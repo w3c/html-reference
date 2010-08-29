@@ -1,0 +1,1425 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
+<!-- when publishing, change bits marked ZZZ -->
+<html lang="en-US-x-Hixie" class="split chapter"><head><title>6 Web application APIs &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+   pre { margin-left: 2em; white-space: pre-wrap; }
+   h2 { margin: 3em 0 1em 0; }
+   h3 { margin: 2.5em 0 1em 0; }
+   h4 { margin: 2.5em 0 0.75em 0; }
+   h5, h6 { margin: 2.5em 0 1em; }
+   h1 + h2, h1 + h2 + h2 { margin: 0.75em 0 0.75em; }
+   h2 + h3, h3 + h4, h4 + h5, h5 + h6 { margin-top: 0.5em; }
+   p { margin: 1em 0; }
+   hr:not(.top) { display: block; background: none; border: none; padding: 0; margin: 2em 0; height: auto; }
+   dl, dd { margin-top: 0; margin-bottom: 0; }
+   dt { margin-top: 0.75em; margin-bottom: 0.25em; clear: left; }
+   dt + dt { margin-top: 0; }
+   dd dt { margin-top: 0.25em; margin-bottom: 0; }
+   dd p { margin-top: 0; }
+   dd dl + p { margin-top: 1em; }
+   dd table + p { margin-top: 1em; }
+   p + * > li, dd li { margin: 1em 0; }
+   dt, dfn { font-weight: bold; font-style: normal; }
+   dt dfn { font-style: italic; }
+   pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
+   pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
+   pre em { font-weight: bolder; font-style: normal; }
+   @media screen { code { color: orangered; } code :link, code :visited { color: inherit; } }
+   var sub { vertical-align: bottom; font-size: smaller; position: relative; top: 0.1em; }
+   table { border-collapse: collapse; border-style: hidden hidden none hidden; }
+   table thead, table tbody { border-bottom: solid; }
+   table tbody th:first-child { border-left: solid; }
+   table tbody th { text-align: left; }
+   table td, table th { border-left: solid; border-right: solid; border-bottom: solid thin; vertical-align: top; padding: 0.2em; }
+   blockquote { margin: 0 0 0 2em; border: 0; padding: 0; font-style: italic; }
+
+   .bad, .bad *:not(.XXX) { color: gray; border-color: gray; background: transparent; }
+   .matrix, .matrix td { border: none; text-align: right; }
+   .matrix { margin-left: 2em; }
+   .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
+   .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
+   .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
+   img.extra { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
+   pre.css:first-line { color: #AAAA50; }
+   dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
+   hr + dl.domintro, div.impl + dl.domintro { margin-top: 2.5em; margin-bottom: 1.5em; }
+   dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
+   dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
+   dl.domintro dd p { margin: 0.5em 0; }
+   dl.switch { padding-left: 2em; }
+   dl.switch > dt { text-indent: -1.5em; }
+   dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
+   dl.triple { padding: 0 0 0 1em; }
+   dl.triple dt, dl.triple dd { margin: 0; display: inline }
+   dl.triple dt:after { content: ':'; }
+   dl.triple dd:after { content: '\A'; white-space: pre; }
+   .diff-old { text-decoration: line-through; color: silver; background: transparent; }
+   .diff-chg, .diff-new { text-decoration: underline; color: green; background: transparent; }
+   a .diff-new { border-bottom: 1px blue solid; }
+
+   h2 { page-break-before: always; }
+   h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
+   h1 + h2, hr + h2.no-toc { page-break-before: auto; }
+
+   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+
+   div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
+   div.head p { margin: 0; }
+   div.head h1 { margin: 0; }
+   div.head .logo { float: right; margin: 0 1em; }
+   div.head .logo img { border: none } /* remove border from top image */
+   div.head dl { margin: 1em 0; }
+   div.head p.copyright, div.head p.alt { font-size: x-small; font-style: oblique; margin: 0; }
+
+   body > .toc > li { margin-top: 1em; margin-bottom: 1em; }
+   body > .toc.brief > li { margin-top: 0.35em; margin-bottom: 0.35em; }
+   body > .toc > li > * { margin-bottom: 0.5em; }
+   body > .toc > li > * > li > * { margin-bottom: 0.25em; }
+   .toc, .toc li { list-style: none; }
+
+   .brief { margin-top: 1em; margin-bottom: 1em; line-height: 1.1; }
+   .brief li { margin: 0; padding: 0; }
+   .brief li p { margin: 0; padding: 0; }
+
+   .category-list { margin-top: -0.75em; margin-bottom: 1em; line-height: 1.5; }
+   .category-list::before { content: '\21D2\A0'; font-size: 1.2em; font-weight: 900; }
+   .category-list li { display: inline; }
+   .category-list li:not(:last-child)::after { content: ', '; }
+   .category-list li > span, .category-list li > a { text-transform: lowercase; }
+   .category-list li * { text-transform: none; } /* don't affect <code> nested in <a> */
+
+   .XXX { color: #E50000; background: white; border: solid red; padding: 0.5em; margin: 1em 0; }
+   .XXX > :first-child { margin-top: 0; }
+   p .XXX { line-height: 3em; }
+   .annotation { border: solid thin black; background: #0C479D; color: white; position: relative; margin: 8px 0 20px 0; }
+   .annotation:before { position: absolute; left: 0; top: 0; width: 100%; height: 100%; margin: 6px -6px -6px 6px; background: #333333; z-index: -1; content: ''; }
+   .annotation :link, .annotation :visited { color: inherit; }
+   .annotation :link:hover, .annotation :visited:hover { background: transparent; }
+   .annotation span { border: none ! important; }
+   .note { color: green; background: transparent; font-family: sans-serif; }
+   .warning { color: red; background: transparent; }
+   .note, .warning { font-weight: bolder; font-style: italic; }
+   p.note, div.note { padding: 0.5em 2em; }
+   span.note { padding: 0 2em; }
+   .note p:first-child, .warning p:first-child { margin-top: 0; }
+   .note p:last-child, .warning p:last-child { margin-bottom: 0; }
+   .warning:before { font-style: normal; }
+   p.note:before { content: 'Note: '; }
+   p.warning:before { content: '\26A0 Warning! '; }
+
+   .bookkeeping:before { display: block; content: 'Bookkeeping details'; font-weight: bolder; font-style: italic; }
+   .bookkeeping { font-size: 0.8em; margin: 2em 0; }
+   .bookkeeping p { margin: 0.5em 2em; display: list-item; list-style: square; }
+   .bookkeeping dt { margin: 0.5em 2em 0; }
+   .bookkeeping dd { margin: 0 3em 0.5em; }
+
+   h4 { position: relative; z-index: 3; }
+   h4 + .element, h4 + div + .element { margin-top: -2.5em; padding-top: 2em; }
+   .element {
+     background: #EEEEFF;
+     color: black;
+     margin: 0 0 1em 0.15em;
+     padding: 0 1em 0.25em 0.75em;
+     border-left: solid #9999FF 0.25em;
+     position: relative;
+     z-index: 1;
+   }
+   .element:before {
+     position: absolute;
+     z-index: 2;
+     top: 0;
+     left: -1.15em;
+     height: 2em;
+     width: 0.9em;
+     background: #EEEEFF;
+     content: ' ';
+     border-style: none none solid solid;
+     border-color: #9999FF;
+     border-width: 0.25em;
+   }
+
+   .example { display: block; color: #222222; background: #FCFCFC; border-left: double; margin-left: 2em; padding-left: 1em; }
+   td > .example:only-child { margin: 0 0 0 0.1em; }
+
+   ul.domTree, ul.domTree ul { padding: 0 0 0 1em; margin: 0; }
+   ul.domTree li { padding: 0; margin: 0; list-style: none; position: relative; }
+   ul.domTree li li { list-style: none; }
+   ul.domTree li:first-child::before { position: absolute; top: 0; height: 0.6em; left: -0.75em; width: 0.5em; border-style: none none solid solid; content: ''; border-width: 0.1em; }
+   ul.domTree li:not(:last-child)::after { position: absolute; top: 0; bottom: -0.6em; left: -0.75em; width: 0.5em; border-style: none none solid solid; content: ''; border-width: 0.1em; }
+   ul.domTree span { font-style: italic; font-family: serif; }
+   ul.domTree .t1 code { color: purple; font-weight: bold; }
+   ul.domTree .t2 { font-style: normal; font-family: monospace; }
+   ul.domTree .t2 .name { color: black; font-weight: bold; }
+   ul.domTree .t2 .value { color: blue; font-weight: normal; }
+   ul.domTree .t3 code, .domTree .t4 code, .domTree .t5 code { color: gray; }
+   ul.domTree .t7 code, .domTree .t8 code { color: green; }
+   ul.domTree .t10 code { color: teal; }
+
+   body.dfnEnabled dfn { cursor: pointer; }
+   .dfnPanel {
+     display: inline;
+     position: absolute;
+     z-index: 10;
+     height: auto;
+     width: auto;
+     padding: 0.5em 0.75em;
+     font: small sans-serif, Droid Sans Fallback;
+     background: #DDDDDD;
+     color: black;
+     border: outset 0.2em;
+   }
+   .dfnPanel * { margin: 0; padding: 0; font: inherit; text-indent: 0; }
+   .dfnPanel :link, .dfnPanel :visited { color: black; }
+   .dfnPanel p { font-weight: bolder; }
+   .dfnPanel * + p { margin-top: 0.25em; }
+   .dfnPanel li { list-style-position: inside; }
+
+   #configUI { position: absolute; z-index: 20; top: 10em; right: 1em; width: 11em; font-size: small; }
+   #configUI p { margin: 0.5em 0; padding: 0.3em; background: #EEEEEE; color: black; border: inset thin; }
+   #configUI p label { display: block; }
+   #configUI #updateUI, #configUI .loginUI { text-align: center; }
+   #configUI input[type=button] { display: block; margin: auto; }
+
+  ]]></style><style type="text/css"><![CDATA[
+
+   .applies thead th > * { display: block; }
+   .applies thead code { display: block; }
+   .applies tbody th { whitespace: nowrap; }
+   .applies td { text-align: center; }
+   .applies .yes { background: yellow; }
+
+   .matrix, .matrix td { border: hidden; text-align: right; }
+   .matrix { margin-left: 2em; }
+
+   .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
+   .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
+   .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
+   #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
+   #table-example-1 caption { padding-bottom: 0.5em; }
+   #table-example-1 thead, #table-example-1 tbody { border: none; }
+   #table-example-1 th, #table-example-1 td { border: solid thin; }
+   #table-example-1 th { font-weight: normal; }
+   #table-example-1 td { border-style: none solid; vertical-align: top; }
+   #table-example-1 th { padding: 0.5em; vertical-align: middle; text-align: center; }
+   #table-example-1 tbody tr:first-child td { padding-top: 0.5em; }
+   #table-example-1 tbody tr:last-child td { padding-bottom: 1.5em; }
+   #table-example-1 tbody td:first-child { padding-left: 2.5em; padding-right: 0; width: 9em; }
+   #table-example-1 tbody td:first-child::after { content: leader(". "); }
+   #table-example-1 tbody td { padding-left: 2em; padding-right: 2em; }
+   #table-example-1 tbody td:first-child + td { width: 10em; }
+   #table-example-1 tbody td:first-child + td ~ td { width: 2.5em; }
+   #table-example-1 tbody td:first-child + td + td + td ~ td { width: 1.25em; }
+
+   .apple-table-examples { border: none; border-collapse: separate; border-spacing: 1.5em 0em; width: 40em; margin-left: 3em; }
+   .apple-table-examples * { font-family: "Times", serif; }
+   .apple-table-examples td, .apple-table-examples th { border: none; white-space: nowrap; padding-top: 0; padding-bottom: 0; }
+   .apple-table-examples tbody th:first-child { border-left: none; width: 100%; }
+   .apple-table-examples thead th:first-child ~ th { font-size: smaller; font-weight: bolder; border-bottom: solid 2px; text-align: center; }
+   .apple-table-examples tbody th::after, .apple-table-examples tfoot th::after { content: leader(". ") }
+   .apple-table-examples tbody th, .apple-table-examples tfoot th { font: inherit; text-align: left; }
+   .apple-table-examples td { text-align: right; vertical-align: top; }
+   .apple-table-examples.e1 tbody tr:last-child td { border-bottom: solid 1px; }
+   .apple-table-examples.e1 tbody + tbody tr:last-child td { border-bottom: double 3px; }
+   .apple-table-examples.e2 th[scope=row] { padding-left: 1em; }
+   .apple-table-examples sup { line-height: 0; }
+
+   .details-example img { vertical-align: top; }
+
+   #named-character-references-table {
+     font-size: 0.6em;
+     column-width: 28em;
+     column-gap: 1em;
+     -moz-column-width: 28em;
+     -moz-column-gap: 1em;
+     -webkit-column-width: 28em;
+     -webkit-column-gap: 1em;
+   }
+   #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
+   #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+
+   .glyph.control { color: red; }
+
+   @font-face {
+     font-family: 'Essays1743';
+     src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743.ttf');
+   }
+   @font-face {
+     font-family: 'Essays1743';
+     font-weight: bold;
+     src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-Bold.ttf');
+   }
+   @font-face {
+     font-family: 'Essays1743';
+     font-style: italic;
+     src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-Italic.ttf');
+   }
+   @font-face {
+     font-family: 'Essays1743';
+     font-style: italic;
+     font-weight: bold;
+     src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
+   }
+
+  ]]></style><style type="text/css"><![CDATA[
+   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
+  ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
+   function getCookie(name) {
+     var params = location.search.substr(1).split("&");
+     for (var index = 0; index < params.length; index++) {
+       if (params[index] == name)
+         return "1";
+       var data = params[index].split("=");
+       if (data[0] == name)
+         return unescape(data[1]);
+     }
+     var cookies = document.cookie.split("; ");
+     for (var index = 0; index < cookies.length; index++) {
+       var data = cookies[index].split("=");
+       if (data[0] == name)
+         return unescape(data[1]);
+     }
+     return null;
+   }
+   function load(script) {
+     var e = document.createElement('script');
+     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     document.body.appendChild(e);
+   }
+   function init() {
+     if (location.search == '?slow-browser')
+       return;
+     var configUI = document.createElement('div');
+     configUI.id = 'configUI';
+     document.body.appendChild(configUI);
+     // load('reviewer.js'); // would need cross-site XHR
+     if (document.getElementById('head'))
+       load('toc.js');
+     load('styler.js');
+     // load('updater.js'); // would need cross-site XHR
+     load('dfn.js'); // doesn't support split-out specs, but, oh well.
+     // load('status.js'); // would need cross-site XHR
+     if (getCookie('profile') == '1')
+       document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
+     fixBrokenLink();
+   }
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="offline.html" title="5.6 Offline Web applications" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="timers.html" title="6.2 Timers" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+   <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
+
+   <h1>HTML5</h1>
+   </div><div>
+   <a href="offline.html">&#x2190; 5.6 Offline Web applications</a> &#x2013;
+   <a href="spec.html#contents">Table of contents</a> &#x2013;
+   <a href="timers.html">6.2 Timers &#x2192;</a>
+  <ol class="toc"><li><a href="webappapis.html#webappapis"><span class="secno">6 </span>Web application APIs</a>
+  <ol><li><a href="webappapis.html#scripting"><span class="secno">6.1 </span>Scripting</a>
+    <ol><li><a href="webappapis.html#introduction-4"><span class="secno">6.1.1 </span>Introduction</a></li><li><a href="webappapis.html#enabling-and-disabling-scripting"><span class="secno">6.1.2 </span>Enabling and disabling scripting</a></li><li><a href="webappapis.html#processing-model-1"><span class="secno">6.1.3 </span>Processing model</a>
+      <ol><li><a href="webappapis.html#definitions-0"><span class="secno">6.1.3.1 </span>Definitions</a></li><li><a href="webappapis.html#calling-scripts"><span class="secno">6.1.3.2 </span>Calling scripts</a></li><li><a href="webappapis.html#creating-scripts"><span class="secno">6.1.3.3 </span>Creating scripts</a></li><li><a href="webappapis.html#killing-scripts"><span class="secno">6.1.3.4 </span>Killing scripts</a></li></ol></li><li><a href="webappapis.html#event-loops"><span class="secno">6.1.4 </span>Event loops</a>
+      <ol><li><a href="webappapis.html#definitions-1"><span class="secno">6.1.4.1 </span>Definitions</a></li><li><a href="webappapis.html#processing-model-2"><span class="secno">6.1.4.2 </span>Processing model</a></li><li><a href="webappapis.html#generic-task-sources"><span class="secno">6.1.4.3 </span>Generic task sources</a></li></ol></li><li><a href="webappapis.html#javascript-protocol"><span class="secno">6.1.5 </span>The <code title="">javascript:</code> protocol</a></li><li><a href="webappapis.html#events"><span class="secno">6.1.6 </span>Events</a>
+      <ol><li><a href="webappapis.html#event-handler-attributes"><span class="secno">6.1.6.1 </span>Event handlers</a></li><li><a href="webappapis.html#event-handlers-on-elements-document-objects-and-window-objects"><span class="secno">6.1.6.2 </span>Event handlers on elements, <code>Document</code> objects, and <code>Window</code> objects</a></li><li><a href="webappapis.html#event-firing"><span class="secno">6.1.6.3 </span>Event firing</a></li><li><a href="webappapis.html#events-and-the-window-object"><span class="secno">6.1.6.4 </span>Events and the <code>Window</code> object</a></li><li><a href="webappapis.html#runtime-script-errors"><span class="secno">6.1.6.5 </span>Runtime script errors</a></li></ol></li></ol></li></ol></li></ol></div><h2 id="webappapis"><span class="secno">6 </span>Web application APIs</h2><h3 id="scripting"><span class="secno">6.1 </span>Scripting</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><h4 id="introduction-4"><span class="secno">6.1.1 </span>Introduction</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Various mechanisms can cause author-provided executable code to
+  run in the context of a document. These mechanisms include, but are
+  probably not limited to:</p><ul><li>Processing of <code><a href="scripting-1.html#script">script</a></code> elements.</li>
+
+   <li>Processing of inline <code title="javascript&#10;   protocol"><a href="#javascript-protocol">javascript:</a></code> URLs (e.g. the <code title="attr-img-src"><a href="embedded-content-1.html#attr-img-src">src</a></code> attribute of <code><a href="embedded-content-1.html#the-img-element">img</a></code>
+   elements, or an <code title="">@import</code> rule in a CSS
+   <code><a href="semantics.html#the-style-element">style</a></code> element block).</li>
+
+   <li>Event handlers, whether registered through the DOM using <code title="">addEventListener()</code>, by explicit <a href="#event-handler-content-attributes">event handler
+   content attributes</a>, by <a href="#event-handler-idl-attributes">event handler IDL
+   attributes</a>, or otherwise.</li>
+
+   <li>Processing of technologies like XBL or SVG that have their own
+   scripting features.</li>
+
+  </ul><div class="impl">
+
+  <h4 id="enabling-and-disabling-scripting"><span class="secno">6.1.2 </span>Enabling and disabling scripting</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+  <p><dfn id="concept-bc-script" title="concept-bc-script">Scripting is enabled</dfn> in a
+  <em><a href="browsers.html#browsing-context">browsing context</a></em> when all of the
+  following conditions are true:</p>
+
+  <ul><li>The user agent supports scripting.</li>
+
+   <li>The user has not disabled scripting for this <a href="browsers.html#browsing-context">browsing
+   context</a> at this time. (User agents may provide users with
+   the option to disable scripting globally, or in a finer-grained
+   manner, e.g. on a per-origin basis.)</li>
+
+   <li id="sandboxScriptBlocked">The <a href="browsers.html#browsing-context">browsing context</a> did
+   not have the <a href="the-iframe-element.html#sandboxed-scripts-browsing-context-flag">sandboxed scripts browsing context flag</a>
+   set when the <a href="browsers.html#browsing-context">browsing context</a>'s <a href="browsers.html#active-document">active
+   document</a> was created.</li>
+
+  </ul><p><dfn id="concept-bc-noscript" title="concept-bc-noscript">Scripting is disabled</dfn> in a
+  <a href="browsers.html#browsing-context">browsing context</a> when any of the above conditions are
+  false (i.e. when scripting is not <a href="#concept-bc-script" title="concept-bc-script">enabled</a>).</p>
+
+  <hr/><p><dfn id="concept-n-script" title="concept-n-script">Scripting is enabled</dfn> for a
+  <em>node</em> if the <code><a href="infrastructure.html#document">Document</a></code> object of the node (the
+  node itself, if it is itself a <code><a href="infrastructure.html#document">Document</a></code> object) has an
+  associated <a href="browsers.html#browsing-context">browsing context</a>, and <a href="#concept-bc-script" title="concept-bc-script">scripting is enabled</a> in that
+  <a href="browsers.html#browsing-context">browsing context</a>.</p>
+
+  <p><dfn id="concept-n-noscript" title="concept-n-noscript">Scripting is disabled</dfn> for a
+  node if there is no such <a href="browsers.html#browsing-context">browsing context</a>, or if <a href="#concept-bc-noscript" title="concept-bc-noscript">scripting is disabled</a> in that
+  <a href="browsers.html#browsing-context">browsing context</a>.</p>
+
+  </div><div class="impl">
+
+  <!-- SCRIPT EXEC (marks areas related to creation of scripts) -->
+  <h4 id="processing-model-1"><span class="secno">6.1.3 </span>Processing model</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+  <h5 id="definitions-0"><span class="secno">6.1.3.1 </span>Definitions</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+  <p>A <dfn id="concept-script" title="concept-script">script</dfn> has:</p>
+
+  <dl><dt>A <dfn id="script-execution-environment">script execution environment</dfn></dt>
+
+   <dd>
+
+    <p>The characteristics of the script execution environment depend
+    on the language, and are not defined by this specification.</p>
+
+    <p class="example">In JavaScript, the script execution environment
+    consists of the interpreter, the stack of <i>execution
+    contexts</i>, the <i>global code</i> and <i>function code</i> and
+    the Function objects resulting, and so forth.</p>
+
+   </dd>
+
+   <dt>A <dfn id="list-of-code-entry-points">list of code entry-points</dfn></dt>
+
+   <dd>
+
+    <p>Each code entry-point represents a block of executable code
+    that the script exposes to other scripts and to the user
+    agent.</p>
+
+    <p class="example">Each Function object in a JavaScript
+    <a href="#script-execution-environment">script execution environment</a> has a corresponding code
+    entry-point, for instance.</p>
+
+    <p>The main program code of the script, if any, is the
+    <dfn id="initial-code-entry-point"><i>initial code entry-point</i></dfn>. Typically, the code
+    corresponding to this entry-point is executed immediately after
+    the script is parsed.</p>
+
+    <p class="example">In JavaScript, this corresponds to the
+    execution context of the global code.</p>
+
+   </dd>
+
+   <dt>A relationship with the <dfn id="script-s-global-object">script's global object</dfn></dt>
+
+   <dd>
+
+    <p>An object that provides the APIs that the code can use.</p>
+
+    <p class="example">This is typically a <code><a href="browsers.html#window">Window</a></code>
+    object. In JavaScript, this corresponds to the <i>global
+    object</i>.</p>
+
+    <p class="note">When a <a href="#script-s-global-object">script's global object</a> is an
+    empty object, it can't do anything that interacts with the
+    environment.</p>
+
+    <p>If the <a href="#script-s-global-object">script's global object</a> is a
+    <code><a href="browsers.html#window">Window</a></code> object, then in JavaScript, the ThisBinding of
+    the global execution context for this script must be the
+    <code><a href="browsers.html#window">Window</a></code> object's <code><a href="browsers.html#windowproxy">WindowProxy</a></code> object,
+    rather than the global object. <a href="references.html#refsECMA262">[ECMA262]</a></p>
+
+    <p class="note">This is a <a href="introduction.html#willful-violation">willful violation</a> of the
+    JavaScript specification current at the time of writing
+    (ECMAScript edition 5, as defined in section 10.4.1.1 Initial
+    Global Execution Context, step 3). The JavaScript specification
+    requires that the <code title="">this</code> keyword in the global
+    scope return the global object, but this is not compatible with
+    the security design prevalent in implementations as specified
+    herein. <a href="references.html#refsECMA262">[ECMA262]</a></p>
+
+   </dd>
+
+   <dt>A relationship with the <dfn id="script-s-browsing-context">script's browsing context</dfn></dt>
+
+   <dd>
+
+    <p>A <a href="browsers.html#browsing-context">browsing context</a> that is assigned responsibility
+    for actions taken by the script.</p>
+
+    <p class="example">When a script creates and <a href="history.html#navigate" title="navigate">navigates</a> a new <a href="browsers.html#top-level-browsing-context">top-level browsing
+    context</a>, the <code title="dom-opener"><a href="browsers.html#dom-opener">opener</a></code>
+    attribute of the new <a href="browsers.html#browsing-context">browsing context</a>'s
+    <code><a href="browsers.html#window">Window</a></code> object will be set to the <a href="#script-s-browsing-context">script's
+    browsing context</a>'s <code><a href="browsers.html#windowproxy">WindowProxy</a></code> object.</p>
+
+   </dd>
+
+   <dt>A relationship with the <dfn id="script-s-document">script's document</dfn></dt>
+
+   <dd>
+
+    <p>A <code><a href="infrastructure.html#document">Document</a></code> that is assigned responsibility for
+    actions taken by the script.</p>
+
+    <p class="example">When a script <a href="fetching-resources.html#fetch" title="fetch">fetches</a> a resource, the <a href="dom.html#the-document-s-current-address" title="the&#10;    document's current address">current address</a> of the
+    <a href="#script-s-document">script's document</a> will be used to set the <code title="http-referer">Referer</code> (sic) header.</p>
+
+   </dd>
+
+   <dt>A <dfn id="script-s-url-character-encoding" title="script's URL character encoding">URL character encoding</dfn></dt>
+
+   <dd>
+
+    <p>A character encoding, set when the script is created, used to
+    encode URLs. <span id="sce-not-copy" title="">If the character
+    encoding is set from another source, e.g. a <a href="dom.html#document-s-character-encoding">document's
+    character encoding</a>, then the <a href="#script-s-url-character-encoding">script's URL character
+    encoding</a> must follow the source, so that if the source's
+    changes, so does the script's.</span></p>
+
+   </dd>
+
+   <dt>A <dfn id="script-s-base-url" title="script's base URL">base URL</dfn></dt>
+
+   <dd>
+
+    <p>A <a href="urls.html#url">URL</a>, set when the script is created, used to
+    resolve relative URLs. <span id="sbu-not-copy" title="">If the
+    base URL is set from another source, e.g. a <a href="urls.html#document-base-url">document base
+    URL</a>, then the <a href="#script-s-base-url">script's base URL</a> must follow
+    the source, so that if the source's changes, so does the
+    script's.</span></p>
+
+   </dd>
+
+  </dl></div><div class="impl">
+
+  <h5 id="calling-scripts"><span class="secno">6.1.3.2 </span>Calling scripts</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+  <p>When a user agent is to <dfn id="jump-to-a-code-entry-point">jump to a code entry-point</dfn> for
+  a <a href="#concept-script" title="concept-script">script</a>, for example to invoke
+  an event listener defined in that <a href="#concept-script" title="concept-script">script</a>, the user agent must run the
+  following steps:</p>
+
+  <ol><li><p>If the <a href="#script-s-global-object">script's global object</a> is a
+   <code><a href="browsers.html#window">Window</a></code> object whose <code><a href="infrastructure.html#document">Document</a></code> object is
+   not <a href="browsers.html#fully-active">fully active</a>, then abort these steps without doing
+   anything. The callback is not fired.</p>
+
+   </li><li><p>Set the <a href="browsers.html#entry-script">entry script</a> to be the <a href="#concept-script" title="concept-script">script</a> being invoked.</p></li>
+
+   <li><p>Make the <a href="#script-execution-environment" title="script execution environment">script
+   execution environment</a> for the <a href="#concept-script" title="concept-script">script</a> execute the code for the given
+   code entry-point.</p></li>
+
+   <li><p>Set the <a href="browsers.html#entry-script">entry script</a> back to whatever it was
+   when this algorithm started.</p></li>
+
+  </ol><p>This algorithm is not invoked by one script calling another.</p>
+
+  </div><div class="impl">
+
+  <h5 id="creating-scripts"><span class="secno">6.1.3.3 </span>Creating scripts</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+  <p>When the specification says that a <a href="#concept-script" title="concept-script">script</a> is to be <dfn id="create-a-script" title="create a&#10;  script">created</dfn>, given some script source, its scripting
+  language, a global object, a browsing context, a URL character
+  encoding, and a base URL, the user agent must run the following
+  steps:</p>
+
+  <ol><li><p>If <a href="#concept-bc-noscript" title="concept-bc-noscript">scripting is
+   disabled</a> for <a href="browsers.html#browsing-context">browsing context</a> passed to this
+   algorithm, then abort these steps, as if the script did nothing but
+   return void.</p>
+
+   </li><li><p>Set up a <a href="#script-execution-environment">script execution environment</a> as
+   appropriate for the scripting language.</p></li>
+
+   <li><p>Parse/compile/initialize the source of the script using the
+   <a href="#script-execution-environment">script execution environment</a>, as appropriate for the
+   scripting language, and thus obtain the <a href="#list-of-code-entry-points">list of code
+   entry-points</a> for the script. If the semantics of the
+   scripting language and the given source code are such that there is
+   executable code to be immediately run, then the <i><a href="#initial-code-entry-point">initial code
+   entry-point</a></i> is the entry-point for that code.</p></li>
+
+   <li><p>Set up the <a href="#script-s-global-object">script's global object</a>, the
+   <a href="#script-s-browsing-context">script's browsing context</a>, the <a href="#script-s-document">script's
+   document</a>, the <a href="#script-s-url-character-encoding">script's URL character encoding</a>,
+   and the <a href="#script-s-base-url">script's base URL</a> from the settings passed to
+   this algorithm.</p></li>
+
+   <li><p><a href="#jump-to-a-code-entry-point" title="jump to a code entry-point">Jump</a> to the
+   <a href="#concept-script" title="concept-script">script</a>'s <i><a href="#initial-code-entry-point">initial code
+   entry-point</a></i>.</p></li>
+
+  </ol><hr/><p>When the user agent is to <dfn id="create-an-impotent-script">create an impotent script</dfn>,
+  given some script source, its scripting language, and a browsing
+  context, the user agent must <a href="#create-a-script">create a script</a>, using the
+  given script source and scripting language, using a new empty object
+  as the global object, and using the given browsing context as the
+  browsing context. The URL character encoding and base URL for the
+  resulting <a href="#concept-script" title="concept-script">script</a> are not
+  important as no APIs are exposed to the script.</p>
+
+  <hr/><p>When the specification says that a <a href="#concept-script" title="concept-script">script</a> is to be <dfn id="create-a-script-from-a-node" title="create a&#10;  script from a node">created from a node</dfn> <var title="">node</var>, given some script source and its scripting
+  language, the user agent must <a href="#create-a-script">create a script</a>, using
+  the given script source and scripting language, and using <a href="#the-script-settings-determined-from-the-node">the
+  script settings determined from the node</a> <var title="">node</var>.</p>
+
+  <p><dfn id="the-script-settings-determined-from-the-node">The script settings determined from the node</dfn> <var title="">node</var> are computed as follows:</p>
+
+  <ol><li><p>Let <var title="">document</var> be the
+   <code><a href="infrastructure.html#document">Document</a></code> of <var title="">node</var> (or <var title="">node</var> itself if it is a
+   <code><a href="infrastructure.html#document">Document</a></code>).</p></li>
+
+   <li><p>The browsing context is the <a href="browsers.html#browsing-context">browsing context</a> of
+   <var title="">document</var>.</p>
+
+   </li><li><p>The global object is the <code><a href="browsers.html#window">Window</a></code> object of
+   <var title="">document</var>.</p></li>
+
+   <li><p>The URL character encoding is the <a href="dom.html#document-s-character-encoding" title="document's&#10;   character encoding">character encoding</a> of <var title="">document</var>. (<a href="#sce-not-copy">This is a
+   reference, not a copy</a>.)</p></li>
+
+   <li><p>The base URL is the <a href="urls.html#document-base-url" title="document base URL">base
+   URL</a> of <var title="">document</var>. (<a href="#sbu-not-copy">This is a reference, not a copy</a>.)</p></li>
+
+  </ol></div><div class="impl">
+
+  <h5 id="killing-scripts"><span class="secno">6.1.3.4 </span>Killing scripts</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+  <p>User agents may impose resource limitations on scripts, for
+  example CPU quotas, memory limits, total execution time limits, or
+  bandwidth limitations. When a script exceeds a limit, the user agent
+  may either throw a <code><a href="common-dom-interfaces.html#quota_exceeded_err">QUOTA_EXCEEDED_ERR</a></code> exception, abort
+  the script without an exception, prompt the user, or throttle script
+  execution.</p>
+
+  <div class="example">
+
+   <p>For example, the following script never terminates. A user agent
+   could, after waiting for a few seconds, prompt the user to either
+   terminate the script or let it continue.</p>
+
+   <pre>&lt;script&gt;
+ while (true) { /* loop */ }
+&lt;/script&gt;</pre>
+
+  </div>
+
+  <p>User agents are encouraged to allow users to disable scripting
+  whenever the user is prompted either by a script (e.g. using the
+  <code title="dom-alert"><a href="timers.html#dom-alert">window.alert()</a></code> API) or because of a
+  script's actions (e.g. because it has exceeded a time limit).</p>
+
+  <p>If scripting is disabled while a script is executing, the script
+  should be terminated immediately.</p>
+
+  </div><div class="impl">
+
+  <h4 id="event-loops"><span class="secno">6.1.4 </span>Event loops</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+  <h5 id="definitions-1"><span class="secno">6.1.4.1 </span>Definitions</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+  <p>To coordinate events, user interaction, scripts, rendering,
+  networking, and so forth, user agents must use <dfn id="event-loop" title="event&#10;  loop">event loops</dfn> as described in this section.</p>
+
+  <p>There must be at least one <a href="#event-loop">event loop</a> per user
+  agent, and at most one <a href="#event-loop">event loop</a> per <a href="browsers.html#unit-of-related-similar-origin-browsing-contexts">unit of
+  related similar-origin browsing contexts</a>.</p>
+
+  <p>An <a href="#event-loop">event loop</a> always has at least one <a href="browsers.html#browsing-context">browsing
+  context</a>. If an <a href="#event-loop">event loop</a>'s <a href="browsers.html#browsing-context" title="browsing context">browsing contexts</a> all go away, then
+  the <a href="#event-loop">event loop</a> goes away as well. A <a href="browsers.html#browsing-context">browsing
+  context</a> always has an <a href="#event-loop">event loop</a> coordinating
+  its activities.</p>
+
+  
+  <p class="note">Other specifications can define new kinds of event
+  loops that aren't associated with browsing contexts; in particular,
+  the Web Workers specification does so.</p>
+  
+
+  <p>An <a href="#event-loop">event loop</a> has one or more <dfn id="task-queue" title="task&#10;  queue">task queues</dfn>. A <a href="#task-queue">task queue</a> is an ordered
+  list of <dfn id="concept-task" title="concept-task">tasks</dfn>, which can be:</p>
+
+  <dl><dt>Events</dt>
+
+   <dd>
+
+    <p>Asynchronously dispatching an <code><a href="infrastructure.html#event">Event</a></code> object at a
+    particular <code><a href="infrastructure.html#eventtarget">EventTarget</a></code> object is a task.</p>
+
+    <p class="note">Not all events are dispatched using the <a href="#task-queue">task
+    queue</a>, many are dispatched synchronously during other
+    tasks.</p>
+
+   </dd>
+
+
+   <dt>Parsing</dt>
+
+   <dd><p>The <a href="parsing.html#html-parser">HTML parser</a> tokenizing one or more bytes,
+   and then processing any resulting tokens, is typically a
+   task.</p></dd>
+
+
+   <dt>Callbacks</dt>
+
+   <dd><p>Calling a callback asynchronously is a task.</p></dd>
+
+
+   <dt>Using a resource</dt>
+
+   <dd><p>When an algorithm <a href="fetching-resources.html#fetch" title="fetch">fetches</a> a
+   resource, if the fetching occurs asynchronously then the processing
+   of the resource once some or all of the resource is available is a
+   task.</p></dd>
+
+
+   <dt>Reacting to DOM manipulation</dt>
+
+   <dd><p>Some elements have tasks that trigger in response to DOM
+   manipulation, e.g. when that element is <a href="infrastructure.html#insert-an-element-into-a-document" title="insert an&#10;   element into a document">inserted into the document</a>.</p>
+
+  </dd></dl><p>When a user agent is to <dfn id="queue-a-task">queue a task</dfn>, it must add the
+  given task to one of the <a href="#task-queue" title="task queue">task queues</a>
+  of the relevant <a href="#event-loop">event loop</a>. All the tasks from one
+  particular <dfn id="task-source">task source</dfn> (e.g. the callbacks generated by
+  timers, the events dispatched for mouse movements, the tasks queued
+  for the parser) must always be added to the same <a href="#task-queue">task
+  queue</a>, but tasks from different <a href="#task-source" title="task&#10;  source">task sources</a> may be placed in different <a href="#task-queue" title="task queue">task queues</a>.</p>
+
+  <p class="example">For example, a user agent could have one
+  <a href="#task-queue">task queue</a> for mouse and key events (the <a href="#user-interaction-task-source">user
+  interaction task source</a>), and another for everything
+  else. The user agent could then give keyboard and mouse events
+  preference over other tasks three quarters of the time, keeping the
+  interface responsive but not starving other task queues, and never
+  processing events from any one <a href="#task-source">task source</a> out of
+  order.</p>
+
+  <p>Each <a href="#concept-task" title="concept-task">task</a> that is <a href="#queue-a-task" title="queue a task">queued</a> onto a <a href="#task-queue">task queue</a> of
+  an <a href="#event-loop">event loop</a> defined by this specification is
+  associated with a <code><a href="infrastructure.html#document">Document</a></code>; if the task was queued in
+  the context of an element, then it is the element's
+  <code><a href="infrastructure.html#document">Document</a></code>; if the task was queued in the context of a
+  <a href="browsers.html#browsing-context">browsing context</a>, then it is the <a href="browsers.html#browsing-context">browsing
+  context</a>'s <a href="browsers.html#active-document">active document</a> at the time the task
+  was queued; if the task was queued by or for a <a href="#concept-script" title="concept-script">script</a> then the document is the
+  <a href="#script-s-document">script's document</a>.</p>
+
+  <p>A user agent is required to have one <dfn id="storage-mutex">storage
+  mutex</dfn>. This mutex is used to control access to shared state
+  like cookies. At any one point, the <a href="#storage-mutex">storage mutex</a> is
+  either free, or owned by a particular <a href="#event-loop">event loop</a> or
+  instance of the <a href="fetching-resources.html#fetch" title="fetch">fetching</a> algorithm.</p>
+
+  <p>Whenever a <a href="#concept-script" title="concept-script">script</a> calls into
+  a <a href="infrastructure.html#plugin">plugin</a>, and whenever a <a href="infrastructure.html#plugin">plugin</a> calls into
+  a <a href="#concept-script" title="concept-script">script</a>, the user agent must
+  release the <a href="#storage-mutex">storage mutex</a>.</p>
+
+
+  <h5 id="processing-model-2"><span class="secno">6.1.4.2 </span>Processing model</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+  <p>An <a href="#event-loop">event loop</a> must continually run through the
+  following steps for as long as it exists:</p>
+
+  <ol><li><p>Run the oldest <a href="#concept-task" title="concept-task">task</a> on one
+   of the <a href="#event-loop">event loop</a>'s <a href="#task-queue" title="task queue">task
+   queues</a>, ignoring tasks whose associated
+   <code><a href="infrastructure.html#document">Document</a></code>s are not <a href="browsers.html#fully-active">fully active</a>. The user
+   agent may pick any <a href="#task-queue">task queue</a>.</p></li>
+
+   <li><p>If the <a href="#storage-mutex">storage mutex</a> is now owned by the
+   <a href="#event-loop">event loop</a>, release it so that it is once again
+   free.</p>
+
+   </li><li><p>Remove that task from its <a href="#task-queue">task queue</a>.</p></li>
+
+   <li><p>If any asynchronously-running algorithms are <dfn id="await-a-stable-state" title="await a stable state">awaiting a stable state</dfn>, then
+   run their <dfn id="synchronous-section">synchronous section</dfn> and then resume running
+   their asynchronous algorithm.</p>
+
+   <p class="note">A <a href="#synchronous-section">synchronous section</a> never mutates
+   the DOM, runs any script, or has any other side-effects.</p>
+
+   <p class="note">Steps in <a href="#synchronous-section" title="synchronous&#10;   section">synchronous sections</a> are marked with
+   &#x231B;.</p></li>
+
+   <li><p>If necessary, update the rendering or user interface of any
+   <code><a href="infrastructure.html#document">Document</a></code> or <a href="browsers.html#browsing-context">browsing context</a> to reflect
+   the current state.</p></li>
+
+   <li><p>Return to the first step of the <a href="#event-loop">event
+   loop</a>.</p></li>
+
+  </ol><hr/><p>When an algorithm says to <dfn id="spin-the-event-loop">spin the event loop</dfn> until
+  a condition <var title="">goal</var> is met, the user agent must run
+  the following steps:</p>
+
+  <ol><li><p>Let <var title="">task source</var> be the <a href="#task-source">task
+   source</a> of the currently running <a href="#concept-task" title="concept-task">task</a>.</p></li>
+
+   <li><p>Stop the currently running <a href="#concept-task" title="concept-task">task</a>, allowing the <a href="#event-loop">event
+   loop</a> to resume, but continue these steps
+   asynchronously.</p></li>
+
+   <li><p>Wait until the condition <var title="">goal</var> is
+   met.</p></li>
+
+   <li><p><a href="#queue-a-task">Queue a task</a> to continue running these steps,
+   using the <a href="#task-source">task source</a> <var title="">task
+   source</var>. Wait until this task runs before continuing these
+   steps.</p></li>
+
+   <li><p>Return to the caller.</p></li>
+
+  </ol><hr/><p>Some of the algorithms in this specification, for historical
+  reasons, require the user agent to <dfn id="pause">pause</dfn> while running a
+  <a href="#concept-task" title="concept-task">task</a> until some condition has been
+  met. While a user agent has a paused <a href="#concept-task" title="concept-task">task</a>, the corresponding <a href="#event-loop">event
+  loop</a> must not run further <a href="#concept-task" title="concept-task">tasks</a>, and any script in the currently
+  running <a href="#concept-task" title="concept-task">task</a> must block. User
+  agents should remain responsive to user input while paused, however,
+  albeit in a reduced capacity since the <a href="#event-loop">event loop</a> will
+  not be doing anything.</p>
+
+  <hr/><p>When a user agent is to <dfn id="obtain-the-storage-mutex">obtain the storage mutex</dfn> as
+  part of running a <a href="#concept-task" title="concept-task">task</a>, it must
+  run through the following steps:</p>
+
+  <ol><li><p>If the <a href="#storage-mutex">storage mutex</a> is already owned by this
+   <a href="#concept-task" title="concept-task">task</a>'s <a href="#event-loop">event loop</a>,
+   then abort these steps.</p></li>
+
+   <li><p>Otherwise, <a href="#pause">pause</a> until the <a href="#storage-mutex">storage
+   mutex</a> can be taken by the <a href="#event-loop">event loop</a>.</p></li>
+
+   <li><p>Take ownership of the <a href="#storage-mutex">storage mutex</a>.</p></li>
+
+  </ol></div><div class="impl">
+
+  <h5 id="generic-task-sources"><span class="secno">6.1.4.3 </span>Generic task sources</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+  <p>The following <a href="#task-source" title="task source">task sources</a> are
+  used by a number of mostly unrelated features in this and other
+  specifications.</p>
+
+  <dl><dt>The <dfn id="dom-manipulation-task-source">DOM manipulation task source</dfn></dt>
+
+   <dd>
+
+    <p>This <a href="#task-source">task source</a> is used for features that react
+    to DOM manipulations, such as things that happen asynchronously
+    when an element is <a href="infrastructure.html#insert-an-element-into-a-document" title="insert an element into a&#10;    document">inserted into the document</a>.</p>
+
+    <!--
+    <p>Asynchronous mutation events must be dispatched using <span
+    title="concept-task">tasks</span> <span title="queue a
+    task">queued</span> with the <span>DOM manipulation task
+    source</span>. <a href="#refsDOMEVENTS">[DOMEVENTS]</a></p>
+    -->
+
+   </dd>
+
+   <dt>The <dfn id="user-interaction-task-source">user interaction task source</dfn></dt>
+
+   <dd>
+
+    <p>This <a href="#task-source">task source</a> is used for features that react
+    to user interaction, for example keyboard or mouse input.</p>
+
+    <p>Asynchronous events sent in response to user input (e.g. <code title="event-click"><a href="infrastructure.html#event-click">click</a></code> events) must be dispatched using
+    <a href="#concept-task" title="concept-task">tasks</a> <a href="#queue-a-task" title="queue a&#10;    task">queued</a> with the <a href="#user-interaction-task-source">user interaction task
+    source</a>. <a href="references.html#refsDOMEVENTS">[DOMEVENTS]</a></p>
+
+   </dd>
+
+   <dt>The <dfn id="networking-task-source">networking task source</dfn></dt>
+
+   <dd>
+
+    <p>This <a href="#task-source">task source</a> is used for features that trigger
+    in response to network activity.</p>
+
+    <!-- XHR should use this -->
+
+   </dd>
+
+   <dt>The <dfn id="history-traversal-task-source">history traversal task source</dfn></dt>
+
+   <dd>
+
+    <p>This <a href="#task-source">task source</a> is used to queue calls to <code title="dom-history-back"><a href="history.html#dom-history-back">history.back()</a></code> and similar
+    APIs.</p>
+
+   </dd>
+
+  </dl></div><div class="impl">
+
+  <!-- SCRIPT EXEC -->
+  <h4 id="javascript-protocol"><span class="secno">6.1.5 </span><dfn title="javascript protocol">The <code title="">javascript:</code> protocol</dfn></h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+  <p>When a <a href="urls.html#url">URL</a> using the <code title="">javascript:</code> protocol is <dfn id="concept-js-deref" title="concept-js-deref">dereferenced</dfn>, the user agent must run
+  the following steps:</p>
+
+  <ol><li><p>Let the script source be the string obtained using the
+   content retrieval operation defined for <code title="">javascript:</code> URLs. <a href="references.html#refsJSURL">[JSURL]</a></p></li>
+
+   <li>
+
+    <p>Use the appropriate step from the following list:</p>
+
+    <dl><dt>If a <a href="browsers.html#browsing-context">browsing context</a> is being <a href="history.html#navigate" title="navigate">navigated</a> to a <code>javascript:</code>
+     URL, and the <a href="browsers.html#active-document">active document</a> of that browsing
+     context has the <a href="origin-0.html#same-origin">same origin</a> as the script given by
+     that URL</dt>
+
+     <dd>
+
+      <!-- http://www.hixie.ch/tests/adhoc/html/navigation/javascript-url/ -->
+
+      <p>Let <var title="">address</var> be the <a href="dom.html#the-document-s-address" title="the&#10;      document's address">address</a> of the <a href="browsers.html#active-document">active
+      document</a> of the <a href="browsers.html#browsing-context">browsing context</a> being
+      navigated.</p>
+
+      <p>If <var title="">address</var> is <code><a href="fetching-resources.html#about:blank">about:blank</a></code>,
+      and the <a href="browsers.html#browsing-context">browsing context</a> being navigated has a
+      <a href="browsers.html#creator-browsing-context">creator browsing context</a>, then let <var title="">address</var> be the <a href="dom.html#the-document-s-address" title="the document's&#10;      address">address</a> of the <a href="browsers.html#creator-document">creator
+      <code>Document</code></a> instead.</p>
+
+      <p><a href="#create-a-script-from-a-node" title="create a script from a node">Create a
+      script</a> from the <code><a href="infrastructure.html#document">Document</a></code> node of the
+      <a href="browsers.html#active-document">active document</a>, using the aforementioned script
+      source, and assuming the scripting language is JavaScript.</p>
+
+      <p>Let <var title="">result</var> be the return value of the
+      <i><a href="#initial-code-entry-point">initial code entry-point</a></i> of this <a href="#concept-script" title="concept-script">script</a>. If an exception was
+      raised, let <var title="">result</var> be void instead. (The
+      result will be void also if <a href="#concept-bc-noscript" title="concept-bc-noscript">scripting is disabled</a>.)</p>
+
+      <p>When it comes time to <a href="history.html#set-the-document-s-address">set the document's address</a>
+      in the <a href="history.html#navigate" title="navigate">navigation algorithm</a>, use
+      <var title="">address</var> as the <a href="history.html#override-url">override
+      URL</a>.</p>
+
+     </dd>
+
+     <dt>If the <code><a href="infrastructure.html#document">Document</a></code> object of the element,
+     attribute, or style sheet from which the <code>javascript:</code>
+     URL was reached has an associated <a href="browsers.html#browsing-context">browsing
+     context</a></dt>
+
+     <dd>
+
+      <p><a href="#create-an-impotent-script">Create an impotent script</a> using the
+      aforementioned script source, with the scripting language set to
+      JavaScript, and with the <code><a href="infrastructure.html#document">Document</a></code>'s object's
+      <a href="browsers.html#browsing-context">browsing context</a> as the browsing context.</p>
+
+      <p>Let <var title="">result</var> be the return value of the
+      <i><a href="#initial-code-entry-point">initial code entry-point</a></i> of this <a href="#concept-script" title="concept-script">script</a>. If an exception was
+      raised, let <var title="">result</var> be void instead. (The
+      result will be void also if <a href="#concept-bc-noscript" title="concept-bc-noscript">scripting is disabled</a>.)</p>
+
+     </dd>
+
+     <dt>Otherwise</dt>
+
+     <dd>
+
+      <p>Let <var title="">result</var> be void.</p>
+
+     </dd>
+
+    </dl></li>
+
+   <li>
+
+    <p>If the result of executing the script is void (there is no
+    return value), then the URL must be treated in a manner equivalent
+    to an HTTP resource with an HTTP 204 No Content response.</p>
+
+    <p>Otherwise, the URL must be treated in a manner equivalent to an
+    HTTP resource with a 200 OK response whose <a href="fetching-resources.html#content-type" title="Content-Type">Content-Type metadata</a> is
+    <code><a href="iana.html#text-html">text/html</a></code> and whose response body is the return value
+    converted to a string value.</p>
+
+    <p class="note">Certain contexts, in particular <code><a href="embedded-content-1.html#the-img-element">img</a></code>
+    elements, ignore the <a href="fetching-resources.html#content-type" title="Content-Type">Content-Type
+    metadata</a>.</p>
+
+   </li>
+
+  </ol><div class="example">
+
+   <p>So for example a <code title="">javascript:</code> URL for a
+   <code title="attr-img-src"><a href="embedded-content-1.html#attr-img-src">src</a></code> attribute of an
+   <code><a href="embedded-content-1.html#the-img-element">img</a></code> element would be evaluated in the context of an
+   empty object as soon as the attribute is set; it would then be
+   sniffed to determine the image type and decoded as an image.</p>
+
+   <p>A <code title="">javascript:</code> URL in an <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code> attribute of an <code><a href="text-level-semantics.html#the-a-element">a</a></code>
+   element would only be evaluated when the link was <a href="links.html#following-hyperlinks" title="following hyperlinks">followed</a>.</p>
+
+   <p>The <code title="attr-iframe-src"><a href="the-iframe-element.html#attr-iframe-src">src</a></code> attribute of an
+   <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> element would be evaluated in the context of
+   the <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>'s own <a href="browsers.html#browsing-context">browsing context</a>; once
+   evaluated, its return value (if it was not void) would replace that
+   <a href="browsers.html#browsing-context">browsing context</a>'s document, thus changing the
+   variables visible in that <a href="browsers.html#browsing-context">browsing context</a>.</p>
+
+  </div>
+
+  </div><h4 id="events"><span class="secno">6.1.6 </span>Events</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><div class="impl">
+
+  <h5 id="event-handler-attributes"><span class="secno">6.1.6.1 </span>Event handlers</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+  </div><!--test: <a href="http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E%0A...%3Cscript%3E%0Aw(a%3Ddocument.implementation.createDocument(null%2C%20null%2C%20null))%3B%0Aw(a.appendChild(a.createElementNS('http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml'%2C%20'html')))%3B%0Aw(b%3Da.firstChild.appendChild(a.createElementNS('http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml'%2C%20'body')))%3B%0Aw(b.test%20%3D%20w)%3B%0Aw(b.setAttribute('onclick'%2C%20'test(%22fire%3A%20%22%20%2B%20event)'))%3B%0Aw(b.onclick)%3B%0Aw(e%3Da.createEvent('Event'))%3B%0Aw(e.initEvent('click'%2C%20false%2C%20false))%3B%0Aw(b.dispatchEvent(e))%3B%0A%3C%2Fscript%3E">test</a>--><p>Many objects can have <dfn id="event-handlers">event handlers</dfn> specified. These
+  act as bubbling event listeners for the object on which they are
+  specified.</p><p>An <a href="#event-handlers" title="event handlers">event handler</a> can either
+  have the value null or be set to a <code><a href="#function">Function</a></code>
+  object. <span class="impl">Initially, event handlers must be set to
+  null.</span></p><p>Event handlers are exposed in one or two ways.</p><p>The first way, common to all event handlers, is as an <a href="#event-handler-idl-attributes" title="event handler IDL attributes">event handler IDL
+  attribute</a>.</p><p>The second way is as an <a href="#event-handler-content-attributes" title="event handler content&#10;  attributes">event handler content attribute</a>. Event handlers
+  on <a href="infrastructure.html#html-elements">HTML elements</a> and some of the event handlers on
+  <code><a href="browsers.html#window">Window</a></code> objects are exposed in this way.</p><div class="impl">
+
+  <hr/><p><dfn id="event-handler-idl-attributes">Event handler IDL attributes</dfn>, on setting, must set the
+  corresponding event handler to their new value, and on
+  getting, must return whatever the current value of the corresponding
+  event handler is (possibly null).</p>
+
+  <p>If an <a href="#event-handler-idl-attributes" title="event handler IDL attributes">event handler
+  IDL attribute</a> exposes an <a href="#event-handlers" title="event handlers">event
+  handler</a> of an object that doesn't exist, it must always
+  return null on getting and must do nothing on setting.</p>
+
+  <p class="note">This can happen in particular for <a href="#event-handler-idl-attributes" title="event&#10;  handler IDL attributes">event handler IDL attribute</a> on
+  <code><a href="sections.html#the-body-element-0">body</a></code> elements that do not have corresponding
+  <code><a href="browsers.html#window">Window</a></code> objects.</p>
+
+  <p class="note">Certain event handler IDL attributes have additional
+  requirements, in particular the <code title="handler-MessagePort-onmessage">onmessage</code> attribute of
+  <code>MessagePort</code> objects.</p>
+
+  <hr/></div><p><dfn id="event-handler-content-attributes">Event handler content attributes</dfn>, when specified, must
+  contain valid JavaScript code matching the <code title="">FunctionBody</code> production. <a href="references.html#refsECMA262">[ECMA262]</a></p><div class="impl">
+
+  <!-- SCRIPT EXEC -->
+  <p>When an <a href="#event-handler-content-attributes" title="event handler content attributes">event
+  handler content attribute</a> is set, if the element is owned by
+  a <code><a href="infrastructure.html#document">Document</a></code> that is in a <a href="browsers.html#browsing-context">browsing context</a>,
+  and <a href="#concept-bc-script" title="concept-bc-script">scripting is enabled</a> for
+  that <a href="browsers.html#browsing-context">browsing context</a>, the user agent must run the
+  following steps to create a <a href="#concept-script" title="concept-script">script</a> after setting the content
+  attribute to its new value:</p>
+
+  <ol><li><p>Set up a <a href="#script-execution-environment">script execution environment</a> for
+   JavaScript.</p></li>
+
+   <li>
+
+    <p>Using this script execution environment, create a function
+    object (as defined in ECMAScript edition 5 section 13.2 Creating
+    Function Objects), with:</p>
+
+    <dl><dt>Parameter list <var title="">FormalParameterList</var></dt>
+
+     <dd>
+
+      <dl class="switch"><dt>If the attribute is the <code title="handler-window-onerror"><a href="#handler-window-onerror">onerror</a></code> attribute of the
+       <code><a href="browsers.html#window">Window</a></code> object</dt>
+
+       <dd>Let the function have three arguments, named <code title="">event</code>, <code title="">source</code>, and <code title="">fileno</code>.</dd>
+
+       <dt>Otherwise</dt>
+
+       <dd>Let the function have a single argument called <code title="">event</code>.</dd>
+
+      </dl></dd>
+
+     <dt>Function body <var title="">FunctionBody</var></dt>
+
+     <dd>The <a href="#event-handler-content-attributes" title="event handler content attributes">event
+     handler content attribute</a>'s new value.</dd>
+
+     <dt>Lexical Environment <var title="">Scope</var></dt>
+
+     <dd>
+
+      <ol><li>Let <var title="">Scope</var> be the result of
+       NewObjectEnvironment(the element's <code><a href="infrastructure.html#document">Document</a></code>, the
+       <var title="">global environment</var>).</li>
+
+       <li>If the element has a <a href="association-of-controls-and-forms.html#form-owner">form owner</a>, let <var title="">Scope</var> be the result of NewObjectEnvironment(the
+       element's <a href="association-of-controls-and-forms.html#form-owner">form owner</a>, <var title="">Scope</var>).</li>
+
+       <li>Let <var title="">Scope</var> be the result of
+       NewObjectEnvironment(the element's object, <var title="">Scope</var>).</li>
+
+      </ol><p class="note">NewObjectEnvironment() is defined in ECMAScript
+      edition 5 section 10.2.2.3 NewObjectEnvironment (O, E). <a href="references.html#refsECMA262">[ECMA262]</a></p>
+
+     </dd>
+
+     <dt>Boolean flag <var title="">Strict</var></dt>
+
+     <dd>False.</dd>
+
+    </dl><p>Let this new function be the only entry in the script's
+    <a href="#list-of-code-entry-points">list of code entry-points</a>.</p>
+
+   </li>
+
+   <li><p>If the previous steps failed to compile the script, then set
+   the corresponding <a href="#event-handlers" title="event handlers">event handler</a>
+   to null and abort these steps.</p></li>
+
+   <li><p>Set up the <a href="#script-s-global-object">script's global object</a>, the
+   <a href="#script-s-browsing-context">script's browsing context</a>, the <a href="#script-s-document">script's
+   document</a>, the <a href="#script-s-url-character-encoding">script's URL character encoding</a>,
+   and the <a href="#script-s-base-url">script's base URL</a> from <a href="#the-script-settings-determined-from-the-node">the script
+   settings determined from the node</a> on which the attribute is
+   being set.</p></li>
+
+   <li><p>Set the corresponding <a href="#event-handlers" title="event handlers">event
+   handler</a> to the aforementioned function.</p></li>
+
+  </ol><p>When an event handler content attribute is removed, the user
+  agent must set the corresponding <a href="#event-handlers" title="event handlers">event
+  handler</a> to null.</p>
+  <!--
+  http://software.hixie.ch/utilities/js/live-dom-viewer/saved/245 onload
+  http://software.hixie.ch/utilities/js/live-dom-viewer/saved/247 onclick
+  see http://www.w3.org/Bugs/Public/show_bug.cgi?id=7626#c5 for reasoning
+  -->
+
+  </div><p class="note">When an <a href="#event-handler-content-attributes" title="event handler content&#10;  attributes">event handler content attribute</a> is set on an
+  element owned by a <code><a href="infrastructure.html#document">Document</a></code> that is not in a
+  <a href="browsers.html#browsing-context">browsing context</a>, the corresponding event handler is
+  not changed.</p><!-- v2: we should probably support HTML4's Content-Script-Type header here. --><div class="impl">
+
+  <hr/><p>All <a href="#event-handlers">event handlers</a> on an object, whether an element
+  or some other object, and whether set to null or to a
+  <code><a href="#function">Function</a></code> object, must be registered as event listeners
+  on the object when it is created, as if the <code title="dom-EventTarget-addEventListener">addEventListener()</code>
+  method on the object's <code><a href="infrastructure.html#eventtarget">EventTarget</a></code> interface had been
+  invoked, with the event type (<var title="dom-event-type">type</var>
+  argument) equal to the type corresponding to the event handler (the
+  <dfn id="event-handler-event-type">event handler event type</dfn>), the listener set to be a
+  target and bubbling phase listener (<var title="dom-event-useCapture">useCapture</var> argument set to
+  false), and the event listener itself (<var title="dom-event-listener">listener</var> argument) set to do
+  nothing while the event handler's value is not a
+  <code><a href="#function">Function</a></code> object, and set to invoke the <code title="dom-function-call"><a href="#dom-function-call">call()</a></code> callback of the
+  <code><a href="#function">Function</a></code> object associated with the event handler
+  otherwise.</p>
+
+  </div><p class="note"><a href="#event-handlers">Event handlers</a> <span class="impl">therefore</span> always fire before event listeners
+  attached using <code title="dom-EventTarget-addEventListener">addEventListener()</code>.</p><div class="impl">
+
+  <p class="note">The <var title="dom-event-listener">listener</var>
+  argument is emphatically <em>not</em> the <a href="#event-handlers" title="event&#10;  handlers">event handler</a> itself.</p>
+
+  <p class="note">The interfaces implemented by the event object do
+  not influence whether an <a href="#event-handlers" title="event handlers">event
+  handler</a> is triggered or not.</p>
+
+  <p>When an <a href="#event-handlers" title="event handlers">event handler</a>'s
+  <code><a href="#function">Function</a></code> object is invoked, its <code title="dom-function-call"><a href="#dom-function-call">call()</a></code> callback must be invoked
+  with one argument, set to the <code><a href="infrastructure.html#event">Event</a></code> object of the event
+  in question.</p>
+
+  <p>The handler's return value must then be processed as follows:</p>
+
+  <dl class="switch"><dt>If the event type is <code class="event-mouseover">mouseover</code></dt>
+
+   <dd><p>If the return value is a boolean with the value true, then
+   the event must be canceled.</p></dd>
+
+   <dt>If the event object is a <code><a href="history.html#beforeunloadevent">BeforeUnloadEvent</a></code> object</dt>
+
+   <dd><p>If the return value is a string, and the event object's
+   <code title="dom-BeforeUnloadEvent-returnValue"><a href="history.html#dom-beforeunloadevent-returnvalue">returnValue</a></code>
+   attribute's value is the empty string, then set the <code title="dom-BeforeUnloadEvent-returnValue"><a href="history.html#dom-beforeunloadevent-returnvalue">returnValue</a></code>
+   attribute's value to the return value.</p></dd>
+
+   <dt>Otherwise</dt>
+
+   <dd><p>If the return value is a boolean with the value false, then
+   the event must be canceled.</p></dd>
+
+  </dl></div><!-- IE actually uncancels the event if the function returns true --><hr/><p>The <code><a href="#function">Function</a></code> interface represents a function in the
+  scripting language being used. It is represented in IDL as
+  follows:</p><pre class="idl">[Callback=FunctionOnly, NoInterfaceObject]
+interface <dfn id="function">Function</dfn> {
+  any <a href="#dom-function-call" title="dom-function-call">call</a>(in any... arguments);
+};</pre><p>The <dfn id="dom-function-call" title="dom-function-call"><code>call(...)</code></dfn>
+  method is the object's callback.</p><p class="note">In JavaScript, any <code title="">Function</code>
+  object implements this interface.</p><p>If the <code><a href="#function">Function</a></code> object is a JavaScript <code title="">Function</code>, then when it is invoked by the user agent,
+  the user agent must set the <var title="">thisArg</var> (as defined
+  by ECMAScript edition 5 section 10.4.3 Entering Function Code) to
+  the <a href="#event-handlers" title="event handlers">event handler</a>'s object. <a href="references.html#refsECMA262">[ECMA262]</a></p><div class="example">
+
+   <p>For example, the following document fragment:</p>
+
+   <pre>&lt;body onload="alert(this)" onclick="alert(this)"&gt;</pre>
+
+   <p>...leads to an alert saying "<code title="">[object&#xA0;Window]</code>" when the document is loaded,
+   and an alert saying "<code title="">[object&#xA0;HTMLBodyElement]</code>" whenever the user
+   clicks something in the page.</p>
+
+  </div><p>The return value of the function affects whether the event is
+  canceled or not: <span class="impl">as described above,</span> if
+  the return value is false, the event is canceled (except for <code class="event-mouseover">mouseover</code> events, where the return
+  value has to be true to cancel the event). With <code title="event-beforeunload">beforeunload</code> events, the value is
+  instead used to determine the message to show the user.</p><div class="impl">
+
+  <h5 id="event-handlers-on-elements-document-objects-and-window-objects"><span class="secno">6.1.6.2 </span>Event handlers on elements, <code><a href="infrastructure.html#document">Document</a></code> objects, and <code><a href="browsers.html#window">Window</a></code> objects</h5>
+
+  <p>The following are the <a href="#event-handlers">event handlers</a> (and their
+  corresponding <a href="#event-handler-event-type" title="event handler event type">event handler
+  event types</a>) that must be supported by all <a href="infrastructure.html#html-elements">HTML
+  elements</a>, as both content attributes and IDL attributes, and
+  on <code><a href="infrastructure.html#document">Document</a></code> and <code><a href="browsers.html#window">Window</a></code> objects, as IDL
+  attributes.</p>
+
+  <table><thead><tr><th><a href="#event-handlers" title="event handlers">Event handler</a> </th><th><a href="#event-handler-event-type">Event handler event type</a>
+   </th></tr></thead><tbody><tr><td><dfn id="handler-onabort" title="handler-onabort"><code>onabort</code></dfn> </td><td> <code title="event-abort">abort</code>
+    </td></tr><tr><td><dfn id="handler-oncanplay" title="handler-oncanplay"><code>oncanplay</code></dfn> </td><td> <code title="event-media-canplay"><a href="video.html#event-media-canplay">canplay</a></code>
+    </td></tr><tr><td><dfn id="handler-oncanplaythrough" title="handler-oncanplaythrough"><code>oncanplaythrough</code></dfn> </td><td> <code title="event-media-canplaythrough"><a href="video.html#event-media-canplaythrough">canplaythrough</a></code>
+    </td></tr><tr><td><dfn id="handler-onchange" title="handler-onchange"><code>onchange</code></dfn> </td><td> <code title="event-change">change</code> <!-- widely used -->
+    </td></tr><tr><td><dfn id="handler-onclick" title="handler-onclick"><code>onclick</code></dfn> </td><td> <code title="event-click"><a href="infrastructure.html#event-click">click</a></code> <!-- widely used -->
+    </td></tr><tr><td><dfn id="handler-oncontextmenu" title="handler-oncontextmenu"><code>oncontextmenu</code></dfn> </td><td> <code title="event-contextmenu">contextmenu</code> <!-- widely used -->
+    </td></tr><tr><td><dfn id="handler-ondblclick" title="handler-ondblclick"><code>ondblclick</code></dfn> </td><td> <code title="event-dblclick">dblclick</code> <!-- widely used -->
+    </td></tr><tr><td><dfn id="handler-ondrag" title="handler-ondrag"><code>ondrag</code></dfn> </td><td> <code title="event-drag"><a href="dnd.html#event-drag">drag</a></code>
+    </td></tr><tr><td><dfn id="handler-ondragend" title="handler-ondragend"><code>ondragend</code></dfn> </td><td> <code title="event-dragend"><a href="dnd.html#event-dragend">dragend</a></code>
+    </td></tr><tr><td><dfn id="handler-ondragenter" title="handler-ondragenter"><code>ondragenter</code></dfn> </td><td> <code title="event-dragenter"><a href="dnd.html#event-dragenter">dragenter</a></code>
+    </td></tr><tr><td><dfn id="handler-ondragleave" title="handler-ondragleave"><code>ondragleave</code></dfn> </td><td> <code title="event-dragleave"><a href="dnd.html#event-dragleave">dragleave</a></code>
+    </td></tr><tr><td><dfn id="handler-ondragover" title="handler-ondragover"><code>ondragover</code></dfn> </td><td> <code title="event-dragover"><a href="dnd.html#event-dragover">dragover</a></code>
+    </td></tr><tr><td><dfn id="handler-ondragstart" title="handler-ondragstart"><code>ondragstart</code></dfn> </td><td> <code title="event-dragstart"><a href="dnd.html#event-dragstart">dragstart</a></code> <!-- widely used -->
+    </td></tr><tr><td><dfn id="handler-ondrop" title="handler-ondrop"><code>ondrop</code></dfn> </td><td> <code title="event-drop"><a href="dnd.html#event-drop">drop</a></code>
+    </td></tr><tr><td><dfn id="handler-ondurationchange" title="handler-ondurationchange"><code>ondurationchange</code></dfn> </td><td> <code title="event-media-durationchange"><a href="video.html#event-media-durationchange">durationchange</a></code>
+    </td></tr><tr><td><dfn id="handler-onemptied" title="handler-onemptied"><code>onemptied</code></dfn> </td><td> <code title="event-media-emptied"><a href="video.html#event-media-emptied">emptied</a></code>
+    </td></tr><tr><td><dfn id="handler-onended" title="handler-onended"><code>onended</code></dfn> </td><td> <code title="event-media-ended"><a href="video.html#event-media-ended">ended</a></code>
+    </td></tr><tr><td><dfn id="handler-onformchange" title="handler-onformchange"><code>onformchange</code></dfn> </td><td> <code title="event-formchange">formchange</code>
+    </td></tr><tr><td><dfn id="handler-onforminput" title="handler-onforminput"><code>onforminput</code></dfn> </td><td> <code title="event-forminput">forminput</code>
+    </td></tr><tr><td><dfn id="handler-oninput" title="handler-oninput"><code>oninput</code></dfn> </td><td> <code title="event-input">input</code>
+    </td></tr><tr><td><dfn id="handler-oninvalid" title="handler-oninvalid"><code>oninvalid</code></dfn> </td><td> <code title="event-invalid">invalid</code>
+    </td></tr><tr><td><dfn id="handler-onkeydown" title="handler-onkeydown"><code>onkeydown</code></dfn> </td><td> <code title="event-keydown">keydown</code> <!-- widely used -->
+    </td></tr><tr><td><dfn id="handler-onkeypress" title="handler-onkeypress"><code>onkeypress</code></dfn> </td><td> <code title="event-keypress">keypress</code> <!-- widely used -->
+    </td></tr><tr><td><dfn id="handler-onkeyup" title="handler-onkeyup"><code>onkeyup</code></dfn> </td><td> <code title="event-keyup">keyup</code> <!-- widely used -->
+    </td></tr><tr><td><dfn id="handler-onloadeddata" title="handler-onloadeddata"><code>onloadeddata</code></dfn> </td><td> <code title="event-media-loadeddata"><a href="video.html#event-media-loadeddata">loadeddata</a></code>
+    </td></tr><tr><td><dfn id="handler-onloadedmetadata" title="handler-onloadedmetadata"><code>onloadedmetadata</code></dfn> </td><td> <code title="event-media-loadedmetadata"><a href="video.html#event-media-loadedmetadata">loadedmetadata</a></code>
+    </td></tr><tr><td><dfn id="handler-onloadstart" title="handler-onloadstart"><code>onloadstart</code></dfn> </td><td> <code title="event-media-loadstart"><a href="video.html#event-media-loadstart">loadstart</a></code>
+    </td></tr><tr><td><dfn id="handler-onmousedown" title="handler-onmousedown"><code>onmousedown</code></dfn> </td><td> <code title="event-mousedown">mousedown</code> <!-- widely used -->
+    </td></tr><tr><td><dfn id="handler-onmousemove" title="handler-onmousemove"><code>onmousemove</code></dfn> </td><td> <code title="event-mousemove">mousemove</code> <!-- widely used -->
+    </td></tr><tr><td><dfn id="handler-onmouseout" title="handler-onmouseout"><code>onmouseout</code></dfn> </td><td> <code title="event-mouseout">mouseout</code> <!-- widely used -->
+    </td></tr><tr><td><dfn id="handler-onmouseover" title="handler-onmouseover"><code>onmouseover</code></dfn> </td><td> <code title="event-mouseover">mouseover</code> <!-- widely used -->
+    </td></tr><tr><td><dfn id="handler-onmouseup" title="handler-onmouseup"><code>onmouseup</code></dfn> </td><td> <code title="event-mouseup">mouseup</code> <!-- widely used -->
+    </td></tr><tr><td><dfn id="handler-onmousewheel" title="handler-onmousewheel"><code>onmousewheel</code></dfn> </td><td> <code title="event-mousewheel">mousewheel</code> <!-- widely used -->
+    </td></tr><tr><td><dfn id="handler-onpause" title="handler-onpause"><code>onpause</code></dfn> </td><td> <code title="event-media-pause"><a href="video.html#event-media-pause">pause</a></code>
+    </td></tr><tr><td><dfn id="handler-onplay" title="handler-onplay"><code>onplay</code></dfn> </td><td> <code title="event-media-play"><a href="video.html#event-media-play">play</a></code>
+    </td></tr><tr><td><dfn id="handler-onplaying" title="handler-onplaying"><code>onplaying</code></dfn> </td><td> <code title="event-media-playing"><a href="video.html#event-media-playing">playing</a></code>
+    </td></tr><tr><td><dfn id="handler-onprogress" title="handler-onprogress"><code>onprogress</code></dfn> </td><td> <code title="event-media-progress"><a href="video.html#event-media-progress">progress</a></code>
+    </td></tr><tr><td><dfn id="handler-onratechange" title="handler-onratechange"><code>onratechange</code></dfn> </td><td> <code title="event-media-ratechange"><a href="video.html#event-media-ratechange">ratechange</a></code>
+    </td></tr><tr><td><dfn id="handler-onreadystatechange" title="handler-onreadystatechange"><code>onreadystatechange</code></dfn> </td><td> <code title="event-readystatechange">readystatechange</code>
+    </td></tr><tr><td><dfn id="handler-onscroll" title="handler-onscroll"><code>onscroll</code></dfn> </td><td> <code title="event-scroll">scroll</code> <!-- widely used --> <!-- [CSSOM] -->
+    </td></tr><tr><td><dfn id="handler-onseeked" title="handler-onseeked"><code>onseeked</code></dfn> </td><td> <code title="event-media-seeked"><a href="video.html#event-media-seeked">seeked</a></code>
+    </td></tr><tr><td><dfn id="handler-onseeking" title="handler-onseeking"><code>onseeking</code></dfn> </td><td> <code title="event-media-seeking"><a href="video.html#event-media-seeking">seeking</a></code>
+    </td></tr><tr><td><dfn id="handler-onselect" title="handler-onselect"><code>onselect</code></dfn> </td><td> <code title="event-select">select</code> <!-- widely used --> <!-- [CSSOM] -->
+    </td></tr><tr><td><dfn id="handler-onshow" title="handler-onshow"><code>onshow</code></dfn> </td><td> <code title="event-show">show</code>
+    </td></tr><tr><td><dfn id="handler-onstalled" title="handler-onstalled"><code>onstalled</code></dfn> </td><td> <code title="event-media-stalled"><a href="video.html#event-media-stalled">stalled</a></code>
+    </td></tr><tr><td><dfn id="handler-onsubmit" title="handler-onsubmit"><code>onsubmit</code></dfn> </td><td> <code title="event-submit">submit</code> <!-- widely used -->
+    </td></tr><tr><td><dfn id="handler-onsuspend" title="handler-onsuspend"><code>onsuspend</code></dfn> </td><td> <code title="event-media-suspend"><a href="video.html#event-media-suspend">suspend</a></code>
+    </td></tr><tr><td><dfn id="handler-ontimeupdate" title="handler-ontimeupdate"><code>ontimeupdate</code></dfn> </td><td> <code title="event-media-timeupdate"><a href="video.html#event-media-timeupdate">timeupdate</a></code>
+    </td></tr><tr><td><dfn id="handler-onvolumechange" title="handler-onvolumechange"><code>onvolumechange</code></dfn> </td><td> <code title="event-media-volumechange"><a href="video.html#event-media-volumechange">volumechange</a></code>
+    </td></tr><tr><td><dfn id="handler-onwaiting" title="handler-onwaiting"><code>onwaiting</code></dfn> </td><td> <code title="event-media-waiting"><a href="video.html#event-media-waiting">waiting</a></code>
+
+<!-- not supported, use dnd: -->
+<!--<tr><td><dfn title="handler-onbeforecopy"><code>onbeforecopy</code></dfn> <td> <code title="event-beforecopy">beforecopy</code>--> <!-- widely used -->
+<!--<tr><td><dfn title="handler-oncopy"><code>oncopy</code></dfn> <td> <code title="event-copy">copy</code>--> <!-- widely used -->
+<!--<tr><td><dfn title="handler-onpaste"><code>onpaste</code></dfn> <td> <code title="event-paste">paste</code>--> <!-- widely used -->
+<!-- not supported yet (v2?): -->
+<!--<tr><td><dfn title="handler-onselectstart"><code>onselectstart</code></dfn> <td> <code title="event-selectstart">selectstart</code>--> <!-- widely used -->
+  </td></tr></tbody></table><hr/><p>The following are the <a href="#event-handlers">event handlers</a> (and their
+  corresponding <a href="#event-handler-event-type" title="event handler event type">event handler
+  event types</a>) that must be supported by all <a href="infrastructure.html#html-elements">HTML
+  elements</a> other than <code><a href="sections.html#the-body-element-0">body</a></code>, as both content
+  attributes and IDL attributes, and on <code><a href="infrastructure.html#document">Document</a></code> objects,
+  as IDL attributes:</p>
+
+  <table><thead><tr><th><a href="#event-handlers" title="event handlers">Event handler</a> </th><th><a href="#event-handler-event-type">Event handler event type</a>
+   </th></tr></thead><tbody><tr><td><dfn id="handler-onblur" title="handler-onblur"><code>onblur</code></dfn> </td><td> <code title="event-blur">blur</code> <!-- widely used -->
+    </td></tr><tr><td><dfn id="handler-onerror" title="handler-onerror"><code>onerror</code></dfn> </td><td> <code title="event-error">error</code>
+    </td></tr><tr><td><dfn id="handler-onfocus" title="handler-onfocus"><code>onfocus</code></dfn> </td><td> <code title="event-focus">focus</code> <!-- widely used -->
+    </td></tr><tr><td><dfn id="handler-onload" title="handler-onload"><code>onload</code></dfn> </td><td> <code title="event-load">load</code>
+  </td></tr></tbody></table><hr/><p>The following are the <a href="#event-handlers">event handlers</a> (and their
+  corresponding <a href="#event-handler-event-type" title="event handler event type">event handler
+  event types</a>) that must be supported by <code><a href="browsers.html#window">Window</a></code>
+  objects, as IDL attributes on the <code><a href="browsers.html#window">Window</a></code> object, and
+  with corresponding content attributes and IDL attributes exposed on
+  the <code><a href="sections.html#the-body-element-0">body</a></code> and <code><a href="obsolete.html#frameset">frameset</a></code> elements:</p>
+
+  <table><thead><tr><th><a href="#event-handlers" title="event handlers">Event handler</a> </th><th><a href="#event-handler-event-type">Event handler event type</a>
+   </th></tr></thead><tbody><tr><td><dfn id="handler-window-onafterprint" title="handler-window-onafterprint"><code>onafterprint</code></dfn> </td><td> <code title="event-afterprint">afterprint</code>
+    </td></tr><tr><td><dfn id="handler-window-onbeforeprint" title="handler-window-onbeforeprint"><code>onbeforeprint</code></dfn> </td><td> <code title="event-beforeprint">beforeprint</code>
+    </td></tr><tr><td><dfn id="handler-window-onbeforeunload" title="handler-window-onbeforeunload"><code>onbeforeunload</code></dfn> </td><td> <code title="event-beforeunload">beforeunload</code>
+    </td></tr><tr><td><dfn id="handler-window-onblur" title="handler-window-onblur"><code>onblur</code></dfn> </td><td> <code title="event-blur">blur</code>
+    </td></tr><tr><td><dfn id="handler-window-onerror" title="handler-window-onerror"><code>onerror</code></dfn> </td><td> <code title="event-error">error</code>
+    </td></tr><tr><td><dfn id="handler-window-onfocus" title="handler-window-onfocus"><code>onfocus</code></dfn> </td><td> <code title="event-focus">focus</code>
+    </td></tr><tr><td><dfn id="handler-window-onhashchange" title="handler-window-onhashchange"><code>onhashchange</code></dfn> </td><td> <code title="event-hashchange"><a href="history.html#event-hashchange">hashchange</a></code> <!-- new -->
+    </td></tr><tr><td><dfn id="handler-window-onload" title="handler-window-onload"><code>onload</code></dfn> </td><td> <code title="event-load">load</code> <!-- widely used -->
+    </td></tr><tr><td><dfn id="handler-window-onmessage" title="handler-window-onmessage"><code>onmessage</code></dfn> </td><td> <code title="event-message">message</code> <!-- new for postMessage -->
+    </td></tr><tr><td><dfn id="handler-window-onoffline" title="handler-window-onoffline"><code>onoffline</code></dfn> </td><td> <code title="event-offline"><a href="offline.html#event-offline">offline</a></code> <!-- new -->
+    </td></tr><tr><td><dfn id="handler-window-ononline" title="handler-window-ononline"><code>ononline</code></dfn> </td><td> <code title="event-online"><a href="offline.html#event-online">online</a></code> <!-- new -->
+    </td></tr><tr><td><dfn id="handler-window-onpagehide" title="handler-window-onpagehide"><code>onpagehide</code></dfn> </td><td> <code title="event-pagehide"><a href="history.html#event-pagehide">pagehide</a></code> <!-- new -->
+    </td></tr><tr><td><dfn id="handler-window-onpageshow" title="handler-window-onpageshow"><code>onpageshow</code></dfn> </td><td> <code title="event-pageshow"><a href="history.html#event-pageshow">pageshow</a></code> <!-- new -->
+    </td></tr><tr><td><dfn id="handler-window-onpopstate" title="handler-window-onpopstate"><code>onpopstate</code></dfn> </td><td> <code title="event-popstate"><a href="history.html#event-popstate">popstate</a></code> <!-- new -->
+    </td></tr><tr><td><dfn id="handler-window-onredo" title="handler-window-onredo"><code>onredo</code></dfn> </td><td> <code title="event-redo"><a href="dnd.html#event-redo">redo</a></code> <!-- new -->
+    </td></tr><tr><td><dfn id="handler-window-onresize" title="handler-window-onresize"><code>onresize</code></dfn> </td><td> <code title="event-resize">resize</code> <!-- widely used --> <!-- [CSSOM] -->
+    </td></tr><tr><td><dfn id="handler-window-onstorage" title="handler-window-onstorage"><code>onstorage</code></dfn> </td><td> <code title="event-storage">storage</code> <!-- new -->
+    </td></tr><tr><td><dfn id="handler-window-onundo" title="handler-window-onundo"><code>onundo</code></dfn> </td><td> <code title="event-undo"><a href="dnd.html#event-undo">undo</a></code> <!-- new -->
+    </td></tr><tr><td><dfn id="handler-window-onunload" title="handler-window-onunload"><code>onunload</code></dfn> </td><td> <code title="event-unload">unload</code> <!-- widely used -->
+  </td></tr></tbody></table><p class="note">The <code title="handler-window-onerror"><a href="#handler-window-onerror">onerror</a></code>
+  handler is also used for <a href="#runtime-script-errors">reporting script errors</a>.</p>
+
+  </div><div class="impl">
+
+  <h5 id="event-firing"><span class="secno">6.1.6.3 </span>Event firing</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+  <p>Certain operations and methods are defined as firing events on
+  elements. For example, the <code title="dom-click"><a href="editing.html#dom-click">click()</a></code>
+  method on the <code><a href="elements.html#htmlelement">HTMLElement</a></code> interface is defined as
+  firing a <code title="event-click"><a href="infrastructure.html#event-click">click</a></code> event on the
+  element. <a href="references.html#refsDOMEVENTS">[DOMEVENTS]</a></p>
+
+  <p><dfn id="fire-a-click-event" title="fire a click event">Firing a <code title="event-click">click</code> event</dfn> means that a <code title="event-click"><a href="infrastructure.html#event-click">click</a></code> event, which bubbles and is
+  cancelable, and which uses the <code>MouseEvent</code> interface,
+  must be dispatched at the given target. The event object must have
+  its <code title="">screenX</code>, <code title="">screenY</code>,
+  <code title="">clientX</code>, <code title="">clientY</code>, and
+  <code title="">button</code> attributes set to 0, its <code title="">ctrlKey</code>, <code title="">shiftKey</code>, <code title="">altKey</code>, and <code title="">metaKey</code> attributes
+  set according to the current state of the key input device, if any
+  (false for any keys that are not available), its <code title="">detail</code> attribute set to 1, and its <code title="">relatedTarget</code> attribute set to null. The <code title="">getModifierState()</code> method on the object must return
+  values appropriately describing the state of the key input device at
+  the time the event is created.</p>
+
+  <p><dfn id="fire-a-simple-event" title="fire a simple event">Firing a simple event named <var title="">e</var></dfn> means that an event with the name <var title="">e</var>, which does not bubble (except where otherwise
+  stated) and is not cancelable (except where otherwise stated), and
+  which uses the <code><a href="infrastructure.html#event">Event</a></code> interface, must be dispatched at
+  the given target.</p>
+
+<!--
+  <p><dfn title="fire a progress event">Firing a progress event named
+  <var title="">e</var></dfn>, optionally in the context of a
+  particular instance of the <span title="fetch">fetching
+  algorithm</span>, means that an event with the name <var
+  title="">e</var>, which does not bubble (except where otherwise
+  stated) and is not cancelable (except where otherwise stated), and
+  which uses the <code>ProgressEvent</code> interface, must be
+  dispatched at the given target element. If there is a <span
+  title="fetch">fetching algorithm</span>, and the <span>URL</span>
+  being <span title="fetch">fetched</span> has the <span>same
+  origin</span> as the <code>Document</code> of the target element,
+  then the <code
+  title="dom-ProgressEvents-lengthComputable">lengthComputable</code>
+  attribute must be set to true if the <span title="fetch">fetching
+  algorithm</span>'s subject has a known <span
+  title="concept-fetch-total">size</span>; the <code
+  title="dom-ProgressEvents-total">total</code> attribute must be set
+  to the subject's <span title="concept-fetch-total">size</span> if it
+  is known and zero otherwise; and the <code
+  title="dom-ProgressEvents-loaded">loaded</code> attribute must be
+  set to the <span title="concept-fetch-loaded">number of bytes
+  downloaded</span>, excluding HTTP headers <span
+  title="concept-http-equivalent-headers">or
+  equivalent</span>. Otherwise, the <code
+  title="dom-ProgressEvents-lengthComputable">lengthComputable</code>
+  attribute must be set to false, and the <code
+  title="dom-ProgressEvents-total">total</code> and the <code
+  title="dom-ProgressEvents-loaded">loaded</code> attributes must be
+  set to zero. <a href="#r-e-f-sPROGRESS">[PROGRESS]</a></p>
+(also fix reference in line above)-->
+
+  <p>The default action of these events is to do nothing except where
+  otherwise stated.</p>
+
+  </div><div class="impl">
+
+  <h5 id="events-and-the-window-object"><span class="secno">6.1.6.4 </span>Events and the <code><a href="browsers.html#window">Window</a></code> object</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+  <p>When an event is dispatched at a DOM node in a
+  <code><a href="infrastructure.html#document">Document</a></code> in a <a href="browsers.html#browsing-context">browsing context</a>, if the
+  event is not a <code title="event-load">load</code> event, the user
+  agent must also dispatch the event to the <code><a href="browsers.html#window">Window</a></code>, as
+  follows:</p>
+
+  <ol><li>In the capture phase, the event must propagate to the
+   <code><a href="browsers.html#window">Window</a></code> object before propagating to any of the nodes,
+   as if the <code><a href="browsers.html#window">Window</a></code> object was the parent of the
+   <code><a href="infrastructure.html#document">Document</a></code> in the dispatch chain.</li>
+
+   <li>In the bubble phase, the event must propagate up to the
+   <code><a href="browsers.html#window">Window</a></code> object at the end of the phase, unless bubbling
+   has been prevented, again as if the <code><a href="browsers.html#window">Window</a></code> object was
+   the parent of the <code><a href="infrastructure.html#document">Document</a></code> in the dispatch chain.</li>
+
+  </ol></div><div class="impl">
+
+  <h5 id="runtime-script-errors"><span class="secno">6.1.6.5 </span>Runtime script errors</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+  <p><i>This section only applies to user agents that support
+  scripting in general and JavaScript in particular.</i></p>
+
+  <p>Whenever an uncaught runtime script error occurs in one of the
+  scripts associated with a <code><a href="infrastructure.html#document">Document</a></code>, the user agent must
+  <a href="#report-the-error">report the error</a> using the <code title="handler-window-onerror"><a href="#handler-window-onerror">onerror</a></code> <a href="#event-handlers" title="event&#10;  handlers">event handler</a> of the <a href="#script-s-global-object">script's global
+  object</a>. If the error is still <i title="concept-error-nothandled"><a href="#concept-error-nothandled">not handled</a></i> after this, then
+  the error may be reported to the user.</p>
+
+  <hr/><p>When the user agent is required to <dfn id="report-the-error" title="report the&#10;  error">report an error</dfn> <var title="">error</var> using the
+  <a href="#event-handlers" title="event handlers">event handler</a> <var title="">onerror</var>, it must run these steps, after which the
+  error is either <dfn id="concept-error-handled" title="concept-error-handled"><i>handled</i></dfn> or <dfn id="concept-error-nothandled" title="concept-error-nothandled"><i>not handled</i></dfn>:</p>
+
+  <dl class="switch"><dt>If the value of <var title="">onerror</var> is a
+   <code><a href="#function">Function</a></code></dt>
+
+   <dd>
+
+    <p>The function must be invoked with three arguments. The three
+    arguments passed to the function are all <code>DOMString</code>s;
+    the first must give the message that the UA is considering
+    reporting, the second must give the <a href="urls.html#absolute-url">absolute URL</a> of
+    the resource in which the error occurred, and the third must give
+    the line number in that resource on which the error occurred.</p>
+
+    <p>If the function returns false, then the error is <i title="concept-error-handled"><a href="#concept-error-handled">handled</a></i>. Otherwise, the error is
+    <i title="concept-error-nothandled"><a href="#concept-error-nothandled">not handled</a></i>.</p>
+
+    <p>Any uncaught exceptions thrown or errors caused by this
+    function may be reported to the user immediately after the error
+    that the function was called for; the <a href="#report-the-error" title="report the&#10;    error">report an error</a> algorithm must not be used to handle
+    exceptions thrown or errors caused by this function.</p>
+
+   </dd>
+
+   <dt>Otherwise</dt>
+
+   <dd>
+
+    <p>The error is <i title="concept-error-nothandled"><a href="#concept-error-nothandled">not handled</a></i>.</p>
+
+   </dd>
+
+  </dl></div></body></html>

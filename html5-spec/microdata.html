@@ -1,0 +1,1835 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE HTML>
+<!-- when publishing, change bits marked ZZZ -->
+<html lang="en-US-x-Hixie"><head><title>5 Microdata &#x2014; HTML 5</title><style type="text/css"><![CDATA[
+   pre { margin-left: 2em; white-space: pre-wrap; }
+   h2 { margin: 3em 0 1em 0; }
+   h3 { margin: 2.5em 0 1em 0; }
+   h4 { margin: 2.5em 0 0.75em 0; }
+   h5, h6 { margin: 2.5em 0 1em; }
+   h1 + h2, h1 + h2 + h2 { margin: 0.75em 0 0.75em; }
+   h2 + h3, h3 + h4, h4 + h5, h5 + h6 { margin-top: 0.5em; }
+   p { margin: 1em 0; }
+   hr:not(.top) { display: block; background: none; border: none; padding: 0; margin: 2em 0; height: auto; }
+   dl, dd { margin-top: 0; margin-bottom: 0; }
+   dt { margin-top: 0.75em; margin-bottom: 0.25em; clear: left; }
+   dt + dt { margin-top: 0; }
+   dd dt { margin-top: 0.25em; margin-bottom: 0; }
+   dd p { margin-top: 0; }
+   dd dl + p { margin-top: 1em; }
+   dd table + p { margin-top: 1em; }
+   p + * > li, dd li { margin: 1em 0; }
+   dt, dfn { font-weight: bold; font-style: normal; }
+   dt dfn { font-style: italic; }
+   pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
+   pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
+   pre em { font-weight: bolder; font-style: normal; }
+   @media screen { code { color: orangered; } code :link, code :visited { color: inherit; } }
+   var sub { vertical-align: bottom; font-size: smaller; position: relative; top: 0.1em; }
+   table { border-collapse: collapse; border-style: hidden hidden none hidden; }
+   table thead { border-bottom: solid; }
+   table tbody th:first-child { border-left: solid; }
+   table tbody th { text-align: left; }
+   table td, table th { border-left: solid; border-right: solid; border-bottom: solid thin; vertical-align: top; padding: 0.2em; }
+   blockquote { margin: 0 0 0 2em; border: 0; padding: 0; font-style: italic; }
+
+   .bad, .bad *:not(.XXX) { color: gray; border-color: gray; background: transparent; }
+   .matrix, .matrix td { border: none; text-align: right; }
+   .matrix { margin-left: 2em; }
+   .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
+   .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
+   .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
+   img.extra { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
+   pre.css:first-line { color: #AAAA50; }
+   dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #EEFFEE; }
+   hr + dl.domintro, div.impl + dl.domintro { margin-top: 2.5em; margin-bottom: 1.5em; }
+   dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
+   dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
+   dl.domintro dd p { margin: 0.5em 0; }
+   dl.switch { padding-left: 2em; }
+   dl.switch > dt { text-indent: -1.5em; }
+   dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
+   dl.triple { padding: 0 0 0 1em; }
+   dl.triple dt, dl.triple dd { margin: 0; display: inline }
+   dl.triple dt:after { content: ':'; }
+   dl.triple dd:after { content: '\A'; white-space: pre; }
+   .diff-old { text-decoration: line-through; color: silver; background: transparent; }
+   .diff-chg, .diff-new { text-decoration: underline; color: green; background: transparent; }
+   a .diff-new { border-bottom: 1px blue solid; }
+
+   h2 { page-break-before: always; }
+   h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
+   h1 + h2, hr + h2.no-toc { page-break-before: auto; }
+
+   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+
+   div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
+   div.head p { margin: 0; }
+   div.head h1 { margin: 0; }
+   div.head .logo { float: right; margin: 0 1em; }
+   div.head .logo img { border: none } /* remove border from top image */
+   div.head dl { margin: 1em 0; }
+   div.head p.copyright, div.head p.alt { font-size: x-small; font-style: oblique; margin: 0; }
+
+   body > .toc > li { margin-top: 1em; margin-bottom: 1em; }
+   body > .toc.brief > li { margin-top: 0.35em; margin-bottom: 0.35em; }
+   body > .toc > li > * { margin-bottom: 0.5em; }
+   body > .toc > li > * > li > * { margin-bottom: 0.25em; }
+   .toc, .toc li { list-style: none; }
+
+   .brief { margin-top: 1em; margin-bottom: 1em; line-height: 1.1; }
+   .brief li { margin: 0; padding: 0; }
+   .brief li p { margin: 0; padding: 0; }
+
+   .category-list { margin-top: -0.75em; margin-bottom: 1em; line-height: 1.5; }
+   .category-list::before { content: '\21D2\A0'; font-size: 1.2em; font-weight: 900; }
+   .category-list li { display: inline; }
+   .category-list li:not(:last-child)::after { content: ', '; }
+   .category-list li > span, .category-list li > a { text-transform: lowercase; }
+   .category-list li * { text-transform: none; } /* don't affect <code> nested in <a> */
+
+   .XXX { color: #E50000; background: white; border: solid red; padding: 0.5em; margin: 1em 0; }
+   .XXX > :first-child { margin-top: 0; }
+   p .XXX { line-height: 3em; }
+   .annotation { border: solid thin black; background: #0C479D; color: white; position: relative; margin: 8px 0 20px 0; }
+   .annotation:before { position: absolute; left: 0; top: 0; width: 100%; height: 100%; margin: 6px -6px -6px 6px; background: #333333; z-index: -1; content: ''; }
+   .annotation :link, .annotation :visited { color: inherit; }
+   .annotation :link:hover, .annotation :visited:hover { background: transparent; }
+   .annotation span { border: none ! important; }
+   .note { color: green; background: transparent; font-family: sans-serif; }
+   .warning { color: red; background: transparent; }
+   .note, .warning { font-weight: bolder; font-style: italic; }
+   p.note, div.note { padding: 0.5em 2em; }
+   span.note { padding: 0 2em; }
+   .note p:first-child, .warning p:first-child { margin-top: 0; }
+   .note p:last-child, .warning p:last-child { margin-bottom: 0; }
+   .warning:before { font-style: normal; }
+   p.note:before { content: 'Note: '; }
+   p.warning:before { content: '\26A0 Warning! '; }
+
+   .bookkeeping:before { display: block; content: 'Bookkeeping details'; font-weight: bolder; font-style: italic; }
+   .bookkeeping { font-size: 0.8em; margin: 2em 0; }
+   .bookkeeping p { margin: 0.5em 2em; display: list-item; list-style: square; }
+
+   h4 { position: relative; z-index: 3; }
+   h4 + .element, h4 + div + .element { margin-top: -2.5em; padding-top: 2em; }
+   .element {
+     background: #EEEEFF;
+     color: black;
+     margin: 0 0 1em 0.15em;
+     padding: 0 1em 0.25em 0.75em;
+     border-left: solid #9999FF 0.25em;
+     position: relative;
+     z-index: 1;
+   }
+   .element:before {
+     position: absolute;
+     z-index: 2;
+     top: 0;
+     left: -1.15em;
+     height: 2em;
+     width: 0.9em;
+     background: #EEEEFF;
+     content: ' ';
+     border-style: none none solid solid;
+     border-color: #9999FF;
+     border-width: 0.25em;
+   }
+
+   .example { display: block; color: #222222; background: #FCFCFC; border-left: double; margin-left: 2em; padding-left: 1em; }
+   td > .example:only-child { margin: 0 0 0 0.1em; }
+
+   .tall-and-narrow {
+     font-size: 0.6em;
+     column-width: 25em;
+     column-gap: 1em;
+     -moz-column-width: 25em;
+     -moz-column-gap: 1em;
+     -webkit-column-width: 25em;
+     -webkit-column-gap: 1em;
+   }
+
+   ul.domTree, ul.domTree ul { padding: 0 0 0 1em; margin: 0; }
+   ul.domTree li { padding: 0; margin: 0; list-style: none; position: relative; }
+   ul.domTree li li { list-style: none; }
+   ul.domTree li:first-child::before { position: absolute; top: 0; height: 0.6em; left: -0.75em; width: 0.5em; border-style: none none solid solid; content: ''; border-width: 0.1em; }
+   ul.domTree li:not(:last-child)::after { position: absolute; top: 0; bottom: -0.6em; left: -0.75em; width: 0.5em; border-style: none none solid solid; content: ''; border-width: 0.1em; }
+   ul.domTree span { font-style: italic; font-family: serif; }
+   ul.domTree .t1 code { color: purple; font-weight: bold; }
+   ul.domTree .t2 { font-style: normal; font-family: monospace; }
+   ul.domTree .t2 .name { color: black; font-weight: bold; }
+   ul.domTree .t2 .value { color: blue; font-weight: normal; }
+   ul.domTree .t3 code, .domTree .t4 code, .domTree .t5 code { color: gray; }
+   ul.domTree .t7 code, .domTree .t8 code { color: green; }
+   ul.domTree .t10 code { color: teal; }
+
+   #configUI { position: absolute; z-index: 20; top: 10em; right: 1em; width: 11em; font-size: small; }
+   #configUI p { margin: 0.5em 0; padding: 0.3em; background: #EEEEEE; color: black; border: inset thin; }
+   #configUI p label { display: block; }
+   #configUI #updateUI, #configUI .loginUI { text-align: center; }
+   #configUI input[type=button] { display: block; margin: auto; }
+  ]]></style><style type="text/css"><![CDATA[
+
+   .applies thead th > * { display: block; }
+   .applies thead code { display: block; }
+   .applies tbody th { whitespace: nowrap; }
+   .applies td { text-align: center; }
+   .applies .yes { background: yellow; }
+
+   .matrix, .matrix td { border: none; text-align: right; }
+   .matrix { margin-left: 2em; }
+
+   .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
+   .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
+   .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
+   #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
+   #table-example-1 caption { padding-bottom: 0.5em; }
+   #table-example-1 thead, #table-example-1 tbody { border: none; }
+   #table-example-1 th, #table-example-1 td { border: solid thin; }
+   #table-example-1 th { font-weight: normal; }
+   #table-example-1 td { border-style: none solid; vertical-align: top; }
+   #table-example-1 th { padding: 0.5em; vertical-align: middle; text-align: center; }
+   #table-example-1 tbody tr:first-child td { padding-top: 0.5em; }
+   #table-example-1 tbody tr:last-child td { padding-bottom: 1.5em; }
+   #table-example-1 tbody td:first-child { padding-left: 2.5em; padding-right: 0; width: 9em; }
+   #table-example-1 tbody td:first-child::after { content: leader(". "); }
+   #table-example-1 tbody td { padding-left: 2em; padding-right: 2em; }
+   #table-example-1 tbody td:first-child + td { width: 10em; }
+   #table-example-1 tbody td:first-child + td ~ td { width: 2.5em; }
+   #table-example-1 tbody td:first-child + td + td + td ~ td { width: 1.25em; }
+
+   .apple-table-examples { border: none; border-collapse: separate; border-spacing: 1.5em 0em; width: 40em; margin-left: 3em; }
+   .apple-table-examples * { font-family: "Times", serif; }
+   .apple-table-examples td, .apple-table-examples th { border: none; white-space: nowrap; padding-top: 0; padding-bottom: 0; }
+   .apple-table-examples tbody th:first-child { border-left: none; width: 100%; }
+   .apple-table-examples thead th:first-child ~ th { font-size: smaller; font-weight: bolder; border-bottom: solid 2px; text-align: center; }
+   .apple-table-examples tbody th::after, .apple-table-examples tfoot th::after { content: leader(". ") }
+   .apple-table-examples tbody th, .apple-table-examples tfoot th { font: inherit; text-align: left; }
+   .apple-table-examples td { text-align: right; vertical-align: top; }
+   .apple-table-examples.e1 tbody tr:last-child td { border-bottom: solid 1px; }
+   .apple-table-examples.e1 tbody + tbody tr:last-child td { border-bottom: double 3px; }
+   .apple-table-examples.e2 th[scope=row] { padding-left: 1em; }
+   .apple-table-examples sup { line-height: 0; }
+
+  ]]></style><link href="data:text/css," rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D" rel="alternate stylesheet" title="Highlight implementation requirements"/><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script><![CDATA[
+   function getCookie(name) {
+     var params = location.search.substr(1).split("&");
+     for (var index = 0; index < params.length; index++) {
+       if (params[index] == name)
+         return "1";
+       var data = params[index].split("=");
+       if (data[0] == name)
+         return unescape(data[1]);
+     }
+     var cookies = document.cookie.split("; ");
+     for (var index = 0; index < cookies.length; index++) {
+       var data = cookies[index].split("=");
+       if (data[0] == name)
+         return unescape(data[1]);
+     }
+     return null;
+   }
+   function load(script) {
+     var e = document.createElement('script');
+     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     document.body.appendChild(e);
+   }
+   function init() {
+     if (location.search == '?slow-browser')
+       return;
+     var configUI = document.createElement('div');
+     configUI.id = 'configUI';
+     document.body.appendChild(configUI);
+     // load('reviewer.js'); // would need cross-site XHR
+     if (document.getElementById('head'))
+       load('toc.js');
+     load('styler.js');
+     // load('updater.js'); // would need cross-site XHR
+     load('dfn.js');
+     // load('status.js'); // would need cross-site XHR
+     if (getCookie('profile') == '1')
+       document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
+     fixBrokenLink();
+   }
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="interactive-elements.html" title="4.11 Interactive elements" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="browsers.html" title="6 Web browsers" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+   <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
+   <h1>HTML5</h1>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2>
+
+   </div><nav><a href="interactive-elements.html">&#x2190; 4.11 Interactive elements</a> &#x2013;
+   <a href="spec.html#contents">Table of contents</a> &#x2013;
+   <a href="browsers.html">6 Web browsers &#x2192;</a>
+  </nav><p>This is revision 1.3627.</p>
+
+
+  <h2 id="microdata"><span class="secno">5 </span><dfn>Microdata</dfn></h2><p class="XXX annotation"><b>Status: </b><i>Controversial Working Draft. </i><span><a href="http://www.w3.org/html/wg/tracker/issues/76">ISSUE-76</a> (Microdata/RDFa) blocks progress to Last Call</span></p><!-- v2
+
+  * <itemref itemprop="foo" src="url#id"> to import the item with
+    id="id" from url into the current microdata block as the value of
+    property foo?
+
+  * splitting the 'content' part of a property into multiple sub-bits,
+    as in:
+
+     <span itemprop="tel" item-content-in-bits>
+       Telephone:
+       <span content-bit>+44</span> (0) <span content-bit>1223 123 123</span>
+     </span>
+
+    maybe vocabs that need this can use a sub vocabulary specifically
+    for this:
+
+     <span itemprop="tel" itemscope itemtype="http://bits.example/">
+       Telephone:
+       <span itemprop=bit>+44</span> (0) <span itemprop=bit>1223 123 123</span>
+     </span>
+
+--><h3 id="introduction-1"><span class="secno">5.1 </span>Introduction</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><h4 id="overview"><span class="secno">5.1.1 </span>Overview</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><p>Sometimes, it is desirable to annotate content with specific
+  machine-readable labels, e.g. to allow generic scripts to provide
+  services that are customised to the page, or to enable content from
+  a variety of cooperating authors to be processed by a single script
+  in a consistent manner.</p><p>For this purpose, authors can use the microdata features
+  described in this section. Microdata allows nested groups of
+  name-value pairs to be added to documents, in parallel with the
+  existing content.</p><h4 id="the-basic-syntax"><span class="secno">5.1.2 </span>The basic syntax</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><p>At a high level, microdata consists of a group of name-value
+  pairs. The groups are called <a href="#concept-item" title="concept-item">items</a>, and each name-value pair is a
+  property. Items and properties are represented by regular
+  elements.</p><p>To create an item, the <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code> attribute is used.</p><p>To add a property to an item, the <code title="attr-itemprop"><a href="#names:-the-itemprop-attribute">itemprop</a></code> attribute is used on one of
+  the <a href="#concept-item" title="concept-item">item's</a> descendants.</p><div class="example">
+
+   <p>Here there are two items, each of which has the property "name":</p>
+
+   <pre>&lt;div itemscope&gt;
+ &lt;p&gt;My name is &lt;span itemprop="name"&gt;Elizabeth&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div itemscope&gt;
+ &lt;p&gt;My name is &lt;span itemprop="name"&gt;Daniel&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;</pre>
+
+  </div><p>Properties generally have values that are strings.</p><div class="example">
+
+   <p>Here the item has three properties:</p>
+
+   <pre>&lt;div itemscope&gt;
+ &lt;p&gt;My name is &lt;span itemprop="name"&gt;Neil&lt;/span&gt;.&lt;/p&gt;
+ &lt;p&gt;My band is called &lt;span itemprop="band"&gt;Four Parts Water&lt;/span&gt;.&lt;/p&gt;
+ &lt;p&gt;I am &lt;span itemprop="nationality"&gt;British&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;</pre>
+
+  </div><p>Properties can also have values that are <a href="infrastructure.html#url" title="URL">URLs</a>. This is achieved using the <code><a href="text-level-semantics.html#the-a-element">a</a></code>
+  element and its <code title="attr-hyperlink-href"><a href="history.html#attr-hyperlink-href">href</a></code>
+  attribute, the <code><a href="text-level-semantics.html#the-img-element">img</a></code> element and its <code title="attr-img-src"><a href="text-level-semantics.html#attr-img-src">src</a></code> attribute, or other elements that
+  link to or embed external resources.</p><div class="example">
+
+   <p>In this example, the item has one property, "image", whose value
+   is a URL:</p>
+
+   <pre>&lt;div itemscope&gt;
+ &lt;img itemprop="image" src="google-logo.png" alt="Google"&gt;
+&lt;/div&gt;</pre>
+
+  </div><p>Properties can also have values that are dates, times, or dates
+  and times. This is achieved using the <code><a href="text-level-semantics.html#the-time-element">time</a></code> element and
+  its <code title="attr-time-datetime"><a href="text-level-semantics.html#attr-time-datetime">datetime</a></code> attribute.</p><div class="example">
+
+   <p>In this example, the item has one property,
+   "birthday", whose value is a date:</p>
+
+   <pre>&lt;div itemscope&gt;
+ I was born on &lt;time itemprop="birthday" datetime="2009-05-10"&gt;May 10th 2009&lt;/time&gt;.
+&lt;/div&gt;</pre>
+
+  </div><p>Properties can also themselves be groups of name-value pairs, by
+  putting the <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code> attribute
+  on the element that declares the property.</p><p>Items that are not part of others are called <a href="#top-level-microdata-items">top-level
+  microdata items</a>.</p><div class="example">
+
+   <p>In this example, the outer item represents a person, and the
+   inner one represents a band:</p>
+
+   <pre>&lt;div itemscope&gt;
+ &lt;p&gt;Name: &lt;span itemprop="name"&gt;Amanda&lt;/span&gt;&lt;/p&gt;
+ &lt;p&gt;Band: &lt;span itemprop="band" itemscope&gt; &lt;span itemprop="name"&gt;Jazz Band&lt;/span&gt; (&lt;span itemprop="size"&gt;12&lt;/span&gt; players)&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;</pre>
+
+   <p>The outer item here has two properties, "name" and
+   "band". The "name" is "Amanda", and the
+   "band" is an item in its own right, with two
+   properties, "name" and "size". The
+   "name" of the band is "Jazz Band", and the
+   "size" is "12".</p>
+
+   <p>The outer item in this example is a top-level microdata
+   item.</p>
+
+  </div><p>Properties that are not descendants of the element with the <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code> attribute can be associated
+  with the <a href="#concept-item" title="concept-item">item</a> using the <code title="attr-itemref"><a href="#attr-itemref">itemref</a></code> attribute. This attribute takes
+  a list of IDs of elements to crawl in addition to crawling the
+  children of the element with the <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code> attribute.</p><div class="example">
+
+   <p>This example is the same as the previous one, but all the
+   properties are separated from their <a href="#concept-item" title="concept-item">items</a>:</p>
+
+   <pre>&lt;div itemscope id="amanda" itemref="a b"&gt;&lt;/div&gt;
+&lt;p id="a"&gt;Name: &lt;span itemprop="name"&gt;Amanda&lt;/span&gt;&lt;/p&gt;
+&lt;div id="b" itemprop="band" itemscope itemref="c"&gt;&lt;/div&gt;
+&lt;div id="c"&gt;
+ &lt;p&gt;Band: &lt;span itemprop="name"&gt;Jazz Band&lt;/span&gt;&lt;/p&gt;
+ &lt;p&gt;Size: &lt;span itemprop="size"&gt;12&lt;/span&gt; players&lt;/p&gt;
+&lt;/div&gt;</pre>
+
+   <p>This gives the same result as the previous example. The first
+   item has two properties, "name", set to "Amanda", and "band", set
+   to another item. That second item has two further properties,
+   "name", set to "Jazz Band", and "size", set to "12".</p>
+
+  </div><p>An <a href="#concept-item" title="concept-item">item</a> can have multiple
+  properties with the same name and different values.</p><div class="example">
+
+   <p>This example describes an ice cream, with two flavors:</p>
+
+   <pre>&lt;div itemscope&gt;
+ &lt;p&gt;Flavors in my favorite ice cream:&lt;/p&gt;
+ &lt;ul&gt;
+  &lt;li itemprop="flavor"&gt;Lemon sorbet&lt;/li&gt;
+  &lt;li itemprop="flavor"&gt;Apricot sorbet&lt;/li&gt;
+ &lt;/ul&gt;
+&lt;/div&gt;</pre>
+
+   <p>This thus results in an item with two properties, both
+   "flavor", having the values "Lemon sorbet" and "Apricot
+   sorbet".</p>
+
+  </div><p>An element introducing a property can also introduce multiple
+  properties at once, to avoid duplication when some of the properties
+  have the same value.</p><div class="example">
+
+   <p>Here we see an item with two properties,
+   "favorite-color" and "favorite-fruit", both
+   set to the value "orange":</p>
+
+   <pre>&lt;div itemscope&gt;
+ &lt;span itemprop="favorite-color favorite-fruit"&gt;orange&lt;/span&gt;
+&lt;/div&gt;</pre>
+
+  </div><p>It's important to note that there is no relationship between the
+  microdata and the content of the document where the microdata is
+  marked up.</p><div class="example">
+
+   <p>There is no semantic difference, for instance, between the
+   following two examples:</p>
+
+   <pre>&lt;figure&gt;
+ &lt;dd&gt;&lt;img src="castle.jpeg"&gt;
+ &lt;dt&gt;&lt;span itemscope&gt;&lt;span itemprop="name"&gt;The Castle&lt;/span&gt;&lt;/span&gt; (1986)
+&lt;/figure&gt;</pre>
+
+   <pre>&lt;span itemscope&gt;&lt;meta itemprop="name" content="The Castle"&gt;&lt;/span&gt;
+&lt;figure&gt;
+ &lt;dd&gt;&lt;img src="castle.jpeg"&gt;
+ &lt;dt&gt;The Castle (1986)
+&lt;/figure&gt;</pre>
+
+   <p>Both have a figure with a caption, and both, completely
+   unrelated to the figure, have an item with a name-value pair with
+   the name "name" and the value "The Castle". The only
+   difference is that if the user drags the caption out of the
+   document, in the former case, the item will be included in the
+   drag-and-drop data. In neither case is the image in any way
+   associated with the item.</p>
+
+  </div><h4 id="typed-items"><span class="secno">5.1.3 </span>Typed items</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><p>The examples in the previous section show how information could
+  be marked up on a page that doesn't expect its microdata to be
+  re-used. Microdata is most useful, though, when it is used in
+  contexts where other authors and readers are able to cooperate to
+  make new uses of the markup.</p><p>For this purpose, it is necessary to give each <a href="#concept-item" title="concept-item">item</a> a type, such as
+  "http://example.com/person", or "http://example.org/cat", or
+  "http://band.example.net/". Types are identified as <a href="infrastructure.html#url" title="URL">URLs</a>.</p><p>The type for an <a href="#concept-item" title="concept-item">item</a> is given
+  as the value of an <code title="attr-itemtype"><a href="#attr-itemtype">itemtype</a></code>
+  attribute on the same element as the <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code> attribute.</p><div class="example">
+
+   <p>Here, the item is "http://example.org/animals#cat":</p>
+
+<pre>&lt;section itemscope itemtype="http://example.org/animals#cat"&gt;
+ &lt;h1 itemprop="name"&gt;Hedral&lt;/h1&gt;
+ &lt;p itemprop="desc"&gt;Hedral is a male american domestic
+ shorthair, with a fluffy black fur with white paws and belly.&lt;/p&gt;
+ &lt;img itemprop="img" src="hedral.jpeg" alt="" title="Hedral, age 18 months"&gt;
+&lt;/section&gt;</pre>   
+
+   <p>In this example the "http://example.org/animals#cat" item has three
+   properties, a "name" ("Hedral"), a "desc" ("Hedral is..."), and an
+   "img" ("hedral.jpeg").</p>
+
+  </div><p>An item can only have one type. The type gives the context for
+  the properties, thus defining a vocabulary: a property named "class"
+  given for an item with the type "http://census.example/person" might
+  refer to the economic class of an individual, while a property named
+  "class" given for an item with the type "http://example.com/school/teacher"
+  might refer to the classroom a teacher has been assigned.</p><h4 id="global-identifiers-for-items"><span class="secno">5.1.4 </span>Global identifiers for items</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><p>Sometimes, an <a href="#concept-item" title="concept-item">item</a> gives
+  information about a topic that has a global identifier. For example,
+  books can be identified by their ISBN number.</p><p>Vocabularies (as identified by the <code title="attr-itemtype"><a href="#attr-itemtype">itemtype</a></code> attribute) can be designed
+  such that <a href="#concept-item" title="concept-item">items</a> get associated
+  with their global identifier in an unambiguous way by expressing the
+  global identifiers as <a href="infrastructure.html#url" title="URL">URLs</a> given in an
+  <code title="attr-itemid"><a href="#attr-itemid">itemid</a></code> attribute.</p><p>The exact meaning of the <a href="infrastructure.html#url" title="URL">URLs</a> given in
+  <code title="attr-itemid"><a href="#attr-itemid">itemid</a></code> attributes depends on the
+  vocabulary used.</p><div class="example">
+
+   <p>Here, an item is talking about a particular book:</p>
+
+<pre>&lt;dl itemscope
+    itemtype="http://vocab.example.net/book"
+    <strong>itemid="urn:isbn:0-330-34032-8"</strong>&gt;
+ &lt;dt&gt;Title
+ &lt;dd itemprop="title"&gt;The Reality Dysfunction
+ &lt;dt&gt;Author
+ &lt;dd itemprop="author"&gt;Peter F. Hamilton
+ &lt;dt&gt;Publication date
+ &lt;dd&gt;&lt;time itemprop="pubdate" datetime="1996-01-26"&gt;26 January 1996&lt;/time&gt;
+&lt;/dl&gt;</pre>
+
+   <p>The "<code title="">http://vocab.example.net/book</code>"
+   vocabulary in this example would define that the <code title="attr-itemid"><a href="#attr-itemid">itemid</a></code> attribute takes a <code title="">urn:</code> <a href="infrastructure.html#url">URL</a> pointing to the ISBN of the
+   book.</p>
+
+  </div><!-- (commented out since itemtype="" defines the meaning of the
+        identifier for now)
+  <p>Although it is common practice, authors are encouraged not to use
+  the same URL to identify multiple topics; in particular, an HTTP URL
+  usually identifies a specific resource (such as an image or
+  document), and authors are encouraged to not use them to identify
+  people, non-Web resources like companies, movies, and products, or
+  other abstract concepts. Using an HTTP URL as a global identifier
+  for something other than the resource actually designated by the URL
+  leads to a situation where it is ambiguous whether the identifier,
+  and thus the set of properties specified in the microdata,
+  references the page or something else.</p>
+  --><h4 id="selecting-names-when-defining-vocabularies"><span class="secno">5.1.5 </span>Selecting names when defining vocabularies</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><p>Using microdata means using a vocabulary. For some purposes, an
+  ad-hoc vocabulary is adequate. For others, a vocabulary will need to
+  be designed. Where possible, authors are encouraged to re-use
+  existing vocabularies, as this makes content re-use easier.</p><p>When designing new vocabularies, identifiers can be created
+  either using <a href="infrastructure.html#url" title="URL">URLs</a>, or, for properties, as
+  plain words (with no dots or colons). For URLs, conflicts with other
+  vocabularies can be avoided by only using identifiers that
+  correspond to pages that the author has control over.</p><div class="example">
+
+   <p>For instance, if Jon and Adam both write content at <code title="">example.com</code>, at <code title="">http://example.com/~jon/...</code> and <code title="">http://example.com/~adam/...</code> respectively, then
+   they could select identifiers of the form
+   "http://example.com/~jon/name" and "http://example.com/~adam/name"
+   respectively.</p>
+
+  </div><p>Properties whose names are just plain words can only be used
+  within the context of the types for which they are intended;
+  properties named using URLs can be reused in items of any type. If
+  an item has no type, and is not part of another item, then if its
+  properties have names that are just plain words, they are not
+  intended to be globally unique, and are instead only intended for
+  limited use. Generally speaking, authors are encouraged to use
+  either properties with globally unique names (URLs) or ensure that
+  their items are typed.</p><div class="example">
+
+   <p>Here, an item is an "http://example.org/animals#cat", and most of the
+   properties have names that are words defined in the context of that
+   type. There are also a few additional properties whose names come
+   from other vocabularies.</p>
+
+<pre>&lt;section itemscope itemtype="http://example.org/animals#cat"&gt;
+ &lt;h1 itemprop="name http://example.com/fn"&gt;Hedral&lt;/h1&gt;
+ &lt;p itemprop="desc"&gt;Hedral is a male american domestic
+ shorthair, with a fluffy &lt;span
+ itemprop="http://example.com/color"&gt;black&lt;/span&gt; fur with &lt;span
+ itemprop="http://example.com/color"&gt;white&lt;/span&gt; paws and belly.&lt;/p&gt;
+ &lt;img itemprop="img" src="hedral.jpeg" alt="" title="Hedral, age 18 months"&gt;
+&lt;/section&gt;</pre>   
+
+   <p>This example has one item with the type "http://example.org/animals#cat"
+   and the following properties:</p>
+
+   <table><thead><tr><td>Property
+      </td><td>Value
+    </td></tr></thead><tbody><tr><td>name
+      </td><td>Hedral
+     </td></tr><tr><td>http://example.com/fn
+      </td><td>Hedral
+     </td></tr><tr><td>desc
+      </td><td>Hedral is a male american domestic shorthair, with a fluffy black fur with white paws and belly.
+     </td></tr><tr><td>http://example.com/color
+      </td><td>black
+     </td></tr><tr><td>http://example.com/color
+      </td><td>white
+     </td></tr><tr><td>img
+      </td><td>.../hedral.jpeg
+   </td></tr></tbody></table></div><h4 id="using-the-microdata-dom-api"><span class="secno">5.1.6 </span>Using the microdata DOM API</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><p>The microdata becomes even more useful when scripts can use it to
+  expose information to the user, for example offering it in a form
+  that can be used by other applications.</p><p>The <code title="dom-document-getItems"><a href="#dom-document-getitems">document.getItems(<var title="">typeNames</var>)</a></code> method provides access to the
+  <a href="#top-level-microdata-items">top-level microdata items</a>. It returns a
+  <code>NodeList</code> containing the items with the specified types,
+  or all types if no argument is specified.</p><p>Each <a href="#concept-item" title="concept-item">item</a> is represented in the
+  DOM by the element on which the relevant <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code> attribute is found. These
+  elements have their <code title="dom-itemScope"><a href="#dom-itemscope">element.itemScope</a></code> IDL attribute set to
+  true.</p><p>The type of <a href="#concept-item" title="concept-item">items</a> can be
+  obtained using the <code title="dom-itemType"><a href="#dom-itemtype">element.itemType</a></code> IDL attribute on the
+  element with the <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code>
+  attribute.</p><div class="example">
+
+   <p>This sample shows how the <code title="dom-document-getItems"><a href="#dom-document-getitems">getItems()</a></code> method can be used
+   to obtain a list of all the top-level microdata items of one type
+   given in the document:</p>
+
+   <pre>var cats = document.getItems("http://example.com/feline");</pre>
+
+  </div><p>Once an element representing an <a href="#concept-item" title="concept-item">item</a> has been obtained, its properties
+  can be extracted using the <code title="dom-properties"><a href="#dom-properties">properties</a></code> IDL attribute. This
+  attribute returns an <code><a href="infrastructure.html#htmlpropertiescollection">HTMLPropertiesCollection</a></code>, which can
+  be enumerated to go through each element that adds one or more
+  properties to the item. It can also be indexed by name, which will
+  return an object with a list of the elements that add properties
+  with that name.</p><p>Each element that adds a property also has a <code title="dom-itemValue"><a href="#dom-itemvalue">itemValue</a></code> IDL attribute that returns
+  its value.</p><div class="example">
+
+   <p>This sample gets the first item of type "http://example.net/user" and
+   then pops up an alert using the "name" property from
+   that item.</p>
+
+   <pre>var user = document.getItems('http://example.net/user')[0];
+alert('Hello ' + user.properties['name'][0].content + '!');</pre>
+
+  </div><p>The <code><a href="infrastructure.html#htmlpropertiescollection">HTMLPropertiesCollection</a></code> object, when indexed by
+  name in this way, actually returns a <code><a href="infrastructure.html#propertynodelist">PropertyNodeList</a></code>
+  object with all the matching properties. The
+  <code><a href="infrastructure.html#propertynodelist">PropertyNodeList</a></code> object can be used to obtain all the
+  values at once using <em>its</em> <code title="dom-PropertyNodeList-values"><a href="infrastructure.html#dom-propertynodelist-values">values</a></code> attribute, which
+  returns an array of all the values.</p><div class="example">
+
+   <p>In an earlier example, a "http://example.org/animals#cat" item had two
+   "http://example.com/color" values. This script looks up the first such
+   item and then lists all its values.</p>
+
+   <pre>var cat = document.getItems('http://example.org/animals#cat')[0];
+var colors = cat.properties['http://example.com/color'].values;
+var result;
+if (colors.length == 0) {
+  result = 'Color unknown.';
+} else if (colors.length == 1) {
+  result = 'Color: ' + colors[0];
+} else {
+  result = 'Colors:';
+  for (var i = 0; i &lt; colors.length; i += 1)
+    result += ' ' + colors[i];
+}</pre>
+
+  </div><p>It's also possible to get a list of all the <a href="#property-names">property
+  names</a> using the object's <code title="dom-HTMLPropertiesCollection-names"><a href="infrastructure.html#dom-htmlpropertiescollection-names">names</a></code> IDL
+  attribute.</p><div class="example">
+
+   <p>This example creates a big list with a nested list for each item
+   on the page, each with of all the property names used in that
+   item.</p>
+
+   <pre>var outer = document.createElement('ul');
+var items = document.getItems();
+for (var item = 0; item &lt; items.length; item += 1) {
+  var itemLi = document.createElement('li');
+  var inner = document.createElement('ul');
+  for (var name = 0; name &lt; items[item].properties.names.length; name += 1) {
+    var propLi = document.createElement('li');
+    propLi.appendChild(document.createTextNode(items[item].properties.names[name]));
+    inner.appendChild(propLi);
+  }
+  itemLi.appendChild(inner);
+  outer.appendChild(itemLi);
+}
+document.body.appendChild(outer);</pre>
+
+   <p>If faced with the following from an earlier example:</p>
+
+   <pre>&lt;section itemscope itemtype="http://example.org/animals#cat"&gt;
+ &lt;h1 itemprop="name http://example.com/fn"&gt;Hedral&lt;/h1&gt;
+ &lt;p itemprop="desc"&gt;Hedral is a male american domestic
+ shorthair, with a fluffy &lt;span
+ itemprop="http://example.com/color"&gt;black&lt;/span&gt; fur with &lt;span
+ itemprop="http://example.com/color"&gt;white&lt;/span&gt; paws and belly.&lt;/p&gt;
+ &lt;img itemprop="img" src="hedral.jpeg" alt="" title="Hedral, age 18 months"&gt;
+&lt;/section&gt;</pre>
+
+   <p>...it would result in the following output:</p>
+
+   <ul><li>
+     <ul><li>name</li>
+      <li>http://example.com/fn</li>
+      <li>desc</li>
+      <li>http://example.com/color</li>
+      <li>img</li>
+     </ul></li>
+   </ul><p>(The duplicate occurrence of "http://example.com/color" is not included
+   in the list.)</p>
+
+  </div><h3 id="encoding-microdata"><span class="secno">5.2 </span>Encoding microdata</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><h4 id="the-microdata-model"><span class="secno">5.2.1 </span>The microdata model</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The microdata model consists of groups of name-value pairs known
+  as <a href="#concept-item" title="concept-item">items</a>.</p><p>Each group is known as an <a href="#concept-item" title="concept-item">item</a>. Each <a href="#concept-item" title="concept-item">item</a> can have an <a href="#item-type">item type</a>,
+  a <a href="#global-identifier">global identifier</a> (if the <a href="#item-type">item type</a>
+  <a href="#support-global-identifiers-for-items" title="support global identifiers for items">supports global
+  identifiers for its items</a>), and a list of name-value
+  pairs. Each name in the name-value pair is known as a <a href="#the-properties-of-an-item" title="the properties of an item">property</a>, and each <a href="#the-properties-of-an-item" title="the properties of an item">property</a> has one or more
+  <a href="#concept-property-value" title="concept-property-value">values</a>. Each <a href="#concept-property-value" title="concept-property-value">value</a> is either a string or itself a group of
+  name-value pairs (an <a href="#concept-item" title="concept-item">item</a>).</p><p>An <a href="#concept-item" title="concept-item">item</a> is said to be a
+  <dfn id="typed-item">typed item</dfn> when either it has an <a href="#item-type">item type</a>,
+  or it is the <a href="#concept-property-value" title="concept-property-value">value</a> of a <a href="#the-properties-of-an-item" title="the properties of an&#10;  item">property</a> of a <a href="#typed-item">typed item</a>. The
+  <dfn id="relevant-type">relevant type</dfn> for a <a href="#typed-item">typed item</a> is the <a href="#concept-item" title="concept-item">item</a>'s <a href="#item-type">item type</a>, if it has
+  one, or else is the <a href="#relevant-type">relevant type</a> of the <a href="#concept-item" title="concept-item">item</a> for which it is a <a href="#the-properties-of-an-item" title="the&#10;  properties of an item">property</a>'s <a href="#concept-property-value" title="concept-property-value">value</a>.</p><h4 id="items"><span class="secno">5.2.2 </span>Items</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Every <a href="infrastructure.html#html-elements" title="HTML elements">HTML element</a> may have an
+  <dfn id="attr-itemscope" title="attr-itemscope"><code>itemscope</code></dfn> attribute
+  specified. The <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code>
+  attribute is a <a href="infrastructure.html#boolean-attribute">boolean attribute</a>.</p><p>An element with the <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code>
+  attribute specified creates a new <dfn id="concept-item" title="concept-item">item</dfn>, a group of name-value pairs.</p><hr/><p>Elements with an <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code>
+  attribute may have an <dfn id="attr-itemtype" title="attr-itemtype"><code>itemtype</code></dfn> attribute
+  specified, to give the <a href="#item-type">item type</a> of the <a href="#concept-item" title="concept-item">item</a>.</p><p>The <code title="attr-itemtype"><a href="#attr-itemtype">itemtype</a></code> attribute, if
+  specified, must have a value that is a <a href="infrastructure.html#valid-url">valid URL</a> that
+  is an <a href="infrastructure.html#absolute-url">absolute URL</a> for which the string "<code title="">http://www.w3.org/1999/xhtml/microdata#</code>" is not a
+  <a href="infrastructure.html#prefix-match">prefix match</a>.</p><!-- we disallow that prefix so that
+  we have somewhere to put future extensions, e.g. if we ever support
+  short type names --><p>The <dfn id="item-type">item type</dfn> of an <a href="#concept-item" title="concept-item">item</a> is the value of its element's <code title="attr-itemtype"><a href="#attr-itemtype">itemtype</a></code> attribute, if it has one and
+  its value is not the empty string. If the <code title="attr-itemtype"><a href="#attr-itemtype">itemtype</a></code> attribute is missing or its
+  value is the empty string, the <a href="#concept-item" title="concept-item">item</a> is said to have no <a href="#item-type">item
+  type</a>.</p><p>The <a href="#item-type">item type</a> must be a type defined in an <a href="infrastructure.html#other-applicable-specifications" title="other applicable specifications">applicable
+  specification</a>.</p><p>The <code title="attr-itemtype"><a href="#attr-itemtype">itemtype</a></code> attribute must
+  not be specified on elements that do not have an <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code> attribute specified.</p><hr/><p>Elements with an <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code>
+  attribute and an <code title="attr-itemtype"><a href="#attr-itemtype">itemtype</a></code>
+  attribute that references a vocabulary that is defined to
+  <dfn id="support-global-identifiers-for-items">support global identifiers for items</dfn> may also have an
+  <dfn id="attr-itemid" title="attr-itemid"><code>itemid</code></dfn> attribute
+  specified, to give a global identifier for the <a href="#concept-item" title="concept-item">item</a>, so that it can be related to other
+  <a href="#concept-item" title="concept-item">items</a> on pages elsewhere on the
+  Web.</p><p>The <code title="attr-itemid"><a href="#attr-itemid">itemid</a></code> attribute, if
+  specified, must have a value that is a <a href="infrastructure.html#valid-url">valid URL</a>.</p><p>The <dfn id="global-identifier">global identifier</dfn> of an <a href="#concept-item" title="concept-item">item</a> is the value of its element's <code title="attr-itemid"><a href="#attr-itemid">itemid</a></code> attribute, if it has one, <a href="infrastructure.html#resolve-a-url" title="resolve a url">resolved</a> relative to the element on
+  which the attribute is specified. If the <code title="attr-itemid"><a href="#attr-itemid">itemid</a></code> attribute is missing or if
+  resolving it fails, it is said to have no <a href="#global-identifier">global
+  identifier</a>.</p><p>The <code title="attr-itemid"><a href="#attr-itemid">itemid</a></code> attribute must not be
+  specified on elements that do not have both an <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code> attribute and an <code title="attr-itemtype"><a href="#attr-itemtype">itemtype</a></code> attribute specified, and must
+  not be specified on elements with an <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code> attribute whose <code title="attr-itemtype"><a href="#attr-itemtype">itemtype</a></code> attribute specifies a
+  vocabulary that does not <a href="#support-global-identifiers-for-items">support global identifiers for
+  items</a>, as defined by that vocabulary's specification.</p><hr/><p>Elements with an <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code>
+  attribute may have an <dfn id="attr-itemref" title="attr-itemref"><code>itemref</code></dfn> attribute specified,
+  to give a list of additional elements to crawl to find the
+  name-value pairs of the <a href="#concept-item" title="concept-item">item</a>.</p><p>The <code title="attr-itemref"><a href="#attr-itemref">itemref</a></code> attribute, if
+  specified, must have a value that is an <a href="infrastructure.html#unordered-set-of-unique-space-separated-tokens">unordered set of
+  unique space-separated tokens</a> consisting of <a href="dom.html#concept-id" title="concept-ID">IDs</a> of elements in the same document; for
+  each one, the element's nearest ancestor element with an <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code> attribute specified, if any,
+  must not be the element with the referencing <code title="attr-itemref"><a href="#attr-itemref">itemref</a></code> attribute specified.</p><p>The <code title="attr-itemref"><a href="#attr-itemref">itemref</a></code> attribute must not
+  be specified on elements that do not have an <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code> attribute specified.</p><h4 id="names:-the-itemprop-attribute"><span class="secno">5.2.3 </span>Names: the <dfn title="attr-itemprop"><code>itemprop</code></dfn> attribute</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Every <a href="infrastructure.html#html-elements" title="HTML elements">HTML element</a> may have an
+  <code title="attr-itemprop"><a href="#names:-the-itemprop-attribute">itemprop</a></code> attribute specified, if
+  doing so <a href="#the-properties-of-an-item" title="the properties of an item">adds a
+  property</a> to one or more <a href="#concept-item" title="concept-item">items</a> (as defined below).</p><p>The <code title="attr-itemprop"><a href="#names:-the-itemprop-attribute">itemprop</a></code> attribute, if
+  specified, must have a value that is an <a href="infrastructure.html#unordered-set-of-unique-space-separated-tokens">unordered set of
+  unique space-separated tokens</a> representing the names of the
+  name-value pairs that it adds. The attribute's value must have at
+  least one token.</p><p>Each token must be either:</p><ul><li>A <a href="infrastructure.html#valid-url">valid URL</a> that is an <a href="infrastructure.html#absolute-url">absolute URL</a>
+   for which the string "<code title="">http://www.w3.org/1999/xhtml/microdata#</code>" is not a
+   <a href="infrastructure.html#prefix-match">prefix match</a>, or</li>
+
+   <li>If the item is a <a href="#typed-item">typed item</a>: a <dfn id="defined-property-name">defined
+   property name</dfn> allowed in this situation according to the
+   specification that defines the <a href="#relevant-type">relevant type</a> for the
+   item, or</li>
+
+   <li>If the item is not a <a href="#typed-item">typed item</a>: a string that
+   contains no U+002E FULL STOP characters (.) and no U+003A COLON
+   characters (:).</li>
+
+  </ul><p>When an element with an <code title="concept-itemprop">itemprop</code> attribute <a href="#the-properties-of-an-item" title="the&#10;  properties of an item">adds a property</a> to multiple <a href="#concept-item" title="concept-item">items</a>, the requirement above regarding
+  the tokens applies for each <a href="#concept-item" title="concept-item">item</a>
+  individually.</p><!--
+
+   e.g.:
+
+     <div itemscope itemtype="http://example.com/a"> <ref refid="x"> </div>
+     <div itemscope itemtype="http://example.com/b"> <ref refid="x"> </div>
+     <meta id="x" itemprop="z" content="">
+
+     "z" had better be valid for both http://example.com/a and http://example.com/b
+
+  --><p>The <dfn id="property-names">property names</dfn> of an element are the tokens that
+  the element's <code title="attr-itemprop"><a href="#names:-the-itemprop-attribute">itemprop</a></code> attribute
+  is found to contain when its value is <a href="infrastructure.html#split-a-string-on-spaces" title="split a string on&#10;  spaces">split on spaces</a>, with the order preserved but with
+  duplicates removed (leaving only the first occurrence of each
+  name).</p><p>Within an <a href="#concept-item" title="concept-item">item</a>, the properties
+  are unordered with respect to each other, except for properties with
+  the same name, which are ordered in the order they are given by the
+  algorithm that defines <a href="#the-properties-of-an-item">the properties of an item</a>.</p><div class="example">
+
+   <p>In the following example, the "a" property has the values "1"
+   and "2", <em>in that order</em>, but whether the "a" property comes
+   before the "b" property or not is not important:</p>
+
+   <pre>&lt;div itemscope&gt;
+ &lt;p itemprop="a"&gt;1&lt;/p&gt;
+ &lt;p itemprop="a"&gt;2&lt;/p&gt;
+ &lt;p itemprop="b"&gt;test&lt;/p&gt;
+&lt;/div&gt;</pre>
+
+   <p>Thus, the following is equivalent:</p>
+
+   <pre>&lt;div itemscope&gt;
+ &lt;p itemprop="b"&gt;test&lt;/p&gt;
+ &lt;p itemprop="a"&gt;1&lt;/p&gt;
+ &lt;p itemprop="a"&gt;2&lt;/p&gt;
+&lt;/div&gt;</pre>
+
+   <p>As is the following:</p>
+
+   <pre>&lt;div itemscope&gt;
+ &lt;p itemprop="a"&gt;1&lt;/p&gt;
+ &lt;p itemprop="b"&gt;test&lt;/p&gt;
+ &lt;p itemprop="a"&gt;2&lt;/p&gt;
+&lt;/div&gt;</pre>
+
+   <p>And the following:</p>
+
+   <pre>&lt;div itemscope itemref="x"&gt;
+ &lt;p itemprop="b"&gt;test&lt;/p&gt;
+ &lt;p itemprop="a"&gt;2&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id="x"&gt;
+ &lt;p itemprop="a"&gt;1&lt;/p&gt;
+&lt;/div&gt;
+</pre>
+
+  </div><h4 id="values"><span class="secno">5.2.4 </span>Values</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The <dfn id="concept-property-value" title="concept-property-value">property value</dfn> of a
+  name-value pair added by an element with an <code title="attr-itemprop"><a href="#names:-the-itemprop-attribute">itemprop</a></code> attribute depends on the
+  element, as follows:</p><dl><dt>If the element also has an <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code> attribute</dt>
+
+   <dd><p>The value is the <a href="#concept-item" title="concept-item">item</a>
+   created by the element.</p></dd>
+
+
+   <dt>If the element is a <code><a href="semantics.html#meta">meta</a></code> element</dt>
+
+   <dd><p>The value is the value of the element's <code title="attr-content">content</code> attribute, if any, or the empty
+   string if there is no such attribute.</p></dd>
+
+
+   <dt>If the element is an <code><a href="video.html#audio">audio</a></code>, <code><a href="text-level-semantics.html#the-embed-element">embed</a></code>,
+   <code><a href="text-level-semantics.html#the-iframe-element">iframe</a></code>, <code><a href="text-level-semantics.html#the-img-element">img</a></code>, <code><a href="video.html#the-source-element">source</a></code>, or
+   <code><a href="video.html#video">video</a></code> element</dt>
+
+   <dd><p>The value is the <a href="infrastructure.html#absolute-url">absolute URL</a> that results from
+   <a href="infrastructure.html#resolve-a-url" title="resolve a url">resolving</a> the value of the
+   element's <code title="">src</code> attribute relative to the
+   element at the time the attribute is set, or the empty string if
+   there is no such attribute or if <a href="infrastructure.html#resolve-a-url" title="resolve a&#10;   url">resolving</a> it results in an error.</p></dd>
+
+
+   <dt>If the element is an <code><a href="text-level-semantics.html#the-a-element">a</a></code>, <code><a href="the-canvas-element.html#the-area-element">area</a></code>, or
+   <code><a href="semantics.html#the-link-element">link</a></code> element</dt>
+
+   <dd><p>The value is the <a href="infrastructure.html#absolute-url">absolute URL</a> that results from
+   <a href="infrastructure.html#resolve-a-url" title="resolve a url">resolving</a> the value of the
+   element's <code title="">href</code> attribute relative to the
+   element at the time the attribute is set, or the empty string if
+   there is no such attribute or if <a href="infrastructure.html#resolve-a-url" title="resolve a&#10;   url">resolving</a> it results in an error.</p></dd>
+
+
+   <dt>If the element is an <code><a href="text-level-semantics.html#the-object-element">object</a></code> element</dt>
+
+   <dd><p>The value is the <a href="infrastructure.html#absolute-url">absolute URL</a> that results from
+   <a href="infrastructure.html#resolve-a-url" title="resolve a url">resolving</a> the value of the
+   element's <code title="">data</code> attribute relative to the
+   element at the time the attribute is set, or the empty string if
+   there is no such attribute or if <a href="infrastructure.html#resolve-a-url" title="resolve a&#10;   url">resolving</a> it results in an error.</p></dd>
+
+
+   <dt>If the element is a <code><a href="text-level-semantics.html#the-time-element">time</a></code> element with a <code title="attr-datetime">datetime</code> attribute</dt>
+
+   <dd><p>The value is the value of the element's <code title="attr-datetime">datetime</code> attribute.</p></dd>
+
+
+   <dt>Otherwise</dt>
+
+   <dd><p>The value is the element's
+   <code>textContent</code>.</p></dd>
+
+  </dl><p>The <dfn id="url-property-elements">URL property elements</dfn> are the <code><a href="text-level-semantics.html#the-a-element">a</a></code>,
+  <code><a href="the-canvas-element.html#the-area-element">area</a></code>, <code><a href="video.html#audio">audio</a></code>, <code><a href="text-level-semantics.html#the-embed-element">embed</a></code>,
+  <code><a href="text-level-semantics.html#the-iframe-element">iframe</a></code>, <code><a href="text-level-semantics.html#the-img-element">img</a></code>, <code><a href="semantics.html#the-link-element">link</a></code>,
+  <code><a href="text-level-semantics.html#the-object-element">object</a></code>, <code><a href="video.html#the-source-element">source</a></code>, and <code><a href="video.html#video">video</a></code>
+  elements.</p><p>If a property's <a href="#concept-property-value" title="concept-property-value">value</a>
+  is an <a href="infrastructure.html#absolute-url">absolute URL</a>, the property must be specified
+  using a <a href="#url-property-elements" title="URL property elements">URL property
+  element</a>.</p><h4 id="associating-names-with-items"><span class="secno">5.2.5 </span>Associating names with items</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>To find <dfn id="the-properties-of-an-item">the properties of an item</dfn>, the user agent must
+  run the following steps:</p><ol><li><p>Let <var title="">root</var> be the element with the <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code> attribute.</p></li>
+
+   <li><p>Let <var title="">pending</var> be a stack of elements
+   initially containing the child elements of <var title="">root</var>, if any. This list will be the one that holds
+   the elements that still need to be crawled.</p></li>
+
+   <li><p>Let <var title="">properties</var> be an empty list of
+   elements. This list will be the result of the algorithm: a list of
+   elements with properties that apply to <var title="">root</var>.</p></li>
+
+   <li><p>If <var title="">root</var> has an <code title="attr-itemref"><a href="#attr-itemref">itemref</a></code> attribute, <a href="infrastructure.html#split-a-string-on-spaces" title="split a&#10;   string on spaces">split the value of that <code title="attr-itemref">itemref</code> attribute on spaces</a>. For
+   each resulting token, <var title="">ID</var>, if there is an
+   element in the document with the <a href="dom.html#concept-id" title="concept-ID">ID</a>
+   <var title="">ID</var>, then push the first such element onto <var title="">pending</var>.</p></li>
+
+   <li>
+
+    <p>For each element <var title="">candidate</var> in <var title="">pending</var>, run the following substeps:</p>
+
+    <ol><li><p>Let <var title="">scope</var> be <var title="">candidate</var>'s nearest ancestor element with an <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code> attribute specified, if
+     any, or null otherwise.</p></li>
+
+     <li><p>If one of the other elements in <var title="">pending</var>
+     is also <var title="">candidate</var>, then remove <var title="">candidate</var> from <var title="">pending</var>
+     (i.e. remove duplicates).</p></li>
+
+     <li><p>Otherwise, if one of the other elements in <var title="">pending</var> is an ancestor element of <var title="">candidate</var>, and that element is <var title="">scope</var>, then remove <var title="">candidate</var>
+     from <var title="">pending</var>.</p></li>
+
+     <li><p>Otherwise, if one of the other elements in <var title="">pending</var> is an ancestor element of <var title="">candidate</var>, and either <var title="">scope</var> is
+     null or that element also has <var title="">scope</var> as its
+     nearest ancestor element with an <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code> attribute specified, then
+     remove <var title="">candidate</var> from <var title="">pending</var>.</p></li>
+
+    </ol></li>
+
+   <li><p>Sort <var title="">pending</var> in <a href="infrastructure.html#tree-order">tree
+   order</a>.</p></li>
+
+   <li><p><i>Loop</i>: Pop the top element from <var title="">pending</var> and let <var title="">current</var> be that
+   element.</p></li>
+
+   <li><p>If <var title="">current</var> has an <code title="attr-itemprop"><a href="#names:-the-itemprop-attribute">itemprop</a></code> attribute, then append <var title="">current</var> to <var title="">properties</var>.</p></li>
+
+   <li><p>If <var title="">current</var> does not have an <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code> attribute, and <var title="">current</var> is an element with child elements, then:
+   push all the child elements of <var title="">current</var> onto
+   <var title="">pending</var>, in <a href="infrastructure.html#tree-order">tree order</a> (so the first
+   child of <var title="">current</var> will be the next element to be
+   popped from <var title="">pending</var>).</p></li>
+
+   <li><p><i>End of loop</i>: If <var title="">pending</var> is not
+   empty, return to the step marked <i>loop</i>.</p></li>
+
+   <li><p>Return <var title="">properties</var>. That is the list of
+   <a href="#the-properties-of-an-item" title="the properties of an item">properties of the
+   item</a> <var title="">root</var>. By definition, this list is
+   in <a href="infrastructure.html#tree-order">tree order</a>.</p></li>
+
+  </ol><p>A document must not contain any elements that have an <code title="attr-itemprop"><a href="#names:-the-itemprop-attribute">itemprop</a></code> attribute that would not be
+  found to be a property of any of the <a href="#concept-item" title="concept-item">items</a> in that document were their <a href="#the-properties-of-an-item" title="the properties of an item">properties</a> all to be
+  determined.</p><p>An <a href="#concept-item" title="concept-item">item</a> is a <dfn id="top-level-microdata-items" title="top-level microdata items">top-level microdata item</dfn> if
+  its element does not have an <code title="attr-itemprop"><a href="#names:-the-itemprop-attribute">itemprop</a></code> attribute.</p><h4 id="examples-1"><span class="secno">5.2.6 </span>Examples</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Here is an example of some HTML using Microdata to express RDF
+  statements:</p><pre>&lt;dl itemscope
+    itemtype="http://purl.org/vocab/frbr/core#Work"
+    itemid="http://purl.oreilly.com/works/45U8QJGZSQKDH8N"&gt;
+ &lt;dt&gt;Title&lt;/dt&gt;
+ &lt;dd&gt;&lt;cite itemprop="http://purl.org/dc/terms/title"&gt;Just a Geek&lt;/cite&gt;&lt;/dd&gt;
+ &lt;dt&gt;By&lt;/dt&gt;
+ &lt;dd&gt;&lt;span itemprop="http://purl.org/dc/terms/creator"&gt;Wil Wheaton&lt;/span&gt;&lt;/dd&gt;
+ &lt;dt&gt;Format&lt;/dt&gt;
+ &lt;dd itemprop="http://purl.org/vocab/frbr/core#realization"
+     itemscope
+     itemtype="http://purl.org/vocab/frbr/core#Expression"
+     itemid="http://purl.oreilly.com/products/9780596007683.BOOK"&gt;
+  &lt;link itemprop="http://purl.org/dc/terms/type" href="http://purl.oreilly.com/product-types/BOOK"&gt;
+  Print
+ &lt;/dd&gt;
+ &lt;dd itemprop="http://purl.org/vocab/frbr/core#realization"
+     itemscope
+     itemtype="http://purl.org/vocab/frbr/core#Expression"
+     itemid="http://purl.oreilly.com/products/9780596802189.EBOOK"&gt;
+  &lt;link itemprop="http://purl.org/dc/terms/type" href="http://purl.oreilly.com/product-types/EBOOK"&gt;
+  Ebook
+ &lt;/dd&gt;
+&lt;/dl&gt;</pre><p>This is equivalent to the following Turtle:</p><pre>@prefix dc: &lt;http://purl.org/dc/terms/&gt; .
+@prefix frbr: &lt;http://purl.org/vocab/frbr/core#&gt; .
+
+&lt;http://purl.oreilly.com/works/45U8QJGZSQKDH8N&gt; a frbr:Work ;
+     dc:creator "Wil Wheaton"@en ;
+     dc:title "Just a Geek"@en ;
+     frbr:realization &lt;http://purl.oreilly.com/products/9780596007683.BOOK&gt;,
+         &lt;http://purl.oreilly.com/products/9780596802189.EBOOK&gt; . 
+
+&lt;http://purl.oreilly.com/products/9780596007683.BOOK&gt; a frbr:Expression ;
+     dc:type &lt;http://purl.oreilly.com/product-types/BOOK&gt; . 
+
+&lt;http://purl.oreilly.com/products/9780596802189.EBOOK&gt; a frbr:Expression ;
+     dc:type &lt;http://purl.oreilly.com/product-types/EBOOK&gt; .</pre><h3 id="microdata-dom-api"><span class="secno">5.3 </span>Microdata DOM API</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">document</var> . <code title="dom-document-getItems"><a href="#dom-document-getitems">getItems</a></code>( [ <var title="">types</var> ] )</dt>
+
+   <dd>
+
+    <p>Returns a <code>NodeList</code> of the elements in the <code>Document</code> that create <a href="#concept-item" title="concept-item">items</a>, that are not part of other <a href="#concept-item" title="concept-item">items</a>, and that are of one of the types given in the argument, if any are listed.</p>
+
+    <p>The <var title="">types</var> argument is interpreted as a space-separated list of types.</p>
+
+   </dd>
+
+   <dt><var title="">element</var> . <code title="dom-properties"><a href="#dom-properties">properties</a></code></dt>
+
+   <dd>
+
+    <p>If the element has an <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code> attribute, returns an
+    <code><a href="infrastructure.html#htmlpropertiescollection">HTMLPropertiesCollection</a></code> object with all the element's
+    properties. Otherwise, an empty
+    <code><a href="infrastructure.html#htmlpropertiescollection">HTMLPropertiesCollection</a></code> object.</p>
+
+   </dd>
+
+   <dt><var title="">element</var> . <code title="dom-itemValue"><a href="#dom-itemvalue">itemValue</a></code> [ = <var title="">value</var> ]</dt>
+
+   <dd>
+
+    <p>Returns the element's <a href="#concept-property-value" title="concept-property-value">value</a>.</p>
+
+    <p>Can be set, to change the element's <a href="#concept-property-value" title="concept-property-value">value</a>. Setting the <a href="#concept-property-value" title="concept-property-value">value</a> when the element has
+    no <code title="attr-itemprop"><a href="#names:-the-itemprop-attribute">itemprop</a></code> attribute or when
+    the element's value is an <a href="#concept-item" title="concept-item">item</a>
+    throws an <code><a href="infrastructure.html#invalid_access_err">INVALID_ACCESS_ERR</a></code> exception.</p>
+
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>The <dfn id="dom-document-getitems" title="dom-document-getItems"><code>document.getItems(<var title="">typeNames</var>)</code></dfn> method takes an optional
+  string that contains an <a href="infrastructure.html#unordered-set-of-unique-space-separated-tokens">unordered set of unique
+  space-separated tokens</a> representing types. When called, the
+  method must return a live <code>NodeList</code> object containing
+  all the elements in the document, in <a href="infrastructure.html#tree-order">tree order</a>, that
+  are each <a href="#top-level-microdata-items">top-level microdata items</a> with a <a href="#item-type" title="item type">type</a> equal to one of the types specified in
+  that argument, having obtained the types by <a href="infrastructure.html#split-a-string-on-spaces" title="split a&#10;  string on spaces">splitting the string on spaces</a>. If there
+  are no tokens specified in the argument, or if the argument is
+  missing, then the method must return a <code>NodeList</code>
+  containing all the <a href="#top-level-microdata-items">top-level microdata items</a> in the
+  document.</p>
+
+  <p>The <dfn id="dom-itemscope" title="dom-itemScope"><code>itemScope</code></dfn> IDL
+  attribute on <a href="infrastructure.html#html-elements">HTML elements</a> must <a href="infrastructure.html#reflect">reflect</a>
+  the <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code> content attribute.
+  The <dfn id="dom-itemtype" title="dom-itemType"><code>itemType</code></dfn> IDL
+  attribute on <a href="infrastructure.html#html-elements">HTML elements</a> must <a href="infrastructure.html#reflect">reflect</a>
+  the <code title="attr-itemtype"><a href="#attr-itemtype">itemtype</a></code> content attribute.
+  The <dfn id="dom-itemid" title="dom-itemId"><code>itemId</code></dfn> IDL attribute
+  on <a href="infrastructure.html#html-elements">HTML elements</a> must <a href="infrastructure.html#reflect">reflect</a> the <code title="attr-itemid"><a href="#attr-itemid">itemid</a></code> content attribute.  The <dfn id="dom-itemprop" title="dom-itemProp"><code>itemProp</code></dfn> IDL attribute on
+  <a href="infrastructure.html#html-elements">HTML elements</a> must <a href="infrastructure.html#reflect">reflect</a> the <code title="attr-itemprop"><a href="#names:-the-itemprop-attribute">itemprop</a></code> content attribute. The <dfn id="dom-itemref" title="dom-itemRef"><code>itemRef</code></dfn> IDL attribute on
+  <a href="infrastructure.html#html-elements">HTML elements</a> must <a href="infrastructure.html#reflect">reflect</a> the <code title="attr-itemref"><a href="#attr-itemref">itemref</a></code> content attribute.</p>
+
+  <p>The <dfn id="dom-properties" title="dom-properties"><code>properties</code></dfn> IDL
+  attribute on <a href="infrastructure.html#html-elements">HTML elements</a> must return an
+  <code><a href="infrastructure.html#htmlpropertiescollection">HTMLPropertiesCollection</a></code> rooted at the
+  <code>Document</code> node, whose filter matches only elements that
+  have <a href="#property-names">property names</a> and are <a href="#the-properties-of-an-item" title="the properties&#10;  of an item">the properties of the item</a> created by the element
+  on which the attribute was invoked, while that element is an <a href="#concept-item" title="concept-item">item</a>, and matches nothing the rest of
+  the time.</p>
+
+  <p>The <dfn id="dom-itemvalue" title="dom-itemValue"><code>itemValue</code></dfn> IDL
+  attribute's behavior depends on the element, as follows:</p>
+
+  <dl><dt>If the element has no <code title="attr-itemprop"><a href="#names:-the-itemprop-attribute">itemprop</a></code> attribute</dt>
+
+   <dd><p>The attribute must return null on getting and must throw an
+   <code><a href="infrastructure.html#invalid_access_err">INVALID_ACCESS_ERR</a></code> exception on setting.</p>
+
+
+   </dd><dt>If the element has an <code title="attr-itemscope"><a href="#attr-itemscope">itemscope</a></code> attribute</dt>
+
+   <dd><p>The attribute must return the element itself on getting and
+   must throw an <code><a href="infrastructure.html#invalid_access_err">INVALID_ACCESS_ERR</a></code> exception on
+   setting.</p>
+
+
+   </dd><dt>If the element is a <code><a href="semantics.html#meta">meta</a></code> element</dt>
+
+   <dd><p>The attribute must act as it would if it was <a href="infrastructure.html#reflect" title="reflect">reflecting</a> the element's <code title="attr-meta-content"><a href="semantics.html#attr-meta-content">content</a></code> content
+   attribute.</p></dd>
+
+
+   <dt>If the element is an <code><a href="video.html#audio">audio</a></code>, <code><a href="text-level-semantics.html#the-embed-element">embed</a></code>,
+   <code><a href="text-level-semantics.html#the-iframe-element">iframe</a></code>, <code><a href="text-level-semantics.html#the-img-element">img</a></code>, <code><a href="video.html#the-source-element">source</a></code>, or
+   <code><a href="video.html#video">video</a></code> element</dt>
+
+   <dd><p>The attribute must act as it would if it was <a href="infrastructure.html#reflect" title="reflect">reflecting</a> the element's <code title="">src</code> content attribute.</p></dd>
+
+
+   <dt>If the element is an <code><a href="text-level-semantics.html#the-a-element">a</a></code>, <code><a href="the-canvas-element.html#the-area-element">area</a></code>, or
+   <code><a href="semantics.html#the-link-element">link</a></code> element</dt>
+
+   <dd><p>The attribute must act as it would if it was <a href="infrastructure.html#reflect" title="reflect">reflecting</a> the element's <code title="">href</code> content attribute.</p></dd>
+
+
+   <dt>If the element is an <code><a href="text-level-semantics.html#the-object-element">object</a></code> element</dt>
+
+   <dd><p>The attribute must act as it would if it was <a href="infrastructure.html#reflect" title="reflect">reflecting</a> the element's <code title="">data</code> content attribute.</p></dd>
+
+
+   <dt>If the element is a <code><a href="text-level-semantics.html#the-time-element">time</a></code> element with a <code title="attr-datetime">datetime</code> attribute</dt>
+
+   <dd><p>The attribute must act as it would if it was <a href="infrastructure.html#reflect" title="reflect">reflecting</a> the element's <code title="">datetime</code> content attribute.</p></dd>
+
+
+   <dt>Otherwise</dt>
+
+   <dd><p>The attribute must act the same as the element's
+   <code>textContent</code> attribute.</p></dd>
+
+  </dl><p>When the <code title="dom-itemValue"><a href="#dom-itemvalue">itemValue</a></code> IDL
+  attribute is <a href="infrastructure.html#reflect" title="reflect">reflecting</a> a content
+  attribute or acting like the element's <code>textContent</code>
+  attribute, the user agent must, on setting, convert the new value to
+  the IDL <code title="">DOMString</code> value before using it
+  according to the mappings described above.</p>
+
+  </div><div class="impl">
+
+  <h3 id="converting-html-to-other-formats"><span class="secno">5.4 </span>Converting HTML to other formats</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+  <h4 id="json"><span class="secno">5.4.1 </span>JSON</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+  <p>Given a list of nodes <var title="">nodes</var> in a
+  <code>Document</code>, a user agent must run the following algorithm
+  to <dfn id="extracting-json" title="extracting JSON">extract the microdata from those
+  nodes into a JSON form</dfn>:</p>
+
+  <ol><li><p>Let <var title="">result</var> be an empty object.</p></li>
+
+   <li><p>Let <var title="">items</var> be an empty array.</p></li>
+
+   <li><p>For each <var title="">node</var> in <var title="">nodes</var>, check if the element is a <a href="#top-level-microdata-items" title="top-level microdata items">top-level microdata item</a>,
+   and if it is then <a href="#get-the-object">get the object</a> for that element and
+   add it to <var title="">items</var>.</p></li>
+
+   <li><p>Add an entry to <var title="">result</var> called "<code title="">items</code>" whose value is the array <var title="">items</var>.</p></li>
+
+   <li><p>Return the result of serializing <var title="">result</var>
+   to JSON.</p></li>
+
+  </ol><p>When the user agent is to <dfn id="get-the-object">get the object</dfn> for an item
+  <var title="">item</var>, it must run the following substeps:</p>
+
+  <ol><li><p>Let <var title="">result</var> be an empty object.</p></li>
+
+   <li><p>If the <var title="">item</var> has an <a href="#item-type">item
+   type</a>, add an entry to <var title="">result</var> called
+   "<code title="">type</code>" whose value is the <a href="#item-type">item
+   type</a> of <var title="">item</var>.</p></li>
+
+   <li><p>If the <var title="">item</var> has an <a href="#global-identifier">global
+   identifier</a>, add an entry to <var title="">result</var>
+   called "<code title="">id</code>" whose value is the <a href="#global-identifier">global
+   identifier</a> of <var title="">item</var>.</p></li>
+
+   <li><p>Let <var title="">properties</var> be an empty
+   object.</p></li>
+
+   <li>
+
+    <p>For each element <var title="">element</var> that has one or
+    more <a href="#property-names">property names</a> and is one of <a href="#the-properties-of-an-item" title="the&#10;    properties of an item">the properties of the item</a> <var title="">item</var>, in the order those elements are given by the
+    algorithm that returns <a href="#the-properties-of-an-item">the properties of an item</a>, run
+    the following substeps:</p>
+
+    <ol><li><p>Let <var title="">value</var> be the <a href="#concept-property-value" title="concept-property-value">property value</a> of <var title="">element</var>.</p></li>
+
+     <li><p>If <var title="">value</var> is an <a href="#concept-item" title="concept-item">item</a>, then <a href="#get-the-object">get the
+     object</a> for <var title="">value</var>, and then replace
+     <var title="">value</var> with the object returned from those
+     steps.</p></li>
+
+     <li>
+
+      <p>For each name <var title="">name</var> in <var title="">element</var>'s <a href="#property-names">property names</a>, run the
+      following substeps:</p>
+
+      <ol><li><p>If there is no entry named <var title="">name</var> in
+       <var title="">properties</var>, then add an entry named <var title="">name</var> to <var title="">properties</var> whose
+       value is an empty array.</p></li>
+
+       <li><p>Append <var title="">value</var> to the entry named <var title="">name</var> in <var title="">properties</var>.</p></li>
+
+      </ol></li>
+
+    </ol></li>
+
+   <li><p>Add an entry to <var title="">result</var> called "<code title="">properties</code>" whose value is the object <var title="">properties</var>.</p></li>
+
+   <li><p>Return <var title="">result</var>.</p></li>
+
+  </ol><h4 id="rdf"><span class="secno">5.4.2 </span>RDF</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+  <p>To convert a <code>Document</code> to RDF, a user agent must run
+  the following algorithm:</p>
+
+  <ol><li>
+
+    <p>If <a href="dom.html#the-title-element">the <code>title</code> element</a> is not null,
+    then generate the following triple:</p>
+
+    <dl class="triple"><dt>subject   </dt><dd> <a href="dom.html#the-document-s-current-address">the document's current address</a>
+     </dd><dt>predicate </dt><dd> <code title="">http://purl.org/dc/terms/title</code>
+     </dd><dt>object    </dt><dd> the concatenation of the data of all the child <a href="infrastructure.html#text-node" title="text node">text nodes</a> of <a href="dom.html#the-title-element">the <code>title</code> element</a>, in <a href="infrastructure.html#tree-order">tree order</a>, as a plain literal, with the language information set from the <a href="dom.html#language">language</a> of <a href="dom.html#the-title-element">the <code>title</code> element</a>, if it is not unknown.
+
+    </dd></dl></li>
+
+   <li>
+
+    <p>For each <code><a href="text-level-semantics.html#the-a-element">a</a></code>, <code><a href="the-canvas-element.html#the-area-element">area</a></code>, and
+    <code><a href="semantics.html#the-link-element">link</a></code> element in the <code>Document</code>, run these
+    substeps:</p>
+
+    <ol><li><p>If the element does not have a <code title="">rel</code>
+     attribute, then skip this element.</p></li>
+
+     <li><p>If the element does not have an <code title="">href</code>
+     attribute, then skip this element.</p></li>
+
+     <li><p>If <a href="infrastructure.html#resolve-a-url" title="resolve a URL">resolving</a> the
+     element's <code title="">href</code> attribute relative to the
+     element is not successful, then skip this element.</p></li>
+
+     <li><p>Otherwise, <a href="infrastructure.html#split-a-string-on-spaces" title="split a string on spaces">split
+     the value of the element's <code title="">rel</code> attribute on
+     spaces</a>, obtaining <var title="">list of tokens</var>.</p></li>
+
+     <li><p><a href="infrastructure.html#converted-to-ascii-lowercase" title="converted to ASCII lowercase">Convert each token in
+     <var title="">list of tokens</var> to ASCII lowercase</a>.</p></li>
+
+     <li><p>If <var title="">list of tokens</var> contains more than
+     one instance of the token <code title="rel-up"><a href="history.html#link-type-up">up</a></code>, then
+     remove all such tokens.</p></li>
+
+     <li><p>Coalesce duplicate tokens in <var title="">list of
+     tokens</var>.</p></li>
+
+     <li><p>If <var title="">list of tokens</var> contains both the
+     tokens <code title="rel-alternate"><a href="history.html#link-type-alternate">alternate</a></code> and <code title="rel-stylesheet"><a href="history.html#link-type-stylesheet">stylesheet</a></code>, then remove them both
+     and replace them with the single (uppercase) token <code title="">ALTERNATE-STYLESHEET</code>.</p></li>
+
+     <li>
+
+      <p>For each token <var title="">token</var> in <var title="">list of tokens</var> that contains no U+003A COLON
+      characters (:), generate the following triple:</p>
+
+      <dl class="triple"><dt>subject   </dt><dd> <a href="dom.html#the-document-s-current-address">the document's current address</a>
+       </dd><dt>predicate </dt><dd> the concatenation of the string "<code title="">http://www.w3.org/1999/xhtml/vocab#</code>" and <var title="">token</var>, with any characters in <var title="">token</var> that are not valid in the &lt;ifragment&gt; production of the IRI syntax being %-escaped <a href="references.html#refsRFC3987">[RFC3987]</a>
+       </dd><dt>object    </dt><dd> the <a href="infrastructure.html#absolute-url">absolute URL</a> that results from <a href="infrastructure.html#resolve-a-url" title="resolve a URL">resolving</a> the value of the element's <code title="">href</code> attribute relative to the element
+      </dd></dl><p>For each token <var title="">token</var> in <var title="">list of tokens</var> that is an <a href="infrastructure.html#absolute-url">absolute
+      URL</a>, generate the following triple:</p>
+
+      <dl class="triple"><dt>subject   </dt><dd> <a href="dom.html#the-document-s-current-address">the document's current address</a>
+       </dd><dt>predicate </dt><dd> <var title="">token</var>
+       </dd><dt>object    </dt><dd> the <a href="infrastructure.html#absolute-url">absolute URL</a> that results from <a href="infrastructure.html#resolve-a-url" title="resolve a URL">resolving</a> the value of the element's <code title="">href</code> attribute relative to the element
+      </dd></dl></li>
+
+    </ol></li>
+
+   <li>
+
+    <p>For each <code><a href="semantics.html#meta">meta</a></code> element in the <code>Document</code>
+    that has a <code title="attr-meta-name"><a href="semantics.html#attr-meta-name">name</a></code> attribute and
+    a <code title="attr-meta-content"><a href="semantics.html#attr-meta-content">content</a></code> attribute, if the
+    value of the <code title="attr-meta-name"><a href="semantics.html#attr-meta-name">name</a></code> attribute
+    contains no U+003A COLON characters (:), generate the following
+    triple:</p>
+
+    <dl class="triple"><dt>subject   </dt><dd> <a href="dom.html#the-document-s-current-address">the document's current address</a>
+     </dd><dt>predicate </dt><dd> the concatenation of the string "<code title="">http://www.w3.org/1999/xhtml/vocab#</code>" and the value of the element's <code title="attr-meta-name"><a href="semantics.html#attr-meta-name">name</a></code> attribute, <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a>, with any characters in the value that are not valid in the &lt;ifragment&gt; production of the IRI syntax being %-escaped <a href="references.html#refsRFC3987">[RFC3987]</a>
+     </dd><dt>object    </dt><dd> the value of the element's <code title="attr-meta-content"><a href="semantics.html#attr-meta-content">content</a></code> attribute, as a plain literal, with the language information set from the <a href="dom.html#language">language</a> of the element, if it is not unknown
+    </dd></dl><p>For each <code><a href="semantics.html#meta">meta</a></code> element in the <code>Document</code>
+    that has a <code title="attr-meta-name"><a href="semantics.html#attr-meta-name">name</a></code> attribute and
+    a <code title="attr-meta-content"><a href="semantics.html#attr-meta-content">content</a></code> attribute, if the
+    value of the <code title="attr-meta-name"><a href="semantics.html#attr-meta-name">name</a></code> attribute is
+    an <a href="infrastructure.html#absolute-url">absolute URL</a>, generate the following triple:</p>
+
+    <dl class="triple"><dt>subject   </dt><dd> <a href="dom.html#the-document-s-current-address">the document's current address</a>
+     </dd><dt>predicate </dt><dd> the value of the element's <code title="attr-meta-name"><a href="semantics.html#attr-meta-name">name</a></code> attribute
+     </dd><dt>object    </dt><dd> the value of the element's <code title="attr-meta-content"><a href="semantics.html#attr-meta-content">content</a></code> attribute, as a plain literal, with the language information set from the <a href="dom.html#language">language</a> of the element, if it is not unknown
+    </dd></dl></li>
+
+   <li>
+
+    <p>For each <code><a href="semantics.html#the-blockquote-element">blockquote</a></code> and <code><a href="text-level-semantics.html#the-q-element">q</a></code> element in
+    the <code>Document</code> that has a <code title="">cite</code>
+    attribute that <a href="infrastructure.html#resolve-a-url" title="resolve a url">resolves</a>
+    successfully relative to the element, generate the following
+    triple:</p>
+
+    <dl class="triple"><dt>subject   </dt><dd> <a href="dom.html#the-document-s-current-address">the document's current address</a>
+     </dd><dt>predicate </dt><dd> <code title="">http://purl.org/dc/terms/source</code>
+     </dd><dt>object    </dt><dd> the <a href="infrastructure.html#absolute-url">absolute URL</a> that results from <a href="infrastructure.html#resolve-a-url" title="resolve a URL">resolving</a> the value of the element's <code title="">cite</code> attribute relative to the element
+    </dd></dl></li>
+
+   <li>
+
+    <p>For each element that is also a <a href="#top-level-microdata-items" title="top-level&#10;    microdata items">top-level microdata item</a>, run the
+    following steps:</p>
+
+    <ol><li>
+
+      <p><a href="#generate-the-triples-for-an-item" title="generate the triples for an item">Generate the
+      triples for the item</a>. Let <var title="">item</var> be the
+      subject returned.</p>
+
+     </li>
+
+     <li>
+
+      <p>Generate the following triple:</p>
+
+      <dl class="triple"><dt>subject   </dt><dd> <a href="dom.html#the-document-s-current-address">the document's current address</a>
+       </dd><dt>predicate </dt><dd> <code title="">http://www.w3.org/1999/xhtml/microdata#item</code>
+       </dd><dt>object    </dt><dd> <var title="">item</var>
+      </dd></dl></li>
+
+    </ol></li>
+
+  </ol><p>When the user agent is to <dfn id="generate-the-triples-for-an-item">generate the triples for an
+  item</dfn> <var title="">item</var>, it must follow the following
+  steps:</p>
+
+  <ol><li><p>If <var title="">item</var> has a <a href="#global-identifier">global
+   identifier</a> and that <a href="#global-identifier">global identifier</a> is an
+   <a href="infrastructure.html#absolute-url">absolute URL</a>, let <var title="">subject</var> be that
+   <a href="#global-identifier">global identifier</a>. Otherwise, let <var title="">subject</var> be a new blank node.</p></li>
+
+   <li><p>If <var title="">item</var> has an <a href="#item-type">item type</a>
+   and that <a href="#item-type">item type</a> is an <a href="infrastructure.html#absolute-url">absolute URL</a>,
+   let <var title="">type</var> be that <a href="#item-type">item
+   type</a>. Otherwise, let <var title="">type</var> be the empty
+   string.</p></li>
+
+   <li>
+
+    <p>If <var title="">type</var> is not the empty string, generate
+    the following triple:</p>
+
+    <dl class="triple"><dt>subject   </dt><dd> <var title="">subject</var>
+     </dd><dt>predicate </dt><dd> <code title="">http://www.w3.org/1999/02/22-rdf-syntax-ns#type</code>
+     </dd><dt>object    </dt><dd> <var title="">type</var>
+    </dd></dl></li>
+
+   <li>
+
+    <p>For each element <var title="">element</var> that has one or
+    more <a href="#property-names">property names</a> and is one of <a href="#the-properties-of-an-item" title="the&#10;    properties of an item">the properties of the item</a> <var title="">item</var>, in the order those elements are given by the
+    algorithm that returns <a href="#the-properties-of-an-item">the properties of an item</a>, run
+    the following substeps:</p>
+
+    <ol><li><p>Let <var title="">value</var> be the <a href="#concept-property-value" title="concept-property-value">property value</a> of <var title="">element</var>.</p></li>
+
+     <li><p>If <var title="">value</var> is an <a href="#concept-item" title="concept-item">item</a>, then <a href="#generate-the-triples-for-an-item" title="generate the&#10;     triples for an item">generate the triples</a> for <var title="">value</var>, and then replace <var title="">value</var>
+     with the subject returned from those steps.</p></li>
+
+     <!-- could support <time> here somehow, though we'd have to
+     reserialise it, check if the <time> was valid, check if it had a
+     date, a time, a timezone, etc. -->
+
+     <li><p>Otherwise, if <var title="">element</var> is not one of
+     the <a href="#url-property-elements">URL property elements</a>, let <var title="">value</var> be a plain literal, with the language
+     information set from the <a href="dom.html#language">language</a> of the element, if
+     it is not unknown.</p></li>
+
+     <li>
+
+      <p>For each name <var title="">name</var> in <var title="">element</var>'s <a href="#property-names">property names</a>, run the
+      appropriate substeps from the following list:</p>
+
+      <dl><dt>If <var title="">name</var> is an <a href="infrastructure.html#absolute-url">absolute
+       URL</a></dt>
+
+       <dd>
+
+        <p>Generate the following triple:</p>
+
+        <dl class="triple"><dt>subject   </dt><dd> <var title="">subject</var>
+         </dd><dt>predicate </dt><dd> <var title="">name</var>
+         </dd><dt>object    </dt><dd> <var title="">value</var>
+        </dd></dl></dd>
+
+       <dt>If <var title="">name</var> contains no U+003A COLON
+       character (:)</dt>
+
+       <dd>
+
+        <ol><li><p>If <var title="">type</var> is the empty string, then
+         abort these substeps.</p></li>
+
+         <li><p>Let <var title="">predicate</var> have the same value
+         as <var title="">type</var>.</p></li>
+
+         <li><p>If <var title="">predicate</var> does not contain a
+         U+0023 NUMBER SIGN character (#), then append a U+0023 NUMBER
+         SIGN character (#) to <var title="">predicate</var>.</p></li>
+
+         <li><p>Append a U+003A COLON character (:) to <var title="">predicate</var>.</p></li> <!-- has to be something
+         not in /name/, so ":", so that a different type/name
+         combination couldn't generate the same string -->
+
+         <li><p>Append the value of <var title="">name</var> to <var title="">predicate</var>, with any characters in <var title="">name</var> that are not valid in the &lt;ifragment&gt;
+         production of the IRI syntax being %-escaped.</p></li>
+
+         <li>
+
+          <p>Generate the following triple:</p>
+
+          <dl class="triple"><dt>subject   </dt><dd> <var title="">subject</var>
+           </dd><dt>predicate </dt><dd> the concatenation of the string "<code title="">http://www.w3.org/1999/xhtml/microdata#</code>" and <var title="">predicate</var>, with any characters in <var title="">predicate</var> that are not valid in the &lt;ifragment&gt; production of the IRI syntax being %-escaped <a href="references.html#refsRFC3987">[RFC3987]</a>
+           </dd><dt>object    </dt><dd> <var title="">value</var>
+          </dd></dl></li>
+
+        </ol></dd>
+
+      </dl></li>
+
+    </ol></li>
+
+   <li><p>Return <var title="">subject</var>.</p></li>
+
+  </ol><h4 id="atom"><span class="secno">5.4.3 </span>Atom</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+  <p>Given a <code>Document</code> <var title="">source</var>, a user
+  agent may run the following algorithm to <dfn id="extracting-atom" title="extracting&#10;  Atom">extract an Atom feed</dfn>. This is not the only algorithm
+  that can be used for this purpose; for instance, a user agent might
+  instead use the hAtom algorithm. <a href="references.html#refsHATOM">[HATOM]</a></p>
+
+  <ol><li><p>If the <code>Document</code> <var title="">source</var> does
+   not contain any <code><a href="semantics.html#the-article-element">article</a></code> elements, then return nothing
+   and abort these steps. This algorithm can only be used with
+   documents that contain distinct articles.</p>
+
+   </li><li><p>Let <var title="">R</var> be an empty <a href="dom.html#xml-documents" title="XML&#10;   documents">XML</a> <code>Document</code> object whose <a href="dom.html#the-document-s-address" title="the document's address">address</a> is user-agent
+   defined.</p></li>
+
+   <li><p>Append a <code title="">feed</code> element in the
+   <a href="#atom-namespace">Atom namespace</a> to <var title="">R</var>.</p></li>
+
+   <li>
+
+    <p>For each <code><a href="semantics.html#meta">meta</a></code> element with a <code title="attr-meta-name"><a href="semantics.html#attr-meta-name">name</a></code> attribute and a <code title="attr-meta-content"><a href="semantics.html#attr-meta-content">content</a></code> attribute and whose <code title="attr-meta-name"><a href="semantics.html#attr-meta-name">name</a></code> attribute's value is <code title="meta-author"><a href="semantics.html#meta-author">author</a></code>, run the following substeps:</p>
+
+    <ol><li><p>Append an <code title="">author</code> element in the
+     <a href="#atom-namespace">Atom namespace</a> to the root element of <var title="">R</var>.</p></li>
+
+     <li><p>Append a <code title="">name</code> element in the
+     <a href="#atom-namespace">Atom namespace</a> to the element created in the
+     previous step.</p>
+
+     </li><li><p>Append a text node whose data is the value of the
+     <code><a href="semantics.html#meta">meta</a></code> element's <code title="attr-meta-content"><a href="semantics.html#attr-meta-content">content</a></code> attribute to the element
+     created in the previous step.</p></li>
+
+    </ol><!-- could use vCards instead, and get <atom:email> and <atom:uri>
+    elements out of this instead of just <atom:name> --></li>
+
+   <li>
+
+    <p>If there is a <code><a href="semantics.html#the-link-element">link</a></code> element whose <code title="attr-link-rel"><a href="semantics.html#attr-link-rel">rel</a></code> attribute's value includes the
+    keyword <code title="rel-icon"><a href="history.html#rel-icon">icon</a></code>, and that element also
+    has an <code title="attr-link-href"><a href="semantics.html#attr-link-href">href</a></code> attribute whose
+    value successfully <a href="infrastructure.html#resolve-a-url" title="resolve a url">resolves</a>
+    relative to the <code><a href="semantics.html#the-link-element">link</a></code> element, then append an <code title="">icon</code> element in the <a href="#atom-namespace">Atom namespace</a> to
+    the root element of <var title="">R</var> whose contents is a text
+    node with its data set to the <a href="infrastructure.html#absolute-url">absolute URL</a> resulting
+    from <a href="infrastructure.html#resolve-a-url" title="resolve a url">resolving</a> the value of the
+    <code title="attr-link-href"><a href="semantics.html#attr-link-href">href</a></code> attribute.</p>
+
+    <!-- could check ratio, could check type... -->
+
+   </li>
+
+   <li>
+
+    <p>Append an <code title="">id</code> element in the <a href="#atom-namespace">Atom
+    namespace</a> to the root element of <var title="">R</var>
+    whose contents is a text node with its data set to <a href="dom.html#the-document-s-current-address">the
+    document's current address</a>.</p>
+
+   </li>
+
+   <li>
+
+    <p>Optionally: Let <var title="">x</var> be a <code title="">link</code> element in the <a href="#atom-namespace">Atom
+    namespace</a>. Add a <code title="">rel</code> attribute whose
+    value is the string "<code title="">self</code>" to <var title="">x</var>. Append a text node with its data set to the
+    (user-agent-defined) <a href="dom.html#the-document-s-address" title="the document's&#10;    address">address</a> of <var title="">R</var> to <var title="">x</var>. Append <var title="">x</var> to the root element
+    of <var title="">R</var>.</p>
+
+    <p class="note">This step would be skipped when the document <var title="">R</var> has no convenient <a href="dom.html#the-document-s-address" title="the document's&#10;    address">address</a>. The presence of the <code title="">rel="self"</code> link is a "should"-level requirement in
+    the Atom specification.</p>
+
+   </li>
+
+   <li>
+
+    <p>Let <var title="">x</var> be a <code title="">link</code>
+    element in the <a href="#atom-namespace">Atom namespace</a>. Add a <code title="">rel</code> attribute whose value is the string "<code title="">alternate</code>" to <var title="">x</var>. If the
+    document being converted is an <a href="dom.html#html-documents" title="HTML documents">HTML
+    document</a>, add a <code title="">type</code> attribute whose
+    value is the string "<code><a href="iana.html#text-html">text/html</a></code>" to <var title="">x</var>. Otherwise, the document being converted is an
+    <a href="dom.html#xml-documents" title="XML documents">XML document</a>; add a <code title="">type</code> attribute whose value is the string
+    "<code><a href="iana.html#application-xhtml-xml">application/xhtml+xml</a></code>" to <var title="">x</var>. Append a text node with its data set to
+    <a href="dom.html#the-document-s-current-address">the document's current address</a> to <var title="">x</var>. Append <var title="">x</var> to the root element
+    of <var title="">R</var>.</p>
+
+   </li>
+
+   <li><p>Let <var title="">subheading text</var> be the empty
+   string.</p></li>
+
+   <li><p>Let <var title="">heading</var> be the first element of
+   <a href="dom.html#heading-content">heading content</a> whose nearest ancestor of
+   <a href="dom.html#sectioning-content">sectioning content</a> is <a href="dom.html#the-body-element">the body
+   element</a>, if any, or null if there is none.</p></li>
+
+   <li>
+
+    <p>Take the appropriate action from the following list, as
+    determined by the type of the <var title="">heading</var>
+    element:</p>
+
+    <dl><dt>If <var title="">heading</var> is null</dt>
+
+     <dd>
+
+      <p>Let <var title="">heading text</var> be the
+      <code>textContent</code> of <a href="dom.html#the-title-element">the <code>title</code>
+      element</a>, if there is one, or the empty string
+      otherwise.</p>
+
+     </dd>
+
+     <dt>If <var title="">heading</var> is a <code><a href="semantics.html#the-hgroup-element">hgroup</a></code> element</dt>
+
+     <dd>
+
+      <p>If <var title="">heading</var> contains no child
+      <code><a href="semantics.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code>&#x2013;<code><a href="semantics.html#the-h1-h2-h3-h4-h5-and-h6-elements">h6</a></code> elements, let <var title="">heading text</var> be the empty string.</p>
+
+      <p>Otherwise, let <var title="">headings list</var> be a list of
+      all the <code><a href="semantics.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code>&#x2013;<code><a href="semantics.html#the-h1-h2-h3-h4-h5-and-h6-elements">h6</a></code> element children
+      of <var title="">heading</var>, sorted first by descending
+      <a href="semantics.html#rank">rank</a> and then in <a href="infrastructure.html#tree-order">tree order</a> (so
+      <code><a href="semantics.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code>s first, then <code><a href="semantics.html#the-h1-h2-h3-h4-h5-and-h6-elements">h2</a></code>s, etc, with each
+      group in the order they appear in the document). Then, let <var title="">heading text</var> be the <code>textContent</code> of
+      the first entry in <var title="">headings list</var>, and if
+      there are multiple entries, let <var title="">subheading
+      text</var> be the <code>textContent</code> of the second entry
+      in <var title="">headings list</var>.</p>
+
+     </dd>
+
+     <dt>If <var title="">heading</var> is an <code><a href="semantics.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code>&#x2013;<code><a href="semantics.html#the-h1-h2-h3-h4-h5-and-h6-elements">h6</a></code> element</dt>
+
+     <dd>
+
+      <p>Let <var title="">heading text</var> be the
+      <code>textContent</code> of <var title="">heading</var>.</p>
+
+     </dd>
+
+    </dl></li>
+
+   <li>
+
+    <p>Append a <code title="">title</code> element in the <a href="#atom-namespace">Atom
+    namespace</a> to the root element of <var title="">R</var>
+    whose contents is a text node with its data set to <var title="">heading text</var>.</p>
+
+   </li>
+
+   <li>
+
+    <p>If <var title="">subheading text</var> is not the empty string,
+    append a <code title="">subtitle</code> element in the <a href="#atom-namespace">Atom
+    namespace</a> to the root element of <var title="">R</var>
+    whose contents is a text node with its data set to <var title="">subheading text</var>.</p>
+
+   </li>
+
+   <li><p>Let <var title="">global update date</var> have no
+   value.</p></li>
+
+   <li>
+
+    <p>For each <code><a href="semantics.html#the-article-element">article</a></code> element <var title="">article</var> that does not have an ancestor
+    <code><a href="semantics.html#the-article-element">article</a></code> element, run the following steps:</p>
+
+    <ol><li><p>Let <var title="">E</var> be an <code title="">entry</code> element in the <a href="#atom-namespace">Atom namespace</a>,
+     and append <var title="">E</var> to the root element of <var title="">R</var>.</p></li>
+
+     <li><p>Let <var title="">heading</var> be the first element of
+     <a href="dom.html#heading-content">heading content</a> whose nearest ancestor of
+     <a href="dom.html#sectioning-content">sectioning content</a> is <var title="">article</var>,
+     if any, or null if there is none.</p></li>
+
+     <li>
+
+      <p>Take the appropriate action from the following list, as
+      determined by the type of the <var title="">heading</var>
+      element:</p>
+
+      <dl><dt>If <var title="">heading</var> is null</dt>
+
+       <dd>
+
+        <p>Let <var title="">heading text</var> be the empty
+        string.</p>
+
+       </dd>
+
+       <dt>If <var title="">heading</var> is a <code><a href="semantics.html#the-hgroup-element">hgroup</a></code> element</dt>
+
+       <dd>
+
+        <p>If <var title="">heading</var> contains no child
+        <code><a href="semantics.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code>&#x2013;<code><a href="semantics.html#the-h1-h2-h3-h4-h5-and-h6-elements">h6</a></code> elements, let <var title="">heading text</var> be the empty string.</p>
+
+        <p>Otherwise, let <var title="">headings list</var> be a list
+        of all the <code><a href="semantics.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code>&#x2013;<code><a href="semantics.html#the-h1-h2-h3-h4-h5-and-h6-elements">h6</a></code> element
+        children of <var title="">heading</var>, sorted first by
+        descending <a href="semantics.html#rank">rank</a> and then in <a href="infrastructure.html#tree-order">tree
+        order</a> (so <code><a href="semantics.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code>s first, then
+        <code><a href="semantics.html#the-h1-h2-h3-h4-h5-and-h6-elements">h2</a></code>s, etc, with each group in the order they
+        appear in the document). Then, let <var title="">heading
+        text</var> be the <code>textContent</code> of the first entry
+        in <var title="">headings list</var>.</p>
+
+       </dd>
+
+       <dt>If <var title="">heading</var> is an <code><a href="semantics.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code>&#x2013;<code><a href="semantics.html#the-h1-h2-h3-h4-h5-and-h6-elements">h6</a></code> element</dt>
+
+       <dd>
+
+        <p>Let <var title="">heading text</var> be the
+        <code>textContent</code> of <var title="">heading</var>.</p>
+
+       </dd>
+
+      </dl></li>
+
+     <li>
+
+      <p>Append a <code title="">title</code> element in the
+      <a href="#atom-namespace">Atom namespace</a> to <var title="">E</var> whose
+      contents is a text node with its data set to <var title="">heading text</var>.</p>
+
+     </li>
+
+     <!-- <atom:author> is required either at the feed level (above)
+     or the entry level (here) but we don't provide it -->
+
+     <li>
+
+      <p>Clone <var title="">article</var> and its descendants into an
+      environment that has <a href="browsers.html#concept-bc-noscript" title="concept-bc-noscript">scripting
+      disabled</a>, has no <a href="infrastructure.html#plugin" title="plugin">plugins</a>, and
+      fails any attempt to <a href="infrastructure.html#fetch" title="fetch">fetch</a> any
+      resources. Let <var title="">cloned article</var> be the
+      resulting clone <code><a href="semantics.html#the-article-element">article</a></code> element.</p>
+
+     </li>
+
+     <li>
+
+      <p>Remove from the subtree rooted at <var title="">cloned
+      article</var> any <code><a href="semantics.html#the-article-element">article</a></code> elements other than the
+      <var title="">cloned article</var> itself, any
+      <code><a href="semantics.html#the-header-element">header</a></code>, <code><a href="semantics.html#the-footer-element">footer</a></code>, or <code><a href="semantics.html#the-nav-element">nav</a></code>
+      elements whose nearest ancestor of <a href="dom.html#sectioning-content">sectioning
+      content</a> is the <var title="">cloned article</var>, and
+      the first element of <a href="dom.html#heading-content">heading content</a> whose nearest
+      ancestor of <a href="dom.html#sectioning-content">sectioning content</a> is the <var title="">cloned article</var>, if any.</p>
+
+     </li>
+
+     <li>
+
+      <p>If <var title="">cloned article</var> contains any
+      <code><a href="text-level-semantics.html#the-ins-element">ins</a></code> or <code><a href="text-level-semantics.html#the-del-element">del</a></code> elements with <code title="attr-mod-datetime"><a href="text-level-semantics.html#attr-mod-datetime">datetime</a></code> attributes whose
+      values <a href="infrastructure.html#parse-a-global-date-and-time-string" title="parse a global date and time string">parse
+      as global date and time strings</a> without errors, then let
+      <var title="">update date</var> be the value of the <code title="attr-mod-datetime"><a href="text-level-semantics.html#attr-mod-datetime">datetime</a></code> attribute that parses
+      to the newest <a href="infrastructure.html#concept-datetime" title="concept-datetime">global date and
+      time</a>.</p>
+
+      <p>Otherwise, let <var title="">update date</var> have no
+      value.</p>
+
+      <p class="note">This value is used below; it is calculated here
+      because in certain cases the next step mutates the <var title="">cloned article</var>.</p>
+
+     </li>
+
+     <li>
+
+      <p>If the document being converted is an <a href="dom.html#html-documents" title="HTML&#10;      documents">HTML document</a>, then: Let <var title="">x</var>
+      be a <code title="">content</code> element in the <a href="#atom-namespace">Atom
+      namespace</a>. Add a <code title="">type</code> attribute
+      whose value is the string "<code title="">html</code>" to <var title="">x</var>. Append a text node with its data set to the
+      result of running the <a href="syntax.html#html-fragment-serialization-algorithm">HTML fragment serialization
+      algorithm</a> on <var title="">cloned article</var> to <var title="">x</var>. Append <var title="">x</var> to <var title="">E</var>.</p>
+
+      <p>Otherwise, the document being converted is an <a href="dom.html#xml-documents" title="XML documents">XML document</a>: Let <var title="">x</var> be a <code title="">content</code> element in
+      the <a href="#atom-namespace">Atom namespace</a>. Add a <code title="">type</code> attribute whose value is the string "<code title="">xml</code>" to <var title="">x</var>. Append a
+      <code><a href="semantics.html#the-div-element">div</a></code> element to <var title="">x</var>. Move all the
+      child nodes of the <var title="">cloned article</var> node to
+      that <code><a href="semantics.html#the-div-element">div</a></code> element, preserving their relative
+      order. Append <var title="">x</var> to <var title="">E</var>.</p>
+
+     </li>
+
+     <li>
+
+      <p>Establish the value of <var title="">id</var> and <var title="">has-alternate</var> from the first of the following to
+      apply:</p>
+
+      <dl><dt>If the <var title="">article</var> node has a descendant
+       <code><a href="text-level-semantics.html#the-a-element">a</a></code> or <code><a href="the-canvas-element.html#the-area-element">area</a></code> element with an <code title="attr-hyperlink-href"><a href="history.html#attr-hyperlink-href">href</a></code> attribute that
+       successfully <a href="infrastructure.html#resolve-a-url" title="resolve a url">resolves</a>
+       relative to that descendant and a <code title="attr-a-rel">rel</code> attribute whose value includes
+       the <code title="rel-bookmark"><a href="history.html#link-type-bookmark">bookmark</a></code> keyword</dt>
+
+       <dd>Let <var title="">id</var> be the <a href="infrastructure.html#absolute-url">absolute URL</a>
+       resulting from <a href="infrastructure.html#resolve-a-url" title="resolve a url">resolving</a> the
+       value of the <code title="attr-hyperlink-href"><a href="history.html#attr-hyperlink-href">href</a></code>
+       attribute of the first such <code><a href="text-level-semantics.html#the-a-element">a</a></code> or <code><a href="the-canvas-element.html#the-area-element">area</a></code>
+       element, relative to the element. Let <var title="">has-alternate</var> be true.</dd>
+
+       <dt>If the <var title="">article</var> node has an <code title="attr-id"><a href="dom.html#the-id-attribute">id</a></code> attribute</dt>
+
+       <dd>Let <var title="">id</var> be <a href="dom.html#the-document-s-current-address">the document's current
+       address</a>, with the fragment identifier (if any) removed,
+       and with a new fragment identifier specified, consisting of the
+       value of the <var title="">article</var> element's <code title="attr-id"><a href="dom.html#the-id-attribute">id</a></code> attribute. Let <var title="">has-alternate</var> be false.</dd>
+
+       <dt>Otherwise</dt>
+
+       <dd>Let <var title="">id</var> be a user-agent-defined
+       undereferenceable yet globally unique <a href="infrastructure.html#valid-url" title="valid&#10;       URL">valid</a> <a href="infrastructure.html#absolute-url">absolute URL</a>. The same
+       <a href="infrastructure.html#absolute-url">absolute URL</a> should be generated for each run of
+       this algorithm when given the same input. Let <var title="">has-alternate</var> be false.</dd>
+
+      </dl></li>
+
+     <li>
+
+      <p>Append an <code title="">id</code> element in the <a href="#atom-namespace">Atom
+      namespace</a> to <var title="">E</var> whose contents is a
+      text node with its data set to <var title="">id</var>.</p>
+
+     </li>
+
+     <li>
+
+      <p>If <var title="">has-alternate</var> is true: Let <var title="">x</var> be a <code title="">link</code> element in the
+      <a href="#atom-namespace">Atom namespace</a>. Add a <code title="">rel</code>
+      attribute whose value is the string "<code title="">alternate</code>" to <var title="">x</var>. Append a
+      text node with its data set to <var title="">id</var> to <var title="">x</var>. Append <var title="">x</var> to <var title="">E</var>.</p>
+
+     </li>
+
+     <li>
+
+      <p>If <var title="">article</var> has a <code><a href="text-level-semantics.html#the-time-element">time</a></code>
+      element descendant that has a <code title="attr-time-pubdate"><a href="text-level-semantics.html#attr-time-pubdate">pubdate</a></code> attribute and whose
+      nearest ancestor <code><a href="semantics.html#the-article-element">article</a></code> element is <var title="">article</var>, and the first such element's <a href="text-level-semantics.html#concept-time-date" title="concept-time-date">date</a> is not unknown, then run
+      the following substeps, with <var title="">e</var> being the
+      first such element:</p>
+
+      <ol><li><p>Let <var title="">datetime</var> be a <a href="infrastructure.html#concept-datetime" title="concept-datetime">global date and time</a> whose date
+       component is the <a href="text-level-semantics.html#concept-time-date" title="concept-time-date">date</a> of
+       <var title="">e</var>.</p></li>
+
+       <li><p>If <var title="">e</var>'s <a href="text-level-semantics.html#concept-time-time" title="concept-time-time">time</a> and <a href="text-level-semantics.html#concept-time-timezone" title="concept-time-timezone">time-zone offset</a> are not
+       unknown, then let <var title="">datetime</var>'s time and
+       time-zone offset components be the <a href="text-level-semantics.html#concept-time-time" title="concept-time-time">time</a> and <a href="text-level-semantics.html#concept-time-timezone" title="concept-time-timezone">time-zone offset</a> of <var title="">e</var>. Otherwise, let them be midnight and no offset
+       respectively ("<code title="">00:00Z</code>").</p></li>
+
+       <li><p>Let <var title="">publication date</var> be the
+       <a href="infrastructure.html#best-representation-of-the-global-date-and-time-string">best representation of the global date and time
+       string</a> <var title="">datetime</var>.</p></li>
+
+      </ol><p>Otherwise, let <var title="">publication date</var> have no
+      value.</p>
+
+     </li>
+
+     <li>
+
+      <p>If <var title="">update date</var> has no value but <var title="">publication date</var> does, then let <var title="">update date</var> have the value of <var title="">publication date</var>.</p>
+
+      <p>Otherwise, if <var title="">publication date</var> has no
+      value but <var title="">update date</var> does, then let <var title="">publication date</var> have the value of <var title="">update date</var>.</p>
+
+     </li>
+
+     <li>
+
+      <p>If <var title="">update date</var> has a value, and <var title="">global update date</var> has no value or is less recent
+      than <var title="">update date</var>, then let <var title="">global update date</var> have the value of <var title="">update date</var>.</p>
+
+     </li>
+
+     <li>
+
+      <p>If <var title="">publication date</var> and <var title="">update date</var> both still have no value, then let
+      them both value a value that is a <a href="infrastructure.html#valid-global-date-and-time-string">valid global date and
+      time string</a> representing the <a href="infrastructure.html#concept-datetime" title="concept-datetime">global date and time</a> of the
+      moment that this algorithm was invoked.</p>
+
+     </li>
+
+     <li>
+
+      <p>Append an <code title="">published</code> element in the
+      <a href="#atom-namespace">Atom namespace</a> to <var title="">E</var> whose
+      contents is a text node with its data set to <var title="">publication date</var>.</p>
+
+     </li>
+
+     <li>
+
+      <p>Append an <code title="">updated</code> element in the
+      <a href="#atom-namespace">Atom namespace</a> to <var title="">E</var> whose
+      contents is a text node with its data set to <var title="">update date</var>.</p>
+
+     </li>
+
+    </ol></li>
+
+   <li>
+
+    <p>If <var title="">global update date</var> has no value, then
+    let it have a value that is a <a href="infrastructure.html#valid-global-date-and-time-string">valid global date and time
+    string</a> representing the <a href="infrastructure.html#concept-datetime" title="concept-datetime">global date and time</a> of the date
+    and time of the <code>Document</code>'s source file's last
+    modification, if it is known, or else of the moment that this
+    algorithm was invoked.</p>
+
+   </li>
+
+   <li>
+
+    <p>Insert an <code title="">updated</code> element in the
+    <a href="#atom-namespace">Atom namespace</a> into the root element of <var title="">R</var> before the first <code title="">entry</code> in
+    the <a href="#atom-namespace">Atom namespace</a> whose contents is a text node with
+    its data set to <var title="">global update date</var>.</p>
+
+   </li>
+
+   <li><p>Return the Atom document <var title="">R</var>.</p></li>
+
+  </ol><p class="note">The above algorithm does not guarantee that the
+  output will be a conforming Atom feed. In particular, if
+  insufficient information is provided in the document (e.g. if the
+  document does not have any <code title="">&lt;meta name="author"
+  content="..."&gt;</code> elements), then the output will not be
+  conforming.</p>
+
+  <p>The <dfn id="atom-namespace">Atom namespace</dfn> is: <code>http://www.w3.org/2005/Atom</code></p>
+
+  </div></body></html>

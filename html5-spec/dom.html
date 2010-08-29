@@ -1,0 +1,1233 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
+<!-- when publishing, change bits marked ZZZ -->
+<html lang="en-US-x-Hixie" class="split chapter"><head><title>3 Semantics, structure, and APIs of HTML documents &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+   pre { margin-left: 2em; white-space: pre-wrap; }
+   h2 { margin: 3em 0 1em 0; }
+   h3 { margin: 2.5em 0 1em 0; }
+   h4 { margin: 2.5em 0 0.75em 0; }
+   h5, h6 { margin: 2.5em 0 1em; }
+   h1 + h2, h1 + h2 + h2 { margin: 0.75em 0 0.75em; }
+   h2 + h3, h3 + h4, h4 + h5, h5 + h6 { margin-top: 0.5em; }
+   p { margin: 1em 0; }
+   hr:not(.top) { display: block; background: none; border: none; padding: 0; margin: 2em 0; height: auto; }
+   dl, dd { margin-top: 0; margin-bottom: 0; }
+   dt { margin-top: 0.75em; margin-bottom: 0.25em; clear: left; }
+   dt + dt { margin-top: 0; }
+   dd dt { margin-top: 0.25em; margin-bottom: 0; }
+   dd p { margin-top: 0; }
+   dd dl + p { margin-top: 1em; }
+   dd table + p { margin-top: 1em; }
+   p + * > li, dd li { margin: 1em 0; }
+   dt, dfn { font-weight: bold; font-style: normal; }
+   dt dfn { font-style: italic; }
+   pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
+   pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
+   pre em { font-weight: bolder; font-style: normal; }
+   @media screen { code { color: orangered; } code :link, code :visited { color: inherit; } }
+   var sub { vertical-align: bottom; font-size: smaller; position: relative; top: 0.1em; }
+   table { border-collapse: collapse; border-style: hidden hidden none hidden; }
+   table thead, table tbody { border-bottom: solid; }
+   table tbody th:first-child { border-left: solid; }
+   table tbody th { text-align: left; }
+   table td, table th { border-left: solid; border-right: solid; border-bottom: solid thin; vertical-align: top; padding: 0.2em; }
+   blockquote { margin: 0 0 0 2em; border: 0; padding: 0; font-style: italic; }
+
+   .bad, .bad *:not(.XXX) { color: gray; border-color: gray; background: transparent; }
+   .matrix, .matrix td { border: none; text-align: right; }
+   .matrix { margin-left: 2em; }
+   .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
+   .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
+   .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
+   img.extra { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
+   pre.css:first-line { color: #AAAA50; }
+   dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
+   hr + dl.domintro, div.impl + dl.domintro { margin-top: 2.5em; margin-bottom: 1.5em; }
+   dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
+   dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
+   dl.domintro dd p { margin: 0.5em 0; }
+   dl.switch { padding-left: 2em; }
+   dl.switch > dt { text-indent: -1.5em; }
+   dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
+   dl.triple { padding: 0 0 0 1em; }
+   dl.triple dt, dl.triple dd { margin: 0; display: inline }
+   dl.triple dt:after { content: ':'; }
+   dl.triple dd:after { content: '\A'; white-space: pre; }
+   .diff-old { text-decoration: line-through; color: silver; background: transparent; }
+   .diff-chg, .diff-new { text-decoration: underline; color: green; background: transparent; }
+   a .diff-new { border-bottom: 1px blue solid; }
+
+   h2 { page-break-before: always; }
+   h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
+   h1 + h2, hr + h2.no-toc { page-break-before: auto; }
+
+   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+
+   div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
+   div.head p { margin: 0; }
+   div.head h1 { margin: 0; }
+   div.head .logo { float: right; margin: 0 1em; }
+   div.head .logo img { border: none } /* remove border from top image */
+   div.head dl { margin: 1em 0; }
+   div.head p.copyright, div.head p.alt { font-size: x-small; font-style: oblique; margin: 0; }
+
+   body > .toc > li { margin-top: 1em; margin-bottom: 1em; }
+   body > .toc.brief > li { margin-top: 0.35em; margin-bottom: 0.35em; }
+   body > .toc > li > * { margin-bottom: 0.5em; }
+   body > .toc > li > * > li > * { margin-bottom: 0.25em; }
+   .toc, .toc li { list-style: none; }
+
+   .brief { margin-top: 1em; margin-bottom: 1em; line-height: 1.1; }
+   .brief li { margin: 0; padding: 0; }
+   .brief li p { margin: 0; padding: 0; }
+
+   .category-list { margin-top: -0.75em; margin-bottom: 1em; line-height: 1.5; }
+   .category-list::before { content: '\21D2\A0'; font-size: 1.2em; font-weight: 900; }
+   .category-list li { display: inline; }
+   .category-list li:not(:last-child)::after { content: ', '; }
+   .category-list li > span, .category-list li > a { text-transform: lowercase; }
+   .category-list li * { text-transform: none; } /* don't affect <code> nested in <a> */
+
+   .XXX { color: #E50000; background: white; border: solid red; padding: 0.5em; margin: 1em 0; }
+   .XXX > :first-child { margin-top: 0; }
+   p .XXX { line-height: 3em; }
+   .annotation { border: solid thin black; background: #0C479D; color: white; position: relative; margin: 8px 0 20px 0; }
+   .annotation:before { position: absolute; left: 0; top: 0; width: 100%; height: 100%; margin: 6px -6px -6px 6px; background: #333333; z-index: -1; content: ''; }
+   .annotation :link, .annotation :visited { color: inherit; }
+   .annotation :link:hover, .annotation :visited:hover { background: transparent; }
+   .annotation span { border: none ! important; }
+   .note { color: green; background: transparent; font-family: sans-serif; }
+   .warning { color: red; background: transparent; }
+   .note, .warning { font-weight: bolder; font-style: italic; }
+   p.note, div.note { padding: 0.5em 2em; }
+   span.note { padding: 0 2em; }
+   .note p:first-child, .warning p:first-child { margin-top: 0; }
+   .note p:last-child, .warning p:last-child { margin-bottom: 0; }
+   .warning:before { font-style: normal; }
+   p.note:before { content: 'Note: '; }
+   p.warning:before { content: '\26A0 Warning! '; }
+
+   .bookkeeping:before { display: block; content: 'Bookkeeping details'; font-weight: bolder; font-style: italic; }
+   .bookkeeping { font-size: 0.8em; margin: 2em 0; }
+   .bookkeeping p { margin: 0.5em 2em; display: list-item; list-style: square; }
+   .bookkeeping dt { margin: 0.5em 2em 0; }
+   .bookkeeping dd { margin: 0 3em 0.5em; }
+
+   h4 { position: relative; z-index: 3; }
+   h4 + .element, h4 + div + .element { margin-top: -2.5em; padding-top: 2em; }
+   .element {
+     background: #EEEEFF;
+     color: black;
+     margin: 0 0 1em 0.15em;
+     padding: 0 1em 0.25em 0.75em;
+     border-left: solid #9999FF 0.25em;
+     position: relative;
+     z-index: 1;
+   }
+   .element:before {
+     position: absolute;
+     z-index: 2;
+     top: 0;
+     left: -1.15em;
+     height: 2em;
+     width: 0.9em;
+     background: #EEEEFF;
+     content: ' ';
+     border-style: none none solid solid;
+     border-color: #9999FF;
+     border-width: 0.25em;
+   }
+
+   .example { display: block; color: #222222; background: #FCFCFC; border-left: double; margin-left: 2em; padding-left: 1em; }
+   td > .example:only-child { margin: 0 0 0 0.1em; }
+
+   ul.domTree, ul.domTree ul { padding: 0 0 0 1em; margin: 0; }
+   ul.domTree li { padding: 0; margin: 0; list-style: none; position: relative; }
+   ul.domTree li li { list-style: none; }
+   ul.domTree li:first-child::before { position: absolute; top: 0; height: 0.6em; left: -0.75em; width: 0.5em; border-style: none none solid solid; content: ''; border-width: 0.1em; }
+   ul.domTree li:not(:last-child)::after { position: absolute; top: 0; bottom: -0.6em; left: -0.75em; width: 0.5em; border-style: none none solid solid; content: ''; border-width: 0.1em; }
+   ul.domTree span { font-style: italic; font-family: serif; }
+   ul.domTree .t1 code { color: purple; font-weight: bold; }
+   ul.domTree .t2 { font-style: normal; font-family: monospace; }
+   ul.domTree .t2 .name { color: black; font-weight: bold; }
+   ul.domTree .t2 .value { color: blue; font-weight: normal; }
+   ul.domTree .t3 code, .domTree .t4 code, .domTree .t5 code { color: gray; }
+   ul.domTree .t7 code, .domTree .t8 code { color: green; }
+   ul.domTree .t10 code { color: teal; }
+
+   body.dfnEnabled dfn { cursor: pointer; }
+   .dfnPanel {
+     display: inline;
+     position: absolute;
+     z-index: 10;
+     height: auto;
+     width: auto;
+     padding: 0.5em 0.75em;
+     font: small sans-serif, Droid Sans Fallback;
+     background: #DDDDDD;
+     color: black;
+     border: outset 0.2em;
+   }
+   .dfnPanel * { margin: 0; padding: 0; font: inherit; text-indent: 0; }
+   .dfnPanel :link, .dfnPanel :visited { color: black; }
+   .dfnPanel p { font-weight: bolder; }
+   .dfnPanel * + p { margin-top: 0.25em; }
+   .dfnPanel li { list-style-position: inside; }
+
+   #configUI { position: absolute; z-index: 20; top: 10em; right: 1em; width: 11em; font-size: small; }
+   #configUI p { margin: 0.5em 0; padding: 0.3em; background: #EEEEEE; color: black; border: inset thin; }
+   #configUI p label { display: block; }
+   #configUI #updateUI, #configUI .loginUI { text-align: center; }
+   #configUI input[type=button] { display: block; margin: auto; }
+
+  ]]></style><style type="text/css"><![CDATA[
+
+   .applies thead th > * { display: block; }
+   .applies thead code { display: block; }
+   .applies tbody th { whitespace: nowrap; }
+   .applies td { text-align: center; }
+   .applies .yes { background: yellow; }
+
+   .matrix, .matrix td { border: hidden; text-align: right; }
+   .matrix { margin-left: 2em; }
+
+   .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
+   .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
+   .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
+   #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
+   #table-example-1 caption { padding-bottom: 0.5em; }
+   #table-example-1 thead, #table-example-1 tbody { border: none; }
+   #table-example-1 th, #table-example-1 td { border: solid thin; }
+   #table-example-1 th { font-weight: normal; }
+   #table-example-1 td { border-style: none solid; vertical-align: top; }
+   #table-example-1 th { padding: 0.5em; vertical-align: middle; text-align: center; }
+   #table-example-1 tbody tr:first-child td { padding-top: 0.5em; }
+   #table-example-1 tbody tr:last-child td { padding-bottom: 1.5em; }
+   #table-example-1 tbody td:first-child { padding-left: 2.5em; padding-right: 0; width: 9em; }
+   #table-example-1 tbody td:first-child::after { content: leader(". "); }
+   #table-example-1 tbody td { padding-left: 2em; padding-right: 2em; }
+   #table-example-1 tbody td:first-child + td { width: 10em; }
+   #table-example-1 tbody td:first-child + td ~ td { width: 2.5em; }
+   #table-example-1 tbody td:first-child + td + td + td ~ td { width: 1.25em; }
+
+   .apple-table-examples { border: none; border-collapse: separate; border-spacing: 1.5em 0em; width: 40em; margin-left: 3em; }
+   .apple-table-examples * { font-family: "Times", serif; }
+   .apple-table-examples td, .apple-table-examples th { border: none; white-space: nowrap; padding-top: 0; padding-bottom: 0; }
+   .apple-table-examples tbody th:first-child { border-left: none; width: 100%; }
+   .apple-table-examples thead th:first-child ~ th { font-size: smaller; font-weight: bolder; border-bottom: solid 2px; text-align: center; }
+   .apple-table-examples tbody th::after, .apple-table-examples tfoot th::after { content: leader(". ") }
+   .apple-table-examples tbody th, .apple-table-examples tfoot th { font: inherit; text-align: left; }
+   .apple-table-examples td { text-align: right; vertical-align: top; }
+   .apple-table-examples.e1 tbody tr:last-child td { border-bottom: solid 1px; }
+   .apple-table-examples.e1 tbody + tbody tr:last-child td { border-bottom: double 3px; }
+   .apple-table-examples.e2 th[scope=row] { padding-left: 1em; }
+   .apple-table-examples sup { line-height: 0; }
+
+   .details-example img { vertical-align: top; }
+
+   #named-character-references-table {
+     font-size: 0.6em;
+     column-width: 28em;
+     column-gap: 1em;
+     -moz-column-width: 28em;
+     -moz-column-gap: 1em;
+     -webkit-column-width: 28em;
+     -webkit-column-gap: 1em;
+   }
+   #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
+   #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+
+   .glyph.control { color: red; }
+
+   @font-face {
+     font-family: 'Essays1743';
+     src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743.ttf');
+   }
+   @font-face {
+     font-family: 'Essays1743';
+     font-weight: bold;
+     src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-Bold.ttf');
+   }
+   @font-face {
+     font-family: 'Essays1743';
+     font-style: italic;
+     src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-Italic.ttf');
+   }
+   @font-face {
+     font-family: 'Essays1743';
+     font-style: italic;
+     font-weight: bold;
+     src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
+   }
+
+  ]]></style><style type="text/css"><![CDATA[
+   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
+  ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
+   function getCookie(name) {
+     var params = location.search.substr(1).split("&");
+     for (var index = 0; index < params.length; index++) {
+       if (params[index] == name)
+         return "1";
+       var data = params[index].split("=");
+       if (data[0] == name)
+         return unescape(data[1]);
+     }
+     var cookies = document.cookie.split("; ");
+     for (var index = 0; index < cookies.length; index++) {
+       var data = cookies[index].split("=");
+       if (data[0] == name)
+         return unescape(data[1]);
+     }
+     return null;
+   }
+   function load(script) {
+     var e = document.createElement('script');
+     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     document.body.appendChild(e);
+   }
+   function init() {
+     if (location.search == '?slow-browser')
+       return;
+     var configUI = document.createElement('div');
+     configUI.id = 'configUI';
+     document.body.appendChild(configUI);
+     // load('reviewer.js'); // would need cross-site XHR
+     if (document.getElementById('head'))
+       load('toc.js');
+     load('styler.js');
+     // load('updater.js'); // would need cross-site XHR
+     load('dfn.js'); // doesn't support split-out specs, but, oh well.
+     // load('status.js'); // would need cross-site XHR
+     if (getCookie('profile') == '1')
+       document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
+     fixBrokenLink();
+   }
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="namespaces.html" title="2.8 Namespaces" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="elements.html" title="3.2 Elements" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+   <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
+
+   <h1>HTML5</h1>
+   </div><div>
+   <a href="namespaces.html">&#x2190; 2.8 Namespaces</a> &#x2013;
+   <a href="spec.html#contents">Table of contents</a> &#x2013;
+   <a href="elements.html">3.2 Elements &#x2192;</a>
+  <ol class="toc"><li><a href="dom.html#dom"><span class="secno">3 </span>Semantics, structure, and APIs of HTML documents</a>
+  <ol><li><a href="dom.html#documents"><span class="secno">3.1 </span>Documents</a>
+    <ol><li><a href="dom.html#documents-in-the-dom"><span class="secno">3.1.1 </span>Documents in the DOM</a></li><li><a href="dom.html#security-document"><span class="secno">3.1.2 </span>Security</a></li><li><a href="dom.html#resource-metadata-management"><span class="secno">3.1.3 </span>Resource metadata management</a></li><li><a href="dom.html#dom-tree-accessors"><span class="secno">3.1.4 </span>DOM tree accessors</a></li><li><a href="dom.html#creating-documents"><span class="secno">3.1.5 </span>Creating documents</a></li><li><a href="dom.html#loading-xml-documents"><span class="secno">3.1.6 </span>Loading XML documents</a></li></ol></li></ol></li></ol></div><h2 id="dom"><span class="secno">3 </span>Semantics, structure, and APIs of HTML documents</h2><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><h3 id="documents"><span class="secno">3.1 </span>Documents</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Every XML and HTML document in an HTML UA is represented by a
+  <code><a href="infrastructure.html#document">Document</a></code> object. <a href="references.html#refsDOMCORE">[DOMCORE]</a></p><p><dfn id="the-document-s-address">The document's address</dfn> is an <a href="urls.html#absolute-url">absolute URL</a>
+  that is set when the <code><a href="infrastructure.html#document">Document</a></code> is created. <dfn id="the-document-s-current-address">The
+  document's current address</dfn> is an <a href="urls.html#absolute-url">absolute URL</a>
+  that can change during the lifetime of the <code><a href="infrastructure.html#document">Document</a></code>,
+  for example when the user <a href="history.html#navigate" title="navigate">navigates</a> to
+  a <a href="history.html#scroll-to-fragid" title="navigate-fragid">fragment identifier</a> on the
+  page or when the <code title="dom-history-pushState"><a href="history.html#dom-history-pushstate">pushState()</a></code> method is called
+  with a new <a href="urls.html#url">URL</a>. <span class="impl"><a href="#the-document-s-current-address">The document's
+  current address</a> must be set to <a href="#the-document-s-address">the document's
+  address</a> when the <code><a href="infrastructure.html#document">Document</a></code> is created.</span></p><p class="note">Interactive user agents typically expose <a href="#the-document-s-current-address">the
+  document's current address</a> in their user interface.</p><p>When a <code><a href="infrastructure.html#document">Document</a></code> is created by a <a href="webappapis.html#concept-script" title="concept-script">script</a> using the <code title="dom-DOMImplementation-createDocument"><a href="infrastructure.html#dom-domimplementation-createdocument">createDocument()</a></code>
+  or <code title="dom-DOMHTMLImplementation-createHTMLDocument"><a href="#dom-domhtmlimplementation-createhtmldocument">createHTMLDocument()</a></code>
+  APIs, <a href="#the-document-s-address">the document's address</a> is the same as <a href="#the-document-s-address">the
+  document's address</a> of the <a href="webappapis.html#script-s-document">script's document</a>.</p><p><code><a href="infrastructure.html#document">Document</a></code> objects are assumed to be <dfn id="xml-documents">XML
+  documents</dfn> unless they are flagged as being <dfn id="html-documents">HTML
+  documents</dfn> when they are created. Whether a document is an
+  <a href="#html-documents" title="HTML documents">HTML document</a> or an <a href="#xml-documents" title="XML documents">XML document</a> affects the behavior of
+  certain APIs and the case-sensitivity of some selectors.</p><h4 id="documents-in-the-dom"><span class="secno">3.1.1 </span>Documents in the DOM</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>All <code><a href="infrastructure.html#document">Document</a></code> objects (in user agents implementing
+  this specification) <span class="impl">must</span> also implement
+  the <code><a href="#htmldocument">HTMLDocument</a></code> interface, available using
+  binding-specific methods. (This is the case whether or not the
+  document in question is an <a href="#html-documents" title="HTML documents">HTML
+  document</a> or indeed whether it contains any <a href="infrastructure.html#html-elements">HTML
+  elements</a> at all.) <code><a href="infrastructure.html#document">Document</a></code> objects <span class="impl">must</span> also implement the document-level interface
+  of any other namespaces that the UA supports.</p><p class="example">For example, if an HTML implementation also
+  supports SVG, then the <code><a href="infrastructure.html#document">Document</a></code> object implements both
+  <code><a href="#htmldocument">HTMLDocument</a></code> and <code>SVGDocument</code>.</p><p class="note">Because the <code><a href="#htmldocument">HTMLDocument</a></code> interface is
+  now obtained using binding-specific casting methods instead of
+  simply being the primary interface of the document object, it is no
+  longer defined as inheriting from <code><a href="infrastructure.html#document">Document</a></code>.</p><pre class="idl">[OverrideBuiltins]
+interface <dfn id="htmldocument">HTMLDocument</dfn> {
+  // <a href="#resource-metadata-management">resource metadata management</a>
+  [PutForwards=<a href="history.html#dom-location-href" title="dom-location-href">href</a>] readonly attribute <a href="history.html#location">Location</a> <a href="history.html#dom-document-location" title="dom-document-location">location</a>;
+  readonly attribute DOMString <a href="#dom-document-url" title="dom-document-URL">URL</a>;
+           attribute DOMString <a href="origin-0.html#dom-document-domain" title="dom-document-domain">domain</a>;
+  readonly attribute DOMString <a href="#dom-document-referrer" title="dom-document-referrer">referrer</a>;
+           attribute DOMString <a href="#dom-document-cookie" title="dom-document-cookie">cookie</a>;
+  readonly attribute DOMString <a href="#dom-document-lastmodified" title="dom-document-lastModified">lastModified</a>;
+  readonly attribute DOMString <a href="#dom-document-compatmode" title="dom-document-compatMode">compatMode</a>;
+           attribute DOMString <a href="#dom-document-charset" title="dom-document-charset">charset</a>;
+  readonly attribute DOMString <a href="#dom-document-characterset" title="dom-document-characterSet">characterSet</a>;
+  readonly attribute DOMString <a href="#dom-document-defaultcharset" title="dom-document-defaultCharset">defaultCharset</a>;
+  readonly attribute DOMString <a href="#dom-document-readystate" title="dom-document-readyState">readyState</a>;
+
+  // <a href="#dom-tree-accessors">DOM tree accessors</a>
+  <a href="#dom-document-nameditem" title="dom-document-namedItem">getter</a> any (in DOMString name);
+           attribute DOMString <a href="#document.title" title="dom-document-title">title</a>;
+           attribute DOMString <a href="elements.html#dom-document-dir" title="dom-document-dir">dir</a>;
+           attribute <a href="elements.html#htmlelement">HTMLElement</a> <a href="#dom-document-body" title="dom-document-body">body</a>;
+  readonly attribute <a href="semantics.html#htmlheadelement">HTMLHeadElement</a> <a href="#dom-document-head" title="dom-document-head">head</a>;
+  readonly attribute <a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a> <a href="#dom-document-images" title="dom-document-images">images</a>;
+  readonly attribute <a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a> <a href="#dom-document-embeds" title="dom-document-embeds">embeds</a>;
+  readonly attribute <a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a> <a href="#dom-document-plugins" title="dom-document-plugins">plugins</a>;
+  readonly attribute <a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a> <a href="#dom-document-links" title="dom-document-links">links</a>;
+  readonly attribute <a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a> <a href="#dom-document-forms" title="dom-document-forms">forms</a>;
+  readonly attribute <a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a> <a href="#dom-document-scripts" title="dom-document-scripts">scripts</a>;
+  NodeList <a href="#dom-document-getelementsbyname" title="dom-document-getElementsByName">getElementsByName</a>(in DOMString elementName);
+  NodeList <a href="#dom-document-getelementsbyclassname" title="dom-document-getElementsByClassName">getElementsByClassName</a>(in DOMString classNames);
+
+  // <a href="apis-in-html-documents.html#dynamic-markup-insertion">dynamic markup insertion</a>
+           attribute DOMString <a href="apis-in-html-documents.html#dom-innerhtml" title="dom-innerHTML">innerHTML</a>;
+  <a href="#htmldocument">HTMLDocument</a> <a href="apis-in-html-documents.html#dom-document-open" title="dom-document-open">open</a>(in optional DOMString type, in optional DOMString replace);
+  <a href="browsers.html#windowproxy">WindowProxy</a> <a href="apis-in-html-documents.html#dom-document-open" title="dom-document-open">open</a>(in DOMString url, in DOMString name, in DOMString features, in optional boolean replace);
+  void <a href="apis-in-html-documents.html#dom-document-close" title="dom-document-close">close</a>();
+  void <a href="apis-in-html-documents.html#dom-document-write" title="dom-document-write">write</a>(in DOMString... text);
+  void <a href="apis-in-html-documents.html#dom-document-writeln" title="dom-document-writeln">writeln</a>(in DOMString... text);
+
+  // <a href="editing.html#editing">user interaction</a>
+  readonly attribute <a href="browsers.html#windowproxy">WindowProxy</a> <a href="browsers.html#dom-document-defaultview" title="dom-document-defaultView">defaultView</a>;
+  <a href="editing.html#selection-0">Selection</a> <a href="editing.html#dom-document-getselection" title="dom-document-getSelection">getSelection</a>();
+  readonly attribute <a href="infrastructure.html#element">Element</a> <a href="editing.html#dom-document-activeelement" title="dom-document-activeElement">activeElement</a>;
+  boolean <a href="editing.html#dom-document-hasfocus" title="dom-document-hasFocus">hasFocus</a>();
+           attribute DOMString <a href="editing.html#designMode" title="dom-document-designMode">designMode</a>;
+  boolean <a href="dnd.html#execCommand" title="dom-document-execCommand">execCommand</a>(in DOMString commandId);
+  boolean <a href="dnd.html#execCommand" title="dom-document-execCommand">execCommand</a>(in DOMString commandId, in boolean showUI);
+  boolean <a href="dnd.html#execCommand" title="dom-document-execCommand">execCommand</a>(in DOMString commandId, in boolean showUI, in DOMString value);
+  boolean <a href="dnd.html#dom-document-querycommandenabled" title="dom-document-queryCommandEnabled">queryCommandEnabled</a>(in DOMString commandId);
+  boolean <a href="dnd.html#dom-document-querycommandindeterm" title="dom-document-queryCommandIndeterm">queryCommandIndeterm</a>(in DOMString commandId);
+  boolean <a href="dnd.html#dom-document-querycommandstate" title="dom-document-queryCommandState">queryCommandState</a>(in DOMString commandId);
+  boolean <a href="dnd.html#dom-document-querycommandsupported" title="dom-document-queryCommandSupported">queryCommandSupported</a>(in DOMString commandId);
+  DOMString <a href="dnd.html#dom-document-querycommandvalue" title="dom-document-queryCommandValue">queryCommandValue</a>(in DOMString commandId);
+  readonly attribute <a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a> <a href="commands.html#dom-document-commands" title="dom-document-commands">commands</a>;
+
+  // <a href="webappapis.html#event-handler-idl-attributes">event handler IDL attributes</a>
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onabort" title="handler-onabort">onabort</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onblur" title="handler-onblur">onblur</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oncanplay" title="handler-oncanplay">oncanplay</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oncanplaythrough" title="handler-oncanplaythrough">oncanplaythrough</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onchange" title="handler-onchange">onchange</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onclick" title="handler-onclick">onclick</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oncontextmenu" title="handler-oncontextmenu">oncontextmenu</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondblclick" title="handler-ondblclick">ondblclick</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondrag" title="handler-ondrag">ondrag</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondragend" title="handler-ondragend">ondragend</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondragenter" title="handler-ondragenter">ondragenter</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondragleave" title="handler-ondragleave">ondragleave</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondragover" title="handler-ondragover">ondragover</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondragstart" title="handler-ondragstart">ondragstart</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondrop" title="handler-ondrop">ondrop</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondurationchange" title="handler-ondurationchange">ondurationchange</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onemptied" title="handler-onemptied">onemptied</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onended" title="handler-onended">onended</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onerror" title="handler-onerror">onerror</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onfocus" title="handler-onfocus">onfocus</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onformchange" title="handler-onformchange">onformchange</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onforminput" title="handler-onforminput">onforminput</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oninput" title="handler-oninput">oninput</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oninvalid" title="handler-oninvalid">oninvalid</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onkeydown" title="handler-onkeydown">onkeydown</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onkeypress" title="handler-onkeypress">onkeypress</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onkeyup" title="handler-onkeyup">onkeyup</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onload" title="handler-onload">onload</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onloadeddata" title="handler-onloadeddata">onloadeddata</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onloadedmetadata" title="handler-onloadedmetadata">onloadedmetadata</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onloadstart" title="handler-onloadstart">onloadstart</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmousedown" title="handler-onmousedown">onmousedown</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmousemove" title="handler-onmousemove">onmousemove</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmouseout" title="handler-onmouseout">onmouseout</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmouseover" title="handler-onmouseover">onmouseover</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmouseup" title="handler-onmouseup">onmouseup</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmousewheel" title="handler-onmousewheel">onmousewheel</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onpause" title="handler-onpause">onpause</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onplay" title="handler-onplay">onplay</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onplaying" title="handler-onplaying">onplaying</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onprogress" title="handler-onprogress">onprogress</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onratechange" title="handler-onratechange">onratechange</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onreadystatechange" title="handler-onreadystatechange">onreadystatechange</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onscroll" title="handler-onscroll">onscroll</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onseeked" title="handler-onseeked">onseeked</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onseeking" title="handler-onseeking">onseeking</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onselect" title="handler-onselect">onselect</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onshow" title="handler-onshow">onshow</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onstalled" title="handler-onstalled">onstalled</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onsubmit" title="handler-onsubmit">onsubmit</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onsuspend" title="handler-onsuspend">onsuspend</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ontimeupdate" title="handler-ontimeupdate">ontimeupdate</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onvolumechange" title="handler-onvolumechange">onvolumechange</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onwaiting" title="handler-onwaiting">onwaiting</a>;
+};
+<a href="infrastructure.html#document">Document</a> implements <a href="#htmldocument">HTMLDocument</a>;</pre><p>Since the <code><a href="#htmldocument">HTMLDocument</a></code> interface holds methods and
+  attributes related to a number of disparate features, the members of
+  this interface are described in various different sections.</p><h4 id="security-document"><span class="secno">3.1.2 </span>Security</h4><p id="security">User agents <span class="impl">must</span> raise a
+  <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code> exception whenever any of the members of
+  an <code><a href="#htmldocument">HTMLDocument</a></code> object are accessed by scripts whose
+  <a href="origin-0.html#effective-script-origin">effective script origin</a> is not the <a href="origin-0.html#same-origin" title="same&#10;  origin">same</a> as the <code><a href="infrastructure.html#document">Document</a></code>'s <a href="origin-0.html#effective-script-origin">effective
+  script origin</a>.</p><h4 id="resource-metadata-management"><span class="secno">3.1.3 </span><dfn>Resource metadata management</dfn></h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">document</var> . <code title="dom-document-URL"><a href="#dom-document-url">URL</a></code></dt>
+   <dd>
+    <p>Returns <a href="#the-document-s-address">the document's address</a>.</p>
+   </dd>
+
+   <dt><var title="">document</var> . <code title="dom-document-referrer"><a href="#dom-document-referrer">referrer</a></code></dt>
+   <dd>
+    <p>Returns <a href="#the-document-s-current-address" title="the document's current address">the
+    address</a> of the <code><a href="infrastructure.html#document">Document</a></code> from which the user
+    navigated to this one, unless it was blocked or there was no such
+    document, in which case it returns the empty string.</p>
+    <p>The <code title="rel-noreferrer"><a href="links.html#link-type-noreferrer">noreferrer</a></code> link
+    type can be used to block the referrer.</p>
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>The <dfn id="dom-document-url" title="dom-document-URL"><code>URL</code></dfn>
+  attribute must return <a href="#the-document-s-address">the document's address</a>.</p>
+
+  <p>The <dfn id="dom-document-referrer" title="dom-document-referrer"><code>referrer</code></dfn> attribute
+  must return either the <a href="#the-document-s-current-address" title="the document's current&#10;  address">current address</a> of the <a href="browsers.html#active-document">active document</a>
+  of the <a href="history.html#source-browsing-context">source browsing context</a> <em>at the time the
+  navigation was started</em> (that is, the page which <a href="history.html#navigate" title="navigate">navigated</a> the <a href="browsers.html#browsing-context">browsing context</a>
+  to the current document), with any <a href="urls.html#url-fragment" title="url-fragment">&lt;fragment&gt;</a> component removed; or
+  the empty string if there is no such originating page, or if the UA
+  has been configured not to report referrers in this case, or if the
+  navigation was initiated for a <a href="links.html#hyperlink">hyperlink</a> with a <code title="rel-noreferrer"><a href="links.html#link-type-noreferrer">noreferrer</a></code> keyword.</p>
+
+  </div><p class="note">In the case of HTTP, the <code title="dom-document-referrer"><a href="#dom-document-referrer">referrer</a></code> IDL attribute will
+  match the <code title="http-referer">Referer</code> (sic) header
+  that was sent when <a href="fetching-resources.html#fetch" title="fetch">fetching</a> the current
+  page.</p><p class="note">Typically user agents are configured to not report
+  referrers in the case where the referrer uses an encrypted protocol
+  and the current page does not (e.g. when navigating from an <code title="">https:</code> page to an <code title="">http:</code>
+  page).</p><hr/><dl class="domintro"><dt><var title="">document</var> . <code title="dom-document-cookie"><a href="#dom-document-cookie">cookie</a></code> [ = <var title="">value</var> ]</dt>
+   <dd>
+    <p>Returns the HTTP cookies that apply to the
+    <code><a href="infrastructure.html#document">Document</a></code>. If there are no cookies or cookies can't be
+    applied to this resource, the empty string will be returned.</p>
+    <p>Can be set, to add a new cookie to the element's set of HTTP
+    cookies.</p>
+    <p>If the contents are <a href="the-iframe-element.html#sandboxed-origin-browsing-context-flag" title="sandboxed origin browsing&#10;    context flag">sandboxed into a unique origin</a> (in an
+    <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> with the <code title="attr-iframe-sandbox"><a href="the-iframe-element.html#attr-iframe-sandbox">sandbox</a></code> attribute) or the
+    resource was labeled as <code><a href="iana.html#text-html-sandboxed">text/html-sandboxed</a></code>, a
+    <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code> exception will be thrown on getting and
+    setting.</p>
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>The <dfn id="dom-document-cookie" title="dom-document-cookie"><code>cookie</code></dfn>
+  attribute represents the cookies of the resource from which the
+  <code><a href="infrastructure.html#document">Document</a></code> was created.</p>
+
+  <p>Some <code><a href="infrastructure.html#document">Document</a></code> objects are <dfn id="cookie-free-document-object" title="cookie-free&#10;  Document object">cookie-free <code>Document</code>
+  objects</dfn>. Any <code><a href="infrastructure.html#document">Document</a></code> object created by the <code title="">createDocument()</code> or <code title="dom-DOMHTMLImplementation-createHTMLDocument"><a href="#dom-domhtmlimplementation-createhtmldocument">createHTMLDocument()</a></code>
+  factory methods is a <a href="#cookie-free-document-object">cookie-free <code>Document</code>
+  object</a>. Any <code><a href="infrastructure.html#document">Document</a></code> whose <a href="#the-document-s-address" title="the&#10;  document's address">address</a> does not use a server-based
+  naming authority is a <a href="#cookie-free-document-object">cookie-free <code>Document</code>
+  object</a>. Other specifications can also define
+  <code><a href="infrastructure.html#document">Document</a></code> objects as being <a href="#cookie-free-document-object" title="cookie-free&#10;  Document object">cookie-free <code>Document</code>
+  objects</a>.</p>
+
+  <p id="sandboxCookies">On getting, if the document is a
+  <a href="#cookie-free-document-object">cookie-free <code>Document</code> object</a>, then the user
+  agent must return the empty string. Otherwise, if the
+  <code><a href="infrastructure.html#document">Document</a></code>'s <a href="origin-0.html#origin">origin</a> is not a
+  scheme/host/port tuple, the user agent must raise a
+  <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code> exception. Otherwise, the user agent must
+  first <a href="webappapis.html#obtain-the-storage-mutex">obtain the storage mutex</a> and then return the
+  cookie-string for <a href="#the-document-s-address">the document's address</a> for a
+  "non-HTTP" API, decoded as UTF-8, with bytes or sequences of bytes
+  that are not valid UTF-8 sequences interpreted as U+FFFD REPLACEMENT
+  CHARACTERs. <a href="references.html#refsCOOKIES">[COOKIES]</a> <a href="references.html#refsRFC3629">[RFC3629]</a></p>
+
+  <p>On setting, if the document is a <a href="#cookie-free-document-object">cookie-free
+  <code>Document</code> object</a>, then the user agent must do
+  nothing. Otherwise, if the <code><a href="infrastructure.html#document">Document</a></code>'s
+  <a href="origin-0.html#origin">origin</a> is not a scheme/host/port tuple, the user agent
+  must raise a <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code> exception. Otherwise, the
+  user agent must <a href="webappapis.html#obtain-the-storage-mutex">obtain the storage mutex</a> and then act
+  as it would when <span title="receives a&#10;  set-cookie-string">receiving a set-cookie-string</span> for
+  <a href="#the-document-s-address">the document's address</a> via a "non-HTTP" API, consisting
+  of the new value encoded as UTF-8. <a href="references.html#refsCOOKIES">[COOKIES]</a> <a href="references.html#refsRFC3629">[RFC3629]</a></p>
+
+  <p class="note">Since the <code title="dom-document-cookie"><a href="#dom-document-cookie">cookie</a></code> attribute is accessible
+  across frames, the path restrictions on cookies are only a tool to
+  help manage which cookies are sent to which parts of the site, and
+  are not in any way a security feature.</p>
+
+  <hr/></div><dl class="domintro"><dt><var title="">document</var> . <code title="dom-document-lastmodified"><a href="#dom-document-lastmodified">lastModified</a></code></dt>
+   <dd>
+    <p>Returns the date of the last modification to the document, as
+    reported by the server, in the form "<code title="">MM/DD/YYYY&#xA0;hh:mm:ss</code>", in the user's local
+    time zone.</p>
+    <p>If the last modification date is not known, the current time is
+    returned instead.</p>
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>The <dfn id="dom-document-lastmodified" title="dom-document-lastModified"><code>lastModified</code></dfn>
+  attribute, on getting, must return the date and time of the
+  <code><a href="infrastructure.html#document">Document</a></code>'s source file's last modification, in the
+  user's local time zone, in the following format:</p>
+
+  <ol><li> The month component of the date. </li>
+
+   <li> A U+002F SOLIDUS character (/). </li>
+
+   <li> The day component of the date. </li>
+
+   <li> A U+002F SOLIDUS character (/). </li>
+
+   <li> The year component of the date. </li>
+
+   <li> A U+0020 SPACE character. </li>
+
+   <li> The hours component of the time. </li>
+
+   <li> A U+003A COLON character (:). </li>
+
+   <li> The minutes component of the time. </li>
+
+   <li> A U+003A COLON character (:). </li>
+
+   <li> The seconds component of the time. </li>
+
+  </ol><p>All the numeric components above, other than the year, must be
+  given as two digits in the range U+0030 DIGIT ZERO (0) to U+0039
+  DIGIT NINE (9) representing the number in base ten, zero-padded if
+  necessary. The year must be given as the shortest possible string of
+  four or more digits in the range U+0030 DIGIT ZERO (0) to U+0039
+  DIGIT NINE (9) representing the number in base ten, zero-padded if
+  necessary.</p>
+
+  <p>The <code><a href="infrastructure.html#document">Document</a></code>'s source file's last modification date
+  and time must be derived from relevant features of the networking
+  protocols used, e.g. from the value of the HTTP <code title="http-last-modified">Last-Modified</code> header of the
+  document, or from metadata in the file system for local files. If
+  the last modification date and time are not known, the attribute
+  must return the current date and time in the above format.</p>
+
+  <hr/></div><dl class="domintro"><dt><var title="">document</var> . <code title="dom-document-compatmode"><a href="#dom-document-compatmode">compatMode</a></code></dt>
+   <dd>
+    <p>In a conforming document, returns the string "<code title="">CSS1Compat</code>". (In <a href="#quirks-mode">quirks mode</a>
+    documents, returns the string "<code title="">BackCompat</code>",
+    but a conforming document can never trigger <a href="#quirks-mode">quirks
+    mode</a>.)</p>
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>A <code><a href="infrastructure.html#document">Document</a></code> is always set to one of three modes:
+  <dfn id="no-quirks-mode">no-quirks mode</dfn>, the default; <dfn id="quirks-mode">quirks mode</dfn>, used
+  typically for legacy documents; and <dfn id="limited-quirks-mode">limited-quirks mode</dfn>,
+  also known as "almost standards" mode. The mode is only ever changed
+  from the default by the <a href="parsing.html#html-parser">HTML parser</a>, based on the
+  presence, absence, or value of the DOCTYPE string.</p>
+
+  <p>The <dfn id="dom-document-compatmode" title="dom-document-compatMode"><code>compatMode</code></dfn> IDL
+  attribute must return the literal string "<code title="">CSS1Compat</code>" unless the document has been set to
+  <a href="#quirks-mode">quirks mode</a> by the <a href="parsing.html#html-parser">HTML parser</a>, in which
+  case it must instead return the literal string "<code title="">BackCompat</code>".</p>
+
+  <hr/></div><dl class="domintro"><dt><var title="">document</var> . <code title="dom-document-charset"><a href="#dom-document-charset">charset</a></code> [ = <var title="">value</var> ]</dt>
+   <dd>
+    <p>Returns the <a href="#document-s-character-encoding">document's character encoding</a>.</p>
+    <p>Can be set, to dynamically change the <a href="#document-s-character-encoding">document's
+    character encoding</a>.</p>
+    <p>New values that are not IANA-registered aliases supported by the user agent are ignored.</p>
+   </dd>
+
+   <dt><var title="">document</var> . <code title="dom-document-characterSet"><a href="#dom-document-characterset">characterSet</a></code></dt>
+   <dd>
+    <p>Returns the <a href="#document-s-character-encoding">document's character encoding</a>.</p>
+   </dd>
+
+   <dt><var title="">document</var> . <code title="dom-document-defaultCharset"><a href="#dom-document-defaultcharset">defaultCharset</a></code></dt>
+   <dd>
+    <p>Returns what might be the user agent's default character
+    encoding. (The user agent might return another character encoding
+    altogether, e.g. to protect the user's privacy, or if the user
+    agent doesn't use a single default encoding.)</p>
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>Documents have an associated <dfn id="document-s-character-encoding" title="document's character&#10;  encoding">character encoding</dfn>. When a <code><a href="infrastructure.html#document">Document</a></code>
+  object is created, the <a href="#document-s-character-encoding">document's character encoding</a>
+  must be initialized to UTF-16. Various algorithms during page
+  loading affect this value, as does the <code title="dom-document-charset"><a href="#dom-document-charset">charset</a></code> setter. <a href="references.html#refsIANACHARSET">[IANACHARSET]</a></p>
+
+  <p>The <dfn id="dom-document-charset" title="dom-document-charset"><code>charset</code></dfn>
+  IDL attribute must, on getting, return the <a href="infrastructure.html#preferred-mime-name">preferred MIME
+  name</a> of the <a href="#document-s-character-encoding">document's character encoding</a>. On
+  setting, if the new value is an IANA-registered alias for a
+  character encoding supported by the user agent, the <a href="#document-s-character-encoding">document's
+  character encoding</a> must be set to that character
+  encoding. (Otherwise, nothing happens.)</p>
+
+  <p>The <dfn id="dom-document-characterset" title="dom-document-characterSet"><code>characterSet</code></dfn>
+  IDL attribute must, on getting, return the <a href="infrastructure.html#preferred-mime-name">preferred MIME
+  name</a> of the <a href="#document-s-character-encoding">document's character encoding</a>.</p>
+
+  <p>The <dfn id="dom-document-defaultcharset" title="dom-document-defaultCharset"><code>defaultCharset</code></dfn>
+  IDL attribute must, on getting, return the <a href="infrastructure.html#preferred-mime-name">preferred MIME
+  name</a> of a character encoding, possibly the user's default
+  encoding, or an encoding associated with the user's current
+  geographical location, or any arbitrary encoding name.</p>
+
+  <hr/></div><dl class="domintro"><dt><var title="">document</var> . <code title="dom-document-readyState"><a href="#dom-document-readystate">readyState</a></code></dt>
+   <dd>
+    <p>Returns "loading" while the <code><a href="infrastructure.html#document">Document</a></code> is loading, and "complete" once it has loaded.</p>
+    <p>The <code title="event-readystatechange">readystatechange</code> event fires on the <code><a href="infrastructure.html#document">Document</a></code> object when this value changes.</p>
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>Each document has a <dfn id="current-document-readiness">current document readiness</dfn>. When a
+  <code><a href="infrastructure.html#document">Document</a></code> object is created, it must have its
+  <a href="#current-document-readiness">current document readiness</a> set to the string "loading"
+  if the document is associated with an <a href="parsing.html#html-parser">HTML parser</a> or an
+  <a href="the-xhtml-syntax.html#xml-parser">XML parser</a>, or to the string "complete"
+  otherwise. Various algorithms during page loading affect this
+  value. When the value is set, the user agent must <a href="webappapis.html#fire-a-simple-event">fire a
+  simple event</a> named <code title="event-readystatechange">readystatechange</code> at the
+  <code><a href="infrastructure.html#document">Document</a></code> object.</p>
+
+  <p>A <code><a href="infrastructure.html#document">Document</a></code> is said to have an <dfn id="active-parser">active
+  parser</dfn> if it is associated with an <a href="parsing.html#html-parser">HTML parser</a> or
+  an <a href="the-xhtml-syntax.html#xml-parser">XML parser</a> that has not yet been <a href="the-end.html#stop-parsing" title="stop&#10;  parsing">stopped</a> or aborted.</p>
+
+  <p>The <dfn id="dom-document-readystate" title="dom-document-readyState"><code>readyState</code></dfn> IDL
+  attribute must, on getting, return the <a href="#current-document-readiness">current document
+  readiness</a>.</p>
+
+  </div><h4 id="dom-tree-accessors"><span class="secno">3.1.4 </span><dfn>DOM tree accessors</dfn></h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><dfn id="the-html-element">The <code>html</code> element</dfn> of a document is the
+  document's root element, if there is one and it's an
+  <code><a href="semantics.html#the-html-element-0">html</a></code> element, or null otherwise.</p><hr/><dl class="domintro"><dt><var title="">document</var> . <code title="dom-document-head"><a href="#dom-document-head">head</a></code></dt>
+   <dd>
+    <p>Returns <a href="#the-head-element">the <code>head</code> element</a>.</p>
+   </dd>
+
+  </dl><p><dfn id="the-head-element">The <code>head</code> element</dfn> of a document is the
+  first <code><a href="semantics.html#the-head-element-0">head</a></code> element that is a child of <a href="#the-html-element">the
+  <code>html</code> element</a>, if there is one, or null
+  otherwise.</p><div class="impl">
+
+  <p>The <dfn id="dom-document-head" title="dom-document-head"><code>head</code></dfn>
+  attribute, on getting, must return <a href="#the-head-element">the <code>head</code>
+  element</a> of the document (a <code><a href="semantics.html#the-head-element-0">head</a></code> element or
+  null).</p>
+
+  </div><hr/><dl class="domintro"><dt><var title="">document</var> . <code title="dom-document-title"><a href="#document.title">title</a></code> [ = <var title="">value</var> ]</dt>
+   <dd>
+    <p>Returns the document's title, as given by <a href="#the-title-element">the
+    <code>title</code> element</a>.</p>
+    <p>Can be set, to update the document's title. If there is no
+    <a href="#the-head-element" title="the head element"><code>head</code> element</a>,
+    the new value is ignored.</p>
+    <p>In SVG documents, the <code>SVGDocument</code> interface's
+    <code title="dom-svg-title">title</code> attribute takes
+    precedence.</p>
+   </dd>
+
+  </dl><p><dfn id="the-title-element">The <code>title</code> element</dfn> of a document is the
+  first <code><a href="semantics.html#the-title-element-0">title</a></code> element in the document (in tree order), if
+  there is one, or null otherwise.</p><div class="impl">
+
+  <p>The <dfn id="document.title" title="dom-document-title"><code>title</code></dfn> attribute must,
+  on getting, run the following algorithm:</p>
+
+  <ol><li><p>If the <a href="infrastructure.html#root-element">root element</a> is an <code><a href="the-map-element.html#svg">svg</a></code>
+   element in the "<code title="">http://www.w3.org/2000/svg</code>"
+   namespace, and the user agent supports SVG, then return the value
+   that would have been returned by the IDL attribute of the same name
+   on the <code>SVGDocument</code> interface. <a href="references.html#refsSVG">[SVG]</a></p></li>
+
+   <li><p>Otherwise, let <var title="">value</var> be a concatenation
+   of the data of all the child <a href="infrastructure.html#text-node" title="text node">text
+   nodes</a> of <a href="#the-title-element">the <code>title</code> element</a>, in
+   <a href="infrastructure.html#tree-order">tree order</a>, or the empty string if <a href="#the-title-element">the
+   <code>title</code> element</a> is null.</p></li>
+
+   <li><p>Replace any sequence of one or more consecutive <a href="common-microsyntaxes.html#space-character" title="space character">space characters</a> in <var title="">value</var> with a single U+0020 SPACE character.</p></li>
+
+   <li><p>Remove any leading or trailing <a href="common-microsyntaxes.html#space-character" title="space&#10;   character">space characters</a> in <var title="">value</var>.</p></li>
+
+   <li><p>Return <var title="">value</var>.</p></li>
+
+  </ol><p>On setting, the following algorithm must be run. Mutation events
+  must be fired as appropriate.</p>
+
+  <ol><li><p>If the <a href="infrastructure.html#root-element">root element</a> is an <code><a href="the-map-element.html#svg">svg</a></code>
+   element in the "<code title="">http://www.w3.org/2000/svg</code>"
+   namespace, and the user agent supports SVG, then the setter must
+   defer to the setter for the IDL attribute of the same name on the
+   <code>SVGDocument</code> interface (if it is readonly, then this
+   will raise an exception). Stop the algorithm here. <a href="references.html#refsSVG">[SVG]</a></p></li>
+
+   <li>If <a href="#the-title-element">the <code>title</code> element</a> is null and
+   <a href="#the-head-element">the <code>head</code> element</a> is null, then the
+   attribute must do nothing. Stop the algorithm here.</li>
+
+   <li>If <a href="#the-title-element">the <code>title</code> element</a> is null, then a
+   new <code><a href="semantics.html#the-title-element-0">title</a></code> element must be created and appended to
+   <a href="#the-head-element">the <code>head</code> element</a>. Let <var title="">element</var> be that element. Otherwise, let <var title="">element</var> be <a href="#the-title-element">the <code>title</code>
+   element</a>.</li>
+
+   <li>The children of <var title="">element</var> (if any) must all
+   be removed.</li>
+
+   <li>A single <code><a href="infrastructure.html#text">Text</a></code> node whose data is the new value
+   being assigned must be appended to <var title="">element</var>.</li>
+
+  </ol><p>The <code title="dom-document-title"><a href="#document.title">title</a></code> attribute on
+  the <code><a href="#htmldocument">HTMLDocument</a></code> interface should shadow the attribute
+  of the same name on the <code>SVGDocument</code> interface when the
+  user agent supports both HTML and SVG. <a href="references.html#refsSVG">[SVG]</a></p>
+
+  </div><hr/><dl class="domintro"><dt><var title="">document</var> . <code title="dom-document-body"><a href="#dom-document-body">body</a></code> [ = <var title="">value</var> ]</dt>
+   <dd>
+    <p>Returns <a href="#the-body-element">the body element</a>.</p>
+    <p>Can be set, to replace <a href="#the-body-element">the body element</a>.</p>
+    <p>If the new value is not a <code><a href="sections.html#the-body-element-0">body</a></code> or <code><a href="obsolete.html#frameset">frameset</a></code> element, this will throw a <code><a href="common-dom-interfaces.html#hierarchy_request_err">HIERARCHY_REQUEST_ERR</a></code> exception.</p>
+   </dd>
+
+  </dl><p><dfn id="the-body-element">The body element</dfn> of a document is the first child of
+  <a href="#the-html-element">the <code>html</code> element</a> that is either a
+  <code><a href="sections.html#the-body-element-0">body</a></code> element or a <code><a href="obsolete.html#frameset">frameset</a></code> element. If
+  there is no such element, it is null. <span class="impl">If the body
+  element is null, then when the specification requires that events be
+  fired at "the body element", they must instead be fired at the
+  <code><a href="infrastructure.html#document">Document</a></code> object.</span></p><div class="impl">
+
+  <p>The <dfn id="dom-document-body" title="dom-document-body"><code>body</code></dfn>
+  attribute, on getting, must return <a href="#the-body-element">the body element</a> of
+  the document (either a <code><a href="sections.html#the-body-element-0">body</a></code> element, a
+  <code><a href="obsolete.html#frameset">frameset</a></code> element, or null). On setting, the following
+  algorithm must be run:</p>
+
+  <ol><!-- if changes are requested:
+    http://lxr.mozilla.org/seamonkey/source/content/html/document/src/nsHTMLDocument.cpp
+    search for ::GetBody ::SetBody
+    http://trac.webkit.org/projects/webkit/browser/trunk/WebCore/html/HTMLDocument.cpp
+    search for ::setBody
+    http://trac.webkit.org/projects/webkit/browser/trunk/WebCore/dom/Document.cpp
+    search for ::body
+   --><li>If the new value is not a <code><a href="sections.html#the-body-element-0">body</a></code> or
+   <code><a href="obsolete.html#frameset">frameset</a></code> element, then raise a
+   <code><a href="common-dom-interfaces.html#hierarchy_request_err">HIERARCHY_REQUEST_ERR</a></code> exception and abort these
+   steps.</li>
+
+   <li>Otherwise, if the new value is the same as <a href="#the-body-element">the body
+   element</a>, do nothing. Abort these steps.</li>
+
+   <li>Otherwise, if <a href="#the-body-element">the body element</a> is not null, then
+   replace that element with the new value in the DOM, as if the root
+   element's <code title="">replaceChild()</code> method had been
+   called with the new value and <a href="#the-body-element" title="the body element">the
+   incumbent body element</a> as its two arguments respectively,
+   then abort these steps.</li>
+
+   <li>Otherwise, <a href="#the-body-element">the body element</a> is null. Append
+   the new value to the root element.</li>
+
+  </ol></div><hr/><dl class="domintro"><dt><var title="">document</var> . <code title="dom-document-images"><a href="#dom-document-images">images</a></code></dt>
+   <dd>
+    <p>Returns an <code><a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a></code> of the <code><a href="embedded-content-1.html#the-img-element">img</a></code> elements in the <code><a href="infrastructure.html#document">Document</a></code>.</p>
+   </dd>
+
+   <dt><var title="">document</var> . <code title="dom-document-embeds"><a href="#dom-document-embeds">embeds</a></code></dt>
+   <dt><var title="">document</var> . <code title="dom-document-plugins"><a href="#dom-document-plugins">plugins</a></code></dt>
+   <dd>
+    <p>Return an <code><a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a></code> of the <code><a href="the-iframe-element.html#the-embed-element">embed</a></code> elements in the <code><a href="infrastructure.html#document">Document</a></code>.</p>
+   </dd>
+
+   <dt><var title="">document</var> . <code title="dom-document-links"><a href="#dom-document-links">links</a></code></dt>
+   <dd>
+    <p>Returns an <code><a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a></code> of the <code><a href="text-level-semantics.html#the-a-element">a</a></code> and <code><a href="the-map-element.html#the-area-element">area</a></code> elements in the <code><a href="infrastructure.html#document">Document</a></code> that have <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code> attributes.</p>
+   </dd>
+
+   <dt><var title="">document</var> . <code title="dom-document-forms"><a href="#dom-document-forms">forms</a></code></dt>
+   <dd>
+    <p>Return an <code><a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a></code> of the <code><a href="forms.html#the-form-element">form</a></code> elements in the <code><a href="infrastructure.html#document">Document</a></code>.</p>
+   </dd>
+
+   <dt><var title="">document</var> . <code title="dom-document-scripts"><a href="#dom-document-scripts">scripts</a></code></dt>
+   <dd>
+    <p>Return an <code><a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a></code> of the <code><a href="scripting-1.html#script">script</a></code> elements in the <code><a href="infrastructure.html#document">Document</a></code>.</p>
+   </dd>
+
+  </dl><div class="impl">
+
+  <!-- these all return the same object each time because of a rule in
+  the collection section -->
+
+  <p>The <dfn id="dom-document-images" title="dom-document-images"><code>images</code></dfn>
+  attribute must return an <code><a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a></code> rooted at the
+  <code><a href="infrastructure.html#document">Document</a></code> node, whose filter matches only
+  <code><a href="embedded-content-1.html#the-img-element">img</a></code> elements.</p>
+
+  <p>The <dfn id="dom-document-embeds" title="dom-document-embeds"><code>embeds</code></dfn>
+  attribute must return an <code><a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a></code> rooted at the
+  <code><a href="infrastructure.html#document">Document</a></code> node, whose filter matches only
+  <code><a href="the-iframe-element.html#the-embed-element">embed</a></code> elements.</p>
+
+  <p>The <dfn id="dom-document-plugins" title="dom-document-plugins"><code>plugins</code></dfn>
+  attribute must return the same object as that returned by the <code title="dom-document-embeds"><a href="#dom-document-embeds">embeds</a></code> attribute.</p>
+
+  <p>The <dfn id="dom-document-links" title="dom-document-links"><code>links</code></dfn>
+  attribute must return an <code><a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a></code> rooted at the
+  <code><a href="infrastructure.html#document">Document</a></code> node, whose filter matches only <code><a href="text-level-semantics.html#the-a-element">a</a></code>
+  elements with <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code>
+  attributes and <code><a href="the-map-element.html#the-area-element">area</a></code> elements with <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code> attributes.</p>
+
+  <p>The <dfn id="dom-document-forms" title="dom-document-forms"><code>forms</code></dfn>
+  attribute must return an <code><a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a></code> rooted at the
+  <code><a href="infrastructure.html#document">Document</a></code> node, whose filter matches only
+  <code><a href="forms.html#the-form-element">form</a></code> elements.</p>
+
+  <p>The <dfn id="dom-document-scripts" title="dom-document-scripts"><code>scripts</code></dfn>
+  attribute must return an <code><a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a></code> rooted at the
+  <code><a href="infrastructure.html#document">Document</a></code> node, whose filter matches only
+  <code><a href="scripting-1.html#script">script</a></code> elements.</p>
+
+  <hr/></div><dl class="domintro"><dt><var title="">collection</var> = <var title="">document</var> . <code title="dom-document-getElementsByName"><a href="#dom-document-getelementsbyname">getElementsByName</a></code>(<var title="">name</var>)</dt>
+   <dd>
+    <p>Returns a <code><a href="infrastructure.html#nodelist">NodeList</a></code> of elements in the
+    <code><a href="infrastructure.html#document">Document</a></code> that have a <code title="">name</code>
+    attribute with the value <var title="">name</var>.</p>
+   </dd>
+
+   <dt><var title="">collection</var> = <var title="">document</var> . <code title="dom-document-getElementsByClassName"><a href="#dom-document-getelementsbyclassname">getElementsByClassName(<var title="">classes</var>)</a></code></dt>
+   <dt><var title="">collection</var> = <var title="">element</var> . <code title="dom-getElementsByClassName"><a href="#dom-getelementsbyclassname">getElementsByClassName(<var title="">classes</var>)</a></code></dt>
+   <dd>
+    <p>Returns a <code><a href="infrastructure.html#nodelist">NodeList</a></code> of the elements in the object
+    on which the method was invoked (a <code><a href="infrastructure.html#document">Document</a></code> or an
+    <code><a href="infrastructure.html#element">Element</a></code>) that have all the classes given by <var title="">classes</var>.</p>
+    <p>The <var title="">classes</var> argument is interpreted as a
+    space-separated list of classes.</p>
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>The <dfn id="dom-document-getelementsbyname" title="dom-document-getElementsByName"><code>getElementsByName(<var title="">name</var>)</code></dfn> method takes a string <var title="">name</var>, and must return a <a href="infrastructure.html#live">live</a>
+  <code><a href="infrastructure.html#nodelist">NodeList</a></code> containing all the <a href="infrastructure.html#html-elements">HTML elements</a>
+  in that document that have a <code title="">name</code> attribute
+  whose value is equal to the <var title="">name</var> argument (in a
+  <a href="infrastructure.html#case-sensitive">case-sensitive</a> manner), in <a href="infrastructure.html#tree-order">tree order</a>.
+  When the method is invoked on a <code><a href="infrastructure.html#document">Document</a></code> object again
+  with the same argument, the user agent may return the same as the
+  object returned by the earlier call. In other cases, a new
+  <code><a href="infrastructure.html#nodelist">NodeList</a></code> object must be returned.</p>
+
+  <p>The <dfn id="dom-document-getelementsbyclassname" title="dom-document-getElementsByClassName"><code>getElementsByClassName(<var title="">classNames</var>)</code></dfn> method takes a string that
+  contains a <a href="common-microsyntaxes.html#set-of-space-separated-tokens">set of space-separated tokens</a> representing
+  classes. When called, the method must return a <a href="infrastructure.html#live">live</a>
+  <code><a href="infrastructure.html#nodelist">NodeList</a></code> object containing all the elements in the
+  document, in <a href="infrastructure.html#tree-order">tree order</a>, that have all the classes
+  specified in that argument, having obtained the classes by <a href="common-microsyntaxes.html#split-a-string-on-spaces" title="split a string on spaces">splitting a string on
+  spaces</a>. (Duplicates are ignored.) If there are no tokens
+  specified in the argument, then the method must return an empty
+  <code><a href="infrastructure.html#nodelist">NodeList</a></code>. If the document is in <a href="#quirks-mode">quirks
+  mode</a>, then the comparisons for the classes must be done in an
+  <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> manner, otherwise, the
+  comparisons must be done in a <a href="infrastructure.html#case-sensitive">case-sensitive</a> manner.
+  When the method is invoked on a <code><a href="infrastructure.html#document">Document</a></code> object again
+  with the same argument, the user agent may return the same object as
+  the object returned by the earlier call. In other cases, a new
+  <code><a href="infrastructure.html#nodelist">NodeList</a></code> object must be returned.</p>
+
+  <p>The <dfn id="dom-getelementsbyclassname" title="dom-getElementsByClassName"><code>getElementsByClassName(<var title="">classNames</var>)</code></dfn> method on the
+  <code><a href="elements.html#htmlelement">HTMLElement</a></code> interface must return a <a href="infrastructure.html#live">live</a>
+  <code><a href="infrastructure.html#nodelist">NodeList</a></code> with the nodes that the
+  <code><a href="#htmldocument">HTMLDocument</a></code> <code title="dom-document-getElementsByClassName"><a href="#dom-document-getelementsbyclassname">getElementsByClassName()</a></code>
+  method would return when passed the same argument(s), excluding any
+  elements that are not descendants of the <code><a href="elements.html#htmlelement">HTMLElement</a></code>
+  object on which the method was invoked.
+  When the method is invoked on an <code><a href="elements.html#htmlelement">HTMLElement</a></code> object
+  again with the same argument, the user agent may return the same
+  object as the object returned by the earlier call. In other cases, a
+  new <code><a href="infrastructure.html#nodelist">NodeList</a></code> object must be returned.</p>
+
+  </div><p>HTML, SVG, and MathML elements define which classes they are in
+  by having an attribute with no namespace with the name <code title="">class</code> containing a space-separated list of classes
+  to which the element belongs. Other specifications may also allow
+  elements in their namespaces to be labeled as being in specific
+  classes.</p><div class="example">
+
+   <p>Given the following XHTML fragment:</p>
+
+   <pre>&lt;div id="example"&gt;
+ &lt;p id="p1" class="aaa bbb"/&gt;
+ &lt;p id="p2" class="aaa ccc"/&gt;
+ &lt;p id="p3" class="bbb ccc"/&gt;
+&lt;/div&gt;</pre>
+
+   <p>A call to <code title="">document.getElementById('example').getElementsByClassName('aaa')</code>
+   would return a <code><a href="infrastructure.html#nodelist">NodeList</a></code> with the two paragraphs <code title="">p1</code> and <code title="">p2</code> in it.</p>
+
+   <p>A call to <code title="">getElementsByClassName('ccc&#xA0;bbb')</code> would only
+   return one node, however, namely <code title="">p3</code>. A call
+   to <code title="">document.getElementById('example').getElementsByClassName('bbb&#xA0;&#xA0;ccc&#xA0;')</code>
+   would return the same thing.</p>
+
+   <p>A call to <code title="">getElementsByClassName('aaa,bbb')</code> would return no
+   nodes; none of the elements above are in the "aaa,bbb" class.</p>
+
+  </div><!-- v2:
+>         * xGetParentElementByClassName(rootElement, className, tagName) -
+> Navigates upwards until we hit a parent element with the given class name and
+> optional tag name.
+--><div class="impl">
+
+  <hr/><p>The <code><a href="#htmldocument">HTMLDocument</a></code> interface <span title="support&#10;  named properties">supports named properties</span>. The <span>names
+  of the supported named properties</span> at any moment consist of
+  the values of the <code title="attr-name">name</code> content
+  attributes of all the <code><a href="obsolete.html#the-applet-element">applet</a></code>, <code><a href="the-iframe-element.html#the-embed-element">embed</a></code>,
+  <code><a href="forms.html#the-form-element">form</a></code>, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <code><a href="embedded-content-1.html#the-img-element">img</a></code>, and
+  <a href="#fallback-free">fallback-free</a> <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements in the
+  <code><a href="infrastructure.html#document">Document</a></code> that have <code title="attr-name">name</code>
+  content attributes, and the values of the <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content attributes of all the
+  <code><a href="obsolete.html#the-applet-element">applet</a></code> and <a href="#fallback-free">fallback-free</a>
+  <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements in the <code><a href="infrastructure.html#document">Document</a></code> that have
+  <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content attributes, and the values
+  of the <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content attributes of all the
+  <code><a href="embedded-content-1.html#the-img-element">img</a></code> elements in the <code><a href="infrastructure.html#document">Document</a></code> that have
+  both <code title="attr-name">name</code> content attributes and
+  <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content attributes.</p>
+
+  <p>When <dfn id="dom-document-nameditem" title="dom-document-namedItem">the
+  <code>HTMLDocument</code> object is indexed for property
+  retrieval</dfn> using a name <var title="">name</var>, then the user
+  agent must return the value obtained using the following steps:</p>
+
+  <ol><li>
+
+    <p>Let <var title="">elements</var> be the list of <a href="#dom-document-nameditem-filter" title="dom-document-namedItem-filter">named elements</a> with
+    the name <var title="">name</var> in the <code><a href="infrastructure.html#document">Document</a></code>.
+
+    </p><p class="note">There will be at least one such element, by
+    definition.<!-- (If there wasn't, then this algorithm wouldn't
+    have been invoked by Web IDL.) --></p>
+
+   </li>
+
+   <li>
+
+    <p>If <var title="">elements</var> has only one element, and that
+    element is an <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> element, then return the
+    <code><a href="browsers.html#windowproxy">WindowProxy</a></code> object of the <a href="browsers.html#nested-browsing-context">nested browsing
+    context</a> represented by that <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> element,
+    and abort these steps.</p>
+
+   </li>
+
+   <li>
+
+    <p>Otherwise, if <var title="">elements</var> has only one
+    element, return that element and abort these steps.</p>
+
+   </li>
+
+   <li>
+
+    <p>Otherwise return an <code><a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a></code> rooted at the
+    <code><a href="infrastructure.html#document">Document</a></code> node, whose filter matches only <a href="#dom-document-nameditem-filter" title="dom-document-namedItem-filter">named elements</a> with
+    the name <var title="">name</var>.</p> <!-- the same one each time
+    is returned, because of the rule under collections -->
+
+   </li>
+
+  <!--
+  Note that this named getter overrides built-in properties, as in:
+     http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E%0D%0A...%3Ciframe%20name%3Dbody%3E%3C%2Fiframe%3E%3Cscript%3Ew(document.body)%3C%2Fscript%3E
+  This is what the "OverrideBuiltins" bit means in the IDL.
+  -->
+
+  </ol><p><dfn id="dom-document-nameditem-filter" title="dom-document-nameditem-filter">Named elements</dfn>
+  with the name <var title="">name</var>, for the purposes of the
+  above algorithm, are those that are either:</p>
+
+  <ul><li><code><a href="obsolete.html#the-applet-element">applet</a></code>, <code><a href="the-iframe-element.html#the-embed-element">embed</a></code>, <code><a href="forms.html#the-form-element">form</a></code>,
+   <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <code><a href="embedded-content-1.html#the-img-element">img</a></code>, or
+   <a href="#fallback-free">fallback-free</a> <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements that have a
+   <code title="attr-name">name</code> content attribute whose value
+   is <var title="">name</var>, or</li>
+
+   <li><code><a href="obsolete.html#the-applet-element">applet</a></code> or <a href="#fallback-free">fallback-free</a>
+   <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements that have an <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content attribute whose value is <var title="">name</var>, or</li>
+
+   <li><code><a href="embedded-content-1.html#the-img-element">img</a></code> elements that have an <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content attribute whose value is <var title="">name</var>, and that have a <code title="attr-name">name</code> content attribute present also.</li>
+
+  </ul><p>An <code><a href="the-iframe-element.html#the-object-element">object</a></code> element is said to be
+  <dfn id="fallback-free">fallback-free</dfn> if it has no <code><a href="the-iframe-element.html#the-object-element">object</a></code> or
+  <code><a href="the-iframe-element.html#the-embed-element">embed</a></code> descendants.</p>
+
+  </div><hr/><p class="note">The <code title="dom-document-dir"><a href="elements.html#dom-document-dir">dir</a></code>
+  attribute on the <code><a href="#htmldocument">HTMLDocument</a></code> interface is defined
+  along with the <code title="attr-dir"><a href="elements.html#the-dir-attribute">dir</a></code> content
+  attribute.</p><h4 id="creating-documents"><span class="secno">3.1.5 </span>Creating documents</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><a href="#xml-documents">XML documents</a> can be created from script using the
+  <code title="dom-DOMImplementation-createDocument"><a href="infrastructure.html#dom-domimplementation-createdocument">createDocument()</a></code>
+  method on the <code><a href="infrastructure.html#domimplementation">DOMImplementation</a></code> interface.</p><p><a href="#html-documents">HTML documents</a> can be created using the <code title="dom-DOMHTMLImplementation-createHTMLDocument"><a href="#dom-domhtmlimplementation-createhtmldocument">createHTMLDocument()</a></code>
+  method:</p><pre class="idl">[Supplemental, NoInterfaceObject]
+interface <dfn id="domhtmlimplementation">DOMHTMLImplementation</dfn> {
+  <a href="infrastructure.html#document">Document</a> <a href="#dom-domhtmlimplementation-createhtmldocument" title="dom-DOMHTMLImplementation-createHTMLDocument">createHTMLDocument</a>(in DOMString title);
+};
+<a href="infrastructure.html#domimplementation">DOMImplementation</a> implements <a href="#domhtmlimplementation">DOMHTMLImplementation</a>;</pre><dl class="domintro"><dt><var title="">document</var> = <var title="">document</var> . <code title="dom-document-implementation">implementation</code> . <code title="dom-DOMHTMLImplementation-createHTMLDocument"><a href="#dom-domhtmlimplementation-createhtmldocument">createHTMLDocument</a></code>( <var title="">title</var> )</dt>
+   <dd>
+
+    <p>Returns a new <code><a href="infrastructure.html#document">Document</a></code>, with a basic DOM already
+    constructed with an appropriate <code><a href="semantics.html#the-title-element-0">title</a></code> element.</p>
+
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>The <dfn id="dom-domhtmlimplementation-createhtmldocument" title="dom-DOMHTMLImplementation-createHTMLDocument"><code>createHTMLDocument(<var title="">title</var>)</code></dfn> method, when invoked, must run the
+  following steps:</p>
+
+  <ol><li><p>Let <var title="">doc</var> be a newly created
+   <code><a href="infrastructure.html#document">Document</a></code> object.</p></li>
+
+   <li><p>Mark <var title="">doc</var> as being an <a href="#html-documents" title="HTML&#10;   documents">HTML document</a>.</p></li>
+
+   <li><p>Create a <code><a href="infrastructure.html#documenttype">DocumentType</a></code> node with the <code title="">name</code> attribute set to the string "<code title="">html</code>", and the other attributes specific to
+   <code><a href="infrastructure.html#documenttype">DocumentType</a></code> objects set to the empty string, null,
+   and empty lists, as appropriate. Append the newly created node to
+   <var title="">doc</var>.</p></li>
+
+   <li><p>Create an <code><a href="semantics.html#the-html-element-0">html</a></code> element, and append it to <var title="">doc</var>.</p></li>
+
+   <li><p>Create a <code><a href="semantics.html#the-head-element-0">head</a></code> element, and append it to the
+   <code><a href="semantics.html#the-html-element-0">html</a></code> element created in the previous step.</p>
+
+   </li><li><p>Create a <code><a href="semantics.html#the-title-element-0">title</a></code> element, and append it to the
+   <code><a href="semantics.html#the-head-element-0">head</a></code> element created in the previous step.</p>
+
+   </li><li><p>Create a <code><a href="infrastructure.html#text">Text</a></code> node, and set its <code title="">data</code> attribute to the string given by the method's
+   argument (which could be the empty string). Append it to the
+   <code><a href="semantics.html#the-title-element-0">title</a></code> element created in the previous step.</p>
+
+   </li><li><p>Create a <code><a href="sections.html#the-body-element-0">body</a></code> element, and append it to the
+   <code><a href="semantics.html#the-html-element-0">html</a></code> element created in the earlier step.</p>
+
+   </li><li><p>Return <var title="">doc</var>.</p></li>
+
+  </ol></div><div class="impl"> <!-- very deprecated API; use XHR instead -->
+
+  <h4 id="loading-xml-documents"><span class="secno">3.1.6 </span>Loading XML documents</h4>
+
+  <p>A <code><a href="infrastructure.html#document">Document</a></code> object that is an <a href="#xml-documents" title="XML&#10;  documents">XML document</a> that was created by the <code title="dom-DOMImplementation-createDocument"><a href="infrastructure.html#dom-domimplementation-createdocument">DOMImplementation.createDocument()</a></code>
+  factory method must also implement the
+  <code><a href="#xmldocumentloader">XMLDocumentLoader</a></code> interface:</p>
+
+  <pre class="idl">[Supplemental, NoInterfaceObject]
+interface <dfn id="xmldocumentloader">XMLDocumentLoader</dfn> {
+<!--SYNCLOAD           attribute boolean <span title="dom-XMLDocumentLoader-async">async</span>;
+-->  boolean <a href="#dom-xmldocumentloader-load" title="dom-XMLDocumentLoader-load">load</a>(in DOMString url);
+};</pre>
+
+  <!-- http://software.hixie.ch/utilities/js/live-dom-viewer/saved/576 -->
+  <!-- http://software.hixie.ch/utilities/js/live-dom-viewer/saved/577 -->
+  <!-- http://www.hixie.ch/tests/adhoc/dom/level0/document/load/001.html -->
+
+<!--SYNCLOAD
+  <p>The <dfn
+  title="dom-XMLDocumentLoader-async"><code>async</code></dfn>
+  attribute must initially be true. On getting, it must return its
+  current value. On setting, its current value must be changed to the
+  new value.</p>
+-->
+  <p>The <dfn id="dom-xmldocumentloader-load" title="dom-XMLDocumentLoader-load"><code>load(<var title="">url</var>)</code></dfn> method must run the following
+  steps:</p>
+
+  <ol><!--SYNCLOAD
+   <li><p>If <code title="dom-XMLDocumentLoader-async">async</code> is
+   set to false and the <var title="">document</var> is
+   <span>load-blocked</span>, return false and abort these
+   steps.</p></li>
+--><li><p>Let <var title="">document</var> be the <code><a href="infrastructure.html#document">Document</a></code>
+   object on which the method was invoked.</p></li>
+
+   <li><p>If the <a href="origin-0.html#origin">origin</a> of <var title="">url</var> is not
+   the same as the <a href="origin-0.html#origin">origin</a> of <var title="">document</var>, throw a <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code>
+   exception.</p></li>
+<!--SYNCLOAD
+   <li><p>If <code title="dom-XMLDocumentLoader-async">async</code> is
+   set to false, let <var title="">document</var> be
+   <dfn>load-blocked</dfn>.</p></li>
+-->
+   <li><p>Remove all child nodes of <var title="">document</var>,
+   without firing any mutation events.</p></li> <!-- as of 2010-07-26,
+   only Opera fired mutation events here. -->
+
+   <li><p>Set the <a href="#current-document-readiness">current document readiness</a> of <var title="">document</var> to "loading".</p></li>
+
+   <li><p><!--SYNCLOAD If <code title="dom-XMLDocumentLoader-async">async</code> is
+   set to true, then run--> Run the remainder of these steps asynchronously,
+   and return true from the method.<!--SYNCLOAD Otherwise, continue running these
+   steps without yet returning.--></p></li>
+
+   <li><p>Let <var title="">result</var> be an <code><a href="infrastructure.html#document">Document</a></code>
+   object.</p></li>
+
+   <li><p>Let <var title="">success</var> be false.</p></li>
+
+   <li><p><a href="fetching-resources.html#fetch">Fetch</a> <var title="">url</var> from the
+   <a href="origin-0.html#origin">origin</a> of <var title="">document</var>, with the <i title="">synchronous flag</i> set and the <i title="">force
+   same-origin flag</i> set.</p></li>
+
+   <li>
+
+    <p>If the fetch attempt was successful, and the resource's <a href="fetching-resources.html#content-type" title="Content-Type">Content-Type metadata</a> is an <a href="infrastructure.html#xml-mime-type">XML
+    MIME type</a>, then run these substeps:</p>
+
+    <ol><li><p>Create a new <a href="the-xhtml-syntax.html#xml-parser">XML parser</a> associated with the
+     <var title="">result</var> document.</p></li>
+
+     <li><p>Pass this parser the fetched document.</p></li> <!-- no
+     worries about scripts running; there's no browsing context for
+     the document so scripts are automatically disabled -->
+
+     <li><p>If there is an XML well-formedness or XML namespace
+     well-formedness error, then remove all child nodes from <var title="">result</var>. Otherwise let <var title="">success</var>
+     be true.</p></li>
+
+    </ol></li>
+
+   <li>
+
+    <p><!--SYNCLOAD If <code title="dom-XMLDocumentLoader-async">async</code> is
+    set to true, then <span>queue--> <a href="webappapis.html#queue-a-task">Queue a task</a> to run the following
+    steps. <!--SYNCLOAD Otherwise, run them synchronously.--></p>
+
+    <ol><li><p>Set the <a href="#current-document-readiness">current document readiness</a> of <var title="">document</var> to "complete".</p></li>
+
+     <li><p>Replace all the children of <var title="">document</var>
+     by the children of <var title="">result</var> (even if it has no
+     children), firing mutation events as if a
+     <code><a href="infrastructure.html#documentfragment">DocumentFragment</a></code> containing the new children had
+     been inserted.</p></li> <!-- as of 2010-07-26, both Firefox and
+     Opera fired mutation events here. -->
+
+     <!-- If the document doesn't have no nodes here, at time of
+     writing, Opera would leave the new nodes and drop the parsed
+     ones, while Firefox would basically abort instead, failing to
+     fire the 'load' event -->
+
+     <li><p><a href="webappapis.html#fire-a-simple-event">Fire a simple event</a> named <code title="event-load">load</code> at <var title="">document</var>.</p></li>
+
+    </ol></li>
+<!--SYNCLOAD
+   <li><p>If <code title="dom-XMLDocumentLoader-async">async</code>
+   was set to false when this algorithm started, let <var
+   title="">document</var> be no longer
+   <span>load-blocked</span>.</p></li>
+
+   <li><p>If <code title="dom-XMLDocumentLoader-async">async</code>
+   was set to false when this algorithm started, return <var
+   title="">success</var>.</p></li>
+-->
+  </ol></div></body></html>

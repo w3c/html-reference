@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<div xmlns="http://www.w3.org/1999/xhtml" class="examples">
+<div class="example">
+   <p>Only one square appears to be drawn in the following example:</p>
+   <pre><![CDATA[
+  // canvas is a reference to a <canvas> element
+  var context = canvas.getContext('2d');
+  context.fillRect(0,0,50,50);
+  canvas.setAttribute('width', '300'); // clears the canvas
+  context.fillRect(0,100,50,50);
+  canvas.width = canvas.width; // clears the canvas
+  context.fillRect(100,0,50,50); // only this square remains]]></pre>
+  </div>
+<div class="example">
+
+   <p>The data returned by <code title="dom-context-2d-getImageData"><a href="#dom-context-2d-getimagedata">getImageData()</a></code> is at the
+   resolution of the canvas backing store, which is likely to not be
+   one device pixel to each CSS pixel if the display used is a high
+   resolution display.</p>
+
+   <p>In the following example, the script generates an
+   <code><a href="#imagedata">ImageData</a></code> object so that it can draw onto it.</p>
+
+   <pre><![CDATA[// canvas is a reference to a <canvas> element
+var context = canvas.getContext('2d');
+
+// create a blank slate
+var data = context.createImageData(canvas.width, canvas.height);
+
+// create some plasma
+FillPlasma(data, 'green'); // green plasma
+
+// add a cloud to the plasma
+AddCloud(data, data.width/2, data.height/2); // put a cloud in the middle
+
+// paint the plasma+cloud on the canvas
+context.putImageData(data, 0, 0);
+
+// support methods
+function FillPlasma(data, color) { ... }
+function AddCloud(data, x, y) { ... }]]></pre>
+
+  </div>
+<div class="example">
+
+   <p>Here is an example of using <code title="dom-context-2d-getImageData"><a href="#dom-context-2d-getimagedata">getImageData()</a></code> and <code title="dom-context-2d-putImageData"><a href="#dom-context-2d-putimagedata">putImageData()</a></code> to
+   implement an edge detection filter.</p>
+
+   <pre><![CDATA[<!DOCTYPE HTML>
+<html>
+ <head>
+  <title>Edge detection demo</title>
+  <script>
+   var image = new Image();
+   function init() {
+     image.onload = demo;
+     image.src = "image.jpeg";
+   }
+   function demo() {
+     var canvas = document.getElementsByTagName('canvas')[0];
+     var context = canvas.getContext('2d');
+
+     // draw the image onto the canvas
+     context.drawImage(image, 0, 0);
+
+     // get the image data to manipulate
+     var input = context.getImageData(0, 0, canvas.width, canvas.height);
+
+     // get an empty slate to put the data into
+     var output = context.createImageData(canvas.width, canvas.height);
+
+     // alias some variables for convenience
+     // notice that we are using input.width and input.height here
+     // as they might not be the same as canvas.width and canvas.height
+     // (in particular, they might be different on high-res displays)
+     var w = input.width, h = input.height;
+     var inputData = input.data;
+     var outputData = output.data;
+
+     // edge detection
+     for (var y = 1; y < h-1; y += 1) {
+       for (var x = 1; x < w-1; x += 1) {
+         for (var c = 0; c < 3; c += 1) {
+           var i = (y*w + x)*4 + c;
+           outputData[i] = 127 + -inputData[i - w*4 - 4] -   inputData[i - w*4] - inputData[i - w*4 + 4] +
+                                 -inputData[i - 4]       + 8*inputData[i]       - inputData[i + 4] +
+                                 -inputData[i + w*4 - 4] -   inputData[i + w*4] - inputData[i + w*4 + 4];
+         }
+         outputData[(y*w + x)*4 + 3] = 255; // alpha
+       }
+     }
+
+     // put the image data back after manipulation
+     context.putImageData(output, 0, 0);
+   }
+  </script>
+ </head>
+ <body onload="init()">
+  <canvas></canvas>
+ </body>
+</html>]]></pre>
+
+  </div>
+
+</div>

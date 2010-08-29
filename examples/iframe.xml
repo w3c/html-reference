@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<div xmlns="http://www.w3.org/1999/xhtml" class="examples">
+<div class="example">
+
+   <p>In this example, some completely-unknown, potentially hostile,
+   user-provided HTML content is embedded in a page. Because it is
+   sandboxed, it is treated by the user agent as being from a unique
+   origin, despite the content being served from the same site. Thus
+   it is affected by all the normal cross-site restrictions. In
+   addition, the embedded page has scripting disabled, plugins
+   disabled, forms disabled, and it cannot navigate any frames or
+   windows other than itself (or any frames or windows it itself
+   embeds).</p>
+
+   <pre><![CDATA[<p>We're not scared of you! Here is your content, unedited:</p>
+<iframe sandbox src="getusercontent.cgi?id=12193"></iframe>]]></pre>
+
+   <p>Note that cookies are still send to the server in the <code title="">getusercontent.cgi</code> request, though they are not
+   visible in the <code title="dom-document-cookies">document.cookies</code> DOM
+   attribute.</p>
+
+  </div>
+<div class="example">
+
+   <p>In this example, a gadget from another site is embedded. The
+   gadget has scripting and forms enabled, and the origin sandbox
+   restrictions are lifted, allowing the gadget to communicate with
+   its originating server. The sandbox is still useful, however, as it
+   disables plugins and popups, thus reducing the risk of the user
+   being exposed to malware and other annoyances.</p>
+
+   <pre><![CDATA[<iframe sandbox="allow-same-origin allow-forms allow-scripts"
+        src="http://maps.example.com/embedded.html"></iframe>]]></pre>
+
+  </div>
+<div class="example">
+
+   <p>In this example, the site's navigation is embedded using a
+   client-side include using an <code><a href="#the-iframe-element">iframe</a></code>. Any links in the
+   <code><a href="#the-iframe-element">iframe</a></code> will, in new user agents, be automatically
+   opened in the <code><a href="#the-iframe-element">iframe</a></code>'s parent browsing context; for
+   legacy user agents, the site could also include a <code><a href="#the-base-element">base</a></code>
+   element with a <code title="attr-base-target"><a href="#attr-base-target">target</a></code>
+   attribute with the value <code title="">_parent</code>. Similarly,
+   in new user agents the styles of the parent page will be
+   automatically applied to the contents of the frame, but to support
+   legacy user agents authors might wish to include the styles
+   explicitly.</p>
+
+   <pre><![CDATA[<nav><iframe seamless src="nav.include.html"></iframe></nav>]]></pre>
+
+  </div>
+
+</div>

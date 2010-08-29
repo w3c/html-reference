@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<div xmlns="http://www.w3.org/1999/xhtml" class="examples">
+<div class="example">
+
+   <p>If a document contains style sheet links labeled as follows:</p>
+
+   <pre><![CDATA[<link rel="stylesheet" href="A" type="text/plain">
+<link rel="stylesheet" href="B" type="text/css">
+<link rel="stylesheet" href="C">]]></pre>
+
+   <p>...then a compliant UA that supported only CSS style sheets
+   would fetch the B and C files, and skip the A file (since
+   <code>text/plain</code> is not the MIME type for CSS style
+   sheets).</p>
+
+   <p>For files B and C, it would then check the actual types returned
+   by the server. For those that are sent as <code>text/css</code>, it
+   would apply the styles, but for those labeled as
+   <code>text/plain</code>, or any other type, it would not.</p>
+
+   <p>If one the two files was returned without a
+   <a href="#content-type-0">Content-Type</a> metadata, or with a syntactically
+   incorrect type like <code title="">Content-Type: "null"</code>, then the default type
+   for <code title="rel-stylesheet"><a href="#link-type-stylesheet">stylesheet</a></code> links would kick
+   in. Since that default type is <code title="">text/css</code>, the
+   style sheet <em>would</em> nonetheless be applied.</p>
+
+  </div>
+
+</div>

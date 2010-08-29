@@ -1,0 +1,89 @@
+#!/usr/bin/perl
+use CSS;
+use Data::Dumper;
+open(FILE,$ARGV[0]);
+my $incomment = 0;
+my $lines = "";
+while (<FILE>) {
+  if (/\@namespace/) {
+    next;
+  }
+  if (/\*\//) {
+    $incomment = 0;
+    if (/^\s*\*\/\s*$/ || /^\s*\/\*/) {
+      next;
+    }
+  }
+  if (/^\s*\/\*/) {
+    $incomment = 1;
+    next;
+  }
+  if (! $incomment eq 1) {
+  $lines .= $_;
+  }
+}
+my $css = CSS->new;
+$css->read_string($lines);
+print "<css>\n";
+for my $style (@{$css->{styles}}) {
+  print "  <rule>";
+  for my $selector (@{$style->{selectors}}) {
+    $selector_name = $selector->{name};
+    next if ($selector_name =~ /::/);
+    next if ($selector_name =~ /-webkit-autofill/);
+    next if ($selector_name =~ /audio|video/);
+    next if ($selector_name =~ /button|input|keygen|option|optgroup|select|textarea/);
+    $selector_name =~ s/([^\[]+)(\[[^\]]+])/$1<span class="predicate">$2<\/span>/g;
+    $selector_name =~ s/([^:]+)(:.+)/$1<span class="pseudo">$2<\/span>/g;
+    SWITCH: {
+      if ($selector_name =~ /-webkit-any-link:active/) {
+        print "    <selector>a<span class='pseudo'>:link:active</span></selector>\n";
+        print "    <selector>a<span class='pseudo'>:visited:active</span></selector>\n";
+        last SWITCH;
+      }
+      if ($selector_name =~ /-webkit-any-link/) {
+        print "    <selector>a<span class='pseudo'>:link</span></selector>\n";
+        print "    <selector>a<span class='pseudo'>:visited</span></selector>\n";
+        last SWITCH;
+      }
+      print "    <selector>" . $selector_name . "</selector>\n";
+    }
+  }
+  print "    <properties>\n";
+  for my $property (@{$style->{properties}}) {
+    for my $values (@{$property->{values}}) {
+      my $propname = $property->{property};
+      next if ($propname =~ /-webkit-rtl-ordering/);
+      next if ($propname =~ /-webkit-text-security/);
+      next if ($propname =~ /-webkit-box-align/);
+      next if ($propname =~ /-webkit-box-orient/);
+      next if ($propname =~ /-webkit-box-sizing/);
+      next if ($propname =~ /-webkit-appearance/);
+      next if ($propname =~ /-webkit-user-select/);
+      $propname =~ s/-webkit-border-radius/border-radius/g;
+      $propname =~ s/-webkit-margin-start/margin-start/g;
+      $propname =~ s/-webkit-padding-start/padding-start/g;
+      my $value = $values->{value};
+      $value =~ s/__q//g;
+      $value =~ s/darkGray/<i class="vendor-value">(internal value)<\/i>/g;
+      $value =~ s/ButtonFace/<i class="vendor-value">(internal value)<\/i>/g;
+      $value =~ s/ButtonText/<i class="vendor-value">(internal value)<\/i>/g;
+      $value =~ s/GrayText/<i class="vendor-value">(internal value)<\/i>/g;
+      $value =~ s/ThreeDFace/<i class="vendor-value">(internal value)<\/i>/g;
+      $value =~ s/-webkit-center/center/g;
+      $value =~ s/-webkit-small-control/small/g;
+      $value =~ s/initial/<i class="vendor-value">(internal value)<\/i>/g;
+      $value =~ s/-webkit-auto/<i class="vendor-value">(internal value)<\/i>/g;
+      $value =~ s/-webkit-activelink/<i class="vendor-value">(internal value)<\/i>/g;
+      $value =~ s/-webkit-link/<i class="vendor-value">(internal value)<\/i>/g;
+      print "      <property>\n";
+      print "        <name>" . $propname . "</name>\n";
+      print "        <value>" . $value . "</value>\n";
+      print "      </property>\n";
+    }
+  }
+  print "    </properties>\n";
+  print "  </rule>\n";
+}
+print "</css>\n";
+

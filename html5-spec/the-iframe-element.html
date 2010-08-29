@@ -1,0 +1,2068 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
+<!-- when publishing, change bits marked ZZZ -->
+<html lang="en-US-x-Hixie" class="split chapter"><head><title>4.8.2 The iframe element &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+   pre { margin-left: 2em; white-space: pre-wrap; }
+   h2 { margin: 3em 0 1em 0; }
+   h3 { margin: 2.5em 0 1em 0; }
+   h4 { margin: 2.5em 0 0.75em 0; }
+   h5, h6 { margin: 2.5em 0 1em; }
+   h1 + h2, h1 + h2 + h2 { margin: 0.75em 0 0.75em; }
+   h2 + h3, h3 + h4, h4 + h5, h5 + h6 { margin-top: 0.5em; }
+   p { margin: 1em 0; }
+   hr:not(.top) { display: block; background: none; border: none; padding: 0; margin: 2em 0; height: auto; }
+   dl, dd { margin-top: 0; margin-bottom: 0; }
+   dt { margin-top: 0.75em; margin-bottom: 0.25em; clear: left; }
+   dt + dt { margin-top: 0; }
+   dd dt { margin-top: 0.25em; margin-bottom: 0; }
+   dd p { margin-top: 0; }
+   dd dl + p { margin-top: 1em; }
+   dd table + p { margin-top: 1em; }
+   p + * > li, dd li { margin: 1em 0; }
+   dt, dfn { font-weight: bold; font-style: normal; }
+   dt dfn { font-style: italic; }
+   pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
+   pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
+   pre em { font-weight: bolder; font-style: normal; }
+   @media screen { code { color: orangered; } code :link, code :visited { color: inherit; } }
+   var sub { vertical-align: bottom; font-size: smaller; position: relative; top: 0.1em; }
+   table { border-collapse: collapse; border-style: hidden hidden none hidden; }
+   table thead, table tbody { border-bottom: solid; }
+   table tbody th:first-child { border-left: solid; }
+   table tbody th { text-align: left; }
+   table td, table th { border-left: solid; border-right: solid; border-bottom: solid thin; vertical-align: top; padding: 0.2em; }
+   blockquote { margin: 0 0 0 2em; border: 0; padding: 0; font-style: italic; }
+
+   .bad, .bad *:not(.XXX) { color: gray; border-color: gray; background: transparent; }
+   .matrix, .matrix td { border: none; text-align: right; }
+   .matrix { margin-left: 2em; }
+   .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
+   .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
+   .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
+   img.extra { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
+   pre.css:first-line { color: #AAAA50; }
+   dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
+   hr + dl.domintro, div.impl + dl.domintro { margin-top: 2.5em; margin-bottom: 1.5em; }
+   dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
+   dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
+   dl.domintro dd p { margin: 0.5em 0; }
+   dl.switch { padding-left: 2em; }
+   dl.switch > dt { text-indent: -1.5em; }
+   dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
+   dl.triple { padding: 0 0 0 1em; }
+   dl.triple dt, dl.triple dd { margin: 0; display: inline }
+   dl.triple dt:after { content: ':'; }
+   dl.triple dd:after { content: '\A'; white-space: pre; }
+   .diff-old { text-decoration: line-through; color: silver; background: transparent; }
+   .diff-chg, .diff-new { text-decoration: underline; color: green; background: transparent; }
+   a .diff-new { border-bottom: 1px blue solid; }
+
+   h2 { page-break-before: always; }
+   h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
+   h1 + h2, hr + h2.no-toc { page-break-before: auto; }
+
+   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+
+   div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
+   div.head p { margin: 0; }
+   div.head h1 { margin: 0; }
+   div.head .logo { float: right; margin: 0 1em; }
+   div.head .logo img { border: none } /* remove border from top image */
+   div.head dl { margin: 1em 0; }
+   div.head p.copyright, div.head p.alt { font-size: x-small; font-style: oblique; margin: 0; }
+
+   body > .toc > li { margin-top: 1em; margin-bottom: 1em; }
+   body > .toc.brief > li { margin-top: 0.35em; margin-bottom: 0.35em; }
+   body > .toc > li > * { margin-bottom: 0.5em; }
+   body > .toc > li > * > li > * { margin-bottom: 0.25em; }
+   .toc, .toc li { list-style: none; }
+
+   .brief { margin-top: 1em; margin-bottom: 1em; line-height: 1.1; }
+   .brief li { margin: 0; padding: 0; }
+   .brief li p { margin: 0; padding: 0; }
+
+   .category-list { margin-top: -0.75em; margin-bottom: 1em; line-height: 1.5; }
+   .category-list::before { content: '\21D2\A0'; font-size: 1.2em; font-weight: 900; }
+   .category-list li { display: inline; }
+   .category-list li:not(:last-child)::after { content: ', '; }
+   .category-list li > span, .category-list li > a { text-transform: lowercase; }
+   .category-list li * { text-transform: none; } /* don't affect <code> nested in <a> */
+
+   .XXX { color: #E50000; background: white; border: solid red; padding: 0.5em; margin: 1em 0; }
+   .XXX > :first-child { margin-top: 0; }
+   p .XXX { line-height: 3em; }
+   .annotation { border: solid thin black; background: #0C479D; color: white; position: relative; margin: 8px 0 20px 0; }
+   .annotation:before { position: absolute; left: 0; top: 0; width: 100%; height: 100%; margin: 6px -6px -6px 6px; background: #333333; z-index: -1; content: ''; }
+   .annotation :link, .annotation :visited { color: inherit; }
+   .annotation :link:hover, .annotation :visited:hover { background: transparent; }
+   .annotation span { border: none ! important; }
+   .note { color: green; background: transparent; font-family: sans-serif; }
+   .warning { color: red; background: transparent; }
+   .note, .warning { font-weight: bolder; font-style: italic; }
+   p.note, div.note { padding: 0.5em 2em; }
+   span.note { padding: 0 2em; }
+   .note p:first-child, .warning p:first-child { margin-top: 0; }
+   .note p:last-child, .warning p:last-child { margin-bottom: 0; }
+   .warning:before { font-style: normal; }
+   p.note:before { content: 'Note: '; }
+   p.warning:before { content: '\26A0 Warning! '; }
+
+   .bookkeeping:before { display: block; content: 'Bookkeeping details'; font-weight: bolder; font-style: italic; }
+   .bookkeeping { font-size: 0.8em; margin: 2em 0; }
+   .bookkeeping p { margin: 0.5em 2em; display: list-item; list-style: square; }
+   .bookkeeping dt { margin: 0.5em 2em 0; }
+   .bookkeeping dd { margin: 0 3em 0.5em; }
+
+   h4 { position: relative; z-index: 3; }
+   h4 + .element, h4 + div + .element { margin-top: -2.5em; padding-top: 2em; }
+   .element {
+     background: #EEEEFF;
+     color: black;
+     margin: 0 0 1em 0.15em;
+     padding: 0 1em 0.25em 0.75em;
+     border-left: solid #9999FF 0.25em;
+     position: relative;
+     z-index: 1;
+   }
+   .element:before {
+     position: absolute;
+     z-index: 2;
+     top: 0;
+     left: -1.15em;
+     height: 2em;
+     width: 0.9em;
+     background: #EEEEFF;
+     content: ' ';
+     border-style: none none solid solid;
+     border-color: #9999FF;
+     border-width: 0.25em;
+   }
+
+   .example { display: block; color: #222222; background: #FCFCFC; border-left: double; margin-left: 2em; padding-left: 1em; }
+   td > .example:only-child { margin: 0 0 0 0.1em; }
+
+   ul.domTree, ul.domTree ul { padding: 0 0 0 1em; margin: 0; }
+   ul.domTree li { padding: 0; margin: 0; list-style: none; position: relative; }
+   ul.domTree li li { list-style: none; }
+   ul.domTree li:first-child::before { position: absolute; top: 0; height: 0.6em; left: -0.75em; width: 0.5em; border-style: none none solid solid; content: ''; border-width: 0.1em; }
+   ul.domTree li:not(:last-child)::after { position: absolute; top: 0; bottom: -0.6em; left: -0.75em; width: 0.5em; border-style: none none solid solid; content: ''; border-width: 0.1em; }
+   ul.domTree span { font-style: italic; font-family: serif; }
+   ul.domTree .t1 code { color: purple; font-weight: bold; }
+   ul.domTree .t2 { font-style: normal; font-family: monospace; }
+   ul.domTree .t2 .name { color: black; font-weight: bold; }
+   ul.domTree .t2 .value { color: blue; font-weight: normal; }
+   ul.domTree .t3 code, .domTree .t4 code, .domTree .t5 code { color: gray; }
+   ul.domTree .t7 code, .domTree .t8 code { color: green; }
+   ul.domTree .t10 code { color: teal; }
+
+   body.dfnEnabled dfn { cursor: pointer; }
+   .dfnPanel {
+     display: inline;
+     position: absolute;
+     z-index: 10;
+     height: auto;
+     width: auto;
+     padding: 0.5em 0.75em;
+     font: small sans-serif, Droid Sans Fallback;
+     background: #DDDDDD;
+     color: black;
+     border: outset 0.2em;
+   }
+   .dfnPanel * { margin: 0; padding: 0; font: inherit; text-indent: 0; }
+   .dfnPanel :link, .dfnPanel :visited { color: black; }
+   .dfnPanel p { font-weight: bolder; }
+   .dfnPanel * + p { margin-top: 0.25em; }
+   .dfnPanel li { list-style-position: inside; }
+
+   #configUI { position: absolute; z-index: 20; top: 10em; right: 1em; width: 11em; font-size: small; }
+   #configUI p { margin: 0.5em 0; padding: 0.3em; background: #EEEEEE; color: black; border: inset thin; }
+   #configUI p label { display: block; }
+   #configUI #updateUI, #configUI .loginUI { text-align: center; }
+   #configUI input[type=button] { display: block; margin: auto; }
+
+  ]]></style><style type="text/css"><![CDATA[
+
+   .applies thead th > * { display: block; }
+   .applies thead code { display: block; }
+   .applies tbody th { whitespace: nowrap; }
+   .applies td { text-align: center; }
+   .applies .yes { background: yellow; }
+
+   .matrix, .matrix td { border: hidden; text-align: right; }
+   .matrix { margin-left: 2em; }
+
+   .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
+   .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
+   .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
+   #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
+   #table-example-1 caption { padding-bottom: 0.5em; }
+   #table-example-1 thead, #table-example-1 tbody { border: none; }
+   #table-example-1 th, #table-example-1 td { border: solid thin; }
+   #table-example-1 th { font-weight: normal; }
+   #table-example-1 td { border-style: none solid; vertical-align: top; }
+   #table-example-1 th { padding: 0.5em; vertical-align: middle; text-align: center; }
+   #table-example-1 tbody tr:first-child td { padding-top: 0.5em; }
+   #table-example-1 tbody tr:last-child td { padding-bottom: 1.5em; }
+   #table-example-1 tbody td:first-child { padding-left: 2.5em; padding-right: 0; width: 9em; }
+   #table-example-1 tbody td:first-child::after { content: leader(". "); }
+   #table-example-1 tbody td { padding-left: 2em; padding-right: 2em; }
+   #table-example-1 tbody td:first-child + td { width: 10em; }
+   #table-example-1 tbody td:first-child + td ~ td { width: 2.5em; }
+   #table-example-1 tbody td:first-child + td + td + td ~ td { width: 1.25em; }
+
+   .apple-table-examples { border: none; border-collapse: separate; border-spacing: 1.5em 0em; width: 40em; margin-left: 3em; }
+   .apple-table-examples * { font-family: "Times", serif; }
+   .apple-table-examples td, .apple-table-examples th { border: none; white-space: nowrap; padding-top: 0; padding-bottom: 0; }
+   .apple-table-examples tbody th:first-child { border-left: none; width: 100%; }
+   .apple-table-examples thead th:first-child ~ th { font-size: smaller; font-weight: bolder; border-bottom: solid 2px; text-align: center; }
+   .apple-table-examples tbody th::after, .apple-table-examples tfoot th::after { content: leader(". ") }
+   .apple-table-examples tbody th, .apple-table-examples tfoot th { font: inherit; text-align: left; }
+   .apple-table-examples td { text-align: right; vertical-align: top; }
+   .apple-table-examples.e1 tbody tr:last-child td { border-bottom: solid 1px; }
+   .apple-table-examples.e1 tbody + tbody tr:last-child td { border-bottom: double 3px; }
+   .apple-table-examples.e2 th[scope=row] { padding-left: 1em; }
+   .apple-table-examples sup { line-height: 0; }
+
+   .details-example img { vertical-align: top; }
+
+   #named-character-references-table {
+     font-size: 0.6em;
+     column-width: 28em;
+     column-gap: 1em;
+     -moz-column-width: 28em;
+     -moz-column-gap: 1em;
+     -webkit-column-width: 28em;
+     -webkit-column-gap: 1em;
+   }
+   #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
+   #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+
+   .glyph.control { color: red; }
+
+   @font-face {
+     font-family: 'Essays1743';
+     src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743.ttf');
+   }
+   @font-face {
+     font-family: 'Essays1743';
+     font-weight: bold;
+     src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-Bold.ttf');
+   }
+   @font-face {
+     font-family: 'Essays1743';
+     font-style: italic;
+     src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-Italic.ttf');
+   }
+   @font-face {
+     font-family: 'Essays1743';
+     font-style: italic;
+     font-weight: bold;
+     src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
+   }
+
+  ]]></style><style type="text/css"><![CDATA[
+   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
+  ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
+   function getCookie(name) {
+     var params = location.search.substr(1).split("&");
+     for (var index = 0; index < params.length; index++) {
+       if (params[index] == name)
+         return "1";
+       var data = params[index].split("=");
+       if (data[0] == name)
+         return unescape(data[1]);
+     }
+     var cookies = document.cookie.split("; ");
+     for (var index = 0; index < cookies.length; index++) {
+       var data = cookies[index].split("=");
+       if (data[0] == name)
+         return unescape(data[1]);
+     }
+     return null;
+   }
+   function load(script) {
+     var e = document.createElement('script');
+     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     document.body.appendChild(e);
+   }
+   function init() {
+     if (location.search == '?slow-browser')
+       return;
+     var configUI = document.createElement('div');
+     configUI.id = 'configUI';
+     document.body.appendChild(configUI);
+     // load('reviewer.js'); // would need cross-site XHR
+     if (document.getElementById('head'))
+       load('toc.js');
+     load('styler.js');
+     // load('updater.js'); // would need cross-site XHR
+     load('dfn.js'); // doesn't support split-out specs, but, oh well.
+     // load('status.js'); // would need cross-site XHR
+     if (getCookie('profile') == '1')
+       document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
+     fixBrokenLink();
+   }
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="embedded-content-1.html" title="4.8 Embedded content" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="video.html" title="4.8.6 The video element" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+   <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
+
+   <h1>HTML5</h1>
+   </div><div>
+   <a href="embedded-content-1.html">&#x2190; 4.8 Embedded content</a> &#x2013;
+   <a href="spec.html#contents">Table of contents</a> &#x2013;
+   <a href="video.html">4.8.6 The video element &#x2192;</a>
+  <ol class="toc"><li><ol><li><ol><li><a href="the-iframe-element.html#the-iframe-element"><span class="secno">4.8.2 </span>The <code>iframe</code> element</a></li><li><a href="the-iframe-element.html#the-embed-element"><span class="secno">4.8.3 </span>The <code>embed</code> element</a></li><li><a href="the-iframe-element.html#the-object-element"><span class="secno">4.8.4 </span>The <code>object</code> element</a></li><li><a href="the-iframe-element.html#the-param-element"><span class="secno">4.8.5 </span>The <code>param</code> element</a></li></ol></li></ol></li></ol></div><h4 id="the-iframe-element"><span class="secno">4.8.2 </span>The <dfn><code>iframe</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments. </i><span><a href="http://www.w3.org/html/wg/tracker/issues/100">ISSUE-100</a> (srcdoc) and <a href="http://www.w3.org/html/wg/tracker/issues/103">ISSUE-103</a> (srcdoc-xml-escaping) block progress to Last Call</span></p><dl class="element"><dt>Categories</dt>
+   <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
+   <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
+   <dd><a href="content-models.html#embedded-content">Embedded content</a>.</dd>
+   <dd><a href="content-models.html#interactive-content">Interactive content</a>.</dd>
+   <dt>Contexts in which this element may be used:</dt>
+   <dd>Where <a href="content-models.html#embedded-content">embedded content</a> is expected.</dd>
+   <dt>Content model:</dt>
+   <dd>Text that conforms to the requirements given in the prose.</dd>
+   <dt>Content attributes:</dt>
+   <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
+   <dd><code title="attr-iframe-src"><a href="#attr-iframe-src">src</a></code></dd>
+   <dd><code title="attr-iframe-srcdoc"><a href="#attr-iframe-srcdoc">srcdoc</a></code></dd>
+   <dd><code title="attr-iframe-name"><a href="#attr-iframe-name">name</a></code></dd>
+   <dd><code title="attr-iframe-sandbox"><a href="#attr-iframe-sandbox">sandbox</a></code></dd>
+   <dd><code title="attr-iframe-seamless"><a href="#attr-iframe-seamless">seamless</a></code></dd>
+   <dd><code title="attr-dim-width"><a href="the-map-element.html#attr-dim-width">width</a></code></dd>
+   <dd><code title="attr-dim-height"><a href="the-map-element.html#attr-dim-height">height</a></code></dd>
+   <dt>DOM interface:</dt>
+   <dd>
+<pre class="idl">interface <dfn id="htmliframeelement">HTMLIFrameElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
+           attribute DOMString <a href="#dom-iframe-src" title="dom-iframe-src">src</a>;
+           attribute DOMString <a href="#dom-iframe-srcdoc" title="dom-iframe-srcdoc">srcdoc</a>;
+           attribute DOMString <a href="#dom-iframe-name" title="dom-iframe-name">name</a>;
+  [PutForwards=<a href="common-dom-interfaces.html#dom-domsettabletokenlist-value" title="dom-DOMSettableTokenList-value">value</a>] readonly attribute <a href="common-dom-interfaces.html#domsettabletokenlist">DOMSettableTokenList</a> <a href="#dom-iframe-sandbox" title="dom-iframe-sandbox">sandbox</a>;
+           attribute boolean <a href="#dom-iframe-seamless" title="dom-iframe-seamless">seamless</a>;
+           attribute DOMString <a href="the-map-element.html#dom-dim-width" title="dom-dim-width">width</a>;
+           attribute DOMString <a href="the-map-element.html#dom-dim-height" title="dom-dim-height">height</a>;
+  readonly attribute Document <a href="#dom-iframe-contentdocument" title="dom-iframe-contentDocument">contentDocument</a>;
+  readonly attribute <a href="browsers.html#windowproxy">WindowProxy</a> <a href="#dom-iframe-contentwindow" title="dom-iframe-contentWindow">contentWindow</a>;
+};</pre>
+   </dd>
+  </dl><p>The <code><a href="#the-iframe-element">iframe</a></code> element <a href="rendering.html#represents">represents</a> a
+  <a href="browsers.html#nested-browsing-context">nested browsing context</a>.</p><p>The <dfn id="attr-iframe-src" title="attr-iframe-src"><code>src</code></dfn> attribute
+  gives the address of a page that the <a href="browsers.html#nested-browsing-context">nested browsing
+  context</a> is to contain. The attribute, if present, must be a
+  <a href="urls.html#valid-non-empty-url-potentially-surrounded-by-spaces">valid non-empty URL potentially surrounded by
+  spaces</a>.</p><p>The <dfn id="attr-iframe-srcdoc" title="attr-iframe-srcdoc"><code>srcdoc</code></dfn>
+  attribute gives the content of the page that the <a href="browsers.html#nested-browsing-context">nested
+  browsing context</a> is to contain.  The value of the attribute
+  in is <dfn id="an-iframe-srcdoc-document">an <code>iframe</code> <code title="attr-iframe-srcdoc">srcdoc</code> document</dfn>.</p><p>For <code><a href="#the-iframe-element">iframe</a></code> elements in <a href="dom.html#html-documents">HTML documents</a>,
+  the attribute, if present, must have a value using <a href="syntax.html#syntax">the HTML
+  syntax</a> that consists of the following syntactic components,
+  in the given order:</p><ol><li>Any number of <a href="syntax.html#syntax-comments" title="syntax-comments">comments</a> and
+   <a href="common-microsyntaxes.html#space-character" title="space character">space characters</a>.</li>
+
+   <li>Optionally, a <a href="syntax.html#syntax-doctype" title="syntax-doctype">DOCTYPE</a>.
+
+   </li><li>Any number of <a href="syntax.html#syntax-comments" title="syntax-comments">comments</a> and
+   <a href="common-microsyntaxes.html#space-character" title="space character">space characters</a>.</li>
+
+   <li>The root element, in the form of an <code><a href="semantics.html#the-html-element-0">html</a></code> <a href="syntax.html#syntax-elements" title="syntax-elements">element</a>.</li>
+
+   <li>Any number of <a href="syntax.html#syntax-comments" title="syntax-comments">comments</a> and
+   <a href="common-microsyntaxes.html#space-character" title="space character">space characters</a>.</li>
+
+  </ol><p>For <code><a href="#the-iframe-element">iframe</a></code> elements in <a href="dom.html#xml-documents">XML documents</a>,
+  the attribute, if present, must have a value that matches the
+  production labeled <code><a href="infrastructure.html#document">document</a></code> in the XML
+  specification. <a href="references.html#refsXML">[XML]</a></p><p>If the <code title="attr-iframe-src"><a href="#attr-iframe-src">src</a></code> attribute and the
+  <code title="attr-iframe-srcdoc"><a href="#attr-iframe-srcdoc">srcdoc</a></code> attribute are both
+  specified together, the <code title="attr-iframe-srcdoc"><a href="#attr-iframe-srcdoc">srcdoc</a></code>
+  attribute takes priority. This allows authors to provide a fallback
+  <a href="urls.html#url">URL</a> for legacy user agents that do not support the
+  <code title="attr-iframe-srcdoc"><a href="#attr-iframe-srcdoc">srcdoc</a></code> attribute.</p><div class="impl">
+
+  <p>When an <code><a href="#the-iframe-element">iframe</a></code> element is first <a href="infrastructure.html#insert-an-element-into-a-document" title="insert&#10;  an element into a document">inserted into a document</a>, the
+  user agent must create a <a href="browsers.html#nested-browsing-context">nested browsing context</a>, and
+  then <a href="#process-the-iframe-attributes">process the <code>iframe</code> attributes</a> for the
+  first time.</p>
+
+  <p>Whenever an <code><a href="#the-iframe-element">iframe</a></code> element with a <a href="browsers.html#nested-browsing-context">nested
+  browsing context</a> has its <code title="attr-iframe-srcdoc"><a href="#attr-iframe-srcdoc">srcdoc</a></code> attribute set or changed,
+  the user agent must <a href="#process-the-iframe-attributes">process the <code>iframe</code>
+  attributes</a>.</p>
+
+  <p>Similarly, whenever an <code><a href="#the-iframe-element">iframe</a></code> element with a
+  <a href="browsers.html#nested-browsing-context">nested browsing context</a> but with no <code title="attr-iframe-srcdoc"><a href="#attr-iframe-srcdoc">srcdoc</a></code> attribute specified has its
+  <code title="attr-iframe-src"><a href="#attr-iframe-src">src</a></code> attribute set or changed,
+  the user agent must <a href="#process-the-iframe-attributes">process the <code>iframe</code>
+  attributes</a>.</p> <!-- It doesn't happen when the base URL is
+  changed, though. -->
+
+  <p>When the user agent is to <dfn id="process-the-iframe-attributes">process the <code>iframe</code>
+  attributes</dfn>, it must run the first appropriate steps from the
+  following list:</p>
+
+  <dl class="switch"><dt>If the <code title="attr-iframe-srcdoc"><a href="#attr-iframe-srcdoc">srcdoc</a></code> attribute
+   is specified</dt>
+
+   <dd><p><a href="history.html#navigate">Navigate</a> the element's <a href="browsers.html#browsing-context">browsing
+   context</a> to a resource whose <a href="fetching-resources.html#content-type">Content-Type</a> is
+   <code><a href="iana.html#text-html">text/html</a></code>, whose <a href="urls.html#url">URL</a> is
+   <code><a href="urls.html#about:srcdoc">about:srcdoc</a></code>, and whose data consists of the value of
+   the attribute.</p></dd>
+
+   <dt>If the <code title="attr-iframe-src"><a href="#attr-iframe-src">src</a></code>
+   attribute is specified but the <code title="attr-iframe-srcdoc"><a href="#attr-iframe-srcdoc">srcdoc</a></code> attribute is not</dt>
+
+   <dd>
+
+    <ol><li><p>If the value of the <code title="attr-iframe-src"><a href="#attr-iframe-src">src</a></code> attribute is the empty string,
+     jump to the <i title="">empty</i> step below.</p></li>
+
+     <li><p><a href="urls.html#resolve-a-url" title="resolve a url">Resolve</a> the value of
+     the <code title="attr-iframe-src"><a href="#attr-iframe-src">src</a></code> attribute, relative
+     to the <code><a href="#the-iframe-element">iframe</a></code> element.</p></li>
+
+     <li><p>If that is not successful, then jump to the <i title="">empty</i> step below.</p></li>
+
+     <li><p>If the resulting <a href="urls.html#absolute-url">absolute URL</a> is an
+     <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for the string
+     "<code><a href="fetching-resources.html#about:blank">about:blank</a></code>", and the user agent is processing this
+     <code><a href="#the-iframe-element">iframe</a></code>'s attributes for the first time, then jump to
+     the <i title="">empty</i> step below. (In cases other than the
+     first time, <code><a href="fetching-resources.html#about:blank">about:blank</a></code> is loaded
+     normally.)</p></li>
+
+     <li><p><a href="history.html#navigate">Navigate</a> the element's <a href="browsers.html#browsing-context">browsing
+     context</a> to the resulting <a href="urls.html#absolute-url">absolute
+     URL</a>.</p></li>
+
+    </ol><p><i>Empty</i>: When the steps above require the user agent to
+    jump to the <i title="">empty</i> step, if the user agent is
+    processing this <code><a href="#the-iframe-element">iframe</a></code>'s attributes for the first
+    time, then the user agent must <a href="webappapis.html#queue-a-task">queue a task</a> to
+    <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named <code title="event-load">load</code> at the <code><a href="#the-iframe-element">iframe</a></code>
+    element. (After jumping to this step, the above steps are not
+    resumed.)</p>
+
+   </dd>
+
+   <dt>Otherwise</dt>
+
+   <dd>
+
+    <p><a href="webappapis.html#queue-a-task">Queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a>
+    named <code title="event-load">load</code> at the
+    <code><a href="#the-iframe-element">iframe</a></code> element.</p>
+
+   </dd>
+
+  </dl><p>Any <a href="history.html#navigate" title="navigate">navigation</a> required of the user
+  agent in the <a href="#process-the-iframe-attributes">process the <code>iframe</code> attributes</a>
+  algorithm must be completed with the <code><a href="#the-iframe-element">iframe</a></code> element's
+  document's <a href="browsers.html#browsing-context">browsing context</a> as the <a href="history.html#source-browsing-context">source
+  browsing context</a>.</p>
+
+  <p>Furthermore, if the <a href="browsers.html#browsing-context">browsing context</a>'s <a href="history.html#session-history">session
+  history</a> contained only one <code><a href="infrastructure.html#document">Document</a></code> when the
+  <a href="#process-the-iframe-attributes">process the <code>iframe</code> attributes</a> algorithm
+  was invoked, and that was the <code><a href="fetching-resources.html#about:blank">about:blank</a></code>
+  <code><a href="infrastructure.html#document">Document</a></code> created when the <a href="browsers.html#browsing-context">browsing context</a>
+  was created, then any <a href="history.html#navigate" title="navigate">navigation</a>
+  required of the user agent in that algorithm must be completed with
+  <a href="history.html#replacement-enabled">replacement enabled</a>.</p> <!-- see also the note near
+  similar text for the location.assign() method -->
+
+  </div><p class="note">If, when the element is created, the <code title="attr-iframe-srcdoc"><a href="#attr-iframe-srcdoc">srcdoc</a></code> attribute is not set, and
+  the <code title="attr-iframe-src"><a href="#attr-iframe-src">src</a></code> attribute is either
+  also not set or set but its value cannot be <a href="urls.html#resolve-a-url" title="resolve a&#10;  url">resolved</a>, the browsing context will remain at the
+  initial <code><a href="fetching-resources.html#about:blank">about:blank</a></code> page.</p><p class="note">If the user <a href="history.html#navigate" title="navigate">navigates</a>
+  away from this page, the <code><a href="#the-iframe-element">iframe</a></code>'s corresponding
+  <code><a href="browsers.html#windowproxy">WindowProxy</a></code> object will proxy new <code><a href="browsers.html#window">Window</a></code>
+  objects for new <code><a href="infrastructure.html#document">Document</a></code> objects, but the <code title="attr-iframe-src"><a href="#attr-iframe-src">src</a></code> attribute will not change.</p><div class="impl">
+
+  <div class="note">
+
+   <p><a href="infrastructure.html#remove-an-element-from-a-document" title="remove an element from a document">Removing</a>
+   an <code><a href="#the-iframe-element">iframe</a></code> from a <code><a href="infrastructure.html#document">Document</a></code> does not cause
+   its <a href="browsers.html#browsing-context">browsing context</a> to be discarded. Indeed, an
+   <code><a href="#the-iframe-element">iframe</a></code>'s <a href="browsers.html#browsing-context">browsing context</a> can survive its
+   original parent <code><a href="infrastructure.html#document">Document</a></code> if its <code><a href="#the-iframe-element">iframe</a></code> is
+   moved to another <code><a href="infrastructure.html#document">Document</a></code>.</p>
+
+   <p>On the other hand, if an <code><a href="#the-iframe-element">iframe</a></code> is <a href="infrastructure.html#remove-an-element-from-a-document" title="remove an element from a document">removed</a> from a
+   <code><a href="infrastructure.html#document">Document</a></code> and is then subsequently garbage collected,
+   this will likely mean (in the absence of other references) that the
+   <a href="browsers.html#child-browsing-context">child browsing context</a>'s <code><a href="browsers.html#windowproxy">WindowProxy</a></code>
+   object will become eligble for garbage collection, which will then
+   lead to that <a href="browsers.html#browsing-context">browsing context</a> being <a href="browsers.html#a-browsing-context-is-discarded" title="a&#10;   browsing context is discarded">discarded</a>, which will then
+   lead to its <code><a href="infrastructure.html#document">Document</a></code> being <a href="browsers.html#discard-a-document" title="discard a&#10;   document">discarded</a> also. This happens without notice to any
+   scripts running in that <code><a href="infrastructure.html#document">Document</a></code>; for example, no
+   <code title="event-unload">unload</code> events are fired (the
+   "<a href="history.html#unload-a-document">unload a document</a>" steps are not run).</p>
+
+  </div>
+
+  </div><div class="example">
+
+   <p>Here a blog uses the <code title="attr-iframe-srcdoc"><a href="#attr-iframe-srcdoc">srcdoc</a></code> attribute in conjunction
+   with the <code title="attr-iframe-sandbox"><a href="#attr-iframe-sandbox">sandbox</a></code> and <code title="attr-iframe-seamless"><a href="#attr-iframe-seamless">seamless</a></code> attributes described
+   below to provide users of user agents that support this feature
+   with an extra layer of protection from script injection in the blog
+   post comments:</p>
+
+   <pre>&lt;article&gt;
+ &lt;h1&gt;I got my own magazine!&lt;/h1&gt;
+ &lt;p&gt;After much effort, I've finally found a publisher, and so now I
+ have my own magazine! Isn't that awesome?! The first issue will come
+ out in September, and we have articles about getting food, and about
+ getting in boxes, it's going to be great!&lt;/p&gt;
+ &lt;footer&gt;
+  &lt;p&gt;Written by &lt;a href="/users/cap"&gt;cap&lt;/a&gt;.
+  &lt;time pubdate&gt;2009-08-21T23:32Z&lt;/time&gt;&lt;/p&gt;
+ &lt;/footer&gt;
+ &lt;article&gt;
+  &lt;footer&gt; At &lt;time pubdate&gt;2009-08-21T23:35Z&lt;/time&gt;, &lt;a href="/users/ch"&gt;ch&lt;/a&gt; writes: &lt;/footer&gt;
+  &lt;iframe seamless sandbox="allow-same-origin" srcdoc="&lt;p&gt;did you get a cover picture yet?"&gt;&lt;/iframe&gt;
+ &lt;/article&gt;
+ &lt;article&gt;
+  &lt;footer&gt; At &lt;time pubdate&gt;2009-08-21T23:44Z&lt;/time&gt;, &lt;a href="/users/cap"&gt;cap&lt;/a&gt; writes: &lt;/footer&gt;
+  &lt;iframe seamless sandbox="allow-same-origin" srcdoc="&lt;p&gt;Yeah, you can see it &lt;a href=&amp;quot;/gallery?mode=cover&amp;amp;amp;page=1&amp;quot;&gt;in my gallery&lt;/a&gt;."&gt;&lt;/iframe&gt;
+ &lt;/article&gt;
+ &lt;article&gt;
+  &lt;footer&gt; At &lt;time pubdate&gt;2009-08-21T23:58Z&lt;/time&gt;, &lt;a href="/users/ch"&gt;ch&lt;/a&gt; writes: &lt;/footer&gt;
+  &lt;iframe seamless sandbox="allow-same-origin" srcdoc="&lt;p&gt;hey that's earl's table.
+&lt;p&gt;you should get earl&amp;amp;amp;me on the next cover."&gt;&lt;/iframe&gt;
+ &lt;/article&gt;</pre>
+
+   <p>Notice the way that quotes have to be escaped (otherwise the
+   <code title="attr-iframe-sandbox"><a href="#attr-iframe-sandbox">sandbox</a></code> attribute would
+   end prematurely), and the way raw ampersands (e.g. in URLs or in
+   prose) mentioned in the sandboxed content have to be
+   <em>doubly</em> escaped &#x2014; once so that the ampersand is
+   preserved when originally parsing the <code title="attr-iframe-sandbox"><a href="#attr-iframe-sandbox">sandbox</a></code> attribute, and once more
+   to prevent the ampersand from being misinterpreted when parsing the
+   sandboxed content.</p>
+
+  </div><p class="note">In <a href="syntax.html#syntax">the HTML syntax</a>, authors need only
+  remember to use U+0022 QUOTATION MARK characters (") to wrap the
+  attribute contents and then to escape all U+0022 QUOTATION MARK (")
+  and U+0026 AMPERSAND (&amp;) characters, and to specify the <code title="attr-iframe-sandbox"><a href="#attr-iframe-sandbox">sandbox</a></code> attribute, to ensure safe
+  embedding of content.</p><p class="note">Due to restrictions of <span>the XML syntax</span>,
+  in XML a number of other characters need to be escaped also to
+  ensure correctness.</p><hr/><p>The <dfn id="attr-iframe-name" title="attr-iframe-name"><code>name</code></dfn>
+  attribute, if present, must be a <a href="browsers.html#valid-browsing-context-name">valid browsing context
+  name</a>. The given value is used to name the <a href="browsers.html#nested-browsing-context">nested
+  browsing context</a>. <span class="impl">When the browsing
+  context is created, if the attribute is present, the <a href="browsers.html#browsing-context-name">browsing
+  context name</a> must be set to the value of this attribute;
+  otherwise, the <a href="browsers.html#browsing-context-name">browsing context name</a> must be set to the
+  empty string.</span></p><div class="impl">
+
+  <p>Whenever the <code title="attr-iframe-name"><a href="#attr-iframe-name">name</a></code> attribute
+  is set, the nested <a href="browsers.html#browsing-context">browsing context</a>'s <a href="browsers.html#browsing-context-name" title="browsing context name">name</a> must be changed to the new
+  value. If the attribute is removed, the <a href="browsers.html#browsing-context-name">browsing context
+  name</a> must be set to the empty string.</p>
+
+  <p>When content loads in an <code><a href="#the-iframe-element">iframe</a></code>, after any <code title="event-load">load</code> events are fired within the content
+  itself, the user agent must <a href="webappapis.html#queue-a-task">queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire
+  a simple event</a> named <code title="event-load">load</code> at
+  the <code><a href="#the-iframe-element">iframe</a></code> element. When content whose <a href="urls.html#url">URL</a>
+  has the <a href="origin-0.html#same-origin">same origin</a> as the <code><a href="#the-iframe-element">iframe</a></code>
+  element's <code><a href="infrastructure.html#document">Document</a></code> fails to load (e.g. due to a DNS
+  error, network error, or if the server returned a 4xx or 5xx status
+  code <a href="fetching-resources.html#concept-http-equivalent-codes" title="concept-http-equivalent-codes">or
+  equivalent</a>), then the user agent must <a href="webappapis.html#queue-a-task">queue a
+  task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named <code title="event-error">error</code> at the element instead. (This event
+  does not fire for <a href="parsing.html#parse-error" title="parse error">parse errors</a>,
+  script errors, or any errors for cross-origin resources.)</p>
+
+  <p>The <a href="webappapis.html#task-source">task source</a> for these <a href="webappapis.html#concept-task" title="concept-task">tasks</a> is the <a href="webappapis.html#dom-manipulation-task-source">DOM manipulation
+  task source</a>.</p>
+
+  <p class="note">A <code title="event-load">load</code> event is also
+  fired at the <code><a href="#the-iframe-element">iframe</a></code> element when it is created if no
+  other data is loaded in it.</p>
+
+  <p>When there is an <a href="dom.html#active-parser">active parser</a> in the
+  <code><a href="#the-iframe-element">iframe</a></code>, and when anything in the <code><a href="#the-iframe-element">iframe</a></code> is
+  <a href="the-end.html#delay-the-load-event" title="delay the load event">delaying the load event</a> of
+  the <code><a href="#the-iframe-element">iframe</a></code>'s <a href="browsers.html#browsing-context">browsing context</a>'s
+  <a href="browsers.html#active-document">active document</a>, the <code><a href="#the-iframe-element">iframe</a></code> must
+  <a href="the-end.html#delay-the-load-event">delay the load event</a> of its document.</p>
+
+  <p class="note">If, during the handling of the <code title="event-load">load</code> event, the <a href="browsers.html#browsing-context">browsing
+  context</a> in the <code><a href="#the-iframe-element">iframe</a></code> is again <a href="history.html#navigate" title="navigate">navigated</a>, that will further <a href="the-end.html#delay-the-load-event">delay the
+  load event</a>.</p>
+
+  </div><hr/><p>The <dfn id="attr-iframe-sandbox" title="attr-iframe-sandbox"><code>sandbox</code></dfn>
+  attribute, when specified, enables a set of extra restrictions on
+  any content hosted by the <code><a href="#the-iframe-element">iframe</a></code>. Its value must be an
+  <a href="common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens">unordered set of unique space-separated tokens</a>. The
+  allowed values are <code title="attr-iframe-sandbox-allow-same-origin"><a href="#attr-iframe-sandbox-allow-same-origin">allow-same-origin</a></code>,
+  <code title="attr-iframe-sandbox-allow-top-navigation"><a href="#attr-iframe-sandbox-allow-top-navigation">allow-top-navigation</a></code>,
+  <code title="attr-iframe-sandbox-allow-forms"><a href="#attr-iframe-sandbox-allow-forms">allow-forms</a></code>,
+  and <code title="attr-iframe-sandbox-allow-scripts"><a href="#attr-iframe-sandbox-allow-scripts">allow-scripts</a></code>. When
+  the attribute is set, the content is treated as being from a unique
+  <a href="origin-0.html#origin">origin</a>, forms and scripts are disabled, links are
+  prevented from targeting other <a href="browsers.html#browsing-context" title="browsing&#10;  context">browsing contexts</a>, and plugins are disabled. The
+  <code title="attr-iframe-sandbox-allow-same-origin"><a href="#attr-iframe-sandbox-allow-same-origin">allow-same-origin</a></code>
+  keyword allows the content to be treated as being from the same
+  origin instead of forcing it into a unique origin, the <code title="attr-iframe-sandbox-allow-top-navigation"><a href="#attr-iframe-sandbox-allow-top-navigation">allow-top-navigation</a></code>
+  keyword allows the content to <a href="history.html#navigate">navigate</a> its
+  <a href="browsers.html#top-level-browsing-context">top-level browsing context</a>, and the <code title="attr-iframe-sandbox-allow-forms"><a href="#attr-iframe-sandbox-allow-forms">allow-forms</a></code> and <code title="attr-iframe-sandbox-allow-scripts"><a href="#attr-iframe-sandbox-allow-scripts">allow-scripts</a></code>
+  keywords re-enable forms and scripts respectively (though scripts
+  are still prevented from creating popups).</p><p class="warning">Setting both the <code title="attr-iframe-sandbox-allow-scripts"><a href="#attr-iframe-sandbox-allow-scripts">allow-scripts</a></code> and
+  <code title="attr-iframe-sandbox-allow-same-origin"><a href="#attr-iframe-sandbox-allow-same-origin">allow-same-origin</a></code>
+  keywords together when the embedded page has the <a href="origin-0.html#same-origin">same
+  origin</a> as the page containing the <code><a href="#the-iframe-element">iframe</a></code> allows
+  the embedded page to simply remove the <code title="attr-iframe-sandbox"><a href="#attr-iframe-sandbox">sandbox</a></code> attribute.</p><p class="warning">Sandboxing hostile content is of minimal help if
+  an attacker can convince the user to just visit the hostile content
+  directly, rather than in the <code><a href="#the-iframe-element">iframe</a></code>. To limit the
+  damage that can be caused by hostile HTML content, it should be
+  served using the <code><a href="iana.html#text-html-sandboxed">text/html-sandboxed</a></code> MIME type.</p><div class="impl">
+
+  <!-- v2: Add a new attribute that enables new restrictions, e.g.:
+       - disallow cross-origin loads of any kind (networking
+         override that only allows same-origin URLs or about:,
+         javascript:, data:)
+       - block access to 'parent.frames' from sandbox
+  -->
+
+  <p>While the <code title="attr-iframe-sandbox"><a href="#attr-iframe-sandbox">sandbox</a></code>
+  attribute is specified, the <code><a href="#the-iframe-element">iframe</a></code> element's
+  <a href="browsers.html#nested-browsing-context">nested browsing context</a> must have the flags given in
+  the following list set.  In addition, any browsing contexts <a href="browsers.html#nested-browsing-context" title="nested browsing context">nested</a> within an
+  <code><a href="#the-iframe-element">iframe</a></code>, either directly or indirectly, must have all
+  the flags set on them as were set on the <code><a href="#the-iframe-element">iframe</a></code>'s
+  <code><a href="infrastructure.html#document">Document</a></code>'s <a href="browsers.html#browsing-context">browsing context</a> when the
+  <code><a href="#the-iframe-element">iframe</a></code>'s <code><a href="infrastructure.html#document">Document</a></code> was created.</p>
+
+  <dl><dt>The <dfn id="sandboxed-navigation-browsing-context-flag">sandboxed navigation browsing context flag</dfn></dt>
+
+   <dd>
+
+    <p>This flag <a href="history.html#sandboxLinks">prevents content from
+    navigating browsing contexts other than the sandboxed browsing
+    context itself</a> (or browsing contexts further nested inside
+    it), and the <a href="browsers.html#top-level-browsing-context">top-level browsing context</a> (which is
+    protected by the <a href="#sandboxed-top-level-navigation-browsing-context-flag">sandboxed top-level navigation browsing
+    context flag</a> defined next).</p>
+
+    <p>This flag also <a href="browsers.html#sandboxWindowOpen">prevents content
+    from creating new auxiliary browsing contexts</a>, e.g. using the
+    <code title="attr-hyperlink-target"><a href="links.html#attr-hyperlink-target">target</a></code> attribute or the
+    <code title="dom-open"><a href="browsers.html#dom-open">window.open()</a></code> method.</p>
+
+   </dd>
+
+
+   <dt>The <dfn id="sandboxed-top-level-navigation-browsing-context-flag">sandboxed top-level navigation browsing context
+   flag</dfn>, unless the <code title="attr-iframe-sandbox"><a href="#attr-iframe-sandbox">sandbox</a></code> attribute's value, when
+   <a href="common-microsyntaxes.html#split-a-string-on-spaces" title="split a string on spaces">split on spaces</a>, is
+   found to have the <dfn id="attr-iframe-sandbox-allow-top-navigation" title="attr-iframe-sandbox-allow-top-navigation"><code>allow-top-navigation</code></dfn>
+   keyword set</dt>
+
+   <dd>
+
+    <p>This flag <a href="history.html#sandboxLinks">prevents content from
+    navigating their <span>top-level browsing context</span></a>.</p>
+
+    <p>When the <code title="attr-iframe-sandbox-allow-top-navigation"><a href="#attr-iframe-sandbox-allow-top-navigation">allow-top-navigation</a></code>
+    is set, content can navigate its <a href="browsers.html#top-level-browsing-context">top-level browsing
+    context</a>, but other <a href="browsers.html#browsing-context" title="browsing context">browsing
+    contexts</a> are still protected by the <a href="#sandboxed-navigation-browsing-context-flag">sandboxed
+    navigation browsing context flag</a> defined above.</p>
+
+   </dd>
+
+
+   <dt>The <dfn id="sandboxed-plugins-browsing-context-flag">sandboxed plugins browsing context flag</dfn></dt>
+
+   <dd>
+
+    <p>This flag prevents content from instantiating <a href="infrastructure.html#plugin" title="plugin">plugins</a>, whether using <a href="#sandboxPluginEmbed">the <code>embed</code> element</a>, <a href="#sandboxPluginObject">the <code>object</code> element</a>,
+    <a href="obsolete.html#sandboxPluginApplet">the <code>applet</code>
+    element</a>, or through <a href="history.html#sandboxPluginNavigate">navigation</a> of a <a href="browsers.html#nested-browsing-context">nested
+    browsing context</a>.</p>
+
+   </dd>
+
+
+   <dt>The <dfn id="sandboxed-seamless-iframes-flag">sandboxed seamless iframes flag</dfn></dt>
+
+   <dd>
+
+    <p>This flag prevents content from using the <code title="attr-iframe-seamless"><a href="#attr-iframe-seamless">seamless</a></code> attribute on
+    descendant <code><a href="#the-iframe-element">iframe</a></code> elements.</p>
+
+    <p class="note">This prevents a page inserted using the <code title="attr-iframe-sandbox-allow-same-origin"><a href="#attr-iframe-sandbox-allow-same-origin">allow-same-origin</a></code>
+    keyword from using a CSS-selector-based method of probing the DOM
+    of other pages on the same site (in particular, pages that contain
+    user-sensitive information).</p>
+
+    <!-- http://lists.w3.org/Archives/Public/public-web-security/2009Dec/thread.html#msg51 -->
+
+   </dd>
+
+
+   <dt>The <dfn id="sandboxed-origin-browsing-context-flag">sandboxed origin browsing context flag</dfn>, unless
+   the <code title="attr-iframe-sandbox"><a href="#attr-iframe-sandbox">sandbox</a></code> attribute's
+   value, when <a href="common-microsyntaxes.html#split-a-string-on-spaces" title="split a string on spaces">split on
+   spaces</a>, is found to have the <dfn id="attr-iframe-sandbox-allow-same-origin" title="attr-iframe-sandbox-allow-same-origin"><code>allow-same-origin</code></dfn>
+   keyword set</dt>
+
+   <dd>
+
+    <p>This flag <a href="origin-0.html#sandboxOrigin">forces content into a unique
+    origin</a>, thus preventing it from accessing other content from
+    the same <a href="origin-0.html#origin">origin</a>.</p>
+
+    <p>This flag also <a href="dom.html#sandboxCookies">prevents script from
+    reading from or writing to the <code title="dom-document-cookie">document.cookie</code> IDL
+    attribute</a>, and blocks access to <code title="dom-localStorage">localStorage</code> and <code title="dom-opendatabase">openDatabase()</code>.
+    
+    <a href="references.html#refsWEBSTORAGE">[WEBSTORAGE]</a>
+    
+    <a href="references.html#refsWEBSQL">[WEBSQL]</a>
+    </p>
+
+    <div class="note">
+
+     <p>The <code title="attr-iframe-sandbox-allow-same-origin"><a href="#attr-iframe-sandbox-allow-same-origin">allow-same-origin</a></code>
+     attribute is intended for two cases.</p>
+
+     <p>First, it can be used to allow content from the same site to
+     be sandboxed to disable scripting, while still allowing access to
+     the DOM of the sandboxed content.</p>
+
+     <p>Second, it can be used to embed content from a third-party
+     site, sandboxed to prevent that site from opening popup windows,
+     etc, without preventing the embedded page from communicating back
+     to its originating site, using the database APIs to store data,
+     etc.</p>
+
+    </div>
+
+   </dd>
+
+
+   <dt>The <dfn id="sandboxed-forms-browsing-context-flag">sandboxed forms browsing context flag</dfn>, unless
+   the <code title="attr-iframe-sandbox"><a href="#attr-iframe-sandbox">sandbox</a></code> attribute's
+   value, when <a href="common-microsyntaxes.html#split-a-string-on-spaces" title="split a string on spaces">split on
+   spaces</a>, is found to have the <dfn id="attr-iframe-sandbox-allow-forms" title="attr-iframe-sandbox-allow-forms"><code>allow-forms</code></dfn>
+   keyword set</dt>
+
+   <dd>
+
+    <p>This flag <a href="association-of-controls-and-forms.html#sandboxSubmitBlocked">blocks form
+    submission</a>.</p>
+
+   </dd>
+
+
+   <dt>The <dfn id="sandboxed-scripts-browsing-context-flag">sandboxed scripts browsing context flag</dfn>, unless
+   the <code title="attr-iframe-sandbox"><a href="#attr-iframe-sandbox">sandbox</a></code> attribute's
+   value, when <a href="common-microsyntaxes.html#split-a-string-on-spaces" title="split a string on spaces">split on
+   spaces</a>, is found to have the <dfn id="attr-iframe-sandbox-allow-scripts" title="attr-iframe-sandbox-allow-scripts"><code>allow-scripts</code></dfn>
+   keyword set</dt>
+
+   <dd>
+
+    <p>This flag <a href="webappapis.html#sandboxScriptBlocked">blocks script
+    execution</a>.</p>
+
+   </dd>
+
+
+   <dt>The <dfn id="sandboxed-automatic-features-browsing-context-flag">sandboxed automatic features browsing context
+   flag</dfn>, unless the <code title="attr-iframe-sandbox"><a href="#attr-iframe-sandbox">sandbox</a></code> attribute's value, when
+   <a href="common-microsyntaxes.html#split-a-string-on-spaces" title="split a string on spaces">split on spaces</a>, is
+   found to have the <code title="attr-iframe-sandbox-allow-scripts"><a href="#attr-iframe-sandbox-allow-scripts">allow-scripts</a></code>
+   keyword (defined above) set</dt>
+
+   <dd>
+
+    <p>This flag blocks features that trigger automatically, such as
+    <a href="video.html#attr-media-autoplay" title="attr-media-autoplay">automatically playing a
+    video</a> or <a href="association-of-controls-and-forms.html#attr-fe-autofocus" title="attr-fe-autofocus">automatically
+    focusing a form control</a>. It is relaxed by the same flag as
+    scripts, because when scripts are enabled these features are
+    trivially possible anyway, and it would be unfortunate to force
+    authors to use script to do them when sandboxed rather than
+    allowing them to use the declarative features.</p>
+
+   </dd>
+
+  </dl><p>These flags must not be set unless the conditions listed above
+  define them as being set.</p>
+
+  <p class="warning">These flags only take effect when the
+  <a href="browsers.html#nested-browsing-context">nested browsing context</a> of the <code><a href="#the-iframe-element">iframe</a></code> is
+  <a href="history.html#navigate" title="navigate">navigated</a>. Removing then, or removing
+  the entire <code title="attr-iframe-sandbox"><a href="#attr-iframe-sandbox">sandbox</a></code>
+  attribute, has no effect on an already-loaded page.</p>
+
+  </div><div class="example">
+
+   <p>In this example, some completely-unknown, potentially hostile,
+   user-provided HTML content is embedded in a page. Because it is
+   sandboxed, it is treated by the user agent as being from a unique
+   origin, despite the content being served from the same site. Thus
+   it is affected by all the normal cross-site restrictions. In
+   addition, the embedded page has scripting disabled, plugins
+   disabled, forms disabled, and it cannot navigate any frames or
+   windows other than itself (or any frames or windows it itself
+   embeds).</p>
+
+   <pre>&lt;p&gt;We're not scared of you! Here is your content, unedited:&lt;/p&gt;
+&lt;iframe sandbox src="getusercontent.cgi?id=12193"&gt;&lt;/iframe&gt;</pre>
+
+   <p>Note that cookies are still sent to the server in the <code title="">getusercontent.cgi</code> request, though they are not
+   visible in the <code title="dom-document-cookie"><a href="dom.html#dom-document-cookie">document.cookie</a></code> IDL
+   attribute.</p>
+
+   <p class="warning">It is important that the server serve the
+   user-provided HTML using the <code><a href="iana.html#text-html-sandboxed">text/html-sandboxed</a></code> MIME
+   type so that if the attacker convinces the user to visit that page
+   directly, the page doesn't run in the context of the site's origin,
+   which would make the user vulnerable to any attack found in the
+   page.</p>
+
+  </div><div class="example">
+
+   <p>In this example, a gadget from another site is embedded. The
+   gadget has scripting and forms enabled, and the origin sandbox
+   restrictions are lifted, allowing the gadget to communicate with
+   its originating server. The sandbox is still useful, however, as it
+   disables plugins and popups, thus reducing the risk of the user
+   being exposed to malware and other annoyances.</p>
+
+   <pre>&lt;iframe sandbox="allow-same-origin allow-forms allow-scripts"
+        src="http://maps.example.com/embedded.html"&gt;&lt;/iframe&gt;</pre>
+
+  </div><div class="example">
+
+   <p>Suppose a file A contained the following fragment:</p>
+
+   <pre>&lt;iframe sandbox="allow-same-origin allow-forms" src=B&gt;&lt;/iframe&gt;</pre>
+
+   <p>Suppose that file B contained an iframe also:</p>
+
+   <pre>&lt;iframe sandbox="allow-scripts" src=C&gt;&lt;/iframe&gt;</pre>
+
+   <p>Further, suppose that file C contained a link:</p>
+
+   <pre>&lt;a href=D&gt;Link&lt;/a&gt;</pre>
+
+   <p>For this example, suppose all the files were served as
+   <code><a href="iana.html#text-html">text/html</a></code>.</p>
+
+   <p>Page C in this scenario has all the sandboxing flags
+   set. Scripts are disabled, because the <code><a href="#the-iframe-element">iframe</a></code> in A has
+   scripts disabled, and this overrides the <code title="attr-iframe-sandbox-allow-scripts"><a href="#attr-iframe-sandbox-allow-scripts">allow-scripts</a></code>
+   keyword set on the <code><a href="#the-iframe-element">iframe</a></code> in B. Forms are also
+   disabled, because the inner <code><a href="#the-iframe-element">iframe</a></code> (in B) does not
+   have the <code title="attr-iframe-sandbox-allow-forms"><a href="#attr-iframe-sandbox-allow-forms">allow-forms</a></code> keyword
+   set.</p>
+
+   <p>Suppose now that a script in A removes all the <code title="attr-iframe-sandbox"><a href="#attr-iframe-sandbox">sandbox</a></code> attributes in A and
+   B. This would change nothing immediately. If the user clicked the
+   link in C, loading page D into the <code><a href="#the-iframe-element">iframe</a></code> in B, page D
+   would now act as if the <code><a href="#the-iframe-element">iframe</a></code> in B had the <code title="attr-iframe-sandbox-allow-same-origin"><a href="#attr-iframe-sandbox-allow-same-origin">allow-same-origin</a></code>
+   and <code title="attr-iframe-sandbox-allow-forms"><a href="#attr-iframe-sandbox-allow-forms">allow-forms</a></code> keywords
+   set, because that was the state of the <a href="browsers.html#nested-browsing-context">nested browsing
+   context</a> in the <code><a href="#the-iframe-element">iframe</a></code> in A when page B was
+   loaded.</p>
+
+   <p>Generally speaking, dynamically removing or changing the <code title="attr-iframe-sandbox"><a href="#attr-iframe-sandbox">sandbox</a></code> attribute is
+   ill-advised, because it can make it quite hard to reason about what
+   will be allowed and what will not.</p>
+
+  </div><p class="note">Potentially hostile files can be served from the
+  same server as the file containing the <code><a href="#the-iframe-element">iframe</a></code> element
+  by labeling them as <code><a href="iana.html#text-html-sandboxed">text/html-sandboxed</a></code> instead of
+  <code><a href="iana.html#text-html">text/html</a></code>. This ensures that scripts in the files are
+  unable to attack the site (as if they were actually served from
+  another server), even if the user is tricked into visiting those
+  pages directly, without the protection of the <code title="attr-iframe-sandbox"><a href="#attr-iframe-sandbox">sandbox</a></code> attribute.</p><p class="warning">If the <code title="attr-iframe-sandbox-allow-scripts"><a href="#attr-iframe-sandbox-allow-scripts">allow-scripts</a></code>
+  keyword is set along with <code title="attr-iframe-sandbox-allow-same-origin"><a href="#attr-iframe-sandbox-allow-same-origin">allow-same-origin</a></code>
+  keyword, and the file is from the <a href="origin-0.html#same-origin">same origin</a> as the
+  <code><a href="#the-iframe-element">iframe</a></code>'s <code><a href="infrastructure.html#document">Document</a></code>, then a script in the
+  "sandboxed" iframe could just reach out, remove the <code title="attr-iframe-sandbox"><a href="#attr-iframe-sandbox">sandbox</a></code> attribute, and then
+  reload itself, effectively breaking out of the sandbox
+  altogether.</p><hr/><!-- v2: Might be interesting to have a value on seamless that
+  allowed event propagation of some sort, maybe based on the WICD
+  work: http://www.w3.org/TR/WICD/ --><p>The <dfn id="attr-iframe-seamless" title="attr-iframe-seamless"><code>seamless</code></dfn>
+  attribute is a <a href="common-microsyntaxes.html#boolean-attribute">boolean attribute</a>. When specified, it
+  indicates that the <code><a href="#the-iframe-element">iframe</a></code> element's <a href="browsers.html#browsing-context">browsing
+  context</a> is to be rendered in a manner that makes it appear to
+  be part of the containing document (seamlessly included in the
+  parent document). <span class="impl">Specifically, when the
+  attribute is set on an <code><a href="#the-iframe-element">iframe</a></code> element whose owner
+  <code><a href="infrastructure.html#document">Document</a></code>'s <a href="browsers.html#browsing-context">browsing context</a> did not have
+  the <a href="#sandboxed-seamless-iframes-flag">sandboxed seamless iframes flag</a> set when that
+  <code><a href="infrastructure.html#document">Document</a></code> was created, and while either the
+  <a href="browsers.html#browsing-context">browsing context</a>'s <a href="browsers.html#active-document">active document</a> has the
+  <a href="origin-0.html#same-origin">same origin</a> as the <code><a href="#the-iframe-element">iframe</a></code> element's
+  document, or the <a href="browsers.html#browsing-context">browsing context</a>'s <a href="browsers.html#active-document">active
+  document</a>'s <em><a href="dom.html#the-document-s-address" title="the document's&#10;  address">address</a></em> has the <a href="origin-0.html#same-origin">same origin</a> as the
+  <code><a href="#the-iframe-element">iframe</a></code> element's document, the following requirements
+  apply:</span></p><div class="impl">
+
+  <ul><li><p>The user agent must set the <dfn id="seamless-browsing-context-flag">seamless browsing context
+   flag</dfn> to true for that <a href="browsers.html#browsing-context">browsing context</a>. This
+   will <a href="history.html#seamlessLinks">cause links to open in the parent
+   browsing context</a> unless an <a href="browsers.html#explicit-self-navigation-override">explicit self-navigation
+   override</a> is used (<code title="">target="_self"</code>).</p></li>
+
+   <li><p>In a CSS-supporting user agent: the user agent must add all
+   the style sheets that apply to the <code><a href="#the-iframe-element">iframe</a></code> element to
+   the cascade of the <a href="browsers.html#active-document">active document</a> of the
+   <code><a href="#the-iframe-element">iframe</a></code> element's <a href="browsers.html#nested-browsing-context">nested browsing context</a>,
+   at the appropriate cascade levels, before any style sheets
+   specified by the document itself.</p></li>
+
+   <li><p>In a CSS-supporting user agent: the user agent must, for the
+   purpose of CSS property inheritance only, treat the root element of
+   the <a href="browsers.html#active-document">active document</a> of the <code><a href="#the-iframe-element">iframe</a></code>
+   element's <a href="browsers.html#nested-browsing-context">nested browsing context</a> as being a child of
+   the <code><a href="#the-iframe-element">iframe</a></code> element. (Thus inherited properties on the
+   root element of the document in the <code><a href="#the-iframe-element">iframe</a></code> will
+   inherit the computed values of those properties on the
+   <code><a href="#the-iframe-element">iframe</a></code> element instead of taking their initial
+   values.)</p></li>
+
+   <li><p>In visual media, in a CSS-supporting user agent: the user agent
+   should set the intrinsic width of the <code><a href="#the-iframe-element">iframe</a></code> to the
+   width that the element would have if it was a non-replaced
+   block-level element with 'width: auto'.</p></li>
+
+   <li><p>In visual media, in a CSS-supporting user agent: the user
+   agent should set the intrinsic height of the <code><a href="#the-iframe-element">iframe</a></code> to
+   the height of the bounding box around the content rendered in the
+   <code><a href="#the-iframe-element">iframe</a></code> at its current width (as given in the previous
+   bullet point), as it would be if the scrolling position was such
+   that the top of the viewport for the content rendered in the
+   <code><a href="#the-iframe-element">iframe</a></code> was aligned with the origin of that content's
+   canvas.</p></li>
+
+   <li>
+
+    <p>In visual media, in a CSS-supporting user agent: the user agent
+    must force the height of the initial containing block of the
+    <a href="browsers.html#active-document">active document</a> of the <a href="browsers.html#nested-browsing-context">nested browsing
+    context</a> of the <code><a href="#the-iframe-element">iframe</a></code> to zero.</p>
+
+    <p class="note">This is intended to get around the otherwise
+    circular dependency of percentage dimensions that depend on the
+    height of the containing block, thus affecting the height of the
+    document's bounding box, thus affecting the height of the
+    viewport, thus affecting the size of the initial containing
+    block.</p>
+
+   </li>
+
+   <li><p>In speech media, the user agent should render the <a href="browsers.html#nested-browsing-context">nested
+   browsing context</a> without announcing that it is a separate
+   document.</p></li>
+
+   <li>
+
+    <p>User agents should, in general, act as if the <a href="browsers.html#active-document">active
+    document</a> of the <code><a href="#the-iframe-element">iframe</a></code>'s <a href="browsers.html#nested-browsing-context">nested browsing
+    context</a> was part of the document that the
+    <code><a href="#the-iframe-element">iframe</a></code> is in.</p>
+
+    <p class="example">For example if the user agent supports listing
+    all the links in a document, links in "seamlessly" nested
+    documents would be included in that list without being
+    significantly distinguished from links in the document itself.</p>
+
+   </li>
+
+  </ul><p>If the attribute is not specified, or if the <a href="origin-0.html#origin">origin</a>
+  conditions listed above are not met, then the user agent should
+  render the <a href="browsers.html#nested-browsing-context">nested browsing context</a> in a manner that is
+  clearly distinguishable as a separate <a href="browsers.html#browsing-context">browsing context</a>,
+  and the <a href="#seamless-browsing-context-flag">seamless browsing context flag</a> must be set to
+  false for that <a href="browsers.html#browsing-context">browsing context</a>.</p>
+
+  <p class="warning">It is important that user agents recheck the
+  above conditions whenever the <a href="browsers.html#active-document">active document</a> of the
+  <a href="browsers.html#nested-browsing-context">nested browsing context</a> of the <code><a href="#the-iframe-element">iframe</a></code>
+  changes, such that the <a href="#seamless-browsing-context-flag">seamless browsing context flag</a>
+  gets unset if the <a href="browsers.html#nested-browsing-context">nested browsing context</a> is <a href="history.html#navigate" title="navigate">navigated</a> to another origin.</p>
+
+  </div><p class="note">The attribute can be set or removed dynamically,
+  with the rendering updating in tandem.</p><div class="example">
+
+   <p>In this example, the site's navigation is embedded using a
+   client-side include using an <code><a href="#the-iframe-element">iframe</a></code>. Any links in the
+   <code><a href="#the-iframe-element">iframe</a></code> will, in new user agents, be automatically
+   opened in the <code><a href="#the-iframe-element">iframe</a></code>'s parent browsing context; for
+   legacy user agents, the site could also include a <code><a href="semantics.html#the-base-element">base</a></code>
+   element with a <code title="attr-base-target"><a href="semantics.html#attr-base-target">target</a></code>
+   attribute with the value <code title="">_parent</code>. Similarly,
+   in new user agents the styles of the parent page will be
+   automatically applied to the contents of the frame, but to support
+   legacy user agents authors might wish to include the styles
+   explicitly.</p>
+
+   <pre>&lt;nav&gt;&lt;iframe seamless src="nav.include.html"&gt;&lt;/iframe&gt;&lt;/nav&gt;</pre>
+
+  </div><hr/><p>The <code><a href="#the-iframe-element">iframe</a></code> element supports <a href="the-map-element.html#dimension-attributes">dimension
+  attributes</a> for cases where the embedded content has specific
+  dimensions (e.g. ad units have well-defined dimensions).</p><p>An <code><a href="#the-iframe-element">iframe</a></code> element never has <a href="content-models.html#fallback-content">fallback
+  content</a>, as it will always create a nested <a href="browsers.html#browsing-context">browsing
+  context</a>, regardless of whether the specified initial contents
+  are successfully used.</p><p>Descendants of <code><a href="#the-iframe-element">iframe</a></code> elements represent
+  nothing. (In legacy user agents that do not support
+  <code><a href="#the-iframe-element">iframe</a></code> elements, the contents would be parsed as markup
+  that could act as fallback content.)</p><p>When used in <a href="dom.html#html-documents">HTML documents</a>, the allowed content
+  model of <code><a href="#the-iframe-element">iframe</a></code> elements is text, except that invoking
+  the <a href="the-end.html#html-fragment-parsing-algorithm">HTML fragment parsing algorithm</a> with the
+  <code><a href="#the-iframe-element">iframe</a></code> element as the <var title="">context</var>
+  element and the text contents as the <var title="">input</var> must
+  result in a list of nodes that are all <a href="content-models.html#phrasing-content">phrasing
+  content</a>, with no <a href="parsing.html#parse-error" title="parse error">parse
+  errors</a> having occurred, with no <code><a href="scripting-1.html#script">script</a></code> elements
+  being anywhere in the list or as descendants of elements in the
+  list, and with all the elements in the list (including their
+  descendants) being themselves conforming.</p><p>The <code><a href="#the-iframe-element">iframe</a></code> element must be empty in <a href="dom.html#xml-documents">XML
+  documents</a>.</p><p class="note">The <a href="parsing.html#html-parser">HTML parser</a> treats markup inside
+  <code><a href="#the-iframe-element">iframe</a></code> elements as text.</p><div class="impl">
+
+  <p>The IDL attributes <dfn id="dom-iframe-src" title="dom-iframe-src"><code>src</code></dfn>, <dfn id="dom-iframe-srcdoc" title="dom-iframe-srcdoc"><code>srcdoc</code></dfn>, <dfn id="dom-iframe-name" title="dom-iframe-name"><code>name</code></dfn>, <dfn id="dom-iframe-sandbox" title="dom-iframe-sandbox"><code>sandbox</code></dfn>, and <dfn id="dom-iframe-seamless" title="dom-iframe-seamless"><code>seamless</code></dfn> must
+  <a href="common-dom-interfaces.html#reflect">reflect</a> the respective content attributes of the same
+  name.</p>
+
+  <p>The <dfn id="dom-iframe-contentdocument" title="dom-iframe-contentDocument"><code>contentDocument</code></dfn>
+  IDL attribute must return the <code><a href="infrastructure.html#document">Document</a></code> object of the
+  <a href="browsers.html#active-document">active document</a> of the <code><a href="#the-iframe-element">iframe</a></code> element's
+  <a href="browsers.html#nested-browsing-context">nested browsing context</a>.</p>
+
+  <p>The <dfn id="dom-iframe-contentwindow" title="dom-iframe-contentWindow"><code>contentWindow</code></dfn>
+  IDL attribute must return the <code><a href="browsers.html#windowproxy">WindowProxy</a></code> object of the
+  <code><a href="#the-iframe-element">iframe</a></code> element's <a href="browsers.html#nested-browsing-context">nested browsing
+  context</a>.</p>
+
+  </div><div class="example">
+
+   <p>Here is an example of a page using an <code><a href="#the-iframe-element">iframe</a></code> to
+   include advertising from an advertising broker:</p>
+
+   <pre>&lt;iframe src="http://ads.example.com/?customerid=923513721&amp;amp;format=banner"
+        width="468" height="60"&gt;&lt;/iframe&gt;</pre>
+
+  </div><h4 id="the-embed-element"><span class="secno">4.8.3 </span>The <dfn><code>embed</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><!-- (v2?)
+ we have all kinds of quirks we should define if they come up during
+ testing, as e.g. shown in:
+ http://mxr.mozilla.org/mozilla-central/source/layout/generic/nsObjectFrame.cpp
+ http://trac.webkit.org/browser/trunk/WebCore/html/HTMLEmbedElement.cpp
+ http://trac.webkit.org/browser/trunk/WebCore/rendering/RenderPartObject.cpp (updateWidget)
+ e.g. - 240x200 default
+      - the attributes/params are sent in a name/value pair list as follows (for Gecko):
+         + attributes of the element, in source order
+         + a synthesised 'src' attribute, if there was no 'src' but
+           there was a 'data', with the value of the 'data' attribute
+         + the params, in source order
+        (WebKit does something different still)
+      - the HIDDEN attribute (might be moot now)
+--><dl class="element"><dt>Categories</dt>
+   <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
+   <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
+   <dd><a href="content-models.html#embedded-content">Embedded content</a>.</dd>
+   <dd><a href="content-models.html#interactive-content">Interactive content</a>.</dd>
+   <dt>Contexts in which this element may be used:</dt>
+   <dd>Where <a href="content-models.html#embedded-content">embedded content</a> is expected.</dd>
+   <dt>Content model:</dt>
+   <dd>Empty.</dd>
+   <dt>Content attributes:</dt>
+   <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
+   <dd><code title="attr-embed-src"><a href="#attr-embed-src">src</a></code></dd>
+   <dd><code title="attr-embed-type"><a href="#attr-embed-type">type</a></code></dd>
+   <dd><code title="attr-dim-width"><a href="the-map-element.html#attr-dim-width">width</a></code></dd>
+   <dd><code title="attr-dim-height"><a href="the-map-element.html#attr-dim-height">height</a></code></dd>
+   <dd>Any other attribute that has no namespace (see prose).</dd>
+   <dt>DOM interface:</dt>
+   <dd>
+<pre class="idl">interface <dfn id="htmlembedelement">HTMLEmbedElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
+           attribute DOMString <a href="#dom-embed-src" title="dom-embed-src">src</a>;
+           attribute DOMString <a href="#dom-embed-type" title="dom-embed-type">type</a>;
+           attribute DOMString <a href="the-map-element.html#dom-dim-width" title="dom-dim-width">width</a>;
+           attribute DOMString <a href="the-map-element.html#dom-dim-height" title="dom-dim-height">height</a>;
+};</pre>
+    <div class="impl">
+    <p>Depending on the type of content instantiated by the
+    <code><a href="#the-embed-element">embed</a></code> element, the node may also support other
+    interfaces.</p>
+    </div>
+   </dd>
+  </dl><p>The <code><a href="#the-embed-element">embed</a></code> element <a href="rendering.html#represents">represents</a> an
+  integration point for an external (typically non-HTML) application
+  or interactive content.</p><p>The <dfn id="attr-embed-src" title="attr-embed-src"><code>src</code></dfn> attribute
+  gives the address of the resource being embedded. The attribute, if
+  present, must contain a <a href="urls.html#valid-non-empty-url-potentially-surrounded-by-spaces">valid non-empty URL potentially
+  surrounded by spaces</a>.</p><p>The <dfn id="attr-embed-type" title="attr-embed-type"><code>type</code></dfn>
+  attribute, if present, gives the <a href="infrastructure.html#mime-type">MIME type</a> by which the
+  plugin to instantiate is selected. The value must be a <a href="infrastructure.html#valid-mime-type">valid
+  MIME type</a>. If both the <code title="attr-embed-type"><a href="#attr-embed-type">type</a></code> attribute and the <code title="attr-embed-src"><a href="#attr-embed-src">src</a></code> attribute are present, then the
+  <code title="attr-embed-type"><a href="#attr-embed-type">type</a></code> attribute must specify the
+  same type as the <a href="fetching-resources.html#content-type" title="Content-Type">explicit Content-Type
+  metadata</a> of the resource given by the <code title="attr-embed-src"><a href="#attr-embed-src">src</a></code> attribute.</p><div class="impl">
+
+  <p>When the element is created with neither a <code title="attr-embed-src"><a href="#attr-embed-src">src</a></code> attribute nor a <code title="attr-embed-type"><a href="#attr-embed-type">type</a></code> attribute, and when attributes
+  are removed such that neither attribute is present on the element
+  anymore, and when the element has a <a href="video.html#media-element">media element</a>
+  ancestor, and when the element has an ancestor <code><a href="#the-object-element">object</a></code>
+  element that is <em>not</em> showing its <a href="content-models.html#fallback-content">fallback
+  content</a>, any plugins instantiated for the element must be
+  removed, and the <code><a href="#the-embed-element">embed</a></code> element represents nothing.</p>
+
+  <p id="sandboxPluginEmbed">If either:
+
+  </p><ul><li>the <a href="#sandboxed-plugins-browsing-context-flag">sandboxed plugins browsing context flag</a> was
+   set on the <a href="browsers.html#browsing-context">browsing context</a> for which the
+   <code><a href="#the-embed-element">embed</a></code> element's <code><a href="infrastructure.html#document">Document</a></code> is the
+   <a href="browsers.html#active-document">active document</a> when that <code><a href="infrastructure.html#document">Document</a></code> was
+   created, or</li>
+
+   <li>the <code><a href="#the-embed-element">embed</a></code> element's <code><a href="infrastructure.html#document">Document</a></code> was
+   parsed from a resource whose <a href="fetching-resources.html#content-type-sniffing-0" title="Content-Type&#10;   sniffing">sniffed type</a> as determined during <a href="history.html#navigate" title="navigate">navigation</a> is
+   <code><a href="iana.html#text-html-sandboxed">text/html-sandboxed</a></code></li>
+
+  </ul><p>...then the user agent must render the <code><a href="#the-embed-element">embed</a></code> element
+  in a manner that conveys that the <a href="infrastructure.html#plugin">plugin</a> was
+  disabled. The user agent may offer the user the option to override
+  the sandbox and instantiate the <a href="infrastructure.html#plugin">plugin</a> anyway; if the
+  user invokes such an option, the user agent must act as if the
+  conditions above did not apply for the purposes of this element.</p>
+
+  <p class="warning">Plugins are disabled in sandboxed browsing
+  contexts because they might not honor the restrictions imposed by
+  the sandbox (e.g. they might allow scripting even when scripting in
+  the sandbox is disabled). User agents should convey the danger of
+  overriding the sandbox to the user if an option to do so is
+  provided.</p>
+
+  <p>An <code><a href="#the-embed-element">embed</a></code> element is said to be <dfn id="concept-embed-active" title="concept-embed-active">potentially active</dfn> when the
+  following conditions are all met simultaneously:</p>
+
+  <ul class="brief"><li>The element is <a href="infrastructure.html#in-a-document" title="in a document">in a <code>Document</code></a>.</li>
+   <li>The element's <code><a href="infrastructure.html#document">Document</a></code> is <a href="browsers.html#fully-active">fully active</a>.</li>
+   <li>The element has either a <code title="attr-embed-src"><a href="#attr-embed-src">src</a></code> attribute set or a <code title="attr-embed-type"><a href="#attr-embed-type">type</a></code> attribute set (or both).</li>
+   <li>The element's <code title="attr-embed-src"><a href="#attr-embed-src">src</a></code> attribute is either absent or its value is the empty string.</li>
+   <li>The element is not in a <code><a href="infrastructure.html#document">Document</a></code> whose <a href="browsers.html#browsing-context">browsing context</a> had the <a href="#sandboxed-plugins-browsing-context-flag">sandboxed plugins browsing context flag</a> set when the <code><a href="infrastructure.html#document">Document</a></code> was created (unless this has been overridden as described above).</li>
+   <li>The element's <code><a href="infrastructure.html#document">Document</a></code> was not parsed from a resource whose <a href="fetching-resources.html#content-type-sniffing-0" title="Content-Type sniffing">sniffed type</a> as determined during <a href="history.html#navigate" title="navigate">navigation</a> is <code><a href="iana.html#text-html-sandboxed">text/html-sandboxed</a></code> (unless this has been overridden as described above).</li>
+   <li>The element is not a descendant of a <a href="video.html#media-element">media element</a>.</li>
+   <li>The element is not a descendant of an <code><a href="#the-object-element">object</a></code> element that is not showing its <a href="content-models.html#fallback-content">fallback content</a>.</li>
+  </ul><p>Whenever an <code><a href="#the-embed-element">embed</a></code> element that was not <a href="#concept-embed-active" title="concept-embed-active">potentially active</a> becomes <a href="#concept-embed-active" title="concept-embed-active">potentially active</a>, and whenever
+  a <a href="#concept-embed-active" title="concept-embed-active">potentially active</a>
+  <code><a href="#the-embed-element">embed</a></code> element's <code title="attr-embed-type"><a href="#attr-embed-type">src</a></code> attribute is set, changed, or
+  removed, and whenever a <a href="#concept-embed-active" title="concept-embed-active">potentially active</a>
+  <code><a href="#the-embed-element">embed</a></code> element's <code title="attr-embed-type"><a href="#attr-embed-type">type</a></code> attribute is set, changed, or
+  removed, the appropriate set of steps from the following is then
+  applied:</p>
+
+  <dl class="switch"><dt>If the element has a <code title="attr-embed-src"><a href="#attr-embed-src">src</a></code>
+   attribute set</dt>
+
+   <dd>
+
+    <p>The user agent must <a href="urls.html#resolve-a-url" title="resolve a url">resolve</a>
+    the value of the element's <code title="attr-embed-src"><a href="#attr-embed-src">src</a></code>
+    attribute, relative to the element. If that is successful, the
+    user agent should <a href="fetching-resources.html#fetch">fetch</a> the resulting <a href="urls.html#absolute-url">absolute
+    URL</a>, from the element's <a href="browsers.html#browsing-context-scope-origin">browsing context scope
+    origin</a> if it has one<!-- potentially http-origin privacy
+    sensitive -->. The <a href="webappapis.html#concept-task" title="concept-task">task</a> that is
+    <a href="webappapis.html#queue-a-task" title="queue a task">queued</a> by the <a href="webappapis.html#networking-task-source">networking
+    task source</a> once the resource has been <a href="fetching-resources.html#fetch" title="fetch">fetched</a> must find and instantiate an
+    appropriate <a href="infrastructure.html#plugin">plugin</a> based on the <a href="#concept-embed-type" title="concept-embed-type">content's type</a>, and hand that
+    <a href="infrastructure.html#plugin">plugin</a> the content of the resource, replacing any
+    previously instantiated plugin for the element.</p> <!-- Note that
+    this doesn't happen when the base URL changes. -->
+
+    <p>Fetching the resource must <a href="the-end.html#delay-the-load-event">delay the load event</a> of
+    the element's document.</p>
+    <!-- if we add load/error events, then replace the previous
+    paragraph with the text one: -->
+    <!-- similar text in various places -->
+    <!--<p>Fetching the resource must <span>delay the load
+    event</span> of the element's document until the final <span
+    title="concept-task">task</span> that is <span title="queue a
+    task">queued</span> by the <span>networking task source</span>
+    once the resource has been <span title="fetch">fetched</span> has
+    been run.</p>-->
+
+   </dd>
+
+   <dt>If the element has no <code title="attr-embed-src"><a href="#attr-embed-src">src</a></code>
+   attribute set</dt>
+
+   <dd><p>The user agent should find and instantiate an appropriate
+   <a href="infrastructure.html#plugin">plugin</a> based on the value of the <code title="attr-embed-type"><a href="#attr-embed-type">type</a></code> attribute.</p>
+
+  </dd></dl><p>Whenever an <code><a href="#the-embed-element">embed</a></code> element that was <a href="#concept-embed-active" title="concept-embed-active">potentially active</a> stops being
+  <a href="#concept-embed-active" title="concept-embed-active">potentially active</a>, any
+  <a href="infrastructure.html#plugin">plugin</a> that had been instantiated for that element must
+  be unloaded.</p>
+
+  <p class="note">The <code><a href="#the-embed-element">embed</a></code> element is unaffected by the
+  CSS 'display' property. The selected plugin is instantiated even if
+  the element is hidden with a 'display:none' CSS style.</p>
+
+  <p>The <dfn id="concept-embed-type" title="concept-embed-type">type of the content</dfn>
+  being embedded is defined as follows:</p>
+
+  <ol><li><p>If the element has a <code title="attr-embed-type"><a href="#attr-embed-type">type</a></code> attribute, and that attribute's
+   value is a type that a <a href="infrastructure.html#plugin">plugin</a> supports, then the value
+   of the <code title="attr-embed-type"><a href="#attr-embed-type">type</a></code> attribute is the
+   <a href="#concept-embed-type" title="concept-embed-type">content's type</a>.</p></li>
+
+   <li>
+
+    <!-- if we get to this point we know we can successfully parsed
+    the URL, since this algorithm is only used after fetching the
+    resource in the steps above -->
+
+    <p>Otherwise, if the <a href="urls.html#url-path" title="url-path">&lt;path&gt;</a>
+    component of the <a href="urls.html#url">URL</a> of the specified resource (after
+    any redirects) matches a pattern that a <a href="infrastructure.html#plugin">plugin</a>
+    supports, then the <a href="#concept-embed-type" title="concept-embed-type">content's
+    type</a> is the type that that plugin can handle.</p>
+
+    <p class="example">For example, a plugin might say that it can
+    handle resources with <a href="urls.html#url-path" title="url-path">&lt;path&gt;</a>
+    components that end with the four character string "<code title="">.swf</code>".</p>
+
+    <!-- it's sad that we have to do extension sniffing. sigh. -->
+    <!-- see also <object> which has a similar step -->
+
+   </li>
+
+   <li><p>Otherwise, if the specified resource has <a href="fetching-resources.html#content-type" title="Content-Type">explicit Content-Type metadata</a>, then
+   that is the <a href="#concept-embed-type" title="concept-embed-type">content's
+   type</a>.</p></li>
+
+   <li><p>Otherwise, the content has no type and there can be no
+   appropriate <a href="infrastructure.html#plugin">plugin</a> for it.</p></li>
+
+   <!-- This algorithm is a monument to bad design. Go legacy! -->
+
+  </ol><p>The <code><a href="#the-embed-element">embed</a></code> element has no <a href="content-models.html#fallback-content">fallback
+  content</a>. If the user agent can't find a suitable plugin, then
+  the user agent must use a default plugin. (This default could be as
+  simple as saying "Unsupported Format".)</p>
+
+  <p>Whether the resource is fetched successfully or not (e.g. whether
+  the response code was a 2xx code <a href="fetching-resources.html#concept-http-equivalent-codes" title="concept-http-equivalent-codes">or equivalent</a>) must be
+  ignored when determining the resource's type and when handing the
+  resource to the plugin.</p>
+
+  <p class="note">This allows servers to return data for plugins even
+  with error responses (e.g. HTTP 500 Internal Server Error codes can
+  still contain plugin data).</p>
+
+  </div><p>Any namespace-less attribute other than <code title="attr-embed-name"><a href="obsolete.html#attr-embed-name">name</a></code>, <code title="attr-embed-align"><a href="obsolete.html#attr-embed-align">align</a></code>, <code title="attr-embed-hspace"><a href="obsolete.html#attr-embed-hspace">hspace</a></code>, and <code title="attr-embed-vspace"><a href="obsolete.html#attr-embed-vspace">vspace</a></code> <!-- when editing, see also
+  note below --> may be specified on the <code><a href="#the-embed-element">embed</a></code> element,
+  so long as its name is <a href="infrastructure.html#xml-compatible">XML-compatible</a> and contains no
+  characters in the range U+0041 to U+005A (LATIN CAPITAL LETTER A to
+  LATIN CAPITAL LETTER Z). These attributes are then passed as
+  parameters to the <a href="infrastructure.html#plugin">plugin</a>.</p><p class="note">All attributes in <a href="dom.html#html-documents">HTML documents</a> get
+  lowercased automatically, so the restriction on uppercase letters
+  doesn't affect such documents.</p><p class="note">The four exceptions are to exclude legacy attributes
+  that have side-effects beyond just sending parameters to the
+  <a href="infrastructure.html#plugin">plugin</a>.</p><div class="impl">
+
+  <p>The user agent should pass the names and values of all the
+  attributes of the <code><a href="#the-embed-element">embed</a></code> element that have no namespace
+  to the <a href="infrastructure.html#plugin">plugin</a> used, when it is instantiated.</p>
+
+  <p>If the <a href="infrastructure.html#plugin">plugin</a> instantiated for the
+  <code><a href="#the-embed-element">embed</a></code> element supports a scriptable interface, the
+  <code><a href="#htmlembedelement">HTMLEmbedElement</a></code> object representing the element should
+  expose that interface while the element is instantiated.</p>
+
+  </div><p>The <code><a href="#the-embed-element">embed</a></code> element supports <a href="the-map-element.html#dimension-attributes">dimension
+  attributes</a>.</p><div class="impl">
+
+  <p>The IDL attributes <dfn id="dom-embed-src" title="dom-embed-src"><code>src</code></dfn> and <dfn id="dom-embed-type" title="dom-embed-type"><code>type</code></dfn> each must
+  <a href="common-dom-interfaces.html#reflect">reflect</a> the respective content attributes of the same
+  name.</p>
+
+  </div><div class="example">
+
+   <p>Here's a way to embed a resource that requires a proprietary
+   plug-in, like Flash:</p>
+
+   <pre>&lt;embed src="catgame.swf"&gt;</pre>
+
+   <p>If the user does not have the plug-in (for example if the
+   plug-in vendor doesn't support the user's platform), then the user
+   will be unable to use the resource.</p>
+
+   <p>To pass the plugin a parameter "quality" with the value "high",
+   an attribute can be specified:</p>
+
+   <pre>&lt;embed src="catgame.swf" quality="high"&gt;</pre>
+
+   <p>This would be equivalent to the following, when using an
+   <code><a href="#the-object-element">object</a></code> element instead:</p>
+
+   <pre>&lt;object data="catgame.swf"&gt;
+ &lt;param name="quality" value="high"&gt;
+&lt;/object&gt;</pre>
+
+  </div><h4 id="the-object-element"><span class="secno">4.8.4 </span>The <dfn><code>object</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+   <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
+   <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
+   <dd><a href="content-models.html#embedded-content">Embedded content</a>.</dd>
+   <dd>If the element has a <code title="attr-hyperlink-usemap"><a href="the-map-element.html#attr-hyperlink-usemap">usemap</a></code> attribute: <a href="content-models.html#interactive-content">Interactive content</a>.</dd> <!-- also when showing a plugin or a nested browsing context, but checking that statically is hard...) -->
+   <dd><a href="forms.html#category-listed" title="category-listed">Listed</a>,  <a href="forms.html#category-submit" title="category-submit">submittable</a>, <a href="forms.html#form-associated-element">form-associated element</a>.</dd>
+   <dt>Contexts in which this element may be used:</dt>
+   <dd>Where <a href="content-models.html#embedded-content">embedded content</a> is expected.</dd>
+   <dt>Content model:</dt>
+   <dd>Zero or more <code><a href="#the-param-element">param</a></code> elements, then, <a href="content-models.html#transparent">transparent</a>.</dd>
+   <dt>Content attributes:</dt>
+   <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
+   <dd><code title="attr-object-data"><a href="#attr-object-data">data</a></code></dd>
+   <dd><code title="attr-object-type"><a href="#attr-object-type">type</a></code></dd>
+   <dd><code title="attr-object-name"><a href="#attr-object-name">name</a></code></dd>
+   <dd><code title="attr-hyperlink-usemap"><a href="the-map-element.html#attr-hyperlink-usemap">usemap</a></code></dd>
+   <dd><code title="attr-fae-form"><a href="association-of-controls-and-forms.html#attr-fae-form">form</a></code></dd>
+   <dd><code title="attr-dim-width"><a href="the-map-element.html#attr-dim-width">width</a></code></dd>
+   <dd><code title="attr-dim-height"><a href="the-map-element.html#attr-dim-height">height</a></code></dd>
+   <dt>DOM interface:</dt>
+   <dd>
+<pre class="idl">interface <dfn id="htmlobjectelement">HTMLObjectElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
+           attribute DOMString <a href="#dom-object-data" title="dom-object-data">data</a>;
+           attribute DOMString <a href="#dom-object-type" title="dom-object-type">type</a>;
+           attribute DOMString <a href="#dom-object-name" title="dom-object-name">name</a>;
+           attribute DOMString <a href="#dom-object-usemap" title="dom-object-useMap">useMap</a>;
+  readonly attribute <a href="forms.html#htmlformelement">HTMLFormElement</a> <a href="association-of-controls-and-forms.html#dom-fae-form" title="dom-fae-form">form</a>;
+           attribute DOMString <a href="the-map-element.html#dom-dim-width" title="dom-dim-width">width</a>;
+           attribute DOMString <a href="the-map-element.html#dom-dim-height" title="dom-dim-height">height</a>;
+  readonly attribute Document <a href="#dom-object-contentdocument" title="dom-object-contentDocument">contentDocument</a>;
+  readonly attribute <a href="browsers.html#windowproxy">WindowProxy</a> <a href="#dom-object-contentwindow" title="dom-object-contentWindow">contentWindow</a>;
+
+  readonly attribute boolean <a href="association-of-controls-and-forms.html#dom-cva-willvalidate" title="dom-cva-willValidate">willValidate</a>;
+  readonly attribute <a href="association-of-controls-and-forms.html#validitystate">ValidityState</a> <a href="association-of-controls-and-forms.html#dom-cva-validity" title="dom-cva-validity">validity</a>;
+  readonly attribute DOMString <a href="association-of-controls-and-forms.html#dom-cva-validationmessage" title="dom-cva-validationMessage">validationMessage</a>;
+  boolean <a href="association-of-controls-and-forms.html#dom-cva-checkvalidatity" title="dom-cva-checkValidatity">checkValidity</a>();
+  void <a href="association-of-controls-and-forms.html#dom-cva-setcustomvalidity" title="dom-cva-setCustomValidity">setCustomValidity</a>(in DOMString error);
+};</pre>
+    <div class="impl">
+    <p>Depending on the type of content instantiated by the
+    <code><a href="#the-object-element">object</a></code> element, the node also supports other
+    interfaces.</p>
+    </div>
+   </dd>
+  </dl><p>The <code><a href="#the-object-element">object</a></code> element can represent an external
+  resource, which, depending on the type of the resource, will either
+  be treated as an image, as a <a href="browsers.html#nested-browsing-context">nested browsing context</a>,
+  or as an external resource to be processed by a
+  <a href="infrastructure.html#plugin">plugin</a>.</p><p>The <dfn id="attr-object-data" title="attr-object-data"><code>data</code></dfn>
+  attribute, if present, specifies the address of the resource. If
+  present, the attribute must be a <a href="urls.html#valid-non-empty-url-potentially-surrounded-by-spaces">valid non-empty
+  URL potentially surrounded by spaces</a>.</p><p>The <dfn id="attr-object-type" title="attr-object-type"><code>type</code></dfn>
+  attribute, if present, specifies the type of the resource. If
+  present, the attribute must be a <a href="infrastructure.html#valid-mime-type">valid MIME type</a>.</p><p>At least one of either the <code title="attr-object-data"><a href="#attr-object-data">data</a></code> attribute or the <code title="attr-object-type"><a href="#attr-object-type">type</a></code> attribute must be present.</p><p>The <dfn id="attr-object-name" title="attr-object-name"><code>name</code></dfn>
+  attribute, if present, must be a <a href="browsers.html#valid-browsing-context-name">valid browsing context
+  name</a>. The given value is used to name the <a href="browsers.html#nested-browsing-context">nested
+  browsing context</a>, if applicable.</p><div class="impl">
+
+  <p>When the element is created, when it is popped off the
+  <a href="parsing.html#stack-of-open-elements">stack of open elements</a> of an <a href="parsing.html#html-parser">HTML parser</a>
+  or <a href="the-xhtml-syntax.html#xml-parser">XML parser</a>, and subsequently whenever the element is
+  <a href="infrastructure.html#insert-an-element-into-a-document" title="insert an element into a document">inserted into a
+  document</a> or <a href="infrastructure.html#remove-an-element-from-a-document" title="remove an element from a&#10;  document">removed from a document</a>; and whenever the element's
+  <code><a href="infrastructure.html#document">Document</a></code> changes whether it is <a href="browsers.html#fully-active">fully
+  active</a>; and whenever an ancestor <code><a href="#the-object-element">object</a></code> element
+  changes to or from showing its <a href="content-models.html#fallback-content">fallback content</a>; and
+  whenever the element's <code title="attr-object-classid"><a href="obsolete.html#attr-object-classid">classid</a></code> attribute is set,
+  changed, or removed; and, when its <code title="attr-object-classid"><a href="obsolete.html#attr-object-classid">classid</a></code> attribute is not present,
+  whenever its <code title="attr-object-data"><a href="#attr-object-data">data</a></code> attribute is
+  set, changed, or removed; and, when neither its <code title="attr-object-classid"><a href="obsolete.html#attr-object-classid">classid</a></code> attribute nor its <code title="attr-object-data"><a href="#attr-object-data">data</a></code> attribute are present, whenever
+  its <code title="attr-object-type"><a href="#attr-object-type">type</a></code> attribute is set,
+  changed, or removed: the user agent must <a href="webappapis.html#queue-a-task">queue a task</a>
+  to run the following steps to (re)determine what the
+  <code><a href="#the-object-element">object</a></code> element represents. The <a href="webappapis.html#task-source">task source</a>
+  for this <a href="webappapis.html#concept-task" title="concept-task">task</a> is the <a href="webappapis.html#dom-manipulation-task-source">DOM
+  manipulation task source</a>.</p> <!-- Changing the base URL
+  doesn't trigger this. -->
+
+  <ol><li>
+
+    <p>If the user has indicated a preference that this
+    <code><a href="#the-object-element">object</a></code> element's <a href="content-models.html#fallback-content">fallback content</a> be
+    shown instead of the element's usual behavior, then jump to the
+    last step in the overall set of steps (fallback).</p>
+
+    <p class="note">For example, a user could ask for the element's
+    <a href="content-models.html#fallback-content">fallback content</a> to be shown because that content
+    uses a format that the user finds more accessible.</p>
+
+   </li>
+
+   <li>
+
+    <p>If the element has an ancestor <a href="video.html#media-element">media element</a>, or
+    has an ancestor <code><a href="#the-object-element">object</a></code> element that is <em>not</em>
+    showing its <a href="content-models.html#fallback-content">fallback content</a>, or if the element is
+    not <a href="infrastructure.html#in-a-document" title="in a document">in a <code>Document</code></a>
+    with a <a href="browsers.html#browsing-context">browsing context</a>, or if the element's
+    <code><a href="infrastructure.html#document">Document</a></code> is not <a href="browsers.html#fully-active">fully active</a>, or if the
+    element is still in the <a href="parsing.html#stack-of-open-elements">stack of open elements</a> of an
+    <a href="parsing.html#html-parser">HTML parser</a> or <a href="the-xhtml-syntax.html#xml-parser">XML parser</a>, then jump to
+    the last step in the overall set of steps (fallback).</p>
+
+   </li>
+
+   <li>
+
+    <!-- what if it's not in the document? if that should prevent
+    plugin instantiation, then here just skip to the last step -->
+
+    <p>If the <code title="attr-object-classid"><a href="obsolete.html#attr-object-classid">classid</a></code>
+    attribute is present, and has a value that isn't the empty string,
+    then: if the user agent can find a <a href="infrastructure.html#plugin">plugin</a> suitable
+    according to the value of the <code title="attr-object-classid"><a href="obsolete.html#attr-object-classid">classid</a></code> attribute, and <a href="#sandboxPluginObject">plugins aren't being sandboxed</a>,
+    then that <a href="infrastructure.html#plugin">plugin</a> <a href="#object-plugin">should be
+    used</a>, and the value of the <code title="attr-object-data"><a href="#attr-object-data">data</a></code> attribute, if any, should be
+    passed to the <a href="infrastructure.html#plugin">plugin</a>. If no suitable
+    <a href="infrastructure.html#plugin">plugin</a> can be found, or if the <a href="infrastructure.html#plugin">plugin</a>
+    reports an error, jump to the last step in the overall set of
+    steps (fallback).</p>
+
+    <!--
+     case insensitive:
+      is "clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" -> application/x-shockwave-flash
+      is "clsid:cfcdaa03-8be4-11cf-b84b-0020afbbccfa" -> audio/x-pn-realaudio-plugin
+      is "clsid:02bf25d5-8c17-4b23-bc80-d3488abddc6b" -> video/quicktime
+      is "clsid:166b1bca-3f9c-11cf-8075-444553540000" -> application/x-director
+      is "clsid:6bf52a52-394a-11d3-b153-00c04f79faa6" -> application/x-mplayer2
+      starts with "java:"                             -> application/x-java-vm
+      starts with "clsid:"                            -> application/x-oleobject
+    -->
+
+   </li>
+
+   <!-- (v2?)
+   we may have to define magic fallback to <param> if it turns out to
+   be needed in testing:
+   <hyatt> apparently your url can come from <param>
+   <hyatt> not just the data attribute
+   <hyatt> our code looks for params with "src", "movie", "code" and "url"
+   <hyatt> and also tries to find the type on a param
+   <Hixie> oh that's you trying to have hacky activex support
+   <Hixie> opera does that too
+   <hyatt> yeah we support activex versions of plugins that are common
+   <hyatt> like flash and quicktime and realaudio
+   <Hixie> that would be a step 1b. if no data attribute, then look for a <param> to get you a URL instead.
+   <Hixie> and if you find one, carry on as if that was your data="".
+   -->
+
+   <li><p>If the <code title="attr-object-data"><a href="#attr-object-data">data</a></code> attribute
+   is present and its value is not the empty string, then:</p>
+
+    <ol><li><p>If the <code title="attr-object-type"><a href="#attr-object-type">type</a></code>
+     attribute is present and its value is not a type that the user
+     agent supports, and is not a type that the user agent can find a
+     <a href="infrastructure.html#plugin">plugin</a> for, then the user agent may jump to the last
+     step in the overall set of steps (fallback) without fetching the
+     content to examine its real type.</p></li>
+
+     <li><p><a href="urls.html#resolve-a-url" title="resolve a url">Resolve</a> the
+     <a href="urls.html#url">URL</a> specified by the <code title="attr-object-data"><a href="#attr-object-data">data</a></code> attribute, relative to the
+     element.</p></li>
+
+     <li><p>If that failed, <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named
+     <code title="event-error">error</code> at the element, then jump
+     to the last step in the overall set of steps (fallback).</p></li>
+
+     <li>
+
+      <p><a href="fetching-resources.html#fetch">Fetch</a> the resulting <a href="urls.html#absolute-url">absolute URL</a>,
+      from the element's <a href="browsers.html#browsing-context-scope-origin">browsing context scope origin</a> if
+      it has one<!-- potentially http-origin privacy sensitive
+      -->.</p>
+
+      <!-- similar text in various places --> <p>Fetching the resource
+      must <a href="the-end.html#delay-the-load-event">delay the load event</a> of the element's document
+      until the <a href="webappapis.html#concept-task" title="concept-task">task</a> that is <a href="webappapis.html#queue-a-task" title="queue a task">queued</a> by the <a href="webappapis.html#networking-task-source">networking task
+      source</a> once the resource has been <a href="fetching-resources.html#fetch" title="fetch">fetched</a> (defined next) has been run.</p>
+
+     </li>
+
+     <li><p>If the resource is not yet available (e.g. because the
+     resource was not available in the cache, so that loading the
+     resource required making a request over the network), then jump
+     to the last step in the overall set of steps (fallback). The
+     <a href="webappapis.html#concept-task" title="concept-task">task</a> that is <a href="webappapis.html#queue-a-task" title="queue&#10;     a task">queued</a> by the <a href="webappapis.html#networking-task-source">networking task source</a>
+     once the resource is available must restart this algorithm from
+     this step. Resources can load incrementally; user agents may opt
+     to consider a resource "available" whenever enough data has been
+     obtained to begin processing the resource.</p></li>
+
+     <li><p>If the load failed (e.g. there was an HTTP 404 error,
+     there was a DNS error), <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named
+     <code title="event-error">error</code> at the element, then jump
+     to the last step in the overall set of steps (fallback).</p></li>
+
+     <li id="object-type-detection">
+
+      <p>Determine the <var title="">resource type</var>, as follows:</p>
+
+<!-- Hopefully this step is exactly equivalent to the following:
+
+ START
+   |
+   V
+ Is there a Content-Type and is the UA going to obey it blindly?
+   |                   |
+   | YES               | NO
+   |                   V                                                          YES
+   |                 Is there a type="" attribute whose value is a plugin type? ============================================-.
+   |                   |                                                                                                     |
+   |                   | NO                                                                                                  |
+   |                   V                        NO                                       YES                                 |
+   |                 Is there a Content type? ========-> Is there a type="" attribute? ==========> Let TYPE be type=""       |
+   |                   |                                                           |               attribute value           |
+   |                   | YES                                                       | NO                    |                 |
+   V            NO     V                                                           |                       V                 |
+   +-<============== Is it text/plain or application/octet-stream?                 `==> Let TYPE be  =====>+                 |
+   |                   |                                     |                          Sniffed type       |                 |
+   |                   | text/plain                          | octet-stream                                V                 |
+   |                   V                              YES    V                                          Is TYPE              |
+   |                 Does the page sniff as binary? ======> Is there a type="" attribute?       application/octet-stream?    |
+   |                   |                                     |              |                      |                |        |
+   |                   | NO                                  | YES          | NO                   | YES            | NO     |
+   |                   |                                     |       YES    V                      V                |        |
+   |                   |                  application/octet-stream? =====> Extension that is plugin type?           |        |
+   |                   |                                     |                          |          |                |        |
+   |                   |                                     | NO                       | NO       | YES            |        |
+   |                   |                                     V                          |          |                |        |
+   |                   |                           Type attribute is XML or     YES     V          |                |        |
+   |                   |                           doesn't start with image/* ======> FALLBACK     |                |        |
+   |                   |                           and is not a plugin type?                       |                |        |
+   |                   |                                          |                                |                |        |
+   |                   |                                          | NO                             |                |        V
+   V                   V                                          V                                V                V       Use
+  Use                 Use                                        Use it (will be                  Use              Use      type=""
+  Content-Type        text/plain                                 bitmap or plugin)                extension        TYPE     attribute
+   |                   |                                          |                                |                |        |
+   |                   V                                          V                                V                V        |
+   `================->-+========================================>-+==============>-+-<============-+-<==============+-<======'
+                                                                                   |
+                                                                                   V
+                                                                  Continue following rules in the spec, which might
+                                                                  result in a plugin, a browsing context, an image,
+                                                                  or using fallback, depending on the UA and the type.
+
+
+   "Extension that is plugin type?" means "Is there an extension that matches one that a plugin supports?".
+   Plugins are not allowed to register text/plain or application/octet-stream.
+
+-->
+
+      <ol><li>
+
+        <p>Let the <var title="">resource type</var> be unknown.</p>
+
+       </li>
+
+       <li>
+
+        <!-- by request: http://www.w3.org/Bugs/Public/show_bug.cgi?id=8479 -->
+
+        <p>If the user agent is configured to strictly obey
+        Content-Type headers for this resource, and the resource has
+        <a href="fetching-resources.html#content-type" title="Content-Type">associated Content-Type
+        metadata</a>, then let the <var title="">resource
+        type</var> be the type specified in <a href="fetching-resources.html#content-type" title="Content-Type">the resource's Content-Type
+        metadata</a>, and jump to the step below labeled
+        <i>handler</i>.</p>
+
+       </li>
+
+       <li>
+
+        <p>If there is a <code title="attr-object-type"><a href="#attr-object-type">type</a></code>
+        attribute present on the <code><a href="#the-object-element">object</a></code> element, and that
+        attribute's value is not a type that the user agent supports,
+        but it <em>is</em> a type that a <a href="infrastructure.html#plugin">plugin</a> supports,
+        then let the <var title="">resource type</var> be the type
+        specified in that <code title="attr-object-type"><a href="#attr-object-type">type</a></code>
+        attribute, and jump to the step below labeled
+        <i>handler</i>.</p>
+
+       </li>
+
+       <li>
+
+        <p>Run the approprate set of steps from the following
+        list:</p>
+
+        <dl class="switch"><dt>The resource has <a href="fetching-resources.html#content-type" title="Content-Type">associated
+         Content-Type metadata</a></dt>
+
+         <dd>
+
+          <ol><li>
+
+            <p>Let <var title="">binary</var> be false.</p>
+
+           </li>
+
+           <li>
+
+            <p>If the type specified in <a href="fetching-resources.html#content-type" title="Content-Type">the
+            resource's Content-Type metadata</a> is
+            "<code>text/plain</code>", and the result of applying the
+            <a href="fetching-resources.html#content-type-sniffing:-text-or-binary" title="Content-Type sniffing: text or binary">rules
+            for distingushing if a resource is text or binary</a>
+            to the resource is that the resource is not
+            <code>text/plain</code>, then set <var title="">binary</var> to true.</p>
+
+           </li>
+
+           <li>
+
+            <p>If the type specified in <a href="fetching-resources.html#content-type" title="Content-Type">the
+            resource's Content-Type metadata</a> is
+            "<code>application/octet-stream</code>", then set <var title="">binary</var> to true.</p>
+
+           </li>
+
+           <li>
+
+            <p>If <var title="">binary</var> is false, then let the
+            <var title="">resource type</var> be the type specified in
+            <a href="fetching-resources.html#content-type" title="Content-Type">the resource's Content-Type
+            metadata</a>, and jump to the step below labeled
+            <i>handler</i>.</p>
+
+           </li>
+
+           <li>
+
+            <p>If there is a <code title="attr-object-type"><a href="#attr-object-type">type</a></code> attribute present on
+            the <code><a href="#the-object-element">object</a></code> element, and its value is not
+            <code>application/octet-stream</code>, then run the
+            following steps:</p>
+
+            <ol><li>
+
+              <p>If the attribute's value is a type that a <a href="infrastructure.html#plugin">plugin</a> supports, or
+              the attribute's value is a type that starts with "<code>image/</code>" that is not also an <a href="infrastructure.html#xml-mime-type">XML MIME type</a>,
+              then let the <var title="">resource type</var> be the type specified in that <code title="attr-object-type"><a href="#attr-object-type">type</a></code> attribute.</p>
+
+             </li>
+
+             <li>
+
+              <p>Jump to the step below labeled <i>handler</i>.</p>
+
+             </li>
+
+            </ol></li>
+
+          </ol></dd>
+
+         <dt>The resource does not have <a href="fetching-resources.html#content-type" title="Content-Type">associated Content-Type
+         metadata</a></dt>
+
+         <dd>
+
+          <ol><li>
+
+            <p>If there is a <code title="attr-object-type"><a href="#attr-object-type">type</a></code> attribute present on
+            the <code><a href="#the-object-element">object</a></code> element, then let the <var title="">tentative type</var> be the type specified in that
+            <code title="attr-object-type"><a href="#attr-object-type">type</a></code> attribute.</p>
+
+            <p>Otherwise, let <var title="">tentative type</var> be the
+            <a href="fetching-resources.html#content-type-sniffing-0" title="content-type sniffing">sniffed type of the
+            resource</a>.</p>
+
+           </li>
+
+           <li>
+
+            <p>If <var title="">tentative type</var> is <em>not</em>
+            <code>application/octet-stream</code>, then let <var title="">resource type</var> be <var title="">tentative
+            type</var> and jump to the step below labeled
+            <i>handler</i>.</p>
+
+           </li>
+
+          </ol></dd>
+
+        </dl></li>
+
+       <li>
+
+        <!-- if we get to this point we know we can successfully
+        parsed the URL, since this algorithm is only used after
+        fetching the resource in the steps above -->
+
+        <p>If the <a href="urls.html#url-path" title="url-path">&lt;path&gt;</a> component
+        of the <a href="urls.html#url">URL</a> of the specified resource (after any
+        redirects) matches a pattern that a <a href="infrastructure.html#plugin">plugin</a>
+        supports, then let <var title="">resource type</var> be the
+        type that that plugin can handle.</p>
+
+        <p class="example">For example, a plugin might say that it can
+        handle resources with <a href="urls.html#url-path" title="url-path">&lt;path&gt;</a> components that end with
+        the four character string "<code title="">.swf</code>".</p>
+
+        <!-- it's sad that we have to do extension sniffing. sigh. -->
+        <!-- see also <embed> which has a similar step -->
+
+       </li>
+
+      </ol><p class="note">It is possible for this step to finish with <var title="">resource type</var> still being unknown, or for one of
+      the substeps above to jump straight to the next step. In both
+      cases, the next step will trigger fallback.</p>
+
+     </li>
+
+     <li><p><i>Handler</i>: Handle the content as given by the first
+     of the following cases that matches:</p>
+
+      <dl class="switch"><dt>If the <var title="">resource type</var> is not a type that
+       the user agent supports, but it <em>is</em> a type that a
+       <a href="infrastructure.html#plugin">plugin</a> supports</dt>
+
+       <dd>
+
+        <p>If <a href="#sandboxPluginObject">plugins are being
+        sandboxed</a>, jump to the last step in the overall set of
+        steps (fallback).</p>
+
+        <p>Otherwise, the user agent should <a href="#object-plugin">use the plugin that supports <var title="">resource type</var></a> and pass the content of the
+        resource to that <a href="infrastructure.html#plugin">plugin</a>. If the
+        <a href="infrastructure.html#plugin">plugin</a> reports an error, then jump to the last
+        step in the overall set of steps (fallback).</p>
+
+       </dd>
+
+
+       <dt>If the <var title="">resource type</var> is an <a href="infrastructure.html#xml-mime-type">XML MIME
+       type</a>, or
+       <!-- (redundant with the next one) if the <var title="">resource type</var> is HTML, or -->
+       if the <var title="">resource type</var> does not start with
+       "<code>image/</code>"</dt>
+
+       <dd>
+
+        <p>The <code><a href="#the-object-element">object</a></code> element must be associated with a
+        newly created <a href="browsers.html#nested-browsing-context">nested browsing context</a>, if it does
+        not already have one.</p>
+
+        <p>If the <a href="urls.html#url">URL</a> of the given resource is not
+        <code><a href="fetching-resources.html#about:blank">about:blank</a></code>, the element's <a href="browsers.html#nested-browsing-context">nested browsing
+        context</a> must then be <a href="history.html#navigate" title="navigate">navigated</a> to that resource, with
+        <a href="history.html#replacement-enabled">replacement enabled</a>, and with the
+        <code><a href="#the-object-element">object</a></code> element's document's <a href="browsers.html#browsing-context">browsing
+        context</a> as the <a href="history.html#source-browsing-context">source browsing
+        context</a>. (The <code title="attr-object-data"><a href="#attr-object-data">data</a></code> attribute of the
+        <code><a href="#the-object-element">object</a></code> element doesn't get updated if the
+        browsing context gets further navigated to other
+        locations.)</p>
+
+        <p>If the <a href="urls.html#url">URL</a> of the given resource <em>is</em>
+        <code><a href="fetching-resources.html#about:blank">about:blank</a></code>, then, instead, the user agent must
+        <a href="webappapis.html#queue-a-task">queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a>
+        named <code title="event-load">load</code> at the
+        <code><a href="#the-object-element">object</a></code> element.</p>
+
+        <p>The <code><a href="#the-object-element">object</a></code> element <a href="rendering.html#represents">represents</a> the
+        <a href="browsers.html#nested-browsing-context">nested browsing context</a>.</p>
+
+        <p>If the <code title="attr-object-name"><a href="#attr-object-name">name</a></code> attribute
+        is present, the <a href="browsers.html#browsing-context-name">browsing context name</a> must be set
+        to the value of this attribute; otherwise, the <a href="browsers.html#browsing-context-name">browsing
+        context name</a> must be set to the empty string.</p>
+
+        <p class="note">It's possible that the <a href="history.html#navigate" title="navigate">navigation</a> of the <a href="browsers.html#browsing-context">browsing
+        context</a> will actually obtain the resource from a
+        different <a href="offline.html#application-cache">application cache</a>. Even if the resource
+        is then found to have a different type, it is still used as
+        part of a <a href="browsers.html#nested-browsing-context">nested browsing context</a>; this algorithm
+        doesn't restart with the new resource.</p>
+
+        <!-- note that malformed XML files don't cause fallback -->
+
+       </dd>
+
+
+       <dt>If the <var title="">resource type</var> starts with
+       "<code>image/</code>", and support for images has not been
+       disabled</dt>
+
+       <dd>
+
+        <p>Apply the <a href="fetching-resources.html#content-type-sniffing:-image" title="content-type sniffing: image">image
+        sniffing</a> rules to determine the type of the image.</p>
+
+        <p>The <code><a href="#the-object-element">object</a></code> element <a href="rendering.html#represents">represents</a> the
+        specified image. The image is not a <a href="browsers.html#nested-browsing-context">nested browsing
+        context</a>.</p>
+
+        <p>If the image cannot be rendered, e.g. because it is
+        malformed or in an unsupported format, jump to the last step
+        in the overall set of steps (fallback).</p>
+
+       </dd>
+
+
+       <dt>Otherwise</dt>
+
+       <dd>
+
+        <p>The given <var title="">resource type</var> is not
+        supported. Jump to the last step in the overall set of steps
+        (fallback).</p>
+
+        <p class="note">If the previous step ended with the <var title="">resource type</var> being unknown, this is the case
+        that is triggered.</p>
+
+       </dd>
+
+      </dl></li>
+
+     <li><p>The element's contents are not part of what the
+     <code><a href="#the-object-element">object</a></code> element represents.</p>
+
+     </li><li>
+
+      <p>Once the resource is completely loaded, <a href="webappapis.html#queue-a-task">queue a
+      task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named <code title="event-load">load</code> at the element.</p>
+
+      <p>The <a href="webappapis.html#task-source">task source</a> for this task<!--tasks mentioned
+      in this section--> is the <a href="webappapis.html#dom-manipulation-task-source">DOM manipulation task
+      source</a>.</p>
+
+     </li>
+
+    </ol></li>
+
+   <li><p>If the <code title="attr-object-data"><a href="#attr-object-data">data</a></code> attribute
+   is absent but the <code title="attr-object-type"><a href="#attr-object-type">type</a></code>
+   attribute is present, <a href="#sandboxPluginObject">plugins aren't
+   being sandboxed</a>, and the user agent can find a
+   <a href="infrastructure.html#plugin">plugin</a> suitable according to the value of the <code title="attr-object-type"><a href="#attr-object-type">type</a></code> attribute, then that
+   <a href="infrastructure.html#plugin">plugin</a> <a href="#object-plugin">should be used</a>. If
+   no suitable <a href="infrastructure.html#plugin">plugin</a> can be found, or if the
+   <a href="infrastructure.html#plugin">plugin</a> reports an error, jump to the next step
+   (fallback).</p></li>
+
+   <li><p>(Fallback.) The <code><a href="#the-object-element">object</a></code> element
+   <a href="rendering.html#represents">represents</a> the element's children, ignoring any
+   leading <code><a href="#the-param-element">param</a></code> element children. This is the element's
+   <a href="content-models.html#fallback-content">fallback content</a>. If the element has an instantiated
+   <a href="infrastructure.html#plugin">plugin</a>, then unload it.</p></li>
+
+  </ol><p id="object-plugin">When the algorithm above instantiates a
+  <a href="infrastructure.html#plugin">plugin</a>, the user agent should pass to the
+  <a href="infrastructure.html#plugin">plugin</a> used the names and values of all the attributes
+  on the element, in the order they were added to the element, with
+  the attributes added by the parser being ordered in source order,
+  followed by a parameter named "PARAM" whose value is null,
+  followed by all the names and values of <a href="#concept-param-parameter" title="concept-param-parameter">parameters</a> given by
+  <code><a href="#the-param-element">param</a></code> elements that are children of the
+  <code><a href="#the-object-element">object</a></code> element, in <a href="infrastructure.html#tree-order">tree order</a>. If the
+  <a href="infrastructure.html#plugin">plugin</a> supports a scriptable interface, the
+  <code><a href="#htmlobjectelement">HTMLObjectElement</a></code> object representing the element
+  should expose that interface. The <code><a href="#the-object-element">object</a></code> element
+  <a href="rendering.html#represents">represents</a> the <a href="infrastructure.html#plugin">plugin</a>. The
+  <a href="infrastructure.html#plugin">plugin</a> is not a nested <a href="browsers.html#browsing-context">browsing
+  context</a>.</p>
+
+  <p id="sandboxPluginObject">If either:</p>
+
+  <ul><li>the <a href="#sandboxed-plugins-browsing-context-flag">sandboxed plugins browsing context flag</a> was
+   set on the <code><a href="#the-object-element">object</a></code> element's <code><a href="infrastructure.html#document">Document</a></code>'s
+   <a href="browsers.html#browsing-context">browsing context</a> when the <code><a href="infrastructure.html#document">Document</a></code> was
+   created, or</li>
+
+   <li>the <code><a href="#the-object-element">object</a></code> element's <code><a href="infrastructure.html#document">Document</a></code> was
+   parsed from a resource whose <a href="fetching-resources.html#content-type-sniffing-0" title="Content-Type&#10;   sniffing">sniffed type</a> as determined during <a href="history.html#navigate" title="navigate">navigation</a> is
+   <code><a href="iana.html#text-html-sandboxed">text/html-sandboxed</a></code></li>
+
+  </ul><p>...then the steps above must always act as if they had failed to
+  find a <a href="infrastructure.html#plugin">plugin</a>, even if one would otherwise have been
+  used.</p>
+
+  <p class="note">The above algorithm is independent of CSS properties
+  (including 'display', 'overflow', and 'visibility'). For example, it
+  runs even if the element is hidden with a 'display:none' CSS style,
+  and does not run <em>again</em> if the element's visibility
+  changes.</p>
+
+  <p>Due to the algorithm above, the contents of <code><a href="#the-object-element">object</a></code>
+  elements act as <a href="content-models.html#fallback-content">fallback content</a>, used only when
+  referenced resources can't be shown (e.g. because it returned a 404
+  error). This allows multiple <code><a href="#the-object-element">object</a></code> elements to be
+  nested inside each other, targeting multiple user agents with
+  different capabilities, with the user agent picking the first one it
+  supports.</p>
+
+  <p>Whenever the <code title="attr-object-name"><a href="#attr-object-name">name</a></code> attribute
+  is set, if the <code><a href="#the-object-element">object</a></code> element has a nested
+  <a href="browsers.html#browsing-context">browsing context</a>, its <a href="browsers.html#browsing-context-name" title="browsing context&#10;  name">name</a> must be changed to the new value. If the attribute
+  is removed, if the <code><a href="#the-object-element">object</a></code> element has a <a href="browsers.html#browsing-context">browsing
+  context</a>, the <a href="browsers.html#browsing-context-name">browsing context name</a> must be set
+  to the empty string.</p>
+
+  </div><p>The <code title="attr-hyperlink-usemap"><a href="the-map-element.html#attr-hyperlink-usemap">usemap</a></code> attribute,
+  if present while the <code><a href="#the-object-element">object</a></code> element represents an
+  image, can indicate that the object has an associated <a href="the-map-element.html#image-map">image
+  map</a>. <span class="impl">The attribute must be ignored if the
+  <code><a href="#the-object-element">object</a></code> element doesn't represent an image.</span></p><p>The <code title="attr-fae-form"><a href="association-of-controls-and-forms.html#attr-fae-form">form</a></code> attribute is used to
+  explicitly associate the <code><a href="#the-object-element">object</a></code> element with its
+  <a href="association-of-controls-and-forms.html#form-owner">form owner</a>.</p><div class="impl">
+
+  <p><strong>Constraint validation</strong>: <code><a href="#the-object-element">object</a></code>
+  elements are always <a href="association-of-controls-and-forms.html#barred-from-constraint-validation">barred from constraint
+  validation</a>.</p>
+
+  </div><p>The <code><a href="#the-object-element">object</a></code> element supports <a href="the-map-element.html#dimension-attributes">dimension
+  attributes</a>.</p><div class="impl">
+
+  <p>The IDL attributes <dfn id="dom-object-data" title="dom-object-data"><code>data</code></dfn>, <dfn id="dom-object-type" title="dom-object-type"><code>type</code></dfn>, <dfn id="dom-object-name" title="dom-object-name"><code>name</code></dfn>, and <dfn id="dom-object-usemap" title="dom-object-useMap"><code>useMap</code></dfn> each must
+  <a href="common-dom-interfaces.html#reflect">reflect</a> the respective content attributes of the same
+  name.</p>
+
+  <p>The <dfn id="dom-object-contentdocument" title="dom-object-contentDocument"><code>contentDocument</code></dfn>
+  IDL attribute must return the <code><a href="infrastructure.html#document">Document</a></code> object of the
+  <a href="browsers.html#active-document">active document</a> of the <code><a href="#the-object-element">object</a></code> element's
+  <a href="browsers.html#nested-browsing-context">nested browsing context</a>, if it has one; otherwise, it
+  must return null.</p>
+
+  <p>The <dfn id="dom-object-contentwindow" title="dom-object-contentWindow"><code>contentWindow</code></dfn>
+  IDL attribute must return the <code><a href="browsers.html#windowproxy">WindowProxy</a></code> object of the
+  <code><a href="#the-object-element">object</a></code> element's <a href="browsers.html#nested-browsing-context">nested browsing context</a>,
+  if it has one; otherwise, it must return null.</p>
+
+  <p>The <code title="dom-cva-willValidate"><a href="association-of-controls-and-forms.html#dom-cva-willvalidate">willValidate</a></code>, <code title="dom-cva-validity"><a href="association-of-controls-and-forms.html#dom-cva-validity">validity</a></code>, and <code title="dom-cva-validationMessage"><a href="association-of-controls-and-forms.html#dom-cva-validationmessage">validationMessage</a></code>
+  attributes, and the <code title="dom-cva-checkValidatity"><a href="association-of-controls-and-forms.html#dom-cva-checkvalidatity">checkValidity()</a></code> and <code title="dom-cva-setCustomValidity"><a href="association-of-controls-and-forms.html#dom-cva-setcustomvalidity">setCustomValidity()</a></code>
+  methods, are part of the <a href="association-of-controls-and-forms.html#the-constraint-validation-api">constraint validation API</a>. The
+  <code title="dom-fae-form"><a href="association-of-controls-and-forms.html#dom-fae-form">form</a></code> IDL attribute is part of the
+  element's forms API.</p>
+
+  </div><div class="example">
+
+   <p>In the following example, a Java applet is embedded in a page
+   using the <code><a href="#the-object-element">object</a></code> element. (Generally speaking, it is
+   better to avoid using applets like these and instead use native
+   JavaScript and HTML to provide the functionality, since that way
+   the application will work on all Web browsers without requiring a
+   third-party plugin. Many devices, especially embedded devices, do
+   not support third-party technologies like Java.)</p>
+
+   <pre>&lt;figure&gt;
+ &lt;object type="application/x-java-applet"&gt;
+  &lt;param name="code" value="MyJavaClass"&gt;
+  &lt;p&gt;You do not have Java available, or it is disabled.&lt;/p&gt;
+ &lt;/object&gt;
+ &lt;figcaption&gt;My Java Clock&lt;/figcaption&gt;
+&lt;/figure&gt;</pre>
+
+  </div><div class="example">
+
+   <p>In this example, an HTML page is embedded in another using the
+   <code><a href="#the-object-element">object</a></code> element.</p>
+
+   <pre>&lt;figure&gt;
+ &lt;object data="clock.html"&gt;&lt;/object&gt;
+ &lt;figcaption&gt;My HTML Clock&lt;/figcaption&gt;
+&lt;/figure&gt;</pre>
+
+  </div><div class="example">
+
+   <p>The following example shows how a plugin can be used in HTML (in
+   this case the Flash plugin, to show a video file). Fallback is
+   provided for users who do not have Flash enabled, in this case
+   using the <code><a href="video.html#video">video</a></code> element to show the video for those
+   using user agents that support <code><a href="video.html#video">video</a></code>, and finally
+   providing a link to the video for those who have neither Flash nor
+   a <code><a href="video.html#video">video</a></code>-capable browser.</p>
+
+   <pre>&lt;p&gt;Look at my video:
+ &lt;object type="application/x-shockwave-flash"&gt;
+  &lt;param name=movie value="http://video.example.com/library/watch.swf"&gt;
+  &lt;param name=allowfullscreen value=true&gt;
+  &lt;param name=flashvars value="http://video.example.com/vids/315981"&gt;
+  &lt;video controls src="http://video.example.com/vids/315981"&gt;
+   &lt;a href="http://video.example.com/vids/315981"&gt;View video&lt;/a&gt;.
+  &lt;/video&gt;
+ &lt;/object&gt;
+&lt;/p&gt;</pre>
+
+  </div><h4 id="the-param-element"><span class="secno">4.8.5 </span>The <dfn><code>param</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+   <dd>None.</dd>
+   <dt>Contexts in which this element may be used:</dt>
+   <dd>As a child of an <code><a href="#the-object-element">object</a></code> element, before any <a href="content-models.html#flow-content">flow content</a>.</dd>
+   <dt>Content model:</dt>
+   <dd>Empty.</dd>
+   <dt>Content attributes:</dt>
+   <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
+   <dd><code title="attr-param-name"><a href="#attr-param-name">name</a></code></dd>
+   <dd><code title="attr-param-value"><a href="#attr-param-value">value</a></code></dd>
+   <dt>DOM interface:</dt>
+   <dd>
+<pre class="idl">interface <dfn id="htmlparamelement">HTMLParamElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
+           attribute DOMString <a href="#dom-param-name" title="dom-param-name">name</a>;
+           attribute DOMString <a href="#dom-param-value" title="dom-param-value">value</a>;
+};</pre>
+   </dd>
+  </dl><p>The <code><a href="#the-param-element">param</a></code> element defines parameters for plugins
+  invoked by <code><a href="#the-object-element">object</a></code> elements. It does not <a href="rendering.html#represents" title="represents">represent</a> anything on its own.</p><p>The <dfn id="attr-param-name" title="attr-param-name"><code>name</code></dfn>
+  attribute gives the name of the parameter.</p><p>The <dfn id="attr-param-value" title="attr-param-value"><code>value</code></dfn>
+  attribute gives the value of the parameter.</p><p>Both attributes must be present. They may have any value.</p><div class="impl">
+
+  <p>If both attributes are present, and if the parent element of the
+  <code><a href="#the-param-element">param</a></code> is an <code><a href="#the-object-element">object</a></code> element, then the
+  element defines a <dfn id="concept-param-parameter" title="concept-param-parameter">parameter</dfn> with the given
+  name/value pair.</p>
+
+  <p>The IDL attributes <dfn id="dom-param-name" title="dom-param-name"><code>name</code></dfn> and <dfn id="dom-param-value" title="dom-param-value"><code>value</code></dfn> must both
+  <a href="common-dom-interfaces.html#reflect">reflect</a> the respective content attributes of the same
+  name.</p>
+
+  </div><div class="example">
+
+   <p>The following example shows how the <code><a href="#the-param-element">param</a></code> element
+   can be used to pass a parameter to a plugin, in this case the O3D
+   plugin.</p>
+
+   <pre>&lt;!DOCTYPE HTML&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+   &lt;title&gt;O3D Utah Teapot&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+   &lt;p&gt;
+    &lt;object type="application/vnd.o3d.auto"&gt;
+     <strong>&lt;param name="o3d_features" value="FloatingPointTextures"&gt;</strong>
+     &lt;img src="o3d-teapot.png"
+          title="3D Utah Teapot illustration rendered using O3D."
+          alt="When O3D renders the Utah Teapot, it appears as a squat
+          teapot with a shiny metallic finish on which the
+          surroundings are reflected, with a faint shadow caused by
+          the lighting."&gt;
+     &lt;p&gt;To see the teapot actually rendered by O3D on your
+     computer, please download and install the &lt;a
+     href="http://code.google.com/apis/o3d/docs/gettingstarted.html#install"&gt;O3D plugin&lt;/a&gt;.&lt;/p&gt;
+    &lt;/object&gt;
+    &lt;script src="o3d-teapot.js"&gt;&lt;/script&gt;
+   &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+
+  </div></body></html>

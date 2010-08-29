@@ -1,0 +1,840 @@
+<section
+  xmlns="http://www.w3.org/1999/xhtml">
+  <section id="data-string-def" class="no-toc no-number">
+    <h2 class="common-subhead"><dfn id="data-string">string</dfn></h2>
+    <div class="datatype-desc">For the purposes of this document, a
+    <var>string</var>
+    is defined as
+    <a href="#normal-character-data">normal character data</a>.
+    <p>The <a href="#syntax-attributes">Attributes</a> section of
+    this document describes additional restrictions on strings in
+    attribute values — in particular, restrictions for the
+    following cases:</p>
+    <ul>
+      <li><a
+        href="#attr-value-unquoted">unquoted attribute values</a></li>
+      <li><a
+        href="#attr-value-single-quoted">single-quoted attribute values</a></li>
+      <li><a
+        href="#attr-value-double-quoted">double-quoted attribute values</a></li>
+    </ul>
+  </div>
+  </section>
+  <section id="data-comma-separated-strings-def" class="no-toc no-number">
+    <h2 class="common-subhead"><dfn id="data-comma-separated-strings">set of comma-separated strings</dfn></h2>
+    <div class="datatype-desc">Zero or more
+      <a href="#data-string">strings</a>
+      that are themselves each zero or more characters, each
+      optionally with leading and/or trailing
+      <a href="#space">space characters</a>,
+      and each separated from the next by a single
+      "<code title="U+002C COMMA">,</code>"
+      (comma) character. Each string itself
+      <a href="#must-requirement">must</a>
+      not begin or end with any
+      <a href="#space">space characters</a>,
+      and each string itself
+      <a href="#must-requirement">must</a>
+      not contain any
+      "<code title="U+002C COMMA">,</code>"
+      (comma) characters.</div>
+  </section>
+  <section id="data-token-def" class="no-toc no-number">
+    <h2 class="common-subhead"><dfn id="data-token">token</dfn></h2>
+    <div class="datatype-desc">A
+      <a href="#data-string">string</a>
+      that does not contain any
+      <a href="#space">space characters</a>.</div>
+  </section>
+  <dl><dt>tokens</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A
+        <a href="#space">space</a>-separated set of zero or more
+        <a href="#data-token">token</a>
+        instances.</div>
+    </dd>
+  </dl>
+  <dl><dt>unordered-tokens</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A
+        <a href="#common.data.tokens">set of space-separated tokens</a>
+        in which none of the tokens are duplicated.</div>
+    </dd>
+  </dl>
+  <dl><dt>ordered-tokens</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A
+        <a href="#common.data.tokens">set of space-separated tokens</a>
+        in which none of the tokens are duplicated,
+        but in which the order of the tokens is meaningful.</div>
+    </dd>
+  </dl>
+  <dl><dt>browsing-context-name</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">Any
+        <a href="#data-string">string</a>,
+        with the following restrictions:
+        <ul>
+          <li><a href="#must-requirement">must</a>
+          not start with a
+          "<code title="U+005F LOW LINE">_</code>"
+          character</li>
+          <li><a href="#must-requirement">must</a>
+          be at least one character long</li>
+        </ul>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>browsing-context-name-or-keyword</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">Any
+        <a href="#data-string">string</a>
+        that is either of the following:
+        <ul>
+          <li>a
+          <a href="#common.data.browsing-context-name">browsing-context name</a></li>
+          <li>any
+          <a href="#case-insensitive">case-insensitive match</a>
+          for one of the following literal strings:
+              "<code>_blank</code>",
+              "<code>_self</code>",
+              "<code>_parent</code>",
+              or
+              "<code>_top</code>".
+          </li>
+        </ul>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>id</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">Any
+        <a href="#data-string">string</a>,
+        with the following restrictions:
+        <ul>
+          <li><a href="#must-requirement">must</a>
+          be at least one character long</li>
+          <li><a href="#must-requirement">must</a>
+          not contain any
+          <a href="#space">space characters</a></li>
+        </ul>
+      </div>
+      <div class="note">
+        <p>Previous versions of HTML placed greater
+        restrictions on the content of
+        <var>ID</var>
+        values (for example, they did not permit
+        <var>ID</var>
+        values to begin with a number).</p>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>idref</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A valid
+        ID reference to an element of type
+        <var>type</var>
+        is a string that exactly matches the value of the
+        <code class="attribute">id</code>
+        attribute of an element of type
+        <var>type</var>
+        anywhere in the document.</div>
+    </dd>
+  </dl>
+  <dl><dt>idrefs</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">An
+        <a href="#data-unordered-tokens">unordered set of unique space-separated tokens</a>,
+        each of which is an
+        <a href="#common.data.idref">ID reference</a>.</div>
+    </dd>
+  </dl>
+  <dl><dt>name</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">Any
+        <a href="#data-string">string</a>,
+        with the following restrictions:
+        <ul>
+          <li><a href="#must-requirement">must</a>
+          be at least one character long</li>
+          <li><a href="#must-requirement">must</a>
+          not contain any
+          <a href="#space">space characters</a></li>
+        </ul>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>hash-name</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A
+        valid hash-name reference to an element of type
+        <var>type</var>
+        is a string that starts with a
+        "<code title="U+0023 NUMBER SIGN">#</code>"
+        character, followed by a string which
+        exactly matches the value of the
+        <code class="attribute">name</code>
+        attribute of an element of type
+        <var>type</var>
+        anywhere in the document.</div>
+    </dd>
+  </dl>
+  <dl><dt>integer</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">One or more characters in the range
+      <code title="U+0030 DIGIT ZERO–U+0039 DIGIT NINE ">0—9</code>,
+      optionally prefixed with a
+      "<code title="U+002D HYPHEN-MINUS">-</code>"
+      character.</div>
+    </dd>
+  </dl>
+  <dl><dt>integer.positive</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">Any
+        <a href="#common.data.integer.non-negative">non-negative integer</a>,
+        with the following restriction:
+        <ul>
+          <li><a href="#must-requirement">must</a>
+          be greater than zero</li>
+        </ul>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>integer.non-negative</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">One or more characters in the range
+        <code title="U+0030 DIGIT ZERO–U+0039 DIGIT NINE ">0—9</code>.</div>
+      </dd>
+  </dl>
+  <dl><dt>float</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A floating-point number consists of the following
+        parts, in exactly the following order:
+        <ol>
+          <li>Optionally, the first character may be a
+          "<code title="U+002D HYPHEN-MINUS">-</code>"
+          character.</li>
+          <li>One or more characters in the range
+          "<code title="U+0030 DIGIT ZERO–U+0039 DIGIT NINE ">0—9</code>".</li>
+          <li>Optionally, the following parts, in exactly the
+          following order:
+            <ol>
+              <li>a
+              "<code title="U+002E FULL STOP">.</code>"
+              character</li>
+              <li>one or more characters in the range
+              "<code title="U+0030 DIGIT ZERO–U+0039 DIGIT NINE ">0—9</code>"</li>
+            </ol>
+          </li>
+          <li>Optionally, the following parts, in exactly the
+          following order:
+            <ol>
+              <li>a
+              "<code title="U+0065 LATIN SMALL LETTER E">e</code>"
+              character or 
+              "<code title="U+0045 LATIN CAPITAL LETTER E">E</code>"
+              character</li>
+              <li>optionally, a 
+              "<code title="U+002D HYPHEN-MINUS">-</code>"
+              character or
+              "<code title="U+002B PLUS SIGN">+</code>"
+              character</li>
+              <li>One or more characters in the range
+              "<code title="U+0030 DIGIT ZERO–U+0039 DIGIT NINE ">0—9</code>".</li>
+            </ol>
+          </li>
+        </ol>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>float.positive</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A
+        <a href="#common.data.float.non-negative">non-negative floating-point number</a>,
+        with the following restriction:
+        <ul>
+          <li><a href="#must-requirement">must</a>
+          be greater than zero</li>
+        </ul>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>float.non-negative</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A
+        <a href="#common.data.float">floating-point number</a>,
+        with the following restriction:
+        <ul>
+          <li>the first character may not be a 
+          "<code title="U+002D HYPHEN-MINUS">-</code>"
+          character</li>
+        </ul>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>datetime</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A valid
+        <var class="defined-elsewhere">date-time</var>
+        as defined in
+        <a href="#refsRFC3339">[RFC 3339]</a>,
+        with these additional qualifications:
+        <ul>
+          <li>the literal letters <code>T</code> and
+          <code>Z</code> in the date/time syntax
+          <a href="#must-requirement">must</a>
+          always be
+          uppercase</li>
+          <li>the
+          <var class="defined-elsewhere">date-fullyear</var>
+          production is instead defined as four or more digits
+          representing a number greater than 0</li>
+        </ul>
+      </div>
+    </dd>
+    <dd>
+      <div class="example">
+        <p>Examples:</p>
+        <pre><code>1990-12-31T23:59:60Z</code>
+<code>1996-12-19T16:39:57-08:00</code></pre>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>date-or-time</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">Any one of the following:
+        <ul>
+          <li><a href="#form.data.date">a date</a></li>
+          <li><a href="#form.data.time">a time</a></li>
+          <li><a href="#common.data.datetime">a date and time</a></li>
+        </ul>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>data-url-no-spaces</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A
+        valid
+        <var class="defined-elsewhere">IRI reference</var>
+         as defined in
+        <a href="#refsRFC3987">[RFC 3987]</a>.</div>
+      <div class="note">
+        <p>The empty string is a valid
+        <var class="defined-elsewhere">IRI reference</var>,
+        so the empty string is allowed anywhere this reference lists
+        the
+        <var>URL</var>
+        datatype as being allowed.</p>
+      </div>
+    </dd>
+    <dd>
+      <div class="example">
+        <p>Example:</p>
+        <pre><code>http://example.org/hello</code></pre>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>uri</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A
+        <a href="#data-url-no-spaces">URL</a>,
+        optionally with leading and/or trailing
+        <a href="#space">space characters</a>.</div>
+      <div class="note">
+        <p>The empty string is a valid
+        <a href="#data-url-no-spaces">URL</a>,
+        so the empty string is allowed anywhere this reference lists
+        the 
+        <var>URL potentially surrounded by spaces</var>
+        datatype as being allowed.</p>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>uris</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A
+        <a href="#space">space</a>-separated set of zero or more
+        <a href="#data-url-no-spaces">URL</a>
+        instances.</div>
+    </dd>
+  </dl>
+  <dl><dt>uri.absolute</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A
+        valid
+        <var class="defined-elsewhere">IRI</var>
+        as defined in
+        <a href="#refsRFC3987">[RFC 3987]</a>.</div>
+    </dd>
+    <dd>
+      <div class="example">
+        <p>Examples:</p>
+        <pre><code>/hello</code>
+<code>#canvas</code>
+<code>http://example.org/</code></pre>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>sizes</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">An
+        <a href="#data-unordered-tokens">unordered set of unique space-separated tokens</a>,
+        each of which
+        <a href="#must-requirement">must</a>
+        be one of the following:
+        <ul>
+          <li>the literal string "<code>any</code>"</li>
+          <li>two valid
+          <a href="#common.data.integer.non-negative">non-negative integers</a>
+          that do not have a leading
+          "<code title="U+0030 DIGIT ZERO">0</code>"
+          character and that are separated by a single
+          "<code title="U+0078 LATIN SMALL LETTER X">x</code>"
+          character.</li>
+        </ul>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>mimetype</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A string that identifies a valid
+        <var class="defined-elsewhere">MIME media type</var>
+        as defined in
+        <a href="#refsRFC2046">[RFC 2046]</a>.</div> </dd>
+  </dl>
+  <dl><dt>charset</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">One of the following:
+        <ul>
+          <li>For documents in the
+          <a href="#html-syntax">HTML syntax</a>: A
+          <a href="#case-insensitive">case-insensitive match</a>
+          for any
+          <var class="defined-elsewhere">character set name</var>
+          for which the IANA
+          <a href="#refsCharacterSets">[Character Sets]</a>
+          registry has a <code>Name</code> or <code>Alias</code> field
+          labeled as “preferred MIME name”;
+          or, if none of the <code>Alias</code> fields are so labeled, a
+          <a href="#case-insensitive">case-insensitive match</a>
+          for a <code>Name</code> field in the registry.</li>
+        <li>For documents in the <a href="#xml-syntax">XML
+          syntax</a>: Any
+          <a href="#case-insensitive">case-insensitive match</a>
+          for the string
+          "<code>UTF-8</code>".</li>
+        </ul>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>meta-charset</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">The following parts, in exactly
+        the following order:
+        <ol>
+          <li>The literal string
+          "<code>text/html;</code>".</li>
+          <li>Optionally, one or more
+          <a href="#space">space characters</a>.</li>
+          <li>The literal string
+          "<code>charset=</code>".</li>
+          <li>A
+          <a href="#common.data.charset">character encoding name</a>.</li>
+        </ol>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>refresh</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">Any one of the following:
+        <ul>
+          <li>A
+          <a href="#common.data.integer.non-negative" >non-negative integer</a>.</li>
+          <li>The string consisting of the following parts, in
+          exactly the following order:
+            <ol>
+              <li>A <a href="#common.data.integer.non-negative" >non-negative integer</a>.</li>
+              <li>A
+              "<code title="U+003B SEMICOLON">;</code>"
+              character.</li>
+              <li>One or more
+              <a href="#space">space characters</a>.</li>
+              <li>A
+              <a href="#case-insensitive">case-insensitive match</a>
+              for the string
+              "<code>url=</code>".</li>
+              <li>A
+              <a href="#data-url-no-spaces">URL</a>.</li>
+            </ol>
+          </li>
+        </ul>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>default-style</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A
+        <a href="#data-string">string</a>.</div>
+    </dd>
+  </dl>
+  <dl><dt>langcode</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A valid
+        <var class="defined-elsewhere">language tag</var>
+        as defined in
+        <a href="#refsBCP47">[BCP 47]</a>.</div>
+    </dd>
+  </dl>
+  <dl><dt>mediaquery</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A valid
+        <var class="defined-elsewhere">media query list</var>
+        as defined in
+      <a href="#refsMediaQueries">[Media Queries]</a>.</div>
+    </dd>
+  </dl>
+  <dl><dt>mimetypelist</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A
+        <a href="#data-comma-separated-strings">set of comma-separated strings</a>,
+        each of which is a valid <a
+          href="#common.data.mimetype">MIME type</a>, with no
+        parameters.</div>
+    </dd>
+  </dl>
+  <dl><dt>charsetlist</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">An
+        <a href="#data-ordered-tokens">ordered set of unique space-separated tokens</a>,
+        each of which
+        <a href="#must-requirement">must</a>
+        be a valid <a
+          href="#common.data.charset">character encoding name</a> that specifies an
+        <a href="#ascii-compatible">ASCII-compatible character encoding</a>.</div>
+    </dd>
+  </dl>
+  <dl><dt>keylabellist</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">An
+        <a href="#data-ordered-tokens">ordered set of unique space-separated tokens</a>,
+        each of which
+        <a href="#must-requirement">must</a>
+        be exactly one Unicode code point in
+        length.</div>
+    </dd>
+  </dl>
+  <dl><dt>pattern</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A regular expression that
+        <a href="#must-requirement">must</a>
+        match the JavaScript
+        <var class="defined-elsewhere">Pattern</var>
+        production as specified in
+        <a href="#refsECMA262">[ECMA 262]</a>.</div>
+    </dd>
+  </dl>
+  <dl><dt>datetime-local</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">The following parts, in exactly
+        the following order:
+        <ol>
+          <li>A <a href="#form.data.date">date</a>.</li>
+          <li>The literal string
+          "<code class="literal">T</code>".</li>
+          <li>A <a href="#form.data.time">time</a>.</li>
+        </ol>
+      </div>
+      <div class="example">
+        <p>Example:</p>
+        <pre><code>1985-04-12T23:20:50.52</code>
+<code>1996-12-19T16:39:57</code></pre>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>date</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A valid
+        <var class="defined-elsewhere">full-date</var>
+        as defined in
+        <a href="#refsRFC3339">[RFC 3339]</a>,
+        with the additional qualification that the year component is
+        four or more digits representing a number greater than 0.</div>
+      <div class="example">
+        <p>Example:</p>
+        <pre><code>1996-12-19</code></pre>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>month</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">The following parts, in exactly the
+        following order:
+        <ol>
+          <li>Four or more digits representing a number greater than 0.</li>
+          <li>The literal string "<code>-</code>".</li>
+          <li>Two digits, representing the month
+          <var>month</var>,
+          in the range 1 ≤
+          <var>month</var>,
+          ≤ 12.</li>
+        </ol>
+      </div>
+      <div class="example">
+        <p>Example:</p>
+        <pre><code>1996-12</code></pre>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>week</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">The following parts, in exactly
+        the following order:
+        <ol>
+          <li>Four or more digits representing year
+          <var>year</var>,
+          where
+          <var>year</var>
+          > 0.</li>
+          <li>The literal string
+          "<code>-W</code>".</li>
+          <li>Two digits, representing the week
+          <var>week</var>,
+          in the range
+          1 ≤
+          <var>week</var>
+          ≤ 
+          <var>maxweek</var>,
+          where
+          <var>maxweek</var>
+          is either
+          <code>52</code>
+          or 
+          <code>53</code>,
+          depending on the particular year.</li>
+        </ol>
+      </div>
+    </dd>
+    <dd>
+      <div class="example">
+        <p>Example:</p>
+        <pre><code>1996-W16</code></pre>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>time</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A valid
+        <var class="defined-elsewhere">partial-time</var>
+        as defined in
+        <a href="#refsRFC3339">[RFC 3339]</a>.</div>
+    </dd>
+    <dd>
+      <div class="example">
+        <p>Examples:</p>
+        <pre><code>23:20:50.52</code>
+<code>17:39:57</code></pre>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>emailaddress</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">Any string that matches the
+        following
+        <a href="#refsABNF">[ABNF]</a>
+        production:
+        <pre><code>1*( atext / "." ) "@" ldh-str 1*( "." ldh-str )</code></pre>
+        <p>…where
+        <var class="defined-elsewhere">atext</var>
+        is as defined in
+        <a href="#refsRFC5322">[RFC 5322]</a>,
+        and
+        <var class="defined-elsewhere">ldh-str</var>
+        is as defined in
+        <a href="#refsRFC1034">[RFC 1034]</a>.</p>
+      </div>
+      <div class="example">
+        <p>Examples:</p>
+        <pre><code>foo-bar.baz@example.com</code></pre>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>emailaddresslist</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A
+        <a href="#data-comma-separated-strings">set of comma-separated strings</a>,
+        each of which is a valid
+      <a href="#form.data.emailaddress">email address</a>.</div>
+    </dd>
+  </dl>
+  <dl><dt>color</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A string exactly seven
+        characters long, consisting of the following parts, in
+        exactly the following order:
+        <ol>
+          <li>A
+          "<code title="U+0023 NUMBER SIGN">#</code>"
+          character.</li>
+          <li>Six characters in the range
+          <code title="U+0030 DIGIT ZERO–U+0039 DIGIT NINE">0–9</code>,
+          <code title="U+0061 LATIN SMALL LETTER A–U+0066 LATIN SMALL LETTER F">a–f</code>,
+          and
+          <code title="U+0041 LATIN CAPITAL LETTER A–U+0046 LATIN CAPITAL LETTER F">A–F</code>.</li>
+        </ol>
+      </div>
+      <div class="note">
+        <p>Color keywords (for example, strings such as “red” or “green”)
+        are not allowed.</p>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>zero</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">The literal string
+        "<code title="U+0030 DIGIT ZERO">0</code>".</div>
+    </dd>
+  </dl>
+  <dl><dt>javascript</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">Any
+        <a href="#case-insensitive">case-insensitive match</a>
+        for the literal string "<code>javascript</code>".</div>
+    </dd>
+  </dl>
+  <dl><dt>sandbox-allow-list</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">An
+        <a href="#data-unordered-tokens">unordered set of unique space-separated tokens</a>,
+        each of which is a
+        <a href="#case-insensitive">case-insensitive match</a>
+        for one of the following literal strings:
+        <ul>
+          <li>"<code>allow-forms</code>"</li>
+          <li>"<code>allow-scripts</code>"</li>
+          <li>"<code>allow-top-navigation</code>"</li>
+          <li>"<code>allow-same-origin</code>"</li>
+        </ul>
+        <div class="note">
+          <p>Because an
+          <a href="#data-unordered-tokens">unordered set of unique space-separated tokens</a>
+          can contain zero tokens, this datatype also allows the following:</p>
+          <ul>
+            <li>the empty string</li>
+            <li>any string consisting only of 
+            <a href="#space">space characters</a></li>
+          </ul>
+        </div>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>circle</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A comma-separated list of three
+        numbers, in exactly the following order:
+        <ol>
+          <li>an
+          <a href="#common.data.integer">integer</a>
+          representing the distance in CSS pixels from the left
+          edge of the image to the center of the circle</li>
+          <li>an
+          <a href="#common.data.integer">integer</a>
+          representing the distance in CSS pixels from the top
+          edge of the image to the center of the circle</li>
+          <li>a
+          <a href="#common.data.integer.non-negative">non-negative integer</a>,
+          representing the radius of the circle, in CSS
+          pixels</li>
+        </ol>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>rectangle</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A comma-separated list of four
+        <a href="#common.data.integer">integers</a>, in exactly
+        the following order:
+        <ol>
+          <li>an
+          <a href="#common.data.integer">integer</a>
+          representing the distance in CSS pixels from the left
+          edge of the image to the left side of the rectangle</li>
+          <li>an
+          <a href="#common.data.integer">integer</a>
+          representing the distance in CSS pixels from the top
+          edge of the image to the top side of the rectangle</li>
+          <li>an
+          <a href="#common.data.integer">integer</a>, greater than
+          the value of the first integer in this list,
+          representing the distance in CSS pixels from the left
+          edge of the image to the right side of the rectangle</li>
+          <li>an
+          <a href="#common.data.integer">integer</a>, greater than
+          the value of the second integer in this list,
+          representing the distance in CSS pixels from the top
+          edge of the image to the bottom side of the rectangle</li>
+        </ol>
+      </div>
+    </dd>
+  </dl>
+  <dl><dt>polygon</dt>
+    <dd></dd>
+    <dd>
+      <div class="datatype-desc">A comma-separated list of at
+        least six
+        <a href="#common.data.integer">integers</a>, with the
+        total number of integers in the list being even (that is,
+        six or eight or ten numbers, and so on). Each pair of
+        integers represents a coordinate, in CSS pixels, given as
+        the distances from, respectively, the left and the top of
+        the image; all the coordinates together represent the
+      points of the polygon, in order.</div>
+    </dd>
+  </dl>
+</section>

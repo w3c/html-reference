@@ -1,0 +1,1394 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
+<!-- when publishing, change bits marked ZZZ -->
+<html lang="en-US-x-Hixie" class="split chapter"><head><title>5 Loading Web pages &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+   pre { margin-left: 2em; white-space: pre-wrap; }
+   h2 { margin: 3em 0 1em 0; }
+   h3 { margin: 2.5em 0 1em 0; }
+   h4 { margin: 2.5em 0 0.75em 0; }
+   h5, h6 { margin: 2.5em 0 1em; }
+   h1 + h2, h1 + h2 + h2 { margin: 0.75em 0 0.75em; }
+   h2 + h3, h3 + h4, h4 + h5, h5 + h6 { margin-top: 0.5em; }
+   p { margin: 1em 0; }
+   hr:not(.top) { display: block; background: none; border: none; padding: 0; margin: 2em 0; height: auto; }
+   dl, dd { margin-top: 0; margin-bottom: 0; }
+   dt { margin-top: 0.75em; margin-bottom: 0.25em; clear: left; }
+   dt + dt { margin-top: 0; }
+   dd dt { margin-top: 0.25em; margin-bottom: 0; }
+   dd p { margin-top: 0; }
+   dd dl + p { margin-top: 1em; }
+   dd table + p { margin-top: 1em; }
+   p + * > li, dd li { margin: 1em 0; }
+   dt, dfn { font-weight: bold; font-style: normal; }
+   dt dfn { font-style: italic; }
+   pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
+   pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
+   pre em { font-weight: bolder; font-style: normal; }
+   @media screen { code { color: orangered; } code :link, code :visited { color: inherit; } }
+   var sub { vertical-align: bottom; font-size: smaller; position: relative; top: 0.1em; }
+   table { border-collapse: collapse; border-style: hidden hidden none hidden; }
+   table thead, table tbody { border-bottom: solid; }
+   table tbody th:first-child { border-left: solid; }
+   table tbody th { text-align: left; }
+   table td, table th { border-left: solid; border-right: solid; border-bottom: solid thin; vertical-align: top; padding: 0.2em; }
+   blockquote { margin: 0 0 0 2em; border: 0; padding: 0; font-style: italic; }
+
+   .bad, .bad *:not(.XXX) { color: gray; border-color: gray; background: transparent; }
+   .matrix, .matrix td { border: none; text-align: right; }
+   .matrix { margin-left: 2em; }
+   .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
+   .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
+   .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
+   img.extra { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
+   pre.css:first-line { color: #AAAA50; }
+   dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
+   hr + dl.domintro, div.impl + dl.domintro { margin-top: 2.5em; margin-bottom: 1.5em; }
+   dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
+   dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
+   dl.domintro dd p { margin: 0.5em 0; }
+   dl.switch { padding-left: 2em; }
+   dl.switch > dt { text-indent: -1.5em; }
+   dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
+   dl.triple { padding: 0 0 0 1em; }
+   dl.triple dt, dl.triple dd { margin: 0; display: inline }
+   dl.triple dt:after { content: ':'; }
+   dl.triple dd:after { content: '\A'; white-space: pre; }
+   .diff-old { text-decoration: line-through; color: silver; background: transparent; }
+   .diff-chg, .diff-new { text-decoration: underline; color: green; background: transparent; }
+   a .diff-new { border-bottom: 1px blue solid; }
+
+   h2 { page-break-before: always; }
+   h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
+   h1 + h2, hr + h2.no-toc { page-break-before: auto; }
+
+   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+
+   div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
+   div.head p { margin: 0; }
+   div.head h1 { margin: 0; }
+   div.head .logo { float: right; margin: 0 1em; }
+   div.head .logo img { border: none } /* remove border from top image */
+   div.head dl { margin: 1em 0; }
+   div.head p.copyright, div.head p.alt { font-size: x-small; font-style: oblique; margin: 0; }
+
+   body > .toc > li { margin-top: 1em; margin-bottom: 1em; }
+   body > .toc.brief > li { margin-top: 0.35em; margin-bottom: 0.35em; }
+   body > .toc > li > * { margin-bottom: 0.5em; }
+   body > .toc > li > * > li > * { margin-bottom: 0.25em; }
+   .toc, .toc li { list-style: none; }
+
+   .brief { margin-top: 1em; margin-bottom: 1em; line-height: 1.1; }
+   .brief li { margin: 0; padding: 0; }
+   .brief li p { margin: 0; padding: 0; }
+
+   .category-list { margin-top: -0.75em; margin-bottom: 1em; line-height: 1.5; }
+   .category-list::before { content: '\21D2\A0'; font-size: 1.2em; font-weight: 900; }
+   .category-list li { display: inline; }
+   .category-list li:not(:last-child)::after { content: ', '; }
+   .category-list li > span, .category-list li > a { text-transform: lowercase; }
+   .category-list li * { text-transform: none; } /* don't affect <code> nested in <a> */
+
+   .XXX { color: #E50000; background: white; border: solid red; padding: 0.5em; margin: 1em 0; }
+   .XXX > :first-child { margin-top: 0; }
+   p .XXX { line-height: 3em; }
+   .annotation { border: solid thin black; background: #0C479D; color: white; position: relative; margin: 8px 0 20px 0; }
+   .annotation:before { position: absolute; left: 0; top: 0; width: 100%; height: 100%; margin: 6px -6px -6px 6px; background: #333333; z-index: -1; content: ''; }
+   .annotation :link, .annotation :visited { color: inherit; }
+   .annotation :link:hover, .annotation :visited:hover { background: transparent; }
+   .annotation span { border: none ! important; }
+   .note { color: green; background: transparent; font-family: sans-serif; }
+   .warning { color: red; background: transparent; }
+   .note, .warning { font-weight: bolder; font-style: italic; }
+   p.note, div.note { padding: 0.5em 2em; }
+   span.note { padding: 0 2em; }
+   .note p:first-child, .warning p:first-child { margin-top: 0; }
+   .note p:last-child, .warning p:last-child { margin-bottom: 0; }
+   .warning:before { font-style: normal; }
+   p.note:before { content: 'Note: '; }
+   p.warning:before { content: '\26A0 Warning! '; }
+
+   .bookkeeping:before { display: block; content: 'Bookkeeping details'; font-weight: bolder; font-style: italic; }
+   .bookkeeping { font-size: 0.8em; margin: 2em 0; }
+   .bookkeeping p { margin: 0.5em 2em; display: list-item; list-style: square; }
+   .bookkeeping dt { margin: 0.5em 2em 0; }
+   .bookkeeping dd { margin: 0 3em 0.5em; }
+
+   h4 { position: relative; z-index: 3; }
+   h4 + .element, h4 + div + .element { margin-top: -2.5em; padding-top: 2em; }
+   .element {
+     background: #EEEEFF;
+     color: black;
+     margin: 0 0 1em 0.15em;
+     padding: 0 1em 0.25em 0.75em;
+     border-left: solid #9999FF 0.25em;
+     position: relative;
+     z-index: 1;
+   }
+   .element:before {
+     position: absolute;
+     z-index: 2;
+     top: 0;
+     left: -1.15em;
+     height: 2em;
+     width: 0.9em;
+     background: #EEEEFF;
+     content: ' ';
+     border-style: none none solid solid;
+     border-color: #9999FF;
+     border-width: 0.25em;
+   }
+
+   .example { display: block; color: #222222; background: #FCFCFC; border-left: double; margin-left: 2em; padding-left: 1em; }
+   td > .example:only-child { margin: 0 0 0 0.1em; }
+
+   ul.domTree, ul.domTree ul { padding: 0 0 0 1em; margin: 0; }
+   ul.domTree li { padding: 0; margin: 0; list-style: none; position: relative; }
+   ul.domTree li li { list-style: none; }
+   ul.domTree li:first-child::before { position: absolute; top: 0; height: 0.6em; left: -0.75em; width: 0.5em; border-style: none none solid solid; content: ''; border-width: 0.1em; }
+   ul.domTree li:not(:last-child)::after { position: absolute; top: 0; bottom: -0.6em; left: -0.75em; width: 0.5em; border-style: none none solid solid; content: ''; border-width: 0.1em; }
+   ul.domTree span { font-style: italic; font-family: serif; }
+   ul.domTree .t1 code { color: purple; font-weight: bold; }
+   ul.domTree .t2 { font-style: normal; font-family: monospace; }
+   ul.domTree .t2 .name { color: black; font-weight: bold; }
+   ul.domTree .t2 .value { color: blue; font-weight: normal; }
+   ul.domTree .t3 code, .domTree .t4 code, .domTree .t5 code { color: gray; }
+   ul.domTree .t7 code, .domTree .t8 code { color: green; }
+   ul.domTree .t10 code { color: teal; }
+
+   body.dfnEnabled dfn { cursor: pointer; }
+   .dfnPanel {
+     display: inline;
+     position: absolute;
+     z-index: 10;
+     height: auto;
+     width: auto;
+     padding: 0.5em 0.75em;
+     font: small sans-serif, Droid Sans Fallback;
+     background: #DDDDDD;
+     color: black;
+     border: outset 0.2em;
+   }
+   .dfnPanel * { margin: 0; padding: 0; font: inherit; text-indent: 0; }
+   .dfnPanel :link, .dfnPanel :visited { color: black; }
+   .dfnPanel p { font-weight: bolder; }
+   .dfnPanel * + p { margin-top: 0.25em; }
+   .dfnPanel li { list-style-position: inside; }
+
+   #configUI { position: absolute; z-index: 20; top: 10em; right: 1em; width: 11em; font-size: small; }
+   #configUI p { margin: 0.5em 0; padding: 0.3em; background: #EEEEEE; color: black; border: inset thin; }
+   #configUI p label { display: block; }
+   #configUI #updateUI, #configUI .loginUI { text-align: center; }
+   #configUI input[type=button] { display: block; margin: auto; }
+
+  ]]></style><style type="text/css"><![CDATA[
+
+   .applies thead th > * { display: block; }
+   .applies thead code { display: block; }
+   .applies tbody th { whitespace: nowrap; }
+   .applies td { text-align: center; }
+   .applies .yes { background: yellow; }
+
+   .matrix, .matrix td { border: hidden; text-align: right; }
+   .matrix { margin-left: 2em; }
+
+   .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
+   .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
+   .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
+   #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
+   #table-example-1 caption { padding-bottom: 0.5em; }
+   #table-example-1 thead, #table-example-1 tbody { border: none; }
+   #table-example-1 th, #table-example-1 td { border: solid thin; }
+   #table-example-1 th { font-weight: normal; }
+   #table-example-1 td { border-style: none solid; vertical-align: top; }
+   #table-example-1 th { padding: 0.5em; vertical-align: middle; text-align: center; }
+   #table-example-1 tbody tr:first-child td { padding-top: 0.5em; }
+   #table-example-1 tbody tr:last-child td { padding-bottom: 1.5em; }
+   #table-example-1 tbody td:first-child { padding-left: 2.5em; padding-right: 0; width: 9em; }
+   #table-example-1 tbody td:first-child::after { content: leader(". "); }
+   #table-example-1 tbody td { padding-left: 2em; padding-right: 2em; }
+   #table-example-1 tbody td:first-child + td { width: 10em; }
+   #table-example-1 tbody td:first-child + td ~ td { width: 2.5em; }
+   #table-example-1 tbody td:first-child + td + td + td ~ td { width: 1.25em; }
+
+   .apple-table-examples { border: none; border-collapse: separate; border-spacing: 1.5em 0em; width: 40em; margin-left: 3em; }
+   .apple-table-examples * { font-family: "Times", serif; }
+   .apple-table-examples td, .apple-table-examples th { border: none; white-space: nowrap; padding-top: 0; padding-bottom: 0; }
+   .apple-table-examples tbody th:first-child { border-left: none; width: 100%; }
+   .apple-table-examples thead th:first-child ~ th { font-size: smaller; font-weight: bolder; border-bottom: solid 2px; text-align: center; }
+   .apple-table-examples tbody th::after, .apple-table-examples tfoot th::after { content: leader(". ") }
+   .apple-table-examples tbody th, .apple-table-examples tfoot th { font: inherit; text-align: left; }
+   .apple-table-examples td { text-align: right; vertical-align: top; }
+   .apple-table-examples.e1 tbody tr:last-child td { border-bottom: solid 1px; }
+   .apple-table-examples.e1 tbody + tbody tr:last-child td { border-bottom: double 3px; }
+   .apple-table-examples.e2 th[scope=row] { padding-left: 1em; }
+   .apple-table-examples sup { line-height: 0; }
+
+   .details-example img { vertical-align: top; }
+
+   #named-character-references-table {
+     font-size: 0.6em;
+     column-width: 28em;
+     column-gap: 1em;
+     -moz-column-width: 28em;
+     -moz-column-gap: 1em;
+     -webkit-column-width: 28em;
+     -webkit-column-gap: 1em;
+   }
+   #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
+   #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+
+   .glyph.control { color: red; }
+
+   @font-face {
+     font-family: 'Essays1743';
+     src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743.ttf');
+   }
+   @font-face {
+     font-family: 'Essays1743';
+     font-weight: bold;
+     src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-Bold.ttf');
+   }
+   @font-face {
+     font-family: 'Essays1743';
+     font-style: italic;
+     src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-Italic.ttf');
+   }
+   @font-face {
+     font-family: 'Essays1743';
+     font-style: italic;
+     font-weight: bold;
+     src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
+   }
+
+  ]]></style><style type="text/css"><![CDATA[
+   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
+  ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
+   function getCookie(name) {
+     var params = location.search.substr(1).split("&");
+     for (var index = 0; index < params.length; index++) {
+       if (params[index] == name)
+         return "1";
+       var data = params[index].split("=");
+       if (data[0] == name)
+         return unescape(data[1]);
+     }
+     var cookies = document.cookie.split("; ");
+     for (var index = 0; index < cookies.length; index++) {
+       var data = cookies[index].split("=");
+       if (data[0] == name)
+         return unescape(data[1]);
+     }
+     return null;
+   }
+   function load(script) {
+     var e = document.createElement('script');
+     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     document.body.appendChild(e);
+   }
+   function init() {
+     if (location.search == '?slow-browser')
+       return;
+     var configUI = document.createElement('div');
+     configUI.id = 'configUI';
+     document.body.appendChild(configUI);
+     // load('reviewer.js'); // would need cross-site XHR
+     if (document.getElementById('head'))
+       load('toc.js');
+     load('styler.js');
+     // load('updater.js'); // would need cross-site XHR
+     load('dfn.js'); // doesn't support split-out specs, but, oh well.
+     // load('status.js'); // would need cross-site XHR
+     if (getCookie('profile') == '1')
+       document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
+     fixBrokenLink();
+   }
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="links.html" title="4.12 Links" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="origin-0.html" title="5.3 Origin" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+   <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
+
+   <h1>HTML5</h1>
+   </div><div>
+   <a href="links.html">&#x2190; 4.12 Links</a> &#x2013;
+   <a href="spec.html#contents">Table of contents</a> &#x2013;
+   <a href="origin-0.html">5.3 Origin &#x2192;</a>
+  <ol class="toc"><li><a href="browsers.html#browsers"><span class="secno">5 </span>Loading Web pages</a>
+  <ol><li><a href="browsers.html#windows"><span class="secno">5.1 </span>Browsing contexts</a>
+    <ol><li><a href="browsers.html#nested-browsing-contexts"><span class="secno">5.1.1 </span>Nested browsing contexts</a>
+      <ol><li><a href="browsers.html#navigating-nested-browsing-contexts-in-the-dom"><span class="secno">5.1.1.1 </span>Navigating nested browsing contexts in the DOM</a></li></ol></li><li><a href="browsers.html#auxiliary-browsing-contexts"><span class="secno">5.1.2 </span>Auxiliary browsing contexts</a>
+      <ol><li><a href="browsers.html#navigating-auxiliary-browsing-contexts-in-the-dom"><span class="secno">5.1.2.1 </span>Navigating auxiliary browsing contexts in the DOM</a></li></ol></li><li><a href="browsers.html#secondary-browsing-contexts"><span class="secno">5.1.3 </span>Secondary browsing contexts</a></li><li><a href="browsers.html#security-nav"><span class="secno">5.1.4 </span>Security</a></li><li><a href="browsers.html#groupings-of-browsing-contexts"><span class="secno">5.1.5 </span>Groupings of browsing contexts</a></li><li><a href="browsers.html#browsing-context-names"><span class="secno">5.1.6 </span>Browsing context names</a></li></ol></li><li><a href="browsers.html#the-window-object"><span class="secno">5.2 </span>The <code>Window</code> object</a>
+    <ol><li><a href="browsers.html#security-window"><span class="secno">5.2.1 </span>Security</a></li><li><a href="browsers.html#apis-for-creating-and-navigating-browsing-contexts-by-name"><span class="secno">5.2.2 </span>APIs for creating and navigating browsing contexts by name</a></li><li><a href="browsers.html#accessing-other-browsing-contexts"><span class="secno">5.2.3 </span>Accessing other browsing contexts</a></li><li><a href="browsers.html#named-access-on-the-window-object"><span class="secno">5.2.4 </span>Named access on the <code>Window</code> object</a></li><li><a href="browsers.html#garbage-collection-and-browsing-contexts"><span class="secno">5.2.5 </span>Garbage collection and browsing contexts</a></li><li><a href="browsers.html#browser-interface-elements"><span class="secno">5.2.6 </span>Browser interface elements</a></li><li><a href="browsers.html#the-windowproxy-object"><span class="secno">5.2.7 </span>The <code>WindowProxy</code> object</a></li></ol></li></ol></li></ol></div><h2 id="browsers"><span class="secno">5 </span>Loading Web pages</h2><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><div class="impl">
+
+  <p>This section describes features that apply most directly to Web
+  browsers. Having said that, except where specified otherwise, the
+  requirements defined in this section <em>do</em> apply to all user
+  agents, whether they are Web browsers or not.</p>
+
+  </div><h3 id="windows"><span class="secno">5.1 </span>Browsing contexts</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>A <dfn id="browsing-context">browsing context</dfn> is an environment in which
+  <code><a href="infrastructure.html#document">Document</a></code> objects are presented to the user.</p><p class="note">A tab or window in a Web browser typically contains
+  a <a href="#browsing-context">browsing context</a>, as does an <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code><span class="impl"> or <code><a href="obsolete.html#frame">frame</a></code>s in a
+  <code><a href="obsolete.html#frameset">frameset</a></code></span>.</p><p>Each <a href="#browsing-context">browsing context</a> has a corresponding
+  <code><a href="#windowproxy">WindowProxy</a></code> object.</p><p>A <a href="#browsing-context">browsing context</a> has a <a href="history.html#session-history">session
+  history</a>, which lists the <code><a href="infrastructure.html#document">Document</a></code> objects that
+  that <a href="#browsing-context">browsing context</a> has presented, is presenting, or
+  will present. At any time, one <code><a href="infrastructure.html#document">Document</a></code> in each
+  <a href="#browsing-context">browsing context</a> is designated the <dfn id="active-document">active
+  document</dfn>.</p><p>Each <code><a href="infrastructure.html#document">Document</a></code> is associated with a
+  <code><a href="#window">Window</a></code> object. A <a href="#browsing-context">browsing context</a>'s
+  <code><a href="#windowproxy">WindowProxy</a></code> object forwards everything to the
+  <a href="#browsing-context">browsing context</a>'s <a href="#active-document">active document</a>'s
+  <code><a href="#window">Window</a></code> object.</p><p class="note">In general, there is a 1-to-1 mapping from the
+  <code><a href="#window">Window</a></code> object to the <code><a href="infrastructure.html#document">Document</a></code> object. In
+  one particular case, a <code><a href="#window">Window</a></code> can be reused for the
+  presentation of a second <code><a href="infrastructure.html#document">Document</a></code> in the same
+  <a href="#browsing-context">browsing context</a>, such that the mapping is then
+  2-to-1. This occurs when a <a href="#browsing-context">browsing context</a> is <a href="history.html#navigate" title="navigate">navigated</a> from the initial
+  <code><a href="fetching-resources.html#about:blank">about:blank</a></code> <code><a href="infrastructure.html#document">Document</a></code> to another, with
+  <a href="history.html#replacement-enabled">replacement enabled</a>.</p><p class="note">A <code><a href="infrastructure.html#document">Document</a></code> does not necessarily have a
+  <a href="#browsing-context">browsing context</a> associated with it. In particular,
+  data mining tools are likely to never instantiate browsing
+  contexts.</p><hr/><p>A <a href="#browsing-context">browsing context</a> can have a <dfn id="creator-browsing-context">creator browsing
+  context</dfn>, the <a href="#browsing-context">browsing context</a> that was
+  responsible for its creation. If a <a href="#browsing-context">browsing context</a> has
+  a <a href="#parent-browsing-context">parent browsing context</a>, then that is its
+  <a href="#creator-browsing-context">creator browsing context</a>. Otherwise, if the
+  <a href="#browsing-context">browsing context</a> has an <a href="#opener-browsing-context">opener browsing
+  context</a>, then <em>that</em> is its <a href="#creator-browsing-context">creator browsing
+  context</a>. Otherwise, the <a href="#browsing-context">browsing context</a> has no
+  <a href="#creator-browsing-context">creator browsing context</a>.</p><p>If a <a href="#browsing-context">browsing context</a> <var title="">A</var> has a
+  <a href="#creator-browsing-context">creator browsing context</a>, then the
+  <code><a href="infrastructure.html#document">Document</a></code> that was the <a href="#active-document">active document</a> of
+  that <a href="#creator-browsing-context">creator browsing context</a> at the time <var title="">A</var> was created is the <dfn id="creator-document">creator
+  <code>Document</code></dfn>.</p><div class="impl">
+
+  <p>When a <a href="#browsing-context">browsing context</a> is first created, it must be
+  created with a single <code><a href="infrastructure.html#document">Document</a></code> in its session history,
+  whose <a href="dom.html#the-document-s-address" title="the document's address">address</a> is
+  <code><a href="fetching-resources.html#about:blank">about:blank</a></code>, which is marked as being an <a href="dom.html#html-documents" title="HTML documents">HTML document</a>, and whose <a href="dom.html#document-s-character-encoding" title="document's character encoding">character encoding</a> is
+  UTF-8. The <code><a href="infrastructure.html#document">Document</a></code> must have a single child
+  <code><a href="semantics.html#the-html-element-0">html</a></code> node, which itself has a single child
+  <code><a href="sections.html#the-body-element-0">body</a></code> node.</p>
+
+  <p class="note">If the <a href="#browsing-context">browsing context</a> is created
+  specifically to be immediately navigated, then that initial
+  navigation will have <a href="history.html#replacement-enabled">replacement enabled</a>.</p>
+
+  <p id="about-blank-origin">The <a href="origin-0.html#origin">origin</a> of the
+  <code><a href="fetching-resources.html#about:blank">about:blank</a></code> <code><a href="infrastructure.html#document">Document</a></code> is set when the
+  <code><a href="infrastructure.html#document">Document</a></code> is created. If the new <a href="#browsing-context">browsing
+  context</a> has a <a href="#creator-browsing-context">creator browsing context</a>, then the
+  <a href="origin-0.html#origin">origin</a> of the <code><a href="fetching-resources.html#about:blank">about:blank</a></code>
+  <code><a href="infrastructure.html#document">Document</a></code> is the <a href="origin-0.html#origin">origin</a> of the
+  <a href="#creator-document">creator <code>Document</code></a>. Otherwise, the
+  <a href="origin-0.html#origin">origin</a> of the <code><a href="fetching-resources.html#about:blank">about:blank</a></code>
+  <code><a href="infrastructure.html#document">Document</a></code> is a globally unique identifier assigned when
+  the new <a href="#browsing-context">browsing context</a> is created.</p>
+
+  </div><h4 id="nested-browsing-contexts"><span class="secno">5.1.1 </span>Nested browsing contexts</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Certain elements (for example, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> elements) can
+  instantiate further <a href="#browsing-context" title="browsing context">browsing
+  contexts</a>. These are called <dfn id="nested-browsing-context" title="nested browsing&#10;  context">nested browsing contexts</dfn>. If a browsing context <var title="">P</var> has an element <var title="">E</var> in one of its
+  <code><a href="infrastructure.html#document">Document</a></code>s <var title="">D</var> that nests another
+  browsing context <var title="">C</var> inside it, then <var title="">P</var> is said to be the <dfn id="parent-browsing-context">parent browsing
+  context</dfn> of <var title="">C</var>, <var title="">C</var> is
+  said to be a <dfn id="child-browsing-context">child browsing context</dfn> of <var title="">P</var>, <var title="">C</var> is said to be <dfn id="browsing-context-nested-through" title="browsing context nested through">nested through</dfn> <var title="">D</var>, and <var title="">E</var> is said to be the
+  <dfn id="browsing-context-container">browsing context container</dfn> of <var title="">C</var>.</p><p>A browsing context <var title="">A</var> is said to be an
+  ancestor of a browsing context <var title="">B</var> if there exists
+  a browsing context <var title="">A'</var> that is a <a href="#child-browsing-context">child
+  browsing context</a> of <var title="">A</var> and that is itself
+  an ancestor of <var title="">B</var>, or if there is a browsing
+  context <var title="">P</var> that is a <a href="#child-browsing-context">child browsing
+  context</a> of <var title="">A</var> and that is the <a href="#parent-browsing-context">parent
+  browsing context</a> of <var title="">B</var>.</p><p>The browsing context with no <a href="#parent-browsing-context">parent browsing context</a>
+  is the <dfn id="top-level-browsing-context">top-level browsing context</dfn> of all the browsing
+  contexts <a href="#nested-browsing-context" title="nested browsing context">nested</a> within
+  it (either directly or indirectly through other nested browsing
+  contexts).</p><p>The transitive closure of <a href="#parent-browsing-context" title="parent browsing&#10;  context">parent browsing contexts</a> for a <a href="#nested-browsing-context">nested browsing
+  context</a> gives the list of <dfn id="ancestor-browsing-context" title="ancestor browsing&#10;  context">ancestor browsing contexts</dfn>.</p><p>The <dfn id="list-of-the-descendant-browsing-contexts">list of the descendant browsing contexts</dfn> of a
+  <code><a href="infrastructure.html#document">Document</a></code> <var title="">d</var> is the list returned by
+  the following algorithm:</p><ol><li><p>Let <var title="">list</var> be an empty list.</p></li>
+
+   <li><p>For each <a href="#child-browsing-context">child browsing context</a> of <var title="">d</var> that is <a href="#browsing-context-nested-through" title="browsing context nested&#10;   through">nested through</a> an element that is <a href="infrastructure.html#in-a-document" title="in a&#10;   document">in the <code>Document</code></a> <var title="">d</var>, in the <a href="infrastructure.html#tree-order">tree order</a> of the elements
+   nesting those <a href="#browsing-context" title="browsing context">browsing
+   contexts</a>, append to the list <var title="">list</var> the
+   <a href="#list-of-the-descendant-browsing-contexts">list of the descendant browsing contexts</a> of the
+   <a href="#active-document">active document</a> of that <a href="#child-browsing-context">child browsing
+   context</a>.</p></li>
+
+   <li><p>Return the constructed <var title="">list</var>.</p></li>
+
+  </ol><hr/><p>A <code><a href="infrastructure.html#document">Document</a></code> is said to be <dfn id="fully-active">fully active</dfn>
+  when it is the <a href="#active-document">active document</a> of its <a href="#browsing-context">browsing
+  context</a>, and either its browsing context is a <a href="#top-level-browsing-context">top-level
+  browsing context</a>, or the <code><a href="infrastructure.html#document">Document</a></code> <a href="#browsing-context-nested-through" title="browsing context nested through">through which</a> that
+  browsing context is <a href="#nested-browsing-context" title="nested browsing&#10;  context">nested</a> is itself <a href="#fully-active">fully active</a>.</p><p>Because they are nested through an element, <a href="#child-browsing-context" title="child&#10;  browsing context">child browsing contexts</a> are always tied to
+  a specific <code><a href="infrastructure.html#document">Document</a></code> in their <a href="#parent-browsing-context">parent browsing
+  context</a>. User agents must not allow the user to interact with
+  <a href="#child-browsing-context" title="child browsing context">child browsing contexts</a>
+  of elements that are in <code><a href="infrastructure.html#document">Document</a></code>s that are not
+  themselves <a href="#fully-active">fully active</a>.</p><p>A <a href="#nested-browsing-context">nested browsing context</a> can have a <a href="the-iframe-element.html#seamless-browsing-context-flag">seamless
+  browsing context flag</a> set, if it is embedded through an
+  <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> element with a <code title="attr-iframe-seamless"><a href="the-iframe-element.html#attr-iframe-seamless">seamless</a></code> attribute.</p><h5 id="navigating-nested-browsing-contexts-in-the-dom"><span class="secno">5.1.1.1 </span>Navigating nested browsing contexts in the DOM</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">window</var> . <code title="dom-top"><a href="#dom-top">top</a></code></dt>
+
+   <dd>
+
+    <p>Returns the <code><a href="#windowproxy">WindowProxy</a></code> for the <a href="#top-level-browsing-context">top-level browsing context</a>.</p>
+
+   </dd>
+
+   <dt><var title="">window</var> . <code title="dom-parent"><a href="#dom-parent">parent</a></code></dt>
+
+   <dd>
+
+    <p>Returns the <code><a href="#windowproxy">WindowProxy</a></code> for the <a href="#parent-browsing-context">parent browsing context</a>.</p>
+
+   </dd>
+
+   <dt><var title="">window</var> . <code title="dom-frameElement"><a href="#dom-frameelement">frameElement</a></code></dt>
+
+   <dd>
+
+    <p>Returns the <code><a href="infrastructure.html#element">Element</a></code> for the <a href="#browsing-context-container">browsing context container</a>.</p>
+
+    <p>Returns null if there isn't one.</p>
+
+    <p>Throws a <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code> exception in cross-origin situations.</p>
+
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>The <dfn id="dom-top" title="dom-top"><code>top</code></dfn> IDL attribute on
+  the <code><a href="#window">Window</a></code> object of a <code><a href="infrastructure.html#document">Document</a></code> in a
+  <a href="#browsing-context">browsing context</a> <var title="">b</var> must return the
+  <code><a href="#windowproxy">WindowProxy</a></code> object of its <a href="#top-level-browsing-context">top-level browsing
+  context</a> (which would be its own <code><a href="#windowproxy">WindowProxy</a></code>
+  object if it was a <a href="#top-level-browsing-context">top-level browsing context</a>
+  itself).</p>
+
+  <p>The <dfn id="dom-parent" title="dom-parent"><code>parent</code></dfn> IDL
+  attribute on the <code><a href="#window">Window</a></code> object of a
+  <code><a href="infrastructure.html#document">Document</a></code> in a <a href="#browsing-context">browsing context</a> <var title="">b</var> must return the <code><a href="#windowproxy">WindowProxy</a></code> object of
+  the <a href="#parent-browsing-context">parent browsing context</a>, if there is one (i.e. if
+  <var title="">b</var> is a <a href="#child-browsing-context">child browsing context</a>), or
+  the <code><a href="#windowproxy">WindowProxy</a></code> object of the <a href="#browsing-context">browsing
+  context</a> <var title="">b</var> itself, otherwise (i.e. if it
+  is a <a href="#top-level-browsing-context">top-level browsing context</a>).</p>
+
+  <p>The <dfn id="dom-frameelement" title="dom-frameElement"><code>frameElement</code></dfn>
+  IDL attribute on the <code><a href="#window">Window</a></code> object of a
+  <code><a href="infrastructure.html#document">Document</a></code> <var title="">d</var>, on getting, must run
+  the following algorithm:</p>
+
+  <ol><li><p>If <var title="">d</var> is not a <code><a href="infrastructure.html#document">Document</a></code> in a
+   <a href="#child-browsing-context">child browsing context</a>, return null and abort these
+   steps.</p></li>
+
+   <li><p>If the <a href="#parent-browsing-context">parent browsing context</a>'s <a href="#active-document">active
+   document</a> does not have the <a href="origin-0.html#same-origin" title="same&#10;   origin">same</a> <a href="origin-0.html#effective-script-origin">effective script origin</a> as the
+   <a href="#entry-script">entry script</a>, then throw a <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code>
+   exception.</p></li>
+
+   <li><p>Otherwise, return the <a href="#browsing-context-container">browsing context
+   container</a> for <var title="">b</var>.</p></li>
+
+  </ol></div><h4 id="auxiliary-browsing-contexts"><span class="secno">5.1.2 </span>Auxiliary browsing contexts</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>It is possible to create new browsing contexts that are related
+  to a <a href="#top-level-browsing-context">top-level browsing context</a> without being nested
+  through an element. Such browsing contexts are called <dfn id="auxiliary-browsing-context" title="auxiliary browsing context">auxiliary browsing
+  contexts</dfn>. Auxiliary browsing contexts are always <a href="#top-level-browsing-context" title="top-level browsing context">top-level browsing
+  contexts</a>.</p><p>An <a href="#auxiliary-browsing-context">auxiliary browsing context</a> has an <dfn id="opener-browsing-context">opener
+  browsing context</dfn>, which is the <a href="#browsing-context">browsing context</a>
+  from which the <a href="#auxiliary-browsing-context">auxiliary browsing context</a> was created,
+  and it has a <dfn id="furthest-ancestor-browsing-context">furthest ancestor browsing context</dfn>, which is
+  the <a href="#top-level-browsing-context">top-level browsing context</a> of the <a href="#opener-browsing-context">opener
+  browsing context</a> when the <a href="#auxiliary-browsing-context">auxiliary browsing
+  context</a> was created.</p><h5 id="navigating-auxiliary-browsing-contexts-in-the-dom"><span class="secno">5.1.2.1 </span>Navigating auxiliary browsing contexts in the DOM</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The <dfn id="dom-opener" title="dom-opener"><code>opener</code></dfn> IDL
+  attribute on the <code><a href="#window">Window</a></code> object must return the
+  <code><a href="#windowproxy">WindowProxy</a></code> object of the <a href="#browsing-context">browsing context</a>
+  from which the current <a href="#browsing-context">browsing context</a> was created
+  (its <a href="#opener-browsing-context">opener browsing context</a>), if there is one and it
+  is still available.</p><h4 id="secondary-browsing-contexts"><span class="secno">5.1.3 </span>Secondary browsing contexts</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>User agents may support <dfn id="secondary-browsing-context" title="secondary browsing&#10;  context">secondary browsing contexts</dfn>, which are <a href="#browsing-context" title="browsing context">browsing contexts</a> that form part of
+  the user agent's interface, apart from the main content area.</p><div class="impl">
+
+  <h4 id="security-nav"><span class="secno">5.1.4 </span>Security</h4>
+
+  <p id="security-1">A <a href="#browsing-context">browsing context</a> <var title="">A</var> is <dfn id="allowed-to-navigate">allowed to navigate</dfn> a second
+  <a href="#browsing-context">browsing context</a> <var title="">B</var> if one of the
+  following conditions is true:</p>
+
+  <ul><li>Either the <a href="origin-0.html#origin">origin</a> of the <a href="#active-document">active
+   document</a> of <var title="">A</var> is the <a href="origin-0.html#same-origin" title="same&#10;   origin">same</a> as the <a href="origin-0.html#origin">origin</a> of the <a href="#active-document">active
+   document</a> of <var title="">B</var>, or</li>
+
+   <li>The browsing context <var title="">A</var> is a <a href="#nested-browsing-context">nested
+   browsing context</a> and its <a href="#top-level-browsing-context">top-level browsing
+   context</a> is <var title="">B</var>, or</li>
+
+   <li>The browsing context <var title="">B</var> is an
+   <a href="#auxiliary-browsing-context">auxiliary browsing context</a> and <var title="">A</var>
+   is <a href="#allowed-to-navigate">allowed to navigate</a> <var title="">B</var>'s
+   <a href="#opener-browsing-context">opener browsing context</a>, or</li>
+
+   <li>The browsing context <var title="">B</var> is not a
+   <a href="#top-level-browsing-context">top-level browsing context</a>, but there exists an
+   <a href="#ancestor-browsing-context">ancestor browsing context</a> of <var title="">B</var>
+   whose <a href="#active-document">active document</a> has the <a href="origin-0.html#same-origin" title="same&#10;   origin">same</a> <a href="origin-0.html#origin">origin</a> as the <a href="#active-document">active
+   document</a> of <var title="">A</var> (possibly in fact being
+   <var title="">A</var> itself).</li>
+
+  </ul><hr/><p>An element has a <dfn id="browsing-context-scope-origin">browsing context scope origin</dfn> if its
+  <code><a href="infrastructure.html#document">Document</a></code>'s <a href="#browsing-context">browsing context</a> is a
+  <a href="#top-level-browsing-context">top-level browsing context</a> or if all of its
+  <code><a href="infrastructure.html#document">Document</a></code>'s <a href="#ancestor-browsing-context" title="ancestor browsing&#10;  context">ancestor browsing contexts</a> all have <a href="#active-document" title="active document">active documents</a> whose
+  <a href="origin-0.html#origin">origin</a> are the <a href="origin-0.html#same-origin">same origin</a> as the
+  element's <code><a href="infrastructure.html#document">Document</a></code>'s <a href="origin-0.html#origin">origin</a>. If an element
+  has a <a href="#browsing-context-scope-origin">browsing context scope origin</a>, then its value is
+  the <a href="origin-0.html#origin">origin</a> of the element's <code><a href="infrastructure.html#document">Document</a></code>.</p>
+
+  </div><div class="impl">
+
+  <h4 id="groupings-of-browsing-contexts"><span class="secno">5.1.5 </span>Groupings of browsing contexts</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+  <p>Each <a href="#browsing-context">browsing context</a> is defined as having a list of
+  zero or more <dfn id="directly-reachable-browsing-contexts">directly reachable browsing contexts</dfn>. These
+  are:</p>
+
+  <ul><li>All the <a href="#browsing-context">browsing context</a>'s <a href="#child-browsing-context" title="child&#10;   browsing context">child browsing contexts</a>.</li>
+
+   <li>The <a href="#browsing-context">browsing context</a>'s <a href="#parent-browsing-context">parent browsing
+   context</a>.</li>
+
+   <li>All the <a href="#browsing-context" title="browsing context">browsing contexts</a>
+   that have the <a href="#browsing-context">browsing context</a> as their <a href="#opener-browsing-context">opener
+   browsing context</a>.</li>
+
+   <li>The <a href="#browsing-context">browsing context</a>'s <a href="#opener-browsing-context">opener browsing
+   context</a>.</li>
+
+  </ul><p>The transitive closure of all the <a href="#browsing-context" title="browsing&#10;  context">browsing contexts</a> that are <a href="#directly-reachable-browsing-contexts">directly reachable
+  browsing contexts</a> forms a <dfn id="unit-of-related-browsing-contexts">unit of related browsing
+  contexts</dfn>.</p>
+
+  <p>Each <a href="#unit-of-related-browsing-contexts">unit of related browsing contexts</a> is then
+  further divided into the smallest number of groups such that every
+  member of each group has an <a href="origin-0.html#effective-script-origin">effective script origin</a>
+  that, through appropriate manipulation of the <code title="dom-document-domain"><a href="origin-0.html#dom-document-domain">document.domain</a></code> attribute, could
+  be made to be the same as other members of the group, but could not
+  be made the same as members of any other group. Each such group is a
+  <dfn id="unit-of-related-similar-origin-browsing-contexts">unit of related similar-origin browsing contexts</dfn>.</p>
+
+  <p>Each <a href="#unit-of-related-similar-origin-browsing-contexts">unit of related similar-origin browsing
+  contexts</a> can have a <dfn id="entry-script">entry script</dfn> which is used to
+  obtain, amongst other things, the <a href="webappapis.html#script-s-base-url">script's base URL</a> to
+  <a href="urls.html#resolve-a-url" title="resolve a url">resolve</a> relative <a href="urls.html#url" title="URL">URLs</a> used in scripts running in that <a href="#unit-of-related-similar-origin-browsing-contexts">unit
+  of related similar-origin browsing contexts</a>. Initially, there
+  is no <a href="#entry-script">entry script</a>. It is changed by the <a href="webappapis.html#jump-to-a-code-entry-point">jump to
+  a code entry-point</a> algorithm.</p>
+
+  <p class="note">There is at most one <a href="webappapis.html#event-loop">event loop</a> per
+  <a href="#unit-of-related-similar-origin-browsing-contexts">unit of related similar-origin browsing contexts</a>.</p>
+
+  </div><h4 id="browsing-context-names"><span class="secno">5.1.6 </span>Browsing context names</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Browsing contexts can have a <dfn id="browsing-context-name">browsing context name</dfn>. By
+  default, a browsing context has no name (its name is not set).</p><p>A <dfn id="valid-browsing-context-name">valid browsing context name</dfn> is any string with at
+  least one character that does not start with a U+005F LOW LINE
+  character. (Names starting with an underscore are reserved for
+  special keywords.)</p><p>A <dfn id="valid-browsing-context-name-or-keyword">valid browsing context name or keyword</dfn> is any string
+  that is either a <a href="#valid-browsing-context-name">valid browsing context name</a> or that is
+  an <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for one of: <code title="">_blank</code>, <code title="">_self</code>, <code title="">_parent</code>, or <code title="">_top</code>.</p><div class="impl">
+
+  <p><dfn id="the-rules-for-choosing-a-browsing-context-given-a-browsing-context-name">The rules for choosing a browsing context given a browsing
+  context name</dfn> are as follows. The rules assume that they are
+  being applied in the context of a <a href="#browsing-context">browsing context</a>.</p>
+
+  <ol><li><p>If the given browsing context name is the empty string or
+   <code title="">_self</code>, then the chosen browsing context must
+   be the current one. This is an <dfn id="explicit-self-navigation-override">explicit self-navigation
+   override</dfn>, which overrides the behavior of the <a href="the-iframe-element.html#seamless-browsing-context-flag">seamless
+   browsing context flag</a> set by the <code title="attr-iframe-seamless"><a href="the-iframe-element.html#attr-iframe-seamless">seamless</a></code> attribute on
+   <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> elements.</p></li>
+
+   <li><p>If the given browsing context name is <code title="">_parent</code>, then the chosen browsing context must be
+   the <a href="#parent-browsing-context"><em>parent</em> browsing context</a> of the current
+   one, unless there isn't one, in which case the chosen browsing
+   context must be the current browsing context.</p></li>
+
+   <li><p>If the given browsing context name is <code title="">_top</code>, then the chosen browsing context must be the
+   most <a href="#top-level-browsing-context">top-level browsing context</a> of the current
+   one.</p></li>
+
+   <li>
+
+    <p>If the given browsing context name is not <code title="">_blank</code> and there exists a browsing context whose
+    <a href="#browsing-context-name" title="browsing context name">name</a> is the same as the
+    given browsing context name, and the current browsing context is
+    <a href="#allowed-to-navigate">allowed to navigate</a> that browsing context, and the
+    user agent determines that the two browsing contexts are related
+    enough that it is ok if they reach each other, then that browsing
+    context must be the chosen one. If there are multiple matching
+    browsing contexts, the user agent should select one in some
+    arbitrary consistent manner, such as the most recently opened,
+    most recently focused, or more closely related.</p>
+
+    <p>If the browsing context is chosen by this step to be the
+    current browsing context, then this is also an <a href="#explicit-self-navigation-override">explicit
+    self-navigation override</a>.</p>
+
+   </li>
+
+   <li>
+
+    <p>Otherwise, a new browsing context is being requested, and what
+    happens depends on the user agent's configuration and/or
+    abilities:</p>
+
+    <dl><dt id="sandboxWindowOpen">If the current browsing context had
+     the <a href="the-iframe-element.html#sandboxed-navigation-browsing-context-flag">sandboxed navigation browsing context flag</a> set
+     when its <a href="#active-document">active document</a> was created.</dt>
+
+     <dd><p>The user agent may offer to create a new <a href="#top-level-browsing-context">top-level
+     browsing context</a> or reuse an existing <a href="#top-level-browsing-context">top-level
+     browsing context</a>. If the user picks one of those options,
+     then the designated browsing context must be the chosen one (the
+     browsing context's name isn't set to the given browsing context
+     name). Otherwise (if the user agent doesn't offer the option to
+     the user, or if the user declines to allow a browsing context to
+     be used) there must not be a chosen browsing context.</p></dd>
+
+
+     <dt id="noopener">If the user agent has been configured such that
+     in this instance it will create a new browsing context, and the
+     browsing context is being requested as part of <a href="links.html#following-hyperlinks" title="following hyperlinks">following a hyperlink</a> whose
+     <a href="links.html#linkTypes">link types</a> include the <code title="rel-noreferrer"><a href="links.html#link-type-noreferrer">noreferrer</a></code> keyword</dt>
+
+     <dd><p>A new <a href="#top-level-browsing-context">top-level browsing context</a> must be
+     created. If the given browsing context name is not <code title="">_blank</code>, then the new top-level browsing context's
+     name must be the given browsing context name (otherwise, it has
+     no name). The chosen browsing context must be this new browsing
+     context.</p>
+
+     <p class="note">If it is immediately <a href="history.html#navigate" title="navigate">navigated</a>, then the navigation will be
+     done with <a href="history.html#replacement-enabled">replacement enabled</a>.</p></dd>
+
+
+     <dt>If the user agent has been configured such that in this
+     instance it will create a new browsing context, and the <code title="rel-noreferrer"><a href="links.html#link-type-noreferrer">noreferrer</a></code> keyword doesn't
+     apply</dt>
+
+     <dd><p>A new <a href="#auxiliary-browsing-context">auxiliary browsing context</a> must be
+     created, with the <a href="#opener-browsing-context">opener browsing context</a> being the
+     current one. If the given browsing context name is not <code title="">_blank</code>, then the new auxiliary browsing context's
+     name must be the given browsing context name (otherwise, it has
+     no name). The chosen browsing context must be this new browsing
+     context.</p>
+
+     <p>If it is immediately <a href="history.html#navigate" title="navigate">navigated</a>,
+     then the navigation will be done with <a href="history.html#replacement-enabled">replacement
+     enabled</a>.</p></dd>
+
+
+     <dt>If the user agent has been configured such that in this
+     instance it will reuse the current browsing context</dt>
+
+     <dd><p>The chosen browsing context is the current browsing
+     context.</p></dd>
+
+
+     <dt>If the user agent has been configured such that in this
+     instance it will not find a browsing context</dt>
+
+     <dd><p>There must not be a chosen browsing context.</p></dd>
+
+    </dl><p>User agent implementors are encouraged to provide a way for
+    users to configure the user agent to always reuse the current
+    browsing context.</p>
+
+   </li>
+
+  </ol></div><h3 id="the-window-object"><span class="secno">5.2 </span>The <code><a href="#window">Window</a></code> object</h3><p class="XXX annotation"><b>Status: </b><i>Implemented and widely deployed</i></p><pre class="idl">[OverrideBuiltins, ReplaceableNamedProperties] <!-- XXX http://www.w3.org/Bugs/Public/show_bug.cgi?id=8241 -->
+interface <dfn id="window">Window</dfn> {
+  // the current browsing context
+  readonly attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-window" title="dom-window">window</a>;
+  readonly attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-self" title="dom-self">self</a>;
+  readonly attribute <a href="infrastructure.html#document">Document</a> <a href="#dom-document" title="dom-document">document</a>;
+           attribute DOMString <a href="#dom-name" title="dom-name">name</a>; <!-- not [Replaceable] per WebKit and IE8 -->
+  [PutForwards=<a href="history.html#dom-location-href" title="dom-location-href">href</a>] readonly attribute <a href="history.html#location">Location</a> <a href="history.html#dom-location" title="dom-location">location</a>;
+  readonly attribute <a href="history.html#history-0">History</a> <a href="history.html#dom-history" title="dom-history">history</a>;
+  readonly attribute <a href="dnd.html#undomanager">UndoManager</a> <a href="dnd.html#dom-undomanager" title="dom-undoManager">undoManager</a>;
+  <a href="editing.html#selection-0">Selection</a> <a href="editing.html#dom-getselection" title="dom-getSelection">getSelection</a>();
+  [Replaceable] readonly attribute <a href="#barprop">BarProp</a> <a href="#dom-window-locationbar" title="dom-window-locationbar">locationbar</a>;
+  [Replaceable] readonly attribute <a href="#barprop">BarProp</a> <a href="#dom-window-menubar" title="dom-window-menubar">menubar</a>;
+  [Replaceable] readonly attribute <a href="#barprop">BarProp</a> <a href="#dom-window-personalbar" title="dom-window-personalbar">personalbar</a>;
+  [Replaceable] readonly attribute <a href="#barprop">BarProp</a> <a href="#dom-window-scrollbars" title="dom-window-scrollbars">scrollbars</a>;
+  [Replaceable] readonly attribute <a href="#barprop">BarProp</a> <a href="#dom-window-statusbar" title="dom-window-statusbar">statusbar</a>;
+  [Replaceable] readonly attribute <a href="#barprop">BarProp</a> <a href="#dom-window-toolbar" title="dom-window-toolbar">toolbar</a>;<!--
+  [Replaceable] readonly attribute <span>BarProp</span> <span title="dom-window-directories">directories</span>; // legacy (Gecko-only) -->
+  void <a href="#dom-window-close" title="dom-window-close">close</a>();
+  void <a href="#dom-window-stop" title="dom-window-stop">stop</a>();
+  void <a href="editing.html#dom-window-focus" title="dom-window-focus">focus</a>();
+  void <a href="editing.html#dom-window-blur" title="dom-window-blur">blur</a>();
+
+  // other browsing contexts
+  [Replaceable] readonly attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-frames" title="dom-frames">frames</a>;
+  [Replaceable] readonly attribute unsigned long <a href="#dom-length" title="dom-length">length</a>;
+  readonly attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-top" title="dom-top">top</a>;
+  [Replaceable] readonly attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-opener" title="dom-opener">opener</a>;
+  readonly attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-parent" title="dom-parent">parent</a>;
+  readonly attribute <a href="infrastructure.html#element">Element</a> <a href="#dom-frameelement" title="dom-frameElement">frameElement</a>;
+  <a href="#windowproxy">WindowProxy</a> <a href="#dom-open" title="dom-open">open</a>(in optional DOMString url, in optional DOMString target, in optional DOMString features, in optional DOMString replace);
+  <a href="#dom-window-item" title="dom-window-item">getter</a> <a href="#windowproxy">WindowProxy</a> (in unsigned long index);
+  <a href="#dom-window-nameditem" title="dom-window-namedItem">getter</a> any (in DOMString name);
+
+  // the user agent
+  readonly attribute <a href="timers.html#navigator">Navigator</a> <a href="timers.html#dom-navigator" title="dom-navigator">navigator</a>; <!-- IE also has window.clientInformation === window.navigator -->
+  readonly attribute <a href="offline.html#applicationcache">ApplicationCache</a> <a href="offline.html#dom-applicationcache" title="dom-applicationCache">applicationCache</a>;
+
+  // user prompts
+  void <a href="timers.html#dom-alert" title="dom-alert">alert</a>(in DOMString message);
+  boolean <a href="timers.html#dom-confirm" title="dom-confirm">confirm</a>(in DOMString message);
+  DOMString <a href="timers.html#dom-prompt" title="dom-prompt">prompt</a>(in DOMString message, in optional DOMString default);
+  void <a href="timers.html#dom-print" title="dom-print">print</a>();
+  any <a href="timers.html#dom-showmodaldialog" title="dom-showModalDialog">showModalDialog</a>(in DOMString url, in optional any argument<!--, in optional DOMString features-->);
+
+  // <a href="webappapis.html#event-handler-idl-attributes">event handler IDL attributes</a>
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onabort" title="handler-onabort">onabort</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onafterprint" title="handler-window-onafterprint">onafterprint</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onbeforeprint" title="handler-window-onbeforeprint">onbeforeprint</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onbeforeunload" title="handler-window-onbeforeunload">onbeforeunload</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onblur" title="handler-window-onblur">onblur</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oncanplay" title="handler-oncanplay">oncanplay</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oncanplaythrough" title="handler-oncanplaythrough">oncanplaythrough</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onchange" title="handler-onchange">onchange</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onclick" title="handler-onclick">onclick</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oncontextmenu" title="handler-oncontextmenu">oncontextmenu</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondblclick" title="handler-ondblclick">ondblclick</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondrag" title="handler-ondrag">ondrag</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondragend" title="handler-ondragend">ondragend</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondragenter" title="handler-ondragenter">ondragenter</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondragleave" title="handler-ondragleave">ondragleave</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondragover" title="handler-ondragover">ondragover</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondragstart" title="handler-ondragstart">ondragstart</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondrop" title="handler-ondrop">ondrop</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondurationchange" title="handler-ondurationchange">ondurationchange</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onemptied" title="handler-onemptied">onemptied</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onended" title="handler-onended">onended</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onerror" title="handler-window-onerror">onerror</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onfocus" title="handler-window-onfocus">onfocus</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onformchange" title="handler-onformchange">onformchange</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onforminput" title="handler-onforminput">onforminput</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onhashchange" title="handler-window-onhashchange">onhashchange</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oninput" title="handler-oninput">oninput</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oninvalid" title="handler-oninvalid">oninvalid</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onkeydown" title="handler-onkeydown">onkeydown</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onkeypress" title="handler-onkeypress">onkeypress</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onkeyup" title="handler-onkeyup">onkeyup</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onload" title="handler-window-onload">onload</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onloadeddata" title="handler-onloadeddata">onloadeddata</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onloadedmetadata" title="handler-onloadedmetadata">onloadedmetadata</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onloadstart" title="handler-onloadstart">onloadstart</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onmessage" title="handler-window-onmessage">onmessage</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmousedown" title="handler-onmousedown">onmousedown</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmousemove" title="handler-onmousemove">onmousemove</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmouseout" title="handler-onmouseout">onmouseout</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmouseover" title="handler-onmouseover">onmouseover</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmouseup" title="handler-onmouseup">onmouseup</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmousewheel" title="handler-onmousewheel">onmousewheel</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onoffline" title="handler-window-onoffline">onoffline</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-ononline" title="handler-window-ononline">ononline</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onpause" title="handler-onpause">onpause</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onplay" title="handler-onplay">onplay</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onplaying" title="handler-onplaying">onplaying</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onpagehide" title="handler-window-onpagehide">onpagehide</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onpageshow" title="handler-window-onpageshow">onpageshow</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onpopstate" title="handler-window-onpopstate">onpopstate</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onprogress" title="handler-onprogress">onprogress</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onratechange" title="handler-onratechange">onratechange</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onreadystatechange" title="handler-onreadystatechange">onreadystatechange</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onredo" title="handler-window-onredo">onredo</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onresize" title="handler-window-onresize">onresize</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onscroll" title="handler-onscroll">onscroll</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onseeked" title="handler-onseeked">onseeked</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onseeking" title="handler-onseeking">onseeking</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onselect" title="handler-onselect">onselect</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onshow" title="handler-onshow">onshow</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onstalled" title="handler-onstalled">onstalled</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onstorage" title="handler-window-onstorage">onstorage</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onsubmit" title="handler-onsubmit">onsubmit</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onsuspend" title="handler-onsuspend">onsuspend</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ontimeupdate" title="handler-ontimeupdate">ontimeupdate</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onundo" title="handler-window-onundo">onundo</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onunload" title="handler-window-onunload">onunload</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onvolumechange" title="handler-onvolumechange">onvolumechange</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onwaiting" title="handler-onwaiting">onwaiting</a>;
+};
+<a href="#window">Window</a> implements <a href="infrastructure.html#eventtarget">EventTarget</a>;</pre><!-- for more features to add here, look here:
+ http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/obj_window.asp
+ http://www.mozilla.org/docs/dom/domref/dom_window_ref.html
+ http://lxr.mozilla.org/mozilla/source/dom/public/idl/base/nsIDOMWindow.idl - scrollBy, etc
+ http://lxr.mozilla.org/mozilla/source/dom/public/idl/base/nsIDOMWindowInternal.idl - DOM level 0
+--><dl class="domintro"><dt><var title="">window</var> . <code title="dom-window"><a href="#dom-window">window</a></code></dt>
+   <dt><var title="">window</var> . <code title="dom-frames"><a href="#dom-frames">frames</a></code></dt>
+   <dt><var title="">window</var> . <code title="dom-self"><a href="#dom-self">self</a></code></dt>
+
+   <dd>
+
+    <p>These attributes all return <var title="">window</var>.</p>
+
+   </dd>
+
+
+   <dt><var title="">window</var> . <code title="dom-document"><a href="#dom-document">document</a></code></dt>
+
+   <dd>
+
+    <p>Returns the <a href="#active-document">active document</a>.</p>
+
+   </dd>
+
+
+   <dt><var title="">document</var> . <code title="dom-document-defaultView"><a href="#dom-document-defaultview">defaultView</a></code></dt>
+
+   <dd>
+
+    <p>Returns the <code><a href="#window">Window</a></code> object of the <a href="#active-document">active document</a>.</p>
+
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>The <dfn id="dom-window" title="dom-window"><code>window</code></dfn>, <dfn id="dom-frames" title="dom-frames"><code>frames</code></dfn>, and <dfn id="dom-self" title="dom-self"><code>self</code></dfn> IDL attributes must all
+  return the <code><a href="#window">Window</a></code> object's <a href="#browsing-context">browsing
+  context</a>'s <code><a href="#windowproxy">WindowProxy</a></code> object.</p>
+
+  <p>The <dfn id="dom-document" title="dom-document"><code>document</code></dfn> IDL
+  attribute must return the <code><a href="infrastructure.html#document">Document</a></code> object of the
+  <code><a href="#window">Window</a></code> object's <code><a href="infrastructure.html#document">Document</a></code>'s <a href="#browsing-context">browsing
+  context</a>'s <a href="#active-document">active document</a>.</p>
+
+  <p>The <dfn id="dom-document-defaultview" title="dom-document-defaultView"><code>defaultView</code></dfn> IDL
+  attribute of the <code><a href="dom.html#htmldocument">HTMLDocument</a></code> interface must return the
+  <code><a href="infrastructure.html#document">Document</a></code>'s <a href="#browsing-context">browsing context</a>'s
+  <code><a href="#windowproxy">WindowProxy</a></code> object.</p>
+
+  </div><div class="impl">
+
+  <h4 id="security-window"><span class="secno">5.2.1 </span>Security</h4>
+
+  <p id="security-2">User agents must raise a
+  <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code> exception whenever any of the members of a
+  <code><a href="#window">Window</a></code> object are accessed by scripts whose
+  <a href="origin-0.html#effective-script-origin">effective script origin</a> is not the same as the
+  <code><a href="#window">Window</a></code> object's <code><a href="infrastructure.html#document">Document</a></code>'s <a href="origin-0.html#effective-script-origin">effective
+  script origin</a>, with the following exceptions:</p>
+
+  <ul><li>The <code title="dom-location"><a href="history.html#dom-location">location</a></code> object
+
+   </li><li>The <code title="dom-window-postMessage">postMessage()</code> method
+
+   </li><li>The <code title="dom-frames"><a href="#dom-frames">frames</a></code> attribute
+
+   </li><li>The <a href="#dynamic-nested-browsing-context-properties">dynamic nested browsing context properties</a>
+
+  </li></ul><p>When a script whose <a href="origin-0.html#effective-script-origin">effective script origin</a> is not
+  the same as the <code><a href="#window">Window</a></code> object's <code><a href="infrastructure.html#document">Document</a></code>'s
+  <a href="origin-0.html#effective-script-origin">effective script origin</a> attempts to access that
+  <code><a href="#window">Window</a></code> object's methods or attributes, the user agent
+  must act as if any changes to the <code><a href="#window">Window</a></code> object's
+  properties, getters, setters, etc, were not present.</p>
+
+  <p>For members that return objects (including function objects),
+  each distinct <a href="origin-0.html#effective-script-origin">effective script origin</a> that is not the
+  same as the <code><a href="#window">Window</a></code> object's <code><a href="infrastructure.html#document">Document</a></code>'s
+  <a href="origin-0.html#effective-script-origin">effective script origin</a> must be provided with a
+  separate set of objects. These objects must have the prototype chain
+  appropriate for the script for which the objects are created (not
+  those that would be appropriate for scripts whose <a href="webappapis.html#script-s-global-object">script's
+  global object</a> is the <code><a href="#window">Window</a></code> object in
+  question).</p>
+
+  <div class="example">
+
+   <p>For instance, if two frames containing <code><a href="infrastructure.html#document">Document</a></code>s
+   from different <a href="origin-0.html#origin" title="origin">origins</a> access the same
+   <code><a href="#window">Window</a></code> object's <code title="dom-window-postMessage">postMessage()</code> method, they
+   will get distinct objects that are not equal.</p>
+
+  </div>
+
+  </div><h4 id="apis-for-creating-and-navigating-browsing-contexts-by-name"><span class="secno">5.2.2 </span>APIs for creating and navigating browsing contexts by name</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">window</var> = <var title="">window</var> . <code title="dom-open"><a href="#dom-open">open</a></code>( [ <var title="">url</var> [, <var title="">target</var> [, <var title="">features</var> [, <var title="">replace</var> ] ] ] ] )</dt>
+
+   <dd>
+
+    <p>Opens a window to show <var title="">url</var> (defaults to
+    <code><a href="fetching-resources.html#about:blank">about:blank</a></code>), and returns it. The <var title="">target</var> argument gives the name of the new
+    window. If a window exists with that name already, it is
+    reused. The <var title="">replace</var> attribute, if true, means
+    that whatever page is currently open in that window will be
+    removed from the window's session history. The <var title="">features</var> argument is ignored.</p>
+
+   </dd>
+
+   <dt><var title="">window</var> . <code title="dom-name"><a href="#dom-name">name</a></code> [ = <var title="">value</var> ]</dt>
+
+   <dd>
+
+    <p>Returns the name of the window.</p>
+
+    <p>Can be set, to change the name.</p>
+
+   </dd>
+
+   <dt><var title="">window</var> . <code title="dom-window-close"><a href="#dom-window-close">close</a></code>()</dt>
+
+   <dd>
+
+    <p>Closes the window.</p>
+
+   </dd>
+
+   <dt><var title="">window</var> . <code title="dom-window-stop"><a href="#dom-window-stop">stop</a></code>()</dt>
+
+   <dd>
+
+    <p>Cancels the document load.</p>
+
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>The <dfn id="dom-open" title="dom-open"><code>open()</code></dfn> method on
+  <code><a href="#window">Window</a></code> objects provides a mechanism for <a href="history.html#navigate" title="navigate">navigating</a> an existing <a href="#browsing-context">browsing
+  context</a> or opening and navigating an <a href="#auxiliary-browsing-context">auxiliary browsing
+  context</a>.</p>
+
+  <p>The method has four arguments, though they are all optional.</p>
+
+  <p>The first argument, <var title="">url</var>, must be a
+  <a href="urls.html#valid-non-empty-url">valid non-empty URL</a> for a page to load in the browsing
+  context. If no arguments are provided, or if the first argument is
+  the empty string, then the <var title="">url</var> argument defaults
+  to "<code><a href="fetching-resources.html#about:blank">about:blank</a></code>". The argument must be <a href="urls.html#resolve-a-url" title="resolve a url">resolved</a> to an <a href="urls.html#absolute-url">absolute
+  URL</a> (or an error), relative to the <a href="#entry-script">entry
+  script</a>'s <a href="webappapis.html#script-s-base-url" title="script's base URL">base URL</a>,
+  when the method is invoked.</p>
+
+  <p>The second argument, <var title="">target</var>, specifies the
+  <a href="#browsing-context-name" title="browsing context name">name</a> of the browsing
+  context that is to be navigated. It must be a <a href="#valid-browsing-context-name-or-keyword">valid browsing
+  context name or keyword</a>. If fewer than two arguments are
+  provided, then the <var title="">target</var> argument defaults to the
+  value "<code>_blank</code>".</p>
+
+  <p>The third argument, <var title="">features</var>, has no effect
+  and is supported for historical reasons only.</p>
+
+  <p>The fourth argument, <var title="">replace</var>, specifies
+  whether or not the new page will <a href="history.html#replacement-enabled" title="replacement&#10;  enabled">replace</a> the page currently loaded in the browsing
+  context, when <var title="">target</var> identifies an existing
+  browsing context (as opposed to leaving the current page in the
+  browsing context's <a href="history.html#session-history">session history</a>). When three or
+  fewer arguments are provided, <var title="">replace</var> defaults
+  to false.</p>
+
+  <p>When the method is invoked, the user agent must first select a
+  <a href="#browsing-context">browsing context</a> to navigate by applying <a href="#the-rules-for-choosing-a-browsing-context-given-a-browsing-context-name">the
+  rules for choosing a browsing context given a browsing context
+  name</a> using the <var title="">target</var> argument as the
+  name and the <a href="#browsing-context">browsing context</a> of the script as the
+  context in which the algorithm is executed, unless the user has
+  indicated a preference, in which case the browsing context to
+  navigate may instead be the one indicated by the user.</p>
+
+  <p class="example">For example, suppose there is a user agent that
+  supports control-clicking a link to open it in a new tab. If a user
+  clicks in that user agent on an element whose <code title="handler-onclick"><a href="webappapis.html#handler-onclick">onclick</a></code> handler uses the <code title="dom-open"><a href="#dom-open">window.open()</a></code> API to open a page in an
+  iframe, but, while doing so, holds the control key down, the user
+  agent could override the selection of the target browsing context to
+  instead target a new tab.</p>
+
+  <p>Then, the user agent must <a href="history.html#navigate">navigate</a> the selected
+  <a href="#browsing-context">browsing context</a> to the <a href="urls.html#absolute-url">absolute URL</a> (or
+  error) obtained from <a href="urls.html#resolve-a-url" title="resolve a url">resolving</a>
+  <var title="">url</var> earlier. If the <var title="">replace</var>
+  is true, then <a href="history.html#replacement-enabled" title="replacement enabled">replacement must be
+  enabled</a>; otherwise, it must not be enabled unless the
+  <a href="#browsing-context">browsing context</a> was just created as part of
+  <a href="#the-rules-for-choosing-a-browsing-context-given-a-browsing-context-name">the rules for choosing a browsing context given a browsing
+  context name</a>. The navigation must be done with the <a href="webappapis.html#script-s-browsing-context" title="script's browsing context">browsing context</a> of the
+  <a href="#entry-script">entry script</a> as the <a href="history.html#source-browsing-context">source browsing
+  context</a>.</p>
+
+  <p>The method must return the <code><a href="#windowproxy">WindowProxy</a></code> object of the
+  <a href="#browsing-context">browsing context</a> that was navigated, or null if no
+  browsing context was navigated.</p>
+
+  <hr/><p>The <dfn id="dom-name" title="dom-name"><code>name</code></dfn> attribute of
+  the <code><a href="#window">Window</a></code> object must, on getting, return the current
+  name of the <a href="#browsing-context">browsing context</a>, and, on setting, set the
+  name of the <a href="#browsing-context">browsing context</a> to the new value.</p>
+
+  <p class="note">The name <a href="history.html#resetBCName">gets reset</a> when
+  the browsing context is navigated to another domain.</p>
+
+  <hr/><p>The <dfn id="dom-window-close" title="dom-window-close"><code>close()</code></dfn>
+  method on <code><a href="#window">Window</a></code> objects should, if the corresponding
+  <a href="#browsing-context">browsing context</a> <var title="">A</var> is an
+  <a href="#auxiliary-browsing-context">auxiliary browsing context</a> that was created by a script
+  (as opposed to by an action of the user), and if the <a href="webappapis.html#script-s-browsing-context" title="script's browsing context">browsing context</a> of the
+  <a href="webappapis.html#concept-script" title="concept-script">script</a> that invokes the method
+  is <a href="#allowed-to-navigate">allowed to navigate</a> the <a href="#browsing-context">browsing
+  context</a> <var title="">A</var>, close the <a href="#browsing-context">browsing
+  context</a> <var title="">A</var> (and may <a href="#a-browsing-context-is-discarded" title="a&#10;  browsing context is discarded">discard</a> it too).</p>
+
+  <p>The <dfn id="dom-window-stop" title="dom-window-stop"><code>stop()</code></dfn> method
+  on <code><a href="#window">Window</a></code> objects should, if there is an existing
+  attempt to <a href="history.html#navigate">navigate</a> the <a href="#browsing-context">browsing context</a>
+  and that attempt is not currently running the <a href="history.html#unload-a-document">unload a
+  document</a> algorithm, cancel that <a href="history.html#navigate" title="navigate">navigation</a> and any associated instances of
+  the <a href="fetching-resources.html#fetch" title="fetch">fetch algorithm</a>. Otherwise, it must
+  do nothing.</p>
+
+  </div><h4 id="accessing-other-browsing-contexts"><span class="secno">5.2.3 </span>Accessing other browsing contexts</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">window</var> . <code title="dom-length"><a href="#dom-length">length</a></code></dt>
+
+   <dd>
+
+    <p>Returns the number of <a href="#child-browsing-context" title="child browsing&#10;    context">child browsing contexts</a>.</p>
+
+   </dd>
+
+   <dt><var title="">window</var>[<var title="">index</var>]</dt>
+
+   <dd>
+
+    <p>Returns the indicated <a href="#child-browsing-context">child browsing context</a>.</p>
+
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>The <dfn id="dom-length" title="dom-length"><code>length</code></dfn> IDL
+  attribute on the <code><a href="#window">Window</a></code> interface must return the
+  number of <a href="#child-browsing-context" title="child browsing context">child browsing
+  contexts</a> that are <a href="#browsing-context-nested-through" title="browsing context nested&#10;  through">nested through</a> elements that are <a href="infrastructure.html#in-a-document" title="in a&#10;  document">in the <code>Document</code></a> that is the
+  <a href="#active-document">active document</a> of that <code><a href="#window">Window</a></code> object, if
+  that <code><a href="#window">Window</a></code>'s <a href="#browsing-context">browsing context</a> shares the
+  same <a href="webappapis.html#event-loop">event loop</a> as the <a href="webappapis.html#script-s-browsing-context">script's browsing
+  context</a> of the <a href="#entry-script">entry script</a> accessing the IDL
+  attribute; otherwise, it must return zero.</p>
+
+  <!-- in other words, frames are only accessible to same-thread processes -->
+
+  <p>The <span>indices of the supported indexed properties</span> on
+  the <code><a href="#window">Window</a></code> object at any instant are the numbers in the
+  range 0 .. <span title=""><var title="">n</var>-1</span>, where <var title="">n</var> is the number returned by the <code title="dom-length"><a href="#dom-length">length</a></code> IDL attribute. If <var title="">n</var> is zero then there are no <span>supported indexed
+  properties</span>.</p>
+
+  <p>When a <code><a href="#window">Window</a></code> object is <dfn id="dom-window-item" title="dom-window-item">indexed to retrieve an indexed
+  property</dfn> <var title="">index</var>, the value returned must be
+  the <code><a href="#windowproxy">WindowProxy</a></code> object of the <var title="">index</var>th <a href="#child-browsing-context">child browsing context</a> of the
+  <code><a href="infrastructure.html#document">Document</a></code> that is nested through an element that is
+  <a href="infrastructure.html#in-a-document" title="in a document">in the <code>Document</code></a>,
+  sorted in the <a href="infrastructure.html#tree-order">tree order</a> of the elements nesting those
+  <a href="#browsing-context" title="browsing context">browsing contexts</a>.</p>
+
+  <p>These properties are the <dfn id="dynamic-nested-browsing-context-properties">dynamic nested browsing context
+  properties</dfn>.</p>
+
+  </div><h4 id="named-access-on-the-window-object"><span class="secno">5.2.4 </span>Named access on the <code><a href="#window">Window</a></code> object</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">window</var>[<var title="">name</var>]</dt>
+
+   <dd>
+
+    <p>Returns the indicated element or collection of elements.</p>
+
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>The <code><a href="#window">Window</a></code> interface <span title="support named&#10;  properties">supports named properties</span>. The <span>names of the
+  supported named properties</span> at any moment consist of:</p>
+
+  <ul><li>the value of the <code title="">name</code> content attribute
+   for all <code><a href="text-level-semantics.html#the-a-element">a</a></code>, <code><a href="obsolete.html#the-applet-element">applet</a></code>, <code><a href="the-map-element.html#the-area-element">area</a></code>,
+   <code><a href="the-iframe-element.html#the-embed-element">embed</a></code>, <code><a href="forms.html#the-form-element">form</a></code>, <code><a href="obsolete.html#frame">frame</a></code>,
+   <code><a href="obsolete.html#frameset">frameset</a></code>, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <code><a href="embedded-content-1.html#the-img-element">img</a></code>, and
+   <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements in the <a href="#active-document">active document</a>
+   that have a <code title="">name</code> content attribute, and</li>
+
+   <li>the value of the <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content
+   attribute of any <a href="infrastructure.html#html-elements" title="HTML elements">HTML element</a> in
+   the <a href="#active-document">active document</a> with an <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content attribute.</li>
+
+  </ul><p>When <dfn id="dom-window-nameditem" title="dom-window-namedItem">the <code>Window</code>
+  object is indexed for property retrieval</dfn> using a name <var title="">name</var>, then the user agent must return the value
+  obtained using the following steps:</p>
+
+  <ol><li>
+
+    <p>Let <var title="">elements</var> be the list of <a href="#dom-window-nameditem-filter" title="dom-window-namedItem-filter">named elements</a> with the
+    name <var title="">name</var> in the <a href="#active-document">active document</a>.
+
+    </p><p class="note">There will be at least one such element, by
+    definition.<!-- (If there wasn't, then this algorithm wouldn't
+    have been invoked by Web IDL.) --></p>
+
+   </li>
+
+   <li>
+
+    <p>If <var title="">elements</var> contains an <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>
+    element, then return the <code><a href="#windowproxy">WindowProxy</a></code> object of the
+    <a href="#nested-browsing-context">nested browsing context</a> represented by the first such
+    <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> element in <a href="infrastructure.html#tree-order">tree order</a>, and abort
+    these steps.</p>
+
+   </li>
+
+   <li>
+
+    <p>Otherwise, if <var title="">elements</var> has only one
+    element, return that element and abort these steps.</p>
+
+   </li>
+
+   <li>
+
+    <p>Otherwise return an <code><a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a></code> rooted at the
+    <code><a href="infrastructure.html#document">Document</a></code> node, whose filter matches only <a href="#dom-window-nameditem-filter" title="dom-window-namedItem-filter">named elements</a> with
+    the name <var title="">name</var>.</p> <!-- the same one each time
+    is returned, because of the rule under collections -->
+
+   </li>
+
+  </ol><p><dfn id="dom-window-nameditem-filter" title="dom-window-nameditem-filter">Named elements</dfn>
+  with the name <var title="">name</var>, for the purposes of the
+  above algorithm, are those that are either:</p>
+
+  <ul><li><code><a href="text-level-semantics.html#the-a-element">a</a></code>, <code><a href="obsolete.html#the-applet-element">applet</a></code>, <code><a href="the-map-element.html#the-area-element">area</a></code>,
+   <code><a href="the-iframe-element.html#the-embed-element">embed</a></code>, <code><a href="forms.html#the-form-element">form</a></code>, <code><a href="obsolete.html#frame">frame</a></code>,
+   <code><a href="obsolete.html#frameset">frameset</a></code>, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <code><a href="embedded-content-1.html#the-img-element">img</a></code>, or
+   <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements that have a <code title="attr-name">name</code> content attribute whose value is <var title="">name</var>, or</li>
+
+   <li><a href="infrastructure.html#html-elements">HTML elements</a> elements that have an <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content attribute whose value is <var title="">name</var>.</li>
+
+  </ul></div><div class="impl">
+
+  <h4 id="garbage-collection-and-browsing-contexts"><span class="secno">5.2.5 </span>Garbage collection and browsing contexts</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+  <p>A <a href="#browsing-context">browsing context</a> has a strong reference to each of
+  its <code><a href="infrastructure.html#document">Document</a></code>s and its <code><a href="#windowproxy">WindowProxy</a></code> object,
+  and the user agent itself has a strong reference to its <a href="#top-level-browsing-context" title="top-level browsing context">top-level browsing
+  contexts</a>.</p>
+
+  <p>A <code><a href="infrastructure.html#document">Document</a></code> has a strong reference to its
+  <code><a href="#window">Window</a></code> object.</p>
+
+  <p class="note">A <code><a href="#window">Window</a></code> object <a href="common-dom-interfaces.html#implied-strong-reference" title="implied&#10;  strong reference">has a strong reference</a> to its
+  <code><a href="infrastructure.html#document">Document</a></code> object through its <code title="dom-document"><a href="#dom-document">document</a></code> attribute.  Thus, references
+  from other scripts to either of those objects will keep both
+  alive. Similarly, both <code><a href="infrastructure.html#document">Document</a></code> and <code><a href="#window">Window</a></code>
+  objects have <a href="common-dom-interfaces.html#implied-strong-reference" title="implied strong reference">implied strong
+  references</a> to the <code><a href="#windowproxy">WindowProxy</a></code> object.</p>
+
+  <p>Each <a href="webappapis.html#concept-script" title="concept-script">script</a> has a strong
+  reference to its <a href="webappapis.html#script-s-browsing-context" title="script's browsing context">browsing
+  context</a> and its <a href="webappapis.html#script-s-document" title="script's&#10;  document">document</a>.</p>
+
+  <p>When a <a href="#browsing-context">browsing context</a> is to <dfn id="discard-a-document">discard a
+  <code>Document</code></dfn>, the user agent must run the following
+  steps:</p>
+
+  <ol><li><p>Set the <code><a href="infrastructure.html#document">Document</a></code>'s <var title="concept-document-salvageable">salvageable</var> state to
+   false.</p></li>
+
+   <li><p>Run any <a href="history.html#unloading-document-cleanup-steps">unloading document cleanup steps</a> for
+   the <code><a href="infrastructure.html#document">Document</a></code> that are defined by this specification
+   and <a href="infrastructure.html#other-applicable-specifications">other applicable specifications</a>.</p></li>
+
+   <li><p>Remove any <a href="webappapis.html#concept-task" title="concept-task">tasks</a>
+   associated with the <code><a href="infrastructure.html#document">Document</a></code> in any <a href="webappapis.html#task-source">task
+   source</a>, without running those tasks.</p></li>
+
+   <li><p><a href="#a-browsing-context-is-discarded" title="a browsing context is discarded">Discard</a>
+   all the <a href="#child-browsing-context" title="child browsing context">child browsing
+   contexts</a> of the <code><a href="infrastructure.html#document">Document</a></code>.</p></li>
+
+   <li><p>Lose the strong reference from the <code><a href="infrastructure.html#document">Document</a></code>'s
+   <a href="#browsing-context">browsing context</a> to the
+   <code><a href="infrastructure.html#document">Document</a></code>.</p></li>
+
+  </ol><p class="note">Whenever a <code><a href="infrastructure.html#document">Document</a></code> object is <a href="#discard-a-document" title="discard a Document">discarded</a>, it is also removed from
+  the list of <span>the worker's <code><a href="infrastructure.html#document">Document</a></code>s</span> of each
+  worker whose list contains that <code><a href="infrastructure.html#document">Document</a></code>.</p>
+
+  <p>When <dfn id="a-browsing-context-is-discarded">a <em><span>browsing context</span></em> is
+  discarded</dfn>, the strong reference from the user agent itself to
+  the <a href="#browsing-context">browsing context</a> must be severed, and all the
+  <code><a href="infrastructure.html#document">Document</a></code> objects for all the entries in the
+  <a href="#browsing-context">browsing context</a>'s session history must be <a href="#discard-a-document" title="discard a document">discarded</a> as well.</p>
+
+  <p>User agents may <a href="#a-browsing-context-is-discarded" title="a browsing context is&#10;  discarded">discard</a> <a href="#top-level-browsing-context" title="top-level browsing&#10;  context">top-level browsing contexts</a> at any time (typically,
+  in response to user requests, e.g. when a user closes a window
+  containing one or more <a href="#top-level-browsing-context" title="top-level browsing&#10;  context">top-level browsing contexts</a>). Other <a href="#browsing-context" title="browsing context">browsing contexts</a> must be discarded
+  once their <code><a href="#windowproxy">WindowProxy</a></code> object is eligible for garbage
+  collection.</p>
+
+  </div><h4 id="browser-interface-elements"><span class="secno">5.2.6 </span>Browser interface elements</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>To allow Web pages to integrate with Web browsers, certain Web
+  browser interface elements are exposed in a limited way to scripts
+  in Web pages.</p><p>Each interface element is represented by a <code><a href="#barprop">BarProp</a></code>
+  object:</p><pre class="idl">interface <dfn id="barprop">BarProp</dfn> {
+           attribute boolean <a href="#dom-barprop-visible" title="dom-BarProp-visible">visible</a>;
+};</pre><dl class="domintro"><dt><var title="">window</var> . <code title="dom-window-locationbar"><a href="#dom-window-locationbar">locationbar</a></code> . <code title="dom-BarProp-visible"><a href="#dom-barprop-visible">visible</a></code></dt>
+   <dd>
+    <p>Returns true if the location bar is visible; otherwise, returns false.</p>
+   </dd>
+
+   <dt><var title="">window</var> . <code title="dom-window-menubar"><a href="#dom-window-menubar">menubar</a></code> . <code title="dom-BarProp-visible"><a href="#dom-barprop-visible">visible</a></code></dt>
+   <dd>
+    <p>Returns true if the menu bar is visible; otherwise, returns false.</p>
+   </dd>
+
+   <dt><var title="">window</var> . <code title="dom-window-personalbar"><a href="#dom-window-personalbar">personalbar</a></code> . <code title="dom-BarProp-visible"><a href="#dom-barprop-visible">visible</a></code></dt>
+   <!--<dt><var title="">window</var> . <code title="dom-window-directories">directories</code> . <code title="dom-BarProp-visible">visible</code></dt>-->
+   <dd>
+    <p>Returns true if the personal bar is visible; otherwise, returns false.</p>
+   </dd>
+
+   <dt><var title="">window</var> . <code title="dom-window-scrollbars"><a href="#dom-window-scrollbars">scrollbars</a></code> . <code title="dom-BarProp-visible"><a href="#dom-barprop-visible">visible</a></code></dt>
+   <dd>
+    <p>Returns true if the scroll bars are visible; otherwise, returns false.</p>
+   </dd>
+
+   <dt><var title="">window</var> . <code title="dom-window-statusbar"><a href="#dom-window-statusbar">statusbar</a></code> . <code title="dom-BarProp-visible"><a href="#dom-barprop-visible">visible</a></code></dt>
+   <dd>
+    <p>Returns true if the status bar is visible; otherwise, returns false.</p>
+   </dd>
+
+   <dt><var title="">window</var> . <code title="dom-window-toolbar"><a href="#dom-window-toolbar">toolbar</a></code> . <code title="dom-BarProp-visible"><a href="#dom-barprop-visible">visible</a></code></dt>
+   <dd>
+    <p>Returns true if the toolbar is visible; otherwise, returns false.</p>
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>The <dfn id="dom-barprop-visible" title="dom-BarProp-visible">visible</dfn> attribute, on
+  getting, must return either true or a value determined by the user
+  agent to most accurately represent the visibility state of the user
+  interface element that the object represents, as described below. On
+  setting, the new value must be discarded.</p>
+
+  <p>The following <code><a href="#barprop">BarProp</a></code> objects exist for each
+  <code><a href="infrastructure.html#document">Document</a></code> object in a <a href="#browsing-context">browsing
+  context</a>. Some of the user interface elements represented by
+  these objects might have no equivalent in some user agents; for
+  those user agents, except when otherwise specified, the object must
+  act as if it was present and visible (i.e. its <code title="dom-BarProp-visible"><a href="#dom-barprop-visible">visible</a></code> attribute must return
+  true).</p>
+
+  <dl><dt><dfn id="the-location-bar-barprop-object">The location bar <code>BarProp</code> object</dfn></dt>
+
+   <dd>Represents the user interface element that contains a control
+   that displays the <a href="urls.html#url">URL</a> of the <a href="#active-document">active
+   document</a>, or some similar interface concept.</dd>
+
+   <dt><dfn id="the-menu-bar-barprop-object">The menu bar <code>BarProp</code> object</dfn></dt>
+
+   <dd>Represents the user interface element that contains a list of
+   commands in menu form, or some similar interface concept.</dd>
+
+   <dt><dfn id="the-personal-bar-barprop-object">The personal bar <code>BarProp</code> object</dfn></dt>
+
+   <dd>Represents the user interface element that contains links to
+   the user's favorite pages, or some similar interface concept.</dd>
+
+   <dt><dfn id="the-scrollbar-barprop-object">The scrollbar <code>BarProp</code> object</dfn></dt>
+
+   <dd>Represents the user interface element that contains a scrolling
+   mechanism, or some similar interface concept.</dd>
+
+   <dt><dfn id="the-status-bar-barprop-object">The status bar <code>BarProp</code> object</dfn></dt>
+
+   <dd>Represents a user interface element found immediately below or
+   after the document, as appropriate for the user's media. If the
+   user agent has no such user interface element, then the object may
+   act as if the corresponding user interface element was absent
+   (i.e. its <code title="dom-BarProp-visible"><a href="#dom-barprop-visible">visible</a></code>
+   attribute may return false).</dd>
+
+   <dt><dfn id="the-toolbar-barprop-object">The toolbar <code>BarProp</code> object</dfn></dt>
+
+   <dd>Represents the user interface element found immediately above
+   or before the document, as appropriate for the user's media. If the
+   user agent has no such user interface element, then the object may
+   act as if the corresponding user interface element was absent
+   (i.e. its <code title="dom-BarProp-visible"><a href="#dom-barprop-visible">visible</a></code>
+   attribute may return false).</dd>
+
+  </dl><p>The <dfn id="dom-window-locationbar" title="dom-window-locationbar"><code>locationbar</code></dfn>
+  attribute must return <a href="#the-location-bar-barprop-object">the location bar <code>BarProp</code>
+  object</a>.</p>
+
+  <p>The <dfn id="dom-window-menubar" title="dom-window-menubar"><code>menubar</code></dfn>
+  attribute must return <a href="#the-menu-bar-barprop-object">the menu bar <code>BarProp</code>
+  object</a>.</p>
+
+  <p>The <dfn id="dom-window-personalbar" title="dom-window-personalbar"><code>personalbar</code></dfn>
+  attribute must return <a href="#the-personal-bar-barprop-object">the personal bar <code>BarProp</code>
+  object</a>.</p>
+
+  <p>The <dfn id="dom-window-scrollbars" title="dom-window-scrollbars"><code>scrollbars</code></dfn>
+  attribute must return <a href="#the-scrollbar-barprop-object">the scrollbar <code>BarProp</code>
+  object</a>.</p>
+
+  <p>The <dfn id="dom-window-statusbar" title="dom-window-statusbar"><code>statusbar</code></dfn> attribute
+  must return <a href="#the-status-bar-barprop-object">the status bar <code>BarProp</code>
+  object</a>.</p>
+
+  <p>The <dfn id="dom-window-toolbar" title="dom-window-toolbar"><code>toolbar</code></dfn>
+  attribute must return <a href="#the-toolbar-barprop-object">the toolbar <code>BarProp</code>
+  object</a>.</p>
+
+<!--
+  <p>For legacy reasons, the <dfn
+  title="dom-window-directories"><code>directories</code></dfn>
+  attribute must also return <span>the personal bar
+  <code>BarProp</code> object</span>.</p>
+-->
+
+  </div><div class="impl">
+
+  <h4 id="the-windowproxy-object"><span class="secno">5.2.7 </span>The <code><a href="#windowproxy">WindowProxy</a></code> object</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+
+  <p>As mentioned earlier, each <a href="#browsing-context">browsing context</a> has a
+  <dfn id="windowproxy"><code>WindowProxy</code></dfn> object. This object is unusual
+  in that all operations that would be performed on it must be
+  performed on the <code><a href="#window">Window</a></code> object of the <a href="#browsing-context">browsing
+  context</a>'s <a href="#active-document">active document</a> instead. It is thus
+  indistinguishable from that <code><a href="#window">Window</a></code> object in every way
+  until the <a href="#browsing-context">browsing context</a> is navigated.</p>
+
+  <p>There is no <code><a href="#windowproxy">WindowProxy</a></code> interface object.</p>
+
+  <p class="note">The <code><a href="#windowproxy">WindowProxy</a></code> object allows scripts
+  to act as if each <a href="#browsing-context">browsing context</a> had a single
+  <code><a href="#window">Window</a></code> object, while still keeping separate
+  <code><a href="#window">Window</a></code> objects for each <code><a href="infrastructure.html#document">Document</a></code>.</p>
+
+  <div class="example">
+
+   <p>In the following example, the variable <var title="">x</var> is
+   set to the <code><a href="#windowproxy">WindowProxy</a></code> object returned by the <code title="dom-window"><a href="#dom-window">window</a></code> accessor on the global object. All
+   of the expressions following the assignment return true, because in
+   every respect, the <code><a href="#windowproxy">WindowProxy</a></code> object acts like the
+   underlying <code><a href="#window">Window</a></code> object.</p>
+
+   <pre>var x = window;
+x instanceof Window; // true
+x === this; // true</pre>
+
+  </div>
+
+  </div></body></html>
