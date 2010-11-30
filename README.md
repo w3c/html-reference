@@ -26,7 +26,7 @@ you’re a truly cutting-edge hipster-developer, you may find downright icky.
 
 Anyway, you can’t say I didn’t warn you.
 
-Michael(tm) Smith <[sideshowbarker@gmail.com>][3]
+Michael(tm) Smith <[sideshowbarker@gmail.com][3]>
 
    [3]: mailto:sideshowbarker@gmail.com
 
