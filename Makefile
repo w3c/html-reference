@@ -30,6 +30,8 @@ SCP=scp
 SCPFLAGS=
 CVS=cvs
 CVSFLAGS=
+HTML2MARKDOWN=html2text
+HTML2MARKDOWNFLAGS=
 
 INCELIM_DIR=tools/rng-incelim-1.2
 WHATTF_BASE_URL=http://svn.versiondude.net/whattf/syntax/trunk/relaxng/
@@ -48,7 +50,7 @@ ifeq ($(PUBSITE),)
 PUBSITE=W3C
 endif
 
-all: Overview.html MANIFEST spec.html
+all: Overview.html MANIFEST spec.html README.md
 
 debug:
 	@echo $(MULTIPAGE_SPEC_FILES)
@@ -272,6 +274,9 @@ elements-generated.html: webapps.html tools/get-elements.xsl
 	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s/\s+<\/p>/<\/p>/g' \
 	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s/ xmlns=""//g' \
 	  > $@
+
+README.md: README.html
+	$(HTML2MARKDOWN) $(HTML2MARKDOWNFLAGS) $< > $@
 
 clean:
 	$(RM) html.rng
