@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,18 +356,18 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="introduction.html" title="1 Introduction" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="common-microsyntaxes.html" title="2.4 Common microsyntaxes" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="introduction.html" title="1 Introduction" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="common-microsyntaxes.html" title="2.5 Common microsyntaxes" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
    </div><div>
    <a href="introduction.html">&#x2190; 1 Introduction</a> &#x2013;
    <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="common-microsyntaxes.html">2.4 Common microsyntaxes &#x2192;</a>
+   <a href="common-microsyntaxes.html">2.5 Common microsyntaxes &#x2192;</a>
   <ol class="toc"><li><a href="infrastructure.html#infrastructure"><span class="secno">2 </span>Common infrastructure</a>
   <ol><li><a href="infrastructure.html#terminology"><span class="secno">2.1 </span>Terminology</a>
     <ol><li><a href="infrastructure.html#resources"><span class="secno">2.1.1 </span>Resources</a></li><li><a href="infrastructure.html#xml"><span class="secno">2.1.2 </span>XML</a></li><li><a href="infrastructure.html#dom-trees"><span class="secno">2.1.3 </span>DOM trees</a></li><li><a href="infrastructure.html#scripting-0"><span class="secno">2.1.4 </span>Scripting</a></li><li><a href="infrastructure.html#plugins"><span class="secno">2.1.5 </span>Plugins</a></li><li><a href="infrastructure.html#character-encodings"><span class="secno">2.1.6 </span>Character encodings</a></li></ol></li><li><a href="infrastructure.html#conformance-requirements"><span class="secno">2.2 </span>Conformance requirements</a>
-    <ol><li><a href="infrastructure.html#dependencies"><span class="secno">2.2.1 </span>Dependencies</a></li><li><a href="infrastructure.html#extensibility"><span class="secno">2.2.2 </span>Extensibility</a></li></ol></li><li><a href="infrastructure.html#case-sensitivity-and-string-comparison"><span class="secno">2.3 </span>Case-sensitivity and string comparison</a></li></ol></li></ol></div><h2 id="infrastructure"><span class="secno">2 </span>Common infrastructure</h2><h3 id="terminology"><span class="secno">2.1 </span>Terminology</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>This specification refers to both HTML and XML attributes and IDL
+    <ol><li><a href="infrastructure.html#dependencies"><span class="secno">2.2.1 </span>Dependencies</a></li><li><a href="infrastructure.html#extensibility"><span class="secno">2.2.2 </span>Extensibility</a></li></ol></li><li><a href="infrastructure.html#case-sensitivity-and-string-comparison"><span class="secno">2.3 </span>Case-sensitivity and string comparison</a></li><li><a href="infrastructure.html#utf-8"><span class="secno">2.4 </span>UTF-8</a></li></ol></li></ol></div><h2 id="infrastructure"><span class="secno">2 </span>Common infrastructure</h2><h3 id="terminology"><span class="secno">2.1 </span>Terminology</h3><p>This specification refers to both HTML and XML attributes and IDL
   attributes, often in the same context. When it is not clear which is
   being referred to, they are referred to as <dfn title="">content
   attributes</dfn> for HTML and XML attributes, and <dfn title="">IDL
@@ -345,7 +392,7 @@
   implies that A called B. Upon returning to A, the implementation
   must continue from where it left off in calling B.</p>
 
-  </div><h4 id="resources"><span class="secno">2.1.1 </span>Resources</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The specification uses the term <dfn title="">supported</dfn>
+  </div><h4 id="resources"><span class="secno">2.1.1 </span>Resources</h4><p>The specification uses the term <dfn title="">supported</dfn>
   when referring to whether a user agent has an implementation capable
   of decoding the semantics of an external resource. A format or type
   is said to be <i>supported</i> if the implementation can process an
@@ -377,7 +424,7 @@
   specification that defines the resource's format. For CSS resources,
   only <code title="">@import</code> rules introduce <a href="#critical-subresources">critical
   subresources</a>; other resources, e.g. fonts or backgrounds, are
-  not.</p><h4 id="xml"><span class="secno">2.1.2 </span>XML</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p id="html-namespace">To ease migration from HTML to XHTML, UAs
+  not.</p><h4 id="xml"><span class="secno">2.1.2 </span>XML</h4><p id="html-namespace">To ease migration from HTML to XHTML, UAs
   conforming to this specification will place elements in HTML in the
   <code>http://www.w3.org/1999/xhtml</code> namespace, at least for
   the purposes of the DOM and CSS. The term "<dfn id="html-elements">HTML
@@ -393,7 +440,7 @@
   not an <a href="#ascii-case-insensitive">ASCII case-insensitive</a> match for the string
   "<code title="">xml</code>". <a href="references.html#refsXML">[XML]</a></p><p>The term <dfn id="xml-mime-type">XML MIME type</dfn> is used to refer to the <a href="#mime-type" title="MIME type">MIME types</a> <code title="">text/xml</code>,
   <code title="">application/xml</code>, and any <a href="#mime-type">MIME
-  type</a> whose subtype ends with the four characters "<code title="">+xml</code>". <a href="references.html#refsRFC3023">[RFC3023]</a></p><h4 id="dom-trees"><span class="secno">2.1.3 </span>DOM trees</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The term <dfn id="root-element">root element</dfn>, when not explicitly qualified
+  type</a> whose subtype ends with the four characters "<code title="">+xml</code>". <a href="references.html#refsRFC3023">[RFC3023]</a></p><h4 id="dom-trees"><span class="secno">2.1.3 </span>DOM trees</h4><p>The term <dfn id="root-element">root element</dfn>, when not explicitly qualified
   as referring to the document's root element, means the furthest
   ancestor element node of whatever node is being discussed, or the
   node itself if it has no ancestors. When the node is a part of the
@@ -425,7 +472,9 @@
   <code><a href="#node">Node</a></code> with node type <code title="">TEXT_NODE</code> (3)
   or <code title="">CDATA_SECTION_NODE</code> (4). <a href="references.html#refsDOMCORE">[DOMCORE]</a></p><p>A content attribute is said to <dfn title="">change</dfn> value
   only if its new value is different than its previous value; setting
-  an attribute to a value it already has does not change it.</p><h4 id="scripting-0"><span class="secno">2.1.4 </span>Scripting</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The construction "a <code>Foo</code> object", where
+  an attribute to a value it already has does not change it.</p><p>The term <dfn title="">empty</dfn>, when used of an attribute
+  value, text node, or string, means that the length of the text is
+  zero (i.e. not even containing spaces or control characters).</p><h4 id="scripting-0"><span class="secno">2.1.4 </span>Scripting</h4><p>The construction "a <code>Foo</code> object", where
   <code>Foo</code> is actually an interface, is sometimes used instead
   of the more accurate "an object implementing the interface
   <code>Foo</code>".</p><p>An IDL attribute is said to be <dfn title="">getting</dfn> when
@@ -437,7 +486,7 @@
   data.</p><p>The terms <dfn title="">fire</dfn> and <dfn title="">dispatch</dfn> are used interchangeably in the context of
   events, as in the DOM Events specifications. The term <dfn id="concept-events-trusted" title="concept-events-trusted">trusted event</dfn> is used as
   defined by the DOM Events specification. <!--
-  http://krijnhoetmer.nl/irc-logs/webapps/20091218 --> <a href="references.html#refsDOMEVENTS">[DOMEVENTS]</a></p><h4 id="plugins"><span class="secno">2.1.5 </span>Plugins</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The term <dfn id="plugin">plugin</dfn> refers to a user-agent defined set of
+  http://krijnhoetmer.nl/irc-logs/webapps/20091218 --> <a href="references.html#refsDOMEVENTS">[DOMEVENTS]</a></p><h4 id="plugins"><span class="secno">2.1.5 </span>Plugins</h4><p>The term <dfn id="plugin">plugin</dfn> refers to a user-agent defined set of
   content handlers used by the user agent that can take part in the
   user agent's rendering of a <code><a href="#document">Document</a></code> object, but that
   neither act as <a href="browsers.html#child-browsing-context" title="child browsing context">child browsing
@@ -463,7 +512,7 @@
   interacting with external content intended for <a href="#plugin" title="plugin">plugins</a>. When third-party software is run with
   the same privileges as the user agent itself, vulnerabilities in the
   third-party software become as dangerous as those in the user
-  agent.</p><h4 id="character-encodings"><span class="secno">2.1.6 </span>Character encodings</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments. </i><span><a href="http://www.w3.org/html/wg/tracker/issues/101">ISSUE-101</a> (us-ascii-ref) blocks progress to Last Call</span></p><p>The <dfn id="preferred-mime-name">preferred MIME name</dfn> of a character encoding is the
+  agent.</p><h4 id="character-encodings"><span class="secno">2.1.6 </span>Character encodings</h4><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/101">ISSUE-101</a> (us-ascii-ref) blocks progress to Last Call</span></p><p>The <dfn id="preferred-mime-name">preferred MIME name</dfn> of a character encoding is the
   name or alias labeled as "preferred MIME name" in the IANA
   <cite>Character Sets</cite> registry, if there is one, or the
   encoding's name, if none of the aliases are so labeled. <a href="references.html#refsIANACHARSET">[IANACHARSET]</a></p><p>An <dfn id="ascii-compatible-character-encoding">ASCII-compatible character encoding</dfn> is a
@@ -483,7 +532,7 @@
    different <meta charset> elements applying in each case.
   --><p>The term <dfn title="">Unicode character</dfn> is used to mean a
   <i title="">Unicode scalar value</i> (i.e. any Unicode code point
-  that is not a surrogate code point). <a href="references.html#refsUNICODE">[UNICODE]</a></p><h3 id="conformance-requirements"><span class="secno">2.2 </span>Conformance requirements</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>All diagrams, examples, and notes in this specification are
+  that is not a surrogate code point). <a href="references.html#refsUNICODE">[UNICODE]</a></p><h3 id="conformance-requirements"><span class="secno">2.2 </span>Conformance requirements</h3><p>All diagrams, examples, and notes in this specification are
   non-normative, as are all sections explicitly marked non-normative.
   Everything else in this specification is normative.</p><p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL
   NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
@@ -768,7 +817,7 @@
   node for the purposes of the algorithms defined in this
   specification.</p><div class="impl">
 
-  <h4 id="dependencies"><span class="secno">2.2.1 </span>Dependencies</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="dependencies"><span class="secno">2.2.1 </span>Dependencies</h4>
 
   <p>This specification relies on several other underlying
   specifications.</p>
@@ -836,7 +885,6 @@
      <li><dfn id="uievent"><code>UIEvent</code></dfn> interface</li>
 
      <li><dfn id="event-click" title="event-click"><code>click</code></dfn> event</li>
-     <li><dfn id="event-domactivate" title="event-DOMActivate"><code>DOMActivate</code></dfn> event</li>
 
      <li><dfn id="dom-event-target" title="dom-Event-target"><code>target</code></dfn> attribute</li>
 
@@ -865,6 +913,10 @@
     <p>The IDL fragments in this specification must be interpreted as
     required for conforming IDL fragments, as described in the Web IDL
     specification. <a href="references.html#refsWEBIDL">[WEBIDL]</a></p>
+
+    <p>The terms <dfn id="supported-property-indices">supported property indices</dfn> and
+    <dfn id="supported-property-names">supported property names</dfn> are used as defined in the
+    WebIDL specification.</p>
 
     <p id="float-nan">Except where otherwise specified, if an IDL
     attribute that is a floating point number type (<code title="">double</code>) is assigned an Infinity or Not-a-Number
@@ -929,7 +981,7 @@
   requirements on character encodings, image formats, audio formats,
   and video formats in the respective sections.</p>
 
-  </div><h4 id="extensibility"><span class="secno">2.2.2 </span>Extensibility</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments. </i><span><a href="http://www.w3.org/html/wg/tracker/issues/41">ISSUE-41</a> (Decentralized-extensibility) blocks progress to Last Call</span></p><p>HTML has a wide number of extensibility mechanisms that can be
+  </div><h4 id="extensibility"><span class="secno">2.2.2 </span>Extensibility</h4><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/41">ISSUE-41</a> (Decentralized-extensibility) blocks progress to Last Call</span></p><p>HTML has a wide number of extensibility mechanisms that can be
   used for adding semantics in a safe manner:</p><ul><li>Authors can use the <code title="attr-class"><a href="elements.html#classes">class</a></code>
    attribute to extend elements, effectively creating their own
    elements, while using the most applicable existing "real" HTML
@@ -953,7 +1005,7 @@
    link types</span>. This is also used by Microformats.</li>
 
    <li>Authors can embed raw data using the <code title="script"><a href="scripting-1.html#script">&lt;script type=""&gt;</a></code> mechanism with a custom
-   type, for further handling by a inline or server-side scripts.</li>
+   type, for further handling by inline or server-side scripts.</li>
 
    <li>Authors can create <a href="#plugin" title="plugin">plugins</a> and
    invoke them using the <code><a href="the-iframe-element.html#the-embed-element">embed</a></code> element. This is how Flash
@@ -963,9 +1015,6 @@
    mechanism. This is widely used by script libraries, for
    instance.</li>
 
-   <li>Authors can use the microdata feature (the <code title="attr-item">item=""</code> and <code title="attr-itemprop">itemprop=""</code> attributes) to embed
-   nested name-value pairs of data to be shared with other
-   applications and sites.</li>
 
   </ul><div class="impl">
 
@@ -987,13 +1036,13 @@
 
   <p>For markup-level features that are intended for use with
   <a href="syntax.html#syntax">the HTML syntax</a>, extensions should be limited to new
-  attributes of the form "<code title=""><var title="">vendor</var>--<var title="">feature</var></code>", where
+  attributes of the form "<code title="">x-<var title="">vendor</var>-<var title="">feature</var></code>", where
   <var title="">vendor</var> is a short string that identifies the
-  vendor responsible for the extension, and <var title="">feature</var> is the name of the feature. (Note the use of
-  <em>two</em> hyphens in the name.) New element names should not be
-  created. Using attributes for such extensions exclusively allows
-  extensions from multiple vendors to co-exist on the same element,
-  which would not be possible with elements. Using the "<code title=""><var title="">vendor</var>--<var title="">feature</var></code>" form allows extensions to be made
+  vendor responsible for the extension, and <var title="">feature</var> is the name of the feature. New element names
+  should not be created. Using attributes for such extensions
+  exclusively allows extensions from multiple vendors to co-exist on
+  the same element, which would not be possible with elements. Using
+  the "<code title="">x-<var title="">vendor</var>-<var title="">feature</var></code>" form allows extensions to be made
   without risk of conflicting with future additions to the
   specification.</p>
 
@@ -1006,14 +1055,16 @@
    these features could write:</p>
 
    <pre>&lt;p&gt;This smells of lemons!
-&lt;span ferret--smellovision ferret--smellcode="LEM01"
-      mb--outputsmell mb--smell="lemon juice"&gt;&lt;/span&gt;&lt;/p&gt;</pre>
+&lt;span x-ferret-smellovision x-ferret-smellcode="LEM01"
+      x-mb-outputsmell x-mb-smell="lemon juice"&gt;&lt;/span&gt;&lt;/p&gt;</pre>
 
   </div>
 
-  <p>Attribute names containing two consecutive U+002D HYPHEN-MINUS
-  (-) characters are reserved for user agent use and are guaranteed to
-  never be formally added to the HTML language.</p>
+  <p>Attribute names beginning with the two characters "<code title="">x-</code>" are reserved for user agent use and are
+  guaranteed to never be formally added to the HTML language. For
+  flexibility, attributes names containing underscores (the U+005F LOW
+  LINE character) are also reserved for experimental purposes and are
+  guaranteed to never be formally added to the HTML language.</p>
 
   <p class="note">Pages that use such attributes are by definition
   non-conforming.</p>
@@ -1039,6 +1090,11 @@
 
   </div>
 
+  <p>When adding new <a href="common-dom-interfaces.html#reflect" title="reflect">reflecting</a> IDL
+  attributes corresponding to content attributes of the form "<code title="">x-<var title="">vendor</var>-<var title="">feature</var></code>", the IDL attribute should be named
+  "<code title=""><var title="">vendor</var><var title="">Feature</var></code>" (i.e. the "<code title="">x</code>"
+  is dropped from the IDL attribute's name).</p>
+
   <hr/><p>When vendor-neutral extensions to this specification are needed,
   either this specification can be updated accordingly, or an
   extension specification can be written that overrides the
@@ -1049,6 +1105,16 @@
   specification</dfn> for the purposes of conformance requirements in
   this specification.</p>
   <!-- http://www.w3.org/mid/17E341CD-E790-422C-9F9A-69347EE01CEB@iki.fi -->
+
+  <p class="note">Someone could write a specification that defines any
+  arbitrary byte stream as conforming, and then claim that their
+  random junk is conforming. However, that does not mean that their
+  random junk actually is conforming for everyone's purposes: if
+  someone else decides that that specification does not apply to their
+  work, then they can quite legitimately say that the aforementioned
+  random junk is just that, junk, and not conforming at all. As far as
+  conformance goes, what matters in a particular community is what
+  that community <em>agrees</em> is applicable.</p>
 
   <hr/><p>User agents must treat elements and attributes that they do not
   understand as semantically neutral; leaving them in the DOM (for DOM
@@ -1065,7 +1131,7 @@
   that interface &#x2014; leaving the attribute on the object but
   making it return null or throw an exception is insufficient.</p>
 
-  </div><h3 id="case-sensitivity-and-string-comparison"><span class="secno">2.3 </span>Case-sensitivity and string comparison</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Comparing two strings in a <dfn id="case-sensitive">case-sensitive</dfn> manner means
+  </div><h3 id="case-sensitivity-and-string-comparison"><span class="secno">2.3 </span>Case-sensitivity and string comparison</h3><p>Comparing two strings in a <dfn id="case-sensitive">case-sensitive</dfn> manner means
   comparing them exactly, code point for code point.</p><p>Comparing two strings in an <dfn id="ascii-case-insensitive">ASCII case-insensitive</dfn>
   manner means comparing them exactly, code point for code point, except
   that the characters in the range U+0041 to U+005A (i.e. LATIN
@@ -1091,4 +1157,48 @@
   </div><p>A string <var title="">pattern</var> is a <dfn id="prefix-match">prefix match</dfn>
   for a string <var title="">s</var> when <var title="">pattern</var>
   is not longer than <var title="">s</var> and truncating <var title="">s</var> to <var title="">pattern</var>'s length leaves the
-  two strings as matches of each other.</p></body></html>
+  two strings as matches of each other.</p><h3 id="utf-8"><span class="secno">2.4 </span>UTF-8</h3><p>When a user agent is required to <dfn id="decoded-as-utf-8-with-error-handling" title="decoded as UTF-8,&#10;  with error handling">decode a byte string as UTF-8, with error
+  handling</dfn>, it means that the byte stream must be converted to a
+  Unicode string by interpreting it as UTF-8, except that any errors
+  must be handled as described in the following list. Bytes in the
+  following list are represented in hexadecimal. <a href="references.html#refsRFC3629">[RFC3629]</a>
+
+  </p><dl class="switch"><dt>One byte in the range FE to FF</dt>
+
+   <dt>Overlong forms (e.g. F0 80 80 A0)</dt>
+
+   <dt>One byte in the range C0 to C1, followed by one byte in the range 80 to BF</dt>
+
+   <dt>One byte in the range F0 to F4, followed by three bytes in the range 80 to BF that represent a code point above U+10FFFF</dt>
+
+   <dt>One byte in the range F5 to F7, followed by three bytes in the range 80 to BF</dt>
+
+   <dt>One byte in the range F8 to FB, followed by four bytes in the range 80 to BF</dt>
+
+   <dt>One byte in the range FC to FD, followed by five bytes in the range 80 to BF</dt>
+
+   <dt>One byte in the range E0 to FD, followed by a byte in the range 80 to BF, not followed by a byte in the range 80 to BF</dt>
+
+   <dt>One byte in the range F0 to FD, followed by two bytes in the range 80 to BF, not followed by a byte in the range 80 to BF</dt>
+
+   <dt>One byte in the range F5 to FD, followed by three bytes in the range 80 to BF, not followed by a byte in the range 80 to BF</dt>
+
+   <dt>One byte in the range FC to FD, followed by four bytes in the range 80 to BF, not followed by a byte in the range 80 to BF</dt>
+
+
+   <dd>The whole sequence must be replaced by a single U+FFFD
+   REPLACEMENT CHARACTER.</dd>
+
+
+   <dt>One byte in the range 80 to BF not preceded by a byte in the range 80 to FD</dt>
+
+   <dt>A sequence of bytes in the range 80 to BF that does not follow a byte in the range C0 to FD</dt>
+
+   <dt>One byte in the range C0 to FD not followed by a byte in the range 80 to BF</dt>
+
+
+   <dd>Each byte must be replaced with a U+FFFD REPLACEMENT CHARACTER.</dd>
+
+  </dl><p class="example">For example, the byte string "41 98 BA 42 E2 98
+  43 E2 98 BA E2 98" would be converted to the string
+  "A&#xFFFD;&#xFFFD;B&#xFFFD;C&#x263A;&#xFFFD;".</p></body></html>

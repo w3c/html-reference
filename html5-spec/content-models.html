@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,7 +356,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="elements.html" title="3.2 Elements" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="apis-in-html-documents.html" title="3.3 APIs in HTML documents" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="elements.html" title="3.2 Elements" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="apis-in-html-documents.html" title="3.3 APIs in HTML documents" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -319,7 +366,7 @@
    <a href="apis-in-html-documents.html">3.3 APIs in HTML documents &#x2192;</a>
   <ol class="toc"><li><ol><li><ol><li><a href="content-models.html#content-models"><span class="secno">3.2.5 </span>Content models</a>
       <ol><li><a href="content-models.html#kinds-of-content"><span class="secno">3.2.5.1 </span>Kinds of content</a>
-        <ol><li><a href="content-models.html#metadata-content-0"><span class="secno">3.2.5.1.1 </span>Metadata content</a></li><li><a href="content-models.html#flow-content-0"><span class="secno">3.2.5.1.2 </span>Flow content</a></li><li><a href="content-models.html#sectioning-content-0"><span class="secno">3.2.5.1.3 </span>Sectioning content</a></li><li><a href="content-models.html#heading-content-0"><span class="secno">3.2.5.1.4 </span>Heading content</a></li><li><a href="content-models.html#phrasing-content-0"><span class="secno">3.2.5.1.5 </span>Phrasing content</a></li><li><a href="content-models.html#embedded-content-0"><span class="secno">3.2.5.1.6 </span>Embedded content</a></li><li><a href="content-models.html#interactive-content-0"><span class="secno">3.2.5.1.7 </span>Interactive content</a></li></ol></li><li><a href="content-models.html#transparent-content-models"><span class="secno">3.2.5.2 </span>Transparent content models</a></li><li><a href="content-models.html#paragraphs"><span class="secno">3.2.5.3 </span>Paragraphs</a></li></ol></li><li><a href="content-models.html#annotations-for-assistive-technology-products-aria"><span class="secno">3.2.6 </span>Annotations for assistive technology products (ARIA)</a></li></ol></li></ol></li></ol></div><h4 id="content-models"><span class="secno">3.2.5 </span><dfn>Content models</dfn></h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Each element defined in this specification has a content model: a
+        <ol><li><a href="content-models.html#metadata-content-0"><span class="secno">3.2.5.1.1 </span>Metadata content</a></li><li><a href="content-models.html#flow-content-0"><span class="secno">3.2.5.1.2 </span>Flow content</a></li><li><a href="content-models.html#sectioning-content-0"><span class="secno">3.2.5.1.3 </span>Sectioning content</a></li><li><a href="content-models.html#heading-content-0"><span class="secno">3.2.5.1.4 </span>Heading content</a></li><li><a href="content-models.html#phrasing-content-0"><span class="secno">3.2.5.1.5 </span>Phrasing content</a></li><li><a href="content-models.html#embedded-content-0"><span class="secno">3.2.5.1.6 </span>Embedded content</a></li><li><a href="content-models.html#interactive-content-0"><span class="secno">3.2.5.1.7 </span>Interactive content</a></li></ol></li><li><a href="content-models.html#transparent-content-models"><span class="secno">3.2.5.2 </span>Transparent content models</a></li><li><a href="content-models.html#paragraphs"><span class="secno">3.2.5.3 </span>Paragraphs</a></li></ol></li><li><a href="content-models.html#annotations-for-assistive-technology-products-aria"><span class="secno">3.2.6 </span>Annotations for assistive technology products (ARIA)</a></li></ol></li></ol></li></ol></div><h4 id="content-models"><span class="secno">3.2.5 </span><dfn>Content models</dfn></h4><p>Each element defined in this specification has a content model: a
   description of the element's expected contents. An <a href="infrastructure.html#html-elements" title="HTML&#10;  elements">HTML element</a> must have contents that match the
   requirements described in the element's content model.</p><p class="note">As noted in the conformance and terminology
   sections, for the purposes of determining if an element matches its
@@ -335,10 +382,14 @@
   processing instruction nodes must be ignored when establishing
   whether an element's contents match the element's content model or
   not, and must be ignored when following algorithms that define
-  document and element semantics.</p><p>An element <var title="">A</var> is said to be <dfn id="preceded-or-followed">preceded or
-  followed</dfn> by a second element <var title="">B</var> if <var title="">A</var> and <var title="">B</var> have the same parent node
-  and there are no other element nodes or text nodes (other than
-  <a href="#inter-element-whitespace">inter-element whitespace</a>) between them.</p><p>Authors must not use <a href="infrastructure.html#html-elements">HTML elements</a> anywhere except
+  document and element semantics.</p><p class="note">Thus, an element <var title="">A</var> is said to be
+  <i>preceded or followed</i> by a second element <var title="">B</var> if <var title="">A</var> and <var title="">B</var>
+  have the same parent node and there are no other element nodes or
+  text nodes (other than <a href="#inter-element-whitespace">inter-element whitespace</a>)
+  between them. Similarly, a node is the <i>only child</i> of an
+  element if that element contains no other nodes other than
+  <a href="#inter-element-whitespace">inter-element whitespace</a>, comment nodes, and processing
+  instruction nodes.</p><p>Authors must not use <a href="infrastructure.html#html-elements">HTML elements</a> anywhere except
   where they are explicitly allowed, as defined for each element, or
   as explicitly required by other specifications. For XML compound
   documents, these contexts could be inside elements from other
@@ -361,7 +412,7 @@
   cell: document.createElement('td'),
 };</pre>
 
-  </div><h5 id="kinds-of-content"><span class="secno">3.2.5.1 </span>Kinds of content</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Each element in HTML falls into zero or more <dfn id="content-categories" title="content&#10;  categories">categories</dfn> that group elements with similar
+  </div><h5 id="kinds-of-content"><span class="secno">3.2.5.1 </span>Kinds of content</h5><p>Each element in HTML falls into zero or more <dfn id="content-categories" title="content&#10;  categories">categories</dfn> that group elements with similar
   characteristics together. The following broad categories are used in
   this specification:</p><ul class="brief"><li><a href="#metadata-content">Metadata content</a></li>
    <li><a href="#flow-content">Flow content</a></li>
@@ -374,7 +425,7 @@
   are defined in other parts of this specification.</p><p>These categories are related as follows:</p><p><object data="images/content-venn.svg" height="288" width="1000"><img alt="Sectioning content, heading content, phrasing content, and&#10;  embedded content are all types of flow content. Embedded content is&#10;  also a type of phrasing content." src="http://dev.w3.org/html5/spec/images/content-venn.png"/></object></p><p>In addition, certain elements are categorized as <a href="forms.html#form-associated-element" title="form-associated element">form-associated elements</a> and
   further subcategorized to define their role in various form-related
   processing models.</p><p>Some elements have unique requirements and do not fit into any
-  particular category.</p><h6 id="metadata-content-0"><span class="secno">3.2.5.1.1 </span>Metadata content</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><dfn id="metadata-content">Metadata content</dfn> is content that sets up the
+  particular category.</p><h6 id="metadata-content-0"><span class="secno">3.2.5.1.1 </span>Metadata content</h6><p><dfn id="metadata-content">Metadata content</dfn> is content that sets up the
   presentation or behavior of the rest of the content, or that sets
   up the relationship of the document with other documents, or that
   conveys other "out of band" information.</p><!-- when updating this also update the category index --><ul class="brief category-list"><li><code><a href="semantics.html#the-base-element">base</a></code></li>
@@ -413,7 +464,7 @@
 
    <p>This isn't possible in the HTML serialization, however.</p>
 
-  </div><h6 id="flow-content-0"><span class="secno">3.2.5.1.2 </span>Flow content</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Most elements that are used in the body of documents and
+  </div><h6 id="flow-content-0"><span class="secno">3.2.5.1.2 </span>Flow content</h6><p>Most elements that are used in the body of documents and
   applications are categorized as <dfn id="flow-content">flow content</dfn>.</p><!-- when updating this also update the category index --><ul class="brief category-list"><li><code><a href="text-level-semantics.html#the-a-element">a</a></code></li>
    <li><code><a href="text-level-semantics.html#the-abbr-element">abbr</a></code></li>
    <li><code><a href="sections.html#the-address-element">address</a></code></li>
@@ -422,6 +473,7 @@
    <li><code><a href="sections.html#the-aside-element">aside</a></code></li>
    <li><code><a href="video.html#audio">audio</a></code></li>
    <li><code><a href="text-level-semantics.html#the-b-element">b</a></code></li>
+   <li><code><a href="text-level-semantics.html#the-bdi-element">bdi</a></code></li>
    <li><code><a href="text-level-semantics.html#the-bdo-element">bdo</a></code></li>
    <li><code><a href="grouping-content.html#the-blockquote-element">blockquote</a></code></li>
    <li><code><a href="text-level-semantics.html#the-br-element">br</a></code></li>
@@ -430,7 +482,6 @@
    <li><code><a href="text-level-semantics.html#the-cite-element">cite</a></code></li>
    <li><code><a href="text-level-semantics.html#the-code-element">code</a></code></li>
    <li><code><a href="interactive-elements.html#the-command">command</a></code></li>
-<!-- v2DATAGRID   <li><code>datagrid</code></li> -->
    <li><code><a href="the-button-element.html#the-datalist-element">datalist</a></code></li>
    <li><code><a href="edits.html#the-del-element">del</a></code></li>
    <li><code><a href="interactive-elements.html#the-details-element">details</a></code></li>
@@ -475,6 +526,7 @@
    <li><code><a href="the-button-element.html#the-progress-element">progress</a></code></li>
    <li><code><a href="text-level-semantics.html#the-q-element">q</a></code></li>
    <li><code><a href="text-level-semantics.html#the-ruby-element">ruby</a></code></li>
+   <li><code><a href="text-level-semantics.html#the-s-element">s</a></code></li>
    <li><code><a href="text-level-semantics.html#the-samp-element">samp</a></code></li>
    <li><code><a href="scripting-1.html#script">script</a></code></li>
    <li><code><a href="sections.html#the-section-element">section</a></code></li>
@@ -505,7 +557,7 @@
   many cases where an element can be empty legitimately, for example
   when it is used as a placeholder which will later be filled in by a
   script, or when the element is part of a template and would on most
-  pages be filled in but on some pages is not relevant.</p><h6 id="sectioning-content-0"><span class="secno">3.2.5.1.3 </span>Sectioning content</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><dfn id="sectioning-content">Sectioning content</dfn> is content that defines the scope
+  pages be filled in but on some pages is not relevant.</p><h6 id="sectioning-content-0"><span class="secno">3.2.5.1.3 </span>Sectioning content</h6><p><dfn id="sectioning-content">Sectioning content</dfn> is content that defines the scope
   of <a href="#heading-content" title="heading content">headings</a> and <a href="sections.html#the-footer-element" title="footer">footers</a>.</p><!-- when updating this also update the category index --><ul class="brief category-list"><li><code><a href="sections.html#the-article-element">article</a></code></li>
    <li><code><a href="sections.html#the-aside-element">aside</a></code></li>
    <li><code><a href="sections.html#the-nav-element">nav</a></code></li>
@@ -514,7 +566,7 @@
   heading and an <a href="sections.html#outline">outline</a>. See the section on
   <a href="sections.html#headings-and-sections">headings and sections</a> for further details.</p><p class="note">There are also certain elements that are <a href="sections.html#sectioning-root" title="sectioning root">sectioning roots</a>. These are distinct
   from <a href="#sectioning-content">sectioning content</a>, but they can also have an
-  <a href="sections.html#outline">outline</a>.</p><h6 id="heading-content-0"><span class="secno">3.2.5.1.4 </span>Heading content</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><dfn id="heading-content">Heading content</dfn> defines the header of a section
+  <a href="sections.html#outline">outline</a>.</p><h6 id="heading-content-0"><span class="secno">3.2.5.1.4 </span>Heading content</h6><p><dfn id="heading-content">Heading content</dfn> defines the header of a section
   (whether explicitly marked up using <a href="#sectioning-content">sectioning content</a>
   elements, or implied by the heading content itself).</p><!-- when updating this also update the category index --><ul class="brief category-list"><li><code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code></li>
    <li><code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h2</a></code></li>
@@ -523,13 +575,14 @@
    <li><code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h5</a></code></li>
    <li><code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h6</a></code></li>
    <li><code><a href="sections.html#the-hgroup-element">hgroup</a></code></li>
-  </ul><h6 id="phrasing-content-0"><span class="secno">3.2.5.1.5 </span>Phrasing content</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><dfn id="phrasing-content">Phrasing content</dfn> is the text of the document, as well
+  </ul><h6 id="phrasing-content-0"><span class="secno">3.2.5.1.5 </span>Phrasing content</h6><p><dfn id="phrasing-content">Phrasing content</dfn> is the text of the document, as well
   as elements that mark up that text at the intra-paragraph
   level. Runs of <a href="#phrasing-content">phrasing content</a> form <a href="#paragraph" title="paragraph">paragraphs</a>.</p><!-- when updating this also update the category index --><ul class="brief category-list"><li><code><a href="text-level-semantics.html#the-a-element">a</a></code> (if it contains only <a href="#phrasing-content">phrasing content</a>)</li>
    <li><code><a href="text-level-semantics.html#the-abbr-element">abbr</a></code></li>
    <li><code><a href="the-map-element.html#the-area-element">area</a></code> (if it is a descendant of a <code><a href="the-map-element.html#the-map-element">map</a></code> element)</li>
    <li><code><a href="video.html#audio">audio</a></code></li>
    <li><code><a href="text-level-semantics.html#the-b-element">b</a></code></li>
+   <li><code><a href="text-level-semantics.html#the-bdi-element">bdi</a></code></li>
    <li><code><a href="text-level-semantics.html#the-bdo-element">bdo</a></code></li>
    <li><code><a href="text-level-semantics.html#the-br-element">br</a></code></li>
    <li><code><a href="the-button-element.html#the-button-element">button</a></code></li>
@@ -560,6 +613,7 @@
    <li><code><a href="the-button-element.html#the-progress-element">progress</a></code></li>
    <li><code><a href="text-level-semantics.html#the-q-element">q</a></code></li>
    <li><code><a href="text-level-semantics.html#the-ruby-element">ruby</a></code></li>
+   <li><code><a href="text-level-semantics.html#the-s-element">s</a></code></li>
    <li><code><a href="text-level-semantics.html#the-samp-element">samp</a></code></li>
    <li><code><a href="scripting-1.html#script">script</a></code></li>
    <li><code><a href="the-button-element.html#the-select-element">select</a></code></li>
@@ -587,7 +641,7 @@
   phrasing content, not any flow content.</p><p><dfn id="text-content" title="text content">Text</dfn>, in the context of content
   models, means <a href="infrastructure.html#text-node" title="text node">text nodes</a>. <a href="#text-content" title="text content">Text</a> is sometimes used as a content
   model on its own, but is also <a href="#phrasing-content">phrasing content</a>, and can
-  be <a href="#inter-element-whitespace">inter-element whitespace</a> (if the <a href="infrastructure.html#text-node" title="text&#10;  node">text nodes</a> are empty or contain just <a href="common-microsyntaxes.html#space-character" title="space&#10;  character">space characters</a>).</p><h6 id="embedded-content-0"><span class="secno">3.2.5.1.6 </span>Embedded content</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><dfn id="embedded-content">Embedded content</dfn> is content that imports another
+  be <a href="#inter-element-whitespace">inter-element whitespace</a> (if the <a href="infrastructure.html#text-node" title="text&#10;  node">text nodes</a> are empty or contain just <a href="common-microsyntaxes.html#space-character" title="space&#10;  character">space characters</a>).</p><h6 id="embedded-content-0"><span class="secno">3.2.5.1.6 </span>Embedded content</h6><p><dfn id="embedded-content">Embedded content</dfn> is content that imports another
   resource into the document, or content from another vocabulary that
   is inserted into the document.</p><!-- when updating this also update the category index --><ul class="brief category-list"><li><code><a href="video.html#audio">audio</a></code></li>
    <li><code><a href="the-canvas-element.html#the-canvas-element">canvas</a></code></li>
@@ -604,7 +658,7 @@
   defined in this specification. (For example, MathML, or SVG.)</p><p>Some embedded content elements can have <dfn id="fallback-content">fallback
   content</dfn>: content that is to be used when the external resource
   cannot be used (e.g. because it is of an unsupported format). The
-  element definitions state what the fallback is, if any.</p><h6 id="interactive-content-0"><span class="secno">3.2.5.1.7 </span>Interactive content</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><!--
+  element definitions state what the fallback is, if any.</p><h6 id="interactive-content-0"><span class="secno">3.2.5.1.7 </span>Interactive content</h6><!--
 TESTS:
 http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E%0A%3Cp%20tabindex%3D1%3Etest%20%3Ca%20href%3D%22%22%3E%20%3Cem%3Etest%3C/em%3E%20%3C/a%3E%0A%3Cscript%3E%0A%20function%20test%20%28e%29%20%7B%20w%28e.type%20+%20%27%20on%20%27%20+%20e.target.tagName%20+%20%27%20through%20%27%20+%20e.currentTarget.tagName%29%3B%20%7D%0A%20document.getElementsByTagName%28%27a%27%29%5B0%5D.addEventListener%28%27click%27%2C%20test%2C%20false%29%3B%0A%20document.getElementsByTagName%28%27a%27%29%5B0%5D.addEventListener%28%27DOMActivate%27%2C%20test%2C%20false%29%3B%0A%20document.getElementsByTagName%28%27p%27%29%5B0%5D.addEventListener%28%27click%27%2C%20test%2C%20false%29%3B%0A%20document.getElementsByTagName%28%27p%27%29%5B0%5D.addEventListener%28%27DOMActivate%27%2C%20test%2C%20false%29%3B%0A%3C/script%3E%0A
 http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20HTML%3E%0A%3Ca%20href%3Dhttp%3A//google.com/%20target%3Da%3EA%3C/a%3E%3Ca%20href%3Dhttp%3A//yahoo.com/%20target%3Db%3EB%3C/a%3E%3Cbr%3E%0A%3Ciframe%20name%3Da%3E%3C/iframe%3E%3Ciframe%20name%3Db%3E%3C/iframe%3E%0A%3Cscript%3E%0A%20var%20a%20%3D%20document.getElementsByTagName%28%27a%27%29%5B0%5D%3B%0A%20var%20b%20%3D%20document.getElementsByTagName%28%27a%27%29%5B1%5D%3B%0A%20a.appendChild%28b%29%3B%0A%3C/script%3E
@@ -614,7 +668,6 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20HTML%3E%0
   intended for user interaction.</p><!-- when updating this also update the category index --><ul class="brief category-list"><li><code><a href="text-level-semantics.html#the-a-element">a</a></code></li>
    <li><code><a href="video.html#audio">audio</a></code> (if the <code title="attr-media-controls"><a href="video.html#attr-media-controls">controls</a></code> attribute is present)</li>
    <li><code><a href="the-button-element.html#the-button-element">button</a></code></li>
-<!-- v2DATAGRID   <li><code>datagrid</code></li> -->
    <li><code><a href="interactive-elements.html#the-details-element">details</a></code></li>
    <li><code><a href="the-iframe-element.html#the-embed-element">embed</a></code></li>
    <li><code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code></li>
@@ -631,7 +684,7 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20HTML%3E%0
   behavior</a>, which means that the user can activate them. This
   triggers a sequence of events dependent on the activation mechanism,
   and normally culminating in a <code title="event-click"><a href="infrastructure.html#event-click">click</a></code>
-  event followed by a <code title="event-DOMActivate"><a href="infrastructure.html#event-domactivate">DOMActivate</a></code> event<span class="impl">, as described below</span>.</p><div class="impl">
+  event<span class="impl">, as described below</span>.</p><div class="impl">
 
   <p>The user agent should allow the user to manually trigger elements
   that have an <a href="#activation-behavior">activation behavior</a>, for instance using
@@ -697,24 +750,17 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20HTML%3E%0
   on an element, it must run the <dfn id="pre-click-activation-steps">pre-click activation steps</dfn>
   defined for that element, if any.</p>
 
-  <p>When a user agent is to <dfn id="run-post-click-activation-steps">run post-click activation
-  steps</dfn> on an element, the user agent must <a href="webappapis.html#fire-a-simple-event">fire a simple
-  event</a> named <code title="event-DOMActivate"><a href="infrastructure.html#event-domactivate">DOMActivate</a></code> that is cancelable at
-  that element. The default action of this event must be to <a href="#run-final-activation-steps">run
-  final activation steps</a> on that element. If the event is
-  canceled, the user agent must <a href="#run-canceled-activation-steps">run canceled activation
-  steps</a> on the element instead.</p>
-
   <p>When a user agent is to <dfn id="run-canceled-activation-steps">run canceled activation steps</dfn>
   on an element, it must run the <dfn id="canceled-activation-steps">canceled activation steps</dfn>
   defined for that element, if any.</p>
 
-  <p>When a user agent is to <dfn id="run-final-activation-steps">run final activation steps</dfn> on
-  an element, it must run the <dfn id="activation-behavior">activation behavior</dfn> defined
-  for that element. Activation behaviors can refer to the <code title="event-click"><a href="infrastructure.html#event-click">click</a></code> and <code title="event-DOMActivate"><a href="infrastructure.html#event-domactivate">DOMActivate</a></code> events that were fired
-  by the steps above leading up to this point.</p>
+  <p>When a user agent is to <dfn id="run-post-click-activation-steps">run post-click activation
+  steps</dfn> on an element, it must run the <dfn id="activation-behavior">activation
+  behavior</dfn> defined for that element. Activation behaviors can
+  refer to the <code title="event-click"><a href="infrastructure.html#event-click">click</a></code> event that was
+  fired by the steps above leading up to this point.</p>
 
-  </div><h5 id="transparent-content-models"><span class="secno">3.2.5.2 </span>Transparent content models</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Some elements are described as <dfn id="transparent">transparent</dfn>; they have
+  </div><h5 id="transparent-content-models"><span class="secno">3.2.5.2 </span>Transparent content models</h5><p>Some elements are described as <dfn id="transparent">transparent</dfn>; they have
   "transparent" in the description of their content model.</p><p>When a content model includes a part that is "transparent", those
   parts must not contain content that would not be conformant if all
   transparent elements in the tree were replaced, in their parent
@@ -736,7 +782,7 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20HTML%3E%0
 
   </div><p>When a transparent element has no parent, then the part of its
   content model that is "transparent" must instead be treated as
-  accepting any <a href="#flow-content">flow content</a>.</p><h5 id="paragraphs"><span class="secno">3.2.5.3 </span>Paragraphs</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p class="note">The term <a href="#paragraph">paragraph</a> as defined in this
+  accepting any <a href="#flow-content">flow content</a>.</p><h5 id="paragraphs"><span class="secno">3.2.5.3 </span>Paragraphs</h5><p class="note">The term <a href="#paragraph">paragraph</a> as defined in this
   section is distinct from (though related to) the <code><a href="grouping-content.html#the-p-element">p</a></code>
   element defined later. The <a href="#paragraph">paragraph</a> concept defined
   here is used to describe how to interpret documents.</p><p>A <dfn id="paragraph">paragraph</dfn> is typically a run of <a href="#phrasing-content">phrasing
@@ -910,9 +956,12 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20HTML%3E%0
   cell in the first column implies the ARIA semantics (role, states,
   and/or properties) given in the cell in the second column of the
   same row. Authors must not set the ARIA <code title="attr-aria-role">role</code> and <code title="attr-aria-*">aria-*</code> attributes in a manner that
-  conflicts with the semantics described in the following table. <span class="impl">When multiple rows apply to an element, the role from
-  the last row to define a role must be applied, and the states and
-  properties from all the rows must be combined.</span></p><table id="table-aria-strong"><thead><tr><th>Language feature
+  conflicts with the semantics described in the following table,
+  except that the <code title="attr-aria-role-presentation">presentation</code> role may
+  always be used. <span class="impl">When multiple rows apply to an
+  element, the role from the last row to define a role must be
+  applied, and the states and properties from all the rows must be
+  combined.</span></p><table id="table-aria-strong"><thead><tr><th>Language feature
      </th><th>Strong native semantics <span class="impl">and implied ARIA semantics</span>
 
    </th></tr></thead><tbody><tr><td><code><a href="semantics.html#the-base-element">base</a></code> element
@@ -931,7 +980,7 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20HTML%3E%0
      </td><td><code title="attr-aria-role-listbox">listbox</code> role, with the <code title="attr-aria-multiselectable">aria-multiselectable</code> property set to "false"
 
     </td></tr><tr><td><code><a href="interactive-elements.html#the-details-element">details</a></code> element
-     </td><td>The <code title="attr-aria-expanded">aria-expanded</code> state must be set to "true" if the element's <code title="attr-details-open"><a href="interactive-elements.html#attr-details-open">open</a></code> attribute is present, and must be set to "false" otherwise. (The role can be changed as described in the next table; the reference to <code title="attr-aria-expanded">aria-expanded</code> here is safe since all the allowed roles use the <code title="attr-aria-expanded">aria-expanded</code> state.)
+     </td><td><code title="attr-aria-expanded">aria-expanded</code> state set to "true" if the element's <code title="attr-details-open"><a href="interactive-elements.html#attr-details-open">open</a></code> attribute is present, and set to "false" otherwise
 
     </td></tr><tr><td><code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code> element that does not have an <code><a href="sections.html#the-hgroup-element">hgroup</a></code> ancestor
      </td><td><code title="attr-aria-role-heading">heading</code> role, with the <code title="attr-aria-level">aria-level</code> property set to the element's <a href="sections.html#outline-depth">outline depth</a>
@@ -970,7 +1019,7 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20HTML%3E%0
      </td><td><code title="attr-aria-role-button">button</code> role
 
     </td></tr><tr><td><code><a href="the-input-element.html#the-input-element">input</a></code> element with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute in the <a href="number-state.html#checkbox-state" title="attr-input-type-checkbox">Checkbox</a> state
-     </td><td><code title="attr-aria-role-checkbox">checkbox</code> role, with the <code title="attr-aria-checked">aria-checked</code> state set to "mixed" if the element's <code title="dom-input-indeterminate"><a href="the-input-element.html#dom-input-indeterminate">indeterminate</a></code> IDL attribute is true, or "true" if the element's <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> is true, or "false" otherwise
+     </td><td><code title="attr-aria-checked">aria-checked</code> state set to "mixed" if the element's <code title="dom-input-indeterminate"><a href="the-input-element.html#dom-input-indeterminate">indeterminate</a></code> IDL attribute is true, or "true" if the element's <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> is true, or "false" otherwise
 
     </td></tr><tr><td><code><a href="the-input-element.html#the-input-element">input</a></code> element with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute in the <a href="number-state.html#color-state" title="attr-input-type-color">Color</a> state
      </td><td>No role
@@ -1006,10 +1055,10 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20HTML%3E%0
      </td><td><code title="attr-aria-role-textbox">textbox</code> role, with the <code title="title-aria-readonly">aria-readonly</code> state set to "true" if the element has a <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code> attribute
 
     </td></tr><tr><td><code><a href="the-input-element.html#the-input-element">input</a></code> element with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute in the <a href="number-state.html#radio-button-state" title="attr-input-type-radio">Radio Button</a> state
-     </td><td><code title="attr-aria-role-radio">radio</code> role, with the <code title="attr-aria-checked">aria-checked</code> state set to "true" if the element's <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> is true, or "false" otherwise
+     </td><td><code title="attr-aria-checked">aria-checked</code> state set to "true" if the element's <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> is true, or "false" otherwise
 
     </td></tr><tr><td><code><a href="the-input-element.html#the-input-element">input</a></code> element with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute in the <a href="number-state.html#range-state" title="attr-input-type-range">Range</a> state
-     </td><td><code title="attr-aria-role-slider">slider</code> role, with the <code title="attr-aria-valuemax">aria-valuemax</code> property set to the element's <a href="common-input-element-attributes.html#concept-input-max" title="concept-input-max">maximum</a>, the <code title="attr-aria-valuemin">aria-valuemin</code> property set to the element's <a href="common-input-element-attributes.html#concept-input-min" title="concept-input-min">minimum</a>, and the <code title="attr-aria-valuenow">aria-valuenow</code> property set to the result of applying the <a href="common-microsyntaxes.html#rules-for-parsing-floating-point-number-values">rules for parsing floating point number values</a> to the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>, if that that results in a number, or the <a href="number-state.html#concept-input-value-default-range" title="concept-input-value-default-range">default value</a> otherwise
+     </td><td><code title="attr-aria-role-slider">slider</code> role, with the <code title="attr-aria-valuemax">aria-valuemax</code> property set to the element's <a href="common-input-element-attributes.html#concept-input-max" title="concept-input-max">maximum</a>, the <code title="attr-aria-valuemin">aria-valuemin</code> property set to the element's <a href="common-input-element-attributes.html#concept-input-min" title="concept-input-min">minimum</a>, and the <code title="attr-aria-valuenow">aria-valuenow</code> property set to the result of applying the <a href="common-microsyntaxes.html#rules-for-parsing-floating-point-number-values">rules for parsing floating point number values</a> to the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>, if that results in a number, or the <a href="number-state.html#concept-input-value-default-range" title="concept-input-value-default-range">default value</a> otherwise
 
     </td></tr><tr><td><code><a href="the-input-element.html#the-input-element">input</a></code> element with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute in the <a href="number-state.html#reset-button-state" title="attr-input-type-reset">Reset Button</a> state
      </td><td><code title="attr-aria-role-button">button</code> role
@@ -1038,7 +1087,13 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20HTML%3E%0
     </td></tr><tr><td><code><a href="the-input-element.html#the-input-element">input</a></code> element with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute in the <a href="states-of-the-type-attribute.html#week-state" title="attr-input-type-week">Week</a> state
      </td><td>No role, with the <code title="title-aria-readonly">aria-readonly</code> state set to "true" if the element has a <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code> attribute
 
+    </td></tr><tr><td><code><a href="the-input-element.html#the-input-element">input</a></code> element that is <a href="common-input-element-attributes.html#concept-input-required" title="concept-input-required">required</a>
+     </td><td>The <code title="title-aria-required">aria-required</code> state set to "true"
+
     </td></tr><tr><td><code><a href="the-button-element.html#the-keygen-element">keygen</a></code> element
+     </td><td>No role
+
+    </td></tr><tr><td><code><a href="forms.html#the-label-element">label</a></code> element
      </td><td>No role
 
     </td></tr><tr><td><code><a href="semantics.html#the-link-element">link</a></code> element that creates a <a href="links.html#hyperlink">hyperlink</a>
@@ -1086,6 +1141,9 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20HTML%3E%0
     </td></tr><tr><td><code><a href="the-button-element.html#the-select-element">select</a></code> element with no <code title="attr-select-multiple"><a href="the-button-element.html#attr-select-multiple">multiple</a></code> attribute
      </td><td><code title="attr-aria-role-listbox">listbox</code> role, with the <code title="attr-aria-multiselectable">aria-multiselectable</code> property set to "false"
 
+    </td></tr><tr><td><code><a href="the-button-element.html#the-select-element">select</a></code> element with a <code title="attr-select-required"><a href="the-button-element.html#attr-select-required">required</a></code> attribute
+     </td><td>The <code title="title-aria-required">aria-required</code> state set to "true"
+
     </td></tr><tr><td><code><a href="video.html#the-source-element">source</a></code> element
      </td><td>No role
 
@@ -1095,26 +1153,14 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20HTML%3E%0
     </td></tr><tr><td><code><a href="interactive-elements.html#the-summary-element">summary</a></code> element
      </td><td><code title="attr-aria-role-heading">heading</code> role
 
-    </td></tr><tr><td><code><a href="tabular-data.html#the-td-element">td</a></code> element
-     </td><td><code title="attr-aria-role-gridcell">gridcell</code> role, with the <code title="attr-aria-labelledby">aria-labelledby</code> property set to the value of the <code title="attr-tdth-headers"><a href="tabular-data.html#attr-tdth-headers">headers</a></code> attribute, if any
-
     </td></tr><tr><td><code><a href="the-button-element.html#the-textarea-element">textarea</a></code> element
      </td><td><code title="attr-aria-role-textbox">textbox</code> role, with the <code title="attr-aria-multiline">aria-multiline</code> property set to "true", and the <code title="title-aria-readonly">aria-readonly</code> state set to "true" if the element has a <code title="attr-textarea-readonly"><a href="the-button-element.html#attr-textarea-readonly">readonly</a></code> attribute
 
-    </td></tr><tr><td><code><a href="tabular-data.html#the-th-element">th</a></code> element that is a <a href="tabular-data.html#column-header">column header</a>
-     </td><td><code title="attr-aria-role-columnheader">columnheader</code> role, with the <code title="attr-aria-labelledby">aria-labelledby</code> property set to the value of the <code title="attr-tdth-headers"><a href="tabular-data.html#attr-tdth-headers">headers</a></code> attribute, if any
-
-    </td></tr><tr><td><code><a href="tabular-data.html#the-th-element">th</a></code> element that is a <a href="tabular-data.html#row-header">row header</a>
-     </td><td><code title="attr-aria-role-rowheader">rowheader</code> role, with the <code title="attr-aria-labelledby">aria-labelledby</code> property set to the value of the <code title="attr-tdth-headers"><a href="tabular-data.html#attr-tdth-headers">headers</a></code> attribute, if any
-
-    </td></tr><tr><td><code><a href="tabular-data.html#the-th-element">th</a></code> element that is neither a <a href="tabular-data.html#column-header">column header</a> nor a <a href="tabular-data.html#row-header">row header</a>
-     </td><td><code title="attr-aria-role-gridcell">gridcell</code> role, with the <code title="attr-aria-labelledby">aria-labelledby</code> property set to the value of the <code title="attr-tdth-headers"><a href="tabular-data.html#attr-tdth-headers">headers</a></code> attribute, if any
+    </td></tr><tr><td><code><a href="the-button-element.html#the-textarea-element">textarea</a></code> element with a <code title="attr-textarea-required"><a href="the-button-element.html#attr-textarea-required">required</a></code> attribute
+     </td><td>The <code title="title-aria-required">aria-required</code> state set to "true"
 
     </td></tr><tr><td><code><a href="semantics.html#the-title-element-0">title</a></code> element
      </td><td>No role
-
-    </td></tr><tr><td><code><a href="tabular-data.html#the-tr-element">tr</a></code> element
-     </td><td><code title="attr-aria-role-row">row</code> role
 
     </td></tr><tr><td>An element that <a href="commands.html#concept-command" title="concept-command">defines a command</a>, whose <a href="commands.html#command-facet-type" title="command-facet-type">Type</a> facet is "checkbox", and that is a descendant of a <code><a href="interactive-elements.html#menus">menu</a></code> element whose <code title="attr-menu-type"><a href="interactive-elements.html#attr-menu-type">type</a></code> attribute in the <a href="interactive-elements.html#list-state" title="list state">list</a> state
      </td><td><code title="attr-aria-role-menuitemcheckbox">menuitemcheckbox</code> role, with the <code title="attr-aria-checked">aria-checked</code> state set to "true" if the command's <a href="commands.html#command-facet-checkedstate" title="command-facet-checkedstate">Checked State</a> facet is true, and "false" otherwise
@@ -1125,11 +1171,14 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20HTML%3E%0
     </td></tr><tr><td>An element that <a href="commands.html#concept-command" title="concept-command">defines a command</a>, whose <a href="commands.html#command-facet-type" title="command-facet-type">Type</a> facet is "radio", and that is a descendant of a <code><a href="interactive-elements.html#menus">menu</a></code> element whose <code title="attr-menu-type"><a href="interactive-elements.html#attr-menu-type">type</a></code> attribute in the <a href="interactive-elements.html#list-state" title="list state">list</a> state
      </td><td><code title="attr-aria-role-menuitemradio">menuitemradio</code> role, with the <code title="attr-aria-checked">aria-checked</code> state set to "true" if the command's <a href="commands.html#command-facet-checkedstate" title="command-facet-checkedstate">Checked State</a> facet is true, and "false" otherwise
 
-    </td></tr><tr><td>Elements that are <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a>
+    </td></tr><tr><td>Element that is <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a>
      </td><td>The <code title="title-aria-disabled">aria-disabled</code> state set to "true"
 
-    </td></tr><tr><td>Elements that are <a href="common-input-element-attributes.html#concept-input-required" title="concept-input-required">required</a>
-     </td><td>The <code title="title-aria-required">aria-required</code> state set to "true"
+    </td></tr><tr><td>Element with a <code title="attr-hidden"><a href="editing.html#the-hidden-attribute">hidden</a></code> attribute
+     </td><td>The <code title="title-aria-hidden">aria-hidden</code> state set to "true"
+
+    </td></tr><tr><td>Element that is a <a href="association-of-controls-and-forms.html#candidate-for-constraint-validation">candidate for constraint validation</a> but that does not <a href="association-of-controls-and-forms.html#concept-fv-valid" title="concept-fv-valid">satisfy its constraints</a>
+     </td><td>The <code title="title-aria-invalid">aria-invalid</code> state set to "true"
 
   </td></tr></tbody></table><p>Some <a href="infrastructure.html#html-elements">HTML elements</a> have native semantics that can be
   overridden. The following table lists these elements<span class="impl"> and their <span>implicit ARIA semantics</span></span>,
@@ -1138,17 +1187,19 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20HTML%3E%0
   column implies, unless otherwise overriden, the ARIA semantic (role,
   state, or property) given in the cell in the second column of the
   same row, but this semantic may be overridden under the conditions
-  listed in the cell in the third column of that row.</p><table id="table-aria-weak"><thead><tr><th>Language feature
+  listed in the cell in the third column of that row. In addition, any
+  element may be given the <code title="attr-aria-role-presentation">presentation</code> role,
+  regardless of the restrictions below.</p><table id="table-aria-weak"><thead><tr><th>Language feature
      </th><th>Default implied ARIA semantic
      </th><th>Restrictions
 
    </th></tr></thead><tbody><tr><td><code><a href="sections.html#the-address-element">address</a></code> element
      </td><td>No role
-     </td><td>If specified, role must be <code title="attr-aria-role-contentinfo">contentinfo</code> (ARIA restricts usage of this role to one per page)
+     </td><td>If specified, role must be <code title="attr-aria-role-contentinfo">contentinfo</code>
 
     </td></tr><tr><td><code><a href="sections.html#the-article-element">article</a></code> element
      </td><td><code title="attr-aria-role-article">article</code> role
-     </td><td>Role must be either <code title="attr-aria-role-article">article</code>, <code title="attr-aria-role-document">document</code>, <code title="attr-aria-role-application">application</code>, or <code title="attr-aria-role-main">main</code> (ARIA restricts usage of this role to one per page)
+     </td><td>Role must be either <code title="attr-aria-role-article">article</code>, <code title="attr-aria-role-document">document</code>, <code title="attr-aria-role-application">application</code>, or <code title="attr-aria-role-main">main</code>
 
     </td></tr><tr><td><code><a href="sections.html#the-aside-element">aside</a></code> element
      </td><td><code title="attr-aria-role-note">note</code> role
@@ -1160,47 +1211,59 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20HTML%3E%0
 
     </td></tr><tr><td><code><a href="interactive-elements.html#the-details-element">details</a></code> element
      </td><td><code title="attr-aria-role-group">group</code> role
-     </td><td>Role must be either <code title="attr-aria-role-form">form</code>, <code title="attr-aria-role-group">group</code>, <code title="attr-aria-role-navigation">navigation</code>, <code title="attr-aria-role-note">note</code>, or <code title="attr-aria-role-search">search</code>
+     </td><td>Role must be a role that supports <code title="attr-aria-expanded">aria-expanded</code>
 
     </td></tr><tr><td><code><a href="the-iframe-element.html#the-embed-element">embed</a></code> element
      </td><td>No role
-     </td><td>If specified, role must be either <code title="attr-aria-role-application">application</code>, <code title="attr-aria-role-document">document</code>, or <code title="attr-aria-role-image">image</code>
+     </td><td>If specified, role must be either <code title="attr-aria-role-application">application</code>, <code title="attr-aria-role-document">document</code>, or <code title="attr-aria-role-img">img</code>
 
     </td></tr><tr><td><code><a href="sections.html#the-footer-element">footer</a></code> element
      </td><td>No role
-     </td><td>If specified, role must be <code title="attr-aria-role-contentinfo">contentinfo</code> (ARIA restricts usage of this role to one per page)
+     </td><td>If specified, role must be <code title="attr-aria-role-contentinfo">contentinfo</code>
 
     </td></tr><tr><td><code><a href="sections.html#the-header-element">header</a></code> element
      </td><td>No role
-     </td><td>If specified, role must be <code title="attr-aria-role-banner">banner</code> (ARIA restricts usage of this role to one per page)
+     </td><td>If specified, role must be <code title="attr-aria-role-banner">banner</code>
 
     </td></tr><tr><td><code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> element
      </td><td>No role
-     </td><td>If specified, role must be either <code title="attr-aria-role-application">application</code>, <code title="attr-aria-role-document">document</code>, or <code title="attr-aria-role-image">image</code>
+     </td><td>If specified, role must be either <code title="attr-aria-role-application">application</code>, <code title="attr-aria-role-document">document</code>, or <code title="attr-aria-role-img">img</code>
+
+    </td></tr><tr><td><code><a href="embedded-content-1.html#the-img-element">img</a></code> element whose <code title="attr-img-alt"><a href="embedded-content-1.html#attr-img-alt">alt</a></code> attribute's value is absent
+     </td><td><code title="attr-aria-role-img">img</code> role
+     </td><td>No restrictions
+
+    </td></tr><tr><td><code><a href="the-input-element.html#the-input-element">input</a></code> element with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute in the <a href="number-state.html#checkbox-state" title="attr-input-type-checkbox">Checkbox</a> state
+     </td><td><code title="attr-aria-role-checkbox">checkbox</code> role
+     </td><td>Role must be either <code title="attr-aria-role-checkbox">checkbox</code> or <code title="attr-aria-role-menuitemcheckbox">menuitemcheckbox</code>
+
+    </td></tr><tr><td><code><a href="the-input-element.html#the-input-element">input</a></code> element with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute in the <a href="number-state.html#radio-button-state" title="attr-input-type-radio">Radio Button</a> state
+     </td><td><code title="attr-aria-role-radio">radio</code> role
+     </td><td>Role must be either <code title="attr-aria-role-radio">radio</code> or <code title="attr-aria-role-menuitemradio">menuitemradio</code>
 
     </td></tr><tr><td><code><a href="grouping-content.html#the-li-element">li</a></code> element whose parent is an <code><a href="grouping-content.html#the-ol-element">ol</a></code> or <code><a href="grouping-content.html#the-ul-element">ul</a></code> element
      </td><td><code title="attr-aria-role-listitem">listitem</code> role
-     </td><td>Role must be either <code title="attr-aria-role-listitem">listitem</code> or <code title="attr-aria-role-treeitem">treeitem</code>
+     </td><td>Role must be either <code title="attr-aria-role-listitem">listitem</code>, <code title="attr-aria-role-menuitemcheckbox">menuitemcheckbox</code>, <code title="attr-aria-role-menuitemradio">menuitemradio</code>, <code title="attr-aria-role-option">option</code>, <code title="attr-aria-role-tab">tab</code>, or <code title="attr-aria-role-treeitem">treeitem</code>
 
     </td></tr><tr><td><code><a href="the-iframe-element.html#the-object-element">object</a></code> element
      </td><td>No role
-     </td><td>If specified, role must be either <code title="attr-aria-role-application">application</code>, <code title="attr-aria-role-document">document</code>, or <code title="attr-aria-role-image">image</code>
+     </td><td>If specified, role must be either <code title="attr-aria-role-application">application</code>, <code title="attr-aria-role-document">document</code>, or <code title="attr-aria-role-img">image</code>
 
     </td></tr><tr><td><code><a href="grouping-content.html#the-ol-element">ol</a></code> element
      </td><td><code title="attr-aria-role-list">list</code> role
-     </td><td>Role must be either <code title="attr-aria-role-list">list</code>, <code title="attr-aria-role-tree">tree</code>, or <code title="attr-aria-role-directory">directory</code>
+     </td><td>Role must be either <code title="attr-aria-role-directory">directory</code>, <code title="attr-aria-role-list">list</code>, <code title="attr-aria-role-listbox">listbox</code>, <code title="attr-aria-role-menu">menu</code>, <code title="attr-aria-role-menubar">menubar</code>, <code title="attr-aria-role-tablist">tablist</code>, <code title="attr-aria-role-toolbar ">toolbar</code>, <code title="attr-aria-role-tree">tree</code>
+
+    </td></tr><tr><td><code><a href="the-button-element.html#the-output-element">output</a></code> element
+     </td><td><code title="attr-aria-role-status">status</code> role
+     </td><td>No restrictions
 
     </td></tr><tr><td><code><a href="sections.html#the-section-element">section</a></code> element
      </td><td><code title="attr-aria-role-region">region</code> role
-     </td><td>Role must be either <code title="attr-aria-role-region">region</code>, <code title="attr-aria-role-document">document</code>, <code title="attr-aria-role-application">application</code>, <code title="attr-aria-role-contentinfo">contentinfo</code> (ARIA restricts usage of this role to one per page), <code title="attr-aria-role-main">main</code> (ARIA restricts usage of this role to one per page), <code title="attr-aria-role-search">search</code>, <code title="attr-aria-role-alert">alert</code>, <code title="attr-aria-role-dialog">dialog</code>, <code title="attr-aria-role-alertdialog">alertdialog</code>, <code title="attr-aria-role-status">status</code>, or <code title="attr-aria-role-log">log</code>
-
-    </td></tr><tr><td><code><a href="tabular-data.html#the-table-element">table</a></code> element
-     </td><td><code title="attr-aria-role-grid">grid</code> role
-     </td><td>Role must be either <code title="attr-aria-role-grid">grid</code> or <code title="attr-aria-role-treegrid">treegrid</code>
+     </td><td>Role must be either <code title="attr-aria-role-region">region</code>, <code title="attr-aria-role-document">document</code>, <code title="attr-aria-role-application">application</code>, <code title="attr-aria-role-contentinfo">contentinfo</code>, <code title="attr-aria-role-main">main</code>, <code title="attr-aria-role-search">search</code>, <code title="attr-aria-role-alert">alert</code>, <code title="attr-aria-role-dialog">dialog</code>, <code title="attr-aria-role-alertdialog">alertdialog</code>, <code title="attr-aria-role-status">status</code>, or <code title="attr-aria-role-log">log</code>
 
     </td></tr><tr><td><code><a href="grouping-content.html#the-ul-element">ul</a></code> element
      </td><td><code title="attr-aria-role-list">list</code> role
-     </td><td>Role must be either <code title="attr-aria-role-list">list</code> or <code title="attr-aria-role-tree">tree</code>, or <code title="attr-aria-role-directory">directory</code>
+     </td><td>Role must be either <code title="attr-aria-role-directory">directory</code>, <code title="attr-aria-role-list">list</code>, <code title="attr-aria-role-listbox">listbox</code>, <code title="attr-aria-role-menu">menu</code>, <code title="attr-aria-role-menubar">menubar</code>, <code title="attr-aria-role-tablist">tablist</code>, <code title="attr-aria-role-toolbar ">toolbar</code>, <code title="attr-aria-role-tree">tree</code>
 
     </td></tr><tr><td><code><a href="video.html#video">video</a></code> element
      </td><td>No role
@@ -1210,81 +1273,16 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20HTML%3E%0
      </td><td><code title="attr-aria-role-document">document</code> role
      </td><td>Role must be either <code title="attr-aria-role-document">document</code> or <code title="attr-aria-role-application">application</code>
 
-  </td></tr></tbody></table><div class="note">
-
-   <p>A number of elements in HTML have no default role and no
-   restrictions on what roles can be applied to those elements:
-    <code><a href="text-level-semantics.html#the-a-element">a</a></code> (unless it creates a <a href="links.html#hyperlink">hyperlink</a>),
-    <code><a href="text-level-semantics.html#the-abbr-element">abbr</a></code>,
-    <code><a href="the-map-element.html#the-area-element">area</a></code> (unless it creates a <a href="links.html#hyperlink">hyperlink</a>),
-    <code><a href="text-level-semantics.html#the-b-element">b</a></code>,
-    <code><a href="text-level-semantics.html#the-bdo-element">bdo</a></code>,
-    <code><a href="grouping-content.html#the-blockquote-element">blockquote</a></code>,
-    <code><a href="text-level-semantics.html#the-br-element">br</a></code>,
-    <code><a href="the-canvas-element.html#the-canvas-element">canvas</a></code>,
-    <code><a href="tabular-data.html#the-caption-element">caption</a></code>,
-    <code><a href="text-level-semantics.html#the-cite-element">cite</a></code>,
-    <code><a href="text-level-semantics.html#the-code-element">code</a></code>,
-    <code><a href="tabular-data.html#the-col-element">col</a></code>,
-    <code><a href="tabular-data.html#the-colgroup-element">colgroup</a></code>,
-    <code><a href="grouping-content.html#the-dd-element">dd</a></code>,
-    <code><a href="edits.html#the-del-element">del</a></code>,
-    <code><a href="text-level-semantics.html#the-dfn-element">dfn</a></code>,
-    <code><a href="grouping-content.html#the-div-element">div</a></code>,
-    <code><a href="grouping-content.html#the-dl-element">dl</a></code>,
-    <code><a href="grouping-content.html#the-dt-element">dt</a></code>,
-    <code><a href="text-level-semantics.html#the-em-element">em</a></code>,
-    <code><a href="forms.html#the-fieldset-element">fieldset</a></code>,
-    <code><a href="grouping-content.html#the-figcaption-element">figcaption</a></code>,
-    <code><a href="grouping-content.html#the-figure-element">figure</a></code>,
-    <code><a href="forms.html#the-form-element">form</a></code>,
-    <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code>&#x2013;<code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h6</a></code> in <code><a href="sections.html#the-hgroup-element">hgroup</a></code>,
-    <code><a href="embedded-content-1.html#the-img-element">img</a></code> (unless the <code title="attr-img-alt"><a href="embedded-content-1.html#attr-img-alt">alt</a></code> attribute's value is the empty string),
-    <code><a href="edits.html#the-ins-element">ins</a></code>,
-    <code><a href="text-level-semantics.html#the-kbd-element">kbd</a></code>,
-    <code><a href="forms.html#the-label-element">label</a></code> (unless it has an <a href="editing.html#assigned-access-key">assigned access key</a>),
-    <code><a href="forms.html#the-legend-element">legend</a></code> (unless it has an <a href="editing.html#assigned-access-key">assigned access key</a>),
-    <code><a href="grouping-content.html#the-li-element">li</a></code> in <code><a href="interactive-elements.html#menus">menu</a></code>,
-    <code><a href="semantics.html#the-link-element">link</a></code> (unless it creates a <a href="links.html#hyperlink">hyperlink</a>),
-    <code><a href="the-map-element.html#the-map-element">map</a></code>,
-    <code><a href="text-level-semantics.html#the-mark-element">mark</a></code>,
-    <code><a href="the-button-element.html#the-output-element">output</a></code>,
-    <code><a href="grouping-content.html#the-p-element">p</a></code>,
-    <code><a href="grouping-content.html#the-pre-element">pre</a></code>,
-    <code><a href="text-level-semantics.html#the-q-element">q</a></code>,
-    <code><a href="text-level-semantics.html#the-rp-element">rp</a></code>,
-    <code><a href="text-level-semantics.html#the-rt-element">rt</a></code>,
-    <code><a href="text-level-semantics.html#the-ruby-element">ruby</a></code>,
-    <code><a href="text-level-semantics.html#the-samp-element">samp</a></code>,
-    <code><a href="text-level-semantics.html#the-small-element">small</a></code>,
-    <code><a href="text-level-semantics.html#the-span-element">span</a></code>,
-    <code><a href="text-level-semantics.html#the-strong-element">strong</a></code>,
-    <code><a href="text-level-semantics.html#the-sub-and-sup-elements">sub</a></code>,
-    <code><a href="text-level-semantics.html#the-sub-and-sup-elements">sup</a></code>,
-    <code><a href="tabular-data.html#the-table-element">table</a></code>,
-    <code><a href="tabular-data.html#the-tbody-element">tbody</a></code>,
-    <code><a href="tabular-data.html#the-tfoot-element">tfoot</a></code>,
-    <code><a href="tabular-data.html#the-thead-element">thead</a></code>,
-    <code><a href="text-level-semantics.html#the-time-element">time</a></code>,
-    <code><a href="text-level-semantics.html#the-var-element">var</a></code>, and
-    <code><a href="text-level-semantics.html#the-wbr-element">wbr</a></code>.
-   </p>
-
-  </div><div class="impl">
-
-  <p>User agents may apply different defaults than those described in
-  this section in order to expose the semantics of <a href="infrastructure.html#html-elements">HTML
-  elements</a> in a manner more fine-grained than possible with the
-  above definitions.</p>
+  </td></tr></tbody></table><div class="impl">
 
   <p>Conformance checkers are encouraged to phrase errors such that
   authors are encouraged to use more appropriate elements rather than
   remove accessibility annotations. For example, if an <code><a href="text-level-semantics.html#the-a-element">a</a></code>
   element is marked as having the <code title="attr-aria-role-button">button</code> role, a conformance
-  checker could say "Either a <code><a href="the-button-element.html#the-button-element">button</a></code> element or an
-  <code><a href="the-input-element.html#the-input-element">input</a></code> element is required when using the <code title="attr-aria-role-button">button</code> role" rather than "The
-  <code title="attr-aria-role-button">button</code> role cannot be
-  used with <code><a href="text-level-semantics.html#the-a-element">a</a></code> elements".</p>
+  checker could say "Use a more appropriate element to represent a
+  button, for example a <code><a href="the-button-element.html#the-button-element">button</a></code> element or an
+  <code><a href="the-input-element.html#the-input-element">input</a></code> element" rather than "The <code title="attr-aria-role-button">button</code> role cannot be used with
+  <code><a href="text-level-semantics.html#the-a-element">a</a></code> elements".</p>
 
   </div><div class="example">
 
@@ -1296,7 +1294,7 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20HTML%3E%0
    features described in this section, one can instead make the ATs
    skip the ASCII art and just read the caption:</p>
 
-   <pre>&lt;figure <strong>role="img" aria-labeledby="fish-caption"</strong>&gt;
+   <pre>&lt;figure <strong>role="img" aria-labelledby="fish-caption"</strong>&gt; <!-- that's "labelled" with TWO "l"s -->
  &lt;pre&gt;
  o           .'`/
      '      /  (

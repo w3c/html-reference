@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,7 +356,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="rendering.html" title="10 Rendering" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="iana.html" title="12 IANA considerations" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="rendering.html" title="10 Rendering" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="iana.html" title="12 IANA considerations" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -320,7 +367,7 @@
   <ol class="toc"><li><a href="obsolete.html#obsolete"><span class="secno">11 </span>Obsolete features</a>
   <ol><li><a href="obsolete.html#obsolete-but-conforming-features"><span class="secno">11.1 </span>Obsolete but conforming features</a>
     <ol><li><a href="obsolete.html#warnings-for-obsolete-but-conforming-features"><span class="secno">11.1.1 </span>Warnings for obsolete but conforming features</a></li></ol></li><li><a href="obsolete.html#non-conforming-features"><span class="secno">11.2 </span>Non-conforming features</a></li><li><a href="obsolete.html#requirements-for-implementations"><span class="secno">11.3 </span>Requirements for implementations</a>
-    <ol><li><a href="obsolete.html#the-applet-element"><span class="secno">11.3.1 </span>The <code>applet</code> element</a></li><li><a href="obsolete.html#the-marquee-element"><span class="secno">11.3.2 </span>The <code>marquee</code> element</a></li><li><a href="obsolete.html#frames"><span class="secno">11.3.3 </span>Frames</a></li><li><a href="obsolete.html#other-elements-attributes-and-apis"><span class="secno">11.3.4 </span>Other elements, attributes and APIs</a></li></ol></li></ol></li></ol></div><h2 id="obsolete"><span class="secno">11 </span>Obsolete features</h2><h3 id="obsolete-but-conforming-features"><span class="secno">11.1 </span>Obsolete but conforming features</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Features listed in this section will trigger warnings in
+    <ol><li><a href="obsolete.html#the-applet-element"><span class="secno">11.3.1 </span>The <code>applet</code> element</a></li><li><a href="obsolete.html#the-marquee-element"><span class="secno">11.3.2 </span>The <code>marquee</code> element</a></li><li><a href="obsolete.html#frames"><span class="secno">11.3.3 </span>Frames</a></li><li><a href="obsolete.html#other-elements-attributes-and-apis"><span class="secno">11.3.4 </span>Other elements, attributes and APIs</a></li></ol></li></ol></li></ol></div><h2 id="obsolete"><span class="secno">11 </span>Obsolete features</h2><h3 id="obsolete-but-conforming-features"><span class="secno">11.1 </span>Obsolete but conforming features</h3><p>Features listed in this section will trigger warnings in
   conformance checkers.</p><p>Authors should not specify an <code title="attr-meta-http-equiv"><a href="semantics.html#attr-meta-http-equiv">http-equiv</a></code> attribute in the
   <a href="semantics.html#attr-meta-http-equiv-content-language" title="attr-meta-http-equiv-content-language">Content
   Language</a> state on a <code><a href="semantics.html#meta">meta</a></code> element. The <code title="attr-lang"><a href="elements.html#attr-lang">lang</a></code> attribute should be used instead.</p><p>Authors should not specify a <code title="attr-img-border"><a href="#attr-img-border">border</a></code> attribute on an
@@ -350,7 +397,7 @@
   attribute, defined in the <code><a href="tabular-data.html#the-table-element">table</a></code> section, will also
   trigger a warning.</p><div class="impl">
 
-  <h4 id="warnings-for-obsolete-but-conforming-features"><span class="secno">11.1.1 </span>Warnings for obsolete but conforming features</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="warnings-for-obsolete-but-conforming-features"><span class="secno">11.1.1 </span>Warnings for obsolete but conforming features</h4>
 
   <p>To ease the transition from HTML4 Transitional documents to the
   language defined in <em>this</em> specification, and to discourage
@@ -396,7 +443,7 @@
   <p class="example">For example, a validator could report some pages
   as "Valid HTML" and others as "Valid HTML with warnings".</p>
 
-  </div><h3 id="non-conforming-features"><span class="secno">11.2 </span>Non-conforming features</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Elements in the following list are entirely obsolete, and must
+  </div><h3 id="non-conforming-features"><span class="secno">11.2 </span>Non-conforming features</h3><p>Elements in the following list are entirely obsolete, and must
   not be used by authors:</p><dl><!-- alphabetical by first element in the group, except CSS goes last --><dt><code><a href="#the-applet-element">applet</a></code></dt>
    <dd><p>Use <code><a href="the-iframe-element.html#the-embed-element">embed</a></code> or <code><a href="the-iframe-element.html#the-object-element">object</a></code> instead.</p></dd>
 
@@ -433,6 +480,9 @@
    <dt><dfn id="rb"><code>rb</code></dfn></dt>
    <dd><p>Providing the ruby base directly inside the <code><a href="text-level-semantics.html#the-ruby-element">ruby</a></code> element is sufficient; the <code><a href="#rb">rb</a></code> element is unnecessary. Omit it altogether.</p></dd>
 
+   <dt><dfn id="strike"><code>strike</code></dfn></dt>
+   <dd><p>Use <code><a href="edits.html#the-del-element">del</a></code> instead if the element is marking an edit, otherwise use <code><a href="text-level-semantics.html#the-s-element">s</a></code> instead.</p></dd>
+
    <dt><dfn id="basefont"><code>basefont</code></dfn></dt>
    <dt><dfn id="big"><code>big</code></dfn></dt>
    <dt><dfn id="blink"><code>blink</code></dfn></dt>
@@ -441,19 +491,13 @@
    <dt><code><a href="#the-marquee-element">marquee</a></code></dt>
    <dt><dfn id="multicol"><code>multicol</code></dfn></dt>
    <dt><dfn id="nobr"><code>nobr</code></dfn></dt>
-   <dt><dfn id="s"><code>s</code></dfn></dt>
    <dt><dfn id="spacer"><code>spacer</code></dfn></dt>
-   <dt><dfn id="strike"><code>strike</code></dfn></dt>
    <dt><dfn id="tt"><code>tt</code></dfn></dt>
    <dt><dfn id="u"><code>u</code></dfn></dt>
 
    <dd>
 
     <p>Use appropriate elements and/or CSS instead.</p>
-
-    <p>For the <code><a href="#s">s</a></code> and <code><a href="#strike">strike</a></code> elements, if
-    they are marking up a removal from the element, consider using the
-    <code><a href="edits.html#the-del-element">del</a></code> element instead.</p>
 
     <p>Where the <code><a href="#tt">tt</a></code> element would have been used for
     marking up keyboard input, consider the <code><a href="text-level-semantics.html#the-kbd-element">kbd</a></code> element;
@@ -521,7 +565,14 @@
 
    <dt><dfn id="attr-iframe-longdesc" title="attr-iframe-longdesc"><code>longdesc</code></dfn> on <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> elements</dt>
    <dt><dfn id="attr-img-longdesc" title="attr-img-longdesc"><code>longdesc</code></dfn> on <code><a href="embedded-content-1.html#the-img-element">img</a></code> elements</dt>
-   <dd><p>Use a regular <code><a href="text-level-semantics.html#the-a-element">a</a></code> element to link to the description.</p></dd>
+   <dd><p>Use a regular <code><a href="text-level-semantics.html#the-a-element">a</a></code> element to link to the
+   description, or (in the case of images) use an <a href="the-map-element.html#image-map">image
+   map</a> to provide a link from the image to the image's
+   description.</p></dd>
+
+   <dt><dfn id="attr-img-lowsrc" title="attr-img-lowsrc"><code>lowsrc</code></dfn> on <code><a href="embedded-content-1.html#the-img-element">img</a></code> elements</dt>
+   <dd><p>Use a progressive JPEG image (given in the <code title="attr-img-src"><a href="embedded-content-1.html#attr-img-src">src</a></code> attribute),
+   instead of using two separate images.</p></dd>
 
    <dt><dfn id="attr-link-target" title="attr-link-target"><code>target</code></dfn> on <code><a href="semantics.html#the-link-element">link</a></code> elements</dt>
    <dd><p>Unnecessary. Omit it altogether.</p></dd>
@@ -567,7 +618,7 @@
 
    </dd><dt><dfn id="attr-datasrc" title="attr-datasrc"><code>datasrc</code></dfn> on <code><a href="text-level-semantics.html#the-a-element">a</a></code>, <code><a href="#the-applet-element">applet</a></code>, <code><a href="the-button-element.html#the-button-element">button</a></code>, <code><a href="grouping-content.html#the-div-element">div</a></code>, <code><a href="#frame">frame</a></code>, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <code><a href="embedded-content-1.html#the-img-element">img</a></code>, <code><a href="the-input-element.html#the-input-element">input</a></code>, <code><a href="forms.html#the-label-element">label</a></code>, <code><a href="forms.html#the-legend-element">legend</a></code>, <code><a href="#the-marquee-element">marquee</a></code>, <code><a href="the-iframe-element.html#the-object-element">object</a></code>, <code><a href="the-button-element.html#the-option-element">option</a></code>, <code><a href="the-button-element.html#the-select-element">select</a></code>, <code><a href="text-level-semantics.html#the-span-element">span</a></code>, <code><a href="tabular-data.html#the-table-element">table</a></code>, and <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> elements</dt>
    <dt><dfn id="attr-datafld" title="attr-datafld"><code>datafld</code></dfn> on <code><a href="text-level-semantics.html#the-a-element">a</a></code>, <code><a href="#the-applet-element">applet</a></code>, <code><a href="the-button-element.html#the-button-element">button</a></code>, <code><a href="grouping-content.html#the-div-element">div</a></code>, <code><a href="forms.html#the-fieldset-element">fieldset</a></code>, <code><a href="#frame">frame</a></code>, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <code><a href="embedded-content-1.html#the-img-element">img</a></code>, <code><a href="the-input-element.html#the-input-element">input</a></code>, <code><a href="forms.html#the-label-element">label</a></code>, <code><a href="forms.html#the-legend-element">legend</a></code>, <code><a href="#the-marquee-element">marquee</a></code>, <code><a href="the-iframe-element.html#the-object-element">object</a></code>, <code><a href="the-iframe-element.html#the-param-element">param</a></code>, <code><a href="the-button-element.html#the-select-element">select</a></code>, <code><a href="text-level-semantics.html#the-span-element">span</a></code>, and <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> elements</dt>
-   <dt><dfn id="attr-dataformatas" title="attr-dataformatas"><code>dataformatas</code></dfn> on <code><a href="the-button-element.html#the-button-element">button</a></code>, <code><a href="grouping-content.html#the-div-element">div</a></code>, <code><a href="the-input-element.html#the-input-element">input</a></code>, <code><a href="forms.html#the-label-element">label</a></code>, <code><a href="forms.html#the-legend-element">legend</a></code>, <code><a href="#the-marquee-element">marquee</a></code>, <code><a href="the-iframe-element.html#the-object-element">object</a></code>, <code><a href="the-button-element.html#the-option-element">option</a></code>, <code><a href="the-button-element.html#the-select-element">select</a></code>, <code><a href="text-level-semantics.html#the-span-element">span</a></code>, <code><a href="tabular-data.html#the-table-element">table</a></code></dt>
+   <dt><dfn id="attr-dataformatas" title="attr-dataformatas"><code>dataformatas</code></dfn> on <code><a href="the-button-element.html#the-button-element">button</a></code>, <code><a href="grouping-content.html#the-div-element">div</a></code>, <code><a href="the-input-element.html#the-input-element">input</a></code>, <code><a href="forms.html#the-label-element">label</a></code>, <code><a href="forms.html#the-legend-element">legend</a></code>, <code><a href="#the-marquee-element">marquee</a></code>, <code><a href="the-iframe-element.html#the-object-element">object</a></code>, <code><a href="the-button-element.html#the-option-element">option</a></code>, <code><a href="the-button-element.html#the-select-element">select</a></code>, <code><a href="text-level-semantics.html#the-span-element">span</a></code>, and <code><a href="tabular-data.html#the-table-element">table</a></code> elements</dt>
    <dd><p>Use script and a mechanism such as <code>XMLHttpRequest</code> to populate the page dynamically. <a href="references.html#refsXHR">[XHR]</a></p></dd>
 
    <dt><dfn id="attr-body-alink" title="attr-body-alink"><code>alink</code></dfn> on <code><a href="sections.html#the-body-element-0">body</a></code> elements</dt>
@@ -622,7 +673,6 @@
    <dt><dfn id="attr-object-hspace" title="attr-object-hspace"><code>hspace</code></dfn> on <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements</dt>
    <dt><dfn id="attr-object-vspace" title="attr-object-vspace"><code>vspace</code></dfn> on <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements</dt>
    <dt><dfn id="attr-ol-compact" title="attr-ol-compact"><code>compact</code></dfn> on <code><a href="grouping-content.html#the-ol-element">ol</a></code> elements</dt>
-   <dt><dfn id="attr-ol-type" title="attr-ol-type"><code>type</code></dfn> on <code><a href="grouping-content.html#the-ol-element">ol</a></code> elements</dt>
    <dt><dfn id="attr-p-align" title="attr-p-align"><code>align</code></dfn> on <code><a href="grouping-content.html#the-p-element">p</a></code> elements</dt>
    <dt><dfn id="attr-pre-width" title="attr-pre-width"><code>width</code></dfn> on <code><a href="grouping-content.html#the-pre-element">pre</a></code> elements</dt>
    <dt><dfn id="attr-table-align" title="attr-table-align"><code>align</code></dfn> on <code><a href="tabular-data.html#the-table-element">table</a></code> elements</dt>
@@ -657,9 +707,9 @@
 
   </dl><div class="impl">
 
-  <h3 id="requirements-for-implementations"><span class="secno">11.3 </span>Requirements for implementations</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h3 id="requirements-for-implementations"><span class="secno">11.3 </span>Requirements for implementations</h3>
 
-  <h4 id="the-applet-element"><span class="secno">11.3.1 </span>The <dfn><code>applet</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="the-applet-element"><span class="secno">11.3.1 </span>The <dfn><code>applet</code></dfn> element</h4>
 
   <p>The <code><a href="#the-applet-element">applet</a></code> element is a Java-specific variant of the
   <code><a href="the-iframe-element.html#the-embed-element">embed</a></code> element. The <code><a href="#the-applet-element">applet</a></code> element is now
@@ -725,13 +775,17 @@
 
   <p>The <dfn id="dom-applet-align" title="dom-applet-align"><code>align</code></dfn>, <dfn id="dom-applet-alt" title="dom-applet-alt"><code>alt</code></dfn>, <dfn id="dom-applet-archive" title="dom-applet-archive"><code>archive</code></dfn>, <dfn id="dom-applet-code" title="dom-applet-code"><code>code</code></dfn>, <dfn id="dom-applet-height" title="dom-applet-height"><code>height</code></dfn>, <dfn id="dom-applet-hspace" title="dom-applet-hspace"><code>hspace</code></dfn>, <dfn id="dom-applet-name" title="dom-applet-name"><code>name</code></dfn>, <dfn id="dom-applet-object" title="dom-applet-object"><code>object</code></dfn>, <dfn id="dom-applet-vspace" title="dom-applet-vspace"><code>vspace</code></dfn>, and <dfn id="dom-applet-width" title="dom-applet-width"><code>width</code></dfn> IDL attributes
   must <a href="common-dom-interfaces.html#reflect">reflect</a> the respective content attributes of the
-  same name.</p>
+  same name. For the purposes of reflection, the <code><a href="#the-applet-element">applet</a></code>
+  element's <code title="attr-applet-object">object</code> content
+  attribute is defined as containing a <a href="urls.html#url">URL</a>.</p>
 
   <p>The <dfn id="dom-applet-codebase" title="dom-applet-codeBase"><code>codeBase</code></dfn>
-  IDL attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-applet-codebase">codebase</code> content attribute.</p>
+  IDL attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-applet-codebase">codebase</code> content attribute,
+  which for the purposes of reflection is defined as containing a
+  <a href="urls.html#url">URL</a>.</p>
 
 
-  <h4 id="the-marquee-element"><span class="secno">11.3.2 </span>The <dfn><code>marquee</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="the-marquee-element"><span class="secno">11.3.2 </span>The <dfn><code>marquee</code></dfn> element</h4>
 
   <p>The <code><a href="#the-marquee-element">marquee</a></code> element is a presentational element that
   animates content. CSS transitions and animations are a more
@@ -908,7 +962,7 @@
   attribute.</p>
 
 
-  <h4 id="frames"><span class="secno">11.3.3 </span>Frames</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="frames"><span class="secno">11.3.3 </span>Frames</h4>
 
   <p>The <dfn id="frameset"><code>frameset</code></dfn> element acts as <a href="dom.html#the-body-element">the
   body element</a> in documents that use frames.</p>
@@ -935,6 +989,7 @@
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onpopstate" title="handler-window-onpopstate">onpopstate</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onredo" title="handler-window-onredo">onredo</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onresize" title="handler-window-onresize">onresize</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onscroll" title="handler-window-onscroll">onscroll</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onstorage" title="handler-window-onstorage">onstorage</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onundo" title="handler-window-onundo">onundo</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onunload" title="handler-window-onunload">onunload</a>;
@@ -966,6 +1021,7 @@
    <li><code title="handler-window-onpopstate"><a href="webappapis.html#handler-window-onpopstate">onpopstate</a></code></li>
    <li><code title="handler-window-onredo"><a href="webappapis.html#handler-window-onredo">onredo</a></code></li>
    <li><code title="handler-window-onresize"><a href="webappapis.html#handler-window-onresize">onresize</a></code></li>
+   <li><code title="handler-window-onscroll"><a href="webappapis.html#handler-window-onscroll">onscroll</a></code></li>
    <li><code title="handler-window-onstorage"><a href="webappapis.html#handler-window-onstorage">onstorage</a></code></li>
    <li><code title="handler-window-onundo"><a href="webappapis.html#handler-window-onundo">onundo</a></code></li>
    <li><code title="handler-window-onunload"><a href="webappapis.html#handler-window-onunload">onunload</a></code></li>
@@ -973,9 +1029,9 @@
   attributes</a> that mirror those on the <code><a href="browsers.html#window">Window</a></code>
   element.</p>
 
-  <p>The <code title="handler-window-onblur"><a href="webappapis.html#handler-window-onblur">onblur</a></code>, <code title="handler-window-onerror"><a href="webappapis.html#handler-window-onerror">onerror</a></code>, <code title="handler-window-onfocus"><a href="webappapis.html#handler-window-onfocus">onfocus</a></code>, and <code title="handler-window-onload"><a href="webappapis.html#handler-window-onload">onload</a></code> <a href="webappapis.html#event-handler-idl-attributes">event handler IDL
-  attributes</a> of the <code><a href="browsers.html#window">Window</a></code> object, exposed on the
-  <code><a href="#frameset">frameset</a></code> element, shadow the generic <a href="webappapis.html#event-handler-idl-attributes">event
+  <p>The <code title="handler-window-onblur"><a href="webappapis.html#handler-window-onblur">onblur</a></code>, <code title="handler-window-onerror"><a href="webappapis.html#handler-window-onerror">onerror</a></code>, <code title="handler-window-onfocus"><a href="webappapis.html#handler-window-onfocus">onfocus</a></code>, <code title="handler-window-onload"><a href="webappapis.html#handler-window-onload">onload</a></code>, and <code title="handler-window-onscroll"><a href="webappapis.html#handler-window-onscroll">onscroll</a></code> <a href="webappapis.html#event-handler-idl-attributes">event handler
+  IDL attributes</a> of the <code><a href="browsers.html#window">Window</a></code> object, exposed on
+  the <code><a href="#frameset">frameset</a></code> element, shadow the generic <a href="webappapis.html#event-handler-idl-attributes">event
   handler IDL attributes</a> with the same names normally supported
   by <a href="infrastructure.html#html-elements">HTML elements</a>.</p>
 
@@ -986,19 +1042,19 @@
   <p>When the browsing context is created, if a <code title="attr-frame-src">src</code> attribute is present, the user
   agent must <a href="urls.html#resolve-a-url" title="resolve a url">resolve</a> the value of
   that attribute, relative to the element, and if that is successful,
-  must then <a href="history.html#navigate">navigate</a> the element's browsing context to
-  the resulting <a href="urls.html#absolute-url">absolute URL</a>, with <a href="history.html#replacement-enabled">replacement
-  enabled</a>, and with the <code><a href="#frame">frame</a></code> element's
+  must then <a href="history.html#navigate">navigate</a><!--DONAV frame--> the element's
+  browsing context to the resulting <a href="urls.html#absolute-url">absolute URL</a>, with
+  <a href="history.html#replacement-enabled">replacement enabled</a>, and with the <code><a href="#frame">frame</a></code>
+  element's document's <a href="browsers.html#browsing-context">browsing context</a> as the
+  <a href="history.html#source-browsing-context">source browsing context</a>.</p>
+
+  <p>Whenever the <code title="attr-frame-src">src</code> attribute is
+  set, the user agent must <a href="urls.html#resolve-a-url" title="resolve a url">resolve</a>
+  the value of that attribute, relative to the element, and if that is
+  successful, the nested <a href="browsers.html#browsing-context">browsing context</a> must be <a href="history.html#navigate" title="navigate">navigated</a><!--DONAV frame--> to the resulting
+  <a href="urls.html#absolute-url">absolute URL</a>, with the <code><a href="#frame">frame</a></code> element's
   document's <a href="browsers.html#browsing-context">browsing context</a> as the <a href="history.html#source-browsing-context">source
   browsing context</a>.</p>
-
-  <p>Whenever the <code title="attr-frame-src">src</code> attribute
-  is set, the user agent must <a href="urls.html#resolve-a-url" title="resolve a&#10;  url">resolve</a> the value of that attribute, relative to the
-  element, and if that is successful, the nested <a href="browsers.html#browsing-context">browsing
-  context</a> must be <a href="history.html#navigate" title="navigate">navigated</a> to
-  the resulting <a href="urls.html#absolute-url">absolute URL</a>, with the
-  <code><a href="#frame">frame</a></code> element's document's <a href="browsers.html#browsing-context">browsing
-  context</a> as the <a href="history.html#source-browsing-context">source browsing context</a>.</p>
 
   <p>When the browsing context is created, if a <code title="attr-frame-name">name</code> attribute is present, the
   <a href="browsers.html#browsing-context-name">browsing context name</a> must be set to the value of this
@@ -1054,7 +1110,9 @@
 
   <p>The <dfn id="dom-frame-longdesc" title="dom-frame-longDesc"><code>longDesc</code></dfn>
   IDL attribute of the <code><a href="#frame">frame</a></code> element must
-  <a href="common-dom-interfaces.html#reflect">reflect</a> the element's <code title="attr-frame-longdesc">longdesc</code> content attribute.</p>
+  <a href="common-dom-interfaces.html#reflect">reflect</a> the element's <code title="attr-frame-longdesc">longdesc</code> content attribute, which
+  for the purposes of reflection is defined as containing a
+  <a href="urls.html#url">URL</a>.</p>
 
   <p>The <dfn id="dom-frame-marginheight" title="dom-frame-marginHeight"><code>marginHeight</code></dfn> IDL
   attribute of the <code><a href="#frame">frame</a></code> element must
@@ -1337,7 +1395,9 @@ interface <a href="the-iframe-element.html#htmliframeelement">HTMLIFrameElement<
 
   <p>The <dfn id="dom-iframe-longdesc" title="dom-iframe-longDesc"><code>longDesc</code></dfn>
   IDL attribute of the <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> element must
-  <a href="common-dom-interfaces.html#reflect">reflect</a> the element's <code title="attr-iframe-longdesc"><a href="#attr-iframe-longdesc">longdesc</a></code> content attribute.</p>
+  <a href="common-dom-interfaces.html#reflect">reflect</a> the element's <code title="attr-iframe-longdesc"><a href="#attr-iframe-longdesc">longdesc</a></code> content attribute,
+  which for the purposes of reflection is defined as containing a
+  <a href="urls.html#url">URL</a>.</p>
 
   <p>The <dfn id="dom-iframe-marginheight" title="dom-iframe-marginHeight"><code>marginHeight</code></dfn> IDL
   attribute of the <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> element must
@@ -1365,8 +1425,11 @@ interface <a href="embedded-content-1.html#htmlimageelement">HTMLImageElement</a
 
   <p>The <dfn id="dom-img-longdesc" title="dom-img-longDesc"><code>longDesc</code></dfn> IDL
   attribute of the <code><a href="embedded-content-1.html#the-img-element">img</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
-  the element's <code title="attr-img-longdesc"><a href="#attr-img-longdesc">longdesc</a></code> content
-  attribute.</p>
+  the element's <code title="attr-img-longdesc"><a href="#attr-img-longdesc">longdesc</a></code>
+  content attribute, which for the purposes of reflection is defined
+  as containing a <a href="urls.html#url">URL</a>.</p>
+
+  <!-- lowsrc is explicitly not given here, see http://www.w3.org/Bugs/Public/show_bug.cgi?id=10341 -->
 
   <hr/><pre class="idl">[Supplemental]
 interface <a href="the-input-element.html#htmlinputelement">HTMLInputElement</a> {
@@ -1486,10 +1549,11 @@ interface <a href="the-iframe-element.html#htmlobjectelement">HTMLObjectElement<
   of the <code><a href="the-iframe-element.html#the-object-element">object</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the
   respective content attributes of the same name.</p>
 
-  <p>The <dfn id="dom-object-codebase" title="dom-object-codeBase"><code>codeBase</code></dfn> IDL
-  attribute of the <code><a href="the-iframe-element.html#the-object-element">object</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
-  the element's <code title="attr-object-codebase"><a href="#attr-object-codebase">codebase</a></code> content
-  attribute.</p>
+  <p>The <dfn id="dom-object-codebase" title="dom-object-codeBase"><code>codeBase</code></dfn>
+  IDL attribute of the <code><a href="the-iframe-element.html#the-object-element">object</a></code> element must
+  <a href="common-dom-interfaces.html#reflect">reflect</a> the element's <code title="attr-object-codebase"><a href="#attr-object-codebase">codebase</a></code> content attribute,
+  which for the purposes of reflection is defined as containing a
+  <a href="urls.html#url">URL</a>.</p>
 
   <p>The <dfn id="dom-object-codetype" title="dom-object-codeType"><code>codeType</code></dfn> IDL
   attribute of the <code><a href="the-iframe-element.html#the-object-element">object</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
@@ -1499,13 +1563,11 @@ interface <a href="the-iframe-element.html#htmlobjectelement">HTMLObjectElement<
   <hr/><pre class="idl">[Supplemental]
 interface <a href="grouping-content.html#htmlolistelement">HTMLOListElement</a> {
            attribute boolean <a href="#dom-ol-compact" title="dom-ol-compact">compact</a>;
-           attribute DOMString <a href="#dom-ol-type" title="dom-ol-type">type</a>;
 };</pre>
 
-  <p>The <dfn id="dom-ol-compact" title="dom-ol-compact"><code>compact</code></dfn> and
-  <dfn id="dom-ol-type" title="dom-ol-type"><code>type</code></dfn> IDL attributes of
-  the <code><a href="grouping-content.html#the-ol-element">ol</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the respective
-  content attributes of the same name.</p>
+  <p>The <dfn id="dom-ol-compact" title="dom-ol-compact"><code>compact</code></dfn> IDL
+  attribute of the <code><a href="grouping-content.html#the-ol-element">ol</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  the content attribute of the same name.</p>
 
   <hr/><pre class="idl">[Supplemental]
 interface <a href="grouping-content.html#htmlparagraphelement">HTMLParagraphElement</a> {
@@ -1742,9 +1804,9 @@ interface <a href="dom.html#htmldocument">HTMLDocument</a> {
      </td><td><code title="attr-body-bgcolor"><a href="#attr-body-bgcolor">bgcolor</a></code>
     </td></tr><tr><td><dfn id="dom-document-linkcolor" title="dom-document-linkColor"><code>linkColor</code></dfn>
      </td><td><code title="attr-body-link"><a href="#attr-body-link">link</a></code>
-    </td></tr><tr><td><dfn id="dom-document-vlinkcolor" title="dom-document-vLinkColor"><code>vLinkColor</code></dfn>
+    </td></tr><tr><td><dfn id="dom-document-vlinkcolor" title="dom-document-vlinkColor"><code>vlinkColor</code></dfn>
      </td><td><code title="attr-body-vlink"><a href="#attr-body-vlink">vlink</a></code>
-    </td></tr><tr><td><dfn id="dom-document-alinkcolor" title="dom-document-aLinkColor"><code>aLinkColor</code></dfn>
+    </td></tr><tr><td><dfn id="dom-document-alinkcolor" title="dom-document-alinkColor"><code>alinkColor</code></dfn>
      </td><td><code title="attr-body-alink"><a href="#attr-body-alink">alink</a></code>
   </td></tr></tbody></table><hr/><p>The <dfn id="dom-document-anchors" title="dom-document-anchors"><code>anchors</code></dfn>
   attribute must return an <code><a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a></code> rooted at the

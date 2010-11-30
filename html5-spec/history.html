@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,7 +356,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="origin-0.html" title="5.3 Origin" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="offline.html" title="5.6 Offline Web applications" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="origin-0.html" title="5.3 Origin" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="offline.html" title="5.6 Offline Web applications" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -322,7 +369,7 @@
       <ol><li><a href="history.html#security-location"><span class="secno">5.4.3.1 </span>Security</a></li></ol></li><li><a href="history.html#history-notes"><span class="secno">5.4.4 </span>Implementation notes for session history</a></li></ol></li><li><a href="history.html#browsing-the-web"><span class="secno">5.5 </span>Browsing the Web</a>
     <ol><li><a href="history.html#navigating-across-documents"><span class="secno">5.5.1 </span>Navigating across documents</a></li><li><a href="history.html#read-html"><span class="secno">5.5.2 </span>Page load processing model for HTML files</a></li><li><a href="history.html#read-xml"><span class="secno">5.5.3 </span>Page load processing model for XML files</a></li><li><a href="history.html#read-text"><span class="secno">5.5.4 </span>Page load processing model for text files</a></li><li><a href="history.html#read-image"><span class="secno">5.5.5 </span>Page load processing model for images</a></li><li><a href="history.html#read-plugin"><span class="secno">5.5.6 </span>Page load processing model for content that uses plugins</a></li><li><a href="history.html#read-ua-inline"><span class="secno">5.5.7 </span>Page load processing model for inline content that doesn't have a DOM</a></li><li><a href="history.html#scroll-to-fragid"><span class="secno">5.5.8 </span>Navigating to a fragment identifier</a></li><li><a href="history.html#history-traversal"><span class="secno">5.5.9 </span>History traversal</a>
       <ol><li><a href="history.html#event-definitions"><span class="secno">5.5.9.1 </span>Event definitions</a></li></ol></li><li><a href="history.html#unloading-documents"><span class="secno">5.5.10 </span>Unloading documents</a>
-      <ol><li><a href="history.html#event-definition"><span class="secno">5.5.10.1 </span>Event definition</a></li></ol></li><li><a href="history.html#aborting-a-document-load"><span class="secno">5.5.11 </span>Aborting a document load</a></li></ol></li></ol></li></ol></div><h3 id="history"><span class="secno">5.4 </span>Session history and navigation</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><h4 id="the-session-history-of-browsing-contexts"><span class="secno">5.4.1 </span>The session history of browsing contexts</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The sequence of <code><a href="infrastructure.html#document">Document</a></code>s in a <a href="browsers.html#browsing-context">browsing
+      <ol><li><a href="history.html#event-definition"><span class="secno">5.5.10.1 </span>Event definition</a></li></ol></li><li><a href="history.html#aborting-a-document-load"><span class="secno">5.5.11 </span>Aborting a document load</a></li></ol></li></ol></li></ol></div><h3 id="history"><span class="secno">5.4 </span>Session history and navigation</h3><h4 id="the-session-history-of-browsing-contexts"><span class="secno">5.4.1 </span>The session history of browsing contexts</h4><p>The sequence of <code><a href="infrastructure.html#document">Document</a></code>s in a <a href="browsers.html#browsing-context">browsing
   context</a> is its <dfn id="session-history">session history</dfn>.</p><p><code><a href="#history-0">History</a></code> objects provide a representation of the
   pages in the session history of <a href="browsers.html#browsing-context" title="browsing&#10;  context">browsing contexts</a>. Each <a href="browsers.html#browsing-context">browsing
   context</a>, including <a href="browsers.html#nested-browsing-context" title="nested browsing&#10;  context">nested browsing contexts</a>, has a distinct session
@@ -385,7 +432,10 @@
   for the <a href="#dom-location-href" title="dom-location-href">location</a> of the
   <code><a href="infrastructure.html#document">Document</a></code>. However, it can also be one of the entries
   for <a href="#state-object" title="state object">state objects</a> added to the
-  history by that document.</p><p>Entries that consist of <a href="#state-object" title="state object">state
+  history by that document.</p><p><dfn id="an-entry-with-persisted-user-state">An entry with persisted user state</dfn> is one that also
+  has user-agent defined state. This specification does not specify
+  what kind of state can be stored.</p><p class="example">For example, some user agents might want to
+  persist the scroll position, or the values of form controls.</p><p>Entries that consist of <a href="#state-object" title="state object">state
   objects</a> share the same <code><a href="infrastructure.html#document">Document</a></code> as the entry for
   the page that was active when they were added.</p><p>Contiguous entries that differ just by fragment identifier also
   share the same <code><a href="infrastructure.html#document">Document</a></code>.</p><p class="note">All entries that share the same
@@ -407,7 +457,7 @@
   entries that shared the same <code><a href="infrastructure.html#document">Document</a></code> object with it
   must share the new object as well.</p>
 
-  </div><h4 id="the-history-interface"><span class="secno">5.4.2 </span>The <code><a href="#history-0">History</a></code> interface</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><pre class="idl">interface <dfn id="history-0">History</dfn> {
+  </div><h4 id="the-history-interface"><span class="secno">5.4.2 </span>The <code><a href="#history-0">History</a></code> interface</h4><pre class="idl">interface <dfn id="history-0">History</dfn> {
   readonly attribute long <a href="#dom-history-length" title="dom-history-length">length</a>;
   void <a href="#dom-history-go" title="dom-history-go">go</a>(in optional long delta);
   void <a href="#dom-history-back" title="dom-history-back">back</a>();
@@ -466,7 +516,7 @@
 
    <dd>
 
-    <p>Updates the current entry in the session histor to have the given data, title, and, if provided, URL.</p>
+    <p>Updates the current entry in the session history to have the given data, title, and, if provided, URL.</p>
 
    </dd>
 
@@ -614,6 +664,11 @@
      <li><p>Remove any <a href="webappapis.html#concept-task" title="concept-task">tasks</a> queued
      by the <a href="webappapis.html#history-traversal-task-source">history traversal task source</a>.</p></li>
 
+     <li><p>If appropriate, update the <a href="#current-entry">current entry</a> to
+     reflect any state that the user agent wishes to persist. The
+     entry is then said to be <a href="#an-entry-with-persisted-user-state">an entry with persisted user
+     state</a>.</p></li>
+
      <li><p>Add a state object entry to the session history, after the
      <a href="#current-entry">current entry</a>, with <var title="">cloned data</var> as
      the state object, the given <var title="">title</var> as the title,
@@ -750,7 +805,7 @@
 State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BUTTON ONCLICK="inc()"&gt;
 &lt;/FORM&gt;</pre>
 
-  </div><h4 id="the-location-interface"><span class="secno">5.4.3 </span>The <code><a href="#location">Location</a></code> interface</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Each <code><a href="infrastructure.html#document">Document</a></code> object in a <a href="browsers.html#browsing-context">browsing
+  </div><h4 id="the-location-interface"><span class="secno">5.4.3 </span>The <code><a href="#location">Location</a></code> interface</h4><p>Each <code><a href="infrastructure.html#document">Document</a></code> object in a <a href="browsers.html#browsing-context">browsing
   context</a>'s session history is associated with a unique
   instance of a <code><a href="#location">Location</a></code> object.</p><dl class="domintro"><dt><var title="">document</var> . <code title="dom-document-location"><a href="#dom-document-location">location</a></code> [ = <var title="">value</var> ]</dt>
    <dt><var title="">window</var> . <code title="dom-location"><a href="#dom-location">location</a></code> [ = <var title="">value</var> ]</dt>
@@ -855,6 +910,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   must act as if the <code title="dom-location-assign"><a href="#dom-location-assign">assign()</a></code>
   method had been called with the new value as its argument.</p><!--
   v2: may wish to allow replace instead as a UI improvement -->
+  <!-- XXXXX the above is about to change -->
 
   <!-- we could change the magic .location setter to simply refer
   straight to assign(), so we don't have two levels of indirection -->
@@ -862,22 +918,23 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   <p>When the <dfn id="dom-location-assign" title="dom-location-assign"><code>assign(<var title="">url</var>)</code></dfn> method is invoked, the UA must
   <a href="urls.html#resolve-a-url" title="resolve a url">resolve</a> the argument, relative to
   the <a href="browsers.html#entry-script">entry script</a>'s <a href="webappapis.html#script-s-base-url" title="script's base URL">base
-  URL</a>, and if that is successful, must <a href="#navigate">navigate</a>
-  the <a href="browsers.html#browsing-context">browsing context</a> to the specified <var title="">url</var>. If the <a href="browsers.html#browsing-context">browsing context</a>'s
+  URL</a>, and if that is successful, must
+  <a href="#navigate">navigate</a><!--DONAV location.href/assign--> the
+  <a href="browsers.html#browsing-context">browsing context</a> to the specified <var title="">url</var>. If the <a href="browsers.html#browsing-context">browsing context</a>'s
   <a href="#session-history">session history</a> contains only one
   <code><a href="infrastructure.html#document">Document</a></code>, and that was the <code><a href="fetching-resources.html#about:blank">about:blank</a></code>
   <code><a href="infrastructure.html#document">Document</a></code> created when the <a href="browsers.html#browsing-context">browsing context</a>
-  was created, then the navigation must be done with
-  <a href="#replacement-enabled">replacement enabled</a>.</p> <!-- READ ME WHEN EDITING
-  THIS: IE and Firefox only seem to treat it that way if the DOM is
-  still a virgin DOM; Safari doesn't check that. Thus this might need
-  changing if testing shows the IE/Firefox behaviour is required
-  here. -->
+  was created, then the navigation must be done with <a href="#replacement-enabled">replacement
+  enabled</a>.</p> <!-- READ ME WHEN EDITING THIS: IE and Firefox
+  only seem to treat it that way if the DOM is still a virgin DOM;
+  Safari doesn't check that. Thus this might need changing if testing
+  shows the IE/Firefox behaviour is required here. -->
 
   <p>When the <dfn id="dom-location-replace" title="dom-location-replace"><code>replace(<var title="">url</var>)</code></dfn> method is invoked, the UA must
   <a href="urls.html#resolve-a-url" title="resolve a url">resolve</a> the argument, relative to
   the <a href="browsers.html#entry-script">entry script</a>'s <a href="webappapis.html#script-s-base-url" title="script's base URL">base
-  URL</a>, and if that is successful, <a href="#navigate">navigate</a> the
+  URL</a>, and if that is successful,
+  <a href="#navigate">navigate</a><!--DONAV location.replace--> the
   <a href="browsers.html#browsing-context">browsing context</a> to the specified <var title="">url</var> with <a href="#replacement-enabled">replacement enabled</a>.</p>
 
   <p>Navigation for the <code title="dom-location-assign"><a href="#dom-location-assign">assign()</a></code> and <code title="dom-location-replace"><a href="#dom-location-replace">replace()</a></code> methods must be done
@@ -901,26 +958,34 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
    steps.</p></dd> <!-- this theoretically would have no effect but in
    practice can be useful to work around rendering bugs. -->
 
+   <dt>If the <a href="browsers.html#browsing-context">browsing context</a>'s <a href="browsers.html#active-document">active
+   document</a> is <a href="the-iframe-element.html#an-iframe-srcdoc-document">an <code>iframe</code> <code title="attr-iframe-srcdoc">srcdoc</code> document</a></dt>
+
+   <dd><p><a href="the-iframe-element.html#process-the-iframe-attributes" title="process the iframe attributes">Reprocess the
+   <code>iframe</code> attributes</a> of the <a href="browsers.html#browsing-context">browsing
+   context</a>'s <a href="browsers.html#browsing-context-container">browsing context container</a>.</p></dd>
+
    <dt>Otherwise</dt>
 
-   <dd><p><a href="#navigate">Navigate</a> the <a href="browsers.html#browsing-context">browsing context</a> to
-   <a href="dom.html#the-document-s-current-address">the document's current address</a> with
-   <a href="#replacement-enabled">replacement enabled</a>. The <a href="#source-browsing-context">source browsing
-   context</a> must be the <a href="browsers.html#browsing-context">browsing context</a> being
-   navigated.</p></dd> <!-- it appears that document.reload() always
-   uses GET and does not, e.g., re-POST. -->
+   <dd><p><a href="#navigate">Navigate</a><!--DONAV location.reload()--> the
+   <a href="browsers.html#browsing-context">browsing context</a> to <a href="dom.html#the-document-s-current-address">the document's current
+   address</a> with <a href="#replacement-enabled">replacement enabled</a>. The
+   <a href="#source-browsing-context">source browsing context</a> must be the <a href="browsers.html#browsing-context">browsing
+   context</a> being navigated.</p></dd> <!-- it appears that
+   document.reload() always uses GET and does not, e.g., re-POST. -->
 
    <!-- http://software.hixie.ch/utilities/js/live-dom-viewer/saved/141 -->
 
   </dl><p>When a user requests that the current page be reloaded through a
-  user interface element, the user agent should <a href="#navigate">navigate</a>
-  the <a href="browsers.html#browsing-context">browsing context</a> to the same resource as
-  <code><a href="infrastructure.html#document">Document</a></code>, with <a href="#replacement-enabled">replacement enabled</a>. In the
-  case of non-idempotent methods (e.g. HTTP POST), the user agent
-  should prompt the user to confirm the operation first, since
-  otherwise transactions (e.g. purchases or database modifications)
-  could be repeated. User agents may allow the user to explicitly
-  override any caches when reloading.</p>
+  user interface element, the user agent should
+  <a href="#navigate">navigate</a><!--DONAV user reload--> the <a href="browsers.html#browsing-context">browsing
+  context</a> to the same resource as <code><a href="infrastructure.html#document">Document</a></code>, with
+  <a href="#replacement-enabled">replacement enabled</a>. In the case of non-idempotent
+  methods (e.g. HTTP POST), the user agent should prompt the user to
+  confirm the operation first, since otherwise transactions (e.g.
+  purchases or database modifications) could be repeated. User agents
+  may allow the user to explicitly override any caches when
+  reloading.</p>
 
   </div><p>The <code><a href="#location">Location</a></code> interface also has the complement of
   <a href="urls.html#url-decomposition-idl-attributes">URL decomposition IDL attributes</a>, <dfn id="dom-location-protocol" title="dom-location-protocol"><code>protocol</code></dfn>, <dfn id="dom-location-host" title="dom-location-host"><code>host</code></dfn>, <dfn id="dom-location-port" title="dom-location-port"><code>port</code></dfn>, <dfn id="dom-location-hostname" title="dom-location-hostname"><code>hostname</code></dfn>, <dfn id="dom-location-pathname" title="dom-location-pathname"><code>pathname</code></dfn>, <dfn id="dom-location-search" title="dom-location-search"><code>search</code></dfn>, and <dfn id="dom-location-hash" title="dom-location-hash"><code>hash</code></dfn>. <span class="impl">These must follow the rules given for <a href="urls.html#url-decomposition-idl-attributes">URL
@@ -959,7 +1024,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
   </li></ul></div><div class="impl">
 
-  <h4 id="history-notes"><span class="secno">5.4.4 </span>Implementation notes for session history</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="history-notes"><span class="secno">5.4.4 </span>Implementation notes for session history</h4>
   <!-- don't change the ID without updating multiple internal links -->
 
   <p><i>This section is non-normative.</i></p>
@@ -995,9 +1060,9 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   a timer, or from event listeners that are not triggered in response
   to a clear user action, or that are invoked in rapid succession.</p>
 
-  </div><h3 id="browsing-the-web"><span class="secno">5.5 </span>Browsing the Web</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><div class="impl">
+  </div><h3 id="browsing-the-web"><span class="secno">5.5 </span>Browsing the Web</h3><div class="impl">
 
-  <h4 id="navigating-across-documents"><span class="secno">5.5.1 </span>Navigating across documents</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="navigating-across-documents"><span class="secno">5.5.1 </span>Navigating across documents</h4>
 
   <p>Certain actions cause the <a href="browsers.html#browsing-context">browsing context</a> to
   <i><a href="#navigate">navigate</a></i> to a new resource. Navigation always involves
@@ -1012,6 +1077,8 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   in this specification.</p>
 
   <!-- NAVIGATE <dfn>navigate</dfn> -->
+  <!-- For places that _call_ this, as opposed to just referring to
+  it, search for "DONAV" -->
   <p>When a browsing context is <dfn id="navigate" title="navigate">navigated</dfn>
   to a new resource, the user agent must run the following steps:</p>
 
@@ -1044,9 +1111,10 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
     the new resource in a new <a href="browsers.html#top-level-browsing-context">top-level browsing context</a>
     or in the <a href="browsers.html#top-level-browsing-context">top-level browsing context</a> of the
     <a href="#source-browsing-context">source browsing context</a>, at the user's option, in
-    which case the user agent must <a href="#navigate">navigate</a> that
-    designated <a href="browsers.html#top-level-browsing-context">top-level browsing context</a> to the new
-    resource as if the user had requested it independently.</p>
+    which case the user agent must <a href="#navigate">navigate</a><!--DONAV
+    sandbox manual load--> that designated <a href="browsers.html#top-level-browsing-context">top-level browsing
+    context</a> to the new resource as if the user had requested it
+    independently.</p>
 
    </li>
 
@@ -1108,6 +1176,10 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
    <li><p>Cancel <em>any</em> preexisting attempt to navigate the
    <a href="browsers.html#browsing-context">browsing context</a>.</p></li>
+
+   <li><p><a href="#abort-a-document" title="abort a document">Abort</a> the
+   <a href="browsers.html#active-document">active document</a> of the <a href="browsers.html#browsing-context">browsing
+   context</a>.</p></li>
 
    <li><p>If the new resource is to be handled using a mechanism that
    does not affect the browsing context, e.g. ignoring the navigation
@@ -1475,7 +1547,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   source</a>.</p>
 
 
-  <h4 id="read-html"><span class="secno">5.5.2 </span><dfn title="navigate-html">Page load processing model for HTML files</dfn></h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="read-html"><span class="secno">5.5.2 </span><dfn title="navigate-html">Page load processing model for HTML files</dfn></h4>
 
   <p>When an HTML document is to be loaded in a <a href="browsers.html#browsing-context">browsing
   context</a>, the user agent must <a href="webappapis.html#queue-a-task">queue a task</a> to
@@ -1515,7 +1587,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
 
 
-  <h4 id="read-xml"><span class="secno">5.5.3 </span><dfn title="navigate-xml">Page load processing model for XML files</dfn></h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="read-xml"><span class="secno">5.5.3 </span><dfn title="navigate-xml">Page load processing model for XML files</dfn></h4>
 
   <p>When faced with displaying an XML file inline, user agents must
   first <a href="#create-a-document-object">create a <code>Document</code> object</a>, following
@@ -1572,7 +1644,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   <code><a href="infrastructure.html#document">Document</a></code>.</p>
 
 
-  <h4 id="read-text"><span class="secno">5.5.4 </span><dfn title="navigate-text">Page load processing model for text files</dfn></h4><p class="XXX annotation"><b>Status: </b><i>Implemented and widely deployed</i></p>
+  <h4 id="read-text"><span class="secno">5.5.4 </span><dfn title="navigate-text">Page load processing model for text files</dfn></h4>
 
   <p>When a plain text document is to be loaded in a <a href="browsers.html#browsing-context">browsing
   context</a>, the user agent should <a href="webappapis.html#queue-a-task">queue a task</a> to
@@ -1590,8 +1662,9 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   of the input stream.</p>
 
   <p>The rules for how to convert the bytes of the plain text document
-  into actual characters are defined in RFC 2046, RFC 2646, and
-  subsequent versions thereof. <a href="references.html#refsRFC2046">[RFC2046]</a> <a href="references.html#refsRFC2646">[RFC2646]</a></p>
+  into actual characters, and the rules for actually rendering the
+  text to the user, are defined in RFC 2046, RFC 2646, and subsequent
+  versions thereof. <a href="references.html#refsRFC2046">[RFC2046]</a> <a href="references.html#refsRFC2646">[RFC2646]</a></p>
 
   <p>The <a href="dom.html#document-s-character-encoding">document's character encoding</a> must be set to the
   character encoding used to decode the document.</p>
@@ -1620,11 +1693,16 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   binding, providing script, giving the document a <code><a href="semantics.html#the-title-element-0">title</a></code>,
   etc.</p>
 
+  <p class="note">In particular, if the user agent supports the <code title="">Format=Flowed</code> feature of RFC 2646 then the user
+  agent would need to apply extra styling to cause the text to wrap
+  correctly and to handle the quoting feature. This could be performed
+  using, e.g., an XBL binding or a CSS extension.</p>
+
   <p>The <a href="webappapis.html#task-source">task source</a> for the two tasks mentioned in this
   section must be the <a href="webappapis.html#networking-task-source">networking task source</a>.</p>
 
 
-  <h4 id="read-image"><span class="secno">5.5.5 </span><dfn title="navigate-image">Page load processing model for images</dfn></h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="read-image"><span class="secno">5.5.5 </span><dfn title="navigate-image">Page load processing model for images</dfn></h4>
 
   <p>When an image resource is to be loaded in a <a href="browsers.html#browsing-context">browsing
   context</a>, the user agent should <a href="#create-a-document-object">create a
@@ -1655,7 +1733,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   a script, to give the document a <code><a href="semantics.html#the-title-element-0">title</a></code>, etc.</p>
 
 
-  <h4 id="read-plugin"><span class="secno">5.5.6 </span><dfn title="navigate-plugin">Page load processing model for content that uses plugins</dfn></h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="read-plugin"><span class="secno">5.5.6 </span><dfn title="navigate-plugin">Page load processing model for content that uses plugins</dfn></h4>
 
   <p>When a resource that requires an external resource to be rendered
   is to be loaded in a <a href="browsers.html#browsing-context">browsing context</a>, the user agent
@@ -1692,7 +1770,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   synthesized <code><a href="the-iframe-element.html#the-embed-element">embed</a></code> element will <a href="the-iframe-element.html#sandboxPluginEmbed">fail to render the content</a>.</p>
 
 
-  <h4 id="read-ua-inline"><span class="secno">5.5.7 </span><dfn title="navigate-ua-inline">Page load processing model for inline content that doesn't have a DOM</dfn></h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="read-ua-inline"><span class="secno">5.5.7 </span><dfn title="navigate-ua-inline">Page load processing model for inline content that doesn't have a DOM</dfn></h4>
 
   <p>When the user agent is to display a user agent page inline in a
   <a href="browsers.html#browsing-context">browsing context</a>, the user agent should <a href="#create-a-document-object">create a
@@ -1719,7 +1797,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
 
 
-  <h4 id="scroll-to-fragid"><span class="secno">5.5.8 </span><dfn title="navigate-fragid">Navigating to a fragment identifier</dfn></h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="scroll-to-fragid"><span class="secno">5.5.8 </span><dfn title="navigate-fragid">Navigating to a fragment identifier</dfn></h4>
 
   <p>When a user agent is supposed to navigate to a fragment
   identifier, then the user agent must <a href="webappapis.html#queue-a-task">queue a task</a> to
@@ -1757,10 +1835,11 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
   <hr/><p>When the user agent is required to <dfn id="scroll-to-the-fragment-identifier">scroll to the fragment
   identifier</dfn>, it must change the scrolling position of the
-  document, or perform some other action, such that <a href="#the-indicated-part-of-the-document">the
-  indicated part of the document</a> is brought to the user's
-  attention. If there is no indicated part, then the user agent must
-  not scroll anywhere.</p>
+  document using the <span>scroll an element into view</span>
+  algorithm defined in the CSSOM View specification, or perform some
+  other action, such that <a href="#the-indicated-part-of-the-document">the indicated part of the
+  document</a> is brought to the user's attention. If there is no
+  indicated part, then the user agent must not scroll anywhere. <a href="references.html#refsCSSOMVIEW">[CSSOMVIEW]</a></p>
 
   <p><dfn id="the-indicated-part-of-the-document">The indicated part of the document</dfn> is the one that the
   fragment identifier, if any, identifies. The semantics of the
@@ -1814,7 +1893,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   document</a>, if that is an element; otherwise there is no
   <i><a href="#target-element">target element</a></i>. <a href="references.html#refsSELECTORS">[SELECTORS]</a></p>
 
-  </div><h4 id="history-traversal"><span class="secno">5.5.9 </span>History traversal</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><!-- session history --><div class="impl">
+  </div><h4 id="history-traversal"><span class="secno">5.5.9 </span>History traversal</h4><!-- session history --><div class="impl">
 
   <p>When a user agent is required to <dfn id="traverse-the-history">traverse the history</dfn>
   to a <i>specified entry</i>, optionally with <a href="#replacement-enabled">replacement
@@ -1827,8 +1906,9 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   page</a>.</p>
 
   <ol><li><p>If there is no longer a <code><a href="infrastructure.html#document">Document</a></code> object for the
-   entry in question, the user agent must <a href="#navigate">navigate</a> the
-   browsing context to the location for that entry to perform an
+   entry in question, the user agent must
+   <a href="#navigate">navigate</a><!--DONAV history traversal after eviction-->
+   the browsing context to the location for that entry to perform an
    <a href="#entry-update">entry update</a> of that entry, and abort these steps. The
    "<a href="#navigate">navigate</a>" algorithm reinvokes this "traverse"
    algorithm to complete the traversal, at which point there
@@ -1843,18 +1923,11 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
    then set its title to the value returned by the <code title="dom-document-title"><a href="dom.html#document.title">document.title</a></code> IDL
    attribute.</p></li>
 
-   <li>
-
-    <p>If appropriate, update the <a href="#current-entry">current entry</a> in the
-    <a href="browsers.html#browsing-context">browsing context</a>'s <code><a href="infrastructure.html#document">Document</a></code> object's
-    <code><a href="#history-0">History</a></code> object to reflect any state that the user
-    agent wishes to persist. The entry is then said to be <dfn id="an-entry-with-persisted-user-state">an
-    entry with persisted user state</dfn>.</p>
-
-    <p class="example">For example, some user agents might want to
-    persist the scroll position, or the values of form controls.</p>
-
-   </li>
+   <li><p>If appropriate, update the <a href="#current-entry">current entry</a> in the
+   <a href="browsers.html#browsing-context">browsing context</a>'s <code><a href="infrastructure.html#document">Document</a></code> object's
+   <code><a href="#history-0">History</a></code> object to reflect any state that the user
+   agent wishes to persist. The entry is then said to be <a href="#an-entry-with-persisted-user-state">an
+   entry with persisted user state</a>.</p></li>
 
    <li><p>If the <i>specified entry</i> has a different
    <code><a href="infrastructure.html#document">Document</a></code> object than the <a href="#current-entry">current entry</a>
@@ -1920,13 +1993,12 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
    <li><p>Set <a href="dom.html#the-document-s-current-address">the document's current address</a> to the URL
    of the <i>specified entry</i>.</p></li>
 
-   <li><p>If the <i>specified entry</i> has a URL that differs from
-   the <a href="#current-entry">current entry</a>'s only by its fragment identifier,
-   and the two share the same <code><a href="infrastructure.html#document">Document</a></code> object, then let
-   <var title="">hash changed</var> be true, and let <var title="">old
-   URL</var> be the URL of the <a href="#current-entry">current entry</a> and <var title="">new URL</var> be the URL of the <i>specified
-   entry</i>. Otherwise, let <var title="">hash changed</var> be
-   false.</p></li>
+   <li><p>If the <i>specified entry</i> has a URL whose fragment
+   identifier differs from that of the <a href="#current-entry">current entry</a>'s
+   when compared in a <a href="infrastructure.html#case-sensitive">case-sensitive</a> manner, and the two
+   share the same <code><a href="infrastructure.html#document">Document</a></code> object, then let <var title="">hash changed</var> be true, and let <var title="">old
+   URL</var> be the URL of the <a href="#current-entry">current entry</a> and <var title="">new URL</var> be the URL of the <i>specified entry</i>.
+   Otherwise, let <var title="">hash changed</var> be false.</p></li>
 
    <li><p>If the traversal was initiated with <dfn id="replacement-enabled">replacement
    enabled</dfn>, remove the entry immediately before the
@@ -1987,7 +2059,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   <a href="webappapis.html#dom-manipulation-task-source">DOM manipulation task source</a>.</p>
 
 
-  <h5 id="event-definitions"><span class="secno">5.5.9.1 </span>Event definitions</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="event-definitions"><span class="secno">5.5.9.1 </span>Event definitions</h5>
 
   </div><p>The <dfn id="event-popstate" title="event-popstate"><code>popstate</code></dfn> event
   is fired in certain cases when navigating to a <a href="#session-history-entry">session history
@@ -2079,7 +2151,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   <p>The <dfn id="dom-pagetransitionevent-persisted" title="dom-PageTransitionEvent-persisted"><code>persisted</code></dfn>
   attribute represents the context information for the event.</p>
 
-  </div><h4 id="unloading-documents"><span class="secno">5.5.10 </span>Unloading documents</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><div class="impl">
+  </div><h4 id="unloading-documents"><span class="secno">5.5.10 </span>Unloading documents</h4><div class="impl">
 
   <p>A <code><a href="infrastructure.html#document">Document</a></code> has a <var title="concept-document-salvageable">salvageable</var> state, which
   is initially true.</p>
@@ -2237,7 +2309,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
    <a href="timers.html#list-of-active-timeouts">list of active timeouts</a> and its <a href="timers.html#list-of-active-intervals">list of active
    intervals</a>.</p></li>
 
-  </ol><h5 id="event-definition"><span class="secno">5.5.10.1 </span>Event definition</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </ol><h5 id="event-definition"><span class="secno">5.5.10.1 </span>Event definition</h5>
 
   </div><pre class="idl">interface <dfn id="beforeunloadevent">BeforeUnloadEvent</dfn> : <a href="infrastructure.html#event">Event</a> {
            attribute DOMString <a href="#dom-beforeunloadevent-returnvalue" title="dom-BeforeUnloadEvent-returnValue">returnValue</a>;
@@ -2262,14 +2334,32 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
   </div><div class="impl">
 
-  <h4 id="aborting-a-document-load"><span class="secno">5.5.11 </span>Aborting a document load</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="aborting-a-document-load"><span class="secno">5.5.11 </span>Aborting a document load</h4>
 
-  <p>If the user cancels any instance of the <a href="fetching-resources.html#fetch" title="fetch">fetching algorithm</a> in the context of a
-  <code><a href="infrastructure.html#document">Document</a></code> in a <a href="browsers.html#browsing-context">browsing context</a>, then, if
-  that <code><a href="infrastructure.html#document">Document</a></code> is an <a href="browsers.html#active-document">active document</a>, the
-  user agent must <a href="webappapis.html#queue-a-task">queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple
+  <p>If a <code><a href="infrastructure.html#document">Document</a></code> is <dfn id="abort-a-document" title="abort a&#10;  document">aborted</dfn>, the user agent must run the following
+  steps:</p>
+
+  <ol><li><p><a href="#abort-a-document" title="abort a document">Abort</a> the <a href="browsers.html#active-document" title="active document">active documents</a> of every
+   <a href="browsers.html#child-browsing-context">child browsing context</a>.</p></li>
+
+   <li><p>Cancel any instances of the <a href="fetching-resources.html#fetch" title="fetch">fetch</a>
+   algorithm in the context of this <code><a href="infrastructure.html#document">Document</a></code>, discarding
+   any <a href="webappapis.html#concept-task" title="concept-task">tasks</a> <a href="webappapis.html#queue-a-task" title="queue a&#10;   task">queued</a> for them, and discarding any further data
+   received from the network for them.</p></li>
+
+   <li><p>If the <code><a href="infrastructure.html#document">Document</a></code> has an <a href="dom.html#active-parser">active
+   parser</a>, then <a href="the-end.html#abort-a-parser" title="abort a parser">abort that
+   parser</a>.</p></li>
+
+   <!-- we could also stop all script, or stop animations -->
+
+  </ol><p>User agents may allow users to explicitly invoke the <a href="#abort-a-document" title="abort a document">abort a document</a> algorithm for a
+  <code><a href="infrastructure.html#document">Document</a></code>. If the user does so, then, if that
+  <code><a href="infrastructure.html#document">Document</a></code> is an <a href="browsers.html#active-document">active document</a>, the user
+  agent should <a href="webappapis.html#queue-a-task">queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple
   event</a> named <code title="event-abort">abort</code> at that
-  <code><a href="infrastructure.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code> object.</p>
+  <code><a href="infrastructure.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code> object before invoking
+  the <a href="#abort-a-document" title="abort a document">abort</a> algorithm.</p>
 
   <!-- I'd love to make this more precise, anyone have any suggestions
   on what it should say? -->

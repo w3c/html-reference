@@ -1,7 +1,7 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
 <!-- when publishing, change bits marked ZZZ -->
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>2.6 Fetching resources &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<html lang="en-US-x-Hixie" class="split chapter"><head><title>2.7 Fetching resources &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,18 +356,18 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="urls.html" title="2.5 URLs" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="common-dom-interfaces.html" title="2.7 Common DOM interfaces" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="urls.html" title="2.6 URLs" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="common-dom-interfaces.html" title="2.8 Common DOM interfaces" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
    </div><div>
-   <a href="urls.html">&#x2190; 2.5 URLs</a> &#x2013;
+   <a href="urls.html">&#x2190; 2.6 URLs</a> &#x2013;
    <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="common-dom-interfaces.html">2.7 Common DOM interfaces &#x2192;</a>
-  <ol class="toc"><li><ol><li><a href="fetching-resources.html#fetching-resources"><span class="secno">2.6 </span>Fetching resources</a>
-    <ol><li><a href="fetching-resources.html#concept-http-equivalent"><span class="secno">2.6.1 </span>Protocol concepts</a></li><li><a href="fetching-resources.html#encrypted-http-and-related-security-concerns"><span class="secno">2.6.2 </span>Encrypted HTTP and related security concerns</a></li><li><a href="fetching-resources.html#content-type-sniffing"><span class="secno">2.6.3 </span>Determining the type of a resource</a></li></ol></li></ol></li></ol></div><div class="impl">
+   <a href="common-dom-interfaces.html">2.8 Common DOM interfaces &#x2192;</a>
+  <ol class="toc"><li><ol><li><a href="fetching-resources.html#fetching-resources"><span class="secno">2.7 </span>Fetching resources</a>
+    <ol><li><a href="fetching-resources.html#concept-http-equivalent"><span class="secno">2.7.1 </span>Protocol concepts</a></li><li><a href="fetching-resources.html#encrypted-http-and-related-security-concerns"><span class="secno">2.7.2 </span>Encrypted HTTP and related security concerns</a></li><li><a href="fetching-resources.html#content-type-sniffing"><span class="secno">2.7.3 </span>Determining the type of a resource</a></li></ol></li></ol></li></ol></div><div class="impl">
 
-  <h3 id="fetching-resources"><span class="secno">2.6 </span>Fetching resources</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h3 id="fetching-resources"><span class="secno">2.7 </span>Fetching resources</h3>
 
   <p>When a user agent is to <dfn id="fetch">fetch</dfn> a resource or
   <a href="urls.html#url">URL</a>, optionally from an origin <i title="">origin</i>,
@@ -346,10 +393,8 @@
 
   <ol><li>
 
-    <p>Generate the <i>address of the resource from which Request-URIs
-    are obtained</i> as required by HTTP for the <code title="http-referer">Referer</code> (sic) header from <a href="dom.html#the-document-s-current-address">the
-    document's current address</a> of the appropriate
-    <code><a href="infrastructure.html#document">Document</a></code> as given by the following list. <a href="references.html#refsHTTP">[HTTP]</a></p>
+    <p>Let <var title="">document</var> be the appropriate
+    <code><a href="infrastructure.html#document">Document</a></code> as given by the following list:</p>
 
     <dl class="switch"><dt>When <a href="history.html#navigate" title="navigate">navigating</a></dt>
 
@@ -364,7 +409,26 @@
 
      <dd>The <a href="browsers.html#entry-script">entry script</a>'s <a href="webappapis.html#script-s-document" title="script's&#10;     document">document</a>.</dd>
 
-    </dl><p>Remove any <a href="urls.html#url-fragment" title="url-fragment">&lt;fragment&gt;</a>
+    </dl></li>
+
+   <li>
+
+    <p>While <var title="">document</var> is is <a href="the-iframe-element.html#an-iframe-srcdoc-document">an
+    <code>iframe</code> <code title="attr-iframe-srcdoc">srcdoc</code>
+    document</a>, let <var title="">document</var> be <var title="">document</var>'s <a href="browsers.html#browsing-context">browsing context</a>'s
+    <a href="browsers.html#browsing-context-container">browsing context container</a>'s <code><a href="infrastructure.html#document">Document</a></code>
+    instead.</p>
+
+   </li>
+
+   <li>
+
+    <p>Generate the <i>address of the resource from which Request-URIs
+    are obtained</i> as required by HTTP for the <code title="http-referer">Referer</code> (sic) header from <a href="dom.html#the-document-s-current-address">the
+    document's current address</a> of <var title="">document</var>.
+    <a href="references.html#refsHTTP">[HTTP]</a></p>
+
+    <p>Remove any <a href="urls.html#url-fragment" title="url-fragment">&lt;fragment&gt;</a>
     component from the generated <i>address of the resource from which
     Request-URIs are obtained</i>.</p> <!-- RFC2616 says "The URI MUST
     NOT include a fragment." (section 14.36) -->
@@ -393,6 +457,18 @@
     download instead of initiating a new one, then use the results of
     the existing download instead of starting a new one.</p>
 
+    <p>Otherwise, if the resource is identified by an <a href="urls.html#absolute-url">absolute
+    URL</a> with a scheme that does not define a mechanism to
+    obtain the resource (e.g. it is a <code title="">mailto:</code>
+    URL) or that the user agent does not support, then act as if the
+    resource was an HTTP 204 No Content response with no other
+    metadata.</p>
+
+    <p>Otherwise, if the resource is identified by the
+    <a href="urls.html#url">URL</a> <dfn id="about:blank"><code>about:blank</code></dfn>, then the
+    resource is immediately available and consists of the empty
+    string, with no metadata.</p>
+
     <p>Otherwise, at a time convenient to the user and the user agent,
     download (or otherwise obtain) the resource, applying the
     semantics of the relevant specifications (e.g. performing an HTTP
@@ -407,11 +483,6 @@
     header, if the <a href="#fetch" title="fetch">fetching algorithm</a> was
     explicitly initiated from an <i title="">origin</i>, then <i title="">the origin that initiated the HTTP request</i> is <i title="">origin</i>. Otherwise, this is <i title="">a request from
     a "privacy-sensitive" context</i>. <a href="references.html#refsORIGIN">[ORIGIN]</a></p>
-
-    <p>If the resource is identified by the <a href="urls.html#url">URL</a>
-    <dfn id="about:blank"><code>about:blank</code></dfn>, then the resource is
-    immediately available and consists of the empty string, with no
-    metadata.</p>
 
    </li>
 
@@ -524,7 +595,7 @@
   applicable.</p>
 
 
-  <h4 id="concept-http-equivalent"><span class="secno">2.6.1 </span>Protocol concepts</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="concept-http-equivalent"><span class="secno">2.7.1 </span>Protocol concepts</h4>
 
   <p>User agents can implement a variety of transfer protocols, but
   this specification mostly defines behavior in terms of HTTP. <a href="references.html#refsHTTP">[HTTP]</a></p>
@@ -547,7 +618,7 @@
   protocol.</p>
 
 
-  <h4 id="encrypted-http-and-related-security-concerns"><span class="secno">2.6.2 </span>Encrypted HTTP and related security concerns</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="encrypted-http-and-related-security-concerns"><span class="secno">2.7.2 </span>Encrypted HTTP and related security concerns</h4>
 
   <p>Anything in this specification that refers to HTTP also applies
   to HTTP-over-TLS, as represented by <a href="urls.html#url" title="url">URLs</a>
@@ -593,7 +664,7 @@
   </div>
 
 
-  <h4 id="content-type-sniffing"><span class="secno">2.6.3 </span>Determining the type of a resource</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="content-type-sniffing"><span class="secno">2.7.3 </span>Determining the type of a resource</h4><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/125">ISSUE-125</a> (charset-vs-quotes) and <a href="http://www.w3.org/html/wg/tracker/issues/126">ISSUE-126</a> (charset-vs-backslashes) block progress to Last Call</span></p>
 
   <p>The <dfn id="content-type" title="Content-Type">Content-Type metadata</dfn> of a
   resource must be obtained and interpreted in a manner consistent
@@ -623,16 +694,20 @@
   Content-Type</dfn>, given a string <var title="">s</var>, is as
   follows. It either returns an encoding or nothing.</p>
 
-  <ol><li><p>Find the first seven characters in <var title="">s</var>
-   that are an <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for the word
-   "<code title="">charset</code>".  If no such match is found, return
-   nothing.</p></li>
+  <ol><!-- http://www.hixie.ch/tests/adhoc/html/parsing/encoding/all.html --><li><p>Let <var title="">position</var> be a pointed into <var title="">s</var>, initially pointing at the start of the
+   string.</p></li>
+
+   <li><p><i>Loop</i>: Find the first seven characters in <var title="">s</var> after <var title="">position</var> that are an
+   <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for the word "<code title="">charset</code>". If no such match is found, return nothing
+   and abort these steps.</p></li>
 
    <li><p>Skip any U+0009, U+000A, U+000C, U+000D, or U+0020
    characters that immediately follow the word "<code title="">charset</code>" (there might not be any).</p></li>
 
    <li><p>If the next character is not a U+003D EQUALS SIGN ('='),
-   return nothing and abort these steps.</p></li>
+   then move <var title="">position</var> to point just before that
+   next character, and jump back to the step labeled
+   <i>loop</i>.</p></li>
 
    <li><p>Skip any U+0009, U+000A, U+000C, U+000D, or U+0020
    characters that immediately follow the equals sign (there might not
@@ -660,7 +735,11 @@
     </dl></li>
 
   </ol><p class="note">This requirement is a <a href="introduction.html#willful-violation">willful violation</a>
-  of the HTTP specification, motivated by the need for backwards
-  compatibility with legacy content. <a href="references.html#refsHTTP">[HTTP]</a></p>
+  of the HTTP specification (for example, HTTP doesn't allow the use
+  of single quotes and requires supporting a backslash-escape
+  mechanism that is not supported by this algorithm<!-- not to mention
+  not having any rules for error-handling, which is of course why
+  we're having to define it ourselves -->), motivated by the need for
+  backwards compatibility with legacy content. <a href="references.html#refsHTTP">[HTTP]</a></p>
 
   </div></body></html>

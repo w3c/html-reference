@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,7 +356,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="the-button-element.html" title="4.10.8 The button element" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="interactive-elements.html" title="4.11 Interactive elements" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="the-button-element.html" title="4.10.8 The button element" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="interactive-elements.html" title="4.11 Interactive elements" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -318,9 +365,9 @@
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="interactive-elements.html">4.11 Interactive elements &#x2192;</a>
   <ol class="toc"><li><ol><li><ol><li><a href="association-of-controls-and-forms.html#association-of-controls-and-forms"><span class="secno">4.10.18 </span>Association of controls and forms</a></li><li><a href="association-of-controls-and-forms.html#attributes-common-to-form-controls"><span class="secno">4.10.19 </span>Attributes common to form controls</a>
-      <ol><li><a href="association-of-controls-and-forms.html#naming-form-controls"><span class="secno">4.10.19.1 </span>Naming form controls</a></li><li><a href="association-of-controls-and-forms.html#enabling-and-disabling-form-controls"><span class="secno">4.10.19.2 </span>Enabling and disabling form controls</a></li><li><a href="association-of-controls-and-forms.html#a-form-control-s-value"><span class="secno">4.10.19.3 </span>A form control's value</a></li><li><a href="association-of-controls-and-forms.html#autofocusing-a-form-control"><span class="secno">4.10.19.4 </span>Autofocusing a form control</a></li><li><a href="association-of-controls-and-forms.html#limiting-user-input-length"><span class="secno">4.10.19.5 </span>Limiting user input length</a></li><li><a href="association-of-controls-and-forms.html#form-submission-0"><span class="secno">4.10.19.6 </span>Form submission</a></li></ol></li><li><a href="association-of-controls-and-forms.html#constraints"><span class="secno">4.10.20 </span>Constraints</a>
-      <ol><li><a href="association-of-controls-and-forms.html#definitions"><span class="secno">4.10.20.1 </span>Definitions</a></li><li><a href="association-of-controls-and-forms.html#constraint-validation"><span class="secno">4.10.20.2 </span>Constraint validation</a></li><li><a href="association-of-controls-and-forms.html#the-constraint-validation-api"><span class="secno">4.10.20.3 </span>The constraint validation API</a></li><li><a href="association-of-controls-and-forms.html#security-forms"><span class="secno">4.10.20.4 </span>Security</a></li></ol></li><li><a href="association-of-controls-and-forms.html#form-submission"><span class="secno">4.10.21 </span>Form submission</a>
-      <ol><li><a href="association-of-controls-and-forms.html#introduction-1"><span class="secno">4.10.21.1 </span>Introduction</a></li><li><a href="association-of-controls-and-forms.html#implicit-submission"><span class="secno">4.10.21.2 </span>Implicit submission</a></li><li><a href="association-of-controls-and-forms.html#form-submission-algorithm"><span class="secno">4.10.21.3 </span>Form submission algorithm</a></li><li><a href="association-of-controls-and-forms.html#url-encoded-form-data"><span class="secno">4.10.21.4 </span>URL-encoded form data</a></li><li><a href="association-of-controls-and-forms.html#multipart-form-data"><span class="secno">4.10.21.5 </span>Multipart form data</a></li><li><a href="association-of-controls-and-forms.html#plain-text-form-data"><span class="secno">4.10.21.6 </span>Plain text form data</a></li></ol></li><li><a href="association-of-controls-and-forms.html#resetting-a-form"><span class="secno">4.10.22 </span>Resetting a form</a></li><li><a href="association-of-controls-and-forms.html#event-dispatch"><span class="secno">4.10.23 </span>Event dispatch</a></li></ol></li></ol></li></ol></div><h4 id="association-of-controls-and-forms"><span class="secno">4.10.18 </span>Association of controls and forms</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>A <a href="forms.html#form-associated-element">form-associated element</a> can have a relationship
+      <ol><li><a href="association-of-controls-and-forms.html#naming-form-controls"><span class="secno">4.10.19.1 </span>Naming form controls</a></li><li><a href="association-of-controls-and-forms.html#enabling-and-disabling-form-controls"><span class="secno">4.10.19.2 </span>Enabling and disabling form controls</a></li><li><a href="association-of-controls-and-forms.html#a-form-control-s-value"><span class="secno">4.10.19.3 </span>A form control's value</a></li><li><a href="association-of-controls-and-forms.html#autofocusing-a-form-control"><span class="secno">4.10.19.4 </span>Autofocusing a form control</a></li><li><a href="association-of-controls-and-forms.html#limiting-user-input-length"><span class="secno">4.10.19.5 </span>Limiting user input length</a></li><li><a href="association-of-controls-and-forms.html#form-submission-0"><span class="secno">4.10.19.6 </span>Form submission</a></li><li><a href="association-of-controls-and-forms.html#submitting-element-directionality"><span class="secno">4.10.19.7 </span>Submitting element directionality</a></li></ol></li><li><a href="association-of-controls-and-forms.html#textFieldSelection"><span class="secno">4.10.20 </span>APIs for the text field selections</a></li><li><a href="association-of-controls-and-forms.html#constraints"><span class="secno">4.10.21 </span>Constraints</a>
+      <ol><li><a href="association-of-controls-and-forms.html#definitions"><span class="secno">4.10.21.1 </span>Definitions</a></li><li><a href="association-of-controls-and-forms.html#constraint-validation"><span class="secno">4.10.21.2 </span>Constraint validation</a></li><li><a href="association-of-controls-and-forms.html#the-constraint-validation-api"><span class="secno">4.10.21.3 </span>The constraint validation API</a></li><li><a href="association-of-controls-and-forms.html#security-forms"><span class="secno">4.10.21.4 </span>Security</a></li></ol></li><li><a href="association-of-controls-and-forms.html#form-submission"><span class="secno">4.10.22 </span>Form submission</a>
+      <ol><li><a href="association-of-controls-and-forms.html#introduction-1"><span class="secno">4.10.22.1 </span>Introduction</a></li><li><a href="association-of-controls-and-forms.html#implicit-submission"><span class="secno">4.10.22.2 </span>Implicit submission</a></li><li><a href="association-of-controls-and-forms.html#form-submission-algorithm"><span class="secno">4.10.22.3 </span>Form submission algorithm</a></li><li><a href="association-of-controls-and-forms.html#url-encoded-form-data"><span class="secno">4.10.22.4 </span>URL-encoded form data</a></li><li><a href="association-of-controls-and-forms.html#multipart-form-data"><span class="secno">4.10.22.5 </span>Multipart form data</a></li><li><a href="association-of-controls-and-forms.html#plain-text-form-data"><span class="secno">4.10.22.6 </span>Plain text form data</a></li></ol></li><li><a href="association-of-controls-and-forms.html#resetting-a-form"><span class="secno">4.10.23 </span>Resetting a form</a></li><li><a href="association-of-controls-and-forms.html#event-dispatch"><span class="secno">4.10.24 </span>Event dispatch</a></li></ol></li></ol></li></ol></div><h4 id="association-of-controls-and-forms"><span class="secno">4.10.18 </span>Association of controls and forms</h4><p>A <a href="forms.html#form-associated-element">form-associated element</a> can have a relationship
   with a <code><a href="forms.html#the-form-element">form</a></code> element, which is called the element's
   <dfn id="form-owner">form owner</dfn>. If a <a href="forms.html#form-associated-element">form-associated element</a> is
   not associated with a <code><a href="forms.html#the-form-element">form</a></code> element, its <a href="#form-owner">form
@@ -351,7 +398,9 @@
   <p>When a <a href="forms.html#form-associated-element">form-associated element</a>'s ancestor chain
   changes, e.g. because it or one of its ancestors was <a href="infrastructure.html#insert-an-element-into-a-document" title="insert an element into a document">inserted</a> or <a href="infrastructure.html#remove-an-element-from-a-document" title="remove an element from a document">removed</a> from a
   <code><a href="infrastructure.html#document">Document</a></code>, then the user agent must <a href="#reset-the-form-owner">reset the form
-  owner</a> of that element.</p>
+  owner</a> of that element. <span class="note">The <a href="parsing.html#html-parser">HTML
+  parser</a> overrides this requirement when inserting form
+  controls.</span></p>
 
   <p>When a <a href="forms.html#form-associated-element">form-associated element</a>'s <code title="attr-fae-form"><a href="#attr-fae-form">form</a></code> attribute is added, removed, or
   has its value changed, then the user agent must <a href="#reset-the-form-owner">reset the form
@@ -454,7 +503,7 @@
   on getting, must return the element's <a href="#form-owner">form owner</a>, or
   null if there isn't one.</p>
 
-  </div><h4 id="attributes-common-to-form-controls"><span class="secno">4.10.19 </span><dfn>Attributes common to form controls</dfn></h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><h5 id="naming-form-controls"><span class="secno">4.10.19.1 </span>Naming form controls</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The <dfn id="attr-fe-name" title="attr-fe-name"><code>name</code></dfn> content
+  </div><h4 id="attributes-common-to-form-controls"><span class="secno">4.10.19 </span><dfn>Attributes common to form controls</dfn></h4><h5 id="naming-form-controls"><span class="secno">4.10.19.1 </span>Naming form controls</h5><p>The <dfn id="attr-fe-name" title="attr-fe-name"><code>name</code></dfn> content
   attribute gives the name of the form control, as used in <a href="#form-submission">form
   submission</a> and in the <code><a href="forms.html#the-form-element">form</a></code> element's <code title="dom-form-elements"><a href="forms.html#dom-form-elements">elements</a></code> object. If the attribute
   is specified, its value must not be the empty string.</p><p>Any non-empty value for <code title="attr-form-name"><a href="forms.html#attr-form-name">name</a></code>
@@ -478,7 +527,7 @@
   <p>The <dfn id="dom-fe-name" title="dom-fe-name"><code>name</code></dfn> IDL
   attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-fe-name"><a href="#attr-fe-name">name</a></code> content attribute.</p>
 
-  </div><h5 id="enabling-and-disabling-form-controls"><span class="secno">4.10.19.2 </span>Enabling and disabling form controls</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The <dfn id="attr-fe-disabled" title="attr-fe-disabled"><code>disabled</code></dfn>
+  </div><h5 id="enabling-and-disabling-form-controls"><span class="secno">4.10.19.2 </span>Enabling and disabling form controls</h5><p>The <dfn id="attr-fe-disabled" title="attr-fe-disabled"><code>disabled</code></dfn>
   content attribute is a <a href="common-microsyntaxes.html#boolean-attribute">boolean attribute</a>.</p><p>A form control is <dfn id="concept-fe-disabled" title="concept-fe-disabled">disabled</dfn>
   if its <code title="attr-fe-disabled"><a href="#attr-fe-disabled">disabled</a></code> attribute is
   set, or if it is a descendant of a <code><a href="forms.html#the-fieldset-element">fieldset</a></code> element
@@ -505,7 +554,7 @@
   is only used by <code><a href="the-input-element.html#the-input-element">input</a></code> elements.) These are used to
   describe how the user interacts with the control.</p>
 
-  </div><h5 id="autofocusing-a-form-control"><span class="secno">4.10.19.4 </span>Autofocusing a form control</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><!-- v2: Apply this to contentEditable elements --><p>The <dfn id="attr-fe-autofocus" title="attr-fe-autofocus"><code>autofocus</code></dfn>
+  </div><h5 id="autofocusing-a-form-control"><span class="secno">4.10.19.4 </span>Autofocusing a form control</h5><!-- v2: Apply this to contentEditable elements --><p>The <dfn id="attr-fe-autofocus" title="attr-fe-autofocus"><code>autofocus</code></dfn>
   content attribute allows the author to indicate that a control is to
   be focused as soon as the page is loaded, allowing the user to just
   start typing without having to manually focus the main control.</p><p>The <code title="attr-fe-autofocus"><a href="#attr-fe-autofocus">autofocus</a></code> attribute is
@@ -517,14 +566,30 @@
   <a href="infrastructure.html#insert-an-element-into-a-document" title="insert an element into a document">inserted into a
   document</a>, user agents should run the following steps:</p>
 
-  <ol><li><p>If the <code><a href="infrastructure.html#document">Document</a></code>'s <a href="browsers.html#browsing-context">browsing context</a>
-   had the <a href="the-iframe-element.html#sandboxed-automatic-features-browsing-context-flag">sandboxed automatic features browsing context
-   flag</a> set when the <code><a href="infrastructure.html#document">Document</a></code> was created, abort
-   these steps.</p></li>
+  <ol><li><p>Let <var title="">target</var> be the element's
+   <code><a href="infrastructure.html#document">Document</a></code>.</p></li>
+
+   <li><p>If <var title="">target</var>'s <a href="browsers.html#browsing-context">browsing
+   context</a> had the <a href="the-iframe-element.html#sandboxed-automatic-features-browsing-context-flag">sandboxed automatic features browsing
+   context flag</a> set when <var title="">target</var> was
+   created, abort these steps.</p></li>
+
+   <li><p>If <var title="">target</var>'s <a href="origin-0.html#origin">origin</a> is not
+   the <a href="origin-0.html#same-origin" title="same origin">same</a> as the
+   <a href="origin-0.html#origin">origin</a> of the <code><a href="infrastructure.html#document">Document</a></code> of the currently
+   focused element in <var title="">target</var>'s <a href="browsers.html#top-level-browsing-context">top-level
+   browsing context</a>, abort these steps.</p></li>
+
+   <li><p>If <var title="">target</var>'s <a href="origin-0.html#origin">origin</a> is not
+   the <a href="origin-0.html#same-origin" title="same origin">same</a> as the
+   <a href="origin-0.html#origin">origin</a> of the <a href="browsers.html#active-document">active document</a> of <var title="">target</var>'s <a href="browsers.html#top-level-browsing-context">top-level browsing context</a>,
+   abort these steps.</p></li>
 
    <li><p>If the user agent has already reached the last step of this
-   list of steps in response to an element being <a href="infrastructure.html#insert-an-element-into-a-document" title="insert&#10;   an element into a document">inserted</a> into this
-   <code><a href="infrastructure.html#document">Document</a></code>, abort these steps.</p></li>
+   list of steps in response to an element being <a href="infrastructure.html#insert-an-element-into-a-document" title="insert&#10;   an element into a document">inserted</a> into a
+   <code><a href="infrastructure.html#document">Document</a></code> whose <a href="browsers.html#top-level-browsing-context">top-level browsing
+   context</a>'s <a href="browsers.html#active-document">active document</a> is the same as <var title="">target</var>'s <a href="browsers.html#top-level-browsing-context">top-level browsing context</a>'s
+   <a href="browsers.html#active-document">active document</a>, abort these steps.</p></li>
 
    <li><p>If the user has indicated (for example, by starting to type
    in a form control) that he does not wish focus to be changed, then
@@ -550,7 +615,7 @@
    the document was loaded.</p>
    <pre>&lt;input maxlength="256" name="q" value="" autofocus&gt;
 &lt;input type="submit" value="Search"&gt;</pre>
-  </div><h5 id="limiting-user-input-length"><span class="secno">4.10.19.5 </span>Limiting user input length</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>A <dfn id="attr-fe-maxlength" title="attr-fe-maxlength">form control <code title="">maxlength</code> attribute</dfn>, controlled by a <var title="">dirty value flag</var> declares a limit on the number of
+  </div><h5 id="limiting-user-input-length"><span class="secno">4.10.19.5 </span>Limiting user input length</h5><p>A <dfn id="attr-fe-maxlength" title="attr-fe-maxlength">form control <code title="">maxlength</code> attribute</dfn>, controlled by a <var title="">dirty value flag</var> declares a limit on the number of
   characters a user can input.</p><p>If an element has its <a href="#attr-fe-maxlength" title="attr-fe-maxlength">form
   control <code title="">maxlength</code> attribute</a> specified,
   the attribute's value must be a <a href="common-microsyntaxes.html#valid-non-negative-integer">valid non-negative
@@ -571,7 +636,7 @@
   <a href="common-microsyntaxes.html#code-point-length">code-point length</a> is greater than the element's
   <a href="#maximum-allowed-value-length">maximum allowed value length</a>.</p>
 
-  </div><h5 id="form-submission-0"><span class="secno">4.10.19.6 </span>Form submission</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><dfn id="attributes-for-form-submission">Attributes for form submission</dfn> can be specified both
+  </div><h5 id="form-submission-0"><span class="secno">4.10.19.6 </span>Form submission</h5><p><dfn id="attributes-for-form-submission">Attributes for form submission</dfn> can be specified both
   on <code><a href="forms.html#the-form-element">form</a></code> elements and on <a href="forms.html#concept-submit-button" title="concept-submit-button">submit buttons</a> (elements that
   represent buttons that submit forms, e.g. an <code><a href="the-input-element.html#the-input-element">input</a></code>
   element whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is
@@ -594,25 +659,17 @@
   attribute, if <em>it</em> has one, or else the empty string.</p><hr/><p>The <dfn id="attr-fs-method" title="attr-fs-method"><code>method</code></dfn> and
   <dfn id="attr-fs-formmethod" title="attr-fs-formmethod"><code>formmethod</code></dfn>
   content attributes are <a href="common-microsyntaxes.html#enumerated-attribute" title="enumerated attribute">enumerated
-  attributes</a> with the following keywords and states:</p><ul><li>The keyword <dfn id="attr-fs-method-get-keyword" title="attr-fs-method-GET-keyword"><code>GET</code></dfn>, mapping
+  attributes</a> with the following keywords and states:</p><ul><li>The keyword <dfn id="attr-fs-method-get-keyword" title="attr-fs-method-GET-keyword"><code>get</code></dfn>, mapping
    to the state <dfn id="attr-fs-method-get" title="attr-fs-method-GET">GET</dfn>, indicating
    the HTTP GET method.</li>
 
-   <li>The keyword <dfn id="attr-fs-method-post-keyword" title="attr-fs-method-POST-keyword"><code>POST</code></dfn>, mapping
+   <li>The keyword <dfn id="attr-fs-method-post-keyword" title="attr-fs-method-POST-keyword"><code>post</code></dfn>, mapping
    to the state <dfn id="attr-fs-method-post" title="attr-fs-method-POST">POST</dfn>, indicating
    the HTTP POST method.</li>
 
-   <li>The keyword <dfn id="attr-fs-method-put-keyword" title="attr-fs-method-PUT-keyword"><code>PUT</code></dfn>, mapping
-   to the state <dfn id="attr-fs-method-put" title="attr-fs-method-PUT">PUT</dfn>, indicating
-   the HTTP PUT method.</li>
-
-   <li>The keyword <dfn id="attr-fs-method-delete-keyword" title="attr-fs-method-DELETE-keyword"><code>DELETE</code></dfn>, mapping
-   to the state <dfn id="attr-fs-method-delete" title="attr-fs-method-DELETE">DELETE</dfn>, indicating
-   the HTTP DELETE method.</li>
-
   </ul><p>The <i>missing value default</i> for these attributes is the
   <a href="#attr-fs-method-get" title="attr-fs-method-GET">GET</a> state.</p><p>The <dfn id="concept-fs-method" title="concept-fs-method">method</dfn> of an element is
-  one of those four states. If the element is a <a href="forms.html#concept-submit-button" title="concept-submit-button">submit button</a> and has a <code title="attr-fs-formmethod"><a href="#attr-fs-formmethod">formmethod</a></code> attribute, then the
+  one of those states. If the element is a <a href="forms.html#concept-submit-button" title="concept-submit-button">submit button</a> and has a <code title="attr-fs-formmethod"><a href="#attr-fs-formmethod">formmethod</a></code> attribute, then the
   element's <a href="#concept-fs-method" title="concept-fs-method">method</a> is that
   attribute's state; otherwise, it is the <a href="#form-owner">form owner</a>'s
   <code title="attr-fs-method"><a href="#attr-fs-method">method</a></code> attribute's state.</p><hr/><p>The <dfn id="attr-fs-enctype" title="attr-fs-enctype"><code>enctype</code></dfn> and
@@ -675,20 +732,132 @@
   <dfn id="dom-fs-enctype" title="dom-fs-enctype"><code>enctype</code></dfn> IDL
   attributes must <a href="common-dom-interfaces.html#reflect">reflect</a> the respective content
   attributes of the same name, <a href="common-dom-interfaces.html#limited-to-only-known-values">limited to only known
-  values</a>. The <dfn id="dom-fs-novalidate" title="dom-fs-noValidate"><code>noValidate</code></dfn> IDL
-  attribute must reflect the <code title="attr-fs-novalidate"><a href="#attr-fs-novalidate">novalidate</a></code> content attribute.  The
+  values</a>. The <dfn id="dom-fs-encoding" title="dom-fs-encoding"><code>encoding</code></dfn> IDL attribute
+  must <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-fs-enctype"><a href="#attr-fs-enctype">enctype</a></code> content attribute,
+  <a href="common-dom-interfaces.html#limited-to-only-known-values">limited to only known values</a>. The <dfn id="dom-fs-novalidate" title="dom-fs-noValidate"><code>noValidate</code></dfn> IDL
+  attribute must reflect the <code title="attr-fs-novalidate"><a href="#attr-fs-novalidate">novalidate</a></code> content attribute. The
   <dfn id="dom-fs-formaction" title="dom-fs-formAction"><code>formAction</code></dfn> IDL
   attribute must reflect the <code title="attr-fs-formaction"><a href="#attr-fs-formaction">formaction</a></code> content attribute. The
   <dfn id="dom-fs-formenctype" title="dom-fs-formEnctype"><code>formEnctype</code></dfn> IDL
   attribute must reflect the <code title="attr-fs-formenctype"><a href="#attr-fs-formenctype">formenctype</a></code> content attribute,
-  <a href="common-dom-interfaces.html#limited-to-only-known-values">limited to only known values</a>.  The <dfn id="dom-fs-formmethod" title="dom-fs-formMethod"><code>formMethod</code></dfn> IDL
+  <a href="common-dom-interfaces.html#limited-to-only-known-values">limited to only known values</a>. The <dfn id="dom-fs-formmethod" title="dom-fs-formMethod"><code>formMethod</code></dfn> IDL
   attribute must reflect the <code title="attr-fs-formmethod"><a href="#attr-fs-formmethod">formmethod</a></code> content attribute,
   <a href="common-dom-interfaces.html#limited-to-only-known-values">limited to only known values</a>. The <dfn id="dom-fs-formnovalidate" title="dom-fs-formNoValidate"><code>formNoValidate</code></dfn> IDL
   attribute must reflect the <code title="attr-fs-formnovalidate"><a href="#attr-fs-formnovalidate">formnovalidate</a></code> content
   attribute. The <dfn id="dom-fs-formtarget" title="dom-fs-formTarget"><code>formTarget</code></dfn> IDL
   attribute must reflect the <code title="attr-fs-formtarget"><a href="#attr-fs-formtarget">formtarget</a></code> content attribute.
 
-  </p></div><h4 id="constraints"><span class="secno">4.10.20 </span>Constraints</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><h5 id="definitions"><span class="secno">4.10.20.1 </span>Definitions</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><div class="impl">
+  </p></div><h5 id="submitting-element-directionality"><span class="secno">4.10.19.7 </span>Submitting element directionality</h5><p>A <dfn id="form-control-dirname-attribute">form control <code title="">dirname</code> attribute</dfn>
+  on a form control element enables the submission of <a href="elements.html#the-directionality">the
+  directionality</a> of the element, and gives the name of the
+  field that contains this value during <a href="#form-submission">form submission</a>.
+  If such an attribute is specified, its value must not be the empty
+  string.</p><h4 id="textFieldSelection"><span class="secno">4.10.20 </span>APIs for the text field selections</h4><!-- v2 idea: DOM Range APIs to expose the textarea/input edited
+  value (ack martijnw) --><p>The <code><a href="the-input-element.html#the-input-element">input</a></code> and <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> elements define
+  the following members in their DOM interfaces for handling their
+  selection:</p><pre class="idl extract">  void <a href="#dom-textarea-input-select" title="dom-textarea/input-select">select</a>();
+           attribute unsigned long <a href="#dom-textarea-input-selectionstart" title="dom-textarea/input-selectionStart">selectionStart</a>;
+           attribute unsigned long <a href="#dom-textarea-input-selectionend" title="dom-textarea/input-selectionEnd">selectionEnd</a>;
+  void <a href="#dom-textarea-input-setselectionrange" title="dom-textarea/input-setSelectionRange">setSelectionRange</a>(in unsigned long start, in unsigned long end);</pre><!-- v2: also add textLength? it seems to be widely used --><p>These methods and attributes expose and control the selection of
+  <code><a href="the-input-element.html#the-input-element">input</a></code> and <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> text fields.</p><dl class="domintro"><dt><var title="">element</var> . <code title="dom-textarea/input-select"><a href="#dom-textarea-input-select">select</a></code>()</dt>
+
+   <dd>
+
+    <p>Selects everything in the text field.</p>
+
+   </dd>
+
+   <dt><var title="">element</var> . <code title="dom-textarea/input-selecionStart">selectionStart</code> [ = <var title="">value</var> ]</dt>
+
+   <dd>
+
+    <p>Returns the offset to the start of the selection.</p>
+
+    <p>Can be set, to change the start of the selection.</p>
+
+   </dd>
+
+   <dt><var title="">element</var> . <code title="dom-textarea/input-selecionEnd">selectionEnd</code> [ = <var title="">value</var> ]</dt>
+
+   <dd>
+
+    <p>Returns the offset to the end of the selection.</p>
+
+    <p>Can be set, to change the end of the selection.</p>
+
+   </dd>
+
+   <dt><var title="">element</var> . <code title="dom-textarea/input-setSelectionRange"><a href="#dom-textarea-input-setselectionrange">setSelectionRange</a></code>(<var title="">start</var>, <var title="">end</var>)</dt>
+
+   <dd>
+
+    <p>Changes the selection to cover the given substring.</p>
+
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>When these methods and attributes are used with
+  <code><a href="the-input-element.html#the-input-element">input</a></code> elements while they don't apply, they must raise
+  an <code><a href="common-dom-interfaces.html#invalid_state_err">INVALID_STATE_ERR</a></code> exception. Otherwise, they must
+  act as described below.</p>
+
+  <p>The <dfn id="dom-textarea-input-select" title="dom-textarea/input-select"><code>select()</code></dfn> method
+  must cause the contents of the text field to be fully selected.</p>
+
+  <p>The <dfn id="dom-textarea-input-selectionstart" title="dom-textarea/input-selectionStart"><code>selectionStart</code></dfn>
+  attribute must, on getting, return the offset (in logical order) to
+  the character that immediately follows the start of the
+  selection. If there is no selection, then it must return the offset
+  (in logical order) to the character that immediately follows the
+  text entry cursor.</p>
+
+  <p>On setting, it must act as if the <code title="dom-textarea/input-setSelectionRange"><a href="#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>
+  method had been called, with the new value as the first argument,
+  and the current value of the <code title="dom-textarea/input-selectionEnd"><a href="#dom-textarea-input-selectionend">selectionEnd</a></code>
+  attribute as the second argument, unless the current value of the
+  <code title="dom-textarea/input-selectionEnd"><a href="#dom-textarea-input-selectionend">selectionEnd</a></code> is
+  less than the new value, in which case the second argument must also
+  be the new value.</p>
+
+  <p>The <dfn id="dom-textarea-input-selectionend" title="dom-textarea/input-selectionEnd"><code>selectionEnd</code></dfn>
+  attribute must, on getting, return the offset (in logical order) to
+  the character that immediately follows the end of the selection. If
+  there is no selection, then it must return the offset (in logical
+  order) to the character that immediately follows the text entry
+  cursor.</p>
+
+  <p>On setting, it must act as if the <code title="dom-textarea/input-setSelectionRange"><a href="#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>
+  method had been called, with the current value of the <code title="dom-textarea/input-selectionStart"><a href="#dom-textarea-input-selectionstart">selectionStart</a></code>
+  attribute as the first argument, and new value as the second
+  argument.</p>
+
+  <p>The <dfn id="dom-textarea-input-setselectionrange" title="dom-textarea/input-setSelectionRange"><code>setSelectionRange(<var title="">start</var>, <var title="">end</var>)</code></dfn> method
+  must set the selection of the text field to the sequence of
+  characters starting with the character at the <var title="">start</var>th position (in logical order) and ending with
+  the character at the <span title="">(<var title="">end</var>-1)</span>th position. Arguments greater than the
+  length of the value in the text field must be treated as pointing at
+  the end of the text field. If <var title="">end</var> is less than
+  or equal to <var title="">start</var> then the start of the
+  selection and the end of the selection must both be placed
+  immediately before the character with offset <var title="">end</var>. In UAs where there is no concept of an empty
+  selection, this must set the cursor to be just before the character
+  with offset <var title="">end</var>.</p>
+
+  </div><div class="example">
+
+   <p>To obtain the currently selected text, the following JavaScript
+   suffices:</p>
+
+   <pre>var selectionText = control.value.substring(control.selectionStart, control.selectionEnd);</pre>
+
+   <p>...where <var title="">control</var> is the <code><a href="the-input-element.html#the-input-element">input</a></code>
+   or <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> element.</p>
+
+  </div><p>Characters with no visible rendering, such as U+200D ZERO WIDTH
+  JOINER, still count as characters. Thus, for instance, the selection
+  can include just an invisible character, and the text insertion
+  cursor can be placed to one side or another of such a character.</p><h4 id="constraints"><span class="secno">4.10.21 </span>Constraints</h4><h5 id="definitions"><span class="secno">4.10.21.1 </span>Definitions</h5><div class="impl">
 
   <p>A <a href="forms.html#category-listed" title="category-listed">listed form-associated
   element</a> is a <dfn id="candidate-for-constraint-validation">candidate for constraint validation</dfn>
@@ -769,7 +938,7 @@
 
   </div><div class="impl">
 
-  <h5 id="constraint-validation"><span class="secno">4.10.20.2 </span>Constraint validation</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="constraint-validation"><span class="secno">4.10.21.2 </span>Constraint validation</h5>
 
   <p>When the user agent is required to <dfn id="statically-validate-the-constraints">statically validate the
   constraints</dfn> of <code><a href="forms.html#the-form-element">form</a></code> element <var title="">form</var>, it must run the following steps, which return
@@ -849,7 +1018,7 @@
 
    <li><p>Return a <i>negative</i> result.</p></li>
 
-  </ol></div><h5 id="the-constraint-validation-api"><span class="secno">4.10.20.3 </span>The <dfn>constraint validation API</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">element</var> . <code title="dom-cva-willValidate"><a href="#dom-cva-willvalidate">willValidate</a></code></dt>
+  </ol></div><h5 id="the-constraint-validation-api"><span class="secno">4.10.21.3 </span>The <dfn>constraint validation API</dfn></h5><dl class="domintro"><dt><var title="">element</var> . <code title="dom-cva-willValidate"><a href="#dom-cva-willvalidate">willValidate</a></code></dt>
 
    <dd>
 
@@ -1070,14 +1239,14 @@
   validity error message</a> should be present in the return
   value.</p>
 
-  </div><h5 id="security-forms"><span class="secno">4.10.20.4 </span>Security</h5><p id="security-0">Servers should not rely on client-side
+  </div><h5 id="security-forms"><span class="secno">4.10.21.4 </span>Security</h5><p id="security-0">Servers should not rely on client-side
   validation. Client-side validation can be intentionally bypassed by
   hostile users, and unintentionally bypassed by users of older user
   agents or automated tools that do not implement these features. The
   constraint validation features are only intended to improve the user
-  experience, not to provide any kind of security mechanism.</p><h4 id="form-submission"><span class="secno">4.10.21 </span><dfn>Form submission</dfn></h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><div class="impl">
+  experience, not to provide any kind of security mechanism.</p><h4 id="form-submission"><span class="secno">4.10.22 </span><dfn>Form submission</dfn></h4><div class="impl">
 
-  <h5 id="introduction-1"><span class="secno">4.10.21.1 </span>Introduction</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="introduction-1"><span class="secno">4.10.22.1 </span>Introduction</h5>
 
   </div><p><i>This section is non-normative.</i></p><p>When a form is submitted, the data in the form is converted into
   the structure specified by the <a href="#concept-fs-enctype" title="concept-fs-enctype">enctype</a>, and then sent to the
@@ -1103,7 +1272,7 @@ Content-Disposition: form-data; name="q"
 fur
 ------kYFrd4jNJEgCervE--</pre><div class="impl">
 
-  <h5 id="implicit-submission"><span class="secno">4.10.21.2 </span>Implicit submission</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="implicit-submission"><span class="secno">4.10.22.2 </span>Implicit submission</h5>
 
   <p>User agents may establish a <a href="forms.html#concept-button" title="concept-button">button</a> in each form as being the
   form's <dfn id="default-button">default button</dfn>. This should be the first <a href="forms.html#concept-submit-button" title="concept-submit-button">submit button</a> in <a href="infrastructure.html#tree-order">tree
@@ -1129,7 +1298,7 @@ fur
 
   </div><div class="impl">
 
-  <h5 id="form-submission-algorithm"><span class="secno">4.10.21.3 </span>Form submission algorithm</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="form-submission-algorithm"><span class="secno">4.10.22.3 </span>Form submission algorithm</h5><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/138">ISSUE-138</a> (mutate-action) blocks progress to Last Call</span></p>
 
   <p>When a <code><a href="forms.html#the-form-element">form</a></code> element <var title="">form</var> is <dfn id="concept-form-submit" title="concept-form-submit">submitted</dfn> from an element <var title="">submitter</var> (typically a button), optionally with a
   <var title="">scripted-submit</var> flag set, the user agent must
@@ -1248,11 +1417,11 @@ fur
        user, and let <var title="">y</var> be the <var title="">y</var>-component of the coordinate selected by the
        user.</p></li>
 
-       <li><p>Append an entry in the <var title="">form data set</var>
+       <li><p>Append an entry to the <var title="">form data set</var>
        with the name <var title="">name<sub title="">x</sub></var>,
        the value <var title="">x</var>, and the type <var title="">type</var>.</p></li>
 
-       <li><p>Append an entry in the <var title="">form data set</var>
+       <li><p>Append an entry to the <var title="">form data set</var>
        with the name <var title="">name<sub title="">y</sub></var> and
        the value <var title="">y</var>, and the type <var title="">type</var>.</p></li>
 
@@ -1269,7 +1438,7 @@ fur
      <li><p>If the <var title="">field</var> element is a
      <code><a href="the-button-element.html#the-select-element">select</a></code> element, then for each <code><a href="the-button-element.html#the-option-element">option</a></code>
      element in the <code><a href="the-button-element.html#the-select-element">select</a></code> element whose <a href="the-button-element.html#concept-option-selectedness" title="concept-option-selectedness">selectedness</a> is true,
-     append an entry in the <var title="">form data set</var> with the
+     append an entry to the <var title="">form data set</var> with the
      <var title="">name</var> as the name, the <a href="the-button-element.html#concept-option-value" title="concept-option-value">value</a> of the
      <code><a href="the-button-element.html#the-option-element">option</a></code> element as the value, and <var title="">type</var> as the type.</p></li>
 
@@ -1285,7 +1454,7 @@ fur
        otherwise, let <var title="">value</var> be the string
        "<code title="">on</code>".</p></li>
 
-       <li><p>Append an entry in the <var title="">form data set</var>
+       <li><p>Append an entry to the <var title="">form data set</var>
        with <var title="">name</var> as the name, <var title="">value</var> as the value, and <var title="">type</var>
        as the type.</p></li>
 
@@ -1294,26 +1463,51 @@ fur
      <li><p>Otherwise, if the <var title="">field</var> element is an
      <code><a href="the-input-element.html#the-input-element">input</a></code> element whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="number-state.html#file-upload-state" title="attr-input-type-file">File Upload</a> state, then for
      each file <a href="number-state.html#concept-input-type-file-selected" title="concept-input-type-file-selected">selected</a> in the
-     <code><a href="the-input-element.html#the-input-element">input</a></code> element, append an entry in the <var title="">form data set</var> with the <var title="">name</var> as
+     <code><a href="the-input-element.html#the-input-element">input</a></code> element, append an entry to the <var title="">form data set</var> with the <var title="">name</var> as
      the name, the file (consisting of the name, the type, and the
      body) as the value, and <var title="">type</var> as the type. If
      there are no <a href="number-state.html#concept-input-type-file-selected" title="concept-input-type-file-selected">selected files</a>,
-     then append an entry in the <var title="">form data set</var>
+     then append an entry to the <var title="">form data set</var>
      with the <var title="">name</var> as the name, the empty string
-     as the value, and <code title="">application/octet-stream</code>
-     as the type.</p></li>
+     as the value, and <code>application/octet-stream</code> as the
+     type.</p></li>
      <!-- https://bugzilla.mozilla.org/show_bug.cgi?id=529859 -->
 
      <li><p>Otherwise, if the <var title="">field</var> element is an
      <code><a href="the-iframe-element.html#the-object-element">object</a></code> element: try to obtain a form submission
      value from the <a href="infrastructure.html#plugin">plugin</a><!-- using NPAPI's
      NPP_GetValue() entry point with the NPPVformValue variable -->,
-     and if that is successful, append an entry in the <var title="">form data set</var> with <var title="">name</var> as the
+     and if that is successful, append an entry to the <var title="">form data set</var> with <var title="">name</var> as the
      name, the returned form submission value as the value, and the
      string "<code title="">object</code>" as the type.</p></li>
 
-     <li><p>Otherwise, append an entry in the <var title="">form data
+     <li><p>Otherwise, append an entry to the <var title="">form data
      set</var> with <var title="">name</var> as the name, the <a href="#concept-fe-value" title="concept-fe-value">value</a> of the <var title="">field</var> element as the value, and <var title="">type</var> as the type.</p></li>
+
+     <li>
+
+      <p>If the element has a <a href="#form-control-dirname-attribute">form control <code title="">dirname</code> attribute</a>, and that attribute's
+      value is not the empty string, then run these substeps:</p>
+
+      <ol><li><p>Let <var title="">dirname</var> be the value of the
+       element's <code title="">dirname</code> attribute.</p></li>
+
+       <li><p>Let <var title="">dir</var> be the string "<code title="">ltr</code>" if <a href="elements.html#the-directionality">the directionality</a> of the
+       element is '<a href="elements.html#concept-ltr" title="concept-ltr">ltr</a>', and "<code title="">rtl</code>" otherwise (i.e. when <a href="elements.html#the-directionality">the
+       directionality</a> of the element is '<a href="elements.html#concept-rtl" title="concept-rtl">rtl</a>').</p></li>
+
+       <li><p>Append an entry to the <var title="">form data set</var>
+       with <var title="">dirname</var> as the name, <var title="">dir</var> as the value, and the string "<code title="">direction</code>" as the type.</p></li>
+
+      </ol><p class="note">An element can only have a <a href="#form-control-dirname-attribute">form control
+      <code title="">dirname</code> attribute</a> if it is a
+      <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> element or an <code><a href="the-input-element.html#the-input-element">input</a></code> element
+      whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in
+      either the <a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-text">Text</a> state
+      or the <a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-search">Search</a>
+      state.</p>
+
+     </li>
 
     </ol></li>
 
@@ -1352,6 +1546,20 @@ fur
 
    <li><p>Let <var title="">target</var> be the <var title="">submitter</var> element's <a href="#concept-fs-target" title="concept-fs-target">target</a>.</p></li>
 
+   <li><p>If the user indicated a specific <a href="browsers.html#browsing-context">browsing
+   context</a> to use when submitting the form, then let <var title="">target browsing context</var> be that <a href="browsers.html#browsing-context">browsing
+   context</a>. Otherwise, apply <a href="browsers.html#the-rules-for-choosing-a-browsing-context-given-a-browsing-context-name">the rules for choosing a
+   browsing context given a browsing context name</a> using <var title="">target</var> as the name and the <a href="browsers.html#browsing-context">browsing
+   context</a> of <var title="">form</var> as the context in which
+   the algorithm is executed, and let <var title="">target browsing
+   context</var> be the resulting <a href="browsers.html#browsing-context">browsing
+   context</a>.</p></li>
+
+   <li><p>If <var title="">target browsing context</var> was created
+   in the previous step, then let <var title="">replace</var> be true.
+   Otherwise, let it be false.</p></li>
+   <!-- XXXXX this is about to change -->
+
    <li>
 
     <p>Select the appropriate row in the table below based on the
@@ -1364,38 +1572,24 @@ fur
     <table><thead><tr><td>
       </td><th> <a href="#attr-fs-method-get" title="attr-fs-method-GET">GET</a>
       </th><th> <a href="#attr-fs-method-post" title="attr-fs-method-POST">POST</a>
-      </th><th> <a href="#attr-fs-method-put" title="attr-fs-method-PUT">PUT</a>
-      </th><th> <a href="#attr-fs-method-delete" title="attr-fs-method-DELETE">DELETE</a>
      </th></tr></thead><tbody><tr><th> <code title="">http</code>
       </th><td> <a href="#submit-mutate-action" title="submit-mutate-action">Mutate action</a>
       </td><td> <a href="#submit-body" title="submit-body">Submit as entity body</a>
-      </td><td> <a href="#submit-body" title="submit-body">Submit as entity body</a>
-      </td><td> <a href="#submit-delete-action" title="submit-delete-action">Delete action</a>
      </td></tr><tr><th> <code title="">https</code>
       </th><td> <a href="#submit-mutate-action" title="submit-mutate-action">Mutate action</a>
       </td><td> <a href="#submit-body" title="submit-body">Submit as entity body</a>
-      </td><td> <a href="#submit-body" title="submit-body">Submit as entity body</a>
-      </td><td> <a href="#submit-delete-action" title="submit-delete-action">Delete action</a>
      </td></tr><tr><th> <code title="">ftp</code>
       </th><td> <a href="#submit-get-action" title="submit-get-action">Get action</a>
-      </td><td> <a href="#submit-get-action" title="submit-get-action">Get action</a>
-      </td><td> <a href="#submit-get-action" title="submit-get-action">Get action</a>
       </td><td> <a href="#submit-get-action" title="submit-get-action">Get action</a>
      </td></tr><tr><th> <code title="">javascript</code>
       </th><td> <a href="#submit-get-action" title="submit-get-action">Get action</a>
       </td><td> <a href="#submit-get-action" title="submit-get-action">Get action</a>
-      </td><td> <a href="#submit-get-action" title="submit-get-action">Get action</a>
-      </td><td> <a href="#submit-get-action" title="submit-get-action">Get action</a>
      </td></tr><tr><th> <code title="">data</code>
       </th><td> <a href="#submit-get-action" title="submit-get-action">Get action</a>
       </td><td> <a href="#submit-data-post" title="submit-data-post">Post to data:</a>
-      </td><td> <a href="#submit-data-put" title="submit-data-put">Put to data:</a>
-      </td><td> <a href="#submit-get-action" title="submit-get-action">Get action</a>
      </td></tr><tr><th> <code title="">mailto</code>
       </th><td> <a href="#submit-mailto-headers" title="submit-mailto-headers">Mail with headers</a>
       </td><td> <a href="#submit-mailto-body" title="submit-mailto-body">Mail as body</a>
-      </td><td> <a href="#submit-mailto-headers" title="submit-mailto-headers">Mail with headers</a>
-      </td><td> <a href="#submit-mailto-headers" title="submit-mailto-headers">Mail with headers</a>
     </td></tr></tbody></table><p>If <var title="">scheme</var> is not one of those listed in
     this table, then the behavior is not defined by this
     specification. User agents should, in the absence of another
@@ -1420,13 +1614,11 @@ fur
       replaced by <var title="">query</var> (adding a U+003F QUESTION
       MARK character (?) if appropriate).</p>
 
-      <p>Let <var title="">target browsing context</var> be <a href="#the-form-submission-target-browsing-context">the
-      form submission target browsing context</a>.</p>
-
-      <p><a href="history.html#navigate">Navigate</a> <var title="">target browsing
-      context</var> to <var title="">destination</var>. If <var title="">target browsing context</var> was newly created for
-      this purpose by the steps above, then it must be navigated with
-      <a href="history.html#replacement-enabled">replacement enabled</a>.</p>
+      <p><a href="history.html#navigate">Navigate</a><!--DONAV form--> <var title="">target
+      browsing context</var> to <var title="">destination</var>. If
+      <var title="">replace</var> is true, then <var title="">target
+      browsing context</var> must be navigated with <a href="history.html#replacement-enabled">replacement
+      enabled</a>.</p>
 
      </dd>
 
@@ -1436,9 +1628,6 @@ fur
       <p>Let <var title="">entity body</var> be the result of encoding
       the <var title="">form data set</var> using the
       <a href="#appropriate-form-encoding-algorithm">appropriate form encoding algorithm</a>.</p>
-
-      <p>Let <var title="">target browsing context</var> be <a href="#the-form-submission-target-browsing-context">the
-      form submission target browsing context</a>.</p>
 
       <p>Let <var title="">MIME type</var> be determined as
       follows:</p>
@@ -1455,50 +1644,27 @@ fur
 
        <dd>Let <var title="">MIME type</var> be "<code title="">text/plain</code>".</dd>
 
-      </dl><p>If <var title="">method</var> is anything but GET or POST,
-      and the <a href="origin-0.html#origin">origin</a> of <var title="">action</var> is not
-      the <a href="origin-0.html#same-origin">same origin</a> as that of the <code><a href="forms.html#the-form-element">form</a></code>
-      element's <code><a href="infrastructure.html#document">Document</a></code>, then abort these steps.</p>
-      <!-- CORS, one day -->
-
-      <p>Otherwise, <a href="history.html#navigate">navigate</a> <var title="">target
-      browsing context</var> to <var title="">action</var> using the
-      HTTP method given by <var title="">method</var> and with <var title="">entity body</var> as the entity body, of type <var title="">MIME type</var>. If <var title="">target browsing
-      context</var> was newly created for this purpose by the steps
-      above, then it must be navigated with <a href="history.html#replacement-enabled">replacement
+      </dl><!--<p>If <var title="">method</var> is anything but (GET or)
+      POST, and the <span>origin</span> of <var title="">action</var>
+      is not the <span>same origin</span> as that of the
+      <code>form</code> element's <code>Document</code>, then abort
+      these steps.</p> [or do CORS] (this is commented out since only
+      POST can trigger this now, and that's historically
+      unrestricted)--><p>Otherwise, <a href="history.html#navigate">navigate</a><!--DONAV form--> <var title="">target browsing context</var> to <var title="">action</var> using the HTTP method given by <var title="">method</var> and with <var title="">entity body</var>
+      as the entity body, of type <var title="">MIME type</var>. If
+      <var title="">replace</var> is true, then <var title="">target
+      browsing context</var> must be navigated with <a href="history.html#replacement-enabled">replacement
       enabled</a>.</p>
-
-     </dd>
-
-     <dt><dfn id="submit-delete-action" title="submit-delete-action">Delete action</dfn>
-     </dt><dd>
-
-      <p>Let <var title="">target browsing context</var> be <a href="#the-form-submission-target-browsing-context">the
-      form submission target browsing context</a>.</p>
-
-      <p>If the <a href="origin-0.html#origin">origin</a> of <var title="">action</var> is
-      not the <a href="origin-0.html#same-origin">same origin</a> as that of the
-      <code><a href="forms.html#the-form-element">form</a></code> element's <code><a href="infrastructure.html#document">Document</a></code>, then abort
-      these steps.</p> <!-- CORS, one day -->
-
-      <p>Otherwise, <a href="history.html#navigate">navigate</a> <var title="">target
-      browsing context</var> to <var title="">action</var> using the
-      DELETE method. If <var title="">target browsing context</var>
-      was newly created for this purpose by the steps above, then it
-      must be navigated with <a href="history.html#replacement-enabled">replacement enabled</a>.</p>
 
      </dd>
 
      <dt><dfn id="submit-get-action" title="submit-get-action">Get action</dfn>
      </dt><dd>
 
-      <p>Let <var title="">target browsing context</var> be <a href="#the-form-submission-target-browsing-context">the
-      form submission target browsing context</a>.</p>
-
-      <p><a href="history.html#navigate">Navigate</a> <var title="">target browsing
-      context</var> to <var title="">action</var>. If <var title="">target browsing context</var> was newly created for
-      this purpose by the steps above, then it must be navigated with
-      <a href="history.html#replacement-enabled">replacement enabled</a>.</p>
+      <p><a href="history.html#navigate">Navigate</a><!--DONAV form--> <var title="">target
+      browsing context</var> to <var title="">action</var>. If <var title="">replace</var> is true, then <var title="">target
+      browsing context</var> must be navigated with <a href="history.html#replacement-enabled">replacement
+      enabled</a>.</p>
 
      </dd>
 
@@ -1525,57 +1691,10 @@ fur
       string, replace the first occurrence of "<code title="">%%</code>" in <var title="">action</var> with the
       resulting escaped string. <a href="references.html#refsRFC3986">[RFC3986]</a></p>
 
-      <p>Let <var title="">target browsing context</var> be <a href="#the-form-submission-target-browsing-context">the
-      form submission target browsing context</a>.</p>
-
-      <p><a href="history.html#navigate">Navigate</a> <var title="">target browsing
-      context</var> to the potentially modified <var title="">action</var>. If <var title="">target browsing
-      context</var> was newly created for this purpose by the steps
-      above, then it must be navigated with <a href="history.html#replacement-enabled">replacement
-      enabled</a>.</p>
-
-     </dd>
-
-     <dt><dfn id="submit-data-put" title="submit-data-put">Put to data:</dfn>
-     </dt><dd>
-
-      <p>Let <var title="">data</var> be the result of encoding the
-      <var title="">form data set</var> using the <a href="#appropriate-form-encoding-algorithm">appropriate
-      form encoding algorithm</a>.</p>
-
-      <p>Let <var title="">MIME type</var> be determined as
-      follows:</p>
-
-      <dl><dt>If <var title="">enctype</var> is <code title="attr-fs-enctype-urlencoded"><a href="#attr-fs-enctype-urlencoded">application/x-www-form-urlencoded</a></code></dt>
-
-       <dd>Let <var title="">MIME type</var> be "<code title="">application/x-www-form-urlencoded</code>".</dd>
-
-       <dt>If <var title="">enctype</var> is <code title="attr-fs-enctype-formdata"><a href="#attr-fs-enctype-formdata">multipart/form-data</a></code></dt>
-
-       <dd>Let <var title="">MIME type</var> be "<code title="">multipart/form-data</code>".</dd>
-
-       <dt>If <var title="">enctype</var> is <code title="attr-fs-enctype-text"><a href="#attr-fs-enctype-text">text/plain</a></code></dt>
-
-       <dd>Let <var title="">MIME type</var> be "<code title="">text/plain</code>".</dd>
-
-      </dl><p>Let <var title="">destination</var> be the result of
-      concatenating the following:</p>
-
-      <ol class="brief"><li>The string "<code title="">data:</code>".</li>
-
-       <li>The value of <var title="">MIME type</var>.</li>
-
-       <li>The string "<code title="">;base64,</code>".</li>
-
-       <li>A base-64 encoded representation of <var title="">data</var>. <a href="references.html#refsRFC2045">[RFC2045]</a></li>
-
-      </ol><p>Let <var title="">target browsing context</var> be <a href="#the-form-submission-target-browsing-context">the
-      form submission target browsing context</a>.</p>
-
-      <p><a href="history.html#navigate">Navigate</a> <var title="">target browsing
-      context</var> to <var title="">destination</var>. If <var title="">target browsing context</var> was newly created for
-      this purpose by the steps above, then it must be navigated with
-      <a href="history.html#replacement-enabled">replacement enabled</a>.</p>
+      <p><a href="history.html#navigate">Navigate</a><!--DONAV form--> <var title="">target
+      browsing context</var> to the potentially modified <var title="">action</var>. If <var title="">replace</var> is true,
+      then <var title="">target browsing context</var> must be
+      navigated with <a href="history.html#replacement-enabled">replacement enabled</a>.</p>
 
      </dd>
 
@@ -1598,13 +1717,11 @@ fur
 
       <p>Append <var title="">headers</var> to <var title="">destination</var>.</p>
 
-      <p>Let <var title="">target browsing context</var> be <a href="#the-form-submission-target-browsing-context">the
-      form submission target browsing context</a>.</p>
-
-      <p><a href="history.html#navigate">Navigate</a> <var title="">target browsing
-      context</var> to <var title="">destination</var>. If <var title="">target browsing context</var> was newly created for
-      this purpose by the steps above, then it must be navigated with
-      <a href="history.html#replacement-enabled">replacement enabled</a>.</p>
+      <p><a href="history.html#navigate">Navigate</a><!--DONAV form--> <var title="">target
+      browsing context</var> to <var title="">destination</var>. If
+      <var title="">replace</var> is true, then <var title="">target
+      browsing context</var> must be navigated with <a href="history.html#replacement-enabled">replacement
+      enabled</a>.</p>
 
      </dd>
 
@@ -1631,28 +1748,15 @@ fur
       <p>Append <var title="">body</var>, interpreted as a US-ASCII
       string, to <var title="">destination</var>.</p>
 
-      <p>Let <var title="">target browsing context</var> be <a href="#the-form-submission-target-browsing-context">the
-      form submission target browsing context</a>.</p>
-
-      <p><a href="history.html#navigate">Navigate</a> <var title="">target browsing
-      context</var> to <var title="">destination</var>. If <var title="">target browsing context</var> was newly created for
-      this purpose by the steps above, then it must be navigated with
-      <a href="history.html#replacement-enabled">replacement enabled</a>.</p>
+      <p><a href="history.html#navigate">Navigate</a><!--DONAV form--> <var title="">target
+      browsing context</var> to <var title="">destination</var>. If
+      <var title="">replace</var> is true, then <var title="">target
+      browsing context</var> must be navigated with <a href="history.html#replacement-enabled">replacement
+      enabled</a>.</p>
 
      </dd>
 
-    </dl><p><dfn id="the-form-submission-target-browsing-context">The form submission target browsing context</dfn> is
-    obtained, when needed by the behaviors described above, as
-    follows: If the user indicated a specific <a href="browsers.html#browsing-context">browsing
-    context</a> to use when submitting the form, then that is the
-    target browsing context. Otherwise, apply <a href="browsers.html#the-rules-for-choosing-a-browsing-context-given-a-browsing-context-name">the rules for
-    choosing a browsing context given a browsing context name</a>
-    using <var title="">target</var> as the name and the
-    <a href="browsers.html#browsing-context">browsing context</a> of <var title="">form</var> as the
-    context in which the algorithm is executed; the resulting
-    <a href="browsers.html#browsing-context">browsing context</a> is the target browsing context.</p>
-
-    <p>The <dfn id="appropriate-form-encoding-algorithm">appropriate form encoding algorithm</dfn> is
+    </dl><p>The <dfn id="appropriate-form-encoding-algorithm">appropriate form encoding algorithm</dfn> is
     determined as follows:</p>
 
     <dl><dt>If <var title="">enctype</var> is <code title="attr-fs-enctype-urlencoded"><a href="#attr-fs-enctype-urlencoded">application/x-www-form-urlencoded</a></code></dt>
@@ -1674,12 +1778,12 @@ fur
 
   </ol></div><div class="impl">
 
-  <h5 id="url-encoded-form-data"><span class="secno">4.10.21.4 </span>URL-encoded form data</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="url-encoded-form-data"><span class="secno">4.10.22.4 </span>URL-encoded form data</h5>
 
   <p>The <dfn id="application-x-www-form-urlencoded-encoding-algorithm"><code title="">application/x-www-form-urlencoded</code> encoding
   algorithm</dfn> is as follows:</p>
 
-  <ol><li><p>Let <var title="">result</var> be the empty string.</p></li>
+  <ol><!-- the first few steps of this are the same as in the next section --><li><p>Let <var title="">result</var> be the empty string.</p></li>
 
    <li>
 
@@ -1712,7 +1816,8 @@ fur
      with <var title="">charset</var>.</p></li>
 
      <li><p>If the entry's type is "<code title="">file</code>",
-     replace its value with the file's filename only.</p></li>
+     replace its value with the file's filename only.</p></li> <!--
+     this is not present in the next section -->
 
      <li><p>For each character in the entry's name and value that
      cannot be expressed using the selected character encoding,
@@ -1722,8 +1827,10 @@ fur
      U+0039 DIGIT NINE (9) representing the Unicode code point of the
      character in base ten, and finally a U+003B SEMICOLON character
      (;).</p></li><!-- we should say it should be the shortest
-     possible string, no leading zeros. this whole step as asinine,
+     possible string, no leading zeros. this whole step is asinine,
      though, so... -->
+
+     <!-- this is where the similarities with the next section end -->
 
      <li>
 
@@ -1802,28 +1909,90 @@ fur
 
   </ol></div><div class="impl">
 
-  <h5 id="multipart-form-data"><span class="secno">4.10.21.5 </span>Multipart form data</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="multipart-form-data"><span class="secno">4.10.22.5 </span>Multipart form data</h5>
+
+  <!-- http://hixie.ch/tests/adhoc/html/forms/submission/multipart_form-data/ -->
 
   <p>The <dfn id="multipart-form-data-encoding-algorithm"><code title="">multipart/form-data</code> encoding
-  algorithm</dfn> is to encode the <var title="">form data set</var>
-  using the rules described by RFC2388, <cite>Returning Values from
-  Forms: <code title="">multipart/form-data</code></cite>, and return
-  the resulting byte stream. <a href="references.html#refsRFC2388">[RFC2388]</a></p>
+  algorithm</dfn> is as follows:</p>
 
-  <p>Each entry in the <var title="">form data set</var> is a
-  <i>field</i>, the name of the entry is the <i>field name</i> and the
-  value of the entry is the <i>field value</i>, unless the entry's
-  name is "<code title="attr-fe-name-charset"><a href="#attr-fe-name-charset">_charset_</a></code>" and its type is "<code title="">hidden</code>", in which case the <i>field value</i> is the
-  character encoding used by the aforementioned algorithm to encode
-  the value of the field.</p>
+  <ol><!-- the first few steps of this are the same as in the previous section --><li><p>Let <var title="">result</var> be the empty string.</p></li>
 
-  <p>The order of parts must be the same as the order of fields in the
-  <var title="">form data set</var>. Multiple entries with the same
-  name must be treated as distinct fields.</p>
+   <li>
 
-  </div><div class="impl">
+    <p>If the <code><a href="forms.html#the-form-element">form</a></code> element has an <code title="attr-form-accept-charset"><a href="forms.html#attr-form-accept-charset">accept-charset</a></code> attribute,
+    then, taking into account the characters found in the <var title="">form data set</var>'s names and values, and the character
+    encodings supported by the user agent, select a character encoding
+    from the list given in the <code><a href="forms.html#the-form-element">form</a></code>'s <code title="attr-form-accept-charset"><a href="forms.html#attr-form-accept-charset">accept-charset</a></code> attribute
+    that is an <a href="infrastructure.html#ascii-compatible-character-encoding">ASCII-compatible character encoding</a>. If
+    none of the encodings are supported, or if none are listed, then
+    let the selected character encoding be UTF-8.</p>
 
-  <h5 id="plain-text-form-data"><span class="secno">4.10.21.6 </span>Plain text form data</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+    <p>Otherwise, if the <a href="dom.html#document-s-character-encoding">document's character encoding</a> is
+    an <a href="infrastructure.html#ascii-compatible-character-encoding">ASCII-compatible character encoding</a>, then that is
+    the selected character encoding.</p>
+
+    <p>Otherwise, let the selected character encoding be UTF-8.</p>
+
+   </li>
+
+   <li><p>Let <var title="">charset</var> be the <a href="infrastructure.html#preferred-mime-name">preferred MIME
+   name</a> of the selected character encoding.</p></li>
+
+   <li>
+
+    <p>For each entry in the <var title="">form data set</var>,
+    perform these substeps:</p>
+
+    <ol><li><p>If the entry's name is "<code title="attr-fe-name-charset"><a href="#attr-fe-name-charset">_charset_</a></code>"
+     and its type is "<code title="">hidden</code>", replace its value
+     with <var title="">charset</var>.</p></li>
+
+     <!-- the step that replaces a file with its name is missing in
+     this version of the algorithm -->
+
+     <li><p>For each character in the entry's name and value that
+     cannot be expressed using the selected character encoding,
+     replace the character by a string consisting of a U+0026
+     AMPERSAND character (&amp;), a U+0023 NUMBER SIGN character (#),
+     one or more characters in the range U+0030 DIGIT ZERO (0) to
+     U+0039 DIGIT NINE (9) representing the Unicode code point of the
+     character in base ten, and finally a U+003B SEMICOLON character
+     (;).</p></li><!-- we should say it should be the shortest
+     possible string, no leading zeros. this whole step is asinine,
+     though, so... -->
+
+     <!-- this is where the similarities with the previous section end -->
+
+    </ol></li>
+
+   <li>
+
+    <p>Encode the (now mutated) <var title="">form data set</var>
+    using the rules described by RFC 2388, <cite>Returning Values from
+    Forms: <code title="">multipart/form-data</code></cite>, and
+    return the resulting byte stream. <a href="references.html#refsRFC2388">[RFC2388]</a></p>
+
+    <p>Each entry in the <var title="">form data set</var> is a
+    <i>field</i>, the name of the entry is the <i>field name</i> and
+    the value of the entry is the <i>field value</i>.</p>
+
+    <p>The order of parts must be the same as the order of fields in
+    the <var title="">form data set</var>. Multiple entries with the
+    same name must be treated as distinct fields.</p>
+
+    <p>The parts of the generated <code title="">multipart/form-data</code> resource that correspond to
+    non-file fields must not have a <code><a href="fetching-resources.html#content-type">Content-Type</a></code> header
+    specified. Their names and values must be encoded using the
+    character encoding selected above (field names in particular do
+    not get converted to a 7-bit safe encoding as suggested in RFC
+    2388).</p>
+
+   </li>
+
+  </ol></div><div class="impl">
+
+  <h5 id="plain-text-form-data"><span class="secno">4.10.22.6 </span>Plain text form data</h5>
 
   <p>The <dfn id="text-plain-encoding-algorithm"><code title="">text/plain</code> encoding
   algorithm</dfn> is as follows:</p>
@@ -1877,7 +2046,7 @@ fur
 
   </ol></div><div class="impl">
 
-  <h4 id="resetting-a-form"><span class="secno">4.10.22 </span>Resetting a form</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="resetting-a-form"><span class="secno">4.10.23 </span>Resetting a form</h4>
 
   <p>When a <code><a href="forms.html#the-form-element">form</a></code> element <var title="">form</var> is <dfn id="concept-form-reset" title="concept-form-reset">reset</dfn>, the user agent must
   <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named <code title="event-reset">reset</code>, that is cancelable, at <var title="">form</var>, and then, if that event is not canceled, must
@@ -1894,7 +2063,7 @@ fur
 
   </div><div class="impl">
 
-  <h4 id="event-dispatch"><span class="secno">4.10.23 </span>Event dispatch</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="event-dispatch"><span class="secno">4.10.24 </span>Event dispatch</h4>
 
   <p>When the user agent is to <dfn id="broadcast-forminput-events">broadcast <code title="event-forminput">forminput</code> events</dfn> or
   <dfn id="broadcast-formchange-events">broadcast <code title="event-formchange">formchange</code>

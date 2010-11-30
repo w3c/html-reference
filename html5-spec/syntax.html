@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,12 +356,12 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="dnd.html" title="7.9 Drag and drop" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="parsing.html" title="8.2 Parsing HTML documents" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="dnd.html" title="7.7 Drag and drop" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="parsing.html" title="8.2 Parsing HTML documents" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
    </div><div>
-   <a href="dnd.html">&#x2190; 7.9 Drag and drop</a> &#x2013;
+   <a href="dnd.html">&#x2190; 7.7 Drag and drop</a> &#x2013;
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="parsing.html">8.2 Parsing HTML documents &#x2192;</a>
   <ol class="toc"><li><a href="syntax.html#syntax"><span class="secno">8 </span>The HTML syntax</a>
@@ -324,7 +371,7 @@
       <ol><li><a href="syntax.html#newlines"><span class="secno">8.1.3.1 </span>Newlines</a></li></ol></li><li><a href="syntax.html#character-references"><span class="secno">8.1.4 </span>Character references</a></li><li><a href="syntax.html#cdata-sections"><span class="secno">8.1.5 </span>CDATA sections</a></li><li><a href="syntax.html#comments"><span class="secno">8.1.6 </span>Comments</a></li></ol></li></ol></li></ol></div><h2 id="syntax"><span class="secno">8 </span><dfn>The HTML syntax</dfn></h2><p class="note">This section only describes the rules for resources
   labeled with an <a href="infrastructure.html#html-mime-type">HTML MIME type</a>. Rules for XML resources
   are discussed in the section below entitled "<a href="the-xhtml-syntax.html#the-xhtml-syntax">The XHTML
-  syntax</a>".</p><h3 id="writing"><span class="secno">8.1 </span>Writing HTML documents</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><div class="impl">
+  syntax</a>".</p><h3 id="writing"><span class="secno">8.1 </span>Writing HTML documents</h3><div class="impl">
 
   <p><i>This section only applies to documents, authoring tools, and
   markup generators. In particular, it does not apply to conformance
@@ -371,7 +418,7 @@
   the ranges U+0041 to U+005A (LATIN CAPITAL LETTER A to LATIN CAPITAL
   LETTER Z) and U+0061 to U+007A (LATIN SMALL LETTER A to LATIN SMALL
   LETTER Z). For convenience, in this section this is just referred to
-  as "case-insensitive".</p><h4 id="the-doctype"><span class="secno">8.1.1 </span>The DOCTYPE</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments. </i><span><a href="http://www.w3.org/html/wg/tracker/issues/4">ISSUE-4</a> (html-versioning) and <a href="http://www.w3.org/html/wg/tracker/issues/84">ISSUE-84</a> (legacy-doctypes) block progress to Last Call</span></p><p>A <dfn id="syntax-doctype" title="syntax-doctype">DOCTYPE</dfn> is a <!-- mostly
+  as "case-insensitive".</p><h4 id="the-doctype"><span class="secno">8.1.1 </span>The DOCTYPE</h4><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/4">ISSUE-4</a> (html-versioning) and <a href="http://www.w3.org/html/wg/tracker/issues/84">ISSUE-84</a> (legacy-doctypes) block progress to Last Call</span></p><p>A <dfn id="syntax-doctype" title="syntax-doctype">DOCTYPE</dfn> is a <!-- mostly
   useless but nonetheless --> required preamble.</p><p class="note">DOCTYPEs are required for legacy reasons. When
   omitted, browsers tend to use a different rendering mode that is
   incompatible with some specifications. Including the DOCTYPE in a
@@ -379,14 +426,14 @@
   following the relevant specifications.</p><p>A DOCTYPE must consist of the following characters, in this
   order:</p><ol class="brief"><li>A string that is an <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for the string "<code title="">&lt;!DOCTYPE</code>".</li>
    <li>One or more <a href="common-microsyntaxes.html#space-character" title="space character">space characters</a>.</li>
-   <li>A string that is an <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for the string "<code title="">HTML</code>".</li>
+   <li>A string that is an <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for the string "<code title="">html</code>".</li>
    <li>Optionally, a <a href="#doctype-legacy-string">DOCTYPE legacy string</a> or an <a href="#obsolete-permitted-doctype-string">obsolete permitted DOCTYPE string</a> (defined below).</li>
    <li>Zero or more <a href="common-microsyntaxes.html#space-character" title="space character">space characters</a>.</li>
    <li>A U+003E GREATER-THAN SIGN character (&gt;).</li>
-  </ol><p class="note">In other words, <code>&lt;!DOCTYPE HTML&gt;</code>,
+  </ol><p class="note">In other words, <code>&lt;!DOCTYPE html&gt;</code>,
   case-insensitively.</p><hr/><p>For the purposes of HTML generators that cannot output HTML
   markup with the short DOCTYPE "<code title="">&lt;!DOCTYPE
-  HTML&gt;</code>", a <dfn id="doctype-legacy-string">DOCTYPE legacy string</dfn> may be inserted
+  html&gt;</code>", a <dfn id="doctype-legacy-string">DOCTYPE legacy string</dfn> may be inserted
   into the DOCTYPE (in the position defined above). This string must
   consist of:</p><ol class="brief"><li>One or more <a href="common-microsyntaxes.html#space-character" title="space character">space characters</a>.</li>
    <li>A string that is an <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for the string "<code title="">SYSTEM</code>".</li>
@@ -394,8 +441,8 @@
    <li>A U+0022 QUOTATION MARK or U+0027 APOSTROPHE character (the <i>quote mark</i>).</li>
    <li>The literal string "<code><a href="urls.html#about:legacy-compat">about:legacy-compat</a></code>".</li>
    <li>A matching U+0022 QUOTATION MARK or U+0027 APOSTROPHE character (i.e. the same character as in the earlier step labeled <i>quote mark</i>).</li>
-  </ol><p class="note">In other words, <code>&lt;!DOCTYPE HTML SYSTEM
-  "about:legacy-compat"&gt;</code> or <code>&lt;!DOCTYPE HTML SYSTEM
+  </ol><p class="note">In other words, <code>&lt;!DOCTYPE html SYSTEM
+  "about:legacy-compat"&gt;</code> or <code>&lt;!DOCTYPE html SYSTEM
   'about:legacy-compat'&gt;</code>, case-insensitively except for the
   part in single or double quotes.</p><p>The <a href="#doctype-legacy-string">DOCTYPE legacy string</a> should not be used unless
   the document is generated from a system that cannot output the
@@ -432,7 +479,7 @@
   </td></tr></tbody></table><p>A <a href="#syntax-doctype" title="syntax-doctype">DOCTYPE</a> containing an
   <a href="#obsolete-permitted-doctype-string">obsolete permitted DOCTYPE string</a> is an <dfn id="obsolete-permitted-doctype">obsolete
   permitted DOCTYPE</dfn>. Authors should not use <a href="#obsolete-permitted-doctype" title="obsolete permitted DOCTYPE">obsolete permitted
-  DOCTYPEs</a>, as they are unnecessarily long.</p><h4 id="elements-0"><span class="secno">8.1.2 </span>Elements</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>There are five different kinds of <dfn id="syntax-elements" title="syntax-elements">elements</dfn>: <a href="#void-elements">void elements</a>,
+  DOCTYPEs</a>, as they are unnecessarily long.</p><h4 id="elements-0"><span class="secno">8.1.2 </span>Elements</h4><p>There are five different kinds of <dfn id="syntax-elements" title="syntax-elements">elements</dfn>: <a href="#void-elements">void elements</a>,
   <a href="#raw-text-elements">raw text elements</a>, <a href="#rcdata-elements">RCDATA elements</a>,
   <a href="#foreign-elements">foreign elements</a>, and <a href="#normal-elements">normal elements</a>.</p><dl><dt><dfn id="void-elements">Void elements</dfn></dt>
 
@@ -440,7 +487,7 @@
    <code><a href="tabular-data.html#the-col-element">col</a></code>, <code><a href="interactive-elements.html#the-command">command</a></code>, <code><a href="the-iframe-element.html#the-embed-element">embed</a></code>,
    <code><a href="grouping-content.html#the-hr-element">hr</a></code>, <code><a href="embedded-content-1.html#the-img-element">img</a></code>, <code><a href="the-input-element.html#the-input-element">input</a></code>,
    <code><a href="the-button-element.html#the-keygen-element">keygen</a></code>, <code><a href="semantics.html#the-link-element">link</a></code>, <code><a href="semantics.html#meta">meta</a></code>,
-   <code><a href="the-iframe-element.html#the-param-element">param</a></code>, <code><a href="video.html#the-source-element">source</a></code>, <code>track</code>,
+   <code><a href="the-iframe-element.html#the-param-element">param</a></code>, <code><a href="video.html#the-source-element">source</a></code>, <code><a href="video.html#the-track-element">track</a></code>,
    <code><a href="text-level-semantics.html#the-wbr-element">wbr</a></code></dd>
 
    <dt><dfn id="raw-text-elements">Raw text elements</dfn></dt>
@@ -527,7 +574,7 @@
   Z. In the HTML syntax, tag names, even those for <a href="#foreign-elements">foreign
   elements</a>, may be written with any mix of lower- and uppercase
   letters that, when converted to all-lowercase, matches the element's
-  tag name; tag names are case-insensitive.</p><h5 id="start-tags"><span class="secno">8.1.2.1 </span>Start tags</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><dfn id="syntax-start-tag" title="syntax-start-tag">Start tags</dfn> must have the
+  tag name; tag names are case-insensitive.</p><h5 id="start-tags"><span class="secno">8.1.2.1 </span>Start tags</h5><p><dfn id="syntax-start-tag" title="syntax-start-tag">Start tags</dfn> must have the
   following format:</p><ol><li>The first character of a start tag must be a U+003C LESS-THAN
    SIGN character (&lt;).</li>
 
@@ -558,7 +605,7 @@
    <li>Finally, start tags must be closed by a U+003E GREATER-THAN
    SIGN character (&gt;).</li>
 
-  </ol><h5 id="end-tags"><span class="secno">8.1.2.2 </span>End tags</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><dfn id="syntax-end-tag" title="syntax-end-tag">End tags</dfn> must have the
+  </ol><h5 id="end-tags"><span class="secno">8.1.2.2 </span>End tags</h5><p><dfn id="syntax-end-tag" title="syntax-end-tag">End tags</dfn> must have the
   following format:</p><ol><li>The first character of an end tag must be a U+003C LESS-THAN
    SIGN character (&lt;).</li>
 
@@ -573,7 +620,7 @@
    <li>Finally, end tags must be closed by a U+003E GREATER-THAN SIGN
    character (&gt;).</li>
 
-  </ol><h5 id="attributes-0"><span class="secno">8.1.2.3 </span>Attributes</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><dfn id="syntax-attributes" title="syntax-attributes">Attributes</dfn> for an element
+  </ol><h5 id="attributes-0"><span class="secno">8.1.2.3 </span>Attributes</h5><p><dfn id="syntax-attributes" title="syntax-attributes">Attributes</dfn> for an element
   are expressed inside the element's start tag.</p><p>Attributes have a name and a value. <dfn id="syntax-attribute-name" title="syntax-attribute-name">Attribute names</dfn> must consist of
   one or more characters other than the <a href="common-microsyntaxes.html#space-character" title="space&#10;  character">space characters</a>, U+0000 NULL, U+0022 QUOTATION
   MARK ("), U+0027 APOSTROPHE ('), U+003E GREATER-THAN SIGN
@@ -746,7 +793,7 @@
     </td></tr><tr><td> <code title="">xmlns</code> </td><td> <a href="namespaces.html#xmlns-namespace">XMLNS namespace</a> </td><td> <code title="">xmlns</code>
     </td></tr><tr><td> <code title="">xlink</code> </td><td> <a href="namespaces.html#xmlns-namespace">XMLNS namespace</a> </td><td> <code title="">xmlns:xlink</code>
   </td></tr></tbody></table><p>No other namespaced attribute can be expressed in <a href="#syntax">the
-  HTML syntax</a>.</p><h5 id="optional-tags"><span class="secno">8.1.2.4 </span>Optional tags</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Certain tags can be <dfn id="syntax-tag-omission" title="syntax-tag-omission">omitted</dfn>.</p><p class="note">Omitting an element's <a href="#syntax-start-tag" title="syntax-start-tag">start tag</a> does not mean the element
+  HTML syntax</a>.</p><h5 id="optional-tags"><span class="secno">8.1.2.4 </span>Optional tags</h5><p>Certain tags can be <dfn id="syntax-tag-omission" title="syntax-tag-omission">omitted</dfn>.</p><p class="note">Omitting an element's <a href="#syntax-start-tag" title="syntax-start-tag">start tag</a> does not mean the element
   is not present; it is implied, but it is still there. An HTML
   document always has a root <code><a href="semantics.html#the-html-element-0">html</a></code> element, even if the
   string <code title="">&lt;html&gt;</code> doesn't appear anywhere in
@@ -780,13 +827,12 @@
   tag</a> may be omitted if the <code><a href="grouping-content.html#the-p-element">p</a></code> element is
   immediately followed by an <code><a href="sections.html#the-address-element">address</a></code>,
   <code><a href="sections.html#the-article-element">article</a></code>, <code><a href="sections.html#the-aside-element">aside</a></code>, <code><a href="grouping-content.html#the-blockquote-element">blockquote</a></code>,
-  <!--v2DATAGRID <code>datagrid</code>,--> <code><a href="obsolete.html#dir">dir</a></code>,
-  <code><a href="grouping-content.html#the-div-element">div</a></code>, <code><a href="grouping-content.html#the-dl-element">dl</a></code>, <code><a href="forms.html#the-fieldset-element">fieldset</a></code>,
-  <code><a href="sections.html#the-footer-element">footer</a></code>, <code><a href="forms.html#the-form-element">form</a></code>, <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code>,
-  <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h2</a></code>, <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h3</a></code>, <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h4</a></code>, <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h5</a></code>,
-  <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h6</a></code>, <code><a href="sections.html#the-header-element">header</a></code>, <code><a href="sections.html#the-hgroup-element">hgroup</a></code>,
-  <code><a href="grouping-content.html#the-hr-element">hr</a></code>, <code><a href="interactive-elements.html#menus">menu</a></code>, <code><a href="sections.html#the-nav-element">nav</a></code>,
-  <code><a href="grouping-content.html#the-ol-element">ol</a></code>, <code><a href="grouping-content.html#the-p-element">p</a></code>, <code><a href="grouping-content.html#the-pre-element">pre</a></code>,
+  <code><a href="obsolete.html#dir">dir</a></code>, <code><a href="grouping-content.html#the-div-element">div</a></code>, <code><a href="grouping-content.html#the-dl-element">dl</a></code>,
+  <code><a href="forms.html#the-fieldset-element">fieldset</a></code>, <code><a href="sections.html#the-footer-element">footer</a></code>, <code><a href="forms.html#the-form-element">form</a></code>,
+  <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code>, <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h2</a></code>, <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h3</a></code>, <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h4</a></code>,
+  <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h5</a></code>, <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h6</a></code>, <code><a href="sections.html#the-header-element">header</a></code>,
+  <code><a href="sections.html#the-hgroup-element">hgroup</a></code>, <code><a href="grouping-content.html#the-hr-element">hr</a></code>, <code><a href="interactive-elements.html#menus">menu</a></code>,
+  <code><a href="sections.html#the-nav-element">nav</a></code>, <code><a href="grouping-content.html#the-ol-element">ol</a></code>, <code><a href="grouping-content.html#the-p-element">p</a></code>, <code><a href="grouping-content.html#the-pre-element">pre</a></code>,
   <code><a href="sections.html#the-section-element">section</a></code>, <code><a href="tabular-data.html#the-table-element">table</a></code>, or <code><a href="grouping-content.html#the-ul-element">ul</a></code>,
   element, or if there is no more content in the parent element and
   the parent element is not an <code><a href="text-level-semantics.html#the-a-element">a</a></code> element.</p><!-- </rt> --><p>An <code><a href="text-level-semantics.html#the-rt-element">rt</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
@@ -845,7 +891,7 @@
   tag</a> may be omitted if the <code><a href="tabular-data.html#the-th-element">th</a></code> element is
   immediately followed by a <code><a href="tabular-data.html#the-td-element">td</a></code> or <code><a href="tabular-data.html#the-th-element">th</a></code>
   element, or if there is no more content in the parent element.</p><p><strong>However</strong>, a <a href="#syntax-start-tag" title="syntax-start-tag">start
-  tag</a> must never be omitted if it has any attributes.</p><h5 id="element-restrictions"><span class="secno">8.1.2.5 </span>Restrictions on content models</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>For historical reasons, certain elements have extra restrictions
+  tag</a> must never be omitted if it has any attributes.</p><h5 id="element-restrictions"><span class="secno">8.1.2.5 </span>Restrictions on content models</h5><p>For historical reasons, certain elements have extra restrictions
   beyond even the restrictions given by their content model.</p><p>A <code><a href="tabular-data.html#the-table-element">table</a></code> element must not contain <code><a href="tabular-data.html#the-tr-element">tr</a></code>
   elements, even though these elements are technically allowed inside
   <code><a href="tabular-data.html#the-table-element">table</a></code> elements according to the content models
@@ -863,26 +909,26 @@
    <p>The following two <code><a href="grouping-content.html#the-pre-element">pre</a></code> blocks are equivalent:</p>
    <pre>&lt;pre&gt;Hello&lt;/pre&gt;</pre>
    <pre>&lt;pre&gt;<br/>Hello&lt;/pre&gt;</pre>
-  </div><h5 id="cdata-rcdata-restrictions"><span class="secno">8.1.2.6 </span>Restrictions on the contents of raw text and RCDATA elements</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The text in <a href="#raw-text-elements" title="raw text elements">raw text</a> and
+  </div><h5 id="cdata-rcdata-restrictions"><span class="secno">8.1.2.6 </span>Restrictions on the contents of raw text and RCDATA elements</h5><p>The text in <a href="#raw-text-elements" title="raw text elements">raw text</a> and
   <a href="#rcdata-elements">RCDATA elements</a> must not contain any occurrences of the
   string "<code title="">&lt;/</code>" (U+003C LESS-THAN SIGN, U+002F
   SOLIDUS) followed by characters that case-insensitively match the
   tag name of the element followed by one of U+0009 CHARACTER
   TABULATION, U+000A LINE FEED (LF), U+000C FORM FEED (FF), U+000D
   CARRIAGE RETURN (CR), U+0020 SPACE, U+003E GREATER-THAN SIGN (&gt;), or
-  U+002F SOLIDUS (/).</p><h4 id="text-0"><span class="secno">8.1.3 </span>Text</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><dfn id="syntax-text" title="syntax-text">Text</dfn> is allowed inside elements,
+  U+002F SOLIDUS (/).</p><h4 id="text-0"><span class="secno">8.1.3 </span>Text</h4><p><dfn id="syntax-text" title="syntax-text">Text</dfn> is allowed inside elements,
   attribute values, and comments. Text must consist of Unicode
   characters. Text must not contain U+0000 characters. Text must not
   contain permanently undefined Unicode characters (noncharacters).
   Text must not contain control characters other than <a href="common-microsyntaxes.html#space-character" title="space character">space characters</a>. Extra constraints
   are placed on what is and what is not allowed in text based on where
-  the text is to be put, as described in the other sections.</p><h5 id="newlines"><span class="secno">8.1.3.1 </span>Newlines</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><dfn id="syntax-newlines" title="syntax-newlines">Newlines</dfn> in HTML may be
+  the text is to be put, as described in the other sections.</p><h5 id="newlines"><span class="secno">8.1.3.1 </span>Newlines</h5><p><dfn id="syntax-newlines" title="syntax-newlines">Newlines</dfn> in HTML may be
   represented either as U+000D CARRIAGE RETURN (CR) characters, U+000A
   LINE FEED (LF) characters, or pairs of U+000D CARRIAGE RETURN (CR),
   U+000A LINE FEED (LF) characters in that order.</p><p>Where <a href="#syntax-charref" title="syntax-charref">character references</a>
   are allowed, a character reference of a U+000A LINE FEED (LF)
   character (but not a U+000D CARRIAGE RETURN (CR) character) also
-  represents a <a href="#syntax-newlines" title="syntax-newlines">newline</a>.</p><h4 id="character-references"><span class="secno">8.1.4 </span>Character references</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>In certain cases described in other sections, <a href="#syntax-text" title="syntax-text">text</a> may be mixed with <dfn id="syntax-charref" title="syntax-charref">character references</dfn>. These can be used
+  represents a <a href="#syntax-newlines" title="syntax-newlines">newline</a>.</p><h4 id="character-references"><span class="secno">8.1.4 </span>Character references</h4><p>In certain cases described in other sections, <a href="#syntax-text" title="syntax-text">text</a> may be mixed with <dfn id="syntax-charref" title="syntax-charref">character references</dfn>. These can be used
   to escape characters that couldn't otherwise legally be included in
   <a href="#syntax-text" title="syntax-text">text</a>.</p><p>Character references must start with a U+0026 AMPERSAND character
   (&amp;). Following this, there are three possible kinds of character
@@ -929,7 +975,7 @@
   LATIN SMALL LETTER Z, and U+0041 LATIN CAPITAL LETTER A to U+005A
   LATIN CAPITAL LETTER Z, followed by a U+003B SEMICOLON character
   (;), where these characters do not match any of the names given in
-  the <a href="named-character-references.html#named-character-references">named character references</a> section.</p><h4 id="cdata-sections"><span class="secno">8.1.5 </span>CDATA sections</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><dfn id="syntax-cdata" title="syntax-cdata">CDATA sections</dfn> must start with
+  the <a href="named-character-references.html#named-character-references">named character references</a> section.</p><h4 id="cdata-sections"><span class="secno">8.1.5 </span>CDATA sections</h4><p><dfn id="syntax-cdata" title="syntax-cdata">CDATA sections</dfn> must start with
   the character sequence U+003C LESS-THAN SIGN, U+0021 EXCLAMATION
   MARK, U+005B LEFT SQUARE BRACKET, U+0043 LATIN CAPITAL LETTER C,
   U+0044 LATIN CAPITAL LETTER D, U+0041 LATIN CAPITAL LETTER A, U+0054
@@ -956,7 +1002,7 @@
  &lt;ms&gt;&lt;![CDATA[x&lt;y3]]&gt;&lt;/ms&gt;
 &lt;/math&gt;</pre>
 
-  </div><h4 id="comments"><span class="secno">8.1.6 </span>Comments</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><dfn id="syntax-comments" title="syntax-comments">Comments</dfn> must start with the
+  </div><h4 id="comments"><span class="secno">8.1.6 </span>Comments</h4><p><dfn id="syntax-comments" title="syntax-comments">Comments</dfn> must start with the
   four character sequence U+003C LESS-THAN SIGN, U+0021 EXCLAMATION
   MARK, U+002D HYPHEN-MINUS, U+002D HYPHEN-MINUS (<code title="">&lt;!--</code>). Following this sequence, the comment may
   have <a href="#syntax-text" title="syntax-text">text</a>, with the additional

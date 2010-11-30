@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,7 +356,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="scripting-1.html" title="4.3 Scripting" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="grouping-content.html" title="4.5 Grouping content" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="scripting-1.html" title="4.3 Scripting" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="grouping-content.html" title="4.5 Grouping content" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -322,9 +369,9 @@
   <code>h3</code>, <code>h4</code>,
   <code>h5</code>, and <code>h6</code>
   elements</a></li><li><a href="sections.html#the-hgroup-element"><span class="secno">4.4.7 </span>The <code>hgroup</code> element</a></li><li><a href="sections.html#the-header-element"><span class="secno">4.4.8 </span>The <code>header</code> element</a></li><li><a href="sections.html#the-footer-element"><span class="secno">4.4.9 </span>The <code>footer</code> element</a></li><li><a href="sections.html#the-address-element"><span class="secno">4.4.10 </span>The <code>address</code> element</a></li><li><a href="sections.html#headings-and-sections"><span class="secno">4.4.11 </span>Headings and sections</a>
-      <ol><li><a href="sections.html#outlines"><span class="secno">4.4.11.1 </span>Creating an outline</a></li></ol></li></ol></li></ol></li></ol></div><h3 id="sections"><span class="secno">4.4 </span>Sections</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><h4 id="the-body-element-0"><span class="secno">4.4.1 </span>The <dfn><code>body</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+      <ol><li><a href="sections.html#outlines"><span class="secno">4.4.11.1 </span>Creating an outline</a></li></ol></li></ol></li></ol></li></ol></div><h3 id="sections"><span class="secno">4.4 </span>Sections</h3><h4 id="the-body-element-0"><span class="secno">4.4.1 </span>The <dfn><code>body</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="#sectioning-root">Sectioning root</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>As the second element in an <code><a href="semantics.html#the-html-element-0">html</a></code> element.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
@@ -346,6 +393,7 @@
    <dd><code title="handler-window-onpopstate"><a href="webappapis.html#handler-window-onpopstate">onpopstate</a></code></dd>
    <dd><code title="handler-window-onredo"><a href="webappapis.html#handler-window-onredo">onredo</a></code></dd>
    <dd><code title="handler-window-onresize"><a href="webappapis.html#handler-window-onresize">onresize</a></code></dd>
+   <dd><code title="handler-window-onscroll"><a href="webappapis.html#handler-window-onscroll">onscroll</a></code></dd>
    <dd><code title="handler-window-onstorage"><a href="webappapis.html#handler-window-onstorage">onstorage</a></code></dd>
    <dd><code title="handler-window-onundo"><a href="webappapis.html#handler-window-onundo">onundo</a></code></dd>
    <dd><code title="handler-window-onunload"><a href="webappapis.html#handler-window-onunload">onunload</a></code></dd>
@@ -368,6 +416,7 @@
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onpageshow" title="handler-window-onpageshow">onpageshow</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onredo" title="handler-window-onredo">onredo</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onresize" title="handler-window-onresize">onresize</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onscroll" title="handler-window-onscroll">onscroll</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onstorage" title="handler-window-onstorage">onstorage</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onundo" title="handler-window-onundo">onundo</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onunload" title="handler-window-onunload">onunload</a>;
@@ -388,7 +437,7 @@
   </div><p>The <code><a href="#the-body-element-0">body</a></code> element exposes as <a href="webappapis.html#event-handler-content-attributes">event handler
   content attributes</a> a number of the <a href="webappapis.html#event-handlers">event
   handlers</a> of the <code><a href="browsers.html#window">Window</a></code> object. It also mirrors
-  their <a href="webappapis.html#event-handler-idl-attributes">event handler IDL attributes</a>.</p><p>The <code title="handler-window-onblur"><a href="webappapis.html#handler-window-onblur">onblur</a></code>, <code title="handler-window-onerror"><a href="webappapis.html#handler-window-onerror">onerror</a></code>, <code title="handler-window-onfocus"><a href="webappapis.html#handler-window-onfocus">onfocus</a></code>, and <code title="handler-window-onload"><a href="webappapis.html#handler-window-onload">onload</a></code> <a href="webappapis.html#event-handlers">event
+  their <a href="webappapis.html#event-handler-idl-attributes">event handler IDL attributes</a>.</p><p>The <code title="handler-window-onblur"><a href="webappapis.html#handler-window-onblur">onblur</a></code>, <code title="handler-window-onerror"><a href="webappapis.html#handler-window-onerror">onerror</a></code>, <code title="handler-window-onfocus"><a href="webappapis.html#handler-window-onfocus">onfocus</a></code>, <code title="handler-window-onload"><a href="webappapis.html#handler-window-onload">onload</a></code>, and <code title="handler-window-onscroll"><a href="webappapis.html#handler-window-onscroll">onscroll</a></code> <a href="webappapis.html#event-handlers">event
   handlers</a> of the <code><a href="browsers.html#window">Window</a></code> object, exposed on the
   <code><a href="#the-body-element-0">body</a></code> element, shadow the generic <a href="webappapis.html#event-handlers">event
   handlers</a> with the same names normally supported by <a href="infrastructure.html#html-elements">HTML
@@ -429,11 +478,11 @@
  &lt;/body&gt;
 &lt;/html&gt;</pre>
 
-  </div><h4 id="the-section-element"><span class="secno">4.4.2 </span>The <dfn><code>section</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-section-element"><span class="secno">4.4.2 </span>The <dfn><code>section</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#sectioning-content">Sectioning content</a>.</dd>
    <dd><a href="dnd.html#formatblock-candidate"><code title="">formatBlock</code> candidate</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
@@ -535,11 +584,11 @@
  &gt;&lt;/Body
 &gt;&lt;/Html&gt;</pre>
 
-  </div><h4 id="the-nav-element"><span class="secno">4.4.3 </span>The <dfn><code>nav</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-nav-element"><span class="secno">4.4.3 </span>The <dfn><code>nav</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#sectioning-content">Sectioning content</a>.</dd>
    <dd><a href="dnd.html#formatblock-candidate"><code title="">formatBlock</code> candidate</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
@@ -657,11 +706,11 @@
  &lt;/footer&gt;
 &lt;/body&gt;</pre>
 
-  </div><h4 id="the-article-element"><span class="secno">4.4.4 </span>The <dfn><code>article</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-article-element"><span class="secno">4.4.4 </span>The <dfn><code>article</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#sectioning-content">Sectioning content</a>.</dd>
    <dd><a href="dnd.html#formatblock-candidate"><code title="">formatBlock</code> candidate</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
@@ -744,11 +793,11 @@
    <code><a href="#the-header-element">header</a></code> in this case wouldn't be wrong either; it's
    mostly a matter of authoring preference.)</p>
 
-  </div><h4 id="the-aside-element"><span class="secno">4.4.5 </span>The <dfn><code>aside</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-aside-element"><span class="secno">4.4.5 </span>The <dfn><code>aside</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#sectioning-content">Sectioning content</a>.</dd>
    <dd><a href="dnd.html#formatblock-candidate"><code title="">formatBlock</code> candidate</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
@@ -882,7 +931,7 @@ isn't his only passion. He also enjoys other pleasures.&lt;/p&gt;
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#heading-content">Heading content</a>.</dd>
    <dd><a href="dnd.html#formatblock-candidate"><code title="">formatBlock</code> candidate</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>As a child of an <code><a href="#the-hgroup-element">hgroup</a></code> element.</dd>
    <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
    <dt>Content model:</dt>
@@ -930,11 +979,11 @@ isn't his only passion. He also enjoys other pleasures.&lt;/p&gt;
  &lt;/section&gt;
 &lt;/body&gt;</pre>
 
-  </div><h4 id="the-hgroup-element"><span class="secno">4.4.7 </span>The <dfn><code>hgroup</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-hgroup-element"><span class="secno">4.4.7 </span>The <dfn><code>hgroup</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#heading-content">Heading content</a>.</dd>
    <dd><a href="dnd.html#formatblock-candidate"><code title="">formatBlock</code> candidate</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd>One or more <code><a href="#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code>, <code><a href="#the-h1-h2-h3-h4-h5-and-h6-elements">h2</a></code>, <code><a href="#the-h1-h2-h3-h4-h5-and-h6-elements">h3</a></code>, <code><a href="#the-h1-h2-h3-h4-h5-and-h6-elements">h4</a></code>, <code><a href="#the-h1-h2-h3-h4-h5-and-h6-elements">h5</a></code>, and/or <code><a href="#the-h1-h2-h3-h4-h5-and-h6-elements">h6</a></code> elements.</dd>
@@ -983,10 +1032,10 @@ isn't his only passion. He also enjoys other pleasures.&lt;/p&gt;
   http://www.brucelawson.co.uk/2009/html-5-is-a-mess/#comment-618895
   -->
 
-  </div><h4 id="the-header-element"><span class="secno">4.4.8 </span>The <dfn><code>header</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-header-element"><span class="secno">4.4.8 </span>The <dfn><code>header</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="dnd.html#formatblock-candidate"><code title="">formatBlock</code> candidate</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>, but with no <code><a href="#the-header-element">header</a></code> or
@@ -1066,10 +1115,10 @@ isn't his only passion. He also enjoys other pleasures.&lt;/p&gt;
  &lt;!-- this is still part of the subsection entitled "Games" --&gt;
  ...</pre>
 
-  </div><h4 id="the-footer-element"><span class="secno">4.4.9 </span>The <dfn><code>footer</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-footer-element"><span class="secno">4.4.9 </span>The <dfn><code>footer</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="dnd.html#formatblock-candidate"><code title="">formatBlock</code> candidate</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>, but with no <code><a href="#the-header-element">header</a></code> or
@@ -1153,10 +1202,10 @@ isn't his only passion. He also enjoys other pleasures.&lt;/p&gt;
 &lt;/BODY&gt;
 &lt;/HTML&gt;</pre>
 
-  </div><h4 id="the-address-element"><span class="secno">4.4.10 </span>The <dfn><code>address</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-address-element"><span class="secno">4.4.10 </span>The <dfn><code>address</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="dnd.html#formatblock-candidate"><code title="">formatBlock</code> candidate</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>, but with no <a href="content-models.html#heading-content">heading
@@ -1223,7 +1272,7 @@ isn't his only passion. He also enjoys other pleasures.&lt;/p&gt;
    <dd>
 
     <p>The contact information of <var title="">node</var> is the same
-    as the contact information <a href="dom.html#the-body-element">the body element</a> of the
+    as the contact information of <a href="dom.html#the-body-element">the body element</a> of the
     <code><a href="infrastructure.html#document">Document</a></code>.</p>
 
    </dd>
@@ -1240,7 +1289,7 @@ isn't his only passion. He also enjoys other pleasures.&lt;/p&gt;
   user, or use it for other purposes, such as indexing sections based
   on the sections' contact information.</p>
 
-  </div><h4 id="headings-and-sections"><span class="secno">4.4.11 </span><dfn>Headings and sections</dfn></h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The <code><a href="#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code>&#x2013;<code><a href="#the-h1-h2-h3-h4-h5-and-h6-elements">h6</a></code> elements and the
+  </div><h4 id="headings-and-sections"><span class="secno">4.4.11 </span><dfn>Headings and sections</dfn></h4><p>The <code><a href="#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code>&#x2013;<code><a href="#the-h1-h2-h3-h4-h5-and-h6-elements">h6</a></code> elements and the
   <code><a href="#the-hgroup-element">hgroup</a></code> element are headings.</p><p>The first element of <a href="content-models.html#heading-content">heading content</a> in an element
   of <a href="content-models.html#sectioning-content">sectioning content</a> <a href="rendering.html#represents">represents</a> the
   heading for that section. Subsequent headings of equal or higher
@@ -1252,7 +1301,6 @@ isn't his only passion. He also enjoys other pleasures.&lt;/p&gt;
   outlines, but the sections and headings inside these elements do not
   contribute to the outlines of their ancestors.</p><!-- when updating this also update the category index --><ul class="brief category-list"><li><code><a href="grouping-content.html#the-blockquote-element">blockquote</a></code></li>
    <li><code><a href="#the-body-element-0">body</a></code></li>
-<!-- v2DATAGRID   <li><code>datagrid</code></li> -->
    <li><code><a href="interactive-elements.html#the-details-element">details</a></code></li>
    <li><code><a href="forms.html#the-fieldset-element">fieldset</a></code></li>
    <li><code><a href="grouping-content.html#the-figure-element">figure</a></code></li>
@@ -1361,7 +1409,7 @@ isn't his only passion. He also enjoys other pleasures.&lt;/p&gt;
  &lt;/section&gt;
 &lt;/body&gt;</pre>
 
-  </div><h5 id="outlines"><span class="secno">4.4.11.1 </span>Creating an outline</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><div class="impl">
+  </div><h5 id="outlines"><span class="secno">4.4.11.1 </span>Creating an outline</h5><div class="impl">
 
   <!-- v2 idea: It would be nice if there was a way to use this to
   autogenerate a table of contents or some such -->

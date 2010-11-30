@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,19 +356,19 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="the-map-element.html" title="4.8.11 The map element" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="forms.html" title="4.10 Forms" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="the-map-element.html" title="4.8.12 The map element" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="forms.html" title="4.10 Forms" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
    </div><div>
-   <a href="the-map-element.html">&#x2190; 4.8.11 The map element</a> &#x2013;
+   <a href="the-map-element.html">&#x2190; 4.8.12 The map element</a> &#x2013;
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="forms.html">4.10 Forms &#x2192;</a>
   <ol class="toc"><li><ol><li><a href="tabular-data.html#tabular-data"><span class="secno">4.9 </span>Tabular data</a>
     <ol><li><a href="tabular-data.html#the-table-element"><span class="secno">4.9.1 </span>The <code>table</code> element</a></li><li><a href="tabular-data.html#the-caption-element"><span class="secno">4.9.2 </span>The <code>caption</code> element</a></li><li><a href="tabular-data.html#the-colgroup-element"><span class="secno">4.9.3 </span>The <code>colgroup</code> element</a></li><li><a href="tabular-data.html#the-col-element"><span class="secno">4.9.4 </span>The <code>col</code> element</a></li><li><a href="tabular-data.html#the-tbody-element"><span class="secno">4.9.5 </span>The <code>tbody</code> element</a></li><li><a href="tabular-data.html#the-thead-element"><span class="secno">4.9.6 </span>The <code>thead</code> element</a></li><li><a href="tabular-data.html#the-tfoot-element"><span class="secno">4.9.7 </span>The <code>tfoot</code> element</a></li><li><a href="tabular-data.html#the-tr-element"><span class="secno">4.9.8 </span>The <code>tr</code> element</a></li><li><a href="tabular-data.html#the-td-element"><span class="secno">4.9.9 </span>The <code>td</code> element</a></li><li><a href="tabular-data.html#the-th-element"><span class="secno">4.9.10 </span>The <code>th</code> element</a></li><li><a href="tabular-data.html#attributes-common-to-td-and-th-elements"><span class="secno">4.9.11 </span>Attributes common to <code>td</code> and <code>th</code> elements</a></li><li><a href="tabular-data.html#processing-model-0"><span class="secno">4.9.12 </span>Processing model</a>
-      <ol><li><a href="tabular-data.html#forming-a-table"><span class="secno">4.9.12.1 </span>Forming a table</a></li><li><a href="tabular-data.html#header-and-data-cell-semantics"><span class="secno">4.9.12.2 </span>Forming relationships between data cells and header cells</a></li></ol></li><li><a href="tabular-data.html#examples"><span class="secno">4.9.13 </span>Examples</a></li></ol></li></ol></li></ol></div><h3 id="tabular-data"><span class="secno">4.9 </span>Tabular data</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments. </i><span><a href="http://www.w3.org/html/wg/tracker/issues/32">ISSUE-32</a> (table-summary) blocks progress to Last Call</span></p><h4 id="the-table-element"><span class="secno">4.9.1 </span>The <dfn><code>table</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments. </i><span><a href="http://www.w3.org/html/wg/tracker/issues/92">ISSUE-92</a> (cleanuptable) blocks progress to Last Call</span></p><dl class="element"><dt>Categories</dt>
+      <ol><li><a href="tabular-data.html#forming-a-table"><span class="secno">4.9.12.1 </span>Forming a table</a></li><li><a href="tabular-data.html#header-and-data-cell-semantics"><span class="secno">4.9.12.2 </span>Forming relationships between data cells and header cells</a></li></ol></li><li><a href="tabular-data.html#examples"><span class="secno">4.9.13 </span>Examples</a></li></ol></li></ol></li></ol></div><h3 id="tabular-data"><span class="secno">4.9 </span>Tabular data</h3><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/32">ISSUE-32</a> (table-summary) blocks progress to Last Call</span></p><h4 id="the-table-element"><span class="secno">4.9.1 </span>The <dfn><code>table</code></dfn> element</h4><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/92">ISSUE-92</a> (cleanuptable) blocks progress to Last Call</span></p><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd>In this order: optionally a <code><a href="#the-caption-element">caption</a></code> element,
@@ -895,9 +942,9 @@ side in the right column.&lt;/p&gt;
  &lt;/table&gt;
 &lt;/section&gt;</pre>
 
-  </div><h4 id="the-caption-element"><span class="secno">4.9.2 </span>The <dfn><code>caption</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-caption-element"><span class="secno">4.9.2 </span>The <dfn><code>caption</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd>None.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>As the first element child of a <code><a href="#the-table-element">table</a></code> element.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>, but with no descendant <code><a href="#the-table-element">table</a></code> elements.</dd>
@@ -942,9 +989,9 @@ the cell that corresponds to the values of the two dice.
 &lt;/caption&gt;</pre>
 
 
-  </div><h4 id="the-colgroup-element"><span class="secno">4.9.3 </span>The <dfn><code>colgroup</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-colgroup-element"><span class="secno">4.9.3 </span>The <dfn><code>colgroup</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd>None.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>As a child of a <code><a href="#the-table-element">table</a></code> element, after any
    <code><a href="#the-caption-element">caption</a></code> elements and before any <code><a href="#the-thead-element">thead</a></code>,
    <code><a href="#the-tbody-element">tbody</a></code>, <code><a href="#the-tfoot-element">tfoot</a></code>, and <code><a href="#the-tr-element">tr</a></code>
@@ -976,9 +1023,9 @@ the cell that corresponds to the values of the two dice.
   same name. The value must be <a href="common-dom-interfaces.html#limited-to-only-non-negative-numbers-greater-than-zero">limited to only non-negative
   numbers greater than zero</a>.</p>
 
-  </div><h4 id="the-col-element"><span class="secno">4.9.4 </span>The <dfn><code>col</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-col-element"><span class="secno">4.9.4 </span>The <dfn><code>col</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd>None.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>As a child of a <code><a href="#the-colgroup-element">colgroup</a></code> element that doesn't have
    a <code title="attr-col-span"><a href="#attr-col-span">span</a></code> attribute.</dd>
    <dt>Content model:</dt>
@@ -1009,9 +1056,9 @@ the cell that corresponds to the values of the two dice.
   same name. The value must be <a href="common-dom-interfaces.html#limited-to-only-non-negative-numbers-greater-than-zero">limited to only non-negative
   numbers greater than zero</a>.</p>
 
-  </div><h4 id="the-tbody-element"><span class="secno">4.9.5 </span>The <dfn><code>tbody</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-tbody-element"><span class="secno">4.9.5 </span>The <dfn><code>tbody</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd>None.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>As a child of a <code><a href="#the-table-element">table</a></code> element, after any
    <code><a href="#the-caption-element">caption</a></code>, <code><a href="#the-colgroup-element">colgroup</a></code>, and
    <code><a href="#the-thead-element">thead</a></code> elements, but only if there are no
@@ -1088,9 +1135,9 @@ the cell that corresponds to the values of the two dice.
   to the number of elements in the <code title="dom-tbody-rows"><a href="#dom-tbody-rows">rows</a></code> collection, the method must
   instead raise an <code><a href="common-dom-interfaces.html#index_size_err">INDEX_SIZE_ERR</a></code> exception.</p>
 
-  </div><h4 id="the-thead-element"><span class="secno">4.9.6 </span>The <dfn><code>thead</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-thead-element"><span class="secno">4.9.6 </span>The <dfn><code>thead</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd>None.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>As a child of a <code><a href="#the-table-element">table</a></code> element, after any
    <code><a href="#the-caption-element">caption</a></code>, and <code><a href="#the-colgroup-element">colgroup</a></code>
    elements and before any <code><a href="#the-tbody-element">tbody</a></code>, <code><a href="#the-tfoot-element">tfoot</a></code>, and
@@ -1112,9 +1159,46 @@ the cell that corresponds to the values of the two dice.
   <p>The <code><a href="#the-thead-element">thead</a></code> element takes part in the <a href="#table-model">table
   model</a>.</p>
 
-  </div><h4 id="the-tfoot-element"><span class="secno">4.9.7 </span>The <dfn><code>tfoot</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><div class="example">
+
+   <p>This example shows a <code><a href="#the-thead-element">thead</a></code> element being used.
+   Notice the use of both <code><a href="#the-th-element">th</a></code> and <code><a href="#the-td-element">td</a></code> elements
+   in the <code><a href="#the-thead-element">thead</a></code> element: the first row is the headers,
+   and the second row is an explanation of how to fill in the
+   table.</p>
+
+   <pre>&lt;table&gt;
+ &lt;caption&gt; School auction sign-up sheet &lt;/caption&gt;
+<strong> &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th&gt;&lt;label for=e1&gt;Name&lt;/label&gt;
+   &lt;th&gt;&lt;label for=e2&gt;Product&lt;/label&gt;
+   &lt;th&gt;&lt;label for=e3&gt;Picture&lt;/label&gt;
+   &lt;th&gt;&lt;label for=e4&gt;Price&lt;/label&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Your name here
+   &lt;td&gt;What are you selling?
+   &lt;td&gt;Link to a picture
+   &lt;td&gt;Your reserve price
+</strong> &lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td&gt;Ms Danus
+   &lt;td&gt;Doughnuts
+   &lt;td&gt;&lt;img src="http://example.com/mydoughnuts.png" title="Doughnuts from Ms Danus"&gt;
+   &lt;td&gt;$45
+  &lt;tr&gt;
+   &lt;td&gt;&lt;input id=e1 type=text name=who required form=f&gt;
+   &lt;td&gt;&lt;input id=e2 type=text name=what required form=f&gt;
+   &lt;td&gt;&lt;input id=e3 type=url name=pic form=f&gt;
+   &lt;td&gt;&lt;input id=e4 type=number step=0.01 min=0 value=0 required form=f&gt;
+&lt;/table&gt;
+&lt;form id=f action="/auction.cgi"&gt;
+ &lt;input type=button name=add value="Submit"&gt;
+&lt;/form&gt;</pre>
+
+  </div><h4 id="the-tfoot-element"><span class="secno">4.9.7 </span>The <dfn><code>tfoot</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd>None.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>As a child of a <code><a href="#the-table-element">table</a></code> element, after any
    <code><a href="#the-caption-element">caption</a></code>, <code><a href="#the-colgroup-element">colgroup</a></code>, and <code><a href="#the-thead-element">thead</a></code>
    elements and before any <code><a href="#the-tbody-element">tbody</a></code> and <code><a href="#the-tr-element">tr</a></code>
@@ -1140,9 +1224,9 @@ the cell that corresponds to the values of the two dice.
   <p>The <code><a href="#the-tfoot-element">tfoot</a></code> element takes part in the <a href="#table-model">table
   model</a>.</p>
 
-  </div><h4 id="the-tr-element"><span class="secno">4.9.8 </span>The <dfn><code>tr</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-tr-element"><span class="secno">4.9.8 </span>The <dfn><code>tr</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd>None.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>As a child of a <code><a href="#the-thead-element">thead</a></code> element.</dd>
    <dd>As a child of a <code><a href="#the-tbody-element">tbody</a></code> element.</dd>
    <dd>As a child of a <code><a href="#the-tfoot-element">tfoot</a></code> element.</dd>
@@ -1151,8 +1235,7 @@ the cell that corresponds to the values of the two dice.
    elements, but only if there are no <code><a href="#the-tbody-element">tbody</a></code> elements that
    are children of the <code><a href="#the-table-element">table</a></code> element.</dd>
    <dt>Content model:</dt>
-   <dd>When the parent node is a <code><a href="#the-thead-element">thead</a></code> element: Zero or more <code><a href="#the-th-element">th</a></code> elements</dd>
-   <dd>Otherwise: Zero or more <code><a href="#the-td-element">td</a></code> or <code><a href="#the-th-element">th</a></code> elements</dd>
+   <dd>Zero or more <code><a href="#the-td-element">td</a></code> or <code><a href="#the-th-element">th</a></code> elements</dd>
    <dt>Content attributes:</dt>
    <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
    <dt>DOM interface:</dt>
@@ -1280,9 +1363,9 @@ the cell that corresponds to the values of the two dice.
   to the number of elements in the <code title="dom-tr-cells"><a href="#dom-tr-cells">cells</a></code> collection, the method must
   instead raise an <code><a href="common-dom-interfaces.html#index_size_err">INDEX_SIZE_ERR</a></code> exception.</p>
 
-  </div><h4 id="the-td-element"><span class="secno">4.9.9 </span>The <dfn><code>td</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-td-element"><span class="secno">4.9.9 </span>The <dfn><code>td</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="sections.html#sectioning-root">Sectioning root</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>As a child of a <code><a href="#the-tr-element">tr</a></code> element.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
@@ -1301,9 +1384,9 @@ the cell that corresponds to the values of the two dice.
   <p>The <code><a href="#the-td-element">td</a></code> element and its <code title="attr-tdth-colspan"><a href="#attr-tdth-colspan">colspan</a></code>, <code title="attr-tdth-rowspan"><a href="#attr-tdth-rowspan">rowspan</a></code>, and <code title="attr-tdth-headers"><a href="#attr-tdth-headers">headers</a></code> attributes take part in the
   <a href="#table-model">table model</a>.</p>
 
-  </div><h4 id="the-th-element"><span class="secno">4.9.10 </span>The <dfn><code>th</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-th-element"><span class="secno">4.9.10 </span>The <dfn><code>th</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd>None.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>As a child of a <code><a href="#the-tr-element">tr</a></code> element.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
@@ -1406,7 +1489,7 @@ the cell that corresponds to the values of the two dice.
    them.</p>
 
    <!-- image source: http://software.hixie.ch/utilities/js/live-dom-viewer/saved/151 -->
-   <img alt="" src="http://dev.w3.org/html5/spec/images/table-scope-diagram.png"/><!-- (alt is empty because the diagram is completely described by the previous paragraphs) --></div><h4 id="attributes-common-to-td-and-th-elements"><span class="secno">4.9.11 </span>Attributes common to <code><a href="#the-td-element">td</a></code> and <code><a href="#the-th-element">th</a></code> elements</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The <code><a href="#the-td-element">td</a></code> and <code><a href="#the-th-element">th</a></code> elements may have a <dfn id="attr-tdth-colspan" title="attr-tdth-colspan"><code>colspan</code></dfn> content
+   <img alt="" height="256" src="http://dev.w3.org/html5/spec/images/table-scope-diagram.png" width="459"/><!-- (alt is empty because the diagram is completely described by the previous paragraphs) --></div><h4 id="attributes-common-to-td-and-th-elements"><span class="secno">4.9.11 </span>Attributes common to <code><a href="#the-td-element">td</a></code> and <code><a href="#the-th-element">th</a></code> elements</h4><p>The <code><a href="#the-td-element">td</a></code> and <code><a href="#the-th-element">th</a></code> elements may have a <dfn id="attr-tdth-colspan" title="attr-tdth-colspan"><code>colspan</code></dfn> content
   attribute specified, whose value must be a <a href="common-microsyntaxes.html#valid-non-negative-integer">valid non-negative
   integer</a> greater than zero.</p><p>The <code><a href="#the-td-element">td</a></code> and <code><a href="#the-th-element">th</a></code> elements may also have a
   <dfn id="attr-tdth-rowspan" title="attr-tdth-rowspan"><code>rowspan</code></dfn> content
@@ -1419,10 +1502,11 @@ the cell that corresponds to the values of the two dice.
   model --><hr/><p>The <code><a href="#the-td-element">td</a></code> and <code><a href="#the-th-element">th</a></code> element may have a <dfn id="attr-tdth-headers" title="attr-tdth-headers"><code>headers</code></dfn> content
   attribute specified. The <code title="attr-tdth-headers"><a href="#attr-tdth-headers">headers</a></code> attribute, if specified,
   must contain a string consisting of an <a href="common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens">unordered set of unique
-  space-separated tokens</a>, each of which must have the value of
-  an <a href="elements.html#concept-id" title="concept-id">ID</a> of a <code><a href="#the-th-element">th</a></code> element taking part in the same <a href="#concept-table" title="concept-table">table</a> as the <code><a href="#the-td-element">td</a></code> or
-  <code><a href="#the-th-element">th</a></code> element<span class="impl"> (as defined by the
-  <a href="#table-model">table model</a>)</span>.</p><p>A <code><a href="#the-th-element">th</a></code> element with <a href="elements.html#concept-id" title="concept-id">ID</a> <var title="">id</var> is said
+  space-separated tokens</a> that are <a href="infrastructure.html#case-sensitive">case-sensitive</a>,
+  each of which must have the value of an <a href="elements.html#concept-id" title="concept-id">ID</a> of a <code><a href="#the-th-element">th</a></code> element taking
+  part in the same <a href="#concept-table" title="concept-table">table</a> as the
+  <code><a href="#the-td-element">td</a></code> or <code><a href="#the-th-element">th</a></code> element<span class="impl"> (as
+  defined by the <a href="#table-model">table model</a>)</span>.</p><p>A <code><a href="#the-th-element">th</a></code> element with <a href="elements.html#concept-id" title="concept-id">ID</a> <var title="">id</var> is said
   to be <i>directly targeted</i> by all <code><a href="#the-td-element">td</a></code> and
   <code><a href="#the-th-element">th</a></code> elements in the same <a href="#concept-table" title="concept-table">table</a> that have <code title="attr-tdth-headers"><a href="#attr-tdth-headers">headers</a></code> attributes whose values
   include as one of their tokens the <a href="elements.html#concept-id" title="concept-id">ID</a> <var title="">id</var>. A
@@ -1483,7 +1567,7 @@ the cell that corresponds to the values of the two dice.
 
   </div><div class="impl">
 
-  <h4 id="processing-model-0"><span class="secno">4.9.12 </span>Processing model</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="processing-model-0"><span class="secno">4.9.12 </span>Processing model</h4>
 
   <p>The various table elements and their content attributes together
   define the <dfn id="table-model">table model</dfn>.</p>
@@ -1555,7 +1639,7 @@ the cell that corresponds to the values of the two dice.
   descendants. Documents must not have table model errors.</p>
 
 
-  <h5 id="forming-a-table"><span class="secno">4.9.12.1 </span>Forming a table</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="forming-a-table"><span class="secno">4.9.12.1 </span>Forming a table</h5>
 
   <p>To determine which elements correspond to which slots in a <a href="#concept-table" title="concept-table">table</a> associated with a
   <code><a href="#the-table-element">table</a></code> element, to determine the dimensions of the table
@@ -2131,7 +2215,7 @@ the cell that corresponds to the values of the two dice.
 
 
 
-  <h5 id="header-and-data-cell-semantics"><span class="secno">4.9.12.2 </span>Forming relationships between data cells and header cells</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="header-and-data-cell-semantics"><span class="secno">4.9.12.2 </span>Forming relationships between data cells and header cells</h5>
 
   <p>Each cell can be assigned zero or more header cells. The
   <dfn id="algorithm-for-assigning-header-cells">algorithm for assigning header cells</dfn> to a cell <var title="">principal cell</var> is as follows.</p>
@@ -2476,7 +2560,7 @@ the cell that corresponds to the values of the two dice.
   elements and its text content, if any, consists only of
   <a href="common-microsyntaxes.html#white_space">White_Space</a> characters.</p>
 
-  </div><h4 id="examples"><span class="secno">4.9.13 </span>Examples</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><p>The following shows how might one mark up the bottom part of
+  </div><h4 id="examples"><span class="secno">4.9.13 </span>Examples</h4><p><i>This section is non-normative.</i></p><p>The following shows how might one mark up the bottom part of
   table 45 of the <cite>Smithsonian physical tables, Volume
   71</cite>:</p><!-- Smithsonian physical tables, Volume 71: By Smithsonian Institution, Frederick Eugene Fowle; page 76 --><!-- from the reprint of the seventh revised edition; publication 2539, published 1921 --><pre>&lt;table&gt;
  &lt;caption&gt;Specification values: &lt;b&gt;Steel&lt;/b&gt;, &lt;b&gt;Castings&lt;/b&gt;,

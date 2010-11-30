@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,7 +356,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="interactive-elements.html" title="4.11 Interactive elements" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="links.html" title="4.12 Links" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="interactive-elements.html" title="4.11 Interactive elements" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="links.html" title="4.12 Links" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -319,7 +366,7 @@
    <a href="links.html">4.12 Links &#x2192;</a>
   <ol class="toc"><li><ol><li><ol><li><a href="commands.html#commands"><span class="secno">4.11.5 </span>Commands</a>
       <ol><li><a href="commands.html#using-the-a-element-to-define-a-command"><span class="secno">4.11.5.1 </span>Using the <code>a</code> element to define a command</a></li><li><a href="commands.html#using-the-button-element-to-define-a-command"><span class="secno">4.11.5.2 </span>Using the <code>button</code> element to define a command</a></li><li><a href="commands.html#using-the-input-element-to-define-a-command"><span class="secno">4.11.5.3 </span>Using the <code>input</code> element to define a command</a></li><li><a href="commands.html#using-the-option-element-to-define-a-command"><span class="secno">4.11.5.4 </span>Using the <code>option</code> element to define a command</a></li><li><a href="commands.html#using-the-command-element-to-define-a-command"><span class="secno">4.11.5.5 </span>Using the <code>command</code> element to define
-  a command</a></li><li><a href="commands.html#using-the-accesskey-attribute-on-a-label-element-to-define-a-command"><span class="secno">4.11.5.6 </span>Using the <code title="attr-accesskey">accesskey</code> attribute on a <code>label</code> element to define a command</a></li><li><a href="commands.html#using-the-accesskey-attribute-on-a-legend-element-to-define-a-command"><span class="secno">4.11.5.7 </span>Using the <code title="attr-accesskey">accesskey</code> attribute on a <code>legend</code> element to define a command</a></li><li><a href="commands.html#using-the-accesskey-attribute-to-define-a-command-on-other-elements"><span class="secno">4.11.5.8 </span>Using the <code title="attr-accesskey">accesskey</code> attribute to define a command on other elements</a></li></ol></li></ol></li></ol></li></ol></div><h4 id="commands"><span class="secno">4.11.5 </span>Commands</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>A <dfn id="concept-command" title="concept-command">command</dfn> is the abstraction
+  a command</a></li><li><a href="commands.html#using-the-accesskey-attribute-on-a-label-element-to-define-a-command"><span class="secno">4.11.5.6 </span>Using the <code title="attr-accesskey">accesskey</code> attribute on a <code>label</code> element to define a command</a></li><li><a href="commands.html#using-the-accesskey-attribute-on-a-legend-element-to-define-a-command"><span class="secno">4.11.5.7 </span>Using the <code title="attr-accesskey">accesskey</code> attribute on a <code>legend</code> element to define a command</a></li><li><a href="commands.html#using-the-accesskey-attribute-to-define-a-command-on-other-elements"><span class="secno">4.11.5.8 </span>Using the <code title="attr-accesskey">accesskey</code> attribute to define a command on other elements</a></li></ol></li></ol></li></ol></li></ol></div><h4 id="commands"><span class="secno">4.11.5 </span>Commands</h4><p>A <dfn id="concept-command" title="concept-command">command</dfn> is the abstraction
   behind menu items, buttons, and links.<!--v2COMMAND: Once a command
   is defined, other parts of the interface can refer to the same
   command, allowing many access points to a single feature to share
@@ -441,7 +488,13 @@
 
    <dd>
 
-    <p>Exposes the <a href="#command-facet-hiddenstate" title="command-facet-HiddenState">Hidden State</a> facet of the command.</p>
+    <p>Exposes the state of the element's <code title="attr-hidden"><a href="editing.html#the-hidden-attribute">hidden</a></code> attribute, which is generally
+    equivalent to the <a href="#command-facet-hiddenstate" title="command-facet-HiddenState">Hidden
+    State</a> facet of the command. For <code><a href="forms.html#the-label-element">label</a></code> and
+    <code><a href="forms.html#the-legend-element">legend</a></code> elements (used in conjunction with the <code title="attr-accesskey"><a href="editing.html#the-accesskey-attribute">accesskey</a></code> attribute), the <a href="#command-facet-hiddenstate" title="command-facet-HiddenState">Hidden State</a> facet is
+    derived from another element (the one that the <a href="editing.html#assigned-access-key">assigned
+    access key</a> will trigger), and cannot be directly accessed
+    from the element.</p>
 
    </dd>
 
@@ -550,7 +603,7 @@
   encouraged to do this especially for commands that have <a href="#command-facet-accesskey" title="command-facet-AccessKey">Access Keys</a>, as a way to
   advertise those keys to the user.</p><div class="impl">
 
-  <h5 id="using-the-a-element-to-define-a-command"><span class="secno">4.11.5.1 </span><dfn title="a-command">Using the <code>a</code> element to define a command</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="using-the-a-element-to-define-a-command"><span class="secno">4.11.5.1 </span><dfn title="a-command">Using the <code>a</code> element to define a command</dfn></h5>
 
   <p>An <code><a href="text-level-semantics.html#the-a-element">a</a></code> element with an <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code> attribute <a href="#concept-command" title="concept-command">defines a command</a>.</p>
 
@@ -595,7 +648,7 @@
   command is to <a href="webappapis.html#fire-a-click-event" title="fire a click event">fire a <code title="event-click">click</code> event</a> at the element.</p>
 
 
-  <h5 id="using-the-button-element-to-define-a-command"><span class="secno">4.11.5.2 </span><dfn title="button-command">Using the <code>button</code> element to define a command</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="using-the-button-element-to-define-a-command"><span class="secno">4.11.5.2 </span><dfn title="button-command">Using the <code>button</code> element to define a command</dfn></h5>
 
   <p>A <code><a href="the-button-element.html#the-button-element">button</a></code> element always <a href="#concept-command" title="concept-command">defines a command</a>.</p>
 
@@ -607,7 +660,7 @@
   State</a> of the command mirrors the <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a> state of the button.</p>
 
 
-  <h5 id="using-the-input-element-to-define-a-command"><span class="secno">4.11.5.3 </span><dfn title="input-command">Using the <code>input</code> element to define a command</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="using-the-input-element-to-define-a-command"><span class="secno">4.11.5.3 </span><dfn title="input-command">Using the <code>input</code> element to define a command</dfn></h5>
 
   <p>An <code><a href="the-input-element.html#the-input-element">input</a></code> element whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in one of the <a href="number-state.html#submit-button-state" title="attr-input-type-submit">Submit Button</a>, <a href="number-state.html#reset-button-state" title="attr-input-type-reset">Reset Button</a>, <a href="number-state.html#image-button-state" title="attr-input-type-image">Image Button</a>, <a href="number-state.html#button-state" title="attr-input-type-button">Button</a>, <a href="number-state.html#radio-button-state" title="attr-input-type-radio">Radio Button</a>, or <a href="number-state.html#checkbox-state" title="attr-input-type-checkbox">Checkbox</a> states <a href="#concept-command" title="concept-command">defines a command</a>.</p>
 
@@ -677,7 +730,7 @@
   element.</p>
 
 
-  <h5 id="using-the-option-element-to-define-a-command"><span class="secno">4.11.5.4 </span><dfn title="option-command">Using the <code>option</code> element to define a command</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="using-the-option-element-to-define-a-command"><span class="secno">4.11.5.4 </span><dfn title="option-command">Using the <code>option</code> element to define a command</dfn></h5>
 
   <p>An <code><a href="the-button-element.html#the-option-element">option</a></code> element with an ancestor
   <code><a href="the-button-element.html#the-select-element">select</a></code> element and either no <code title="attr-option-value"><a href="the-button-element.html#attr-option-value">value</a></code> attribute or a <code title="attr-option-value"><a href="the-button-element.html#attr-option-value">value</a></code> attribute that is not the
@@ -717,7 +770,7 @@
   <p>The <a href="#command-facet-disabledstate" title="command-facet-DisabledState">Disabled
   State</a> of the command is true (disabled) if the element is
   <a href="the-button-element.html#concept-option-disabled" title="concept-option-disabled">disabled</a> or if its
-  nearest ancestor <code><a href="the-button-element.html#the-select-element">select</a></code> element is <a href="the-button-element.html#concept-option-disabled" title="concept-option-disabled">disabled</a>, and false
+  nearest ancestor <code><a href="the-button-element.html#the-select-element">select</a></code> element is <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a>, and false
   otherwise.</p>
 
   <p>The <a href="#command-facet-checkedstate" title="command-facet-CheckedState">Checked State</a>
@@ -731,7 +784,7 @@
 
 
   <h5 id="using-the-command-element-to-define-a-command"><span class="secno">4.11.5.5 </span>Using the <dfn title="command-element"><code>command</code></dfn> element to define
-  a command</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  a command</h5>
 
   <p>A <code><a href="interactive-elements.html#the-command">command</a></code> element <a href="#concept-command" title="concept-command">defines a command</a>.</p>
 
@@ -786,7 +839,7 @@
 
 
 
-  <h5 id="using-the-accesskey-attribute-on-a-label-element-to-define-a-command"><span class="secno">4.11.5.6 </span><dfn title="label-command">Using the <code title="attr-accesskey">accesskey</code> attribute on a <code>label</code> element to define a command</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="using-the-accesskey-attribute-on-a-label-element-to-define-a-command"><span class="secno">4.11.5.6 </span><dfn title="label-command">Using the <code title="attr-accesskey">accesskey</code> attribute on a <code>label</code> element to define a command</dfn></h5>
 
   <p>A <code><a href="forms.html#the-label-element">label</a></code> element that has an <a href="editing.html#assigned-access-key">assigned access
   key</a> and a <a href="forms.html#labeled-control">labeled control</a> and whose
@@ -827,7 +880,7 @@
 
 
 
-  <h5 id="using-the-accesskey-attribute-on-a-legend-element-to-define-a-command"><span class="secno">4.11.5.7 </span><dfn title="legend-command">Using the <code title="attr-accesskey">accesskey</code> attribute on a <code>legend</code> element to define a command</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="using-the-accesskey-attribute-on-a-legend-element-to-define-a-command"><span class="secno">4.11.5.7 </span><dfn title="legend-command">Using the <code title="attr-accesskey">accesskey</code> attribute on a <code>legend</code> element to define a command</dfn></h5>
 
   <p>A <code><a href="forms.html#the-legend-element">legend</a></code> element that has an <a href="editing.html#assigned-access-key">assigned access
   key</a> and is a child of a <code><a href="forms.html#the-fieldset-element">fieldset</a></code> element that
@@ -871,7 +924,7 @@
 
 
 
-  <h5 id="using-the-accesskey-attribute-to-define-a-command-on-other-elements"><span class="secno">4.11.5.8 </span><dfn title="accesskey-command">Using the <code title="attr-accesskey">accesskey</code> attribute to define a command on other elements</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="using-the-accesskey-attribute-to-define-a-command-on-other-elements"><span class="secno">4.11.5.8 </span><dfn title="accesskey-command">Using the <code title="attr-accesskey">accesskey</code> attribute to define a command on other elements</dfn></h5>
 
   <p>An element that has an <a href="editing.html#assigned-access-key">assigned access key</a> <a href="#concept-command" title="concept-command">defines a command</a>.</p>
 

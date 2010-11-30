@@ -299,11 +299,7 @@ endif
 	@echo "NOTE: You can run \"make distclean && make\" to re-download third-party dependencies and rebuild from scratch."
 	@echo
 
-distclean: clean
-	$(RM) webapps.html
-	$(RM) html.css
-	$(RM) fragment-links.js
-	$(RM) fragment-links.html
+schemaclean:
 ifneq ($(WHATTF_SCHEMA),)
 	rm -rf schema
 	mkdir schema
@@ -313,3 +309,9 @@ ifneq ($(WHATTF_SCHEMA),)
 	cp -pR $(WHATTF_SCHEMA)/.svn schema
 	-$(PATCH) $(PATCHFLAGS) < patch-schema
 endif
+
+distclean: clean schemaclean
+	$(RM) webapps.html
+	$(RM) html.css
+	$(RM) fragment-links.js
+	$(RM) fragment-links.html

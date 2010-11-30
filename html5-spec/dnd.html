@@ -1,7 +1,7 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
 <!-- when publishing, change bits marked ZZZ -->
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>7.9 Drag and drop &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<html lang="en-US-x-Hixie" class="split chapter"><head><title>7.7 Drag and drop &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,7 +356,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="editing.html" title="7 User interaction" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="syntax.html" title="8 The HTML syntax" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="editing.html" title="7 User interaction" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="syntax.html" title="8 The HTML syntax" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -317,12 +364,10 @@
    <a href="editing.html">&#x2190; 7 User interaction</a> &#x2013;
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="syntax.html">8 The HTML syntax &#x2192;</a>
-  <ol class="toc"><li><ol><li><a href="dnd.html#dnd"><span class="secno">7.9 </span>Drag and drop</a>
-    <ol><li><a href="dnd.html#introduction-5"><span class="secno">7.9.1 </span>Introduction</a></li><li><a href="dnd.html#the-dragevent-and-datatransfer-interfaces"><span class="secno">7.9.2 </span>The <code>DragEvent</code> and <code>DataTransfer</code> interfaces</a></li><li><a href="dnd.html#dndevents"><span class="secno">7.9.3 </span>Events fired during a drag-and-drop action</a></li><li><a href="dnd.html#drag-and-drop-processing-model"><span class="secno">7.9.4 </span>Drag-and-drop processing model</a>
-      <ol><li><a href="dnd.html#when-the-drag-and-drop-operation-starts-or-ends-in-another-document"><span class="secno">7.9.4.1 </span>When the drag-and-drop operation starts or ends in another
-  document</a></li><li><a href="dnd.html#when-the-drag-and-drop-operation-starts-or-ends-in-another-application"><span class="secno">7.9.4.2 </span>When the drag-and-drop operation starts or ends in another
-  application</a></li></ol></li><li><a href="dnd.html#the-draggable-attribute"><span class="secno">7.9.5 </span>The <code>draggable</code> attribute</a></li><li><a href="dnd.html#security-risks-in-the-drag-and-drop-model"><span class="secno">7.9.6 </span>Security risks in the drag-and-drop model</a></li></ol></li><li><a href="dnd.html#undo"><span class="secno">7.10 </span>Undo history</a>
-    <ol><li><a href="dnd.html#definitions-2"><span class="secno">7.10.1 </span>Definitions</a></li><li><a href="dnd.html#the-undomanager-interface"><span class="secno">7.10.2 </span>The <code>UndoManager</code> interface</a></li><li><a href="dnd.html#undo:-moving-back-in-the-undo-transaction-history"><span class="secno">7.10.3 </span>Undo: moving back in the undo transaction history</a></li><li><a href="dnd.html#redo:-moving-forward-in-the-undo-transaction-history"><span class="secno">7.10.4 </span>Redo: moving forward in the undo transaction history</a></li><li><a href="dnd.html#the-undomanagerevent-interface-and-the-undo-and-redo-events"><span class="secno">7.10.5 </span>The <code>UndoManagerEvent</code> interface and the <code title="event-undo">undo</code> and <code title="event-redo">redo</code> events</a></li><li><a href="dnd.html#implementation-notes"><span class="secno">7.10.6 </span>Implementation notes</a></li></ol></li><li><a href="dnd.html#editing-apis"><span class="secno">7.11 </span>Editing APIs</a></li></ol></li></ol></div><h3 id="dnd"><span class="secno">7.9 </span><dfn>Drag and drop</dfn></h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><!-- v2 ideas for drag and drop:
+  <ol class="toc"><li><ol><li><a href="dnd.html#dnd"><span class="secno">7.7 </span>Drag and drop</a>
+    <ol><li><a href="dnd.html#introduction-6"><span class="secno">7.7.1 </span>Introduction</a></li><li><a href="dnd.html#the-drag-data-store"><span class="secno">7.7.2 </span>The drag data store</a></li><li><a href="dnd.html#the-datatransfer-interface"><span class="secno">7.7.3 </span>The <code>DataTransfer</code> interface</a>
+      <ol><li><a href="dnd.html#the-datatransferitems-interface"><span class="secno">7.7.3.1 </span>The <code>DataTransferItems</code> interface</a></li><li><a href="dnd.html#the-datatransferitem-interface"><span class="secno">7.7.3.2 </span>The <code>DataTransferItem</code> interface</a></li></ol></li><li><a href="dnd.html#the-dragevent-interface"><span class="secno">7.7.4 </span>The <code>DragEvent</code> interface</a></li><li><a href="dnd.html#drag-and-drop-processing-model"><span class="secno">7.7.5 </span>Drag-and-drop processing model</a></li><li><a href="dnd.html#dndevents"><span class="secno">7.7.6 </span>Events summary</a></li><li><a href="dnd.html#the-draggable-attribute"><span class="secno">7.7.7 </span>The <code>draggable</code> attribute</a></li><li><a href="dnd.html#the-dropzone-attribute"><span class="secno">7.7.8 </span>The <code>dropzone</code> attribute</a></li><li><a href="dnd.html#security-risks-in-the-drag-and-drop-model"><span class="secno">7.7.9 </span>Security risks in the drag-and-drop model</a></li></ol></li><li><a href="dnd.html#undo"><span class="secno">7.8 </span>Undo history</a>
+    <ol><li><a href="dnd.html#definitions-2"><span class="secno">7.8.1 </span>Definitions</a></li><li><a href="dnd.html#the-undomanager-interface"><span class="secno">7.8.2 </span>The <code>UndoManager</code> interface</a></li><li><a href="dnd.html#undo:-moving-back-in-the-undo-transaction-history"><span class="secno">7.8.3 </span>Undo: moving back in the undo transaction history</a></li><li><a href="dnd.html#redo:-moving-forward-in-the-undo-transaction-history"><span class="secno">7.8.4 </span>Redo: moving forward in the undo transaction history</a></li><li><a href="dnd.html#the-undomanagerevent-interface-and-the-undo-and-redo-events"><span class="secno">7.8.5 </span>The <code>UndoManagerEvent</code> interface and the <code title="event-undo">undo</code> and <code title="event-redo">redo</code> events</a></li><li><a href="dnd.html#implementation-notes"><span class="secno">7.8.6 </span>Implementation notes</a></li></ol></li><li><a href="dnd.html#editing-apis"><span class="secno">7.9 </span>Editing APIs</a></li></ol></li></ol></div><h3 id="dnd"><span class="secno">7.7 </span><dfn>Drag and drop</dfn></h3><!-- v2: ideas for drag and drop:
 
      * being able to animate a drop target:
 
@@ -346,6 +391,7 @@
      * We should let drop targets communicate back to drag sources if
        they want to communicate. (e.g. expose Window, and thus
        postMessage(), on the dataTransfer object on drop.)
+       Or maybe just use a MessagePort!
 
        We should let drag sources provide a set of options via a
        context menu when the drop happens. (So that, e.g., the source
@@ -359,29 +405,23 @@
 
        Ack: Ben Laurie (@g)
 
-     * Promises. Should be able to say "if you accept this drop, then
-       I can provide the File object that corresponds to it
-       eventually".
+     * Interop with native apps. In particular, we probably want to
+       whitelist the list of types that a Web page can see, since
+       otherwise we'll end up exposing things like the username (if a
+       user drags a file from their desktop, the path is exposed on
+       some OSes).
 
-     * Exposing more information about each item. Best idea (from
-       Eduard Pascual) is to have a new attribute on dataTransfer
-       that's a list of items, each of which has:
+     Other things listed below:
+      DND-v2: more native support: text/html from selections, etc
+      DND-v3: add Blob support
+      DND-v4: add structured clone support
+      DND-v5: add promises (should be able to say "if you accept this
+              drop, then I can provide the File object that
+              corresponds to it eventually")
 
-        dataTransfer.items = DataTransferItems
-
-         DataTransferItems.length
-                          .getItem(n) = DataTransferItem
-                          .add(stringData, type)
-                          .add(blobData)
-                          .add(fileData)
-                          .add(dataTransferItem)
-                          .clear()
-
-         DataTransferItem.kind = 'string', 'file', 'blob', ...
-                         .type = MIME type
-                         .binary = boolean
-                         .getTextData(function callback (data)) - throws if binary is true
-                         .getBlob() - returns File or Blob
+         DataTransferPromise.type = 'string' or 'file' or 'blob' or 'data'
+                            .onneeddata - can wait until this fires to provide data
+                            .setData() - call this once you have data, must be the right type
 
 --><p>This section defines an event-based drag-and-drop mechanism.</p><p>This specification does not define exactly what a
   <em>drag-and-drop operation</em> actually is.</p><p>On a visual medium with a pointing device, a drag operation could
@@ -394,18 +434,17 @@
 
   <p>However it is implemented, drag-and-drop operations must have a
   starting point (e.g. where the mouse was clicked, or the start of
-  <a href="editing.html#the-selection">the selection</a> or element that was selected for the
-  drag), may have any number of intermediate steps (elements that the
-  mouse moves over during a drag, or elements that the user picks as
-  possible drop points as he cycles through possibilities), and must
-  either have an end point (the element above which the mouse button
-  was released, or the element that was finally selected), or be
-  canceled. The end point must be the last element selected as a
-  possible drop point before the drop occurs (so if the operation is
-  not canceled, there must be at least one element in the middle
-  step).</p>
+  the selection or element that was selected for the drag), may have
+  any number of intermediate steps (elements that the mouse moves over
+  during a drag, or elements that the user picks as possible drop
+  points as he cycles through possibilities), and must either have an
+  end point (the element above which the mouse button was released, or
+  the element that was finally selected), or be canceled. The end
+  point must be the last element selected as a possible drop point
+  before the drop occurs (so if the operation is not canceled, there
+  must be at least one element in the middle step).</p>
 
-  </div><h4 id="introduction-5"><span class="secno">7.9.1 </span>Introduction</h4><p class="XXX annotation"><b>Status: </b><i>Working draft</i></p><p><i>This section is non-normative.</i></p><p>To make an element draggable is simple: give the element a <code title="attr-draggable"><a href="#the-draggable-attribute">draggable</a></code> attribute, and set an event
+  </div><h4 id="introduction-6"><span class="secno">7.7.1 </span>Introduction</h4><p><i>This section is non-normative.</i></p><p>To make an element draggable is simple: give the element a <code title="attr-draggable"><a href="#the-draggable-attribute">draggable</a></code> attribute, and set an event
   listener for <code title="event-dragstart"><a href="#event-dragstart">dragstart</a></code> that
   stores the data being dragged.</p><p>The event handler typically needs to check that it's not a text
   selection that is being dragged, and then needs to store data into
@@ -427,7 +466,8 @@
       event.preventDefault(); // don't allow selection to be dragged
     }
   }
-&lt;/script&gt;</pre><hr/><p>To accept a drop, the drop target has to listen to at least three
+&lt;/script&gt;</pre><hr/><!-- v2: once dropzone="" is implemented, add text here to use that
+  instead of the events --><p>To accept a drop, the drop target has to listen to at least three
   events. First, the <code title="event-dragenter"><a href="#event-dragenter">dragenter</a></code>
   event, which is used to determine whether or not the drop target is
   to accept the drop. If the drop is to be accepted, then this event
@@ -455,7 +495,7 @@
   }
   function dragOverHandler(event) {
     event.dataTransfer.dropEffect = 'move';
-    event.preventDefault();
+    event.preventDefault(); // override default drag feedback
   }
   function dropHandler(event) {
     // drop the data
@@ -487,31 +527,140 @@
     // remove the dragged element
     event.target.parentNode.removeChild(event.target);
   }
-&lt;/script&gt;</pre><h4 id="the-dragevent-and-datatransfer-interfaces"><span class="secno">7.9.2 </span>The <code><a href="#dragevent">DragEvent</a></code> and <code><a href="#datatransfer">DataTransfer</a></code> interfaces</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The drag-and-drop processing model involves several events. They
-  all use the <code><a href="#dragevent">DragEvent</a></code> interface.</p><pre class="idl">interface <dfn id="dragevent">DragEvent</dfn> : <span>MouseEvent</span> {
-  readonly attribute <a href="#datatransfer">DataTransfer</a> <a href="#dom-dragevent-datatransfer" title="dom-DragEvent-dataTransfer">dataTransfer</a>;
+&lt;/script&gt;</pre><h4 id="the-drag-data-store"><span class="secno">7.7.2 </span>The drag data store</h4><p>The data that underlies a drag-and-drop operation, known as the
+  <dfn id="drag-data-store">drag data store</dfn>, consists of the following information:</p><ul><li><p>A <dfn id="drag-data-store-item-list">drag data store item list</dfn>, which is a list of
+   items representing the dragged data, each consisting of the
+   following information:</p>
 
-  void <a href="#dom-dragevent-initdragevent" title="dom-DragEvent-initDragEvent">initDragEvent</a>(in DOMString typeArg, in boolean canBubbleArg, in boolean cancelableArg, in any dummyArg<!-- used to be viewArg, back when we had views -->, in long detailArg, in long screenXArg, in long screenYArg, in long clientXArg, in long clientYArg, in boolean ctrlKeyArg, in boolean altKeyArg, in boolean shiftKeyArg, in boolean metaKeyArg, in unsigned short buttonArg, in EventTarget relatedTargetArg, in <a href="#datatransfer">DataTransfer</a> dataTransferArg);
-};</pre><dl class="domintro"><dt><var title="">event</var> . <code title="dom-DragEvent-dataTransfer"><a href="#dom-dragevent-datatransfer">dataTransfer</a></code></dt>
+    <dl><dt><dfn id="the-drag-data-item-kind">The drag data item kind</dfn></dt>
 
-   <dd>
+     <dd>
 
-    <p>Returns the <code><a href="#datatransfer">DataTransfer</a></code> object for the event.</p>
+      <p>The kind of data:</p>
 
-   </dd>
+      <dl><dt><i>Plain Unicode string</i></dt>
+       <dd>
+        <p>Text.</p>
+       </dd>
 
-  </dl><div class="impl">
+<!-- DND-v3:
+       <dt><i>Blob</i></dt>
+       <dd>
+        <p>Binary data.</p>
+       </dd>
+-->
 
-  <p>The <dfn id="dom-dragevent-initdragevent" title="dom-DragEvent-initDragEvent"><code>initDragEvent()</code></dfn>
-  method must initialize the event in a manner analogous to the
-  similarly-named method in the DOM Events interfaces, except that the
-  <var title="">dummyArg</var> argument must be ignored. <a href="references.html#refsDOMEVENTS">[DOMEVENTS]</a></p>
+       <dt><i>File</i></dt>
+       <dd>
+        <p>Binary data with a file name.</p>
+       </dd>
 
-  <p>The <dfn id="dom-dragevent-datatransfer" title="dom-DragEvent-dataTransfer"><code>dataTransfer</code></dfn>
-  attribute of the <code><a href="#dragevent">DragEvent</a></code> interface represents the
-  context information for the event.</p>
+<!-- DND-v4:
+       <dt><i>Structured object</i></dt>
+       <dd>
+        <p>An object that will be cloned using the <span>structured clone</span> algorithm.</p>
+       </dd>
+-->
 
-  </div><pre class="idl">interface <dfn id="datatransfer">DataTransfer</dfn> {
+      </dl></dd>
+
+     <dt><dfn id="the-drag-data-item-type-string">The drag data item type string</dfn></dt>
+
+     <dd>
+
+      <p>A Unicode string giving the type or format of the data,
+      generally given by a <a href="infrastructure.html#mime-type">MIME type</a>. Some values that
+      are not <a href="infrastructure.html#mime-type" title="MIME type">MIME types</a> are
+      special-cased for legacy reasons. The API does not enforce the
+      use of <a href="infrastructure.html#mime-type" title="MIME type">MIME types</a>; other values
+      can be used as well. In all cases, however, the values are all
+      <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a> by the API.</p>
+
+      <p class="note">Strings that contain <a href="common-microsyntaxes.html#space-character" title="space&#10;      character">space characters</a> cannot be used with the <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code> attribute, so authors are
+      encouraged to use only <a href="infrastructure.html#mime-type" title="MIME type">MIME types</a>
+      or custom strings (without spaces).</p>
+
+     </dd>
+
+     <dt>The actual data</dt>
+
+     <dd><p>A Unicode or binary string, optionally with a file name
+     (itself a Unicode string), <!-- (DND-v4:) or an object, --> as per
+     <a href="#the-drag-data-item-kind">the drag data item kind</a>.</p></dd>
+
+    </dl><p>The <a href="#drag-data-store-item-list">drag data store item list</a> is ordered in the
+    order that the items were added to the list; most recently added
+    last.</p>
+
+   </li>
+
+   <li>
+
+    <p>The following information, used to generate the UI feedback
+    during the drag:</p>
+
+    <ul><li>User-agent-defined default feedback information, known as the
+     <dfn id="drag-data-store-default-feedback">drag data store default feedback</dfn>.</li>
+
+     <li>A list of zero or more elements known as the <dfn id="drag-data-store-elements-list">drag data
+     store elements list</dfn>.</li>
+
+     <li>Optionally, a bitmap image and the coordinate of a point
+     within that image, known as the <dfn id="drag-data-store-bitmap">drag data store bitmap</dfn>
+     and <dfn id="drag-data-store-hot-spot-coordinate">drag data store hot spot coordinate</dfn>.</li>
+
+    </ul></li>
+
+   <li>
+
+    <p>A <dfn id="drag-data-store-mode">drag data store mode</dfn>, which is one of the
+    following:</p>
+
+    <dl><dt><dfn id="concept-dnd-rw" title="concept-dnd-rw">Read/write mode</dfn></dt>
+     <dd>
+
+      <p>For the <code title="event-dragstart"><a href="#event-dragstart">dragstart</a></code> event.
+      New data can be added to the <a href="#drag-data-store">drag data store</a>.</p>
+
+     </dd>
+
+     <dt><dfn id="concept-dnd-ro" title="concept-dnd-ro">Read-only mode</dfn></dt>
+     <dd>
+
+      <p>For the <code title="event-drop"><a href="#event-drop">drop</a></code> event. The list of
+      items representing dragged data can be read, including the data.
+      No new data can be added.</p>
+
+     </dd>
+
+     <dt><dfn id="concept-dnd-p" title="concept-dnd-p">Protected mode</dfn></dt>
+     <dd>
+
+      <p>For all other events. The formats and kinds in the <a href="#drag-data-store">drag
+      data store</a> list of items representing dragged data can be
+      enumerated, but the data itself is unavailable and no new data can
+      be added.</p>
+
+     </dd>
+
+    </dl></li>
+
+   <li>
+
+    <p>A <dfn id="drag-data-store-allowed-effects-state">drag data store allowed effects state</dfn>, which is a
+    string.</p>
+
+   </li>
+
+  </ul><p>When a <a href="#drag-data-store">drag data store</a> is <dfn id="create-a-drag-data-store" title="create a drag&#10;  data store">created</dfn>, it must be initialized such that its
+  <a href="#drag-data-store-item-list">drag data store item list</a> is empty, it has no
+  <a href="#drag-data-store-default-feedback">drag data store default feedback</a>, its <a href="#drag-data-store-elements-list">drag data
+  store elements list</a> is empty, it has no <a href="#drag-data-store-bitmap">drag data store
+  bitmap</a> / <a href="#drag-data-store-hot-spot-coordinate">drag data store hot spot coordinate</a>,
+  its <a href="#drag-data-store-mode">drag data store mode</a> is <a href="#concept-dnd-p" title="concept-dnd-p">protected mode</a>, and its <a href="#drag-data-store-allowed-effects-state">drag data
+  store allowed effects state</a> is the string "<code title="">uninitialized</code>".</p><h4 id="the-datatransfer-interface"><span class="secno">7.7.3 </span>The <code><a href="#datatransfer">DataTransfer</a></code> interface</h4><p><code><a href="#datatransfer">DataTransfer</a></code> objects are used to expose the
+  <a href="#drag-data-store">drag data store</a> that underlies a drag-and-drop
+  operation.</p><pre class="idl">interface <dfn id="datatransfer">DataTransfer</dfn> {
            attribute DOMString <a href="#dom-datatransfer-dropeffect" title="dom-DataTransfer-dropEffect">dropEffect</a>;
            attribute DOMString <a href="#dom-datatransfer-effectallowed" title="dom-DataTransfer-effectAllowed">effectAllowed</a>;
 
@@ -523,13 +672,7 @@
 
   void <a href="#dom-datatransfer-setdragimage" title="dom-DataTransfer-setDragImage">setDragImage</a>(in Element image, in long x, in long y);
   void <a href="#dom-datatransfer-addelement" title="dom-DataTransfer-addElement">addElement</a>(in Element element);
-};</pre><p><code><a href="#datatransfer">DataTransfer</a></code> objects can hold pieces of data, each
-  associated with a unique format. Formats are generally given by
-  <a href="infrastructure.html#mime-type" title="MIME type">MIME types</a>, with some values
-  special-cased for legacy reasons. However, the API does not enforce
-  this; non-MIME-type values can be added as well. All formats are
-  identified by strings that are <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII
-  lowercase</a> by the API.</p><dl class="domintro"><dt><var title="">dataTransfer</var> . <code title="dom-DataTransfer-dropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code> [ = <var title="">value</var> ]</dt>
+};</pre><dl class="domintro"><dt><var title="">dataTransfer</var> . <code title="dom-DataTransfer-dropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code> [ = <var title="">value</var> ]</dt>
 
    <dd>
 
@@ -540,7 +683,7 @@
 
     <p>Can be set, to change the selected operation.</p>
 
-    <p>The possible values are <code title="">none</code>, <code title="">copy</code>, <code title="">link</code>, and <code title="">move</code>.</p>
+    <p>The possible values are "<code title="">none</code>", "<code title="">copy</code>", "<code title="">link</code>", and "<code title="">move</code>".</p>
 
    </dd>
 
@@ -552,7 +695,7 @@
 
     <p>Can be set, to change the allowed operations.</p>
 
-    <p>The possible values are <code title="">none</code>, <code title="">copy</code>, <code title="">copyLink</code>, <code title="">copyMove</code>, <code title="">link</code>, <code title="">linkMove</code>, <code title="">move</code>, <code title="">all</code>, and <code title="">uninitialized</code>,</p>
+    <p>The possible values are "<code title="">none</code>", "<code title="">copy</code>", "<code title="">copyLink</code>", "<code title="">copyMove</code>", "<code title="">link</code>", "<code title="">linkMove</code>", "<code title="">move</code>", "<code title="">all</code>", and "<code title="">uninitialized</code>",</p>
 
    </dd>
 
@@ -616,314 +759,885 @@
 
    </dd>
 
-  </dl><div class="impl">
+  </dl><p><code><a href="#datatransfer">DataTransfer</a></code> objects are used during the <a href="#dndevents">drag-and-drop events</a>, and are only valid while
+  those events are being dispatched.</p><div class="impl">
 
-  <p>When a <code><a href="#datatransfer">DataTransfer</a></code> object is created, it must be
-  initialized as follows:</p>
+  <p>A <code><a href="#datatransfer">DataTransfer</a></code> object is associated with a
+  <a href="#drag-data-store">drag data store</a> while it is valid.</p>
 
-  <ul><li>The <code><a href="#datatransfer">DataTransfer</a></code> object must initially contain no
-   data, no elements, and have no associated image.</li>
-
-   <li>The <code><a href="#datatransfer">DataTransfer</a></code> object's <code title="dom-DataTransfer-effectAllowed"><a href="#dom-datatransfer-effectallowed">effectAllowed</a></code>
-   attribute must be set to "<code title="">uninitialized</code>".</li>
-
-   <li>The <code title="dom-DataTransfer-dropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code>
-   attribute must be set to "<code title="">none</code>".</li>
-
-  </ul><p>The <dfn id="dom-datatransfer-dropeffect" title="dom-DataTransfer-dropEffect"><code>dropEffect</code></dfn>
+  <p>The <dfn id="dom-datatransfer-dropeffect" title="dom-DataTransfer-dropEffect"><code>dropEffect</code></dfn>
   attribute controls the drag-and-drop feedback that the user is given
-  during a drag-and-drop operation.</p>
-
-  <p>The attribute must ignore any attempts to set it to a value other
-  than <code title="">none</code>, <code title="">copy</code>, <code title="">link</code>, and <code title="">move</code>. On getting,
-  the attribute must return the last of those four values that it was
-  set to.</p>
+  during a drag-and-drop operation. When the <code><a href="#datatransfer">DataTransfer</a></code>
+  object is created, the <code title="dom-DataTransfer-dropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code> attribute is
+  set to a string value. On getting, it must return its current value.
+  On setting, if the new value is one of "<code title="">none</code>",
+  "<code title="">copy</code>", "<code title="">link</code>", or
+  "<code title="">move</code>", then the attribute's current value
+  must be set to the new value. Other values must be ignored.</p>
 
   <p>The <dfn id="dom-datatransfer-effectallowed" title="dom-DataTransfer-effectAllowed"><code>effectAllowed</code></dfn>
   attribute is used in the drag-and-drop processing model to
   initialize the <code title="dom-DataTransfer-dropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code> attribute
-  during the <code title="event-dragenter"><a href="#event-dragenter">dragenter</a></code> and <code title="event-dragover"><a href="#event-dragover">dragover</a></code> events.</p>
-
-  <p>The attribute must ignore any attempts to set it to a value other
-  than <code title="">none</code>, <code title="">copy</code>, <code title="">copyLink</code>, <code title="">copyMove</code>, <code title="">link</code>, <code title="">linkMove</code>, <code title="">move</code>, <code title="">all</code>, and <code title="">uninitialized</code>. On getting, the attribute must return
-  the last of those values that it was set to.</p>
+  during the <code title="event-dragenter"><a href="#event-dragenter">dragenter</a></code> and <code title="event-dragover"><a href="#event-dragover">dragover</a></code> events. When the
+  <code><a href="#datatransfer">DataTransfer</a></code> object is created, the <code title="dom-DataTransfer-effectAllowed"><a href="#dom-datatransfer-effectallowed">effectAllowed</a></code>
+  attribute is set to a string value. On getting, it must return its
+  current value. On setting, if the new value is one of "<code title="">none</code>", "<code title="">copy</code>", "<code title="">copyLink</code>", "<code title="">copyMove</code>", "<code title="">link</code>", "<code title="">linkMove</code>", "<code title="">move</code>", "<code title="">all</code>", or "<code title="">uninitialized</code>", then the attribute's current value
+  must be set to the new value. Other values must be ignored.</p>
 
   <p>The <dfn id="dom-datatransfer-types" title="dom-DataTransfer-types"><code>types</code></dfn>
   attribute must return a <a href="infrastructure.html#live">live</a> <code>DOMStringList</code>
-  that contains the list of formats that were added to the
-  <code><a href="#datatransfer">DataTransfer</a></code> object in the corresponding <code title="event-dragstart"><a href="#event-dragstart">dragstart</a></code> event. The same object must
-  be returned each time. If any files were included in the drag, then
-  the <code>DOMStringList</code> object must in addition include the
-  string "<code title="">Files</code>". (This value can be
-  distinguished from the other values because it is not
-  lowercase.)</p>
+  giving the strings that the following steps would produce. The same
+  object must be returned each time.</p>
 
-  <p>The <dfn id="dom-datatransfer-cleardata" title="dom-DataTransfer-clearData"><code>clearData()</code></dfn>
-  method, when called with no arguments, must clear the
-  <code><a href="#datatransfer">DataTransfer</a></code> object of all data (for all formats).</p>
+  <ol><li><p>Start with an empty list <var title="">L</var>.</p></li>
 
-  <p class="note">The <code title="dom-DataTransfer-clearData"><a href="#dom-datatransfer-cleardata">clearData()</a></code> method does
+   <li><p>If the <code><a href="#datatransfer">DataTransfer</a></code> object is no longer
+   associated with a <a href="#drag-data-store">drag data store</a>, the
+   <code>DOMStringList</code> is empty. Abort these steps; return the
+   empty list <var title="">L</var>.</p></li>
+
+   <li><p>For each item in the <a href="#drag-data-store-item-list">drag data store item list</a>
+   <!-- in some order...? --> whose <a href="#the-drag-data-item-kind" title="the drag data item&#10;   kind">kind</a> is <i>Plain Unicode string</i>, add an entry to
+   the list <var title="">L</var> consisting of the item's <a href="#the-drag-data-item-type-string" title="the drag data item type string">type string</a>.</p></li>
+
+   <li><p>If there are any items in the <a href="#drag-data-store-item-list">drag data store item
+   list</a> whose <a href="#the-drag-data-item-kind" title="the drag data item kind">kind</a>
+   is <i>File</i>, then add an entry to the list <var title="">L</var>
+   consisting of the string "<code title="">Files</code>". (This value
+   can be distinguished from the other values because it is not
+   lowercase.)</p></li>
+
+   <!-- <li><p>Sort the list...?</p></li> -->
+
+   <li><p>The strings produced by these steps are those in the list
+   <var title="">L</var>.</p></li>
+
+  </ol><p>The <dfn id="dom-datatransfer-cleardata" title="dom-DataTransfer-clearData"><code>clearData()</code></dfn>
+  method must run the following steps:</p>
+
+  <ol><li><p>If the <code><a href="#datatransfer">DataTransfer</a></code> object is no longer
+   associated with a <a href="#drag-data-store">drag data store</a>, abort these steps.
+   Nothing happens.</p></li>
+
+   <li><p>If the <a href="#drag-data-store">drag data store</a>'s <a href="#drag-data-store-mode" title="drag data&#10;   store mode">mode</a> is not the <a href="#concept-dnd-rw" title="concept-dnd-rw">read/write mode</a>, abort these steps.
+   Nothing happens.</p></li>
+
+   <li><p>If the method was called with no arguments, remove each item
+   in the <a href="#drag-data-store-item-list">drag data store item list</a> whose <a href="#the-drag-data-item-kind" title="the drag data item kind">kind</a> is <i>Plain Unicode
+   string</i>, and abort these steps.</p></li>
+
+   <li><p>Let <var title="">format</var> be the first argument,
+   <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a>.</p></li>
+
+   <li>
+
+    <p>If <var title="">format</var> equals "<code title="">text</code>", change it to "<code title="">text/plain</code>".</p>
+
+    <p>If <var title="">format</var> equals "<code title="">url</code>", change it to "<code title="">text/uri-list</code>".</p>
+
+   </li>
+
+   <li><p>Remove each item in the <a href="#drag-data-store-item-list">drag data store item
+   list</a> whose <a href="#the-drag-data-item-kind" title="the drag data item kind">kind</a>
+   is <i>Plain Unicode string</i> and whose <a href="#the-drag-data-item-type-string" title="the drag data&#10;   item type string">type string</a> is equal to <var title="">format</var>.</p></li>
+
+  </ol><p class="note">The <code title="dom-DataTransfer-clearData"><a href="#dom-datatransfer-cleardata">clearData()</a></code> method does
   not affect whether any files were included in the drag, so the <code title="dom-DataTransfer-types"><a href="#dom-datatransfer-types">types</a></code> attribute's list might
   still not be empty after calling <code title="dom-DataTransfer-clearData"><a href="#dom-datatransfer-cleardata">clearData()</a></code> (it would
   still contain the "<code title="">Files</code>" string if any files
   were included in the drag).</p>
 
-  <p>When called with an argument, the <code title="dom-DataTransfer-clearData"><a href="#dom-datatransfer-cleardata">clearData(<var title="">format</var>)</a></code> method must clear the
-  <code><a href="#datatransfer">DataTransfer</a></code> object of any data associated with the
-  given <var title="">format</var>, <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII
-  lowercase</a>. If <var title="">format</var> (after conversion to
-  lowercase) is the value "<code title="">text</code>", then it must
-  be treated as "<code title="">text/plain</code>". If the <var title="">format</var> (after conversion to lowercase) is "<code title="">url</code>", then it must be treated as "<code title="">text/uri-list</code>".</p>
-
   <p>The <dfn id="dom-datatransfer-setdata" title="dom-DataTransfer-setData"><code>setData(<var title="">format</var>, <var title="">data</var>)</code></dfn> method
-  must add <var title="">data</var> to the data stored in the
-  <code><a href="#datatransfer">DataTransfer</a></code> object, labeled as being of the type <var title="">format</var>, <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII
-  lowercase</a>. This must replace any previous data that had been
-  set for that format. If <var title="">format</var> (after conversion
-  to lowercase) is the value "<code title="">text</code>", then it
-  must be treated as "<code title="">text/plain</code>". If the <var title="">format</var> (after conversion to lowercase) is "<code title="">url</code>", then it must be treated as "<code title="">text/uri-list</code>".</p>
+  must run the following steps:</p>
 
-  <p>The <dfn id="dom-datatransfer-getdata" title="dom-DataTransfer-getData"><code>getData(<var title="">format</var>)</code></dfn> method must return the data that
-  is associated with the type <var title="">format</var>
-  <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a>, if any, and must return
-  the empty string otherwise. If <var title="">format</var> (after
-  conversion to lowercase) is the value "<code title="">text</code>",
-  then it must be treated as "<code title="">text/plain</code>". If
-  the <var title="">format</var> (after conversion to lowercase) is
-  "<code title="">url</code>", then the data associated with the
-  "<code title="">text/uri-list</code>" format must be parsed as
-  appropriate for <code title="">text/uri-list</code> data, and the
-  first URL from the list must be returned. If there is no data with
-  that format, or if there is but it has no URLs, then the method must
-  return the empty string. <a href="references.html#refsRFC2483">[RFC2483]</a></p>
+  <ol><li><p>If the <code><a href="#datatransfer">DataTransfer</a></code> object is no longer
+   associated with a <a href="#drag-data-store">drag data store</a>, abort these steps.
+   Nothing happens.</p></li>
 
-  <p>The <dfn id="dom-datatransfer-files" title="dom-DataTransfer-files"><code>files</code></dfn>
-  attribute must return the <code>FileList</code> object that contains
-  the files that are stored in the <code><a href="#datatransfer">DataTransfer</a></code>
-  object. There is one such object per <code><a href="#datatransfer">DataTransfer</a></code>
-  object.</p>
+   <li><p>If the <a href="#drag-data-store">drag data store</a>'s <a href="#drag-data-store-mode" title="drag data&#10;   store mode">mode</a> is not the <a href="#concept-dnd-rw" title="concept-dnd-rw">read/write mode</a>, abort these steps.
+   Nothing happens.</p></li>
 
-  <p class="note">This version of the API does not expose the types of
+   <li><p>Let <var title="">format</var> be the first argument,
+   <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a>.</p></li>
+
+   <li>
+
+    <p>If <var title="">format</var> equals "<code title="">text</code>", change it to "<code title="">text/plain</code>".</p>
+
+    <p>If <var title="">format</var> equals "<code title="">url</code>", change it to "<code title="">text/uri-list</code>".</p>
+
+   </li>
+
+   <li><p>Remove each item in the <a href="#drag-data-store-item-list">drag data store item
+   list</a> whose <a href="#the-drag-data-item-kind" title="the drag data item kind">kind</a>
+   is <i>Plain Unicode string</i> and whose <a href="#the-drag-data-item-type-string" title="the drag data&#10;   item type string">type string</a> is equal to <var title="">format</var>.</p></li>
+
+   <li><p>Add an item to the <a href="#drag-data-store-item-list">drag data store item list</a>
+   whose <a href="#the-drag-data-item-kind" title="the drag data item kind">kind</a> is <i>Plain
+   Unicode string</i>, whose <a href="#the-drag-data-item-type-string" title="the drag data item type&#10;   string">type string</a> is equal to <var title="">format</var>,
+   and whose data is the string given by the method's second
+   argument.</p></li>
+
+  </ol><p>The <dfn id="dom-datatransfer-getdata" title="dom-DataTransfer-getData"><code>getData(<var title="">format</var>, <var title="">data</var>)</code></dfn> method
+  must run the following steps:</p>
+
+  <ol><li><p>If the <code><a href="#datatransfer">DataTransfer</a></code> object is no longer
+   associated with a <a href="#drag-data-store">drag data store</a>, abort these steps.
+   Nothing happens.</p></li>
+
+   <li><p>If the <a href="#drag-data-store">drag data store</a>'s <a href="#drag-data-store-mode" title="drag data&#10;   store mode">mode</a> is in the <a href="#concept-dnd-p" title="concept-dnd-p">protected mode</a>, abort these steps.
+   Nothing happens.</p></li>
+
+   <li><p>Let <var title="">format</var> be the first argument,
+   <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a>.</p></li>
+
+   <li><p>Let <var title="">convert-to-URL</var> be false.</p></li>
+
+   <li><p>If <var title="">format</var> equals "<code title="">text</code>", change it to "<code title="">text/plain</code>".</p></li>
+
+   <li><p>If <var title="">format</var> equals "<code title="">url</code>", change it to "<code title="">text/uri-list</code>" and set <var title="">convert-to-URL</var> to true.</p></li>
+
+   <li><p>If there is no item in the <a href="#drag-data-store-item-list">drag data store item
+   list</a> whose <a href="#the-drag-data-item-kind" title="the drag data item kind">kind</a>
+   is <i>Plain Unicode string</i> and whose <a href="#the-drag-data-item-type-string" title="the drag data&#10;   item type string">type string</a> is equal to <var title="">format</var>, return the empty string and abort these
+   steps.</p></li>
+
+   <li><p>Let <var title="">result</var> be the data of the first item
+   to the <a href="#drag-data-store-item-list">drag data store item list</a> whose <a href="#the-drag-data-item-kind" title="the drag data item kind">kind</a> is <i>Plain Unicode
+   string</i> and whose <a href="#the-drag-data-item-type-string" title="the drag data item type&#10;   string">type string</a> is equal to <var title="">format</var>.</p></li>
+
+   <li><p>If <var title="">convert-to-URL</var> is true, then parse
+   <var title="">result</var> as appropriate for <code title="">text/uri-list</code> data, and then set <var title="">result</var> to the first URL from the list, if any, or
+   the empty string otherwise. <a href="references.html#refsRFC2483">[RFC2483]</a></p></li>
+
+   <li><p>Return <var title="">result</var>.</p></li>
+
+  </ol><p>The <dfn id="dom-datatransfer-files" title="dom-DataTransfer-files"><code>files</code></dfn>
+  attribute must return a <a href="infrastructure.html#live">live</a> <code>FileList</code>
+  sequence consisting of <code>File</code> objects representing the
+  files found by the following steps. The same object must be returned
+  each time. Furthermore, for a given <code>FileList</code> object and
+  a given underlying file, the same <code>File</code> object must be
+  used each time.</p>
+
+  <ol><li><p>Start with an empty list <var title="">L</var>.</p></li>
+
+   <li><p>If the <code><a href="#datatransfer">DataTransfer</a></code> object is no longer
+   associated with a <a href="#drag-data-store">drag data store</a>, the
+   <code>FileList</code> is empty. Abort these steps; return the
+   empty list <var title="">L</var>.</p></li>
+
+   <li><p>If the <a href="#drag-data-store">drag data store</a>'s <a href="#drag-data-store-mode" title="drag data&#10;   store mode">mode</a> is in the <a href="#concept-dnd-p" title="concept-dnd-p">protected mode</a>, abort these steps;
+   return the empty list <var title="">L</var>.</p></li>
+
+   <li><p>For each item in the <a href="#drag-data-store-item-list">drag data store item list</a>
+   <!-- in some order...? --> whose <a href="#the-drag-data-item-kind" title="the drag data item&#10;   kind">kind</a> is <i>File</i> <!-- DND-v3: (not <i>Blob</i>) -->,
+   add the item's data (the file, in particular its name and contents,
+   as well as its <a href="#the-drag-data-item-type-string" title="the drag data item type&#10;   string">type</a>) to the list <var title="">L</var>.</p></li>
+
+   <!-- <li><p>Sort the list...?</p></li> -->
+
+   <li><p>The files found by these steps are those in the list <var title="">L</var>.</p></li>
+
+  </ol><p class="note">This version of the API does not expose the types of
   the files during the drag.</p>
 
-  <p>The <dfn id="dom-datatransfer-setdragimage" title="dom-DataTransfer-setDragImage"><code>setDragImage(<var title="">element</var>, <var title="">x</var>, <var title="">y</var>)</code></dfn> method sets which element to use <a href="#base-dnd-feedback">to generate the drag feedback</a>. The
-  <var title="">element</var> argument can be any
-  <code><a href="infrastructure.html#element">Element</a></code>; if it is an <code><a href="embedded-content-1.html#the-img-element">img</a></code> element, then the
-  user agent should use the element's image (at its intrinsic size) to
-  generate the feedback, otherwise the user agent should base the
-  feedback on the given element (but the exact mechanism for doing so
-  is not specified).</p>
+  <p>The <dfn id="dom-datatransfer-items" title="dom-DataTransfer-items"><code>items</code></dfn>
+  attribute must return a <code><a href="#datatransferitems">DataTransferItems</a></code> object
+  associated with the <code><a href="#datatransfer">DataTransfer</a></code> object. The same
+  object must be returned each time.</p>
 
-  <p>The <dfn id="dom-datatransfer-addelement" title="dom-DataTransfer-addElement"><code>addElement(<var title="">element</var>)</code></dfn> method is an alternative way of
-  specifying how the user agent is to <a href="#base-dnd-feedback">render the drag feedback</a>. It adds an
-  element to the <code><a href="#datatransfer">DataTransfer</a></code> object.</p>
+  <p>The <dfn id="dom-datatransfer-setdragimage" title="dom-DataTransfer-setDragImage"><code>setDragImage(<var title="">element</var>, <var title="">x</var>, <var title="">y</var>)</code></dfn> method must run the following
+  steps:</p>
 
-  <p class="note">The difference between <code title="dom-DataTransfer-setDragImage"><a href="#dom-datatransfer-setdragimage">setDragImage()</a></code> and
+  <ol><li><p>If the <code><a href="#datatransfer">DataTransfer</a></code> object is no longer
+   associated with a <a href="#drag-data-store">drag data store</a>, abort these steps.
+   Nothing happens.</p></li>
+
+   <li><p>If the <a href="#drag-data-store">drag data store</a>'s <a href="#drag-data-store-mode" title="drag data&#10;   store mode">mode</a> is not in the <a href="#concept-dnd-rw" title="concept-dnd-rw">read/write mode</a>, abort these steps.
+   Nothing happens.</p></li>
+
+   <li><p>If the <var title="">element</var> argument is an
+   <code><a href="embedded-content-1.html#the-img-element">img</a></code> element, then set the <a href="#drag-data-store-bitmap">drag data store
+   bitmap</a> to the element's image (at its intrinsic size);
+   otherwise, set the <a href="#drag-data-store-bitmap">drag data store bitmap</a> to an image
+   generated from the given element (the exact mechanism for doing so
+   is not currently specified).</p></li>
+
+   <li><p>Set the <a href="#drag-data-store-hot-spot-coordinate">drag data store hot spot coordinate</a> to
+   the given <var title="">x</var>, <var title="">y</var>
+   coordinate.</p></li>
+
+  </ol><p>The <dfn id="dom-datatransfer-addelement" title="dom-DataTransfer-addElement"><code>addElement(<var title="">element</var>)</code></dfn> method is an alternative way of
+  specifying how the user agent is to <a href="#base-dnd-feedback">render the drag feedback</a>. The method
+  must run the following steps:</p>
+
+  <ol><li><p>If the <code><a href="#datatransfer">DataTransfer</a></code> object is no longer
+   associated with a <a href="#drag-data-store">drag data store</a>, abort these steps.
+   Nothing happens.</p></li>
+
+   <li><p>If the <a href="#drag-data-store">drag data store</a>'s <a href="#drag-data-store-mode" title="drag data&#10;   store mode">mode</a> is not in the <a href="#concept-dnd-rw" title="concept-dnd-rw">read/write mode</a>, abort these steps.
+   Nothing happens.</p></li>
+
+   <li><p>Add the given <var title="">element</var> to the element's
+   <a href="#drag-data-store-elements-list">drag data store elements list</a>.</p></li>
+
+  </ol><p class="note">The difference between <code title="dom-DataTransfer-setDragImage"><a href="#dom-datatransfer-setdragimage">setDragImage()</a></code> and
   <code title="dom-DataTransfer-addElement"><a href="#dom-datatransfer-addelement">addElement()</a></code> is
   that the latter automatically generates the image based on the
-  current rendering of the elements added, whereas the former uses the
-  exact specified image.</p>
+  current rendering of the elements added (potentially keeping it
+  updated as the drag continues, e.g. if the elements include an
+  actively playing video), whereas the former uses the exact specified
+  image at the time the method is invoked.</p>
 
-  </div><h4 id="dndevents"><span class="secno">7.9.3 </span>Events fired during a drag-and-drop action</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The following events are involved in the drag-and-drop
-  model.</p><div class="impl">
+  </div><h5 id="the-datatransferitems-interface"><span class="secno">7.7.3.1 </span>The <code><a href="#datatransferitems">DataTransferItems</a></code> interface</h5><p>Each <code><a href="#datatransfer">DataTransfer</a></code> object is associated with a
+  <code><a href="#datatransferitems">DataTransferItems</a></code> object.</p><pre class="idl">interface <dfn id="datatransferitems">DataTransferItems</dfn> {
+  readonly attribute unsigned long <a href="#dom-datatransferitems-length" title="dom-DataTransferItems-length">length</a>;
+  <a href="#dom-datatransferitems-item" title="dom-DataTransferItems-item">getter</a> <a href="#datatransferitem">DataTransferItem</a> (in unsigned long index);
+  <a href="#dom-datatransferitems-removeitem" title="dom-DataTransferItems-removeItem">deleter</a> void (in unsigned long index);
+  void <a href="#dom-datatransferitems-clear" title="dom-DataTransferItems-clear">clear</a>();
 
-  <p>Whenever the processing model described below causes one of these
-  events to be fired, the event fired must use the
-  <code><a href="#dragevent">DragEvent</a></code> interface defined above, must have the
-  bubbling and cancelable behaviors given in the table below, and must
-  have the context information set up as described after the table,
-  with the <code title="dom-UIEvent-detail">detail</code> attribute
-  set to zero, the mouse and key attributes set according to the state
-  of the input devices as they would be for user interaction events,
-  and the <code title="">relatedTarget</code> attribute set to
-  null.</p>
+  <a href="#datatransferitem">DataTransferItem</a> <a href="#dom-datatransferitems-add" title="dom-DataTransferItems-add">add</a>(in DOMString data, in DOMString type);<!--
+DND-v3:  <span>DataTransferItem</span> <span title="dom-DataTransferItems-add">add</span>(in <span>Blob</span> data);-->
+  <a href="#datatransferitem">DataTransferItem</a> <a href="#dom-datatransferitems-add" title="dom-DataTransferItems-add">add</a>(in <span>File</span> data);<!--
+DND-v4:  <span>DataTransferItem</span> <span title="dom-DataTransferItems-add">add</span>(in any data, in DOMString type);--><!--
+DND-v5:  <span>DataTransferItem</span> <span title="dom-DataTransferItems-add">add</span>(in <span>DataTransferPromise</span> data);-->
+};</pre><dl class="domintro"><dt><var title="">items</var> . <code title="dom-DataTransferItems-length"><a href="#dom-datatransferitems-length">length</a></code></dt>
 
-  <p>If there is no relevant pointing device, the object must have its
-  <code title="">screenX</code>, <code title="">screenY</code>, <code title="">clientX</code>, <code title="">clientY</code>, and <code title="">button</code> attributes set to 0.</p>
+   <dd><p>Returns the number of items in the <a href="#drag-data-store">drag data store</a>.</p></dd>
 
-  <!-- interaction event spec point -->
 
-  </div><table><thead><tr><th> Event Name </th>
-     <th> Target </th>
-     <th> Bubbles? </th>
-     <th> Cancelable? </th>
-     <th> <code title="dom-DataTransfer-dataTransfer">dataTransfer</code> </th>
-     <th> <code title="dom-DataTransfer-effectAllowed"><a href="#dom-datatransfer-effectallowed">effectAllowed</a></code> </th>
-     <th> <code title="dom-DataTransfer-dropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code> </th>
-     <th> Default Action </th>
-    </tr></thead><tbody><tr><td><dfn id="event-dragstart" title="event-dragstart"><code>dragstart</code></dfn></td>
-     <td><a href="#source-node">Source node</a></td>
-     <td>&#x2713; Bubbles</td>
-     <td>&#x2713; Cancelable</td>
-     <td>Contains <a href="#source-node">source node</a> unless a selection is being dragged, in which case it is empty; <code title="dom-datatransfer-files"><a href="#dom-datatransfer-files">files</a></code> returns any files included in the drag operation</td>
-     <td><code title="">uninitialized</code></td>
-     <td><code title="">none</code></td>
-     <td>Initiate the drag-and-drop operation</td>
-    </tr><tr><td><dfn id="event-drag" title="event-drag"><code>drag</code></dfn></td>
-     <td><a href="#source-node">Source node</a></td>
-     <td>&#x2713; Bubbles</td>
-     <td>&#x2713; Cancelable</td>
-     <td>Empty</td>
-     <td><a href="#effectAllowed-initialization">Same as last event</a></td>
-     <td><code title="">none</code></td>
-     <td>Continue the drag-and-drop operation</td>
-    </tr><tr><td><dfn id="event-dragenter" title="event-dragenter"><code>dragenter</code></dfn></td>
-     <td><a href="#immediate-user-selection">Immediate user selection</a> or <a href="dom.html#the-body-element">the body element</a></td>
-     <td>&#x2713; Bubbles</td>
-     <td>&#x2713; Cancelable</td>
-     <td>Empty</td>
-     <td><a href="#effectAllowed-initialization">Same as last event</a></td>
-     <td><a href="#dropEffect-initialization">Based on <code>effectAllowed</code> value</a></td>
-     <td>Reject <a href="#immediate-user-selection">immediate user selection</a> as potential <a href="#current-target-element" title="current target element">target element</a></td>
-    </tr><tr><td><dfn id="event-dragleave" title="event-dragleave"><code>dragleave</code></dfn></td>
-     <td><a href="#current-target-element" title="current target element">Previous target element</a></td>
-     <td>&#x2713; Bubbles</td>
-     <td>&#x2014;</td>
-     <td>Empty</td>
-     <td><a href="#effectAllowed-initialization">Same as last event</a></td>
-     <td><code title="">none</code></td>
-     <td>None</td>
-    </tr><tr><td><dfn id="event-dragover" title="event-dragover"><code>dragover</code></dfn></td>
-     <td><a href="#current-target-element">Current target element</a></td>
-     <td>&#x2713; Bubbles</td>
-     <td>&#x2713; Cancelable</td>
-     <td>Empty</td>
-     <td><a href="#effectAllowed-initialization">Same as last event</a></td>
-     <td><a href="#dropEffect-initialization">Based on <code>effectAllowed</code> value</a></td>
-     <td>Reset the <a href="#current-drag-operation">current drag operation</a> to "none"</td>
-    </tr><tr><td><dfn id="event-drop" title="event-drop"><code>drop</code></dfn></td>
-     <td><a href="#current-target-element">Current target element</a></td>
-     <td>&#x2713; Bubbles</td>
-     <td>&#x2713; Cancelable</td>
-     <td><code title="dom-datatransfer-getdata"><a href="#dom-datatransfer-getdata">getData()</a></code> returns data set in <code title="dom-dragstart">dragstart</code> event; <code title="dom-datatransfer-files"><a href="#dom-datatransfer-files">files</a></code> returns any files included in the drag operation</td>
-     <td><a href="#effectAllowed-initialization">Same as last event</a></td>
-     <td><a href="#current-drag-operation">Current drag operation</a></td>
-     <td>Varies</td>
-    </tr><tr><td><dfn id="event-dragend" title="event-dragend"><code>dragend</code></dfn></td>
-     <td><a href="#source-node">Source node</a></td>
-     <td>&#x2713; Bubbles</td>
-     <td>&#x2014;</td>
-     <td>Empty</td>
-     <td><a href="#effectAllowed-initialization">Same as last event</a></td>
-     <td><a href="#current-drag-operation">Current drag operation</a></td>
-     <td>Varies</td>
-    </tr></tbody></table><p class="note">"Empty" in the table above means that the <code title="dom-datatransfer-getdata"><a href="#dom-datatransfer-getdata">getData()</a></code> and <code title="dom-dataTransfer-files"><a href="#dom-datatransfer-files">files</a></code> attributes act as if
-  there is no data being dragged.</p><div class="impl">
+   <dt><var title="">items</var>[<var title="">index</var>]</dt>
 
-  <p>The <code title="dom-DragEvent-dataTransfer"><a href="#dom-dragevent-datatransfer">dataTransfer</a></code>
-  object's contents are empty (the <code title="dom-datatransfer-getdata"><a href="#dom-datatransfer-getdata">getData()</a></code> and <code title="dom-dataTransfer-files"><a href="#dom-datatransfer-files">files</a></code> attributes act as if
-  there is no data being dragged) except for <code title="event-dragstart"><a href="#event-dragstart">dragstart</a></code> events and <code title="event-drop"><a href="#event-drop">drop</a></code> events, for which the contents are
-  set as described in the processing model, below.</p>
+   <dd>
 
-  <p id="effectAllowed-initialization">The <code title="dom-DataTransfer-effectAllowed"><a href="#dom-datatransfer-effectallowed">effectAllowed</a></code>
-  attribute must be set to "<code title="">uninitialized</code>" for
-  <code title="event-dragstart"><a href="#event-dragstart">dragstart</a></code> events, and to
-  whatever value the field had after the last drag-and-drop event was
-  fired for all other events (only counting events fired by the user
-  agent for the purposes of the drag-and-drop model described
-  below).</p>
+    <p>Returns the <code><a href="#datatransferitem">DataTransferItem</a></code> object representing the <var title="">index</var>th entry in the <a href="#drag-data-store">drag data store</a>.</p>
 
-  <p id="dropEffect-initialization">The <code title="dom-DataTransfer-dropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code> attribute must
-  be set to "<code title="">none</code>" for <code title="event-dragstart"><a href="#event-dragstart">dragstart</a></code>, <code title="event-drag"><a href="#event-drag">drag</a></code>, and <code title="event-dragleave"><a href="#event-dragleave">dragleave</a></code> events (except when stated
-  otherwise in the algorithms given in the sections below), to the
-  value corresponding to the <a href="#current-drag-operation">current drag operation</a> for
-  <code title="event-drop"><a href="#event-drop">drop</a></code> and <code title="event-dragend"><a href="#event-dragend">dragend</a></code> events, and to a value based on
-  the <code title="dom-DataTransfer-effectAllowed"><a href="#dom-datatransfer-effectallowed">effectAllowed</a></code>
-  attribute's value and to the drag-and-drop source, as given by the
-  following table, for the remaining events (<code title="event-dragenter"><a href="#event-dragenter">dragenter</a></code> and <code title="event-dragover"><a href="#event-dragover">dragover</a></code>):</p>
+   </dd>
 
-  <table><thead><tr><th><code title="dom-DataTransfer-effectAllowed"><a href="#dom-datatransfer-effectallowed">effectAllowed</a></code></th>
-     <th><code title="dom-DataTransfer-dropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code></th>
-    </tr></thead><tr><td><code title="">none</code></td>
-    <td><code title="">none</code></td>
-   </tr><tr><td><code title="">copy</code>, <code title="">copyLink</code>, <code title="">copyMove</code>, <code title="">all</code></td>
-    <td><code title="">copy</code></td>
-   </tr><tr><td><code title="">link</code>, <code title="">linkMove</code></td>
-    <td><code title="">link</code></td>
-   </tr><tr><td><code title="">move</code></td>
-    <td><code title="">move</code></td>
-   </tr><tr><td><code title="">uninitialized</code> when what is being dragged is a selection from a text field</td>
-    <td><code title="">move</code></td>
-   </tr><tr><td><code title="">uninitialized</code> when what is being dragged is a selection</td>
-    <td><code title="">copy</code></td>
-   </tr><tr><td><code title="">uninitialized</code> when what is being dragged is an <code><a href="text-level-semantics.html#the-a-element">a</a></code> element with an <code>href</code> attribute</td>
-    <td><code title="">link</code></td>
-   </tr><tr><td>Any other case</td>
-    <td><code title="">copy</code></td>
-   </tr></table></div><div class="impl">
 
-  <h4 id="drag-and-drop-processing-model"><span class="secno">7.9.4 </span>Drag-and-drop processing model</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+   <dt><code title="">delete</code> <var title="">items</var>[<var title="">index</var>]</dt>
+
+   <dd>
+
+    <p>Removes the <var title="">index</var>th entry in the <a href="#drag-data-store">drag data store</a>.</p>
+
+   </dd>
+
+
+   <dt><var title="">items</var> . <code title="dom-DataTransferItems-clear"><a href="#dom-datatransferitems-clear">clear</a></code>()</dt>
+
+   <dd>
+
+    <p>Removes all the entries in the <a href="#drag-data-store">drag data store</a>.</p>
+
+   </dd>
+
+
+   <dt><var title="">items</var> . <code title="dom-DataTransferItems-add"><a href="#dom-datatransferitems-add">add</a></code>(<var title="">data</var>)</dt>
+   <dt><var title="">items</var> . <code title="dom-DataTransferItems-add"><a href="#dom-datatransferitems-add">add</a></code>(<var title="">data</var>, <var title="">type</var>)</dt>
+
+   <dd>
+
+    <p>Adds a new entry for the given data to the <a href="#drag-data-store">drag data
+    store</a>. If the data is plain text <!-- DND-v4: or an object -->
+    then a <var title="">type</var> string has to be provided
+    also.</p>
+
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>While the <code><a href="#datatransferitems">DataTransferItems</a></code> object's
+  <code><a href="#datatransfer">DataTransfer</a></code> object is associated with a <a href="#drag-data-store">drag
+  data store</a>, the <code><a href="#datatransferitems">DataTransferItems</a></code> object's
+  <i>mode</i> is the same as the <a href="#drag-data-store-mode">drag data store mode</a>.
+  When the <code><a href="#datatransferitems">DataTransferItems</a></code> object's
+  <code><a href="#datatransfer">DataTransfer</a></code> object is <em>not</em> associated with a
+  <a href="#drag-data-store">drag data store</a>, the <code><a href="#datatransferitems">DataTransferItems</a></code>
+  object's <i>mode</i> is the <i>disabled mode</i>. The <a href="#drag-data-store">drag
+  data store</a> referenced in this section (which is used only
+  when the <code><a href="#datatransferitems">DataTransferItems</a></code> object is not in the
+  <i>disabled mode</i>) is the <a href="#drag-data-store">drag data store</a> with which
+  the <code><a href="#datatransferitems">DataTransferItems</a></code> object's
+  <code><a href="#datatransfer">DataTransfer</a></code> object is associated.</p>
+
+  <p>The <dfn id="dom-datatransferitems-length" title="dom-DataTransferItems-length"><code>length</code></dfn>
+  attribute must return zero if the object is in the <i>disabled
+  mode</i>; otherwise it must return the number of items in the
+  <a href="#drag-data-store-item-list">drag data store item list</a>.</p>
+
+  <p>When a <code><a href="#datatransferitems">DataTransferItems</a></code> object is not in the
+  <i>disabled mode</i>, its <a href="infrastructure.html#supported-property-indices">supported property indices</a>
+  are the numbers in the range
+
+    <span title="">0 .. <var title="">n</var>-1</span>,
+
+  where <var title="">n</var> is the number of items in the <a href="#drag-data-store-item-list">drag
+  data store item list</a>.</p>
+
+  <p>To <dfn id="dom-datatransferitems-item" title="dom-DataTransferItems-item">determine the value of
+  an indexed property</dfn> <var title="">i</var> of a
+  <code><a href="#datatransferitems">DataTransferItems</a></code> object, the user agent must return a
+  <code><a href="#datatransferitem">DataTransferItem</a></code> object representing the <var title="">i</var>th item in the <a href="#drag-data-store">drag data store</a>. The
+  same object must be returned each time. The
+  <code><a href="#datatransferitem">DataTransferItem</a></code> object must be associated with the
+  same <code><a href="#datatransfer">DataTransfer</a></code> object as the
+  <code><a href="#datatransferitems">DataTransferItems</a></code> object when it is created.</p>
+
+  <p>To <dfn id="dom-datatransferitems-removeitem" title="dom-DataTransferItems-removeItem">delete an
+  existing indexed property</dfn> <var title="">i</var> of a
+  <code><a href="#datatransferitems">DataTransferItems</a></code> object, the user agent must run these
+  steps:</p>
+
+  <ol><li><p>If the <code><a href="#datatransferitems">DataTransferItems</a></code> object is not in the
+   <i title="concept-dnd-rw"><a href="#concept-dnd-rw">read/write mode</a></i>, throw an
+   <code><a href="common-dom-interfaces.html#invalid_state_err">INVALID_STATE_ERR</a></code> exception and abort these
+   steps.</p></li>
+
+   <li><p>Remove the <var title="">i</var>th item from the <a href="#drag-data-store">drag
+   data store</a>.</p></li>
+
+  </ol><p>The <dfn id="dom-datatransferitems-clear" title="dom-DataTransferItems-clear"><code>clear</code></dfn> method,
+  if the <code><a href="#datatransferitems">DataTransferItems</a></code> object is in the <i title="concept-dnd-rw"><a href="#concept-dnd-rw">read/write mode</a></i>, must remove all the
+  items from the <a href="#drag-data-store">drag data store</a>. Otherwise, it must do
+  nothing.</p>
+
+  <p>The <dfn id="dom-datatransferitems-add" title="dom-DataTransferItems-add"><code>add()</code></dfn> method
+  must run the following steps:</p>
+
+  <ol><li><p>If the <code><a href="#datatransferitems">DataTransferItems</a></code> object is not in the
+   <i title="concept-dnd-rw"><a href="#concept-dnd-rw">read/write mode</a></i>, return null and
+   abort these steps.</p></li>
+
+   <li>
+
+    <p>Jump to the appropriate set of steps from the following list:</p>
+
+    <dl class="switch"><dt>If the first argument to the method is a string</dt>
+
+     <dd>
+
+      <p>Add an item to the <a href="#drag-data-store-item-list">drag data store item list</a>
+      whose <a href="#the-drag-data-item-kind" title="the drag data item kind">kind</a> is
+      <i>Plain Unicode string</i>, whose <a href="#the-drag-data-item-type-string" title="the drag data&#10;      item type string">type string</a> is equal to the value of
+      the method's second argument, <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII
+      lowercase</a>, and whose data is the string given by the
+      method's first argument.</p>
+
+     </dd>
+
+<!--DND-v3:
+     <dt>If the first argument to the method is a <code>Blob</code></dt>
+
+     <dd>
+
+      <p>Add an item to the <span>drag data store item list</span>
+      whose <span title="the drag data item kind">kind</span> is
+      <i>Blob</i>, whose <span title="the drag data item type
+      string">type string</span> is the <code
+      title="dom-Blob-type">type</code> of the <code>Blob</code>,
+      <span>converted to ASCII lowercase</span>, and whose data is the
+      same as the <code>Blob</code>'s data.</p>
+
+     </dd>
+-->
+
+     <dt>If the first argument to the method is a <code>File</code></dt>
+
+     <dd>
+
+      <p>Add an item to the <a href="#drag-data-store-item-list">drag data store item list</a>
+      whose <a href="#the-drag-data-item-kind" title="the drag data item kind">kind</a> is
+      <i>File</i>, whose <a href="#the-drag-data-item-type-string" title="the drag data item type&#10;      string">type string</a> is the <code title="dom-Blob-type">type</code> of the <code>File</code>,
+      <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a>, and whose data is the
+      same as the <code>File</code>'s data.</p>
+
+     </dd>
+
+<!--DND-v4:
+     <dt>Otherwise
+
+     <dd>
+
+      <p>Add an item to the <span>drag data store item list</span>
+      whose <span title="the drag data item kind">kind</span> is
+      <i>Object</i>, whose <span title="the drag data item type
+      string">type string</span> is equal to the value of the method's
+      second argument, <span>converted to ASCII lowercase</span>, and
+      whose data is a <span>structured clone</span> of the method's
+      first argument. If creating the clone throws an exception, then
+      throw that exception and abort these steps.</p>
+
+     </dd>
+-->
+
+    </dl></li>
+
+   <li><p><a href="#dom-datatransferitems-item" title="dom-DataTransferItems-item">Determine the value
+   of the indexed property</a> corresponding to the newly added
+   item, and return that value (a newly created
+   <code><a href="#datatransferitem">DataTransferItem</a></code> object).</p></li>
+
+  </ol></div><h5 id="the-datatransferitem-interface"><span class="secno">7.7.3.2 </span>The <code><a href="#datatransferitem">DataTransferItem</a></code> interface</h5><p>Each <code><a href="#datatransferitem">DataTransferItem</a></code> object is associated with a
+  <code><a href="#datatransfer">DataTransfer</a></code> object.</p><pre class="idl">interface <dfn id="datatransferitem">DataTransferItem</dfn> {
+    readonly attribute DOMString <a href="#dom-datatransferitem-kind" title="dom-DataTransferItem-kind">kind</a>;
+    readonly attribute DOMString <a href="#dom-datatransferitem-type" title="dom-DataTransferItem-type">type</a>;
+    void <a href="#dom-datatransferitem-getasstring" title="dom-DataTransferItem-getAsString">getAsString</a>(in <a href="#functionstringcallback">FunctionStringCallback</a> callback);<!--
+DND-v3:    <span>Blob</span> <span title="dom-DataTransferItem-getAsBlob">getAsBlob</span>();-->
+    <span>File</span> <a href="#dom-datatransferitem-getasfile" title="dom-DataTransferItem-getAsFile">getAsFile</a>();<!--
+DND-v4:    void <span title="dom-DataTransferItem-getAsObject">getAsObject</span>(in <span>FunctionObjectCallback</span> callback);-->
+};
+
+[Callback=FunctionOnly, NoInterfaceObject]
+interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
+  void <span title="dom-FunctionStringCallback-handleEvent">handleEvent</span>(in DOMString data);
+};<!--
+
+// DND-v4:
+[Callback=FunctionOnly, NoInterfaceObject]
+interface <dfn>FunctionObjectCallback</dfn> {
+  void <span title="dom-FunctionObjectCallback-handleEvent">handleEvent</span>(in DOMString data);
+};--></pre><dl class="domintro"><dt><var title="">item</var> . <code title="dom-DataTransferItem-kind"><a href="#dom-datatransferitem-kind">kind</a></code></dt>
+   <dd>
+
+    <p>Returns <a href="#the-drag-data-item-kind">the drag data item kind</a>, one of: "string",
+    <!-- DND-v3: "blob", --> "file"<!-- DND-v4: , "object" -->.</p>
+
+   </dd>
+
+   <dt><var title="">item</var> . <code title="dom-DataTransferItem-type"><a href="#dom-datatransferitem-type">type</a></code></dt>
+   <dd>
+
+    <p>Returns <a href="#the-drag-data-item-type-string">the drag data item type string</a>.</p>
+
+   </dd>
+
+   <dt><var title="">item</var> . <code title="dom-DataTransferItem-getAsString"><a href="#dom-datatransferitem-getasstring">getAsString</a></code>(<var title="">callback</var>)</dt>
+   <dd>
+
+    <p>Invokes the callback with the string data as the argument, if <a href="#the-drag-data-item-kind">the drag data item kind</a> is <i>Plain Unicode string</i>.</p>
+
+   </dd>
+
+<!-- DND-v3:
+   <dt><var title="">file</var> = <var title="">item</var> . <code title="dom-DataTransferItem-getAsBlob">getAsBlob</code>()</dt>
+   <dd>
+
+    <p>Returns a <code>Blob</code> object, if <span>the drag data item kind</span> is <i>Blob</i> or <i>File</i>.</p>
+
+   </dd>
+-->
+
+   <dt><var title="">file</var> = <var title="">item</var> . <code title="dom-DataTransferItem-getAsFile"><a href="#dom-datatransferitem-getasfile">getAsFile</a></code>()</dt>
+   <dd>
+
+    <p>Returns a <code>File</code> object, if <a href="#the-drag-data-item-kind">the drag data item kind</a> is <i>File</i>.</p>
+
+   </dd>
+
+<!-- DND-v4:
+   <dt><var title="">file</var> = <var title="">item</var> . <code title="dom-DataTransferItem-getAsFile">getAsFile</code>()</dt>
+   <dd>
+
+    <p>Invokes the callback with the cloned object data as the argument, if <span>the drag data item kind</span> is <i>Plain Unicode string</i> or <i>Object</i>.</p>
+
+   </dd>
+-->
+
+  </dl><div class="impl">
+
+  <p>While the <code><a href="#datatransferitem">DataTransferItem</a></code> object's
+  <code><a href="#datatransfer">DataTransfer</a></code> object is associated with a <a href="#drag-data-store">drag
+  data store</a> and that <a href="#drag-data-store">drag data store</a>'s <a href="#drag-data-store-item-list">drag
+  data store item list</a> still contains the item that the
+  <code><a href="#datatransferitem">DataTransferItem</a></code> object represents, the
+  <code><a href="#datatransferitem">DataTransferItem</a></code> object's <i>mode</i> is the same as
+  the <a href="#drag-data-store-mode">drag data store mode</a>. When the
+  <code><a href="#datatransferitem">DataTransferItem</a></code> object's <code><a href="#datatransfer">DataTransfer</a></code>
+  object is <em>not</em> associated with a <a href="#drag-data-store">drag data
+  store</a>, or if the item that the <code><a href="#datatransferitem">DataTransferItem</a></code>
+  object represents has been removed from the relevant <a href="#drag-data-store-item-list">drag data
+  store item list</a>, the <code><a href="#datatransferitem">DataTransferItem</a></code> object's
+  <i>mode</i> is the <i>disabled mode</i>. The <a href="#drag-data-store">drag data
+  store</a> referenced in this section (which is used only when the
+  <code><a href="#datatransferitem">DataTransferItem</a></code> object is not in the <i>disabled
+  mode</i>) is the <a href="#drag-data-store">drag data store</a> with which the
+  <code><a href="#datatransferitem">DataTransferItem</a></code> object's <code><a href="#datatransfer">DataTransfer</a></code>
+  object is associated.</p>
+
+  <p>The <dfn id="dom-datatransferitem-kind" title="dom-DataTransferItem-kind"><code>kind</code></dfn> attribute
+  must return the empty string if the <code><a href="#datatransferitem">DataTransferItem</a></code>
+  object is in the <i>disabled mode</i>; otherwise it must return the
+  string given in the cell from the second column of the following
+  table from the row whose cell in the first column contains <a href="#the-drag-data-item-kind">the
+  drag data item kind</a> of the item represented by the
+  <code><a href="#datatransferitem">DataTransferItem</a></code> object:</p>
+
+  <table><thead><tr><th> Kind </th><th> String
+   </th></tr></thead><tbody><tr><td> <i>Plain Unicode string</i> </td><td> "<code title="">string</code>"
+<!-- DND-v3:    <tr> <td> <i>Blob</i> <td> "<code title="">blob</code>"-->
+    </td></tr><tr><td> <i>File</i> </td><td> "<code title="">file</code>"
+<!-- DND-v4:    <tr> <td> <i>Object</i> <td> "<code title="">object</code>"-->
+  </td></tr></tbody></table><p>The <dfn id="dom-datatransferitem-type" title="dom-DataTransferItem-type"><code>type</code></dfn> attribute
+  must return the empty string if the <code><a href="#datatransferitem">DataTransferItem</a></code>
+  object is in the <i>disabled mode</i>; otherwise it must return
+  <a href="#the-drag-data-item-type-string">the drag data item type string</a> of the item represented
+  by the <code><a href="#datatransferitem">DataTransferItem</a></code> object.</p>
+
+  <p>The <dfn id="dom-datatransferitem-getasstring" title="dom-DataTransferItem-getAsString"><code>getAsString(<var title="">callback</var>)</code></dfn> method must run the following
+  steps:</p>
+
+  <ol><li><p>If the <var title="">callback</var> is null, abort these
+   steps.</p></li>
+
+   <li><p>If the <code><a href="#datatransferitem">DataTransferItem</a></code> object is not in the <i title="concept-dnd-rw"><a href="#concept-dnd-rw">read/write mode</a></i> or the <i title="concept-dnd-ro"><a href="#concept-dnd-ro">read-only mode</a></i>, abort these steps. The
+   callback is never invoked.</p></li>
+
+   <li><p>If <a href="#the-drag-data-item-kind">the drag data item kind</a> is not <i>Plain
+   Unicode string</i>, abort these steps. The callback is never
+   invoked.</p></li>
+
+   <li><p>Otherwise, <a href="webappapis.html#queue-a-task">queue a task</a> to invoke <var title="">callback</var>, passing the actual data of the item
+   represented by the <code><a href="#datatransferitem">DataTransferItem</a></code> object as the
+   argument.</p></li>
+
+  </ol><!--DND-v3:
+  <p>The <dfn
+  title="dom-DataTransferItem-getAsBlob"><code>getAsBlob()</code></dfn>
+  method must run the following steps:</p>
+
+  <ol>
+
+   <li><p>If the <code>DataTransferItem</code> object is not in the <i
+   title="concept-dnd-rw">read/write mode</i> or the <i
+   title="concept-dnd-ro">read-only mode</i>, return null and abort
+   these steps.</p></li>
+
+   <li>
+
+--><!--DND-v4:
+    <p>If <span>the drag data item kind</span> is <i>Object</i>,
+    return null.</p></li>
+--><!--DND-v3:
+
+    <p>If <span>the drag data item kind</span> is <i>File</i>, then
+    return a new <code>File</code> object representing the actual data
+    of the item represented by the <code>DataTransferItem</code>
+    object.</p>
+
+    <p>If <span>the drag data item kind</span> is <i>Unicode Data
+    string</i>, then return a new <code>Blob</code> object
+    representing the actual data of the item represented by the
+    <code>DataTransferItem</code> object, with the <code
+    title="dom-Blob-type">type</code> of the <code>Blob</code> being
+    <span>the drag data item type string</span> and with the binary
+    data of the <code>Blob</code> object being the Unicode string
+    encoded as UTF-8. <a href="#refsRFC3629">[RFC3629]</a></p>
+
+    <p>Otherwise, <span>the drag data item kind</span> is <i>Blob</i>;
+    return a new <code>Blob</code> object representing the actual data
+    of the item represented by the <code>DataTransferItem</code>
+    object.</p>
+
+   </li>
+
+  </ol>
+--><p>The <dfn id="dom-datatransferitem-getasfile" title="dom-DataTransferItem-getAsFile"><code>getAsFile()</code></dfn>
+  method must run the following steps:</p>
+
+  <ol><li><p>If the <code><a href="#datatransferitem">DataTransferItem</a></code> object is not in the <i title="concept-dnd-rw"><a href="#concept-dnd-rw">read/write mode</a></i> or the <i title="concept-dnd-ro"><a href="#concept-dnd-ro">read-only mode</a></i>, return null and abort
+   these steps.</p></li>
+
+   <li><p>If <a href="#the-drag-data-item-kind">the drag data item kind</a> is not <i>File</i>,
+   then return null and abort these steps.</p></li>
+
+   <li><p>Return a new <code>File</code> object representing the
+   actual data of the item represented by the
+   <code><a href="#datatransferitem">DataTransferItem</a></code> object.</p>
+
+  </li></ol><!--DND-v4:
+  <p>The <dfn
+  title="dom-DataTransferItem-getAsObject"><code>getAsObject(<var
+  title="">callback</var>)</code></dfn> method must run the following
+  steps:</p>
+
+  <ol>
+
+   <li><p>If the <code>DataTransferItem</code> object is not in the <i
+   title="concept-dnd-rw">read/write mode</i> or the <i
+   title="concept-dnd-ro">read-only mode</i>, return null and abort
+   these steps.</p></li>
+
+   <li>
+
+    <p>Let <var title="">data</var> be the actual data of the item
+    represented by the <code>DataTransferItem</code> object.</p>
+
+    <p>If <span>the drag data item kind</span> is <i>Unicode Data
+    string</i>, then <var title="">data</var> is a <code
+    title="">DOMString</code> containing the actual data.</p>
+
+    <p>If <span>the drag data item kind</span> is <i>Blob</i>, then
+    <var title="">data</var> is a <code>Blob</code> representing the
+    actual data.</p>
+
+    <p>If <span>the drag data item kind</span> is <i>File</i>, then
+    <var title="">data</var> is a <code>File</code> representing the
+    actual data.</p>
+
+    <p>If <span>the drag data item kind</span> is <i>Object</i>, then
+    <var title="">data</var> is the object that is the actual
+    data.</p>
+
+   </li>
+
+   <li><span>Queue a task</span> to invoke <var
+   title="">callback</var>, passing a <span>structured clone</span> of
+   <var title="">data</var> as the argument.</p></li>
+
+  </ol>
+--></div><h4 id="the-dragevent-interface"><span class="secno">7.7.4 </span>The <code><a href="#dragevent">DragEvent</a></code> interface</h4><p>The drag-and-drop processing model involves several events. They
+  all use the <code><a href="#dragevent">DragEvent</a></code> interface.</p><pre class="idl">interface <dfn id="dragevent">DragEvent</dfn> : <span>MouseEvent</span> {
+  readonly attribute <a href="#datatransfer">DataTransfer</a> <a href="#dom-dragevent-datatransfer" title="dom-DragEvent-dataTransfer">dataTransfer</a>;
+
+  void <a href="#dom-dragevent-initdragevent" title="dom-DragEvent-initDragEvent">initDragEvent</a>(in DOMString typeArg, in boolean canBubbleArg, in boolean cancelableArg, in any dummyArg<!-- used to be viewArg, back when we had views -->, in long detailArg, in long screenXArg, in long screenYArg, in long clientXArg, in long clientYArg, in boolean ctrlKeyArg, in boolean altKeyArg, in boolean shiftKeyArg, in boolean metaKeyArg, in unsigned short buttonArg, in EventTarget relatedTargetArg, in <a href="#datatransfer">DataTransfer</a> dataTransferArg);
+};</pre><dl class="domintro"><dt><var title="">event</var> . <code title="dom-DragEvent-dataTransfer"><a href="#dom-dragevent-datatransfer">dataTransfer</a></code></dt>
+
+   <dd>
+
+    <p>Returns the <code><a href="#datatransfer">DataTransfer</a></code> object for the event.</p>
+
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>The <dfn id="dom-dragevent-initdragevent" title="dom-DragEvent-initDragEvent"><code>initDragEvent()</code></dfn>
+  method must initialize the event in a manner analogous to the
+  similarly-named method in the DOM Events interfaces, except that the
+  <var title="">dummyArg</var> argument must be ignored. <a href="references.html#refsDOMEVENTS">[DOMEVENTS]</a></p>
+
+  <p>The <dfn id="dom-dragevent-datatransfer" title="dom-DragEvent-dataTransfer"><code>dataTransfer</code></dfn>
+  attribute of the <code><a href="#dragevent">DragEvent</a></code> interface represents the
+  context information for the event.</p>
+
+  </div><div class="impl">
+
+  <p>When a user agent is required to <dfn id="fire-a-dnd-event">fire a DND event</dfn>
+  named <var title="">e</var> at an element, using a particular
+  <a href="#drag-data-store">drag data store</a>, the user agent must run the following
+  steps:</p>
+
+  <ol><li>
+
+    <p>If <var title="">e</var> is <code title="event-dragstart"><a href="#event-dragstart">dragstart</a></code>, set the <a href="#drag-data-store-mode">drag data
+    store mode</a> to the <a href="#concept-dnd-rw" title="concept-dnd-rw">read/write
+    mode</a>.</p>
+
+    <p>If <var title="">e</var> is <code title="event-drop"><a href="#event-drop">drop</a></code>, set the <a href="#drag-data-store-mode">drag data store
+    mode</a> to the <a href="#concept-dnd-ro" title="concept-dnd-ro">read-only
+    mode</a>.</p>
+
+   </li>
+
+   <li><p>Let <var title="">dataTransfer</var> be a newly created
+   <code><a href="#datatransfer">DataTransfer</a></code> object associated with the given
+   <a href="#drag-data-store">drag data store</a>.</p></li>
+
+   <li><p id="effectAllowed-initialization">Set the <code title="dom-DataTransfer-effectAllowed"><a href="#dom-datatransfer-effectallowed">effectAllowed</a></code>
+   attribute to the <a href="#drag-data-store">drag data store</a>'s <a href="#drag-data-store-allowed-effects-state">drag data
+   store allowed effects state</a>.</p></li>
+
+   <li>
+
+    <p id="dropEffect-initialization">Set the <code title="dom-DataTransfer-dropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code> attribute to
+    "<code title="">none</code>" if <var title="">e</var> is <code title="event-dragstart"><a href="#event-dragstart">dragstart</a></code>, <code title="event-drag"><a href="#event-drag">drag</a></code>, or <code title="event-dragleave"><a href="#event-dragleave">dragleave</a></code>; to the value
+    corresponding to the <a href="#current-drag-operation">current drag operation</a> if <var title="">e</var> is <code title="event-drop"><a href="#event-drop">drop</a></code> or <code title="event-dragend"><a href="#event-dragend">dragend</a></code>; and to a value based on the
+    <code title="dom-DataTransfer-effectAllowed"><a href="#dom-datatransfer-effectallowed">effectAllowed</a></code>
+    attribute's value and to the drag-and-drop source, as given by the
+    following table, otherwise (i.e. if <var title="">e</var> is <code title="event-dragenter"><a href="#event-dragenter">dragenter</a></code> or <code title="event-dragover"><a href="#event-dragover">dragover</a></code>):</p>
+
+    <table><thead><tr><th><code title="dom-DataTransfer-effectAllowed"><a href="#dom-datatransfer-effectallowed">effectAllowed</a></code></th>
+       <th><code title="dom-DataTransfer-dropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code></th>
+      </tr></thead><tr><td>"<code title="">none</code>"</td>
+      <td>"<code title="">none</code>"</td>
+     </tr><tr><td>"<code title="">copy</code>", "<code title="">copyLink</code>", "<code title="">copyMove</code>", "<code title="">all</code>"</td>
+      <td>"<code title="">copy</code>"</td>
+     </tr><tr><td>"<code title="">link</code>", "<code title="">linkMove</code>"</td>
+      <td>"<code title="">link</code>"</td>
+     </tr><tr><td>"<code title="">move</code>"</td>
+      <td>"<code title="">move</code>"</td>
+     </tr><tr><td>"<code title="">uninitialized</code>" when what is being dragged is a selection from a text field</td>
+      <td>"<code title="">move</code>"</td>
+     </tr><tr><td>"<code title="">uninitialized</code>" when what is being dragged is a selection</td>
+      <td>"<code title="">copy</code>"</td>
+     </tr><tr><td>"<code title="">uninitialized</code>" when what is being dragged is an <code><a href="text-level-semantics.html#the-a-element">a</a></code> element with an <code>href</code> attribute</td>
+      <td>"<code title="">link</code>"</td>
+     </tr><tr><td>Any other case</td>
+      <td>"<code title="">copy</code>"</td>
+     </tr></table></li>
+
+   <li>
+
+    <p>Create a <code><a href="#dragevent">DragEvent</a></code> object and initialize it to
+    have the given name <var title="">e</var>, to bubble, to be
+    cancelable unless <var title="">e</var> is <code title="event-dragleave"><a href="#event-dragleave">dragleave</a></code> or <code title="event-dragend"><a href="#event-dragend">dragend</a></code>, and to have the <code title="dom-UIEvent-detail">detail</code> attribute set to zero,
+    the mouse and key attributes set according to the state of the
+    input devices as they would be for user interaction events, the
+    <code title="">relatedTarget</code> attribute set to null, and the
+    <code title="dom-DragEvent-dataTransfer"><a href="#dom-dragevent-datatransfer">dataTransfer</a></code>
+    attribute set to <var title="">dataTransfer</var>, the
+    <code><a href="#datatransfer">DataTransfer</a></code> object created above.</p>
+
+    <!-- interaction event spec point -->
+
+    <p>If there is no relevant pointing device, the object must have
+    its <code title="">screenX</code>, <code title="">screenY</code>,
+    <code title="">clientX</code>, <code title="">clientY</code>, and
+    <code title="">button</code> attributes set to 0.</p>
+
+   </li>
+
+   <li><p>Dispatch the newly created <code><a href="#dragevent">DragEvent</a></code> object at
+   the specified target element.</p></li>
+
+   <li><p>Set the <a href="#drag-data-store-allowed-effects-state">drag data store allowed effects state</a>
+   to the current value of <var title="">dataTransfer</var>'s <code title="dom-DataTransfer-effectAllowed"><a href="#dom-datatransfer-effectallowed">effectAllowed</a></code>
+   attribute.</p></li>
+
+   <li><p>Set the <a href="#drag-data-store-mode">drag data store mode</a> back to the <a href="#concept-dnd-p" title="concept-dnd-p">protected mode</a> if it was changed in
+   the first step.</p></li>
+
+   <li><p>Break the association between <var title="">dataTransfer</var> and the <a href="#drag-data-store">drag data
+   store</a>.</p></li>
+
+  </ol></div><div class="impl">
+
+  <h4 id="drag-and-drop-processing-model"><span class="secno">7.7.5 </span>Drag-and-drop processing model</h4>
 
   <p>When the user attempts to begin a drag operation, the user agent
-  must first determine what is being dragged. If the drag operation
-  was invoked on a selection, then it is the selection that is being
-  dragged. Otherwise, it is the first element, going up the ancestor
-  chain, starting at the node that the user tried to drag, that has
-  the IDL attribute <code title="dom-draggable"><a href="#dom-draggable">draggable</a></code> set
-  to true. If there is no such element, then nothing is being dragged,
-  the drag-and-drop operation is never started, and the user agent
-  must not continue with this algorithm.</p>
+  must run the following steps. User agents must act as if these steps
+  were run even if the drag actually started in another document or
+  application and the user agent was not aware that the drag was
+  occuring until it intersected with a document under the user agent's
+  purview.</p>
 
-  <p class="note"><code><a href="embedded-content-1.html#the-img-element">img</a></code> elements and <code><a href="text-level-semantics.html#the-a-element">a</a></code>
-  elements with an <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code>
-  attribute have their <code title="dom-draggable"><a href="#dom-draggable">draggable</a></code>
-  attribute set to true by default.</p>
+  <ol><li>
 
-  <p>If the user agent determines that something can be dragged, a
-  <code title="event-dragstart"><a href="#event-dragstart">dragstart</a></code> event must then be
-  fired at the <a href="#source-node">source node</a>.</p>
+    <p>Determine what is being dragged, as follows:</p>
 
-  <p>The <dfn id="source-node">source node</dfn> depends on the kind of drag and how it
-  was initiated. If it is a selection that is being dragged, then the
-  <a href="#source-node">source node</a> is the text node that the user started the
-  drag on (typically the text node that the user originally
-  clicked). If the user did not specify a particular node, for example
-  if the user just told the user agent to begin a drag of "the
-  selection", then the <a href="#source-node">source node</a> is the first text node
-  containing a part of the selection. If it is not a selection that is
-  being dragged, then the <a href="#source-node">source node</a> is the element that
-  is being dragged.</p>
+    <p>If the drag operation was invoked on a selection, then it is
+    the selection that is being dragged.</p>
 
-  <p>Multiple events are fired on the <a href="#source-node">source node</a> during
-  the course of the drag-and-drop operation.</p>
+    <p>Otherwise, if the drag operation was invoked on a
+    <code><a href="infrastructure.html#document">Document</a></code>, it is the first element, going up the
+    ancestor chain, starting at the node that the user tried to drag,
+    that has the IDL attribute <code title="dom-draggable"><a href="#dom-draggable">draggable</a></code> set to true. If there is no
+    such element, then nothing is being dragged; abort these steps,
+    the drag-and-drop operation is never started.</p>
 
-  <hr/><p>The <dfn id="list-of-dragged-nodes">list of dragged nodes</dfn> also depends on the kind of
-  drag. If it is a selection that is being dragged, then the
-  <a href="#list-of-dragged-nodes">list of dragged nodes</a> contains, in <a href="infrastructure.html#tree-order">tree
-  order</a>, every node that is partially or completely included in
-  the selection (including all their ancestors). Otherwise, the
-  <a href="#list-of-dragged-nodes">list of dragged nodes</a> contains only the <a href="#source-node">source
-  node</a>.</p>
+    <p>Otherwise, the drag operation was invoked outside the user
+    agent's purview. What is being dragged is defined by the document
+    or application where the drag was started.</p>
 
-  <hr/><p>If it is a selection that is being dragged, the <code title="dom-DragEvent-dataTransfer"><a href="#dom-dragevent-datatransfer">dataTransfer</a></code> member of the
-  event must be created with no nodes. Otherwise, it must be created
-  containing just the <a href="#source-node">source node</a>. Script can use the
-  <code title="dom-DataTransfer-addElement"><a href="#dom-datatransfer-addelement">addElement()</a></code> method
-  to add further elements to the list of what is being dragged. (This
-  list is only used for rendering the drag feedback.)</p>
+    <p class="note"><code><a href="embedded-content-1.html#the-img-element">img</a></code> elements and <code><a href="text-level-semantics.html#the-a-element">a</a></code>
+    elements with an <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code>
+    attribute have their <code title="dom-draggable"><a href="#dom-draggable">draggable</a></code>
+    attribute set to true by default.</p>
 
-  <p>The <code title="dom-DragEvent-dataTransfer"><a href="#dom-dragevent-datatransfer">dataTransfer</a></code>
-  member of the event also has data added to it, as follows:</p>
+   </li>
 
-  <ul><li>
+   <li><p><a href="#create-a-drag-data-store">Create a drag data store</a>. All the DND events
+   fired subsequently by the steps in this section must use this
+   <a href="#drag-data-store">drag data store</a>.</p></li>
 
-    <p>If it is a selection that is being dragged, then the user agent
-    must add the text of the selection to the <code title="dom-DragEvent-dataTransfer"><a href="#dom-dragevent-datatransfer">dataTransfer</a></code> member,
-    associated with the <code title="">text/plain</code> format.</p>
+   <li>
+
+    <p>Establish which DOM node is the <dfn id="source-node">source node</dfn>, as
+    follows:</p>
+
+    <p>If it is a selection that is being dragged, then the
+    <a href="#source-node">source node</a> is the text node that the user started
+    the drag on (typically the text node that the user originally
+    clicked). If the user did not specify a particular node, for
+    example if the user just told the user agent to begin a drag of
+    "the selection", then the <a href="#source-node">source node</a> is the first
+    text node containing a part of the selection.</p>
+
+    <p>Otherwise, if it is an element that is being dragged, then the
+    <a href="#source-node">source node</a> is the element that is being dragged.</p>
+
+    <p>Otherwise, the <a href="#source-node">source node</a> is part of another
+    document or application. When this specification requires that an
+    event be dispatched at the <a href="#source-node">source node</a> in this case,
+    the user agent must instead follow the platform-specific
+    conventions relevant to that situation.</p>
+
+    <p class="note">Multiple events are fired on the <a href="#source-node">source
+    node</a> during the course of the drag-and-drop operation.</p>
 
    </li>
 
    <li>
 
-    <p>If files are being dragged, then the user agent must add the
-    files to the <code title="dom-DragEvent-dataTransfer"><a href="#dom-dragevent-datatransfer">dataTransfer</a></code> member's
-    <code title="dom-datatransfer-files"><a href="#dom-datatransfer-files">files</a></code> attribute's
-    <code>FileList</code> object. (Dragging files can only happen from
-    outside a <a href="browsers.html#browsing-context">browsing context</a>, for example from a file
-    system manager application, and thus the <code title="event-dragstart"><a href="#event-dragstart">dragstart</a></code> event is actually implied
-    in this case.)</p>
+    <p>Determine the <dfn id="list-of-dragged-nodes">list of dragged nodes</dfn>, as follows:</p>
+
+    <p>If it is a selection that is being dragged, then the <a href="#list-of-dragged-nodes">list
+    of dragged nodes</a> contains, in <a href="infrastructure.html#tree-order">tree order</a>,
+    every node that is partially or completely included in the
+    selection (including all their ancestors).</p>
+
+    <p>Otherwise, the <a href="#list-of-dragged-nodes">list of dragged nodes</a> contains only
+    the <a href="#source-node">source node</a>, if any.</p>
 
    </li>
+
+   <li>
+
+    <p>If it is a selection that is being dragged, then add an item to
+    the <a href="#drag-data-store-item-list">drag data store item list</a>, with its properties
+    set as follows:</p>
+
+    <dl><dt><a href="#the-drag-data-item-type-string">The drag data item type string</a>
+     </dt><dd>"<code>text/plain</code>"</dd>
+
+     <dt><a href="#the-drag-data-item-kind">The drag data item kind</a>
+     </dt><dd><i>Plain Unicode string</i></dd>
+
+     <dt>The actual data</dt>
+     <dd>The text of the selection</dd>
+
+    </dl><p>Otherwise, if any files are being dragged, then add one item
+    per file to the <a href="#drag-data-store-item-list">drag data store item list</a>, with their
+    properties set as follows:</p>
+
+    <dl><dt><a href="#the-drag-data-item-type-string">The drag data item type string</a>
+     </dt><dd>The MIME type of the file, if known, or "<code>application/octet-stream</code>" otherwise.</dd>
+
+     <dt><a href="#the-drag-data-item-kind">The drag data item kind</a>
+     </dt><dd><i>File</i></dd>
+
+     <dt>The actual data</dt>
+     <dd>The file's contents and name.</dd>
+
+    </dl><p class="note">Dragging files can currently only happen from
+    outside a <a href="browsers.html#browsing-context">browsing context</a>, for example from a file
+    system manager application.</p>
+
+    <p>If the drag initiated outside of the application, the user
+    agent must add items to the <a href="#drag-data-store-item-list">drag data store item list</a>
+    as appropriate for the data being dragged, honoring platform
+    conventions where appropriate; however, if the platform
+    conventions do not use <a href="infrastructure.html#mime-type" title="MIME type">MIME types</a>
+    to label dragged data, the user agent must make a best-effort
+    attempt to map the types to MIME types, and, in any case, all the
+    <a href="#the-drag-data-item-type-string" title="the drag data item type string">drag data item type
+    strings</a> must be <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII
+    lowercase</a>.</p>
+
+   </li>
+
+   <!-- DND-v2: text/html as an export format -->
 
 
    <li>Perform <dfn id="drag-and-drop-initialization-steps">drag-and-drop initialization steps</dfn> defined
@@ -931,36 +1645,9 @@
 
 
 
-<!-- v2: deal with multiple vCards -->
-<!--
    <li>
 
-    <p>The user agent must take the <span>list of dragged nodes</span>
-    and <span title="extracting a vCard">extract the vCard data from
-    those nodes</span>, and then must add the resulting string to the
-    <code title="dom-DragEvent-dataTransfer">dataTransfer</code>
-    member, associated with the <code
-    title="">text/directory;profile=vcard</code> format.</p>
-
-   </li>
-
-   <li>
-
-    <p>The user agent must take the <span>list of dragged nodes</span>
-    and <span title="extracting vEvent data">extract the vEvent data
-    from those nodes</span>, and then must add the resulting string to
-    the <code title="dom-DragEvent-dataTransfer">dataTransfer</code>
-    member, associated with the <code
-    title="">text/calendar;component=vevent</code> format.</p>
-
-   </li>
--->
-
-   <!-- v2: text/html -->
-
-   <li>
-
-    <p>The user agent must run the following steps:</p>
+    <p>Run the following substeps:</p>
 
     <ol><li><p>Let <var title="">urls</var> be an empty list of <a href="urls.html#absolute-url" title="absolute URL">absolute URLs</a>.</p></li>
 
@@ -969,87 +1656,120 @@
       <p>For each <var title="">node</var> in the <a href="#list-of-dragged-nodes">list of
       dragged nodes</a>:</p>
 
-      <dl><dt>If the node is an <code><a href="text-level-semantics.html#the-a-element">a</a></code> element with an <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code></dt>
+      <dl><dt>If the node is an <code><a href="text-level-semantics.html#the-a-element">a</a></code> element with an <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code> attribute</dt>
 
-       <dd>Add to <var title="">urls</var> the result of <a href="urls.html#resolve-a-url" title="resolve a url">resolving</a> the element's <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code> content attribute relative to
+       <dd>Add to <var title="">urls</var> the result of <a href="urls.html#resolve-a-url" title="resolve a url">resolving</a> the element's <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code> content attribute
+       relative to the element.</dd>
+
+       <dt>If the node is an <code><a href="embedded-content-1.html#the-img-element">img</a></code> element with an <code title="attr-img-src"><a href="embedded-content-1.html#attr-img-src">src</a></code> attribute</dt>
+
+       <dd>Add to <var title="">urls</var> the result of <a href="urls.html#resolve-a-url" title="resolve a url">resolving</a> the element's <code title="attr-img-src"><a href="embedded-content-1.html#attr-img-src">src</a></code> content attribute relative to
        the element.</dd>
 
-       <dt>If the node is an <code><a href="embedded-content-1.html#the-img-element">img</a></code> element with an <code title="attr-img-src"><a href="embedded-content-1.html#attr-img-src">src</a></code></dt>
-
-       <dd>Add to <var title="">urls</var> the result of <a href="urls.html#resolve-a-url" title="resolve a url">resolving</a> the element's <code title="attr-img-src"><a href="embedded-content-1.html#attr-img-src">src</a></code> content attribute relative to the
-       element.</dd>
-
-       <!-- v2: more -->
+       <!-- DND-v2: more -->
 
       </dl></li>
 
      <li><p>If <var title="">urls</var> is still empty, abort these
-     steps.</p></li>
+     substeps.</p></li>
 
      <li><p>Let <var title="">url string</var> be the result of
      concatenating the strings in <var title="">urls</var>, in the
      order they were added, separated by a U+000D CARRIAGE RETURN
      U+000A LINE FEED character pair (CRLF).</p></li>
 
-     <li><p>Add <var title="">url string</var> to the <code title="dom-DragEvent-dataTransfer"><a href="#dom-dragevent-datatransfer">dataTransfer</a></code> member,
-     associated with the <code title="">text/uri-list</code>
-     format.</p></li>
+     <li><p>Add one item to the <a href="#drag-data-store-item-list">drag data store item
+     list</a>, with its properties set as follows:</p>
+
+      <dl><dt><a href="#the-drag-data-item-type-string">The drag data item type string</a>
+       </dt><dd><code>text/uri-list</code></dd>
+
+       <dt><a href="#the-drag-data-item-kind">The drag data item kind</a>
+       </dt><dd><i>Plain Unicode string</i></dd>
+
+       <dt>The actual data</dt>
+       <dd><var title="">url string</var></dd>
+
+      </dl></li>
 
     </ol></li>
 
-  </ul><hr/><p>If the event is canceled, then the drag-and-drop operation must
-  not occur; the user agent must not continue with this algorithm.</p>
+   <li>
 
-  <p>If it is not canceled, then the drag-and-drop operation must be
-  initiated.</p>
+    <p>If it is an element that is being dragged, then set the
+    <a href="#drag-data-store-elements-list">drag data store elements list</a> to contain just the
+    <a href="#source-node">source node</a>.</p>
 
-  <p class="note">Since events with no event listeners registered are,
-  almost by definition, never canceled, drag-and-drop is always
-  available to the user if the author does not specifically prevent
-  it.</p>
+    <p>Otherwise, update the <a href="#drag-data-store-default-feedback">drag data store default
+    feedback</a> as appropriate for the user agent (if the user is
+    dragging the selection, then the selection would likely be the
+    basis for this feedback; if the drag began outside the user agent,
+    then the platform conventions for determining the drag feedback
+    should be used).</p>
 
-  <p id="base-dnd-feedback">The drag-and-drop feedback must be
-  generated from the first of the following sources that is
-  available:</p>
+    <p class="note">Script can use the <code title="dom-DataTransfer-addElement"><a href="#dom-datatransfer-addelement">addElement()</a></code> method to
+    add further elements to the list of what is being dragged. (This
+    list is only used for rendering the drag feedback.)</p>
 
-  <ol><li>The element specified in the last call to the <code title="dom-DataTransfer-setDragImage"><a href="#dom-datatransfer-setdragimage">setDragImage()</a></code> method
-   of the <code title="dom-DragEvent-dataTransfer"><a href="#dom-dragevent-datatransfer">dataTransfer</a></code>
-   object of the <code title="event-dragstart"><a href="#event-dragstart">dragstart</a></code> event,
-   if the method was called. In visual media, if this is used, the
-   <var title="">x</var> and <var title="">y</var> arguments that were
-   passed to that method should be used as hints for where to put the
-   cursor relative to the resulting image. The values are expressed as
-   distances in CSS pixels from the left side and from the top side of
-   the image respectively. <a href="references.html#refsCSS">[CSS]</a></li>
+   </li>
 
-   <li>The elements that were added to the <code title="dom-DragEvent-dataTransfer"><a href="#dom-dragevent-datatransfer">dataTransfer</a></code> object, both
-   before the event was fired, and during the handling of the event
-   using the <code title="dom-DataTransfer-addElement"><a href="#dom-datatransfer-addelement">addElement()</a></code>
-   method, if any such elements were indeed added.</li>
+   <li>
 
-   <li>The selection that the user is dragging.</li>
+    <p><a href="#fire-a-dnd-event">Fire a DND event</a> named <code title="event-dragstart"><a href="#event-dragstart">dragstart</a></code> at the <a href="#source-node">source
+    node</a>.</p>
 
-  </ol><p>The user agent must take a note of <a href="#dom-datatransfer-setdata" title="dom-DataTransfer-setData">the data that was placed</a> in
-  the <code title="dom-DragEvent-dataTransfer"><a href="#dom-dragevent-datatransfer">dataTransfer</a></code>
-  object. This data will be made available again when the <code title="event-drop"><a href="#event-drop">drop</a></code> event is fired.</p>
+    <p>If the event is canceled, then the drag-and-drop operation
+    should not occur; abort these steps.</p> <!-- only a should
+    because the UA can always allow the user to drag without the page
+    knowing -->
 
-  <p>From this point until the end of the drag-and-drop operation,
-  device input events (e.g. mouse and keyboard events) must be
-  suppressed. In addition, the user agent must track all DOM changes
-  made during the drag-and-drop operation, and add them to its <a href="#undo">undo history</a> as one atomic operation once the
+    <p class="note">Since events with no event listeners registered
+    are, almost by definition, never canceled, drag-and-drop is always
+    available to the user if the author does not specifically prevent
+    it.</p>
+
+   </li>
+
+   <li>
+
+    <p><a href="#initiate-the-drag-and-drop-operation">Initiate the drag-and-drop operation</a> in a manner
+    consistent with platform conventions, and as described below.</p>
+
+    <p id="base-dnd-feedback">The drag-and-drop feedback must be
+    generated from the first of the following sources that is
+    available:</p>
+
+    <ol><li>The <a href="#drag-data-store-bitmap">drag data store bitmap</a>, if any. In this
+     case, the <a href="#drag-data-store-hot-spot-coordinate">drag data store hot spot coordinate</a> should
+     be used as hints for where to put the cursor relative to the
+     resulting image. The values are expressed as distances in CSS
+     pixels from the left side and from the top side of the image
+     respectively. <a href="references.html#refsCSS">[CSS]</a></li>
+
+     <li>The elements in the <a href="#drag-data-store-elements-list">drag data store elements
+     list</a>, if any.</li>
+
+     <li>The <a href="#drag-data-store-default-feedback">drag data store default feedback</a>.</li>
+
+    </ol></li>
+
+  </ol><p>From the moment that the user agent is to <dfn id="initiate-the-drag-and-drop-operation">initiate the
+  drag-and-drop operation</dfn>, until the end of the drag-and-drop
+  operation, device input events (e.g. mouse and keyboard events) must
+  be suppressed. In addition, the user agent must track all DOM
+  changes made during the drag-and-drop operation, and add them to its
+  <a href="#undo">undo history</a> as one atomic operation once the
   drag-and-drop operation has ended.</p>
 
   <p>During the drag operation, the element directly indicated by the
   user as the drop target is called the <dfn id="immediate-user-selection">immediate user
   selection</dfn>. (Only elements can be selected by the user; other
-  nodes must not be made available as drop targets.)
+  nodes must not be made available as drop targets.) However, the
+  <a href="#immediate-user-selection">immediate user selection</a> is not necessarily the
+  <dfn id="current-target-element">current target element</dfn>, which is the element currently
+  selected for the drop part of the drag-and-drop operation.</p>
 
-  However, the <a href="#immediate-user-selection">immediate user selection</a> is not
-  necessarily the <dfn id="current-target-element">current target element</dfn>, which is the
-  element currently selected for the drop part of the drag-and-drop
-  operation.
-
-  The <a href="#immediate-user-selection">immediate user selection</a> changes as the user
+  <p>The <a href="#immediate-user-selection">immediate user selection</a> changes as the user
   selects different elements (either by pointing at them with a
   pointing device, or by selecting them in some other way). The
   <a href="#current-target-element">current target element</a> changes when the <a href="#immediate-user-selection">immediate
@@ -1064,11 +1784,10 @@
   <a href="#current-target-element">current target element</a> is initially null.</p>
 
   <p>In addition, there is also a <dfn id="current-drag-operation">current drag operation</dfn>,
-  which can take on the values "none", "copy", "link", and "move".
-  Initially, it has the value "none". It is updated by the user agent
-  as described in the steps below.</p>
+  which can take on the values "<code title="">none</code>", "<code title="">copy</code>", "<code title="">link</code>", and "<code title="">move</code>". Initially, it has the value "<code title="">none</code>". It is updated by the user agent as described
+  in the steps below.</p>
 
-  <p>User agents must, as soon as the drag operation is initiated and
+  <p>User agents must, as soon as the drag operation is <a href="#initiate-the-drag-and-drop-operation" title="initiate the drag-and-drop operation">initiated</a> and
   every 350ms (&#xB1;200ms) thereafter for as long as the drag
   operation is ongoing, <a href="webappapis.html#queue-a-task">queue a task</a> to perform the
   following steps in sequence:</p>
@@ -1076,81 +1795,104 @@
   <ol><li>
 
     <p>If the user agent is still performing the previous iteration of
-    the sequence (if any) when the next iteration becomes due, the
-    user agent must not execute the overdue iteration, effectively
-    "skipping missed frames" of the drag-and-drop operation.</p>
+    the sequence (if any) when the next iteration becomes due, abort
+    these steps for this iteration (effectively "skipping missed
+    frames" of the drag-and-drop operation).</p>
 
    </li>
 
    <li>
 
-    <p>The user agent must fire a <code title="event-drag"><a href="#event-drag">drag</a></code>
-    event at the <a href="#source-node">source node</a>. If this event is canceled,
-    the user agent must set the <a href="#current-drag-operation">current drag operation</a> to
-    none (no drag operation).</p>
+    <p><a href="#fire-a-dnd-event">Fire a DND event</a> named <code title="event-drag"><a href="#event-drag">drag</a></code> event at the <a href="#source-node">source
+    node</a>. If this event is canceled, the user agent must set
+    the <a href="#current-drag-operation">current drag operation</a> to "<code title="">none</code>" (no drag operation).</p>
 
    </li>
 
    <li>
 
-    <p>Next, if the <code title="event-drag"><a href="#event-drag">drag</a></code> event was not
+    <p>If the <code title="event-drag"><a href="#event-drag">drag</a></code> event was not
     canceled and the user has not ended the drag-and-drop operation,
-    the user agent must check the state of the drag-and-drop
-    operation, as follows:</p>
+    check the state of the drag-and-drop operation, as follows:</p>
 
     <ol><li>
 
-      <p>First, if the user is indicating a different <a href="#immediate-user-selection">immediate
-      user selection</a> than during the last iteration (or if this
-      is the first iteration), and if this <a href="#immediate-user-selection">immediate user
+      <p>If the user is indicating a different <a href="#immediate-user-selection">immediate user
+      selection</a> than during the last iteration (or if this is
+      the first iteration), and if this <a href="#immediate-user-selection">immediate user
       selection</a> is not the same as the <a href="#current-target-element">current target
-      element</a>, then the <a href="#current-target-element">current target element</a> must
-      be updated, as follows:</p>
+      element</a>, then update the <a href="#current-target-element">current target
+      element</a> as follows:</p>
 
-      <dl class="switch"><dt>If the new <a href="#immediate-user-selection">immediate user selection</a> is null, or
-       is in a non-DOM document or application</dt>
+      <dl class="switch"><dt>If the new <a href="#immediate-user-selection">immediate user selection</a> is null</dt>
 
-       <dd><p>The user agent must set the <a href="#current-target-element">current target
-       element</a> to the same value.</p></dd>
+       <dd><p>Set the <a href="#current-target-element">current target element</a> to null
+       also.</p></dd>
+
+       <dt>If the new <a href="#immediate-user-selection">immediate user selection</a> is in a
+       non-DOM document or application</dt>
+
+       <dd><p>Set the <a href="#current-target-element">current target element</a> to the
+       <a href="#immediate-user-selection">immediate user selection</a>.</p></dd>
 
        <dt>Otherwise</dt>
 
        <dd>
 
-        <p>The user agent must fire a <code title="event-dragenter"><a href="#event-dragenter">dragenter</a></code> event at the
+        <p><a href="#fire-a-dnd-event">Fire a DND event</a> named <code title="event-dragenter"><a href="#event-dragenter">dragenter</a></code> at the
         <a href="#immediate-user-selection">immediate user selection</a>.</p>
 
-        <p>If the event is canceled, then the <a href="#current-target-element">current target
-        element</a> must be set to the <a href="#immediate-user-selection">immediate user
+        <p>If the event is canceled, then set the <a href="#current-target-element">current target
+        element</a> to the <a href="#immediate-user-selection">immediate user
         selection</a>.</p>
 
-        <p>Otherwise, the user agent must act as follows:</p>
+        <p>Otherwise, run the appropriate step from the following
+        list:</p>
 
         <dl class="switch"><dt>If the <a href="#current-target-element">current target element</a> is a text
          field (e.g. <code><a href="the-button-element.html#the-textarea-element">textarea</a></code>, or an <code><a href="the-input-element.html#the-input-element">input</a></code>
          element whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code>
          attribute is in the <a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-text">Text</a> state) or an
-         <a href="editing.html#editable">editable</a> element</dt>
+         <a href="editing.html#editable">editable</a> element, and the <a href="#drag-data-store-item-list">drag data store
+         item list</a> has an item with <a href="#the-drag-data-item-type-string">the drag data item
+         type string</a> "<code>text/plain</code>" and <a href="#the-drag-data-item-kind">the
+         drag data item kind</a> <i>Plain Unicode string</i></dt>
 
-         <dd><p>The <a href="#current-target-element">current target element</a> must be set to
-         the <a href="#immediate-user-selection">immediate user selection</a> anyway.</p></dd>
+         <dd><p>Set the <a href="#current-target-element">current target element</a> to the
+         <a href="#immediate-user-selection">immediate user selection</a> anyway.</p></dd>
+
+
+         <dt>If the <a href="#current-target-element">current target element</a> is an element
+         with a <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code> attribute
+         that <a href="#concept-dropzone-match" title="concept-dropzone-match">matches</a> the
+         <a href="#drag-data-store">drag data store</a></dt>
+
+         <dd><p>Set the <a href="#current-target-element">current target element</a> to the
+         <a href="#immediate-user-selection">immediate user selection</a> anyway.</p></dd>
+
 
          <dt>If the <a href="#current-target-element">current target element</a> is
          <a href="dom.html#the-body-element">the body element</a></dt>
 
-         <dd><p>The <a href="#current-target-element">current target element</a> is left
+         <dd><p>Leave the <a href="#current-target-element">current target element</a>
          unchanged.</p></dd>
+
 
          <dt>Otherwise</dt>
 
-         <dd><p>The user agent must fire a <code title="event-dragenter"><a href="#event-dragenter">dragenter</a></code> event at <a href="dom.html#the-body-element">the
-         body element</a>, and the <a href="#current-target-element">current target
-         element</a> must be set to <a href="dom.html#the-body-element">the body element</a>,
-         regardless of whether that event was canceled or not. (If
-         <a href="dom.html#the-body-element">the body element</a> is null, then the <a href="#current-target-element">current
-         target element</a> would be set to null too in this case,
-         it wouldn't be set to the <code><a href="infrastructure.html#document">Document</a></code>
-         object.)</p></dd>
+         <dd>
+
+          <p><a href="#fire-a-dnd-event">Fire a DND event</a> named <code title="event-dragenter"><a href="#event-dragenter">dragenter</a></code> at <a href="dom.html#the-body-element">the body
+          element</a>, and set the <a href="#current-target-element">current target
+          element</a> to <a href="dom.html#the-body-element">the body element</a>, regardless
+          of whether that event was canceled or not.</p>
+
+          <p class="note">If <a href="dom.html#the-body-element">the body element</a> is null,
+          then the event will be fired at the <code><a href="infrastructure.html#document">Document</a></code>
+          object (as required by the definition of <a href="dom.html#the-body-element">the body
+          element</a>), but the <a href="#current-target-element">current target element</a>
+          would be set to null, not the <code><a href="infrastructure.html#document">Document</a></code>
+          object.</p></dd>
 
         </dl></dd>
 
@@ -1160,82 +1902,111 @@
 
       <p>If the previous step caused the <a href="#current-target-element">current target
       element</a> to change, and if the previous target element was
-      not null or a part of a non-DOM document, the user agent must fire
-      a <code title="event-dragleave"><a href="#event-dragleave">dragleave</a></code> event at the
-      previous target element.</p>
+      not null or a part of a non-DOM document, then <a href="#fire-a-dnd-event">fire a DND
+      event</a> named <code title="event-dragleave"><a href="#event-dragleave">dragleave</a></code> at the previous target
+      element.</p>
 
      </li>
 
      <li>
 
       <p>If the <a href="#current-target-element">current target element</a> is a DOM element,
-      the user agent must fire a <code title="event-dragover"><a href="#event-dragover">dragover</a></code> event at this <a href="#current-target-element">current
+      then <a href="#fire-a-dnd-event">fire a DND event</a> named <code title="event-dragover"><a href="#event-dragover">dragover</a></code> at this <a href="#current-target-element">current
       target element</a>.</p>
 
       <p>If the <code title="event-dragover"><a href="#event-dragover">dragover</a></code> event is
-      not canceled, the user agent must act as follows:</p>
+      not canceled, run the appropriate step from the following
+      list:</p>
 
       <dl class="switch"><dt>If the <a href="#current-target-element">current target element</a> is a text field
        (e.g. <code><a href="the-button-element.html#the-textarea-element">textarea</a></code>, or an <code><a href="the-input-element.html#the-input-element">input</a></code> element
        whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in
        the <a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-text">Text</a> state) or an
-       <a href="editing.html#editable">editable</a> element</dt>
+       <a href="editing.html#editable">editable</a> element, and the <a href="#drag-data-store-item-list">drag data store
+       item list</a> has an item with <a href="#the-drag-data-item-type-string">the drag data item type
+       string</a> "<code>text/plain</code>" and <a href="#the-drag-data-item-kind">the drag data
+       item kind</a> <i>Plain Unicode string</i></dt>
 
-       <dd><p>The user agent must set the <a href="#current-drag-operation">current drag
-       operation</a> to either "copy" or "move", as appropriate
-       given the platform conventions.</p></dd>
+       <dd><p>Set the <a href="#current-drag-operation">current drag operation</a> to either
+       "<code title="">copy</code>" or "<code title="">move</code>",
+       as appropriate given the platform conventions.</p></dd>
 
-       <dt>Otherwise</dt>
 
-       <dd><p>The user agent must reset the <a href="#current-drag-operation">current drag
-       operation</a> to "none".</p></dd>
+       <dt>If the <a href="#current-target-element">current target element</a> is an element
+       with a <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code> attribute
+       that <a href="#concept-dropzone-match" title="concept-dropzone-match">matches</a> the
+       <a href="#drag-data-store">drag data store</a> and <a href="#concept-dropzone-operation" title="concept-dropzone-operation">specifies an
+       operation</a></dt>
+
+       <dd><p>Set the <a href="#current-drag-operation">current drag operation</a> to the
+       operation <a href="#concept-dropzone-operation" title="concept-dropzone-operation">specified</a> by the
+       <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code> attribute of the
+       <a href="#current-target-element">current target element</a>.</p>
+
+
+       </dd><dt>If the <a href="#current-target-element">current target element</a> is an element
+       with a <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code> attribute
+       that <a href="#concept-dropzone-match" title="concept-dropzone-match">matches</a> the
+       <a href="#drag-data-store">drag data store</a> and does not <a href="#concept-dropzone-operation" title="concept-dropzone-operation">specify an
+       operation</a></dt>
+
+       <dd><p>Set the <a href="#current-drag-operation">current drag operation</a> to "<code title="">copy</code>".</p>
+
+
+       </dd><dt>Otherwise</dt>
+
+       <dd><p>Reset the <a href="#current-drag-operation">current drag operation</a> to "<code title="">none</code>".</p></dd>
 
       </dl><p>Otherwise (if the <code title="event-dragover"><a href="#event-dragover">dragover</a></code> event <em>is</em>
-      canceled), the <a href="#current-drag-operation">current drag operation</a> must be set
-      based on the values the <code title="dom-DataTransfer-effectAllowed"><a href="#dom-datatransfer-effectallowed">effectAllowed</a></code> and
+      canceled), set the <a href="#current-drag-operation">current drag operation</a> based on
+      the values of the <code title="dom-DataTransfer-effectAllowed"><a href="#dom-datatransfer-effectallowed">effectAllowed</a></code> and
       <code title="dom-DataTransfer-dropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code>
-      attributes of the <code title="dom-DragEvent-dataTransfer"><a href="#dom-dragevent-datatransfer">dataTransfer</a></code> object
-      had after the event was handled, as per the following table:</p>
+      attributes of the <code><a href="#dragevent">DragEvent</a></code> object's <code title="dom-DragEvent-dataTransfer"><a href="#dom-dragevent-datatransfer">dataTransfer</a></code> object as
+      they stood after the event dispatch finished, as per the
+      following table:</p>
 
       <table><thead><tr><th><code title="dom-DataTransfer-effectAllowed"><a href="#dom-datatransfer-effectallowed">effectAllowed</a></code></th>
          <th><code title="dom-DataTransfer-dropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code></th>
          <th>Drag operation</th>
-        </tr></thead><tr><td><code title="">uninitialized</code>, <code title="">copy</code>, <code title="">copyLink</code>, <code title="">copyMove</code>, or <code title="">all</code></td>
-        <td><code title="">copy</code></td>
-        <td>"copy"</td>
-       </tr><tr><td><code title="">uninitialized</code>, <code title="">link</code>, <code title="">copyLink</code>, <code title="">linkMove</code>, or <code title="">all</code></td>
-        <td><code title="">link</code></td>
-        <td>"link"</td>
-       </tr><tr><td><code title="">uninitialized</code>, <code title="">move</code>, <code title="">copyMove</code>, <code title="">linkMove</code>, or <code title="">all</code></td>
-        <td><code title="">move</code></td>
-        <td>"move"</td>
+        </tr></thead><tr><td>"<code title="">uninitialized</code>", "<code title="">copy</code>", "<code title="">copyLink</code>", "<code title="">copyMove</code>", or "<code title="">all</code>"</td>
+        <td>"<code title="">copy</code>"</td>
+        <td>"<code title="">copy</code>"</td>
+       </tr><tr><td>"<code title="">uninitialized</code>", "<code title="">link</code>", "<code title="">copyLink</code>", "<code title="">linkMove</code>", or "<code title="">all</code>"</td>
+        <td>"<code title="">link</code>"</td>
+        <td>"<code title="">link</code>"</td>
+       </tr><tr><td>"<code title="">uninitialized</code>", "<code title="">move</code>", "<code title="">copyMove</code>", "<code title="">linkMove</code>", or "<code title="">all</code>"</td>
+        <td>"<code title="">move</code>"</td>
+        <td>"<code title="">move</code>"</td>
        </tr><tr><td colspan="2">Any other case</td>
-        <td>"none"</td>
-       </tr></table><p>Then, regardless of whether the <code title="event-dragover"><a href="#event-dragover">dragover</a></code> event was canceled or
-      not, the drag feedback (e.g. the mouse cursor) must be updated
-      to match the <a href="#current-drag-operation">current drag operation</a>, as
-      follows:</p>
-
-      <table><thead><tr><th>Drag operation</th>
-         <th>Feedback</th>
-        </tr></thead><tr><td>"copy"</td>
-        <td>Data will be copied if dropped here.</td>
-       </tr><tr><td>"link"</td>
-        <td>Data will be linked if dropped here.</td>
-       </tr><tr><td>"move"</td>
-        <td>Data will be moved if dropped here.</td>
-       </tr><tr><td>"none"</td>
-        <td>No operation allowed, dropping here will cancel the drag-and-drop operation.</td>
+        <td>"<code title="">none</code>"</td>
        </tr></table></li>
 
      <li>
 
-      <p>Otherwise, if the <a href="#current-target-element">current target element</a> is not a
-      DOM element, the user agent must use platform-specific mechanisms
-      to determine what drag operation is being performed (none, copy,
-      link, or move). This sets the <em>current drag operation</em>.</p>
+      <p>Otherwise, if the <a href="#current-target-element">current target element</a> is not
+      a DOM element, use platform-specific mechanisms to determine
+      what drag operation is being performed (none, copy, link, or
+      move), and set the <i><a href="#current-drag-operation">current drag operation</a></i>
+      accordingly.</p>
 
      </li>
+
+     <li>
+
+      <p>Update the drag feedback (e.g. the mouse cursor) to match the
+      <a href="#current-drag-operation">current drag operation</a>, as follows:</p>
+
+      <table><thead><tr><th>Drag operation</th>
+         <th>Feedback</th>
+        </tr></thead><tr><td>"<code title="">copy</code>"</td>
+        <td>Data will be copied if dropped here.</td>
+       </tr><tr><td>"<code title="">link</code>"</td>
+        <td>Data will be linked if dropped here.</td>
+       </tr><tr><td>"<code title="">move</code>"</td>
+        <td>Data will be moved if dropped here.</td>
+       </tr><tr><td>"<code title="">none</code>"</td>
+        <td>No operation allowed, dropping here will cancel the drag-and-drop operation.</td>
+       </tr></table></li>
 
     </ol></li>
 
@@ -1244,90 +2015,91 @@
     <p>Otherwise, if the user ended the drag-and-drop operation (e.g.
     by releasing the mouse button in a mouse-driven drag-and-drop
     interface), or if the <code title="event-drag"><a href="#event-drag">drag</a></code> event
-    was canceled, then this will be the last iteration. The user agent
-    must execute the following steps, then stop looping.</p>
+    was canceled, then this will be the last iteration. Run the
+    following steps, then stop the drag-and-drop operation:</p>
 
     <ol><li>
 
-      <p>If the <a href="#current-drag-operation">current drag operation</a> is none (no drag
-      operation), or, if the user ended the drag-and-drop operation by
-      canceling it (e.g. by hitting the <kbd>Escape</kbd> key), or if
-      the <a href="#current-target-element">current target element</a> is null, then the drag
-      operation failed. If the <a href="#current-target-element">current target element</a> is
-      a DOM element, the user agent must fire a <code title="event-dragleave"><a href="#event-dragleave">dragleave</a></code> event at it; otherwise,
-      if it is not null, it must use platform-specific conventions for
-      drag cancellation.</p>
+      <p>If the <a href="#current-drag-operation">current drag operation</a> is "<code title="">none</code>" (no drag operation), or, if the user ended
+      the drag-and-drop operation by canceling it (e.g. by hitting the
+      <kbd>Escape</kbd> key), or if the <a href="#current-target-element">current target
+      element</a> is null, then the drag operation failed. Run
+      these substeps:</p>
+
+      <ol><li><p>Let <var title="">dropped</var> be false.</p></li>
+
+       <li><p>If the <a href="#current-target-element">current target element</a> is a DOM
+       element, <a href="#fire-a-dnd-event">fire a DND event</a> named <code title="event-dragleave"><a href="#event-dragleave">dragleave</a></code> at it; otherwise, if
+       it is not null, use platform-specific conventions for drag
+       cancellation.</p>
+
+      </li></ol><p>Otherwise, the drag operation was as success; run these substeps:</p>
+
+      <ol><li><p>Let <var title="">dropped</var> be true.</p></li>
+
+       <li><p>If the <a href="#current-target-element">current target element</a> is a DOM
+       element, <a href="#fire-a-dnd-event">fire a DND event</a> named <code title="event-drop"><a href="#event-drop">drop</a></code> at it; otherwise, use
+       platform-specific conventions for indicating a drop.</p></li>
+
+       <li>
+
+        <p>If the event is canceled, set the <a href="#current-drag-operation">current drag
+        operation</a> to the value of the <code title="dom-DataTransfer-dropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code> attribute
+        of the <code><a href="#dragevent">DragEvent</a></code> object's <code title="dom-DragEvent-dataTransfer"><a href="#dom-dragevent-datatransfer">dataTransfer</a></code> object
+        as it stood after the event dispatch finished.</p>
+
+        <p>Otherwise, the event is not canceled; perform the event's
+        default action, which depends on the exact target as
+        follows:</p>
+
+        <dl class="switch"><dt>If the <a href="#current-target-element">current target element</a> is a text
+         field (e.g. <code><a href="the-button-element.html#the-textarea-element">textarea</a></code>, or an <code><a href="the-input-element.html#the-input-element">input</a></code>
+         element whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code>
+         attribute is in the <a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-text">Text</a> state) or an
+         <a href="editing.html#editable">editable</a> element, and the <a href="#drag-data-store-item-list">drag data store
+         item list</a> has an item with <a href="#the-drag-data-item-type-string">the drag data item
+         type string</a> "<code>text/plain</code>" and <a href="#the-drag-data-item-kind">the
+         drag data item kind</a> <i>Plain Unicode string</i></dt>
+
+         <dd><p>Insert the actual data of the first item in the
+         <a href="#drag-data-store-item-list">drag data store item list</a> to have <a href="#the-drag-data-item-type-string" title="the drag data item type string">a drag data item type
+         string</a> of "<code>text/plain</code>" and <a href="#the-drag-data-item-kind" title="the drag data item kind">a drag data item kind</a>
+         that is <i>Plain Unicode string</i> into the text field or
+         <a href="editing.html#editable">editable</a> element in a manner consistent with
+         platform-specific conventions (e.g. inserting it at the
+         current mouse cursor position, or inserting it at the end of
+         the field).</p></dd>
+
+         <dt>Otherwise</dt>
+
+         <dd><p>Reset the <a href="#current-drag-operation">current drag operation</a> to
+         "<code title="">none</code>".</p></dd>
+
+        </dl></li>
+
+      </ol></li>
+
+     <li>
+
+      <p><a href="#fire-a-dnd-event">Fire a DND event</a> named <code title="event-dragend"><a href="#event-dragend">dragend</a></code> at the <a href="#source-node">source
+      node</a>.</p>
 
      </li>
 
      <li>
 
-      <p>Otherwise, the drag operation was as success. If the
-      <a href="#current-target-element">current target element</a> is a DOM element, the user
-      agent must fire a <code title="event-drop"><a href="#event-drop">drop</a></code> event at
-      it; otherwise, it must use platform-specific conventions for
-      indicating a drop.</p>
-
-      <p>When the target is a DOM element, the <code title="dom-DataTransfer-dropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code> attribute
-      of the event's <code title="dom-DragEvent-dataTransfer"><a href="#dom-dragevent-datatransfer">dataTransfer</a></code> object
-      must be given the value representing the <a href="#current-drag-operation">current drag
-      operation</a> (<code title="">copy</code>, <code title="">link</code>, or <code title="">move</code>), and the
-      object must be set up so that the <code title="dom-DataTransfer-getData"><a href="#dom-datatransfer-getdata">getData()</a></code> method will
-      return the data that was added during the <code title="event-dragstart"><a href="#event-dragstart">dragstart</a></code> event, and the <code title="dom-datatransfer-files"><a href="#dom-datatransfer-files">files</a></code> attribute will
-      return a <code>FileList</code> object with any files that were
-      dragged.</p>
-
-      <p>If the event is canceled, the <a href="#current-drag-operation">current drag
-      operation</a> must be set to the value of the <code title="dom-DataTransfer-dropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code> attribute
-      of the event's <code title="dom-DragEvent-dataTransfer"><a href="#dom-dragevent-datatransfer">dataTransfer</a></code> object as
-      it stood after the event was handled.</p>
-
-      <p>Otherwise, the event is not canceled, and the user agent must
-      perform the event's default action, which depends on the exact
-      target as follows:</p>
-
-      <dl class="switch"><dt>If the <a href="#current-target-element">current target element</a> is a text field
-       (e.g. <code><a href="the-button-element.html#the-textarea-element">textarea</a></code>, or an <code><a href="the-input-element.html#the-input-element">input</a></code> element
-       whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in
-       the <a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-text">Text</a> state) or an
-       <a href="editing.html#editable">editable</a> element</dt>
-
-       <dd>The user agent must insert the data associated with the
-       <code>text/plain</code> format, if any, into the text field or
-       <a href="editing.html#editable">editable</a> element in a manner consistent with
-       platform-specific conventions (e.g. inserting it at the current
-       mouse cursor position, or inserting it at the end of the
-       field).</dd>
-
-       <dt>Otherwise</dt>
-
-       <dd>Reset the <a href="#current-drag-operation">current drag operation</a> to
-       "none".</dd>
-
-      </dl></li>
-
-     <li>
-
-      <p>Finally, the user agent must fire a <code title="event-dragend"><a href="#event-dragend">dragend</a></code> event at the <a href="#source-node">source
-      node</a>, with the <code title="dom-DataTransfer-dropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code> attribute
-      of the event's <code title="dom-DragEvent-dataTransfer"><a href="#dom-dragevent-datatransfer">dataTransfer</a></code> object
-      being set to the value corresponding to the <a href="#current-drag-operation">current drag
-      operation</a>.</p>
-
-      <p class="note">The <a href="#current-drag-operation">current drag operation</a> can
-      change during the processing of the <code title="event-drop"><a href="#event-drop">drop</a></code> event, if one was fired.</p>
-
-      <p>The event is not cancelable. After the event has been
-      handled, the user agent must act as follows:</p>
+      <p>Run the appropriate steps from the following list as the
+      default action of the <code title="event-dragend"><a href="#event-dragend">dragend</a></code>
+      event:</p>
 
       <dl class="switch"><dt>If the <a href="#current-target-element">current target element</a> is a text field
        (e.g. <code><a href="the-button-element.html#the-textarea-element">textarea</a></code>, or an <code><a href="the-input-element.html#the-input-element">input</a></code> element
        whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in
        the <a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-text">Text</a> state), and
-       a <code title="event-drop"><a href="#event-drop">drop</a></code> event was fired in the
-       previous step, and the <a href="#current-drag-operation">current drag operation</a> is
-       "move", and the source of the drag-and-drop operation is a
-       selection in the DOM</dt>
+       <var title="">dropped</var> is true, and the <a href="#current-drag-operation">current drag
+       operation</a> is "<code title="">move</code>", and the
+       source of the drag-and-drop operation is a selection in the
+       DOM</dt>
 
        <dd>The user agent should delete the range representing the
        dragged selection from the DOM.</dd>
@@ -1336,10 +2108,10 @@
        (e.g. <code><a href="the-button-element.html#the-textarea-element">textarea</a></code>, or an <code><a href="the-input-element.html#the-input-element">input</a></code> element
        whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in
        the <a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-text">Text</a> state), and
-       a <code title="event-drop"><a href="#event-drop">drop</a></code> event was fired in the
-       previous step, and the <a href="#current-drag-operation">current drag operation</a> is
-       "move", and the source of the drag-and-drop operation is a
-       selection in a text field</dt>
+       <var title="">dropped</var> is true, and the <a href="#current-drag-operation">current drag
+       operation</a> is "<code title="">move</code>", and the
+       source of the drag-and-drop operation is a selection in a text
+       field</dt>
 
        <dd>The user agent should delete the dragged selection from the
        relevant text field.</dd>
@@ -1358,47 +2130,82 @@
   make sense to scroll the page so that the user can drop the link
   lower on the page.</p>
 
-  </div><div class="impl">
-
-  <h5 id="when-the-drag-and-drop-operation-starts-or-ends-in-another-document"><span class="secno">7.9.4.1 </span>When the drag-and-drop operation starts or ends in another
-  document</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
-
-  <p>The model described above is independent of which
+  <p class="note">This model is independent of which
   <code><a href="infrastructure.html#document">Document</a></code> object the nodes involved are from; the events
-  must be fired as described above and the rest of the processing
-  model must be followed as described above, irrespective of how many
-  documents are involved in the operation.</p>
+  are fired as described above and the rest of the processing model
+  runs as described above, irrespective of how many documents are
+  involved in the operation.</p>
 
-  </div><div class="impl">
-
-  <h5 id="when-the-drag-and-drop-operation-starts-or-ends-in-another-application"><span class="secno">7.9.4.2 </span>When the drag-and-drop operation starts or ends in another
-  application</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
-
-  <p>If the drag is initiated in another application, the <a href="#source-node">source
-  node</a> is not a DOM node, and the user agent must use
-  platform-specific conventions instead when the requirements above
-  involve the source node. User agents in this situation must act as
-  if the dragged data had been added to the <code><a href="#datatransfer">DataTransfer</a></code>
-  object when the drag started, even though no <code title="event-dragstart"><a href="#event-dragstart">dragstart</a></code> event was actually fired;
-  user agents must similarly use platform-specific conventions when
-  deciding on what drag feedback to use.</p>
-
-  <p>All the format strings must be <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII
-  lowercase</a>. If the platform conventions do not use <a href="infrastructure.html#mime-type" title="MIME type">MIME types</a> to label the dragged data, the
-  user agent must map the types to MIME types first.</p>
-
-  <p>If a drag is started in a document but ends in another
-  application, then the user agent must instead replace the parts of
-  the processing model relating to handling the <em>target</em>
-  according to platform-specific conventions.</p>
-
-  <p>In any case, scripts running in the context of the document must
-  not be able to distinguish the case of a drag-and-drop operation
-  being started or ended in another application from the case of a
-  drag-and-drop operation being started or ended in another document
-  from another domain.</p>
-
-  </div><h4 id="the-draggable-attribute"><span class="secno">7.9.5 </span>The <dfn title="attr-draggable"><code>draggable</code></dfn> attribute</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>All <a href="infrastructure.html#html-elements">HTML elements</a> may have the <code title="attr-draggable"><a href="#the-draggable-attribute">draggable</a></code> content attribute set. The
+  </div><h4 id="dndevents"><span class="secno">7.7.6 </span>Events summary</h4><p><i>This section is non-normative.</i></p><p>The following events are involved in the drag-and-drop
+  model.</p><table><thead><tr><th> Event Name </th>
+     <th> Target </th>
+     <!-- <th> Bubbles? </th> -->
+     <th> Cancelable? </th>
+     <th> <a href="#drag-data-store-mode">Drag data store mode</a> </th>
+     <!-- <th> <code title="dom-DataTransfer-effectAllowed">effectAllowed</code> </th> -->
+     <th> <code title="dom-DataTransfer-dropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code> </th>
+     <th> Default Action </th>
+    </tr></thead><tbody><tr><td><dfn id="event-dragstart" title="event-dragstart"><code>dragstart</code></dfn></td>
+     <td><a href="#source-node">Source node</a></td>
+     <!-- <td>&#x2713; Bubbles</td> -->
+     <td>&#x2713; Cancelable</td>
+     <td><a href="#concept-dnd-rw" title="concept-dnd-rw">Read/write mode</a>
+     <!-- <td>"<code title="">uninitialized</code>"</td> -->
+     </td><td>"<code title="">none</code>"</td>
+     <td>Initiate the drag-and-drop operation</td>
+    </tr><tr><td><dfn id="event-drag" title="event-drag"><code>drag</code></dfn></td>
+     <td><a href="#source-node">Source node</a></td>
+     <!-- <td>&#x2713; Bubbles</td> -->
+     <td>&#x2713; Cancelable</td>
+     <td><a href="#concept-dnd-p" title="concept-dnd-p">Protected mode</a>
+     <!-- <td>Same as last event</td> -->
+     </td><td>"<code title="">none</code>"</td>
+     <td>Continue the drag-and-drop operation</td>
+    </tr><tr><td><dfn id="event-dragenter" title="event-dragenter"><code>dragenter</code></dfn></td>
+     <td><a href="#immediate-user-selection">Immediate user selection</a> or <a href="dom.html#the-body-element">the body element</a></td>
+     <!-- <td>&#x2713; Bubbles</td> -->
+     <td>&#x2713; Cancelable</td>
+     <td><a href="#concept-dnd-p" title="concept-dnd-p">Protected mode</a>
+     <!-- <td>Same as last event</td> -->
+     </td><td><a href="#dropEffect-initialization">Based on <code>effectAllowed</code> value</a></td>
+     <td>Reject <a href="#immediate-user-selection">immediate user selection</a> as potential <a href="#current-target-element" title="current target element">target element</a></td>
+    </tr><tr><td><dfn id="event-dragleave" title="event-dragleave"><code>dragleave</code></dfn></td>
+     <td><a href="#current-target-element" title="current target element">Previous target element</a></td>
+     <!-- <td>&#x2713; Bubbles</td> -->
+     <td>&#x2014;</td>
+     <td><a href="#concept-dnd-p" title="concept-dnd-p">Protected mode</a>
+     <!-- <td>Same as last event</td> -->
+     </td><td>"<code title="">none</code>"</td>
+     <td>None</td>
+    </tr><tr><td><dfn id="event-dragover" title="event-dragover"><code>dragover</code></dfn></td>
+     <td><a href="#current-target-element">Current target element</a></td>
+     <!-- <td>&#x2713; Bubbles</td> -->
+     <td>&#x2713; Cancelable</td>
+     <td><a href="#concept-dnd-p" title="concept-dnd-p">Protected mode</a>
+     <!-- <td>Same as last event</td> -->
+     </td><td><a href="#dropEffect-initialization">Based on <code>effectAllowed</code> value</a></td>
+     <td>Reset the <a href="#current-drag-operation">current drag operation</a> to "none"</td>
+    </tr><tr><td><dfn id="event-drop" title="event-drop"><code>drop</code></dfn></td>
+     <td><a href="#current-target-element">Current target element</a></td>
+     <!-- <td>&#x2713; Bubbles</td> -->
+     <td>&#x2713; Cancelable</td>
+     <td><a href="#concept-dnd-ro" title="concept-dnd-ro">Read-only mode</a>
+     <!-- <td>Same as last event</td> -->
+     </td><td><a href="#current-drag-operation">Current drag operation</a></td>
+     <td>Varies</td>
+    </tr><tr><td><dfn id="event-dragend" title="event-dragend"><code>dragend</code></dfn></td>
+     <td><a href="#source-node">Source node</a></td>
+     <!-- <td>&#x2713; Bubbles</td> -->
+     <td>&#x2014;</td>
+     <td><a href="#concept-dnd-p" title="concept-dnd-p">Protected mode</a>
+     <!-- <td>Same as last event</td> -->
+     </td><td><a href="#current-drag-operation">Current drag operation</a></td>
+     <td>Varies</td>
+    </tr></tbody></table><p>Not shown in the above table: all these events bubble, and the
+  <code title="dom-DataTransfer-effectAllowed"><a href="#dom-datatransfer-effectallowed">effectAllowed</a></code>
+  attribute always has the value it had after the previous event was
+  fired, defaulting to "<code title="">uninitialized</code>" in the
+  <code title="event-dragstart"><a href="#event-dragstart">dragstart</a></code> event.</p><h4 id="the-draggable-attribute"><span class="secno">7.7.7 </span>The <dfn title="attr-draggable"><code>draggable</code></dfn> attribute</h4><p>All <a href="infrastructure.html#html-elements">HTML elements</a> may have the <code title="attr-draggable"><a href="#the-draggable-attribute">draggable</a></code> content attribute set. The
   <code title="attr-draggable"><a href="#the-draggable-attribute">draggable</a></code> attribute is an
   <a href="common-microsyntaxes.html#enumerated-attribute">enumerated attribute</a>. It has three states. The first
   state is <i>true</i> and it has the keyword <code title="">true</code>. The second state is <i>false</i> and it has
@@ -1447,6 +2254,238 @@
   set to the literal value <code title="">false</code>. If the <code title="dom-draggable"><a href="#dom-draggable">draggable</a></code> IDL attribute is set to the
   value true, the <code title="attr-draggable"><a href="#the-draggable-attribute">draggable</a></code>
   content attribute must be set to the literal value <code title="">true</code>.</p>
+
+  </div><h4 id="the-dropzone-attribute"><span class="secno">7.7.8 </span>The <dfn title="attr-dropzone"><code>dropzone</code></dfn> attribute</h4><p>All <a href="infrastructure.html#html-elements">HTML elements</a> may have the <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code> content attribute set. When
+  specified, its value must be an <a href="common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens">unordered set of unique
+  space-separated tokens</a> that are <a href="infrastructure.html#ascii-case-insensitive">ASCII
+  case-insensitive</a>. The allowed values are the following:</p><dl><dt><dfn id="attr-dropzone-copy" title="attr-dropzone-copy"><code>copy</code></dfn></dt>
+
+   <dd><p>Indicates that dropping an accepted item on the element will
+   result in a copy of the dragged data.</p>
+
+
+   </dd><dt><dfn id="attr-dropzone-move" title="attr-dropzone-move"><code>move</code></dfn></dt>
+
+   <dd><p>Indicates that dropping an accepted item on the element will
+   result in the dragged data being moved to the new location.</p>
+
+
+   </dd><dt><dfn id="attr-dropzone-link" title="attr-dropzone-link"><code>link</code></dfn></dt>
+
+   <dd><p>Indicates that dropping an accepted item on the element will
+   result in a link to the original data.</p>
+
+
+   </dd><dt>Any keyword with three characters or more, beginning with the
+   two characters U+0073 LATIN SMALL LETTER S and U+003A COLON or
+   U+0053 LATIN CAPITAL LETTER S and U+003A COLON (i.e. an <a href="infrastructure.html#ascii-case-insensitive">ASCII
+   case-insensitive</a> match for the string "<code title="">s:</code>")<dt>
+
+   </dt></dt><dd><p>Indicates that items with <a href="#the-drag-data-item-kind">the drag data item
+   kind</a> <i>Plain Unicode string</i> and <a href="#the-drag-data-item-type-string">the drag data
+   item type string</a> set to a value that matches the remainder
+   of the keyword are accepted.</p></dd>
+
+<!--DND-v3:
+   <dt>Any keyword with three characters or more, beginning with the
+   two characters U+0062 LATIN SMALL LETTER B and U+003A COLON or
+   U+0042 LATIN CAPITAL LETTER B and U+003A COLON (i.e. an <span>ASCII
+   case-insensitive</span> match for the string "<code
+   title="">b:</code>")<dt>
+
+   <dd><p>Indicates that items with <span>the drag data item
+   kind</span> <i>Blob</i>, <i>File</i>, or <i>Plain Unicode
+   string</i> and <span>the drag data item type string</span> set to a
+   value that matches the remainder of the keyword are
+   accepted.</p></dd>
+-->
+
+   <dt>Any keyword with three characters or more, beginning with the
+   two characters U+0066 LATIN SMALL LETTER F and U+003A COLON or
+   U+0046 LATIN CAPITAL LETTER F and U+003A COLON (i.e. an <a href="infrastructure.html#ascii-case-insensitive">ASCII
+   case-insensitive</a> match for the string "<code title="">f:</code>")<dt>
+
+   </dt></dt><dd><p>Indicates that items with <a href="#the-drag-data-item-kind">the drag data item
+   kind</a> <i>File</i> and <a href="#the-drag-data-item-type-string">the drag data item type
+   string</a> set to a value that matches the remainder of the
+   keyword are accepted.</p></dd>
+
+<!--DND-v4:
+   <dt>Any keyword with three characters or more, beginning with the
+   two characters U+006F LATIN SMALL LETTER O and U+003A COLON or
+   U+004F LATIN CAPITAL LETTER O and U+003A COLON (i.e. an <span>ASCII
+   case-insensitive</span> match for the string "<code
+   title="">o:</code>")<dt>
+
+   <dd><p>Indicates that items with <span>the drag data item type
+   string</span> set to a value that matches the remainder of the
+   keyword are accepted.</p></dd>
+-->
+
+  </dl><p>The <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code> content
+  attribute's values must not have more than one of the three feedback
+  values (<code title="attr-dropzone-copy"><a href="#attr-dropzone-copy">copy</a></code>, <code title="attr-dropzone-move"><a href="#attr-dropzone-move">move</a></code>, and <code title="attr-dropzone-link"><a href="#attr-dropzone-link">link</a></code>) specified. If none are
+  specified, the <code title="attr-dropzone-copy"><a href="#attr-dropzone-copy">copy</a></code> value is
+  implied.</p><div class="impl">
+
+  <p>A <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code> attribute <dfn id="concept-dropzone-match" title="concept-dropzone-match">matches a drag data store</dfn> if
+  the <a href="#dropzone-processing-steps"><code title="attr-dropzone">dropzone</code> processing
+  steps</a> result in a match.</p>
+
+  <p>A <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code> attribute <dfn id="concept-dropzone-operation" title="concept-dropzone-operation">specifies an operation</dfn> if
+  the <a href="#dropzone-processing-steps"><code title="attr-dropzone">dropzone</code> processing
+  steps</a> result in a specified operation. The specified
+  operation is as given by those steps.</p>
+
+  <p>The <dfn id="dropzone-processing-steps"><code title="attr-dropzone">dropzone</code> processing
+  steps</dfn> are as follows. They either result in a match or not,
+  and separate from this result either in a specified operation or
+  not, as defined below.</p>
+
+  <ol><li><p>Let <var title="">value</var> be the value of the <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code> attribute.</p></li>
+
+   <li><p>Let <var title="">keywords</var> be the result of <a href="common-microsyntaxes.html#split-a-string-on-spaces" title="split a string on spaces">splitting <var title="">value</var> on spaces</a>.</p></li>
+
+   <li><p>Let <var title="">matched</var> be false.</p></li>
+
+   <li><p>Let <var title="">operation</var> be unspecified.</p></li>
+
+   <li>
+
+    <p>For each value in <var title="">keywords</var>, if any, in the
+    order that they were found in <var title="">value</var>, run the
+    following steps.</p>
+
+    <ol><li><p>Let <var title="">keyword</var> be the keyword.</p></li>
+
+     <li>
+
+      <p>If <var title="">keyword</var> is one of "<code title="attr-dropzone-copy"><a href="#attr-dropzone-copy">copy</a></code>", "<code title="attr-dropzone-move"><a href="#attr-dropzone-move">move</a></code>", or "<code title="attr-dropzone-link"><a href="#attr-dropzone-link">link</a></code>", then: run the following
+      substeps:</p>
+
+      <ol><li><p>If <var title="">operation</var> is still unspecified,
+       then let <var title="">operation</var> be the string given by
+       <var title="">keyword</var>.</p></li>
+
+       <li><p>Skip to the step labeled <i>end of keyword</i>
+       below.</p></li>
+
+      </ol></li>
+
+     <li><p>If <var title="">keyword</var> is shorter than three
+     characters in length, then skip to the step labeled <i>end of
+     keyword</i> below.</p></li>
+
+     <li><p>If the second character in <var title="">keyword</var> is
+     not a U+003A COLON character (:), then skip to the step labeled
+     <i>end of keyword</i> below.</p></li>
+
+     <li><p>Let <var title="">kind code</var> be the first character
+     in <var title="">keyword</var>, <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII
+     lowercase</a>.</p></li>
+
+     <li>
+
+      <p>Jump to the appropriate step from the list below, based on
+      the value of <var title="">kind code</var>:</p>
+
+      <dl class="switch"><dt>If <var title="">kind code</var> is a U+0073 LATIN SMALL LETTER S character</dt>
+       <dd>
+
+        <p>Let <var title="">kind<!--DND-v3:/DND-v4: s--></var> be
+        <i>Plain Unicode string</i>.</p>
+
+       </dd>
+
+<!--DND-v3:
+       <dt>If <var title="">kind code</var> is a U+0062 LATIN SMALL LETTER B character</dt>
+       <dd>
+
+        <p>Let <var title="">kinds</var> be <i>Plain Unicode
+        string</i>, <i>Blob</i>, and <i>File</i>.</p>
+
+       </dd>
+-->
+
+       <dt>If <var title="">kind code</var> is a U+0066 LATIN SMALL LETTER F character</dt>
+       <dd>
+
+        <p>Let <var title="">kind<!--DND-v3:/DND-v4: s--></var> be
+        <i>File</i>.</p>
+
+       </dd>
+
+<!--DND-v4:
+       <dt>If <var title="">kind code</var> is a U+006F LATIN SMALL LETTER O character</dt>
+       <dd>
+
+        <p>Let <var title="">kinds</var> be <i>Plain Unicode
+        string</i>, <i>Blob</i>, <i>File</i>, and <i>Object</i>.</p>
+
+       </dd>
+-->
+
+       <dt>Otherwise</dt>
+       <dd>
+
+        <p>Skip to the step labeled <i>end of keyword</i> below.</p>
+
+       </dd>
+
+      </dl></li>
+
+     <li><p>Let <var title="">type</var> be the string consisting of
+     all but the first two characters of <var title="">keyword</var>,
+     <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a>.</p></li>
+
+     <li><p>If there exist any items in the <a href="#drag-data-store-item-list">drag data store item
+     list</a> whose <a href="#the-drag-data-item-kind" title="the drag data item kind">drag data
+     item kind</a> is <!--DND-v3:/DND-v4: one of--> the
+     kind<!--DND-v3:/DND-v4: s--> given in <var title="">kind<!--DND-v3:/DND-v4: s--></var> and whose <span title="the drag data item type">drag data item type</span> is
+     <var title="">type</var>, then let <var title="">matched</var> be
+     true.</p></li>
+
+     <li><p><i>End of keyword</i>: Go on to the next keyword, if any,
+     or the next step in the overall algorithm, if there are no
+     more.</p></li>
+
+    </ol></li>
+
+   <li>
+
+    <p>The algorithm results in a match if <var title="">matched</var>
+    is true, and does not otherwise.</p>
+
+    <p>The algorithm results in a specified operation if <var title="">operation</var> is not unspecified. The specified
+    operation, if one is specified, is the one given by <var title="">operation</var>.</p>
+
+   </li>
+
+  </ol><p>The <dfn id="dom-dropzone" title="dom-dropzone"><code>dropzone</code></dfn>
+  attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the content attribute of the
+  same name.</p>
+
+  </div><div class="example">
+
+   <p>In this example, a <code><a href="grouping-content.html#the-div-element">div</a></code> element is made into a drop
+   target for image files using the <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code> attribute. Images dropped
+   into the target are then displayed.</p>
+
+   <pre>&lt;div dropzone="copy f:image/png f:image/gif f:image/jpeg" ondrop="receive(event, this)"&gt;
+ &lt;p&gt;Drop an image here to have it displayed.&lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+ function receive(event, element) {
+   var data = event.dataTransfer.items;
+   for (var i = 0; i &lt; data.length; i += 1) {
+     if ((data[i].kind == 'file') &amp;&amp; (data[i].type.match('^image/'))) {
+       var img = new Image();
+       img.src = window.createObjectURL(data[i].getAsFile());
+       element.appendChild(img);
+     }
+   }
+ }
+&lt;/script&gt;</pre>
 
   </div><!--
   <h4>Copy and paste</h4>
@@ -1528,7 +2567,7 @@
   </div>
 --><div class="impl">
 
-  <h4 id="security-risks-in-the-drag-and-drop-model"><span class="secno">7.9.6 </span>Security risks in the drag-and-drop model</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="security-risks-in-the-drag-and-drop-model"><span class="secno">7.7.9 </span>Security risks in the drag-and-drop model</h4>
 
   <p>User agents must not make the data added to the
   <code><a href="#datatransfer">DataTransfer</a></code> object during the <code title="event-dragstart"><a href="#event-dragstart">dragstart</a></code> event available to scripts
@@ -1551,9 +2590,9 @@
   data to be dragged from sensitive sources and dropped into hostile
   documents without the user's consent.</p>
 
-  </div><h3 id="undo"><span class="secno">7.10 </span><dfn>Undo history</dfn></h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><div class="impl">
+  </div><h3 id="undo"><span class="secno">7.8 </span><dfn>Undo history</dfn></h3><div class="impl">
 
-  <h4 id="definitions-2"><span class="secno">7.10.1 </span>Definitions</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="definitions-2"><span class="secno">7.8.1 </span>Definitions</h4>
 
   <p>The user agent must associate an <dfn id="undo-transaction-history">undo transaction
   history</dfn> with each <code><a href="dom.html#htmldocument">HTMLDocument</a></code> object.</p>
@@ -1588,7 +2627,7 @@
   to higher-level user actions (such as interactions with server-side
   state, or in the implementation of a drawing tool).</p>
 
-  </div><h4 id="the-undomanager-interface"><span class="secno">7.10.2 </span>The <code><a href="#undomanager">UndoManager</a></code> interface</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>To manage <a href="#undo-object">undo object</a> entries in the <a href="#undo-transaction-history">undo
+  </div><h4 id="the-undomanager-interface"><span class="secno">7.8.2 </span>The <code><a href="#undomanager">UndoManager</a></code> interface</h4><p>To manage <a href="#undo-object">undo object</a> entries in the <a href="#undo-transaction-history">undo
   transaction history</a>, the <code><a href="#undomanager">UndoManager</a></code>
   interface can be used:</p><pre class="idl">interface <dfn id="undomanager">UndoManager</dfn> {
   readonly attribute unsigned long <a href="#dom-undomanager-length" title="dom-UndoManager-length">length</a>;
@@ -1678,10 +2717,10 @@
   attribute must return the number of <a href="#undo-object">undo object</a> entries
   in the <a href="#undo-transaction-history">undo transaction history</a>. This is the <var title="dom-UndoManager-length"><a href="#dom-undomanager-length">length</a></var>.</p>
 
-  <p>The object's <span>indices of the supported indexed
-  properties</span> are the numbers in the range zero to <span title=""><var title="dom-UndoManager-length"><a href="#dom-undomanager-length">length</a></var>-1</span>, unless the
+  <p>The object's <a href="infrastructure.html#supported-property-indices">supported property indices</a> are the
+  numbers in the range zero to <span title=""><var title="dom-UndoManager-length"><a href="#dom-undomanager-length">length</a></var>-1</span>, unless the
   <var title="dom-UndoManager-length"><a href="#dom-undomanager-length">length</a></var> is zero, in which
-  case there are no <span>supported indexed properties</span>.</p>
+  case there are no <a href="infrastructure.html#supported-property-indices">supported property indices</a>.</p>
 
   <p>The <dfn id="dom-undomanager-item" title="dom-UndoManager-item"><code>item(<var title="">n</var>)</code></dfn> method must return the <var title="">n</var>th <a href="#undo-object">undo object</a> entry in the <a href="#undo-transaction-history">undo
   transaction history</a>, if there is one, or null otherwise.</p>
@@ -1746,7 +2785,7 @@
 
   </div><div class="impl">
 
-  <h4 id="undo:-moving-back-in-the-undo-transaction-history"><span class="secno">7.10.3 </span><dfn title="do-undo">Undo: moving back in the undo transaction history</dfn></h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="undo:-moving-back-in-the-undo-transaction-history"><span class="secno">7.8.3 </span><dfn title="do-undo">Undo: moving back in the undo transaction history</dfn></h4>
 
   <p>When the user invokes an undo operation, or when the <code title="dom-document-execCommand"><a href="#execCommand">execCommand()</a></code> method is
   called with the <code title="command-undo"><a href="#command-undo">undo</a></code> command, the
@@ -1783,7 +2822,7 @@
   command to undo his undo.</p>
 
 
-  <h4 id="redo:-moving-forward-in-the-undo-transaction-history"><span class="secno">7.10.4 </span><dfn title="do-redo">Redo: moving forward in the undo transaction history</dfn></h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="redo:-moving-forward-in-the-undo-transaction-history"><span class="secno">7.8.4 </span><dfn title="do-redo">Redo: moving forward in the undo transaction history</dfn></h4>
 
   <p>When the user invokes a redo operation, or when the <code title="dom-document-execCommand"><a href="#execCommand">execCommand()</a></code> method is
   called with the <code title="command-redo"><a href="#command-redo">redo</a></code> command, the
@@ -1817,7 +2856,7 @@
   object, using the <a href="#undo-object">undo object</a> entry's associated undo
   object as the event's data.</p>
 
-  </div><h4 id="the-undomanagerevent-interface-and-the-undo-and-redo-events"><span class="secno">7.10.5 </span>The <code><a href="#undomanagerevent">UndoManagerEvent</a></code> interface and the <code title="event-undo"><a href="#event-undo">undo</a></code> and <code title="event-redo"><a href="#event-redo">redo</a></code> events</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><pre class="idl">interface <dfn id="undomanagerevent">UndoManagerEvent</dfn> : <a href="infrastructure.html#event">Event</a> {
+  </div><h4 id="the-undomanagerevent-interface-and-the-undo-and-redo-events"><span class="secno">7.8.5 </span>The <code><a href="#undomanagerevent">UndoManagerEvent</a></code> interface and the <code title="event-undo"><a href="#event-undo">undo</a></code> and <code title="event-redo"><a href="#event-redo">redo</a></code> events</h4><pre class="idl">interface <dfn id="undomanagerevent">UndoManagerEvent</dfn> : <a href="infrastructure.html#event">Event</a> {
   readonly attribute any <a href="#dom-undomanagerevent-data" title="dom-UndoManagerEvent-data">data</a>;
   void <a href="#dom-undomanagerevent-initundomanagerevent" title="dom-UndoManagerEvent-initUndoManagerEvent">initUndoManagerEvent</a>(in DOMString typeArg, in boolean canBubbleArg, in boolean cancelableArg, in any dataArg);
 };</pre><dl class="domintro"><dt><var title="">event</var>  . <code title="dom-UndoManagerEvent-data"><a href="#dom-undomanagerevent-data">data</a></code></dt>
@@ -1845,7 +2884,7 @@
 
   </div><div class="impl">
 
-  <h4 id="implementation-notes"><span class="secno">7.10.6 </span>Implementation notes</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="implementation-notes"><span class="secno">7.8.6 </span>Implementation notes</h4>
 
   <p>How user agents present the above conceptual model to the user is
   not defined. The undo interface could be a filtered view of the
@@ -1862,7 +2901,7 @@
   described in this section, however, such that to a script there is
   no detectable difference.</p>
 
-  </div><h3 id="editing-apis"><span class="secno">7.11 </span>Editing APIs</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">document</var> . <code title="dom-document-execCommand"><a href="#execCommand">execCommand</a></code>(<var title="">commandId</var> [, <var title="">showUI</var> [, <var title="">value</var> ] ] )</dt>
+  </div><h3 id="editing-apis"><span class="secno">7.9 </span>Editing APIs</h3><dl class="domintro"><dt><var title="">document</var> . <code title="dom-document-execCommand"><a href="#execCommand">execCommand</a></code>(<var title="">commandId</var> [, <var title="">showUI</var> [, <var title="">value</var> ] ] )</dt>
 
    <dd>
 
@@ -1916,10 +2955,9 @@
 
   <p>The <dfn id="execCommand" title="dom-document-execCommand"><code>execCommand(<var title="">commandId</var>, <var title="">showUI</var>, <var title="">value</var>)</code></dfn> method on the
   <code><a href="dom.html#htmldocument">HTMLDocument</a></code> interface allows scripts to perform
-  actions on the <a href="editing.html#the-selection" title="the selection">current selection</a>
-  or at the current caret position. Generally, these commands would be
-  used to implement editor UI, for example having a "delete" button on
-  a toolbar.</p>
+  actions on the current selection or at the current caret position.
+  Generally, these commands would be used to implement editor UI, for
+  example having a "delete" button on a toolbar.</p>
 
   <p>There are three variants to this method, with one, two, and three
   arguments respectively. The <var title="">showUI</var> and <var title="">value</var> parameters, even if specified, are ignored

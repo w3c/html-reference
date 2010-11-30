@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,7 +356,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="edits.html" title="4.7 Edits" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="the-iframe-element.html" title="4.8.2 The iframe element" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="edits.html" title="4.7 Edits" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="the-iframe-element.html" title="4.8.2 The iframe element" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -320,12 +367,12 @@
   <ol class="toc"><li><ol><li><a href="embedded-content-1.html#embedded-content-1"><span class="secno">4.8 </span>Embedded content</a>
     <ol><li><a href="embedded-content-1.html#the-img-element"><span class="secno">4.8.1 </span>The <code>img</code> element</a>
       <ol><li><a href="embedded-content-1.html#alt"><span class="secno">4.8.1.1 </span>Requirements for providing text to act as an alternative for images</a>
-        <ol><li><a href="embedded-content-1.html#a-link-or-button-containing-nothing-but-the-image"><span class="secno">4.8.1.1.1 </span>A link or button containing nothing but the image</a></li><li><a href="embedded-content-1.html#a-phrase-or-paragraph-with-an-alternative-graphical-representation:-charts-diagrams-graphs-maps-illustrations"><span class="secno">4.8.1.1.2 </span>A phrase or paragraph with an alternative graphical representation: charts, diagrams, graphs, maps, illustrations</a></li><li><a href="embedded-content-1.html#a-short-phrase-or-label-with-an-alternative-graphical-representation:-icons-logos"><span class="secno">4.8.1.1.3 </span>A short phrase or label with an alternative graphical representation: icons, logos</a></li><li><a href="embedded-content-1.html#text-that-has-been-rendered-to-a-graphic-for-typographical-effect"><span class="secno">4.8.1.1.4 </span>Text that has been rendered to a graphic for typographical effect</a></li><li><a href="embedded-content-1.html#a-graphical-representation-of-some-of-the-surrounding-text"><span class="secno">4.8.1.1.5 </span>A graphical representation of some of the surrounding text</a></li><li><a href="embedded-content-1.html#a-purely-decorative-image-that-doesn-t-add-any-information"><span class="secno">4.8.1.1.6 </span>A purely decorative image that doesn't add any information</a></li><li><a href="embedded-content-1.html#a-group-of-images-that-form-a-single-larger-picture-with-no-links"><span class="secno">4.8.1.1.7 </span>A group of images that form a single larger picture with no links</a></li><li><a href="embedded-content-1.html#a-group-of-images-that-form-a-single-larger-picture-with-links"><span class="secno">4.8.1.1.8 </span>A group of images that form a single larger picture with links</a></li><li><a href="embedded-content-1.html#a-key-part-of-the-content"><span class="secno">4.8.1.1.9 </span>A key part of the content</a></li><li><a href="embedded-content-1.html#an-image-not-intended-for-the-user"><span class="secno">4.8.1.1.10 </span>An image not intended for the user</a></li><li><a href="embedded-content-1.html#an-image-in-an-e-mail-or-private-document-intended-for-a-specific-person-who-is-known-to-be-able-to-view-images"><span class="secno">4.8.1.1.11 </span>An image in an e-mail or private document intended for a specific person who is known to be able to view images</a></li><li><a href="embedded-content-1.html#general-guidelines"><span class="secno">4.8.1.1.12 </span>General guidelines</a></li><li><a href="embedded-content-1.html#guidance-for-markup-generators"><span class="secno">4.8.1.1.13 </span>Guidance for markup generators</a></li><li><a href="embedded-content-1.html#guidance-for-conformance-checkers"><span class="secno">4.8.1.1.14 </span>Guidance for conformance checkers</a></li></ol></li></ol></li></ol></li></ol></li></ol></div><h3 id="embedded-content-1"><span class="secno">4.8 </span>Embedded content</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><h4 id="the-img-element"><span class="secno">4.8.1 </span>The <dfn><code>img</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+        <ol><li><a href="embedded-content-1.html#general-guidelines"><span class="secno">4.8.1.1.1 </span>General guidelines</a></li><li><a href="embedded-content-1.html#a-link-or-button-containing-nothing-but-the-image"><span class="secno">4.8.1.1.2 </span>A link or button containing nothing but the image</a></li><li><a href="embedded-content-1.html#a-phrase-or-paragraph-with-an-alternative-graphical-representation:-charts-diagrams-graphs-maps-illustrations"><span class="secno">4.8.1.1.3 </span>A phrase or paragraph with an alternative graphical representation: charts, diagrams, graphs, maps, illustrations</a></li><li><a href="embedded-content-1.html#a-short-phrase-or-label-with-an-alternative-graphical-representation:-icons-logos"><span class="secno">4.8.1.1.4 </span>A short phrase or label with an alternative graphical representation: icons, logos</a></li><li><a href="embedded-content-1.html#text-that-has-been-rendered-to-a-graphic-for-typographical-effect"><span class="secno">4.8.1.1.5 </span>Text that has been rendered to a graphic for typographical effect</a></li><li><a href="embedded-content-1.html#a-graphical-representation-of-some-of-the-surrounding-text"><span class="secno">4.8.1.1.6 </span>A graphical representation of some of the surrounding text</a></li><li><a href="embedded-content-1.html#a-purely-decorative-image-that-doesn-t-add-any-information"><span class="secno">4.8.1.1.7 </span>A purely decorative image that doesn't add any information</a></li><li><a href="embedded-content-1.html#a-group-of-images-that-form-a-single-larger-picture-with-no-links"><span class="secno">4.8.1.1.8 </span>A group of images that form a single larger picture with no links</a></li><li><a href="embedded-content-1.html#a-group-of-images-that-form-a-single-larger-picture-with-links"><span class="secno">4.8.1.1.9 </span>A group of images that form a single larger picture with links</a></li><li><a href="embedded-content-1.html#a-key-part-of-the-content"><span class="secno">4.8.1.1.10 </span>A key part of the content</a></li><li><a href="embedded-content-1.html#an-image-not-intended-for-the-user"><span class="secno">4.8.1.1.11 </span>An image not intended for the user</a></li><li><a href="embedded-content-1.html#an-image-in-an-e-mail-or-private-document-intended-for-a-specific-person-who-is-known-to-be-able-to-view-images"><span class="secno">4.8.1.1.12 </span>An image in an e-mail or private document intended for a specific person who is known to be able to view images</a></li><li><a href="embedded-content-1.html#guidance-for-markup-generators"><span class="secno">4.8.1.1.13 </span>Guidance for markup generators</a></li><li><a href="embedded-content-1.html#guidance-for-conformance-checkers"><span class="secno">4.8.1.1.14 </span>Guidance for conformance checkers</a></li></ol></li></ol></li></ol></li></ol></li></ol></div><h3 id="embedded-content-1"><span class="secno">4.8 </span>Embedded content</h3><h4 id="the-img-element"><span class="secno">4.8.1 </span>The <dfn><code>img</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
    <dd><a href="content-models.html#embedded-content">Embedded content</a>.</dd>
    <dd>If the element has a <code title="attr-hyperlink-usemap"><a href="the-map-element.html#attr-hyperlink-usemap">usemap</a></code> attribute: <a href="content-models.html#interactive-content">Interactive content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#embedded-content">embedded content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd>Empty.</dd>
@@ -383,29 +430,84 @@ interface <dfn id="htmlimageelement">HTMLImageElement</dfn> : <a href="elements.
   precludes SVG files with script, multipage PDF files, interactive
   MNG files, HTML documents, plain text documents, and so forth.</p><p>The requirements on the <code title="attr-img-alt"><a href="#attr-img-alt">alt</a></code>
   attribute's value are described <a href="#alt">in the next
-  section</a>.
-  </p><p>The <code><a href="#the-img-element">img</a></code> must not be used as a layout tool. In
+  section</a>.</p><p>The <code><a href="#the-img-element">img</a></code> must not be used as a layout tool. In
   particular, <code><a href="#the-img-element">img</a></code> elements should not be used to display
   transparent images, as they rarely convey meaning and rarely add
   anything useful to the document.</p><div class="impl">
 
-  <hr/><p>Unless the user agent cannot support images, or its support for
-  images has been disabled, or the user agent only fetches elements on
-  demand, then, when an <code><a href="#the-img-element">img</a></code> is created with a <code title="attr-img-src"><a href="#attr-img-src">src</a></code> attribute, and whenever the <code title="attr-img-src"><a href="#attr-img-src">src</a></code> attribute is set subsequently, the
-  user agent must run the following steps:</p> <!-- Note how this does
-  NOT happen when the base URL changes. -->
+  <hr/><p>An <code><a href="#the-img-element">img</a></code> is always in one of the following states:</p>
 
-  <ol><li><p>If the element's <code title="attr-img-src"><a href="#attr-img-src">src</a></code>
-   attribute's value is the empty string, then <a href="webappapis.html#queue-a-task">queue a
+  <dl><dt><dfn id="img-none" title="img-none">Unavailable</dfn></dt>
+   <dd>The user agent hasn't obtained any image data.</dd>
+
+   <dt><dfn id="img-inc" title="img-inc">Partially available</dfn></dt>
+   <dd>The user agent has obtained some of the image data.</dd>
+
+   <dt><dfn id="img-all" title="img-all">Completely available</dfn></dt>
+   <dd>The user agent has obtained all of the image data.</dd>
+
+   <dt><dfn id="img-error" title="img-error">Broken</dfn></dt>
+   <dd>The user agent has obtained all of the image data that it can,
+   but it cannot decode the image (e.g. the image is corrupted, or the
+   format is not supported, or no data could be obtained).</dd>
+
+  </dl><p>When an <code><a href="#the-img-element">img</a></code> element is either in the <a href="#img-inc" title="img-inc">partially available</a> state or in the <a href="#img-all" title="img-all">completely available</a> state, it is said to be
+  <dfn id="img-yes" title="img-yes">available</dfn>.</p>
+
+  <p>An <code><a href="#the-img-element">img</a></code> element is initially <a href="#img-none" title="img-none">unavailable</a>.</p>
+
+  <p>User agents may obtain images immediately or on demand.</p>
+
+  <p>A user agent that obtains images immediately must synchronously
+  <a href="#update-the-image-data">update the image data</a> of an <code><a href="#the-img-element">img</a></code> element
+  whenever that element is either created with a <code title="attr-img-src"><a href="#attr-img-src">src</a></code> attribute, or has its <code title="attr-img-src"><a href="#attr-img-src">src</a></code> attribute set, changed, or
+  removed.</p> <!-- Note how this does NOT happen when the base URL
+  changes. -->
+
+  <p>A user agent that obtains images on demand must <a href="#update-the-image-data">update the
+  image data</a> of an <code><a href="#the-img-element">img</a></code> element whenever it needs
+  the image data (i.e. on demand), but only if the <code><a href="#the-img-element">img</a></code>
+  element has a <code title="attr-img-src"><a href="#attr-img-src">src</a></code> attribute, and
+  if it has not <a href="#update-the-image-data" title="update the image data">updated the image
+  data</a> since the last time the <code title="attr-img-src"><a href="#attr-img-src">src</a></code> attribute was set. When an
+  <code><a href="#the-img-element">img</a></code> element's <code title="attr-img-src"><a href="#attr-img-src">src</a></code>
+  attribute is changed or removed, if the user agent only obtains
+  images on demand, the <code><a href="#the-img-element">img</a></code> element must return to the
+  <a href="#img-none" title="img-none">unavailable</a> state.</p> <!-- Note how
+  this does NOT happen when the base URL changes. -->
+
+  <p>When the user agent is to <dfn id="update-the-image-data">update the image data</dfn> of an
+  <code><a href="#the-img-element">img</a></code> element, it must run the following steps:</p>
+
+  <ol><li><p>Return the <code><a href="#the-img-element">img</a></code> element to the <a href="#img-none" title="img-none">unavailable</a> state.</p>
+
+   </li><li><p>If an instance of the <a href="fetching-resources.html#fetch" title="fetch">fetching</a>
+   algorithm is still running for this element, then abort that
+   algorithm, discarding any pending <a href="webappapis.html#concept-task" title="concept-task">tasks</a> generated by that
+   algorithm.</p></li>
+
+   <li><p>Forget the <code><a href="#the-img-element">img</a></code> element's current image data, if
+   any.</p></li>
+
+   <li><p>If the user agent cannot support images, or its support for
+   images has been disabled, then abort these steps.</p></li>
+
+   <li><p>If the element's <code title="attr-img-src"><a href="#attr-img-src">src</a></code>
+   attribute's value is the empty string, then set the element to the
+   <a href="#img-error" title="img-error">broken</a> state, <a href="webappapis.html#queue-a-task">queue a
    task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named <code title="event-error">error</code> at the <code><a href="#the-img-element">img</a></code> element,
    and abort these steps.</p></li>
 
    <li>
 
     <p>Otherwise, <a href="urls.html#resolve-a-url" title="resolve a url">resolve</a> the value
-    of that attribute, relative to the element, and if that is
-    successful must then <a href="fetching-resources.html#fetch">fetch</a> that resource.</p> <!--
-    http-origin privacy sensitive -->
+    of the element's <code title="attr-img-src"><a href="#attr-img-src">src</a></code> attribute,
+    relative to the element, and, if that is successful,
+    <a href="fetching-resources.html#fetch">fetch</a> that resource.</p> <!-- http-origin privacy
+    sensitive -->
+
+    <p>The resouce obtained in this fashion is the <code><a href="#the-img-element">img</a></code>
+    element's image data.</p>
 
     <!-- same text in <input type=image> section and similar text
     elsewhere --> <p>Fetching the image must <a href="the-end.html#delay-the-load-event">delay the load
@@ -417,24 +519,48 @@ interface <dfn id="htmlimageelement">HTMLImageElement</dfn> : <a href="elements.
     conjunction with scripting, though scripting isn't actually
     necessary to carry out such an attack). User agents may implement
     <a href="origin-0.html#origin" title="origin">cross-origin</a> access control policies
-    that mitigate this attack.</p>
+    that mitigate this attack, but unfortunately such policies are
+    typically not compatible with existing Web content.</p>
 
    </li>
 
-  </ol><p>If the image is in a supported image type and its dimensions are
-  known, then the image is said to be <dfn id="img-available" title="img-available"><i>available</i></dfn> (this affects exactly
-  what the element represents, as defined below). This can be true
-  even before the image is completely downloaded, if the user agent
-  supports incremental rendering of images; in such cases, each <a href="webappapis.html#concept-task" title="concept-task">task</a> that is <a href="webappapis.html#queue-a-task" title="queue a&#10;  task">queued</a> by the <a href="webappapis.html#networking-task-source">networking task source</a> while
-  the image is being <a href="fetching-resources.html#fetch" title="fetch">fetched</a> must update
-  the presentation of the image appropriately. It can also stop being
-  true, e.g. if the user agent finds, after obtaining the image's
-  dimensions, that the image data is actually fatally corrupted.</p>
+  </ol><p>Each <a href="webappapis.html#concept-task" title="concept-task">task</a> that is <a href="webappapis.html#queue-a-task" title="queue a task">queued</a> by the <a href="webappapis.html#networking-task-source">networking task
+  source</a> while the image is being <a href="fetching-resources.html#fetch" title="fetch">fetched</a> must set the <code><a href="#the-img-element">img</a></code> element's
+  state to <a href="#img-inc" title="img-inc">partially available</a> and update
+  the presentation of the image appropriately.</p>
 
-  <p>If the image was not fetched (e.g. because the UA's image support
-  is disabled, or because the <code title="attr-img-src"><a href="#attr-img-src">src</a></code>
-  attribute's value is the empty string, or if the conditions in the
-  previous paragraph are not met), then the image is <em>not</em> <i title="img-available"><a href="#img-available">available</a></i>.</p>
+  <p id="img-load">The <a href="webappapis.html#concept-task" title="concept-task">task</a> that is
+  <a href="webappapis.html#queue-a-task" title="queue a task">queued</a> by the <a href="webappapis.html#networking-task-source">networking
+  task source</a> once the resource has been <a href="fetching-resources.html#fetch" title="fetch">fetched</a> must act as appropriate given the
+  following alternatives:</p>
+
+  <dl class="switch"><dt>If the download was successful</dt>
+
+   <dd>Set the <code><a href="#the-img-element">img</a></code> element to the <a href="#img-all" title="img-all">completely available</a> state, update the
+   presentation of the image appropriately, and <a href="webappapis.html#queue-a-task">queue a
+   task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named <code title="event-load">load</code> at the <code><a href="#the-img-element">img</a></code>
+   element.</dd>
+
+   <dt>Otherwise</dt>
+
+   <dd>Set the <code><a href="#the-img-element">img</a></code> element to the <a href="#img-error" title="img-error">broken</a> state, and <a href="webappapis.html#queue-a-task">queue a
+   task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named <code title="event-error">error</code> at the <code><a href="#the-img-element">img</a></code>
+   element.</dd>
+
+  </dl><p>If at any point the user agent discovers that the image data is
+  corrupted in some fatal way, or that the image is not in a supported
+  file format, then the user agent must set the <code><a href="#the-img-element">img</a></code>
+  element to the <a href="#img-error" title="img-error">broken</a> state. If the
+  <a href="fetching-resources.html#fetch" title="fetch">fetching</a> algorithm is still running for
+  this element, then the user agent must also abort that algorithm,
+  discarding any pending <a href="webappapis.html#concept-task" title="concept-task">tasks</a>
+  generated by that algorithm, and then <a href="webappapis.html#queue-a-task">queue a task</a> to
+  <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named <code title="event-error">error</code> at the <code><a href="#the-img-element">img</a></code>
+  element.</p>
+
+  <p>When an <code><a href="#the-img-element">img</a></code> element is in the <a href="#img-all" title="img-all">completely available</a> state <em>and</em> the
+  user agent can completely decode the media data without errors, then
+  the <code><a href="#the-img-element">img</a></code> element is said to be <dfn id="img-good" title="img-good">fully decodable</dfn>.</p>
 
   <p>Whether the image is fetched successfully or not (e.g. whether
   the response code was a 2xx code <a href="fetching-resources.html#concept-http-equivalent-codes" title="concept-http-equivalent-codes">or equivalent</a>) must be
@@ -462,27 +588,7 @@ interface <dfn id="htmlimageelement">HTMLImageElement</dfn> : <a href="elements.
   <p>This specification does not specify which image types are to be
   supported.</p>
 
-  <p id="img-load">The <a href="webappapis.html#concept-task" title="concept-task">task</a> that is
-  <a href="webappapis.html#queue-a-task" title="queue a task">queued</a> by the <a href="webappapis.html#networking-task-source">networking
-  task source</a> once the resource has been <a href="fetching-resources.html#fetch" title="fetch">fetched</a>, must act as appropriate given the
-  following alternatives:</p>
-
-  <dl class="switch"><dt>If the download was successful and the image is <i title="img-available"><a href="#img-available">available</a></i></dt>
-
-   <dd><a href="webappapis.html#queue-a-task">Queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a>
-   named <code title="event-load">load</code> at the <code><a href="#the-img-element">img</a></code>
-   element (this happens after <code title="dom-img-complete"><a href="#dom-img-complete">complete</a></code> starts returning
-   true).</dd>
-
-   <dt>Otherwise (the fetching process failed without a response from
-   the remote server, or completed but the image is not a supported
-   image)</dt>
-
-   <dd><a href="webappapis.html#queue-a-task">Queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a>
-   named <code title="event-error">error</code> on the
-   <code><a href="#the-img-element">img</a></code> element.</dd>
-
-  </dl><p>The <a href="webappapis.html#task-source">task source</a> for these <a href="webappapis.html#concept-task" title="concept-task">tasks</a> is the <a href="webappapis.html#dom-manipulation-task-source">DOM manipulation
+  <p>The <a href="webappapis.html#task-source">task source</a> for these <a href="webappapis.html#concept-task" title="concept-task">tasks</a> is the <a href="webappapis.html#dom-manipulation-task-source">DOM manipulation
   task source</a>.</p>
 
   <hr/><p>What an <code><a href="#the-img-element">img</a></code> element represents depends on the <code title="attr-img-src"><a href="#attr-img-src">src</a></code> attribute and the <code title="attr-img-alt"><a href="#attr-img-alt">alt</a></code> attribute.</p>
@@ -497,9 +603,9 @@ interface <dfn id="htmlimageelement">HTMLImageElement</dfn> : <a href="elements.
     the content, redundant with some other information in the
     document.</p>
 
-    <p>If the image is <i title="img-available"><a href="#img-available">available</a></i> and the
+    <p>If the image is <a href="#img-yes" title="img-yes">available</a> and the
     user agent is configured to display that image, then the element
-    <a href="rendering.html#represents">represents</a> the image specified by the <code title="attr-img-src"><a href="#attr-img-src">src</a></code> attribute.</p>
+    <a href="rendering.html#represents">represents</a> the element's image data.</p>
 
     <p>Otherwise, the element <a href="rendering.html#represents">represents</a> nothing, and may
     be omitted completely from the rendering. User agents may provide
@@ -517,9 +623,9 @@ interface <dfn id="htmlimageelement">HTMLImageElement</dfn> : <a href="elements.
     <p>The image is a key part of the content; the <code title="attr-img-alt"><a href="#attr-img-alt">alt</a></code> attribute gives a textual
     equivalent or replacement for the image.</p>
 
-    <p>If the image is <i title="img-available"><a href="#img-available">available</a></i> and the
+    <p>If the image is <a href="#img-yes" title="img-yes">available</a> and the
     user agent is configured to display that image, then the element
-    <a href="rendering.html#represents">represents</a> the image specified by the <code title="attr-img-src"><a href="#attr-img-src">src</a></code> attribute.</p>
+    <a href="rendering.html#represents">represents</a> the element's image data.</p>
 
     <p>Otherwise, the element <a href="rendering.html#represents">represents</a> the text given
     by the <code title="attr-img-alt"><a href="#attr-img-alt">alt</a></code> attribute. User
@@ -540,16 +646,15 @@ interface <dfn id="htmlimageelement">HTMLImageElement</dfn> : <a href="elements.
     is a key part of the content but that a textual replacement for
     the image was not available when the image was generated.</p>
 
-    <p>If the image is <i title="img-available"><a href="#img-available">available</a></i>, the
-    element <a href="rendering.html#represents">represents</a> the image specified by the <code title="attr-img-src"><a href="#attr-img-src">src</a></code> attribute.</p>
+    <p>If the image is <a href="#img-yes" title="img-yes">available</a> and the
+    user agent is configured to display that image, then the element
+    <a href="rendering.html#represents">represents</a> the element's image data.</p>
 
-    <p>If the image is not <i title="img-available"><a href="#img-available">available</a></i> or
-    if the user agent is not configured to display the image, then the
-    user agent should display some sort of indicator that there is an
-    image that is not being rendered, and may, if requested by the
-    user, or if so configured, or when required to provide contextual
-    information in response to navigation, provide caption information
-    for the image, derived as follows:</p>
+    <p>Otherwise, the user agent should display some sort of indicator
+    that there is an image that is not being rendered, and may, if
+    requested by the user, or if so configured, or when required to
+    provide contextual information in response to navigation, provide
+    caption information for the image, derived as follows:</p>
 
     <ol><!-- when editing this list, search for the two other occurrences
      of 'critical-no-alt' --><li><p>If the image has a <code title="attr-title"><a href="elements.html#the-title-attribute">title</a></code>
@@ -557,10 +662,15 @@ interface <dfn id="htmlimageelement">HTMLImageElement</dfn> : <a href="elements.
      that attribute is the caption information; abort these
      steps.</p></li>
 
-     <li><p>If the image is the child of a <code><a href="grouping-content.html#the-figure-element">figure</a></code> element
-     that has a child <code><a href="grouping-content.html#the-figcaption-element">figcaption</a></code> element, then the
-     contents of the first such <code><a href="grouping-content.html#the-figcaption-element">figcaption</a></code> element are
-     the caption information; abort these steps.</p></li>
+     <li><p>If the image is a descendant of a <code><a href="grouping-content.html#the-figure-element">figure</a></code>
+     element that has a child <code><a href="grouping-content.html#the-figcaption-element">figcaption</a></code> element, and,
+     ignoring the <code><a href="grouping-content.html#the-figcaption-element">figcaption</a></code> element and its descendants,
+     the <code><a href="grouping-content.html#the-figure-element">figure</a></code> element has no text node descendants
+     other than <a href="content-models.html#inter-element-whitespace">inter-element whitespace</a>, and no
+     <a href="content-models.html#embedded-content">embedded content</a> descendant other than the
+     <code><a href="#the-img-element">img</a></code> element, then the contents of the first such
+     <code><a href="grouping-content.html#the-figcaption-element">figcaption</a></code> element are the caption information;
+     abort these steps.</p></li>
 
     </ol></dd>
 
@@ -648,9 +758,8 @@ interface <dfn id="htmlimageelement">HTMLImageElement</dfn> : <a href="elements.
 
    <dd>
 
-    <p>Returns true if the image has been downloaded, decoded, and
-    found to be valid, or if no image is specified; otherwise, returns
-    false.</p>
+    <p>Returns true if the image has been completely downloaded or if
+    no image is specified; otherwise, returns false.</p>
 
    </dd>
 
@@ -669,9 +778,9 @@ interface <dfn id="htmlimageelement">HTMLImageElement</dfn> : <a href="elements.
   rendered width and height of the image, in CSS pixels, if the image
   is <a href="rendering.html#being-rendered">being rendered</a>, and is being rendered to a visual
   medium; or else the intrinsic width and height of the image, in CSS
-  pixels, if the image is <i title="img-available"><a href="#img-available">available</a></i> but
+  pixels, if the image is <i title="img-available">available</i> but
   not being rendered to a visual medium; or else 0, if the image is
-  not <i title="img-available"><a href="#img-available">available</a></i>. <a href="references.html#refsCSS">[CSS]</a></p>
+  not <i title="img-available">available</i>. <a href="references.html#refsCSS">[CSS]</a></p>
 
   <p>On setting, they must act as if they <a href="common-dom-interfaces.html#reflect" title="reflect">reflected</a> the respective content attributes
   of the same name.</p>
@@ -679,17 +788,16 @@ interface <dfn id="htmlimageelement">HTMLImageElement</dfn> : <a href="elements.
   <p>The IDL attributes <dfn id="dom-img-naturalwidth" title="dom-img-naturalWidth"><code>naturalWidth</code></dfn> and
   <dfn id="dom-img-naturalheight" title="dom-img-naturalHeight"><code>naturalHeight</code></dfn>
   must return the intrinsic width and height of the image, in CSS
-  pixels, if the image is <i title="img-available"><a href="#img-available">available</a></i>, or
+  pixels, if the image is <i title="img-available">available</i>, or
   else 0. <a href="references.html#refsCSS">[CSS]</a></p>
 
   <p>The IDL attribute <dfn id="dom-img-complete" title="dom-img-complete"><code>complete</code></dfn> must return
-  true if either the <code title="attr-img-src"><a href="#attr-img-src">src</a></code> attribute
-  is omitted, or its value is the empty string, or if the user agent
-  has fetched the image specified in the <code title="attr-img-src"><a href="#attr-img-src">src</a></code> attribute and it is in a supported
-  image type (i.e. it was decoded without fatal errors), even if the
-  final <a href="webappapis.html#concept-task" title="concept-task">task</a> queued by the
-  <a href="webappapis.html#networking-task-source">networking task source</a> for the <a href="fetching-resources.html#fetch" title="fetch">fetching</a> of the image resource has not yet been
-  processed. Otherwise, the attribute must return false.</p>
+  true if any of the following conditions is true:</p>
+  <ul class="brief"><li>The <code title="attr-img-src"><a href="#attr-img-src">src</a></code> attribute is omitted.
+   </li><li>The <code title="attr-img-src"><a href="#attr-img-src">src</a></code> attribute's value is the empty string.
+   </li><li>The final <a href="webappapis.html#concept-task" title="concept-task">task</a> that is <a href="webappapis.html#queue-a-task" title="queue a task">queued</a> by the <a href="webappapis.html#networking-task-source">networking task source</a> once the resource has been <a href="fetching-resources.html#fetch" title="fetch">fetched</a> has been <a href="webappapis.html#queue-a-task" title="queue a task">queued</a>, but has not yet been run, and the <code><a href="#the-img-element">img</a></code> element is not in the <a href="#img-error" title="img-error">broken</a> state.
+   </li><li>The <code><a href="#the-img-element">img</a></code> element is <a href="#img-all" title="img-all">completely available</a>.
+  </li></ul><p>Otherwise, the attribute must return false.</p>
 
   <p class="note">The value of <code title="dom-img-complete"><a href="#dom-img-complete">complete</a></code> can thus change while a
   <a href="webappapis.html#concept-script" title="concept-script">script</a> is executing.</p>
@@ -809,11 +917,25 @@ the time Marco had stuck his tongue out...&lt;/p&gt;</pre>
  &lt;p&gt;He would play in the morning, he would play in the evening.&lt;/p&gt;
 &lt;/article&gt;</pre>
 
-  </div><h5 id="alt"><span class="secno">4.8.1.1 </span>Requirements for providing text to act as an alternative for images</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments. </i><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>Except where otherwise specified, the <code title="attr-img-alt"><a href="#attr-img-alt">alt</a></code> attribute must be specified and its
+  </div><h5 id="alt"><span class="secno">4.8.1.1 </span>Requirements for providing text to act as an alternative for images</h5><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><h6 id="general-guidelines"><span class="secno">4.8.1.1.1 </span>General guidelines</h6><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>Except where otherwise specified, the <code title="attr-img-alt"><a href="#attr-img-alt">alt</a></code> attribute must be specified and its
   value must not be empty; the value must be an appropriate
   replacement for the image. The specific requirements for the <code title="attr-img-alt"><a href="#attr-img-alt">alt</a></code> attribute depend on what the image
   is intended to represent, as described in the following
-  sections.</p><h6 id="a-link-or-button-containing-nothing-but-the-image"><span class="secno">4.8.1.1.1 </span>A link or button containing nothing but the image</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments. </i><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>When an <a href="text-level-semantics.html#the-a-element">a</a> element that creates a
+  sections.</p><p>The most general rule to consider when writing alternative text
+  is the following: <strong>the intent is that replacing every image
+  with the text of its <code title="attr-img-alt"><a href="#attr-img-alt">alt</a></code> attribute
+  not change the meaning of the page</strong>.</p><p>So, in general, alternative text can be written by considering
+  what one would have written had one not been able to include the
+  image.</p><p>A corollary to this is that the <code title="attr-img-alt"><a href="#attr-img-alt">alt</a></code> attribute's value should never
+  contain text that could be considered the image's <em>caption</em>,
+  <em>title</em>, or <em>legend</em>. It is supposed to contain
+  replacement text that could be used by users <em>instead</em> of the
+  image; it is not meant to supplement the image. The <code title="attr-title"><a href="elements.html#the-title-attribute">title</a></code> attribute can be used for
+  supplemental information.</p><p class="note">One way to think of alternative text is to think
+  about how you would read the page containing the image to someone
+  over the phone, without mentioning that there is an image
+  present. Whatever you say instead of the image is typically a good
+  start for writing the alternative text.</p><h6 id="a-link-or-button-containing-nothing-but-the-image"><span class="secno">4.8.1.1.2 </span>A link or button containing nothing but the image</h6><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>When an <a href="text-level-semantics.html#the-a-element">a</a> element that creates a
   <a href="links.html#hyperlink">hyperlink</a>, or a <code><a href="the-button-element.html#the-button-element">button</a></code> element, has no
   textual content but contains one or more images, the <code title="attr-img-alt"><a href="#attr-img-alt">alt</a></code> attributes must contain text that
   together convey the purpose of the link or button.</p><div class="example">
@@ -852,7 +974,7 @@ the time Marco had stuck his tongue out...&lt;/p&gt;</pre>
    <pre>&lt;button name="rgb"&gt;<strong>&lt;img src="red" alt="sRGB profile"&gt;&lt;img src="green" alt=""&gt;&lt;img src="blue" alt=""&gt;</strong>&lt;/button&gt;
 &lt;button name="cmyk"&gt;<strong>&lt;img src="cyan" alt="CMYK profile"&gt;&lt;img src="magenta" alt=""&gt;&lt;img src="yellow" alt=""&gt;&lt;img src="black" alt=""&gt;</strong>&lt;/button&gt;</pre>
 
-  </div><h6 id="a-phrase-or-paragraph-with-an-alternative-graphical-representation:-charts-diagrams-graphs-maps-illustrations"><span class="secno">4.8.1.1.2 </span>A phrase or paragraph with an alternative graphical representation: charts, diagrams, graphs, maps, illustrations</h6><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>Sometimes something can be more clearly stated in graphical
+  </div><h6 id="a-phrase-or-paragraph-with-an-alternative-graphical-representation:-charts-diagrams-graphs-maps-illustrations"><span class="secno">4.8.1.1.3 </span>A phrase or paragraph with an alternative graphical representation: charts, diagrams, graphs, maps, illustrations</h6><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>Sometimes something can be more clearly stated in graphical
   form, for example as a flowchart, a diagram, a graph, or a simple
   map showing directions. In such cases, an image can be given using
   the <code><a href="#the-img-element">img</a></code> element, but the lesser textual version must
@@ -914,7 +1036,7 @@ document.write(), passes data to the Tokenizer."&gt;</strong>&lt;/p&gt;</pre>
    <code><a href="grouping-content.html#the-figcaption-element">figcaption</a></code> element of a <code><a href="grouping-content.html#the-figure-element">figure</a></code> with this
    image).</p>
 
-  </div><h6 id="a-short-phrase-or-label-with-an-alternative-graphical-representation:-icons-logos"><span class="secno">4.8.1.1.3 </span>A short phrase or label with an alternative graphical representation: icons, logos</h6><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>A document can contain information in iconic form. The icon is
+  </div><h6 id="a-short-phrase-or-label-with-an-alternative-graphical-representation:-icons-logos"><span class="secno">4.8.1.1.4 </span>A short phrase or label with an alternative graphical representation: icons, logos</h6><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>A document can contain information in iconic form. The icon is
   intended to help users of visual browsers to recognize features at
   a glance.</p><p>In some cases, the icon is supplemental to a text label
   conveying the same meaning. In those cases, the <code title="attr-img-alt"><a href="#attr-img-alt">alt</a></code> attribute must be present but must
@@ -1016,11 +1138,11 @@ rounded squares with varying shades of green and bold white outlines,
 at least that would look good on the cover of a blue book.&lt;/p&gt;</pre>
 
    <p>This example shows how the alternative text should be written
-   such that if the image isn't <i title="img-available"><a href="#img-available">available</a></i>, and the text is used instead,
+   such that if the image isn't <i title="img-available">available</i>, and the text is used instead,
    the text flows seamlessly into the surrounding text, as if the
    image had never been there in the first place.</p>
 
-  </div><h6 id="text-that-has-been-rendered-to-a-graphic-for-typographical-effect"><span class="secno">4.8.1.1.4 </span>Text that has been rendered to a graphic for typographical effect</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments. </i><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>Sometimes, an image just consists of text, and the purpose of the
+  </div><h6 id="text-that-has-been-rendered-to-a-graphic-for-typographical-effect"><span class="secno">4.8.1.1.5 </span>Text that has been rendered to a graphic for typographical effect</h6><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>Sometimes, an image just consists of text, and the purpose of the
   image is not to highlight the actual typographic effects used to
   render the text, but just to convey the text itself.</p><p>In such cases, the <code title="attr-img-alt"><a href="#attr-img-alt">alt</a></code>
   attribute must be present but must consist of the same text as
@@ -1034,7 +1156,7 @@ at least that would look good on the cover of a blue book.&lt;/p&gt;</pre>
 
    <pre>&lt;h1&gt;<strong>&lt;img src="earthdayheading.png" alt="Earth Day"&gt;</strong>&lt;/h1&gt;</pre>
 
-  </div><h6 id="a-graphical-representation-of-some-of-the-surrounding-text"><span class="secno">4.8.1.1.5 </span>A graphical representation of some of the surrounding text</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments. </i><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>In many cases, the image is actually just supplementary, and
+  </div><h6 id="a-graphical-representation-of-some-of-the-surrounding-text"><span class="secno">4.8.1.1.6 </span>A graphical representation of some of the surrounding text</h6><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>In many cases, the image is actually just supplementary, and
   its presence merely reinforces the surrounding text. In these
   cases, the <code title="attr-img-alt"><a href="#attr-img-alt">alt</a></code> attribute must be
   present but its value must be the empty string.</p><p>In general, an image falls into this category if removing the
@@ -1104,7 +1226,7 @@ rendering mode of Web browsers, about 30% triggered the Almost
 Standards mode, and about 9% triggered the Standards mode.&lt;/p&gt;
 <strong>&lt;p&gt;&lt;img src="rendering-mode-pie-chart.png" alt=""&gt;&lt;/p&gt;</strong></pre>
 
-  </div><h6 id="a-purely-decorative-image-that-doesn-t-add-any-information"><span class="secno">4.8.1.1.6 </span>A purely decorative image that doesn't add any information</h6><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>In general, if an image is decorative but isn't especially
+  </div><h6 id="a-purely-decorative-image-that-doesn-t-add-any-information"><span class="secno">4.8.1.1.7 </span>A purely decorative image that doesn't add any information</h6><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>In general, if an image is decorative but isn't especially
   page-specific, for example an image that forms part of a site-wide
   design scheme, the image should be specified in the site's CSS,
   not in the markup of the document.</p><p>However, a decorative image that isn't discussed by the
@@ -1132,7 +1254,7 @@ Gazing where the lilies blow&lt;br&gt;
 Round an island there below,&lt;br&gt;
 The island of Shalott.&lt;/p&gt;</pre>
 
-  </div><h6 id="a-group-of-images-that-form-a-single-larger-picture-with-no-links"><span class="secno">4.8.1.1.7 </span>A group of images that form a single larger picture with no links</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments. </i><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>When a picture has been sliced into smaller image files that are
+  </div><h6 id="a-group-of-images-that-form-a-single-larger-picture-with-no-links"><span class="secno">4.8.1.1.8 </span>A group of images that form a single larger picture with no links</h6><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>When a picture has been sliced into smaller image files that are
   then displayed together to form the complete picture again, one of
   the images must have its <code title="attr-img-alt"><a href="#attr-img-alt">alt</a></code>
   attribute set as per the relevant rules that would be appropriate
@@ -1161,7 +1283,7 @@ The island of Shalott.&lt;/p&gt;</pre>
   &gt;&lt;img src="1" alt=""&gt;&lt;img src="1" alt=""&gt;&lt;img src="0" alt=""
   &gt;&lt;img src="0" alt=""&gt;</strong>&lt;/meter&gt;&lt;/p&gt;</pre>
 
-  </div><h6 id="a-group-of-images-that-form-a-single-larger-picture-with-links"><span class="secno">4.8.1.1.8 </span>A group of images that form a single larger picture with links</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments. </i><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>Generally, <a href="the-map-element.html#image-map" title="image map">image maps</a> should be
+  </div><h6 id="a-group-of-images-that-form-a-single-larger-picture-with-links"><span class="secno">4.8.1.1.9 </span>A group of images that form a single larger picture with links</h6><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>Generally, <a href="the-map-element.html#image-map" title="image map">image maps</a> should be
   used instead of slicing an image for links.</p><p>However, if an image is indeed sliced and any of the components
   of the sliced picture are the sole contents of links, then one image
   per link must have alternative text in its <code title="attr-img-alt"><a href="#attr-img-alt">alt</a></code> attribute representing the purpose
@@ -1179,7 +1301,7 @@ Noodliness do you wish to reach out for?&lt;/p&gt;
   &gt;&lt;img src="fsm-middle.png" alt=""
   &gt;&lt;a href="?go=right"&gt;&lt;img src="fsm-right.png" alt="Right side."&gt;&lt;/a&gt;&lt;/p&gt;</strong></pre>
 
-  </div><h6 id="a-key-part-of-the-content"><span class="secno">4.8.1.1.9 </span>A key part of the content</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments. </i><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>In some cases, the image is a critical part of the
+  </div><h6 id="a-key-part-of-the-content"><span class="secno">4.8.1.1.10 </span>A key part of the content</h6><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>In some cases, the image is a critical part of the
   content. This could be the case, for instance, on a page that is
   part of a photo gallery. The image is the whole <em>point</em> of
   the page containing it.</p><p>How to provide alternative text for an image that is a key part
@@ -1317,17 +1439,22 @@ of various sizes."&gt;</strong></pre>
     (e.g. a blind photographer sharing an image on his blog).</p>
 
     <p>In such cases, the <code title="attr-img-alt"><a href="#attr-img-alt">alt</a></code>
-    attribute's value may be omitted, but one of the following
-    conditions must be met as well:</p>
+    attribute may be omitted, but one of the following conditions must
+    be met as well:</p>
 
     <ul><!-- when editing this list, search for the two other occurrences
      of 'critical-no-alt' --><li>The <code title="attr-title"><a href="elements.html#the-title-attribute">title</a></code> attribute is
      present and has a non-empty value.</li>
 
-     <li>The <code><a href="#the-img-element">img</a></code> element is in a <code><a href="grouping-content.html#the-figure-element">figure</a></code>
-     element that contains a <code><a href="grouping-content.html#the-figcaption-element">figcaption</a></code> element that
-     contains content other than <a href="content-models.html#inter-element-whitespace">inter-element
-     whitespace</a>.</li>
+     <li id="figcaption-as-alt-condition">The <code><a href="#the-img-element">img</a></code> element
+     is in a <code><a href="grouping-content.html#the-figure-element">figure</a></code> element that contains a
+     <code><a href="grouping-content.html#the-figcaption-element">figcaption</a></code> element that contains content other than
+     <a href="content-models.html#inter-element-whitespace">inter-element whitespace</a>, and, ignoring the
+     <code><a href="grouping-content.html#the-figcaption-element">figcaption</a></code> element and its descendants, the
+     <code><a href="grouping-content.html#the-figure-element">figure</a></code> element has no text node descendants other
+     than <a href="content-models.html#inter-element-whitespace">inter-element whitespace</a>, and no <a href="content-models.html#embedded-content">embedded
+     content</a> descendant other than the <code><a href="#the-img-element">img</a></code>
+     element.</li>
 
     </ul><p class="note">Such cases are to be kept to an absolute
     minimum. If there is even the slightest possibility of the author
@@ -1435,13 +1562,13 @@ href="?audio"&gt;audio&lt;/a&gt; test instead.)&lt;/p&gt;</pre>
 
    </dd>
 
-  </dl><h6 id="an-image-not-intended-for-the-user"><span class="secno">4.8.1.1.10 </span>An image not intended for the user</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments. </i><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>Generally authors should avoid using <code><a href="#the-img-element">img</a></code> elements
+  </dl><h6 id="an-image-not-intended-for-the-user"><span class="secno">4.8.1.1.11 </span>An image not intended for the user</h6><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>Generally authors should avoid using <code><a href="#the-img-element">img</a></code> elements
   for purposes other than showing images.</p><p>If an <code><a href="#the-img-element">img</a></code> element is being used for purposes other
   than showing an image, e.g. as part of a service to count page
   views, then the <code title="attr-img-alt"><a href="#attr-img-alt">alt</a></code> attribute must
   be the empty string.</p><p>In such cases, the <code title="attr-dim-width"><a href="the-map-element.html#attr-dim-width">width</a></code> and
   <code title="attr-dim-height"><a href="the-map-element.html#attr-dim-height">height</a></code> attributes should both
-  be set to zero.</p><h6 id="an-image-in-an-e-mail-or-private-document-intended-for-a-specific-person-who-is-known-to-be-able-to-view-images"><span class="secno">4.8.1.1.11 </span>An image in an e-mail or private document intended for a specific person who is known to be able to view images</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments. </i><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p><i>This section does not apply to documents that are publicly
+  be set to zero.</p><h6 id="an-image-in-an-e-mail-or-private-document-intended-for-a-specific-person-who-is-known-to-be-able-to-view-images"><span class="secno">4.8.1.1.12 </span>An image in an e-mail or private document intended for a specific person who is known to be able to view images</h6><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p><i>This section does not apply to documents that are publicly
   accessible, or whose target audience is not necessarily personally
   known to the author, such as documents on a Web site, e-mails sent
   to public mailing lists, or software documentation.</i></p><p>When an image is included in a private communication (such as an
@@ -1453,23 +1580,9 @@ href="?audio"&gt;audio&lt;/a&gt; test instead.)&lt;/p&gt;</pre>
   the e-mail is still usable should the user use a mail client that
   does not support images, or should the document be forwarded on to
   other users whose abilities might not include easily seeing
-  images.</p><h6 id="general-guidelines"><span class="secno">4.8.1.1.12 </span>General guidelines</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments. </i><span><a href="http://www.w3.org/html/wg/tracker/issues/31">ISSUE-31</a> (alt-conformance-requirements) blocks progress to Last Call</span></p><p>The most general rule to consider when writing alternative text
-  is the following: <strong>the intent is that replacing every image
-  with the text of its <code title="attr-img-alt"><a href="#attr-img-alt">alt</a></code> attribute
-  not change the meaning of the page</strong>.</p><p>So, in general, alternative text can be written by considering
-  what one would have written had one not been able to include the
-  image.</p><p>A corollary to this is that the <code title="attr-img-alt"><a href="#attr-img-alt">alt</a></code> attribute's value should never
-  contain text that could be considered the image's <em>caption</em>,
-  <em>title</em>, or <em>legend</em>. It is supposed to contain
-  replacement text that could be used by users <em>instead</em> of the
-  image; it is not meant to supplement the image. The <code title="attr-title"><a href="elements.html#the-title-attribute">title</a></code> attribute can be used for
-  supplemental information.</p><p class="note">One way to think of alternative text is to think
-  about how you would read the page containing the image to someone
-  over the phone, without mentioning that there is an image
-  present. Whatever you say instead of the image is typically a good
-  start for writing the alternative text.</p><div class="impl">
+  images.</p><div class="impl">
 
-  <h6 id="guidance-for-markup-generators"><span class="secno">4.8.1.1.13 </span>Guidance for markup generators</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h6 id="guidance-for-markup-generators"><span class="secno">4.8.1.1.13 </span>Guidance for markup generators</h6>
 
   <p>Markup generators (such as WYSIWYG authoring tools) should,
   wherever possible, obtain alternative text from their
@@ -1502,7 +1615,7 @@ href="?audio"&gt;audio&lt;/a&gt; test instead.)&lt;/p&gt;</pre>
 
   </div><div class="impl">
 
-  <h6 id="guidance-for-conformance-checkers"><span class="secno">4.8.1.1.14 </span>Guidance for conformance checkers</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h6 id="guidance-for-conformance-checkers"><span class="secno">4.8.1.1.14 </span>Guidance for conformance checkers</h6>
 
   <p>A conformance checker must report the lack of an <code title="attr-img-alt"><a href="#attr-img-alt">alt</a></code> attribute as an error unless one of
   the conditions listed below applies:</p>
@@ -1513,9 +1626,8 @@ href="?audio"&gt;audio&lt;/a&gt; test instead.)&lt;/p&gt;</pre>
    above</a>).</li>
 
    <li>The <code><a href="#the-img-element">img</a></code> element is in a <code><a href="grouping-content.html#the-figure-element">figure</a></code>
-   element that contains a <code><a href="grouping-content.html#the-figcaption-element">figcaption</a></code> element that
-   contains content other than <a href="content-models.html#inter-element-whitespace">inter-element whitespace</a>
-   (as <a href="#unknown-images">described above</a>).</li>
+   element that satisfies <a href="#figcaption-as-alt-condition">the
+   conditions described above</a>.</li>
 
    <!-- the following are additional entries not included in the
    aforementioned list, as they apply only to conformance checkers -->

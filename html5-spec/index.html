@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,7 +356,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="iana.html" title="12 IANA considerations" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="references.html" title="References" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="iana.html" title="12 IANA considerations" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="references.html" title="References" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -318,11 +365,11 @@
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="references.html">References &#x2192;</a>
   <ol class="toc"><li><a class="no-num" href="index.html#index">Index</a>
-  <ol><li><a class="no-num" href="index.html#elements-1">Elements</a></li><li><a class="no-num" href="index.html#element-content-categories">Element content categories</a></li><li><a class="no-num" href="index.html#attributes-1">Attributes</a></li><li><a class="no-num" href="index.html#interfaces">Interfaces</a></li><li><a class="no-num" href="index.html#events-0">Events</a></li></ol></li></ol></div><h2 class="no-num" id="index">Index</h2><p class="XXX annotation"><b>Status: </b><i>Implemented and widely deployed</i></p><div class="impl">
+  <ol><li><a class="no-num" href="index.html#elements-1">Elements</a></li><li><a class="no-num" href="index.html#element-content-categories">Element content categories</a></li><li><a class="no-num" href="index.html#attributes-1">Attributes</a></li><li><a class="no-num" href="index.html#interfaces">Interfaces</a></li><li><a class="no-num" href="index.html#events-0">Events</a></li></ol></li></ol></div><h2 class="no-num" id="index">Index</h2><div class="impl">
 
   <p>The following sections only cover conforming elements and features.</p>
 
-  </div><h3 class="no-num" id="elements-1">Elements</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><table><caption>List of elements</caption>
+  </div><h3 class="no-num" id="elements-1">Elements</h3><p><i>This section is non-normative.</i></p><table><caption>List of elements</caption>
    <thead><tr><th> Element
      </th><th> Description
      </th><th> Categories
@@ -429,6 +476,14 @@
          <code title="attr-base-href"><a href="semantics.html#attr-base-href">href</a></code>;
          <code title="attr-base-target"><a href="semantics.html#attr-base-target">target</a></code></td>
      <td><code><a href="semantics.html#htmlbaseelement">HTMLBaseElement</a></code></td>
+    </tr><tr><th><code><a href="text-level-semantics.html#the-bdi-element">bdi</a></code></th>
+     <td>Text directionality isolation</td>
+     <td><a href="content-models.html#flow-content" title="Flow content">flow</a>;
+         <a href="content-models.html#phrasing-content" title="Phrasing content">phrasing</a></td>
+     <td><a href="content-models.html#phrasing-content" title="Phrasing content">phrasing</a></td>
+     <td><a href="content-models.html#phrasing-content" title="Phrasing content">phrasing</a></td>
+     <td><a href="elements.html#global-attributes" title="global attributes">globals</a></td>
+     <td><code><a href="elements.html#htmlelement">HTMLElement</a></code></td>
     </tr><tr><th><code><a href="text-level-semantics.html#the-bdo-element">bdo</a></code></th>
      <td>Text directionality formatting</td>
      <td><a href="content-models.html#flow-content" title="Flow content">flow</a>;
@@ -469,6 +524,7 @@
          <code title="handler-window-onpopstate"><a href="webappapis.html#handler-window-onpopstate">onpopstate</a></code>;
          <code title="handler-window-onredo"><a href="webappapis.html#handler-window-onredo">onredo</a></code>;
          <code title="handler-window-onresize"><a href="webappapis.html#handler-window-onresize">onresize</a></code>;
+         <code title="handler-window-onscroll"><a href="webappapis.html#handler-window-onscroll">onscroll</a></code>;
          <code title="handler-window-onstorage"><a href="webappapis.html#handler-window-onstorage">onstorage</a></code>;
          <code title="handler-window-onundo"><a href="webappapis.html#handler-window-onundo">onundo</a></code>;
          <code title="handler-window-onunload"><a href="webappapis.html#handler-window-onunload">onunload</a></code></td>
@@ -824,6 +880,7 @@
          <code title="attr-input-autocomplete"><a href="common-input-element-attributes.html#attr-input-autocomplete">autocomplete</a></code>;
          <code title="attr-fe-autofocus"><a href="association-of-controls-and-forms.html#attr-fe-autofocus">autofocus</a></code>;
          <code title="attr-input-checked"><a href="the-input-element.html#attr-input-checked">checked</a></code>;
+         <code title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>;
          <code title="attr-fe-disabled"><a href="association-of-controls-and-forms.html#attr-fe-disabled">disabled</a></code>;
          <code title="attr-fae-form"><a href="association-of-controls-and-forms.html#attr-fae-form">form</a></code>;
          <code title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>;
@@ -1149,6 +1206,14 @@
          <code><a href="text-level-semantics.html#the-rp-element">rp</a></code> element*</td>
      <td><a href="elements.html#global-attributes" title="global attributes">globals</a></td>
      <td><code><a href="elements.html#htmlelement">HTMLElement</a></code></td>
+    </tr><tr><th><code><a href="text-level-semantics.html#the-s-element">s</a></code></th>
+     <td>Inaccurate text</td>
+     <td><a href="content-models.html#flow-content" title="Flow content">flow</a>;
+         <a href="content-models.html#phrasing-content" title="Phrasing content">phrasing</a></td>
+     <td><a href="content-models.html#phrasing-content" title="Phrasing content">phrasing</a></td>
+     <td><a href="content-models.html#phrasing-content" title="Phrasing content">phrasing</a></td>
+     <td><a href="elements.html#global-attributes" title="global attributes">globals</a></td>
+     <td><code><a href="elements.html#htmlelement">HTMLElement</a></code></td>
     </tr><tr><th><code><a href="text-level-semantics.html#the-samp-element">samp</a></code></th>
      <td>Computer output</td>
      <td><a href="content-models.html#flow-content" title="Flow content">flow</a>;
@@ -1381,7 +1446,19 @@
          <code><a href="tabular-data.html#the-td-element">td</a></code></td>
      <td><a href="elements.html#global-attributes" title="global attributes">globals</a></td>
      <td><code><a href="tabular-data.html#htmltablerowelement">HTMLTableRowElement</a></code></td>
-    </tr><tr><th><code><a href="grouping-content.html#the-ul-element">ul</a></code></th>
+    </tr><!--KEEP-END w3c-html--><!--TT--><tr><th><code><a href="video.html#the-track-element">track</a></code></th>
+     <td>Timed track</td>
+     <td>none</td>
+     <td><code><a href="video.html#audio">audio</a></code>;
+         <code><a href="video.html#video">video</a></code></td>
+     <td>empty</td>
+     <td><a href="elements.html#global-attributes" title="global attributes">globals</a>;
+         <code title="attr-track-kind"><a href="video.html#attr-track-kind">kind</a></code>;
+         <code title="attr-track-label"><a href="video.html#attr-track-label">label</a></code>;
+         <code title="attr-track-src"><a href="video.html#attr-track-src">src</a></code>;
+         <code title="attr-track-srclang"><a href="video.html#attr-track-srclang">srclang</a></code></td>
+     <td><code><a href="video.html#htmltrackelement">HTMLTrackElement</a></code></td>
+    </tr><!--KEEP-START w3c-html--><!--TT--><tr><th><code><a href="grouping-content.html#the-ul-element">ul</a></code></th>
      <td>List</td>
      <td><a href="content-models.html#flow-content" title="Flow content">flow</a></td>
      <td><a href="content-models.html#flow-content" title="Flow content">flow</a></td>
@@ -1449,6 +1526,7 @@
       <code><a href="sections.html#the-aside-element">aside</a></code>;
       <code><a href="video.html#audio">audio</a></code>;
       <code><a href="text-level-semantics.html#the-b-element">b</a></code>;
+      <code><a href="text-level-semantics.html#the-bdi-element">bdi</a></code>;
       <code><a href="text-level-semantics.html#the-bdo-element">bdo</a></code>;
       <code><a href="grouping-content.html#the-blockquote-element">blockquote</a></code>;
       <code><a href="text-level-semantics.html#the-br-element">br</a></code>;
@@ -1457,7 +1535,6 @@
       <code><a href="text-level-semantics.html#the-cite-element">cite</a></code>;
       <code><a href="text-level-semantics.html#the-code-element">code</a></code>;
       <code><a href="interactive-elements.html#the-command">command</a></code>;
-      <!-- v2DATAGRID <code>datagrid</code>; -->
       <code><a href="the-button-element.html#the-datalist-element">datalist</a></code>;
       <code><a href="edits.html#the-del-element">del</a></code>;
       <code><a href="interactive-elements.html#the-details-element">details</a></code>;
@@ -1502,6 +1579,7 @@
       <code><a href="the-button-element.html#the-progress-element">progress</a></code>;
       <code><a href="text-level-semantics.html#the-q-element">q</a></code>;
       <code><a href="text-level-semantics.html#the-ruby-element">ruby</a></code>;
+      <code><a href="text-level-semantics.html#the-s-element">s</a></code>;
       <code><a href="text-level-semantics.html#the-samp-element">samp</a></code>;
       <code><a href="scripting-1.html#script">script</a></code>;
       <code><a href="sections.html#the-section-element">section</a></code>;
@@ -1550,6 +1628,7 @@
       <code><a href="text-level-semantics.html#the-abbr-element">abbr</a></code>;
       <code><a href="video.html#audio">audio</a></code>;
       <code><a href="text-level-semantics.html#the-b-element">b</a></code>;
+      <code><a href="text-level-semantics.html#the-bdi-element">bdi</a></code>;
       <code><a href="text-level-semantics.html#the-bdo-element">bdo</a></code>;
       <code><a href="text-level-semantics.html#the-br-element">br</a></code>;
       <code><a href="the-button-element.html#the-button-element">button</a></code>;
@@ -1577,6 +1656,7 @@
       <code><a href="the-button-element.html#the-progress-element">progress</a></code>;
       <code><a href="text-level-semantics.html#the-q-element">q</a></code>;
       <code><a href="text-level-semantics.html#the-ruby-element">ruby</a></code>;
+      <code><a href="text-level-semantics.html#the-s-element">s</a></code>;
       <code><a href="text-level-semantics.html#the-samp-element">samp</a></code>;
       <code><a href="scripting-1.html#script">script</a></code>;
       <code><a href="the-button-element.html#the-select-element">select</a></code>;
@@ -1618,7 +1698,6 @@
      </td><td>
       <code><a href="text-level-semantics.html#the-a-element">a</a></code>;
       <code><a href="the-button-element.html#the-button-element">button</a></code>;
-      <!-- v2DATAGRID <code>datagrid</code>; -->
       <code><a href="interactive-elements.html#the-details-element">details</a></code>;
       <code><a href="the-iframe-element.html#the-embed-element">embed</a></code>;
       <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>;
@@ -1638,7 +1717,6 @@
      </td><td>
       <code><a href="grouping-content.html#the-blockquote-element">blockquote</a></code>;
       <code><a href="sections.html#the-body-element-0">body</a></code>;
-      <!-- v2DATAGRID <code>datagrid</code>; -->
       <code><a href="interactive-elements.html#the-details-element">details</a></code>;
       <code><a href="forms.html#the-fieldset-element">fieldset</a></code>;
       <code><a href="grouping-content.html#the-figure-element">figure</a></code>;
@@ -1744,11 +1822,11 @@
     </td></tr><tr><th> <code title="">accept-charset</code>
      </th><td> <code title="attr-form-accept-charset"><a href="forms.html#attr-form-accept-charset">form</a></code>
      </td><td> Character encodings to use for <a href="association-of-controls-and-forms.html#form-submission">form submission</a>
-     </td><td> <a href="common-microsyntaxes.html#ordered-set-of-unique-space-separated-tokens">Ordered set of unique space-separated tokens</a> consisting of <a href="infrastructure.html#preferred-mime-name" title="preferred MIME name">preferred MIME names</a> of <a href="infrastructure.html#ascii-compatible-character-encoding" title="ASCII-compatible character encoding">ASCII-compatible character encodings</a>*
+     </td><td> <a href="common-microsyntaxes.html#ordered-set-of-unique-space-separated-tokens">Ordered set of unique space-separated tokens</a>, <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a>, consisting of <a href="infrastructure.html#preferred-mime-name" title="preferred MIME name">preferred MIME names</a> of <a href="infrastructure.html#ascii-compatible-character-encoding" title="ASCII-compatible character encoding">ASCII-compatible character encodings</a>*
     </td></tr><tr><th> <code title="">accesskey</code>
      </th><td> <a href="editing.html#the-accesskey-attribute" title="attr-accesskey">HTML elements</a>
      </td><td> Keyboard shortcut to activate or focus element
-     </td><td> <a href="common-microsyntaxes.html#ordered-set-of-unique-space-separated-tokens">Ordered set of unique space-separated tokens</a> consisting of one Unicode code point in length
+     </td><td> <a href="common-microsyntaxes.html#ordered-set-of-unique-space-separated-tokens">Ordered set of unique space-separated tokens</a>, <a href="infrastructure.html#case-sensitive">case-sensitive</a>, consisting of one Unicode code point in length
     </td></tr><tr><th> <code title="">action</code>
      </th><td> <code title="attr-fs-action"><a href="association-of-controls-and-forms.html#attr-fs-action">form</a></code>
      </td><td> <a href="urls.html#url">URL</a> to use for <a href="association-of-controls-and-forms.html#form-submission">form submission</a>
@@ -1808,7 +1886,7 @@
     </td></tr><tr><th> <code title="">class</code>
      </th><td> <a href="elements.html#classes" title="attr-class">HTML elements</a>
      </td><td> Classes to which the element belongs
-     </td><td> <a href="common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens">Unordered set of unique space-separated tokens</a>
+     </td><td> <a href="common-microsyntaxes.html#set-of-space-separated-tokens">Set of space-separated tokens</a>
     </td></tr><tr><th> <code title="">cols</code>
      </th><td> <code title="attr-textarea-cols"><a href="the-button-element.html#attr-textarea-cols">textarea</a></code>
      </td><td> Maximum number of characters per line
@@ -1860,6 +1938,11 @@
      </th><td> <a href="elements.html#the-dir-attribute" title="attr-dir">HTML elements</a>
      </td><td> <a href="elements.html#the-directionality" title="the directionality">The text directionality</a> of the element
      </td><td> "<code title="">ltr</code>"; "<code title="">rtl</code>"
+    </td></tr><tr><th> <code title="">dirname</code>
+     </th><td> <code title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">input</a></code>;
+          <code title="attr-textarea-dirname"><a href="the-button-element.html#attr-textarea-dirname">textarea</a></code>
+     </td><td> Name of form field to use for sending the element's <a href="elements.html#the-directionality" title="the directionality">directionality</a> in <a href="association-of-controls-and-forms.html#form-submission">form submission</a>
+     </td><td> <a href="elements.html#attribute-text">Text</a>*
     </td></tr><tr><th> <code title="">disabled</code>
      </th><td> <code title="attr-fe-disabled"><a href="association-of-controls-and-forms.html#attr-fe-disabled">button</a></code>;
           <code title="attr-command-disabled"><a href="interactive-elements.html#attr-command-disabled">command</a></code>;
@@ -1876,6 +1959,10 @@
      </th><td> <a href="dnd.html#the-draggable-attribute" title="attr-draggable">HTML elements</a>
      </td><td> Whether the element is draggable
      </td><td> "<code title="">true</code>"; "<code title="">false</code>"
+    </td></tr><tr><th> <code title="">dropzone</code>
+     </th><td> <a href="dnd.html#the-dropzone-attribute" title="attr-dropzone">HTML elements</a>
+     </td><td> Accepted item types for drag-and-drop
+     </td><td> <a href="common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens">Unordered set of unique space-separated tokens</a>, <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a>, consisting of accepted types and drag feedback*
     </td></tr><tr><th> <code title="">enctype</code>
      </th><td> <code title="attr-fs-enctype"><a href="association-of-controls-and-forms.html#attr-fs-enctype">form</a></code>
      </td><td> Form data set encoding type to use for <a href="association-of-controls-and-forms.html#form-submission">form submission</a>
@@ -1887,7 +1974,7 @@
     </td></tr><tr><th> <code title="">for</code>
      </th><td> <code title="attr-output-for"><a href="the-button-element.html#attr-output-for">output</a></code>
      </td><td> Specifies controls from which the output was calculated
-     </td><td> <a href="common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens">Unordered set of unique space-separated tokens</a> consisting of IDs*
+     </td><td> <a href="common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens">Unordered set of unique space-separated tokens</a>, <a href="infrastructure.html#case-sensitive">case-sensitive</a>, consisting of IDs*
     </td></tr><tr><th> <code title="">form</code>
      </th><td> <code title="attr-fae-form"><a href="association-of-controls-and-forms.html#attr-fae-form">button</a></code>;
           <code title="attr-fae-form"><a href="association-of-controls-and-forms.html#attr-fae-form">fieldset</a></code>;
@@ -1916,7 +2003,7 @@
      </th><td> <code title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">button</a></code>;
           <code title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">input</a></code>
      </td><td> HTTP method to use for <a href="association-of-controls-and-forms.html#form-submission">form submission</a>
-     </td><td> "<code title="">GET</code>"; "<code title="">POST</code>"; "<code title="">PUT</code>"; "<code title="">DELETE</code>"
+     </td><td> "<code title="">GET</code>"; "<code title="">POST</code>"
     </td></tr><tr><th> <code title="">formnovalidate</code>
      </th><td> <code title="attr-fs-formnovalidate"><a href="association-of-controls-and-forms.html#attr-fs-formnovalidate">button</a></code>;
           <code title="attr-fs-formnovalidate"><a href="association-of-controls-and-forms.html#attr-fs-formnovalidate">input</a></code>
@@ -1931,7 +2018,7 @@
      </th><td> <code title="attr-tdth-headers"><a href="tabular-data.html#attr-tdth-headers">td</a></code>;
           <code title="attr-tdth-headers"><a href="tabular-data.html#attr-tdth-headers">th</a></code>
      </td><td> The header cells for this cell
-     </td><td> <a href="common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens">Unordered set of unique space-separated tokens</a> consisting of IDs*
+     </td><td> <a href="common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens">Unordered set of unique space-separated tokens</a>, <a href="infrastructure.html#case-sensitive">case-sensitive</a>, consisting of IDs*
     </td></tr><tr><th> <code title="">height</code>
      </th><td> <code title="attr-canvas-height"><a href="the-canvas-element.html#attr-canvas-height">canvas</a></code>;
           <code title="attr-dim-height"><a href="the-map-element.html#attr-dim-height">embed</a></code>;
@@ -1989,11 +2076,24 @@
      </th><td> <code title="attr-keygen-keytype"><a href="the-button-element.html#attr-keygen-keytype">keygen</a></code>
      </td><td> The type of cryptographic key to generate
      </td><td> <a href="elements.html#attribute-text">Text</a>*
+<!--KEEP-END w3c-html--><!--TT-->
+    </td></tr><tr><th> <code title="">kind</code>
+     </th><td> <code title="attr-track-kind"><a href="video.html#attr-track-kind">track</a></code>
+     </td><td> The type of timed track
+     </td><td> "<code title="attr-track-kind-subtitles"><a href="video.html#attr-track-kind-subtitles">subtitles</a></code>";
+          "<code title="attr-track-kind-captions"><a href="video.html#attr-track-kind-captions">captions</a></code>";
+          "<code title="attr-track-kind-descriptions"><a href="video.html#attr-track-kind-descriptions">descriptions</a></code>";
+          "<code title="attr-track-kind-chapters"><a href="video.html#attr-track-kind-chapters">chapters</a></code>";
+          "<code title="attr-track-kind-metadata"><a href="video.html#attr-track-kind-metadata">metadata</a></code>"
+<!--KEEP-START w3c-html--><!--TT-->
     </td></tr><tr><th> <code title="">label</code>
      </th><td> <code title="attr-command-label"><a href="interactive-elements.html#attr-command-label">command</a></code>;
           <code title="attr-menu-label"><a href="interactive-elements.html#attr-menu-label">menu</a></code>;
           <code title="attr-optgroup-label"><a href="the-button-element.html#attr-optgroup-label">optgroup</a></code>;
           <code title="attr-option-label"><a href="the-button-element.html#attr-option-label">option</a></code>;
+<!--KEEP-END w3c-html--><!--TT-->
+          <code title="attr-track-label"><a href="video.html#attr-track-label">track</a></code>
+<!--KEEP-START w3c-html--><!--TT-->
      </td><td> User-visible label
      </td><td> <a href="elements.html#attribute-text">Text</a>
     </td></tr><tr><th> <code title="">lang</code>
@@ -2042,7 +2142,7 @@
     </td></tr><tr><th> <code title="">method</code>
      </th><td> <code title="attr-fs-method"><a href="association-of-controls-and-forms.html#attr-fs-method">form</a></code>
      </td><td> HTTP method to use for <a href="association-of-controls-and-forms.html#form-submission">form submission</a>
-     </td><td> "<code title="">GET</code>"; "<code title="">POST</code>"; "<code title="">PUT</code>"; "<code title="">DELETE</code>"
+     </td><td> "<code title="">GET</code>"; "<code title="">POST</code>"
     </td></tr><tr><th> <code title="">min</code>
      </th><td> <code title="attr-input-min"><a href="common-input-element-attributes.html#attr-input-min">input</a></code>
      </td><td> Minimum value
@@ -2160,7 +2260,7 @@
     </td></tr><tr><th> <code title="">sandbox</code>
      </th><td> <code title="attr-iframe-sandbox"><a href="the-iframe-element.html#attr-iframe-sandbox">iframe</a></code>
      </td><td> Security rules for nested content
-     </td><td> <a href="common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens">Unordered set of unique space-separated tokens</a> consisting of
+     </td><td> <a href="common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens">Unordered set of unique space-separated tokens</a>, <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a>, consisting of
           "<code title="attr-iframe-sandbox-allow-same-origin"><a href="the-iframe-element.html#attr-iframe-sandbox-allow-same-origin">allow-same-origin</a></code>",
           "<code title="attr-iframe-sandbox-allow-forms"><a href="the-iframe-element.html#attr-iframe-sandbox-allow-forms">allow-forms</a></code>", and
           "<code title="attr-iframe-sandbox-allow-scripts"><a href="the-iframe-element.html#attr-iframe-sandbox-allow-scripts">allow-scripts</a></code>"
@@ -2202,7 +2302,7 @@
     </td></tr><tr><th> <code title="">sizes</code>
      </th><td> <code title="attr-link-sizes"><a href="links.html#attr-link-sizes">link</a></code>
      </td><td> Sizes of the icons (for <code title="attr-link-rel"><a href="semantics.html#attr-link-rel">rel</a></code>="<code title="rel-icon"><a href="links.html#rel-icon">icon</a></code>")
-     </td><td> <a href="common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens">Unordered set of unique space-separated tokens</a> consisting of sizes*
+     </td><td> <a href="common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens">Unordered set of unique space-separated tokens</a>, <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a>, consisting of sizes*
     </td></tr><tr><th> <code title="">span</code>
      </th><td> <code title="attr-col-span"><a href="tabular-data.html#attr-col-span">col</a></code>;
           <code title="attr-colgroup-span"><a href="tabular-data.html#attr-colgroup-span">colgroup</a></code>
@@ -2216,6 +2316,9 @@
           <code title="attr-input-src"><a href="number-state.html#attr-input-src">input</a></code>;
           <code title="attr-script-src"><a href="scripting-1.html#attr-script-src">script</a></code>;
           <code title="attr-source-src"><a href="video.html#attr-source-src">source</a></code>;
+<!--KEEP-END w3c-html--><!--TT-->
+          <code title="attr-track-src"><a href="video.html#attr-track-src">track</a></code>;
+<!--KEEP-START w3c-html--><!--TT-->
           <code title="attr-media-src"><a href="video.html#attr-media-src">video</a></code>
      </td><td> Address of the resource
      </td><td> <a href="urls.html#valid-non-empty-url-potentially-surrounded-by-spaces">Valid non-empty URL potentially surrounded by spaces</a>
@@ -2223,6 +2326,12 @@
      </th><td> <code title="attr-iframe-srcdoc"><a href="the-iframe-element.html#attr-iframe-srcdoc">iframe</a></code>
      </td><td> A document to render in the <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>
      </td><td> The source of <a href="the-iframe-element.html#an-iframe-srcdoc-document">an <code>iframe</code> <code title="attr-iframe-srcdoc">srcdoc</code> document</a>*
+<!--KEEP-END w3c-html--><!--TT-->
+    </td></tr><tr><th> <code title="">srclang</code>
+     </th><td> <code title="attr-track-srclang"><a href="video.html#attr-track-srclang">track</a></code>
+     </td><td> Language of the timed track
+     </td><td> Valid BCP 47 language tag
+<!--KEEP-START w3c-html--><!--TT-->
     </td></tr><tr><th> <code title="">start</code>
      </th><td> <code title="attr-ol-start"><a href="grouping-content.html#attr-ol-start">ol</a></code>
      </td><td> <a href="grouping-content.html#ordinal-value">Ordinal value</a> of the first item
@@ -2414,6 +2523,12 @@
      </th><td> <a href="webappapis.html#handler-oncontextmenu" title="handler-oncontextmenu">HTML elements</a>
      </td><td> <code title="event-contextmenu">contextmenu</code> event handler
      </td><td> <a href="webappapis.html#event-handler-content-attributes" title="event handler content attributes">Event handler content attribute</a>
+<!--KEEP-END w3c-html--><!--TT-->
+    </td></tr><tr><th id="ix-handler-oncuechange"> <code title="">oncuechange</code>
+     </th><td> <a href="webappapis.html#handler-oncuechange" title="handler-oncuechange">HTML elements</a>
+     </td><td> <code title="event-cuechange">cuechange</code> event handler
+     </td><td> <a href="webappapis.html#event-handler-content-attributes" title="event handler content attributes">Event handler content attribute</a>
+<!--KEEP-START w3c-html--><!--TT-->
 
     </td></tr><tr><th id="ix-handler-ondblclick"> <code title="">ondblclick</code>
      </th><td> <a href="webappapis.html#handler-ondblclick" title="handler-ondblclick">HTML elements</a>
@@ -2642,7 +2757,7 @@
 
     </td></tr><tr><th id="ix-handler-onreadystatechange"> <code title="">onreadystatechange</code>
      </th><td> <a href="webappapis.html#handler-onreadystatechange" title="handler-onreadystatechange">HTML elements</a>
-     </td><td> <code title="event-readystatechange">readystatechange</code> event handler
+     </td><td> <code title="event-readystatechange"><a href="dom.html#event-readystatechange">readystatechange</a></code> event handler
      </td><td> <a href="webappapis.html#event-handler-content-attributes" title="event handler content attributes">Event handler content attribute</a>
 
     </td></tr><tr><th id="ix-handler-window-onredo"> <code title="">onredo</code>
@@ -2650,9 +2765,19 @@
      </td><td> <code title="event-redo"><a href="dnd.html#event-redo">redo</a></code> event handler for <code><a href="browsers.html#window">Window</a></code> object
      </td><td> <a href="webappapis.html#event-handler-content-attributes" title="event handler content attributes">Event handler content attribute</a>
 
+    </td></tr><tr><th id="ix-handler-onreset"> <code title="">onreset</code>
+     </th><td> <a href="webappapis.html#handler-onreset" title="handler-onreset">HTML elements</a>
+     </td><td> <code title="event-reset">reset</code> event handler
+     </td><td> <a href="webappapis.html#event-handler-content-attributes" title="event handler content attributes">Event handler content attribute</a>
+
     </td></tr><tr><th id="ix-handler-window-onresize"> <code title="">onresize</code>
      </th><td> <code title="handler-window-onresize"><a href="webappapis.html#handler-window-onresize">body</a></code>
      </td><td> <code title="event-resize">resize</code> event handler for <code><a href="browsers.html#window">Window</a></code> object
+     </td><td> <a href="webappapis.html#event-handler-content-attributes" title="event handler content attributes">Event handler content attribute</a>
+
+    </td></tr><tr><th id="ix-handler-window-onscroll"> <code title="">onscroll</code>
+     </th><td> <code title="handler-window-onscroll"><a href="webappapis.html#handler-window-onscroll">body</a></code>
+     </td><td> <code title="event-scroll">scroll</code> event handler for <code><a href="browsers.html#window">Window</a></code> object
      </td><td> <a href="webappapis.html#event-handler-content-attributes" title="event handler content attributes">Event handler content attribute</a>
 
     </td></tr><tr><th id="ix-handler-onscroll"> <code title="">onscroll</code>
@@ -2752,7 +2877,7 @@
      <td> <code>textContent</code>
   </table>
   ( include option.text; textarea.defaultValue, and other attributes that "reflect" the element's textContent )
---><h3 class="no-num" id="interfaces">Interfaces</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><table><caption>List of interfaces for elements</caption>
+--><h3 class="no-num" id="interfaces">Interfaces</h3><p><i>This section is non-normative.</i></p><table><caption>List of interfaces for elements</caption>
    <thead><tr><th> Element(s)
      </th><th> Interface(s)
    </th></tr></thead><tbody><tr><td> <code><a href="text-level-semantics.html#the-a-element">a</a></code>
@@ -2781,6 +2906,9 @@
 
     </td></tr><tr><td> <code><a href="semantics.html#the-base-element">base</a></code>
      </td><td> <code><a href="semantics.html#htmlbaseelement">HTMLBaseElement</a></code> : <code><a href="elements.html#htmlelement">HTMLElement</a></code>
+
+    </td></tr><tr><td> <code><a href="text-level-semantics.html#the-bdi-element">bdi</a></code>
+     </td><td> <code><a href="elements.html#htmlelement">HTMLElement</a></code>
 
     </td></tr><tr><td> <code><a href="text-level-semantics.html#the-bdo-element">bdo</a></code>
      </td><td> <code><a href="elements.html#htmlelement">HTMLElement</a></code>
@@ -2980,6 +3108,9 @@
     </td></tr><tr><td> <code><a href="text-level-semantics.html#the-ruby-element">ruby</a></code>
      </td><td> <code><a href="elements.html#htmlelement">HTMLElement</a></code>
 
+    </td></tr><tr><td> <code><a href="text-level-semantics.html#the-s-element">s</a></code>
+     </td><td> <code><a href="elements.html#htmlelement">HTMLElement</a></code>
+
     </td></tr><tr><td> <code><a href="text-level-semantics.html#the-samp-element">samp</a></code>
      </td><td> <code><a href="elements.html#htmlelement">HTMLElement</a></code>
 
@@ -3043,6 +3174,10 @@
     </td></tr><tr><td> <code><a href="tabular-data.html#the-tr-element">tr</a></code>
      </td><td> <code><a href="tabular-data.html#htmltablerowelement">HTMLTableRowElement</a></code> : <code><a href="elements.html#htmlelement">HTMLElement</a></code>
 
+<!--KEEP-END w3c-html--><!--TT-->
+    </td></tr><tr><td> <code><a href="video.html#the-track-element">track</a></code>
+     </td><td> <code><a href="video.html#htmltrackelement">HTMLTrackElement</a></code> : <code><a href="elements.html#htmlelement">HTMLElement</a></code>
+<!--KEEP-START w3c-html--><!--TT-->
 
     </td></tr><tr><td> <code><a href="grouping-content.html#the-ul-element">ul</a></code>
      </td><td> <code><a href="grouping-content.html#htmlulistelement">HTMLUListElement</a></code> : <code><a href="elements.html#htmlelement">HTMLElement</a></code>
@@ -3056,15 +3191,11 @@
     </td></tr><tr><td> <code><a href="text-level-semantics.html#the-wbr-element">wbr</a></code>
      </td><td> <code><a href="elements.html#htmlelement">HTMLElement</a></code>
 
-  </td></tr></tbody></table><!-- (only has events from HTML5) --><h3 class="no-num" id="events-0">Events</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><table><caption>List of events</caption>
+  </td></tr></tbody></table><!-- (only has events from HTML5) --><h3 class="no-num" id="events-0">Events</h3><p><i>This section is non-normative.</i></p><table><caption>List of events</caption>
    <thead><tr><th> Event
      </th><th> Interface
      </th><th> Description
-   </th></tr></thead><tbody><tr><td> <code title="event-DOMActivate"><a href="infrastructure.html#event-domactivate">DOMActivate</a></code>
-     </td><td> <code><a href="infrastructure.html#event">Event</a></code>
-     </td><td> Fired at an element before its <a href="content-models.html#activation-behavior">activation behavior</a> is run
-
-    </td></tr><tr><td> <code title="event-DOMContentLoaded">DOMContentLoaded</code>
+   </th></tr></thead><tbody><tr><td> <code title="event-DOMContentLoaded">DOMContentLoaded</code>
      </td><td> <code><a href="infrastructure.html#event">Event</a></code>
      </td><td> Fired at the <code><a href="infrastructure.html#document">Document</a></code> once it and its scripts have loaded, without waiting for other subresources
 
@@ -3091,6 +3222,10 @@
     </td></tr><tr><td> <code title="event-change">change</code>
      </td><td> <code><a href="infrastructure.html#event">Event</a></code>
      </td><td> Fired at controls when the user commits a value change
+
+    </td></tr><tr><td> <code title="event-click"><a href="infrastructure.html#event-click">click</a></code>
+     </td><td> <code><a href="infrastructure.html#event">Event</a></code>
+     </td><td> Fired at an element before its <a href="content-models.html#activation-behavior">activation behavior</a> is run
 
     </td></tr><tr><td> <code title="event-contextmenu">contextmenu</code>
      </td><td> <code><a href="infrastructure.html#event">Event</a></code>
@@ -3152,7 +3287,7 @@
      </td><td> <code><a href="history.html#popstateevent">PopStateEvent</a></code>
      </td><td> Fired at the <code><a href="browsers.html#window">Window</a></code> when the user navigates the <a href="history.html#session-history">session history</a>
 
-    </td></tr><tr><td> <code title="event-readystatechange">readystatechange</code>
+    </td></tr><tr><td> <code title="event-readystatechange"><a href="dom.html#event-readystatechange">readystatechange</a></code>
      </td><td> <code><a href="infrastructure.html#event">Event</a></code>
      </td><td> Fired at the <code><a href="infrastructure.html#document">Document</a></code> when it finishes parsing and again when all its subresources have finished loading
 

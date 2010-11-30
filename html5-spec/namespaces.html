@@ -1,7 +1,7 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
 <!-- when publishing, change bits marked ZZZ -->
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>2.8 Namespaces &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<html lang="en-US-x-Hixie" class="split chapter"><head><title>2.9 Namespaces &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,15 +356,15 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="common-dom-interfaces.html" title="2.7 Common DOM interfaces" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="dom.html" title="3 Semantics, structure, and APIs of HTML documents" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="common-dom-interfaces.html" title="2.8 Common DOM interfaces" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="dom.html" title="3 Semantics, structure, and APIs of HTML documents" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
    </div><div>
-   <a href="common-dom-interfaces.html">&#x2190; 2.7 Common DOM interfaces</a> &#x2013;
+   <a href="common-dom-interfaces.html">&#x2190; 2.8 Common DOM interfaces</a> &#x2013;
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="dom.html">3 Semantics, structure, and APIs of HTML documents &#x2192;</a>
-  </div><h3 id="namespaces"><span class="secno">2.8 </span>Namespaces</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The <dfn id="html-namespace-0">HTML namespace</dfn> is: <code>http://www.w3.org/1999/xhtml</code></p><p>The <dfn id="mathml-namespace">MathML namespace</dfn> is: <code>http://www.w3.org/1998/Math/MathML</code></p><p>The <dfn id="svg-namespace">SVG namespace</dfn> is: <code>http://www.w3.org/2000/svg</code></p><p>The <dfn id="xlink-namespace">XLink namespace</dfn> is: <code>http://www.w3.org/1999/xlink</code></p><p>The <dfn id="xml-namespace">XML namespace</dfn> is: <code>http://www.w3.org/XML/1998/namespace</code></p><p>The <dfn id="xmlns-namespace">XMLNS namespace</dfn> is: <code>http://www.w3.org/2000/xmlns/</code></p><hr/><p>Data mining tools and other user agents that perform operations
+  </div><h3 id="namespaces"><span class="secno">2.9 </span>Namespaces</h3><p>The <dfn id="html-namespace-0">HTML namespace</dfn> is: <code>http://www.w3.org/1999/xhtml</code></p><p>The <dfn id="mathml-namespace">MathML namespace</dfn> is: <code>http://www.w3.org/1998/Math/MathML</code></p><p>The <dfn id="svg-namespace">SVG namespace</dfn> is: <code>http://www.w3.org/2000/svg</code></p><p>The <dfn id="xlink-namespace">XLink namespace</dfn> is: <code>http://www.w3.org/1999/xlink</code></p><p>The <dfn id="xml-namespace">XML namespace</dfn> is: <code>http://www.w3.org/XML/1998/namespace</code></p><p>The <dfn id="xmlns-namespace">XMLNS namespace</dfn> is: <code>http://www.w3.org/2000/xmlns/</code></p><hr/><p>Data mining tools and other user agents that perform operations
   on content without running scripts, evaluating CSS or XPath
   expressions, or otherwise exposing the resulting DOM to arbitrary
   content, may "support namespaces" by just asserting that their DOM

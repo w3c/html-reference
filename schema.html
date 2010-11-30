@@ -126,6 +126,7 @@ default namespace =
    <span class='postfix or'>or</span> <a class='ref' href='#dfn'>dfn</a>
    <span class='postfix or'>or</span> <a class='ref' href='#i'>i</a>
    <span class='postfix or'>or</span> <a class='ref' href='#b'>b</a>
+   <span class='postfix or'>or</span> <a class='ref' href='#s'>s</a>
    <span class='postfix or'>or</span> <a class='ref' href='#code'>code</a>
    <span class='postfix or'>or</span> <a class='ref' href='#var'>var</a>
    <span class='postfix or'>or</span> <a class='ref' href='#samp'>samp</a>
@@ -283,7 +284,10 @@ default namespace =
   <div class='patternname' id='the-common.attrs.xmlspace'><a href='#the-common.attrs.xmlspace'>common.attrs.xmlspace</a> =</div>
   <span class='pattern' id='common.attrs.xmlspace'><span class='type'>attribute </span>
   <span class='name'>xml:space</span>
-   {<span class='model'> string "preserve" </span>}
+   {<span class='model'>
+      string "preserve"
+       <span class='postfix or'>or</span> string "default"
+    </span>}
   
    <span class='postfix intermixed'>intermixed with</span> notAllowed</span>
 </div>
@@ -411,6 +415,10 @@ default namespace =
 <div class='define' id='common.data.date-or-time-define'>
   <div class='patternname' id='the-common.data.date-or-time'><a href='#the-common.data.date-or-time'>date-or-time</a> =</div>
   <span class='pattern' id='common.data.date-or-time'>d:date-or-time</span>
+</div>
+<div class='define' id='common.data.date-define'>
+  <div class='patternname' id='the-common.data.date'><a href='#the-common.data.date'>date</a> =</div>
+  <span class='pattern' id='common.data.date'>d:date</span>
 </div>
 <div class='define' id='common.data.uri-define'>
   <div class='patternname' id='the-common.data.uri'><a href='#the-common.data.uri'>uri</a> =</div>
@@ -1315,6 +1323,24 @@ default namespace =
   <div class='patternname' id='the-b.inner'><a href='#the-b.inner'>b.inner</a> =</div>
   <span class='pattern' id='b.inner'><a class='ref' href='#common.inner.phrasing'>common.inner.phrasing</a></span>
 </div>
+<div class='define' id='s-define'>
+  <div class='patternname' id='the-s'><a href='#the-s'>s</a> =</div>
+  <span class='pattern' id='s'><span class='type'>element </span>
+  <span class='name'>s</span>
+   {<span class='model'>
+      <a class='ref' href='#s.inner'>s.inner</a>
+       <span class='postfix intermixed'>intermixed with</span> <a class='ref' href='#s.attrs'>s.attrs</a>
+    </span>}
+  </span>
+</div>
+<div class='define' id='s.attrs-define'>
+  <div class='patternname' id='the-s.attrs'><a href='#the-s.attrs'>s.attrs</a> =</div>
+  <span class='pattern' id='s.attrs'><a class='ref' href='#common.attrs'>common.attrs</a></span>
+</div>
+<div class='define' id='s.inner-define'>
+  <div class='patternname' id='the-s.inner'><a href='#the-s.inner'>s.inner</a> =</div>
+  <span class='pattern' id='s.inner'><a class='ref' href='#common.inner.phrasing'>common.inner.phrasing</a></span>
+</div>
 <div class='define' id='code-define'>
   <div class='patternname' id='the-code'><a href='#the-code'>code</a> =</div>
   <span class='pattern' id='code'><span class='type'>element </span>
@@ -1637,7 +1663,8 @@ default namespace =
   <div class='patternname' id='the-ol.attrs'><a href='#the-ol.attrs'>ol.attrs</a> =</div>
   <span class='pattern' id='ol.attrs'><a class='ref' href='#common.attrs'>common.attrs</a>
    <span class='postfix intermixed'>intermixed with</span> <a class='ref' href='#ol.attrs.start' title='ol.attrs.start'>start</a><span class='postfix optional' title='OPTIONAL (ZERO OR ONE)'>?</span> 
-   <span class='postfix intermixed'>intermixed with</span> <a class='ref' href='#ol.attrs.reversed' title='ol.attrs.reversed'>reversed</a><span class='postfix optional' title='OPTIONAL (ZERO OR ONE)'>?</span> </span>
+   <span class='postfix intermixed'>intermixed with</span> <a class='ref' href='#ol.attrs.reversed' title='ol.attrs.reversed'>reversed</a><span class='postfix optional' title='OPTIONAL (ZERO OR ONE)'>?</span> 
+   <span class='postfix intermixed'>intermixed with</span> <a class='ref' href='#ol.attrs.type' title='ol.attrs.type'>type</a><span class='postfix optional' title='OPTIONAL (ZERO OR ONE)'>?</span> </span>
 </div>
 <div class='define' id='ol.attrs.start-define'>
   <div class='patternname' id='the-ol.attrs.start'><a href='#the-ol.attrs.start'>start</a> =</div>
@@ -1654,6 +1681,20 @@ default namespace =
   <span class='name'>reversed</span>
    {<span class='model'>
       d:string "reversed"
+       <span class='postfix or'>or</span> d:string ""
+    </span>}
+  </span>
+</div>
+<div class='define' id='ol.attrs.type-define'>
+  <div class='patternname' id='the-ol.attrs.type'><a href='#the-ol.attrs.type'>type</a> =</div>
+  <span class='pattern' id='ol.attrs.type'><span class='type'>attribute </span>
+  <span class='name'>type</span>
+   {<span class='model'>
+      d:string "1"
+       <span class='postfix or'>or</span> d:string "a"
+       <span class='postfix or'>or</span> d:string "A"
+       <span class='postfix or'>or</span> d:string "i"
+       <span class='postfix or'>or</span> d:string "I"
        <span class='postfix or'>or</span> d:string ""
     </span>}
   </span>
@@ -2012,6 +2053,7 @@ default namespace =
   <span class='name'>datetime</span>
    {<span class='model'>
       <a class='ref' href='#common.data.datetime' title='common.data.datetime'>datetime</a>
+       <span class='postfix or'>or</span> <a class='ref' href='#common.data.date' title='common.data.date'>date</a>
     </span>}
   </span>
 </div>
@@ -2064,6 +2106,7 @@ default namespace =
   <span class='name'>datetime</span>
    {<span class='model'>
       <a class='ref' href='#common.data.datetime' title='common.data.datetime'>datetime</a>
+       <span class='postfix or'>or</span> <a class='ref' href='#common.data.date' title='common.data.date'>date</a>
     </span>}
   </span>
 </div>

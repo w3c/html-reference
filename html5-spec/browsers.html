@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,7 +356,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="links.html" title="4.12 Links" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="origin-0.html" title="5.3 Origin" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="links.html" title="4.12 Links" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="origin-0.html" title="5.3 Origin" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -322,14 +369,14 @@
     <ol><li><a href="browsers.html#nested-browsing-contexts"><span class="secno">5.1.1 </span>Nested browsing contexts</a>
       <ol><li><a href="browsers.html#navigating-nested-browsing-contexts-in-the-dom"><span class="secno">5.1.1.1 </span>Navigating nested browsing contexts in the DOM</a></li></ol></li><li><a href="browsers.html#auxiliary-browsing-contexts"><span class="secno">5.1.2 </span>Auxiliary browsing contexts</a>
       <ol><li><a href="browsers.html#navigating-auxiliary-browsing-contexts-in-the-dom"><span class="secno">5.1.2.1 </span>Navigating auxiliary browsing contexts in the DOM</a></li></ol></li><li><a href="browsers.html#secondary-browsing-contexts"><span class="secno">5.1.3 </span>Secondary browsing contexts</a></li><li><a href="browsers.html#security-nav"><span class="secno">5.1.4 </span>Security</a></li><li><a href="browsers.html#groupings-of-browsing-contexts"><span class="secno">5.1.5 </span>Groupings of browsing contexts</a></li><li><a href="browsers.html#browsing-context-names"><span class="secno">5.1.6 </span>Browsing context names</a></li></ol></li><li><a href="browsers.html#the-window-object"><span class="secno">5.2 </span>The <code>Window</code> object</a>
-    <ol><li><a href="browsers.html#security-window"><span class="secno">5.2.1 </span>Security</a></li><li><a href="browsers.html#apis-for-creating-and-navigating-browsing-contexts-by-name"><span class="secno">5.2.2 </span>APIs for creating and navigating browsing contexts by name</a></li><li><a href="browsers.html#accessing-other-browsing-contexts"><span class="secno">5.2.3 </span>Accessing other browsing contexts</a></li><li><a href="browsers.html#named-access-on-the-window-object"><span class="secno">5.2.4 </span>Named access on the <code>Window</code> object</a></li><li><a href="browsers.html#garbage-collection-and-browsing-contexts"><span class="secno">5.2.5 </span>Garbage collection and browsing contexts</a></li><li><a href="browsers.html#browser-interface-elements"><span class="secno">5.2.6 </span>Browser interface elements</a></li><li><a href="browsers.html#the-windowproxy-object"><span class="secno">5.2.7 </span>The <code>WindowProxy</code> object</a></li></ol></li></ol></li></ol></div><h2 id="browsers"><span class="secno">5 </span>Loading Web pages</h2><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><div class="impl">
+    <ol><li><a href="browsers.html#security-window"><span class="secno">5.2.1 </span>Security</a></li><li><a href="browsers.html#apis-for-creating-and-navigating-browsing-contexts-by-name"><span class="secno">5.2.2 </span>APIs for creating and navigating browsing contexts by name</a></li><li><a href="browsers.html#accessing-other-browsing-contexts"><span class="secno">5.2.3 </span>Accessing other browsing contexts</a></li><li><a href="browsers.html#named-access-on-the-window-object"><span class="secno">5.2.4 </span>Named access on the <code>Window</code> object</a></li><li><a href="browsers.html#garbage-collection-and-browsing-contexts"><span class="secno">5.2.5 </span>Garbage collection and browsing contexts</a></li><li><a href="browsers.html#browser-interface-elements"><span class="secno">5.2.6 </span>Browser interface elements</a></li><li><a href="browsers.html#the-windowproxy-object"><span class="secno">5.2.7 </span>The <code>WindowProxy</code> object</a></li></ol></li></ol></li></ol></div><h2 id="browsers"><span class="secno">5 </span>Loading Web pages</h2><div class="impl">
 
   <p>This section describes features that apply most directly to Web
   browsers. Having said that, except where specified otherwise, the
   requirements defined in this section <em>do</em> apply to all user
   agents, whether they are Web browsers or not.</p>
 
-  </div><h3 id="windows"><span class="secno">5.1 </span>Browsing contexts</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>A <dfn id="browsing-context">browsing context</dfn> is an environment in which
+  </div><h3 id="windows"><span class="secno">5.1 </span>Browsing contexts</h3><p>A <dfn id="browsing-context">browsing context</dfn> is an environment in which
   <code><a href="infrastructure.html#document">Document</a></code> objects are presented to the user.</p><p class="note">A tab or window in a Web browser typically contains
   a <a href="#browsing-context">browsing context</a>, as does an <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code><span class="impl"> or <code><a href="obsolete.html#frame">frame</a></code>s in a
   <code><a href="obsolete.html#frameset">frameset</a></code></span>.</p><p>Each <a href="#browsing-context">browsing context</a> has a corresponding
@@ -389,7 +436,7 @@
   <code><a href="infrastructure.html#document">Document</a></code> is a globally unique identifier assigned when
   the new <a href="#browsing-context">browsing context</a> is created.</p>
 
-  </div><h4 id="nested-browsing-contexts"><span class="secno">5.1.1 </span>Nested browsing contexts</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Certain elements (for example, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> elements) can
+  </div><h4 id="nested-browsing-contexts"><span class="secno">5.1.1 </span>Nested browsing contexts</h4><p>Certain elements (for example, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> elements) can
   instantiate further <a href="#browsing-context" title="browsing context">browsing
   contexts</a>. These are called <dfn id="nested-browsing-context" title="nested browsing&#10;  context">nested browsing contexts</dfn>. If a browsing context <var title="">P</var> has an element <var title="">E</var> in one of its
   <code><a href="infrastructure.html#document">Document</a></code>s <var title="">D</var> that nests another
@@ -432,7 +479,7 @@
   of elements that are in <code><a href="infrastructure.html#document">Document</a></code>s that are not
   themselves <a href="#fully-active">fully active</a>.</p><p>A <a href="#nested-browsing-context">nested browsing context</a> can have a <a href="the-iframe-element.html#seamless-browsing-context-flag">seamless
   browsing context flag</a> set, if it is embedded through an
-  <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> element with a <code title="attr-iframe-seamless"><a href="the-iframe-element.html#attr-iframe-seamless">seamless</a></code> attribute.</p><h5 id="navigating-nested-browsing-contexts-in-the-dom"><span class="secno">5.1.1.1 </span>Navigating nested browsing contexts in the DOM</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">window</var> . <code title="dom-top"><a href="#dom-top">top</a></code></dt>
+  <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> element with a <code title="attr-iframe-seamless"><a href="the-iframe-element.html#attr-iframe-seamless">seamless</a></code> attribute.</p><h5 id="navigating-nested-browsing-contexts-in-the-dom"><span class="secno">5.1.1.1 </span>Navigating nested browsing contexts in the DOM</h5><dl class="domintro"><dt><var title="">window</var> . <code title="dom-top"><a href="#dom-top">top</a></code></dt>
 
    <dd>
 
@@ -496,7 +543,7 @@
    <li><p>Otherwise, return the <a href="#browsing-context-container">browsing context
    container</a> for <var title="">b</var>.</p></li>
 
-  </ol></div><h4 id="auxiliary-browsing-contexts"><span class="secno">5.1.2 </span>Auxiliary browsing contexts</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>It is possible to create new browsing contexts that are related
+  </ol></div><h4 id="auxiliary-browsing-contexts"><span class="secno">5.1.2 </span>Auxiliary browsing contexts</h4><p>It is possible to create new browsing contexts that are related
   to a <a href="#top-level-browsing-context">top-level browsing context</a> without being nested
   through an element. Such browsing contexts are called <dfn id="auxiliary-browsing-context" title="auxiliary browsing context">auxiliary browsing
   contexts</dfn>. Auxiliary browsing contexts are always <a href="#top-level-browsing-context" title="top-level browsing context">top-level browsing
@@ -506,12 +553,12 @@
   and it has a <dfn id="furthest-ancestor-browsing-context">furthest ancestor browsing context</dfn>, which is
   the <a href="#top-level-browsing-context">top-level browsing context</a> of the <a href="#opener-browsing-context">opener
   browsing context</a> when the <a href="#auxiliary-browsing-context">auxiliary browsing
-  context</a> was created.</p><h5 id="navigating-auxiliary-browsing-contexts-in-the-dom"><span class="secno">5.1.2.1 </span>Navigating auxiliary browsing contexts in the DOM</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The <dfn id="dom-opener" title="dom-opener"><code>opener</code></dfn> IDL
+  context</a> was created.</p><h5 id="navigating-auxiliary-browsing-contexts-in-the-dom"><span class="secno">5.1.2.1 </span>Navigating auxiliary browsing contexts in the DOM</h5><p>The <dfn id="dom-opener" title="dom-opener"><code>opener</code></dfn> IDL
   attribute on the <code><a href="#window">Window</a></code> object must return the
   <code><a href="#windowproxy">WindowProxy</a></code> object of the <a href="#browsing-context">browsing context</a>
   from which the current <a href="#browsing-context">browsing context</a> was created
   (its <a href="#opener-browsing-context">opener browsing context</a>), if there is one and it
-  is still available.</p><h4 id="secondary-browsing-contexts"><span class="secno">5.1.3 </span>Secondary browsing contexts</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>User agents may support <dfn id="secondary-browsing-context" title="secondary browsing&#10;  context">secondary browsing contexts</dfn>, which are <a href="#browsing-context" title="browsing context">browsing contexts</a> that form part of
+  is still available.</p><h4 id="secondary-browsing-contexts"><span class="secno">5.1.3 </span>Secondary browsing contexts</h4><p>User agents may support <dfn id="secondary-browsing-context" title="secondary browsing&#10;  context">secondary browsing contexts</dfn>, which are <a href="#browsing-context" title="browsing context">browsing contexts</a> that form part of
   the user agent's interface, apart from the main content area.</p><div class="impl">
 
   <h4 id="security-nav"><span class="secno">5.1.4 </span>Security</h4>
@@ -551,13 +598,15 @@
 
   </div><div class="impl">
 
-  <h4 id="groupings-of-browsing-contexts"><span class="secno">5.1.5 </span>Groupings of browsing contexts</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="groupings-of-browsing-contexts"><span class="secno">5.1.5 </span>Groupings of browsing contexts</h4>
 
   <p>Each <a href="#browsing-context">browsing context</a> is defined as having a list of
-  zero or more <dfn id="directly-reachable-browsing-contexts">directly reachable browsing contexts</dfn>. These
+  one or more <dfn id="directly-reachable-browsing-contexts">directly reachable browsing contexts</dfn>. These
   are:</p>
 
-  <ul><li>All the <a href="#browsing-context">browsing context</a>'s <a href="#child-browsing-context" title="child&#10;   browsing context">child browsing contexts</a>.</li>
+  <ul><li>The <a href="#browsing-context">browsing context</a> itself.</li>
+
+   <li>All the <a href="#browsing-context">browsing context</a>'s <a href="#child-browsing-context" title="child&#10;   browsing context">child browsing contexts</a>.</li>
 
    <li>The <a href="#browsing-context">browsing context</a>'s <a href="#parent-browsing-context">parent browsing
    context</a>.</li>
@@ -592,7 +641,7 @@
   <p class="note">There is at most one <a href="webappapis.html#event-loop">event loop</a> per
   <a href="#unit-of-related-similar-origin-browsing-contexts">unit of related similar-origin browsing contexts</a>.</p>
 
-  </div><h4 id="browsing-context-names"><span class="secno">5.1.6 </span>Browsing context names</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Browsing contexts can have a <dfn id="browsing-context-name">browsing context name</dfn>. By
+  </div><h4 id="browsing-context-names"><span class="secno">5.1.6 </span>Browsing context names</h4><p>Browsing contexts can have a <dfn id="browsing-context-name">browsing context name</dfn>. By
   default, a browsing context has no name (its name is not set).</p><p>A <dfn id="valid-browsing-context-name">valid browsing context name</dfn> is any string with at
   least one character that does not start with a U+005F LOW LINE
   character. (Names starting with an underscore are reserved for
@@ -685,9 +734,8 @@
      no name). The chosen browsing context must be this new browsing
      context.</p>
 
-     <p>If it is immediately <a href="history.html#navigate" title="navigate">navigated</a>,
-     then the navigation will be done with <a href="history.html#replacement-enabled">replacement
-     enabled</a>.</p></dd>
+     <p class="note">If it is immediately <a href="history.html#navigate" title="navigate">navigated</a>, then the navigation will be
+     done with <a href="history.html#replacement-enabled">replacement enabled</a>.</p></dd>
 
 
      <dt>If the user agent has been configured such that in this
@@ -708,7 +756,7 @@
 
    </li>
 
-  </ol></div><h3 id="the-window-object"><span class="secno">5.2 </span>The <code><a href="#window">Window</a></code> object</h3><p class="XXX annotation"><b>Status: </b><i>Implemented and widely deployed</i></p><pre class="idl">[OverrideBuiltins, ReplaceableNamedProperties] <!-- XXX http://www.w3.org/Bugs/Public/show_bug.cgi?id=8241 -->
+  </ol></div><h3 id="the-window-object"><span class="secno">5.2 </span>The <code><a href="#window">Window</a></code> object</h3><pre class="idl">[ReplaceableNamedProperties] <!-- XXX http://www.w3.org/Bugs/Public/show_bug.cgi?id=8241 -->
 interface <dfn id="window">Window</dfn> {
   // the current browsing context
   readonly attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-window" title="dom-window">window</a>;
@@ -718,7 +766,6 @@ interface <dfn id="window">Window</dfn> {
   [PutForwards=<a href="history.html#dom-location-href" title="dom-location-href">href</a>] readonly attribute <a href="history.html#location">Location</a> <a href="history.html#dom-location" title="dom-location">location</a>;
   readonly attribute <a href="history.html#history-0">History</a> <a href="history.html#dom-history" title="dom-history">history</a>;
   readonly attribute <a href="dnd.html#undomanager">UndoManager</a> <a href="dnd.html#dom-undomanager" title="dom-undoManager">undoManager</a>;
-  <a href="editing.html#selection-0">Selection</a> <a href="editing.html#dom-getselection" title="dom-getSelection">getSelection</a>();
   [Replaceable] readonly attribute <a href="#barprop">BarProp</a> <a href="#dom-window-locationbar" title="dom-window-locationbar">locationbar</a>;
   [Replaceable] readonly attribute <a href="#barprop">BarProp</a> <a href="#dom-window-menubar" title="dom-window-menubar">menubar</a>;
   [Replaceable] readonly attribute <a href="#barprop">BarProp</a> <a href="#dom-window-personalbar" title="dom-window-personalbar">personalbar</a>;
@@ -764,6 +811,9 @@ interface <dfn id="window">Window</dfn> {
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onchange" title="handler-onchange">onchange</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onclick" title="handler-onclick">onclick</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oncontextmenu" title="handler-oncontextmenu">oncontextmenu</a>;
+<!--KEEP-END w3c-html--><!--TT-->
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oncuechange" title="handler-oncuechange">oncuechange</a>;
+<!--KEEP-START w3c-html--><!--TT-->
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondblclick" title="handler-ondblclick">ondblclick</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondrag" title="handler-ondrag">ondrag</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondragend" title="handler-ondragend">ondragend</a>;
@@ -808,6 +858,7 @@ interface <dfn id="window">Window</dfn> {
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onratechange" title="handler-onratechange">onratechange</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onreadystatechange" title="handler-onreadystatechange">onreadystatechange</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onredo" title="handler-window-onredo">onredo</a>;
+           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onreset" title="handler-onreset">onreset</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onresize" title="handler-window-onresize">onresize</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onscroll" title="handler-onscroll">onscroll</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onseeked" title="handler-onseeked">onseeked</a>;
@@ -871,7 +922,8 @@ interface <dfn id="window">Window</dfn> {
   <p>The <dfn id="dom-document-defaultview" title="dom-document-defaultView"><code>defaultView</code></dfn> IDL
   attribute of the <code><a href="dom.html#htmldocument">HTMLDocument</a></code> interface must return the
   <code><a href="infrastructure.html#document">Document</a></code>'s <a href="#browsing-context">browsing context</a>'s
-  <code><a href="#windowproxy">WindowProxy</a></code> object.</p>
+  <code><a href="#windowproxy">WindowProxy</a></code> object, if there is one, or null
+  otherwise.</p>
 
   </div><div class="impl">
 
@@ -918,7 +970,7 @@ interface <dfn id="window">Window</dfn> {
 
   </div>
 
-  </div><h4 id="apis-for-creating-and-navigating-browsing-contexts-by-name"><span class="secno">5.2.2 </span>APIs for creating and navigating browsing contexts by name</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">window</var> = <var title="">window</var> . <code title="dom-open"><a href="#dom-open">open</a></code>( [ <var title="">url</var> [, <var title="">target</var> [, <var title="">features</var> [, <var title="">replace</var> ] ] ] ] )</dt>
+  </div><h4 id="apis-for-creating-and-navigating-browsing-contexts-by-name"><span class="secno">5.2.2 </span>APIs for creating and navigating browsing contexts by name</h4><dl class="domintro"><dt><var title="">window</var> = <var title="">window</var> . <code title="dom-open"><a href="#dom-open">open</a></code>( [ <var title="">url</var> [, <var title="">target</var> [, <var title="">features</var> [, <var title="">replace</var> ] ] ] ] )</dt>
 
    <dd>
 
@@ -982,8 +1034,11 @@ interface <dfn id="window">Window</dfn> {
   provided, then the <var title="">target</var> argument defaults to the
   value "<code>_blank</code>".</p>
 
-  <p>The third argument, <var title="">features</var>, has no effect
-  and is supported for historical reasons only.</p>
+  <p>The third argument, <var title="">features</var>, has no defined
+  effect and is mentioned for historical reasons only. User agents may
+  interpret this argument as instructions to set the size and position
+  of the browsing context, but are encouraged to instead ignore the
+  argument entirely.</p>
 
   <p>The fourth argument, <var title="">replace</var>, specifies
   whether or not the new page will <a href="history.html#replacement-enabled" title="replacement&#10;  enabled">replace</a> the page currently loaded in the browsing
@@ -1009,15 +1064,14 @@ interface <dfn id="window">Window</dfn> {
   agent could override the selection of the target browsing context to
   instead target a new tab.</p>
 
-  <p>Then, the user agent must <a href="history.html#navigate">navigate</a> the selected
-  <a href="#browsing-context">browsing context</a> to the <a href="urls.html#absolute-url">absolute URL</a> (or
-  error) obtained from <a href="urls.html#resolve-a-url" title="resolve a url">resolving</a>
-  <var title="">url</var> earlier. If the <var title="">replace</var>
-  is true, then <a href="history.html#replacement-enabled" title="replacement enabled">replacement must be
-  enabled</a>; otherwise, it must not be enabled unless the
-  <a href="#browsing-context">browsing context</a> was just created as part of
-  <a href="#the-rules-for-choosing-a-browsing-context-given-a-browsing-context-name">the rules for choosing a browsing context given a browsing
-  context name</a>. The navigation must be done with the <a href="webappapis.html#script-s-browsing-context" title="script's browsing context">browsing context</a> of the
+  <p>Then, the user agent must <a href="history.html#navigate">navigate</a><!--DONAV
+  window.open()--> the selected <a href="#browsing-context">browsing context</a> to the
+  <a href="urls.html#absolute-url">absolute URL</a> (or error) obtained from <a href="urls.html#resolve-a-url" title="resolve a url">resolving</a> <var title="">url</var>
+  earlier. If the <var title="">replace</var> is true or if the
+  <a href="#browsing-context">browsing context</a> was just created as part of <a href="#the-rules-for-choosing-a-browsing-context-given-a-browsing-context-name">the
+  rules for choosing a browsing context given a browsing context
+  name</a>, then <a href="history.html#replacement-enabled" title="replacement enabled">replacement must
+  be enabled</a>. The navigation must be done with the <a href="webappapis.html#script-s-browsing-context" title="script's browsing context">browsing context</a> of the
   <a href="#entry-script">entry script</a> as the <a href="history.html#source-browsing-context">source browsing
   context</a>.</p>
 
@@ -1051,7 +1105,7 @@ interface <dfn id="window">Window</dfn> {
   the <a href="fetching-resources.html#fetch" title="fetch">fetch algorithm</a>. Otherwise, it must
   do nothing.</p>
 
-  </div><h4 id="accessing-other-browsing-contexts"><span class="secno">5.2.3 </span>Accessing other browsing contexts</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">window</var> . <code title="dom-length"><a href="#dom-length">length</a></code></dt>
+  </div><h4 id="accessing-other-browsing-contexts"><span class="secno">5.2.3 </span>Accessing other browsing contexts</h4><dl class="domintro"><dt><var title="">window</var> . <code title="dom-length"><a href="#dom-length">length</a></code></dt>
 
    <dd>
 
@@ -1081,23 +1135,24 @@ interface <dfn id="window">Window</dfn> {
 
   <!-- in other words, frames are only accessible to same-thread processes -->
 
-  <p>The <span>indices of the supported indexed properties</span> on
-  the <code><a href="#window">Window</a></code> object at any instant are the numbers in the
-  range 0 .. <span title=""><var title="">n</var>-1</span>, where <var title="">n</var> is the number returned by the <code title="dom-length"><a href="#dom-length">length</a></code> IDL attribute. If <var title="">n</var> is zero then there are no <span>supported indexed
-  properties</span>.</p>
+  <p>The <a href="infrastructure.html#supported-property-indices">supported property indices</a> on the
+  <code><a href="#window">Window</a></code> object at any instant are the numbers in the
+  range 0 .. <span title=""><var title="">n</var>-1</span>, where <var title="">n</var> is the number returned by the <code title="dom-length"><a href="#dom-length">length</a></code> IDL attribute. If <var title="">n</var> is zero then there are no <a href="infrastructure.html#supported-property-indices">supported property
+  indices</a>.</p>
 
-  <p>When a <code><a href="#window">Window</a></code> object is <dfn id="dom-window-item" title="dom-window-item">indexed to retrieve an indexed
-  property</dfn> <var title="">index</var>, the value returned must be
-  the <code><a href="#windowproxy">WindowProxy</a></code> object of the <var title="">index</var>th <a href="#child-browsing-context">child browsing context</a> of the
-  <code><a href="infrastructure.html#document">Document</a></code> that is nested through an element that is
-  <a href="infrastructure.html#in-a-document" title="in a document">in the <code>Document</code></a>,
-  sorted in the <a href="infrastructure.html#tree-order">tree order</a> of the elements nesting those
-  <a href="#browsing-context" title="browsing context">browsing contexts</a>.</p>
+  <p>To <dfn id="dom-window-item" title="dom-window-item">determine the value of an indexed
+  property</dfn> <var title="">index</var> of a <code><a href="#window">Window</a></code>
+  object, the user agent must return the <code><a href="#windowproxy">WindowProxy</a></code>
+  object of the <var title="">index</var>th <a href="#child-browsing-context">child browsing
+  context</a> of the <code><a href="infrastructure.html#document">Document</a></code> that is nested through
+  an element that is <a href="infrastructure.html#in-a-document" title="in a document">in the
+  <code>Document</code></a>, sorted in the <a href="infrastructure.html#tree-order">tree order</a>
+  of the elements nesting those <a href="#browsing-context" title="browsing&#10;  context">browsing contexts</a>.</p>
 
   <p>These properties are the <dfn id="dynamic-nested-browsing-context-properties">dynamic nested browsing context
   properties</dfn>.</p>
 
-  </div><h4 id="named-access-on-the-window-object"><span class="secno">5.2.4 </span>Named access on the <code><a href="#window">Window</a></code> object</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">window</var>[<var title="">name</var>]</dt>
+  </div><h4 id="named-access-on-the-window-object"><span class="secno">5.2.4 </span>Named access on the <code><a href="#window">Window</a></code> object</h4><dl class="domintro"><dt><var title="">window</var>[<var title="">name</var>]</dt>
 
    <dd>
 
@@ -1107,8 +1162,8 @@ interface <dfn id="window">Window</dfn> {
 
   </dl><div class="impl">
 
-  <p>The <code><a href="#window">Window</a></code> interface <span title="support named&#10;  properties">supports named properties</span>. The <span>names of the
-  supported named properties</span> at any moment consist of:</p>
+  <p>The <code><a href="#window">Window</a></code> interface <span title="support named&#10;  properties">supports named properties</span>. The <a href="infrastructure.html#supported-property-names">supported
+  property names</a> at any moment consist of:</p>
 
   <ul><li>the value of the <code title="">name</code> content attribute
    for all <code><a href="text-level-semantics.html#the-a-element">a</a></code>, <code><a href="obsolete.html#the-applet-element">applet</a></code>, <code><a href="the-map-element.html#the-area-element">area</a></code>,
@@ -1175,7 +1230,7 @@ interface <dfn id="window">Window</dfn> {
 
   </ul></div><div class="impl">
 
-  <h4 id="garbage-collection-and-browsing-contexts"><span class="secno">5.2.5 </span>Garbage collection and browsing contexts</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="garbage-collection-and-browsing-contexts"><span class="secno">5.2.5 </span>Garbage collection and browsing contexts</h4>
 
   <p>A <a href="#browsing-context">browsing context</a> has a strong reference to each of
   its <code><a href="infrastructure.html#document">Document</a></code>s and its <code><a href="#windowproxy">WindowProxy</a></code> object,
@@ -1235,7 +1290,7 @@ interface <dfn id="window">Window</dfn> {
   once their <code><a href="#windowproxy">WindowProxy</a></code> object is eligible for garbage
   collection.</p>
 
-  </div><h4 id="browser-interface-elements"><span class="secno">5.2.6 </span>Browser interface elements</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>To allow Web pages to integrate with Web browsers, certain Web
+  </div><h4 id="browser-interface-elements"><span class="secno">5.2.6 </span>Browser interface elements</h4><p>To allow Web pages to integrate with Web browsers, certain Web
   browser interface elements are exposed in a limited way to scripts
   in Web pages.</p><p>Each interface element is represented by a <code><a href="#barprop">BarProp</a></code>
   object:</p><pre class="idl">interface <dfn id="barprop">BarProp</dfn> {
@@ -1359,7 +1414,7 @@ interface <dfn id="window">Window</dfn> {
 
   </div><div class="impl">
 
-  <h4 id="the-windowproxy-object"><span class="secno">5.2.7 </span>The <code><a href="#windowproxy">WindowProxy</a></code> object</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="the-windowproxy-object"><span class="secno">5.2.7 </span>The <code><a href="#windowproxy">WindowProxy</a></code> object</h4>
 
 
   <p>As mentioned earlier, each <a href="#browsing-context">browsing context</a> has a

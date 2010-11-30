@@ -1,7 +1,7 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
 <!-- when publishing, change bits marked ZZZ -->
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>2.7 Common DOM interfaces &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<html lang="en-US-x-Hixie" class="split chapter"><head><title>2.8 Common DOM interfaces &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,17 +356,17 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="fetching-resources.html" title="2.6 Fetching resources" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="namespaces.html" title="2.8 Namespaces" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="fetching-resources.html" title="2.7 Fetching resources" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="namespaces.html" title="2.9 Namespaces" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
    </div><div>
-   <a href="fetching-resources.html">&#x2190; 2.6 Fetching resources</a> &#x2013;
+   <a href="fetching-resources.html">&#x2190; 2.7 Fetching resources</a> &#x2013;
    <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="namespaces.html">2.8 Namespaces &#x2192;</a>
-  <ol class="toc"><li><ol><li><a href="common-dom-interfaces.html#common-dom-interfaces"><span class="secno">2.7 </span>Common DOM interfaces</a>
-    <ol><li><a href="common-dom-interfaces.html#reflecting-content-attributes-in-idl-attributes"><span class="secno">2.7.1 </span>Reflecting content attributes in IDL attributes</a></li><li><a href="common-dom-interfaces.html#collections-0"><span class="secno">2.7.2 </span>Collections</a>
-      <ol><li><a href="common-dom-interfaces.html#htmlcollection-0"><span class="secno">2.7.2.1 </span>HTMLCollection</a></li><li><a href="common-dom-interfaces.html#htmlallcollection-0"><span class="secno">2.7.2.2 </span>HTMLAllCollection</a></li><li><a href="common-dom-interfaces.html#htmlformcontrolscollection-0"><span class="secno">2.7.2.3 </span>HTMLFormControlsCollection</a></li><li><a href="common-dom-interfaces.html#htmloptionscollection-0"><span class="secno">2.7.2.4 </span>HTMLOptionsCollection</a></li></ol></li><li><a href="common-dom-interfaces.html#domtokenlist-0"><span class="secno">2.7.3 </span>DOMTokenList</a></li><li><a href="common-dom-interfaces.html#domsettabletokenlist-0"><span class="secno">2.7.4 </span>DOMSettableTokenList</a></li><li><a href="common-dom-interfaces.html#safe-passing-of-structured-data"><span class="secno">2.7.5 </span>Safe passing of structured data</a></li><li><a href="common-dom-interfaces.html#domstringmap-0"><span class="secno">2.7.6 </span>DOMStringMap</a></li><li><a href="common-dom-interfaces.html#dom-feature-strings"><span class="secno">2.7.7 </span>DOM feature strings</a></li><li><a href="common-dom-interfaces.html#exceptions"><span class="secno">2.7.8 </span>Exceptions</a></li><li><a href="common-dom-interfaces.html#garbage-collection"><span class="secno">2.7.9 </span>Garbage collection</a></li></ol></li></ol></li></ol></div><h3 id="common-dom-interfaces"><span class="secno">2.7 </span>Common DOM interfaces</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><h4 id="reflecting-content-attributes-in-idl-attributes"><span class="secno">2.7.1 </span>Reflecting content attributes in IDL attributes</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Some IDL attributes are defined to <dfn id="reflect">reflect</dfn> a
+   <a href="namespaces.html">2.9 Namespaces &#x2192;</a>
+  <ol class="toc"><li><ol><li><a href="common-dom-interfaces.html#common-dom-interfaces"><span class="secno">2.8 </span>Common DOM interfaces</a>
+    <ol><li><a href="common-dom-interfaces.html#reflecting-content-attributes-in-idl-attributes"><span class="secno">2.8.1 </span>Reflecting content attributes in IDL attributes</a></li><li><a href="common-dom-interfaces.html#collections-0"><span class="secno">2.8.2 </span>Collections</a>
+      <ol><li><a href="common-dom-interfaces.html#htmlcollection-0"><span class="secno">2.8.2.1 </span>HTMLCollection</a></li><li><a href="common-dom-interfaces.html#htmlallcollection-0"><span class="secno">2.8.2.2 </span>HTMLAllCollection</a></li><li><a href="common-dom-interfaces.html#htmlformcontrolscollection-0"><span class="secno">2.8.2.3 </span>HTMLFormControlsCollection</a></li><li><a href="common-dom-interfaces.html#htmloptionscollection-0"><span class="secno">2.8.2.4 </span>HTMLOptionsCollection</a></li></ol></li><li><a href="common-dom-interfaces.html#domtokenlist-0"><span class="secno">2.8.3 </span>DOMTokenList</a></li><li><a href="common-dom-interfaces.html#domsettabletokenlist-0"><span class="secno">2.8.4 </span>DOMSettableTokenList</a></li><li><a href="common-dom-interfaces.html#safe-passing-of-structured-data"><span class="secno">2.8.5 </span>Safe passing of structured data</a></li><li><a href="common-dom-interfaces.html#domstringmap-0"><span class="secno">2.8.6 </span>DOMStringMap</a></li><li><a href="common-dom-interfaces.html#dom-feature-strings"><span class="secno">2.8.7 </span>DOM feature strings</a></li><li><a href="common-dom-interfaces.html#exceptions"><span class="secno">2.8.8 </span>Exceptions</a></li><li><a href="common-dom-interfaces.html#garbage-collection"><span class="secno">2.8.9 </span>Garbage collection</a></li></ol></li></ol></li></ol></div><h3 id="common-dom-interfaces"><span class="secno">2.8 </span>Common DOM interfaces</h3><h4 id="reflecting-content-attributes-in-idl-attributes"><span class="secno">2.8.1 </span>Reflecting content attributes in IDL attributes</h4><p>Some IDL attributes are defined to <dfn id="reflect">reflect</dfn> a
   particular content attribute. This means that on getting, the IDL
   attribute returns the current value of the content attribute, and on
   setting, the IDL attribute changes the value of the content
@@ -362,14 +409,8 @@
   getting, the IDL attribute must return the conforming value
   associated with the state the attribute is in (in its canonical
   case), or the empty string if the attribute is in a state that has
-  no associated keyword value; and on setting, if the new value is an
-  <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for one of the keywords
-  given for that attribute, then the content attribute must be set to
-  the conforming value associated with the state that the attribute
-  would be in if set to the given new value, otherwise, if the new
-  value is the empty string, then the content attribute must be
-  removed, otherwise, the content attribute must be set to the given
-  new value.</p>
+  no associated keyword value; and on setting, the content attribute
+  must be set to the specified new value.</p>
 
   <p>If a reflecting IDL attribute is a <code>DOMString</code> but
   doesn't fall into any of the above categories, then the getting and
@@ -413,14 +454,18 @@
   type (<code>unsigned long</code>) then, on getting, the content
   attribute must be parsed according to the <a href="common-microsyntaxes.html#rules-for-parsing-non-negative-integers">rules for parsing
   non-negative integers</a>, and if that is successful, and the
-  value is in the range of the IDL attribute's type, the resulting
-  value must be returned. If, on the other hand, it fails or returns
-  an out of range value, or if the attribute is absent, the default
-  value must be returned instead, or 0 if there is no default
-  value. On setting, the given value must be converted to the shortest
-  possible string representing the number as a <a href="common-microsyntaxes.html#valid-non-negative-integer">valid
-  non-negative integer</a> and then that string must be used as the
-  new content attribute value.</p>
+  value is in the range 0 to 2147483647 inclusive, the resulting value
+  must be returned. If, on the other hand, it fails or returns an out
+  of range value, or if the attribute is absent, the default value
+  must be returned instead, or 0 if there is no default value. On
+  setting, the given value must be converted to the shortest possible
+  string representing the number as a <a href="common-microsyntaxes.html#valid-non-negative-integer">valid non-negative
+  integer</a> and then that string must be used as the new content
+  attribute value.</p>
+  <!-- see http://www.w3.org/Bugs/Public/show_bug.cgi?id=10352 and
+  https://bugzilla.mozilla.org/show_bug.cgi?id=586118 for why the
+  range is clamped to 2147483647 rather the normal unsigned long
+  maximum value of 4294967295 -->
 
   <p>If a reflecting IDL attribute is an unsigned integer type
   (<code>unsigned long</code>) that is <dfn id="limited-to-only-non-negative-numbers-greater-than-zero">limited to only
@@ -428,16 +473,16 @@
   similar to the previous case, but zero is not allowed. On getting,
   the content attribute must first be parsed according to the
   <a href="common-microsyntaxes.html#rules-for-parsing-non-negative-integers">rules for parsing non-negative integers</a>, and if that is
-  successful, and the value is in the range of the IDL attribute's
-  type, the resulting value must be returned. If, on the other hand,
-  it fails or returns an out of range value, or if the attribute is
+  successful, and the value is in the range 1 to 2147483647 inclusive,
+  the resulting value must be returned. If, on the other hand, it
+  fails or returns an out of range value, or if the attribute is
   absent, the default value must be returned instead, or 1 if there is
   no default value. On setting, if the value is zero, the user agent
   must fire an <code><a href="#index_size_err">INDEX_SIZE_ERR</a></code> exception. Otherwise, the
   given value must be converted to the shortest possible string
   representing the number as a <a href="common-microsyntaxes.html#valid-non-negative-integer">valid non-negative integer</a>
   and then that string must be used as the new content attribute
-  value.</p>
+  value.</p> <!-- see previous paragraph for note about the range -->
 
   <p>If a reflecting IDL attribute is a floating point number type
   (<code>double</code>), then, on getting, the content attribute must
@@ -506,10 +551,10 @@
   attribute. Otherwise, the IDL attribute must be set to the empty
   string.</p>
 
-  </div><h4 id="collections-0"><span class="secno">2.7.2 </span>Collections</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The <code><a href="#htmlcollection">HTMLCollection</a></code>, <code><a href="#htmlallcollection">HTMLAllCollection</a></code>,
+  </div><h4 id="collections-0"><span class="secno">2.8.2 </span>Collections</h4><p>The <code><a href="#htmlcollection">HTMLCollection</a></code>, <code><a href="#htmlallcollection">HTMLAllCollection</a></code>,
   <code><a href="#htmlformcontrolscollection">HTMLFormControlsCollection</a></code>,
-  <code><a href="#htmloptionscollection">HTMLOptionsCollection</a></code>, and
-  <code>HTMLPropertiesCollection</code> interfaces represent various
+  <code><a href="#htmloptionscollection">HTMLOptionsCollection</a></code>,
+  interfaces represent various
   lists of DOM nodes. Collectively, objects implementing these
   interfaces are called <dfn id="collections">collections</dfn>.</p><p>When a <a href="#collections" title="collections">collection</a> is created, a
   filter and a root are associated with the collection.</p><p class="example">For example, when the <code><a href="#htmlcollection">HTMLCollection</a></code>
@@ -529,10 +574,10 @@
   <p>An attribute that returns a collection must return the same
   object every time it is retrieved.</p>
 
-  </div><h5 id="htmlcollection-0"><span class="secno">2.7.2.1 </span>HTMLCollection</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The <code><a href="#htmlcollection">HTMLCollection</a></code> interface represents a generic
+  </div><h5 id="htmlcollection-0"><span class="secno">2.8.2.1 </span>HTMLCollection</h5><p>The <code><a href="#htmlcollection">HTMLCollection</a></code> interface represents a generic
   <a href="#collections" title="collections">collection</a> of elements.</p><pre class="idl">interface <dfn id="htmlcollection">HTMLCollection</dfn> {
   readonly attribute unsigned long <a href="#dom-htmlcollection-length" title="dom-HTMLCollection-length">length</a>;
-  caller getter object <a href="#dom-htmlcollection-item" title="dom-HTMLCollection-item">item</a>(in unsigned long index); // only returns Element
+  caller getter <a href="infrastructure.html#element">Element</a> <a href="#dom-htmlcollection-item" title="dom-HTMLCollection-item">item</a>(in unsigned long index);
   caller getter object <a href="#dom-htmlcollection-nameditem" title="dom-HTMLCollection-namedItem">namedItem</a>(in DOMString name); // only returns Element
 };</pre><dl class="domintro"><dt><var title="">collection</var> . <code title="dom-HTMLCollection-length"><a href="#dom-htmlcollection-length">length</a></code></dt>
    <dd>
@@ -562,11 +607,11 @@
    </dd>
   </dl><div class="impl">
 
-  <p>The object's <span>indices of the supported indexed
-  properties</span> are the numbers in the range zero to one less than
-  the number of nodes <a href="#represented-by-the-collection">represented by the collection</a>. If
-  there are no such elements, then there are no <span>supported
-  indexed properties</span>.</p>
+  <p>The object's <a href="infrastructure.html#supported-property-indices">supported property indices</a> are the
+  numbers in the range zero to one less than the number of nodes
+  <a href="#represented-by-the-collection">represented by the collection</a>. If there are no such
+  elements, then there are no <a href="infrastructure.html#supported-property-indices">supported property
+  indices</a>.</p>
 
   <p>The <dfn id="dom-htmlcollection-length" title="dom-HTMLCollection-length"><code>length</code></dfn>
   attribute must return the number of nodes <a href="#represented-by-the-collection">represented by the
@@ -575,7 +620,7 @@
   <p>The <dfn id="dom-htmlcollection-item" title="dom-HTMLCollection-item"><code>item(<var title="">index</var>)</code></dfn> method must return the <var title="">index</var>th node in the collection. If there is no <var title="">index</var>th node in the collection, then the method must
   return null.</p>
 
-  <p>The <span>names of the supported named properties</span> consist
+  <p>The <a href="infrastructure.html#supported-property-names">supported property names</a> consist
   of the values of the <code title="">name</code> attributes of each
   <code><a href="text-level-semantics.html#the-a-element">a</a></code>, <code><a href="obsolete.html#the-applet-element">applet</a></code>, <code><a href="the-map-element.html#the-area-element">area</a></code>,
   <code><a href="the-iframe-element.html#the-embed-element">embed</a></code>, <code><a href="forms.html#the-form-element">form</a></code>, <code><a href="obsolete.html#frame">frame</a></code>,
@@ -600,10 +645,10 @@
   </ul><p>If no such elements are found, then the method must return
   null.</p>
 
-  </div><h5 id="htmlallcollection-0"><span class="secno">2.7.2.2 </span>HTMLAllCollection</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The <code><a href="#htmlallcollection">HTMLAllCollection</a></code> interface represents a generic
+  </div><h5 id="htmlallcollection-0"><span class="secno">2.8.2.2 </span>HTMLAllCollection</h5><p>The <code><a href="#htmlallcollection">HTMLAllCollection</a></code> interface represents a generic
   <a href="#collections" title="collections">collection</a> of elements just like
   <code><a href="#htmlcollection">HTMLCollection</a></code>, with the exception that its <code title="dom-HTMLAllCollection-namedItem"><a href="#dom-htmlallcollection-nameditem">namedItem()</a></code> method
-  returns an <code><a href="#htmlcollection">HTMLCollection</a></code> object when there are
+  returns an <code><a href="#htmlallcollection">HTMLAllCollection</a></code> object when there are
   multiple matching elements.</p><pre class="idl">interface <dfn id="htmlallcollection">HTMLAllCollection</dfn> : <a href="#htmlcollection">HTMLCollection</a> {
   // inherits <a href="#dom-htmlcollection-length" title="dom-HTMLCollection-length">length</a> and <a href="#dom-htmlcollection-item" title="dom-HTMLCollection-item">item</a>()
   caller getter object <a href="#dom-htmlallcollection-nameditem" title="dom-HTMLAllCollection-namedItem">namedItem</a>(in DOMString name); // overrides inherited namedItem()
@@ -643,10 +688,9 @@
 
   </dl><div class="impl">
 
-  <p>The object's <span>indices of the supported indexed
-  properties</span> and <span>names of the supported named
-  properties</span> are as defined for <code><a href="#htmlcollection">HTMLCollection</a></code>
-  objects.</p>
+  <p>The object's <a href="infrastructure.html#supported-property-indices">supported property indices</a> and
+  <a href="infrastructure.html#supported-property-names">supported property names</a> are as defined for
+  <code><a href="#htmlcollection">HTMLCollection</a></code> objects.</p>
 
   <p>The <dfn id="dom-htmlallcollection-nameditem" title="dom-HTMLAllCollection-namedItem"><code>namedItem(<var title="">key</var>)</code></dfn> method must act according to the
   following algorithm:</p>
@@ -656,7 +700,7 @@
     <p>Let <var title="">collection</var> be an
     <code><a href="#htmlallcollection">HTMLAllCollection</a></code> object rooted at the same node as
     the <code><a href="#htmlallcollection">HTMLAllCollection</a></code> object on which the method was
-    invoked, whose filter matches only only elements that already
+    invoked, whose filter matches only elements that already
     match the filter of the <code><a href="#htmlallcollection">HTMLAllCollection</a></code> object on
     which the method was invoked and that are either:</p>
 
@@ -690,7 +734,7 @@
   documents</a>, the argument must first be <a href="infrastructure.html#converted-to-ascii-lowercase">converted to
   ASCII lowercase</a>.</p>
 
-  </div><h5 id="htmlformcontrolscollection-0"><span class="secno">2.7.2.3 </span>HTMLFormControlsCollection</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The <code><a href="#htmlformcontrolscollection">HTMLFormControlsCollection</a></code> interface represents
+  </div><h5 id="htmlformcontrolscollection-0"><span class="secno">2.8.2.3 </span>HTMLFormControlsCollection</h5><p>The <code><a href="#htmlformcontrolscollection">HTMLFormControlsCollection</a></code> interface represents
   a <a href="#collections" title="collections">collection</a> of <a href="forms.html#category-listed" title="category-listed">listed elements</a> in <code><a href="forms.html#the-form-element">form</a></code>
   and <code><a href="forms.html#the-fieldset-element">fieldset</a></code> elements.</p><pre class="idl">interface <dfn id="htmlformcontrolscollection">HTMLFormControlsCollection</dfn> : <a href="#htmlcollection">HTMLCollection</a> {
   // inherits <a href="#dom-htmlcollection-length" title="dom-HTMLCollection-length">length</a> and <a href="#dom-htmlcollection-item" title="dom-HTMLCollection-item">item</a>()
@@ -730,12 +774,11 @@ interface <dfn id="radionodelist">RadioNodeList</dfn> : <a href="infrastructure.
 
   </dl><div class="impl">
 
-  <p>The object's <span>indices of the supported indexed
-  properties</span> are as defined for <code><a href="#htmlcollection">HTMLCollection</a></code>
-  objects.</p>
+  <p>The object's <a href="infrastructure.html#supported-property-indices">supported property indices</a> are as
+  defined for <code><a href="#htmlcollection">HTMLCollection</a></code> objects.</p>
 
-  <p>The <span>names of the supported named properties</span> consist
-  of the values of all the <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> and <code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code> attributes of all the elements
+  <p>The <a href="infrastructure.html#supported-property-names">supported property names</a> consist of the values
+  of all the <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> and <code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code> attributes of all the elements
   <a href="#represented-by-the-collection">represented by the collection</a>.</p>
 
   <p>The <dfn id="dom-htmlformcontrolscollection-nameditem" title="dom-HTMLFormControlsCollection-namedItem"><code>namedItem(<var title="">name</var>)</code></dfn> method must act according to the
@@ -798,7 +841,7 @@ interface <dfn id="radionodelist">RadioNodeList</dfn> : <a href="infrastructure.
 
   </li></ol><!--
 http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E...%0A%3Cform%20name%3D%22a%22%3E%3Cinput%20id%3D%22x%22%20name%3D%22y%22%3E%3Cinput%20name%3D%22x%22%20id%3D%22y%22%3E%3C/form%3E%0A%3Cscript%3E%0A%20%20var%20x%3B%0A%20%20w%28x%20%3D%20document.forms%5B%27a%27%5D%5B%27x%27%5D%29%3B%0A%20%20w%28x.length%29%3B%0A%20%20x%5B0%5D.parentNode.removeChild%28x%5B0%5D%29%3B%0A%20%20w%28x.length%29%3B%0A%20%20w%28x%20%3D%3D%20document.forms%5B%27a%27%5D%5B%27x%27%5D%29%3B%0A%3C/script%3E%0A
---></div><h5 id="htmloptionscollection-0"><span class="secno">2.7.2.4 </span>HTMLOptionsCollection</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The <code><a href="#htmloptionscollection">HTMLOptionsCollection</a></code> interface represents a
+--></div><h5 id="htmloptionscollection-0"><span class="secno">2.8.2.4 </span>HTMLOptionsCollection</h5><p>The <code><a href="#htmloptionscollection">HTMLOptionsCollection</a></code> interface represents a
   list of <code><a href="the-button-element.html#the-option-element">option</a></code> elements. It is always rooted on a
   <code><a href="the-button-element.html#the-select-element">select</a></code> element and has attributes and methods that
   manipulate that element's descendants.</p><pre class="idl">interface <dfn id="htmloptionscollection">HTMLOptionsCollection</dfn> : <a href="#htmlcollection">HTMLCollection</a> {
@@ -808,6 +851,7 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E..
   void <a href="#dom-htmloptionscollection-add" title="dom-HTMLOptionsCollection-add">add</a>(in <a href="elements.html#htmlelement">HTMLElement</a> element, in optional <a href="elements.html#htmlelement">HTMLElement</a> before);
   void <a href="#dom-htmloptionscollection-add" title="dom-HTMLOptionsCollection-add">add</a>(in <a href="elements.html#htmlelement">HTMLElement</a> element, in long before);
   void <a href="#dom-htmloptionscollection-remove" title="dom-HTMLOptionsCollection-remove">remove</a>(in long index);
+           attribute long <a href="#dom-htmloptionscollection-selectedindex" title="dom-HTMLOptionsCollection-selectedIndex">selectedIndex</a>;
 };</pre><dl class="domintro"><dt><var title="">collection</var> . <code title="dom-HTMLOptionsCollection-length"><a href="#dom-htmloptionscollection-length">length</a></code> [ = <var title="">value</var> ]</dt>
    <dd>
     <p>Returns the number of elements in the collection.</p>
@@ -849,11 +893,21 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E..
     <code><a href="the-button-element.html#the-optgroup-element">optgroup</a></code> element, then the method does nothing.</p>
    </dd>
 
+   <dt><var title="">collection</var> . <code title="dom-HTMLOptionsCollection-selectedIndex"><a href="#dom-htmloptionscollection-selectedindex">selectedIndex</a></code> [ = <var title="">value</var> ]</dt>
+
+   <dd>
+
+    <p>Returns the index of the first selected item, if any, or
+    &#x2212;1 if there is no selected item.</p>
+
+    <p>Can be set, to change the selection.</p>
+
+   </dd>
+
   </dl><div class="impl">
 
-  <p>The object's <span>indices of the supported indexed
-  properties</span> are as defined for <code><a href="#htmlcollection">HTMLCollection</a></code>
-  objects.</p>
+  <p>The object's <a href="infrastructure.html#supported-property-indices">supported property indices</a> are as
+  defined for <code><a href="#htmlcollection">HTMLCollection</a></code> objects.</p>
 
   <p>On getting, the <dfn id="dom-htmloptionscollection-length" title="dom-HTMLOptionsCollection-length"><code>length</code></dfn>
   attribute must return the number of nodes <a href="#represented-by-the-collection">represented by the
@@ -879,8 +933,8 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E..
   children to existing <code><a href="the-button-element.html#the-optgroup-element">optgroup</a></code> elements (though it can
   remove children from them).</p>
 
-  <p>The <span>names of the supported named properties</span> consist
-  of the values of all the <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> and <code title="attr-option-name"><a href="obsolete.html#attr-option-name">name</a></code> attributes of all the elements
+  <p>The <a href="infrastructure.html#supported-property-names">supported property names</a> consist of the values
+  of all the <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> and <code title="attr-option-name"><a href="obsolete.html#attr-option-name">name</a></code> attributes of all the elements
   <a href="#represented-by-the-collection">represented by the collection</a>.</p>
 
   <p>The <dfn id="dom-htmloptionscollection-nameditem" title="dom-HTMLOptionsCollection-namedItem"><code>namedItem(<var title="">name</var>)</code></dfn> method must act according to the
@@ -947,7 +1001,14 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E..
    <li><p>Remove <var title="">element</var> from its parent
    node.</p></li>
 
-  </ol><!-- see also http://ln.hixie.ch/?start=1161042744&count=1 --></div><h4 id="domtokenlist-0"><span class="secno">2.7.3 </span>DOMTokenList</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The <code><a href="#domtokenlist">DOMTokenList</a></code> interface represents an interface
+  </ol><p>The <dfn id="dom-htmloptionscollection-selectedindex" title="dom-HTMLOptionsCollection-selectedIndex"><code>selectedIndex</code></dfn>
+  IDL attribute must act like the identically named attribute on the
+  <code><a href="the-button-element.html#the-select-element">select</a></code> element on which the
+  <code><a href="#htmloptionscollection">HTMLOptionsCollection</a></code> is rooted</p>
+
+  <!-- see also http://ln.hixie.ch/?start=1161042744&count=1 -->
+
+  </div><h4 id="domtokenlist-0"><span class="secno">2.8.3 </span>DOMTokenList</h4><p>The <code><a href="#domtokenlist">DOMTokenList</a></code> interface represents an interface
   to an underlying string that consists of a <a href="common-microsyntaxes.html#set-of-space-separated-tokens">set of
   space-separated tokens</a>.</p><p class="note"><code><a href="#domtokenlist">DOMTokenList</a></code> objects are always
   <a href="infrastructure.html#case-sensitive">case-sensitive</a>, even when the underlying string might
@@ -1008,9 +1069,9 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E..
   attribute must return the number of tokens that result from <a href="common-microsyntaxes.html#split-a-string-on-spaces" title="split a string on spaces">splitting the underlying string on
   spaces</a>. This is the <var title="dom-tokenlist-length"><a href="#dom-tokenlist-length">length</a></var>.</p>
 
-  <p>The object's <span>indices of the supported indexed
-  properties</span> are the numbers in the range zero to <span title=""><var title="dom-tokenlist-length"><a href="#dom-tokenlist-length">length</a></var>-1</span>, unless the <var title="dom-tokenlist-length"><a href="#dom-tokenlist-length">length</a></var> is zero, in which case
-  there are no <span>supported indexed properties</span>.</p>
+  <p>The object's <a href="infrastructure.html#supported-property-indices">supported property indices</a> are the
+  numbers in the range zero to <span title=""><var title="dom-tokenlist-length"><a href="#dom-tokenlist-length">length</a></var>-1</span>, unless the <var title="dom-tokenlist-length"><a href="#dom-tokenlist-length">length</a></var> is zero, in which case
+  there are no <a href="infrastructure.html#supported-property-indices">supported property indices</a>.</p>
 
   <p>The <dfn id="dom-tokenlist-item" title="dom-tokenlist-item"><code>item(<var title="">index</var>)</code></dfn> method must <a href="common-microsyntaxes.html#split-a-string-on-spaces" title="split a&#10;  string on spaces">split the underlying string on spaces</a>,
   preserving the order of the tokens as found in the underlying
@@ -1121,7 +1182,7 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E..
   <dfn id="dom-tokenlist-tostring" title="dom-tokenlist-toString">stringify</dfn> to the object's
   underlying string representation.</p>
 
-  </div><h4 id="domsettabletokenlist-0"><span class="secno">2.7.4 </span>DOMSettableTokenList</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The <code><a href="#domsettabletokenlist">DOMSettableTokenList</a></code> interface is the same as the
+  </div><h4 id="domsettabletokenlist-0"><span class="secno">2.8.4 </span>DOMSettableTokenList</h4><p>The <code><a href="#domsettabletokenlist">DOMSettableTokenList</a></code> interface is the same as the
   <code><a href="#domtokenlist">DOMTokenList</a></code> interface, except that it allows the
   underlying string to be directly changed.</p><pre class="idl">interface <dfn id="domsettabletokenlist">DOMSettableTokenList</dfn> : <a href="#domtokenlist">DOMTokenList</a> {
             attribute DOMString <a href="#dom-domsettabletokenlist-value" title="dom-DOMSettableTokenList-value">value</a>;
@@ -1144,7 +1205,7 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E..
 
   </div><div class="impl">
 
-  <h4 id="safe-passing-of-structured-data"><span class="secno">2.7.5 </span>Safe passing of structured data</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="safe-passing-of-structured-data"><span class="secno">2.8.5 </span>Safe passing of structured data</h4>
 
   <p>When a user agent is required to obtain a <dfn id="structured-clone">structured
   clone</dfn> of an object, it must run the following algorithm, which
@@ -1153,8 +1214,11 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E..
   <ol><li><p>Let <var title="">input</var> be the object being
    cloned.</p></li>
 
-   <li><p>Let <var title="">memory</var> be a list of objects,
-   initially empty. (This is used to catch cycles.)</p></li>
+   <li><p>Let <var title="">memory</var> be an association list of
+   pairs of objects, initially empty. This is used to handle duplicate
+   references. In each pair of objects, one is called the
+   <em>source</em> object and the other the <em>destination</em>
+   object.</p></li>
 
    <li><p>Let <var title="">output</var> be the object resulting from
    calling the <a href="#internal-structured-cloning-algorithm">internal structured cloning algorithm</a> with
@@ -1163,110 +1227,108 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E..
    <li><p>Return <var title="">output</var>.</p></li>
 
   </ol><p>The <dfn id="internal-structured-cloning-algorithm">internal structured cloning algorithm</dfn> is always
-  called with two arguments, <var title="">input</var> and <var title="">memory</var>, and its behavior depends on the type of <var title="">input</var>, as follows:</p>
+  called with two arguments, <var title="">input</var> and <var title="">memory</var>, and its behavior is as follows:</p>
 
-  <dl class="switch"><dt>If <var title="">input</var> is the undefined value</dt>
+  <ol><li><p>If <var title="">input</var> is the source object of a pair
+   of objects in <var title="">memory</var>, then return the
+   destination object in that pair of objects and abort these
+   steps.</p></li>
 
-   <dd><p>Return the undefined value.</p></dd>
+   <li><p>If <var title="">input</var> is a primitive value, then
+   return that value and abort these steps.</p></li>
 
-   <dt>If <var title="">input</var> is the null value</dt>
+   <li>
 
-   <dd><p>Return the null value.</p></dd>
+    <p>The <var title="">input</var> value is an object. Jump to the
+    appropriate step below:</p>
 
-   <dt>If <var title="">input</var> is the false value</dt>
+    <dl class="switch"><dt>If <var title="">input</var> is a Boolean object</dt>
 
-   <dd><p>Return the false value.</p></dd>
+     <dd><p>Let <var title="">output</var> be a newly constructed Boolean object with the same value as <var title="">input</var>.</p></dd>
 
-   <dt>If <var title="">input</var> is the true value</dt>
+     <dt>If <var title="">input</var> is a Number object</dt>
 
-   <dd><p>Return the true value.</p></dd>
+     <dd><p>Let <var title="">output</var> be a newly constructed Number object with the same value as <var title="">input</var>.</p></dd>
 
-   <dt>If <var title="">input</var> is a Number object</dt>
+     <dt>If <var title="">input</var> is a String object</dt>
 
-   <dd><p>Return a newly constructed Number object with the same value as <var title="">input</var>.</p></dd>
+     <dd><p>Let <var title="">output</var> be a newly constructed String object with the same value as <var title="">input</var>.</p></dd>
 
-   <dt>If <var title="">input</var> is a String object</dt>
+     <dt>If <var title="">input</var> is a <code>Date</code> object</dt>
 
-   <dd><p>Return a newly constructed String object with the same value as <var title="">input</var>.</p></dd>
+     <dd><p>Let <var title="">output</var> be a newly constructed <code>Date</code> object with the same value as <var title="">input</var>.</p></dd>
 
-   <dt>If <var title="">input</var> is a <code>Date</code> object</dt>
+     <dt>If <var title="">input</var> is a <code>RegExp</code> object</dt>
 
-   <dd><p>Return a newly constructed <code>Date</code> object with the same value as <var title="">input</var>.</p></dd>
+     <dd>
 
-   <dt>If <var title="">input</var> is a <code>RegExp</code> object</dt>
+      <p>Let <var title="">output</var> be a newly constructed <code>RegExp</code> object with the same pattern and flags as <var title="">input</var>.</p>
 
-   <dd>
+      <p class="note">The value of the <code title="">lastIndex</code> property is not copied.</p>
 
-    <p>Return a newly constructed <code>RegExp</code> object with the same pattern and flags as <var title="">input</var>.</p>
+     </dd>
 
-    <p class="note">The value of the <code title="">lastIndex</code> property is not copied.</p>
+     <dt>If <var title="">input</var> is a <code>ImageData</code> object</dt>
 
-   </dd>
+     <dd><p>Let <var title="">output</var> be a newly constructed <code>ImageData</code> object
+     with the same <code title="dom-imagedata-width">width</code> and
+     <code title="dom-imagedata-height">height</code> as <var title="">input</var>, and with a newly constructed
+     <code>CanvasPixelArray</code> for its <code title="dom-imagedata-data">data</code> attribute, with the same
+     <code title="dom-canvaspixelarray-length">length</code> and pixel
+     values as the <var title="">input</var>'s.</p></dd>
 
-   <dt>If <var title="">input</var> is a <code>ImageData</code> object</dt>
+     <dt>If <var title="">input</var> is a <code>File</code> object</dt>
 
-   <dd><p>Return a newly constructed <code>ImageData</code> object
-   with the same <code title="dom-imagedata-width">width</code> and
-   <code title="dom-imagedata-height">height</code> as <var title="">input</var>, and with a newly constructed
-   <code>CanvasPixelArray</code> for its <code title="dom-imagedata-data">data</code> attribute, with the same
-   <code title="dom-canvaspixelarray-length">length</code> and pixel
-   values as the <var title="">input</var>'s.</p></dd>
+     <dd><p>Let <var title="">output</var> be a newly constructed <code>File</code> object corresponding to the same underlying data.</p></dd>
 
-   <dt>If <var title="">input</var> is a <code>File</code> object</dt>
+     <dt>If <var title="">input</var> is a <code>Blob</code> object</dt>
 
-   <dd><p>Return a newly constructed <code>File</code> object corresponding to the same underlying data.</p></dd>
+     <dd><p>Let <var title="">output</var> be a newly constructed <code>Blob</code> object corresponding to the same underlying data.</p></dd>
 
-   <dt>If <var title="">input</var> is a <code>Blob</code> object</dt>
+     <dt>If <var title="">input</var> is a <code>FileList</code> object</dt>
 
-   <dd><p>Return a newly constructed <code>Blob</code> object corresponding to the same underlying data.</p></dd>
+     <dd><p>Let <var title="">output</var> be a newly constructed <code>FileList</code> object containing a list of newly constructed <code>File</code> objects corresponding to the same underlying data as those in <var title="">input</var>, maintaining their relative order.</p></dd>
 
-   <dt>If <var title="">input</var> is a <code>FileList</code> object</dt>
+     <dt>If <var title="">input</var> is an Array object</dt>
 
-   <dd><p>Return a newly constructed <code>FileList</code> object containing a list of newly constructed <code>File</code> objects corresponding to the same underlying data as those in <var title="">input</var>, maintaining their relative order.</p></dd>
+     <dd><p>Let <var title="">output</var> be a newly constructed empty <code>Array</code> object.</p></dd>
 
-   <dt>If <var title="">input</var> is an Array object</dt>
-   <dt>If <var title="">input</var> is an Object object</dt>
+     <dt>If <var title="">input</var> is an Object object</dt>
 
-   <dd>
+     <dd><p>Let <var title="">output</var> be a newly constructed empty <code><a href="the-iframe-element.html#the-object-element">Object</a></code> object.</p></dd>
 
-    <ol><li><p>If <var title="">input</var> is in <var title="">memory</var>, then throw a <code><a href="#data_clone_err">DATA_CLONE_ERR</a></code>
-     exception and abort the overall <a href="#structured-clone">structured clone</a>
-     algorithm.</p></li>
+     <dt>If <var title="">input</var> is another native object type (e.g. <code>Error</code>, <code><a href="webappapis.html#function">Function</a></code>)</dt>
+     <dt>If <var title="">input</var> is a host object (e.g. a DOM node)</dt>
 
-     <li><p>Otherwise, let <var title="">new memory</var> be a list
-     consisting of the items in <var title="">memory</var> with the
-     addition of <var title="">input</var>.</p></li>
+     <dd><p>Throw a <code><a href="#data_clone_err">DATA_CLONE_ERR</a></code> exception and abort
+     the overall <a href="#structured-clone">structured clone</a> algorithm.</p></dd>
 
-     <li><p>Create a new object, <var title="">output</var>, of the
-     same type as <var title="">input</var>: either an Array or an
-     Object.</p></li>
+    </dl></li>
 
-     <li>
+   <li><p>Add a mapping from <var title="">input</var> (the source
+   object) to <var title="">output</var> (the destination object) to
+   <var title="">memory</var>.</p></li>
 
-      <p>For each enumerable property in <var title="">input</var>,
-      add a corresponding property to <var title="">output</var>
-      having the same name, and having a value created from invoking
-      the <a href="#internal-structured-cloning-algorithm">internal structured cloning algorithm</a>
-      recursively with the value of the property as the "<var title="">input</var>" argument and <var title="">new
-      memory</var> as the "<var title="">memory</var>" argument. The
-      order of the properties in the <var title="">input</var> and
-      <var title="">output</var> objects must be the same.</p>
+   <li>
 
-      <p class="note">This does not walk the prototype chain.</p>
+    <p>If <var title="">input</var> is an Array object or an Object
+    object, then, for each enumerable property in <var title="">input</var>, add a corresponding property to <var title="">output</var> having the same name, and having a value
+    created from invoking the <a href="#internal-structured-cloning-algorithm">internal structured cloning
+    algorithm</a> recursively with the value of the property as the
+    "<var title="">input</var>" argument and <var title="">memory</var> as the "<var title="">memory</var>"
+    argument. The order of the properties in the <var title="">input</var> and <var title="">output</var> objects must
+    be the same.</p>
 
-     </li>
+    <p class="note">This does not walk the prototype chain.</p>
 
-     <li><p>Return <var title="">output</var>.</p></li>
+   </li>
 
-    </ol></dd>
+   <li><p>Return <var title="">output</var>.</p></li>
 
-   <dt>If <var title="">input</var> is another native object type (e.g. <code>Error</code>)</dt>
-   <dt>If <var title="">input</var> is a host object (e.g. a DOM node)</dt>
+  </ol><p class="note">This algorithm preserves cycles and preserves the
+  identity of duplicate objects in graphs.</p>
 
-   <dd><p>Throw a <code><a href="#data_clone_err">DATA_CLONE_ERR</a></code> exception and abort the
-   overall <a href="#structured-clone">structured clone</a> algorithm.</p></dd>
-
-  </dl></div><h4 id="domstringmap-0"><span class="secno">2.7.6 </span>DOMStringMap</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The <code><a href="#domstringmap">DOMStringMap</a></code> interface represents a set of
+  </div><h4 id="domstringmap-0"><span class="secno">2.8.6 </span>DOMStringMap</h4><p>The <code><a href="#domstringmap">DOMStringMap</a></code> interface represents a set of
   name-value pairs. It exposes these using the scripting language's
   native mechanisms for property access.</p><div class="impl">
 
@@ -1276,31 +1338,31 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E..
   for deleting names.</p>
 
   <pre class="idl">interface <dfn id="domstringmap">DOMStringMap</dfn> {
-  getter DOMString (in DOMString name);
-  setter void (in DOMString name, in DOMString value);
-  creator void (in DOMString name, in DOMString value);
-  deleter void (in DOMString name);
+  <a href="#dom-domstringmap-nameditem" title="dom-DOMStringMap-namedItem">getter</a> DOMString (in DOMString name);
+  <a href="#dom-domstringmap-setitem" title="dom-DOMStringMap-setItem">setter</a> void (in DOMString name, in DOMString value);
+  <a href="#dom-domstringmap-additem" title="dom-DOMStringMap-addItem">creator</a> void (in DOMString name, in DOMString value);
+  <a href="#dom-domstringmap-removeitem" title="dom-DOMStringMap-removeItem">deleter</a> void (in DOMString name);
 };</pre>
 
-  <p>The <span>names of the supported named properties</span> on a
+  <p>The <a href="infrastructure.html#supported-property-names">supported property names</a> on a
   <code><a href="#domstringmap">DOMStringMap</a></code> object at any instant are the names of
   each pair returned from the algorithm for getting the list of
   name-value pairs at that instant.</p>
 
-  <p>When a <code><a href="#domstringmap">DOMStringMap</a></code> object is indexed to retrieve a
-  named property <var title="">name</var>, the value returned must be
-  the value component of the name-value pair whose name component is
-  <var title="">name</var> in the list returned by the algorithm for
+  <p>To <dfn id="dom-domstringmap-nameditem" title="dom-DOMStringMap-namedItem">determine the value of
+  a named property</dfn> <var title="">name</var> in a
+  <code><a href="#domstringmap">DOMStringMap</a></code>, the user agent must return the value
+  component of the name-value pair whose name component is <var title="">name</var> in the list returned by the algorithm for
   getting the list of name-value pairs.</p>
 
-  <p>When a <code><a href="#domstringmap">DOMStringMap</a></code> object is indexed to create or
-  modify a named property <var title="">name</var> with value <var title="">value</var>, the algorithm for setting names to certain
-  values must be run, passing <var title="">name</var> as the name and
-  the result of converting <var title="">value</var> to a
-  <code>DOMString</code> as the value.</p>
+  <p>To set the value of a <dfn id="dom-domstringmap-additem" title="dom-DOMStringMap-addItem">new</dfn> or <dfn id="dom-domstringmap-setitem" title="dom-DOMStringMap-setItem">existing</dfn> named property <var title="">name</var> to value <var title="">value</var>, the
+  algorithm for setting names to certain values must be run, passing
+  <var title="">name</var> as the name and the result of converting
+  <var title="">value</var> to a <code>DOMString</code> as the
+  value.</p>
 
-  <p>When a <code><a href="#domstringmap">DOMStringMap</a></code> object is indexed to delete a
-  named property named <var title="">name</var>, the algorithm for
+  <p>To <dfn id="dom-domstringmap-removeitem" title="dom-DOMStringMap-removeItem">delete an existing
+  named property</dfn> <var title="">name</var>, the algorithm for
   deleting names must be run, passing <var title="">name</var> as the
   name.</p>
 
@@ -1340,7 +1402,7 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E..
   }
 }</pre>
 
-  </div><h4 id="dom-feature-strings"><span class="secno">2.7.7 </span>DOM feature strings</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>DOM3 Core defines mechanisms for checking for interface support,
+  </div><h4 id="dom-feature-strings"><span class="secno">2.8.7 </span>DOM feature strings</h4><p>DOM3 Core defines mechanisms for checking for interface support,
   and for obtaining implementations of interfaces, using <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#DOMFeatures">feature
   strings</a>. <a href="references.html#refsDOMCORE">[DOMCORE]</a></p><p>Authors are strongly discouraged from using these, as they are
   notoriously unreliable and imprecise. Authors are encouraged to rely
@@ -1353,7 +1415,7 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E..
   with <var title="">feature</var> set to either "<code title="">HTML</code>" or "<code title="">XHTML</code>" and <var title="">version</var> set to either "<code>1.0</code>" or
   "<code>2.0</code>".</p>
 
-  </div><h4 id="exceptions"><span class="secno">2.7.8 </span>Exceptions</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The following are <code><a href="infrastructure.html#domexception">DOMException</a></code> codes. <a href="references.html#refsDOMCORE">[DOMCORE]</a></p><ol class="brief"><li value="1"><dfn id="index_size_err"><code>INDEX_SIZE_ERR</code></dfn></li>
+  </div><h4 id="exceptions"><span class="secno">2.8.8 </span>Exceptions</h4><p>The following are <code><a href="infrastructure.html#domexception">DOMException</a></code> codes. <a href="references.html#refsDOMCORE">[DOMCORE]</a></p><ol class="brief"><li value="1"><dfn id="index_size_err"><code>INDEX_SIZE_ERR</code></dfn></li>
    <li value="2"><dfn id="domstring_size_err"><code>DOMSTRING_SIZE_ERR</code></dfn></li>
    <li value="3"><dfn id="hierarchy_request_err"><code>HIERARCHY_REQUEST_ERR</code></dfn></li>
    <li value="4"><dfn id="wrong_document_err"><code>WRONG_DOCUMENT_ERR</code></dfn></li>
@@ -1376,17 +1438,24 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E..
    <li value="21"><dfn id="url_mismatch_err"><code>URL_MISMATCH_ERR</code></dfn></li> <!-- actually defined right here for now -->
    <li value="22"><dfn id="quota_exceeded_err"><code>QUOTA_EXCEEDED_ERR</code></dfn></li> <!-- actually defined right here for now -->
    <li value="23"><dfn id="timeout_err"><code>TIMEOUT_ERR</code></dfn></li> <!-- actually in XHR for now -->
-   <li value="24"><dfn id="data_clone_err"><code>DATA_CLONE_ERR</code></dfn></li> <!-- actually defined right here for now -->
-<!--v2DATAGRID   <li value="24"><dfn><code>DATAGRID_MODEL_ERR</code></dfn></li> --> <!-- actually defined right here for now -->
-   <li value="81"><dfn id="parse_err"><code>PARSE_ERR</code></dfn></li> <!-- actually defined in dom3ls -->
-   <li value="82"><dfn id="serialize_err"><code>SERIALIZE_ERR</code></dfn></li> <!-- actually defined in dom3ls -->
-  </ol><pre class="impl">[Supplemental] exception DOMException {
+   <li value="24"><dfn id="not_readable_err"><code>NOT_READABLE_ERR</code></dfn></li> <!-- File API -->
+   <li value="25"><dfn id="data_clone_err"><code>DATA_CLONE_ERR</code></dfn></li> <!-- actually defined right here for now -->
+   <li value="26"><dfn id="encoding_err"><code>ENCODING_ERR</code></dfn></li> <!-- File API -->
+<!--
+   <li value="81"><dfn><code>PARSE_ERR</code></dfn></li> <!- - actually defined in dom3ls - ->
+   <li value="82"><dfn><code>SERIALIZE_ERR</code></dfn></li> <!- - actually defined in dom3ls - ->
+-->
+  </ol><div class="impl">
+
+  <pre class="idl">[Supplemental] exception DOMException {
   const unsigned short <a href="#url_mismatch_err">URL_MISMATCH_ERR</a> = 21;
   const unsigned short <a href="#quota_exceeded_err">QUOTA_EXCEEDED_ERR</a> = 22;
-  const unsigned short <a href="#data_clone_err">DATA_CLONE_ERR</a> = 24;
-};</pre><div class="impl">
+  const unsigned short <a href="#data_clone_err">DATA_CLONE_ERR</a> = 25;
+};</pre>
 
-  <h4 id="garbage-collection"><span class="secno">2.7.9 </span>Garbage collection</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </div><div class="impl">
+
+  <h4 id="garbage-collection"><span class="secno">2.8.9 </span>Garbage collection</h4>
 
   <p>There is an <dfn id="implied-strong-reference">implied strong reference</dfn> from any IDL
   attribute that returns a pre-existing object to that object.</p>

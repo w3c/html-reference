@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,7 +356,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="grouping-content.html" title="4.5 Grouping content" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="edits.html" title="4.7 Edits" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="grouping-content.html" title="4.5 Grouping content" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="edits.html" title="4.7 Edits" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -318,12 +365,13 @@
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="edits.html">4.7 Edits &#x2192;</a>
   <ol class="toc"><li><ol><li><a href="text-level-semantics.html#text-level-semantics"><span class="secno">4.6 </span>Text-level semantics</a>
-    <ol><li><a href="text-level-semantics.html#the-a-element"><span class="secno">4.6.1 </span>The <code>a</code> element</a></li><li><a href="text-level-semantics.html#the-em-element"><span class="secno">4.6.2 </span>The <code>em</code> element</a></li><li><a href="text-level-semantics.html#the-strong-element"><span class="secno">4.6.3 </span>The <code>strong</code> element</a></li><li><a href="text-level-semantics.html#the-small-element"><span class="secno">4.6.4 </span>The <code>small</code> element</a></li><li><a href="text-level-semantics.html#the-cite-element"><span class="secno">4.6.5 </span>The <code>cite</code> element</a></li><li><a href="text-level-semantics.html#the-q-element"><span class="secno">4.6.6 </span>The <code>q</code> element</a></li><li><a href="text-level-semantics.html#the-dfn-element"><span class="secno">4.6.7 </span>The <code>dfn</code> element</a></li><li><a href="text-level-semantics.html#the-abbr-element"><span class="secno">4.6.8 </span>The <code>abbr</code> element</a></li><li><a href="text-level-semantics.html#the-time-element"><span class="secno">4.6.9 </span>The <code>time</code> element</a></li><li><a href="text-level-semantics.html#the-code-element"><span class="secno">4.6.10 </span>The <code>code</code> element</a></li><li><a href="text-level-semantics.html#the-var-element"><span class="secno">4.6.11 </span>The <code>var</code> element</a></li><li><a href="text-level-semantics.html#the-samp-element"><span class="secno">4.6.12 </span>The <code>samp</code> element</a></li><li><a href="text-level-semantics.html#the-kbd-element"><span class="secno">4.6.13 </span>The <code>kbd</code> element</a></li><li><a href="text-level-semantics.html#the-sub-and-sup-elements"><span class="secno">4.6.14 </span>The <code>sub</code> and <code>sup</code> elements</a></li><li><a href="text-level-semantics.html#the-i-element"><span class="secno">4.6.15 </span>The <code>i</code> element</a></li><li><a href="text-level-semantics.html#the-b-element"><span class="secno">4.6.16 </span>The <code>b</code> element</a></li><li><a href="text-level-semantics.html#the-mark-element"><span class="secno">4.6.17 </span>The <code>mark</code> element</a></li><li><a href="text-level-semantics.html#the-ruby-element"><span class="secno">4.6.18 </span>The <code>ruby</code> element</a></li><li><a href="text-level-semantics.html#the-rt-element"><span class="secno">4.6.19 </span>The <code>rt</code> element</a></li><li><a href="text-level-semantics.html#the-rp-element"><span class="secno">4.6.20 </span>The <code>rp</code> element</a></li><li><a href="text-level-semantics.html#the-bdo-element"><span class="secno">4.6.21 </span>The <code>bdo</code> element</a></li><li><a href="text-level-semantics.html#the-span-element"><span class="secno">4.6.22 </span>The <code>span</code> element</a></li><li><a href="text-level-semantics.html#the-br-element"><span class="secno">4.6.23 </span>The <code>br</code> element</a></li><li><a href="text-level-semantics.html#the-wbr-element"><span class="secno">4.6.24 </span>The <code>wbr</code> element</a></li><li><a href="text-level-semantics.html#usage-summary"><span class="secno">4.6.25 </span>Usage summary</a></li></ol></li></ol></li></ol></div><h3 id="text-level-semantics"><span class="secno">4.6 </span>Text-level semantics</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><h4 id="the-a-element"><span class="secno">4.6.1 </span>The <dfn><code>a</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+    <ol><li><a href="text-level-semantics.html#the-a-element"><span class="secno">4.6.1 </span>The <code>a</code> element</a></li><li><a href="text-level-semantics.html#the-em-element"><span class="secno">4.6.2 </span>The <code>em</code> element</a></li><li><a href="text-level-semantics.html#the-strong-element"><span class="secno">4.6.3 </span>The <code>strong</code> element</a></li><li><a href="text-level-semantics.html#the-small-element"><span class="secno">4.6.4 </span>The <code>small</code> element</a></li><li><a href="text-level-semantics.html#the-s-element"><span class="secno">4.6.5 </span>The <code>s</code> element</a></li><li><a href="text-level-semantics.html#the-cite-element"><span class="secno">4.6.6 </span>The <code>cite</code> element</a></li><li><a href="text-level-semantics.html#the-q-element"><span class="secno">4.6.7 </span>The <code>q</code> element</a></li><li><a href="text-level-semantics.html#the-dfn-element"><span class="secno">4.6.8 </span>The <code>dfn</code> element</a></li><li><a href="text-level-semantics.html#the-abbr-element"><span class="secno">4.6.9 </span>The <code>abbr</code> element</a></li><li><a href="text-level-semantics.html#the-time-element"><span class="secno">4.6.10 </span>The <code>time</code> element</a></li><li><a href="text-level-semantics.html#the-code-element"><span class="secno">4.6.11 </span>The <code>code</code> element</a></li><li><a href="text-level-semantics.html#the-var-element"><span class="secno">4.6.12 </span>The <code>var</code> element</a></li><li><a href="text-level-semantics.html#the-samp-element"><span class="secno">4.6.13 </span>The <code>samp</code> element</a></li><li><a href="text-level-semantics.html#the-kbd-element"><span class="secno">4.6.14 </span>The <code>kbd</code> element</a></li><li><a href="text-level-semantics.html#the-sub-and-sup-elements"><span class="secno">4.6.15 </span>The <code>sub</code> and <code>sup</code> elements</a></li><li><a href="text-level-semantics.html#the-i-element"><span class="secno">4.6.16 </span>The <code>i</code> element</a></li><li><a href="text-level-semantics.html#the-b-element"><span class="secno">4.6.17 </span>The <code>b</code> element</a></li><li><a href="text-level-semantics.html#the-mark-element"><span class="secno">4.6.18 </span>The <code>mark</code> element</a></li><li><a href="text-level-semantics.html#the-ruby-element"><span class="secno">4.6.19 </span>The <code>ruby</code> element</a></li><li><a href="text-level-semantics.html#the-rt-element"><span class="secno">4.6.20 </span>The <code>rt</code> element</a></li><li><a href="text-level-semantics.html#the-rp-element"><span class="secno">4.6.21 </span>The <code>rp</code> element</a></li><li><a href="text-level-semantics.html#the-bdi-element"><span class="secno">4.6.22 </span>The <code>bdi</code> element</a></li><li><a href="text-level-semantics.html#the-bdo-element"><span class="secno">4.6.23 </span>The <code>bdo</code> element</a></li><li><a href="text-level-semantics.html#the-span-element"><span class="secno">4.6.24 </span>The <code>span</code> element</a></li><li><a href="text-level-semantics.html#the-br-element"><span class="secno">4.6.25 </span>The <code>br</code> element</a></li><li><a href="text-level-semantics.html#the-wbr-element"><span class="secno">4.6.26 </span>The <code>wbr</code> element</a></li><li><a href="text-level-semantics.html#usage-summary"><span class="secno">4.6.27 </span>Usage summary</a></li></ol></li></ol></li></ol></div><h3 id="text-level-semantics"><span class="secno">4.6 </span>Text-level semantics</h3><h4 id="the-a-element"><span class="secno">4.6.1 </span>The <dfn><code>a</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd>When the element only contains <a href="content-models.html#phrasing-content">phrasing content</a>: <a href="content-models.html#phrasing-content">phrasing content</a>.</dd>
    <dd><a href="content-models.html#interactive-content">Interactive content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
-   <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
+   <dt>Contexts in which this element can be used:</dt>
+   <dd>When the element only contains <a href="content-models.html#phrasing-content">phrasing content</a>: where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
+   <dd>Otherwise: where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#transparent">Transparent</a>, but there must be no <a href="content-models.html#interactive-content">interactive content</a> descendant.</dd>
    <dt>Content attributes:</dt>
@@ -394,7 +442,7 @@
   that create <a href="links.html#hyperlink" title="hyperlink">hyperlinks</a> is to run the
   following steps:</p>
 
-  <ol><li><p>If the <code title="event-DOMActivate"><a href="infrastructure.html#event-domactivate">DOMActivate</a></code>
+  <ol><li><p>If the <code title="event-click"><a href="infrastructure.html#event-click">click</a></code>
    event in question is not <a href="infrastructure.html#concept-events-trusted" title="concept-events-trusted">trusted</a> (i.e. a <code title="dom-click"><a href="editing.html#dom-click">click()</a></code> method call was the reason for the
    event being dispatched), and the <code><a href="#the-a-element">a</a></code> element's <code title="attr-hyperlink-target"><a href="links.html#attr-hyperlink-target">target</a></code> attribute is such that
    applying <a href="browsers.html#the-rules-for-choosing-a-browsing-context-given-a-browsing-context-name">the rules for choosing a browsing context given a
@@ -407,15 +455,15 @@
    event is an <code><a href="embedded-content-1.html#the-img-element">img</a></code> element with an <code title="attr-img-ismap"><a href="embedded-content-1.html#attr-img-ismap">ismap</a></code> attribute specified, then
    server-side image map processing must be performed, as follows:</p>
 
-    <ol><!-- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E%0A...%3Ca%20href%3D%22%23%22%3E%3Cimg%20ismap%20usemap%3D%22%23a%22%20src%3D/resources/images/smallcats%3E%3C/a%3E%0A%3Cmap%20name%3Da%3E%3Carea%20shape%3Drect%20coords%3D0%2C0%2C50%2C50%20href%3Db%3E%3C/map%3E --><li>If the <code title="event-DOMActivate"><a href="infrastructure.html#event-domactivate">DOMActivate</a></code>
-     event was dispatched as the result of a real
-     pointing-device-triggered <code title="event-click"><a href="infrastructure.html#event-click">click</a></code>
-     event on the <code><a href="embedded-content-1.html#the-img-element">img</a></code> element, then let <var title="">x</var> be the distance in CSS pixels from the left edge
-     of the image's left border, if it has one, or the left edge of
-     the image otherwise, to the location of the click, and let <var title="">y</var> be the distance in CSS pixels from the top edge
-     of the image's top border, if it has one, or the top edge of the
-     image otherwise, to the location of the click. Otherwise, let
-     <var title="">x</var> and <var title="">y</var> be zero.</li>
+    <ol><!-- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E%0A...%3Ca%20href%3D%22%23%22%3E%3Cimg%20ismap%20usemap%3D%22%23a%22%20src%3D/resources/images/smallcats%3E%3C/a%3E%0A%3Cmap%20name%3Da%3E%3Carea%20shape%3Drect%20coords%3D0%2C0%2C50%2C50%20href%3Db%3E%3C/map%3E --><li>If the <code title="event-click"><a href="infrastructure.html#event-click">click</a></code> event was a
+     real pointing-device-triggered <code title="event-click"><a href="infrastructure.html#event-click">click</a></code> event on the <code><a href="embedded-content-1.html#the-img-element">img</a></code>
+     element, then let <var title="">x</var> be the distance in CSS
+     pixels from the left edge of the image's left border, if it has
+     one, or the left edge of the image otherwise, to the location of
+     the click, and let <var title="">y</var> be the distance in CSS
+     pixels from the top edge of the image's top border, if it has
+     one, or the top edge of the image otherwise, to the location of
+     the click. Otherwise, let <var title="">x</var> and <var title="">y</var> be zero.</li>
 
      <li>Let the <dfn id="hyperlink-suffix"><var>hyperlink suffix</var></dfn> be a U+003F
      QUESTION MARK character, the value of <var title="">x</var>
@@ -493,10 +541,10 @@
  &lt;/a&gt;
 &lt;/aside&gt;</pre>
 
-  </div><h4 id="the-em-element"><span class="secno">4.6.2 </span>The <dfn><code>em</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-em-element"><span class="secno">4.6.2 </span>The <dfn><code>em</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
@@ -573,10 +621,10 @@
 
    -->
 
-  </div><h4 id="the-strong-element"><span class="secno">4.6.3 </span>The <dfn><code>strong</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-strong-element"><span class="secno">4.6.3 </span>The <dfn><code>strong</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
@@ -599,10 +647,10 @@
 &lt;strong&gt;&lt;strong&gt;Do not take any of the diamonds&lt;/strong&gt;,
 they are explosive and &lt;strong&gt;will destroy anything within
 ten meters.&lt;/strong&gt;&lt;/strong&gt; You have been warned.&lt;/p&gt;</pre>
-  </div><h4 id="the-small-element"><span class="secno">4.6.4 </span>The <dfn><code>small</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-small-element"><span class="secno">4.6.4 </span>The <dfn><code>small</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
@@ -670,10 +718,34 @@ merger with Demo Group.&lt;/p&gt;</pre>
 
    <pre>&lt;p&gt;&lt;strong&gt;&lt;small&gt;Continued use of this service will result in a kiss.&lt;/small&gt;&lt;/strong&gt;&lt;/p&gt;</pre>
 
-  </div><h4 id="the-cite-element"><span class="secno">4.6.5 </span>The <dfn><code>cite</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-s-element"><span class="secno">4.6.5 </span>The <dfn><code>s</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
+   <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
+   <dt>Content model:</dt>
+   <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
+   <dt>Content attributes:</dt>
+   <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
+   <dt>DOM interface:</dt>
+   <dd>Uses <code><a href="elements.html#htmlelement">HTMLElement</a></code>.</dd>
+  </dl><p>The <code><a href="#the-s-element">s</a></code> element <a href="rendering.html#represents">represents</a> contents that
+  are no longer accurate or no longer relevant.</p><p class="note">The <code><a href="#the-s-element">s</a></code> element is not appropriate when
+  indicating document edits; to mark a span of text as having been
+  removed from a document, use the <code><a href="edits.html#the-del-element">del</a></code> element.</p><div class="example">
+
+   <p>In this example a recommended retail price has been marked as no
+   longer relevant as the product in question has a new sale
+   price.</p>
+
+   <pre>&lt;p&gt;Buy our Iced Tea and Lemonade!&lt;/p&gt;
+&lt;p&gt;&lt;s&gt;Recommended retail price: $3.99 per bottle&lt;/s&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Now selling for just $2.99 a bottle!&lt;/strong&gt;&lt;/p&gt;</pre>
+
+  </div><h4 id="the-cite-element"><span class="secno">4.6.6 </span>The <dfn><code>cite</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
+   <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
+   <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
@@ -774,10 +846,10 @@ December 1948. Adopted by General Assembly resolution 217 A (III).&lt;/p&gt;</pr
    <pre>&lt;p&gt;And then &lt;b&gt;Ian&lt;/b&gt; said &lt;q&gt;this might be right, in a
 gossip column, maybe!&lt;/q&gt;.&lt;/p&gt;</pre>
 
-  </div><h4 id="the-q-element"><span class="secno">4.6.6 </span>The <dfn><code>q</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-q-element"><span class="secno">4.6.7 </span>The <dfn><code>q</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
@@ -848,10 +920,10 @@ I thought was laughable.&lt;/p&gt;</pre>
    <pre>&lt;p&gt;The word "ineffable" could have been used to describe the disaster
 resulting from the campaign's mismanagement.&lt;/p&gt;</pre>
 
-  </div><h4 id="the-dfn-element"><span class="secno">4.6.7 </span>The <dfn><code>dfn</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-dfn-element"><span class="secno">4.6.8 </span>The <dfn><code>dfn</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>, but there must be no <code><a href="#the-dfn-element">dfn</a></code> element descendants.</dd>
@@ -898,10 +970,10 @@ is a device that allows off-world teams to open the iris.&lt;/p&gt;
 &lt;p&gt;Teal'c activated his &lt;a href=#gdo&gt;&lt;abbr title="Garage Door Opener"&gt;GDO&lt;/abbr&gt;&lt;/a&gt;
 and so Hammond ordered the iris to be opened.&lt;/p&gt;</pre>
 
-  </div><h4 id="the-abbr-element"><span class="secno">4.6.8 </span>The <dfn><code>abbr</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-abbr-element"><span class="secno">4.6.9 </span>The <dfn><code>abbr</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
@@ -989,10 +1061,10 @@ this specification: the &lt;abbr&gt;WHATWG&lt;/abbr&gt; and the
   cause other <code><a href="#the-abbr-element">abbr</a></code> elements in the same document with the
   same contents but without a <code title="attr-title"><a href="elements.html#the-title-attribute">title</a></code>
   attribute to behave as if they had the same expansion. Every
-  <code><a href="#the-abbr-element">abbr</a></code> element is independent.</p><h4 id="the-time-element"><span class="secno">4.6.9 </span>The <dfn><code>time</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  <code><a href="#the-abbr-element">abbr</a></code> element is independent.</p><h4 id="the-time-element"><span class="secno">4.6.10 </span>The <dfn><code>time</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>, but there must be no <code><a href="#the-time-element">time</a></code> element descendants.</dd>
@@ -1016,7 +1088,11 @@ this specification: the &lt;abbr&gt;WHATWG&lt;/abbr&gt; and the
   can offer to add birthday reminders or scheduled events to the
   user's calendar.</p><!-- it's also intended for restyling to local conventions
   (2000-12-31 vs 31-12-2000 vs 12-31-2000), but CSS doesn't support
-  that yet. --><div class="note">
+  that yet. Once CSS does support that, we should update this to also
+  support year and year-month cases, since in Japanese those need
+  special styling also. See #2 in:
+     http://lists.whatwg.org/htdig.cgi/whatwg-whatwg.org/2010-August/028025.html
+  ...for details. --><div class="note">
 
    <p>The <code><a href="#the-time-element">time</a></code> element is not intended for encoding times
    for which a precise date or time cannot be established. For
@@ -1040,7 +1116,7 @@ this specification: the &lt;abbr&gt;WHATWG&lt;/abbr&gt; and the
   <code><a href="sections.html#the-article-element">article</a></code> element, of the document as a whole. If the
   element has a <code title="attr-time-pubdate"><a href="#attr-time-pubdate">pubdate</a></code>
   attribute specified, then the element <dfn id="needs-a-date">needs a date</dfn>. For
-  each <code><a href="sections.html#the-article-element">article</a></code> element, there must no more than one
+  each <code><a href="sections.html#the-article-element">article</a></code> element, there must be no more than one
   <code><a href="#the-time-element">time</a></code> element with a <code title="attr-time-pubdate"><a href="#attr-time-pubdate">pubdate</a></code> attribute whose nearest
   ancestor is that <code><a href="sections.html#the-article-element">article</a></code> element. Furthermore, for each
   <code><a href="infrastructure.html#document">Document</a></code>, there must be no more than one
@@ -1227,10 +1303,10 @@ this specification: the &lt;abbr&gt;WHATWG&lt;/abbr&gt; and the
  &lt;p&gt;I put a bike bell on his bike.&lt;/p&gt;
 &lt;/article&gt;</pre>
 
-  </div><h4 id="the-code-element"><span class="secno">4.6.10 </span>The <dfn><code>code</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-code-element"><span class="secno">4.6.11 </span>The <dfn><code>code</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
@@ -1276,10 +1352,10 @@ end.&lt;/code&gt;&lt;/pre&gt;</pre>
    <p>A class is used in that example to indicate the language
    used.</p>
 
-  </div><p class="note">See the <code><a href="grouping-content.html#the-pre-element">pre</a></code> element for more details.</p><h4 id="the-var-element"><span class="secno">4.6.11 </span>The <dfn><code>var</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><p class="note">See the <code><a href="grouping-content.html#the-pre-element">pre</a></code> element for more details.</p><h4 id="the-var-element"><span class="secno">4.6.12 </span>The <dfn><code>var</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
@@ -1322,10 +1398,10 @@ flavors of ice cream to be available for purchase!&lt;/p&gt;</pre>
  &lt;/figcaption&gt;
 &lt;/figure&gt;</pre>
 
-  </div><h4 id="the-samp-element"><span class="secno">4.6.12 </span>The <dfn><code>samp</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-samp-element"><span class="secno">4.6.13 </span>The <dfn><code>samp</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
@@ -1351,10 +1427,10 @@ Last login: Tue Apr 12 09:10:17 2005 from mowmow.example.com on pts/1
 Linux demo 2.6.10-grsec+gg3+e+fhs6b+nfs+gr0501+++p3+c4a+gr2b-reslog-v6.189 #1 SMP Tue Feb 1 11:22:36 PST 2005 i686 unknown
 
 &lt;span class="prompt"&gt;jdoe@demo:~$&lt;/span&gt; &lt;span class="cursor"&gt;_&lt;/span&gt;&lt;/samp&gt;&lt;/pre&gt;</pre>
-  </div><h4 id="the-kbd-element"><span class="secno">4.6.13 </span>The <dfn><code>kbd</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-kbd-element"><span class="secno">4.6.14 </span>The <dfn><code>kbd</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
@@ -1389,10 +1465,10 @@ Linux demo 2.6.10-grsec+gg3+e+fhs6b+nfs+gr0501+++p3+c4a+gr2b-reslog-v6.189 #1 SM
 
    <pre>&lt;p&gt;To make George eat an apple, select &lt;kbd&gt;File | Eat Apple...&lt;/kbd&gt;&lt;/p&gt;</pre>
 
-  </div><h4 id="the-sub-and-sup-elements"><span class="secno">4.6.14 </span>The <dfn><code>sub</code></dfn> and <dfn><code>sup</code></dfn> elements</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-sub-and-sup-elements"><span class="secno">4.6.15 </span>The <dfn><code>sub</code></dfn> and <dfn><code>sup</code></dfn> elements</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which these elements may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
@@ -1431,10 +1507,10 @@ For example, the 10th point has coordinate
   detailed mathematical markup is not desired. <a href="references.html#refsMATHML">[MATHML]</a></p><div class="example">
    <pre>&lt;var&gt;E&lt;/var&gt;=&lt;var&gt;m&lt;/var&gt;&lt;var&gt;c&lt;/var&gt;&lt;sup&gt;2&lt;/sup&gt;</pre>
    <pre>f(&lt;var&gt;x&lt;/var&gt;, &lt;var&gt;n&lt;/var&gt;) = log&lt;sub&gt;4&lt;/sub&gt;&lt;var&gt;x&lt;/var&gt;&lt;sup&gt;&lt;var&gt;n&lt;/var&gt;&lt;/sup&gt;</pre>
-  </div><h4 id="the-i-element"><span class="secno">4.6.15 </span>The <dfn><code>i</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-i-element"><span class="secno">4.6.16 </span>The <dfn><code>i</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
@@ -1465,22 +1541,22 @@ would notice him, but she never did.&lt;/i&gt;&lt;/p&gt;
 &lt;p&gt;&lt;i&gt;Finally one night he picked up the courage to speak with
 her&#x2014;&lt;/i&gt;&lt;/p&gt;
 &lt;p&gt;Raymond woke with a start as the fire alarm rang out.&lt;/p&gt;</pre>
-  </div><p>Authors are encouraged to use the <code title="attr-class"><a href="elements.html#classes">class</a></code> attribute on the <code><a href="#the-i-element">i</a></code>
-  element to identify why the element is being used, so that if the
-  style of a particular use (e.g. dream sequences as opposed to
-  taxonomic terms) is to be changed at a later date, the author
-  doesn't have to go through the entire document (or series of related
-  documents) annotating each use. Similarly, authors are encouraged to
-  consider whether other elements might be more applicable than the
-  <code><a href="#the-i-element">i</a></code> element, for instance the <code><a href="#the-em-element">em</a></code> element for
-  marking up stress emphasis, or the <code><a href="#the-dfn-element">dfn</a></code> element to mark
-  up the defining instance of a term.</p><p class="note">Style sheets can be used to format <code><a href="#the-i-element">i</a></code>
+  </div><p>Authors can use the <code title="attr-class"><a href="elements.html#classes">class</a></code>
+  attribute on the <code><a href="#the-i-element">i</a></code> element to identify why the element
+  is being used, so that if the style of a particular use (e.g. dream
+  sequences as opposed to taxonomic terms) is to be changed at a later
+  date, the author doesn't have to go through the entire document (or
+  series of related documents) annotating each use.</p><p>Authors are encouraged to consider whether other elements might
+  be more applicable than the <code><a href="#the-i-element">i</a></code> element, for instance the
+  <code><a href="#the-em-element">em</a></code> element for marking up stress emphasis, or the
+  <code><a href="#the-dfn-element">dfn</a></code> element to mark up the defining instance of a
+  term.</p><p class="note">Style sheets can be used to format <code><a href="#the-i-element">i</a></code>
   elements, just like any other element can be restyled. Thus, it is
   not the case that content in <code><a href="#the-i-element">i</a></code> elements will
-  necessarily be italicized.</p><h4 id="the-b-element"><span class="secno">4.6.16 </span>The <dfn><code>b</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  necessarily be italicized.</p><h4 id="the-b-element"><span class="secno">4.6.17 </span>The <dfn><code>b</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
@@ -1515,11 +1591,10 @@ brighter. A &lt;b&gt;rat&lt;/b&gt; scurries past the corner wall.&lt;/p&gt;</pre
  &lt;p&gt;Veterinary nurse Melanie Humble took the three-week-old
  kittens to her Aberdeen home.&lt;/p&gt;
 <i>[...]</i></pre>
-  </div><p>As with the <code><a href="#the-i-element">i</a></code> element, authors are encouraged to use
-  the <code title="attr-class"><a href="elements.html#classes">class</a></code> attribute on the
-  <code><a href="#the-b-element">b</a></code> element to identify why the element is being used, so
-  that if the style of a particular use is to be changed at a later
-  date, the author doesn't have to go through annotating each use.</p><p>The <code><a href="#the-b-element">b</a></code> element should be used as a last resort when
+  </div><p>As with the <code><a href="#the-i-element">i</a></code> element, authors can use the <code title="attr-class"><a href="elements.html#classes">class</a></code> attribute on the <code><a href="#the-b-element">b</a></code>
+  element to identify why the element is being used, so that if the
+  style of a particular use is to be changed at a later date, the
+  author doesn't have to go through annotating each use.</p><p>The <code><a href="#the-b-element">b</a></code> element should be used as a last resort when
   no other element is more appropriate. In particular, headings should
   use the <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code> to <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h6</a></code> elements, stress emphasis
   should use the <code><a href="#the-em-element">em</a></code> element, importance should be denoted
@@ -1532,10 +1607,10 @@ brighter. A &lt;b&gt;rat&lt;/b&gt; scurries past the corner wall.&lt;/p&gt;</pre
   </div><p class="note">Style sheets can be used to format <code><a href="#the-b-element">b</a></code>
   elements, just like any other element can be restyled. Thus, it is
   not the case that content in <code><a href="#the-b-element">b</a></code> elements will
-  necessarily be boldened.</p><h4 id="the-mark-element"><span class="secno">4.6.17 </span>The <dfn><code>mark</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  necessarily be boldened.</p><h4 id="the-mark-element"><span class="secno">4.6.18 </span>The <dfn><code>mark</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
@@ -1662,10 +1737,10 @@ using sufficiently advanced dialing technology.&lt;/p&gt;
 &lt;p&gt;&lt;mark&gt;An obstruction in a gate will prevent it from accepting a
 wormhole connection.&lt;/mark&gt;&lt;/p&gt;</pre>
 
-  </div><h4 id="the-ruby-element"><span class="secno">4.6.18 </span>The <dfn><code>ruby</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-ruby-element"><span class="secno">4.6.19 </span>The <dfn><code>ruby</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd>One or more groups of: <a href="content-models.html#phrasing-content">phrasing content</a> followed either by a single <code><a href="#the-rt-element">rt</a></code> element, or an <code><a href="#the-rp-element">rp</a></code> element, an <code><a href="#the-rt-element">rt</a></code> element, and another <code><a href="#the-rp-element">rp</a></code> element.</dd>
@@ -1691,15 +1766,12 @@ wormhole connection.&lt;/mark&gt;&lt;/p&gt;</pre>
    reading in hiragana.</p>
 
    <pre lang="ja">...
-&lt;ruby&gt;
- &#x6F22; &lt;rt&gt; &#x304B;&#x3093; &lt;/rt&gt;
- &#x5B57; &lt;rt&gt; &#x3058;&#x3000; &lt;/rt&gt;
-&lt;/ruby&gt;
+&lt;ruby&gt;&#x6F22;&lt;rt&gt;&#x304B;&#x3093;&lt;/rt&gt;&#x5B57;&lt;rt&gt;&#x3058;&#x3000;&lt;/rt&gt;&lt;/ruby&gt;
 ...</pre>
 
    <p>This might be rendered as:</p>
 
-   <p><img alt="The two main ideographs, each with its annotation in hiragana rendered in a smaller font above it." src="http://dev.w3.org/html5/spec/images/sample-ruby-ja.png"/></p>
+   <p><img alt="The two main ideographs, each with its annotation in hiragana rendered in a smaller font above it." height="78" src="http://dev.w3.org/html5/spec/images/sample-ruby-ja.png" width="171"/></p>
 
   </div><div class="example">
 
@@ -1709,14 +1781,11 @@ wormhole connection.&lt;/mark&gt;&lt;/p&gt;</pre>
    <span lang="zh-TW" title="">&#x6F22;&#x5B57;</span> is annotated
    with its bopomofo reading.</p>
 
-   <pre lang="zh-TW">&lt;ruby&gt;
- &#x6F22; &lt;rt&gt; &#x310F;&#x3122;&#x2CB; &lt;/rt&gt;
- &#x5B57; &lt;rt&gt; &#x3117;&#x2CB;&#x3000; &lt;/rt&gt;
-&lt;/ruby&gt;</pre>
+   <pre lang="zh-TW">&lt;ruby&gt;&#x6F22;&lt;rt&gt;&#x310F;&#x3122;&#x2CB;&lt;/rt&gt;&#x5B57;&lt;rt&gt;&#x3117;&#x2CB;&#x3000;&lt;/rt&gt;&lt;/ruby&gt;</pre>
 
    <p>This might be rendered as:</p>
 
-   <p><img alt="The two main ideographs, each with its bopomofo annotation rendered in a smaller font next to it." src="http://dev.w3.org/html5/spec/images/sample-ruby-bopomofo.png"/></p>
+   <p><img alt="The two main ideographs, each with its bopomofo annotation rendered in a smaller font next to it." height="100" src="http://dev.w3.org/html5/spec/images/sample-ruby-bopomofo.png" width="78"/></p>
 
   </div><div class="example">
 
@@ -1726,20 +1795,15 @@ wormhole connection.&lt;/mark&gt;&lt;/p&gt;</pre>
    <span lang="zh-CN" title="">&#x6C49;&#x5B57;</span> is annotated
    with its pinyin reading.</p>
 
-   <pre lang="zh-CN">...
-&lt;ruby&gt;
- &#x6C49; &lt;rt&gt; h&#xE0;n &lt;/rt&gt;
- &#x5B57; &lt;rt&gt; z&#xEC;&#xA0; &lt;/rt&gt;
-&lt;/ruby&gt;
-...</pre>
+   <pre lang="zh-CN">...&lt;ruby&gt;&#x6C49;&lt;rt&gt;h&#xE0;n&lt;/rt&gt;&#x5B57;&lt;rt&gt;z&#xEC;&#xA0;&lt;/rt&gt;&lt;/ruby&gt;...</pre>
 
    <p>This might be rendered as:</p>
 
-   <p><img alt="The two main ideographs, each with its pinyin annotation rendered in a smaller font above it." src="http://dev.w3.org/html5/spec/images/sample-ruby-pinyin.png"/></p>
+   <p><img alt="The two main ideographs, each with its pinyin annotation rendered in a smaller font above it." height="79" src="http://dev.w3.org/html5/spec/images/sample-ruby-pinyin.png" width="173"/></p>
 
-  </div><!-- Note: Examples are 32px/16px Stone Sans Sem ITC TT --><h4 id="the-rt-element"><span class="secno">4.6.19 </span>The <dfn><code>rt</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><!-- Note: Examples are 32px/16px Stone Sans Sem ITC TT --><h4 id="the-rt-element"><span class="secno">4.6.20 </span>The <dfn><code>rt</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd>None.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>As a child of a <code><a href="#the-ruby-element">ruby</a></code> element.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
@@ -1758,9 +1822,9 @@ wormhole connection.&lt;/mark&gt;&lt;/p&gt;</pre>
   <code><a href="#the-ruby-element">ruby</a></code> element represents the same thing as its
   children.</p>
 
-  </div><h4 id="the-rp-element"><span class="secno">4.6.20 </span>The <dfn><code>rp</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-rp-element"><span class="secno">4.6.21 </span>The <dfn><code>rp</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd>None.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>As a child of a <code><a href="#the-ruby-element">ruby</a></code> element, either immediately before or immediately after an <code><a href="#the-rt-element">rt</a></code> element.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
@@ -1798,10 +1862,63 @@ wormhole connection.&lt;/mark&gt;&lt;/p&gt;</pre>
 
    <pre lang="ja">... &#x6F22; (&#x304B;&#x3093;) &#x5B57; (&#x3058;) ...</pre>
 
-  </div><h4 id="the-bdo-element"><span class="secno">4.6.21 </span>The <dfn><code>bdo</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-bdi-element"><span class="secno">4.6.22 </span>The <dfn><code>bdi</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
+   <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
+   <dt>Content model:</dt>
+   <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
+   <dt>Content attributes:</dt>
+   <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
+   <dd>Also, the <code title="attr-dir"><a href="elements.html#the-dir-attribute">dir</a></code> global attribute has special semantics on this element.</dd>
+   <dt>DOM interface:</dt>
+   <dd>Uses <code><a href="elements.html#htmlelement">HTMLElement</a></code>.</dd>
+  </dl><p>The <code><a href="#the-bdi-element">bdi</a></code> element <a href="rendering.html#represents">represents</a> a span of
+  text that is to be isolated from its surroundings for the purposes
+  of bidirectional text formatting. <a href="references.html#refsBIDI">[BIDI]</a></p><p class="note">The <code title="attr-dir"><a href="elements.html#the-dir-attribute">dir</a></code> global
+  attribute defaults to <code title="attr-dir-auto"><a href="elements.html#attr-dir-auto">auto</a></code> on
+  this element (it never inherits from the parent element like with
+  other elements).</p><div class="impl">
+
+  <p>For the purposes of applying the bidirectional algorithm to the
+  contents of a <code><a href="#the-bdi-element">bdi</a></code> element, user agents must treat the
+  element as a paragraph-level container.</p>
+
+  <p>For the purposes of applying the bidirectional algorithm to the
+  paragraph-level container that a <code><a href="#the-bdi-element">bdi</a></code> element finds
+  itself within, the <code><a href="#the-bdi-element">bdi</a></code> element must be treated like a
+  U+FFFC OBJECT REPLACEMENT CHARACTER (in the same manner that an
+  image or other inline object is handled).</p>
+
+  <p>The requirements on handling the <code><a href="#the-bdi-element">bdi</a></code> element for the
+  bidirectional algorithm may be implemented indirectly through the
+  style layer. For example, an HTML+CSS user agent should implement
+  these requirements by implementing the CSS 'unicode-bidi' property.
+  <a href="references.html#refsCSS">[CSS]</a></p>
+
+  </div><div class="example">
+
+   <p>This element is especially useful when embedding user-generated
+   content with an unknown directionality.</p>
+
+   <p>In this example, usernames are shown along with the number of
+   posts that the user has submitted. If the <code><a href="#the-bdi-element">bdi</a></code> element
+   were not used, the username of the Arabic user would end up
+   confusing the text (the bidirectional algorithm would put the colon
+   and the number "3" next to the word "User" rather than next to the
+   word "posts").</p>
+
+   <pre>&lt;ul&gt;
+ &lt;li&gt;User &lt;bdi&gt;jcranmer&lt;/bdi&gt;: 12 posts.
+ &lt;li&gt;User &lt;bdi&gt;hober&lt;/bdi&gt;: 5 posts.
+ &lt;li&gt;User &lt;bdi&gt;<bdo dir="rtl">&#x625;&#x64A;&#x627;&#x646;</bdo>&lt;/bdi&gt;: 3 posts.
+&lt;/ul&gt;</pre>
+
+  </div><h4 id="the-bdo-element"><span class="secno">4.6.23 </span>The <dfn><code>bdo</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
+   <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
+   <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
@@ -1820,27 +1937,28 @@ wormhole connection.&lt;/mark&gt;&lt;/p&gt;</pre>
 
   <p>If the element has the <code title="attr-dir"><a href="elements.html#the-dir-attribute">dir</a></code>
   attribute set to the exact value <code>ltr</code>, then for the
-  purposes of the bidi algorithm, the user agent must act as if there
-  was a U+202D LEFT-TO-RIGHT OVERRIDE character at the start of the
-  element, and a U+202C POP DIRECTIONAL FORMATTING at the end of the
-  element.</p>
+  purposes of the bidirectional algorithm, the user agent must act as
+  if there was a U+202D LEFT-TO-RIGHT OVERRIDE character at the start
+  of the element, and a U+202C POP DIRECTIONAL FORMATTING at the end
+  of the element.</p>
 
   <p>If the element has the <code title="attr-dir"><a href="elements.html#the-dir-attribute">dir</a></code>
   attribute set to the exact value <code>rtl</code>, then for the
-  purposes of the bidi algorithm, the user agent must act as if there
-  was a U+202E RIGHT-TO-LEFT OVERRIDE character at the start of the
-  element, and a U+202C POP DIRECTIONAL FORMATTING at the end of the
-  element.</p>
+  purposes of the bidirectional algorithm, the user agent must act as
+  if there was a U+202E RIGHT-TO-LEFT OVERRIDE character at the start
+  of the element, and a U+202C POP DIRECTIONAL FORMATTING at the end
+  of the element.</p>
 
   <p>The requirements on handling the <code><a href="#the-bdo-element">bdo</a></code> element for the
-  bidi algorithm may be implemented indirectly through the style
-  layer. For example, an HTML+CSS user agent should implement these
-  requirements by implementing the CSS 'unicode-bidi' property. <a href="references.html#refsCSS">[CSS]</a></p>
+  bidirectional algorithm may be implemented indirectly through the
+  style layer. For example, an HTML+CSS user agent should implement
+  these requirements by implementing the CSS 'unicode-bidi' property.
+  <a href="references.html#refsCSS">[CSS]</a></p>
 
-  </div><h4 id="the-span-element"><span class="secno">4.6.22 </span>The <dfn><code>span</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-span-element"><span class="secno">4.6.24 </span>The <dfn><code>span</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
@@ -1868,10 +1986,10 @@ wormhole connection.&lt;/mark&gt;&lt;/p&gt;</pre>
     &lt;span class="keyword"&gt;break&lt;/span&gt;;
 }&lt;/code&gt;&lt;/pre&gt;</pre>
 
-  </div><h4 id="the-br-element"><span class="secno">4.6.23 </span>The <dfn><code>br</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-br-element"><span class="secno">4.6.25 </span>The <dfn><code>br</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd>Empty.</dd>
@@ -1924,13 +2042,13 @@ Sydney&lt;/p&gt;</pre>
   <p>Any content inside <code><a href="#the-br-element">br</a></code> elements must not be
   considered part of the surrounding text.</p>
 
-  <p>A <code><a href="#the-br-element">br</a></code> element does not separate paragraphs for the
-  purposes of the Unicode bidirectional algorithm. <a href="references.html#refsBIDI">[BIDI]</a></p>
+  <p class="note">A <code><a href="#the-br-element">br</a></code> element separates paragraphs for
+  the purposes of the Unicode bidirectional algorithm. <a href="references.html#refsBIDI">[BIDI]</a></p>
 
-  </div><h4 id="the-wbr-element"><span class="secno">4.6.24 </span>The <dfn><code>wbr</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Implemented and widely deployed</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-wbr-element"><span class="secno">4.6.26 </span>The <dfn><code>wbr</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd>Empty.</dd>
@@ -1955,7 +2073,7 @@ Sydney&lt;/p&gt;</pre>
   <p>Any content inside <code><a href="#the-wbr-element">wbr</a></code> elements must not be
   considered part of the surrounding text.</p>
 
-  </div><h4 id="usage-summary"><span class="secno">4.6.25 </span>Usage summary</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><table><thead><tr><th>Element
+  </div><h4 id="usage-summary"><span class="secno">4.6.27 </span>Usage summary</h4><p><i>This section is non-normative.</i></p><table><thead><tr><th>Element
      </th><th>Purpose
      </th><th>Example
    </th></tr></thead><tbody><tr><td><code><a href="#the-a-element">a</a></code>
@@ -1973,6 +2091,10 @@ Sydney&lt;/p&gt;</pre>
     </td></tr><tr><td><code><a href="#the-small-element">small</a></code>
      </td><td>Side comments
      </td><td><pre class="example">These grapes are made into wine. <strong>&lt;small&gt;Alcohol is addictive.&lt;/small&gt;</strong></pre>
+
+    </td></tr><tr><td><code><a href="#the-s-element">s</a></code>
+     </td><td>Inaccurate text
+     </td><td><pre class="example">Price: <strong>&lt;s&gt;&#xA3;4.50&lt;/s&gt;</strong> &#xA3;2.00!</pre>
 
     </td></tr><tr><td><code><a href="#the-cite-element">cite</a></code>
      </td><td>Titles of works
@@ -2033,6 +2155,10 @@ Sydney&lt;/p&gt;</pre>
     </td></tr><tr><td><code><a href="#the-ruby-element">ruby</a></code>, <code><a href="#the-rt-element">rt</a></code>, <code><a href="#the-rp-element">rp</a></code>
      </td><td>Ruby annotations
      </td><td><pre class="example"><strong>&lt;ruby&gt; OJ &lt;rp&gt;(&lt;rt&gt;Orange Juice&lt;rp&gt;)&lt;/ruby&gt;</strong></pre>
+
+    </td></tr><tr><td><code><a href="#the-bdi-element">bdi</a></code>
+     </td><td>Text directionality isolation
+     </td><td><pre class="example">The recommended restaurant is <strong>&lt;bdi lang=""&gt;My Juice Caf&#xE9; (At The Beach)&lt;/bdi&gt;</strong>.</pre>
 
     </td></tr><tr><td><code><a href="#the-bdo-element">bdo</a></code>
      </td><td>Text directionality formatting

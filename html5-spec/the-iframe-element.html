@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,7 +356,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="embedded-content-1.html" title="4.8 Embedded content" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="video.html" title="4.8.6 The video element" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="embedded-content-1.html" title="4.8 Embedded content" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="video.html" title="4.8.6 The video element" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -317,15 +364,15 @@
    <a href="embedded-content-1.html">&#x2190; 4.8 Embedded content</a> &#x2013;
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="video.html">4.8.6 The video element &#x2192;</a>
-  <ol class="toc"><li><ol><li><ol><li><a href="the-iframe-element.html#the-iframe-element"><span class="secno">4.8.2 </span>The <code>iframe</code> element</a></li><li><a href="the-iframe-element.html#the-embed-element"><span class="secno">4.8.3 </span>The <code>embed</code> element</a></li><li><a href="the-iframe-element.html#the-object-element"><span class="secno">4.8.4 </span>The <code>object</code> element</a></li><li><a href="the-iframe-element.html#the-param-element"><span class="secno">4.8.5 </span>The <code>param</code> element</a></li></ol></li></ol></li></ol></div><h4 id="the-iframe-element"><span class="secno">4.8.2 </span>The <dfn><code>iframe</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments. </i><span><a href="http://www.w3.org/html/wg/tracker/issues/100">ISSUE-100</a> (srcdoc) and <a href="http://www.w3.org/html/wg/tracker/issues/103">ISSUE-103</a> (srcdoc-xml-escaping) block progress to Last Call</span></p><dl class="element"><dt>Categories</dt>
+  <ol class="toc"><li><ol><li><ol><li><a href="the-iframe-element.html#the-iframe-element"><span class="secno">4.8.2 </span>The <code>iframe</code> element</a></li><li><a href="the-iframe-element.html#the-embed-element"><span class="secno">4.8.3 </span>The <code>embed</code> element</a></li><li><a href="the-iframe-element.html#the-object-element"><span class="secno">4.8.4 </span>The <code>object</code> element</a></li><li><a href="the-iframe-element.html#the-param-element"><span class="secno">4.8.5 </span>The <code>param</code> element</a></li></ol></li></ol></li></ol></div><h4 id="the-iframe-element"><span class="secno">4.8.2 </span>The <dfn><code>iframe</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
    <dd><a href="content-models.html#embedded-content">Embedded content</a>.</dd>
    <dd><a href="content-models.html#interactive-content">Interactive content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#embedded-content">embedded content</a> is expected.</dd>
    <dt>Content model:</dt>
-   <dd>Text that conforms to the requirements given in the prose.</dd>
+   <dd>Text that conforms to <a href="#iframe-content-model">the requirements given in the prose</a>.</dd>
    <dt>Content attributes:</dt>
    <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
    <dd><code title="attr-iframe-src"><a href="#attr-iframe-src">src</a></code></dd>
@@ -356,8 +403,8 @@
   <a href="urls.html#valid-non-empty-url-potentially-surrounded-by-spaces">valid non-empty URL potentially surrounded by
   spaces</a>.</p><p>The <dfn id="attr-iframe-srcdoc" title="attr-iframe-srcdoc"><code>srcdoc</code></dfn>
   attribute gives the content of the page that the <a href="browsers.html#nested-browsing-context">nested
-  browsing context</a> is to contain.  The value of the attribute
-  in is <dfn id="an-iframe-srcdoc-document">an <code>iframe</code> <code title="attr-iframe-srcdoc">srcdoc</code> document</dfn>.</p><p>For <code><a href="#the-iframe-element">iframe</a></code> elements in <a href="dom.html#html-documents">HTML documents</a>,
+  browsing context</a> is to contain. The value of the attribute is
+  the source of <dfn id="an-iframe-srcdoc-document">an <code>iframe</code> <code title="attr-iframe-srcdoc">srcdoc</code> document</dfn>.</p><p>For <code><a href="#the-iframe-element">iframe</a></code> elements in <a href="dom.html#html-documents">HTML documents</a>,
   the attribute, if present, must have a value using <a href="syntax.html#syntax">the HTML
   syntax</a> that consists of the following syntactic components,
   in the given order:</p><ol><li>Any number of <a href="syntax.html#syntax-comments" title="syntax-comments">comments</a> and
@@ -389,14 +436,14 @@
   first time.</p>
 
   <p>Whenever an <code><a href="#the-iframe-element">iframe</a></code> element with a <a href="browsers.html#nested-browsing-context">nested
-  browsing context</a> has its <code title="attr-iframe-srcdoc"><a href="#attr-iframe-srcdoc">srcdoc</a></code> attribute set or changed,
-  the user agent must <a href="#process-the-iframe-attributes">process the <code>iframe</code>
+  browsing context</a> has its <code title="attr-iframe-srcdoc"><a href="#attr-iframe-srcdoc">srcdoc</a></code> attribute set, changed, or
+  removed, the user agent must <a href="#process-the-iframe-attributes">process the <code>iframe</code>
   attributes</a>.</p>
 
   <p>Similarly, whenever an <code><a href="#the-iframe-element">iframe</a></code> element with a
   <a href="browsers.html#nested-browsing-context">nested browsing context</a> but with no <code title="attr-iframe-srcdoc"><a href="#attr-iframe-srcdoc">srcdoc</a></code> attribute specified has its
-  <code title="attr-iframe-src"><a href="#attr-iframe-src">src</a></code> attribute set or changed,
-  the user agent must <a href="#process-the-iframe-attributes">process the <code>iframe</code>
+  <code title="attr-iframe-src"><a href="#attr-iframe-src">src</a></code> attribute set, changed, or
+  removed, the user agent must <a href="#process-the-iframe-attributes">process the <code>iframe</code>
   attributes</a>.</p> <!-- It doesn't happen when the base URL is
   changed, though. -->
 
@@ -407,11 +454,14 @@
   <dl class="switch"><dt>If the <code title="attr-iframe-srcdoc"><a href="#attr-iframe-srcdoc">srcdoc</a></code> attribute
    is specified</dt>
 
-   <dd><p><a href="history.html#navigate">Navigate</a> the element's <a href="browsers.html#browsing-context">browsing
-   context</a> to a resource whose <a href="fetching-resources.html#content-type">Content-Type</a> is
-   <code><a href="iana.html#text-html">text/html</a></code>, whose <a href="urls.html#url">URL</a> is
-   <code><a href="urls.html#about:srcdoc">about:srcdoc</a></code>, and whose data consists of the value of
-   the attribute.</p></dd>
+   <dd><p><a href="history.html#navigate">Navigate</a><!--DONAV iframe--> the element's
+   <a href="browsers.html#browsing-context">browsing context</a> to a resource whose
+   <a href="fetching-resources.html#content-type">Content-Type</a> is <code><a href="iana.html#text-html">text/html</a></code>, whose
+   <a href="urls.html#url">URL</a> is <code><a href="urls.html#about:srcdoc">about:srcdoc</a></code>, and whose data
+   consists of the value of the attribute. The resulting
+   <code><a href="infrastructure.html#document">Document</a></code> must be considered <a href="#an-iframe-srcdoc-document">an
+   <code>iframe</code> <code title="attr-iframe-srcdoc">srcdoc</code>
+   document</a>.</p></dd>
 
    <dt>If the <code title="attr-iframe-src"><a href="#attr-iframe-src">src</a></code>
    attribute is specified but the <code title="attr-iframe-srcdoc"><a href="#attr-iframe-srcdoc">srcdoc</a></code> attribute is not</dt>
@@ -435,8 +485,8 @@
      first time, <code><a href="fetching-resources.html#about:blank">about:blank</a></code> is loaded
      normally.)</p></li>
 
-     <li><p><a href="history.html#navigate">Navigate</a> the element's <a href="browsers.html#browsing-context">browsing
-     context</a> to the resulting <a href="urls.html#absolute-url">absolute
+     <li><p><a href="history.html#navigate">Navigate</a><!--DONAV iframe--> the element's
+     <a href="browsers.html#browsing-context">browsing context</a> to the resulting <a href="urls.html#absolute-url">absolute
      URL</a>.</p></li>
 
     </ol><p><i>Empty</i>: When the steps above require the user agent to
@@ -525,15 +575,15 @@
  &lt;/footer&gt;
  &lt;article&gt;
   &lt;footer&gt; At &lt;time pubdate&gt;2009-08-21T23:35Z&lt;/time&gt;, &lt;a href="/users/ch"&gt;ch&lt;/a&gt; writes: &lt;/footer&gt;
-  &lt;iframe seamless sandbox="allow-same-origin" srcdoc="&lt;p&gt;did you get a cover picture yet?"&gt;&lt;/iframe&gt;
+  &lt;iframe seamless sandbox srcdoc="&lt;p&gt;did you get a cover picture yet?"&gt;&lt;/iframe&gt;
  &lt;/article&gt;
  &lt;article&gt;
   &lt;footer&gt; At &lt;time pubdate&gt;2009-08-21T23:44Z&lt;/time&gt;, &lt;a href="/users/cap"&gt;cap&lt;/a&gt; writes: &lt;/footer&gt;
-  &lt;iframe seamless sandbox="allow-same-origin" srcdoc="&lt;p&gt;Yeah, you can see it &lt;a href=&amp;quot;/gallery?mode=cover&amp;amp;amp;page=1&amp;quot;&gt;in my gallery&lt;/a&gt;."&gt;&lt;/iframe&gt;
+  &lt;iframe seamless sandbox srcdoc="&lt;p&gt;Yeah, you can see it &lt;a href=&amp;quot;/gallery?mode=cover&amp;amp;amp;page=1&amp;quot;&gt;in my gallery&lt;/a&gt;."&gt;&lt;/iframe&gt;
  &lt;/article&gt;
  &lt;article&gt;
   &lt;footer&gt; At &lt;time pubdate&gt;2009-08-21T23:58Z&lt;/time&gt;, &lt;a href="/users/ch"&gt;ch&lt;/a&gt; writes: &lt;/footer&gt;
-  &lt;iframe seamless sandbox="allow-same-origin" srcdoc="&lt;p&gt;hey that's earl's table.
+  &lt;iframe seamless sandbox srcdoc="&lt;p&gt;hey that's earl's table.
 &lt;p&gt;you should get earl&amp;amp;amp;me on the next cover."&gt;&lt;/iframe&gt;
  &lt;/article&gt;</pre>
 
@@ -551,8 +601,11 @@
   attribute contents and then to escape all U+0022 QUOTATION MARK (")
   and U+0026 AMPERSAND (&amp;) characters, and to specify the <code title="attr-iframe-sandbox"><a href="#attr-iframe-sandbox">sandbox</a></code> attribute, to ensure safe
   embedding of content.</p><p class="note">Due to restrictions of <span>the XML syntax</span>,
-  in XML a number of other characters need to be escaped also to
-  ensure correctness.</p><hr/><p>The <dfn id="attr-iframe-name" title="attr-iframe-name"><code>name</code></dfn>
+  in XML the U+003C LESS-THAN SIGN character (&lt;) needs to be
+  escaped as well. In order to prevent <a href="http://www.w3.org/TR/REC-xml/#AVNormalize">attribute-value
+  normalization</a>, XML's whitespace characters &#x2014; U+0009
+  CHARACTER TABULATION (HT), U+000A LINE FEED (LF), U+000D CARRIAGE
+  RETURN (CR) and U+0020 SPACE &#x2014; also need to be escaped. <a href="references.html#refsXML">[XML]</a></p><hr/><p>The <dfn id="attr-iframe-name" title="attr-iframe-name"><code>name</code></dfn>
   attribute, if present, must be a <a href="browsers.html#valid-browsing-context-name">valid browsing context
   name</a>. The given value is used to name the <a href="browsers.html#nested-browsing-context">nested
   browsing context</a>. <span class="impl">When the browsing
@@ -600,8 +653,8 @@
   </div><hr/><p>The <dfn id="attr-iframe-sandbox" title="attr-iframe-sandbox"><code>sandbox</code></dfn>
   attribute, when specified, enables a set of extra restrictions on
   any content hosted by the <code><a href="#the-iframe-element">iframe</a></code>. Its value must be an
-  <a href="common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens">unordered set of unique space-separated tokens</a>. The
-  allowed values are <code title="attr-iframe-sandbox-allow-same-origin"><a href="#attr-iframe-sandbox-allow-same-origin">allow-same-origin</a></code>,
+  <a href="common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens">unordered set of unique space-separated tokens</a> that are
+  <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a>. The allowed values are <code title="attr-iframe-sandbox-allow-same-origin"><a href="#attr-iframe-sandbox-allow-same-origin">allow-same-origin</a></code>,
   <code title="attr-iframe-sandbox-allow-top-navigation"><a href="#attr-iframe-sandbox-allow-top-navigation">allow-top-navigation</a></code>,
   <code title="attr-iframe-sandbox-allow-forms"><a href="#attr-iframe-sandbox-allow-forms">allow-forms</a></code>,
   and <code title="attr-iframe-sandbox-allow-scripts"><a href="#attr-iframe-sandbox-allow-scripts">allow-scripts</a></code>. When
@@ -801,7 +854,7 @@
 
   <p class="warning">These flags only take effect when the
   <a href="browsers.html#nested-browsing-context">nested browsing context</a> of the <code><a href="#the-iframe-element">iframe</a></code> is
-  <a href="history.html#navigate" title="navigate">navigated</a>. Removing then, or removing
+  <a href="history.html#navigate" title="navigate">navigated</a>. Removing them, or removing
   the entire <code title="attr-iframe-sandbox"><a href="#attr-iframe-sandbox">sandbox</a></code>
   attribute, has no effect on an already-loaded page.</p>
 
@@ -909,8 +962,10 @@
   <a href="origin-0.html#same-origin">same origin</a> as the <code><a href="#the-iframe-element">iframe</a></code> element's
   document, or the <a href="browsers.html#browsing-context">browsing context</a>'s <a href="browsers.html#active-document">active
   document</a>'s <em><a href="dom.html#the-document-s-address" title="the document's&#10;  address">address</a></em> has the <a href="origin-0.html#same-origin">same origin</a> as the
-  <code><a href="#the-iframe-element">iframe</a></code> element's document, the following requirements
-  apply:</span></p><div class="impl">
+  <code><a href="#the-iframe-element">iframe</a></code> element's document, or the <a href="browsers.html#browsing-context">browsing
+  context</a>'s <a href="browsers.html#active-document">active document</a> is <a href="#an-iframe-srcdoc-document">an
+  <code>iframe</code> <code title="attr-iframe-srcdoc">srcdoc</code>
+  document</a>, the following requirements apply:</span></p><div class="impl">
 
   <ul><li><p>The user agent must set the <dfn id="seamless-browsing-context-flag">seamless browsing context
    flag</dfn> to true for that <a href="browsers.html#browsing-context">browsing context</a>. This
@@ -1021,17 +1076,17 @@
   are successfully used.</p><p>Descendants of <code><a href="#the-iframe-element">iframe</a></code> elements represent
   nothing. (In legacy user agents that do not support
   <code><a href="#the-iframe-element">iframe</a></code> elements, the contents would be parsed as markup
-  that could act as fallback content.)</p><p>When used in <a href="dom.html#html-documents">HTML documents</a>, the allowed content
-  model of <code><a href="#the-iframe-element">iframe</a></code> elements is text, except that invoking
-  the <a href="the-end.html#html-fragment-parsing-algorithm">HTML fragment parsing algorithm</a> with the
-  <code><a href="#the-iframe-element">iframe</a></code> element as the <var title="">context</var>
-  element and the text contents as the <var title="">input</var> must
-  result in a list of nodes that are all <a href="content-models.html#phrasing-content">phrasing
-  content</a>, with no <a href="parsing.html#parse-error" title="parse error">parse
-  errors</a> having occurred, with no <code><a href="scripting-1.html#script">script</a></code> elements
-  being anywhere in the list or as descendants of elements in the
-  list, and with all the elements in the list (including their
-  descendants) being themselves conforming.</p><p>The <code><a href="#the-iframe-element">iframe</a></code> element must be empty in <a href="dom.html#xml-documents">XML
+  that could act as fallback content.)</p><p id="iframe-content-model">When used in <a href="dom.html#html-documents">HTML
+  documents</a>, the allowed content model of <code><a href="#the-iframe-element">iframe</a></code>
+  elements is text, except that invoking the <a href="the-end.html#html-fragment-parsing-algorithm">HTML fragment
+  parsing algorithm</a> with the <code><a href="#the-iframe-element">iframe</a></code> element as the
+  <var title="">context</var> element and the text contents as the
+  <var title="">input</var> must result in a list of nodes that are
+  all <a href="content-models.html#phrasing-content">phrasing content</a>, with no <a href="parsing.html#parse-error" title="parse&#10;  error">parse errors</a> having occurred, with no
+  <code><a href="scripting-1.html#script">script</a></code> elements being anywhere in the list or as
+  descendants of elements in the list, and with all the elements in
+  the list (including their descendants) being themselves
+  conforming.</p><p>The <code><a href="#the-iframe-element">iframe</a></code> element must be empty in <a href="dom.html#xml-documents">XML
   documents</a>.</p><p class="note">The <a href="parsing.html#html-parser">HTML parser</a> treats markup inside
   <code><a href="#the-iframe-element">iframe</a></code> elements as text.</p><div class="impl">
 
@@ -1057,7 +1112,7 @@
    <pre>&lt;iframe src="http://ads.example.com/?customerid=923513721&amp;amp;format=banner"
         width="468" height="60"&gt;&lt;/iframe&gt;</pre>
 
-  </div><h4 id="the-embed-element"><span class="secno">4.8.3 </span>The <dfn><code>embed</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><!-- (v2?)
+  </div><h4 id="the-embed-element"><span class="secno">4.8.3 </span>The <dfn><code>embed</code></dfn> element</h4><!-- (v2?)
  we have all kinds of quirks we should define if they come up during
  testing, as e.g. shown in:
  http://mxr.mozilla.org/mozilla-central/source/layout/generic/nsObjectFrame.cpp
@@ -1076,7 +1131,7 @@
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
    <dd><a href="content-models.html#embedded-content">Embedded content</a>.</dd>
    <dd><a href="content-models.html#interactive-content">Interactive content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#embedded-content">embedded content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd>Empty.</dd>
@@ -1317,13 +1372,13 @@
  &lt;param name="quality" value="high"&gt;
 &lt;/object&gt;</pre>
 
-  </div><h4 id="the-object-element"><span class="secno">4.8.4 </span>The <dfn><code>object</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-object-element"><span class="secno">4.8.4 </span>The <dfn><code>object</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
    <dd><a href="content-models.html#embedded-content">Embedded content</a>.</dd>
    <dd>If the element has a <code title="attr-hyperlink-usemap"><a href="the-map-element.html#attr-hyperlink-usemap">usemap</a></code> attribute: <a href="content-models.html#interactive-content">Interactive content</a>.</dd> <!-- also when showing a plugin or a nested browsing context, but checking that statically is hard...) -->
    <dd><a href="forms.html#category-listed" title="category-listed">Listed</a>,  <a href="forms.html#category-submit" title="category-submit">submittable</a>, <a href="forms.html#form-associated-element">form-associated element</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#embedded-content">embedded content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd>Zero or more <code><a href="#the-param-element">param</a></code> elements, then, <a href="content-models.html#transparent">transparent</a>.</dd>
@@ -1765,12 +1820,12 @@
 
         <p>If the <a href="urls.html#url">URL</a> of the given resource is not
         <code><a href="fetching-resources.html#about:blank">about:blank</a></code>, the element's <a href="browsers.html#nested-browsing-context">nested browsing
-        context</a> must then be <a href="history.html#navigate" title="navigate">navigated</a> to that resource, with
-        <a href="history.html#replacement-enabled">replacement enabled</a>, and with the
+        context</a> must then be <a href="history.html#navigate" title="navigate">navigated</a><!--DONAV object--> to that
+        resource, with <a href="history.html#replacement-enabled">replacement enabled</a>, and with the
         <code><a href="#the-object-element">object</a></code> element's document's <a href="browsers.html#browsing-context">browsing
-        context</a> as the <a href="history.html#source-browsing-context">source browsing
-        context</a>. (The <code title="attr-object-data"><a href="#attr-object-data">data</a></code> attribute of the
-        <code><a href="#the-object-element">object</a></code> element doesn't get updated if the
+        context</a> as the <a href="history.html#source-browsing-context">source browsing context</a>.
+        (The <code title="attr-object-data"><a href="#attr-object-data">data</a></code> attribute of
+        the <code><a href="#the-object-element">object</a></code> element doesn't get updated if the
         browsing context gets further navigated to other
         locations.)</p>
 
@@ -2004,9 +2059,9 @@
  &lt;/object&gt;
 &lt;/p&gt;</pre>
 
-  </div><h4 id="the-param-element"><span class="secno">4.8.5 </span>The <dfn><code>param</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-param-element"><span class="secno">4.8.5 </span>The <dfn><code>param</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd>None.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>As a child of an <code><a href="#the-object-element">object</a></code> element, before any <a href="content-models.html#flow-content">flow content</a>.</dd>
    <dt>Content model:</dt>
    <dd>Empty.</dd>
@@ -2030,6 +2085,16 @@
   <code><a href="#the-param-element">param</a></code> is an <code><a href="#the-object-element">object</a></code> element, then the
   element defines a <dfn id="concept-param-parameter" title="concept-param-parameter">parameter</dfn> with the given
   name/value pair.</p>
+
+  <p>If either the name or value of a <a href="#concept-param-parameter" title="concept-param-parameter">parameter</a> defined by a
+  <code><a href="#the-param-element">param</a></code> element that is the child of an
+  <code><a href="#the-object-element">object</a></code> element that <a href="rendering.html#represents">represents</a> an
+  instantiated <a href="infrastructure.html#plugin">plugin</a> changes, and if that
+  <a href="infrastructure.html#plugin">plugin</a> is communicating with the user agent using an
+  API that features the ability to update the <a href="infrastructure.html#plugin">plugin</a> when
+  the name or value of a <a href="#concept-param-parameter" title="concept-param-parameter">parameter</a> so changes, then
+  the user agent must appropriately exercise that ability to notify
+  the <a href="infrastructure.html#plugin">plugin</a> of the change.</p>
 
   <p>The IDL attributes <dfn id="dom-param-name" title="dom-param-name"><code>name</code></dfn> and <dfn id="dom-param-value" title="dom-param-value"><code>value</code></dfn> must both
   <a href="common-dom-interfaces.html#reflect">reflect</a> the respective content attributes of the same

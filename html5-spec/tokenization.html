@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,7 +356,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="parsing.html" title="8.2 Parsing HTML documents" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="the-end.html" title="8.2.6 The end" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="parsing.html" title="8.2 Parsing HTML documents" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="the-end.html" title="8.2.6 The end" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -318,10 +365,10 @@
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="the-end.html">8.2.6 The end &#x2192;</a>
   <ol class="toc"><li><ol><li><ol><li><a href="tokenization.html#tokenization"><span class="secno">8.2.4 </span>Tokenization</a>
-      <ol><li><a href="tokenization.html#data-state"><span class="secno">8.2.4.1 </span>Data state</a></li><li><a href="tokenization.html#character-reference-in-data-state"><span class="secno">8.2.4.2 </span>Character reference in data state</a></li><li><a href="tokenization.html#rcdata-state"><span class="secno">8.2.4.3 </span>RCDATA state</a></li><li><a href="tokenization.html#character-reference-in-rcdata-state"><span class="secno">8.2.4.4 </span>Character reference in RCDATA state</a></li><li><a href="tokenization.html#rawtext-state"><span class="secno">8.2.4.5 </span>RAWTEXT state</a></li><li><a href="tokenization.html#script-data-state"><span class="secno">8.2.4.6 </span>Script data state</a></li><li><a href="tokenization.html#plaintext-state"><span class="secno">8.2.4.7 </span>PLAINTEXT state</a></li><li><a href="tokenization.html#tag-open-state"><span class="secno">8.2.4.8 </span>Tag open state</a></li><li><a href="tokenization.html#end-tag-open-state"><span class="secno">8.2.4.9 </span>End tag open state</a></li><li><a href="tokenization.html#tag-name-state"><span class="secno">8.2.4.10 </span>Tag name state</a></li><li><a href="tokenization.html#rcdata-less-than-sign-state"><span class="secno">8.2.4.11 </span>RCDATA less-than sign state</a></li><li><a href="tokenization.html#rcdata-end-tag-open-state"><span class="secno">8.2.4.12 </span>RCDATA end tag open state</a></li><li><a href="tokenization.html#rcdata-end-tag-name-state"><span class="secno">8.2.4.13 </span>RCDATA end tag name state</a></li><li><a href="tokenization.html#rawtext-less-than-sign-state"><span class="secno">8.2.4.14 </span>RAWTEXT less-than sign state</a></li><li><a href="tokenization.html#rawtext-end-tag-open-state"><span class="secno">8.2.4.15 </span>RAWTEXT end tag open state</a></li><li><a href="tokenization.html#rawtext-end-tag-name-state"><span class="secno">8.2.4.16 </span>RAWTEXT end tag name state</a></li><li><a href="tokenization.html#script-data-less-than-sign-state"><span class="secno">8.2.4.17 </span>Script data less-than sign state</a></li><li><a href="tokenization.html#script-data-end-tag-open-state"><span class="secno">8.2.4.18 </span>Script data end tag open state</a></li><li><a href="tokenization.html#script-data-end-tag-name-state"><span class="secno">8.2.4.19 </span>Script data end tag name state</a></li><li><a href="tokenization.html#script-data-escape-start-state"><span class="secno">8.2.4.20 </span>Script data escape start state</a></li><li><a href="tokenization.html#script-data-escape-start-dash-state"><span class="secno">8.2.4.21 </span>Script data escape start dash state</a></li><li><a href="tokenization.html#script-data-escaped-state"><span class="secno">8.2.4.22 </span>Script data escaped state</a></li><li><a href="tokenization.html#script-data-escaped-dash-state"><span class="secno">8.2.4.23 </span>Script data escaped dash state</a></li><li><a href="tokenization.html#script-data-escaped-dash-dash-state"><span class="secno">8.2.4.24 </span>Script data escaped dash dash state</a></li><li><a href="tokenization.html#script-data-escaped-less-than-sign-state"><span class="secno">8.2.4.25 </span>Script data escaped less-than sign state</a></li><li><a href="tokenization.html#script-data-escaped-end-tag-open-state"><span class="secno">8.2.4.26 </span>Script data escaped end tag open state</a></li><li><a href="tokenization.html#script-data-escaped-end-tag-name-state"><span class="secno">8.2.4.27 </span>Script data escaped end tag name state</a></li><li><a href="tokenization.html#script-data-double-escape-start-state"><span class="secno">8.2.4.28 </span>Script data double escape start state</a></li><li><a href="tokenization.html#script-data-double-escaped-state"><span class="secno">8.2.4.29 </span>Script data double escaped state</a></li><li><a href="tokenization.html#script-data-double-escaped-dash-state"><span class="secno">8.2.4.30 </span>Script data double escaped dash state</a></li><li><a href="tokenization.html#script-data-double-escaped-dash-dash-state"><span class="secno">8.2.4.31 </span>Script data double escaped dash dash state</a></li><li><a href="tokenization.html#script-data-double-escaped-less-than-sign-state"><span class="secno">8.2.4.32 </span>Script data double escaped less-than sign state</a></li><li><a href="tokenization.html#script-data-double-escape-end-state"><span class="secno">8.2.4.33 </span>Script data double escape end state</a></li><li><a href="tokenization.html#before-attribute-name-state"><span class="secno">8.2.4.34 </span>Before attribute name state</a></li><li><a href="tokenization.html#attribute-name-state"><span class="secno">8.2.4.35 </span>Attribute name state</a></li><li><a href="tokenization.html#after-attribute-name-state"><span class="secno">8.2.4.36 </span>After attribute name state</a></li><li><a href="tokenization.html#before-attribute-value-state"><span class="secno">8.2.4.37 </span>Before attribute value state</a></li><li><a href="tokenization.html#attribute-value-double-quoted-state"><span class="secno">8.2.4.38 </span>Attribute value (double-quoted) state</a></li><li><a href="tokenization.html#attribute-value-single-quoted-state"><span class="secno">8.2.4.39 </span>Attribute value (single-quoted) state</a></li><li><a href="tokenization.html#attribute-value-unquoted-state"><span class="secno">8.2.4.40 </span>Attribute value (unquoted) state</a></li><li><a href="tokenization.html#character-reference-in-attribute-value-state"><span class="secno">8.2.4.41 </span>Character reference in attribute value state</a></li><li><a href="tokenization.html#after-attribute-value-quoted-state"><span class="secno">8.2.4.42 </span>After attribute value (quoted) state</a></li><li><a href="tokenization.html#self-closing-start-tag-state"><span class="secno">8.2.4.43 </span>Self-closing start tag state</a></li><li><a href="tokenization.html#bogus-comment-state"><span class="secno">8.2.4.44 </span>Bogus comment state</a></li><li><a href="tokenization.html#markup-declaration-open-state"><span class="secno">8.2.4.45 </span>Markup declaration open state</a></li><li><a href="tokenization.html#comment-start-state"><span class="secno">8.2.4.46 </span>Comment start state</a></li><li><a href="tokenization.html#comment-start-dash-state"><span class="secno">8.2.4.47 </span>Comment start dash state</a></li><li><a href="tokenization.html#comment-state"><span class="secno">8.2.4.48 </span>Comment state</a></li><li><a href="tokenization.html#comment-end-dash-state"><span class="secno">8.2.4.49 </span>Comment end dash state</a></li><li><a href="tokenization.html#comment-end-state"><span class="secno">8.2.4.50 </span>Comment end state</a></li><li><a href="tokenization.html#comment-end-bang-state"><span class="secno">8.2.4.51 </span>Comment end bang state</a></li><li><a href="tokenization.html#comment-end-space-state"><span class="secno">8.2.4.52 </span>Comment end space state</a></li><li><a href="tokenization.html#doctype-state"><span class="secno">8.2.4.53 </span>DOCTYPE state</a></li><li><a href="tokenization.html#before-doctype-name-state"><span class="secno">8.2.4.54 </span>Before DOCTYPE name state</a></li><li><a href="tokenization.html#doctype-name-state"><span class="secno">8.2.4.55 </span>DOCTYPE name state</a></li><li><a href="tokenization.html#after-doctype-name-state"><span class="secno">8.2.4.56 </span>After DOCTYPE name state</a></li><li><a href="tokenization.html#after-doctype-public-keyword-state"><span class="secno">8.2.4.57 </span>After DOCTYPE public keyword state</a></li><li><a href="tokenization.html#before-doctype-public-identifier-state"><span class="secno">8.2.4.58 </span>Before DOCTYPE public identifier state</a></li><li><a href="tokenization.html#doctype-public-identifier-double-quoted-state"><span class="secno">8.2.4.59 </span>DOCTYPE public identifier (double-quoted) state</a></li><li><a href="tokenization.html#doctype-public-identifier-single-quoted-state"><span class="secno">8.2.4.60 </span>DOCTYPE public identifier (single-quoted) state</a></li><li><a href="tokenization.html#after-doctype-public-identifier-state"><span class="secno">8.2.4.61 </span>After DOCTYPE public identifier state</a></li><li><a href="tokenization.html#between-doctype-public-and-system-identifiers-state"><span class="secno">8.2.4.62 </span>Between DOCTYPE public and system identifiers state</a></li><li><a href="tokenization.html#after-doctype-system-keyword-state"><span class="secno">8.2.4.63 </span>After DOCTYPE system keyword state</a></li><li><a href="tokenization.html#before-doctype-system-identifier-state"><span class="secno">8.2.4.64 </span>Before DOCTYPE system identifier state</a></li><li><a href="tokenization.html#doctype-system-identifier-double-quoted-state"><span class="secno">8.2.4.65 </span>DOCTYPE system identifier (double-quoted) state</a></li><li><a href="tokenization.html#doctype-system-identifier-single-quoted-state"><span class="secno">8.2.4.66 </span>DOCTYPE system identifier (single-quoted) state</a></li><li><a href="tokenization.html#after-doctype-system-identifier-state"><span class="secno">8.2.4.67 </span>After DOCTYPE system identifier state</a></li><li><a href="tokenization.html#bogus-doctype-state"><span class="secno">8.2.4.68 </span>Bogus DOCTYPE state</a></li><li><a href="tokenization.html#cdata-section-state"><span class="secno">8.2.4.69 </span>CDATA section state</a></li><li><a href="tokenization.html#tokenizing-character-references"><span class="secno">8.2.4.70 </span>Tokenizing character references</a></li></ol></li><li><a href="tokenization.html#tree-construction"><span class="secno">8.2.5 </span>Tree construction</a>
+      <ol><li><a href="tokenization.html#data-state"><span class="secno">8.2.4.1 </span>Data state</a></li><li><a href="tokenization.html#character-reference-in-data-state"><span class="secno">8.2.4.2 </span>Character reference in data state</a></li><li><a href="tokenization.html#rcdata-state"><span class="secno">8.2.4.3 </span>RCDATA state</a></li><li><a href="tokenization.html#character-reference-in-rcdata-state"><span class="secno">8.2.4.4 </span>Character reference in RCDATA state</a></li><li><a href="tokenization.html#rawtext-state"><span class="secno">8.2.4.5 </span>RAWTEXT state</a></li><li><a href="tokenization.html#script-data-state"><span class="secno">8.2.4.6 </span>Script data state</a></li><li><a href="tokenization.html#plaintext-state"><span class="secno">8.2.4.7 </span>PLAINTEXT state</a></li><li><a href="tokenization.html#tag-open-state"><span class="secno">8.2.4.8 </span>Tag open state</a></li><li><a href="tokenization.html#end-tag-open-state"><span class="secno">8.2.4.9 </span>End tag open state</a></li><li><a href="tokenization.html#tag-name-state"><span class="secno">8.2.4.10 </span>Tag name state</a></li><li><a href="tokenization.html#rcdata-less-than-sign-state"><span class="secno">8.2.4.11 </span>RCDATA less-than sign state</a></li><li><a href="tokenization.html#rcdata-end-tag-open-state"><span class="secno">8.2.4.12 </span>RCDATA end tag open state</a></li><li><a href="tokenization.html#rcdata-end-tag-name-state"><span class="secno">8.2.4.13 </span>RCDATA end tag name state</a></li><li><a href="tokenization.html#rawtext-less-than-sign-state"><span class="secno">8.2.4.14 </span>RAWTEXT less-than sign state</a></li><li><a href="tokenization.html#rawtext-end-tag-open-state"><span class="secno">8.2.4.15 </span>RAWTEXT end tag open state</a></li><li><a href="tokenization.html#rawtext-end-tag-name-state"><span class="secno">8.2.4.16 </span>RAWTEXT end tag name state</a></li><li><a href="tokenization.html#script-data-less-than-sign-state"><span class="secno">8.2.4.17 </span>Script data less-than sign state</a></li><li><a href="tokenization.html#script-data-end-tag-open-state"><span class="secno">8.2.4.18 </span>Script data end tag open state</a></li><li><a href="tokenization.html#script-data-end-tag-name-state"><span class="secno">8.2.4.19 </span>Script data end tag name state</a></li><li><a href="tokenization.html#script-data-escape-start-state"><span class="secno">8.2.4.20 </span>Script data escape start state</a></li><li><a href="tokenization.html#script-data-escape-start-dash-state"><span class="secno">8.2.4.21 </span>Script data escape start dash state</a></li><li><a href="tokenization.html#script-data-escaped-state"><span class="secno">8.2.4.22 </span>Script data escaped state</a></li><li><a href="tokenization.html#script-data-escaped-dash-state"><span class="secno">8.2.4.23 </span>Script data escaped dash state</a></li><li><a href="tokenization.html#script-data-escaped-dash-dash-state"><span class="secno">8.2.4.24 </span>Script data escaped dash dash state</a></li><li><a href="tokenization.html#script-data-escaped-less-than-sign-state"><span class="secno">8.2.4.25 </span>Script data escaped less-than sign state</a></li><li><a href="tokenization.html#script-data-escaped-end-tag-open-state"><span class="secno">8.2.4.26 </span>Script data escaped end tag open state</a></li><li><a href="tokenization.html#script-data-escaped-end-tag-name-state"><span class="secno">8.2.4.27 </span>Script data escaped end tag name state</a></li><li><a href="tokenization.html#script-data-double-escape-start-state"><span class="secno">8.2.4.28 </span>Script data double escape start state</a></li><li><a href="tokenization.html#script-data-double-escaped-state"><span class="secno">8.2.4.29 </span>Script data double escaped state</a></li><li><a href="tokenization.html#script-data-double-escaped-dash-state"><span class="secno">8.2.4.30 </span>Script data double escaped dash state</a></li><li><a href="tokenization.html#script-data-double-escaped-dash-dash-state"><span class="secno">8.2.4.31 </span>Script data double escaped dash dash state</a></li><li><a href="tokenization.html#script-data-double-escaped-less-than-sign-state"><span class="secno">8.2.4.32 </span>Script data double escaped less-than sign state</a></li><li><a href="tokenization.html#script-data-double-escape-end-state"><span class="secno">8.2.4.33 </span>Script data double escape end state</a></li><li><a href="tokenization.html#before-attribute-name-state"><span class="secno">8.2.4.34 </span>Before attribute name state</a></li><li><a href="tokenization.html#attribute-name-state"><span class="secno">8.2.4.35 </span>Attribute name state</a></li><li><a href="tokenization.html#after-attribute-name-state"><span class="secno">8.2.4.36 </span>After attribute name state</a></li><li><a href="tokenization.html#before-attribute-value-state"><span class="secno">8.2.4.37 </span>Before attribute value state</a></li><li><a href="tokenization.html#attribute-value-double-quoted-state"><span class="secno">8.2.4.38 </span>Attribute value (double-quoted) state</a></li><li><a href="tokenization.html#attribute-value-single-quoted-state"><span class="secno">8.2.4.39 </span>Attribute value (single-quoted) state</a></li><li><a href="tokenization.html#attribute-value-unquoted-state"><span class="secno">8.2.4.40 </span>Attribute value (unquoted) state</a></li><li><a href="tokenization.html#character-reference-in-attribute-value-state"><span class="secno">8.2.4.41 </span>Character reference in attribute value state</a></li><li><a href="tokenization.html#after-attribute-value-quoted-state"><span class="secno">8.2.4.42 </span>After attribute value (quoted) state</a></li><li><a href="tokenization.html#self-closing-start-tag-state"><span class="secno">8.2.4.43 </span>Self-closing start tag state</a></li><li><a href="tokenization.html#bogus-comment-state"><span class="secno">8.2.4.44 </span>Bogus comment state</a></li><li><a href="tokenization.html#markup-declaration-open-state"><span class="secno">8.2.4.45 </span>Markup declaration open state</a></li><li><a href="tokenization.html#comment-start-state"><span class="secno">8.2.4.46 </span>Comment start state</a></li><li><a href="tokenization.html#comment-start-dash-state"><span class="secno">8.2.4.47 </span>Comment start dash state</a></li><li><a href="tokenization.html#comment-state"><span class="secno">8.2.4.48 </span>Comment state</a></li><li><a href="tokenization.html#comment-end-dash-state"><span class="secno">8.2.4.49 </span>Comment end dash state</a></li><li><a href="tokenization.html#comment-end-state"><span class="secno">8.2.4.50 </span>Comment end state</a></li><li><a href="tokenization.html#comment-end-bang-state"><span class="secno">8.2.4.51 </span>Comment end bang state</a></li><li><a href="tokenization.html#doctype-state"><span class="secno">8.2.4.52 </span>DOCTYPE state</a></li><li><a href="tokenization.html#before-doctype-name-state"><span class="secno">8.2.4.53 </span>Before DOCTYPE name state</a></li><li><a href="tokenization.html#doctype-name-state"><span class="secno">8.2.4.54 </span>DOCTYPE name state</a></li><li><a href="tokenization.html#after-doctype-name-state"><span class="secno">8.2.4.55 </span>After DOCTYPE name state</a></li><li><a href="tokenization.html#after-doctype-public-keyword-state"><span class="secno">8.2.4.56 </span>After DOCTYPE public keyword state</a></li><li><a href="tokenization.html#before-doctype-public-identifier-state"><span class="secno">8.2.4.57 </span>Before DOCTYPE public identifier state</a></li><li><a href="tokenization.html#doctype-public-identifier-double-quoted-state"><span class="secno">8.2.4.58 </span>DOCTYPE public identifier (double-quoted) state</a></li><li><a href="tokenization.html#doctype-public-identifier-single-quoted-state"><span class="secno">8.2.4.59 </span>DOCTYPE public identifier (single-quoted) state</a></li><li><a href="tokenization.html#after-doctype-public-identifier-state"><span class="secno">8.2.4.60 </span>After DOCTYPE public identifier state</a></li><li><a href="tokenization.html#between-doctype-public-and-system-identifiers-state"><span class="secno">8.2.4.61 </span>Between DOCTYPE public and system identifiers state</a></li><li><a href="tokenization.html#after-doctype-system-keyword-state"><span class="secno">8.2.4.62 </span>After DOCTYPE system keyword state</a></li><li><a href="tokenization.html#before-doctype-system-identifier-state"><span class="secno">8.2.4.63 </span>Before DOCTYPE system identifier state</a></li><li><a href="tokenization.html#doctype-system-identifier-double-quoted-state"><span class="secno">8.2.4.64 </span>DOCTYPE system identifier (double-quoted) state</a></li><li><a href="tokenization.html#doctype-system-identifier-single-quoted-state"><span class="secno">8.2.4.65 </span>DOCTYPE system identifier (single-quoted) state</a></li><li><a href="tokenization.html#after-doctype-system-identifier-state"><span class="secno">8.2.4.66 </span>After DOCTYPE system identifier state</a></li><li><a href="tokenization.html#bogus-doctype-state"><span class="secno">8.2.4.67 </span>Bogus DOCTYPE state</a></li><li><a href="tokenization.html#cdata-section-state"><span class="secno">8.2.4.68 </span>CDATA section state</a></li><li><a href="tokenization.html#tokenizing-character-references"><span class="secno">8.2.4.69 </span>Tokenizing character references</a></li></ol></li><li><a href="tokenization.html#tree-construction"><span class="secno">8.2.5 </span>Tree construction</a>
       <ol><li><a href="tokenization.html#creating-and-inserting-elements"><span class="secno">8.2.5.1 </span>Creating and inserting elements</a></li><li><a href="tokenization.html#closing-elements-that-have-implied-end-tags"><span class="secno">8.2.5.2 </span>Closing elements that have implied end tags</a></li><li><a href="tokenization.html#foster-parenting"><span class="secno">8.2.5.3 </span>Foster parenting</a></li><li><a href="tokenization.html#the-initial-insertion-mode"><span class="secno">8.2.5.4 </span>The "initial" insertion mode</a></li><li><a href="tokenization.html#the-before-html-insertion-mode"><span class="secno">8.2.5.5 </span>The "before html" insertion mode</a></li><li><a href="tokenization.html#the-before-head-insertion-mode"><span class="secno">8.2.5.6 </span>The "before head" insertion mode</a></li><li><a href="tokenization.html#parsing-main-inhead"><span class="secno">8.2.5.7 </span>The "in head" insertion mode</a></li><li><a href="tokenization.html#parsing-main-inheadnoscript"><span class="secno">8.2.5.8 </span>The "in head noscript" insertion mode</a></li><li><a href="tokenization.html#the-after-head-insertion-mode"><span class="secno">8.2.5.9 </span>The "after head" insertion mode</a></li><li><a href="tokenization.html#parsing-main-inbody"><span class="secno">8.2.5.10 </span>The "in body" insertion mode</a></li><li><a href="tokenization.html#parsing-main-incdata"><span class="secno">8.2.5.11 </span>The "text" insertion mode</a></li><li><a href="tokenization.html#parsing-main-intable"><span class="secno">8.2.5.12 </span>The "in table" insertion mode</a></li><li><a href="tokenization.html#parsing-main-intabletext"><span class="secno">8.2.5.13 </span>The "in table text" insertion mode</a></li><li><a href="tokenization.html#parsing-main-incaption"><span class="secno">8.2.5.14 </span>The "in caption" insertion mode</a></li><li><a href="tokenization.html#parsing-main-incolgroup"><span class="secno">8.2.5.15 </span>The "in column group" insertion mode</a></li><li><a href="tokenization.html#parsing-main-intbody"><span class="secno">8.2.5.16 </span>The "in table body" insertion mode</a></li><li><a href="tokenization.html#parsing-main-intr"><span class="secno">8.2.5.17 </span>The "in row" insertion mode</a></li><li><a href="tokenization.html#parsing-main-intd"><span class="secno">8.2.5.18 </span>The "in cell" insertion mode</a></li><li><a href="tokenization.html#parsing-main-inselect"><span class="secno">8.2.5.19 </span>The "in select" insertion mode</a></li><li><a href="tokenization.html#parsing-main-inselectintable"><span class="secno">8.2.5.20 </span>The "in select in table" insertion mode</a></li><li><a href="tokenization.html#parsing-main-inforeign"><span class="secno">8.2.5.21 </span>The "in foreign content" insertion mode</a></li><li><a href="tokenization.html#parsing-main-afterbody"><span class="secno">8.2.5.22 </span>The "after body" insertion mode</a></li><li><a href="tokenization.html#parsing-main-inframeset"><span class="secno">8.2.5.23 </span>The "in frameset" insertion mode</a></li><li><a href="tokenization.html#parsing-main-afterframeset"><span class="secno">8.2.5.24 </span>The "after frameset" insertion mode</a></li><li><a href="tokenization.html#the-after-after-body-insertion-mode"><span class="secno">8.2.5.25 </span>The "after after body" insertion mode</a></li><li><a href="tokenization.html#the-after-after-frameset-insertion-mode"><span class="secno">8.2.5.26 </span>The "after after frameset" insertion mode</a></li></ol></li></ol></li></ol></li></ol></div><div class="impl">
 
-  <h4 id="tokenization"><span class="secno">8.2.4 </span><dfn>Tokenization</dfn></h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="tokenization"><span class="secno">8.2.4 </span><dfn>Tokenization</dfn></h4>
 
   <p>Implementations must act as if they used the following state
   machine to tokenize HTML. The state machine must start in the
@@ -391,7 +438,7 @@
   error, by unicode, then EOF, ending with "anything else" -->
 
 
-  <h5 id="data-state"><span class="secno">8.2.4.1 </span><dfn>Data state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="data-state"><span class="secno">8.2.4.1 </span><dfn>Data state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -402,6 +449,10 @@
    <dt>U+003C LESS-THAN SIGN (&lt;)</dt>
    <dd>Switch to the <a href="#tag-open-state">tag open state</a>.</dd>
 
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Emit the <a href="parsing.html#current-input-character">current input
+   character</a> as a character token.</dd>
+
    <dt>EOF</dt>
    <dd>Emit an end-of-file token.</dd>
 
@@ -409,7 +460,7 @@
    <dd>Emit the <a href="parsing.html#current-input-character">current input character</a> as a character
    token.</dd>
 
-  </dl><h5 id="character-reference-in-data-state"><span class="secno">8.2.4.2 </span><dfn>Character reference in data state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="character-reference-in-data-state"><span class="secno">8.2.4.2 </span><dfn>Character reference in data state</dfn></h5>
 
   <p>Attempt to <a href="#consume-a-character-reference">consume a character reference</a>, with no
   <a href="#additional-allowed-character">additional allowed character</a>.</p>
@@ -422,7 +473,7 @@
   <p>Finally, switch to the <a href="#data-state">data state</a>.</p>
 
 
-  <h5 id="rcdata-state"><span class="secno">8.2.4.3 </span><dfn>RCDATA state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="rcdata-state"><span class="secno">8.2.4.3 </span><dfn>RCDATA state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -432,6 +483,10 @@
 
    <dt>U+003C LESS-THAN SIGN (&lt;)</dt>
    <dd>Switch to the <a href="#rcdata-less-than-sign-state">RCDATA less-than sign state</a>.</dd>
+
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Emit a U+FFFD REPLACEMENT CHARACTER
+   character token.</dd>
 
    <dt>EOF</dt>
    <dd>Emit an end-of-file token.</dd>
@@ -453,13 +508,17 @@
   <p>Finally, switch to the <a href="#rcdata-state">RCDATA state</a>.</p>
 
 
-  <h5 id="rawtext-state"><span class="secno">8.2.4.5 </span><dfn>RAWTEXT state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="rawtext-state"><span class="secno">8.2.4.5 </span><dfn>RAWTEXT state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
   <dl class="switch"><dt>U+003C LESS-THAN SIGN (&lt;)</dt>
    <dd>Switch to the <a href="#rawtext-less-than-sign-state">RAWTEXT less-than sign state</a>.</dd>
 
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Emit a U+FFFD REPLACEMENT CHARACTER
+   character token.</dd>
+
    <dt>EOF</dt>
    <dd>Emit an end-of-file token.</dd>
 
@@ -467,13 +526,17 @@
    <dd>Emit the <a href="parsing.html#current-input-character">current input character</a> as a character
    token.</dd>
 
-  </dl><h5 id="script-data-state"><span class="secno">8.2.4.6 </span><dfn>Script data state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="script-data-state"><span class="secno">8.2.4.6 </span><dfn>Script data state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
   <dl class="switch"><dt>U+003C LESS-THAN SIGN (&lt;)</dt>
    <dd>Switch to the <a href="#script-data-less-than-sign-state">script data less-than sign state</a>.</dd>
 
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Emit a U+FFFD REPLACEMENT CHARACTER
+   character token.</dd>
+
    <dt>EOF</dt>
    <dd>Emit an end-of-file token.</dd>
 
@@ -481,18 +544,22 @@
    <dd>Emit the <a href="parsing.html#current-input-character">current input character</a> as a character
    token.</dd>
 
-  </dl><h5 id="plaintext-state"><span class="secno">8.2.4.7 </span><dfn>PLAINTEXT state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="plaintext-state"><span class="secno">8.2.4.7 </span><dfn>PLAINTEXT state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
-  <dl class="switch"><dt>EOF</dt>
+  <dl class="switch"><dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Emit a U+FFFD REPLACEMENT CHARACTER
+   character token.</dd>
+
+   <dt>EOF</dt>
    <dd>Emit an end-of-file token.</dd>
 
    <dt>Anything else</dt>
    <dd>Emit the <a href="parsing.html#current-input-character">current input character</a> as a character
    token.</dd>
 
-  </dl><h5 id="tag-open-state"><span class="secno">8.2.4.8 </span><dfn>Tag open state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="tag-open-state"><span class="secno">8.2.4.8 </span><dfn>Tag open state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -554,7 +621,7 @@
    <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#bogus-comment-state">bogus
    comment state</a>.</dd>
 
-  </dl><h5 id="tag-name-state"><span class="secno">8.2.4.10 </span><dfn>Tag name state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="tag-name-state"><span class="secno">8.2.4.10 </span><dfn>Tag name state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -577,6 +644,10 @@
    character</a> (add 0x0020 to the character's code point) to the
    current tag token's tag name.</dd>
 
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Append a U+FFFD REPLACEMENT CHARACTER
+   character to the current tag token's tag name.</dd>
+
    <dt>EOF</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
    <a href="#data-state">data state</a>.</dd>
@@ -585,7 +656,7 @@
    <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the current
    tag token's tag name.</dd>
 
-  </dl><h5 id="rcdata-less-than-sign-state"><span class="secno">8.2.4.11 </span><dfn>RCDATA less-than sign state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="rcdata-less-than-sign-state"><span class="secno">8.2.4.11 </span><dfn>RCDATA less-than sign state</dfn></h5>
   <!-- identical to the RAWTEXT less-than sign state, except s/RAWTEXT/RCDATA/g -->
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
@@ -599,7 +670,7 @@
    <a href="parsing.html#current-input-character">current input character</a> in the <a href="#rcdata-state">RCDATA
    state</a>.</dd>
 
-  </dl><h5 id="rcdata-end-tag-open-state"><span class="secno">8.2.4.12 </span><dfn>RCDATA end tag open state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="rcdata-end-tag-open-state"><span class="secno">8.2.4.12 </span><dfn>RCDATA end tag open state</dfn></h5>
   <!-- identical to the RAWTEXT (and Script data) end tag open state, except s/RAWTEXT/RCDATA/g -->
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
@@ -626,7 +697,7 @@
    character token, and reconsume the <a href="parsing.html#current-input-character">current input
    character</a> in the <a href="#rcdata-state">RCDATA state</a>.</dd>
 
-  </dl><h5 id="rcdata-end-tag-name-state"><span class="secno">8.2.4.13 </span><dfn>RCDATA end tag name state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="rcdata-end-tag-name-state"><span class="secno">8.2.4.13 </span><dfn>RCDATA end tag name state</dfn></h5>
   <!-- identical to the RAWTEXT (and Script data) end tag name state, except s/RAWTEXT/RCDATA/g -->
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
@@ -671,7 +742,7 @@
    the buffer), and reconsume the <a href="parsing.html#current-input-character">current input character</a>
    in the <a href="#rcdata-state">RCDATA state</a>.</dd>
 
-  </dl><h5 id="rawtext-less-than-sign-state"><span class="secno">8.2.4.14 </span><dfn>RAWTEXT less-than sign state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="rawtext-less-than-sign-state"><span class="secno">8.2.4.14 </span><dfn>RAWTEXT less-than sign state</dfn></h5>
   <!-- identical to the RCDATA less-than sign state, except s/RCDATA/RAWTEXT/g -->
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
@@ -685,7 +756,7 @@
    <a href="parsing.html#current-input-character">current input character</a> in the <a href="#rawtext-state">RAWTEXT
    state</a>.</dd>
 
-  </dl><h5 id="rawtext-end-tag-open-state"><span class="secno">8.2.4.15 </span><dfn>RAWTEXT end tag open state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="rawtext-end-tag-open-state"><span class="secno">8.2.4.15 </span><dfn>RAWTEXT end tag open state</dfn></h5>
   <!-- identical to the RCDATA (and Script data) end tag open state, except s/RCDATA/RAWTEXT/g -->
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
@@ -712,7 +783,7 @@
    character token, and reconsume the <a href="parsing.html#current-input-character">current input
    character</a> in the <a href="#rawtext-state">RAWTEXT state</a>.</dd>
 
-  </dl><h5 id="rawtext-end-tag-name-state"><span class="secno">8.2.4.16 </span><dfn>RAWTEXT end tag name state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="rawtext-end-tag-name-state"><span class="secno">8.2.4.16 </span><dfn>RAWTEXT end tag name state</dfn></h5>
   <!-- identical to the RCDATA (and Script data) end tag name state, except s/RCDATA/RAWTEXT/g -->
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
@@ -757,7 +828,7 @@
    the buffer), and reconsume the <a href="parsing.html#current-input-character">current input character</a>
    in the <a href="#rawtext-state">RAWTEXT state</a>.</dd>
 
-  </dl><h5 id="script-data-less-than-sign-state"><span class="secno">8.2.4.17 </span><dfn>Script data less-than sign state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="script-data-less-than-sign-state"><span class="secno">8.2.4.17 </span><dfn>Script data less-than sign state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -775,7 +846,7 @@
    <a href="parsing.html#current-input-character">current input character</a> in the <a href="#script-data-state">script data
    state</a>.</dd>
 
-  </dl><h5 id="script-data-end-tag-open-state"><span class="secno">8.2.4.18 </span><dfn>Script data end tag open state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="script-data-end-tag-open-state"><span class="secno">8.2.4.18 </span><dfn>Script data end tag open state</dfn></h5>
   <!-- identical to the RCDATA (and RAWTEXT) end tag open state, except s/RCDATA/Script data/g -->
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
@@ -802,7 +873,7 @@
    character token, and reconsume the <a href="parsing.html#current-input-character">current input
    character</a> in the <a href="#script-data-state">script data state</a>.</dd>
 
-  </dl><h5 id="script-data-end-tag-name-state"><span class="secno">8.2.4.19 </span><dfn>Script data end tag name state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="script-data-end-tag-name-state"><span class="secno">8.2.4.19 </span><dfn>Script data end tag name state</dfn></h5>
   <!-- identical to the RCDATA (and RAWTEXT) end tag name state, except s/RCDATA/Script data/g -->
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
@@ -847,7 +918,7 @@
    the buffer), and reconsume the <a href="parsing.html#current-input-character">current input character</a>
    in the <a href="#script-data-state">script data state</a>.</dd>
 
-  </dl><h5 id="script-data-escape-start-state"><span class="secno">8.2.4.20 </span><dfn>Script data escape start state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="script-data-escape-start-state"><span class="secno">8.2.4.20 </span><dfn>Script data escape start state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -859,7 +930,7 @@
    <dd>Reconsume the <a href="parsing.html#current-input-character">current input character</a> in the
    <a href="#script-data-state">script data state</a>.</dd>
 
-  </dl><h5 id="script-data-escape-start-dash-state"><span class="secno">8.2.4.21 </span><dfn>Script data escape start dash state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="script-data-escape-start-dash-state"><span class="secno">8.2.4.21 </span><dfn>Script data escape start dash state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -871,7 +942,7 @@
    <dd>Reconsume the <a href="parsing.html#current-input-character">current input character</a> in the
    <a href="#script-data-state">script data state</a>.</dd>
 
-  </dl><h5 id="script-data-escaped-state"><span class="secno">8.2.4.22 </span><dfn>Script data escaped state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="script-data-escaped-state"><span class="secno">8.2.4.22 </span><dfn>Script data escaped state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -883,6 +954,10 @@
    <dd><p>Switch to the <a href="#script-data-escaped-less-than-sign-state">script data escaped less-than sign
    state</a>.</p></dd>
 
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Emit a U+FFFD REPLACEMENT CHARACTER
+   character token.</dd>
+
    <dt>EOF</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
    <a href="#data-state">data state</a>.</dd>
@@ -891,7 +966,7 @@
    <dd>Emit the <a href="parsing.html#current-input-character">current input character</a> as a character
    token.</dd>
 
-  </dl><h5 id="script-data-escaped-dash-state"><span class="secno">8.2.4.23 </span><dfn>Script data escaped dash state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="script-data-escaped-dash-state"><span class="secno">8.2.4.23 </span><dfn>Script data escaped dash state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -903,6 +978,11 @@
    <dd><p>Switch to the <a href="#script-data-escaped-less-than-sign-state">script data escaped less-than sign
    state</a>.</p></dd>
 
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#script-data-escaped-state">script data
+   escaped state</a>. Emit a U+FFFD REPLACEMENT CHARACTER character
+   token.</dd>
+
    <dt>EOF</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
    <a href="#data-state">data state</a>.</dd>
@@ -911,7 +991,7 @@
    <dd>Switch to the <a href="#script-data-escaped-state">script data escaped state</a>. Emit the
    <a href="parsing.html#current-input-character">current input character</a> as a character token.</dd>
 
-  </dl><h5 id="script-data-escaped-dash-dash-state"><span class="secno">8.2.4.24 </span><dfn>Script data escaped dash dash state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="script-data-escaped-dash-dash-state"><span class="secno">8.2.4.24 </span><dfn>Script data escaped dash dash state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -926,6 +1006,11 @@
    <dd>Switch to the <a href="#script-data-state">script data state</a>. Emit a U+003E
    GREATER-THAN SIGN character token.</dd>
 
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#script-data-escaped-state">script data
+   escaped state</a>. Emit a U+FFFD REPLACEMENT CHARACTER character
+   token.</dd>
+
    <dt>EOF</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
    <a href="#data-state">data state</a>.</dd>
@@ -934,7 +1019,7 @@
    <dd>Switch to the <a href="#script-data-escaped-state">script data escaped state</a>. Emit the
    <a href="parsing.html#current-input-character">current input character</a> as a character token.</dd>
 
-  </dl><h5 id="script-data-escaped-less-than-sign-state"><span class="secno">8.2.4.25 </span><dfn>Script data escaped less-than sign state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="script-data-escaped-less-than-sign-state"><span class="secno">8.2.4.25 </span><dfn>Script data escaped less-than sign state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -962,7 +1047,7 @@
    <a href="parsing.html#current-input-character">current input character</a> in the <a href="#script-data-escaped-state">script data
    escaped state</a>.</dd>
 
-  </dl><h5 id="script-data-escaped-end-tag-open-state"><span class="secno">8.2.4.26 </span><dfn>Script data escaped end tag open state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="script-data-escaped-end-tag-open-state"><span class="secno">8.2.4.26 </span><dfn>Script data escaped end tag open state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -988,7 +1073,7 @@
    character token, and reconsume the <a href="parsing.html#current-input-character">current input
    character</a> in the <a href="#script-data-escaped-state">script data escaped state</a>.</dd>
 
-  </dl><h5 id="script-data-escaped-end-tag-name-state"><span class="secno">8.2.4.27 </span><dfn>Script data escaped end tag name state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="script-data-escaped-end-tag-name-state"><span class="secno">8.2.4.27 </span><dfn>Script data escaped end tag name state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -1032,7 +1117,7 @@
    the buffer), and reconsume the <a href="parsing.html#current-input-character">current input character</a>
    in the <a href="#script-data-escaped-state">script data escaped state</a>.</dd>
 
-  </dl><h5 id="script-data-double-escape-start-state"><span class="secno">8.2.4.28 </span><dfn>Script data double escape start state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="script-data-double-escape-start-state"><span class="secno">8.2.4.28 </span><dfn>Script data double escape start state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -1063,7 +1148,7 @@
    <dd>Reconsume the <a href="parsing.html#current-input-character">current input character</a> in the
    <a href="#script-data-escaped-state">script data escaped state</a>.</dd>
 
-  </dl><h5 id="script-data-double-escaped-state"><span class="secno">8.2.4.29 </span><dfn>Script data double escaped state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="script-data-double-escaped-state"><span class="secno">8.2.4.29 </span><dfn>Script data double escaped state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -1076,6 +1161,10 @@
    sign state</a>. Emit a U+003C LESS-THAN SIGN character
    token.</p></dd>
 
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Emit a U+FFFD REPLACEMENT CHARACTER
+   character token.</dd>
+
    <dt>EOF</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
    <a href="#data-state">data state</a>.</dd>
@@ -1084,7 +1173,7 @@
    <dd>Emit the <a href="parsing.html#current-input-character">current input character</a> as a character
    token.</dd>
 
-  </dl><h5 id="script-data-double-escaped-dash-state"><span class="secno">8.2.4.30 </span><dfn>Script data double escaped dash state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="script-data-double-escaped-dash-state"><span class="secno">8.2.4.30 </span><dfn>Script data double escaped dash state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -1097,6 +1186,11 @@
    sign state</a>. Emit a U+003C LESS-THAN SIGN character
    token.</p></dd>
 
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#script-data-double-escaped-state">script data
+   double escaped state</a>. Emit a U+FFFD REPLACEMENT CHARACTER
+   character token.</dd>
+
    <dt>EOF</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
    <a href="#data-state">data state</a>.</dd>
@@ -1106,7 +1200,7 @@
    state</a>. Emit the <a href="parsing.html#current-input-character">current input character</a> as a
    character token.</dd>
 
-  </dl><h5 id="script-data-double-escaped-dash-dash-state"><span class="secno">8.2.4.31 </span><dfn>Script data double escaped dash dash state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="script-data-double-escaped-dash-dash-state"><span class="secno">8.2.4.31 </span><dfn>Script data double escaped dash dash state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -1122,6 +1216,11 @@
    <dd>Switch to the <a href="#script-data-state">script data state</a>. Emit a U+003E
    GREATER-THAN SIGN character token.</dd>
 
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#script-data-double-escaped-state">script data
+   double escaped state</a>. Emit a U+FFFD REPLACEMENT CHARACTER
+   character token.</dd>
+
    <dt>EOF</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
    <a href="#data-state">data state</a>.</dd>
@@ -1131,7 +1230,7 @@
    state</a>. Emit the <a href="parsing.html#current-input-character">current input character</a> as a
    character token.</dd>
 
-  </dl><h5 id="script-data-double-escaped-less-than-sign-state"><span class="secno">8.2.4.32 </span><dfn>Script data double escaped less-than sign state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="script-data-double-escaped-less-than-sign-state"><span class="secno">8.2.4.32 </span><dfn>Script data double escaped less-than sign state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -1144,7 +1243,7 @@
    <dd>Reconsume the <a href="parsing.html#current-input-character">current input character</a> in the
    <a href="#script-data-double-escaped-state">script data double escaped state</a>.</dd>
 
-  </dl><h5 id="script-data-double-escape-end-state"><span class="secno">8.2.4.33 </span><dfn>Script data double escape end state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="script-data-double-escape-end-state"><span class="secno">8.2.4.33 </span><dfn>Script data double escape end state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -1175,7 +1274,7 @@
    <dd>Reconsume the <a href="parsing.html#current-input-character">current input character</a> in the
    <a href="#script-data-double-escaped-state">script data double escaped state</a>.</dd>
 
-  </dl><h5 id="before-attribute-name-state"><span class="secno">8.2.4.34 </span><dfn>Before attribute name state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="before-attribute-name-state"><span class="secno">8.2.4.34 </span><dfn>Before attribute name state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -1200,6 +1299,12 @@
    value to the empty string. Switch to the <a href="#attribute-name-state">attribute name
    state</a>.</dd>
 
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Start a new attribute in the current
+   tag token. Set that attribute's name to a U+FFFD REPLACEMENT
+   CHARACTER character, and its value to the empty string. Switch to
+   the <a href="#attribute-name-state">attribute name state</a>.</dd>
+
    <dt>U+0022 QUOTATION MARK (")</dt>
    <dt>U+0027 APOSTROPHE (')</dt>
    <dt>U+003C LESS-THAN SIGN (&lt;)</dt>
@@ -1213,11 +1318,11 @@
 
    <dt>Anything else</dt>
    <dd>Start a new attribute in the current tag token. Set that
-   attribute's name to the <a href="parsing.html#current-input-character">current input character</a>, and its value to
-   the empty string. Switch to the <a href="#attribute-name-state">attribute name
+   attribute's name to the <a href="parsing.html#current-input-character">current input character</a>, and
+   its value to the empty string. Switch to the <a href="#attribute-name-state">attribute name
    state</a>.</dd>
 
-  </dl><h5 id="attribute-name-state"><span class="secno">8.2.4.35 </span><dfn>Attribute name state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="attribute-name-state"><span class="secno">8.2.4.35 </span><dfn>Attribute name state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -1243,6 +1348,10 @@
    character</a> (add 0x0020 to the character's code point) to the
    current attribute's name.</dd>
 
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Append a U+FFFD REPLACEMENT CHARACTER
+   character to the current attribute's name.</dd>
+
    <dt>U+0022 QUOTATION MARK (")</dt>
    <dt>U+0027 APOSTROPHE (')</dt>
    <dt>U+003C LESS-THAN SIGN (&lt;)</dt>
@@ -1266,7 +1375,7 @@
   associated with it (if any).</p>
 
 
-  <h5 id="after-attribute-name-state"><span class="secno">8.2.4.36 </span><dfn>After attribute name state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="after-attribute-name-state"><span class="secno">8.2.4.36 </span><dfn>After attribute name state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -1294,6 +1403,12 @@
    and its value to the empty string. Switch to the <a href="#attribute-name-state">attribute
    name state</a>.</dd>
 
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Start a new attribute in the current
+   tag token. Set that attribute's name to a U+FFFD REPLACEMENT
+   CHARACTER character, and its value to the empty string. Switch to
+   the <a href="#attribute-name-state">attribute name state</a>.</dd>
+
    <dt>U+0022 QUOTATION MARK (")</dt>
    <dt>U+0027 APOSTROPHE (')</dt>
    <dt>U+003C LESS-THAN SIGN (&lt;)</dt>
@@ -1310,7 +1425,7 @@
    its value to the empty string. Switch to the <a href="#attribute-name-state">attribute name
    state</a>.</dd>
 
-  </dl><h5 id="before-attribute-value-state"><span class="secno">8.2.4.37 </span><dfn>Before attribute value state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="before-attribute-value-state"><span class="secno">8.2.4.37 </span><dfn>Before attribute value state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -1330,6 +1445,11 @@
 
    <dt>U+0027 APOSTROPHE (')</dt>
    <dd>Switch to the <a href="#attribute-value-single-quoted-state">attribute value (single-quoted) state</a>.</dd>
+
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Append a U+FFFD REPLACEMENT CHARACTER
+   character to the current attribute's value. Switch to the
+   <a href="#attribute-value-unquoted-state">attribute value (unquoted) state</a>.</dd>
 
    <dt>U+003E GREATER-THAN SIGN (&gt;)</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
@@ -1362,6 +1482,10 @@
    <dd>Switch to the <a href="#character-reference-in-attribute-value-state">character reference in attribute value
    state</a>, with the <a href="#additional-allowed-character">additional allowed character</a>
    being U+0022 QUOTATION MARK (").</dd>
+
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Append a U+FFFD REPLACEMENT CHARACTER
+   character to the current attribute's value.</dd>
 
    <dt>EOF</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
@@ -1412,6 +1536,10 @@
    <dd>Switch to the <a href="#data-state">data state</a>. Emit the current tag
    token.</dd>
 
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Append a U+FFFD REPLACEMENT CHARACTER
+   character to the current attribute's value.</dd>
+
    <dt>U+0022 QUOTATION MARK (")</dt>
    <dt>U+0027 APOSTROPHE (')</dt>
    <dt>U+003C LESS-THAN SIGN (&lt;)</dt>
@@ -1428,7 +1556,7 @@
    <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the current
    attribute's value.</dd>
 
-  </dl><h5 id="character-reference-in-attribute-value-state"><span class="secno">8.2.4.41 </span><dfn>Character reference in attribute value state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="character-reference-in-attribute-value-state"><span class="secno">8.2.4.41 </span><dfn>Character reference in attribute value state</dfn></h5>
 
   <p>Attempt to <a href="#consume-a-character-reference">consume a character reference</a>.</p>
 
@@ -1468,7 +1596,7 @@
    <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the character in
    the <a href="#before-attribute-name-state">before attribute name state</a>.</dd>
 
-  </dl><h5 id="self-closing-start-tag-state"><span class="secno">8.2.4.43 </span><dfn>Self-closing start tag state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="self-closing-start-tag-state"><span class="secno">8.2.4.43 </span><dfn>Self-closing start tag state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -1485,17 +1613,18 @@
    <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the character in
    the <a href="#before-attribute-name-state">before attribute name state</a>.</dd>
 
-  </dl><h5 id="bogus-comment-state"><span class="secno">8.2.4.44 </span><dfn>Bogus comment state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="bogus-comment-state"><span class="secno">8.2.4.44 </span><dfn>Bogus comment state</dfn></h5>
 
   <p>Consume every character up to and including the first U+003E
   GREATER-THAN SIGN character (&gt;) or the end of the file (EOF),
   whichever comes first. Emit a comment token whose data is the
-  concatenation of all the characters starting from and including
-  the character that caused the state machine to switch into the
-  bogus comment state, up to and including the character immediately
-  before the last consumed character (i.e. up to the character just
-  before the U+003E or EOF character). (If the comment was started
-  by the end of the file (EOF), the token is empty.)</p>
+  concatenation of all the characters starting from and including the
+  character that caused the state machine to switch into the bogus
+  comment state, up to and including the character immediately before
+  the last consumed character (i.e. up to the character just before
+  the U+003E or EOF character), but with any U+0000 NULL characters
+  replaced by U+FFFD REPLACEMENT CHARACTER characters. (If the comment
+  was started by the end of the file (EOF), the token is empty.)</p>
 
   <p>Switch to the <a href="#data-state">data state</a>.</p>
 
@@ -1503,7 +1632,7 @@
   character.</p>
 
 
-  <h5 id="markup-declaration-open-state"><span class="secno">8.2.4.45 </span><dfn>Markup declaration open state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="markup-declaration-open-state"><span class="secno">8.2.4.45 </span><dfn>Markup declaration open state</dfn></h5>
 
   <p>If the next two characters are both U+002D HYPHEN-MINUS
   characters (-), consume those two characters, create a comment token
@@ -1528,12 +1657,17 @@
   comment.</p>
 
 
-  <h5 id="comment-start-state"><span class="secno">8.2.4.46 </span><dfn>Comment start state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="comment-start-state"><span class="secno">8.2.4.46 </span><dfn>Comment start state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
   <dl class="switch"><dt>U+002D HYPHEN-MINUS (-)</dt>
    <dd>Switch to the <a href="#comment-start-dash-state">comment start dash state</a>.</dd>
+
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Append a U+FFFD REPLACEMENT CHARACTER
+   character to the comment token's data. Switch to the <a href="#comment-state">comment
+   state</a>.</dd>
 
    <dt>U+003E GREATER-THAN SIGN (&gt;)</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
@@ -1548,12 +1682,18 @@
    <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the comment
    token's data. Switch to the <a href="#comment-state">comment state</a>.</dd>
 
-  </dl><h5 id="comment-start-dash-state"><span class="secno">8.2.4.47 </span><dfn>Comment start dash state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="comment-start-dash-state"><span class="secno">8.2.4.47 </span><dfn>Comment start dash state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
   <dl class="switch"><dt>U+002D HYPHEN-MINUS (-)</dt>
    <dd>Switch to the <a href="#comment-end-state">comment end state</a></dd>
+
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Append a U+002D HYPHEN-MINUS
+   character (-) and a U+FFFD REPLACEMENT CHARACTER character to the
+   comment token's data. Switch to the <a href="#comment-state">comment
+   state</a>.</dd>
 
    <dt>U+003E GREATER-THAN SIGN (&gt;)</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
@@ -1569,12 +1709,16 @@
    <a href="parsing.html#current-input-character">current input character</a> to the comment token's
    data. Switch to the <a href="#comment-state">comment state</a>.</dd>
 
-  </dl><h5 id="comment-state"><span class="secno">8.2.4.48 </span><dfn id="comment">Comment state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="comment-state"><span class="secno">8.2.4.48 </span><dfn id="comment">Comment state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
   <dl class="switch"><dt>U+002D HYPHEN-MINUS (-)</dt>
    <dd>Switch to the <a href="#comment-end-dash-state">comment end dash state</a></dd>
+
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Append a U+FFFD REPLACEMENT CHARACTER
+   character to the comment token's data.</dd>
 
    <dt>EOF</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Emit the comment token. Reconsume the
@@ -1585,12 +1729,18 @@
    <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the comment
    token's data.</dd>
 
-  </dl><h5 id="comment-end-dash-state"><span class="secno">8.2.4.49 </span><dfn>Comment end dash state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="comment-end-dash-state"><span class="secno">8.2.4.49 </span><dfn>Comment end dash state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
   <dl class="switch"><dt>U+002D HYPHEN-MINUS (-)</dt>
    <dd>Switch to the <a href="#comment-end-state">comment end state</a></dd>
+
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Append a U+002D HYPHEN-MINUS
+   character (-) and a U+FFFD REPLACEMENT CHARACTER character to the
+   comment token's data. Switch to the <a href="#comment-state">comment
+   state</a>.</dd>
 
    <dt>EOF</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Emit the comment token. Reconsume the
@@ -1602,7 +1752,7 @@
    <a href="parsing.html#current-input-character">current input character</a> to the comment token's
    data. Switch to the <a href="#comment-state">comment state</a>.</dd>
 
-  </dl><h5 id="comment-end-state"><span class="secno">8.2.4.50 </span><dfn>Comment end state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="comment-end-state"><span class="secno">8.2.4.50 </span><dfn>Comment end state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -1610,14 +1760,10 @@
    <dd>Switch to the <a href="#data-state">data state</a>. Emit the comment
    token.</dd>
 
-   <dt>U+0009 CHARACTER TABULATION</dt>
-   <dt>U+000A LINE FEED (LF)</dt>
-   <dt>U+000C FORM FEED (FF)</dt>
-   <!--<dt>U+000D CARRIAGE RETURN (CR)</dt>-->
-   <dt>U+0020 SPACE</dt>
+   <dt>U+0000 NULL</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Append two U+002D HYPHEN-MINUS
-   characters (-) and the <a href="parsing.html#current-input-character">current input character</a> to the
-   comment token's data. Switch to the <a href="#comment-end-space-state">comment end space
+   characters (-) and a U+FFFD REPLACEMENT CHARACTER character to the
+   comment token's data. Switch to the <a href="#comment-state">comment
    state</a>.</dd>
 
    <dt>U+0021 EXCLAMATION MARK (!)</dt>
@@ -1642,7 +1788,7 @@
    comment token's data. Switch to the <a href="#comment-state">comment
    state</a>.</dd>
 
-  </dl><h5 id="comment-end-bang-state"><span class="secno">8.2.4.51 </span><dfn>Comment end bang state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="comment-end-bang-state"><span class="secno">8.2.4.51 </span><dfn>Comment end bang state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -1655,6 +1801,12 @@
    <dd>Switch to the <a href="#data-state">data state</a>. Emit the comment
    token.</dd>
 
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Append two U+002D HYPHEN-MINUS
+   characters (-), a U+0021 EXCLAMATION MARK character (!), and a
+   U+FFFD REPLACEMENT CHARACTER character to the comment token's data.
+   Switch to the <a href="#comment-state">comment state</a>.</dd>
+
    <dt>EOF</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Emit the comment token. Reconsume
    the EOF character in the <a href="#data-state">data state</a>.</dd> <!-- see
@@ -1666,34 +1818,7 @@
    character</a> to the comment token's data. Switch to the
    <a href="#comment-state">comment state</a>.</dd>
 
-  </dl><h5 id="comment-end-space-state"><span class="secno">8.2.4.52 </span><dfn>Comment end space state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
-
-  <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
-
-  <dl class="switch"><dt>U+0009 CHARACTER TABULATION</dt>
-   <dt>U+000A LINE FEED (LF)</dt>
-   <dt>U+000C FORM FEED (FF)</dt>
-   <!--<dt>U+000D CARRIAGE RETURN (CR)</dt>-->
-   <dt>U+0020 SPACE</dt>
-   <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the comment token's data.</dd>
-
-   <dt>U+002D HYPHEN-MINUS (-)</dt>
-   <dd>Switch to the <a href="#comment-end-dash-state">comment end dash state</a>.</dd>
-
-   <dt>U+003E GREATER-THAN SIGN (&gt;)</dt>
-   <dd>Switch to the <a href="#data-state">data state</a>. Emit the comment
-   token.</dd>
-
-   <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Emit the comment token. Reconsume
-   the EOF character in the <a href="#data-state">data state</a>.</dd> <!-- see
-   comment in comment end state -->
-
-   <dt>Anything else</dt>
-   <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the comment token's data. Switch
-   to the <a href="#comment-state">comment state</a>.</dd>
-
-  </dl><h5 id="doctype-state"><span class="secno">8.2.4.53 </span><dfn>DOCTYPE state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="doctype-state"><span class="secno">8.2.4.52 </span><dfn>DOCTYPE state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -1713,7 +1838,7 @@
    <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the character in the
    <a href="#before-doctype-name-state">before DOCTYPE name state</a>.</dd>
 
-  </dl><h5 id="before-doctype-name-state"><span class="secno">8.2.4.54 </span><dfn>Before DOCTYPE name state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="before-doctype-name-state"><span class="secno">8.2.4.53 </span><dfn>Before DOCTYPE name state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -1728,6 +1853,11 @@
    <dd>Create a new DOCTYPE token. Set the token's name to the
    lowercase version of the <a href="parsing.html#current-input-character">current input character</a> (add 0x0020 to the
    character's code point). Switch to the <a href="#doctype-name-state">DOCTYPE name
+   state</a>.</dd>
+
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Set the token's name to a U+FFFD
+   REPLACEMENT CHARACTER character. Switch to the <a href="#doctype-name-state">DOCTYPE name
    state</a>.</dd>
 
    <dt>U+003E GREATER-THAN SIGN (&gt;)</dt>
@@ -1745,7 +1875,7 @@
    <a href="parsing.html#current-input-character">current input character</a>. Switch to the <a href="#doctype-name-state">DOCTYPE name
    state</a>.</dd>
 
-  </dl><h5 id="doctype-name-state"><span class="secno">8.2.4.55 </span><dfn>DOCTYPE name state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="doctype-name-state"><span class="secno">8.2.4.54 </span><dfn>DOCTYPE name state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -1765,6 +1895,10 @@
    character</a> (add 0x0020 to the character's code point) to the
    current DOCTYPE token's name.</dd>
 
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Append a U+FFFD REPLACEMENT CHARACTER
+   character to the current DOCTYPE token's name.</dd>
+
    <dt>EOF</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
    <i>force-quirks flag</i> to <i>on</i>. Emit that DOCTYPE token.
@@ -1774,7 +1908,7 @@
    <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the current
    DOCTYPE token's name.</dd>
 
-  </dl><h5 id="after-doctype-name-state"><span class="secno">8.2.4.56 </span><dfn>After DOCTYPE name state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="after-doctype-name-state"><span class="secno">8.2.4.55 </span><dfn>After DOCTYPE name state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -1814,7 +1948,7 @@
 
    </dd>
 
-  </dl><h5 id="after-doctype-public-keyword-state"><span class="secno">8.2.4.57 </span><dfn>After DOCTYPE public keyword state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="after-doctype-public-keyword-state"><span class="secno">8.2.4.56 </span><dfn>After DOCTYPE public keyword state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -1851,7 +1985,7 @@
    <i>force-quirks flag</i> to <i>on</i>. Switch to the <a href="#bogus-doctype-state">bogus
    DOCTYPE state</a>.</dd>
 
-  </dl><h5 id="before-doctype-public-identifier-state"><span class="secno">8.2.4.58 </span><dfn>Before DOCTYPE public identifier state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="before-doctype-public-identifier-state"><span class="secno">8.2.4.57 </span><dfn>Before DOCTYPE public identifier state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -1887,13 +2021,17 @@
    <i>force-quirks flag</i> to <i>on</i>. Switch to the <a href="#bogus-doctype-state">bogus
    DOCTYPE state</a>.</dd>
 
-  </dl><h5 id="doctype-public-identifier-double-quoted-state"><span class="secno">8.2.4.59 </span><dfn>DOCTYPE public identifier (double-quoted) state</dfn></h5>
+  </dl><h5 id="doctype-public-identifier-double-quoted-state"><span class="secno">8.2.4.58 </span><dfn>DOCTYPE public identifier (double-quoted) state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
   <dl class="switch"><dt>U+0022 QUOTATION MARK (")</dt>
    <dd>Switch to the <a href="#after-doctype-public-identifier-state">after DOCTYPE public identifier state</a>.</dd>
 
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Append a U+FFFD REPLACEMENT CHARACTER
+   character to the current DOCTYPE token's public identifier.</dd>
+
    <dt>U+003E GREATER-THAN SIGN (&gt;)</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
    <i>force-quirks flag</i> to <i>on</i>. Switch to the <a href="#data-state">data
@@ -1905,16 +2043,20 @@
    Reconsume the EOF character in the <a href="#data-state">data state</a>.</dd>
 
    <dt>Anything else</dt>
-   <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the current DOCTYPE
-   token's public identifier.</dd>
+   <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the current
+   DOCTYPE token's public identifier.</dd>
 
-  </dl><h5 id="doctype-public-identifier-single-quoted-state"><span class="secno">8.2.4.60 </span><dfn>DOCTYPE public identifier (single-quoted) state</dfn></h5>
+  </dl><h5 id="doctype-public-identifier-single-quoted-state"><span class="secno">8.2.4.59 </span><dfn>DOCTYPE public identifier (single-quoted) state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
   <dl class="switch"><dt>U+0027 APOSTROPHE (')</dt>
    <dd>Switch to the <a href="#after-doctype-public-identifier-state">after DOCTYPE public identifier state</a>.</dd>
 
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Append a U+FFFD REPLACEMENT CHARACTER
+   character to the current DOCTYPE token's public identifier.</dd>
+
    <dt>U+003E GREATER-THAN SIGN (&gt;)</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
    <i>force-quirks flag</i> to <i>on</i>. Switch to the <a href="#data-state">data
@@ -1926,10 +2068,10 @@
    Reconsume the EOF character in the <a href="#data-state">data state</a>.</dd>
 
    <dt>Anything else</dt>
-   <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the current DOCTYPE
-   token's public identifier.</dd>
+   <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the current
+   DOCTYPE token's public identifier.</dd>
 
-  </dl><h5 id="after-doctype-public-identifier-state"><span class="secno">8.2.4.61 </span><dfn>After DOCTYPE public identifier state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="after-doctype-public-identifier-state"><span class="secno">8.2.4.60 </span><dfn>After DOCTYPE public identifier state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -1965,7 +2107,7 @@
    <i>force-quirks flag</i> to <i>on</i>. Switch to the <a href="#bogus-doctype-state">bogus
    DOCTYPE state</a>.</dd>
 
-  </dl><h5 id="between-doctype-public-and-system-identifiers-state"><span class="secno">8.2.4.62 </span><dfn>Between DOCTYPE public and system identifiers state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="between-doctype-public-and-system-identifiers-state"><span class="secno">8.2.4.61 </span><dfn>Between DOCTYPE public and system identifiers state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -2000,7 +2142,7 @@
    <i>force-quirks flag</i> to <i>on</i>. Switch to the <a href="#bogus-doctype-state">bogus
    DOCTYPE state</a>.</dd>
 
-  </dl><h5 id="after-doctype-system-keyword-state"><span class="secno">8.2.4.63 </span><dfn>After DOCTYPE system keyword state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="after-doctype-system-keyword-state"><span class="secno">8.2.4.62 </span><dfn>After DOCTYPE system keyword state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -2037,7 +2179,7 @@
    <i>force-quirks flag</i> to <i>on</i>. Switch to the <a href="#bogus-doctype-state">bogus
    DOCTYPE state</a>.</dd>
 
-  </dl><h5 id="before-doctype-system-identifier-state"><span class="secno">8.2.4.64 </span><dfn>Before DOCTYPE system identifier state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="before-doctype-system-identifier-state"><span class="secno">8.2.4.63 </span><dfn>Before DOCTYPE system identifier state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -2073,7 +2215,7 @@
    <i>force-quirks flag</i> to <i>on</i>. Switch to the <a href="#bogus-doctype-state">bogus
    DOCTYPE state</a>.</dd>
 
-  </dl><h5 id="doctype-system-identifier-double-quoted-state"><span class="secno">8.2.4.65 </span><dfn>DOCTYPE system identifier (double-quoted) state</dfn></h5>
+  </dl><h5 id="doctype-system-identifier-double-quoted-state"><span class="secno">8.2.4.64 </span><dfn>DOCTYPE system identifier (double-quoted) state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -2081,6 +2223,10 @@
    <dd>Switch to the <a href="#after-doctype-system-identifier-state">after DOCTYPE system identifier
    state</a>.</dd>
 
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Append a U+FFFD REPLACEMENT CHARACTER
+   character to the current DOCTYPE token's system identifier.</dd>
+
    <dt>U+003E GREATER-THAN SIGN (&gt;)</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
    <i>force-quirks flag</i> to <i>on</i>. Switch to the <a href="#data-state">data
@@ -2095,7 +2241,7 @@
    <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the current
    DOCTYPE token's system identifier.</dd>
 
-  </dl><h5 id="doctype-system-identifier-single-quoted-state"><span class="secno">8.2.4.66 </span><dfn>DOCTYPE system identifier (single-quoted) state</dfn></h5>
+  </dl><h5 id="doctype-system-identifier-single-quoted-state"><span class="secno">8.2.4.65 </span><dfn>DOCTYPE system identifier (single-quoted) state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -2103,6 +2249,10 @@
    <dd>Switch to the <a href="#after-doctype-system-identifier-state">after DOCTYPE system identifier
    state</a>.</dd>
 
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Append a U+FFFD REPLACEMENT CHARACTER
+   character to the current DOCTYPE token's system identifier.</dd>
+
    <dt>U+003E GREATER-THAN SIGN (&gt;)</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
    <i>force-quirks flag</i> to <i>on</i>. Switch to the <a href="#data-state">data
@@ -2117,7 +2267,7 @@
    <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the current
    DOCTYPE token's system identifier.</dd>
 
-  </dl><h5 id="after-doctype-system-identifier-state"><span class="secno">8.2.4.67 </span><dfn>After DOCTYPE system identifier state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="after-doctype-system-identifier-state"><span class="secno">8.2.4.66 </span><dfn>After DOCTYPE system identifier state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -2142,7 +2292,7 @@
    state</a>. (This does <em>not</em> set the DOCTYPE token's
    <i>force-quirks flag</i> to <i>on</i>.)</dd>
 
-  </dl><h5 id="bogus-doctype-state"><span class="secno">8.2.4.68 </span><dfn>Bogus DOCTYPE state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="bogus-doctype-state"><span class="secno">8.2.4.67 </span><dfn>Bogus DOCTYPE state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
 
@@ -2157,7 +2307,7 @@
    <dt>Anything else</dt>
    <dd>Ignore the character.</dd>
 
-  </dl><h5 id="cdata-section-state"><span class="secno">8.2.4.69 </span><dfn>CDATA section state</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="cdata-section-state"><span class="secno">8.2.4.68 </span><dfn>CDATA section state</dfn></h5>
 
   <p>Consume every character up to the next occurrence of the three
   character sequence U+005D RIGHT SQUARE BRACKET U+005D RIGHT SQUARE
@@ -2165,7 +2315,9 @@
   end of the file (EOF), whichever comes first. Emit a series of
   character tokens consisting of all the characters consumed except
   the matching three character sequence at the end (if one was found
-  before the end of the file).</p>
+  before the end of the file)<!--(not needed; taken care of by the
+  tree constructor), but with any U+0000 NULL characters replaced by
+  U+FFFD REPLACEMENT CHARACTER characters-->.</p>
 
   <p>Switch to the <a href="#data-state">data state</a>.</p>
 
@@ -2174,7 +2326,7 @@
 
 
 
-  <h5 id="tokenizing-character-references"><span class="secno">8.2.4.70 </span>Tokenizing character references</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="tokenizing-character-references"><span class="secno">8.2.4.69 </span>Tokenizing character references</h5>
 
   <p>This section defines how to <dfn id="consume-a-character-reference">consume a character
   reference</dfn>. This definition is used when parsing character
@@ -2354,9 +2506,10 @@
     character matched is not a U+003B SEMICOLON character (;), there
     is a <a href="parsing.html#parse-error">parse error</a>.</p>
 
-    <p>Return a character token for the character corresponding to the
-    character reference name (as given by the second column of the
-    <a href="named-character-references.html#named-character-references">named character references</a> table).</p>
+    <p>Return one or two character tokens for the character(s)
+    corresponding to the character reference name (as given by the
+    second column of the <a href="named-character-references.html#named-character-references">named character references</a>
+    table).</p>
 
     <div class="example">
 
@@ -2381,7 +2534,7 @@
   thing to do is to close some formatting elements from the middle of
   the stack when you hit a limit, or something. -->
 
-  <h4 id="tree-construction"><span class="secno">8.2.5 </span><dfn>Tree construction</dfn></h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="tree-construction"><span class="secno">8.2.5 </span><dfn>Tree construction</dfn></h4>
 
   <p>The input to the tree construction stage is a sequence of tokens
   from the <a href="#tokenization">tokenization</a> stage. The tree construction
@@ -2455,7 +2608,7 @@ document.body.appendChild(text);
   constraints.</p>
 
 
-  <h5 id="creating-and-inserting-elements"><span class="secno">8.2.5.1 </span>Creating and inserting elements</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="creating-and-inserting-elements"><span class="secno">8.2.5.1 </span>Creating and inserting elements</h5>
 
   <p>When the steps below require the UA to <dfn id="create-an-element-for-the-token" title="create an&#10;  element for the token">create an element for a token</dfn> in a
   particular namespace, the UA must create a node implementing the
@@ -2501,8 +2654,9 @@ document.body.appendChild(text);
   and the newly created element doesn't have a <code title="attr-fae-form"><a href="association-of-controls-and-forms.html#attr-fae-form">form</a></code> attribute, the user agent must
   <a href="association-of-controls-and-forms.html#concept-form-association" title="concept-form-association">associate</a> the newly
   created element with the <code><a href="forms.html#the-form-element">form</a></code> element pointed to by the
-  <a href="parsing.html#form-element-pointer"><code title="">form</code> element pointer</a> before
-  inserting it wherever it is to be inserted.</p>
+  <a href="parsing.html#form-element-pointer"><code title="">form</code> element pointer</a> when the
+  element is inserted, instead of running the <a href="association-of-controls-and-forms.html#reset-the-form-owner">reset the form
+  owner</a> algorithm.</p>
 
   <hr/><p>When the steps below require the UA to <dfn id="insert-a-foreign-element">insert a foreign
   element</dfn> for a token, the UA must first <a href="#create-an-element-for-the-token">create an element
@@ -2633,7 +2787,7 @@ document.body.appendChild(text);
 
    </li><li><p>Then, switch the <a href="parsing.html#insertion-mode">insertion mode</a> to "<a href="#parsing-main-incdata" title="insertion mode: text">text</a>".</p></li>
 
-  </ol><h5 id="closing-elements-that-have-implied-end-tags"><span class="secno">8.2.5.2 </span>Closing elements that have implied end tags</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </ol><h5 id="closing-elements-that-have-implied-end-tags"><span class="secno">8.2.5.2 </span>Closing elements that have implied end tags</h5>
 
   <p>When the steps below require the UA to <dfn id="generate-implied-end-tags">generate implied end
   tags</dfn>, then, while the <a href="parsing.html#current-node">current node</a> is a
@@ -2649,7 +2803,7 @@ document.body.appendChild(text);
   above steps as if that element was not in the above list.</p>
 
 
-  <h5 id="foster-parenting"><span class="secno">8.2.5.3 </span>Foster parenting</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="foster-parenting"><span class="secno">8.2.5.3 </span>Foster parenting</h5>
 
   <p>Foster parenting happens when content is misnested in tables.</p>
 
@@ -2686,7 +2840,7 @@ document.body.appendChild(text);
 
 
 
-  <h5 id="the-initial-insertion-mode"><span class="secno">8.2.5.4 </span>The "<dfn title="insertion mode: initial">initial</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="the-initial-insertion-mode"><span class="secno">8.2.5.4 </span>The "<dfn title="insertion mode: initial">initial</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#the-initial-insertion-mode" title="insertion&#10;  mode: initial">initial</a>", tokens must be handled as follows:</p>
 
@@ -2879,7 +3033,7 @@ document.body.appendChild(text);
 
    </dd>
 
-  </dl><h5 id="the-before-html-insertion-mode"><span class="secno">8.2.5.5 </span>The "<dfn title="insertion mode: before html">before html</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="the-before-html-insertion-mode"><span class="secno">8.2.5.5 </span>The "<dfn title="insertion mode: before html">before html</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#the-before-html-insertion-mode" title="insertion&#10;  mode: before html">before html</a>", tokens must be handled as follows:</p>
 
@@ -2961,7 +3115,7 @@ document.body.appendChild(text);
   as described in the next section.</p>
 
 
-  <h5 id="the-before-head-insertion-mode"><span class="secno">8.2.5.6 </span>The "<dfn title="insertion mode: before head">before head</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="the-before-head-insertion-mode"><span class="secno">8.2.5.6 </span>The "<dfn title="insertion mode: before head">before head</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#the-before-head-insertion-mode" title="insertion&#10;  mode: before head">before head</a>", tokens must be handled as follows:</p>
 
@@ -3026,7 +3180,7 @@ document.body.appendChild(text);
 
    </dd>
 
-  </dl><h5 id="parsing-main-inhead"><span class="secno">8.2.5.7 </span>The "<dfn title="insertion mode: in head">in head</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="parsing-main-inhead"><span class="secno">8.2.5.7 </span>The "<dfn title="insertion mode: in head">in head</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#parsing-main-inhead" title="insertion&#10;  mode: in head">in head</a>", tokens must be handled as follows:</p>
 
@@ -3190,7 +3344,7 @@ document.body.appendChild(text);
 
    </dd>
 
-  </dl><h5 id="parsing-main-inheadnoscript"><span class="secno">8.2.5.8 </span>The "<dfn title="insertion mode: in head noscript">in head noscript</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="parsing-main-inheadnoscript"><span class="secno">8.2.5.8 </span>The "<dfn title="insertion mode: in head noscript">in head noscript</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#parsing-main-inheadnoscript" title="insertion&#10;  mode: in head noscript">in head noscript</a>", tokens must be handled as follows:</p>
 
@@ -3250,7 +3404,7 @@ document.body.appendChild(text);
 
    </dd>
 
-  </dl><h5 id="the-after-head-insertion-mode"><span class="secno">8.2.5.9 </span>The "<dfn title="insertion mode: after head">after head</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="the-after-head-insertion-mode"><span class="secno">8.2.5.9 </span>The "<dfn title="insertion mode: after head">after head</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#the-after-head-insertion-mode" title="insertion&#10;  mode: after head">after head</a>", tokens must be handled as follows:</p>
 
@@ -3340,11 +3494,27 @@ document.body.appendChild(text);
     token.</p>
    </dd>
 
-  </dl><h5 id="parsing-main-inbody"><span class="secno">8.2.5.10 </span>The "<dfn title="insertion mode: in body">in body</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="parsing-main-inbody"><span class="secno">8.2.5.10 </span>The "<dfn title="insertion mode: in body">in body</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#parsing-main-inbody" title="insertion&#10;  mode: in body">in body</a>", tokens must be handled as follows:</p>
 
-  <dl class="switch"><dt>A character token</dt>
+  <dl class="switch"><dt>A character token that is U+0000 NULL</dt>
+   <dd>
+
+    <p><a href="parsing.html#parse-error">Parse error</a>. Ignore the token.</p>
+
+    <!-- The D-Link DSL-G604T ADSL router has a zero byte in its
+         configuration UI before a <frameset>, which is why U+0000 is
+         special-cased here.
+         refs: https://bugzilla.mozilla.org/show_bug.cgi?id=563526
+               http://www.w3.org/Bugs/Public/show_bug.cgi?id=9659
+    -->
+
+   </dd>
+
+   <dt>A character token that is one of U+0009 CHARACTER TABULATION,
+   U+000A LINE FEED (LF), U+000C FORM FEED (FF), U+000D CARRIAGE
+   RETURN (CR), or U+0020 SPACE</dt>
    <dd>
 
     <p><a href="parsing.html#reconstruct-the-active-formatting-elements">Reconstruct the active formatting elements</a>, if
@@ -3353,19 +3523,18 @@ document.body.appendChild(text);
     <p><a href="#insert-a-character" title="insert a character">Insert the token's
     character</a> into the <a href="parsing.html#current-node">current node</a>.</p>
 
-    <p>If the token is not one of U+0009 CHARACTER TABULATION, U+000A
-    LINE FEED (LF), U+000C FORM FEED (FF), U+000D CARRIAGE RETURN
-    (CR), U+0020 SPACE, or U+FFFD REPLACEMENT CHARACTER, then set the
-    <a href="parsing.html#frameset-ok-flag">frameset-ok flag</a> to "not ok".</p>
+   </dd>
 
-    <!-- U+FFFD REPLACEMENT CHARACTER is in this list because the
-         D-Link DSL-G604T ADSL router has a zero byte in its
-         configuration UI before a <frameset>. Zero bytes get
-         converted to U+FFFD, which (without that character in this
-         list) would mean the <frameset> would be ignored.
-         refs: https://bugzilla.mozilla.org/show_bug.cgi?id=563526
-               http://www.w3.org/Bugs/Public/show_bug.cgi?id=9659
-    -->
+   <dt>Any other character token</dt>
+   <dd>
+
+    <p><a href="parsing.html#reconstruct-the-active-formatting-elements">Reconstruct the active formatting elements</a>, if
+    any.</p>
+
+    <p><a href="#insert-a-character" title="insert a character">Insert the token's
+    character</a> into the <a href="parsing.html#current-node">current node</a>.</p>
+
+    <p>Set the <a href="parsing.html#frameset-ok-flag">frameset-ok flag</a> to "not ok".</p>
 
    </dd>
 
@@ -3407,11 +3576,12 @@ document.body.appendChild(text);
     <a href="parsing.html#stack-of-open-elements">stack of open elements</a> has only one node on it,
     then ignore the token. (<a href="the-end.html#fragment-case">fragment case</a>)</p>
 
-    <p>Otherwise, for each attribute on the token, check to see if
-    the attribute is already present on the <code><a href="sections.html#the-body-element-0">body</a></code>
-    element (the second element) on the <a href="parsing.html#stack-of-open-elements">stack of open
-    elements</a>. If it is not, add the attribute and its
-    corresponding value to that element.</p>
+    <p>Otherwise, set the <a href="parsing.html#frameset-ok-flag">frameset-ok flag</a> to "not ok";
+    then, for each attribute on the token, check to see if the
+    attribute is already present on the <code><a href="sections.html#the-body-element-0">body</a></code> element (the
+    second element) on the <a href="parsing.html#stack-of-open-elements">stack of open elements</a>, and if
+    it is not, add the attribute and its corresponding value to that
+    element.</p>
 
    </dd>
 
@@ -3506,10 +3676,9 @@ document.body.appendChild(text);
 
    <!-- the normal ones -->
    <dt>A start tag whose tag name is one of: "address", "article",
-   "aside", "blockquote", "center", <!--v2DATAGRID"datagrid",-->
-   "details", "dir", "div", "dl", "fieldset", "figcaption", "figure",
-   "footer", "header", "hgroup", "menu", "nav", "ol", "p", "section",
-   "summary", "ul"</dt>
+   "aside", "blockquote", "center", "details", "dir", "div", "dl",
+   "fieldset", "figcaption", "figure", "footer", "header", "hgroup",
+   "menu", "nav", "ol", "p", "section", "summary", "ul"</dt>
    <dd>
 
     <!-- As of May 2008 this doesn't match any browser exactly, but is
@@ -3720,11 +3889,10 @@ document.body.appendChild(text);
 
    <!-- the normal ones -->
    <dt>An end tag whose tag name is one of: "address", "article",
-   "aside", "blockquote", "button", "center",
-   <!--v2DATAGRID"datagrid",--> "details", "dir", "div", "dl",
-   "fieldset", "figcaption", "figure", "footer", "header", "hgroup",
-   "listing", "menu", "nav", "ol", "pre", "section", "summary",
-   "ul"</dt>
+   "aside", "blockquote", "button", "center", "details", "dir", "div",
+   "dl", "fieldset", "figcaption", "figure", "footer", "header",
+   "hgroup", "listing", "menu", "nav", "ol", "pre", "section",
+   "summary", "ul"</dt>
    <dd>
 
     <p>If the <a href="parsing.html#stack-of-open-elements">stack of open elements</a> does not <a href="parsing.html#has-an-element-in-scope" title="has an element in scope">have an element in scope</a>
@@ -3776,8 +3944,8 @@ document.body.appendChild(text);
    <dt>An end tag whose tag name is "p"</dt>
    <dd>
 
-    <p>If the <a href="parsing.html#stack-of-open-elements">stack of open elements</a> does not <a href="parsing.html#has-an-element-in-button-scope" title="has an element in button scope">have an element in sbutton
-    cope</a> with the same tag name as that of the token, then this
+    <p>If the <a href="parsing.html#stack-of-open-elements">stack of open elements</a> does not <a href="parsing.html#has-an-element-in-button-scope" title="has an element in button scope">have an element in button
+    scope</a> with the same tag name as that of the token, then this
     is a <a href="parsing.html#parse-error">parse error</a>; act as if a start tag with the tag
     name "p" had been seen, then reprocess the current token.</p>
 
@@ -3907,9 +4075,9 @@ document.body.appendChild(text);
     <p><a href="parsing.html#reconstruct-the-active-formatting-elements">Reconstruct the active formatting elements</a>, if
     any.</p>
 
-    <p><a href="#insert-an-html-element">Insert an HTML element</a> for the token. Add that
-    element to the <a href="parsing.html#list-of-active-formatting-elements">list of active formatting
-    elements</a>.</p>
+    <p><a href="#insert-an-html-element">Insert an HTML element</a> for the token. <a href="parsing.html#push-onto-the-list-of-active-formatting-elements">Push
+    onto the list of active formatting elements</a> that
+    element.</p>
 
    </dd>
 
@@ -3920,9 +4088,9 @@ document.body.appendChild(text);
     <p><a href="parsing.html#reconstruct-the-active-formatting-elements">Reconstruct the active formatting elements</a>, if
     any.</p>
 
-    <p><a href="#insert-an-html-element">Insert an HTML element</a> for the token. Add that
-    element to the <a href="parsing.html#list-of-active-formatting-elements">list of active formatting
-    elements</a>.</p>
+    <p><a href="#insert-an-html-element">Insert an HTML element</a> for the token. <a href="parsing.html#push-onto-the-list-of-active-formatting-elements">Push
+    onto the list of active formatting elements</a> that
+    element.</p>
 
    </dd>
 
@@ -3938,9 +4106,9 @@ document.body.appendChild(text);
     <a href="parsing.html#reconstruct-the-active-formatting-elements">reconstruct the active formatting elements</a>, if
     any.</p>
 
-    <p><a href="#insert-an-html-element">Insert an HTML element</a> for the token. Add that
-    element to the <a href="parsing.html#list-of-active-formatting-elements">list of active formatting
-    elements</a>.</p>
+    <p><a href="#insert-an-html-element">Insert an HTML element</a> for the token. <a href="parsing.html#push-onto-the-list-of-active-formatting-elements">Push
+    onto the list of active formatting elements</a> that
+    element.</p>
 
    </dd>
 
@@ -3951,11 +4119,21 @@ document.body.appendChild(text);
 
     <p>Run these steps:</p>
 
-    <ol><li>
+    <ol><li><p>Let <var title="">outer loop counter</var> be
+     zero.</p></li>
 
-      <p>Let the <var title="">formatting element</var> be the
-      last element in the <a href="parsing.html#list-of-active-formatting-elements">list of active formatting
-      elements</a> that:</p>
+     <li><p><i>Outer loop</i>: If <var title="">outer loop
+     counter</var> is greater than or equal to eight, then abort these
+     steps.</p></li>
+
+     <li><p>Increment <var title="">outer loop counter</var> by
+     one.</p></li>
+
+     <li>
+
+      <p>Let the <var title="">formatting element</var> be the last
+      element in the <a href="parsing.html#list-of-active-formatting-elements">list of active formatting elements</a>
+      that:</p>
 
       <ul><li>is between the end of the list and the last scope
        marker in the list, if any, or the start of the list
@@ -3963,15 +4141,19 @@ document.body.appendChild(text);
 
        <li>has the same tag name as the token.</li>
 
-      </ul><p>If there is no such node, or, if that node is also in the
-      <a href="parsing.html#stack-of-open-elements">stack of open elements</a> but the element is not <a href="parsing.html#has-an-element-in-scope" title="has an element in scope">in scope</a>, then this is a
-      <a href="parsing.html#parse-error">parse error</a>; ignore the token, and abort these
-      steps.</p>
+      </ul><p>If there is no such node, then abort these steps and instead
+      act as described in the "any other end tag" entry below.</p>
 
       <p>Otherwise, if there is such a node, but that node is not
       in the <a href="parsing.html#stack-of-open-elements">stack of open elements</a>, then this is a
       <a href="parsing.html#parse-error">parse error</a>; remove the element from the list,
       and abort these steps.</p>
+
+      <p>Otherwise, if there is such a node, and that node is also in
+      the <a href="parsing.html#stack-of-open-elements">stack of open elements</a>, but the element is not
+      <a href="parsing.html#has-an-element-in-scope" title="has an element in scope">in scope</a>, then this
+      is a <a href="parsing.html#parse-error">parse error</a>; ignore the token, and abort these
+      steps.</p>
 
       <p>Otherwise, there is a <var title="">formatting
       element</var> and that element is in <a href="parsing.html#stack-of-open-elements" title="stack of&#10;      open elements">the stack</a> and is <a href="parsing.html#has-an-element-in-scope" title="has an&#10;      element in scope">in scope</a>. If the element is not the
@@ -4008,7 +4190,17 @@ document.body.appendChild(text);
       <p>Let <var title="">node</var> and <var title="">last node</var> be the
       <var title="">furthest block</var>. Follow these steps:</p>
 
-      <ol><li>Let <var title="">node</var> be the element immediately
+      <ol><li><p>Let <var title="">inner loop counter</var> be
+       zero.</p></li>
+
+       <li><p><i>Inner loop</i>: If <var title="">inner loop
+       counter</var> is greater than or equal to three, then abort these
+       steps.</p></li>
+
+       <li><p>Increment <var title="">inner loop counter</var> by
+       one.</p></li>
+
+       <li>Let <var title="">node</var> be the element immediately
        above <var title="">node</var> in the <a href="parsing.html#stack-of-open-elements">stack of open
        elements</a>, or if <var title="">node</var> is no longer in
        the <a href="parsing.html#stack-of-open-elements">stack of open elements</a> (e.g. because it got
@@ -4019,7 +4211,8 @@ document.body.appendChild(text);
 
        <li>If <var title="">node</var> is not in the <a href="parsing.html#list-of-active-formatting-elements">list of
        active formatting elements</a>, then remove <var title="">node</var> from the <a href="parsing.html#stack-of-open-elements">stack of open
-       elements</a> and then go back to step 1.</li>
+       elements</a> and then go back to the step labeled <i>inner
+       loop</i>.</li>
 
        <li>Otherwise, if <var title="">node</var> is the <var title="">formatting element</var>, then go to the next step
        in the overall algorithm.</li>
@@ -4042,7 +4235,7 @@ document.body.appendChild(text);
 
        <li>Let <var title="">last node</var> be <var title="">node</var>.</li>
 
-       <li>Return to step 1 of this inner set of steps.</li>
+       <li>Return to the step labeled <i>inner loop</i>.</li>
 
       </ol></li>
 
@@ -4084,7 +4277,7 @@ document.body.appendChild(text);
      the position of the <var title="">furthest block</var> in that
      stack.</p></li>
 
-     <li><p>Jump back to step 1 in this series of steps.</p></li>
+     <li><p>Jump back to the step labeled <i>outer loop</i>.</p></li>
 
     </ol><p class="note">Because of the way this algorithm causes elements
     to change parents, it has been dubbed the "adoption agency
@@ -4352,9 +4545,9 @@ document.body.appendChild(text);
    <dt>A start tag whose tag name is one of: "optgroup", "option"</dt>
    <dd>
 
-    <p>If the <a href="parsing.html#stack-of-open-elements">stack of open elements</a> <a href="parsing.html#has-an-element-in-scope" title="has an&#10;    element in scope">has an <code>option</code> element in
-    scope</a>, then act as if an end tag with the tag name "option"
-    had been seen.</p>
+    <p>If the <a href="parsing.html#current-node">current node</a> is an <code><a href="the-button-element.html#the-option-element">option</a></code>
+    element, then act as if an end tag with the tag name "option" had
+    been seen.</p>
 
     <p><a href="parsing.html#reconstruct-the-active-formatting-elements">Reconstruct the active formatting elements</a>, if
     any.</p>
@@ -4430,9 +4623,8 @@ document.body.appendChild(text);
 
     <p>Otherwise, if the <a href="parsing.html#insertion-mode">insertion mode</a> is not already
     "<a href="#parsing-main-inforeign" title="insertion mode: in foreign content">in foreign
-    content</a>", let the <a href="parsing.html#secondary-insertion-mode">secondary insertion mode</a> be
-    the current <a href="parsing.html#insertion-mode">insertion mode</a>, and then switch the
-    <a href="parsing.html#insertion-mode">insertion mode</a> to "<a href="#parsing-main-inforeign" title="insertion mode: in&#10;    foreign content">in foreign content</a>".</p>
+    content</a>", switch the <a href="parsing.html#insertion-mode">insertion mode</a> to "<a href="#parsing-main-inforeign" title="insertion mode: in foreign content">in foreign
+    content</a>".</p>
 
    </dd>
 
@@ -4464,9 +4656,8 @@ document.body.appendChild(text);
 
     <p>Otherwise, if the <a href="parsing.html#insertion-mode">insertion mode</a> is not already
     "<a href="#parsing-main-inforeign" title="insertion mode: in foreign content">in foreign
-    content</a>", let the <a href="parsing.html#secondary-insertion-mode">secondary insertion mode</a> be
-    the current <a href="parsing.html#insertion-mode">insertion mode</a>, and then switch the
-    <a href="parsing.html#insertion-mode">insertion mode</a> to "<a href="#parsing-main-inforeign" title="insertion mode: in&#10;    foreign content">in foreign content</a>".</p>
+    content</a>", switch the <a href="parsing.html#insertion-mode">insertion mode</a> to "<a href="#parsing-main-inforeign" title="insertion mode: in foreign content">in foreign
+    content</a>".</p>
 
    </dd>
 
@@ -4536,7 +4727,7 @@ document.body.appendChild(text);
 
     </ol></dd>
 
-  </dl><h5 id="parsing-main-incdata"><span class="secno">8.2.5.11 </span>The "<dfn title="insertion mode: text">text</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="parsing-main-incdata"><span class="secno">8.2.5.11 </span>The "<dfn title="insertion mode: text">text</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#parsing-main-incdata" title="insertion&#10;  mode: text">text</a>", tokens must be handled as follows:</p>
 
@@ -4545,6 +4736,10 @@ document.body.appendChild(text);
 
     <p><a href="#insert-a-character" title="insert a character">Insert the token's
     character</a> into the <a href="parsing.html#current-node">current node</a>.</p>
+
+    <p class="note">This can never be a U+0000 NULL character; the
+    tokenizer converts those to U+FFFD REPLACEMENT CHARACTER
+    characters.</p>
 
    </dd>
 
@@ -4632,9 +4827,11 @@ document.body.appendChild(text);
        for this instance of the <a href="parsing.html#html-parser">HTML parser</a>, such that
        the <a href="webappapis.html#event-loop">event loop</a> will not run <a href="webappapis.html#concept-task" title="concept-task">tasks</a> that invoke the <a href="#tokenization" title="tokenization">tokenizer</a>.</p></li>
 
-       <li><p><a href="webappapis.html#spin-the-event-loop">Spin the event loop</a> until there is no <a href="semantics.html#a-style-sheet-blocking-scripts" title="a style sheet blocking scripts">style sheet blocking
+       <li><p><a href="webappapis.html#spin-the-event-loop">Spin the event loop</a> until the parser's
+       <code><a href="infrastructure.html#document">Document</a></code> <a href="semantics.html#has-no-style-sheet-that-is-blocking-scripts">has no style sheet that is blocking
        scripts</a> and <var title="">the script</var>'s
-       <a href="scripting-1.html#ready-to-be-parser-executed">"ready to be parser-executed"</a> flag is set.</p></li>
+       <a href="scripting-1.html#ready-to-be-parser-executed">"ready to be parser-executed"</a> flag is
+       set.</p></li>
 
        <li><p>Unblock the <a href="#tokenization" title="tokenization">tokenizer</a>
        for this instance of the <a href="parsing.html#html-parser">HTML parser</a>, such that
@@ -4677,7 +4874,7 @@ document.body.appendChild(text);
 
    </dd>
 
-  </dl><h5 id="parsing-main-intable"><span class="secno">8.2.5.12 </span>The "<dfn title="insertion mode: in table">in table</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="parsing-main-intable"><span class="secno">8.2.5.12 </span>The "<dfn title="insertion mode: in table">in table</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#parsing-main-intable" title="insertion&#10;  mode: in table">in table</a>", tokens must be handled as follows:</p>
 
@@ -4880,7 +5077,7 @@ document.body.appendChild(text);
 
 
 
-  <h5 id="parsing-main-intabletext"><span class="secno">8.2.5.13 </span>The "<dfn title="insertion mode: in table text">in table text</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="parsing-main-intabletext"><span class="secno">8.2.5.13 </span>The "<dfn title="insertion mode: in table text">in table text</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#parsing-main-intabletext" title="insertion&#10;  mode: in table text">in table text</a>", tokens must be handled
   as follows:</p>
@@ -4913,7 +5110,7 @@ document.body.appendChild(text);
 
    </dd>
 
-  </dl><h5 id="parsing-main-incaption"><span class="secno">8.2.5.14 </span>The "<dfn title="insertion mode: in caption">in caption</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="parsing-main-incaption"><span class="secno">8.2.5.14 </span>The "<dfn title="insertion mode: in caption">in caption</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#parsing-main-incaption" title="insertion&#10;  mode: in caption">in caption</a>", tokens must be handled as follows:</p>
 
@@ -4970,7 +5167,7 @@ document.body.appendChild(text);
     mode</a>.</p>
    </dd>
 
-  </dl><h5 id="parsing-main-incolgroup"><span class="secno">8.2.5.15 </span>The "<dfn title="insertion mode: in column group">in column group</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="parsing-main-incolgroup"><span class="secno">8.2.5.15 </span>The "<dfn title="insertion mode: in column group">in column group</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#parsing-main-incolgroup" title="insertion&#10;  mode: in column group">in column group</a>", tokens must be handled as follows:</p>
 
@@ -5056,7 +5253,7 @@ document.body.appendChild(text);
 
    </dd>
 
-  </dl><h5 id="parsing-main-intbody"><span class="secno">8.2.5.16 </span>The "<dfn title="insertion mode: in table body">in table body</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="parsing-main-intbody"><span class="secno">8.2.5.16 </span>The "<dfn title="insertion mode: in table body">in table body</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#parsing-main-intbody" title="insertion&#10;  mode: in table body">in table body</a>", tokens must be handled as follows:</p>
 
@@ -5143,7 +5340,7 @@ document.body.appendChild(text);
   case</a>.</p>
 
 
-  <h5 id="parsing-main-intr"><span class="secno">8.2.5.17 </span>The "<dfn title="insertion mode: in row">in row</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="parsing-main-intr"><span class="secno">8.2.5.17 </span>The "<dfn title="insertion mode: in row">in row</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#parsing-main-intr" title="insertion&#10;  mode: in row">in row</a>", tokens must be handled as follows:</p>
 
@@ -5232,7 +5429,7 @@ document.body.appendChild(text);
   case</a>.</p>
 
 
-  <h5 id="parsing-main-intd"><span class="secno">8.2.5.18 </span>The "<dfn title="insertion mode: in cell">in cell</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="parsing-main-intd"><span class="secno">8.2.5.18 </span>The "<dfn title="insertion mode: in cell">in cell</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#parsing-main-intd" title="insertion&#10;  mode: in cell">in cell</a>", tokens must be handled as follows:</p>
 
@@ -5319,18 +5516,22 @@ document.body.appendChild(text);
    <code>th</code> element in table scope</a>; act as if an end
    tag token with the tag name "th" had been seen.</p></li>
 
-  </ol><p class="note">The <a href="parsing.html#stack-of-open-elements">stack of open elements</a> cannot
-  have both a <code><a href="tabular-data.html#the-td-element">td</a></code> and a <code><a href="tabular-data.html#the-th-element">th</a></code> element <a href="parsing.html#has-an-element-in-table-scope" title="has an element in table scope">in table scope</a> at
-  the same time, nor can it have neither when the <a href="parsing.html#insertion-mode">insertion
-  mode</a> is "<a href="#parsing-main-intd" title="insertion mode: in cell">in
-  cell</a>".</p>
+  </ol><p class="note">The <a href="parsing.html#stack-of-open-elements">stack of open elements</a> cannot have
+  both a <code><a href="tabular-data.html#the-td-element">td</a></code> and a <code><a href="tabular-data.html#the-th-element">th</a></code> element <a href="parsing.html#has-an-element-in-table-scope" title="has an element in table scope">in table scope</a> at the
+  same time, nor can it have neither when the <a href="#close-the-cell">close the
+  cell</a> algorithm is invoked.</p>
 
 
-  <h5 id="parsing-main-inselect"><span class="secno">8.2.5.19 </span>The "<dfn title="insertion mode: in select">in select</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="parsing-main-inselect"><span class="secno">8.2.5.19 </span>The "<dfn title="insertion mode: in select">in select</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#parsing-main-inselect" title="insertion&#10;  mode: in select">in select</a>", tokens must be handled as follows:</p>
 
-  <dl class="switch"><dt>A character token</dt>
+  <dl class="switch"><dt>A character token that is U+0000 NULL</dt>
+   <dd>
+    <p><a href="parsing.html#parse-error">Parse error</a>. Ignore the token.</p>
+   </dd>
+
+   <dt>Any other character token</dt>
    <dd>
     <p><a href="#insert-a-character" title="insert a character">Insert the token's
     character</a> into the <a href="parsing.html#current-node">current node</a>.</p>
@@ -5409,7 +5610,7 @@ document.body.appendChild(text);
    <dt>An end tag whose tag name is "select"</dt>
    <dd>
 
-    <p>If the <a href="parsing.html#stack-of-open-elements">stack of open elements</a> does not <a href="parsing.html#has-an-element-in-table-scope" title="has an element in table scope">have an element in table
+    <p>If the <a href="parsing.html#stack-of-open-elements">stack of open elements</a> does not <a href="parsing.html#has-an-element-in-select-scope" title="has an element in select scope">have an element in select
     scope</a> with the same tag name as the token, this is a
     <a href="parsing.html#parse-error">parse error</a>. Ignore the token. (<a href="the-end.html#fragment-case">fragment
     case</a>)</p>
@@ -5437,8 +5638,8 @@ document.body.appendChild(text);
 
     <p><a href="parsing.html#parse-error">Parse error</a>.</p>
 
-    <p>If the <a href="parsing.html#stack-of-open-elements">stack of open elements</a> does not <a href="parsing.html#has-an-element-in-table-scope" title="has an element in table scope">have a <code>select</code>
-    element in table scope</a>, ignore the token. (<a href="the-end.html#fragment-case">fragment
+    <p>If the <a href="parsing.html#stack-of-open-elements">stack of open elements</a> does not <a href="parsing.html#has-an-element-in-select-scope" title="has an element in select scope">have a <code>select</code>
+    element in select scope</a>, ignore the token. (<a href="the-end.html#fragment-case">fragment
     case</a>)</p>
 
     <p>Otherwise, act as if an end tag with the tag name "select" had
@@ -5471,7 +5672,7 @@ document.body.appendChild(text);
     <p><a href="parsing.html#parse-error">Parse error</a>. Ignore the token.</p>
    </dd>
 
-  </dl><h5 id="parsing-main-inselectintable"><span class="secno">8.2.5.20 </span>The "<dfn title="insertion mode: in select in table">in select in table</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="parsing-main-inselectintable"><span class="secno">8.2.5.20 </span>The "<dfn title="insertion mode: in select in table">in select in table</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#parsing-main-inselectintable" title="insertion&#10;  mode: in select in table">in select in table</a>", tokens must be handled as follows:</p>
 
@@ -5502,21 +5703,58 @@ document.body.appendChild(text);
     mode</a>.</p>
    </dd>
 
-  </dl><h5 id="parsing-main-inforeign"><span class="secno">8.2.5.21 </span>The "<dfn title="insertion mode: in foreign content">in foreign content</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="parsing-main-inforeign"><span class="secno">8.2.5.21 </span>The "<dfn title="insertion mode: in foreign content">in foreign content</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#parsing-main-inforeign" title="insertion&#10;  mode: in foreign content">in foreign content</a>", tokens must be
   handled as follows:</p>
 
-  <dl class="switch"><dt>A character token</dt>
+  <dl class="switch"><dt>Any token, if the <a href="parsing.html#current-node">current node</a> is an element in the <a href="namespaces.html#html-namespace-0">HTML namespace</a></dt>
+   <dt>A start tag whose tag name is neither "mglyph" nor "malignmark", if the <a href="parsing.html#current-node">current node</a> is a <a href="#mathml-text-integration-point">MathML text integration point</a></dt>
+   <dt>A start tag whose tag name is "svg", if the <a href="parsing.html#current-node">current node</a> is an <code title="">annotation-xml</code> element in the <a href="namespaces.html#mathml-namespace">MathML namespace</a></dt>
+   <dt>A start tag, if the <a href="parsing.html#current-node">current node</a> is an <a href="#html-integration-point">HTML integration point</a></dt>
+   <dt>A character token, if the <a href="parsing.html#current-node">current node</a> is an <a href="#html-integration-point">HTML integration point</a></dt>
+   <dt>An end-of-file token</dt>
+   <dd>
+
+    <ol><li><p>Process the token <a href="parsing.html#using-the-rules-for">using the rules for</a> the
+     "<a href="#parsing-main-inbody" title="insertion mode: in body">in body</a>"
+     <a href="parsing.html#insertion-mode">insertion mode</a>, except that if those rules say to
+     reprocess the token, these steps must be finished first (i.e. the
+     insertion mode is reset by the following step before the token is
+     reprocessed).</p></li>
+
+     <li><p>If, after doing so, the <a href="parsing.html#insertion-mode">insertion mode</a> is
+     still "<a href="#parsing-main-inforeign" title="insertion mode: in foreign content">in
+     foreign content</a>", <a href="parsing.html#reset-the-insertion-mode-appropriately">reset the insertion mode
+     appropriately</a>.</p></li>
+
+    </ol></dd>
+
+   <dt>A character token that is U+0000 NULL</dt>
+   <dd>
+
+    <p><a href="parsing.html#parse-error">Parse error</a>. <a href="#insert-a-character" title="insert a&#10;    character">Insert a U+FFFD REPLACEMENT CHARACTER character</a>
+    into the <a href="parsing.html#current-node">current node</a>.</p>
+
+   </dd>
+
+   <dt>A character token that is one of U+0009 CHARACTER TABULATION,
+   U+000A LINE FEED (LF), U+000C FORM FEED (FF), U+000D CARRIAGE
+   RETURN (CR), or U+0020 SPACE</dt>
    <dd>
 
     <p><a href="#insert-a-character" title="insert a character">Insert the token's
     character</a> into the <a href="parsing.html#current-node">current node</a>.</p>
 
-    <p>If the token is not one of U+0009 CHARACTER TABULATION, U+000A
-    LINE FEED (LF), U+000C FORM FEED (FF), U+000D CARRIAGE RETURN
-    (CR), or U+0020 SPACE, then set the <a href="parsing.html#frameset-ok-flag">frameset-ok
-    flag</a> to "not ok".</p>
+   </dd>
+
+   <dt>Any other character token</dt>
+   <dd>
+
+    <p><a href="#insert-a-character" title="insert a character">Insert the token's
+    character</a> into the <a href="parsing.html#current-node">current node</a>.</p>
+
+    <p>Set the <a href="parsing.html#frameset-ok-flag">frameset-ok flag</a> to "not ok".</p>
 
    </dd>
 
@@ -5530,99 +5768,6 @@ document.body.appendChild(text);
    <dt>A DOCTYPE token</dt>
    <dd>
     <p><a href="parsing.html#parse-error">Parse error</a>. Ignore the token.</p>
-   </dd>
-
-   <dt id="scriptForeignEndTag">An end tag whose tag name is "script", if the <a href="parsing.html#current-node">current node</a> is a <code title="">script</code> element in the <a href="namespaces.html#svg-namespace">SVG namespace</a>.</dt>
-   <dd>
-
-    <p>Pop the <a href="parsing.html#current-node">current node</a> off the <a href="parsing.html#stack-of-open-elements">stack of open
-    elements</a>.</p>
-
-    <p>Let the <var title="">old insertion point</var> have the
-    same value as the current <a href="parsing.html#insertion-point">insertion point</a>. Let
-    the <a href="parsing.html#insertion-point">insertion point</a> be just before the <a href="parsing.html#next-input-character">next
-    input character</a>.</p>
-
-    <p>Increment the parser's <a href="parsing.html#script-nesting-level">script nesting level</a> by
-    one. Set the <a href="parsing.html#parser-pause-flag">parser pause flag</a> to true.</p>
-
-    <p><a href="http://www.w3.org/TR/SVGMobile12/script.html#ScriptContentProcessing">Process
-    the <code title="">script</code> element</a> according to the SVG
-    rules, if the user agent supports SVG. <a href="references.html#refsSVG">[SVG]</a></p>
-
-    <p class="note">Even if this causes <a href="apis-in-html-documents.html#dom-document-write" title="dom-document-write">new characters to be inserted into the
-    tokenizer</a>, the parser will not be executed reentrantly,
-    since the <a href="parsing.html#parser-pause-flag">parser pause flag</a> is true.</p>
-
-    <p>Decrement the parser's <a href="parsing.html#script-nesting-level">script nesting level</a> by
-    one. If the parser's <a href="parsing.html#script-nesting-level">script nesting level</a> is zero,
-    then set the <a href="parsing.html#parser-pause-flag">parser pause flag</a> to false.</p>
-
-    <p>Let the <a href="parsing.html#insertion-point">insertion point</a> have the value of the <var title="">old insertion point</var>. (In other words, restore the
-    <a href="parsing.html#insertion-point">insertion point</a> to its previous value. This value
-    might be the "undefined" value.)</p>
-
-   </dd>
-
-   <dt>An end tag, if the <a href="parsing.html#current-node">current node</a> is not an element in the <a href="namespaces.html#html-namespace-0">HTML namespace</a>.</dt>
-
-   <dd>
-
-    <p>Run these steps:</p>
-
-    <ol><li><p>Initialize <var title="">node</var> to be the <a href="parsing.html#current-node">current
-     node</a> (the bottommost node of the stack).</p></li>
-
-     <li><p>If <var title="">node</var> is not an element with the
-     same tag name as the token, then this is a <a href="parsing.html#parse-error">parse
-     error</a>.</p></li>
-
-     <li><p><i>Loop</i>: If <var title="">node</var> has the same tag
-     name as the token, pop elements from the <a href="parsing.html#stack-of-open-elements">stack of open
-     elements</a> until <var title="">node</var> has been popped
-     from the stack, and then jump to the last step of this list of
-     steps.</p></li>
-
-     <li><p>Set <var title="">node</var> to the previous entry in the
-     <a href="parsing.html#stack-of-open-elements">stack of open elements</a>.</p></li>
-
-     <li><p>If <var title="">node</var> is not an element in the
-     <a href="namespaces.html#html-namespace-0">HTML namespace</a>, return to the step labeled
-     <i>loop</i>.</p></li>
-
-     <li><p>Otherwise, process the token <a href="parsing.html#using-the-rules-for">using the rules
-     for</a> the <a href="parsing.html#secondary-insertion-mode">secondary insertion mode</a>.</p></li>
-
-     <li><p>If the <a href="parsing.html#insertion-mode">insertion mode</a> is still "<a href="#parsing-main-inforeign" title="insertion mode: in foreign content">in foreign
-     content</a>", but there is no element <a href="parsing.html#has-an-element-in-scope" title="has an&#10;     element in scope">in scope</a> that has a namespace other than
-     the <a href="namespaces.html#html-namespace-0">HTML namespace</a>, switch the <a href="parsing.html#insertion-mode">insertion
-     mode</a> to the <a href="parsing.html#secondary-insertion-mode">secondary insertion
-     mode</a>.</p></li>
-
-    </ol></dd>
-
-   <dt>A start tag whose tag name is neither "mglyph" nor "malignmark", if the <a href="parsing.html#current-node">current node</a> is an <code title="">mi</code> element in the <a href="namespaces.html#mathml-namespace">MathML namespace</a>.</dt>
-   <dt>A start tag whose tag name is neither "mglyph" nor "malignmark", if the <a href="parsing.html#current-node">current node</a> is an <code title="">mo</code> element in the <a href="namespaces.html#mathml-namespace">MathML namespace</a>.</dt>
-   <dt>A start tag whose tag name is neither "mglyph" nor "malignmark", if the <a href="parsing.html#current-node">current node</a> is an <code title="">mn</code> element in the <a href="namespaces.html#mathml-namespace">MathML namespace</a>.</dt>
-   <dt>A start tag whose tag name is neither "mglyph" nor "malignmark", if the <a href="parsing.html#current-node">current node</a> is an <code title="">ms</code> element in the <a href="namespaces.html#mathml-namespace">MathML namespace</a>.</dt>
-   <dt>A start tag whose tag name is neither "mglyph" nor "malignmark", if the <a href="parsing.html#current-node">current node</a> is an <code title="">mtext</code> element in the <a href="namespaces.html#mathml-namespace">MathML namespace</a>.</dt>
-   <dt>A start tag whose tag name is "svg", if the <a href="parsing.html#current-node">current node</a> is an <code title="">annotation-xml</code> element in the <a href="namespaces.html#mathml-namespace">MathML namespace</a>.</dt>
-   <dt>A start tag, if the <a href="parsing.html#current-node">current node</a> is a <code title="">foreignObject</code> element in the <a href="namespaces.html#svg-namespace">SVG namespace</a>.</dt>
-   <dt>A start tag, if the <a href="parsing.html#current-node">current node</a> is a <code title="">desc</code> element in the <a href="namespaces.html#svg-namespace">SVG namespace</a>.</dt>
-   <dt>A start tag, if the <a href="parsing.html#current-node">current node</a> is a <code title="">title</code> element in the <a href="namespaces.html#svg-namespace">SVG namespace</a>.</dt>
-   <dt>A start tag, if the <a href="parsing.html#current-node">current node</a> is an element in the <a href="namespaces.html#html-namespace-0">HTML namespace</a>.</dt>
-   <dt>Any other end tag</dt>
-   <dd>
-
-    <p>Process the token <a href="parsing.html#using-the-rules-for">using the rules for</a> the
-    <a href="parsing.html#secondary-insertion-mode">secondary insertion mode</a>.</p>
-
-    <p>If, after doing so, the <a href="parsing.html#insertion-mode">insertion mode</a> is still
-    "<a href="#parsing-main-inforeign" title="insertion mode: in foreign content">in foreign
-    content</a>", but there is no element <a href="parsing.html#has-an-element-in-scope" title="has an&#10;    element in scope">in scope</a> that has a namespace other than
-    the <a href="namespaces.html#html-namespace-0">HTML namespace</a>, switch the <a href="parsing.html#insertion-mode">insertion
-    mode</a> to the <a href="parsing.html#secondary-insertion-mode">secondary insertion mode</a>.</p>
-
    </dd>
 
    <dt>A start tag whose tag name is one of: <!--"a",--> "b", "big",
@@ -5644,30 +5789,20 @@ document.body.appendChild(text);
    attributes named "color", "face", or "size"</dt> <!-- the
    attributes here are required so that SVG <font> will go through as
    SVG but legacy <font>s won't -->
-   <dt>An end-of-file token</dt> <dd>
+
+   <dd>
 
     <p><a href="parsing.html#parse-error">Parse error</a>.</p>
 
-    <p>Pop elements from the <a href="parsing.html#stack-of-open-elements">stack of open elements</a> until
-    the <a href="parsing.html#current-node">current node</a> is one of the following:</p>
+    <p>Pop an element from the <a href="parsing.html#stack-of-open-elements">stack of open elements</a>,
+    and then keep popping more elements from the <a href="parsing.html#stack-of-open-elements">stack of open
+    elements</a> until the <a href="parsing.html#current-node">current node</a> is a
+    <a href="#mathml-text-integration-point">MathML text integration point</a>, an <a href="#html-integration-point">HTML
+    integration point</a>, or an element in the <a href="namespaces.html#html-namespace-0">HTML
+    namespace</a>.</p>
 
-    <ul class="brief"><li>an <code title="">mi</code> element in the <a href="namespaces.html#mathml-namespace">MathML namespace</a></li>
-     <li>an <code title="">mo</code> element in the <a href="namespaces.html#mathml-namespace">MathML namespace</a></li>
-     <li>an <code title="">mn</code> element in the <a href="namespaces.html#mathml-namespace">MathML namespace</a></li>
-     <li>an <code title="">ms</code> element in the <a href="namespaces.html#mathml-namespace">MathML namespace</a></li>
-     <li>an <code title="">mtext</code> element in the <a href="namespaces.html#mathml-namespace">MathML namespace</a></li>
-     <li>a <code title="">foreignObject</code> element in the <a href="namespaces.html#svg-namespace">SVG namespace</a></li>
-     <li>a <code title="">desc</code> element in the <a href="namespaces.html#svg-namespace">SVG namespace</a></li>
-     <li>a <code title="">title</code> element in the <a href="namespaces.html#svg-namespace">SVG namespace</a></li>
-     <li>an element in the <a href="namespaces.html#html-namespace-0">HTML namespace</a></li>
-
-    </ul><p>If, after doing so, the <a href="parsing.html#insertion-mode">insertion mode</a> is still
-    "<a href="#parsing-main-inforeign" title="insertion mode: in foreign content">in foreign
-    content</a>", but there is no element <a href="parsing.html#has-an-element-in-scope" title="has an&#10;    element in scope">in scope</a> that has a namespace other than
-    the <a href="namespaces.html#html-namespace-0">HTML namespace</a>, switch the <a href="parsing.html#insertion-mode">insertion
-    mode</a> to the <a href="parsing.html#secondary-insertion-mode">secondary insertion mode</a>.</p>
-
-    <p>Reprocess the token.</p>
+    <p>Then, <a href="parsing.html#reset-the-insertion-mode-appropriately">reset the insertion mode appropriately</a> and
+    reprocess the token.</p>
 
    </dd>
 
@@ -5742,7 +5877,95 @@ document.body.appendChild(text);
 
    </dd>
 
-  </dl><h5 id="parsing-main-afterbody"><span class="secno">8.2.5.22 </span>The "<dfn title="insertion mode: after body">after body</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+   <dt id="scriptForeignEndTag">An end tag whose tag name is "script", if the <a href="parsing.html#current-node">current node</a> is a <code title="">script</code> element in the <a href="namespaces.html#svg-namespace">SVG namespace</a></dt>
+   <dd>
+
+    <p>Pop the <a href="parsing.html#current-node">current node</a> off the <a href="parsing.html#stack-of-open-elements">stack of open
+    elements</a>.</p>
+
+    <p>Let the <var title="">old insertion point</var> have the
+    same value as the current <a href="parsing.html#insertion-point">insertion point</a>. Let
+    the <a href="parsing.html#insertion-point">insertion point</a> be just before the <a href="parsing.html#next-input-character">next
+    input character</a>.</p>
+
+    <p>Increment the parser's <a href="parsing.html#script-nesting-level">script nesting level</a> by
+    one. Set the <a href="parsing.html#parser-pause-flag">parser pause flag</a> to true.</p>
+
+    <p><a href="http://www.w3.org/TR/SVGMobile12/script.html#ScriptContentProcessing">Process
+    the <code title="">script</code> element</a> according to the SVG
+    rules, if the user agent supports SVG. <a href="references.html#refsSVG">[SVG]</a></p>
+
+    <p class="note">Even if this causes <a href="apis-in-html-documents.html#dom-document-write" title="dom-document-write">new characters to be inserted into the
+    tokenizer</a>, the parser will not be executed reentrantly,
+    since the <a href="parsing.html#parser-pause-flag">parser pause flag</a> is true.</p>
+
+    <p>Decrement the parser's <a href="parsing.html#script-nesting-level">script nesting level</a> by
+    one. If the parser's <a href="parsing.html#script-nesting-level">script nesting level</a> is zero,
+    then set the <a href="parsing.html#parser-pause-flag">parser pause flag</a> to false.</p>
+
+    <p>Let the <a href="parsing.html#insertion-point">insertion point</a> have the value of the <var title="">old insertion point</var>. (In other words, restore the
+    <a href="parsing.html#insertion-point">insertion point</a> to its previous value. This value
+    might be the "undefined" value.)</p>
+
+   </dd>
+
+   <dt>Any other end tag</dt>
+
+   <dd>
+
+    <p>Run these steps:</p>
+
+    <ol><li><p>Initialize <var title="">node</var> to be the <a href="parsing.html#current-node">current
+     node</a> (the bottommost node of the stack).</p></li>
+
+     <li><p>If <var title="">node</var> is not an element with the
+     same tag name as the token, then this is a <a href="parsing.html#parse-error">parse
+     error</a>.</p></li>
+
+     <li><p><i>Loop</i>: If <var title="">node</var>'s tag name,
+     <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a>, is the same as as the
+     tag name of the token, pop elements from the <a href="parsing.html#stack-of-open-elements">stack of open
+     elements</a> until <var title="">node</var> has been popped
+     from the stack, and then jump to the last step of this list of
+     steps.</p></li>
+
+     <li><p>Set <var title="">node</var> to the previous entry in the
+     <a href="parsing.html#stack-of-open-elements">stack of open elements</a>.</p></li>
+
+     <li><p>If <var title="">node</var> is not an element in the
+     <a href="namespaces.html#html-namespace-0">HTML namespace</a>, return to the step labeled
+     <i>loop</i>.</p></li>
+
+     <li><p>Otherwise, process the token <a href="parsing.html#using-the-rules-for">using the rules
+     for</a> the "<a href="#parsing-main-inbody" title="insertion mode: in body">in
+     body</a>" <a href="parsing.html#insertion-mode">insertion mode</a>, except that if those
+     rules say to reprocess the token, these steps must be finished
+     first (i.e. the insertion mode is reset by the following step
+     before the token is reprocessed).</p></li>
+
+     <li><p>If the <a href="parsing.html#insertion-mode">insertion mode</a> is still "<a href="#parsing-main-inforeign" title="insertion mode: in foreign content">in foreign
+     content</a>", <a href="parsing.html#reset-the-insertion-mode-appropriately">reset the insertion mode
+     appropriately</a>.</p></li>
+
+    </ol></dd>
+
+  </dl><p>The <a href="parsing.html#current-node">current node</a> is a <dfn id="mathml-text-integration-point">MathML text
+  integration point</dfn> if it is one of the following elements:</p>
+
+  <ul class="brief"><li>An <code title="">mi</code> element in the <a href="namespaces.html#mathml-namespace">MathML namespace</a></li>
+   <li>An <code title="">mo</code> element in the <a href="namespaces.html#mathml-namespace">MathML namespace</a></li>
+   <li>An <code title="">mn</code> element in the <a href="namespaces.html#mathml-namespace">MathML namespace</a></li>
+   <li>An <code title="">ms</code> element in the <a href="namespaces.html#mathml-namespace">MathML namespace</a></li>
+   <li>An <code title="">mtext</code> element in the <a href="namespaces.html#mathml-namespace">MathML namespace</a></li>
+  </ul><p>The <a href="parsing.html#current-node">current node</a> is an <dfn id="html-integration-point">HTML
+  integration point</dfn> if it is one of the following elements:</p>
+
+  <ul class="brief"><li>An <code title="">annotation-xml</code> element in the <a href="namespaces.html#mathml-namespace">MathML namespace</a> whose start tag token had an attribute with the name "encoding" whose value was an <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for the string "<code title="">text/html</code>"</li>
+   <li>An <code title="">annotation-xml</code> element in the <a href="namespaces.html#mathml-namespace">MathML namespace</a> whose start tag token had an attribute with the name "encoding" whose value was an <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for the string "<code title="">application/xhtml+xml</code>"</li>
+   <li>A <code title="">foreignObject</code> element in the <a href="namespaces.html#svg-namespace">SVG namespace</a></li>
+   <li>A <code title="">desc</code> element in the <a href="namespaces.html#svg-namespace">SVG namespace</a></li>
+   <li>A <code title="">title</code> element in the <a href="namespaces.html#svg-namespace">SVG namespace</a></li>
+  </ul><h5 id="parsing-main-afterbody"><span class="secno">8.2.5.22 </span>The "<dfn title="insertion mode: after body">after body</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#parsing-main-afterbody" title="insertion&#10;  mode: after body">after body</a>", tokens must be handled as follows:</p>
 
@@ -5799,7 +6022,7 @@ document.body.appendChild(text);
 
    </dd>
 
-  </dl><h5 id="parsing-main-inframeset"><span class="secno">8.2.5.23 </span>The "<dfn title="insertion mode: in frameset">in frameset</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="parsing-main-inframeset"><span class="secno">8.2.5.23 </span>The "<dfn title="insertion mode: in frameset">in frameset</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#parsing-main-inframeset" title="insertion&#10;  mode: in frameset">in frameset</a>", tokens must be handled as follows:</p>
 
@@ -5891,7 +6114,7 @@ document.body.appendChild(text);
     <p><a href="parsing.html#parse-error">Parse error</a>. Ignore the token.</p>
    </dd>
 
-  </dl><h5 id="parsing-main-afterframeset"><span class="secno">8.2.5.24 </span>The "<dfn title="insertion mode: after frameset">after frameset</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="parsing-main-afterframeset"><span class="secno">8.2.5.24 </span>The "<dfn title="insertion mode: after frameset">after frameset</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#parsing-main-afterframeset" title="insertion&#10;  mode: after frameset">after frameset</a>", tokens must be handled as follows:</p>
 
@@ -5944,7 +6167,7 @@ document.body.appendChild(text);
     <p><a href="parsing.html#parse-error">Parse error</a>. Ignore the token.</p>
    </dd>
 
-  </dl><h5 id="the-after-after-body-insertion-mode"><span class="secno">8.2.5.25 </span>The "<dfn title="insertion mode: after after body">after after body</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="the-after-after-body-insertion-mode"><span class="secno">8.2.5.25 </span>The "<dfn title="insertion mode: after after body">after after body</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#the-after-after-body-insertion-mode" title="insertion&#10;  mode: after after body">after after body</a>", tokens must be handled as follows:</p>
 
@@ -5977,7 +6200,7 @@ document.body.appendChild(text);
     reprocess the token.</p>
    </dd>
 
-  </dl><h5 id="the-after-after-frameset-insertion-mode"><span class="secno">8.2.5.26 </span>The "<dfn title="insertion mode: after after frameset">after after frameset</dfn>" insertion mode</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h5 id="the-after-after-frameset-insertion-mode"><span class="secno">8.2.5.26 </span>The "<dfn title="insertion mode: after after frameset">after after frameset</dfn>" insertion mode</h5>
 
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#the-after-after-frameset-insertion-mode" title="insertion&#10;  mode: after after frameset">after after frameset</a>", tokens must be handled as follows:</p>
 

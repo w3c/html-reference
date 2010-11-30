@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,26 +356,34 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="the-iframe-element.html" title="4.8.2 The iframe element" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="the-canvas-element.html" title="4.8.10 The canvas element" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="the-iframe-element.html" title="4.8.2 The iframe element" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="the-canvas-element.html" title="4.8.11 The canvas element" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
    </div><div>
    <a href="the-iframe-element.html">&#x2190; 4.8.2 The iframe element</a> &#x2013;
    <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="the-canvas-element.html">4.8.10 The canvas element &#x2192;</a>
-  <ol class="toc"><li><ol><li><ol><li><a href="video.html#video"><span class="secno">4.8.6 </span>The <code>video</code> element</a></li><li><a href="video.html#audio"><span class="secno">4.8.7 </span>The <code>audio</code> element</a></li><li><a href="video.html#the-source-element"><span class="secno">4.8.8 </span>The <code>source</code> element</a></li><li><a href="video.html#media-elements"><span class="secno">4.8.9 </span>Media elements</a>
-      <ol><li><a href="video.html#error-codes"><span class="secno">4.8.9.1 </span>Error codes</a></li><li><a href="video.html#location-of-the-media-resource"><span class="secno">4.8.9.2 </span>Location of the media resource</a></li><li><a href="video.html#mime-types"><span class="secno">4.8.9.3 </span>MIME types</a></li><li><a href="video.html#network-states"><span class="secno">4.8.9.4 </span>Network states</a></li><li><a href="video.html#loading-the-media-resource"><span class="secno">4.8.9.5 </span>Loading the media resource</a></li><li><a href="video.html#offsets-into-the-media-resource"><span class="secno">4.8.9.6 </span>Offsets into the media resource</a></li><li><a href="video.html#the-ready-states"><span class="secno">4.8.9.7 </span>The ready states</a></li><li><a href="video.html#playing-the-media-resource"><span class="secno">4.8.9.8 </span>Playing the media resource</a></li><li><a href="video.html#seeking"><span class="secno">4.8.9.9 </span>Seeking</a></li><li><a href="video.html#user-interface"><span class="secno">4.8.9.10 </span>User interface</a></li><li><a href="video.html#time-ranges"><span class="secno">4.8.9.11 </span>Time ranges</a></li><li><a href="video.html#mediaevents"><span class="secno">4.8.9.12 </span>Event summary</a></li><li><a href="video.html#security-and-privacy-considerations"><span class="secno">4.8.9.13 </span>Security and privacy considerations</a></li></ol></li></ol></li></ol></li></ol></div><h4 id="video"><span class="secno">4.8.6 </span>The <dfn><code>video</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments. </i><span><a href="http://www.w3.org/html/wg/tracker/issues/9">ISSUE-9</a> (video-accessibility) blocks progress to Last Call</span></p><dl class="element"><dt>Categories</dt>
+   <a href="the-canvas-element.html">4.8.11 The canvas element &#x2192;</a>
+  <ol class="toc"><li><ol><li><ol><li><a href="video.html#video"><span class="secno">4.8.6 </span>The <code>video</code> element</a></li><li><a href="video.html#audio"><span class="secno">4.8.7 </span>The <code>audio</code> element</a></li><li><a href="video.html#the-source-element"><span class="secno">4.8.8 </span>The <code>source</code> element</a></li><li><a href="video.html#the-track-element"><span class="secno">4.8.9 </span>The <code>track</code> element</a></li><li><a href="video.html#media-elements"><span class="secno">4.8.10 </span>Media elements</a>
+      <ol><li><a href="video.html#error-codes"><span class="secno">4.8.10.1 </span>Error codes</a></li><li><a href="video.html#location-of-the-media-resource"><span class="secno">4.8.10.2 </span>Location of the media resource</a></li><li><a href="video.html#mime-types"><span class="secno">4.8.10.3 </span>MIME types</a></li><li><a href="video.html#network-states"><span class="secno">4.8.10.4 </span>Network states</a></li><li><a href="video.html#loading-the-media-resource"><span class="secno">4.8.10.5 </span>Loading the media resource</a></li><li><a href="video.html#offsets-into-the-media-resource"><span class="secno">4.8.10.6 </span>Offsets into the media resource</a></li><li><a href="video.html#the-ready-states"><span class="secno">4.8.10.7 </span>The ready states</a></li><li><a href="video.html#playing-the-media-resource"><span class="secno">4.8.10.8 </span>Playing the media resource</a></li><li><a href="video.html#seeking"><span class="secno">4.8.10.9 </span>Seeking</a></li><li><a href="video.html#timed-tracks"><span class="secno">4.8.10.10 </span>Timed tracks</a>
+        <ol><li><a href="video.html#timed-track-model"><span class="secno">4.8.10.10.1 </span>Timed track model</a></li><li><a href="video.html#sourcing-in-band-timed-tracks"><span class="secno">4.8.10.10.2 </span>Sourcing in-band timed tracks</a></li><li><a href="video.html#sourcing-out-of-band-timed-tracks"><span class="secno">4.8.10.10.3 </span>Sourcing out-of-band timed tracks</a></li><li><a href="video.html#guidelines-for-exposing-cues-in-various-formats-as-timed-track-cues"><span class="secno">4.8.10.10.4 </span>Guidelines for exposing cues in various formats as
+  timed track cues</a></li><li><a href="video.html#timed-track-api"><span class="secno">4.8.10.10.5 </span>Timed track API</a></li><li><a href="video.html#cue-events"><span class="secno">4.8.10.10.6 </span>Event definitions</a></li></ol></li><li><a href="video.html#user-interface"><span class="secno">4.8.10.11 </span>User interface</a></li><li><a href="video.html#time-ranges"><span class="secno">4.8.10.12 </span>Time ranges</a></li><li><a href="video.html#mediaevents"><span class="secno">4.8.10.13 </span>Event summary</a></li><li><a href="video.html#security-and-privacy-considerations"><span class="secno">4.8.10.14 </span>Security and privacy considerations</a></li></ol></li></ol></li></ol></li></ol></div><h4 id="video"><span class="secno">4.8.6 </span>The <dfn><code>video</code></dfn> element</h4><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/9">ISSUE-9</a> (video-accessibility) blocks progress to Last Call</span></p><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
    <dd><a href="content-models.html#embedded-content">Embedded content</a>.</dd>
    <dd>If the element has a <code title="attr-media-controls"><a href="#attr-media-controls">controls</a></code> attribute: <a href="content-models.html#interactive-content">Interactive content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#embedded-content">embedded content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd>If the element has a <code title="attr-media-src"><a href="#attr-media-src">src</a></code> attribute:
+<!--KEEP-END w3c-html--><!--TT-->
+ zero or more <code><a href="#the-track-element">track</a></code> elements, then
+<!--KEEP-START w3c-html--><!--TT-->
  <a href="content-models.html#transparent">transparent</a>, but with no <a href="#media-element">media element</a> descendants.</dd>
    <dd>If the element does not have a <code title="attr-media-src"><a href="#attr-media-src">src</a></code> attribute: one or more <code><a href="#the-source-element">source</a></code> elements, then
+<!--KEEP-END w3c-html--><!--TT-->
+ zero or more <code><a href="#the-track-element">track</a></code> elements, then
+<!--KEEP-START w3c-html--><!--TT-->
  <a href="content-models.html#transparent">transparent</a>, but with no <a href="#media-element">media element</a> descendants.</dd>
    <dt>Content attributes:</dt>
    <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
@@ -337,17 +392,19 @@
    <dd><code title="attr-media-preload"><a href="#attr-media-preload">preload</a></code></dd>
    <dd><code title="attr-media-autoplay"><a href="#attr-media-autoplay">autoplay</a></code></dd>
    <dd><code title="attr-media-loop"><a href="#attr-media-loop">loop</a></code></dd>
+   <dd><code title="attr-media-audio"><a href="#attr-media-audio">audio</a></code></dd>
    <dd><code title="attr-media-controls"><a href="#attr-media-controls">controls</a></code></dd>
    <dd><code title="attr-dim-width"><a href="the-map-element.html#attr-dim-width">width</a></code></dd>
    <dd><code title="attr-dim-height"><a href="the-map-element.html#attr-dim-height">height</a></code></dd>
    <dt>DOM interface:</dt>
    <dd>
     <pre class="idl">interface <dfn id="htmlvideoelement">HTMLVideoElement</dfn> : <a href="#htmlmediaelement">HTMLMediaElement</a> {
-           attribute DOMString <a href="the-map-element.html#dom-dim-width" title="dom-dim-width">width</a>;
-           attribute DOMString <a href="the-map-element.html#dom-dim-height" title="dom-dim-height">height</a>;
+           attribute unsigned long <a href="the-map-element.html#dom-dim-width" title="dom-dim-width">width</a>;
+           attribute unsigned long <a href="the-map-element.html#dom-dim-height" title="dom-dim-height">height</a>;
   readonly attribute unsigned long <a href="#dom-video-videowidth" title="dom-video-videoWidth">videoWidth</a>;
   readonly attribute unsigned long <a href="#dom-video-videoheight" title="dom-video-videoHeight">videoHeight</a>;
            attribute DOMString <a href="#dom-video-poster" title="dom-video-poster">poster</a>;
+  [PutForwards=<a href="common-dom-interfaces.html#dom-domsettabletokenlist-value" title="dom-DOMSettableTokenList-value">value</a> attribute <a href="common-dom-interfaces.html#domsettabletokenlist">DOMSettableTokenList</a> <a href="#dom-media-audio" title="dom-media-audio">audio</a>; <!-- attr-media-audio -->
 };</pre>
    </dd>
   </dl><p>A <code><a href="#video">video</a></code> element is used for playing videos or
@@ -365,7 +422,9 @@
   overlays) into their media streams.</p><p>The <code><a href="#video">video</a></code> element is a <a href="#media-element">media element</a>
   whose <a href="#media-data">media data</a> is ostensibly video data, possibly
   with associated audio data.</p><p>The <code title="attr-media-src"><a href="#attr-media-src">src</a></code>, <code title="attr-media-preload"><a href="#attr-media-preload">preload</a></code>, <code title="attr-media-autoplay"><a href="#attr-media-autoplay">autoplay</a></code>, <code title="attr-media-loop"><a href="#attr-media-loop">loop</a></code>, and <code title="attr-media-controls"><a href="#attr-media-controls">controls</a></code> attributes are <a href="#media-element-attributes" title="media element attributes">the attributes common to all media
-  elements</a>.</p><p>The <dfn id="attr-video-poster" title="attr-video-poster"><code>poster</code></dfn>
+  elements</a>. The <code title="attr-media-audio"><a href="#attr-media-audio">audio</a></code>
+  attribute <a href="#attr-media-audio" title="attr-media-audio">controls the audio
+  channel</a>.</p><p>The <dfn id="attr-video-poster" title="attr-video-poster"><code>poster</code></dfn>
   attribute gives the address of an image file that the user agent can
   show while no video data is available. The attribute, if present,
   must contain a <a href="urls.html#valid-non-empty-url-potentially-surrounded-by-spaces">valid non-empty URL potentially surrounded by
@@ -382,9 +441,6 @@
   frame</a></i>, is intended to be a representative frame of the video
   (typically one of the first non-blank frames) that gives the user an
   idea of what the video is like.</p><div class="impl">
-
-  <p>The <dfn id="dom-video-poster" title="dom-video-poster"><code>poster</code></dfn> IDL
-  attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-video-poster"><a href="#attr-video-poster">poster</a></code> content attribute.</p>
 
   <hr/><p>When no video data is available (the element's <code title="dom-media-readyState"><a href="#dom-media-readystate">readyState</a></code> attribute is either
   <code title="dom-media-HAVE_NOTHING"><a href="#dom-media-have_nothing">HAVE_NOTHING</a></code>, or <code title="dom-media-HAVE_METADATA"><a href="#dom-media-have_metadata">HAVE_METADATA</a></code> but no video
@@ -427,6 +483,12 @@
   particular playback position is defined by the video stream's
   format.</p>
 
+<!--KEEP-END w3c-html--><!--TT-->
+  <p>The <code><a href="#video">video</a></code> element also <a href="rendering.html#represents">represents</a> any
+  <a href="#timed-track-cue" title="timed track cue">timed track cues</a> whose
+  <a href="#timed-track-cue-active-flag">timed track cue active flag</a> is set and whose
+  <a href="#timed-track">timed track</a> is in the <a href="#timed-track-showing" title="timed track&#10;  showing">showing</a> mode.</p>
+<!--KEEP-START w3c-html--><!--TT-->
 
   <p>In addition to the above, the user agent may provide messages to
   the user (such as "buffering", "no video loaded", "error", or more
@@ -512,6 +574,12 @@
   agents could disable screensavers while video playback is in
   progress.</p>
 
+  <hr/><p>The <dfn id="dom-video-poster" title="dom-video-poster"><code>poster</code></dfn> IDL
+  attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-video-poster"><a href="#attr-video-poster">poster</a></code> content attribute.</p>
+
+  <p>The <dfn id="dom-media-audio" title="dom-media-audio"><code>audio</code></dfn> IDL
+  attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-media-audio"><a href="#attr-media-audio">audio</a></code> content attribute.</p>
+
   </div><div class="example">
 
    <p>This example shows how to detect when a video has failed to play
@@ -562,17 +630,23 @@
 
   </div>
 
-  (when replacing this text, also fix "- -" nested comments)--><h4 id="audio"><span class="secno">4.8.7 </span>The <dfn><code>audio</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  (when replacing this text, also fix "- -" nested comments)--><h4 id="audio"><span class="secno">4.8.7 </span>The <dfn><code>audio</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
    <dd><a href="content-models.html#embedded-content">Embedded content</a>.</dd>
    <dd>If the element has a <code title="attr-media-controls"><a href="#attr-media-controls">controls</a></code> attribute: <a href="content-models.html#interactive-content">Interactive content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#embedded-content">embedded content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd>If the element has a <code title="attr-media-src"><a href="#attr-media-src">src</a></code> attribute: 
+<!--KEEP-END w3c-html--><!--TT-->
+zero or more <code><a href="#the-track-element">track</a></code> elements, then 
+<!--KEEP-START w3c-html--><!--TT-->
 <a href="content-models.html#transparent">transparent</a>, but with no <a href="#media-element">media element</a> descendants.</dd>
    <dd>If the element does not have a <code title="attr-media-src"><a href="#attr-media-src">src</a></code> attribute: one or more <code><a href="#the-source-element">source</a></code> elements, then
+<!--KEEP-END w3c-html--><!--TT-->
+ zero or more <code><a href="#the-track-element">track</a></code> elements, then
+<!--KEEP-START w3c-html--><!--TT-->
  <a href="content-models.html#transparent">transparent</a>, but with no <a href="#media-element">media element</a> descendants.</dd>
    <dt>Content attributes:</dt>
    <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
@@ -676,11 +750,14 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
 
   </div>
 
-  (when replacing this text, also fix "- -" nested comments)--><h4 id="the-source-element"><span class="secno">4.8.8 </span>The <dfn><code>source</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  (when replacing this text, also fix "- -" nested comments)--><h4 id="the-source-element"><span class="secno">4.8.8 </span>The <dfn><code>source</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd>None.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>As a child of a <a href="#media-element">media element</a>, before any <a href="content-models.html#flow-content">flow content</a>
-   </dd><dt>Content model:</dt>
+<!--KEEP-END w3c-html--><!--TT-->
+ or <code><a href="#the-track-element">track</a></code> elements.</dd>
+<!--KEEP-START w3c-html--><!--TT-->
+   <dt>Content model:</dt>
    <dd>Empty.</dd>
    <dt>Content attributes:</dt>
    <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
@@ -712,8 +789,8 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   the user agent determine if it can play this <a href="#media-resource">media
   resource</a> before fetching it. If specified, its value must be
   a <a href="infrastructure.html#valid-mime-type">valid MIME type</a>. The <code title="">codecs</code>
-  parameter may be specified and might be necessary to specify exactly
-  how the resource is encoded. <a href="references.html#refsRFC4281">[RFC4281]</a></p><div class="example">
+  parameter, which certain MIME types define, might be necessary to
+  specify exactly how the resource is encoded. <a href="references.html#refsRFC4281">[RFC4281]</a></p><div class="example">
 
    <p>The following list shows some examples of how to use the <code title="">codecs=</code> MIME parameter in the <code title="attr-source-type"><a href="#attr-source-type">type</a></code> attribute.</p>
 
@@ -842,7 +919,140 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
  ...
 &lt;/video&gt;</pre>
 
-  </div><h4 id="media-elements"><span class="secno">4.8.9 </span>Media elements</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><dfn id="media-element" title="media element">Media elements</dfn>
+  </div><!--KEEP-END w3c-html--><!--TT--><!--<div data-component="other Hixie drafts (editor: Ian Hickson)">--><h4 id="the-track-element"><span class="secno">4.8.9 </span>The <dfn><code>track</code></dfn> element</h4><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/9">ISSUE-9</a> (video-accessibility) blocks progress to Last Call</span></p><dl class="element"><dt>Categories</dt>
+   <dd>None.</dd>
+   <dt>Contexts in which this element can be used:</dt>
+   <dd>As a child of a <a href="#media-element">media element</a>, before any <a href="content-models.html#flow-content">flow content</a>.</dd>
+   <dt>Content model:</dt>
+   <dd>Empty.</dd>
+   <dt>Content attributes:</dt>
+   <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
+   <dd><code title="attr-track-kind"><a href="#attr-track-kind">kind</a></code></dd>
+   <dd><code title="attr-track-src"><a href="#attr-track-src">src</a></code></dd>
+   <dd><code title="attr-track-charset"><a href="#attr-track-charset">charset</a></code></dd>
+   <dd><code title="attr-track-srclang"><a href="#attr-track-srclang">srclang</a></code></dd>
+   <dd><code title="attr-track-label"><a href="#attr-track-label">label</a></code></dd>
+   <dt>DOM interface:</dt>
+   <dd>
+<pre class="idl">interface <dfn id="htmltrackelement">HTMLTrackElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
+           attribute DOMString <a href="#dom-track-kind" title="dom-track-kind">kind</a>;
+           attribute DOMString <a href="#dom-track-src" title="dom-track-src">src</a>;
+           attribute DOMString <a href="#dom-track-charset" title="dom-track-charset">charset</a>;
+           attribute DOMString <a href="#dom-track-srclang" title="dom-track-srclang">srclang</a>;
+           attribute DOMString <a href="#dom-track-label" title="dom-track-label">label</a>;
+
+  readonly attribute <a href="#timedtrack">TimedTrack</a> <a href="#dom-track-track" title="dom-track-track">track</a>;
+};</pre>
+   </dd>
+  </dl><p>The <code><a href="#the-track-element">track</a></code> element allows authors to specify explicit
+  external <a href="#timed-track" title="timed track">timed tracks</a> for <a href="#media-element" title="media element">media elements</a>. It does not <a href="rendering.html#represents" title="represents">represent</a> anything on its own.</p><p>The <dfn id="attr-track-kind" title="attr-track-kind"><code>kind</code></dfn>
+  attribute is an <a href="common-microsyntaxes.html#enumerated-attribute">enumerated attribute</a>. The following
+  table lists the keywords defined for this attribute. The keyword
+  given in the first cell of each row maps to the state given in the
+  second cell.</p><table><thead><tr><th>Keyword
+     </th><th>State
+     </th><th>Brief description
+   </th></tr></thead><tbody><tr><td><dfn id="attr-track-kind-keyword-subtitles" title="attr-track-kind-keyword-subtitles"><code>subtitles</code></dfn>
+     </td><td><dfn id="attr-track-kind-subtitles" title="attr-track-kind-subtitles">Subtitles</dfn>
+     </td><td>Transcription or translation of the dialogue, suitable for when the sound is available but not understood (e.g. because the user does not understand the language of the <a href="#media-resource">media resource</a>'s soundtrack).
+    </td></tr><tr><td><dfn id="attr-track-kind-keyword-captions" title="attr-track-kind-keyword-captions"><code>captions</code></dfn>
+     </td><td><dfn id="attr-track-kind-captions" title="attr-track-kind-captions">Captions</dfn>
+     </td><td>Transcription or translation of the dialogue, sound effects, relevant musical cues, and other relevant audio information, suitable for when the soundtrack is unavailable (e.g. because it is muted or because the user is deaf).
+    </td></tr><tr><td><dfn id="attr-track-kind-keyword-descriptions" title="attr-track-kind-keyword-descriptions"><code>descriptions</code></dfn>
+     </td><td><dfn id="attr-track-kind-descriptions" title="attr-track-kind-descriptions">Descriptions</dfn>
+     </td><td>Textual descriptions of the video component of the <a href="#media-resource">media resource</a>, intended for audio synthesis when the visual component is unavailable (e.g. because the user is interacting with the application without a screen while driving, or because the user is blind).
+    </td></tr><tr><td><dfn id="attr-track-kind-keyword-chapters" title="attr-track-kind-keyword-chapters"><code>chapters</code></dfn>
+     </td><td><dfn id="attr-track-kind-chapters" title="attr-track-kind-chapters">Chapters</dfn>
+     </td><td>Chapter titles, intended to be used for navigating the <a href="#media-resource">media resource</a>.
+    </td></tr><tr><td><dfn id="attr-track-kind-keyword-metadata" title="attr-track-kind-keyword-metadata"><code>metadata</code></dfn>
+     </td><td><dfn id="attr-track-kind-metadata" title="attr-track-kind-metadata">Metadata</dfn>
+     </td><td>Tracks intended for use from script.
+  </td></tr></tbody></table><p>The attribute may be omitted. The <i>missing value default</i> is
+  the <a href="#attr-track-kind-subtitles" title="attr-track-kind-subtitles">subtitles</a> state.</p><p>The <dfn id="attr-track-src" title="attr-track-src"><code>src</code></dfn> attribute
+  gives the address of the timed track data. The value must be a
+  <a href="urls.html#valid-non-empty-url-potentially-surrounded-by-spaces">valid non-empty URL potentially surrounded by
+  spaces</a>. This attribute must be present.</p><div class="impl">
+
+  <p>If the element has a <code title="attr-track-src"><a href="#attr-track-src">src</a></code>
+  attribute whose value is not the empty string and whose value, when
+  the attribute was set, could be successfully <a href="urls.html#resolve-a-url" title="resolve a&#10;  url">resolved</a> relative to the element, then the element's
+  <dfn id="track-url">track URL</dfn> is the resulting <a href="urls.html#absolute-url">absolute
+  URL</a>. Otherwise, the element's <a href="#track-url">track URL</a> is the
+  empty string.</p>
+
+  </div><p>If the elements's <a href="#track-url">track URL</a> identifies a
+  <span>WebSRT</span> resource, and the element's <code title="attr-track-kind"><a href="#attr-track-kind">kind</a></code> attribute is not in the <a href="#attr-track-kind-metadata" title="attr-track-kind-metadata">metadata</a> state, then the
+  <span>WebSRT</span> file must be a <span>WebSRT file using cue
+  text</span>.</p><p>If the elements's <a href="#track-url">track URL</a> identifies a
+  <span>WebSRT</span> resource, then the <dfn id="attr-track-charset" title="attr-track-charset"><code>charset</code></dfn> attribute may
+  be specified. If the attribute is set, its value must be a valid
+  character encoding name, must be an <a href="infrastructure.html#ascii-case-insensitive">ASCII
+  case-insensitive</a> match for the <a href="infrastructure.html#preferred-mime-name">preferred MIME
+  name</a> for that encoding, and must match the character encoding
+  of the <span>WebSRT</span> file. <a href="references.html#refsIANACHARSET">[IANACHARSET]</a></p><p>The <dfn id="attr-track-srclang" title="attr-track-srclang"><code>srclang</code></dfn>
+  attribute gives the language of the timed track data. The value must
+  be a valid BCP 47 language tag. This attribute must be present if
+  the element's <code title="attr-track-kind"><a href="#attr-track-kind">kind</a></code> attribute is
+  in the <a href="#attr-track-kind-subtitles" title="attr-track-kind-subtitles">subtitles</a>
+  state. <a href="references.html#refsBCP47">[BCP47]</a></p><div class="impl">
+
+  <p>If the element has a <code title="attr-track-srclang"><a href="#attr-track-srclang">srclang</a></code> attribute whose value is
+  not the empty string, then the element's <dfn id="track-language">track language</dfn>
+  is the value of the attribute. Otherwise, the element has no
+  <a href="#track-language">track language</a>.</p>
+
+  </div><p>The <dfn id="attr-track-label" title="attr-track-label"><code>label</code></dfn>
+  attribute gives a user-readable title for the track. This title is
+  used by user agents when listing <a href="#attr-track-kind-subtitles" title="attr-track-kind-subtitles">subtitle</a>, <a href="#attr-track-kind-captions" title="attr-track-kind-captions">caption</a>, and <a href="#attr-track-kind-descriptions" title="attr-track-kind-descriptions">audio description</a> tracks
+  in their user interface.</p><p>The value of the <code title="attr-track-label"><a href="#attr-track-label">label</a></code>
+  attribute, if the attribute is present, must not be the empty
+  string. Furthermore, there must not be two <code><a href="#the-track-element">track</a></code>
+  element children of the same <a href="#media-element">media element</a> whose <code title="attr-track-kind"><a href="#attr-track-kind">kind</a></code> attributes are in the same
+  state, whose <code title="attr-track-srclang"><a href="#attr-track-srclang">srclang</a></code>
+  attributes are both missing or have values that represent the same
+  language, and whose <code title="attr-track-label"><a href="#attr-track-label">label</a></code>
+  attributes are again both missing or both have the same value.</p><div class="impl">
+
+  <p>If the element has a <code title="attr-track-label"><a href="#attr-track-label">label</a></code>
+  attribute whose value is not the empty string, then the element's
+  <dfn id="track-label">track label</dfn> is the value of the attribute. Otherwise, the
+  element's <a href="#track-label">track label</a> is a user-agent defined string
+  (e.g. the string "untitled" in the user's locale, or a value
+  automatically generated from the other attributes).</p>
+
+  </div><dl class="domintro"><dt><var title="">track</var> . <code title="dom-track-track"><a href="#dom-track-track">track</a></code></dt>
+
+   <dd>
+
+    <p>Returns the <code><a href="#timedtrack">TimedTrack</a></code> object corresponding to the <a href="#timed-track">timed track</a> of the <code><a href="#the-track-element">track</a></code> element.</p>
+
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>The <dfn id="dom-track-track" title="dom-track-track"><code>track</code></dfn> IDL
+  attribute must, on getting, return the <code><a href="#the-track-element">track</a></code> element's
+  <a href="#timed-track">timed track</a>'s corresponding <code><a href="#timedtrack">TimedTrack</a></code>
+  object.</p>
+
+  <p>The <dfn id="dom-track-src" title="dom-track-src"><code>src</code></dfn>, <dfn id="dom-track-charset" title="dom-track-charset"><code>charset</code></dfn>, <dfn id="dom-track-srclang" title="dom-track-srclang"><code>srclang</code></dfn>, and <dfn id="dom-track-label" title="dom-track-label"><code>label</code></dfn> IDL attributes must
+  <a href="common-dom-interfaces.html#reflect">reflect</a> the respective content attributes of the same
+  name. The <dfn id="dom-track-kind" title="dom-track-kind"><code>kind</code></dfn> IDL
+  attributemust <a href="common-dom-interfaces.html#reflect">reflect</a> the content attribute of the same
+  name, <a href="common-dom-interfaces.html#limited-to-only-known-values">limited to only known values</a>.</p>
+
+  </div><div class="example">
+
+   <p>This video has subtitles in several languages:</p>
+
+   <pre>&lt;video src="brave.webm"&gt;
+ &lt;track kind=subtitles src=brave.en.srt srclang=en label="English"&gt;
+ &lt;track kind=captions src=brave.en.srt srclang=en label="English for the Hard of Hearing"&gt;
+ &lt;track kind=subtitles src=brave.fr.srt srclang=fr label="Fran&#xE7;ais"&gt;
+ &lt;track kind=subtitles src=brave.de.srt srclang=de label="Deutsch"&gt;
+&lt;/video&gt;</pre>
+
+  </div><!--</div>--><!--KEEP-START w3c-html--><!--TT--><h4 id="media-elements"><span class="secno">4.8.10 </span>Media elements</h4><p><dfn id="media-element" title="media element">Media elements</dfn>
   (<code><a href="#audio">audio</a></code> and <code><a href="#video">video</a></code>, in this specification)
   implement the following interface:</p><pre class="idl">interface <dfn id="htmlmediaelement">HTMLMediaElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
 
@@ -893,8 +1103,13 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
            attribute boolean <a href="#dom-media-controls" title="dom-media-controls">controls</a>;
            attribute double <a href="#dom-media-volume" title="dom-media-volume">volume</a>;
            attribute boolean <a href="#dom-media-muted" title="dom-media-muted">muted</a>;
+<!--KEEP-END w3c-html--><!--TT-->
+  // timed tracks
+  readonly attribute <a href="#timedtrack">TimedTrack</a>[] <a href="#dom-media-tracks" title="dom-media-tracks">tracks</a>;
+  <a href="#mutabletimedtrack">MutableTimedTrack</a> <a href="#dom-media-addtrack" title="dom-media-addTrack">addTrack</a>(in DOMString kind, in optional DOMString label, in optional DOMString language);
+<!--KEEP-START w3c-html--><!--TT-->
 };</pre><p>The <dfn id="media-element-attributes">media element attributes</dfn>, <code title="attr-media-src"><a href="#attr-media-src">src</a></code>, <code title="attr-media-preload"><a href="#attr-media-preload">preload</a></code>, <code title="attr-media-autoplay"><a href="#attr-media-autoplay">autoplay</a></code>, <code title="attr-media-loop"><a href="#attr-media-loop">loop</a></code>, and <code title="attr-media-controls"><a href="#attr-media-controls">controls</a></code>, apply to all <a href="#media-element" title="media element">media elements</a>. They are defined in
-  this section.</p><!-- proposed v2 (actually v3!) features:
+  this section.</p><!-- attr-media-audio --><!-- proposed v2 (actually v3!) features:
     * frame forward / backwards / step(n) while paused
     * hasAudio, hasVideo, hasCaptions, etc
     * per-frame control: get current frame; set current frame
@@ -937,7 +1152,7 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   section and its subsections is the <dfn id="media-element-event-task-source">media element event task
   source</dfn>.</p>
 
-  </div><h5 id="error-codes"><span class="secno">4.8.9.1 </span>Error codes</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">media</var> . <code title="dom-media-error"><a href="#dom-media-error">error</a></code></dt>
+  </div><h5 id="error-codes"><span class="secno">4.8.10.1 </span>Error codes</h5><dl class="domintro"><dt><var title="">media</var> . <code title="dom-media-error"><a href="#dom-media-error">error</a></code></dt>
 
    <dd>
 
@@ -998,7 +1213,7 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
 
    <dd>The <a href="#media-resource">media resource</a> indicated by the <code title="attr-media-src"><a href="#attr-media-src">src</a></code> attribute was not suitable.</dd>
 
-  </dl><h5 id="location-of-the-media-resource"><span class="secno">4.8.9.2 </span>Location of the media resource</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The <dfn id="attr-media-src" title="attr-media-src"><code>src</code></dfn> content
+  </dl><h5 id="location-of-the-media-resource"><span class="secno">4.8.10.2 </span>Location of the media resource</h5><p>The <dfn id="attr-media-src" title="attr-media-src"><code>src</code></dfn> content
   attribute on <a href="#media-element" title="media element">media elements</a> gives
   the address of the media resource (video, audio) to show. The
   attribute, if present, must contain a <a href="urls.html#valid-non-empty-url-potentially-surrounded-by-spaces">valid non-empty
@@ -1034,9 +1249,10 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   </div><p class="note">There are two ways to specify a <a href="#media-resource">media
   resource</a>, the <code title="attr-media-src"><a href="#attr-media-src">src</a></code>
   attribute, or <code><a href="#the-source-element">source</a></code> elements. The attribute overrides
-  the elements.</p><h5 id="mime-types"><span class="secno">4.8.9.3 </span>MIME types</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>A <a href="#media-resource">media resource</a> can be described in terms of its
-  <em>type</em>, specifically a <a href="infrastructure.html#mime-type">MIME type</a>, optionally
-  with a <code title="">codecs</code> parameter. <a href="references.html#refsRFC4281">[RFC4281]</a></p><p>Types are usually somewhat incomplete descriptions; for example
+  the elements.</p><h5 id="mime-types"><span class="secno">4.8.10.3 </span>MIME types</h5><p>A <a href="#media-resource">media resource</a> can be described in terms of its
+  <em>type</em>, specifically a <a href="infrastructure.html#mime-type">MIME type</a>, in some cases
+  with a <code title="">codecs</code> parameter. (Whether the <code title="">codecs</code> parameter is allowed or not depends on the
+  MIME type.) <a href="references.html#refsRFC4281">[RFC4281]</a></p><p>Types are usually somewhat incomplete descriptions; for example
   "<code title="">video/mpeg</code>" doesn't say anything except what
   the container type is, and even a type like "<code title="">video/mp4; codecs="avc1.42E01E,
   mp4a.40.2"</code>" doesn't include information like the actual
@@ -1046,15 +1262,19 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   it definitely <em>cannot</em> play media of that type.</p><p><dfn id="a-type-that-the-user-agent-knows-it-cannot-render">A type that the user agent knows it cannot render</dfn> is
   one that describes a resource that the user agent definitely does
   not support, for example because it doesn't recognize the container
-  type, or it doesn't support the listed codecs.</p><p>The <a href="infrastructure.html#mime-type">MIME type</a> "<code title="">application/octet-stream</code>" with no parameters is
-  never <a href="#a-type-that-the-user-agent-knows-it-cannot-render">a type that the user agent knows it cannot
-  render</a>. User agents must treat that type as equivalent to the
-  lack of any explicit <a href="fetching-resources.html#content-type" title="Content-Type">Content-Type
-  metadata</a> when it is used to label a potential <a href="#media-resource">media
+  type, or it doesn't support the listed codecs.</p><p>The <a href="infrastructure.html#mime-type">MIME type</a>
+  "<code>application/octet-stream</code>" with no parameters is never
+  <a href="#a-type-that-the-user-agent-knows-it-cannot-render">a type that the user agent knows it cannot render</a>. User
+  agents must treat that type as equivalent to the lack of any
+  explicit <a href="fetching-resources.html#content-type" title="Content-Type">Content-Type metadata</a>
+  when it is used to label a potential <a href="#media-resource">media
   resource</a>.</p><p class="note">In the absence of a <!-- pretty crazy -->
-  specification to the contrary, the <a href="infrastructure.html#mime-type">MIME type</a> "<code title="">application/octet-stream</code>" when used <em>with</em>
-  parameters, e.g. "<code title="">application/octet-stream;codecs=theora</code>", <em>is</em>
-  <a href="#a-type-that-the-user-agent-knows-it-cannot-render">a type that the user agent knows it cannot render</a>.</p><dl class="domintro"><dt><var title="">media</var> . <code title="dom-navigator-canPlayType"><a href="#dom-navigator-canplaytype">canPlayType</a></code>(<var title="">type</var>)</dt>
+  specification to the contrary, the <a href="infrastructure.html#mime-type">MIME type</a>
+  "<code>application/octet-stream</code>" when used <em>with</em>
+  parameters, e.g.
+  "<code>application/octet-stream;codecs=theora</code>", <em>is</em>
+  <a href="#a-type-that-the-user-agent-knows-it-cannot-render">a type that the user agent knows it cannot render</a>,
+  since that parameter is not defined for that type.</p><dl class="domintro"><dt><var title="">media</var> . <code title="dom-navigator-canPlayType"><a href="#dom-navigator-canplaytype">canPlayType</a></code>(<var title="">type</var>)</dt>
 
    <dd>
 
@@ -1068,14 +1288,15 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
 
   <p>The <dfn id="dom-navigator-canplaytype" title="dom-navigator-canPlayType"><code>canPlayType(<var title="">type</var>)</code></dfn> method must return the empty
   string if <var title="">type</var> is <a href="#a-type-that-the-user-agent-knows-it-cannot-render">a type that the user
-  agent knows it cannot render</a>; it must return "<code title="">probably</code>" if the user agent is confident that the
+  agent knows it cannot render</a> or is the type
+  "<code>application/octet-stream</code>"; it must return "<code title="">probably</code>" if the user agent is confident that the
   type represents a <a href="#media-resource">media resource</a> that it can render if
   used in with this <code><a href="#audio">audio</a></code> or <code><a href="#video">video</a></code> element;
-  and it must return "<code title="">maybe</code>"
-  otherwise. Implementors are encouraged to return "<code title="">maybe</code>" unless the type can be confidently
-  established as being supported or not. Generally, a user agent
-  should never return "<code title="">probably</code>" if the type
-  doesn't have a <code title="">codecs</code> parameter.</p>
+  and it must return "<code title="">maybe</code>" otherwise.
+  Implementors are encouraged to return "<code title="">maybe</code>"
+  unless the type can be confidently established as being supported or
+  not. Generally, a user agent should never return "<code title="">probably</code>" for a type that allows the <code title="">codecs</code> parameter if that parameter is not
+  present.</p>
 
   </div><div class="example">
 
@@ -1111,7 +1332,7 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   </div><p class="note">The <code title="attr-source-type"><a href="#attr-source-type">type</a></code>
   attribute of the <code><a href="#the-source-element">source</a></code> element allows the user agent
   to avoid downloading resources that use formats it cannot
-  render.</p><h5 id="network-states"><span class="secno">4.8.9.4 </span>Network states</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">media</var> . <code title="dom-media-networkState"><a href="#dom-media-networkstate">networkState</a></code></dt>
+  render.</p><h5 id="network-states"><span class="secno">4.8.10.4 </span>Network states</h5><dl class="domintro"><dt><var title="">media</var> . <code title="dom-media-networkState"><a href="#dom-media-networkstate">networkState</a></code></dt>
 
    <dd>
 
@@ -1155,7 +1376,7 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   algorithm</a> defined below describes exactly when the <code title="dom-media-networkState"><a href="#dom-media-networkstate">networkState</a></code> attribute changes
   value and what events fire to indicate changes in this state.</p>
 
-  </div><h5 id="loading-the-media-resource"><span class="secno">4.8.9.5 </span>Loading the media resource</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">media</var> . <code title="dom-media-load"><a href="#dom-media-load">load</a></code>()</dt>
+  </div><h5 id="loading-the-media-resource"><span class="secno">4.8.10.5 </span>Loading the media resource</h5><dl class="domintro"><dt><var title="">media</var> . <code title="dom-media-load"><a href="#dom-media-load">load</a></code>()</dt>
 
    <dd>
 
@@ -1212,6 +1433,10 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
      <li><p>Set the <code title="dom-media-networkState"><a href="#dom-media-networkstate">networkState</a></code> attribute to
      <code title="dom-media-NETWORK_EMPTY"><a href="#dom-media-network_empty">NETWORK_EMPTY</a></code>.</p></li>
 
+<!--KEEP-END w3c-html--><!--TT-->
+     <li><p><a href="#forget-the-media-element-s-media-resource-specific-timed-tracks">Forget the media element's media-resource-specific
+     timed tracks</a>.</p></li>
+<!--KEEP-START w3c-html--><!--TT-->
 
      <li><p>If <code title="dom-media-readyState"><a href="#dom-media-readystate">readyState</a></code> is
      not set to <code title="dom-media-HAVE_NOTHING"><a href="#dom-media-have_nothing">HAVE_NOTHING</a></code>, then set it
@@ -1360,6 +1585,10 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
        attribute to a new <code><a href="#mediaerror">MediaError</a></code> object whose <code title="dom-MediaError-code"><a href="#dom-mediaerror-code">code</a></code> attribute is set to
        <code title="dom-MediaError-MEDIA_ERR_SRC_NOT_SUPPORTED"><a href="#dom-mediaerror-media_err_src_not_supported">MEDIA_ERR_SRC_NOT_SUPPORTED</a></code>.</p></li>
 
+<!--KEEP-END w3c-html--><!--TT-->
+       <li><p><a href="#forget-the-media-element-s-media-resource-specific-timed-tracks">Forget the media element's media-resource-specific
+       timed tracks</a>.</p></li>
+<!--KEEP-START w3c-html--><!--TT-->
 
        <li><p>Set the element's <code title="dom-media-networkState"><a href="#dom-media-networkstate">networkState</a></code> attribute to
        the <a href="#dom-media-network_no_source" title="dom-media-NETWORK_NO_SOURCE">NETWORK_NO_SOURCE</a>
@@ -1443,10 +1672,10 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
 
      <li><p>&#x231B; If <var title="">candidate</var> has a <code title="attr-source-type"><a href="#attr-source-type">type</a></code> attribute whose value, when
      parsed as a <a href="infrastructure.html#mime-type">MIME type</a> (including any codecs
-     described by the <code title="">codecs</code> parameter),
-     represents <a href="#a-type-that-the-user-agent-knows-it-cannot-render">a type that the user agent knows it cannot
-     render</a>, then end the <a href="webappapis.html#synchronous-section">synchronous section</a>, and
-     jump down to the <i title="">failed</i> step below.</p></li>
+     described by the <code title="">codecs</code> parameter, for
+     types that define that parameter), represents <a href="#a-type-that-the-user-agent-knows-it-cannot-render">a type that
+     the user agent knows it cannot render</a>, then end the
+     <a href="webappapis.html#synchronous-section">synchronous section</a>, and jump down to the <i title="">failed</i> step below.</p></li>
 
      <li><p>&#x231B; If <var title="">candidate</var> has a <code title="attr-source-media"><a href="#attr-source-media">media</a></code> attribute whose value does
      not <a href="common-microsyntaxes.html#matches-the-environment" title="matches the environment">match the
@@ -1476,6 +1705,10 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
      <a href="webappapis.html#synchronous-section">synchronous section</a> has ended. (Steps in <a href="webappapis.html#synchronous-section" title="synchronous section">synchronous sections</a> are
      marked with &#x231B;.)</p></li>
 
+<!--KEEP-END w3c-html--><!--TT-->
+     <li><p>&#x231B; <a href="#forget-the-media-element-s-media-resource-specific-timed-tracks">Forget the media element's
+     media-resource-specific timed tracks</a>.</p></li>
+<!--KEEP-START w3c-html--><!--TT-->
 
      <li><p>&#x231B; <i title="">Find next candidate</i>: Let <var title="">candidate</var> be null.</p></li>
 
@@ -1602,10 +1835,10 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
 
      <dt>If the <a href="#media-resource">media resource</a> is found to have <a href="fetching-resources.html#content-type" title="Content-Type">Content-Type metadata</a> that, when
      parsed as a <a href="infrastructure.html#mime-type">MIME type</a> (including any codecs
-     described by the <code title="">codecs</code> parameter),
-     represents <a href="#a-type-that-the-user-agent-knows-it-cannot-render">a type that the user agent knows it cannot
-     render</a> (even if the actual <a href="#media-data">media data</a> is in a
-     supported format)</dt>
+     described by the <code title="">codecs</code> parameter, if the
+     parameter is defined for that type), represents <a href="#a-type-that-the-user-agent-knows-it-cannot-render">a type that
+     the user agent knows it cannot render</a> (even if the actual
+     <a href="#media-data">media data</a> is in a supported format)</dt>
 
      <dt>If the <a href="#media-data">media data</a> can be fetched but is found by
      inspection to be in an unsupported format, or can otherwise not
@@ -1639,6 +1872,9 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
      data</a> has been fetched to determine the duration of the
      <a href="#media-resource">media resource</a>, its dimensions, and other
      metadata,
+<!--KEEP-END w3c-html--><!--TT-->
+     and once <a href="#the-timed-tracks-are-ready">the timed tracks are ready</a>
+<!--KEEP-START w3c-html--><!--TT-->
      </dt>
 
      <dd>
@@ -1891,6 +2127,25 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
      </dd>
 
 
+<!--KEEP-END w3c-html--><!--TT-->
+     <dt id="found-a-media-resource-specific-timed-track">If the <a href="#media-resource">media resource</a> is found to declare a <a href="#media-resource-specific-timed-track">media-resource-specific timed track</a> that the user agent supports</dt>
+
+     <dd>
+
+      <p>If the <a href="#media-resource">media resource</a>'s <a href="origin-0.html#origin">origin</a> is
+      the <a href="origin-0.html#same-origin">same origin</a> as the <a href="#media-element">media element</a>'s
+      <code><a href="infrastructure.html#document">Document</a></code>'s <a href="origin-0.html#origin">origin</a>, <a href="webappapis.html#queue-a-task">queue a
+      task</a> to run the <a href="#steps-to-expose-a-media-resource-specific-timed-track">steps to expose a
+      media-resource-specific timed track</a> with the relevant
+      data.</p> <!-- CORS -->
+
+      <p class="note">Cross-origin files do not expose their subtitles
+      in the DOM, for security reasons. However, user agents may still
+      provide the user with access to such data in their user
+      interface.</p>
+
+     </dd>
+<!--KEEP-START w3c-html--><!--TT-->
 
     </dl><p>When the <a href="webappapis.html#networking-task-source">networking task source</a> has <a href="webappapis.html#queue-a-task" title="queue a task">queued</a> the last <a href="webappapis.html#concept-task" title="concept-task">task</a> as part of <a href="fetching-resources.html#fetch" title="fetch">fetching</a> the <a href="#media-resource">media resource</a>
     (i.e. once the download has completed), if the fetching process
@@ -1952,7 +2207,7 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the content attribute of the
   same name, <a href="common-dom-interfaces.html#limited-to-only-known-values">limited to only known values</a>.</p>
 
-  </div><p class="note">The <code title="attr-media-autoplay"><a href="#attr-media-autoplay">autoplay</a></code> attribute can overrride
+  </div><p class="note">The <code title="attr-media-autoplay"><a href="#attr-media-autoplay">autoplay</a></code> attribute can override
   the <code title="attr-media-preload"><a href="#attr-media-preload">preload</a></code> attribute (since
   if the media plays, it naturally has to buffer first, regardless of
   the hint given by the <code title="attr-media-preload"><a href="#attr-media-preload">preload</a></code> attribute). Including
@@ -2002,7 +2257,7 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   end up being not included in the range(s) of objects returned by the
   same attribute at later times.</p>
 
-  </div><h5 id="offsets-into-the-media-resource"><span class="secno">4.8.9.6 </span>Offsets into the media resource</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">media</var> . <code title="dom-media-duration"><a href="#dom-media-duration">duration</a></code></dt>
+  </div><h5 id="offsets-into-the-media-resource"><span class="secno">4.8.10.6 </span>Offsets into the media resource</h5><dl class="domintro"><dt><var title="">media</var> . <code title="dom-media-duration"><a href="#dom-media-duration">duration</a></code></dt>
 
    <dd>
 
@@ -2215,7 +2470,7 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the content attribute of the
   same name.</p>
 
-  </div><h5 id="the-ready-states"><span class="secno">4.8.9.7 </span>The ready states</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">media</var> . <code title="dom-media-readyState"><a href="#dom-media-readystate">readyState</a></code></dt>
+  </div><h5 id="the-ready-states"><span class="secno">4.8.10.7 </span>The ready states</h5><dl class="domintro"><dt><var title="">media</var> . <code title="dom-media-readyState"><a href="#dom-media-readystate">readyState</a></code></dt>
 
    <dd>
 
@@ -2252,6 +2507,10 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
    will no longer raise an exception when seeking. No <a href="#media-data">media
    data</a> is available for the immediate <a href="#current-playback-position">current playback
    position</a>.
+<!--KEEP-END w3c-html--><!--TT-->
+   The <a href="#timed-track" title="timed track">timed tracks</a>
+   are <a href="#the-timed-tracks-are-ready" title="the timed tracks are ready">ready</a>.
+<!--KEEP-START w3c-html--><!--TT-->
    </dd>
 
    <dt><dfn id="dom-media-have_current_data" title="dom-media-HAVE_CURRENT_DATA"><code>HAVE_CURRENT_DATA</code></dfn> (numeric value 2)</dt>
@@ -2412,7 +2671,7 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   IDL attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the content attribute of the
   same name.</p>
 
-  </div><h5 id="playing-the-media-resource"><span class="secno">4.8.9.8 </span>Playing the media resource</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">media</var> . <code title="dom-media-paused"><a href="#dom-media-paused">paused</a></code></dt>
+  </div><h5 id="playing-the-media-resource"><span class="secno">4.8.10.8 </span>Playing the media resource</h5><dl class="domintro"><dt><var title="">media</var> . <code title="dom-media-paused"><a href="#dom-media-paused">paused</a></code></dt>
 
    <dd>
 
@@ -2758,9 +3017,31 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   position</a> changes while the steps are running, then the user
   agent must wait for the steps to complete, and then must immediately
   rerun the steps.
+<!--KEEP-END w3c-html--><!--TT-->
+  (These steps are thus run as often as possible or needed &#x2014; if
+  one iteration takes a long time, this can cause certain <a href="#timed-track-cue" title="timed track cue">cues</a> to be skipped over as the user
+  agent rushes ahead to "catch up".)
+<!--KEEP-START w3c-html--><!--TT-->
   </p>
 
-  <ol><li><p>If the time was reached through the usual monotonic increase
+  <ol><!--KEEP-END w3c-html--><!--TT--><li><p>Let <var title="">current cues</var> be an ordered list of
+   <a href="#timed-track-cue" title="timed track cue">cues</a>, initialized to contain
+   all the <a href="#timed-track-cue" title="timed track cue">cues</a> of all the <a href="#timed-track-hidden" title="timed track hidden">hidden</a> or <a href="#timed-track-showing" title="timed&#10;   track showing">showing</a> <a href="#timed-track" title="timed track">timed
+   tracks</a> of the <a href="#media-element">media element</a> (not the <a href="#timed-track-disabled" title="timed track disabled">disabled</a> ones) whose <a href="#timed-track-cue-start-time" title="timed track cue start time">start times</a> are less than
+   or equal to the <a href="#current-playback-position">current playback position</a> and whose
+   <a href="#timed-track-cue-end-time" title="timed track cue end time">end times</a> are greater
+   than the <a href="#current-playback-position">current playback position</a>, in <a href="#timed-track-cue-order">timed
+   track cue order</a>.</p></li>
+
+   <li><p>Let <var title="">other cues</var> be an ordered list of
+   <a href="#timed-track-cue" title="timed track cue">cues</a>, initialized to contain
+   all the <a href="#timed-track-cue" title="timed track cue">cues</a> of <a href="#timed-track-hidden" title="timed track hidden">hidden</a> and <a href="#timed-track-showing" title="timed&#10;   track showing">showing</a> <a href="#timed-track" title="timed track">timed
+   tracks</a> of the <a href="#media-element">media element</a> that are not
+   present in <var title="">current cues</var>, also in <a href="#timed-track-cue-order">timed
+   track cue order</a>.</p></li>
+<!--KEEP-START w3c-html--><!--TT-->
+
+   <li><p>If the time was reached through the usual monotonic increase
    of the current playback position during normal playback, and if the
    user agent has not fired a <code title="event-media-timeupdate"><a href="#event-media-timeupdate">timeupdate</a></code> event at the
    element in the past 15 to 250ms and is not still running event
@@ -2778,8 +3059,74 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
    not any more frequent than the user agent can comfortably handle
    while decoding the video.</p></li>
 
+<!--KEEP-END w3c-html--><!--TT-->
+   <li><p>If all of the <a href="#timed-track-cue" title="timed track cue">cues</a> in
+   <var title="">current cues</var> have their <a href="#timed-track-cue-active-flag">timed track cue
+   active flag</a> set, and none of the <a href="#timed-track-cue" title="timed track&#10;   cue">cues</a> in <var title="">other cues</var> have their
+   <a href="#timed-track-cue-active-flag">timed track cue active flag</a> set, then abort these
+   steps.</p></li>
 
-  </ol><p>When a <a href="#media-element">media element</a> is <a href="infrastructure.html#remove-an-element-from-a-document" title="remove an&#10;  element from a document">removed from a
+   <li><p>If the time was reached through the usual monotonic increase
+   of the current playback position during normal playback, and there
+   are <a href="#timed-track-cue" title="timed track cue">cues</a> in <var title="">other cues</var> that have both their <a href="#timed-track-cue-active-flag">timed track
+   cue active flag</a> set and their <a href="#timed-track-cue-pause-on-exit-flag">timed track cue
+   pause-on-exit flag</a> set, then immediately act as if the
+   element's <code title="dom-media-pause"><a href="#dom-media-pause">pause()</a></code> method had
+   been invoked. <!-- pause() can in theory call load(), but never can
+   it do so as part of this invokation, since we wouldn't be in this
+   algorithm if the media element was empty. So, no need to couch all
+   this in a task. --> (In the other cases, such as explicit seeks,
+   playback is not paused by going past the end time of a <a href="#timed-track-cue" title="timed track cue">cue</a>, even if that <a href="#timed-track-cue" title="timed&#10;   track cue">cue</a> has its <a href="#timed-track-cue-pause-on-exit-flag">timed track cue pause-on-exit
+   flag</a> set.)</p></li>
+
+   <li><p>Let <var title="">affected tracks</var> be a list of <a href="#timed-track" title="timed track">timed tracks</a>, initially empty.</p></li>
+
+   <li><p>For each <a href="#timed-track-cue" title="timed track cue">timed track
+   cue</a> in <var title="">other cues</var> that has its
+   <a href="#timed-track-cue-active-flag">timed track cue active flag</a> set, in list order,
+   <a href="webappapis.html#queue-a-task">queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named
+   <code title="event-exit">exit</code> at the
+   <code><a href="#timedtrackcue">TimedTrackCue</a></code> object, and add the <a href="#timed-track-cue" title="timed&#10;   track cue">cue</a>'s <a href="#timed-track">timed track</a> to <var title="">affected tracks</var>, if it's not already in the
+   list.</p></li>
+
+   <li><p>For each <a href="#timed-track-cue" title="timed track cue">timed track
+   cue</a> in <var title="">current cues</var> that does not have
+   its <a href="#timed-track-cue-active-flag">timed track cue active flag</a> set, in list order,
+   <a href="webappapis.html#queue-a-task">queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named
+   <code title="event-enter">enter</code> at the
+   <code><a href="#timedtrackcue">TimedTrackCue</a></code> object, and add the <a href="#timed-track-cue" title="timed&#10;   track cue">cue</a>'s <a href="#timed-track">timed track</a> to <var title="">affected tracks</var>, if it's not already in the
+   list.</p></li>
+
+   <li><p>For each <a href="#timed-track">timed track</a> in <var title="">affected
+   tracks</var>, in the order they were added to the list (which will
+   match the relative order of the <a href="#timed-track" title="timed track">timed
+   tracks</a> in the <a href="#media-element">media element</a>'s <a href="#list-of-timed-tracks">list of
+   timed tracks</a>), <a href="webappapis.html#queue-a-task">queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a
+   simple event</a> named <code title="event-cuechange">cuechange</code> at the
+   <code><a href="#timedtrack">TimedTrack</a></code> object, and, if the <a href="#timed-track">timed
+   track</a> has a corresponding <code><a href="#the-track-element">track</a></code> element, to
+   then <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named <code title="event-cuechange">cuechange</code> at the <code><a href="#the-track-element">track</a></code>
+   element as well.</p></li>
+
+   <li><p>Set the <a href="#timed-track-cue-active-flag">timed track cue active flag</a> of all the
+   <a href="#timed-track-cue" title="timed track cue">cues</a> in the <var title="">current cues</var>, and unset the <a href="#timed-track-cue-active-flag">timed track cue
+   active flag</a> of all the <a href="#timed-track-cue" title="timed track&#10;   cue">cues</a> in the <var title="">other cues</var>.</p></li>
+
+   <li><p>Run the <a href="#rules-for-updating-the-timed-track-rendering">rules for updating the timed track
+   rendering</a> of each of the <a href="#timed-track" title="timed track">timed
+   tracks</a> in <var title="">affected tracks</var> that are <a href="#timed-track-showing" title="timed track showing">showing</a> (e.g., for <a href="#timed-track" title="timed track">timed tracks</a> based on
+   <span>WebSRT</span>, the <a href="rendering.html#rules-for-updating-the-display-of-websrt-timed-tracks">rules for updating the display of
+   WebSRT timed tracks</a>).</p></li>
+<!--KEEP-START w3c-html--><!--TT-->
+
+  </ol><!--KEEP-END w3c-html--><!--TT--><p>For the purposes of the algorithm above, a <a href="#timed-track-cue">timed track
+  cue</a> is considered to be part of a <a href="#timed-track">timed track</a>
+  only if it is listed in the <a href="#timed-track-list-of-cues">timed track list of cues</a>,
+  not merely if it is associated with the <a href="#timed-track">timed
+  track</a>.</p>
+<!--KEEP-START w3c-html--><!--TT-->
+
+  <p>When a <a href="#media-element">media element</a> is <a href="infrastructure.html#remove-an-element-from-a-document" title="remove an&#10;  element from a document">removed from a
   <code>Document</code></a>, if the <a href="#media-element">media element</a>'s
   <code title="dom-media-networkState"><a href="#dom-media-networkstate">networkState</a></code> attribute
   has a value other than <code title="dom-media-NETWORK_EMPTY"><a href="#dom-media-network_empty">NETWORK_EMPTY</a></code> then the user
@@ -2790,7 +3137,7 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   document, then the playback will <a href="#media-playback">stop</a>
   until the document is active again.</p>
 
-  </div><h5 id="seeking"><span class="secno">4.8.9.9 </span>Seeking</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">media</var> . <code title="dom-media-seeking"><a href="#dom-media-seeking">seeking</a></code></dt>
+  </div><h5 id="seeking"><span class="secno">4.8.10.9 </span>Seeking</h5><dl class="domintro"><dt><var title="">media</var> . <code title="dom-media-seeking"><a href="#dom-media-seeking">seeking</a></code></dt>
 
    <dd>
 
@@ -2904,10 +3251,10 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   to seek to, at the time the attribute is evaluated.</p>
 
   <p class="note">If the user agent can seek to anywhere in the
-  <a href="#media-resource">media resource</a>, e.g. because it a simple movie file and
-  the user agent and the server support HTTP Range requests, then the
-  attribute would return an object with one range, whose start is the
-  time of the first frame (the <a href="#earliest-possible-position">earliest possible
+  <a href="#media-resource">media resource</a>, e.g. because it is a simple movie file
+  and the user agent and the server support HTTP Range requests, then
+  the attribute would return an object with one range, whose start is
+  the time of the first frame (the <a href="#earliest-possible-position">earliest possible
   position</a>, typically zero), and whose end is the same as the
   time of the first frame plus the <code title="dom-media-duration"><a href="#dom-media-duration">duration</a></code> attribute's value (which
   would equal the time of the last frame, and might be positive
@@ -2925,7 +3272,1442 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   <a href="#current-playback-position">current playback position</a> changes in a discontinuous
   fashion (so that the relevant events fire).</p>
 
-  </div><h5 id="user-interface"><span class="secno">4.8.9.10 </span>User interface</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The <dfn id="attr-media-controls" title="attr-media-controls"><code>controls</code></dfn>
+  </div><!--KEEP-END w3c-html--><!--TT--><!--<div data-component="other Hixie drafts (editor: Ian Hickson)">--><h5 id="timed-tracks"><span class="secno">4.8.10.10 </span>Timed tracks</h5><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/9">ISSUE-9</a> (video-accessibility) blocks progress to Last Call</span></p><h6 id="timed-track-model"><span class="secno">4.8.10.10.1 </span>Timed track model</h6><p>A <a href="#media-element">media element</a> can have a group of associated <dfn id="timed-track" title="timed track">timed tracks</dfn>, known as the <a href="#media-element">media
+  element</a>'s <dfn id="list-of-timed-tracks">list of timed tracks</dfn>. The <a href="#timed-track" title="timed track">timed tracks</a> are sorted as follows:</p><ol class="brief"><li>The <a href="#timed-track" title="timed track">timed tracks</a> corresponding
+   to <code><a href="#the-track-element">track</a></code> element children of the <a href="#media-element">media
+   element</a>, in <a href="infrastructure.html#tree-order">tree order</a>.</li>
+
+   <li>Any <a href="#timed-track" title="timed track">timed tracks</a> added using
+   the <code title="dom-media-addTrack"><a href="#dom-media-addtrack">addTrack()</a></code> method, in
+   the order they were added, oldest first.</li>
+
+   <li>Any <a href="#media-resource-specific-timed-track" title="media-resource-specific timed&#10;   track">media-resource-specific timed tracks</a> (<a href="#timed-track" title="timed track">timed tracks</a> corresponding to data in
+   the <a href="#media-resource">media resource</a>), in the order defined by the
+   <a href="#media-resource">media resource</a>'s format specification.</li>
+
+  </ol><p>A <a href="#timed-track">timed track</a> consists of:</p><dl><dt><dfn id="timed-track-kind" title="timed track kind">The kind of timed track</dfn>
+
+   </dt><dd>
+
+    <p>This decides how the track is handled by the user agent. The
+    kind is represented by a string. The possible strings are:</p>
+
+    <ul class="brief"><li><dfn id="dom-timedtrack-kind-subtitles" title="dom-TimedTrack-kind-subtitles"><code>subtitles</code></dfn>
+     </li><li><dfn id="dom-timedtrack-kind-captions" title="dom-TimedTrack-kind-captions"><code>captions</code></dfn>
+     </li><li><dfn id="dom-timedtrack-kind-descriptions" title="dom-TimedTrack-kind-descriptions"><code>descriptions</code></dfn>
+     </li><li><dfn id="dom-timedtrack-kind-chapters" title="dom-TimedTrack-kind-chapters"><code>chapters</code></dfn>
+     </li><li><dfn id="dom-timedtrack-kind-metadata" title="dom-TimedTrack-kind-metadata"><code>metadata</code></dfn>
+    </li></ul><p>The <a href="#timed-track-kind" title="timed track kind">kind of track</a> can
+    change dynamically, in the case of a <a href="#timed-track">timed track</a>
+    corresponding to a <code><a href="#the-track-element">track</a></code> element.</p>
+
+   </dd>
+
+   <dt><dfn id="timed-track-label" title="timed track label">A label</dfn>
+
+   </dt><dd>
+
+    <p>This is a human-readable string intended to identify the track
+    for the user. In certain cases, the label might be generated
+    automatically.</p>
+
+    <p>The <a href="#timed-track-label" title="timed track label">label of a track</a> can
+    change dynamically, in the case of a <a href="#timed-track">timed track</a>
+    corresponding to a <code><a href="#the-track-element">track</a></code> element or in the case of an
+    automatically-generated label whose value depends on variable
+    factors such as the user's preferred user interface language.</p>
+
+   </dd>
+
+   <dt><dfn id="timed-track-language" title="timed track language">A language</dfn>
+
+   </dt><dd>
+
+    <p>This is a string (a BCP 47 language tag) representing the
+    language of the timed track's cues. <a href="references.html#refsBCP47">[BCP47]</a></p>
+
+    <p>The <a href="#timed-track-language" title="timed track language">language of a timed
+    track</a> can change dynamically, in the case of a <a href="#timed-track">timed
+    track</a> corresponding to a <code><a href="#the-track-element">track</a></code> element.</p>
+
+   </dd>
+
+   <dt><dfn id="timed-track-readiness-state" title="timed track readiness state">A readiness state</dfn>
+
+   </dt><dd>
+
+    <p>One of the following:</p>
+
+    <dl><dt><dfn id="timed-track-not-loaded" title="timed track not loaded">Not loaded</dfn>
+
+     </dt><dd>
+
+      <p>Indicates that the timed track is known to exist (e.g. it has
+      been declared with a <code><a href="#the-track-element">track</a></code> element), but its cues
+      have not been obtained.</p>
+
+     </dd>
+
+     <dt><dfn id="timed-track-loading" title="timed track loading">Loading</dfn>
+
+     </dt><dd>
+
+      <p>Indicates that the timed track is loading and there have been
+      no fatal errors encountered so far. Further cues might still be
+      added to the track.</p>
+
+     </dd>
+
+     <dt><dfn id="timed-track-loaded" title="timed track loaded">Loaded</dfn>
+
+     </dt><dd>
+
+      <p>Indicates that the timed track has been loaded with no fatal
+      errors. No new cues will be added to the track except if the
+      <a href="#timed-track">timed track</a> corresponds to a
+      <code><a href="#mutabletimedtrack">MutableTimedTrack</a></code> object.</p>
+
+     </dd>
+
+     <dt><dfn id="timed-track-failed-to-load" title="timed track failed to load">Failed to load</dfn>
+
+     </dt><dd>
+
+      <p>Indicates that the timed track was enabled, but when the user
+      agent attempted to obtain it, this failed in some way
+      (e.g. <a href="urls.html#url">URL</a> could not be <a href="urls.html#resolve-a-url" title="resolve a&#10;      url">resolved</a>, network error, unknown timed track
+      format). Some or all of the cues are likely missing and will not
+      be obtained.</p>
+
+     </dd>
+
+    </dl><p>The <a href="#timed-track-readiness-state" title="timed track readiness state">readiness
+    state</a> of a <a href="#timed-track">timed track</a> changes dynamically as
+    the track is obtained.</p>
+
+   </dd>
+
+   <dt><dfn id="timed-track-mode" title="timed track mode">A mode</dfn>
+
+   </dt><dd>
+
+    <p>One of the following:</p>
+
+    <dl><dt><dfn id="timed-track-disabled" title="timed track disabled">Disabled</dfn>
+
+     </dt><dd>
+
+      <p>Indicates that the timed track is not active. Other than for
+      the purposes of exposing the track in the DOM, the user agent is
+      ignoring the timed track. No cues are active, no events are
+      fired, and the user agent will not attempt to obtain the track's
+      cues.</p>
+
+     </dd>
+
+     <dt><dfn id="timed-track-hidden" title="timed track hidden">Hidden</dfn>
+
+     </dt><dd>
+
+      <p>Indicates that the timed track is active, but that the user
+      agent is not actively displaying the cues. If no attempt has yet
+      been made to obtain the track's cues, the user agent will
+      perform such an attempt momentarily. The user agent is
+      maintaining a list of which cues are active, and events are
+      being fired accordingly.</p>
+
+     </dd>
+
+     <dt><dfn id="timed-track-showing" title="timed track showing">Showing</dfn>
+
+     </dt><dd>
+
+      <p>Indicates that the timed track is active. If no attempt has
+      yet been made to obtain the track's cues, the user agent will
+      perform such an attempt momentarily. The user agent is
+      maintaining a list of which cues are active, and events are
+      being fired accordingly. In addition, for timed tracks whose
+      <a href="#timed-track-kind" title="timed track kind">kind</a> is <code title="dom-mediatrack-kind-subtitles">subtitles</code> or <code title="dom-mediatrack-kind-captions">captions</code>, the cues
+      are being displayed over the video as appropriate; for timed
+      tracks whose <a href="#timed-track-kind" title="timed track kind">kind</a> is <code title="dom-mediatrack-kind-descriptions">descriptions</code>,
+      the user agent is making the cues available to the user in a
+      non-visual fashion; and for timed tracks whose <a href="#timed-track-kind" title="timed track kind">kind</a> is <code title="dom-mediatrack-kind-chapters">chapters</code>, the user
+      agent is making available to the user a mechanism by which the
+      user can navigate to any point in the <a href="#media-resource">media
+      resource</a> by selecting a cue.</p>
+
+     </dd>
+
+    </dl></dd>
+
+   <dt><dfn id="timed-track-list-of-cues" title="timed track list of cues">A list of zero or more cues</dfn>
+
+   </dt><dd>
+
+    <p>A list of <a href="#timed-track-cue" title="timed track cue">timed track
+    cues</a>, along with <dfn id="rules-for-updating-the-timed-track-rendering">rules for updating the timed track
+    rendering</dfn> (e.g., for <span>WebSRT</span>, the <a href="rendering.html#rules-for-updating-the-display-of-websrt-timed-tracks">rules
+    for updating the display of WebSRT timed tracks</a>).</p>
+
+    <p>The <a href="#timed-track-list-of-cues" title="timed track list of cues">list of cues of a
+    timed track</a> can change dynamically, either because the
+    <a href="#timed-track">timed track</a> has <a href="#timed-track-not-loaded" title="timed track not&#10;    loaded">not yet been loaded</a> or is still <a href="#timed-track-loading" title="timed&#10;    track loading">loading</a>, or because the the <a href="#timed-track">timed
+    track</a> corresponds to a <code><a href="#mutabletimedtrack">MutableTimedTrack</a></code>
+    object, whose API allows individual cues can be added or removed
+    dynamically.</p>
+
+   </dd>
+
+  </dl><p>Each <a href="#timed-track">timed track</a> has a corresponding
+  <code><a href="#timedtrack">TimedTrack</a></code> object.</p><p>The <a href="#timed-track" title="timed track">timed tracks</a> of a
+  <a href="#media-element">media element</a> are <dfn id="the-timed-tracks-are-ready" title="the timed tracks are&#10;  ready">ready</dfn> if all the <a href="#timed-track" title="timed track">timed
+  tracks</a> whose <a href="#timed-track-mode" title="timed track mode">mode</a> was
+  not in the <a href="#timed-track-disabled" title="timed track disabled">disabled</a> state
+  when the element's <a href="#concept-media-load-algorithm" title="concept-media-load-algorithm">resource selection
+  algorithm</a> last started now have a <a href="#timed-track-readiness-state">timed track readiness
+  state</a> of <a href="#timed-track-loaded" title="timed track loaded">loaded</a> or
+  <a href="#timed-track-failed-to-load" title="timed track failed to load">failed to load</a>.</p><hr/><p>A <dfn id="timed-track-cue">timed track cue</dfn> is the unit of time-sensitive data
+  in a <a href="#timed-track">timed track</a>, corresponding for instance for
+  subtitles and captions to the text that appears at a particular time
+  and disappears at another time.</p><p>Each <a href="#timed-track-cue">timed track cue</a> consists of:</p><dl><dt><dfn id="timed-track-cue-identifier" title="timed track cue identifier">An identifier</dfn>
+   </dt><dd>
+    <p>An arbitrary string.</p>
+   </dd>
+
+   <dt><dfn id="timed-track-cue-start-time" title="timed track cue start time">A start time</dfn>
+   </dt><dd>
+    <p>A time, in seconds and fractions of a second, at which the cue
+    becomes relevant.</p>
+   </dd>
+
+   <dt><dfn id="timed-track-cue-end-time" title="timed track cue end time">An end time</dfn>
+   </dt><dd>
+    <p>A time, in seconds and fractions of a second, at which the cue
+    stops being relevant.</p>
+   </dd>
+
+   <dt><dfn id="timed-track-cue-pause-on-exit-flag" title="timed track cue pause-on-exit flag">A pause-on-exit flag</dfn>
+   </dt><dd>
+    <p>A boolean indicating whether playback of the <a href="#media-resource">media
+    resource</a> is to pause when the cue stops being relevant.</p>
+   </dd>
+
+   <dt><dfn id="timed-track-cue-writing-direction" title="timed track cue writing direction">A writing direction</dfn>
+   </dt><dd>
+    <p>A writing direction, either <dfn id="timed-track-cue-horizontal-writing-direction" title="timed track cue&#10;    horizontal writing direction">horizontal</dfn> (a line extends
+    horizontally and is positioned vertically, with consecutive lines
+    displayed below each other), <dfn id="timed-track-cue-vertical-growing-left-writing-direction" title="timed track cue vertical&#10;    growing left writing direction">vertical growing left</dfn> (a
+    line extends vertically and is positioned horizontally, with
+    consecutive lines displayed to the left of each other<!-- used
+    for east asian-->), or <dfn id="timed-track-cue-vertical-growing-right-writing-direction" title="timed track cue vertical&#10;    growing right writing direction">vertical growing right</dfn> (a
+    line extends vertically and is positioned horizontally, with
+    consecutive lines displayed to the right of each other<!-- used for
+    mongolian -->).</p>
+
+    <p>If the <a href="#timed-track-cue-writing-direction" title="timed track cue writing direction">writing
+    direction</a> is <a href="#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal&#10;    writing direction">horizontal</a>, then <a href="#timed-track-cue-line-position" title="timed&#10;    track cue line position">line position</a> percentages are
+    relative to the height of the video, and <a href="#timed-track-cue-text-position" title="timed track&#10;    cue text position">text position</a> and <a href="#timed-track-cue-size" title="timed&#10;    track cue size">size</a> percentages are relative to the width
+    of the video.</p>
+
+    <p>Otherwise, <a href="#timed-track-cue-line-position" title="timed track cue line position">line
+    position</a> percentages are relative to the width of the
+    video, and <a href="#timed-track-cue-text-position" title="timed track cue text position">text
+    position</a> and <a href="#timed-track-cue-size" title="timed track cue size">size</a>
+    percentages are relative to the height of the video.</p>
+
+   </dd>
+
+   <dt><dfn id="timed-track-cue-snap-to-lines-flag" title="timed track cue snap-to-lines flag">A snap-to-lines flag</dfn>
+   </dt><dd>
+    <p>A boolean indicating whether the <a href="#timed-track-cue-line-position" title="timed track cue&#10;    line position">line's position</a> is a line position
+    (positioned to a multiple of the line dimensions of the first line
+    of the cue), or whether it is a percentage of the dimension of the
+    video.</p>
+   </dd>
+
+   <dt><dfn id="timed-track-cue-line-position" title="timed track cue line position">A line position</dfn>
+   </dt><dd>
+    <p>Either a number giving the position of the lines of the cue, to
+    be interpreted as defined by the <a href="#timed-track-cue-writing-direction" title="timed track cue&#10;    writing direction">writing direction</a> and <a href="#timed-track-cue-snap-to-lines-flag" title="timed&#10;    track cue snap-to-lines flag">snap-to-lines flag</a> of the
+    cue, or the special value <dfn id="timed-track-cue-automatic-line-position" title="timed track cue automatic line&#10;    position">auto</dfn>, which means the position is to depend on
+    the other active tracks.</p>
+   </dd>
+
+   <dt><dfn id="timed-track-cue-text-position" title="timed track cue text position">A text position</dfn>
+   </dt><dd>
+    <p>A number giving the position of the text of the cue within each
+    line, to be interpreted as a percentage of the video, as defined
+    by the <a href="#timed-track-cue-writing-direction" title="timed track cue writing direction">writing
+    direction</a>.</p>
+   </dd>
+
+   <dt><dfn id="timed-track-cue-size" title="timed track cue size">A size</dfn>
+   </dt><dd>
+    <p>A number giving the size of the box within which the text of
+    each line of the cue is to be aligned, to be interpreted as a
+    percentage of the video, as defined by the <a href="#timed-track-cue-writing-direction" title="timed&#10;    track cue writing direction">writing direction</a>.</p>
+   </dd>
+
+   <dt><dfn id="timed-track-cue-alignment" title="timed track cue alignment">An alignment</dfn>
+   </dt><dd>
+    <p>An alignment for the text of each line of the cue, either <dfn id="timed-track-cue-start-alignment" title="timed track cue start alignment">start alignment</dfn> (the
+    text is aligned towards its start side), <dfn id="timed-track-cue-middle-alignment" title="timed track&#10;    cue middle alignment">middle alignment</dfn> (the text is aligned
+    centered between its start and end sides), <dfn id="timed-track-cue-end-alignment" title="timed track&#10;    cue end alignment">end alignment</dfn> (the text is aligned
+    towards its end side). Which sides are the start and end sides
+    depends on the Unicode bidirectional algorithm and the <a href="#timed-track-cue-writing-direction" title="timed track cue writing direction">writing
+    direction</a>. <a href="references.html#refsBIDI">[BIDI]</a></p>
+   </dd>
+
+   <dt><dfn id="timed-track-cue-voice-identifier" title="timed track cue voice identifier">A voice identifier</dfn>
+   </dt><dd>
+    <p>A string identifying the voice with which the cue is associated.</p>
+   </dd>
+
+   <dt><dfn id="timed-track-cue-text" title="timed track cue text">The text of the cue</dfn>
+   </dt><dd>
+    <p>The raw text of the cue, and rules for its interpretation,
+    allowing the text to be rendered and converted to a DOM fragment.</p>
+   </dd>
+
+  </dl><p>A <a href="#timed-track-cue">timed track cue</a> is immutable.</p><p>Each <a href="#timed-track-cue">timed track cue</a> has a corresponding
+  <code><a href="#timedtrackcue">TimedTrackCue</a></code> object, and can be associated with a
+  particular <a href="#timed-track">timed track</a>. Once a <a href="#timed-track-cue">timed track
+  cue</a> is associated with a particular <a href="#timed-track">timed track</a>,
+  the association is permanent.</p><p>In addition, each <a href="#timed-track-cue">timed track cue</a> has two pieces of
+  dynamic information:</p><dl><dt>The <dfn id="timed-track-cue-active-flag" title="timed track cue active flag">active flag</dfn>
+   </dt><dd>
+
+    <p>This flag must be initially unset.  The flag is used to ensure
+    events are fired appropriately when the cue becomes active or
+    inactive, and to make sure the right cues are rendered.</p>
+
+    <p>The user agent must synchronously unset this flag whenever the
+    <a href="#timed-track-cue">timed track cue</a> is removed from its <a href="#timed-track">timed
+    track</a>'s <a href="#timed-track-list-of-cues">timed track list of cues</a>; whenever the
+    <a href="#timed-track">timed track</a> itself is removed from its <a href="#media-element">media
+    element</a>'s <a href="#list-of-timed-tracks">list of timed tracks</a> or has its
+    <a href="#timed-track-mode">timed track mode</a> changed to <a href="#timed-track-disabled" title="timed track&#10;    disabled">disabled</a>; and whenever the <a href="#media-element">media
+    element</a>'s <code title="dom-media-readyState"><a href="#dom-media-readystate">readyState</a></code> is changed back to
+    <code title="dom-media-HAVE_NOTHING"><a href="#dom-media-have_nothing">HAVE_NOTHING</a></code>. When the
+    flag is unset in this way for one or more cues in <a href="#timed-track" title="timed track">timed tracks</a> that were <a href="#timed-track-showing" title="timed track showing">showing</a> prior to the relevant
+    incident, the user agent must, after having unset the flag for all
+    the affected cues, apply the <a href="#rules-for-updating-the-timed-track-rendering">rules for updating the timed
+    track rendering</a> of those <a href="#timed-track" title="timed track">timed
+    tracks</a> (e.g., for <a href="#timed-track" title="timed track">timed
+    tracks</a> based on <span>WebSRT</span>, the <a href="rendering.html#rules-for-updating-the-display-of-websrt-timed-tracks">rules for
+    updating the display of WebSRT timed tracks</a>).</p>
+
+   </dd>
+
+   <dt>The <dfn id="timed-track-cue-display-state" title="timed track cue display state">display state</dfn>
+   </dt><dd>
+
+    <p>This is used as part of the rendering model, to keep cues in a
+    consistent position. It must initially be empty. Whenever the
+    <a href="#timed-track-cue-active-flag">timed track cue active flag</a> is unset, the user agent
+    must empty the <a href="#timed-track-cue-display-state">timed track cue display state</a>.</p>
+
+   </dd>
+
+  </dl><p>The <a href="#timed-track-cue" title="timed track cue">timed track cues</a> of a
+  <a href="#media-element">media element</a>'s <a href="#timed-track" title="timed track">timed
+  tracks</a> are ordered relative to each other in the <dfn id="timed-track-cue-order">timed
+  track cue order</dfn>, which is determined as follows: first group
+  the <a href="#timed-track-cue" title="timed track cue">cues</a> by their <a href="#timed-track">timed
+  track</a>, with the groups being sorted in the same order as
+  their <a href="#timed-track" title="timed track">timed tracks</a> appear in the
+  <a href="#media-element">media element</a>'s <a href="#list-of-timed-tracks">list of timed tracks</a>;
+  then, within each group, <a href="#timed-track-cue" title="timed track cue">cues</a>
+  must be sorted by their <a href="#timed-track-cue-start-time" title="timed track cue start&#10;  time">start time</a>, earliest first; then, any <a href="#timed-track-cue" title="timed track cue">cues</a> with the same <a href="#timed-track-cue-start-time" title="timed&#10;  track cue start time">start time</a> must be sorted by their
+  <a href="#timed-track-cue-end-time" title="timed track cue end time">end time</a>, earliest
+  first; and finally, any <a href="#timed-track-cue" title="timed track cue">cues</a>
+  with identical <a href="#timed-track-cue-end-time" title="timed track cue end time">end
+  times</a> must be sorted in the order they were created (so
+  e.g. for cues from a <span>WebSRT</span> file, that would be the
+  order in which the cues were listed in the file).</p><h6 id="sourcing-in-band-timed-tracks"><span class="secno">4.8.10.10.2 </span>Sourcing in-band timed tracks</h6><p>A <dfn id="media-resource-specific-timed-track">media-resource-specific timed track</dfn> is a <a href="#timed-track">timed
+  track</a> that corresponds to data found in the <a href="#media-resource">media
+  resource</a>.</p><div class="impl">
+
+  <p>Rules for processing and rendering such data are defined by the
+  relevant specifications, e.g. the specification of the video format
+  if the <a href="#media-resource">media resource</a> is a video.</p>
+
+  <p>When a <a href="#media-resource">media resource</a> contains data that the user
+  agent recognises and supports as being equivalent to a <a href="#timed-track">timed
+  track</a>, the user agent <a href="#found-a-media-resource-specific-timed-track">runs</a> the
+  <dfn id="steps-to-expose-a-media-resource-specific-timed-track">steps to expose a media-resource-specific timed track</dfn>
+  with the relevant data, as follows:</p>
+
+  <ol><li><p>Associate the relevant data with a new <a href="#timed-track">timed
+   track</a> and its corresponding new <code><a href="#timedtrack">TimedTrack</a></code>
+   object. The <a href="#timed-track">timed track</a> is a
+   <a href="#media-resource-specific-timed-track">media-resource-specific timed track</a>.</p></li>
+
+   <li><p>Set the new <a href="#timed-track">timed track</a>'s <a href="#timed-track-kind" title="timed track&#10;   kind">kind</a>, <a href="#timed-track-label" title="timed track label">label</a>,
+   and <a href="#timed-track-language" title="timed track language">language</a> based on the
+   semantics of the relevant data, as defined by the relevant
+   specification.</p></li>
+
+   <li><p>Populate the new <a href="#timed-track">timed track</a>'s <a href="#timed-track-list-of-cues" title="timed track list of cues">list of cues</a> with the cues
+   parsed so far, folllowing the <a href="#guidelines-for-exposing-cues-in-various-formats-as-timed-track-cues">guidelines for exposing
+   cues</a>, and begin updating it dynamically as
+   necessary.</p></li>
+
+   <li>
+
+    <p>Set the new <a href="#timed-track">timed track</a>'s <a href="#timed-track-readiness-state" title="timed track&#10;    readiness state">readiness state</a> to the value that most
+    correctly describes the current state, and begin updating it
+    dynamically as necessary.</p>
+
+    <p class="example">For example, if the relevant data in the
+    <a href="#media-resource">media resource</a> has been fully parsed and completely
+    describes the cues, then the <a href="#timed-track">timed track</a> would be
+    <a href="#timed-track-loaded" title="timed track loaded">loaded</a>. On the other hand,
+    if the data for the cues is interleaved with the <a href="#media-data">media
+    data</a>, and the <a href="#media-resource">media resource</a> as a whole is
+    still being downloaded, then the <a href="#timed-track-loading" title="timed track&#10;    loading">loading</a> state might be more accurate.</p>
+
+   </li>
+
+   <li><p>Set the new <a href="#timed-track">timed track</a>'s <a href="#timed-track-mode" title="timed&#10;   track mode">mode</a> to the mode consistent with the user's
+   preferences and the requirements of the relevant specification for
+   the data.</p></li>
+
+   <li><p>Leave the <a href="#timed-track-list-of-cues">timed track list of cues</a> empty, and
+   associate with it the <a href="#rules-for-updating-the-timed-track-rendering">rules for updating the timed track
+   rendering</a> appropriate for the format in question.</p>
+
+   </li><li><p>Add the new <a href="#timed-track">timed track</a> to the <a href="#media-element">media
+   element</a>'s <a href="#list-of-timed-tracks">list of timed tracks</a>.</p></li>
+
+  </ol><p>When a <a href="#media-element">media element</a> is to <dfn id="forget-the-media-element-s-media-resource-specific-timed-tracks">forget the media
+  element's media-resource-specific timed tracks</dfn>, the user
+  agent must remove from the <a href="#media-element">media element</a>'s <a href="#list-of-timed-tracks">list
+  of timed tracks</a> all the <a href="#media-resource-specific-timed-track" title="media-resource-specific&#10;  timed track">media-resource-specific timed tracks</a>.</p>
+
+  </div><div class="impl">
+
+  <h6 id="sourcing-out-of-band-timed-tracks"><span class="secno">4.8.10.10.3 </span>Sourcing out-of-band timed tracks</h6>
+
+  <p>When a <code><a href="#the-track-element">track</a></code> element is created, it must be
+  associated with a new <a href="#timed-track">timed track</a> (with its value set
+  as defined below) and its corresponding new <code><a href="#timedtrack">TimedTrack</a></code>
+  object.</p>
+
+  <p>The <a href="#timed-track-kind">timed track kind</a> is determined from the state of
+  the element's <code title="attr-track-kind"><a href="#attr-track-kind">kind</a></code> attribute
+  according to the following table; for a state given in a cell of the
+  first column, the <a href="#timed-track-kind" title="timed track kind">kind</a> is the
+  string given in the second column:</p>
+
+  <table><thead><tr><th>State
+     </th><th>String
+   </th></tr></thead><tbody><tr><td><a href="#attr-track-kind-subtitles" title="attr-track-kind-subtitles">Subtitles</a>
+     </td><td><code title="dom-timedtrack-kind-subtitles"><a href="#dom-timedtrack-kind-subtitles">subtitles</a></code>
+    </td></tr><tr><td><a href="#attr-track-kind-captions" title="attr-track-kind-captions">Captions</a>
+     </td><td><code title="dom-timedtrack-kind-captions"><a href="#dom-timedtrack-kind-captions">captions</a></code>
+    </td></tr><tr><td><a href="#attr-track-kind-descriptions" title="attr-track-kind-descriptions">Descriptions</a>
+     </td><td><code title="dom-timedtrack-kind-descriptions"><a href="#dom-timedtrack-kind-descriptions">descriptions</a></code>
+    </td></tr><tr><td><a href="#attr-track-kind-chapters" title="attr-track-kind-chapters">Chapters</a>
+     </td><td><code title="dom-timedtrack-kind-chapters"><a href="#dom-timedtrack-kind-chapters">chapters</a></code>
+    </td></tr><tr><td><a href="#attr-track-kind-metadata" title="attr-track-kind-metadata">Metadata</a>
+     </td><td><code title="dom-timedtrack-kind-metadata"><a href="#dom-timedtrack-kind-metadata">metadata</a></code>
+  </td></tr></tbody></table><p>The <a href="#timed-track-label">timed track label</a> is the element's <a href="#track-label">track
+  label</a>.</p>
+
+  <p>The <a href="#timed-track-language">timed track language</a> is the element's
+  <a href="#track-language">track language</a>, if any, or the empty string
+  otherwise.</p>
+
+  <p>As the <code title="attr-track-kind"><a href="#attr-track-kind">kind</a></code>, <code title="attr-track-label"><a href="#attr-track-label">label</a></code>, and <code title="attr-track-srclang"><a href="#attr-track-srclang">srclang</a></code> attributes are added,
+  removed, or changed, the <a href="#timed-track">timed track</a> must update
+  accordingly, as per the definitions above.</p>
+
+  <p class="note">Changes to the <a href="#track-url">track URL</a> are handled in
+  the algorithm below.</p>
+
+  <p>The <a href="#timed-track-list-of-cues">timed track list of cues</a> is initially empty. It
+  is dynamically modified when the referenced file is parsed.
+  Associated with the list are the <a href="#rules-for-updating-the-timed-track-rendering">rules for updating the timed
+  track rendering</a> appropriate for the format in question; for
+  <span>WebSRT</span>, this is the <a href="rendering.html#rules-for-updating-the-display-of-websrt-timed-tracks">rules for updating the
+  display of WebSRT timed tracks</a>.</p>
+
+  <p>When a <code><a href="#the-track-element">track</a></code> element's parent element changes and
+  the new parent is a <a href="#media-element">media element</a>, then the user agent
+  must add the <code><a href="#the-track-element">track</a></code> element's corresponding <a href="#timed-track">timed
+  track</a> to the <a href="#media-element">media element</a>'s <a href="#list-of-timed-tracks">list of timed
+  tracks</a>.</p>
+
+  <p>When a <code><a href="#the-track-element">track</a></code> element's parent element changes and
+  the old parent was a <a href="#media-element">media element</a>, then the user agent
+  must remove the <code><a href="#the-track-element">track</a></code> element's corresponding
+  <a href="#timed-track">timed track</a> from the <a href="#media-element">media element</a>'s
+  <a href="#list-of-timed-tracks">list of timed tracks</a>.</p>
+
+  <p>When a <a href="#timed-track">timed track</a> corresponding to a
+  <code><a href="#the-track-element">track</a></code> element is added to a <a href="#media-element">media
+  element</a>'s <a href="#list-of-timed-tracks">list of timed tracks</a>, the user agent
+  must set the <a href="#timed-track-mode">timed track mode</a> appropriately, as
+  determined by the following conditions:</p>
+
+  <dl class="switch"><dt>If the <a href="#timed-track-kind">timed track kind</a> is <code title="dom-TimedTrack-kind-subtitles"><a href="#dom-timedtrack-kind-subtitles">subtitles</a></code> or <code title="dom-TimedTrack-kind-captions"><a href="#dom-timedtrack-kind-captions">captions</a></code> and the user
+   has indicated an interest in having a track with this <a href="#timed-track-kind">timed
+   track kind</a>, <a href="#timed-track-language">timed track language</a>, and
+   <a href="#timed-track-label">timed track label</a> enabled, and there is no other
+   <a href="#timed-track">timed track</a> in the <a href="#media-element">media element</a>'s
+   <a href="#list-of-timed-tracks">list of timed tracks</a> with a <a href="#timed-track-kind">timed track
+   kind</a> of either <code title="dom-TimedTrack-kind-subtitles"><a href="#dom-timedtrack-kind-subtitles">subtitles</a></code> or <code title="dom-TimedTrack-kind-captions"><a href="#dom-timedtrack-kind-captions">captions</a></code> whose
+   <a href="#timed-track-mode">timed track mode</a> is <a href="#timed-track-showing" title="timed track&#10;   showing">showing</a></dt>
+
+   <dt>If the <a href="#timed-track-kind">timed track kind</a> is <code title="dom-TimedTrack-kind-descriptions"><a href="#dom-timedtrack-kind-descriptions">descriptions</a></code> and
+   the user has indicated an interest in having text descriptions with
+   this <a href="#timed-track-language">timed track language</a> and <a href="#timed-track-label">timed track
+   label</a> enabled, and there is no other <a href="#timed-track">timed
+   track</a> in the <a href="#media-element">media element</a>'s <a href="#list-of-timed-tracks">list of
+   timed tracks</a> with a <a href="#timed-track-kind">timed track kind</a> of <code title="dom-TimedTrack-kind-descriptions"><a href="#dom-timedtrack-kind-descriptions">descriptions</a></code> whose
+   <a href="#timed-track-mode">timed track mode</a> is <a href="#timed-track-showing" title="timed track&#10;   showing">showing</a></dt>
+
+   <dt>If the <a href="#timed-track-kind">timed track kind</a> is <code title="dom-TimedTrack-kind-chapters"><a href="#dom-timedtrack-kind-chapters">chapters</a></code> and the
+   <a href="#timed-track-language">timed track language</a> is one that the user agent has
+   reason to believe is appropriate for the user, and there is no
+   other <a href="#timed-track">timed track</a> in the <a href="#media-element">media element</a>'s
+   <a href="#list-of-timed-tracks">list of timed tracks</a> with a <a href="#timed-track-kind">timed track
+   kind</a> of <code title="dom-TimedTrack-kind-chapters"><a href="#dom-timedtrack-kind-chapters">chapters</a></code> whose
+   <a href="#timed-track-mode">timed track mode</a> is <a href="#timed-track-showing" title="timed track&#10;   showing">showing</a></dt>
+
+   <dd>
+    <p>Let the <a href="#timed-track-mode">timed track mode</a> be <a href="#timed-track-showing" title="timed&#10;    track showing">showing</a>.</p>
+   </dd>
+
+   <dt>Otherwise</dt>
+
+   <dd>
+    <p>Let the <a href="#timed-track-mode">timed track mode</a> be <a href="#timed-track-disabled" title="timed&#10;    track disabled">disabled</a>.</p>
+   </dd>
+
+  </dl><p>When a <a href="#timed-track">timed track</a> corresponding to a
+  <code><a href="#the-track-element">track</a></code> element is created with <a href="#timed-track-mode">timed track
+  mode</a> set to <a href="#timed-track-hidden" title="timed track hidden">hidden</a> or
+  <a href="#timed-track-showing" title="timed track showing">showing</a>, and when a
+  <a href="#timed-track">timed track</a> corresponding to a <code><a href="#the-track-element">track</a></code>
+  element is created with <a href="#timed-track-mode">timed track mode</a> set to <a href="#timed-track-disabled" title="timed track disabled">disabled</a> and subsequently
+  changes its <a href="#timed-track-mode">timed track mode</a> to <a href="#timed-track-hidden" title="timed&#10;  track hidden">hidden</a> or <a href="#timed-track-showing" title="timed track&#10;  showing">showing</a> for the first time, the user agent must
+  immediately and synchronously run the following algorithm. This
+  algorithm interacts closely with the <a href="webappapis.html#event-loop">event loop</a>
+  mechanism; in particular, it has a <a href="webappapis.html#synchronous-section">synchronous section</a>
+  (which is triggered as part of the <a href="webappapis.html#event-loop">event loop</a>
+  algorithm). The step in that section is marked with &#x231B;.</p>
+
+  <ol><li><p>Set the <a href="#timed-track-readiness-state">timed track readiness state</a> to <a href="#timed-track-loading" title="timed track loading">loading</a>.</p></li>
+
+   <li><p>Let <var title="">URL</var> be the <a href="#track-url">track URL</a> of
+   the <code><a href="#the-track-element">track</a></code> element.</p></li>
+
+   <li><p>Asynchronously run the remaining steps, while continuing
+   with whatever task was responsible for creating the <a href="#timed-track">timed
+   track</a> or changing the <a href="#timed-track-mode">timed track
+   mode</a>.</p></li>
+
+   <li>
+
+    <p><i>Download</i>: If <var title="">URL</var> is not the empty
+    string, and its <a href="origin-0.html#origin">origin</a> is the same as the <a href="#media-element">media
+    element</a>'s <code><a href="infrastructure.html#document">Document</a></code>'s <a href="origin-0.html#origin">origin</a>, then
+    <a href="fetching-resources.html#fetch">fetch</a> <var title="">URL</var>, from the <a href="#media-element">media
+    element</a>'s <code><a href="infrastructure.html#document">Document</a></code>'s <a href="origin-0.html#origin">origin</a>, with
+    the <i>force same-origin flag</i> set.</p> <!-- not http-origin
+    privacy sensitive (looking forward to CORS here) -->
+
+    <p>The <a href="webappapis.html#concept-task" title="concept-task">tasks</a> <a href="webappapis.html#queue-a-task" title="queue&#10;    a task">queued</a> by the <a href="fetching-resources.html#fetch" title="fetch">fetching
+    algorithm</a> on the <a href="webappapis.html#networking-task-source">networking task source</a> to
+    process the data as it is being fetched must examine the
+    resource's <a href="fetching-resources.html#content-type" title="Content-Type">Content Type
+    metadata</a>, once it is available, if it ever is. If no <a href="fetching-resources.html#content-type" title="Content-Type">Content Type metadata</a> is ever
+    available, or if the type is not recognised as a timed track
+    format, then the resource's format must be assumed to be
+    unsupported (this causes the load to fail, as described below). If
+    a type is obtained, and represents a supported timed track format,
+    then the resource's data must be passed to the appropriate parser
+    (e.g. the <span>WebSRT parser</span> if the <a href="fetching-resources.html#content-type" title="Content-Type">Content Type metadata</a> is 
+    <code>text/srt</code>) as it is received, with the <a href="#timed-track-list-of-cues">timed
+    track list of cues</a> being used for that parser's output. If
+    the <code><a href="#the-track-element">track</a></code> element has a <code title="attr-track-charset"><a href="#attr-track-charset">charset</a></code> attribute that specifies
+    a supported character encoding, then that encoding must be given
+    to the parser as a character encoding override. Otherwise the
+    parser must use its default character encoding behavior.</p>
+
+    <p>If the <a href="fetching-resources.html#fetch" title="fetch">fetching algorithm</a> fails for
+    any reason (network error, the server returns an error code, a
+    cross-origin check fails, etc), or if <var title="">URL</var> is
+    the empty string or has the wrong <a href="origin-0.html#origin">origin</a> as
+    determined by the condition at the start of this step, or if the
+    fetched resource is not in a supported format, then <a href="webappapis.html#queue-a-task">queue a
+    task</a> to first change the <a href="#timed-track-readiness-state">timed track readiness
+    state</a> to <a href="#timed-track-failed-to-load" title="timed track failed to load">failed to
+    load</a> and then <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named <code title="event-error">error</code> at the <code><a href="#the-track-element">track</a></code>
+    element; and then, once that <a href="webappapis.html#concept-task" title="concept-task">task</a> is <a href="webappapis.html#queue-a-task" title="queue a&#10;    task">queued</a>, move on to the step below labeled
+    <i>monitoring</i>.</p>
+
+    <p>If the <a href="fetching-resources.html#fetch" title="fetch">fetching algorithm</a> does not
+    fail, then, when it completes, <a href="webappapis.html#queue-a-task">queue a task</a> to first
+    change the <a href="#timed-track-readiness-state">timed track readiness state</a> to <a href="#timed-track-loaded" title="timed track loaded">loaded</a> and then <a href="webappapis.html#fire-a-simple-event">fire a
+    simple event</a> named <code title="event-load">load</code> at
+    the <code><a href="#the-track-element">track</a></code> element; and then, once that <a href="webappapis.html#concept-task" title="concept-task">task</a> is <a href="webappapis.html#queue-a-task" title="queue a&#10;    task">queued</a>, move on to the step below labeled
+    <i>monitoring</i>.</p>
+
+    <p>If, while the <a href="fetching-resources.html#fetch" title="fetch">fetching algorithm</a> is
+    active, either:</p>
+
+    <ul><li>the <a href="#track-url">track URL</a> changes so that it is no longer
+     equal to <var title="">URL</var>, while the <a href="#timed-track-mode">timed track
+     mode</a> is set to <a href="#timed-track-hidden" title="timed track&#10;     hidden">hidden</a> or <a href="#timed-track-showing" title="timed track&#10;     showing">showing</a>; or</li>
+
+     <li>the <a href="#timed-track-mode">timed track mode</a> changes to <a href="#timed-track-hidden" title="timed track hidden">hidden</a> or <a href="#timed-track-showing" title="timed&#10;     track showing">showing</a>, while the <a href="#track-url">track URL</a> is
+     not equal to <var title="">URL</var></li>
+
+    </ul><p>...then the user agent must run the following steps:</p>
+
+    <ol><li><p>Abort the <a href="fetching-resources.html#fetch" title="fetch">fetching
+     algorithm</a>.</p></li>
+
+     <li><p><a href="webappapis.html#queue-a-task">Queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple
+     event</a> named <code title="event-abort">abort</code> at
+     the <code><a href="#the-track-element">track</a></code> element.</p></li>
+
+     <li><p>Let <var title="">URL</var> be the new <a href="#track-url">track
+     URL</a>.</p></li>
+
+     <li><p>Jump back to the top of the step labeled
+     <i>download</i>.</p></li>
+
+    </ol><p>Until one of the above circumstances occurs, the user agent
+    must remain on this step.</p>
+
+   </li>
+
+   <li><p><i>Monitoring</i>: Wait until the <a href="#track-url">track URL</a> is
+   no longer equal to <var title="">URL</var>, at the same time as the
+   <a href="#timed-track-mode">timed track mode</a> is set to <a href="#timed-track-hidden" title="timed track&#10;   hidden">hidden</a> or <a href="#timed-track-showing" title="timed track&#10;   showing">showing</a>.</p></li>
+
+   <li><p>Wait until the <a href="#timed-track-readiness-state">timed track readiness state</a> is
+   no longer set to <a href="#timed-track-loading" title="timed track&#10;   loading">loading</a>.</p></li>
+
+   <li><p><a href="webappapis.html#await-a-stable-state">Await a stable state</a>. The <a href="webappapis.html#synchronous-section">synchronous
+   section</a> consists of the following step. (The step in the
+   <a href="webappapis.html#synchronous-section">synchronous section</a> is marked with &#x231B;.)</p></li>
+
+   <li><p>&#x231B; Set the <a href="#timed-track-readiness-state">timed track readiness state</a> to
+   <a href="#timed-track-loading" title="timed track loading">loading</a>.</p></li>
+
+   <!-- if you add more, change the grammar of the sentences above to
+   be plural with respect to the number of synchronous steps (both in
+   the step above and in the intro to the whole algorithm) -->
+
+   <li><p>End the <a href="webappapis.html#synchronous-section">synchronous section</a>, continuing the
+   remaining steps asynchronously.</p></li>
+
+   <li><p>Jump to the step labeled <i>download</i>.</p></li>
+
+  </ol></div><div class="impl">
+
+  <h6 id="guidelines-for-exposing-cues-in-various-formats-as-timed-track-cues"><span class="secno">4.8.10.10.4 </span><dfn>Guidelines for exposing cues</dfn> in various formats as
+  <a href="#timed-track-cue" title="timed track cue">timed track cues</a></h6>
+
+  <p>How a specific format's timed track cues are to be interpreted
+  for the purposes of processing by an HTML user agent is defined by
+  that format. In the absence of such a specification, this section
+  provides some constraints within which implementations can attempt
+  to consistently expose such formats.</p>
+
+  <p>To support the <a href="#timed-track">timed track</a> model of HTML, each unit
+  of timed data is converted to a <a href="#timed-track-cue">timed track cue</a>. Where
+  the mapping of the format's features to the aspects of a <a href="#timed-track-cue">timed
+  track cue</a> as defined in this specification are not defined,
+  implementations must ensure that the mapping is consistent with the
+  definitions of the aspects of a <a href="#timed-track-cue">timed track cue</a> as
+  defined above, as well as with the following constraints:</p>
+
+  <dl><dt>The <a href="#timed-track-cue-identifier">timed track cue identifier</a>
+   </dt><dd>
+    <p>Should be set to the empty string if the format has no
+    obvious analogue to a per-cue identifier.</p>
+   </dd>
+
+   <dt>The <a href="#timed-track-cue-pause-on-exit-flag">timed track cue pause-on-exit flag</a>
+   </dt><dd>
+    <p>Should be set to false.</p>
+   </dd>
+
+   <dt>The <a href="#timed-track-cue-writing-direction">timed track cue writing direction</a>
+   </dt><dd>
+    <p>Should be set to <a href="#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing&#10;    direction">horizontal</a> if the concept of writing direction
+    doesn't really apply (e.g. the cue consists of a bitmap
+    image).</p>
+   </dd>
+
+   <dt>The <a href="#timed-track-cue-snap-to-lines-flag">timed track cue snap-to-lines flag</a>
+   </dt><dd>
+    <p>Should be set to false unless the format uses a rendering and
+    positioning model for cues that is largely consistent with the
+    <a href="rendering.html#websrt-cue-text-rendering-rules">WebSRT cue text rendering rules</a>.</p>
+   </dd>
+
+   <dt>The <a href="#timed-track-cue-line-position">timed track cue line position</a>
+   <dt>The <a href="#timed-track-cue-text-position">timed track cue text position</a>
+   <dt>The <a href="#timed-track-cue-size">timed track cue size</a>
+   <dt>The <a href="#timed-track-cue-alignment">timed track cue alignment</a>
+   </dt></dt></dt></dt><dd>
+    <p>If the the format uses a rendering and positioning model for
+    cues that can be largely simulated using the <a href="rendering.html#websrt-cue-text-rendering-rules">WebSRT cue text
+    rendering rules</a>, then these should be set to the values
+    that would give the same effect for <span>WebSRT</span>
+    cues. Otherwise, they should be set to zero.</p>
+   </dd>
+
+   <dt>The <a href="#timed-track-cue-voice-identifier">timed track cue voice identifier</a>
+   </dt><dd>
+    <p>Should be set to the empty string if the format has no
+    obvious analogue to cue voices. The <a href="#timed-track-cue-voice-identifier">timed track cue voice
+    identifier</a> may be set to strings that cannot be expressed
+    using <span>WebSRT</span>, if the format supports voices that do
+    not correspond to the voices used by WebSRT.</p>
+   </dd>
+
+  </dl></div><h6 id="timed-track-api"><span class="secno">4.8.10.10.5 </span>Timed track API</h6><dl class="domintro"><dt><var title="">media</var> . <code title="dom-media-tracks"><a href="#dom-media-tracks">tracks</a></code> . <code title="">length</code></dt>
+   <dd>
+    <p>Returns the number of <a href="#timed-track" title="timed track">timed tracks</a> associated with the <a href="#media-element">media element</a> (e.g. from <code><a href="#the-track-element">track</a></code> elements). This is the number of <a href="#timed-track" title="timed track">timed tracks</a> in the <a href="#media-element">media element</a>'s <a href="#list-of-timed-tracks">list of timed tracks</a>.</p>
+   </dd>
+
+   <dt><var title="">media</var> . <code title="dom-media-tracks"><a href="#dom-media-tracks">tracks[</a></code> <var title="">n</var> <code title="">]</code></dt>
+   <dd>
+    <p>Returns the <code><a href="#timedtrack">TimedTrack</a></code> object representing the <var title="">n</var>th <a href="#timed-track">timed track</a> in the <a href="#media-element">media element</a>'s <a href="#list-of-timed-tracks">list of timed tracks</a>.</p>
+   </dd>
+
+   <dt><var title="">track</var> . <code title="dom-track-track"><a href="#dom-track-track">track</a></code></dt>
+   <dd>
+    <p>Returns the <code><a href="#timedtrack">TimedTrack</a></code> object representing the <code><a href="#the-track-element">track</a></code> element's <a href="#timed-track">timed track</a>.</p>
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>The <dfn id="dom-media-tracks" title="dom-media-tracks"><code>tracks</code></dfn>
+  attribute of <a href="#media-element" title="media element">media elements</a> must
+  return an <span title="array host objects">array host object</span>
+  for objects of type <code><a href="#timedtrack">TimedTrack</a></code> that is <i>fixed
+  length</i> and <i>read only</i>. The same object must be returned
+  each time the attribute is accessed. <a href="references.html#refsWEBIDL">[WEBIDL]</a></p>
+
+  <p>The array must contain the <code><a href="#timedtrack">TimedTrack</a></code> objects of the
+  <a href="#timed-track" title="timed track">timed tracks</a> in the <a href="#media-element">media
+  element</a>'s <a href="#list-of-timed-tracks">list of timed tracks</a>, in the same
+  order as in the <a href="#list-of-timed-tracks">list of timed tracks</a>.</p>
+
+  </div><hr/><pre class="idl">interface <dfn id="timedtrack">TimedTrack</dfn> {
+  readonly attribute DOMString <a href="#dom-timedtrack-kind" title="dom-TimedTrack-kind">kind</a>;
+  readonly attribute DOMString <a href="#dom-timedtrack-label" title="dom-TimedTrack-label">label</a>;
+  readonly attribute DOMString <a href="#dom-timedtrack-language" title="dom-TimedTrack-language">language</a>;
+
+  const unsigned short <a href="#dom-timedtrack-none" title="dom-TimedTrack-NONE">NONE</a> = 0;
+  const unsigned short <a href="#dom-timedtrack-loading" title="dom-TimedTrack-LOADING">LOADING</a> = 1;
+  const unsigned short <a href="#dom-timedtrack-loaded" title="dom-TimedTrack-LOADED">LOADED</a> = 2;
+  const unsigned short <a href="#dom-timedtrack-error" title="dom-TimedTrack-ERROR">ERROR</a> = 3;
+  readonly attribute unsigned short <a href="#dom-timedtrack-readystate" title="dom-TimedTrack-readyState">readyState</a>;
+  readonly attribute <a href="webappapis.html#function">Function</a> <a href="#handler-timedtrack-onload" title="handler-TimedTrack-onload">onload</a>;
+  readonly attribute <a href="webappapis.html#function">Function</a> <a href="#handler-timedtrack-onerror" title="handler-TimedTrack-onerror">onerror</a>;
+
+  const unsigned short <a href="#dom-timedtrack-off" title="dom-TimedTrack-OFF">OFF</a> = 0;
+  const unsigned short <a href="#dom-timedtrack-hidden" title="dom-TimedTrack-HIDDEN">HIDDEN</a> = 1;
+  const unsigned short <a href="#dom-timedtrack-showing" title="dom-TimedTrack-SHOWING">SHOWING</a> = 2;
+           attribute unsigned short <a href="#dom-timedtrack-mode" title="dom-TimedTrack-mode">mode</a>;
+
+  readonly attribute <a href="#timedtrackcuelist">TimedTrackCueList</a> <a href="#dom-timedtrack-cues" title="dom-TimedTrack-cues">cues</a>;
+  readonly attribute <a href="#timedtrackcuelist">TimedTrackCueList</a> <a href="#dom-timedtrack-activecues" title="dom-TimedTrack-activeCues">activeCues</a>;
+
+  readonly attribute <a href="webappapis.html#function">Function</a> <a href="#handler-timedtrack-oncuechange" title="handler-TimedTrack-oncuechange">oncuechange</a>;
+};</pre><dl class="domintro"><dt><var title="">timedTrack</var> . <code title="dom-TimedTrack-kind"><a href="#dom-timedtrack-kind">kind</a></code></dt>
+   <dd>
+    <p>Returns the <a href="#timed-track-kind">timed track kind</a> string.</p>
+   </dd>
+
+   <dt><var title="">timedTrack</var> . <code title="dom-TimedTrack-label"><a href="#dom-timedtrack-label">label</a></code></dt>
+   <dd>
+    <p>Returns the <a href="#timed-track-label">timed track label</a>.</p>
+   </dd>
+
+   <dt><var title="">timedTrack</var> . <code title="dom-TimedTrack-language"><a href="#dom-timedtrack-language">language</a></code></dt>
+   <dd>
+    <p>Returns the <a href="#timed-track-language">timed track language</a> string.</p>
+   </dd>
+
+   <dt><var title="">timedTrack</var> . <code title="dom-TimedTrack-readyState"><a href="#dom-timedtrack-readystate">readyState</a></code></dt>
+   <dd>
+    <p>Returns the <a href="#timed-track-readiness-state">timed track readiness state</a>,
+    represented by a number from the following list:</p>
+    <dl><dt><code><a href="#timedtrack">TimedTrack</a></code> . <code title="dom-TimedTrack-NONE"><a href="#dom-timedtrack-none">NONE</a></code> (0)</dt>
+     <dd>
+      <p>The <a href="#timed-track-not-loaded">timed track not loaded</a> state.</p>
+     </dd>
+     <dt><code><a href="#timedtrack">TimedTrack</a></code> . <code title="dom-TimedTrack-LOADING"><a href="#dom-timedtrack-loading">LOADING</a></code> (1)</dt>
+     <dd>
+      <p>The <a href="#timed-track-loading">timed track loading</a> state.</p>
+     </dd>
+     <dt><code><a href="#timedtrack">TimedTrack</a></code> . <code title="dom-TimedTrack-LOADED"><a href="#dom-timedtrack-loaded">LOADED</a></code> (2)</dt>
+     <dd>
+      <p>The <a href="#timed-track-loaded">timed track loaded</a> state.</p>
+     </dd>
+     <dt><code><a href="#timedtrack">TimedTrack</a></code> . <code title="dom-TimedTrack-ERROR"><a href="#dom-timedtrack-error">ERROR</a></code> (3)</dt>
+     <dd>
+      <p>The <a href="#timed-track-failed-to-load">timed track failed to load</a> state.</p>
+     </dd>
+    </dl></dd>
+
+   <dt><var title="">timedTrack</var> . <code title="dom-TimedTrack-mode"><a href="#dom-timedtrack-mode">mode</a></code></dt>
+   <dd>
+    <p>Returns the <a href="#timed-track-mode">timed track mode</a>, represented by a
+    number from the following list:</p>
+    <dl><dt><code><a href="#timedtrack">TimedTrack</a></code> . <code title="dom-TimedTrack-OFF"><a href="#dom-timedtrack-off">OFF</a></code> (0)</dt>
+     <dd>
+      <p>The <a href="#timed-track-disabled">timed track disabled</a> mode.</p>
+     </dd>
+     <dt><code><a href="#timedtrack">TimedTrack</a></code> . <code title="dom-TimedTrack-HIDDEN"><a href="#dom-timedtrack-hidden">HIDDEN</a></code> (0)</dt>
+     <dd>
+      <p>The <a href="#timed-track-hidden">timed track hidden</a> mode.</p>
+     </dd>
+     <dt><code><a href="#timedtrack">TimedTrack</a></code> . <code title="dom-TimedTrack-SHOWING"><a href="#dom-timedtrack-showing">SHOWING</a></code> (0)</dt>
+     <dd>
+      <p>The <a href="#timed-track-showing">timed track showing</a> mode.</p>
+     </dd>
+    </dl><p>Can be set, to change the mode.</p>
+   </dd>
+
+   <dt><var title="">timedTrack</var> . <code title="dom-TimedTrack-cues"><a href="#dom-timedtrack-cues">cues</a></code></dt>
+   <dd>
+    <p>Returns the <a href="#timed-track-list-of-cues">timed track list of cues</a>, as a <code><a href="#timedtrackcuelist">TimedTrackCueList</a></code> object.</p>
+   </dd>
+
+   <dt><var title="">timedTrack</var> . <code title="dom-TimedTrack-activeCues"><a href="#dom-timedtrack-activecues">activeCues</a></code></dt>
+   <dd>
+    <p>Returns the <a href="#timed-track-cue" title="timed track cue">timed track cues</a> from the <a href="#timed-track-list-of-cues">timed track list of cues</a> that are currently active (i.e. that start before the <a href="#current-playback-position">current playback position</a> and end after it), as a <code><a href="#timedtrackcuelist">TimedTrackCueList</a></code> object.</p>
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>The <dfn id="dom-timedtrack-kind" title="dom-TimedTrack-kind"><code>kind</code></dfn>
+  attribute must return the <a href="#timed-track-kind">timed track kind</a> of the
+  <a href="#timed-track">timed track</a> that the <code><a href="#timedtrack">TimedTrack</a></code> object
+  represents.</p>
+
+  <p>The <dfn id="dom-timedtrack-label" title="dom-TimedTrack-label"><code>label</code></dfn>
+  attribute must return the <a href="#timed-track-label">timed track label</a> of the
+  <a href="#timed-track">timed track</a> that the <code><a href="#timedtrack">TimedTrack</a></code> object
+  represents.</p>
+
+  <p>The <dfn id="dom-timedtrack-language" title="dom-TimedTrack-language"><code>language</code></dfn>
+  attribute must return the <a href="#timed-track-language">timed track language</a> of the
+  <a href="#timed-track">timed track</a> that the <code><a href="#timedtrack">TimedTrack</a></code> object
+  represents.</p>
+
+  <p>The <dfn id="dom-timedtrack-readystate" title="dom-TimedTrack-readyState"><code>readyState</code></dfn>
+  attribute must return the numeric value corresponding to the
+  <a href="#timed-track-readiness-state">timed track readiness state</a> of the <a href="#timed-track">timed
+  track</a> that the <code><a href="#timedtrack">TimedTrack</a></code> object represents, as
+  defined by the following list:</p>
+
+  <dl><dt><dfn id="dom-timedtrack-none" title="dom-TimedTrack-NONE"><code>NONE</code></dfn> (numeric value 0)</dt>
+   <dd>The <a href="#timed-track-not-loaded">timed track not loaded</a> state.</dd>
+   <dt><dfn id="dom-timedtrack-loading" title="dom-TimedTrack-LOADING"><code>LOADING</code></dfn> (numeric value 1)</dt>
+   <dd>The <a href="#timed-track-loading">timed track loading</a> state.</dd>
+   <dt><dfn id="dom-timedtrack-loaded" title="dom-TimedTrack-LOADED"><code>LOADED</code></dfn> (numeric value 2)</dt>
+   <dd>The <a href="#timed-track-loaded">timed track loaded</a> state.</dd>
+   <dt><dfn id="dom-timedtrack-error" title="dom-TimedTrack-ERROR"><code>ERROR</code></dfn> (numeric value 3)</dt>
+   <dd>The <a href="#timed-track-failed-to-load">timed track failed to load</a> state.</dd>
+  </dl><p>The <dfn id="dom-timedtrack-mode" title="dom-TimedTrack-mode"><code>mode</code></dfn>
+  attribute, on getting, must return the numeric value corresponding
+  to the <a href="#timed-track-mode">timed track mode</a> of the <a href="#timed-track">timed track</a>
+  that the <code><a href="#timedtrack">TimedTrack</a></code> object represents, as defined by
+  the following list:</p>
+
+  <dl><dt><dfn id="dom-timedtrack-off" title="dom-TimedTrack-OFF"><code>OFF</code></dfn> (numeric value 0)</dt>
+   <dd>The <a href="#timed-track-disabled">timed track disabled</a> mode.</dd>
+   <dt><dfn id="dom-timedtrack-hidden" title="dom-TimedTrack-HIDDEN"><code>HIDDEN</code></dfn> (numeric value 1)</dt>
+   <dd>The <a href="#timed-track-hidden">timed track hidden</a> mode.</dd>
+   <dt><dfn id="dom-timedtrack-showing" title="dom-TimedTrack-SHOWING"><code>SHOWING</code></dfn> (numeric value 2)</dt>
+   <dd>The <a href="#timed-track-showing">timed track showing</a> mode.</dd>
+  </dl><p>On setting, if the new value is not either 0, 1, or 2, the user
+  agent must throw an <code><a href="common-dom-interfaces.html#invalid_access_err">INVALID_ACCESS_ERR</a></code>
+  exception. Otherwise, if the new value isn't equal to what the
+  attribute would currently return, the new value must be processed as
+  follows:</p>
+
+  <dl class="switch"><dt>If the new value is 0</dt>
+
+   <dd>
+
+    <p>Set the <a href="#timed-track-mode">timed track mode</a> of the <a href="#timed-track">timed
+    track</a> that the <code><a href="#timedtrack">TimedTrack</a></code> object represents to
+    the <a href="#timed-track-disabled">timed track disabled</a> mode.</p>
+
+   </dd>
+
+   <dt>If the new value is 1</dt>
+
+   <dd>
+
+    <p>Set the <a href="#timed-track-mode">timed track mode</a> of the <a href="#timed-track">timed
+    track</a> that the <code><a href="#timedtrack">TimedTrack</a></code> object represents to
+    the <a href="#timed-track-hidden">timed track hidden</a> mode.</p>
+
+   </dd>
+
+   <dt>If the new value is 2</dt>
+
+   <dd>
+
+    <p>Set the <a href="#timed-track-mode">timed track mode</a> of the <a href="#timed-track">timed
+    track</a> that the <code><a href="#timedtrack">TimedTrack</a></code> object represents to
+    the <a href="#timed-track-showing">timed track showing</a> mode.</p>
+
+   </dd>
+
+  </dl><p>If the <a href="#timed-track-mode">timed track mode</a> of the <a href="#timed-track">timed
+  track</a> that the <code><a href="#timedtrack">TimedTrack</a></code> object represents is
+  not the <a href="#timed-track-disabled">timed track disabled</a> mode, then the <dfn id="dom-timedtrack-cues" title="dom-TimedTrack-cues"><code>cues</code></dfn> attribute must
+  return a <a href="infrastructure.html#live">live</a> <code><a href="#timedtrackcuelist">TimedTrackCueList</a></code> object
+  that represents the subset of the <a href="#timed-track-list-of-cues">timed track list of
+  cues</a> of the <a href="#timed-track">timed track</a> that the
+  <code><a href="#timedtrack">TimedTrack</a></code> object represents whose <a href="#timed-track-cue-start-time" title="timed&#10;  track cue start time">start times</a> occur before the
+  <a href="#earliest-possible-position-when-the-script-started">earliest possible position when the script started</a>, in
+  <a href="#timed-track-cue-order">timed track cue order</a>. Otherwise, it must return
+  null. When an object is returned, the same object must be returned
+  each time.</p>
+
+  <p>The <dfn id="earliest-possible-position-when-the-script-started">earliest possible position when the script started</dfn>
+  is whatever the <a href="#earliest-possible-position">earliest possible position</a> was the last
+  time the <a href="webappapis.html#event-loop">event loop</a> reached step 1.</p>
+
+  <p>If the <a href="#timed-track-mode">timed track mode</a> of the <a href="#timed-track">timed
+  track</a> that the <code><a href="#timedtrack">TimedTrack</a></code> object represents is
+  not the <a href="#timed-track-disabled">timed track disabled</a> mode, then the <dfn id="dom-timedtrack-activecues" title="dom-TimedTrack-activeCues"><code>activeCues</code></dfn>
+  attribute must return a <a href="infrastructure.html#live">live</a>
+  <code><a href="#timedtrackcuelist">TimedTrackCueList</a></code> object that represents the subset of
+  the <a href="#timed-track-list-of-cues">timed track list of cues</a> of the <a href="#timed-track">timed
+  track</a> that the <code><a href="#timedtrack">TimedTrack</a></code> object represents
+  whose <a href="#active-flag-was-set-when-the-script-started">active flag was set when the script started</a>, in
+  <a href="#timed-track-cue-order">timed track cue order</a>. Otherwise, it must return
+  null. When an object is returned, the same object must be returned
+  each time.</p>
+
+  <p>A <a href="#timed-track-cue">timed track cue</a>'s <dfn id="active-flag-was-set-when-the-script-started">active flag was set when
+  the script started</dfn> if its <a href="#timed-track-cue-active-flag">timed track cue active
+  flag</a> was set the last time the <a href="webappapis.html#event-loop">event loop</a>
+  reached step 1.</p>
+
+  </div><hr/><pre class="idl">interface <dfn id="mutabletimedtrack">MutableTimedTrack</dfn> : <a href="#timedtrack">TimedTrack</a> {
+ void <a href="#dom-mutabletimedtrack-addcue" title="dom-MutableTimedTrack-addCue">addCue</a>(in <a href="#timedtrackcue">TimedTrackCue</a> cue);
+ void <a href="#dom-mutabletimedtrack-removecue" title="dom-MutableTimedTrack-removeCue">removeCue</a>(in <a href="#timedtrackcue">TimedTrackCue</a> cue);
+};</pre><dl class="domintro"><dt><var title="">mutableTimedTrack</var> = <var title="">media</var> . <code title="dom-media-addTrack"><a href="#dom-media-addtrack">addTrack</a></code>( <var title="">kind</var> [, <var title="">label</var> [, <var title="">language</var> ] ] )</dt>
+   <dd>
+    <p>Creates and returns a new <code><a href="#mutabletimedtrack">MutableTimedTrack</a></code> object, which is also added to the <a href="#media-element">media element</a>'s <a href="#list-of-timed-tracks">list of timed tracks</a>.</p>
+   </dd>
+
+   <dt><var title="">mutableTimedTrack</var> . <code title="dom-MutableTimedTrack-addCue"><a href="#dom-mutabletimedtrack-addcue">addCue</a></code>( <var title="">cue</var> )</dt>
+   <dd>
+    <p>Adds the given cue to <var title="">mutableTimedTrack</var>'s <a href="#timed-track-list-of-cues">timed track list of cues</a>.</p>
+    <p>Raises an exception if the argument is null, associated with another <a href="#timed-track">timed track</a>, or already in the list of cues.</p>
+   </dd>
+
+   <dt><var title="">mutableTimedTrack</var> . <code title="dom-MutableTimedTrack-removeCue"><a href="#dom-mutabletimedtrack-removecue">removeCue</a></code>( <var title="">cue</var> )</dt>
+   <dd>
+    <p>Removes the given cue from <var title="">mutableTimedTrack</var>'s <a href="#timed-track-list-of-cues">timed track list of cues</a>.</p>
+    <p>Raises an exception if the argument is null, associated with another <a href="#timed-track">timed track</a>, or not in the list of cues.</p>
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>The <dfn id="dom-media-addtrack" title="dom-media-addTrack"><code>addTrack(<var title="">kind</var>, <var title="">label</var>, <var title="">language</var>)</code></dfn> method of <a href="#media-element" title="media&#10;  element">media elements</a>, when invoked, must run the following
+  steps:</p>
+
+  <ol><li>
+
+    <p>If <var title="">kind</var> is not one of the following
+    strings, then throw a <code><a href="common-dom-interfaces.html#syntax_err">SYNTAX_ERR</a></code> exception and abort
+    these steps:</p>
+
+    <ul class="brief"><li><code title="dom-TimedTrack-kind-subtitles"><a href="#dom-timedtrack-kind-subtitles">subtitles</a></code>
+     </li><li><code title="dom-TimedTrack-kind-captions"><a href="#dom-timedtrack-kind-captions">captions</a></code>
+     </li><li><code title="dom-TimedTrack-kind-descriptions"><a href="#dom-timedtrack-kind-descriptions">descriptions</a></code>
+     </li><li><code title="dom-TimedTrack-kind-chapters"><a href="#dom-timedtrack-kind-chapters">chapters</a></code>
+     </li><li><code title="dom-TimedTrack-kind-metadata"><a href="#dom-timedtrack-kind-metadata">metadata</a></code>
+    </li></ul></li>
+
+   <li>
+
+    <p>If the <var title="">label</var> argument was omitted, let <var title="">label</var> be the empty string.</p>
+
+   </li>
+
+   <li>
+
+    <p>If the <var title="">language</var> argument was omitted, let
+    <var title="">language</var> be the empty string.</p>
+
+   </li>
+
+   <li>
+
+    <p>Create a new <a href="#timed-track">timed track</a>, and set its <a href="#timed-track-kind">timed
+    track kind</a> to <var title="">kind</var>, its <a href="#timed-track-label">timed
+    track label</a> to <var title="">label</var>, its <a href="#timed-track-language">timed
+    track language</a> to <var title="">language</var>, its
+    <a href="#timed-track-readiness-state">timed track readiness state</a> to the <a href="#timed-track-loaded">timed track
+    loaded</a> state, its <a href="#timed-track-mode">timed track mode</a> to the
+    <a href="#timed-track-hidden">timed track hidden</a> mode, and its <a href="#timed-track-list-of-cues">timed track
+    list of cues</a> to an empty list, associated with the
+    <a href="rendering.html#rules-for-updating-the-display-of-websrt-timed-tracks">rules for updating the display of WebSRT timed tracks</a>
+    as its <a href="#rules-for-updating-the-timed-track-rendering">rules for updating the timed track
+    rendering</a>.</p>
+
+   </li>
+
+   <li>
+
+    <p>Add the new <a href="#timed-track">timed track</a> to the <a href="#media-element">media
+    element</a>'s <a href="#list-of-timed-tracks">list of timed tracks</a>.</p>
+
+  </li></ol><p>The <dfn id="dom-mutabletimedtrack-addcue" title="dom-MutableTimedTrack-addCue"><code>addCue(<var title="">cue</var>)</code></dfn> method of
+  <code><a href="#mutabletimedtrack">MutableTimedTrack</a></code> objects, when invoked, must run the
+  following steps:</p>
+
+  <ol><li><p>If <var title="">cue</var> is null, then throw an
+   <code><a href="common-dom-interfaces.html#invalid_access_err">INVALID_ACCESS_ERR</a></code> exception and abort these
+   steps.</p></li>
+
+   <li><p>If the given <var title="">cue</var> is already associated
+   with a <a href="#timed-track">timed track</a> other than the method's
+   <code><a href="#mutabletimedtrack">MutableTimedTrack</a></code> object's <a href="#timed-track">timed track</a>,
+   then throw an <code><a href="common-dom-interfaces.html#invalid_state_err">INVALID_STATE_ERR</a></code> exception and abort
+   these steps.</p></li>
+
+   <li><p>Associate <var title="">cue</var> with the method's
+   <code><a href="#mutabletimedtrack">MutableTimedTrack</a></code> object's <a href="#timed-track">timed track</a>,
+   if it is not currently associated with a <a href="#timed-track">timed
+   track</a>.</p></li>
+
+   <li><p>If the given <var title="">cue</var> is already listed in
+   the method's <code><a href="#mutabletimedtrack">MutableTimedTrack</a></code> object's <a href="#timed-track">timed
+   track</a>'s <a href="#timed-track-list-of-cues">timed track list of cues</a>, then throw an
+   <code><a href="common-dom-interfaces.html#invalid_state_err">INVALID_STATE_ERR</a></code> exception.</p></li>
+
+   <li><p>Add <var title="">cue</var> to the method's
+   <code><a href="#mutabletimedtrack">MutableTimedTrack</a></code> object's <a href="#timed-track">timed track</a>'s
+   <a href="#timed-track-list-of-cues">timed track list of cues</a>.</p></li>
+
+  </ol><p>The <dfn id="dom-mutabletimedtrack-removecue" title="dom-MutableTimedTrack-removeCue"><code>removeCue(<var title="">cue</var>)</code></dfn> method of
+  <code><a href="#mutabletimedtrack">MutableTimedTrack</a></code> objects, when invoked, must run the
+  following steps:</p>
+
+  <ol><li><p>If <var title="">cue</var> is null, then throw an
+   <code><a href="common-dom-interfaces.html#invalid_access_err">INVALID_ACCESS_ERR</a></code> exception and abort these
+   steps.</p></li>
+
+   <li><p>If the given <var title="">cue</var> is not associated with
+   the method's <code><a href="#mutabletimedtrack">MutableTimedTrack</a></code> object's <a href="#timed-track">timed
+   track</a>, then throw an <code><a href="common-dom-interfaces.html#invalid_state_err">INVALID_STATE_ERR</a></code>
+   exception.</p></li>
+
+   <li><p>If the given <var title="">cue</var> is not currently listed
+   in the method's <code><a href="#mutabletimedtrack">MutableTimedTrack</a></code> object's <a href="#timed-track">timed
+   track</a>'s <a href="#timed-track-list-of-cues">timed track list of cues</a>, then throw a
+   <code><a href="common-dom-interfaces.html#not_found_err">NOT_FOUND_ERR</a></code> exception.</p></li>
+
+   <li><p>Remove <var title="">cue</var> from the method's
+   <code><a href="#mutabletimedtrack">MutableTimedTrack</a></code> object's <a href="#timed-track">timed track</a>'s
+   <a href="#timed-track-list-of-cues">timed track list of cues</a>.</p></li>
+
+  </ol></div><div class="example">
+
+   <p>In this example, an <code><a href="#audio">audio</a></code> element is used to play a
+   specific sound-effect from a sound file containing many sound
+   effects. A cue is used to pause the audio, so that it ends exactly
+   at the end of the clip, even if the browser is busy running some
+   script. If the page had relied on script to pause the audio, then
+   the start of the next clip might be heard if the browser was not
+   able to run the script at the exact time specified.</p>
+
+   <pre>var sfx = new Audio('sfx.wav');
+var sounds = a.addTrack('metadata');
+// add sounds we care about
+sounds.addCue(new TimedTrackCue('dog bark', 12.783, 13.612, '', '', '', true));
+sounds.addCue(new TimedTrackCue('kitten mew', 13.612, 15.091, '', '', '', true));
+
+function playSound(id) {
+  sfx.currentTime = sounds.getCueById(id).startTime;
+  sfx.play();
+}
+
+sfx.oncanplaythrough = function () {
+  playSound('dog bark');
+}
+window.onbeforeunload = function () {
+  playSound('kitten mew');
+  return 'Are you sure you want to leave this awesome page?';
+}</pre>
+
+  </div><hr/><pre class="idl">interface <dfn id="timedtrackcuelist">TimedTrackCueList</dfn> {
+  readonly attribute unsigned long <a href="#dom-timedtrackcuelist-length" title="dom-TimedTrackCueList-length">length</a>;
+  getter <a href="#timedtrackcue">TimedTrackCue</a> (in unsigned long index);
+  <a href="#timedtrackcue">TimedTrackCue</a> <a href="#dom-timedtrackcuelist-getcuebyid" title="dom-TimedTrackCueList-getCueById">getCueById</a>(in DOMString id);
+};</pre><dl class="domintro"><dt><var title="">cuelist</var> . <code title="dom-TimedTrackCueList-length"><a href="#dom-timedtrackcuelist-length">length</a></code></dt>
+   <dd>
+    <p>Returns the number of <a href="#timed-track-cue" title="timed track cue">cues</a> in the list.</p>
+   </dd>
+
+   <dt><var title="">cuelist</var>[<var title="">index</var>]</dt>
+   <dd>
+    <p>Returns the <a href="#timed-track-cue">timed track cue</a> with index <var title="">index</var> in the list. The cues are sorted in <a href="#timed-track-cue-order">timed track cue order</a>.</p>
+   </dd>
+
+   <dt><var title="">cuelist</var> . <code title="dom-TimedTrackCueList-getCueById"><a href="#dom-timedtrackcuelist-getcuebyid">getCueById</a></code>( <var title="">id</var> )</dt>
+   <dd>
+    <p>Returns the first <a href="#timed-track-cue">timed track cue</a> (in <a href="#timed-track-cue-order">timed track cue order</a>) with <a href="#timed-track-cue-identifier">timed track cue identifier</a> <var title="">id</var>.</p>
+    <p>Returns null if none of the cues have the given identifier or if the argument is the empty string.</p>
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>A <code><a href="#timedtrackcuelist">TimedTrackCueList</a></code> object represents a dynamically
+  updating list of <a href="#timed-track-cue" title="timed track cue">timed track
+  cues</a> in a given order.</p>
+
+  <p>The <dfn id="dom-timedtrackcuelist-length" title="dom-TimedTrackCueList-length"><code>length</code></dfn>
+  attribute must return the number of <a href="#timed-track-cue" title="timed track&#10;  cue">cues</a> in the list represented by the
+  <code><a href="#timedtrackcuelist">TimedTrackCueList</a></code> object.</p>
+
+  <p>The <span>supported property indicies</span> of a
+  <code><a href="#timedtrackcuelist">TimedTrackCueList</a></code> object at any instant are the numbers
+  from zero to the number of <a href="#timed-track-cue" title="timed track cue">cues</a>
+  in the list represented by the <code><a href="#timedtrackcuelist">TimedTrackCueList</a></code> object
+  minus one, if any. If there are no <a href="#timed-track-cue" title="timed track&#10;  cue">cues</a> in the list, there are no <span>supported property
+  indicies</span>.</p>
+
+  <p>To <span>determine the value of an indexed property</span> for a
+  given index <var title="">index</var>, the user agent must return
+  the <var title="">index</var>th <a href="#timed-track-cue">timed track cue</a> in the
+  list represented by the <code><a href="#timedtrackcuelist">TimedTrackCueList</a></code> object.</p>
+
+  <p>The <dfn id="dom-timedtrackcuelist-getcuebyid" title="dom-TimedTrackCueList-getCueById"><code>getCueById(<var title="">id</var>)</code></dfn> method, when called with an argument
+  other than the empty string, must return the first <a href="#timed-track-cue">timed track
+  cue</a> in the list represented by the
+  <code><a href="#timedtrackcuelist">TimedTrackCueList</a></code> object whose <a href="#timed-track-cue-identifier">timed track cue
+  identifier</a> is <var title="">id</var>, if any, or null
+  otherwise. If the argument is the empty string, then the method must
+  return null.</p>
+
+  </div><hr/><pre class="idl">[<a href="#dom-timedtrackcue" title="dom-TimedTrackCue">Constructor</a>(in DOMString id, in double startTime, in double endTime, in DOMString text, in optional DOMString settings, in optional DOMString voice, in optional boolean pauseOnExit)]
+interface <dfn id="timedtrackcue">TimedTrackCue</dfn> {
+  readonly attribute <a href="#timedtrack">TimedTrack</a> <a href="#dom-timedtrackcue-track" title="dom-TimedTrackCue-track">track</a>;
+  readonly attribute DOMString <a href="#dom-timedtrackcue-id" title="dom-TimedTrackCue-id">id</a>;
+
+  readonly attribute double <a href="#dom-timedtrackcue-starttime" title="dom-TimedTrackCue-startTime">startTime</a>;
+  readonly attribute double <a href="#dom-timedtrackcue-endtime" title="dom-TimedTrackCue-endTime">endTime</a>;
+  readonly attribute boolean <a href="#dom-timedtrackcue-pauseonexit" title="dom-TimedTrackCue-pauseOnExit">pauseOnExit</a>;
+
+  readonly attribute DOMString <a href="#dom-timedtrackcue-direction" title="dom-TimedTrackCue-direction">direction</a>;
+  readonly attribute boolean <a href="#dom-timedtrackcue-snaptolines" title="dom-TimedTrackCue-snapToLines">snapToLines</a>;
+  readonly attribute long <a href="#dom-timedtrackcue-lineposition" title="dom-TimedTrackCue-linePosition">linePosition</a>;
+  readonly attribute long <a href="#dom-timedtrackcue-textposition" title="dom-TimedTrackCue-textPosition">textPosition</a>;
+  readonly attribute long <a href="#dom-timedtrackcue-size" title="dom-TimedTrackCue-size">size</a>;
+  readonly attribute DOMString <a href="#dom-timedtrackcue-alignment" title="dom-TimedTrackCue-alignment">alignment</a>;
+
+  readonly attribute DOMString <a href="#dom-timedtrackcue-voice" title="dom-TimedTrackCue-voice">voice</a>;
+  DOMString <a href="#dom-timedtrackcue-getcueassource" title="dom-TimedTrackCue-getCueAsSource()">getCueAsSource</a>();
+  <a href="infrastructure.html#documentfragment">DocumentFragment</a> <a href="#dom-timedtrackcue-getcueashtml" title="dom-TimedTrackCue-getCueAsHTML()">getCueAsHTML</a>();
+
+  readonly attribute <a href="webappapis.html#function">Function</a> <a href="#handler-timedtrackcue-onenter" title="handler-TimedTrackCue-onenter">onenter</a>;
+  readonly attribute <a href="webappapis.html#function">Function</a> <a href="#handler-timedtrackcue-onexit" title="handler-TimedTrackCue-onexit">onexit</a>;
+};</pre><dl class="domintro"><dt><var title="">cue</var> = new <code title="dom-TimedTrackCue"><a href="#dom-timedtrackcue">TimedTrackCue</a></code>( <var title="">id</var>, <var title="">startTime</var>, <var title="">endTime</var>, <var title="">text</var> [, <var title="">settings</var> [, <var title="">voice</var> [, <var title="">pauseOnExit</var> ] ] ] )</dt>
+   <dd>
+    <p>Returns a new <code><a href="#timedtrackcue">TimedTrackCue</a></code> object, for use with the <code title="dom-MutableTimedTrack-addCue"><a href="#dom-mutabletimedtrack-addcue">addCue()</a></code> method.</p>
+    <p>The <var title="">id</var> argument sets the <a href="#timed-track-cue-identifier">timed track cue identifier</a>.</p>
+    <p>The <var title="">startTime</var> argument sets the <a href="#timed-track-cue-start-time">timed track cue start time</a>.</p>
+    <p>The <var title="">endTime</var> argument sets the <a href="#timed-track-cue-end-time">timed track cue end time</a>.</p>
+    <p>The <var title="">text</var> argument sets the <a href="#timed-track-cue-text">timed track cue text</a>.</p>
+    <p>The <var title="">settings</var> argument is a string in the format of <span>WebSRT cue settings</span>. If omitted, the empty string is assumed.</p>
+    <p>The <var title="">voice</var> argument sets the <a href="#timed-track-cue-voice-identifier">timed track cue voice identifier</a>. If omitted, the empty string is assumed.</p>
+    <p>The <var title="">pauseOnExit</var> argument sets the <a href="#timed-track-cue-pause-on-exit-flag">timed track cue pause-on-exit flag</a>. If omitted, false is assumed.</p>
+   </dd>
+
+   <dt><var title="">cue</var> . <a href="#dom-timedtrackcue-track" title="dom-TimedTrackCue-track">track</a></dt>
+   <dd>
+    <p>Returns the <code><a href="#timedtrack">TimedTrack</a></code> object to which this
+    <a href="#timed-track-cue">timed track cue</a> belongs, if any, or null
+    otherwise.</p>
+   </dd>
+
+   <dt><var title="">cue</var> . <a href="#dom-timedtrackcue-id" title="dom-TimedTrackCue-id">id</a></dt>
+   <dd>
+    <p>Returns the <a href="#timed-track-cue-identifier">timed track cue identifier</a>.</p>
+   </dd>
+
+   <dt><var title="">cue</var> . <a href="#dom-timedtrackcue-starttime" title="dom-TimedTrackCue-startTime">startTime</a></dt>
+   <dd>
+    <p>Returns the <a href="#timed-track-cue-start-time">timed track cue start time</a>, in seconds.</p>
+   </dd>
+
+   <dt><var title="">cue</var> . <a href="#dom-timedtrackcue-endtime" title="dom-TimedTrackCue-endTime">endTime</a></dt>
+   <dd>
+    <p>Returns the <a href="#timed-track-cue-end-time">timed track cue end time</a>, in seconds.</p>
+   </dd>
+
+   <dt><var title="">cue</var> . <a href="#dom-timedtrackcue-pauseonexit" title="dom-TimedTrackCue-pauseOnExit">pauseOnExit</a></dt>
+   <dd>
+    <p>Returns true if the <a href="#timed-track-cue-pause-on-exit-flag">timed track cue pause-on-exit flag</a> is set, false otherwise.</p>
+   </dd>
+
+   <dt><var title="">cue</var> . <a href="#dom-timedtrackcue-direction" title="dom-TimedTrackCue-direction">direction</a></dt>
+   <dd>
+    <p>Returns a string representing the <a href="#timed-track-cue-writing-direction">timed track cue writing direction</a>, as follows:</p>
+    <dl class="switch"><dt>If it is <a href="#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing direction">horizontal</a></dt>
+     <dd><p>The string "<code title="">horizontal</code>".</p></dd>
+     <dt>If it is <a href="#timed-track-cue-vertical-growing-left-writing-direction" title="timed track cue vertical growing left writing direction">vertical growing left</a></dt>
+     <dd><p>The string "<code title="">vertical</code>".</p></dd>
+     <dt>If it is <a href="#timed-track-cue-vertical-growing-right-writing-direction" title="timed track cue vertical growing right writing direction">vertical growing right</a></dt>
+     <dd><p>The string "<code title="">vertical-lr</code>".</p></dd>
+    </dl></dd>
+
+   <dt><var title="">cue</var> . <a href="#dom-timedtrackcue-snaptolines" title="dom-TimedTrackCue-snapToLines">snapToLines</a></dt>
+   <dd>
+    <p>Returns true if the <a href="#timed-track-cue-snap-to-lines-flag">timed track cue snap-to-lines flag</a> is set, false otherwise.</p>
+   </dd>
+
+   <dt><var title="">cue</var> . <a href="#dom-timedtrackcue-lineposition" title="dom-TimedTrackCue-linePosition">linePosition</a></dt>
+   <dd>
+    <p>Returns the <a href="#timed-track-cue-line-position">timed track cue line position</a>. In the
+    case of the value being <a href="#timed-track-cue-automatic-line-position" title="timed track cue automatic&#10;    line position">auto</a>, the appropriate default is returned.</p>
+   </dd>
+
+   <dt><var title="">cue</var> . <a href="#dom-timedtrackcue-textposition" title="dom-TimedTrackCue-textPosition">textPosition</a></dt>
+   <dd>
+    <p>Returns the <a href="#timed-track-cue-text-position">timed track cue text position</a>.</p>
+   </dd>
+
+   <dt><var title="">cue</var> . <a href="#dom-timedtrackcue-size" title="dom-TimedTrackCue-size">size</a></dt>
+   <dd>
+    <p>Returns the <a href="#timed-track-cue-size">timed track cue size</a>.</p>
+   </dd>
+
+   <dt><var title="">cue</var> . <a href="#dom-timedtrackcue-alignment" title="dom-TimedTrackCue-alignment">alignment</a></dt>
+   <dd>
+    <p>Returns a string representing the <a href="#timed-track-cue-alignment">timed track cue alignment</a>, as follows:</p>
+    <dl class="switch"><dt>If it is <a href="#timed-track-cue-start-alignment" title="timed track cue start alignment">start alignment</a></dt>
+     <dd><p>The string "<code title="">start</code>".</p></dd>
+     <dt>If it is <a href="#timed-track-cue-middle-alignment" title="timed track cue middle alignment">middle alignment</a></dt>
+     <dd><p>The string "<code title="">middle</code>".</p></dd>
+     <dt>If it is <a href="#timed-track-cue-end-alignment" title="timed track cue end alignment">end alignment</a></dt>
+     <dd><p>The string "<code title="">end</code>".</p></dd>
+    </dl></dd>
+
+   <dt><var title="">cue</var> . <a href="#dom-timedtrackcue-voice" title="dom-TimedTrackCue-voice">voice</a></dt>
+   <dd>
+    <p>Returns the <a href="#timed-track-cue-voice-identifier">timed track cue voice identifier</a>.</p>
+   </dd>
+
+   <dt><var title="">source</var> = <var title="">cue</var> . <span title="dom-TimedTrackCue-getCueAsSource">getCueAsSource</span>()</dt>
+   <dd>
+    <p>Returns the <a href="#timed-track-cue-text">timed track cue text</a> in raw unparsed form.</p>
+   </dd>
+
+   <dt><var title="">fragment</var> = <var title="">cue</var> . <span title="dom-TimedTrackCue-getCueAsHTML">getCueAsHTML</span>()</dt>
+   <dd>
+    <p>Returns the <a href="#timed-track-cue-text">timed track cue text</a> as a <code><a href="infrastructure.html#documentfragment">DocumentFragment</a></code> of <a href="infrastructure.html#html-elements">HTML elements</a> and other DOM nodes.</p>
+   </dd>
+
+  </dl><div class="impl">
+
+  <p>The <dfn id="dom-timedtrackcue" title="dom-TimedTrackCue"><code>TimedTrackCue(<var title="">id</var>, <var title="">startTime</var>, <var title="">endTime</var>, <var title="">text</var>, <var title="">settings</var>, <var title="">voice</var>, <var title="">pauseOnExit</var>)</code></dfn> constructor, when invoked,
+  must run the following steps:</p>
+
+  <ol><li><p>Create a new <a href="#timed-track-cue">timed track cue</a> that is not
+   associated with any <a href="#timed-track">timed track</a>. Let <var title="">cue</var> be that <a href="#timed-track-cue">timed track cue</a>.</p></li>
+
+   <li><p>Let <var title="">cue</var>'s <a href="#timed-track-cue-identifier">timed track cue
+   identifier</a> be the value of the <var title="">id</var>
+   argument.</p></li>
+
+   <li><p>Let <var title="">cue</var>'s <a href="#timed-track-cue-start-time">timed track cue start
+   time</a> be the value of the <var title="">startTime</var>
+   argument, interpreted as a time in seconds.</p></li>
+
+   <li><p>Let <var title="">cue</var>'s <a href="#timed-track-cue-end-time">timed track cue end
+   time</a> be the value of the <var title="">endTime</var>
+   argument, interpreted as a time in seconds.</p></li>
+
+   <li><p>Let <var title="">cue</var>'s <a href="#timed-track-cue-pause-on-exit-flag">timed track cue
+   pause-on-exit flag</a> be true if the <var title="">pauseOnExit</var> is present and true. Otherwise, let it
+   be false.</p></li>
+
+   <li><p>Let <var title="">cue</var>'s <a href="#timed-track-cue-voice-identifier">timed track cue voice
+   identifier</a> be the value of the <var title="">voice</var>
+   argument, if it is present, or the empty string otherwise.</p></li>
+
+   <li><p>Let <var title="">cue</var>'s <a href="#timed-track-cue-text">timed track cue
+   text</a> be the value of the <var title="">text</var> argument,
+   and let the rules for its interpretation be the <span>WebSRT cue
+   text parsing rules</span>, the <a href="rendering.html#websrt-cue-text-rendering-rules">WebSRT cue text rendering
+   rules</a>, and the <span>WebSRT cue text DOM construction
+   rules</span>.</p></li>
+
+   <!-- default settings -->
+
+   <li><p>Let <var title="">cue</var>'s <a href="#timed-track-cue-writing-direction">timed track cue
+   writing direction</a> be <a href="#timed-track-cue-horizontal-writing-direction" title="timed track cue&#10;   horizontal writing direction">horizontal</a>.</p></li>
+
+   <li><p>Let <var title="">cue</var>'s <a href="#timed-track-cue-snap-to-lines-flag">timed track cue
+   snap-to-lines flag</a> be true.</p></li>
+
+   <li><p>Let <var title="">cue</var>'s <a href="#timed-track-cue-line-position">timed track cue line
+   position</a> be <a href="#timed-track-cue-automatic-line-position" title="timed track cue automatic line&#10;   position">auto</a>.</p></li>
+
+   <li><p>Let <var title="">cue</var>'s <a href="#timed-track-cue-text-position">timed track cue
+   text position</a> be 50.</p></li>
+
+   <li><p>Let <var title="">cue</var>'s <a href="#timed-track-cue-size">timed track cue
+   size</a> be 100.</p></li>
+
+   <li><p>Let <var title="">cue</var>'s <a href="#timed-track-cue-alignment">timed track cue
+   alignment</a> be <a href="#timed-track-cue-middle-alignment" title="timed track cue middle&#10;   alignment">middle alignment</a>.</p></li>
+
+   <li><p>Let <var title="">input</var> be the string given by the
+   <var title="">settings</var> argument.</p></li>
+
+   <li><p>Let <var title="">position</var> be a pointer into <var title="">input</var>, initially pointing at the start of the
+   string.</p></li>
+
+   <li><p><span>Parse the WebSRT settings</span> for <var title="">cue</var>.</p></li>
+
+   <li><p>Return the <code><a href="#timedtrackcue">TimedTrackCue</a></code> object representing
+   <var title="">cue</var>.</p></li>
+
+  </ol><p>The <dfn id="dom-timedtrackcue-track" title="dom-TimedTrackCue-track"><code>track</code></dfn>
+  attribute must return the <code><a href="#timedtrack">TimedTrack</a></code> object of the
+  <a href="#timed-track">timed track</a> with which the <a href="#timed-track-cue">timed track cue</a>
+  that the <code><a href="#timedtrackcue">TimedTrackCue</a></code> object represents is associated,
+  if any; or null otherwise.</p>
+
+  <p>The <dfn id="dom-timedtrackcue-id" title="dom-TimedTrackCue-id"><code>id</code></dfn>
+  attribute must return the <a href="#timed-track-cue-identifier">timed track cue identifier</a> of
+  the <a href="#timed-track-cue">timed track cue</a> that the <code><a href="#timedtrackcue">TimedTrackCue</a></code>
+  object represents.</p>
+
+  <p>The <dfn id="dom-timedtrackcue-starttime" title="dom-TimedTrackCue-startTime"><code>startTime</code></dfn>
+  attribute must return the <a href="#timed-track-cue-start-time">timed track cue start time</a> of
+  the <a href="#timed-track-cue">timed track cue</a> that the <code><a href="#timedtrackcue">TimedTrackCue</a></code>
+  object represents, in seconds.</p>
+
+  <p>The <dfn id="dom-timedtrackcue-endtime" title="dom-TimedTrackCue-endTime"><code>endTime</code></dfn>
+  attribute must return the <a href="#timed-track-cue-end-time">timed track cue end time</a> of
+  the <a href="#timed-track-cue">timed track cue</a> that the <code><a href="#timedtrackcue">TimedTrackCue</a></code>
+  object represents, in seconds.</p>
+
+  <p>The <dfn id="dom-timedtrackcue-pauseonexit" title="dom-TimedTrackCue-pauseOnExit"><code>pauseOnExit</code></dfn>
+  attribute must return true if the <a href="#timed-track-cue-pause-on-exit-flag">timed track cue
+  pause-on-exit flag</a> of the <a href="#timed-track-cue">timed track cue</a> that
+  the <code><a href="#timedtrackcue">TimedTrackCue</a></code> object represents is set; or false
+  otherwise.</p>
+
+  <p>The <dfn id="dom-timedtrackcue-direction" title="dom-TimedTrackCue-direction"><code>direction</code></dfn>
+  attribute must return the <a href="#timed-track-cue-writing-direction">timed track cue writing
+  direction</a> of the <a href="#timed-track-cue">timed track cue</a> that the
+  <code><a href="#timedtrackcue">TimedTrackCue</a></code> object represents.</p>
+
+  <p>The <dfn id="dom-timedtrackcue-snaptolines" title="dom-TimedTrackCue-snapToLines"><code>snapToLines</code></dfn>
+  attribute must return true if the <a href="#timed-track-cue-snap-to-lines-flag">timed track cue
+  snap-to-lines flag</a> of the <a href="#timed-track-cue">timed track cue</a> that
+  the <code><a href="#timedtrackcue">TimedTrackCue</a></code> object represents is set; or false
+  otherwise.</p>
+
+  <p>The <dfn id="dom-timedtrackcue-lineposition" title="dom-TimedTrackCue-linePosition"><code>linePosition</code></dfn>
+  attribute must return the <a href="#timed-track-cue-line-position">timed track cue line position</a>
+  of the <a href="#timed-track-cue">timed track cue</a> that the
+  <code><a href="#timedtrackcue">TimedTrackCue</a></code> object represents, if that value is
+  numeric. Otherwise, the value is the special value <a href="#timed-track-cue-automatic-line-position" title="timed track cue automatic line position">auto</a>; if the
+  <a href="#timed-track-cue-snap-to-lines-flag">timed track cue snap-to-lines flag</a> of the <a href="#timed-track-cue">timed
+  track cue</a> that the <code><a href="#timedtrackcue">TimedTrackCue</a></code> object
+  represents is not set, the attribute must return the value 100;
+  otherwise, it must return the value returned by the following
+  algorithm:</p>
+
+  <ol><li><p>Let <var title="">cue</var> be the <a href="#timed-track-cue">timed track
+   cue</a> that the <code><a href="#timedtrackcue">TimedTrackCue</a></code> object
+   represents.</p></li>
+
+   <li><p>If <var title="">cue</var> is not associated with a
+   <a href="#timed-track">timed track</a>, return &#x2212;1 and abort these
+   steps.</p></li>
+
+   <li><p>Let <var title="">track</var> be the <a href="#timed-track">timed
+   track</a> that the <var title="">cue</var> is associated
+   with.</p></li>
+
+   <li><p>Let <var title="">n</var> be the number of <a href="#timed-track" title="timed track">timed tracks</a> whose <a href="#timed-track-mode">timed track
+   mode</a> is <a href="#timed-track-showing" title="timed track showing">showing</a> and
+   that are in the <a href="#media-element">media element</a>'s <a href="#list-of-timed-tracks">list of timed
+   tracks</a> before <var title="">track</var>.</p></li>
+
+   <li><p>Return <var title="">n</var>.</p></li>
+
+  </ol><p>The <dfn id="dom-timedtrackcue-textposition" title="dom-TimedTrackCue-textPosition"><code>textPosition</code></dfn>
+  attribute must return the <a href="#timed-track-cue-text-position">timed track cue text position</a>
+  of the <a href="#timed-track-cue">timed track cue</a> that the
+  <code><a href="#timedtrackcue">TimedTrackCue</a></code> object represents.</p>
+
+  <p>The <dfn id="dom-timedtrackcue-size" title="dom-TimedTrackCue-size"><code>size</code></dfn>
+  attribute must return the <a href="#timed-track-cue-size">timed track cue size</a> of the
+  <a href="#timed-track-cue">timed track cue</a> that the <code><a href="#timedtrackcue">TimedTrackCue</a></code>
+  object represents.</p>
+
+  <p>The <dfn id="dom-timedtrackcue-alignment" title="dom-TimedTrackCue-alignment"><code>alignment</code></dfn>
+  attribute must return the <a href="#timed-track-cue-alignment">timed track cue alignment</a> of
+  the <a href="#timed-track-cue">timed track cue</a> that the <code><a href="#timedtrackcue">TimedTrackCue</a></code>
+  object represents.</p>
+
+  <p>The <dfn id="dom-timedtrackcue-voice" title="dom-TimedTrackCue-voice"><code>voice</code></dfn>
+  attribute must return the <a href="#timed-track-cue-voice-identifier">timed track cue voice
+  identifier</a> of the <a href="#timed-track-cue">timed track cue</a> that the
+  <code><a href="#timedtrackcue">TimedTrackCue</a></code> object represents.</p>
+
+  <p>The <dfn id="dom-timedtrackcue-getcueassource" title="dom-TimedTrackCue-getCueAsSource()"><code>getCueAsSource()</code></dfn>
+  method must return the raw <a href="#timed-track-cue-text">timed track cue text</a>.</p>
+
+  <p>The <dfn id="dom-timedtrackcue-getcueashtml" title="dom-TimedTrackCue-getCueAsHTML()"><code>getCueAsHTML()</code></dfn>
+  method must convert the <a href="#timed-track-cue-text">timed track cue text</a> to a
+  <code><a href="infrastructure.html#documentfragment">DocumentFragment</a></code> for the <a href="#media-element">media element</a>'s
+  <code><a href="infrastructure.html#document">Document</a></code>, using the appropriate rules for doing
+  so. (For example, for <span>WebSRT</span>, those rules are the
+  <span>WebSRT cue text parsing rules</span> and the <span>WebSRT cue
+  text DOM construction rules</span>.)</p>
+
+  </div><div class="impl">
+
+  <h6 id="cue-events"><span class="secno">4.8.10.10.6 </span>Event definitions</h6>
+
+  <p>The following are the <a href="webappapis.html#event-handlers">event handlers</a> that must be
+  supported, as IDL attributes, by all objects implementing the
+  <code><a href="#timedtrack">TimedTrack</a></code> interface:</p>
+
+  <table><thead><tr><th><a href="webappapis.html#event-handlers" title="event handlers">Event handler</a> </th><th><a href="webappapis.html#event-handler-event-type">Event handler event type</a>
+   </th></tr></thead><tbody><tr><td><dfn id="handler-timedtrack-onload" title="handler-TimedTrack-onload"><code>onload</code></dfn> </td><td> <code title="event-load">load</code>
+    </td></tr><tr><td><dfn id="handler-timedtrack-onerror" title="handler-TimedTrack-onerror"><code>onerror</code></dfn> </td><td> <code title="event-error">error</code>
+    </td></tr><tr><td><dfn id="handler-timedtrack-oncuechange" title="handler-TimedTrack-oncuechange"><code>oncuechange</code></dfn> </td><td> <code title="event-cuechange">cuechange</code>
+  </td></tr></tbody></table><p>The following are the <a href="webappapis.html#event-handlers">event handlers</a> that must be
+  supported, as IDL attributes, by all objects implementing the
+  <code><a href="#timedtrackcue">TimedTrackCue</a></code> interface:</p>
+
+  <table><thead><tr><th><a href="webappapis.html#event-handlers" title="event handlers">Event handler</a> </th><th><a href="webappapis.html#event-handler-event-type">Event handler event type</a>
+   </th></tr></thead><tbody><tr><td><dfn id="handler-timedtrackcue-onenter" title="handler-TimedTrackCue-onenter"><code>onenter</code></dfn> </td><td> <code title="event-enter">enter</code>
+    </td></tr><tr><td><dfn id="handler-timedtrackcue-onexit" title="handler-TimedTrackCue-onexit"><code>onexit</code></dfn> </td><td> <code title="event-exit">exit</code>
+  </td></tr></tbody></table></div><!--KEEP-START w3c-html--><!--TT--><h5 id="user-interface"><span class="secno">4.8.10.11 </span>User interface</h5><p>The <dfn id="attr-media-controls" title="attr-media-controls"><code>controls</code></dfn>
   attribute is a <a href="common-microsyntaxes.html#boolean-attribute">boolean attribute</a>. If present, it
   indicates that the author has not provided a scripted controller and
   would like the user agent to provide its own set of controls.</p><div class="impl">
@@ -2950,10 +4732,25 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
 
   <p>Where possible (specifically, for starting, stopping, pausing,
   and unpausing playback, for seeking,
+<!--KEEP-END w3c-html--><!--TT-->
+  for listing, enabling, and disabling timed tracks,
+<!--KEEP-START w3c-html--><!--TT-->
   and for muting or changing the volume of the audio), user interface
   features exposed by the user agent must be implemented in terms of
   the DOM API described above, so that, e.g., all the same events
   fire.</p>
+
+<!--KEEP-END w3c-html--><!--TT-->
+  <p>For the purposes of listing chapters in the <a href="#media-resource">media
+  resource</a>, only <a href="#timed-track" title="timed track">timed tracks</a>
+  in the <a href="#media-element">media element</a>'s <a href="#list-of-timed-tracks">list of timed
+  tracks</a> <a href="#timed-track-showing" title="timed track showing">showing</a> and
+  whose <a href="#timed-track-kind">timed track kind</a> is <code title="dom-timedtrack-kind-chapters"><a href="#dom-timedtrack-kind-chapters">chapters</a></code> should be used.
+  Each <a href="#timed-track-cue" title="timed track cue">cue</a> in such a <a href="#timed-track">timed
+  track</a> represents a chapter starting at the cue's <a href="#timed-track-cue-start-time" title="timed track cue start time">start time</a>. The name of
+  the chapter is the <a href="#timed-track-cue-text">timed track cue text</a>, interpreted
+  literally.</p>
+<!--KEEP-START w3c-html--><!--TT-->
 
   <p>The <dfn id="dom-media-controls" title="dom-media-controls"><code>controls</code></dfn>
   IDL attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the content attribute of the
@@ -3020,7 +4817,49 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   event</a> named <code title="event-media-volumechange"><a href="#event-media-volumechange">volumechange</a></code> at the <a href="#media-element">media
   element</a>.</p>
 
-  </div><h5 id="time-ranges"><span class="secno">4.8.9.11 </span>Time ranges</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Objects implementing the <code><a href="#timeranges">TimeRanges</a></code> interface
+  </div><p>The <dfn id="attr-media-audio" title="attr-media-audio"><code>audio</code></dfn>
+  attribute on the <code><a href="#video">video</a></code> element controls the default
+  state of the audio channel of the <a href="#media-resource">media resource</a>,
+  potentially overriding user preferences.</p><p>The <code title="attr-media-audio"><a href="#attr-media-audio">audio</a></code> attribute, if
+  specified, must have a value that is an <a href="common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens">unordered set of
+  unique space-separated tokens</a>, which are <a href="infrastructure.html#ascii-case-insensitive">ASCII
+  case-insensitive</a>. The tokens must be from the following list
+  (currently, only one allowed token is defined):</p><dl><dt><dfn id="attr-media-audio-keyword-muted" title="attr-media-audio-keyword-muted"><code>muted</code></dfn></dt>
+
+   <dd>
+
+    <p>Causes the user agent to override the user's preferences, if
+    any, and always default the video to muted.</p>
+
+   </dd>
+
+  </dl><p class="note">A future version of this specification will probably
+  introduce new values here, e.g. to control the default volume, or to
+  select a default audio track.</p><div class="impl">
+
+  <p>When a <code><a href="#video">video</a></code> element is created, if it has an <code title="attr-media-audio"><a href="#attr-media-audio">audio</a></code> attribute specified, the user
+  agent must <a href="common-microsyntaxes.html#split-a-string-on-spaces" title="split a string on spaces">split the
+  attribute's value on spaces</a>; if any of the tokens are an
+  <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for the string <code title="attr-media-audio-keyword-muted"><a href="#attr-media-audio-keyword-muted">muted</a></code>, the user agent
+  must then set the <code title="dom-media-muted"><a href="#dom-media-muted">muted</a></code>
+  attribute to true, overriding any user preference.</p>
+
+  <!-- attr-media-audio
+  <p>The <dfn title="dom-media-audio"><code>audio</code></dfn> IDL
+  attribute must <span>reflect</span> the content attribute of the
+  same name.</p>
+  -->
+
+  </div><p class="note">This attribute has no dynamic effect (it only
+  controls the default state of the element).</p><div class="example">
+
+   <p>This video (an advertisment) autoplays, but to avoid annoying
+   users, it does so without sound, and allows the user to turn the
+   sound on.</p>
+
+   <pre>&lt;video src="adverts.cgi?kind=video" controls autoplay loop audio=muted&gt;&lt;/video&gt;</pre>
+
+  </div><h5 id="time-ranges"><span class="secno">4.8.10.12 </span>Time ranges</h5><p>Objects implementing the <code><a href="#timeranges">TimeRanges</a></code> interface
   represent a list of ranges (periods) of time.</p><pre class="idl">interface <dfn id="timeranges">TimeRanges</dfn> {
   readonly attribute unsigned long <a href="#dom-timeranges-length" title="dom-TimeRanges-length">length</a>;
   double <a href="#dom-timeranges-start" title="dom-TimeRanges-start">start</a>(in unsigned long index);
@@ -3089,7 +4928,7 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   <p>The timelines used by the objects returned by the <code title="dom-media-buffered"><a href="#dom-media-buffered">buffered</a></code>, <code title="dom-media-seekable"><a href="#dom-media-seekable">seekable</a></code> and <code title="dom-media-played"><a href="#dom-media-played">played</a></code> IDL attributes of <a href="#media-element" title="media element">media elements</a> must be that element's
   <a href="#media-timeline">media timeline</a>.</p>
 
-  </div><h5 id="mediaevents"><span class="secno">4.8.9.12 </span>Event summary</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><p>The following events fire on <a href="#media-element" title="media element">media
+  </div><h5 id="mediaevents"><span class="secno">4.8.10.13 </span>Event summary</h5><p><i>This section is non-normative.</i></p><p>The following events fire on <a href="#media-element" title="media element">media
   elements</a> as part of the processing model described above:</p><table><thead><tr><th>Event name
      </th><th>Interface
      </th><th>Dispatched when...
@@ -3138,6 +4977,9 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
    </td></tr></tbody><tbody><tr><td><dfn id="event-media-loadedmetadata" title="event-media-loadedmetadata"><code>loadedmetadata</code></dfn>
      </td><td><code><a href="infrastructure.html#event">Event</a></code>
      </td><td>The user agent has just determined the duration and dimensions of the <a href="#media-resource">media resource</a>
+<!--KEEP-END w3c-html--><!--TT-->
+ and <a href="#the-timed-tracks-are-ready">the timed tracks are ready</a>.
+<!--KEEP-START w3c-html--><!--TT-->
      </td><td><code title="dom-media-readyState"><a href="#dom-media-readystate">readyState</a></code> is newly equal to <code title="dom-media-HAVE_METADATA"><a href="#dom-media-have_metadata">HAVE_METADATA</a></code> or greater for the first time.
     </td></tr><tr><td><dfn id="event-media-loadeddata" title="event-media-loadeddata"><code>loadeddata</code></dfn>
      </td><td><code><a href="infrastructure.html#event">Event</a></code>
@@ -3191,7 +5033,7 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
      </td><td>
   </td></tr></tbody></table><div class="impl">
 
-  <h5 id="security-and-privacy-considerations"><span class="secno">4.8.9.13 </span>Security and privacy considerations</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="security-and-privacy-considerations"><span class="secno">4.8.10.14 </span>Security and privacy considerations</h5>
 
   <p>The main security and privacy implications of the
   <code><a href="#video">video</a></code> and <code><a href="#audio">audio</a></code> elements come from the

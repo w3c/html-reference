@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,7 +356,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="history.html" title="5.4 Session history and navigation" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="webappapis.html" title="6 Web application APIs" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="history.html" title="5.4 Session history and navigation" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="webappapis.html" title="6 Web application APIs" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -320,7 +367,7 @@
   <ol class="toc"><li><ol><li><a href="offline.html#offline"><span class="secno">5.6 </span>Offline Web applications</a>
     <ol><li><a href="offline.html#introduction-3"><span class="secno">5.6.1 </span>Introduction</a>
       <ol><li><a href="offline.html#appcacheevents"><span class="secno">5.6.1.1 </span>Event summary</a></li></ol></li><li><a href="offline.html#appcache"><span class="secno">5.6.2 </span>Application caches</a></li><li><a href="offline.html#manifests"><span class="secno">5.6.3 </span>The cache manifest syntax</a>
-      <ol><li><a href="offline.html#a-sample-manifest"><span class="secno">5.6.3.1 </span>A sample manifest</a></li><li><a href="offline.html#writing-cache-manifests"><span class="secno">5.6.3.2 </span>Writing cache manifests</a></li><li><a href="offline.html#parsing-cache-manifests"><span class="secno">5.6.3.3 </span>Parsing cache manifests</a></li></ol></li><li><a href="offline.html#downloading-or-updating-an-application-cache"><span class="secno">5.6.4 </span>Downloading or updating an application cache</a></li><li><a href="offline.html#the-application-cache-selection-algorithm"><span class="secno">5.6.5 </span>The application cache selection algorithm</a></li><li><a href="offline.html#changesToNetworkingModel"><span class="secno">5.6.6 </span>Changes to the networking model</a></li><li><a href="offline.html#expiring-application-caches"><span class="secno">5.6.7 </span>Expiring application caches</a></li><li><a href="offline.html#disk-space"><span class="secno">5.6.8 </span>Disk space</a></li><li><a href="offline.html#application-cache-api"><span class="secno">5.6.9 </span>Application cache API</a></li><li><a href="offline.html#browser-state"><span class="secno">5.6.10 </span>Browser state</a></li></ol></li></ol></li></ol></div><h3 id="offline"><span class="secno">5.6 </span>Offline Web applications</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><!-- v2 ideas for appcache:
+      <ol><li><a href="offline.html#some-sample-manifests"><span class="secno">5.6.3.1 </span>Some sample manifests</a></li><li><a href="offline.html#writing-cache-manifests"><span class="secno">5.6.3.2 </span>Writing cache manifests</a></li><li><a href="offline.html#parsing-cache-manifests"><span class="secno">5.6.3.3 </span>Parsing cache manifests</a></li></ol></li><li><a href="offline.html#downloading-or-updating-an-application-cache"><span class="secno">5.6.4 </span>Downloading or updating an application cache</a></li><li><a href="offline.html#the-application-cache-selection-algorithm"><span class="secno">5.6.5 </span>The application cache selection algorithm</a></li><li><a href="offline.html#changesToNetworkingModel"><span class="secno">5.6.6 </span>Changes to the networking model</a></li><li><a href="offline.html#expiring-application-caches"><span class="secno">5.6.7 </span>Expiring application caches</a></li><li><a href="offline.html#disk-space"><span class="secno">5.6.8 </span>Disk space</a></li><li><a href="offline.html#application-cache-api"><span class="secno">5.6.9 </span>Application cache API</a></li><li><a href="offline.html#browser-state"><span class="secno">5.6.10 </span>Browser state</a></li></ol></li></ol></li></ol></div><h3 id="offline"><span class="secno">5.6 </span>Offline Web applications</h3><!-- v2 ideas for appcache:
 
      * A way to limit what gets download when the user agent is
        updating the application cache and it turns out the server has
@@ -360,7 +407,7 @@
        else by just making the script pick the other user's variant,
        and then reloading.
 
-  --><h4 id="introduction-3"><span class="secno">5.6.1 </span>Introduction</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><p>In order to enable users to continue interacting with Web
+  --><h4 id="introduction-3"><span class="secno">5.6.1 </span>Introduction</h4><p><i>This section is non-normative.</i></p><p>In order to enable users to continue interacting with Web
   applications and documents even when their network connection is
   unavailable &#x2014; for instance, because they are traveling outside
   of their ISP's coverage area &#x2014; authors can provide a manifest
@@ -411,7 +458,7 @@ clock.js</pre><p>With a small change to the HTML file, the manifest (served as
   application cache before the user agent has updated it, and even
   applications served over TLS can be made to work offline.</p><!--(doesn't currently function)
   <p><a href="http://www.whatwg.org/demos/offline/clock/clock2.html">View this example online</a>.</p>
---><h5 id="appcacheevents"><span class="secno">5.6.1.1 </span>Event summary</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><p>When the user visits a page that declares a manifest, the browser
+--><h5 id="appcacheevents"><span class="secno">5.6.1.1 </span>Event summary</h5><p><i>This section is non-normative.</i></p><p>When the user visits a page that declares a manifest, the browser
   will try to update the cache. It does this by fetching a copy of the
   manifest and, if the manifest has changed since the user agent last
   saw it, redownloading all the resources it mentions and caching them
@@ -460,7 +507,7 @@ clock.js</pre><p>With a small change to the HTML file, the manifest (served as
      </td><td> The user agent will try fetching the files again momentarily.
   </td></tr></tbody></table><div class="impl">
 
-  <h4 id="appcache"><span class="secno">5.6.2 </span>Application caches</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="appcache"><span class="secno">5.6.2 </span>Application caches</h4>
 
   <p>An <dfn id="application-cache">application cache</dfn> is a set of cached resources
   consisting of:</p>
@@ -625,8 +672,12 @@ clock.js</pre><p>With a small change to the HTML file, the manifest (served as
 
   </div>
 
-  </div><h4 id="manifests"><span class="secno">5.6.3 </span>The cache manifest syntax</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><h5 id="a-sample-manifest"><span class="secno">5.6.3.1 </span>A sample manifest</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><p>This example manifest requires two images and a style sheet to be
-  cached and whitelists a CGI script.</p><pre>CACHE MANIFEST
+  </div><h4 id="manifests"><span class="secno">5.6.3 </span>The cache manifest syntax</h4><h5 id="some-sample-manifests"><span class="secno">5.6.3.1 </span>Some sample manifests</h5><p><i>This section is non-normative.</i></p><div class="example">
+
+   <p>This example manifest requires two images and a style sheet to be
+   cached and whitelists a CGI script.</p>
+
+   <pre>CACHE MANIFEST
 # the above line is required
 
 # this is a comment
@@ -652,29 +703,60 @@ comm.cgi
 
 # here is another set of files to cache, this time just the CSS file.
 CACHE:
-style/default.css</pre><p>It could equally well be written as follows:</p><pre>CACHE MANIFEST
+style/default.css</pre>
+
+   <p>It could equally well be written as follows:</p>
+
+   <pre>CACHE MANIFEST
 NETWORK:
 comm.cgi
 CACHE:
 style/default.css
 images/sound-icon.png
-images/background.png</pre><hr/><p>The following manifest defines a catch-all error page that is
-  displayed for any page on the site while the user is offline. It
-  also specifies that the <a href="#concept-appcache-onlinewhitelist-wildcard" title="concept-appcache-onlinewhitelist-wildcard">online whitelist
-  wildcard flag</a> is <i title="">open</i>, meaning that accesses
-  to resources on other sites will not be blocked. (Resources on the
-  same site are already not blocked because of the catch-all fallback
-  namespace.)</p><p>So long as all pages on the site reference this manifest, they
-  will get cached locally as they are fetched, so that subsequent hits
-  to the same page will load the page immediately from the
-  cache. Until the manifest is changed, those pages will not be
-  fetched from the server again. When the manifest changes, then all
-  the files will be redownloaded.</p><p>Subresources, such as style sheets, images, etc, would only be
-  cached using the regular HTTP caching semantics, however.</p><pre>CACHE MANIFEST
+images/background.png</pre>
+
+  </div><div class="example">
+
+   <p>Offline application cache manifests can use absolute paths or
+   even absolute URLs:</p>
+
+   <pre>CACHE MANIFEST
+
+/main/home
+/main/app.js
+/settings/home
+/settings/app.js
+http://img.example.com/logo.png
+http://img.example.com/check.png
+http://img.example.com/cross.png</pre>
+
+  </div><div class="example">
+
+   <p>The following manifest defines a catch-all error page that is
+   displayed for any page on the site while the user is offline. It
+   also specifies that the <a href="#concept-appcache-onlinewhitelist-wildcard" title="concept-appcache-onlinewhitelist-wildcard">online whitelist
+   wildcard flag</a> is <i title="">open</i>, meaning that accesses
+   to resources on other sites will not be blocked. (Resources on the
+   same site are already not blocked because of the catch-all fallback
+   namespace.)</p>
+
+   <p>So long as all pages on the site reference this manifest, they
+   will get cached locally as they are fetched, so that subsequent hits
+   to the same page will load the page immediately from the
+   cache. Until the manifest is changed, those pages will not be
+   fetched from the server again. When the manifest changes, then all
+   the files will be redownloaded.</p>
+
+   <p>Subresources, such as style sheets, images, etc, would only be
+   cached using the regular HTTP caching semantics, however.</p>
+
+   <pre>CACHE MANIFEST
 FALLBACK:
 / /offline.html
 NETWORK:
-*</pre><h5 id="writing-cache-manifests"><span class="secno">5.6.3.2 </span>Writing cache manifests</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Manifests must be served using the
+*</pre>
+
+  </div><h5 id="writing-cache-manifests"><span class="secno">5.6.3.2 </span>Writing cache manifests</h5><p>Manifests must be served using the
   <code><a href="iana.html#text-cache-manifest">text/cache-manifest</a></code> <a href="infrastructure.html#mime-type">MIME type</a>. All
   resources served using the <code><a href="iana.html#text-cache-manifest">text/cache-manifest</a></code>
   <a href="infrastructure.html#mime-type">MIME type</a> must follow the syntax of application cache
@@ -682,14 +764,11 @@ NETWORK:
   encoded using UTF-8. Data in application cache manifests is
   line-based. Newlines must be represented by U+000A LINE FEED (LF)
   characters, U+000D CARRIAGE RETURN (CR) characters, or U+000D
-  CARRIAGE RETURN (CR) U+000A LINE FEED (LF) pairs. <a href="references.html#refsRFC3629">[RFC3629]</a></p><p class="note">This is a <a href="introduction.html#willful-violation">willful violation</a> of two
-  aspects of RFC 2046, which requires all <code title="">text/*</code>
-  types to support an open-ended set of character encodings and only
-  allows CRLF line breaks. These requirements, however, are outdated;
-  UTF-8 is now widely used, such that supporting other encodings is no
-  longer necessary, and use of CR, LF, and CRLF line breaks is
-  commonly supported and indeed sometimes CRLF is <em>not</em>
-  supported by text editors. <a href="references.html#refsRFC2046">[RFC2046]</a></p><!-- also RFC 2045 for charset --><p>The first line of an application cache manifest must consist of
+  CARRIAGE RETURN (CR) U+000A LINE FEED (LF) pairs. <a href="references.html#refsRFC3629">[RFC3629]</a></p><p class="note">This is a <a href="introduction.html#willful-violation">willful violation</a> of RFC
+  2046, which requires all <code title="">text/*</code> types to only
+  allow CRLF line breaks. This requirement, however, is outdated; the
+  use of CR, LF, and CRLF line breaks is commonly supported and indeed
+  sometimes CRLF is <em>not</em> supported by text editors. <a href="references.html#refsRFC2046">[RFC2046]</a></p><p>The first line of an application cache manifest must consist of
   the string "CACHE", a single U+0020 SPACE character, the string
   "MANIFEST", and either a U+0020 SPACE character, a U+0009 CHARACTER
   TABULATION (tab) character, a U+000A LINE FEED (LF) character, or a
@@ -801,18 +880,17 @@ NETWORK:
   namespaces</a> and namespaces in the <a href="#concept-appcache-onlinewhitelist" title="concept-appcache-onlinewhitelist">online whitelist</a> are
   matched by <a href="infrastructure.html#prefix-match">prefix match</a>.</p><div class="impl">
 
-  <h5 id="parsing-cache-manifests"><span class="secno">5.6.3.3 </span>Parsing cache manifests</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="parsing-cache-manifests"><span class="secno">5.6.3.3 </span>Parsing cache manifests</h5>
 
   <p>When a user agent is to <dfn id="parse-a-manifest">parse a manifest</dfn>, it means
   that the user agent must run the following steps:</p>
 
-  <ol><li><p>The user agent must decode the byte stream corresponding with
-   the manifest to be parsed, treating it as UTF-8. Bytes or sequences
-   of bytes that are not valid UTF-8 sequences must be interpreted as
-   a U+FFFD REPLACEMENT CHARACTER. <!--All U+0000 NULL characters must
-   be replaced by U+FFFD REPLACEMENT CHARACTERs. (this isn't black-box
-   testable since neither U+0000 nor U+FFFD are valid anywhere in the
-   syntax and thus both will be treated the same anyway)--> <a href="references.html#refsRFC3629">[RFC3629]</a></p></li>
+  <ol><li><p>The user agent must decode the byte stream corresponding
+   with the manifest to be parsed <a href="infrastructure.html#decoded-as-utf-8-with-error-handling" title="decoded as UTF-8, with&#10;   error handling">as UTF-8, with error handling</a>. <!--All
+   U+0000 NULL characters must be replaced by U+FFFD REPLACEMENT
+   CHARACTERs. (this isn't black-box testable since neither U+0000 nor
+   U+FFFD are valid anywhere in the syntax and thus both will be
+   treated the same anyway)--></p></li>
 
    <li><p>Let <var title="">base URL</var> be the <a href="urls.html#absolute-url">absolute
    URL</a> representing the manifest.</p></li>
@@ -1071,7 +1149,7 @@ NETWORK:
   </div>
 
 
-  <h4 id="downloading-or-updating-an-application-cache"><span class="secno">5.6.4 </span>Downloading or updating an application cache</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="downloading-or-updating-an-application-cache"><span class="secno">5.6.4 </span>Downloading or updating an application cache</h4>
 
   <p>When the user agent is required (by other parts of this
   specification) to start the <dfn id="application-cache-download-process">application cache download
@@ -1822,7 +1900,7 @@ NETWORK:
 
 
 
-  <h4 id="the-application-cache-selection-algorithm"><span class="secno">5.6.5 </span>The application cache selection algorithm</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="the-application-cache-selection-algorithm"><span class="secno">5.6.5 </span>The application cache selection algorithm</h4>
 
   <p>When the <dfn id="concept-appcache-init" title="concept-appcache-init">application cache
   selection algorithm</dfn> algorithm is invoked with a
@@ -1910,7 +1988,7 @@ NETWORK:
 
    </dd>
 
-  </dl><h4 id="changesToNetworkingModel"><span class="secno">5.6.6 </span>Changes to the networking model</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  </dl><h4 id="changesToNetworkingModel"><span class="secno">5.6.6 </span>Changes to the networking model</h4>
 
   <p>When a <a href="#cache-host">cache host</a> is associated with an
   <a href="#application-cache">application cache</a> whose <a href="#concept-appcache-completeness" title="concept-appcache-completeness">completeness flag</a> is
@@ -1973,7 +2051,7 @@ NETWORK:
   primed the first time), making the testing of offline applications
   simpler.</p>
 
-  </div><h4 id="expiring-application-caches"><span class="secno">5.6.7 </span>Expiring application caches</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>As a general rule, user agents should not expire application
+  </div><h4 id="expiring-application-caches"><span class="secno">5.6.7 </span>Expiring application caches</h4><p>As a general rule, user agents should not expire application
   caches, except on request from the user, or after having been left
   unused for an extended period of time.</p><p>Application caches and cookies have similar implications with
   respect to privacy (e.g. if the site can identify the user when
@@ -1984,12 +2062,12 @@ NETWORK:
   origin-specific data.</p><p class="example">For example, a user agent could have a "delete
   site-specific data" feature that clears all cookies, application
   caches, local storage, databases, etc, from an origin all at
-  once.</p><h4 id="disk-space"><span class="secno">5.6.8 </span>Disk space</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>User agents should consider applying constraints on disk usage of
+  once.</p><h4 id="disk-space"><span class="secno">5.6.8 </span>Disk space</h4><p>User agents should consider applying constraints on disk usage of
   <a href="#application-cache" title="application cache">application caches</a>, and care
   should be taken to ensure that the restrictions cannot be easily
   worked around using subdomains.</p><p>User agents should allow users to see how much space each domain
   is using, and may offer the user the ability to delete specific
-  <a href="#application-cache" title="application cache">application caches</a>.</p><h4 id="application-cache-api"><span class="secno">5.6.9 </span>Application cache API</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><pre class="idl">interface <dfn id="applicationcache">ApplicationCache</dfn> {
+  <a href="#application-cache" title="application cache">application caches</a>.</p><h4 id="application-cache-api"><span class="secno">5.6.9 </span>Application cache API</h4><pre class="idl">interface <dfn id="applicationcache">ApplicationCache</dfn> {
 
   // <a href="#concept-appcache-status" title="concept-appcache-status">update status</a>
   const unsigned short <a href="#dom-appcache-uncached" title="dom-appcache-UNCACHED">UNCACHED</a> = 0;
@@ -2203,13 +2281,16 @@ NETWORK:
     </td></tr><tr><td><dfn id="handler-appcache-onupdateready" title="handler-appcache-onupdateready"><code>onupdateready</code></dfn> </td><td> <code title="event-appcache-updateready"><a href="#event-appcache-updateready">updateready</a></code>
     </td></tr><tr><td><dfn id="handler-appcache-oncached" title="handler-appcache-oncached"><code>oncached</code></dfn> </td><td> <code title="event-appcache-cached"><a href="#event-appcache-cached">cached</a></code>
     </td></tr><tr><td><dfn id="handler-appcache-onobsolete" title="handler-appcache-onobsolete"><code>onobsolete</code></dfn> </td><td> <code title="event-appcache-obsolete"><a href="#event-appcache-obsolete">obsolete</a></code>
-  </td></tr></tbody></table></div><h4 id="browser-state"><span class="secno">5.6.10 </span>Browser state</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">window</var> . <code title="dom-navigator"><a href="timers.html#dom-navigator">navigator</a></code> . <code title="dom-navigator-onLine"><a href="#dom-navigator-online">onLine</a></code></dt>
+  </td></tr></tbody></table></div><h4 id="browser-state"><span class="secno">5.6.10 </span>Browser state</h4><dl class="domintro"><dt><var title="">window</var> . <code title="dom-navigator"><a href="timers.html#dom-navigator">navigator</a></code> . <code title="dom-navigator-onLine"><a href="#dom-navigator-online">onLine</a></code></dt>
 
    <dd>
 
     <p>Returns false if the user agent is definitely offline
     (disconnected from the network). Returns true if the user agent
     might be online.</p>
+
+    <p>The events <code title="event-online"><a href="#event-online">online</a></code> and <code title="event-offline"><a href="#event-offline">offline</a></code> are fired when the value of
+    this attribute changes.</p>
 
    </dd>
 
@@ -2238,4 +2319,24 @@ NETWORK:
   source</a>.</p>
 
   </div><p class="note">This attribute is inherently unreliable. A computer
-  can be connected to a network without having Internet access.</p></body></html>
+  can be connected to a network without having Internet access.</p><div class="example">
+
+   <p>In this example, an indicator is updated as the browser goes
+   online and offline.</p>
+
+   <pre>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+ &lt;head&gt;
+  &lt;title&gt;Online status&lt;/title&gt;
+  &lt;script&gt;
+   function updateIndicator() {
+     document.getElementById('indicator').textContext = navigator.onLine ? 'online' : 'offline';
+   }
+  &lt;/script&gt;
+ &lt;/head&gt;
+ &lt;body onload="updateIndicator()" ononline="updateIndicator()" onoffline="updateIndicator()"&gt;
+  &lt;p&gt;The network is: &lt;span id="indicator"&gt;(state unknown)&lt;/span&gt;
+ &lt;/body&gt;
+&lt;/html&gt;</pre>
+
+  </div></body></html>

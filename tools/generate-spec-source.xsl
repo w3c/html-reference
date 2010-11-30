@@ -3157,6 +3157,7 @@
               <xsl:when test="key('filename-map',$ref)">
                 <xsl:value-of select="concat('http://dev.w3.org/html5/spec/',key('filename-map',$ref)/*[2],'.html')"/>
               </xsl:when>
+              <xsl:when test="contains($ref,'common.attrs.xmlspace')"/>
               <xsl:otherwise>
                 <xsl:message>
                   <xsl:text>    ** SPEC TARGET NOT FOUND: </xsl:text>

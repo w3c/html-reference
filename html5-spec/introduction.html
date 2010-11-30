@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,7 +356,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="infrastructure.html" title="2 Common infrastructure" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="infrastructure.html" title="2 Common infrastructure" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -320,14 +367,14 @@
   <ol><li><a href="introduction.html#background"><span class="secno">1.1 </span>Background</a></li><li><a href="introduction.html#audience"><span class="secno">1.2 </span>Audience</a></li><li><a href="introduction.html#scope"><span class="secno">1.3 </span>Scope</a></li><li><a href="introduction.html#history-1"><span class="secno">1.4 </span>History</a></li><li><a href="introduction.html#design-notes"><span class="secno">1.5 </span>Design notes</a>
     <ol><li><a href="introduction.html#serializability-of-script-execution"><span class="secno">1.5.1 </span>Serializability of script execution</a></li><li><a href="introduction.html#compliance-with-other-specifications"><span class="secno">1.5.2 </span>Compliance with other specifications</a></li></ol></li><li><a href="introduction.html#html-vs-xhtml"><span class="secno">1.6 </span>HTML vs XHTML</a></li><li><a href="introduction.html#structure-of-this-specification"><span class="secno">1.7 </span>Structure of this specification</a>
     <ol><li><a href="introduction.html#how-to-read-this-specification"><span class="secno">1.7.1 </span>How to read this specification</a></li><li><a href="introduction.html#typographic-conventions"><span class="secno">1.7.2 </span>Typographic conventions</a></li></ol></li><li><a href="introduction.html#a-quick-introduction-to-html"><span class="secno">1.8 </span>A quick introduction to HTML</a></li><li><a href="introduction.html#conformance-requirements-for-authors"><span class="secno">1.9 </span>Conformance requirements for authors</a>
-    <ol><li><a href="introduction.html#presentational-markup"><span class="secno">1.9.1 </span>Presentational markup</a></li><li><a href="introduction.html#syntax-errors"><span class="secno">1.9.2 </span>Syntax errors</a></li><li><a href="introduction.html#restrictions-on-content-models-and-on-attribute-values"><span class="secno">1.9.3 </span>Restrictions on content models and on attribute values</a></li></ol></li><li><a href="introduction.html#recommended-reading"><span class="secno">1.10 </span>Recommended reading</a></li></ol></li></ol></div><h2 id="introduction"><span class="secno">1 </span>Introduction</h2><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><h3 id="background"><span class="secno">1.1 </span>Background</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><p>The World Wide Web's markup language has always been HTML. HTML
+    <ol><li><a href="introduction.html#presentational-markup"><span class="secno">1.9.1 </span>Presentational markup</a></li><li><a href="introduction.html#syntax-errors"><span class="secno">1.9.2 </span>Syntax errors</a></li><li><a href="introduction.html#restrictions-on-content-models-and-on-attribute-values"><span class="secno">1.9.3 </span>Restrictions on content models and on attribute values</a></li></ol></li><li><a href="introduction.html#recommended-reading"><span class="secno">1.10 </span>Recommended reading</a></li></ol></li></ol></div><h2 id="introduction"><span class="secno">1 </span>Introduction</h2><h3 id="background"><span class="secno">1.1 </span>Background</h3><p><i>This section is non-normative.</i></p><p>The World Wide Web's markup language has always been HTML. HTML
   was primarily designed as a language for semantically describing
   scientific documents, although its general design and adaptations
   over the years have enabled it to be used to describe a number of
   other types of documents.</p><p>The main area that has not been adequately addressed by HTML is a
   vague subject referred to as Web Applications. This specification
   attempts to rectify this, while at the same time updating the HTML
-  specifications to address issues raised in the past few years.</p><h3 id="audience"><span class="secno">1.2 </span>Audience</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><p>This specification is intended for authors of documents and
+  specifications to address issues raised in the past few years.</p><h3 id="audience"><span class="secno">1.2 </span>Audience</h3><p><i>This section is non-normative.</i></p><p>This specification is intended for authors of documents and
   scripts that use the features defined in this specification<span class="impl">, implementors of tools that operate on pages that use
   the features defined in this specification, and individuals wishing
   to establish the correctness of documents or implementations with
@@ -339,7 +386,7 @@
   Events is necessary for a complete understanding of some of the more
   technical parts of this specification. An understanding of Web IDL,
   HTTP, XML, Unicode, character encodings, JavaScript, and CSS will
-  also be helpful in places but is not essential.</p><h3 id="scope"><span class="secno">1.3 </span>Scope</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><p>This specification is limited to providing a semantic-level
+  also be helpful in places but is not essential.</p><h3 id="scope"><span class="secno">1.3 </span>Scope</h3><p><i>This section is non-normative.</i></p><p>This specification is limited to providing a semantic-level
   markup language and associated semantic-level scripting APIs for
   authoring accessible pages on the Web ranging from static documents
   to dynamic applications.</p><p>The scope of this specification does not include providing
@@ -357,7 +404,7 @@
   systems, searching systems, games (especially multiplayer online
   games), public telephone books or address books, communications
   software (e-mail clients, instant messaging clients, discussion
-  software), document editing software, etc.</p><h3 id="history-1"><span class="secno">1.4 </span>History</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><p>For its first five years (1990-1995), HTML went through a number
+  software), document editing software, etc.</p><h3 id="history-1"><span class="secno">1.4 </span>History</h3><p><i>This section is non-normative.</i></p><p>For its first five years (1990-1995), HTML went through a number
   of revisions and experienced a number of extensions, primarily
   hosted first at CERN, and then at the IETF.</p><p>With the creation of the W3C, HTML's development changed venue
   again. A first abortive attempt at extending HTML in 1995 known as
@@ -421,15 +468,14 @@
   the specification under the W3C copyright, while keeping a version
   with the less restrictive license on the WHATWG site.</p><p>Since then, both groups have been working together.</p><!--w3c-html--><!--VERSION--><p>The <a href="http://www.whatwg.org/specs/web-apps/current-work/">HTML
   specification</a> published by the WHATWG is not identical to
-  this specification. The main differences are that the WHATWG version
-  includes features not included in this W3C version: some features
-  have been omitted as they are considered part of future revisions of
-  HTML, not HTML5; and other features are omitted because at the W3C
-  they are published as separate specifications. There are also some
-  minor differences. For an exact list of differences, please see the
-  WHATWG specification.</p><!--w3c-html--><!--VERSION--><p>A separate document has been published by the W3C HTML working
+  this specification. At the time of this publication, the main
+  differences were that the WHATWG version included features not
+  included in this W3C version: some features have been omitted, but
+  may be considered for future revisions of HTML beyond HTML5; and
+  other features were omitted because at the W3C they are published as
+  separate specifications.</p><!--w3c-html--><!--VERSION--><p>A separate document has been published by the W3C HTML working
   group to document the differences between this specification and the
-  language described in the HTML4 specification. <a href="references.html#refsHTMLDIFF">[HTMLDIFF]</a></p><h3 id="design-notes"><span class="secno">1.5 </span>Design notes</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><p>It must be admitted that many aspects of HTML appear at first
+  language described in the HTML4 specification. <a href="references.html#refsHTMLDIFF">[HTMLDIFF]</a></p><h3 id="design-notes"><span class="secno">1.5 </span>Design notes</h3><p><i>This section is non-normative.</i></p><p>It must be admitted that many aspects of HTML appear at first
   glance to be nonsensical and inconsistent.</p><p>HTML, its supporting DOM APIs, as well as many of its supporting
   technologies, have been developed over a period of several decades
   by a wide array of people with different priorities who, in many
@@ -439,20 +485,20 @@
   often become de-facto, and now de-jure, standards, as content is
   often unintentionally written in ways that rely on them before they
   can be fixed.</p><p>Despite all this, efforts have been made to adhere to certain
-  design goals. These are described in the next few subsections.</p><h4 id="serializability-of-script-execution"><span class="secno">1.5.1 </span>Serializability of script execution</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><p>To avoid exposing Web authors to the complexities of
+  design goals. These are described in the next few subsections.</p><h4 id="serializability-of-script-execution"><span class="secno">1.5.1 </span>Serializability of script execution</h4><p><i>This section is non-normative.</i></p><p>To avoid exposing Web authors to the complexities of
   multithreading, the HTML and DOM APIs are designed such that no
   script can ever detect the simultaneous execution of other
   scripts. Even with <span title="Worker">workers</span>, the intent
   is that the behavior of implementations can be thought of as
   completely serializing the execution of all scripts in all <a href="browsers.html#browsing-context" title="browsing context">browsing contexts</a>.</p><p class="note">The <code title="dom-navigator-yieldForStorageUpdates"><a href="timers.html#dom-navigator-yieldforstorageupdates">navigator.yieldForStorageUpdates()</a></code>
   method, in this model, is equivalent to allowing other scripts to
-  run while the calling script is blocked.</p><h4 id="compliance-with-other-specifications"><span class="secno">1.5.2 </span>Compliance with other specifications</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><p>This specification interacts with and relies on a wide variety of
+  run while the calling script is blocked.</p><h4 id="compliance-with-other-specifications"><span class="secno">1.5.2 </span>Compliance with other specifications</h4><p><i>This section is non-normative.</i></p><p>This specification interacts with and relies on a wide variety of
   other specifications. In certain circumstances, unfortunately,
   conflicting needs have led to this specification violating the
   requirements of these other specifications. Whenever this has
   occurred, the transgressions have each been noted as a "<dfn id="willful-violation">willful
   violation</dfn>", and the reason for the violation has been
-  noted.</p><h3 id="html-vs-xhtml"><span class="secno">1.6 </span>HTML vs XHTML</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><p>This specification defines an abstract language for describing
+  noted.</p><h3 id="html-vs-xhtml"><span class="secno">1.6 </span>HTML vs XHTML</h3><p><i>This section is non-normative.</i></p><p>This specification defines an abstract language for describing
   documents and applications, and some APIs for interacting with
   in-memory representations of resources that use this language.</p><p>The in-memory representation is known as "DOM HTML", or "the DOM"
   for short. This specification defines version 5 of DOM HTML, known
@@ -487,7 +533,7 @@
   Similarly, documents that use the <code><a href="scripting-1.html#the-noscript-element">noscript</a></code> feature can
   be represented using the HTML syntax, but cannot be represented with
   the DOM or in XML. Comments that contain the string "<code title="">--&gt;</code>" can only be represented in the DOM, not in
-  the HTML and XML syntaxes.</p><h3 id="structure-of-this-specification"><span class="secno">1.7 </span>Structure of this specification</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><p>This specification is divided into the following major
+  the HTML and XML syntaxes.</p><h3 id="structure-of-this-specification"><span class="secno">1.7 </span>Structure of this specification</h3><p><i>This section is non-normative.</i></p><p>This specification is divided into the following major
   sections:</p><dl><dt><a href="infrastructure.html#infrastructure">Common infrastructure</a></dt>
 
    <dd>The conformance classes, algorithms, definitions, and the
@@ -541,11 +587,11 @@
 
   </dl><p>There are also some appendices, defining <a href="rendering.html#rendering">rendering rules</a> for Web browsers and listing
   <a href="obsolete.html#obsolete">obsolete features</a> and <a href="iana.html#iana">IANA
-  considerations</a>.</p><h4 id="how-to-read-this-specification"><span class="secno">1.7.1 </span>How to read this specification</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>This specification should be read like all other specifications.
+  considerations</a>.</p><h4 id="how-to-read-this-specification"><span class="secno">1.7.1 </span>How to read this specification</h4><p>This specification should be read like all other specifications.
   First, it should be read cover-to-cover, multiple times. Then, it
   should be read backwards at least once. Then it should be read by
   picking random sections from the contents list and following all the
-  cross-references.</p><h4 id="typographic-conventions"><span class="secno">1.7.2 </span>Typographic conventions</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>This is a definition, requirement, or explanation.</p><p class="note">This is a note.</p><p class="example">This is an example.</p><p class="XXX">This is an open issue.</p><p class="warning">This is a warning.</p><pre class="idl extract">interface <dfn title="">Example</dfn> {
+  cross-references.</p><h4 id="typographic-conventions"><span class="secno">1.7.2 </span>Typographic conventions</h4><p>This is a definition, requirement, or explanation.</p><p class="note">This is a note.</p><p class="example">This is an example.</p><p class="XXX">This is an open issue.</p><p class="warning">This is a warning.</p><pre class="idl extract">interface <dfn title="">Example</dfn> {
   // this is an IDL definition
 };</pre><dl class="domintro"><dt><var title="">variable</var> = <var title="">object</var> . <code title="">method</code>( [ <var title="">optionalArgument</var> ] )</dt>
 
@@ -559,7 +605,7 @@
   <a href="#x-this" title="x-this">this</a> or like <i title="x-this"><a href="#x-this">this</a></i>.</p><p>The defining instance of an element, attribute, or API is marked
   up like <dfn id="x-that" title="x-that"><code>this</code></dfn>. References to
   that element, attribute, or API are marked up like <code title="x-that"><a href="#x-that">this</a></code>.</p><p>Other code fragments are marked up <code title="">like
-  this</code>.</p><p>Variables are marked up like <var title="">this</var>.</p><p class="impl">This is an implementation requirement.</p><h3 id="a-quick-introduction-to-html"><span class="secno">1.8 </span>A quick introduction to HTML</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><p>A basic HTML document looks like this:</p><pre id="intro-early-example">&lt;!DOCTYPE html&gt;
+  this</code>.</p><p>Variables are marked up like <var title="">this</var>.</p><p class="impl">This is an implementation requirement.</p><h3 id="a-quick-introduction-to-html"><span class="secno">1.8 </span>A quick introduction to HTML</h3><p><i>This section is non-normative.</i></p><p>A basic HTML document looks like this:</p><pre id="intro-early-example">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
  &lt;head&gt;
   &lt;title&gt;Sample page&lt;/title&gt;
@@ -594,13 +640,18 @@
   markup, turning it into a DOM (Document Object Model) tree. A DOM
   tree is an in-memory representation of a document.</p><p>DOM trees contain several kinds of nodes, in particular a DOCTYPE
   node, elements, text nodes, and comment nodes.</p><p>The <a href="#intro-early-example">markup snippet at the top of
-  this section</a> would be turned into the following DOM tree:</p><ul class="domTree"><li class="t10">DOCTYPE: <code><a href="semantics.html#the-html-element-0">html</a></code></li><li class="t1"><code><a href="semantics.html#the-html-element-0">html</a></code><ul><li class="t1"><code><a href="semantics.html#the-head-element-0">head</a></code><ul><li class="t3"><code>#text</code>: <span title="">&#x23CE;&#x2423;&#x2423;</span></li><li class="t1"><code><a href="semantics.html#the-title-element-0">title</a></code><ul><li class="t3"><code>#text</code>: <span title="">Sample page</span></li></ul></li><li class="t3"><code>#text</code>: <span title="">&#x23CE;&#x2423;</span></li></ul></li><li class="t3"><code>#text</code>: <span title="">&#x23CE;&#x2423;</span></li><li class="t1"><code><a href="sections.html#the-body-element-0">body</a></code><ul><li class="t3"><code>#text</code>: <span title="">&#x23CE;&#x2423;&#x2423;</span></li><li class="t1"><code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code><ul><li class="t3"><code>#text</code>: <span title="">Sample page</span></li></ul></li><li class="t3"><code>#text</code>: <span title="">&#x23CE;&#x2423;&#x2423;</span></li><li class="t1"><code><a href="grouping-content.html#the-p-element">p</a></code><ul><li class="t3"><code>#text</code>: <span title="">This is a </span></li><li class="t1"><code><a href="text-level-semantics.html#the-a-element">a</a></code> <span class="t2" title=""><code class="attribute name">href</code>="<code class="attribute value">demo.html</code>"</span><ul><li class="t3"><code>#text</code>: <span title="">simple</span></li></ul></li><li class="t3"><code>#text</code>: <span title=""> sample.</span></li></ul></li><li class="t3"><code>#text</code>: <span title="">&#x23CE;&#x2423;&#x2423;</span></li><li class="t8"><code>#comment</code>: <span title=""> this is a comment </span></li><li class="t3"><code>#text</code>: <span title="">&#x23CE;&#x2423;&#x23CE;</span></li></ul></li></ul></li></ul><p>The <a href="infrastructure.html#root-element">root element</a> of this tree is the
+  this section</a> would be turned into the following DOM tree:</p><ul class="domTree"><li class="t10">DOCTYPE: <code title="">html</code></li><li class="t1"><code><a href="semantics.html#the-html-element-0">html</a></code><ul><li class="t1"><code><a href="semantics.html#the-head-element-0">head</a></code><ul><li class="t3"><code>#text</code>: <span title="">&#x23CE;&#x2423;&#x2423;</span></li><li class="t1"><code><a href="semantics.html#the-title-element-0">title</a></code><ul><li class="t3"><code>#text</code>: <span title="">Sample page</span></li></ul></li><li class="t3"><code>#text</code>: <span title="">&#x23CE;&#x2423;</span></li></ul></li><li class="t3"><code>#text</code>: <span title="">&#x23CE;&#x2423;</span></li><li class="t1"><code><a href="sections.html#the-body-element-0">body</a></code><ul><li class="t3"><code>#text</code>: <span title="">&#x23CE;&#x2423;&#x2423;</span></li><li class="t1"><code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code><ul><li class="t3"><code>#text</code>: <span title="">Sample page</span></li></ul></li><li class="t3"><code>#text</code>: <span title="">&#x23CE;&#x2423;&#x2423;</span></li><li class="t1"><code><a href="grouping-content.html#the-p-element">p</a></code><ul><li class="t3"><code>#text</code>: <span title="">This is a </span></li><li class="t1"><code><a href="text-level-semantics.html#the-a-element">a</a></code> <span class="t2" title=""><code class="attribute name">href</code>="<code class="attribute value">demo.html</code>"</span><ul><li class="t3"><code>#text</code>: <span title="">simple</span></li></ul></li><li class="t3"><code>#text</code>: <span title=""> sample.</span></li></ul></li><li class="t3"><code>#text</code>: <span title="">&#x23CE;&#x2423;&#x2423;</span></li><li class="t8"><code>#comment</code>: <span title=""> this is a comment </span></li><li class="t3"><code>#text</code>: <span title="">&#x23CE;&#x2423;&#x23CE;</span></li></ul></li></ul></li></ul><p>The <a href="infrastructure.html#root-element">root element</a> of this tree is the
   <code><a href="semantics.html#the-html-element-0">html</a></code> element, which is the element always found at the
   root of HTML documents. It contains two elements, <code><a href="semantics.html#the-head-element-0">head</a></code>
   and <code><a href="sections.html#the-body-element-0">body</a></code>, as well as a text node between them.</p><p>There are many more text nodes in the DOM tree than one would
   initially expect, because the source contains a number of spaces
   (represented here by "&#x2423;") and line breaks ("&#x23CE;") that
-  all end up as text nodes in the DOM.</p><p>The <code><a href="semantics.html#the-head-element-0">head</a></code> element contains a <code><a href="semantics.html#the-title-element-0">title</a></code>
+  all end up as text nodes in the DOM. However, for historical reasons
+  not all of the spaces and line breaks in the original markup appear
+  in the DOM. In particular, all the whitespace before
+  <code><a href="semantics.html#the-head-element-0">head</a></code> start tag ends up being dropped silently, and all
+  the whitespace after the <code><a href="sections.html#the-body-element-0">body</a></code> end tag ends up placed at
+  the end of the <code><a href="sections.html#the-body-element-0">body</a></code>.</p><p>The <code><a href="semantics.html#the-head-element-0">head</a></code> element contains a <code><a href="semantics.html#the-title-element-0">title</a></code>
   element, which itself contains a text node with the text "Sample
   page". Similarly, the <code><a href="sections.html#the-body-element-0">body</a></code> element contains an
   <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code> element, a <code><a href="grouping-content.html#the-p-element">p</a></code> element, and a
@@ -717,10 +768,10 @@ a.setAttribute('href', 'http://example.com/'); // change the content attribute d
   <code><a href="semantics.html#the-style-element">style</a></code> element can be useful in syndication or for
   page-specific styles, but in general an external style sheet is
   likely to be more convenient when the styles apply to multiple
-  pages.</p><p>It is also worth noting that four elements that were previously
+  pages.</p><p>It is also worth noting that some elements that were previously
   presentational have been redefined in this specification to be
   media-independent: <code><a href="text-level-semantics.html#the-b-element">b</a></code>, <code><a href="text-level-semantics.html#the-i-element">i</a></code>, <code><a href="grouping-content.html#the-hr-element">hr</a></code>,
-  and <code><a href="text-level-semantics.html#the-small-element">small</a></code>.</p><h4 id="syntax-errors"><span class="secno">1.9.2 </span>Syntax errors</h4><p><i>This section is non-normative.</i></p><p>The syntax of HTML is constrained to avoid a wide variety of
+  <code><a href="text-level-semantics.html#the-s-element">s</a></code>, and <code><a href="text-level-semantics.html#the-small-element">small</a></code>.</p><h4 id="syntax-errors"><span class="secno">1.9.2 </span>Syntax errors</h4><p><i>This section is non-normative.</i></p><p>The syntax of HTML is constrained to avoid a wide variety of
   problems.</p><dl><dt>Unintuitive error-handling behavior</dt>
 
    <dd>
@@ -820,15 +871,15 @@ a.setAttribute('href', 'http://example.com/'); // change the content attribute d
      are changed to a string that <em>does</em> form a named character
      reference, they will be interpreted as that character instead.</p>
 
-     <p>In this fragment, the attribute's value is "<code title="">?hello=1&amp;world=2</code>":</p>
+     <p>In this fragment, the attribute's value is "<code title="">?bill&amp;ted</code>":</p>
 
-     <pre class="bad">&lt;a href="?hello=1&amp;world=2"&gt;Demo&lt;/a&gt;</pre>
+     <pre class="bad">&lt;a href="?bill&amp;ted"&gt;Bill and Ted&lt;/a&gt;</pre>
 
      <p>In the following fragment, however, the attribute's value is
-     actually "<code title="">?original=1&#xA9;=2</code>",
-     <em>not</em> the intended "<code title="">?original=1&amp;copy=2</code>":</p>
+     actually "<code title="">?art&#xA9;</code>",
+     <em>not</em> the intended "<code title="">?art&amp;copy</code>":</p>
 
-     <pre class="bad">&lt;a href="?original=1&amp;copy=2"&gt;Compare&lt;/a&gt;</pre>
+     <pre class="bad">&lt;a href="?art&amp;copy"&gt;Art and Copy&lt;/a&gt;</pre>
 
      <p>To avoid this problem, all named character references are
      required to end with a semicolon, and uses of named character
@@ -837,8 +888,8 @@ a.setAttribute('href', 'http://example.com/'); // change the content attribute d
      <p>Thus, the correct way to express the above cases is as
      follows:</p>
 
-     <pre>&lt;a href="?hello=1&amp;world=2"&gt;Demo&lt;/a&gt; &lt;!-- &amp;world is ok, since it's not a named character reference --&gt;</pre>
-     <pre>&lt;a href="?original=1&amp;amp;copy=2"&gt;Compare&lt;/a&gt; &lt;!-- the &amp; has to be escaped, since &amp;copy <em>is</em> a named character reference --&gt;</pre>
+     <pre>&lt;a href="?bill&amp;ted"&gt;Bill and Ted&lt;/a&gt; &lt;!-- &amp;ted is ok, since it's not a named character reference --&gt;</pre>
+     <pre>&lt;a href="?art&amp;amp;copy"&gt;Art and Copy&lt;/a&gt; &lt;!-- the &amp; has to be escaped, since &amp;copy <em>is</em> a named character reference --&gt;</pre>
 
     </div>
 
@@ -1197,7 +1248,7 @@ a.setAttribute('href', 'http://example.com/'); // change the content attribute d
 
    </dd>
 
-  </dl><h3 id="recommended-reading"><span class="secno">1.10 </span>Recommended reading</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><i>This section is non-normative.</i></p><p>The following documents might be of interest to readers of this
+  </dl><h3 id="recommended-reading"><span class="secno">1.10 </span>Recommended reading</h3><p><i>This section is non-normative.</i></p><p>The following documents might be of interest to readers of this
   specification.</p><dl><dt><cite>Character Model for the World Wide Web 1.0: Fundamentals</cite> <a href="references.html#refsCHARMOD">[CHARMOD]</a></dt>
 
    <dd><blockquote><p>This Architectural Specification provides
@@ -1257,5 +1308,21 @@ a.setAttribute('href', 'http://example.com/'); // change the content attribute d
    technologies). Furthermore, all users, not just users with
    disabilities, should find conforming user agents to be more
    usable.</p></blockquote></dd>
+
+   <dt><cite>Polyglot Markup: HTML-Compatible XHTML Documents</cite> <a href="references.html#refsPOLYGLOT">[POLYGLOT]</a></dt>
+
+   <dd><blockquote><p>A document that uses polyglot markup is document
+   that is a stream of bytes that parses into identical document trees
+   (with the exception of the xmlns attribute on the root element)
+   when processed as HTML and when processed as XML. Polyglot markup
+   that meets a well defined set of constraints is interpreted as
+   compatible, regardless of whether they are processed as HTML or as
+   XHTML, per the HTML5 specification. Polyglot markup uses a specific
+   DOCTYPE, namespace declarations, and a specific case &#x2014;
+   normally lower case but occasionally camel case &#x2014; for element
+   and attribute names. Polyglot markup uses lower case for certain
+   attribute values. Further constraints include those on empty
+   elements, named entity references, and the use of scripts and
+   style.</p></blockquote></dd>
 
   </dl></body></html>

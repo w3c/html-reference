@@ -1,7 +1,7 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
 <!-- when publishing, change bits marked ZZZ -->
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>4.8.11 The map element &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<html lang="en-US-x-Hixie" class="split chapter"><head><title>4.8.12 The map element &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,20 +356,21 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="the-canvas-element.html" title="4.8.10 The canvas element" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="tabular-data.html" title="4.9 Tabular data" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="the-canvas-element.html" title="4.8.11 The canvas element" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="tabular-data.html" title="4.9 Tabular data" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
    </div><div>
-   <a href="the-canvas-element.html">&#x2190; 4.8.10 The canvas element</a> &#x2013;
+   <a href="the-canvas-element.html">&#x2190; 4.8.11 The canvas element</a> &#x2013;
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="tabular-data.html">4.9 Tabular data &#x2192;</a>
-  <ol class="toc"><li><ol><li><ol><li><a href="the-map-element.html#the-map-element"><span class="secno">4.8.11 </span>The <code>map</code> element</a></li><li><a href="the-map-element.html#the-area-element"><span class="secno">4.8.12 </span>The <code>area</code> element</a></li><li><a href="the-map-element.html#image-maps"><span class="secno">4.8.13 </span>Image maps</a>
-      <ol><li><a href="the-map-element.html#authoring"><span class="secno">4.8.13.1 </span>Authoring</a></li><li><a href="the-map-element.html#processing-model"><span class="secno">4.8.13.2 </span>Processing model</a></li></ol></li><li><a href="the-map-element.html#mathml"><span class="secno">4.8.14 </span>MathML</a></li><li><a href="the-map-element.html#svg-0"><span class="secno">4.8.15 </span>SVG</a></li><li><a href="the-map-element.html#dimension-attributes"><span class="secno">4.8.16 </span>Dimension attributes</a></li></ol></li></ol></li></ol></div><h4 id="the-map-element"><span class="secno">4.8.11 </span>The <dfn><code>map</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  <ol class="toc"><li><ol><li><ol><li><a href="the-map-element.html#the-map-element"><span class="secno">4.8.12 </span>The <code>map</code> element</a></li><li><a href="the-map-element.html#the-area-element"><span class="secno">4.8.13 </span>The <code>area</code> element</a></li><li><a href="the-map-element.html#image-maps"><span class="secno">4.8.14 </span>Image maps</a>
+      <ol><li><a href="the-map-element.html#authoring"><span class="secno">4.8.14.1 </span>Authoring</a></li><li><a href="the-map-element.html#processing-model"><span class="secno">4.8.14.2 </span>Processing model</a></li></ol></li><li><a href="the-map-element.html#mathml"><span class="secno">4.8.15 </span>MathML</a></li><li><a href="the-map-element.html#svg-0"><span class="secno">4.8.16 </span>SVG</a></li><li><a href="the-map-element.html#dimension-attributes"><span class="secno">4.8.17 </span>Dimension attributes</a></li></ol></li></ol></li></ol></div><h4 id="the-map-element"><span class="secno">4.8.12 </span>The <dfn><code>map</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd>When the element only contains <a href="content-models.html#phrasing-content">phrasing content</a>: <a href="content-models.html#phrasing-content">phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
-   <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
+   <dt>Contexts in which this element can be used:</dt>
+   <dd>When the element only contains <a href="content-models.html#phrasing-content">phrasing content</a>: where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
+   <dd>Otherwise: where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#transparent">Transparent</a>.</dd>
    <dt>Content attributes:</dt>
@@ -379,10 +427,40 @@
   <p>The IDL attribute <dfn id="dom-map-name" title="dom-map-name"><code>name</code></dfn> must
   <a href="common-dom-interfaces.html#reflect">reflect</a> the content attribute of the same name.</p>
 
-  </div><h4 id="the-area-element"><span class="secno">4.8.12 </span>The <dfn><code>area</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><div class="example">
+
+   <p>Image maps can be defined in conjunction with other content on
+   the page, to ease maintenance. This example is of a page with an
+   image map at the top of the page and a corresponding set of text
+   links at the bottom.</p>
+
+   <pre>&lt;!DOCTYPE HTML&gt;
+&lt;TITLE&gt;Babies&#x2122;: Toys&lt;/TITLE&gt;
+&lt;HEADER&gt;
+ &lt;H1&gt;Toys&lt;/H1&gt;
+ &lt;IMG SRC="/images/menu.gif"
+      ALT="Babies&#x2122; navigation menu. Select a department to go to its page."
+      USEMAP="#NAV"&gt;
+&lt;/HEADER&gt;
+ ...
+&lt;FOOTER&gt;
+ &lt;MAP NAME="NAV"&gt;
+  &lt;P&gt;
+   &lt;A HREF="/clothes/"&gt;Clothes&lt;/A&gt;
+   &lt;AREA ALT="Clothes" COORDS="0,0,100,50" HREF="/clothes/"&gt; |
+   &lt;A HREF="/toys/"&gt;Toys&lt;/A&gt;
+   &lt;AREA ALT="Toys" COORDS="0,0,100,50" HREF="/toys/"&gt; |
+   &lt;A HREF="/food/"&gt;Food&lt;/A&gt;
+   &lt;AREA ALT="Food" COORDS="0,0,100,50" HREF="/food/"&gt; |
+   &lt;A HREF="/books/"&gt;Books&lt;/A&gt;
+   &lt;AREA ALT="Books" COORDS="0,0,100,50" HREF="/books/"&gt;
+ &lt;/MAP&gt;
+&lt;/FOOTER&gt;</pre>
+
+  </div><h4 id="the-area-element"><span class="secno">4.8.13 </span>The <dfn><code>area</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected, but only if there is a <code><a href="#the-map-element">map</a></code> element ancestor.</dd>
    <dt>Content model:</dt>
    <dd>Empty.</dd>
@@ -517,14 +595,18 @@
   <p>The <a href="content-models.html#activation-behavior">activation behavior</a> of <code><a href="#the-area-element">area</a></code>
   elements is to run the following steps:</p>
 
-  <ol><li><p>If the <code title="event-DOMActivate"><a href="infrastructure.html#event-domactivate">DOMActivate</a></code>
-   event in question is not <a href="infrastructure.html#concept-events-trusted" title="concept-events-trusted">trusted</a> (i.e. a <code title="dom-click"><a href="editing.html#dom-click">click()</a></code> method call was the reason for the
-   event being dispatched), and the <code><a href="#the-area-element">area</a></code> element's <code title="attr-hyperlink-target"><a href="links.html#attr-hyperlink-target">target</a></code> attribute is such that
-   applying <a href="browsers.html#the-rules-for-choosing-a-browsing-context-given-a-browsing-context-name">the rules for choosing a browsing context given a
-   browsing context name</a>, using the value of the <code title="attr-hyperlink-target"><a href="links.html#attr-hyperlink-target">target</a></code> attribute as the
-   browsing context name, would result in there not being a chosen
-   browsing context, then raise an <code><a href="common-dom-interfaces.html#invalid_access_err">INVALID_ACCESS_ERR</a></code>
-   exception and abort these steps.</p></li>
+  <ol><li><p>If the <code title="event-click"><a href="infrastructure.html#event-click">click</a></code> event in
+   question is not <a href="infrastructure.html#concept-events-trusted" title="concept-events-trusted">trusted</a>
+   (i.e. a <code title="dom-click"><a href="editing.html#dom-click">click()</a></code> method call was the
+   reason for the event being dispatched), and the <code><a href="#the-area-element">area</a></code>
+   element's <code title="attr-hyperlink-target"><a href="links.html#attr-hyperlink-target">target</a></code>
+   attribute is such that applying <a href="browsers.html#the-rules-for-choosing-a-browsing-context-given-a-browsing-context-name">the rules for choosing a
+   browsing context given a browsing context name</a>, using the
+   value of the <code title="attr-hyperlink-target"><a href="links.html#attr-hyperlink-target">target</a></code>
+   attribute as the browsing context name, would result in there not
+   being a chosen browsing context, then raise an
+   <code><a href="common-dom-interfaces.html#invalid_access_err">INVALID_ACCESS_ERR</a></code> exception and abort these
+   steps.</p></li>
 
    <li>Otherwise, the user agent must <a href="links.html#following-hyperlinks" title="following&#10;   hyperlinks">follow the hyperlink</a> created by the
    <code><a href="#the-area-element">area</a></code> element, if any.</li>
@@ -536,7 +618,7 @@
 
   <p>The IDL attribute <dfn id="dom-area-shape" title="dom-area-shape"><code>shape</code></dfn> must
   <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-area-shape"><a href="#attr-area-shape">shape</a></code>
-  content attribute, <a href="common-dom-interfaces.html#limited-to-only-known-values">limited to only known values</a>.</p>
+  content attribute.</p>
 
   <p>The IDL attribute <dfn id="dom-area-rellist" title="dom-area-rellist"><code>relList</code></dfn> must
   <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-hyperlink-rel"><a href="links.html#attr-hyperlink-rel">rel</a></code>
@@ -552,14 +634,14 @@
   same as setting the element's <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code> attribute to the new output
   value.</p>
 
-  </div><h4 id="image-maps"><span class="secno">4.8.13 </span>Image maps</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><!-- TESTS
+  </div><h4 id="image-maps"><span class="secno">4.8.14 </span>Image maps</h4><!-- TESTS
   http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E%0A%3Cimg%20src%3D%22http%3A//hixie.ch/resources/images/smallcats%22%20usemap%3D%23a%20onclick%3Dw%28%27img%27%29%3E%0A%3Cmap%20name%3Da%3E%0A%20%3Carea%20onclick%3Dw%28%271%27%29%20coords%3D%270%25%200%25%20100%25%20100%25%27%20href%3Djavascript%3A%3E%0A%3C/map%3E
   http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E%0A%3Cbody%20onfocus%3D%22w%28document.activeElement.tagName%29%22%3E%0A%3Cimg%20src%3D%22http%3A//hixie.ch/resources/images/smallcats%22%20usemap%3D%23a%20onclick%3Dw%28%27img%27%29%20onfocus%3D%22w%28document.activeElement.tagName%29%22%3E%0A%3Cimg%20src%3D%22http%3A//hixie.ch/resources/images/sample%22%20usemap%3D%23a%20onclick%3Dw%28%27img%27%29%20onfocus%3D%22w%28document.activeElement.tagName%29%22%3E%0A%3Cmap%20name%3Da%20onfocus%3D%22w%28document.activeElement.tagName%29%22%3E%0A%20%3Carea%20onclick%3Dw%28%271%27%29%20coords%3D%270%200%2050%2050%27%20href%3Djavascript%3A%20onfocus%3D%22w%28document.activeElement.tagName%29%22%3E%0A%3C/map%3E%0A%3Cscript%3E%0A%20var%20x%20%3D%20document.getElementsByTagName%28%27img%27%29%5B0%5D%3B%0A%20x.parentNode.appendChild%28x%29%3B%0A%20document.getElementsByTagName%28%27area%27%29%5B0%5D.focus%28%29%3B%0A%3C/script%3E
   http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3Ex%3Cmap%3E%3Carea%20shape%3Dpolyg%20coords%3D%221%2C2%203%22%3E%3C/map%3E%0A%3Cscript%3Ex%20%3D%20document.getElementsByTagName%28%27area%27%29%5B0%5D%3B%20w%28x.shape%20+%20%27%20%27%20+%20x.coords%29%3C/script%3E
   http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E%0D%0A%3Cp%3E%3Cimg%20src%3D%22http%3A//hixie.ch/resources/images/astrophy/128%22%20usemap%3D%23a%3E%0D%0A%3Cmap%20name%3Da%3E%3Carea%20shape%3Dcirc%20coords%3D%2220%2C20%2C10%25%22%20href%3D%23%3E%3Carea%20shape%3Dcirc%20coords%3D%2220%2C20%2C10%22%20href%3D%23%3E%3C/map%3E%0D%0A%3Cscript%3Edocument.write%28document.getElementsByTagName%28%27area%27%29%5B0%5D.coords%29%3C/script%3E
   --><div class="impl">
 
-  <h5 id="authoring"><span class="secno">4.8.13.1 </span>Authoring</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="authoring"><span class="secno">4.8.14.1 </span>Authoring</h5>
 
   </div><p>An <dfn id="image-map">image map</dfn> allows geometric areas on an image to be
   associated with <a href="links.html#hyperlink" title="hyperlink">hyperlinks</a>.</p><p>An image, in the form of an <code><a href="embedded-content-1.html#the-img-element">img</a></code> element or an
@@ -572,7 +654,7 @@
 
    <p>Consider an image that looks as follows:</p>
 
-   <p><img alt="A line with four shapes in it, equally spaced: a red hollow box, a green circle, a blue triangle, and a yellow four-pointed star." src="http://dev.w3.org/html5/spec/images/sample-usemap.png"/></p>
+   <p><img alt="A line with four shapes in it, equally spaced: a red hollow box, a green circle, a blue triangle, and a yellow four-pointed star." height="150" src="http://dev.w3.org/html5/spec/images/sample-usemap.png" width="600"/></p>
 
    <p>If we wanted just the colored areas to be clickable, we could
    do it as follows:</p>
@@ -593,7 +675,7 @@
 
   </div><div class="impl">
 
-  <h5 id="processing-model"><span class="secno">4.8.13.2 </span>Processing model</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="processing-model"><span class="secno">4.8.14.2 </span>Processing model</h5>
 
   <p>If an <code><a href="embedded-content-1.html#the-img-element">img</a></code> element or an <code><a href="the-iframe-element.html#the-object-element">object</a></code> element
   representing an image has a <code title="attr-hyperlink-usemap"><a href="#attr-hyperlink-usemap">usemap</a></code> attribute specified,
@@ -789,7 +871,7 @@
   user agent must act as if it had rerun the algorithms for image
   maps.</p>
 
-  </div><h4 id="mathml"><span class="secno">4.8.14 </span>MathML</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The <dfn id="math"><code>math</code></dfn> element from the <a href="namespaces.html#mathml-namespace">MathML
+  </div><h4 id="mathml"><span class="secno">4.8.15 </span>MathML</h4><p>The <dfn id="math"><code>math</code></dfn> element from the <a href="namespaces.html#mathml-namespace">MathML
   namespace</a> falls into the <a href="content-models.html#embedded-content">embedded content</a>,
   <a href="content-models.html#phrasing-content">phrasing content</a>, and <a href="content-models.html#flow-content">flow content</a>
   categories for the purposes of the content models in this
@@ -851,7 +933,7 @@
  &lt;/body&gt;
 &lt;/html&gt;</pre>
 
-  </div><h4 id="svg-0"><span class="secno">4.8.15 </span>SVG</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The <dfn id="svg"><code>svg</code></dfn> element from the <a href="namespaces.html#svg-namespace">SVG
+  </div><h4 id="svg-0"><span class="secno">4.8.16 </span>SVG</h4><p>The <dfn id="svg"><code>svg</code></dfn> element from the <a href="namespaces.html#svg-namespace">SVG
   namespace</a> falls into the <a href="content-models.html#embedded-content">embedded content</a>,
   <a href="content-models.html#phrasing-content">phrasing content</a>, and <a href="content-models.html#flow-content">flow content</a>
   categories for the purposes of the content models in this
@@ -862,19 +944,20 @@
   way to export any SVG fragment as an XML namespace-well-formed XML
   fragment.</p>
 
-  </div><p>When the SVG <code>foreignObject</code> element contains elements
-  from the <a href="namespaces.html#html-namespace-0">HTML namespace</a>, such elements must all be
-  <a href="content-models.html#flow-content">flow content</a>. <a href="references.html#refsSVG">[SVG]</a></p><p>The content model for <code title="">title</code> elements in the
+  </div><p>When the SVG <code title="">foreignObject</code> element contains
+  elements from the <a href="namespaces.html#html-namespace-0">HTML namespace</a>, such elements must
+  all be <a href="content-models.html#flow-content">flow content</a>. <a href="references.html#refsSVG">[SVG]</a></p><p>The content model for <code title="">title</code> elements in the
   <a href="namespaces.html#svg-namespace">SVG namespace</a> inside <a href="dom.html#html-documents">HTML documents</a> is
   <a href="content-models.html#phrasing-content">phrasing content</a>. (This further constrains the
   requirements given in the SVG specification.)</p><p>The semantics of SVG elements are defined by the SVG
   specification and <a href="infrastructure.html#other-applicable-specifications">other applicable specifications</a>. <a href="references.html#refsSVG">[SVG]</a></p><!-- The following paragraph is for bug 7510 --><p>The SVG specification includes requirements regarding the
   handling of elements in the DOM that are not in the SVG namespace,
   that are in SVG fragments, and that are not included in a
-  <code>foreignObject</code> element. <em>This</em> specification does
-  not define any processing for elements in SVG fragments that are not
-  in the HTML namespace; they are considered neither conforming nor
-  non-conforming from the perspective of this specification.</p><h4 id="dimension-attributes"><span class="secno">4.8.16 </span><dfn>Dimension attributes</dfn></h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p><span class="impl"><strong>Author requirements</strong>:</span>
+  <code title="">foreignObject</code> element. <em>This</em>
+  specification does not define any processing for elements in SVG
+  fragments that are not in the HTML namespace; they are considered
+  neither conforming nor non-conforming from the perspective of this
+  specification.</p><h4 id="dimension-attributes"><span class="secno">4.8.17 </span><dfn>Dimension attributes</dfn></h4><p><span class="impl"><strong>Author requirements</strong>:</span>
   The <dfn id="attr-dim-width" title="attr-dim-width"><code>width</code></dfn> and <dfn id="attr-dim-height" title="attr-dim-height"><code>height</code></dfn> attributes on
   <code><a href="embedded-content-1.html#the-img-element">img</a></code>, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <code><a href="the-iframe-element.html#the-embed-element">embed</a></code>,
   <code><a href="the-iframe-element.html#the-object-element">object</a></code>, <code><a href="video.html#video">video</a></code>, and, when their <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="number-state.html#image-button-state" title="attr-input-type-image">Image Button</a> state,
@@ -914,5 +997,10 @@
   the <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <code><a href="the-iframe-element.html#the-embed-element">embed</a></code>, <code><a href="the-iframe-element.html#the-object-element">object</a></code>,
   and <code><a href="video.html#video">video</a></code> elements must <a href="common-dom-interfaces.html#reflect">reflect</a> the
   respective content attributes of the same name.</p>
+
+  <p class="note">For <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <code><a href="the-iframe-element.html#the-embed-element">embed</a></code>, and
+  <code><a href="the-iframe-element.html#the-object-element">object</a></code> the IDL attributes are <code>DOMString</code>;
+  for <code><a href="video.html#video">video</a></code> the IDL attributes are <code>unsigned
+  long</code>.</p>
 
   </div></body></html>

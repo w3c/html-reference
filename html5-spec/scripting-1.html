@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,7 +356,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="semantics.html" title="4 The elements of HTML" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="sections.html" title="4.4 Sections" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="semantics.html" title="4 The elements of HTML" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="sections.html" title="4.4 Sections" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -319,7 +366,7 @@
    <a href="sections.html">4.4 Sections &#x2192;</a>
   <ol class="toc"><li><ol><li><a href="scripting-1.html#scripting-1"><span class="secno">4.3 </span>Scripting</a>
     <ol><li><a href="scripting-1.html#script"><span class="secno">4.3.1 </span>The <code>script</code> element</a>
-      <ol><li><a href="scripting-1.html#scriptingLanguages"><span class="secno">4.3.1.1 </span>Scripting languages</a></li><li><a href="scripting-1.html#restrictions-for-contents-of-script-elements"><span class="secno">4.3.1.2 </span>Restrictions for contents of <code>script</code> elements</a></li><li><a href="scripting-1.html#inline-documentation-for-external-scripts"><span class="secno">4.3.1.3 </span>Inline documentation for external scripts</a></li></ol></li><li><a href="scripting-1.html#the-noscript-element"><span class="secno">4.3.2 </span>The <code>noscript</code> element</a></li></ol></li></ol></li></ol></div><h3 id="scripting-1"><span class="secno">4.3 </span>Scripting</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Scripts allow authors to add interactivity to their documents.</p><p>Authors are encouraged to use declarative alternatives to
+      <ol><li><a href="scripting-1.html#scriptingLanguages"><span class="secno">4.3.1.1 </span>Scripting languages</a></li><li><a href="scripting-1.html#restrictions-for-contents-of-script-elements"><span class="secno">4.3.1.2 </span>Restrictions for contents of <code>script</code> elements</a></li><li><a href="scripting-1.html#inline-documentation-for-external-scripts"><span class="secno">4.3.1.3 </span>Inline documentation for external scripts</a></li></ol></li><li><a href="scripting-1.html#the-noscript-element"><span class="secno">4.3.2 </span>The <code>noscript</code> element</a></li></ol></li></ol></li></ol></div><h3 id="scripting-1"><span class="secno">4.3 </span>Scripting</h3><p>Scripts allow authors to add interactivity to their documents.</p><p>Authors are encouraged to use declarative alternatives to
   scripting where possible, as declarative mechanisms are often more
   maintainable, and many users disable scripting.</p><div class="example">
    <p>For example, instead of using script to show or hide a section
@@ -331,11 +378,11 @@
    dynamically resort the table, the link could also be made to
    function without scripts by requesting the sorted table from the
    server.</p>
-  </div><h4 id="script"><span class="secno">4.3.1 </span>The <dfn><code>script</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="script"><span class="secno">4.3.1 </span>The <dfn><code>script</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#metadata-content">Metadata content</a>.</dd>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#metadata-content">metadata content</a> is expected.</dd>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
@@ -451,22 +498,14 @@
   <a href="#parser-inserted">"parser-inserted"</a>, to let the parser know when to
   execute the script.</p>
 
-  <p>The fourth is a flag is the <dfn id="ignore-destructive-writes">"ignore-destructive-writes"</dfn> flag.
-  Initially, <code><a href="#script">script</a></code> elements must have this flag unset
-  (script blocks, when created, do not have a "ignore-destructive-writes"
-  flag). This flag is used to ensure that scripts <em>not</em>
-  inserted by the parser but inserted while a parser is active do not
-  blow away the document if they use the <code title="dom-document-write"><a href="apis-in-html-documents.html#dom-document-write">document.write()</a></code> API.
-  <code><a href="infrastructure.html#document">Document</a></code> objects can also have this flag set; it's
-  propagated to the <code><a href="infrastructure.html#document">Document</a></code> when the script runs.</p>
+  <p>The last few pieces of state are <dfn id="the-script-block-s-type"><var>the script block's
+  type</var></dfn>, <dfn id="the-script-block-s-character-encoding"><var>the script block's character
+  encoding</var></dfn>, and <dfn id="the-script-block-s-fallback-character-encoding"><var>the script block's fallback
+  character encoding</var></dfn>. They are determined when the script
+  is run, based on the attributes on the element at that time, and the
+  <code><a href="infrastructure.html#document">Document</a></code> of the <code><a href="#script">script</a></code> element.</p>
 
-  <p>The fifth and sixth pieces of state are <dfn id="the-script-block-s-type"><var>the script
-  block's type</var></dfn> and <dfn id="the-script-block-s-character-encoding"><var>the script block's character
-  encoding</var></dfn>. They are determined when the script is run,
-  based on the attributes on the element at that time.</p>
-
-  <p>When a <code><a href="#script">script</a></code> element that is neither marked as
-  having <a href="#already-started">"already started"</a> nor marked as being
+  <p>When a <code><a href="#script">script</a></code> element that is not marked as being
   <a href="#parser-inserted">"parser-inserted"</a> experiences one of the events listed
   in the following list, the user agent must synchronously <a href="#running-a-script" title="running a script">run</a> the <code><a href="#script">script</a></code>
   element:</p>
@@ -484,7 +523,50 @@
   <code><a href="#script">script</a></code> element is to be run, the user agent must act as
   follows:</p>
 
-  <ol><li id="script-processing-prepare">
+  <ol><li>
+
+    <p>If the <code><a href="#script">script</a></code> element is marked as having
+    <a href="#already-started">"already started"</a>, then the user agent must abort
+    these steps at this point. The script is not executed.</p>
+
+   </li>
+
+   <li>
+
+    <p>If the element has its <a href="#parser-inserted">"parser-inserted"</a> flag set,
+    then set <var title="">was-parser-inserted</var> to true and unset
+    the element's <a href="#parser-inserted">"parser-inserted"</a> flag. Otherwise, set
+    <var title="">was-parser-inserted</var> to false.</p>
+
+    <p class="note">This is done so that if parser-inserted
+    <code><a href="#script">script</a></code> elements fail to run when the parser tries to
+    run them, e.g. because they are empty or specify an unsupported
+    scripting language, another script can later mutate them and cause
+    them to run again.</p>
+
+    <!-- q.v. http://hsivonen.iki.fi/test/moz/script-setting-src-on-parser-inserted-script.html -->
+
+   </li>
+
+   <li id="script-processing-empty">
+
+    <p>If the element has no <code title="attr-script-src"><a href="#attr-script-src">src</a></code>
+    attribute, and its child nodes, if any, consist only of comment
+    nodes and empty <a href="infrastructure.html#text-node" title="text node">text nodes</a>, then
+    the user agent must abort these steps at this point. The script is
+    not executed.</p>
+
+   </li>
+
+   <li>
+
+    <p>If the element is not <a href="infrastructure.html#in-a-document">in a <code>Document</code></a>,
+    then the user agent must abort these steps at this point. The
+    script is not executed.</p>
+
+   </li>
+
+   <li id="script-processing-prepare">
 
     <p>If either:</p>
 
@@ -516,15 +598,35 @@
 
    </li>
 
-   <li id="script-processing-encoding">
+   <li>
 
-    <p>If the <code><a href="#script">script</a></code> element has a <code title="attr-script-charset"><a href="#attr-script-charset">charset</a></code> attribute, then let
-    <var><a href="#the-script-block-s-character-encoding">the script block's character encoding</a></var> for this
-    <code><a href="#script">script</a></code> element be the encoding given by the <code title="attr-script-charset"><a href="#attr-script-charset">charset</a></code> attribute.</p>
+    <p>If the user agent does not <a href="#support-the-scripting-language">support the scripting
+    language</a> given by <var><a href="#the-script-block-s-type">the script block's type</a></var> for
+    this <code><a href="#script">script</a></code> element, then the user agent must abort
+    these steps at this point. The script is not executed.</p>
 
-    <p>Otherwise, let <var><a href="#the-script-block-s-character-encoding">the script block's character encoding</a></var>
-    for this <code><a href="#script">script</a></code> element be the same as <a href="dom.html#document-s-character-encoding" title="document's character encoding">the encoding of the document
-    itself</a>.</p>
+   </li>
+
+   <li id="script-processing-start">
+
+    <p>The user agent must set the element's <a href="#already-started">"already
+    started"</a> flag.</p>
+
+   </li>
+
+   <li>
+
+    <p>If <var title="">was-parser-inserted</var> is true, then flag
+    the element as <a href="#parser-inserted">"parser-inserted"</a> again.</p>
+
+   </li>
+
+   <li id="script-processing-noscript">
+
+    <p>If <a href="webappapis.html#concept-n-noscript" title="concept-n-noscript">scripting is
+    disabled</a> for the <code><a href="#script">script</a></code> element, then the user
+    agent must abort these steps at this point. The script is not
+    executed.</p>
 
    </li>
 
@@ -550,41 +652,18 @@
 
     </ol></li>
 
-   <li id="script-processing-noscript">
+   <li id="script-processing-encoding">
 
-    <p>If <a href="webappapis.html#concept-n-noscript" title="concept-n-noscript">scripting is
-    disabled</a> for the <code><a href="#script">script</a></code> element, or if the
-    user agent does not <a href="#support-the-scripting-language">support the scripting language</a>
-    given by <var><a href="#the-script-block-s-type">the script block's type</a></var> for this
-    <code><a href="#script">script</a></code> element, then the user agent must abort these
-    steps at this point. The script is not executed.</p>
+    <p>If the <code><a href="#script">script</a></code> element has a <code title="attr-script-charset"><a href="#attr-script-charset">charset</a></code> attribute, then let
+    <var><a href="#the-script-block-s-character-encoding">the script block's character encoding</a></var> for this
+    <code><a href="#script">script</a></code> element be the encoding given by the <code title="attr-script-charset"><a href="#attr-script-charset">charset</a></code> attribute.</p>
 
-   </li>
+    <p>Otherwise, let <var><a href="#the-script-block-s-fallback-character-encoding">the script block's fallback character
+    encoding</a></var> for this <code><a href="#script">script</a></code> element be the same as
+    <a href="dom.html#document-s-character-encoding" title="document's character encoding">the encoding of the
+    document itself</a>.</p>
 
-   <li id="script-processing-empty">
-
-    <p>If the element has no <code title="attr-script-src"><a href="#attr-script-src">src</a></code>
-    attribute, and its child nodes consist only of comment nodes and
-    empty <a href="infrastructure.html#text-node" title="text node">text nodes</a>, then the user
-    agent must abort these steps at this point. The script is not
-    executed.</p>
-
-   </li>
-
-   <li id="script-processing-start">
-
-    <p>The user agent must set the element's <a href="#already-started">"already
-    started"</a> flag.</p>
-
-   </li>
-
-   <li>
-
-    <p>If the element's <code><a href="infrastructure.html#document">Document</a></code> has an <a href="dom.html#active-parser">active
-    parser</a>, and the parser's <a href="parsing.html#script-nesting-level">script nesting level</a>
-    is non-zero, but this <code><a href="#script">script</a></code> element does not have
-    the <a href="#parser-inserted">"parser-inserted"</a> flag set, the user agent must
-    set the element's <a href="#ignore-destructive-writes">"ignore-destructive-writes"</a> flag.</p>
+    <p class="note">Only one of these two pieces of state is set.</p>
 
    </li>
 
@@ -610,13 +689,6 @@
     algorithm, actually execute the script in the URL; instead the
     user agent must act as if it had received an empty HTTP 400
     response.</p>
-
-    <p>Once the resource's <a href="fetching-resources.html#content-type" title="Content-Type">Content Type
-    metadata</a> is available, if it ever is, apply the
-    <a href="fetching-resources.html#algorithm-for-extracting-an-encoding-from-a-content-type">algorithm for extracting an encoding from a
-    Content-Type</a> to it. If this returns an encoding, and the
-    user agent supports that encoding, then let <var><a href="#the-script-block-s-character-encoding">the script
-    block's character encoding</a></var> be that encoding.</p>
 
     <p>For performance reasons, user agents may start fetching the
     script as soon as the attribute is set, instead, in the hope that
@@ -644,7 +716,8 @@
 
       <p>The element must be added to the end of the <dfn id="list-of-scripts-that-will-execute-when-the-document-has-finished-parsing">list of
       scripts that will execute when the document has finished
-      parsing</dfn>.</p>
+      parsing</dfn> associated with the <code><a href="infrastructure.html#document">Document</a></code> of the
+      parser that created the element.</p>
 
       <p>The <a href="webappapis.html#concept-task" title="concept-task">task</a> that the
       <a href="webappapis.html#networking-task-source">networking task source</a> places on the <a href="webappapis.html#task-queue">task
@@ -664,8 +737,9 @@
      <dd>
 
       <p>The element is the <a href="#pending-parsing-blocking-script">pending parsing-blocking
-      script</a>. (There can only be one such script at a
-      time.)</p>
+      script</a> of the <code><a href="infrastructure.html#document">Document</a></code> of the parser that
+      created the element. (There can only be one such script per
+      <code><a href="infrastructure.html#document">Document</a></code> at a time.)</p>
 
       <p>The <a href="webappapis.html#concept-task" title="concept-task">task</a> that the
       <a href="webappapis.html#networking-task-source">networking task source</a> places on the <a href="webappapis.html#task-queue">task
@@ -678,15 +752,19 @@
 
 
      <dt id="script-processing-style-delayed">If the element does not
-     have a <code title="attr-script-src"><a href="#attr-script-src">src</a></code> attribute, but
-     there is <a href="semantics.html#a-style-sheet-blocking-scripts">a style sheet blocking scripts</a>, and the
-     element has been flagged as <a href="#parser-inserted">"parser-inserted"</a></dt>
+     have a <code title="attr-script-src"><a href="#attr-script-src">src</a></code> attribute, and
+     the element has been flagged as <a href="#parser-inserted">"parser-inserted"</a>,
+     and the <code><a href="infrastructure.html#document">Document</a></code> of the <a href="parsing.html#html-parser">HTML parser</a> or
+     <a href="the-xhtml-syntax.html#xml-parser">XML parser</a> that created the <code><a href="#script">script</a></code>
+     element <a href="semantics.html#has-a-style-sheet-that-is-blocking-scripts">has a style sheet that is blocking
+     scripts</a></dt>
 
      <dd>
 
       <p>The element is the <a href="#pending-parsing-blocking-script">pending parsing-blocking
-      script</a>. (There can only be one such script at a
-      time.)</p>
+      script</a> of the <code><a href="infrastructure.html#document">Document</a></code> of the parser that
+      created the element. (There can only be one such script per
+      <code><a href="infrastructure.html#document">Document</a></code> at a time.)</p>
 
       <p>Set the element's <a href="#ready-to-be-parser-executed">"ready to be parser-executed"</a>
       flag. The parser will handle executing the script.</p>
@@ -699,7 +777,9 @@
      <dd>
 
       <p>The element must be added to the <dfn id="set-of-scripts-that-will-execute-as-soon-as-possible">set of scripts that
-      will execute as soon as possible</dfn>.</p>
+      will execute as soon as possible</dfn> of the
+      <code><a href="infrastructure.html#document">Document</a></code> of the <code><a href="#script">script</a></code> element at the
+      time the <a href="#running-a-script">running a script</a> algorithm started.</p>
 
       <p>The <a href="webappapis.html#concept-task" title="concept-task">task</a> that the
       <a href="webappapis.html#networking-task-source">networking task source</a> places on the <a href="webappapis.html#task-queue">task
@@ -723,8 +803,29 @@
   the resource has been <a href="fetching-resources.html#fetch" title="fetch">fetched</a> (defined
   above) has been run.</p>
 
-  <p>The <dfn id="pending-parsing-blocking-script">pending parsing-blocking script</dfn> is used by the
-  parser.</p>
+  <p>The <dfn id="pending-parsing-blocking-script">pending parsing-blocking script</dfn> of a
+  <code><a href="infrastructure.html#document">Document</a></code> is used by the <code><a href="infrastructure.html#document">Document</a></code>'s
+  parser(s).</p>
+
+  <p class="note">If a <code><a href="#script">script</a></code> element that blocks a
+  parser gets moved to another <code><a href="infrastructure.html#document">Document</a></code> before it would
+  normally have stopped blocking that parser, it nonetheless continues
+  blocking that parser until the condition that causes it to be
+  blocking the parser no longer applies (e.g. if the script is a
+  <a href="#pending-parsing-blocking-script">pending parsing-blocking script</a> because there was
+  <a href="semantics.html#a-style-sheet-that-is-blocking-scripts">a style sheet that is blocking scripts</a> when it was
+  parsed, but then the script is moved to another
+  <code><a href="infrastructure.html#document">Document</a></code> before the style sheet loads, the script still
+  blocks the parser until the style sheets are all loaded, at which
+  time the script executes and the parser is unblocked).</p>
+
+  <!-- also (and this would be worth testing): the way the spec is
+  written, if you do not have a style sheet that is blocking scripts,
+  then you parse a <script src>, then while waiting for the script to
+  load you insert an external style sheet, the script will delay until
+  the sheet is loaded, because there's just a binary "are style sheets
+  blocking scripts" state, things aren't defined in terms of which
+  style sheets are blocking which scripts -->
 
   <p><dfn id="executing-a-script-block" title="executing a script block">Executing a script
   block</dfn>: When the steps above require that the script block be
@@ -741,6 +842,12 @@
    <!-- SCRIPT EXEC -->
    <dd>
 
+    <p>Executing the script block must consists of running the
+    following steps. For the purposes of these steps, the script is
+    considered to be from an <i>external file</i> if, while the
+    <a href="#running-a-script">running a script</a> algorithm above was running for this
+    script, the <code><a href="#script">script</a></code> element had a <code title="attr-script-src"><a href="#attr-script-src">src</a></code> attribute specified.</p>
+
     <ol><li>
 
       <p>Initialize <dfn id="the-script-block-s-source"><var>the script block's source</var></dfn> as
@@ -753,43 +860,63 @@
         <p>The contents of that file, interpreted as string of
         Unicode characters, are the script source.</p>
 
-        <p>For each of the rows in the following table, starting with
-        the first one and going down, if the file has as many or more
-        bytes available than the number of bytes in the first column,
-        and the first bytes of the file match the bytes given in the
-        first column, then set <var><a href="#the-script-block-s-character-encoding">the script block's character
-        encoding</a></var> to the encoding given in the cell in the second
-        column of that row, irrespective of any previous value:</p>
+        <p>To obtain the string of Unicode characters, the user agent
+        run the following steps:</p>
 
-        <!-- this table is present in several forms in this file; keep them in sync -->
-        <table id="table-script-bom"><thead><tr><th>Bytes in Hexadecimal
-           </th><th>Encoding
-         </th></tr></thead><tbody><!-- nobody uses this
-          <tr>
-           <td>00 00 FE FF
-           <td>UTF-32BE
-          <tr>
-           <td>FF FE 00 00
-           <td>UTF-32LE
---><tr><td>FE FF
-           </td><td>Big-endian UTF-16
-          </td></tr><tr><td>FF FE
-           </td><td>Little-endian UTF-16
-          </td></tr><tr><td>EF BB BF
-           </td><td>UTF-8
-<!-- nobody uses this
-          <tr>
-           <td>DD 73 66 73
-           <td>UTF-EBCDIC
--->
-        </td></tr></tbody></table><p class="note">This step looks for Unicode Byte Order Marks
-        (BOMs).</p>
+        <ol><li><p>If the resource's <a href="fetching-resources.html#content-type" title="Content-Type">Content
+         Type metadata</a>, if any, specifies a character encoding,
+         and the user agent supports that encoding, then let <var title="">character encoding</var> be that encoding, and jump
+         to the bottom step in this series of steps.</p></li>
 
-        <p>The file must then be converted to Unicode using the
-        character encoding given by <var><a href="#the-script-block-s-character-encoding">the script block's character
-        encoding</a></var>.</p>
+         <li><p>If the algorithm above set <var><a href="#the-script-block-s-character-encoding">the script block's
+         character encoding</a></var>, then let <var title="">character
+         encoding</var> be that encoding, and jump to the bottom step
+         in this series of steps.</p></li>
 
-       </dd>
+         <li><p>For each of the rows in the following table, starting
+         with the first one and going down, if the file has as many or
+         more bytes available than the number of bytes in the first
+         column, and the first bytes of the file match the bytes given
+         in the first column, then set <var title="">character
+         encoding</var> to the encoding given in the cell in the
+         second column of that row, and jump to the bottom step in
+         this series of steps:</p>
+
+          <!-- this table is present in several forms in this file; keep them in sync -->
+          <table id="table-script-bom"><thead><tr><th>Bytes in Hexadecimal
+             </th><th>Encoding
+           </th></tr></thead><tbody><!-- nobody uses this
+            <tr>
+             <td>00 00 FE FF
+             <td>UTF-32BE
+            <tr>
+             <td>FF FE 00 00
+             <td>UTF-32LE
+  --><tr><td>FE FF
+             </td><td>Big-endian UTF-16
+            </td></tr><tr><td>FF FE
+             </td><td>Little-endian UTF-16
+            </td></tr><tr><td>EF BB BF
+             </td><td>UTF-8
+  <!-- nobody uses this
+            <tr>
+             <td>DD 73 66 73
+             <td>UTF-EBCDIC
+  -->
+          </td></tr></tbody></table><p class="note">This step looks for Unicode Byte Order Marks
+          (BOMs).</p>
+
+         </li>
+
+         <li><p>Let <var title="">character encoding</var> be <var><a href="#the-script-block-s-fallback-character-encoding">the
+         script block's fallback character encoding</a></var>.</p></li>
+
+         <li><p>Convert the file to Unicode using <var>character
+         encoding</var>, following the rules for doing so given by the
+         specification for <var><a href="#the-script-block-s-type">the script block's
+         type</a></var>.</p></li>
+
+        </ol></dd>
 
        <dt>If the script is from an external file and <var><a href="#the-script-block-s-type">the script block's type</a></var> is an XML-based language</dt>
 
@@ -826,18 +953,10 @@
 
      <li>
 
-      <p>If the <code><a href="#script">script</a></code> element's
-      <a href="#ignore-destructive-writes">"ignore-destructive-writes"</a> flag is set, then flag the
-      <code><a href="infrastructure.html#document">Document</a></code> the <code><a href="#script">script</a></code> element was in
-      when the <a href="#ignore-destructive-writes">"ignore-destructive-writes"</a> flag was set as being
-      itself <a href="#ignore-destructive-writes">"ignore-destructive-writes"</a>. Let <var title="">neutralized doc</var> be that
+      <p>If the script is from an external file, then increment the
+      <a href="apis-in-html-documents.html#ignore-destructive-writes-counter">ignore-destructive-writes counter</a> of the
+      <code><a href="#script">script</a></code> element's <code><a href="infrastructure.html#document">Document</a></code>. Let <var title="">neutralized doc</var> be that
       <code><a href="infrastructure.html#document">Document</a></code>.</p>
-
-      <!-- theorem: this can only happen when the parser nesting
-      levels of all parsers on this thread are zero, so any scripts
-      inserted while this is true will not themselves have the flag
-      said, so we don't have to worry about this being a counter
-      instead of just a boolean. -->
 
      </li>
 
@@ -855,8 +974,9 @@
 
      <li>
 
-      <p>Remove the <a href="#ignore-destructive-writes">"ignore-destructive-writes"</a> flag from <var title="">neutralized doc</var>, if it was set in the earlier
-      step.</p>
+      <p>Decrement the <a href="apis-in-html-documents.html#ignore-destructive-writes-counter">ignore-destructive-writes counter</a>
+      of <var title="">neutralized doc</var>, if it was incremented in
+      the earlier step.</p>
 
      </li>
 
@@ -961,7 +1081,7 @@ o............A....e
  &lt;/script&gt;
 &lt;/form&gt;</pre>
 
-  </div><h5 id="scriptingLanguages"><span class="secno">4.3.1.1 </span>Scripting languages</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><div class="impl">
+  </div><h5 id="scriptingLanguages"><span class="secno">4.3.1.1 </span>Scripting languages</h5><div class="impl">
 
   <p>A user agent is said to <dfn id="support-the-scripting-language">support the scripting language</dfn>
   if <var><a href="#the-script-block-s-type">the script block's type</a></var> is an <a href="infrastructure.html#ascii-case-insensitive">ASCII
@@ -1002,7 +1122,7 @@ o............A....e
   parameter for the purpose of comparing <a href="infrastructure.html#mime-type" title="MIME type">MIME
   types</a> here.</p>
 
-  </div><h5 id="restrictions-for-contents-of-script-elements"><span class="secno">4.3.1.2 </span><dfn title="script content restrictions">Restrictions for contents of <code>script</code> elements</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The <code><a href="infrastructure.html#textcontent">textContent</a></code> of a <code><a href="#script">script</a></code> element must match the
+  </div><h5 id="restrictions-for-contents-of-script-elements"><span class="secno">4.3.1.2 </span><dfn title="script content restrictions">Restrictions for contents of <code>script</code> elements</dfn></h5><p>The <code><a href="infrastructure.html#textcontent">textContent</a></code> of a <code><a href="#script">script</a></code> element must match the
   <code title="">script</code> production in the following ABNF, the
   character set for which is Unicode. <a href="references.html#refsABNF">[ABNF]</a></p><pre>script        = data1 *( escape [ script-start data3 ] "--&gt;" data1 ) [ escape ]
 escape        = "&lt;!--" data2 *( script-start data3 script-end data2 )
@@ -1042,7 +1162,7 @@ tag-end       =/ %x0020 ; U+0020 SPACE
 tag-end       =/ %x002F ; U+002F SOLIDUS (/)
 tag-end       =/ %x003E ; U+003E GREATER-THAN SIGN (&gt;)</pre><p>When a <code><a href="#script">script</a></code> element contains <a href="#inline-documentation-for-external-scripts">script
   documentation</a>, there are further restrictions on the contents
-  of the element, as described in the section below.</p><h5 id="inline-documentation-for-external-scripts"><span class="secno">4.3.1.3 </span><dfn title="script documentation">Inline documentation for external scripts</dfn></h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>If a <code><a href="#script">script</a></code> element's <code title="attr-script-src"><a href="#attr-script-src">src</a></code> attribute is specified, then the
+  of the element, as described in the section below.</p><h5 id="inline-documentation-for-external-scripts"><span class="secno">4.3.1.3 </span><dfn title="script documentation">Inline documentation for external scripts</dfn></h5><p>If a <code><a href="#script">script</a></code> element's <code title="attr-script-src"><a href="#attr-script-src">src</a></code> attribute is specified, then the
   contents of the <code><a href="#script">script</a></code> element, if any, must be such
   that the value of the <code title="dom-script-text"><a href="#dom-script-text">text</a></code> IDL
   attribute, which is derived from the element's contents, matches the
@@ -1081,11 +1201,11 @@ not-slash     = %x0000-002E / %x0030-10FFFF
  //    e.stop();
 &lt;/script&gt;</pre>
 
-  </div><h4 id="the-noscript-element"><span class="secno">4.3.2 </span>The <dfn><code>noscript</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments. </i><span><a href="http://www.w3.org/html/wg/tracker/issues/117">ISSUE-117</a> (deprecate-noscript) blocks progress to Last Call</span></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-noscript-element"><span class="secno">4.3.2 </span>The <dfn><code>noscript</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#metadata-content">Metadata content</a>.</dd>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>In a <code><a href="semantics.html#the-head-element-0">head</a></code> element of an <a href="dom.html#html-documents" title="HTML documents">HTML document</a>, if there are no ancestor <code><a href="#the-noscript-element">noscript</a></code> elements.</dd>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected in <a href="dom.html#html-documents">HTML documents</a>, if there are no ancestor <code><a href="#the-noscript-element">noscript</a></code> elements.</dd>
    <dt>Content model:</dt>

@@ -1,7 +1,7 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
 <!-- when publishing, change bits marked ZZZ -->
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>2.4 Common microsyntaxes &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<html lang="en-US-x-Hixie" class="split chapter"><head><title>2.5 Common microsyntaxes &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,18 +356,18 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="infrastructure.html" title="2 Common infrastructure" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="urls.html" title="2.5 URLs" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="infrastructure.html" title="2 Common infrastructure" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="urls.html" title="2.6 URLs" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
    </div><div>
    <a href="infrastructure.html">&#x2190; 2 Common infrastructure</a> &#x2013;
    <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="urls.html">2.5 URLs &#x2192;</a>
-  <ol class="toc"><li><ol><li><a href="common-microsyntaxes.html#common-microsyntaxes"><span class="secno">2.4 </span>Common microsyntaxes</a>
-    <ol><li><a href="common-microsyntaxes.html#common-parser-idioms"><span class="secno">2.4.1 </span>Common parser idioms</a></li><li><a href="common-microsyntaxes.html#boolean-attributes"><span class="secno">2.4.2 </span>Boolean attributes</a></li><li><a href="common-microsyntaxes.html#keywords-and-enumerated-attributes"><span class="secno">2.4.3 </span>Keywords and enumerated attributes</a></li><li><a href="common-microsyntaxes.html#numbers"><span class="secno">2.4.4 </span>Numbers</a>
-      <ol><li><a href="common-microsyntaxes.html#non-negative-integers"><span class="secno">2.4.4.1 </span>Non-negative integers</a></li><li><a href="common-microsyntaxes.html#signed-integers"><span class="secno">2.4.4.2 </span>Signed integers</a></li><li><a href="common-microsyntaxes.html#real-numbers"><span class="secno">2.4.4.3 </span>Real numbers</a></li><li><a href="common-microsyntaxes.html#percentages-and-dimensions"><span class="secno">2.4.4.4 </span>Percentages and lengths</a></li><li><a href="common-microsyntaxes.html#lists-of-integers"><span class="secno">2.4.4.5 </span>Lists of integers</a></li><li><a href="common-microsyntaxes.html#lists-of-dimensions"><span class="secno">2.4.4.6 </span>Lists of dimensions</a></li></ol></li><li><a href="common-microsyntaxes.html#dates-and-times"><span class="secno">2.4.5 </span>Dates and times</a>
-      <ol><li><a href="common-microsyntaxes.html#months"><span class="secno">2.4.5.1 </span>Months</a></li><li><a href="common-microsyntaxes.html#dates"><span class="secno">2.4.5.2 </span>Dates</a></li><li><a href="common-microsyntaxes.html#times"><span class="secno">2.4.5.3 </span>Times</a></li><li><a href="common-microsyntaxes.html#local-dates-and-times"><span class="secno">2.4.5.4 </span>Local dates and times</a></li><li><a href="common-microsyntaxes.html#global-dates-and-times"><span class="secno">2.4.5.5 </span>Global dates and times</a></li><li><a href="common-microsyntaxes.html#weeks"><span class="secno">2.4.5.6 </span>Weeks</a></li><li><a href="common-microsyntaxes.html#vaguer-moments-in-time"><span class="secno">2.4.5.7 </span>Vaguer moments in time</a></li></ol></li><li><a href="common-microsyntaxes.html#colors"><span class="secno">2.4.6 </span>Colors</a></li><li><a href="common-microsyntaxes.html#space-separated-tokens"><span class="secno">2.4.7 </span>Space-separated tokens</a></li><li><a href="common-microsyntaxes.html#comma-separated-tokens"><span class="secno">2.4.8 </span>Comma-separated tokens</a></li><li><a href="common-microsyntaxes.html#syntax-references"><span class="secno">2.4.9 </span>References</a></li><li><a href="common-microsyntaxes.html#mq"><span class="secno">2.4.10 </span>Media queries</a></li></ol></li></ol></li></ol></div><h3 id="common-microsyntaxes"><span class="secno">2.4 </span>Common microsyntaxes</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>There are various places in HTML that accept particular data
+   <a href="urls.html">2.6 URLs &#x2192;</a>
+  <ol class="toc"><li><ol><li><a href="common-microsyntaxes.html#common-microsyntaxes"><span class="secno">2.5 </span>Common microsyntaxes</a>
+    <ol><li><a href="common-microsyntaxes.html#common-parser-idioms"><span class="secno">2.5.1 </span>Common parser idioms</a></li><li><a href="common-microsyntaxes.html#boolean-attributes"><span class="secno">2.5.2 </span>Boolean attributes</a></li><li><a href="common-microsyntaxes.html#keywords-and-enumerated-attributes"><span class="secno">2.5.3 </span>Keywords and enumerated attributes</a></li><li><a href="common-microsyntaxes.html#numbers"><span class="secno">2.5.4 </span>Numbers</a>
+      <ol><li><a href="common-microsyntaxes.html#non-negative-integers"><span class="secno">2.5.4.1 </span>Non-negative integers</a></li><li><a href="common-microsyntaxes.html#signed-integers"><span class="secno">2.5.4.2 </span>Signed integers</a></li><li><a href="common-microsyntaxes.html#real-numbers"><span class="secno">2.5.4.3 </span>Real numbers</a></li><li><a href="common-microsyntaxes.html#percentages-and-dimensions"><span class="secno">2.5.4.4 </span>Percentages and lengths</a></li><li><a href="common-microsyntaxes.html#lists-of-integers"><span class="secno">2.5.4.5 </span>Lists of integers</a></li><li><a href="common-microsyntaxes.html#lists-of-dimensions"><span class="secno">2.5.4.6 </span>Lists of dimensions</a></li></ol></li><li><a href="common-microsyntaxes.html#dates-and-times"><span class="secno">2.5.5 </span>Dates and times</a>
+      <ol><li><a href="common-microsyntaxes.html#months"><span class="secno">2.5.5.1 </span>Months</a></li><li><a href="common-microsyntaxes.html#dates"><span class="secno">2.5.5.2 </span>Dates</a></li><li><a href="common-microsyntaxes.html#times"><span class="secno">2.5.5.3 </span>Times</a></li><li><a href="common-microsyntaxes.html#local-dates-and-times"><span class="secno">2.5.5.4 </span>Local dates and times</a></li><li><a href="common-microsyntaxes.html#global-dates-and-times"><span class="secno">2.5.5.5 </span>Global dates and times</a></li><li><a href="common-microsyntaxes.html#weeks"><span class="secno">2.5.5.6 </span>Weeks</a></li><li><a href="common-microsyntaxes.html#vaguer-moments-in-time"><span class="secno">2.5.5.7 </span>Vaguer moments in time</a></li></ol></li><li><a href="common-microsyntaxes.html#colors"><span class="secno">2.5.6 </span>Colors</a></li><li><a href="common-microsyntaxes.html#space-separated-tokens"><span class="secno">2.5.7 </span>Space-separated tokens</a></li><li><a href="common-microsyntaxes.html#comma-separated-tokens"><span class="secno">2.5.8 </span>Comma-separated tokens</a></li><li><a href="common-microsyntaxes.html#syntax-references"><span class="secno">2.5.9 </span>References</a></li><li><a href="common-microsyntaxes.html#mq"><span class="secno">2.5.10 </span>Media queries</a></li></ol></li></ol></li></ol></div><h3 id="common-microsyntaxes"><span class="secno">2.5 </span>Common microsyntaxes</h3><p>There are various places in HTML that accept particular data
   types, such as dates or numbers. This section describes what the
   conformance criteria for content in those formats is, and how to
   parse them.</p><div class="impl">
@@ -336,7 +383,7 @@
 
   </div><div class="impl">
 
-  <h4 id="common-parser-idioms"><span class="secno">2.4.1 </span>Common parser idioms</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="common-parser-idioms"><span class="secno">2.5.1 </span>Common parser idioms</h4>
 
   <p>The <dfn id="space-character" title="space character">space characters</dfn>, for the
   purposes of this specification, are U+0020 SPACE, U+0009 CHARACTER
@@ -394,7 +441,7 @@
   <p>The <dfn id="code-point-length">code-point length</dfn> of a string is the number of
   Unicode code points in that string.</p>
 
-  </div><h4 id="boolean-attributes"><span class="secno">2.4.2 </span>Boolean attributes</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>A number of attributes are <dfn id="boolean-attribute" title="boolean attribute">boolean
+  </div><h4 id="boolean-attributes"><span class="secno">2.5.2 </span>Boolean attributes</h4><p>A number of attributes are <dfn id="boolean-attribute" title="boolean attribute">boolean
   attributes</dfn>. The presence of a boolean attribute on an element
   represents the true value, and the absence of the attribute
   represents the false value.</p><p>If the attribute is present, its value must either be the empty
@@ -418,7 +465,7 @@
 
    <pre>&lt;label&gt;&lt;input type='checkbox' checked name=cheese disabled=""&gt; Cheese&lt;/label&gt;</pre>
 
-  </div><h4 id="keywords-and-enumerated-attributes"><span class="secno">2.4.3 </span>Keywords and enumerated attributes</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Some attributes are defined as taking one of a finite set of
+  </div><h4 id="keywords-and-enumerated-attributes"><span class="secno">2.5.3 </span>Keywords and enumerated attributes</h4><p>Some attributes are defined as taking one of a finite set of
   keywords. Such attributes are called <dfn id="enumerated-attribute" title="enumerated&#10;  attribute">enumerated attributes</dfn>. The keywords are each
   defined to map to a particular <em>state</em> (several keywords
   might map to the same state, in which case some of the keywords are
@@ -441,7 +488,7 @@
   be ignored.</p><p>When the attribute is <em>not</em> specified, if there is a
   <i>missing value default</i> state defined, then that is the state
   represented by the (missing) attribute. Otherwise, the absence of
-  the attribute means that there is no state represented.</p><p class="note">The empty string can be a valid keyword.</p><h4 id="numbers"><span class="secno">2.4.4 </span>Numbers</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><h5 id="non-negative-integers"><span class="secno">2.4.4.1 </span>Non-negative integers</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>A string is a <dfn id="valid-non-negative-integer">valid non-negative integer</dfn> if it
+  the attribute means that there is no state represented.</p><p class="note">The empty string can be a valid keyword.</p><h4 id="numbers"><span class="secno">2.5.4 </span>Numbers</h4><h5 id="non-negative-integers"><span class="secno">2.5.4.1 </span>Non-negative integers</h5><p>A string is a <dfn id="valid-non-negative-integer">valid non-negative integer</dfn> if it
   consists of one or more characters in the range U+0030 DIGIT ZERO
   (0) to U+0039 DIGIT NINE (9).</p><p>A <a href="#valid-non-negative-integer">valid non-negative integer</a> represents the number
   that is represented in base ten by that string of digits.</p><div class="impl">
@@ -450,8 +497,7 @@
   given in the following algorithm. When invoked, the steps must be
   followed in the order given, aborting at the first step that returns
   a value. This algorithm will return either zero, a positive integer,
-  or an error. Leading spaces are ignored. Trailing spaces and any
-  trailing garbage characters are ignored.</p>
+  or an error.</p>
 
   <ol><li><p>Let <var title="">input</var> be the string being
    parsed.</p></li>
@@ -482,7 +528,7 @@
 
    <li><p>Return <var title="">value</var>.</p></li>
 
-  </ol></div><h5 id="signed-integers"><span class="secno">2.4.4.2 </span>Signed integers</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>A string is a <dfn id="valid-integer">valid integer</dfn> if it consists of one or
+  </ol></div><h5 id="signed-integers"><span class="secno">2.5.4.2 </span>Signed integers</h5><p>A string is a <dfn id="valid-integer">valid integer</dfn> if it consists of one or
   more characters in the range U+0030 DIGIT ZERO (0) to U+0039 DIGIT
   NINE (9), optionally prefixed with a U+002D HYPHEN-MINUS character
   (-).</p><p>A <a href="#valid-integer">valid integer</a> without a U+002D HYPHEN-MINUS (-)
@@ -497,9 +543,7 @@
   non-negative integers</a>, and are as given in the following
   algorithm. When invoked, the steps must be followed in the order
   given, aborting at the first step that returns a value. This
-  algorithm will return either an integer or an error. Leading spaces
-  are ignored. Trailing spaces and trailing garbage characters are
-  ignored.</p>
+  algorithm will return either an integer or an error.</p>
 
   <ol><li><p>Let <var title="">input</var> be the string being
    parsed.</p></li>
@@ -552,7 +596,7 @@
    <li><p>If <var title="">sign</var> is "positive", return <var title="">value</var>, otherwise return the result of subtracting
    <var title="">value</var> from zero.</p></li>
 
-  </ol></div><h5 id="real-numbers"><span class="secno">2.4.4.3 </span>Real numbers</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>A string is a <dfn id="valid-floating-point-number">valid floating point number</dfn> if it
+  </ol></div><h5 id="real-numbers"><span class="secno">2.5.4.3 </span>Real numbers</h5><p>A string is a <dfn id="valid-floating-point-number">valid floating point number</dfn> if it
   consists of:</p><ol class="brief"><li>Optionally, a U+002D HYPHEN-MINUS character (-).</li>
 
    <li>A series of one or more characters in the range U+0030 DIGIT
@@ -607,8 +651,7 @@
   <p>The <dfn id="rules-for-parsing-floating-point-number-values">rules for parsing floating point number values</dfn> are
   as given in the following algorithm. This algorithm must be aborted
   at the first step that returns something. This algorithm will return
-  either a number or an error. Leading spaces are ignored. Trailing
-  spaces and garbage characters are ignored.</p>
+  either a number or an error.</p>
 
   <ol><li><p>Let <var title="">input</var> be the string being
    parsed.</p></li>
@@ -745,7 +788,7 @@
    <li><p>Return <var title="">rounded-value</var>.</p></li>
 
   </ol></div><div class="impl">
-  <h5 id="percentages-and-dimensions"><span class="secno">2.4.4.4 </span>Percentages and lengths</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="percentages-and-dimensions"><span class="secno">2.5.4.4 </span>Percentages and lengths</h5>
 <!--(percentages are not used in valid html anymore)
   <p>A string is a <dfn>valid dimension value</dfn> if it consists of
   a character in the range U+0031 DIGIT ONE (1) to U+0039 DIGIT NINE
@@ -845,7 +888,7 @@
 
    <li><p>Return <var title="">value</var> as a length.</p></li>
 
-  </ol></div><h5 id="lists-of-integers"><span class="secno">2.4.4.5 </span>Lists of integers</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>A <dfn id="valid-list-of-integers">valid list of integers</dfn> is a number of <a href="#valid-integer" title="valid integer">valid integers</a> separated by U+002C
+  </ol></div><h5 id="lists-of-integers"><span class="secno">2.5.4.5 </span>Lists of integers</h5><p>A <dfn id="valid-list-of-integers">valid list of integers</dfn> is a number of <a href="#valid-integer" title="valid integer">valid integers</a> separated by U+002C
   COMMA characters, with no other characters (e.g. no <a href="#space-character" title="space character">space characters</a>). In addition, there
   might be restrictions on the number of integers that can be given,
   or on the range of values allowed.</p><div class="impl">
@@ -1109,7 +1152,7 @@
 
   </ol></div><div class="impl">
 
-  <h5 id="lists-of-dimensions"><span class="secno">2.4.4.6 </span>Lists of dimensions</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h5 id="lists-of-dimensions"><span class="secno">2.5.4.6 </span>Lists of dimensions</h5>
 
   <!-- no definition of a type since no conforming feature uses this
   syntax (it's only used in cols="" and rows="" on <frameset> -->
@@ -1210,7 +1253,7 @@
 
    <li><p>Return the list <var title="">result</var>.</p></li>
 
-  </ol></div><h4 id="dates-and-times"><span class="secno">2.4.5 </span>Dates and times</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>In the algorithms below, the <dfn id="number-of-days-in-month-month-of-year-year">number of days in month <var title="">month</var> of year <var title="">year</var></dfn> is:
+  </ol></div><h4 id="dates-and-times"><span class="secno">2.5.5 </span>Dates and times</h4><p>In the algorithms below, the <dfn id="number-of-days-in-month-month-of-year-year">number of days in month <var title="">month</var> of year <var title="">year</var></dfn> is:
   <em>31</em> if <var title="">month</var> is 1, 3, 5, 7, 8, 10, or
   12; <em>30</em> if <var title="">month</var> is 4, 6, 9, or 11;
   <em>29</em> if <var title="">month</var> is 2 and <var title="">year</var> is a number divisible by 400, or if <var title="">year</var> is a number divisible by 4 but not by 100; and
@@ -1228,7 +1271,7 @@
   described below; ISO8601 libraries might not parse dates and times
   in exactly the same manner. <a href="references.html#refsISO8601">[ISO8601]</a></p>
 
-  </div><h5 id="months"><span class="secno">2.4.5.1 </span>Months</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>A <dfn id="concept-month" title="concept-month">month</dfn> consists of a specific
+  </div><h5 id="months"><span class="secno">2.5.5.1 </span>Months</h5><p>A <dfn id="concept-month" title="concept-month">month</dfn> consists of a specific
   proleptic Gregorian date with no time-zone information and no date
   information beyond a year and a month. <a href="references.html#refsGREGORIAN">[GREGORIAN]</a></p><p>A string is a <dfn id="valid-month-string">valid month string</dfn> representing a year
   <var title="">year</var> and month <var title="">month</var> if it
@@ -1291,7 +1334,7 @@
 
    <li><p>Return <var title="">year</var> and <var title="">month</var>.</p></li>
 
-  </ol></div><h5 id="dates"><span class="secno">2.4.5.2 </span>Dates</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>A <dfn id="concept-date" title="concept-date">date</dfn> consists of a specific
+  </ol></div><h5 id="dates"><span class="secno">2.5.5.2 </span>Dates</h5><p>A <dfn id="concept-date" title="concept-date">date</dfn> consists of a specific
   proleptic Gregorian date with no time-zone information, consisting
   of a year, a month, and a day. <a href="references.html#refsGREGORIAN">[GREGORIAN]</a></p><p>A string is a <dfn id="valid-date-string">valid date string</dfn> representing a year
   <var title="">year</var>, month <var title="">month</var>, and day
@@ -1354,7 +1397,7 @@
    <li><p>Return <var title="">year</var>, <var title="">month</var>,
    and <var title="">day</var>.</p></li>
 
-  </ol></div><h5 id="times"><span class="secno">2.4.5.3 </span>Times</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>A <dfn id="concept-time" title="concept-time">time</dfn> consists of a specific
+  </ol></div><h5 id="times"><span class="secno">2.5.5.3 </span>Times</h5><p>A <dfn id="concept-time" title="concept-time">time</dfn> consists of a specific
   time with no time-zone information, consisting of an hour, a minute,
   a second, and a fraction of a second.</p><p>A string is a <dfn id="valid-time-string">valid time string</dfn> representing an hour
   <var title="">hour</var>, a minute <var title="">minute</var>, and a
@@ -1480,7 +1523,7 @@
    <li><p>Return <var title="">hour</var>, <var title="">minute</var>,
    and <var title="">second</var>.</p></li>
 
-  </ol></div><h5 id="local-dates-and-times"><span class="secno">2.4.5.4 </span>Local dates and times</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>A <dfn id="concept-datetime-local" title="concept-datetime-local">local date and time</dfn>
+  </ol></div><h5 id="local-dates-and-times"><span class="secno">2.5.5.4 </span>Local dates and times</h5><p>A <dfn id="concept-datetime-local" title="concept-datetime-local">local date and time</dfn>
   consists of a specific proleptic Gregorian date, consisting of a
   year, a month, and a day, and a time, consisting of an hour, a
   minute, a second, and a fraction of a second, but expressed without
@@ -1522,7 +1565,7 @@
 
    <li><p>Return <var title="">date</var> and <var title="">time</var>.</p></li>
 
-  </ol></div><h5 id="global-dates-and-times"><span class="secno">2.4.5.5 </span>Global dates and times</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>A <dfn id="concept-datetime" title="concept-datetime">global date and time</dfn>
+  </ol></div><h5 id="global-dates-and-times"><span class="secno">2.5.5.5 </span>Global dates and times</h5><p>A <dfn id="concept-datetime" title="concept-datetime">global date and time</dfn>
   consists of a specific proleptic Gregorian date, consisting of a
   year, a month, and a day, and a time, consisting of an hour, a
   minute, a second, and a fraction of a second, expressed with a
@@ -1542,9 +1585,11 @@
 
      <li>Or:
 
-      <ol><li>Either a U+002B PLUS SIGN character (+) or a U+002D
-       HYPHEN-MINUS character (-), representing the sign of the
-       time-zone offset</li>
+      <ol><li>Either a U+002B PLUS SIGN character (+) or, if the
+       time-zone offset is not zero, a U+002D HYPHEN-MINUS character
+       (-), representing the sign of the time-zone offset</li>
+       <!-- the -00:00 offset is disallowed because RFC3339 gives it a
+       special semantic -->
 
        <li>Two <a href="#concept-datetime-digit" title="concept-datetime-digit">digits</a>,
        representing the hours component <var title="">hour</var> of
@@ -1723,7 +1768,7 @@
    <li><p>Return <var title="">timezone<sub title="">hours</sub></var>
    and <var title="">timezone<sub title="">minutes</sub></var>.</p></li>
 
-  </ol></div><h5 id="weeks"><span class="secno">2.4.5.6 </span>Weeks</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>A <dfn id="concept-week" title="concept-week">week</dfn> consists of a week-year
+  </ol></div><h5 id="weeks"><span class="secno">2.5.5.6 </span>Weeks</h5><p>A <dfn id="concept-week" title="concept-week">week</dfn> consists of a week-year
   number and a week number representing a seven-day period starting on
   a Monday. Each week-year in this calendaring system has either 52 or
   53 such seven-day periods, as defined below. The seven-day period
@@ -1803,7 +1848,7 @@
    <li><p>Return the week-year number <var title="">year</var> and the
    week number <var title="">week</var>.</p></li>
 
-  </ol></div><h5 id="vaguer-moments-in-time"><span class="secno">2.4.5.7 </span>Vaguer moments in time</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>A string is a <dfn id="valid-date-or-time-string">valid date or time string</dfn> if it is also
+  </ol></div><h5 id="vaguer-moments-in-time"><span class="secno">2.5.5.7 </span>Vaguer moments in time</h5><p>A string is a <dfn id="valid-date-or-time-string">valid date or time string</dfn> if it is also
   one of the following:</p><ul><li>A <a href="#valid-date-string">valid date string</a>.</li>
 
    <li>A <a href="#valid-time-string">valid time string</a>.</li>
@@ -1900,7 +1945,7 @@
 
    </li>
 
-  </ol></div><h4 id="colors"><span class="secno">2.4.6 </span>Colors</h4><p class="XXX annotation"><b>Status: </b><i>Awaiting implementation feedback</i></p><p>A <dfn id="simple-color">simple color</dfn> consists of three 8-bit numbers in the
+  </ol></div><h4 id="colors"><span class="secno">2.5.6 </span>Colors</h4><p>A <dfn id="simple-color">simple color</dfn> consists of three 8-bit numbers in the
   range 0..255, representing the red, green, and blue components of
   the color respectively, in the sRGB color space. <a href="references.html#refsSRGB">[SRGB]</a></p><p>A string is a <dfn id="valid-simple-color">valid simple color</dfn> if it is exactly
   seven characters long, and the first character is a U+0023 NUMBER
@@ -2087,20 +2132,22 @@
 
    <li><p>Return <var title="">result</var>.</p>
 
-  </li></ol></div><hr/><h4 id="space-separated-tokens"><span class="secno">2.4.7 </span>Space-separated tokens</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>A <dfn id="set-of-space-separated-tokens">set of space-separated tokens</dfn> is a string containing
-  zero or more words separated by one or more <a href="#space-character" title="space&#10;  character">space characters</a>, where words consist of any
-  string of one or more characters, none of which are <a href="#space-character" title="space character">space characters</a>.</p><p>A string containing a <a href="#set-of-space-separated-tokens">set of space-separated tokens</a>
+  </li></ol></div><hr/><h4 id="space-separated-tokens"><span class="secno">2.5.7 </span>Space-separated tokens</h4><p>A <dfn id="set-of-space-separated-tokens">set of space-separated tokens</dfn> is a string containing
+  zero or more words (known as tokens) separated by one or more <a href="#space-character" title="space character">space characters</a>, where words consist
+  of any string of one or more characters, none of which are <a href="#space-character" title="space character">space characters</a>.</p><p>A string containing a <a href="#set-of-space-separated-tokens">set of space-separated tokens</a>
   may have leading or trailing <a href="#space-character" title="space character">space
   characters</a>.</p><p>An <dfn id="unordered-set-of-unique-space-separated-tokens">unordered set of unique space-separated tokens</dfn> is a
-  <a href="#set-of-space-separated-tokens">set of space-separated tokens</a> where none of the words
+  <a href="#set-of-space-separated-tokens">set of space-separated tokens</a> where none of the tokens
   are duplicated.</p><p>An <dfn id="ordered-set-of-unique-space-separated-tokens">ordered set of unique space-separated tokens</dfn> is a
-  <a href="#set-of-space-separated-tokens">set of space-separated tokens</a> where none of the words
+  <a href="#set-of-space-separated-tokens">set of space-separated tokens</a> where none of the tokens
   are duplicated but where the order of the tokens is meaningful.</p><p><a href="#set-of-space-separated-tokens" title="set of space-separated tokens">Sets of
   space-separated tokens</a> sometimes have a defined set of
   allowed values. When a set of allowed values is defined, the tokens
   must all be from that list of allowed values; other values are
   non-conforming. If no such set of allowed values is provided, then
-  all values are conforming.</p><div class="impl">
+  all values are conforming.</p><p class="note">How tokens in a <a href="#set-of-space-separated-tokens">set of space-separated
+  tokens</a> are to be compared (e.g. case-sensitively or not) is
+  defined on a per-set basis.</p><div class="impl">
 
   <p>When a user agent has to <dfn id="split-a-string-on-spaces">split a string on spaces</dfn>, it
   must use the following algorithm:</p>
@@ -2167,7 +2214,8 @@
    characters</a> that are not <a href="#space-character" title="space character">space
    characters</a>, and let that be <var title="">s</var>.</p></li>
 
-   <li><p>If <var title="">s</var> is exactly equal to <var title="">token</var>, then:</p>
+   <li><p>If <var title="">s</var> is exactly equal to <var title="">token</var> (this is a <a href="infrastructure.html#case-sensitive">case-sensitive</a>
+   comparison), then:</p>
 
     <ol><li><p><a href="#skip-whitespace">Skip whitespace</a> (in <var title="">input</var>).</p></li>
 
@@ -2190,7 +2238,7 @@
   token to be collapsed to a single space, except at the start and end
   of the string, where such spaces are removed.</p>
 
-  </div><h4 id="comma-separated-tokens"><span class="secno">2.4.8 </span>Comma-separated tokens</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>A <dfn id="set-of-comma-separated-tokens">set of comma-separated tokens</dfn> is a string containing
+  </div><h4 id="comma-separated-tokens"><span class="secno">2.5.8 </span>Comma-separated tokens</h4><p>A <dfn id="set-of-comma-separated-tokens">set of comma-separated tokens</dfn> is a string containing
   zero or more tokens each separated from the next by a single U+002C
   COMMA character (,), where tokens consist of any string of zero or
   more characters, neither beginning nor ending with <a href="#space-character" title="space character">space characters</a>, nor containing any
@@ -2234,7 +2282,7 @@
 
    <li><p>Return <var title="">tokens</var>.</p></li>
 
-  </ol></div><h4 id="syntax-references"><span class="secno">2.4.9 </span>References</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>A <dfn id="valid-hash-name-reference">valid hash-name reference</dfn> to an element of type <var title="">type</var> is a string consisting of a U+0023 NUMBER SIGN
+  </ol></div><h4 id="syntax-references"><span class="secno">2.5.9 </span>References</h4><p>A <dfn id="valid-hash-name-reference">valid hash-name reference</dfn> to an element of type <var title="">type</var> is a string consisting of a U+0023 NUMBER SIGN
   character (#) followed by a string which exactly matches the value
   of the <code title="">name</code> attribute of an element with type
   <var title="">type</var> in the document.</p><div class="impl">
@@ -2266,7 +2314,7 @@
    maybe they just don't know about combining dot above?
    -->
 
-  </ol></div><h4 id="mq"><span class="secno">2.4.10 </span>Media queries</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>A string is a <dfn id="valid-media-query">valid media query</dfn> if it matches the
+  </ol></div><h4 id="mq"><span class="secno">2.5.10 </span>Media queries</h4><p>A string is a <dfn id="valid-media-query">valid media query</dfn> if it matches the
   <code title="">media_query_list</code> production of the Media
   Queries specification. <a href="references.html#refsMQ">[MQ]</a></p><p>A string <dfn id="matches-the-environment">matches the environment</dfn> of the user if it is
   the empty string, a string consisting of only <a href="#space-character" title="space&#10;  character">space characters</a>, or is a media query that matches

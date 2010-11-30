@@ -137,7 +137,7 @@
         <xsl:text>&#10;</xsl:text>
         <xsl:choose>
           <xsl:when test="$maturity = 'ED'">
-            <link rel='stylesheet' href='W3C-ED.css' type='text/css'/>
+            <link rel='stylesheet' href='ED.css' type='text/css'/>
           </xsl:when>
           <xsl:when test='
             $maturity="WD"

@@ -53,7 +53,7 @@
       <xsl:text>&#10;  </xsl:text>
       <xsl:choose>
         <xsl:when test="$maturity = 'ED'">
-          <link rel='stylesheet' href='W3C-ED.css' type='text/css'/>
+          <link rel='stylesheet' href='ED.css' type='text/css'/>
         </xsl:when>
         <xsl:when test='
           $maturity="WD"
@@ -89,7 +89,7 @@ color: #3C790A;
   <!-- * suppress meta@charset -->
   <xsl:template match="h:meta[@charset]"/>
   <!-- * suppress duplication of ED CSS link -->
-  <xsl:template match="h:head/h:link[contains(@href,'W3C-ED')]"/>
+  <xsl:template match="h:head/h:link[contains(@href,'ED')]"/>
   <!-- * remove source CSS link -->
   <xsl:template match="h:head/h:link[@href = 'src.css']"/>
   <!-- * remove info stuff -->
@@ -356,44 +356,55 @@ color: #3C790A;
         </em>
       </h2>
 
-      <dl>
         <xsl:if test="$site = 'W3C' and not($maturity = 'ED')">
         <xsl:choose>
           <xsl:when test='$source and $maturity="ED"'>
-            <dt>Latest Editor’s Draft:</dt>
+          <dl>
+            <dt>Latest Editor’s Draft is also available:</dt>
             <dd>
               <a id='latestED' href='{$source}'><xsl:value-of select='$source'/></a>
               <xsl:text> </xsl:text>
               <!-- * <xsl:value-of select='date:date-time()'/> -->
             </dd>
+          </dl>
             <xsl:if test='$latest and not($latest = "")'>
+            <dl>
               <dt>Latest Published Version:</dt>
               <dd><a href='{$latest}'><xsl:value-of select='$latest'/></a></dd>
+            </dl>
             </xsl:if>
           </xsl:when>
           <xsl:otherwise>
-            <dt>This Version:</dt>
-            <dd>
-              <a href='{$this}'><xsl:value-of select='$this'/></a>
-            </dd>
             <xsl:if test='not($latest = "")'>
-              <dt>Latest Published Version:</dt>
-              <dd><a href='{$latest}'><xsl:value-of select='$latest'/></a></dd>
-              <dt>Latest Editor’s Draft:</dt>
+            <dl class="ed-draft-link">
+              <dt class="ed-draft-link">Latest Editor’s Draft is also available:</dt>
               <dd>
                 <a id='latestED' href='{$source}'><xsl:value-of select='$source'/></a>
                 <xsl:text> </xsl:text>
                 <!-- * <xsl:value-of select='date:date-time()'/> -->
               </dd>
+            </dl>
+            <dl>
+              <dt>Latest Published Version:</dt>
+              <dd><a href='{$latest}'><xsl:value-of select='$latest'/></a></dd>
+            </dl>
             </xsl:if>
+            <dl>
+            <dt>This Version:</dt>
+            <dd>
+              <a href='{$this}'><xsl:value-of select='$this'/></a>
+            </dd>
+            </dl>
           </xsl:otherwise>
         </xsl:choose>
         <xsl:if test='$previous-nodeset
           and not($previous-nodeset = "")'>
+          <dl>
           <dt>Previous Version<xsl:if test='count($previous-nodeset) > 1'>s</xsl:if>:</dt>
           <xsl:for-each select='$previous-nodeset'>
             <dd><a href='{.}'><xsl:value-of select='.'/></a></dd>
           </xsl:for-each>
+          </dl>
         </xsl:if>
         </xsl:if>
 
@@ -426,7 +437,6 @@ color: #3C790A;
             </xsl:choose>
           </xsl:for-each>
         </xsl:if>
-      </dl>
       <p>The content of this document is also available as
         <xsl:choose>
           <xsl:when test="$chunk=1">

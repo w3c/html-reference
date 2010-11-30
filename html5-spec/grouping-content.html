@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,7 +356,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="sections.html" title="4.4 Sections" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="text-level-semantics.html" title="4.6 Text-level semantics" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="sections.html" title="4.4 Sections" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="text-level-semantics.html" title="4.6 Text-level semantics" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -318,10 +365,10 @@
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="text-level-semantics.html">4.6 Text-level semantics &#x2192;</a>
   <ol class="toc"><li><ol><li><a href="grouping-content.html#grouping-content"><span class="secno">4.5 </span>Grouping content</a>
-    <ol><li><a href="grouping-content.html#the-p-element"><span class="secno">4.5.1 </span>The <code>p</code> element</a></li><li><a href="grouping-content.html#the-hr-element"><span class="secno">4.5.2 </span>The <code>hr</code> element</a></li><li><a href="grouping-content.html#the-pre-element"><span class="secno">4.5.3 </span>The <code>pre</code> element</a></li><li><a href="grouping-content.html#the-blockquote-element"><span class="secno">4.5.4 </span>The <code>blockquote</code> element</a></li><li><a href="grouping-content.html#the-ol-element"><span class="secno">4.5.5 </span>The <code>ol</code> element</a></li><li><a href="grouping-content.html#the-ul-element"><span class="secno">4.5.6 </span>The <code>ul</code> element</a></li><li><a href="grouping-content.html#the-li-element"><span class="secno">4.5.7 </span>The <code>li</code> element</a></li><li><a href="grouping-content.html#the-dl-element"><span class="secno">4.5.8 </span>The <code>dl</code> element</a></li><li><a href="grouping-content.html#the-dt-element"><span class="secno">4.5.9 </span>The <code>dt</code> element</a></li><li><a href="grouping-content.html#the-dd-element"><span class="secno">4.5.10 </span>The <code>dd</code> element</a></li><li><a href="grouping-content.html#the-figure-element"><span class="secno">4.5.11 </span>The <code>figure</code> element</a></li><li><a href="grouping-content.html#the-figcaption-element"><span class="secno">4.5.12 </span>The <code>figcaption</code> element</a></li><li><a href="grouping-content.html#the-div-element"><span class="secno">4.5.13 </span>The <code>div</code> element</a></li></ol></li></ol></li></ol></div><h3 id="grouping-content"><span class="secno">4.5 </span>Grouping content</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><h4 id="the-p-element"><span class="secno">4.5.1 </span>The <dfn><code>p</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+    <ol><li><a href="grouping-content.html#the-p-element"><span class="secno">4.5.1 </span>The <code>p</code> element</a></li><li><a href="grouping-content.html#the-hr-element"><span class="secno">4.5.2 </span>The <code>hr</code> element</a></li><li><a href="grouping-content.html#the-pre-element"><span class="secno">4.5.3 </span>The <code>pre</code> element</a></li><li><a href="grouping-content.html#the-blockquote-element"><span class="secno">4.5.4 </span>The <code>blockquote</code> element</a></li><li><a href="grouping-content.html#the-ol-element"><span class="secno">4.5.5 </span>The <code>ol</code> element</a></li><li><a href="grouping-content.html#the-ul-element"><span class="secno">4.5.6 </span>The <code>ul</code> element</a></li><li><a href="grouping-content.html#the-li-element"><span class="secno">4.5.7 </span>The <code>li</code> element</a></li><li><a href="grouping-content.html#the-dl-element"><span class="secno">4.5.8 </span>The <code>dl</code> element</a></li><li><a href="grouping-content.html#the-dt-element"><span class="secno">4.5.9 </span>The <code>dt</code> element</a></li><li><a href="grouping-content.html#the-dd-element"><span class="secno">4.5.10 </span>The <code>dd</code> element</a></li><li><a href="grouping-content.html#the-figure-element"><span class="secno">4.5.11 </span>The <code>figure</code> element</a></li><li><a href="grouping-content.html#the-figcaption-element"><span class="secno">4.5.12 </span>The <code>figcaption</code> element</a></li><li><a href="grouping-content.html#the-div-element"><span class="secno">4.5.13 </span>The <code>div</code> element</a></li></ol></li></ol></li></ol></div><h3 id="grouping-content"><span class="secno">4.5 </span>Grouping content</h3><h4 id="the-p-element"><span class="secno">4.5.1 </span>The <dfn><code>p</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="dnd.html#formatblock-candidate"><code title="">formatBlock</code> candidate</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
@@ -383,9 +430,9 @@ To move the error from the markup to the rhyming.&lt;/p&gt;</pre>
  &lt;/footer&gt;
 &lt;/section&gt;</pre>
 
-  </div><h4 id="the-hr-element"><span class="secno">4.5.2 </span>The <dfn><code>hr</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-hr-element"><span class="secno">4.5.2 </span>The <dfn><code>hr</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd>Empty.</dd>
@@ -474,10 +521,10 @@ observatory in all weather and seasons, including the metre-deep snow
 of Gralmond's winters.&lt;/p&gt;</pre>
 
   </div><p class="note">The <code><a href="#the-hr-element">hr</a></code> element does not affect the
-  document's <a href="sections.html#outline">outline</a>.</p><h4 id="the-pre-element"><span class="secno">4.5.3 </span>The <dfn><code>pre</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  document's <a href="sections.html#outline">outline</a>.</p><h4 id="the-pre-element"><span class="secno">4.5.3 </span>The <dfn><code>pre</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="dnd.html#formatblock-candidate"><code title="">formatBlock</code> candidate</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
@@ -510,7 +557,9 @@ of Gralmond's winters.&lt;/p&gt;</pre>
   block of computer output the <code><a href="#the-pre-element">pre</a></code> element can be used
   with a <code><a href="text-level-semantics.html#the-samp-element">samp</a></code> element. Similarly, the <code><a href="text-level-semantics.html#the-kbd-element">kbd</a></code>
   element can be used within a <code><a href="#the-pre-element">pre</a></code> element to indicate
-  text that the user is to enter.</p><div class="example">
+  text that the user is to enter.</p><p class="note">A newline in a <code><a href="#the-pre-element">pre</a></code> element separates
+  paragraphs for the purposes of the Unicode bidirectional algorithm.
+  <a href="references.html#refsBIDI">[BIDI]</a></p><div class="example">
 
    <p>In the following snippet, a sample of computer code is
    presented.</p>
@@ -559,11 +608,11 @@ a friend lost to the
 
 ~cdr 11dec07&lt;/pre&gt;</pre>
 
-  </div><h4 id="the-blockquote-element"><span class="secno">4.5.4 </span>The <dfn><code>blockquote</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-blockquote-element"><span class="secno">4.5.4 </span>The <dfn><code>blockquote</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="sections.html#sectioning-root">Sectioning root</a>.</dd>
    <dd><a href="dnd.html#formatblock-candidate"><code title="">formatBlock</code> candidate</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
@@ -650,9 +699,9 @@ a friend lost to the
   </div><p class="note"><a href="links.html#conversations">Examples of how to
   represent a conversation</a> are shown in a later section; it is not
   appropriate to use the <code><a href="text-level-semantics.html#the-cite-element">cite</a></code> and <code><a href="#the-blockquote-element">blockquote</a></code>
-  elements for this purpose.</p><h4 id="the-ol-element"><span class="secno">4.5.5 </span>The <dfn><code>ol</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  elements for this purpose.</p><h4 id="the-ol-element"><span class="secno">4.5.5 </span>The <dfn><code>ol</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd>Zero or more <code><a href="#the-li-element">li</a></code> elements.</dd>
@@ -660,11 +709,13 @@ a friend lost to the
    <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
    <dd><code title="attr-ol-reversed"><a href="#attr-ol-reversed">reversed</a></code></dd>
    <dd><code title="attr-ol-start"><a href="#attr-ol-start">start</a></code></dd>
+   <dd><code title="attr-ol-type"><a href="#attr-ol-type">type</a></code></dd>
    <dt>DOM interface:</dt>
    <dd>
 <pre class="idl">interface <dfn id="htmlolistelement">HTMLOListElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
            attribute boolean <a href="#dom-ol-reversed" title="dom-ol-reversed">reversed</a>;
            attribute long <a href="#dom-ol-start" title="dom-ol-start">start</a>;
+           attribute DOMString <a href="#dom-ol-type" title="dom-ol-type">type</a>;
 };</pre>
    </dd>
   </dl><p>The <code><a href="#the-ol-element">ol</a></code> element <a href="rendering.html#represents">represents</a> a list of
@@ -698,13 +749,61 @@ a friend lost to the
   value</a> of the previous item, plus one if the <code title="attr-ol-reversed"><a href="#attr-ol-reversed">reversed</a></code> is absent, or minus one if
   it is present.</p>
 
-  <p>The <dfn id="dom-ol-reversed" title="dom-ol-reversed"><code>reversed</code></dfn> IDL
-  attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the value of the <code title="attr-ol-reversed"><a href="#attr-ol-reversed">reversed</a></code> content attribute.</p>
+  </div><p>The <dfn id="attr-ol-type" title="attr-ol-type"><code>type</code></dfn> attribute
+  can be used to specify the kind of marker to use in the list, in the
+  cases where that matters (e.g. because items are to be referened by
+  their number/letter). The attribute, if specified, must have a value
+  that is a <a href="infrastructure.html#case-sensitive">case-sensitive</a> match for one of the
+  characters given in the first cell of one of the rows of the
+  following table. <span class="impl">The <code title="attr-ol-type"><a href="#attr-ol-type">type</a></code> attribute represents the state
+  given in the cell in the second column of the row whose first cell
+  matches the attribute's value; if none of the cells match, or if the
+  attribute is omitted, then the attribute represents the <a href="#attr-ol-type-state-decimal" title="attr-ol-type-state-decimal">decimal</a> state.</span></p><table><thead><tr><th>Keyword
+     </th><th>State
+     </th><th>Description
+     </th><th colspan="8">Examples for values 1-3 and 3999-4001
+   </th></tr></thead><tbody><tr><td><dfn id="attr-ol-type-keyword-decimal" title="attr-ol-type-keyword-decimal"><code>1</code></dfn> (U+0031)
+     </td><td><dfn id="attr-ol-type-state-decimal" title="attr-ol-type-state-decimal">decimal</dfn>
+     </td><td>Decimal numbers
+     </td><td class="eg"><samp>1.</samp> </td><td class="eg"><samp>2.</samp> </td><td class="eg"><samp>3.</samp> </td><td class="eg">... </td><td class="eg"><samp>3999.</samp> </td><td class="eg"><samp>4000.</samp> </td><td class="eg"><samp>4001.</samp> </td><td class="eg">...
+    </td></tr><tr><td><dfn id="attr-ol-type-keyword-lower-alpha" title="attr-ol-type-keyword-lower-alpha"><code>a</code></dfn> (U+0061)
+     </td><td><dfn id="attr-ol-type-state-lower-alpha" title="attr-ol-type-state-lower-alpha">lower-alpha</dfn>
+     </td><td>Lowercase latin alphabet
+     </td><td class="eg"><samp>a.</samp> </td><td class="eg"><samp>b.</samp> </td><td class="eg"><samp>c.</samp> </td><td class="eg">... </td><td class="eg"><samp>ewu.</samp> </td><td class="eg"><samp>ewv.</samp> </td><td class="eg"><samp>eww.</samp> </td><td class="eg">...
+    </td></tr><tr><td><dfn id="attr-ol-type-keyword-upper-alpha" title="attr-ol-type-keyword-upper-alpha"><code>A</code></dfn> (U+0041)
+     </td><td><dfn id="attr-ol-type-state-upper-alpha" title="attr-ol-type-state-upper-alpha">upper-alpha</dfn>
+     </td><td>Uppercase latin alphabet
+     </td><td class="eg"><samp>A.</samp> </td><td class="eg"><samp>B.</samp> </td><td class="eg"><samp>C.</samp> </td><td class="eg">... </td><td class="eg"><samp>EWU.</samp> </td><td class="eg"><samp>EWV.</samp> </td><td class="eg"><samp>EWW.</samp> </td><td class="eg">...
+    </td></tr><tr><td><dfn id="attr-ol-type-keyword-lower-roman" title="attr-ol-type-keyword-lower-roman"><code>i</code></dfn> (U+0069)
+     </td><td><dfn id="attr-ol-type-state-lower-roman" title="attr-ol-type-state-lower-roman">lower-roman</dfn>
+     </td><td>Lowercase roman numerals
+     </td><td class="eg"><samp>i.</samp> </td><td class="eg"><samp>ii.</samp> </td><td class="eg"><samp>iii.</samp> </td><td class="eg">... </td><td class="eg"><samp>mmmcmxcix.</samp> </td><td class="eg"><samp>i&#x305;v&#x305;.</samp> </td><td class="eg"><samp>i&#x305;v&#x305;i.</samp> </td><td class="eg">...
+    </td></tr><tr><td><dfn id="attr-ol-type-keyword-upper-roman" title="attr-ol-type-keyword-upper-roman"><code>I</code></dfn> (U+0049)
+     </td><td><dfn id="attr-ol-type-state-upper-roman" title="attr-ol-type-state-upper-roman">upper-roman</dfn>
+     </td><td>Uppercase roman numerals
+     </td><td class="eg"><samp>I.</samp> </td><td class="eg"><samp>II.</samp> </td><td class="eg"><samp>III.</samp> </td><td class="eg">... </td><td class="eg"><samp>MMMCMXCIX.</samp> </td><td class="eg"><samp>I&#x305;V&#x305;.</samp> </td><td class="eg"><samp>I&#x305;V&#x305;I.</samp> </td><td class="eg">...
+  </td></tr></tbody></table><div class="impl">
 
-  <p>The <dfn id="dom-ol-start" title="dom-ol-start"><code>start</code></dfn> IDL
-  attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the value of the <code title="attr-ol-start"><a href="#attr-ol-start">start</a></code> content attribute.</p>
+  <p>User agents should render the items of the list in a manner
+  consistent with the state of the <code title="attr-ol-type"><a href="#attr-ol-type">type</a></code> attribute of the <code><a href="#the-ol-element">ol</a></code>
+  element. Numbers less than or equal to zero should always use the
+  decimal system regardless of the <code title="attr-ol-type"><a href="#attr-ol-type">type</a></code> attribute.</p>
 
-  </div><!-- v2: resuming numbering of lists from previous lists? --><div class="example">
+  <p class="note">For CSS user agents, a mapping for this attribute to
+  the 'list-style-type' CSS property is given <a href="rendering.html#decohints">in
+  the rendering section</a> (the mapping is straightforward: the
+  states above have the same names as their corresponding CSS
+  values).</p>
+
+  </div><!-- v2: resuming numbering of lists from previous lists? --><div class="impl">
+
+  <p>The <dfn id="dom-ol-reversed" title="dom-ol-reversed"><code>reversed</code></dfn>,
+  <dfn id="dom-ol-start" title="dom-ol-start"><code>start</code></dfn>, and <dfn id="dom-ol-type" title="dom-ol-type"><code>type</code></dfn> IDL attributes must
+  <a href="common-dom-interfaces.html#reflect">reflect</a> the respective content attributes of the same
+  name. The <code title="dom-ol-start"><a href="#dom-ol-start">start</a></code> IDL attribute has
+  the same default as its content attribute.</p>
+
+  </div><div class="example">
 
    <p>The following markup shows a list where the order matters, and
    where the <code><a href="#the-ol-element">ol</a></code> element is therefore appropriate. Compare
@@ -735,9 +834,9 @@ I first lived there):&lt;/p&gt;
  &lt;li&gt;Norway
 &lt;/ol&gt;</pre>
 
-  </div><h4 id="the-ul-element"><span class="secno">4.5.6 </span>The <dfn><code>ul</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-ul-element"><span class="secno">4.5.6 </span>The <dfn><code>ul</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd>Zero or more <code><a href="#the-li-element">li</a></code> elements.</dd>
@@ -781,9 +880,9 @@ I first lived there):&lt;/p&gt;
  &lt;li&gt;United States
 &lt;/ul&gt;</pre>
 
-  </div><h4 id="the-li-element"><span class="secno">4.5.7 </span>The <dfn><code>li</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-li-element"><span class="secno">4.5.7 </span>The <dfn><code>li</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd>None.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Inside <code><a href="#the-ol-element">ol</a></code> elements.</dd>
    <dd>Inside <code><a href="#the-ul-element">ul</a></code> elements.</dd>
    <dd>Inside <code><a href="interactive-elements.html#menus">menu</a></code> elements.</dd>
@@ -865,9 +964,9 @@ I first lived there):&lt;/p&gt;
   <code><a href="interactive-elements.html#menus">menu</a></code> element and itself has a child that defines a
   <a href="commands.html#concept-command" title="concept-command">command</a>, then the
   <code><a href="#the-li-element">li</a></code> element will match the <code title="selector-enabled"><a href="links.html#selector-enabled">:enabled</a></code> and <code title="selector-disabled"><a href="links.html#selector-disabled">:disabled</a></code> pseudo-classes in the
-  same way as the first such child element does.</p><h4 id="the-dl-element"><span class="secno">4.5.8 </span>The <dfn><code>dl</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  same way as the first such child element does.</p><h4 id="the-dl-element"><span class="secno">4.5.8 </span>The <dfn><code>dl</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd>Zero or more groups each consisting of one or more
@@ -886,7 +985,8 @@ I first lived there):&lt;/p&gt;
   (<code><a href="#the-dd-element">dd</a></code> elements). Within a single <code><a href="#the-dl-element">dl</a></code> element,
   there should not be more than one <code><a href="#the-dt-element">dt</a></code> element for each
   name.</p><p>Name-value groups may be terms and definitions, metadata topics
-  and values, or any other groups of name-value data.</p><p>The values within a group are alternatives; multiple paragraphs
+  and values, questions and answers, or any other groups of name-value
+  data.</p><p>The values within a group are alternatives; multiple paragraphs
   forming part of the same value must all be given within the same
   <code><a href="#the-dd-element">dd</a></code> element.</p><p>The order of the list of groups, and of the names and values
   within each group, may be significant.</p><div class="impl">
@@ -989,9 +1089,9 @@ first matching case):&lt;/p&gt;
 &lt;/dl&gt;</pre>
   </div><p class="note">The <code><a href="#the-dl-element">dl</a></code> element is inappropriate for
   marking up dialogue. <a href="links.html#conversations">Examples of how to
-  mark up dialogue</a> are shown below.</p><h4 id="the-dt-element"><span class="secno">4.5.9 </span>The <dfn><code>dt</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  mark up dialogue</a> are shown below.</p><h4 id="the-dt-element"><span class="secno">4.5.9 </span>The <dfn><code>dt</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd>None.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Before <code><a href="#the-dd-element">dd</a></code> or <code><a href="#the-dt-element">dt</a></code> elements inside <code><a href="#the-dl-element">dl</a></code> elements.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
@@ -1022,9 +1122,9 @@ first matching case):&lt;/p&gt;
  &lt;/dl&gt;
 &lt;/article&gt;</pre>
 
-  </div><h4 id="the-dd-element"><span class="secno">4.5.10 </span>The <dfn><code>dd</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-dd-element"><span class="secno">4.5.10 </span>The <dfn><code>dd</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd>None.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>After <code><a href="#the-dt-element">dt</a></code> or <code><a href="#the-dd-element">dd</a></code> elements inside <code><a href="#the-dl-element">dl</a></code> elements.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
@@ -1053,10 +1153,10 @@ first matching case):&lt;/p&gt;
  &lt;dd&gt;&lt;i class="part-of-speech"&gt;&lt;abbr&gt;v.intr.&lt;/abbr&gt;&lt;/i&gt; To be delighted oneself.&lt;/dd&gt;
  &lt;dd&gt;&lt;i class="part-of-speech"&gt;&lt;abbr&gt;v.tr.&lt;/abbr&gt;&lt;/i&gt; To cause one to be delighted.&lt;/dd&gt;
 &lt;/dl&gt;</pre>
-  </div><h4 id="the-figure-element"><span class="secno">4.5.11 </span>The <dfn><code>figure</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-figure-element"><span class="secno">4.5.11 </span>The <dfn><code>figure</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="sections.html#sectioning-root">Sectioning root</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd>Either: One <code><a href="#the-figcaption-element">figcaption</a></code> element followed by <a href="content-models.html#flow-content">flow content</a>.</dd>
@@ -1166,7 +1266,7 @@ included with Exhibit B.
 
   </div><h4 id="the-figcaption-element"><span class="secno">4.5.12 </span>The <dfn><code>figcaption</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd>None.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>As the first or last child of a <code><a href="#the-figure-element">figure</a></code> element.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
@@ -1177,10 +1277,10 @@ included with Exhibit B.
   </dl><p>The <code><a href="#the-figcaption-element">figcaption</a></code> element <a href="rendering.html#represents">represents</a> a
   caption or legend for the rest of the contents of the
   <code><a href="#the-figcaption-element">figcaption</a></code> element's parent <code><a href="#the-figure-element">figure</a></code>
-  element<span class="impl">, if any</span>.</p><h4 id="the-div-element"><span class="secno">4.5.13 </span>The <dfn><code>div</code></dfn> element</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="element"><dt>Categories</dt>
+  element<span class="impl">, if any</span>.</p><h4 id="the-div-element"><span class="secno">4.5.13 </span>The <dfn><code>div</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="dnd.html#formatblock-candidate"><code title="">formatBlock</code> candidate</a>.</dd>
-   <dt>Contexts in which this element may be used:</dt>
+   <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
    <dt>Content model:</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>

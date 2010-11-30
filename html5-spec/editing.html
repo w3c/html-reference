@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,19 +356,19 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="timers.html" title="6.2 Timers" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="dnd.html" title="7.9 Drag and drop" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="timers.html" title="6.2 Timers" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="dnd.html" title="7.7 Drag and drop" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
    </div><div>
    <a href="timers.html">&#x2190; 6.2 Timers</a> &#x2013;
    <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="dnd.html">7.9 Drag and drop &#x2192;</a>
+   <a href="dnd.html">7.7 Drag and drop &#x2192;</a>
   <ol class="toc"><li><a href="editing.html#editing"><span class="secno">7 </span>User interaction</a>
-  <ol><li><a href="editing.html#the-hidden-attribute"><span class="secno">7.1 </span>The <code>hidden</code> attribute</a></li><li><a href="editing.html#activation"><span class="secno">7.2 </span>Activation</a></li><li><a href="editing.html#scrolling-elements-into-view"><span class="secno">7.3 </span>Scrolling elements into view</a></li><li><a href="editing.html#focus"><span class="secno">7.4 </span>Focus</a>
-    <ol><li><a href="editing.html#sequential-focus-navigation-and-the-tabindex-attribute"><span class="secno">7.4.1 </span>Sequential focus navigation and the <code title="attr-tabindex">tabindex</code> attribute</a></li><li><a href="editing.html#focus-management"><span class="secno">7.4.2 </span>Focus management</a></li><li><a href="editing.html#document-level-focus-apis"><span class="secno">7.4.3 </span>Document-level focus APIs</a></li><li><a href="editing.html#element-level-focus-apis"><span class="secno">7.4.4 </span>Element-level focus APIs</a></li></ol></li><li><a href="editing.html#the-accesskey-attribute"><span class="secno">7.5 </span>The <code>accesskey</code> attribute</a></li><li><a href="editing.html#selection"><span class="secno">7.6 </span>The text selection APIs</a>
-    <ol><li><a href="editing.html#documentSelection"><span class="secno">7.6.1 </span>APIs for the browsing context selection</a></li><li><a href="editing.html#textFieldSelection"><span class="secno">7.6.2 </span>APIs for the text field selections</a></li></ol></li><li><a href="editing.html#contenteditable"><span class="secno">7.7 </span>The <code title="attr-contenteditable">contenteditable</code> attribute</a>
-    <ol><li><a href="editing.html#user-editing-actions"><span class="secno">7.7.1 </span>User editing actions</a></li><li><a href="editing.html#making-entire-documents-editable"><span class="secno">7.7.2 </span>Making entire documents editable</a></li></ol></li><li><a href="editing.html#spelling-and-grammar-checking"><span class="secno">7.8 </span>Spelling and grammar checking</a></li></ol></li></ol></div><h2 id="editing"><span class="secno">7 </span><dfn>User interaction</dfn></h2><h3 id="the-hidden-attribute"><span class="secno">7.1 </span>The <dfn title="attr-hidden"><code>hidden</code></dfn> attribute</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>All <a href="infrastructure.html#html-elements">HTML elements</a> may have the <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> content attribute set. The <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> attribute is a <a href="common-microsyntaxes.html#boolean-attribute">boolean
+  <ol><li><a href="editing.html#the-hidden-attribute"><span class="secno">7.1 </span>The <code>hidden</code> attribute</a></li><li><a href="editing.html#activation"><span class="secno">7.2 </span>Activation</a></li><li><a href="editing.html#focus"><span class="secno">7.3 </span>Focus</a>
+    <ol><li><a href="editing.html#sequential-focus-navigation-and-the-tabindex-attribute"><span class="secno">7.3.1 </span>Sequential focus navigation and the <code title="attr-tabindex">tabindex</code> attribute</a></li><li><a href="editing.html#focus-management"><span class="secno">7.3.2 </span>Focus management</a></li><li><a href="editing.html#document-level-focus-apis"><span class="secno">7.3.3 </span>Document-level focus APIs</a></li><li><a href="editing.html#element-level-focus-apis"><span class="secno">7.3.4 </span>Element-level focus APIs</a></li></ol></li><li><a href="editing.html#assigning-keyboard-shortcuts"><span class="secno">7.4 </span>Assigning keyboard shortcuts</a>
+    <ol><li><a href="editing.html#introduction-5"><span class="secno">7.4.1 </span>Introduction</a></li><li><a href="editing.html#the-accesskey-attribute"><span class="secno">7.4.2 </span>The <code>accesskey</code> attribute</a></li><li><a href="editing.html#processing-model-3"><span class="secno">7.4.3 </span>Processing model</a></li></ol></li><li><a href="editing.html#contenteditable"><span class="secno">7.5 </span>The <code title="attr-contenteditable">contenteditable</code> attribute</a>
+    <ol><li><a href="editing.html#user-editing-actions"><span class="secno">7.5.1 </span>User editing actions</a></li><li><a href="editing.html#making-entire-documents-editable"><span class="secno">7.5.2 </span>Making entire documents editable</a></li></ol></li><li><a href="editing.html#spelling-and-grammar-checking"><span class="secno">7.6 </span>Spelling and grammar checking</a></li></ol></li></ol></div><h2 id="editing"><span class="secno">7 </span><dfn>User interaction</dfn></h2><h3 id="the-hidden-attribute"><span class="secno">7.1 </span>The <dfn title="attr-hidden"><code>hidden</code></dfn> attribute</h3><p>All <a href="infrastructure.html#html-elements">HTML elements</a> may have the <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> content attribute set. The <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> attribute is a <a href="common-microsyntaxes.html#boolean-attribute">boolean
   attribute</a>. When specified on an element, it indicates that
   the element is not yet, or is no longer, relevant. <span class="impl">User agents should not render elements that have the
   <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> attribute
@@ -380,7 +427,7 @@
   attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the content attribute of the
   same name.</p>
 
-  </div><h3 id="activation"><span class="secno">7.2 </span>Activation</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><!-- v2 idea: HTMLImageElement.click(x, y); or clickPoint(), if
+  </div><h3 id="activation"><span class="secno">7.2 </span>Activation</h3><!-- v2 idea: HTMLImageElement.click(x, y); or clickPoint(), if
        click() can't be done in IE; can this be emulated in IE by
        posting a synthetic mouse click event with those X and Y
        coords? (ack Csaba Gabor)
@@ -414,48 +461,7 @@
    <li><p>Set the <var title="">click in progress</var> flag on the
    element to false.</p></li>
 
-  </ol></div><h3 id="scrolling-elements-into-view"><span class="secno">7.3 </span>Scrolling elements into view</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><!-- maybe this should move to [CSSOM] --><dl class="domintro"><dt><var title="">element</var> . <code title="dom-scrollIntoView"><a href="#dom-scrollintoview">scrollIntoView</a></code>( [ <var title="">top</var> ] )</dt>
-
-   <dd>
-
-    <p>Scrolls the element into view. If the <var title="">top</var>
-    argument is true, then the element will be scrolled to the top of
-    the viewport, otherwise it'll be scrolled to the bottom. The
-    default is the top.</p>
-
-   </dd>
-
-  </dl><div class="impl">
-
-  <p>The <dfn id="dom-scrollintoview" title="dom-scrollIntoView"><code>scrollIntoView([<var title="">top</var>])</code></dfn> method, when called, must cause
-  the element on which the method was called to have the attention of
-  the user called to it.</p>
-
-  <p class="note">In a speech browser, this could happen by having the
-  current playback position move to the start of the given
-  element.</p>
-
-  <p>If the element in question cannot be brought to the user's
-  attention, e.g. because it is <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code>, or is not <a href="rendering.html#being-rendered">being
-  rendered</a>, then the user agent must do nothing instead.</p>
-
-  <p>In visual user agents, if the argument is present and has the
-  value false, the user agent should scroll the element into view such
-  that both the bottom and the top of the element are in the viewport,
-  with the bottom of the element aligned with the bottom of the
-  viewport. If it isn't possible to show the entire element in that
-  way, or if the argument is omitted or is true, then the user agent
-  should instead align the top of the element with the top of the
-  viewport. If the entire scrollable part of the content is visible
-  all at once (e.g. if a page is shorter than the viewport), then the
-  user agent should not scroll anything. Visual user agents should
-  further scroll horizontally as necessary to bring the element to the
-  attention of the user.</p>
-
-  <p>Non-visual user agents may ignore the argument, or may treat it
-  in some media-specific manner most useful to the user.</p>
-
-  </div><h3 id="focus"><span class="secno">7.4 </span>Focus</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><!-- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E%20%0A...%3Cform%3E%3Cinput%20name%3Da%20onfocus%3D%22value%2B%3D1%3Bd.name%3D%27a%27%3Bname%3D%27d%27%3Bb.focus()%22%3E%0A%3Cinput%20name%3Db%20onfocus%3D%22value%2B%3D1%3Bc.focus()%22%3E%0A%3Cinput%20name%3Dc%20onfocus%3D%22value%2B%3D1%3Bd.focus()%22%3E%0A%3Cinput%20name%3Dd%20onfocus%3D%22value%2B%3D1%3Ba.focus()%22%3E --><!-- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E%0A...%3Cform%3E%0A%3Ctextarea%20name%3Dt%20cols%3D100%20rows%3D3%3E%3C%2Ftextarea%3E%3Cp%3E%0A%3Cinput%20name%3Da%20onfocus%3D%22t.value%2B%3D%27af1%20%27%3Bb.focus()%3Balert(document.activeElement.name)%3Bt.value%2B%3D%27af2%20%27%3B%22%20onblur%3D%22t.value%2B%3D%27ab%20%27%3B%22%3E%0A%3Cinput%20name%3Db%20onfocus%3D%22t.value%2B%3D%27bf1%20%27%3Bc.focus()%3Bt.value%2B%3D%27bf2%20%27%3B%22%20onblur%3D%22t.value%2B%3D%27bb%20%27%3B%22%3E%0A%3Cinput%20name%3Dc%20onfocus%3D%22t.value%2B%3D%27cf1%20%27%3Bc.focus()%3Bt.value%2B%3D%27cf2%20%27%3B%22%20onblur%3D%22t.value%2B%3D%27cb%20%27%3B%22%3E%0A --><!-- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E%3Cbody%20onload%3D%22document.forms%5B0%5D.a.focus()%22%3E%0A...%3Cform%3E%0A%3Ctextarea%20name%3Dt%20cols%3D100%20rows%3D3%3E%3C%2Ftextarea%3E%3Cp%3E%0A%3Cinput%20name%3Da%20onblur%3D%22t.value%2B%3D'ab%20'%3B%20b.focus()%3B%22%3E%0A%3Cinput%20name%3Db%20onfocus%3D%22t.value%2B%3D'bf1%20'%3Ba.focus()%3Bt.value%2B%3D'bf2%20'%3B%22%20onblur%3D%22t.value%2B%3D'bb%20'%3B%22%3E --><!-- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E%3Cbody%3E...%3Cform%3E%0A%3Ctextarea%20name%3Dt%20cols%3D100%20rows%3D3%3E%3C%2Ftextarea%3E%3Cp%3E%0A%3Cinput%20name%3Da%20onfocus%3D%22t.value%2B%3D%27af%20%27%3B%22%20onblur%3D%22t.value%2B%3D%27ab1%20%27%3Bb.focus()%3Bt.value%2B%3D%27ab2%20%27%3B%22%3E%0A%3Cinput%20name%3Db%20onfocus%3D%22t.value%2B%3D%27bf1%20%27%3Ba.focus()%3Bt.value%2B%3D%27bf2%20%27%3B%22%20onblur%3D%22t.value%2B%3D%27bb%20%27%3B%22%3E --><!-- v2: more things to define, if no other specs define them:
+  </ol></div><h3 id="focus"><span class="secno">7.3 </span>Focus</h3><!-- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E%20%0A...%3Cform%3E%3Cinput%20name%3Da%20onfocus%3D%22value%2B%3D1%3Bd.name%3D%27a%27%3Bname%3D%27d%27%3Bb.focus()%22%3E%0A%3Cinput%20name%3Db%20onfocus%3D%22value%2B%3D1%3Bc.focus()%22%3E%0A%3Cinput%20name%3Dc%20onfocus%3D%22value%2B%3D1%3Bd.focus()%22%3E%0A%3Cinput%20name%3Dd%20onfocus%3D%22value%2B%3D1%3Ba.focus()%22%3E --><!-- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E%0A...%3Cform%3E%0A%3Ctextarea%20name%3Dt%20cols%3D100%20rows%3D3%3E%3C%2Ftextarea%3E%3Cp%3E%0A%3Cinput%20name%3Da%20onfocus%3D%22t.value%2B%3D%27af1%20%27%3Bb.focus()%3Balert(document.activeElement.name)%3Bt.value%2B%3D%27af2%20%27%3B%22%20onblur%3D%22t.value%2B%3D%27ab%20%27%3B%22%3E%0A%3Cinput%20name%3Db%20onfocus%3D%22t.value%2B%3D%27bf1%20%27%3Bc.focus()%3Bt.value%2B%3D%27bf2%20%27%3B%22%20onblur%3D%22t.value%2B%3D%27bb%20%27%3B%22%3E%0A%3Cinput%20name%3Dc%20onfocus%3D%22t.value%2B%3D%27cf1%20%27%3Bc.focus()%3Bt.value%2B%3D%27cf2%20%27%3B%22%20onblur%3D%22t.value%2B%3D%27cb%20%27%3B%22%3E%0A --><!-- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E%3Cbody%20onload%3D%22document.forms%5B0%5D.a.focus()%22%3E%0A...%3Cform%3E%0A%3Ctextarea%20name%3Dt%20cols%3D100%20rows%3D3%3E%3C%2Ftextarea%3E%3Cp%3E%0A%3Cinput%20name%3Da%20onblur%3D%22t.value%2B%3D'ab%20'%3B%20b.focus()%3B%22%3E%0A%3Cinput%20name%3Db%20onfocus%3D%22t.value%2B%3D'bf1%20'%3Ba.focus()%3Bt.value%2B%3D'bf2%20'%3B%22%20onblur%3D%22t.value%2B%3D'bb%20'%3B%22%3E --><!-- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E%3Cbody%3E...%3Cform%3E%0A%3Ctextarea%20name%3Dt%20cols%3D100%20rows%3D3%3E%3C%2Ftextarea%3E%3Cp%3E%0A%3Cinput%20name%3Da%20onfocus%3D%22t.value%2B%3D%27af%20%27%3B%22%20onblur%3D%22t.value%2B%3D%27ab1%20%27%3Bb.focus()%3Bt.value%2B%3D%27ab2%20%27%3B%22%3E%0A%3Cinput%20name%3Db%20onfocus%3D%22t.value%2B%3D%27bf1%20%27%3Ba.focus()%3Bt.value%2B%3D%27bf2%20%27%3B%22%20onblur%3D%22t.value%2B%3D%27bb%20%27%3B%22%3E --><!-- v2: more things to define, if no other specs define them:
    - define onfocus/onblur behaviour for Window
    - Other things to look at are IE's focus APIs (HTMLElement.setActive(),
      onBeforeActivate, onActivate, onBeforeDeactivate, onDeactivate):
@@ -484,7 +490,7 @@
   <p class="note">When an element is focused, the element matches the
   CSS <code>:focus</code> pseudo-class.</p>
 
-  </div><h4 id="sequential-focus-navigation-and-the-tabindex-attribute"><span class="secno">7.4.1 </span>Sequential focus navigation and the <code title="attr-tabindex"><a href="#attr-tabindex">tabindex</a></code> attribute</h4><p>The <dfn id="attr-tabindex" title="attr-tabindex"><code>tabindex</code></dfn>
+  </div><h4 id="sequential-focus-navigation-and-the-tabindex-attribute"><span class="secno">7.3.1 </span>Sequential focus navigation and the <code title="attr-tabindex"><a href="#attr-tabindex">tabindex</a></code> attribute</h4><p>The <dfn id="attr-tabindex" title="attr-tabindex"><code>tabindex</code></dfn>
   content attribute specifies whether the element is focusable,
   whether it can be reached using sequential focus navigation, and the
   relative order of the element for the purposes of sequential focus
@@ -581,14 +587,13 @@
   element is focused).</p>
 
   <p>The <dfn id="dom-tabindex" title="dom-tabIndex"><code>tabIndex</code></dfn> IDL
-  attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the value of the <code title="attr-tabindex"><a href="#attr-tabindex">tabindex</a></code> content attribute. If the
-  attribute is not present, or parsing its value returns an error,
-  then the IDL attribute must return 0 for elements that are focusable
-  and &#x2212;1 for elements that are not focusable.</p>
+  attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the value of the <code title="attr-tabindex"><a href="#attr-tabindex">tabindex</a></code> content attribute. Its default
+  value is 0 for elements that are focusable and &#x2212;1 for
+  elements that are not focusable.</p>
 
   </div><div class="impl">
 
-  <h4 id="focus-management"><span class="secno">7.4.2 </span>Focus management</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="focus-management"><span class="secno">7.3.2 </span>Focus management</h4>
 
   <p>An element is <dfn id="focusable">focusable</dfn> if the user agent's default
   behavior allows it to be focusable or if the element is
@@ -627,6 +632,12 @@
   platform conventions dictate otherwise. (A single <code><a href="the-map-element.html#the-area-element">area</a></code>
   element can correspond to multiple shapes, since image maps can be
   reused with multiple images on a page.)</p>
+
+  <p>The user agent may also make part of a <code><a href="interactive-elements.html#the-details-element">details</a></code>
+  element's rendering focusable, to enable the element to be opened or
+  closed using keyboard input. However, this is distinct from the
+  <code><a href="interactive-elements.html#the-details-element">details</a></code> or <code><a href="interactive-elements.html#the-summary-element">summary</a></code> element being
+  focusable.</p>
 
   <hr/><p>The <dfn id="focusing-steps">focusing steps</dfn> are as follows:</p>
 
@@ -680,7 +691,7 @@
   element is removed from its <code><a href="infrastructure.html#document">Document</a></code>, or has a <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> attribute added. It would also
   happen to an <code><a href="the-input-element.html#the-input-element">input</a></code> element when the element gets <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a>.</p>
 
-  </div><h4 id="document-level-focus-apis"><span class="secno">7.4.3 </span>Document-level focus APIs</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">document</var> . <code title="dom-document-activeElement"><a href="#dom-document-activeelement">activeElement</a></code></dt>
+  </div><h4 id="document-level-focus-apis"><span class="secno">7.3.3 </span>Document-level focus APIs</h4><dl class="domintro"><dt><var title="">document</var> . <code title="dom-document-activeElement"><a href="#dom-document-activeelement">activeElement</a></code></dt>
 
    <dd>
 
@@ -750,7 +761,7 @@
   system focus, but hostile sites widely abuse this behavior to the
   user's detriment.</p>
 
-  </div><h4 id="element-level-focus-apis"><span class="secno">7.4.4 </span>Element-level focus APIs</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">element</var> . <code title="dom-focus"><a href="#dom-focus">focus</a></code>()</dt>
+  </div><h4 id="element-level-focus-apis"><span class="secno">7.3.4 </span>Element-level focus APIs</h4><dl class="domintro"><dt><var title="">element</var> . <code title="dom-focus"><a href="#dom-focus">focus</a></code>()</dt>
 
    <dd>
 
@@ -809,79 +820,23 @@
   unusable by keyboard users. Ignoring calls to this method would thus
   allow keyboard users to interact with the page.</p>
 
-  </div><h3 id="the-accesskey-attribute"><span class="secno">7.5 </span>The <dfn title="attr-accesskey"><code>accesskey</code></dfn> attribute</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>All <a href="infrastructure.html#html-elements">HTML elements</a> may have the <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> content attribute set. The
+  </div><h3 id="assigning-keyboard-shortcuts"><span class="secno">7.4 </span>Assigning keyboard shortcuts</h3><h4 id="introduction-5"><span class="secno">7.4.1 </span>Introduction</h4><p><i>This section is non-normative.</i></p><p>Each element that can be activated or focused can be assigned a
+  single key combination to activate it, using the <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> attribute.</p><p>The exact shortcut is determined by the user agent, based on
+  information about the user's keyboard, what keyboard shortcuts
+  already exist on the platform, and what other shortcuts have been
+  specified on the page, using the information provided in the <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> attribute as a guide.</p><p>In order to ensure that a relevant keyboard shortcut is available
+  on a wide variety of input devices, the author can provide a number
+  of alternatives in the <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code>
+  attribute.</p><p>Each alternative consists of a single character, such as a letter
+  or digit.</p><p>User agents can provide users with a list of the keyboard
+  shortcuts, but authors are encouraged to do so also. The <code title="dom-accessKeyLabel"><a href="#dom-accesskeylabel">accessKeyLabel</a></code> IDL attribute
+  returns a string representing the actual key combination assigned by
+  the user agent.</p><h4 id="the-accesskey-attribute"><span class="secno">7.4.2 </span>The <dfn title="attr-accesskey"><code>accesskey</code></dfn> attribute</h4><p>All <a href="infrastructure.html#html-elements">HTML elements</a> may have the <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> content attribute set. The
   <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> attribute's value is
   used by the user agent as a guide for creating a keyboard shortcut
   that activates or focuses the element.</p><p>If specified, the value must be an <a href="common-microsyntaxes.html#ordered-set-of-unique-space-separated-tokens">ordered set of unique
-  space-separated tokens</a>, each of which must be exactly one
-  Unicode code point in length.</p><div class="impl">
-
-  <p>An element's <dfn id="assigned-access-key">assigned access key</dfn> is a key combination
-  derived from the element's <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> content attribute as
-  follows:</p>
-
-  <ol><li><p>If the element has no <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> attribute, then skip to the
-   <i>fallback</i> step below.</p></li>
-
-   <li><p>Otherwise, the user agent must <a href="common-microsyntaxes.html#split-a-string-on-spaces" title="split a string&#10;   on spaces">split the attribute's value on spaces</a>, and let
-   <var title="">keys</var> be the resulting tokens.</p></li>
-
-   <li>
-
-    <p>For each value in <var title="">keys</var> in turn, in the
-    order the tokens appeared in the attribute's value, run the
-    following substeps:</p>
-
-    <ol><li><p>If the value is not a string exactly one Unicode code
-     point in length, then skip the remainder of these steps for this
-     value.</p></li>
-
-     <li><p>If the value does not correspond to a key on the system's
-     keyboard, then skip the remainder of these steps for this
-     value.</p></li>
-
-     <li><p>If the user agent can find a combination of modifier keys
-     that, with the key that corresponds to the value given in the
-     attribute, can be used as a shortcut key, then the user agent may
-     assign that combination of keys as the element's <a href="#assigned-access-key">assigned
-     access key</a> and abort these steps.</p></li>
-
-    </ol></li>
-
-   <li><p><i>Fallback</i>: Optionally, the user agent may assign a key
-   combination of its choosing as the element's <a href="#assigned-access-key">assigned access
-   key</a> and then abort these steps.</p></li>
-
-   <li><p>If this step is reached, the element has no <a href="#assigned-access-key">assigned
-   access key</a>.</p></li>
-
-  </ol><p>Once a user agent has selected and assigned an access key for an
-  element, the user agent should not change the element's
-  <a href="#assigned-access-key">assigned access key</a> unless the <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> content attribute is changed
-  or the element is moved to another <code><a href="infrastructure.html#document">Document</a></code>.</p>
-
-  <p>When the user presses the key combination corresponding to the
-  <a href="#assigned-access-key">assigned access key</a> for an element, if the element
-  <a href="commands.html#concept-command" title="concept-command">defines a command</a>, and the
-  command's <a href="commands.html#command-facet-hiddenstate" title="command-facet-HiddenState">Hidden
-  State</a> facet is false (visible), and the command's <a href="commands.html#command-facet-disabledstate" title="command-facet-DisabledState">Disabled State</a> facet is
-  also false (enabled), then the user agent must trigger the <a href="commands.html#command-facet-action" title="command-facet-Action">Action</a> of the command.</p>
-
-  <p>User agents may expose elements that have an <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> attribute in other ways as
-  well, e.g. in a menu displayed in response to a specific key
-  combination.</p>
-
-  </div><div class="impl">
-
-  <p>The <dfn id="dom-accesskey" title="dom-accessKey"><code>accessKey</code></dfn> IDL
-  attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> content attribute.</p>
-
-  <p>The <dfn id="dom-accesskeylabel" title="dom-accessKeyLabel"><code>accessKeyLabel</code></dfn> IDL
-  attribute must return a string that represents the element's
-  <a href="#assigned-access-key">assigned access key</a>, if any. If the element does not
-  have one, then the IDL attribute must return the empty string.</p>
-
-  </div><div class="example">
+  space-separated tokens</a> that are <a href="infrastructure.html#case-sensitive">case-sensitive</a>,
+  each of which must be exactly one Unicode code point in length.</p><div class="example">
 
    <p>In the following example, a variety of links are given with
    access keys so that keyboard users familiar with the site can
@@ -939,465 +894,74 @@
    string depends on what the <a href="#assigned-access-key">assigned access key</a> is, and
    on how the user agent represents that key combination.</p>
 
-  </div><h3 id="selection"><span class="secno">7.6 </span>The text selection APIs</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>Every <a href="browsers.html#browsing-context">browsing context</a> has <dfn id="the-selection" title="the&#10;  selection">a selection</dfn>. The selection can be empty, and the
-  selection can have more than one range (a disjointed selection). The
-  user agent should allow the user to change the selection. User
-  agents are not required to let the user select more than one range,
-  and may collapse multiple ranges in the selection to a single range
-  when the user interacts with the selection. (But, of course, the
-  user agent may let the user create selections with multiple
-  ranges.)</p><p>This one selection must be shared by all the content of the
-  browsing context (though not by nested <a href="browsers.html#browsing-context" title="browsing&#10;  context">browsing contexts</a>), including any editing hosts in
-  the document. (Editing hosts that are not inside a document cannot
-  have a selection.)</p><div class="impl">
-
-  <p>If the selection is empty (collapsed, so that it has only one
-  segment and that segment's start and end points are the same) then
-  the selection's position should equal the caret position. When the
-  selection is not empty, this specification does not define the caret
-  position; user agents should follow platform conventions in deciding
-  whether the caret is at the start of the selection, the end of the
-  selection, or somewhere else.</p>
-
-  <p>On some platforms (such as those using Wordstar editing
-  conventions), the caret position is totally independent of the start
-  and end of the selection, even when the selection is empty. On such
-  platforms, user agents may ignore the requirement that the cursor
-  position be linked to the position of the selection altogether.</p>
-
-  </div><p>Mostly for historical reasons, in addition to the <a href="browsers.html#browsing-context">browsing
-  context</a>'s <a href="#the-selection" title="the selection">selection</a>, each
-  <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> and <code><a href="the-input-element.html#the-input-element">input</a></code> element has an
-  independent selection. These are the <dfn id="text-field-selection" title="text field&#10;  selection">text field selections</dfn>.</p><div class="impl">
-
-  <p>User agents may selectively ignore attempts to use the API to
-  adjust the selection made after the user has modified the
-  selection. For example, if the user has just selected part of a
-  word, the user agent could ignore attempts to use the API call to
-  immediately unselect the selection altogether, but could allow
-  attempts to change the selection to select the entire word.</p>
-
-  <p>User agents may also allow the user to create selections that are
-  not exposed to the API.</p>
-
-  </div><!-- v2DATAGRID v2DGS:
-  <p>The <code>datagrid</code> and <code>select</code> elements also
-  have selections, indicating which items have been picked by the
-  user. These are not discussed in this section.</p>
-  --><p>The <code><a href="the-button-element.html#the-select-element">select</a></code> element also has a selection, indicating
-  which items have been picked by the user. This is not discussed in
-  this section.</p><p class="note">This specification does not specify how selections
-  are presented to the user. <!-- The Selectors specification, in
-  conjunction with CSS, can be used to style text selections using the
-  <code title="selector-selection">::selection</code>
-  pseudo-element. <a href="#refsSELECTORS">[SELECTORS]</a> <a
-  href="#refsCSS">[CSS]</a> --></p><h4 id="documentSelection"><span class="secno">7.6.1 </span>APIs for the browsing context selection</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><dl class="domintro"><dt><var title="">window</var> . <code title="dom-getSelection"><a href="#dom-getselection">getSelection</a></code>()</dt>
-   <dt><var title="">document</var> . <code title="dom-document-getSelection"><a href="#dom-document-getselection">getSelection</a></code>()</dt>
-
-   <dd>
-
-    <p>Returns the <code><a href="#selection-0">Selection</a></code> object for the window, which
-    stringifies to the text of the current selection.</p>
-
-   </dd>
-
-  </dl><div class="impl">
-
-  <p>The <dfn id="dom-getselection" title="dom-getSelection"><code>getSelection()</code></dfn> method on
-  the <code><a href="browsers.html#window">Window</a></code> interface must return the
-  <code><a href="#selection-0">Selection</a></code> object representing <a href="#the-selection">the
-  selection</a> of that <code><a href="browsers.html#window">Window</a></code> object's
-  <a href="browsers.html#browsing-context">browsing context</a>.
+  </div><div class="impl">
 
-  </p><p>For historical reasons, the <dfn id="dom-document-getselection" title="dom-document-getSelection"><code>getSelection()</code></dfn>
-  method on the <code><a href="dom.html#htmldocument">HTMLDocument</a></code> interface must return the
-  same <code><a href="#selection-0">Selection</a></code> object.</p>
+  <h4 id="processing-model-3"><span class="secno">7.4.3 </span>Processing model</h4>
 
-  </div><pre class="idl">interface <dfn id="selection-0">Selection</dfn> {
-  readonly attribute Node <a href="#dom-selection-anchornode" title="dom-selection-anchorNode">anchorNode</a>;
-  readonly attribute long <a href="#dom-selection-anchoroffset" title="dom-selection-anchorOffset">anchorOffset</a>;
-  readonly attribute Node <a href="#dom-selection-focusnode" title="dom-selection-focusNode">focusNode</a>;
-  readonly attribute long <a href="#dom-selection-focusoffset" title="dom-selection-focusOffset">focusOffset</a>;
-  readonly attribute boolean <a href="#dom-selection-iscollapsed" title="dom-selection-isCollapsed">isCollapsed</a>;
-  void <a href="#dom-selection-collapse" title="dom-selection-collapse">collapse</a>(in Node parentNode, in long offset);
-  void <a href="#dom-selection-collapsetostart" title="dom-selection-collapseToStart">collapseToStart</a>();
-  void <a href="#dom-selection-collapsetoend" title="dom-selection-collapseToEnd">collapseToEnd</a>();
-  void <a href="#dom-selection-selectallchildren" title="dom-selection-selectAllChildren">selectAllChildren</a>(in Node parentNode);
-  void <a href="#dom-selection-deletefromdocument" title="dom-selection-deleteFromDocument">deleteFromDocument</a>();
-  readonly attribute long <a href="#dom-selection-rangecount" title="dom-selection-rangeCount">rangeCount</a>;
-  Range <a href="#dom-selection-getrangeat" title="dom-selection-getRangeAt">getRangeAt</a>(in long index);
-  void <a href="#dom-selection-addrange" title="dom-selection-addRange">addRange</a>(in Range range);
-  void <a href="#dom-selection-removerange" title="dom-selection-removeRange">removeRange</a>(in Range range);
-  void <a href="#dom-selection-removeallranges" title="dom-selection-removeAllRanges">removeAllRanges</a>();
-  <a href="#dom-selection-tostring" title="dom-selection-toString">stringifier</a> DOMString ();
-};</pre><!--
-  See also:
-    http://lxr.mozilla.org/mozilla/source/content/base/public/nsISelection.idl
-  This spec doesn't have everything from there yet, in particular
-  selectionLanguageChange() and containsNode() are missing. They are missing
-  because I couldn't work out how to define them in terms of Ranges.
+  <p>An element's <dfn id="assigned-access-key">assigned access key</dfn> is a key combination
+  derived from the element's <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> content attribute as
+  follows:</p>
 
-  I also haven't included extend():
+  <ol><li><p>If the element has no <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> attribute, then skip to the
+   <i>fallback</i> step below.</p></li>
 
-    void <span title="dom-selection-extend">extend</span>(in Node parentNode, in long offset);
-    // raise if no range
-    // raise WRONG_DOCUMENT_ERR if parentNode not in document
-    // do something
+   <li><p>Otherwise, the user agent must <a href="common-microsyntaxes.html#split-a-string-on-spaces" title="split a string&#10;   on spaces">split the attribute's value on spaces</a>, and let
+   <var title="">keys</var> be the resulting tokens.</p></li>
 
-  ...mostly because I can't work out how to describe what it does quickly.
---><p>The <code><a href="#selection-0">Selection</a></code> interface represents a list of
-  <code><a href="infrastructure.html#range">Range</a></code> objects. The first item in the list has index 0,
-  and the last item has index <var title="">count</var>-1, where <var title="">count</var> is the number of ranges in the list. <a href="references.html#refsDOMRANGE">[DOMRANGE]</a></p><p>All of the members of the <code><a href="#selection-0">Selection</a></code> interface are
-  defined in terms of operations on the <code><a href="infrastructure.html#range">Range</a></code> objects
-  represented by this object. These operations can raise exceptions,
-  as defined for the <code><a href="infrastructure.html#range">Range</a></code> interface; this can therefore
-  result in the members of the <code><a href="#selection-0">Selection</a></code> interface
-  raising exceptions as well, in addition to any explicitly called out
-  below.</p><dl class="domintro"><dt><var title="">selection</var> . <code title="dom-selection-anchorNode"><a href="#dom-selection-anchornode">anchorNode</a></code></dt>
+   <li>
 
-   <dd>
+    <p>For each value in <var title="">keys</var> in turn, in the
+    order the tokens appeared in the attribute's value, run the
+    following substeps:</p>
 
-    <p>Returns the element that contains the start of the selection.</p>
+    <ol><li><p>If the value is not a string exactly one Unicode code
+     point in length, then skip the remainder of these steps for this
+     value.</p></li>
 
-    <p>Returns null if there's no selection.</p>
+     <li><p>If the value does not correspond to a key on the system's
+     keyboard, then skip the remainder of these steps for this
+     value.</p></li>
 
-   </dd>
+     <li><p>If the user agent can find a combination of modifier keys
+     that, with the key that corresponds to the value given in the
+     attribute, can be used as a shortcut key, then the user agent may
+     assign that combination of keys as the element's <a href="#assigned-access-key">assigned
+     access key</a> and abort these steps.</p></li>
 
-   <dt><var title="">selection</var> . <code title="dom-selection-anchorOffset"><a href="#dom-selection-anchoroffset">anchorOffset</a></code></dt>
+    </ol></li>
 
-   <dd>
+   <li><p><i>Fallback</i>: Optionally, the user agent may assign a key
+   combination of its choosing as the element's <a href="#assigned-access-key">assigned access
+   key</a> and then abort these steps.</p></li>
 
-    <p>Returns the offset of the start of the selection relative to the element that contains the start of the selection.</p>
+   <li><p>If this step is reached, the element has no <a href="#assigned-access-key">assigned
+   access key</a>.</p></li>
 
-    <p>Returns 0 if there's no selection.</p>
+  </ol><p>Once a user agent has selected and assigned an access key for an
+  element, the user agent should not change the element's
+  <a href="#assigned-access-key">assigned access key</a> unless the <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> content attribute is changed
+  or the element is moved to another <code><a href="infrastructure.html#document">Document</a></code>.</p>
 
-   </dd>
+  <p>When the user presses the key combination corresponding to the
+  <a href="#assigned-access-key">assigned access key</a> for an element, if the element
+  <a href="commands.html#concept-command" title="concept-command">defines a command</a>, and the
+  command's <a href="commands.html#command-facet-hiddenstate" title="command-facet-HiddenState">Hidden
+  State</a> facet is false (visible), and the command's <a href="commands.html#command-facet-disabledstate" title="command-facet-DisabledState">Disabled State</a> facet is
+  also false (enabled), then the user agent must trigger the <a href="commands.html#command-facet-action" title="command-facet-Action">Action</a> of the command.</p>
 
-   <dt><var title="">selection</var> . <code title="dom-selection-focusNode"><a href="#dom-selection-focusnode">focusNode</a></code></dt>
+  <p>User agents may expose elements that have an <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> attribute in other ways as
+  well, e.g. in a menu displayed in response to a specific key
+  combination.</p>
 
-   <dd>
+  <p>The <dfn id="dom-accesskey" title="dom-accessKey"><code>accessKey</code></dfn> IDL
+  attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> content attribute.</p>
 
-    <p>Returns the element that contains the end of the selection.</p>
+  <p>The <dfn id="dom-accesskeylabel" title="dom-accessKeyLabel"><code>accessKeyLabel</code></dfn> IDL
+  attribute must return a string that represents the element's
+  <a href="#assigned-access-key">assigned access key</a>, if any. If the element does not
+  have one, then the IDL attribute must return the empty string.</p>
 
-    <p>Returns null if there's no selection.</p>
-
-   </dd>
-
-   <dt><var title="">selection</var> . <code title="dom-selection-focusOffset"><a href="#dom-selection-focusoffset">focusOffset</a></code></dt>
-
-   <dd>
-
-    <p>Returns the offset of the end of the selection relative to the element that contains the end of the selection.</p>
-
-    <p>Returns 0 if there's no selection.</p>
-
-   </dd>
-
-   <dt><var title="">collapsed</var> = <var title="">selection</var> . <code title="dom-selection-isCollapsed"><a href="#dom-selection-iscollapsed">isCollapsed</a></code>()</dt>
-
-   <dd>
-
-    <p>Returns true if there's no selection or if the selection is empty. Otherwise, returns false.</p>
-
-   </dd>
-
-   <dt><var title="">selection</var> . <code title="dom-selection-collapse"><a href="#dom-selection-collapse">collapse</a></code>(<var title="">parentNode</var>, <var title="">offset</var>)</dt>
-
-   <dd>
-
-    <p>Replaces the selection with an empty one at the given position.</p>
-
-    <p>Throws a <code><a href="common-dom-interfaces.html#wrong_document_err">WRONG_DOCUMENT_ERR</a></code> exception if the given node is in a different document.</p>
-
-   </dd>
-
-   <dt><var title="">selection</var> . <code title="dom-selection-collapseToStart"><a href="#dom-selection-collapsetostart">collapseToStart</a></code>()</dt>
-
-   <dd>
-
-    <p>Replaces the selection with an empty one at the position of the start of the current selection.</p>
-
-    <p>Throws an <code><a href="common-dom-interfaces.html#invalid_state_err">INVALID_STATE_ERR</a></code> exception if there is no selection.</p>
-
-   </dd>
-
-   <dt><var title="">selection</var> . <code title="dom-selection-collapseToEnd"><a href="#dom-selection-collapsetoend">collapseToEnd</a></code>()</dt>
-
-   <dd>
-
-    <p>Replaces the selection with an empty one at the position of the end of the current selection.</p>
-
-    <p>Throws an <code><a href="common-dom-interfaces.html#invalid_state_err">INVALID_STATE_ERR</a></code> exception if there is no selection.</p>
-
-   </dd>
-
-   <dt><var title="">selection</var> . <code title="dom-selection-selectAllChildren"><a href="#dom-selection-selectallchildren">selectAllChildren</a></code>(<var title="">parentNode</var>)</dt>
-
-   <dd>
-
-    <p>Replaces the selection with one that contains all the contents of the given element.</p>
-
-    <p>Throws a <code><a href="common-dom-interfaces.html#wrong_document_err">WRONG_DOCUMENT_ERR</a></code> exception if the given node is in a different document.</p>
-
-   </dd>
-
-   <dt><var title="">selection</var> . <code title="dom-selection-deleteFromDocument"><a href="#dom-selection-deletefromdocument">deleteFromDocument</a></code>()</dt>
-
-   <dd>
-
-    <p>Deletes the selection.</p>
-
-   </dd>
-
-   <dt><var title="">selection</var> . <code title="dom-selection-rangeCount"><a href="#dom-selection-rangecount">rangeCount</a></code></dt>
-
-   <dd>
-
-    <p>Returns the number of ranges in the selection.</p>
-
-   </dd>
-
-   <dt><var title="">selection</var> . <code title="dom-selection-getRangeAt"><a href="#dom-selection-getrangeat">getRangeAt</a></code>(<var title="">index</var>)</dt>
-
-   <dd>
-
-    <p>Returns the given range.</p>
-
-    <p>Throws an <code><a href="common-dom-interfaces.html#index_size_err">INDEX_SIZE_ERR</a></code> exception if the value is out of range.</p>
-
-   </dd>
-
-   <dt><var title="">selection</var> . <code title="dom-selection-addRange"><a href="#dom-selection-addrange">addRange</a></code>(<var title="">range</var>)</dt>
-
-   <dd>
-
-    <p>Adds the given range to the selection.</p>
-
-   </dd>
-
-   <dt><var title="">selection</var> . <code title="dom-selection-removeRange"><a href="#dom-selection-removerange">removeRange</a></code>(<var title="">range</var>)</dt>
-
-   <dd>
-
-    <p>Removes the given range from the selection, if the range was one of the ones in the selection.</p>
-
-   </dd>
-
-   <dt><var title="">selection</var> . <code title="dom-selection-removeAllRanges"><a href="#dom-selection-removeallranges">removeAllRanges</a></code>()</dt>
-
-   <dd>
-
-    <p>Removes all the ranges in the selection.</p>
-
-   </dd>
-
-  </dl><div class="impl">
-
-  <p>The <dfn id="dom-selection-anchornode" title="dom-selection-anchorNode"><code>anchorNode</code></dfn>
-  attribute must return the value returned by the <code title="dom-Range-startContainer"><a href="infrastructure.html#dom-range-startcontainer">startContainer</a></code> attribute of the last
-  <code><a href="infrastructure.html#range">Range</a></code> object in the list, or null if the list is
-  empty.</p>
-
-  <p>The <dfn id="dom-selection-anchoroffset" title="dom-selection-anchorOffset"><code>anchorOffset</code></dfn>
-  attribute must return the value returned by the <code title="dom-Range-startOffset"><a href="infrastructure.html#dom-range-startoffset">startOffset</a></code> attribute of the last <code><a href="infrastructure.html#range">Range</a></code>
-  object in the list, or 0 if the list is empty.</p>
-
-  <p>The <dfn id="dom-selection-focusnode" title="dom-selection-focusNode"><code>focusNode</code></dfn>
-  attribute must return the value returned by the <code title="dom-Range-endContainer"><a href="infrastructure.html#dom-range-endcontainer">endContainer</a></code> attribute of the last
-  <code><a href="infrastructure.html#range">Range</a></code> object in the list, or null if the list is
-  empty.</p>
-
-  <p>The <dfn id="dom-selection-focusoffset" title="dom-selection-focusOffset"><code>focusOffset</code></dfn>
-  attribute must return the value returned by the <code title="dom-Range-endOffset"><a href="infrastructure.html#dom-range-endoffset">endOffset</a></code> attribute of the last <code><a href="infrastructure.html#range">Range</a></code>
-  object in the list, or 0 if the list is empty.</p>
-
-  <p>The <dfn id="dom-selection-iscollapsed" title="dom-selection-isCollapsed"><code>isCollapsed</code></dfn>
-  attribute must return true if there are zero ranges, or if there is
-  exactly one range and its <code title="dom-Range-collapsed"><a href="infrastructure.html#dom-range-collapsed">collapsed</a></code> attribute
-  is itself true. Otherwise it must return false.</p>
-
-  <p>The <dfn id="dom-selection-collapse" title="dom-selection-collapse"><code>collapse(<var title="">parentNode</var>, <var title="">offset</var>)</code></dfn>
-  method must raise a <code><a href="common-dom-interfaces.html#wrong_document_err">WRONG_DOCUMENT_ERR</a></code> DOM exception if
-  <var title="">parentNode</var>'s <code><a href="infrastructure.html#document">Document</a></code> is not the
-  <code><a href="dom.html#htmldocument">HTMLDocument</a></code> object with which the
-  <code><a href="#selection-0">Selection</a></code> object is associated. Otherwise it is, and
-  the method must remove all the ranges in the <code><a href="#selection-0">Selection</a></code>
-  list, then create a new <code><a href="infrastructure.html#range">Range</a></code> object, add it to the
-  list, and invoke its <code title="dom-Range-setStart()">setStart()</code> and <code title="dom-Range-setEnd()">setEnd()</code> methods with the <var title="">parentNode</var> and <var title="">offset</var> values as
-  their arguments.</p>
-
-  <p>The <dfn id="dom-selection-collapsetostart" title="dom-selection-collapseToStart"><code>collapseToStart()</code></dfn>
-  method must raise an <code><a href="common-dom-interfaces.html#invalid_state_err">INVALID_STATE_ERR</a></code> DOM exception if
-  there are no ranges in the list. Otherwise, it must invoke the <code title="dom-selection-collapse"><a href="#dom-selection-collapse">collapse()</a></code> method with the
-  <code title="dom-Range-startContainer"><a href="infrastructure.html#dom-range-startcontainer">startContainer</a></code> and <code title="dom-Range-startOffset"><a href="infrastructure.html#dom-range-startoffset">startOffset</a></code> values of the first <code><a href="infrastructure.html#range">Range</a></code>
-  object in the list as the arguments.</p>
-
-  <p>The <dfn id="dom-selection-collapsetoend" title="dom-selection-collapseToEnd"><code>collapseToEnd()</code></dfn>
-  method must raise an <code><a href="common-dom-interfaces.html#invalid_state_err">INVALID_STATE_ERR</a></code> DOM exception if
-  there are no ranges in the list. Otherwise, it must invoke the <code title="dom-selection-collapse"><a href="#dom-selection-collapse">collapse()</a></code> method with the
-  <code title="dom-Range-endContainer"><a href="infrastructure.html#dom-range-endcontainer">endContainer</a></code> and <code title="dom-Range-endOffset"><a href="infrastructure.html#dom-range-endoffset">endOffset</a></code> values of the last <code><a href="infrastructure.html#range">Range</a></code>
-  object in the list as the arguments.</p>
-
-  <p>The <dfn id="dom-selection-selectallchildren" title="dom-selection-selectAllChildren"><code>selectAllChildren(<var title="">parentNode</var>)</code></dfn>
-  method must invoke the <code title="dom-selection-collapse"><a href="#dom-selection-collapse">collapse()</a></code> method with the
-  <var title="">parentNode</var> value as the first argument and 0 as the
-  second argument, and must then invoke the <code title="dom-Range-selectNodeContents()">selectNodeContents()</code> method on the first (and only)
-  range in the list with the <var title="">parentNode</var> value as the
-  argument.</p>
-
-  <p>The <dfn id="dom-selection-deletefromdocument" title="dom-selection-deleteFromDocument"><code>deleteFromDocument()</code></dfn>
-  method must invoke the <code title="dom-Range-deleteContents()">deleteContents()</code> method
-  on each range in the list, if any, from first to last.</p>
-
-  <p>The <dfn id="dom-selection-rangecount" title="dom-selection-rangeCount"><code>rangeCount</code></dfn>
-  attribute must return the number of ranges in the list.</p>
-
-  <p>The <dfn id="dom-selection-getrangeat" title="dom-selection-getRangeAt"><code>getRangeAt(<var title="">index</var>)</code></dfn>
-  method must return the <var title="">index</var>th range in the list. If
-  <var title="">index</var> is less than zero or greater or equal to the value
-  returned by the <code title="dom-selection-rangeCount"><a href="#dom-selection-rangecount">rangeCount</a></code> attribute, then
-  the method must raise an <code><a href="common-dom-interfaces.html#index_size_err">INDEX_SIZE_ERR</a></code> DOM
-  exception.</p>
-
-  <p>The <dfn id="dom-selection-addrange" title="dom-selection-addRange"><code>addRange(<var title="">range</var>)</code></dfn>
-  method must add the given <var title="">range</var> Range object to the list
-  of selections, at the end (so the newly added range is the new last
-  range). Duplicates are not prevented; a range may be added more than
-  once in which case it appears in the list more than once, which (for
-  example) will cause <a href="#dom-selection-tostring" title="dom-selection-toString">stringification</a> to return the
-  range's text twice.</p>
-
-  <p>The <dfn id="dom-selection-removerange" title="dom-selection-removeRange"><code>removeRange(<var title="">range</var>)</code></dfn>
-  method must remove the first occurrence of <var title="">range</var> in the
-  list of ranges, if it appears at all.</p>
-
-  <p>The <dfn id="dom-selection-removeallranges" title="dom-selection-removeAllRanges"><code>removeAllRanges()</code></dfn>
-  method must remove all the ranges from the list of ranges, such that
-  the <code title="dom-selection-rangeCount"><a href="#dom-selection-rangecount">rangeCount</a></code>
-  attribute returns 0 after the <code title="dom-selection-removeAllRanges"><a href="#dom-selection-removeallranges">removeAllRanges()</a></code>
-  method is invoked (and until a new range is added to the list,
-  either through this interface or via user interaction).</p>
-
-  <p>Objects implementing this interface must <dfn id="dom-selection-tostring" title="dom-selection-toString">stringify</dfn> to a concatenation
-  of the results of invoking the <code title="">toString()</code>
-  method of the <code><a href="infrastructure.html#range">Range</a></code> object on each of the ranges of the
-  selection, in the order they appear in the list (first to last).</p>
-
-  </div><div class="example">
-   <p>In the following document fragment, the emphasized parts
-   indicate the selection.</p>
-   <pre>&lt;p&gt;The cute girl likes <em>the </em>&lt;cite&gt;<em>Oxford English</em> Dictionary&lt;/cite&gt;.&lt;/p&gt;</pre>
-   <p>If a script invoked <code title="">window.getSelection().toString()</code>, the return value
-   would be "<code>the Oxford English</code>".</p>
-  </div><!-- v2DATAGRID v2DGS:
-  <p class="note">The <code>Selection</code> interface has no relation
-  to the <code>DataGridSelection</code> interface.</p>
-  --><h4 id="textFieldSelection"><span class="secno">7.6.2 </span>APIs for the text field selections</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><!-- v2 idea: DOM Range APIs to expose the textarea/input edited
-  value (ack martijnw) --><p>The <code><a href="the-input-element.html#the-input-element">input</a></code> and <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> elements define
-  the following members in their DOM interfaces for handling their
-  text selection:</p><pre class="idl extract">  void <a href="#dom-textarea-input-select" title="dom-textarea/input-select">select</a>();
-           attribute unsigned long <a href="#dom-textarea-input-selectionstart" title="dom-textarea/input-selectionStart">selectionStart</a>;
-           attribute unsigned long <a href="#dom-textarea-input-selectionend" title="dom-textarea/input-selectionEnd">selectionEnd</a>;
-  void <a href="#dom-textarea-input-setselectionrange" title="dom-textarea/input-setSelectionRange">setSelectionRange</a>(in unsigned long start, in unsigned long end);</pre><!-- v2: also add textLength? it seems to be widely used --><p>These methods and attributes expose and control the selection of
-  <code><a href="the-input-element.html#the-input-element">input</a></code> and <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> text fields.</p><dl class="domintro"><dt><var title="">element</var> . <code title="dom-textarea/input-select"><a href="#dom-textarea-input-select">select</a></code>()</dt>
-
-   <dd>
-
-    <p>Selects everything in the text field.</p>
-
-   </dd>
-
-   <dt><var title="">element</var> . <code title="dom-textarea/input-selecionStart">selectionStart</code> [ = <var title="">value</var> ]</dt>
-
-   <dd>
-
-    <p>Returns the offset to the start of the selection.</p>
-
-    <p>Can be set, to change the start of the selection.</p>
-
-   </dd>
-
-   <dt><var title="">element</var> . <code title="dom-textarea/input-selecionEnd">selectionEnd</code> [ = <var title="">value</var> ]</dt>
-
-   <dd>
-
-    <p>Returns the offset to the end of the selection.</p>
-
-    <p>Can be set, to change the end of the selection.</p>
-
-   </dd>
-
-   <dt><var title="">element</var> . <code title="dom-textarea/input-setSelectionRange"><a href="#dom-textarea-input-setselectionrange">setSelectionRange</a></code>(<var title="">start</var>, <var title="">end</var>)</dt>
-
-   <dd>
-
-    <p>Changes the selection to cover the given substring.</p>
-
-   </dd>
-
-  </dl><div class="impl">
-
-  <p>When these methods and attributes are used with
-  <code><a href="the-input-element.html#the-input-element">input</a></code> elements while they don't apply, they must raise
-  an <code><a href="common-dom-interfaces.html#invalid_state_err">INVALID_STATE_ERR</a></code> exception. Otherwise, they must
-  act as described below.</p>
-
-  <p>The <dfn id="dom-textarea-input-select" title="dom-textarea/input-select"><code>select()</code></dfn> method
-  must cause the contents of the text field to be fully selected.</p>
-
-  <p>The <dfn id="dom-textarea-input-selectionstart" title="dom-textarea/input-selectionStart"><code>selectionStart</code></dfn>
-  attribute must, on getting, return the offset (in logical order) to
-  the character that immediately follows the start of the
-  selection. If there is no selection, then it must return the offset
-  (in logical order) to the character that immediately follows the
-  text entry cursor.</p>
-
-  <p>On setting, it must act as if the <code title="dom-textarea/input-setSelectionRange"><a href="#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>
-  method had been called, with the new value as the first argument,
-  and the current value of the <code title="dom-textarea/input-selectionEnd"><a href="#dom-textarea-input-selectionend">selectionEnd</a></code>
-  attribute as the second argument, unless the current value of the
-  <code title="dom-textarea/input-selectionEnd"><a href="#dom-textarea-input-selectionend">selectionEnd</a></code> is
-  less than the new value, in which case the second argument must also
-  be the new value.</p>
-
-  <p>The <dfn id="dom-textarea-input-selectionend" title="dom-textarea/input-selectionEnd"><code>selectionEnd</code></dfn>
-  attribute must, on getting, return the offset (in logical order) to
-  the character that immediately follows the end of the selection. If
-  there is no selection, then it must return the offset (in logical
-  order) to the character that immediately follows the text entry
-  cursor.</p>
-
-  <p>On setting, it must act as if the <code title="dom-textarea/input-setSelectionRange"><a href="#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>
-  method had been called, with the current value of the <code title="dom-textarea/input-selectionStart"><a href="#dom-textarea-input-selectionstart">selectionStart</a></code>
-  attribute as the first argument, and new value as the second
-  argument.</p>
-
-  <p>The <dfn id="dom-textarea-input-setselectionrange" title="dom-textarea/input-setSelectionRange"><code>setSelectionRange(<var title="">start</var>, <var title="">end</var>)</code></dfn> method
-  must set the selection of the text field to the sequence of
-  characters starting with the character at the <var title="">start</var>th position (in logical order) and ending with
-  the character at the <span title="">(<var title="">end</var>-1)</span>th position. Arguments greater than the
-  length of the value in the text field must be treated as pointing at
-  the end of the text field. If <var title="">end</var> is less than
-  or equal to <var title="">start</var> then the start of the
-  selection and the end of the selection must both be placed
-  immediately before the character with offset <var title="">end</var>. In UAs where there is no concept of an empty
-  selection, this must set the cursor to be just before the character
-  with offset <var title="">end</var>.</p>
-
-  </div><div class="example">
-
-   <p>To obtain the currently selected text, the following JavaScript
-   suffices:</p>
-
-   <pre>var selectionText = control.value.substring(control.selectionStart, control.selectionEnd);</pre>
-
-   <p>...where <var title="">control</var> is the <code><a href="the-input-element.html#the-input-element">input</a></code>
-   or <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> element.</p>
-
-  </div><p>Characters with no visible rendering, such as U+200D ZERO WIDTH
-  JOINER, still count as characters. Thus, for instance, the selection
-  can include just an invisible character, and the text insertion
-  cursor can be placed to one side or another of such a character.</p><h3 id="contenteditable"><span class="secno">7.7 </span>The <code title="attr-contenteditable"><a href="#attr-contenteditable">contenteditable</a></code> attribute</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><p>The <dfn id="attr-contenteditable" title="attr-contenteditable"><code>contenteditable</code></dfn>
+  </div><h3 id="contenteditable"><span class="secno">7.5 </span>The <code title="attr-contenteditable"><a href="#attr-contenteditable">contenteditable</a></code> attribute</h3><p>The <dfn id="attr-contenteditable" title="attr-contenteditable"><code>contenteditable</code></dfn>
   attribute is an <a href="common-microsyntaxes.html#enumerated-attribute">enumerated attribute</a> whose keywords are
   the empty string, <code title="">true</code>, and <code title="">false</code>. The empty string and the <code title="">true</code> keyword map to the <i>true</i> state. The <code title="">false</code> keyword maps to the <i>false</i> state. In
   addition, there is a third state, the <i>inherit</i> state, which is
@@ -1478,8 +1042,8 @@
   editing hosts.</p>
 
   <p>When an editing host has focus, it must have a <dfn id="caret-position">caret
-  position</dfn> that specifies where the current editing position
-  is. It may also have a <a href="#the-selection" title="the&#10;  selection">selection</a>.</p>
+  position</dfn> that specifies where the current editing position is.
+  It may also have a selection.</p>
 
   <p class="note">How the caret and selection are represented depends
   entirely on the UA.</p>
@@ -1489,7 +1053,7 @@
 
   </div><div class="impl">
 
-  <h4 id="user-editing-actions"><span class="secno">7.7.1 </span>User editing actions</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="user-editing-actions"><span class="secno">7.5.1 </span>User editing actions</h4>
 
   <p>There are several actions that the user agent should allow the
   user to perform while the user is interacting with an editing
@@ -1507,14 +1071,14 @@
 
    <dt>Change the selection</dt>
 
-   <dd><p>User agents must allow users to change <a href="#the-selection">the
-   selection</a> within an editing host, even into nested editable
-   elements. User agents may prevent selections from being made in
-   ways that cross from editable elements into non-editable elements
-   (e.g. by making each non-editable descendant atomically selectable,
-   but not allowing text selection within them). This could be
-   triggered as the default action of <code title="event-keydown">keydown</code> events with various key
-   identifiers and as the default action of <code title="event-mousedown">mousedown</code> events.</p></dd>
+   <dd><p>User agents must allow users to change the selection within
+   an editing host, even into nested editable elements. User agents
+   may prevent selections from being made in ways that cross from
+   editable elements into non-editable elements (e.g. by making each
+   non-editable descendant atomically selectable, but not allowing
+   text selection within them). This could be triggered as the default
+   action of <code title="event-keydown">keydown</code> events with
+   various key identifiers and as the default action of <code title="event-mousedown">mousedown</code> events.</p></dd>
 
 
    <dt id="contenteditable-insertText">Insert text</dt>
@@ -1593,8 +1157,8 @@
    element, backspacing when the caret is immediately after an
    element, forward-deleting at the end of an element,
    forward-deleting when the caret is immediately before an element,
-   and deleting a <a href="#the-selection" title="the selection">selection</a> whose
-   start and end points do not share a common parent node.</p>
+   and deleting a selection whose start and end points do not share a
+   common parent node.</p>
 
    <p>In any case, the exact behavior is UA-dependent, but user
    agents must not, in response to a request to delete text or an
@@ -1662,8 +1226,8 @@
   </dl><p>User agents may perform several commands per user request; for
   example if the user selects a block of text and hits
   <kbd><kbd>Enter</kbd></kbd>, the UA might interpret that as a
-  request to delete the content of <a href="#the-selection">the selection</a> followed
-  by a request to break the paragraph at that position.</p>
+  request to delete the content of the selection followed by a request
+  to break the paragraph at that position.</p>
 
   <p>User agents may add <a href="dnd.html#dom-changes">DOM changes</a> entries to the
   <a href="dnd.html#undo-transaction-history">undo transaction history</a> of the <a href="#editing-host">editing
@@ -1674,7 +1238,7 @@
   or programmatically (e.g. by <code title="dom-document-execCommand"><a href="dnd.html#execCommand">execCommand()</a></code> commands),
   must fire mutation events as appropriate.</p>
 
-  </div><h4 id="making-entire-documents-editable"><span class="secno">7.7.2 </span>Making entire documents editable</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><div class="impl">
+  </div><h4 id="making-entire-documents-editable"><span class="secno">7.5.2 </span>Making entire documents editable</h4><div class="impl">
 
   <p>Documents have a <dfn id="designMode" title="dom-document-designMode"><code>designMode</code></dfn>, which
   can be either enabled or disabled.</p>
@@ -1708,7 +1272,7 @@
   <p>The last state set must persist until the document is destroyed
   or the state is changed. Initially, documents must have their <code title="dom-document-designMode"><a href="#designMode">designMode</a></code> disabled.</p>
 
-  </div><h3 id="spelling-and-grammar-checking"><span class="secno">7.8 </span>Spelling and grammar checking</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><div class="impl">
+  </div><h3 id="spelling-and-grammar-checking"><span class="secno">7.6 </span>Spelling and grammar checking</h3><div class="impl">
 
   <p>User agents can support the checking of spelling and grammar of
   editable text, either in form controls (such as the value of

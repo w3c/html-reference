@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,7 +356,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="states-of-the-type-attribute.html" title="4.10.7.1 States of the type attribute" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="common-input-element-attributes.html" title="4.10.7.2 Common input element attributes" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="states-of-the-type-attribute.html" title="4.10.7.1 States of the type attribute" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="common-input-element-attributes.html" title="4.10.7.2 Common input element attributes" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -317,7 +364,7 @@
    <a href="states-of-the-type-attribute.html">&#x2190; 4.10.7.1 States of the type attribute</a> &#x2013;
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="common-input-element-attributes.html">4.10.7.2 Common input element attributes &#x2192;</a>
-  <ol class="toc"><li><ol><li><ol><li><ol><li><ol><li><a href="number-state.html#number-state"><span class="secno">4.10.7.1.13 </span>Number state</a></li><li><a href="number-state.html#range-state"><span class="secno">4.10.7.1.14 </span>Range state</a></li><li><a href="number-state.html#color-state"><span class="secno">4.10.7.1.15 </span>Color state</a></li><li><a href="number-state.html#checkbox-state"><span class="secno">4.10.7.1.16 </span>Checkbox state</a></li><li><a href="number-state.html#radio-button-state"><span class="secno">4.10.7.1.17 </span>Radio Button state</a></li><li><a href="number-state.html#file-upload-state"><span class="secno">4.10.7.1.18 </span>File Upload state</a></li><li><a href="number-state.html#submit-button-state"><span class="secno">4.10.7.1.19 </span>Submit Button state</a></li><li><a href="number-state.html#image-button-state"><span class="secno">4.10.7.1.20 </span>Image Button state</a></li><li><a href="number-state.html#reset-button-state"><span class="secno">4.10.7.1.21 </span>Reset Button state</a></li><li><a href="number-state.html#button-state"><span class="secno">4.10.7.1.22 </span>Button state</a></li></ol></li></ol></li></ol></li></ol></li></ol></div><h6 id="number-state"><span class="secno">4.10.7.1.13 </span><dfn title="attr-input-type-number">Number</dfn> state</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><div class="impl">
+  <ol class="toc"><li><ol><li><ol><li><ol><li><ol><li><a href="number-state.html#number-state"><span class="secno">4.10.7.1.13 </span>Number state</a></li><li><a href="number-state.html#range-state"><span class="secno">4.10.7.1.14 </span>Range state</a></li><li><a href="number-state.html#color-state"><span class="secno">4.10.7.1.15 </span>Color state</a></li><li><a href="number-state.html#checkbox-state"><span class="secno">4.10.7.1.16 </span>Checkbox state</a></li><li><a href="number-state.html#radio-button-state"><span class="secno">4.10.7.1.17 </span>Radio Button state</a></li><li><a href="number-state.html#file-upload-state"><span class="secno">4.10.7.1.18 </span>File Upload state</a></li><li><a href="number-state.html#submit-button-state"><span class="secno">4.10.7.1.19 </span>Submit Button state</a></li><li><a href="number-state.html#image-button-state"><span class="secno">4.10.7.1.20 </span>Image Button state</a></li><li><a href="number-state.html#reset-button-state"><span class="secno">4.10.7.1.21 </span>Reset Button state</a></li><li><a href="number-state.html#button-state"><span class="secno">4.10.7.1.22 </span>Button state</a></li></ol></li></ol></li></ol></li></ol></li></ol></div><h6 id="number-state"><span class="secno">4.10.7.1.13 </span><dfn title="attr-input-type-number">Number</dfn> state</h6><div class="impl">
 
   <p>When an <code><a href="the-input-element.html#the-input-element">input</a></code> element's <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="#number-state" title="attr-input-type-number">Number</a> state, the rules in
   this section apply.</p>
@@ -358,7 +405,9 @@
 
   <p>When the element is <a href="association-of-controls-and-forms.html#suffering-from-a-step-mismatch">suffering from a step mismatch</a>,
   the user agent may round the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the nearest number for
-  which the element would not <a href="association-of-controls-and-forms.html#suffering-from-a-step-mismatch" title="suffering from a step&#10;  mismatch">suffer from a step mismatch</a>.</p>
+  which the element would not <a href="association-of-controls-and-forms.html#suffering-from-a-step-mismatch" title="suffering from a step&#10;  mismatch">suffer from a step mismatch</a>. If there are two such
+  numbers, user agents are encouraged to pick the one nearest positive
+  infinity.</p>
 
   <p><strong>The <a href="the-input-element.html#concept-input-value-string-number" title="concept-input-value-string-number">algorithm to convert a
   string to a number</a>, given a string <var title="">input</var>,
@@ -400,6 +449,7 @@
    <code class="no-backref" title="attr-input-accept"><a href="#attr-input-accept">accept</a></code>,
    <code class="no-backref" title="attr-input-alt"><a href="#attr-input-alt">alt</a></code>,
    <code class="no-backref" title="attr-input-checked"><a href="the-input-element.html#attr-input-checked">checked</a></code>,
+   <code class="no-backref" title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>,
    <code class="no-backref" title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>,
    <code class="no-backref" title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code>,
    <code class="no-backref" title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code>,
@@ -418,13 +468,13 @@
    element:
    <code class="no-backref" title="dom-input-checked"><a href="common-input-element-attributes.html#dom-input-checked">checked</a></code>,
    <code class="no-backref" title="dom-input-files"><a href="common-input-element-attributes.html#dom-input-files">files</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="editing.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="editing.html#dom-textarea-input-selectionend">selectionEnd</a></code>, and
+   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>, and
    <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code> IDL attributes;
-   <code class="no-backref" title="dom-textarea/input-select"><a href="editing.html#dom-textarea-input-select">select()</a></code> and
-   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="editing.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code> methods.</p>
+   <code class="no-backref" title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code> and
+   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code> methods.</p>
 
-  </div><h6 id="range-state"><span class="secno">4.10.7.1.14 </span><dfn title="attr-input-type-range">Range</dfn> state</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><div class="impl">
+  </div><h6 id="range-state"><span class="secno">4.10.7.1.14 </span><dfn title="attr-input-type-range">Range</dfn> state</h6><div class="impl">
 
   <p>When an <code><a href="the-input-element.html#the-input-element">input</a></code> element's <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="#range-state" title="attr-input-type-range">Range</a> state, the rules in this
   section apply.</p>
@@ -491,7 +541,13 @@
   than or equal to the <a href="common-input-element-attributes.html#concept-input-min" title="concept-input-min">minimum</a>,
   and, if the <a href="common-input-element-attributes.html#concept-input-max" title="concept-input-max">maximum</a> is not
   less than the <a href="common-input-element-attributes.html#concept-input-min" title="concept-input-min">minimum</a>, which
-  is less than or equal to the <a href="common-input-element-attributes.html#concept-input-max" title="concept-input-max">maximum</a>.</p>
+  is less than or equal to the <a href="common-input-element-attributes.html#concept-input-max" title="concept-input-max">maximum</a>. If two numbers match these
+  constraints, then user agents must use the one nearest to positive
+  infinity.</p>
+
+  <p class="example">For example, the markup
+  <code>&lt;input&#xA0;type="range"&#xA0;min=0&#xA0;max=100&#xA0;step=20&#xA0;value=50&gt;</code>
+  results in a range control whose initial value is 60.</p>
 
   <p><strong>The <a href="the-input-element.html#concept-input-value-string-number" title="concept-input-value-string-number">algorithm to convert a
   string to a number</a>, given a string <var title="">input</var>,
@@ -531,6 +587,7 @@
    <code class="no-backref" title="attr-input-accept"><a href="#attr-input-accept">accept</a></code>,
    <code class="no-backref" title="attr-input-alt"><a href="#attr-input-alt">alt</a></code>,
    <code class="no-backref" title="attr-input-checked"><a href="the-input-element.html#attr-input-checked">checked</a></code>,
+   <code class="no-backref" title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>,
    <code class="no-backref" title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>,
    <code class="no-backref" title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code>,
    <code class="no-backref" title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code>,
@@ -551,11 +608,11 @@
    element:
    <code class="no-backref" title="dom-input-checked"><a href="common-input-element-attributes.html#dom-input-checked">checked</a></code>,
    <code class="no-backref" title="dom-input-files"><a href="common-input-element-attributes.html#dom-input-files">files</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="editing.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="editing.html#dom-textarea-input-selectionend">selectionEnd</a></code>, and
+   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>, and
    <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code> IDL attributes;
-   <code class="no-backref" title="dom-textarea/input-select"><a href="editing.html#dom-textarea-input-select">select()</a></code> and
-   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="editing.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code> methods.</p>
+   <code class="no-backref" title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code> and
+   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code> methods.</p>
 
   </div><div class="example">
 
@@ -581,7 +638,7 @@
 
    <p>...might render as:</p>
 
-   <p><img alt="A vertical slider control whose primary color is black and whose background color is beige, with the slider having five tick marks, one long one at each extremity, and three short ones clustered around the midpoint." src="http://dev.w3.org/html5/spec/images/sample-range.png"/></p><p>Note how the UA determined the orientation of the control from
+   <p><img alt="A vertical slider control whose primary color is black and whose background color is beige, with the slider having five tick marks, one long one at each extremity, and three short ones clustered around the midpoint." height="75" src="http://dev.w3.org/html5/spec/images/sample-range.png" width="49"/></p><p>Note how the UA determined the orientation of the control from
    the ratio of the style-sheet-specified height and width properties.
    The colors were similiarly derived from the style sheet. The tick
    marks, however, were derived from the markup. In particular, the
@@ -601,18 +658,18 @@
 
    <p>A user agent could display in a variety of ways, for instance:</p>
 
-   <p><img alt="As a dial." src="http://dev.w3.org/html5/spec/images/sample-range-2a.png"/></p>
+   <p><img alt="As a dial." height="57" src="http://dev.w3.org/html5/spec/images/sample-range-2a.png" width="231"/></p>
 
    <p>Or, alternatively, for instance:</p>
 
-   <p><img alt="As a long horizontal slider with tick marks." src="http://dev.w3.org/html5/spec/images/sample-range-2b.png"/></p>
+   <p><img alt="As a long horizontal slider with tick marks." height="56" src="http://dev.w3.org/html5/spec/images/sample-range-2b.png" width="445"/></p>
 
    <p>The user agent could pick which one to display based on the
    dimensions given in the style sheet. This would allow it to
    maintain the same resolution for the tick marks, despite the
    differences in width.</p>
 
-  </div><h6 id="color-state"><span class="secno">4.10.7.1.15 </span><dfn title="attr-input-type-color">Color</dfn> state</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><div class="impl">
+  </div><h6 id="color-state"><span class="secno">4.10.7.1.15 </span><dfn title="attr-input-type-color">Color</dfn> state</h6><div class="impl">
 
   <p>When an <code><a href="the-input-element.html#the-input-element">input</a></code> element's <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="#color-state" title="attr-input-type-color">Color</a> state, the rules in this
   section apply.</p>
@@ -666,6 +723,7 @@
    <code class="no-backref" title="attr-input-accept"><a href="#attr-input-accept">accept</a></code>,
    <code class="no-backref" title="attr-input-alt"><a href="#attr-input-alt">alt</a></code>,
    <code class="no-backref" title="attr-input-checked"><a href="the-input-element.html#attr-input-checked">checked</a></code>,
+   <code class="no-backref" title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>,
    <code class="no-backref" title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>,
    <code class="no-backref" title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code>,
    <code class="no-backref" title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code>,
@@ -689,16 +747,16 @@
    element:
    <code class="no-backref" title="dom-input-checked"><a href="common-input-element-attributes.html#dom-input-checked">checked</a></code>,
    <code class="no-backref" title="dom-input-files"><a href="common-input-element-attributes.html#dom-input-files">files</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="editing.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="editing.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
    <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code>, and
    <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-attributes.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
-   <code class="no-backref" title="dom-textarea/input-select"><a href="editing.html#dom-textarea-input-select">select()</a></code>,
-   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="editing.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
    <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-attributes.html#dom-input-stepdown">stepDown()</a></code>, and
    <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-attributes.html#dom-input-stepup">stepUp()</a></code> methods.</p>
 
-  </div><h6 id="checkbox-state"><span class="secno">4.10.7.1.16 </span><dfn title="attr-input-type-checkbox">Checkbox</dfn> state</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><div class="impl">
+  </div><h6 id="checkbox-state"><span class="secno">4.10.7.1.16 </span><dfn title="attr-input-type-checkbox">Checkbox</dfn> state</h6><div class="impl">
 
   <p>When an <code><a href="the-input-element.html#the-input-element">input</a></code> element's <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="#checkbox-state" title="attr-input-type-checkbox">Checkbox</a> state, the rules in
   this section apply.</p>
@@ -725,9 +783,9 @@
   back to the values they had before the <a href="content-models.html#pre-click-activation-steps">pre-click activation
   steps</a> were run. The <a href="content-models.html#activation-behavior">activation behavior</a> is to
   <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> that bubbles named <code title="event-change">change</code> at the element<!-- It's not
-  cancelable. Once this fires, the control is checked, end of
-  story. -->, then <a href="association-of-controls-and-forms.html#broadcast-formchange-events">broadcast <code title="event-formchange">formchange</code> events</a> at the
-  element's <a href="association-of-controls-and-forms.html#form-owner">form owner</a>.</p>
+  cancelable. Once this fires, the control is checked, end of story.
+  -->, then <a href="association-of-controls-and-forms.html#broadcast-formchange-events">broadcast <code title="event-formchange">formchange</code> events</a> from the
+  element's <a href="association-of-controls-and-forms.html#form-owner">form owner</a>, if any.</p>
 
   <p><strong>Constraint validation</strong>: If the element is <i title="concept-input-required"><a href="common-input-element-attributes.html#concept-input-required">required</a></i> and its <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> is false, then the
   element is <a href="association-of-controls-and-forms.html#suffering-from-being-missing">suffering from being missing</a>.</p>
@@ -760,6 +818,7 @@
    <code class="no-backref" title="attr-input-accept"><a href="#attr-input-accept">accept</a></code>,
    <code class="no-backref" title="attr-input-alt"><a href="#attr-input-alt">alt</a></code>,
    <code class="no-backref" title="attr-input-autocomplete"><a href="common-input-element-attributes.html#attr-input-autocomplete">autocomplete</a></code>,
+   <code class="no-backref" title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>,
    <code class="no-backref" title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>,
    <code class="no-backref" title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code>,
    <code class="no-backref" title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code>,
@@ -784,18 +843,18 @@
    <code class="no-backref" title="dom-input-files"><a href="common-input-element-attributes.html#dom-input-files">files</a></code>,
    <code class="no-backref" title="dom-input-list"><a href="common-input-element-attributes.html#dom-input-list">list</a></code>,
    <code class="no-backref" title="dom-input-selectedOption"><a href="common-input-element-attributes.html#dom-input-selectedoption">selectedOption</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="editing.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="editing.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
    <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code>, and
    <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-attributes.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
-   <code class="no-backref" title="dom-textarea/input-select"><a href="editing.html#dom-textarea-input-select">select()</a></code>,
-   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="editing.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
    <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-attributes.html#dom-input-stepdown">stepDown()</a></code>, and
    <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-attributes.html#dom-input-stepup">stepUp()</a></code> methods.</p>
 
    <p>The <code class="no-backref" title="event-input-input"><a href="common-input-element-attributes.html#event-input-input">input</a></code> event does not apply.</p>
 
-  </div><h6 id="radio-button-state"><span class="secno">4.10.7.1.17 </span><dfn title="attr-input-type-radio">Radio Button</dfn> state</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><div class="impl">
+  </div><h6 id="radio-button-state"><span class="secno">4.10.7.1.17 </span><dfn title="attr-input-type-radio">Radio Button</dfn> state</h6><div class="impl">
 
   <p>When an <code><a href="the-input-element.html#the-input-element">input</a></code> element's <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="#radio-button-state" title="attr-input-type-radio">Radio Button</a> state, the rules
   in this section apply.</p>
@@ -824,9 +883,9 @@
   </ul><p>A document must not contain an <code><a href="the-input-element.html#the-input-element">input</a></code> element whose
   <i><a href="#radio-button-group">radio button group</a></i> contains only that element.</p><div class="impl">
 
-  <p>When any of the following events occur, if the element's <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> state is true after
-  the event, the <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> state of all the
-  other elements in the same <i><a href="#radio-button-group">radio button group</a></i> must be set to
+  <p>When any of the following phenomena occur, if the element's <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> state is true after
+  the occurrence, the <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> state of all the other
+  elements in the same <i><a href="#radio-button-group">radio button group</a></i> must be set to
   false:</p>
 
   <ul><li>The element's <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> state is set to
@@ -845,8 +904,8 @@
   false. The <a href="content-models.html#activation-behavior">activation behavior</a> is to <a href="webappapis.html#fire-a-simple-event">fire a
   simple event</a> that bubbles named <code title="event-change">change</code> at the element<!-- It's not
   cancelable. Once this fires, the control is checked, end of
-  story. -->, then <a href="association-of-controls-and-forms.html#broadcast-formchange-events">broadcast <code title="event-formchange">formchange</code> events</a> at the
-  element's <a href="association-of-controls-and-forms.html#form-owner">form owner</a>.</p>
+  story. -->, then <a href="association-of-controls-and-forms.html#broadcast-formchange-events">broadcast <code title="event-formchange">formchange</code> events</a> from the
+  element's <a href="association-of-controls-and-forms.html#form-owner">form owner</a>, if any.</p>
 
   <p><strong>Constraint validation</strong>: If the element is <i title="concept-input-required"><a href="common-input-element-attributes.html#concept-input-required">required</a></i> and all of the
   <code><a href="the-input-element.html#the-input-element">input</a></code> elements in the <i><a href="#radio-button-group">radio button group</a></i> have a
@@ -877,6 +936,7 @@
    <code class="no-backref" title="attr-input-accept"><a href="#attr-input-accept">accept</a></code>,
    <code class="no-backref" title="attr-input-alt"><a href="#attr-input-alt">alt</a></code>,
    <code class="no-backref" title="attr-input-autocomplete"><a href="common-input-element-attributes.html#attr-input-autocomplete">autocomplete</a></code>,
+   <code class="no-backref" title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>,
    <code class="no-backref" title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>,
    <code class="no-backref" title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code>,
    <code class="no-backref" title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code>,
@@ -901,18 +961,18 @@
    <code class="no-backref" title="dom-input-files"><a href="common-input-element-attributes.html#dom-input-files">files</a></code>,
    <code class="no-backref" title="dom-input-list"><a href="common-input-element-attributes.html#dom-input-list">list</a></code>,
    <code class="no-backref" title="dom-input-selectedOption"><a href="common-input-element-attributes.html#dom-input-selectedoption">selectedOption</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="editing.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="editing.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
    <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code>, and
    <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-attributes.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
-   <code class="no-backref" title="dom-textarea/input-select"><a href="editing.html#dom-textarea-input-select">select()</a></code>,
-   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="editing.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
    <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-attributes.html#dom-input-stepdown">stepDown()</a></code>, and
    <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-attributes.html#dom-input-stepup">stepUp()</a></code> methods.</p>
 
    <p>The <code class="no-backref" title="event-input-input"><a href="common-input-element-attributes.html#event-input-input">input</a></code> event does not apply.</p>
 
-  </div><h6 id="file-upload-state"><span class="secno">4.10.7.1.18 </span><dfn title="attr-input-type-file">File Upload</dfn> state</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><!-- v2 ideas:
+  </div><h6 id="file-upload-state"><span class="secno">4.10.7.1.18 </span><dfn title="attr-input-type-file">File Upload</dfn> state</h6><!-- v2 ideas:
    * maximum height/width or required ratio for image uploads? - Leons Petrazickis
    * maximum per-file upload size - Alfonso Mart&iacute;nez de Lizarrondo
   --><div class="impl">
@@ -1033,6 +1093,7 @@
    <code class="no-backref" title="attr-input-alt"><a href="#attr-input-alt">alt</a></code>,
    <code class="no-backref" title="attr-input-autocomplete"><a href="common-input-element-attributes.html#attr-input-autocomplete">autocomplete</a></code>,
    <code class="no-backref" title="attr-input-checked"><a href="the-input-element.html#attr-input-checked">checked</a></code>,
+   <code class="no-backref" title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>,
    <code class="no-backref" title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>,
    <code class="no-backref" title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code>,
    <code class="no-backref" title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code>,
@@ -1059,18 +1120,18 @@
    <code class="no-backref" title="dom-input-checked"><a href="common-input-element-attributes.html#dom-input-checked">checked</a></code>,
    <code class="no-backref" title="dom-input-list"><a href="common-input-element-attributes.html#dom-input-list">list</a></code>,
    <code class="no-backref" title="dom-input-selectedOption"><a href="common-input-element-attributes.html#dom-input-selectedoption">selectedOption</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="editing.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="editing.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
    <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code>, and
    <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-attributes.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
-   <code class="no-backref" title="dom-textarea/input-select"><a href="editing.html#dom-textarea-input-select">select()</a></code>,
-   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="editing.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
    <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-attributes.html#dom-input-stepdown">stepDown()</a></code>, and
    <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-attributes.html#dom-input-stepup">stepUp()</a></code> methods.</p>
 
    <p>The <code class="no-backref" title="event-input-input"><a href="common-input-element-attributes.html#event-input-input">input</a></code> event does not apply.</p>
 
-  </div><h6 id="submit-button-state"><span class="secno">4.10.7.1.19 </span><dfn title="attr-input-type-submit">Submit Button</dfn> state</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><div class="impl">
+  </div><h6 id="submit-button-state"><span class="secno">4.10.7.1.19 </span><dfn title="attr-input-type-submit">Submit Button</dfn> state</h6><div class="impl">
 
   <p>When an <code><a href="the-input-element.html#the-input-element">input</a></code> element's <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="#submit-button-state" title="attr-input-type-submit">Submit Button</a> state, the rules
   in this section apply.</p>
@@ -1113,6 +1174,7 @@
    <code class="no-backref" title="attr-input-alt"><a href="#attr-input-alt">alt</a></code>,
    <code class="no-backref" title="attr-input-autocomplete"><a href="common-input-element-attributes.html#attr-input-autocomplete">autocomplete</a></code>,
    <code class="no-backref" title="attr-input-checked"><a href="the-input-element.html#attr-input-checked">checked</a></code>,
+   <code class="no-backref" title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>,
    <code class="no-backref" title="attr-dim-height"><a href="the-map-element.html#attr-dim-height">height</a></code>,
    <code class="no-backref" title="attr-input-list"><a href="common-input-element-attributes.html#attr-input-list">list</a></code>,
    <code class="no-backref" title="attr-input-max"><a href="common-input-element-attributes.html#attr-input-max">max</a></code>,
@@ -1134,18 +1196,18 @@
    <code class="no-backref" title="dom-input-files"><a href="common-input-element-attributes.html#dom-input-files">files</a></code>,
    <code class="no-backref" title="dom-input-list"><a href="common-input-element-attributes.html#dom-input-list">list</a></code>,
    <code class="no-backref" title="dom-input-selectedOption"><a href="common-input-element-attributes.html#dom-input-selectedoption">selectedOption</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="editing.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="editing.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
    <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code>, and
    <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-attributes.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
-   <code class="no-backref" title="dom-textarea/input-select"><a href="editing.html#dom-textarea-input-select">select()</a></code>,
-   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="editing.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
    <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-attributes.html#dom-input-stepdown">stepDown()</a></code>, and
    <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-attributes.html#dom-input-stepup">stepUp()</a></code> methods.</p>
 
    <p>The <code class="no-backref" title="event-input-input"><a href="common-input-element-attributes.html#event-input-input">input</a></code> and <code class="no-backref" title="event-input-change"><a href="common-input-element-attributes.html#event-input-change">change</a></code> events do not apply.</p>
 
-  </div><h6 id="image-button-state"><span class="secno">4.10.7.1.20 </span><dfn title="attr-input-type-image">Image Button</dfn> state</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><div class="impl">
+  </div><h6 id="image-button-state"><span class="secno">4.10.7.1.20 </span><dfn title="attr-input-type-image">Image Button</dfn> state</h6><div class="impl">
 
   <p>When an <code><a href="the-input-element.html#the-input-element">input</a></code> element's <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="#image-button-state" title="attr-input-type-image">Image Button</a> state, the rules
   in this section apply.</p>
@@ -1302,6 +1364,7 @@
    <code class="no-backref" title="attr-input-accept"><a href="#attr-input-accept">accept</a></code>,
    <code class="no-backref" title="attr-input-autocomplete"><a href="common-input-element-attributes.html#attr-input-autocomplete">autocomplete</a></code>,
    <code class="no-backref" title="attr-input-checked"><a href="the-input-element.html#attr-input-checked">checked</a></code>,
+   <code class="no-backref" title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>,
    <code class="no-backref" title="attr-input-list"><a href="common-input-element-attributes.html#attr-input-list">list</a></code>,
    <code class="no-backref" title="attr-input-max"><a href="common-input-element-attributes.html#attr-input-max">max</a></code>,
    <code class="no-backref" title="attr-input-maxlength"><a href="common-input-element-attributes.html#attr-input-maxlength">maxlength</a></code>,
@@ -1323,12 +1386,12 @@
    <code class="no-backref" title="dom-input-files"><a href="common-input-element-attributes.html#dom-input-files">files</a></code>,
    <code class="no-backref" title="dom-input-list"><a href="common-input-element-attributes.html#dom-input-list">list</a></code>,
    <code class="no-backref" title="dom-input-selectedOption"><a href="common-input-element-attributes.html#dom-input-selectedoption">selectedOption</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="editing.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="editing.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
    <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code>, and
    <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-attributes.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
-   <code class="no-backref" title="dom-textarea/input-select"><a href="editing.html#dom-textarea-input-select">select()</a></code>,
-   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="editing.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
    <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-attributes.html#dom-input-stepdown">stepDown()</a></code>, and
    <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-attributes.html#dom-input-stepup">stepUp()</a></code> methods.</p>
 
@@ -1337,7 +1400,7 @@
   </div><p class="note">Many aspects of this state's behavior are similar to
   the behavior of the <code><a href="embedded-content-1.html#the-img-element">img</a></code> element. Readers are encouraged
   to read that section, where many of the same requirements are
-  described in more detail.</p><h6 id="reset-button-state"><span class="secno">4.10.7.1.21 </span><dfn title="attr-input-type-reset">Reset Button</dfn> state</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><div class="impl">
+  described in more detail.</p><h6 id="reset-button-state"><span class="secno">4.10.7.1.21 </span><dfn title="attr-input-type-reset">Reset Button</dfn> state</h6><div class="impl">
 
   <p>When an <code><a href="the-input-element.html#the-input-element">input</a></code> element's <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="#reset-button-state" title="attr-input-type-reset">Reset Button</a> state, the rules
   in this section apply.</p>
@@ -1370,6 +1433,7 @@
    <code class="no-backref" title="attr-input-alt"><a href="#attr-input-alt">alt</a></code>,
    <code class="no-backref" title="attr-input-autocomplete"><a href="common-input-element-attributes.html#attr-input-autocomplete">autocomplete</a></code>,
    <code class="no-backref" title="attr-input-checked"><a href="the-input-element.html#attr-input-checked">checked</a></code>,
+   <code class="no-backref" title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>,
    <code class="no-backref" title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>,
    <code class="no-backref" title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code>,
    <code class="no-backref" title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code>,
@@ -1396,27 +1460,28 @@
    <code class="no-backref" title="dom-input-files"><a href="common-input-element-attributes.html#dom-input-files">files</a></code>,
    <code class="no-backref" title="dom-input-list"><a href="common-input-element-attributes.html#dom-input-list">list</a></code>,
    <code class="no-backref" title="dom-input-selectedOption"><a href="common-input-element-attributes.html#dom-input-selectedoption">selectedOption</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="editing.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="editing.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
    <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code>, and
    <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-attributes.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
-   <code class="no-backref" title="dom-textarea/input-select"><a href="editing.html#dom-textarea-input-select">select()</a></code>,
-   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="editing.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
    <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-attributes.html#dom-input-stepdown">stepDown()</a></code>, and
    <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-attributes.html#dom-input-stepup">stepUp()</a></code> methods.</p>
 
    <p>The <code class="no-backref" title="event-input-input"><a href="common-input-element-attributes.html#event-input-input">input</a></code> and <code class="no-backref" title="event-input-change"><a href="common-input-element-attributes.html#event-input-change">change</a></code> events do not apply.</p>
 
-  </div><h6 id="button-state"><span class="secno">4.10.7.1.22 </span><dfn title="attr-input-type-button">Button</dfn> state</h6><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p><div class="impl">
+  </div><h6 id="button-state"><span class="secno">4.10.7.1.22 </span><dfn title="attr-input-type-button">Button</dfn> state</h6><div class="impl">
 
   <p>When an <code><a href="the-input-element.html#the-input-element">input</a></code> element's <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="#button-state" title="attr-input-type-button">Button</a> state, the rules in
   this section apply.</p>
 
   </div><p>The <code><a href="the-input-element.html#the-input-element">input</a></code> element <a href="rendering.html#represents">represents</a> a button
-  with no default behavior. <span class="impl">If the element has a
-  <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, the button's
-  label must be the value of that attribute; otherwise, it must be the
-  empty string.</span> The element is a <a href="forms.html#concept-button" title="concept-button">button</a>.</p><div class="impl">
+  with no default behavior. A label for the button must be provided
+  in the <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute.
+  <span class="impl">If the element has a <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, the button's label
+  must be the value of that attribute; otherwise, it must be the empty
+  string.</span> The element is a <a href="forms.html#concept-button" title="concept-button">button</a>.</p><div class="impl">
 
   <p>If the element is <i title="concept-input-mutable"><a href="the-input-element.html#concept-input-mutable">mutable</a></i>,
   the user agent should allow the user to activate the element. The
@@ -1436,6 +1501,7 @@
    <code class="no-backref" title="attr-input-alt"><a href="#attr-input-alt">alt</a></code>,
    <code class="no-backref" title="attr-input-autocomplete"><a href="common-input-element-attributes.html#attr-input-autocomplete">autocomplete</a></code>,
    <code class="no-backref" title="attr-input-checked"><a href="the-input-element.html#attr-input-checked">checked</a></code>,
+   <code class="no-backref" title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>,
    <code class="no-backref" title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>,
    <code class="no-backref" title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code>,
    <code class="no-backref" title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code>,
@@ -1462,12 +1528,12 @@
    <code class="no-backref" title="dom-input-files"><a href="common-input-element-attributes.html#dom-input-files">files</a></code>,
    <code class="no-backref" title="dom-input-list"><a href="common-input-element-attributes.html#dom-input-list">list</a></code>,
    <code class="no-backref" title="dom-input-selectedOption"><a href="common-input-element-attributes.html#dom-input-selectedoption">selectedOption</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="editing.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="editing.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
    <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code>, and
    <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-attributes.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
-   <code class="no-backref" title="dom-textarea/input-select"><a href="editing.html#dom-textarea-input-select">select()</a></code>,
-   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="editing.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
    <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-attributes.html#dom-input-stepdown">stepDown()</a></code>, and
    <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-attributes.html#dom-input-stepup">stepUp()</a></code> methods.</p>
 

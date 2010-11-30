@@ -66,7 +66,8 @@
    h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
    h1 + h2, hr + h2.no-toc { page-break-before: auto; }
 
-   p > span:not([title=""]):not([class="XXX"]):not([class="impl"]), li > span:not([title=""]):not([class="XXX"]):not([class="impl"]) { border-bottom: solid #9999CC; }
+   p  > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]),
+   li > span:not([title=""]):not([class="XXX"]):not([class="impl"]):not([class="note"]), { border-bottom: solid #9999CC; }
 
    div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
    div.head p { margin: 0; }
@@ -185,6 +186,47 @@
    #configUI #updateUI, #configUI .loginUI { text-align: center; }
    #configUI input[type=button] { display: block; margin: auto; }
 
+   fieldset { margin: 1em; padding: 0.5em 1em; }
+   fieldset > legend + * { margin-top: 0; }
+   fieldset > :last-child { margin-bottom: 0; }
+   fieldset p { margin: 0.5em 0; }
+
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
   ]]></style><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
@@ -199,6 +241,8 @@
    .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
    .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+
+   td.eg { border-width: thin; text-align: center; }
 
    #table-example-1 { border: solid thin; border-collapse: collapse; margin-left: 3em; }
    #table-example-1 * { font-family: "Essays1743", serif; line-height: 1.01em; }
@@ -233,16 +277,19 @@
    .details-example img { vertical-align: top; }
 
    #named-character-references-table {
+     white-space: nowrap;
      font-size: 0.6em;
-     column-width: 28em;
+     column-width: 30em;
      column-gap: 1em;
-     -moz-column-width: 28em;
+     -moz-column-width: 30em;
      -moz-column-gap: 1em;
-     -webkit-column-width: 28em;
+     -webkit-column-width: 30em;
      -webkit-column-gap: 1em;
    }
+   #named-character-references-table > table > tbody > tr > td:first-child + td,
    #named-character-references-table > table > tbody > tr > td:last-child { text-align: center; }
    #named-character-references-table > table > tbody > tr > td:last-child:hover > span { position: absolute; top: auto; left: auto; margin-left: 0.5em; line-height: 1.2; font-size: 5em; border: outset; padding: 0.25em 0.5em; background: white; width: 1.25em; height: auto; text-align: center; }
+   #named-character-references-table > table > tbody > tr#entity-CounterClockwiseContourIntegral > td:first-child { font-size: 0.5em; }
 
    .glyph.control { color: red; }
 
@@ -289,7 +336,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
+     e.setAttribute('src', script);
      document.body.appendChild(e);
    }
    function init() {
@@ -309,7 +356,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="tokenization.html" title="8.2.4 Tokenization" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="named-character-references.html" title="8.5 Named character references" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="tokenization.html" title="8.2.4 Tokenization" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="named-character-references.html" title="8.5 Named character references" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -318,9 +365,9 @@
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="named-character-references.html">8.5 Named character references &#x2192;</a>
   <ol class="toc"><li><ol><li><ol><li><a href="the-end.html#the-end"><span class="secno">8.2.6 </span>The end</a></li><li><a href="the-end.html#coercing-an-html-dom-into-an-infoset"><span class="secno">8.2.7 </span>Coercing an HTML DOM into an infoset</a></li><li><a href="the-end.html#an-introduction-to-error-handling-and-strange-cases-in-the-parser"><span class="secno">8.2.8 </span>An introduction to error handling and strange cases in the parser</a>
-      <ol><li><a href="the-end.html#misnested-tags:-b-i-b-i"><span class="secno">8.2.8.1 </span>Misnested tags: &lt;b&gt;&lt;i&gt;&lt;/b&gt;&lt;/i&gt;</a></li><li><a href="the-end.html#misnested-tags:-b-p-b-p"><span class="secno">8.2.8.2 </span>Misnested tags: &lt;b&gt;&lt;p&gt;&lt;/b&gt;&lt;/p&gt;</a></li><li><a href="the-end.html#unexpected-markup-in-tables"><span class="secno">8.2.8.3 </span>Unexpected markup in tables</a></li><li><a href="the-end.html#scripts-that-modify-the-page-as-it-is-being-parsed"><span class="secno">8.2.8.4 </span>Scripts that modify the page as it is being parsed</a></li></ol></li></ol></li><li><a href="the-end.html#serializing-html-fragments"><span class="secno">8.3 </span>Serializing HTML fragments</a></li><li><a href="the-end.html#parsing-html-fragments"><span class="secno">8.4 </span>Parsing HTML fragments</a></li></ol></li></ol></div><div class="impl">
+      <ol><li><a href="the-end.html#misnested-tags:-b-i-b-i"><span class="secno">8.2.8.1 </span>Misnested tags: &lt;b&gt;&lt;i&gt;&lt;/b&gt;&lt;/i&gt;</a></li><li><a href="the-end.html#misnested-tags:-b-p-b-p"><span class="secno">8.2.8.2 </span>Misnested tags: &lt;b&gt;&lt;p&gt;&lt;/b&gt;&lt;/p&gt;</a></li><li><a href="the-end.html#unexpected-markup-in-tables"><span class="secno">8.2.8.3 </span>Unexpected markup in tables</a></li><li><a href="the-end.html#scripts-that-modify-the-page-as-it-is-being-parsed"><span class="secno">8.2.8.4 </span>Scripts that modify the page as it is being parsed</a></li><li><a href="the-end.html#unclosed-formatting-elements"><span class="secno">8.2.8.5 </span>Unclosed formatting elements</a></li></ol></li></ol></li><li><a href="the-end.html#serializing-html-fragments"><span class="secno">8.3 </span>Serializing HTML fragments</a></li><li><a href="the-end.html#parsing-html-fragments"><span class="secno">8.4 </span>Parsing HTML fragments</a></li></ol></li></ol></div><div class="impl">
 
-  <h4 id="the-end"><span class="secno">8.2.6 </span>The end</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="the-end"><span class="secno">8.2.6 </span>The end</h4>
 
   <p>Once the user agent <dfn id="stop-parsing" title="stop parsing">stops parsing</dfn>
   the document, the user agent must run the following steps:</p>
@@ -339,9 +386,9 @@
     <ol><li><p><a href="webappapis.html#spin-the-event-loop">Spin the event loop</a> until the first
      <code><a href="scripting-1.html#script">script</a></code> in the <a href="scripting-1.html#list-of-scripts-that-will-execute-when-the-document-has-finished-parsing">list of scripts that will
      execute when the document has finished parsing</a> has its
-     <a href="scripting-1.html#ready-to-be-parser-executed">"ready to be parser-executed"</a> flag set <em>and</em> there
-     is no <a href="semantics.html#a-style-sheet-blocking-scripts" title="a style sheet blocking scripts">style sheet
-     blocking scripts</a>.</p></li>
+     <a href="scripting-1.html#ready-to-be-parser-executed">"ready to be parser-executed"</a> flag set <em>and</em>
+     the parser's <code><a href="infrastructure.html#document">Document</a></code> <a href="semantics.html#has-no-style-sheet-that-is-blocking-scripts">has no style sheet that
+     is blocking scripts</a>.</p></li>
 
      <li><p><a href="scripting-1.html#executing-a-script-block" title="executing a script block">Execute</a> the
      first <code><a href="scripting-1.html#script">script</a></code> in the <a href="scripting-1.html#list-of-scripts-that-will-execute-when-the-document-has-finished-parsing">list of scripts that will
@@ -414,8 +461,8 @@
    <li><p>The <code><a href="infrastructure.html#document">Document</a></code> is now <dfn id="completely-loaded">completely
    loaded</dfn>.</p></li>
 
-  </ol><p>When the user agent is to <dfn id="abort-an-html-parser">abort an HTML parser</dfn>, it
-  must run the following steps:</p>
+  </ol><p>When the user agent is to <dfn id="abort-a-parser">abort a parser</dfn>, it must run
+  the following steps:</p>
 
   <ol><li><p>Throw away any pending content in the <a href="parsing.html#the-input-stream">input
    stream</a>, and discard any future content that would have been
@@ -425,8 +472,11 @@
    elements</a>.</p></li>
 
    <!-- anything else? this is things that happen when you call
-   document.open() on a document that's still being parsed. Should the
-   pending scripts be blown away or anything? -->
+   document.open() on a document that's still being parsed, or when
+   you navigate a document that's still parsing, or navigate the
+   parent of a frame with a document that's still parsing, or the user
+   hits "stop". Should the pending scripts be blown away or anything?
+   -->
 
   </ol><p>Except where otherwise specified, the <a href="webappapis.html#task-source">task source</a>
   for the <a href="webappapis.html#concept-task" title="concept-task">tasks</a> mentioned in this
@@ -434,7 +484,7 @@
 
   </div><div class="impl">
 
-  <h4 id="coercing-an-html-dom-into-an-infoset"><span class="secno">8.2.7 </span>Coercing an HTML DOM into an infoset</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="coercing-an-html-dom-into-an-infoset"><span class="secno">8.2.7 </span>Coercing an HTML DOM into an infoset</h4>
 
   <p>When an application uses an <a href="parsing.html#html-parser">HTML parser</a> in
   conjunction with an XML pipeline, it is possible that the
@@ -520,7 +570,7 @@
 
   </div><div class="impl">
 
-  <h4 id="an-introduction-to-error-handling-and-strange-cases-in-the-parser"><span class="secno">8.2.8 </span>An introduction to error handling and strange cases in the parser</h4><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h4 id="an-introduction-to-error-handling-and-strange-cases-in-the-parser"><span class="secno">8.2.8 </span>An introduction to error handling and strange cases in the parser</h4>
 
   <p><i>This section is non-normative.</i></p>
 
@@ -611,7 +661,7 @@
   elements</a>, so that when the "3" is parsed, it is appended to
   the <code><a href="grouping-content.html#the-p-element">p</a></code> element:</p>
 
-  <ul class="domTree"><li class="t1"><code><a href="semantics.html#the-html-element-0">html</a></code><ul><li class="t1"><code><a href="semantics.html#the-head-element-0">head</a></code></li><li class="t1"><code><a href="sections.html#the-body-element-0">body</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code><ul><li class="t3"><code>#text</code>: <span title="">1</span></li></ul></li><li class="t1"><code><a href="grouping-content.html#the-p-element">p</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code><ul><li class="t3"><code>#text</code>: <span title="">2</span></li></ul></li><li class="t3"><code>#text</code>: <span title="">3</span></li></ul></li></ul></li></ul></li></ul><h5 id="unexpected-markup-in-tables"><span class="secno">8.2.8.3 </span>Unexpected markup in tables</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <ul class="domTree"><li class="t1"><code><a href="semantics.html#the-html-element-0">html</a></code><ul><li class="t1"><code><a href="semantics.html#the-head-element-0">head</a></code></li><li class="t1"><code><a href="sections.html#the-body-element-0">body</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code><ul><li class="t3"><code>#text</code>: <span title="">1</span></li></ul></li><li class="t1"><code><a href="grouping-content.html#the-p-element">p</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code><ul><li class="t3"><code>#text</code>: <span title="">2</span></li></ul></li><li class="t3"><code>#text</code>: <span title="">3</span></li></ul></li></ul></li></ul></li></ul><h5 id="unexpected-markup-in-tables"><span class="secno">8.2.8.3 </span>Unexpected markup in tables</h5>
 
   <p><i>This section is non-normative.</i></p>
 
@@ -702,7 +752,7 @@
   result in yet another <code><a href="text-level-semantics.html#the-b-element">b</a></code> element being created, this
   time after the table:</p>
 
-  <ul class="domTree"><li class="t1"><code><a href="semantics.html#the-html-element-0">html</a></code><ul><li class="t1"><code><a href="semantics.html#the-head-element-0">head</a></code></li><li class="t1"><code><a href="sections.html#the-body-element-0">body</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code></li><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code><ul><li class="t3"><code>#text</code>: <span title="">bbb</span></li></ul></li><li class="t1"><code><a href="tabular-data.html#the-table-element">table</a></code><ul><li class="t1"><code><a href="tabular-data.html#the-tbody-element">tbody</a></code><ul><li class="t1"><code><a href="tabular-data.html#the-tr-element">tr</a></code><ul><li class="t1"><code><a href="tabular-data.html#the-td-element">td</a></code><ul><li class="t3"><code>#text</code>: <span title="">aaa</span></li></ul></li></ul></li></ul></li></ul></li><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code><ul><li class="t3"><code>#text</code>: <span title="">ccc</span></li></ul></li></ul></li></ul></li></ul><h5 id="scripts-that-modify-the-page-as-it-is-being-parsed"><span class="secno">8.2.8.4 </span>Scripts that modify the page as it is being parsed</h5><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <ul class="domTree"><li class="t1"><code><a href="semantics.html#the-html-element-0">html</a></code><ul><li class="t1"><code><a href="semantics.html#the-head-element-0">head</a></code></li><li class="t1"><code><a href="sections.html#the-body-element-0">body</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code></li><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code><ul><li class="t3"><code>#text</code>: <span title="">bbb</span></li></ul></li><li class="t1"><code><a href="tabular-data.html#the-table-element">table</a></code><ul><li class="t1"><code><a href="tabular-data.html#the-tbody-element">tbody</a></code><ul><li class="t1"><code><a href="tabular-data.html#the-tr-element">tr</a></code><ul><li class="t1"><code><a href="tabular-data.html#the-td-element">td</a></code><ul><li class="t3"><code>#text</code>: <span title="">aaa</span></li></ul></li></ul></li></ul></li></ul></li><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code><ul><li class="t3"><code>#text</code>: <span title="">ccc</span></li></ul></li></ul></li></ul></li></ul><h5 id="scripts-that-modify-the-page-as-it-is-being-parsed"><span class="secno">8.2.8.4 </span>Scripts that modify the page as it is being parsed</h5>
 
   <p><i>This section is non-normative.</i></p>
 
@@ -759,9 +809,39 @@
   <ul class="domTree"><li class="t1"><code><a href="semantics.html#the-html-element-0">html</a></code><ul><li class="t1"><code><a href="semantics.html#the-head-element-0">head</a></code></li><li class="t1"><code><a href="sections.html#the-body-element-0">body</a></code><ul><li class="t1"><code><a href="scripting-1.html#script">script</a></code><ul><li class="t3"><code>#text</code>: <span title="">alert(document.URL);</span></li></ul></li></ul></li></ul></li></ul><p>This second alert will say "http://example.com/inner".</p>
 
 
+  <h5 id="unclosed-formatting-elements"><span class="secno">8.2.8.5 </span>Unclosed formatting elements</h5>
+
+  <p><i>This section is non-normative.</i></p>
+
+  <p>The following markup shows how nested formatting elements (such
+  as <code><a href="text-level-semantics.html#the-b-element">b</a></code>) get collected and continue to be applied even as
+  the elements they are contained in are closed, but that excessive
+  duplicates are thrown away.</p>
+
+  <pre>&lt;!DOCTYPE html&gt;
+&lt;p&gt;&lt;b class=x&gt;&lt;b class=x&gt;&lt;b&gt;&lt;b class=x&gt;&lt;b class=x&gt;&lt;b&gt;X
+&lt;p&gt;X
+&lt;p&gt;&lt;b&gt;&lt;b class=x&gt;&lt;b&gt;X
+&lt;p&gt;&lt;/b&gt;&lt;/b&gt;&lt;/b&gt;&lt;/b&gt;&lt;/b&gt;&lt;/b&gt;X</pre>
+
+  <p>The resulting DOM tree is as follows:</p>
+
+  <ul class="domTree"><li class="t10">DOCTYPE: <code><a href="semantics.html#the-html-element-0">html</a></code></li><li class="t1"><code><a href="semantics.html#the-html-element-0">html</a></code><ul><li class="t1"><code><a href="semantics.html#the-head-element-0">head</a></code></li><li class="t1"><code><a href="sections.html#the-body-element-0">body</a></code><ul><li class="t1"><code><a href="grouping-content.html#the-p-element">p</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code> <span class="t2" title=""><code class="attribute name">class</code>="<code class="attribute value">x</code>"</span><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code> <span class="t2" title=""><code class="attribute name">class</code>="<code class="attribute value">x</code>"</span><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code> <span class="t2" title=""><code class="attribute name">class</code>="<code class="attribute value">x</code>"</span><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code> <span class="t2" title=""><code class="attribute name">class</code>="<code class="attribute value">x</code>"</span><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code><ul><li class="t3"><code>#text</code>: <span title="">X&#x23CE;</span></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li><li class="t1"><code><a href="grouping-content.html#the-p-element">p</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code> <span class="t2" title=""><code class="attribute name">class</code>="<code class="attribute value">x</code>"</span><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code> <span class="t2" title=""><code class="attribute name">class</code>="<code class="attribute value">x</code>"</span><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code> <span class="t2" title=""><code class="attribute name">class</code>="<code class="attribute value">x</code>"</span><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code><ul><li class="t3"><code>#text</code>: <span title="">X&#x23CE;</span></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li><li class="t1"><code><a href="grouping-content.html#the-p-element">p</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code> <span class="t2" title=""><code class="attribute name">class</code>="<code class="attribute value">x</code>"</span><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code> <span class="t2" title=""><code class="attribute name">class</code>="<code class="attribute value">x</code>"</span><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code> <span class="t2" title=""><code class="attribute name">class</code>="<code class="attribute value">x</code>"</span><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code> <span class="t2" title=""><code class="attribute name">class</code>="<code class="attribute value">x</code>"</span><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code><ul><li class="t3"><code>#text</code>: <span title="">X&#x23CE;</span></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li><li class="t1"><code><a href="grouping-content.html#the-p-element">p</a></code><ul><li class="t3"><code>#text</code>: <span title="">X&#x23CE;</span></li></ul></li></ul></li></ul></li></ul><p>Note how the second <code><a href="grouping-content.html#the-p-element">p</a></code> element in the markup has no
+  explicit <code><a href="text-level-semantics.html#the-b-element">b</a></code> elements, but in the resulting DOM, up to
+  three of each kind of formatting element (in this case three
+  <code><a href="text-level-semantics.html#the-b-element">b</a></code> elements with the class attribute, and two unadorned
+  <code><a href="text-level-semantics.html#the-b-element">b</a></code> elements) get reconstructed before the element's
+  "X".</p>
+
+  <p>Also note how this means that in the final paragraph only six
+  <code><a href="text-level-semantics.html#the-b-element">b</a></code> end tags are needed to completely clear the list of
+  formatting elements, even though nine <code><a href="text-level-semantics.html#the-b-element">b</a></code> start tags have
+  been seen up to this point.</p>
 
 
-  <h3 id="serializing-html-fragments"><span class="secno">8.3 </span>Serializing HTML fragments</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+
+
+  <h3 id="serializing-html-fragments"><span class="secno">8.3 </span>Serializing HTML fragments</h3>
 
   <p>The following steps form the <dfn id="html-fragment-serialization-algorithm">HTML fragment serialization
   algorithm</dfn>. The algorithm takes as input a DOM
@@ -946,7 +1026,7 @@
   tag for the <code><a href="grouping-content.html#the-p-element">p</a></code>).</p>
 
 
-  <h3 id="parsing-html-fragments"><span class="secno">8.4 </span>Parsing HTML fragments</h3><p class="XXX annotation"><b>Status: </b><i>Last call for comments</i></p>
+  <h3 id="parsing-html-fragments"><span class="secno">8.4 </span>Parsing HTML fragments</h3>
 
   <p>The following steps form the <dfn id="html-fragment-parsing-algorithm">HTML fragment parsing
   algorithm</dfn>. The algorithm optionally takes as input an
