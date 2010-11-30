@@ -50,7 +50,7 @@ ifeq ($(PUBSITE),)
 PUBSITE=W3C
 endif
 
-all: Overview.html MANIFEST spec.html README.md
+all: Overview.html index.html MANIFEST spec.html README.md
 
 debug:
 	@echo $(MULTIPAGE_SPEC_FILES)
@@ -183,6 +183,9 @@ Overview.html: html.spec.src.html src/status.html tools/specgen.xsl tools/toc.xs
 	  | $(PERL) $(PERLFLAGS) -pi -e 's| xmlns="http://www.w3.org/1999/xhtml"||' \
 	  | $(PERL) $(PERLFLAGS) -pi -e 's|<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">|<meta http-equiv="Content-Type" content="text/html; charset=utf-8">|' \
 	  > $@
+
+index.html: Overview.html
+	cp $< $@
 
 MANIFEST: MANIFEST.tmp
 ifneq ($(shell if [ -f MANIFEST.tmp ]; then $(GREP) $(GREPFLAGS) -v html MANIFEST.tmp; fi),)
