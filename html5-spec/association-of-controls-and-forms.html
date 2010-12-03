@@ -1304,12 +1304,17 @@ fur
   <var title="">scripted-submit</var> flag set, the user agent must
   run the following steps:</p>
 
-  <ol><li id="sandboxSubmitBlocked"><p>If <var title="">form</var> is in
-   a <code><a href="infrastructure.html#document">Document</a></code> that has no associated <a href="browsers.html#browsing-context">browsing
-   context</a> or whose <a href="browsers.html#browsing-context">browsing context</a> had its
-   <a href="the-iframe-element.html#sandboxed-forms-browsing-context-flag">sandboxed forms browsing context flag</a> set when the
-   <code><a href="infrastructure.html#document">Document</a></code> was created, then abort these steps without
-   doing anything.</p></li>
+  <ol><li><p>Let <var title="">form document</var> be the <var title="">form</var>'s <code><a href="infrastructure.html#document">Document</a></code>.</p></li>
+
+   <li id="sandboxSubmitBlocked"><p>If <var title="">form
+   document</var> has no associated <a href="browsers.html#browsing-context">browsing context</a> or
+   its <a href="browsers.html#browsing-context">browsing context</a> had its <a href="the-iframe-element.html#sandboxed-forms-browsing-context-flag">sandboxed forms
+   browsing context flag</a> set when the <code><a href="infrastructure.html#document">Document</a></code> was
+   created, then abort these steps without doing anything.</p></li>
+
+   <li><p>Let <var title="">form browsing context</var> be the
+   <a href="browsers.html#browsing-context">browsing context</a> of <var title="">form
+   document</var>.</p></li>
 
    <li><p>If <var title="">form</var> is already being submitted
    (i.e. the form was <a href="#concept-form-submit" title="concept-form-submit">submitted</a> again while processing
@@ -1515,7 +1520,8 @@ fur
 
    <li>
 
-    <p>If <var title="">action</var> is the empty string, let <var title="">action</var> be <a href="dom.html#the-document-s-address">the document's address</a>.</p>
+    <p>If <var title="">action</var> is the empty string, let <var title="">action</var> be <a href="dom.html#the-document-s-address">the document's address</a> of
+    the <var title="">form document</var>.</p>
 
     <p class="note">This step is a <a href="introduction.html#willful-violation">willful violation</a> of
     RFC 3986, which would require base URL processing here. This
@@ -1549,16 +1555,15 @@ fur
    <li><p>If the user indicated a specific <a href="browsers.html#browsing-context">browsing
    context</a> to use when submitting the form, then let <var title="">target browsing context</var> be that <a href="browsers.html#browsing-context">browsing
    context</a>. Otherwise, apply <a href="browsers.html#the-rules-for-choosing-a-browsing-context-given-a-browsing-context-name">the rules for choosing a
-   browsing context given a browsing context name</a> using <var title="">target</var> as the name and the <a href="browsers.html#browsing-context">browsing
-   context</a> of <var title="">form</var> as the context in which
-   the algorithm is executed, and let <var title="">target browsing
-   context</var> be the resulting <a href="browsers.html#browsing-context">browsing
-   context</a>.</p></li>
+   browsing context given a browsing context name</a> using <var title="">target</var> as the name and <var title="">form browsing
+   context</var> as the context in which the algorithm is executed,
+   and let <var title="">target browsing context</var> be the
+   resulting <a href="browsers.html#browsing-context">browsing context</a>.</p></li>
 
    <li><p>If <var title="">target browsing context</var> was created
-   in the previous step, then let <var title="">replace</var> be true.
-   Otherwise, let it be false.</p></li>
-   <!-- XXXXX this is about to change -->
+   in the previous step, or if the <var title="">form document</var>
+   has not yet <a href="the-end.html#completely-loaded">completely loaded</a>, then let <var title="">replace</var> be true. Otherwise, let it be
+   false.</p></li>
 
    <li>
 
@@ -1646,11 +1651,10 @@ fur
 
       </dl><!--<p>If <var title="">method</var> is anything but (GET or)
       POST, and the <span>origin</span> of <var title="">action</var>
-      is not the <span>same origin</span> as that of the
-      <code>form</code> element's <code>Document</code>, then abort
-      these steps.</p> [or do CORS] (this is commented out since only
-      POST can trigger this now, and that's historically
-      unrestricted)--><p>Otherwise, <a href="history.html#navigate">navigate</a><!--DONAV form--> <var title="">target browsing context</var> to <var title="">action</var> using the HTTP method given by <var title="">method</var> and with <var title="">entity body</var>
+      is not the <span>same origin</span> as that of <var
+      title="">form document</var>, then abort these steps.</p> [or do
+      CORS] (this is commented out since only POST can trigger this
+      now, and that's historically unrestricted)--><p>Otherwise, <a href="history.html#navigate">navigate</a><!--DONAV form--> <var title="">target browsing context</var> to <var title="">action</var> using the HTTP method given by <var title="">method</var> and with <var title="">entity body</var>
       as the entity body, of type <var title="">MIME type</var>. If
       <var title="">replace</var> is true, then <var title="">target
       browsing context</var> must be navigated with <a href="history.html#replacement-enabled">replacement
@@ -1692,9 +1696,9 @@ fur
       resulting escaped string. <a href="references.html#refsRFC3986">[RFC3986]</a></p>
 
       <p><a href="history.html#navigate">Navigate</a><!--DONAV form--> <var title="">target
-      browsing context</var> to the potentially modified <var title="">action</var>. If <var title="">replace</var> is true,
-      then <var title="">target browsing context</var> must be
-      navigated with <a href="history.html#replacement-enabled">replacement enabled</a>.</p>
+      browsing context</var> to the potentially modified <var title="">action</var> (which will be a <a href="infrastructure.html#data-protocol" title="data&#10;      protocol"><code title="">data:</code> URL</a>). If <var title="">replace</var> is true, then <var title="">target
+      browsing context</var> must be navigated with <a href="history.html#replacement-enabled">replacement
+      enabled</a>.</p>
 
      </dd>
 

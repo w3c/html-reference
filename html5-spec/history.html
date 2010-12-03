@@ -587,7 +587,7 @@
    <a href="#refused-to-allow-the-document-to-be-unloaded">refused to allow the document to be unloaded</a>, then
    abort these steps.</p></li>
 
-   <li><p><a href="#unload-a-document" title="unload a document">Unload</a> the the
+   <li><p><a href="#unload-a-document" title="unload a document">Unload</a> the
    <a href="browsers.html#active-document">active document</a> of the <var title="">specified
    browsing context</var> with the <var title="">recycle</var>
    parameter set to false.</p></li>
@@ -699,6 +699,21 @@
     <p class="note">Since this is neither a <a href="#navigate" title="navigate">navigation</a> of the <a href="browsers.html#browsing-context">browsing
     context</a> nor a <a href="#traverse-the-history" title="traverse the history">history
     traversal</a>, it does not cause a <code title="event-hashchange"><a href="#event-hashchange">hashchange</a></code> event to be fired.</p>
+
+   </li>
+
+   <li>
+
+     <p>If the <a href="dom.html#current-document-readiness">current document readiness</a> is not yet set
+     to the string "complete", let the <code><a href="infrastructure.html#document">Document</a></code>'s
+     <a href="#pending-state-object">pending state object</a> be another <a href="common-dom-interfaces.html#structured-clone">structured
+     clone</a> of the specified <var title="">data</var>. (If there
+     was already a <a href="#pending-state-object">pending state object</a>, the previous one
+     is discarded.)</p>
+
+     <p class="note">This ensures that the <code title="event-popstate"><a href="#event-popstate">popstate</a></code> event that will be fired
+     when the document finally loads will accurately reflect the
+     pushed or replaced state object.</p>
 
    </li>
 
@@ -898,22 +913,13 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   attribute must return <a href="dom.html#the-document-s-current-address" title="the document's current&#10;  address">the current address</a> of the associated
   <code><a href="infrastructure.html#document">Document</a></code> object, as an <a href="urls.html#absolute-url">absolute URL</a>.</p>
 
-  <p>On setting, <!-- READ ME WHEN EDITING THIS: Mozilla does this,
-  but IE doesn't. What should we do?: the behavior depends on the
-  context in which the script that set the attribute is running. If
-  the script ran as the direct result of the execution of a
-  <code>script</code> element in the document represented by the
-  <code>Location</code> object's associated <code>Document</code>
-  object, then the user agent must act as if the <code
-  title="dom-location-replace">replace()</code> method had been called
-  with the new value as its argument. Otherwise,--> the user agent
-  must act as if the <code title="dom-location-assign"><a href="#dom-location-assign">assign()</a></code>
-  method had been called with the new value as its argument.</p><!--
-  v2: may wish to allow replace instead as a UI improvement -->
-  <!-- XXXXX the above is about to change -->
-
-  <!-- we could change the magic .location setter to simply refer
-  straight to assign(), so we don't have two levels of indirection -->
+  <p>On setting, if the <code><a href="#location">Location</a></code> object's associated
+  <code><a href="infrastructure.html#document">Document</a></code> object has <a href="the-end.html#completely-loaded">completely loaded</a>,
+  then the user agent must act as if the <code title="dom-location-assign"><a href="#dom-location-assign">assign()</a></code> method had been called
+  with the new value as its argument. Otherwise, the user agent must
+  act as if the <code title="dom-location-replace"><a href="#dom-location-replace">replace()</a></code>
+  method had been called with the new value as its argument.</p>
+  <!--DONAV location.href, defined in terms of the paragraphs below-->
 
   <p>When the <dfn id="dom-location-assign" title="dom-location-assign"><code>assign(<var title="">url</var>)</code></dfn> method is invoked, the UA must
   <a href="urls.html#resolve-a-url" title="resolve a url">resolve</a> the argument, relative to
@@ -934,7 +940,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   <a href="urls.html#resolve-a-url" title="resolve a url">resolve</a> the argument, relative to
   the <a href="browsers.html#entry-script">entry script</a>'s <a href="webappapis.html#script-s-base-url" title="script's base URL">base
   URL</a>, and if that is successful,
-  <a href="#navigate">navigate</a><!--DONAV location.replace--> the
+  <a href="#navigate">navigate</a><!--DONAV location.href/replace--> the
   <a href="browsers.html#browsing-context">browsing context</a> to the specified <var title="">url</var> with <a href="#replacement-enabled">replacement enabled</a>.</p>
 
   <p>Navigation for the <code title="dom-location-assign"><a href="#dom-location-assign">assign()</a></code> and <code title="dom-location-replace"><a href="#dom-location-replace">replace()</a></code> methods must be done
@@ -1988,6 +1994,12 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
      attribute set to true. This event must not bubble, must not be
      cancelable, and has no default action.</p></li>
 
+     <!-- an interesting thing to test would be to traverse back
+     during onload, before the first pageshow has fired, and then to
+     traverse forward again, and see if we get _two_ pageshows. If so,
+     it indicates that the history traversal task source has a higher
+     priority than the DOM manipulation task source. -->
+
     </ol></li>
 
    <li><p>Set <a href="dom.html#the-document-s-current-address">the document's current address</a> to the URL
@@ -2033,8 +2045,8 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
      <dt>Otherwise</dt>
 
-     <dd><p>Let the <code><a href="infrastructure.html#document">Document</a></code>'s <dfn id="pending-state-object">pending state
-     object</dfn> be <var title="">state</var>. (If there was already
+     <dd><p>Let the <code><a href="infrastructure.html#document">Document</a></code>'s <a href="#pending-state-object">pending state
+     object</a> be <var title="">state</var>. (If there was already
      a <a href="#pending-state-object">pending state object</a>, the previous one is
      discarded.)</p>
 
@@ -2053,7 +2065,10 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
    <li><p>The <a href="#current-entry">current entry</a> is now the <i>specified
    entry</i>.</p></li>
 
-  </ol><p>The <a href="#pending-state-object">pending state object</a> must be initially null.</p>
+  </ol><p>The <dfn id="pending-state-object">pending state object</dfn> is used to keep track of what
+  state object to use in the inital <code title="event-popstate"><a href="#event-popstate">popstate</a></code> event fired by the parser
+  once it <a href="the-end.html#stop-parsing" title="stop parsing">stops parsing</a>. The
+  <a href="#pending-state-object">pending state object</a> must be initially null.</p>
 
   <p>The <a href="webappapis.html#task-source">task source</a> for the tasks mentioned above is the
   <a href="webappapis.html#dom-manipulation-task-source">DOM manipulation task source</a>.</p>

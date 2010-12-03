@@ -1,8 +1,8 @@
 PARSE=xmllint
 PARSEFLAGS=--html --xmlout
 TOHTML=xmllint --html
-SVN=svn
-SVNFLAGS=
+HG=hg
+HGFLAGS=
 CURL=curl
 CURLFLAGS=-R
 UNZIP=unzip
@@ -35,9 +35,9 @@ HTML2MARKDOWNFLAGS=
 
 INCELIM_DIR=tools/rng-incelim-1.2
 WHATTF_BASE_URL=http://svn.versiondude.net/whattf/syntax/trunk/relaxng/
-OTHER_RNG=$(foreach rnc,$(wildcard schema/*.rnc),$(basename $(notdir $(rnc))).rng)
-ARIA_OTHER_RNG=$(foreach rnc,$(wildcard schema/*.rnc),aria/$(basename $(notdir $(rnc))).rng)
-SCHEMA_FILES=$(wildcard schema/*.rnc) schema/assertions.sch schema/LICENSE
+OTHER_RNG=$(foreach rnc,$(wildcard syntax/relaxng/*.rnc),$(basename $(notdir $(rnc))).rng)
+ARIA_OTHER_RNG=$(foreach rnc,$(wildcard syntax/relaxng/*.rnc),aria/$(basename $(notdir $(rnc))).rng)
+SCHEMA_FILES=$(wildcard syntax/relaxng/*.rnc) syntax/relaxng/assertions.sch syntax/relaxng/LICENSE
 MULTIPAGE_SPEC_FILES=$(foreach file,$(wildcard html5/spec/*.html),$(notdir $(file)))
 
 ELEMENTS=$(wildcard elements/*.html)
@@ -56,7 +56,7 @@ debug:
 	@echo $(MULTIPAGE_SPEC_FILES)
 
 patch-schema: $(SCHEMA_FILES)
-	$(SVN) $(SVNFLAGS) diff --depth files  schema > $@
+	$(HG) $(HGFLAGS) diff syntax/relaxng > $@
 
 html.rng: $(SCHEMA_FILES)
 	$(TRANG) $(TRANGFLAGS) html.rnc $@
@@ -73,7 +73,7 @@ schema.html: html-compiled.rng.combined
 #	$(CURL) $(CURLFLAGS) -F "rngfile=@$(realpath $<);type=text/html" $(TRANG_HTML_SPEC_CGI) -o $@
 	$(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s/\s+<a[^<]+<\/a> notAllowed//g' $@
 
-LICENSE.xml: schema/LICENSE
+LICENSE.xml: syntax/relaxng/LICENSE
 	echo "<license>" > $@
 	$(PERL) $(PERLFLAGS) -p -e "s/&/&amp;/g" $< | $(PERL) $(PERLFLAGS) -p -e "s/</&lt;/g" >> $@
 	echo "</license>" >> $@
@@ -116,7 +116,7 @@ elements/h2.html elements/h3.html elements/h4.html elements/h5.html elements/h6.
 	cp $< $@
 
 html.spec.src.html: html-compiled.rng schema.html \
-  tools/generate-spec-source.xsl schema/assertions.sch \
+  tools/generate-spec-source.xsl syntax/relaxng/assertions.sch \
   src/head.html src/header.src.html src/intro-scope.html \
   src/terms.html src/syntax.html src/documents.html \
   $(ELEMENTS) src/attributes.html src/map-attributes.html \
@@ -157,11 +157,18 @@ html.spec.src.html: html-compiled.rng schema.html \
 	  | $(PERL) $(PERLFLAGS) -pi -e 's|>meta.http-equiv.content-type<|>meta http-equiv=content-type<|g' \
 	  | $(PERL) $(PERLFLAGS) -pi -e 's|>wrap.hard</a>|>wrap</a>=<span class="attr-values">"hard"</span><span class="postfix required" title="REQUIRED">&#x2605;</span>|g' \
 	  | $(PERL) $(PERLFLAGS) -pi -e 's|>wrap.soft</a>|>wrap</a>=<span class="attr-values">"soft"</span>|g' \
-	  | $(PERL) $(PERLFLAGS) -pi -e 's|element “([^”]+)”|element <span class="element">$$1</span>|g' \
-	  | $(PERL) $(PERLFLAGS) -pi -e 's|“([^”]+)” element|<span class="element">$$1</span> element|g' \
-	  | $(PERL) $(PERLFLAGS) -pi -e 's|“([^”]+)” elements|<span class="element">$$1</span> elements|g' \
-	  | $(PERL) $(PERLFLAGS) -pi -e 's|attribute “([^”]+)”|attribute <span class="attribute">$$1</span>|g' \
-	  | $(PERL) $(PERLFLAGS) -pi -e 's|“([^”]+)” attribute|<span class="attribute">$$1</span> attribute|g' \
+	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|element\s+“([^”]+)”|element <span class="element">$$1</span>|g' \
+	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|Element\s+“([^”]+)”|Element <span class="element">$$1</span>|g' \
+	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|“([^”]+)”\s+element|<span class="element">$$1</span> element|g' \
+	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|“([^”]+)”\s+elements|<span class="element">$$1</span> elements|g' \
+	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|attribute\s+“([^”]+)”|attribute <span class="attribute">$$1</span>|g' \
+	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|“([^”]+)”\s+attribute|<span class="attribute">$$1</span> attribute|g' \
+	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|element\s+&#8220;([^&]+)&#8221;|element <span class="element">$$1</span>|g' \
+	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|Element\s+&#8220;([^&]+)&#8221;|Element <span class="element">$$1</span>|g' \
+	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|&#8220;([^&]+)&#8221;\s+element|<span class="element">$$1</span> element|g' \
+	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|&#8220;([^&]+)&#8221;\s+elements|<span class="element">$$1</span> elements|g' \
+	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|attribute\s+&#8220;([^&]+)&#8221;|attribute <span class="attribute">$$1</span>|g' \
+	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|&#8220;([^&]+)&#8221;\s+attribute|<span class="attribute">$$1</span> attribute|g' \
 	  > $@
 
 html5:
@@ -230,7 +237,7 @@ aria/schema.html: aria/html-compiled.rng.combined
 	$(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s/\s+<a[^<]+<\/a> notAllowed//g' $@
 
 aria/html.spec.src.html: aria/html-compiled.rng aria/schema.html \
-  tools/generate-spec-source.xsl schema/assertions.sch \
+  tools/generate-spec-source.xsl syntax/relaxng/assertions.sch \
   src/head.html src/header.src.html src/intro-scope.html \
   src/terms.html src/syntax.html src/documents.html \
   $(ELEMENTS) src/attributes.html src/datatypes.html src/references.html \
@@ -309,12 +316,8 @@ endif
 
 schemaclean:
 ifneq ($(WHATTF_SCHEMA),)
-	rm -rf schema
-	mkdir schema
-	cp -p $(WHATTF_SCHEMA)/*.rnc schema
-	cp -p $(WHATTF_SCHEMA)/*.sch schema
-	cp -p $(WHATTF_SCHEMA)/LICENSE schema
-	cp -pR $(WHATTF_SCHEMA)/.svn schema
+	rm -rf syntax
+	cp -pR $(WHATTF_SCHEMA) syntax
 	-$(PATCH) $(PATCHFLAGS) < patch-schema
 endif
 

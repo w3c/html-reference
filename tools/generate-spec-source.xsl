@@ -28,7 +28,7 @@
   <xsl:variable name="assertions">
     <!-- * FIXME: really should be doing this with keys... -->
     <xsl:for-each
-      select="document('../schema/assertions.sch')//*[@context]">
+      select="document('../syntax/relaxng/assertions.sch')//*[@context]">
       <s:rule>
         <xsl:choose>
           <xsl:when test="contains(@context,'|')">
@@ -50,7 +50,7 @@
   </xsl:variable>
   <xsl:variable name="warnings">
     <xsl:for-each
-      select="document('../schema/warnings.sch')//*[@context]">
+      select="document('../syntax/relaxng/warnings.sch')//*[@context]">
       <s:rule>
         <xsl:choose>
           <xsl:when test="contains(@context,'|')">

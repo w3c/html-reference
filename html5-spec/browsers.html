@@ -438,26 +438,31 @@
 
   </div><h4 id="nested-browsing-contexts"><span class="secno">5.1.1 </span>Nested browsing contexts</h4><p>Certain elements (for example, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> elements) can
   instantiate further <a href="#browsing-context" title="browsing context">browsing
-  contexts</a>. These are called <dfn id="nested-browsing-context" title="nested browsing&#10;  context">nested browsing contexts</dfn>. If a browsing context <var title="">P</var> has an element <var title="">E</var> in one of its
-  <code><a href="infrastructure.html#document">Document</a></code>s <var title="">D</var> that nests another
-  browsing context <var title="">C</var> inside it, then <var title="">P</var> is said to be the <dfn id="parent-browsing-context">parent browsing
-  context</dfn> of <var title="">C</var>, <var title="">C</var> is
-  said to be a <dfn id="child-browsing-context">child browsing context</dfn> of <var title="">P</var>, <var title="">C</var> is said to be <dfn id="browsing-context-nested-through" title="browsing context nested through">nested through</dfn> <var title="">D</var>, and <var title="">E</var> is said to be the
-  <dfn id="browsing-context-container">browsing context container</dfn> of <var title="">C</var>.</p><p>A browsing context <var title="">A</var> is said to be an
-  ancestor of a browsing context <var title="">B</var> if there exists
-  a browsing context <var title="">A'</var> that is a <a href="#child-browsing-context">child
-  browsing context</a> of <var title="">A</var> and that is itself
-  an ancestor of <var title="">B</var>, or if there is a browsing
-  context <var title="">P</var> that is a <a href="#child-browsing-context">child browsing
-  context</a> of <var title="">A</var> and that is the <a href="#parent-browsing-context">parent
-  browsing context</a> of <var title="">B</var>.</p><p>The browsing context with no <a href="#parent-browsing-context">parent browsing context</a>
-  is the <dfn id="top-level-browsing-context">top-level browsing context</dfn> of all the browsing
-  contexts <a href="#nested-browsing-context" title="nested browsing context">nested</a> within
-  it (either directly or indirectly through other nested browsing
-  contexts).</p><p>The transitive closure of <a href="#parent-browsing-context" title="parent browsing&#10;  context">parent browsing contexts</a> for a <a href="#nested-browsing-context">nested browsing
-  context</a> gives the list of <dfn id="ancestor-browsing-context" title="ancestor browsing&#10;  context">ancestor browsing contexts</dfn>.</p><p>The <dfn id="list-of-the-descendant-browsing-contexts">list of the descendant browsing contexts</dfn> of a
-  <code><a href="infrastructure.html#document">Document</a></code> <var title="">d</var> is the list returned by
-  the following algorithm:</p><ol><li><p>Let <var title="">list</var> be an empty list.</p></li>
+  contexts</a>. These are called <dfn id="nested-browsing-context" title="nested browsing&#10;  context">nested browsing contexts</dfn>. If a browsing context <var title="">P</var> has a <code><a href="infrastructure.html#document">Document</a></code>s <var title="">D</var>
+  with an element <var title="">E</var> that nests another browsing
+  context <var title="">C</var> inside it, then <var title="">C</var>
+  is said to be <dfn id="browsing-context-nested-through" title="browsing context nested through">nested
+  through</dfn> <var title="">D</var>, and <var title="">E</var> is
+  said to be the <dfn id="browsing-context-container">browsing context container</dfn> of <var title="">C</var>. If the <a href="#browsing-context-container">browsing context container</a>
+  element <var title="">E</var> is <a href="infrastructure.html#in-a-document" title="in a&#10;  Document">in</a> the <code><a href="infrastructure.html#document">Document</a></code> <var title="">D</var>,
+  then <var title="">P</var> is said to be the <dfn id="parent-browsing-context">parent browsing
+  context</dfn> of <var title="">C</var> and <var title="">C</var> is
+  said to be a <dfn id="child-browsing-context">child browsing context</dfn> of <var title="">P</var>. Otherwise, the <a href="#nested-browsing-context">nested browsing
+  context</a> <var title="">C</var> has no <a href="#parent-browsing-context">parent browsing
+  context</a>.</p><p>A browsing context <var title="">A</var> is said to be an <dfn id="ancestor-browsing-context" title="ancestor browsing context">ancestor</dfn> of a browsing
+  context <var title="">B</var> if there exists a browsing context
+  <var title="">A'</var> that is a <a href="#child-browsing-context">child browsing context</a>
+  of <var title="">A</var> and that is itself an <a href="#ancestor-browsing-context" title="ancestor&#10;  browsing context">ancestor</a> of <var title="">B</var>, or if
+  there is a browsing context <var title="">P</var> that is a
+  <a href="#child-browsing-context">child browsing context</a> of <var title="">A</var> and
+  that is the <a href="#parent-browsing-context">parent browsing context</a> of <var title="">B</var>.</p><p>A browsing context that is not a <a href="#nested-browsing-context">nested browsing
+  context</a> has no <a href="#parent-browsing-context">parent browsing context</a>, and is
+  the <dfn id="top-level-browsing-context">top-level browsing context</dfn> of all the browsing
+  contexts for which it is an <a href="#ancestor-browsing-context">ancestor browsing
+  context</a>.</p><p>The transitive closure of <a href="#parent-browsing-context" title="parent browsing&#10;  context">parent browsing contexts</a> for a <a href="#nested-browsing-context">nested browsing
+  context</a> gives the list of <a href="#ancestor-browsing-context" title="ancestor browsing&#10;  context">ancestor browsing contexts</a>.</p><p>The <dfn id="list-of-the-descendant-browsing-contexts">list of the descendant browsing contexts</dfn> of a
+  <code><a href="infrastructure.html#document">Document</a></code> <var title="">d</var> is the (ordered) list
+  returned by the following algorithm:</p><ol><li><p>Let <var title="">list</var> be an empty list.</p></li>
 
    <li><p>For each <a href="#child-browsing-context">child browsing context</a> of <var title="">d</var> that is <a href="#browsing-context-nested-through" title="browsing context nested&#10;   through">nested through</a> an element that is <a href="infrastructure.html#in-a-document" title="in a&#10;   document">in the <code>Document</code></a> <var title="">d</var>, in the <a href="infrastructure.html#tree-order">tree order</a> of the elements
    nesting those <a href="#browsing-context" title="browsing context">browsing
@@ -468,18 +473,33 @@
 
    <li><p>Return the constructed <var title="">list</var>.</p></li>
 
-  </ol><hr/><p>A <code><a href="infrastructure.html#document">Document</a></code> is said to be <dfn id="fully-active">fully active</dfn>
+  </ol><p>A <code><a href="infrastructure.html#document">Document</a></code> is said to be <dfn id="fully-active">fully active</dfn>
   when it is the <a href="#active-document">active document</a> of its <a href="#browsing-context">browsing
   context</a>, and either its browsing context is a <a href="#top-level-browsing-context">top-level
-  browsing context</a>, or the <code><a href="infrastructure.html#document">Document</a></code> <a href="#browsing-context-nested-through" title="browsing context nested through">through which</a> that
-  browsing context is <a href="#nested-browsing-context" title="nested browsing&#10;  context">nested</a> is itself <a href="#fully-active">fully active</a>.</p><p>Because they are nested through an element, <a href="#child-browsing-context" title="child&#10;  browsing context">child browsing contexts</a> are always tied to
+  browsing context</a>, or it has a <a href="#parent-browsing-context">parent browsing
+  context</a> and the <code><a href="infrastructure.html#document">Document</a></code> <a href="#browsing-context-nested-through" title="browsing&#10;  context nested through">through which</a> it is <a href="#nested-browsing-context" title="nested browsing context">nested</a> is itself <a href="#fully-active">fully
+  active</a>.</p><p>Because they are nested through an element, <a href="#child-browsing-context" title="child&#10;  browsing context">child browsing contexts</a> are always tied to
   a specific <code><a href="infrastructure.html#document">Document</a></code> in their <a href="#parent-browsing-context">parent browsing
   context</a>. User agents must not allow the user to interact with
   <a href="#child-browsing-context" title="child browsing context">child browsing contexts</a>
   of elements that are in <code><a href="infrastructure.html#document">Document</a></code>s that are not
   themselves <a href="#fully-active">fully active</a>.</p><p>A <a href="#nested-browsing-context">nested browsing context</a> can have a <a href="the-iframe-element.html#seamless-browsing-context-flag">seamless
   browsing context flag</a> set, if it is embedded through an
-  <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> element with a <code title="attr-iframe-seamless"><a href="the-iframe-element.html#attr-iframe-seamless">seamless</a></code> attribute.</p><h5 id="navigating-nested-browsing-contexts-in-the-dom"><span class="secno">5.1.1.1 </span>Navigating nested browsing contexts in the DOM</h5><dl class="domintro"><dt><var title="">window</var> . <code title="dom-top"><a href="#dom-top">top</a></code></dt>
+  <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> element with a <code title="attr-iframe-seamless"><a href="the-iframe-element.html#attr-iframe-seamless">seamless</a></code> attribute.</p><p class="note">A <a href="#nested-browsing-context">nested browsing context</a> can in some
+  cases be taken out of its <a href="#parent-browsing-context">parent browsing context</a> (e.g.
+  if an <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> element is removed from its
+  <code><a href="infrastructure.html#document">Document</a></code>). In such a situation, the <a href="#nested-browsing-context">nested
+  browsing context</a> has no <a href="#parent-browsing-context">parent browsing context</a>,
+  but it still has the same <a href="#browsing-context-container">browsing context container</a>
+  and is still <a href="#browsing-context-nested-through" title="browsing context nested through">nested
+  through</a> that element's <code><a href="infrastructure.html#document">Document</a></code>. Such a
+  <a href="#nested-browsing-context">nested browsing context</a> is <em>not</em> a
+  <a href="#top-level-browsing-context">top-level browsing context</a>, and cannot contain
+  <code><a href="infrastructure.html#document">Document</a></code>s that are <a href="#fully-active">fully active</a>.
+  Furthermore, if a <a href="#browsing-context-container">browsing context container</a> (such as
+  an <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>) is moved to another <code><a href="infrastructure.html#document">Document</a></code>,
+  then the <a href="#parent-browsing-context">parent browsing context</a> of its <a href="#nested-browsing-context">nested
+  browsing context</a> will change.</p><h5 id="navigating-nested-browsing-contexts-in-the-dom"><span class="secno">5.1.1.1 </span>Navigating nested browsing contexts in the DOM</h5><dl class="domintro"><dt><var title="">window</var> . <code title="dom-top"><a href="#dom-top">top</a></code></dt>
 
    <dd>
 
