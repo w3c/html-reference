@@ -356,14 +356,14 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="links.html" title="4.12 Links" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="origin-0.html" title="5.3 Origin" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="links.html" title="4.12 Links" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="origin-0.html" title="5.3 Origin" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
    </div><div>
-   <a href="links.html">&#x2190; 4.12 Links</a> &#x2013;
+   <a href="links.html" class="prev">4.12 Links</a> &#x2013;
    <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="origin-0.html">5.3 Origin &#x2192;</a>
+   <a href="origin-0.html" class="next">5.3 Origin</a>
   <ol class="toc"><li><a href="browsers.html#browsers"><span class="secno">5 </span>Loading Web pages</a>
   <ol><li><a href="browsers.html#windows"><span class="secno">5.1 </span>Browsing contexts</a>
     <ol><li><a href="browsers.html#nested-browsing-contexts"><span class="secno">5.1.1 </span>Nested browsing contexts</a>
@@ -534,8 +534,10 @@
   <a href="#browsing-context">browsing context</a> <var title="">b</var> must return the
   <code><a href="#windowproxy">WindowProxy</a></code> object of its <a href="#top-level-browsing-context">top-level browsing
   context</a> (which would be its own <code><a href="#windowproxy">WindowProxy</a></code>
-  object if it was a <a href="#top-level-browsing-context">top-level browsing context</a>
-  itself).</p>
+  object if it was a <a href="#top-level-browsing-context">top-level browsing context</a> itself),
+  if it has one, or its own <code><a href="#windowproxy">WindowProxy</a></code> object otherwise
+  (e.g. if it was a detached <a href="#nested-browsing-context">nested browsing
+  context</a>).</p>
 
   <p>The <dfn id="dom-parent" title="dom-parent"><code>parent</code></dfn> IDL
   attribute on the <code><a href="#window">Window</a></code> object of a
@@ -544,7 +546,8 @@
   <var title="">b</var> is a <a href="#child-browsing-context">child browsing context</a>), or
   the <code><a href="#windowproxy">WindowProxy</a></code> object of the <a href="#browsing-context">browsing
   context</a> <var title="">b</var> itself, otherwise (i.e. if it
-  is a <a href="#top-level-browsing-context">top-level browsing context</a>).</p>
+  is a <a href="#top-level-browsing-context">top-level browsing context</a> or a detached
+  <a href="#nested-browsing-context">nested browsing context</a>).</p>
 
   <p>The <dfn id="dom-frameelement" title="dom-frameElement"><code>frameElement</code></dfn>
   IDL attribute on the <code><a href="#window">Window</a></code> object of a
@@ -552,11 +555,11 @@
   the following algorithm:</p>
 
   <ol><li><p>If <var title="">d</var> is not a <code><a href="infrastructure.html#document">Document</a></code> in a
-   <a href="#child-browsing-context">child browsing context</a>, return null and abort these
+   <a href="#nested-browsing-context">nested browsing context</a>, return null and abort these
    steps.</p></li>
 
-   <li><p>If the <a href="#parent-browsing-context">parent browsing context</a>'s <a href="#active-document">active
-   document</a> does not have the <a href="origin-0.html#same-origin" title="same&#10;   origin">same</a> <a href="origin-0.html#effective-script-origin">effective script origin</a> as the
+   <li><p>If the <a href="#browsing-context-container">browsing context container</a>'s
+   <code><a href="infrastructure.html#document">Document</a></code> does not have the <a href="origin-0.html#same-origin" title="same&#10;   origin">same</a> <a href="origin-0.html#effective-script-origin">effective script origin</a> as the
    <a href="#entry-script">entry script</a>, then throw a <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code>
    exception.</p></li>
 
@@ -569,11 +572,8 @@
   contexts</dfn>. Auxiliary browsing contexts are always <a href="#top-level-browsing-context" title="top-level browsing context">top-level browsing
   contexts</a>.</p><p>An <a href="#auxiliary-browsing-context">auxiliary browsing context</a> has an <dfn id="opener-browsing-context">opener
   browsing context</dfn>, which is the <a href="#browsing-context">browsing context</a>
-  from which the <a href="#auxiliary-browsing-context">auxiliary browsing context</a> was created,
-  and it has a <dfn id="furthest-ancestor-browsing-context">furthest ancestor browsing context</dfn>, which is
-  the <a href="#top-level-browsing-context">top-level browsing context</a> of the <a href="#opener-browsing-context">opener
-  browsing context</a> when the <a href="#auxiliary-browsing-context">auxiliary browsing
-  context</a> was created.</p><h5 id="navigating-auxiliary-browsing-contexts-in-the-dom"><span class="secno">5.1.2.1 </span>Navigating auxiliary browsing contexts in the DOM</h5><p>The <dfn id="dom-opener" title="dom-opener"><code>opener</code></dfn> IDL
+  from which the <a href="#auxiliary-browsing-context">auxiliary browsing context</a> was
+  created.</p><h5 id="navigating-auxiliary-browsing-contexts-in-the-dom"><span class="secno">5.1.2.1 </span>Navigating auxiliary browsing contexts in the DOM</h5><p>The <dfn id="dom-opener" title="dom-opener"><code>opener</code></dfn> IDL
   attribute on the <code><a href="#window">Window</a></code> object must return the
   <code><a href="#windowproxy">WindowProxy</a></code> object of the <a href="#browsing-context">browsing context</a>
   from which the current <a href="#browsing-context">browsing context</a> was created
@@ -592,8 +592,9 @@
    document</a> of <var title="">B</var>, or</li>
 
    <li>The browsing context <var title="">A</var> is a <a href="#nested-browsing-context">nested
-   browsing context</a> and its <a href="#top-level-browsing-context">top-level browsing
-   context</a> is <var title="">B</var>, or</li>
+   browsing context</a> with a <a href="#top-level-browsing-context">top-level browsing
+   context</a>, and its <a href="#top-level-browsing-context">top-level browsing context</a> is
+   <var title="">B</var>, or</li>
 
    <li>The browsing context <var title="">B</var> is an
    <a href="#auxiliary-browsing-context">auxiliary browsing context</a> and <var title="">A</var>
@@ -644,8 +645,9 @@
 
   <p>Each <a href="#unit-of-related-browsing-contexts">unit of related browsing contexts</a> is then
   further divided into the smallest number of groups such that every
-  member of each group has an <a href="origin-0.html#effective-script-origin">effective script origin</a>
-  that, through appropriate manipulation of the <code title="dom-document-domain"><a href="origin-0.html#dom-document-domain">document.domain</a></code> attribute, could
+  member of each group has an <a href="#active-document">active document</a> with an
+  <a href="origin-0.html#effective-script-origin">effective script origin</a> that, through appropriate
+  manipulation of the <code title="dom-document-domain"><a href="origin-0.html#dom-document-domain">document.domain</a></code> attribute, could
   be made to be the same as other members of the group, but could not
   be made the same as members of any other group. Each such group is a
   <dfn id="unit-of-related-similar-origin-browsing-contexts">unit of related similar-origin browsing contexts</dfn>.</p>
@@ -686,8 +688,8 @@
    context must be the current browsing context.</p></li>
 
    <li><p>If the given browsing context name is <code title="">_top</code>, then the chosen browsing context must be the
-   most <a href="#top-level-browsing-context">top-level browsing context</a> of the current
-   one.</p></li>
+   <a href="#top-level-browsing-context">top-level browsing context</a> of the current one, if
+   there is one, or else the current browsing context.</p></li>
 
    <li>
 

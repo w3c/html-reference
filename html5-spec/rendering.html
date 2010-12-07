@@ -356,14 +356,14 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="the-xhtml-syntax.html" title="9 The XHTML syntax" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="obsolete.html" title="11 Obsolete features" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="the-xhtml-syntax.html" title="9 The XHTML syntax" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="obsolete.html" title="11 Obsolete features" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
    </div><div>
-   <a href="the-xhtml-syntax.html">&#x2190; 9 The XHTML syntax</a> &#x2013;
+   <a href="the-xhtml-syntax.html" class="prev">9 The XHTML syntax</a> &#x2013;
    <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="obsolete.html">11 Obsolete features &#x2192;</a>
+   <a href="obsolete.html" class="next">11 Obsolete features</a>
   <ol class="toc"><li><a href="rendering.html#rendering"><span class="secno">10 </span>Rendering</a>
   <ol><li><a href="rendering.html#introduction-7"><span class="secno">10.1 </span>Introduction</a></li><li><a href="rendering.html#the-css-user-agent-style-sheet-and-presentational-hints"><span class="secno">10.2 </span>The CSS user agent style sheet and presentational hints</a>
     <ol><li><a href="rendering.html#introduction-8"><span class="secno">10.2.1 </span>Introduction</a></li><li><a href="rendering.html#display-types"><span class="secno">10.2.2 </span>Display types</a></li><li><a href="rendering.html#margins-and-padding"><span class="secno">10.2.3 </span>Margins and padding</a></li><li><a href="rendering.html#alignment"><span class="secno">10.2.4 </span>Alignment</a></li><li><a href="rendering.html#fonts-and-colors"><span class="secno">10.2.5 </span>Fonts and colors</a></li><li><a href="rendering.html#punctuation-and-decorations"><span class="secno">10.2.6 </span>Punctuation and decorations</a></li><li><a href="rendering.html#resetting-rules-for-inherited-properties"><span class="secno">10.2.7 </span>Resetting rules for inherited properties</a></li><li><a href="rendering.html#the-hr-element-0"><span class="secno">10.2.8 </span>The <code>hr</code> element</a></li><li><a href="rendering.html#the-fieldset-element-0"><span class="secno">10.2.9 </span>The <code>fieldset</code> element</a></li></ol></li><li><a href="rendering.html#replaced-elements"><span class="secno">10.3 </span>Replaced elements</a>
@@ -3514,7 +3514,14 @@ time[datetime] { binding: <i title="">time</i>; }</pre>
   as an independent set of one or more bidirectional algorithm
   paragraphs when displayed, as defined by the bidirectional
   algorithm, including, for instance, supporting the
-  paragraph-breaking behaviour of U+000A LINE FEED (LF) characters. <a href="references.html#refsBIDI">[BIDI]</a></p>
+  paragraph-breaking behaviour of U+000A LINE FEED (LF) characters.
+  For the purposes of determining the paragraph level of such text in
+  the bidirectional algorithm, this specification does <em>not</em>
+  provide a higher-level override of rules P2 and P3. <a href="references.html#refsBIDI">[BIDI]</a></p>
+
+  <p>When necessary, authors can enforce a particular direction for a
+  given paragraph by starting it with the Unicode U+200E LEFT-TO-RIGHT
+  MARK or U+200F RIGHT-TO-LEFT MARK characters.</p>
 
   <div class="example">
 
@@ -3534,7 +3541,8 @@ time[datetime] { binding: <i title="">time</i>; }</pre>
 
    <p>For a more complex example, consider the following script:</p>
 
-   <pre>var s;
+   <pre class="bad">/* Warning: this script does not handle right-to-left scripts correctly */
+var s;
 if (s = prompt('What is your name?')) {
   alert(s + '! Ok, Fred, ' + s + ', and Wilma will get the car.');
 }</pre>
@@ -3543,13 +3551,19 @@ if (s = prompt('What is your name?')) {
    alert "<samp>Kitty! Ok, Fred, Kitty, and Wilma will get the
    car.</samp>". However, if the user enters "<kbd dir="rtl" lang="ar">&#x644;&#x627;&#xA0;&#x623;&#x641;&#x647;&#x645;</kbd>",
    then the bidirectional algorithm will determine that the direction
-   of the paragraph is right-to-left, and so the output will be "<samp lang=""><bdo dir="rtl">&#x644;&#x627;&#xA0;&#x623;&#x641;&#x647;&#x645;!&#xA0;derF&#xA0;,kO,&#xA0;&#x644;&#x627;&#xA0;&#x623;&#x641;&#x647;&#x645;,&#xA0;rac&#xA0;eht&#xA0;teg&#xA0;lliw&#xA0;amliW&#xA0;dna.</bdo></samp>"!</p>
+   of the paragraph is right-to-left, and so the output will be the
+   following unintended mess: "<samp lang=""><bdo dir="rtl">&#x644;&#x627;&#xA0;&#x623;&#x641;&#x647;&#x645;!&#xA0;derF&#xA0;,kO,&#xA0;&#x644;&#x627;&#xA0;&#x623;&#x641;&#x647;&#x645;,&#xA0;rac&#xA0;eht&#xA0;teg&#xA0;lliw&#xA0;amliW&#xA0;dna.</bdo></samp>"</p>
+
+   <p>To force an alert that starts with user-provided text (or other
+   text of unknown directionality) to render left-to-right, the string
+   can be prefixed with a U+200E LEFT-TO-RIGHT MARK character:</p>
+
+   <pre>var s;
+if (s = prompt('What is your name?')) {
+  alert('<strong>\u200E</strong>' + s + '! Ok, Fred, ' + s + ', and Wilma will get the car.');
+}</pre>
 
   </div>
-
-  <p>When necessary, authors can enforce a particular direction for a
-  given paragraph by starting it with the Unicode U+200E LEFT-TO-RIGHT
-  MARK or U+200F RIGHT-TO-LEFT MARK characters.</p>
 
 
 

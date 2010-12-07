@@ -50,7 +50,7 @@ ifeq ($(PUBSITE),)
 PUBSITE=W3C
 endif
 
-all: Overview.html index.html MANIFEST spec.html README.md
+all: syntax Overview.html index.html MANIFEST spec.html README.md
 
 debug:
 	@echo $(MULTIPAGE_SPEC_FILES)
@@ -121,7 +121,7 @@ html.spec.src.html: html-compiled.rng schema.html \
   src/terms.html src/syntax.html src/documents.html \
   $(ELEMENTS) src/attributes.html src/map-attributes.html \
   src/datatypes.html src/references.html src/elements-by-function.html \
-  html5-spec fragment-links.html fragment-links-full.html webapps.html \
+  html5-spec fragment-links.html fragment-links-full.html \
   LICENSE.xml html.css.xml html.css.LICENSE.xml
 	$(XSLTPROC) $(XSLTPROCFLAGS) \
 	  --param show-content-models $(SHOW_CONTENT_MODELS) \
@@ -288,6 +288,12 @@ elements-generated.html: webapps.html tools/get-elements.xsl
 README.md: README.html
 	$(HTML2MARKDOWN) $(HTML2MARKDOWNFLAGS) $< > $@
 
+syntax:
+ifneq ($(WHATTF_SCHEMA),)
+	cp -pR $(WHATTF_SCHEMA) syntax
+	-$(PATCH) $(PATCHFLAGS) < patch-schema
+endif
+
 clean:
 	$(RM) html.rng
 	$(RM) LICENSE.xml
@@ -315,13 +321,9 @@ endif
 	@echo
 
 schemaclean:
-ifneq ($(WHATTF_SCHEMA),)
 	rm -rf syntax
-	cp -pR $(WHATTF_SCHEMA) syntax
-	-$(PATCH) $(PATCHFLAGS) < patch-schema
-endif
 
-distclean: clean schemaclean
+distclean: clean schemaclean syntax
 	$(RM) webapps.html
 	$(RM) html.css
 	$(RM) fragment-links.js

@@ -356,14 +356,14 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="timers.html" title="6.2 Timers" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="dnd.html" title="7.7 Drag and drop" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="timers.html" title="6.2 Timers" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="dnd.html" title="7.7 Drag and drop" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
    </div><div>
-   <a href="timers.html">&#x2190; 6.2 Timers</a> &#x2013;
+   <a href="timers.html" class="prev">6.2 Timers</a> &#x2013;
    <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="dnd.html">7.7 Drag and drop &#x2192;</a>
+   <a href="dnd.html" class="next">7.7 Drag and drop</a>
   <ol class="toc"><li><a href="editing.html#editing"><span class="secno">7 </span>User interaction</a>
   <ol><li><a href="editing.html#the-hidden-attribute"><span class="secno">7.1 </span>The <code>hidden</code> attribute</a></li><li><a href="editing.html#activation"><span class="secno">7.2 </span>Activation</a></li><li><a href="editing.html#focus"><span class="secno">7.3 </span>Focus</a>
     <ol><li><a href="editing.html#sequential-focus-navigation-and-the-tabindex-attribute"><span class="secno">7.3.1 </span>Sequential focus navigation and the <code title="attr-tabindex">tabindex</code> attribute</a></li><li><a href="editing.html#focus-management"><span class="secno">7.3.2 </span>Focus management</a></li><li><a href="editing.html#document-level-focus-apis"><span class="secno">7.3.3 </span>Document-level focus APIs</a></li><li><a href="editing.html#element-level-focus-apis"><span class="secno">7.3.4 </span>Element-level focus APIs</a></li></ol></li><li><a href="editing.html#assigning-keyboard-shortcuts"><span class="secno">7.4 </span>Assigning keyboard shortcuts</a>
@@ -641,7 +641,14 @@
 
   <hr/><p>The <dfn id="focusing-steps">focusing steps</dfn> are as follows:</p>
 
-  <ol><li><p>If focusing the element will remove the focus from another
+  <ol><li><p>If the element is not <a href="infrastructure.html#in-a-document" title="in a Document">in a
+   <code>Document</code></a>, or if the element's
+   <code><a href="infrastructure.html#document">Document</a></code> has no <a href="browsers.html#browsing-context">browsing context</a>, or if
+   the element's <code><a href="infrastructure.html#document">Document</a></code>' <a href="browsers.html#browsing-context">browsing context</a>
+   has no <a href="browsers.html#top-level-browsing-context">top-level browsing context</a>, then abort these
+   steps.</p>
+
+   </li><li><p>If focusing the element will remove the focus from another
    element, then run the <a href="#unfocusing-steps">unfocusing steps</a> for that
    element.</p></li>
 
@@ -735,10 +742,13 @@
 
   <p>The <dfn id="dom-document-hasfocus" title="dom-document-hasFocus"><code>hasFocus()</code></dfn> method
   on <code><a href="dom.html#htmldocument">HTMLDocument</a></code> objects must return true if the
-  document's <a href="browsers.html#browsing-context">browsing context</a> is focused, and all its
-  <a href="browsers.html#ancestor-browsing-context" title="ancestor browsing context">ancestor browsing
-  contexts</a> are also focused, and the <a href="browsers.html#top-level-browsing-context">top-level browsing
-  context</a> has the <i>system focus</i>.</p>
+  <code><a href="infrastructure.html#document">Document</a></code>'s <a href="browsers.html#browsing-context">browsing context</a> is focused,
+  and all its <a href="browsers.html#ancestor-browsing-context" title="ancestor browsing context">ancestor
+  browsing contexts</a> are also focused, and the <a href="browsers.html#top-level-browsing-context">top-level
+  browsing context</a> has the <i>system focus</i>. If the
+  <code><a href="infrastructure.html#document">Document</a></code> has no <a href="browsers.html#browsing-context">browsing context</a> or if its
+  <a href="browsers.html#browsing-context">browsing context</a> has no <a href="browsers.html#top-level-browsing-context">top-level browsing
+  context</a>, then the method will always return false.</p>
 
   <p>The <dfn id="dom-window-focus" title="dom-window-focus"><code>focus()</code></dfn>
   method on the <code><a href="browsers.html#window">Window</a></code> object, when invoked, provides a
