@@ -56,7 +56,7 @@ debug:
 	@echo $(MULTIPAGE_SPEC_FILES)
 
 patch-schema: $(SCHEMA_FILES)
-	$(HG) $(HGFLAGS) diff syntax/relaxng > $@
+	$(HG) $(HGFLAGS) diff -X "*datatype/java*" syntax/relaxng > $@
 
 html.rng: $(SCHEMA_FILES)
 	$(TRANG) $(TRANGFLAGS) html.rnc $@
@@ -291,7 +291,8 @@ README.md: README.html
 syntax:
 ifneq ($(WHATTF_SCHEMA),)
 	cp -pR $(WHATTF_SCHEMA) syntax
-	-$(PATCH) $(PATCHFLAGS) < patch-schema
+	$(RM) -f syntax/datatype
+	-$(PATCH) $(PATCHFLAGS) -p1 -d syntax < patch-schema
 endif
 
 clean:

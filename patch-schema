@@ -1,284 +1,343 @@
-Index: syntax/relaxng/revision.rnc
-===================================================================
---- syntax/relaxng/revision.rnc	(revision 577)
-+++ syntax/relaxng/revision.rnc	(working copy)
-@@ -2,17 +2,6 @@
- ##  RELAX NG Schema for HTML 5: Revision Annotations                  #
+diff -r b7c516d99a63 relaxng/applications.rnc
+--- a/relaxng/applications.rnc	Wed Dec 08 01:47:47 2010 +0900
++++ b/relaxng/applications.rnc	Wed Dec 08 17:50:00 2010 +0900
+@@ -4,18 +4,6 @@
+ ##  RELAX NG Schema for HTML 5: Web Application Features              #
  # #####################################################################
  
--## Common Attributes
+-## Additions to Common Attributes
 -
--	edit.attrs.cite =
--		attribute cite {
--			common.data.uri
--		}
--	edit.attrs.datetime =
--		attribute datetime {
--			common.data.datetime | common.data.date
--		}
--
- ## Inserts: <ins>
- 
- 	ins.elem.flow =
-@@ -21,9 +10,17 @@
- 		element ins { ins.inner.phrasing & ins.attrs }
- 	ins.attrs =
- 		(	common.attrs
--		&	edit.attrs.cite?
--		&	edit.attrs.datetime?
-+		&	ins.attrs.cite?
-+		&	ins.attrs.datetime?
- 		)
-+		ins.attrs.cite =
-+			attribute cite {
-+				common.data.uri
-+			}
-+		ins.attrs.datetime =
-+			attribute datetime {
-+				common.data.datetime | common.data.date
-+			}
- 	ins.inner.flow =
- 		( common.inner.flow )
- 	ins.inner.phrasing =
-@@ -40,9 +37,17 @@
- 		element del { del.inner.phrasing & del.attrs }
- 	del.attrs =
- 		(	common.attrs
--		&	edit.attrs.cite?
--		&	edit.attrs.datetime?
-+		&	del.attrs.cite?
-+		&	del.attrs.datetime?
- 		)
-+		del.attrs.cite =
-+			attribute cite {
-+				common.data.uri
-+			}
-+		del.attrs.datetime =
-+			attribute datetime {
-+				common.data.datetime | common.data.date
-+			}
- 	del.inner.flow =
- 		( common.inner.flow )
- 	del.inner.phrasing =
-Index: syntax/relaxng/web-forms.rnc
-===================================================================
---- syntax/relaxng/web-forms.rnc	(revision 577)
-+++ syntax/relaxng/web-forms.rnc	(working copy)
-@@ -9,6 +9,7 @@
- 	common-form.attrs =
- 		(	common-form.attrs.name?
- 		&	common-form.attrs.disabled?
-+		&	common-form.attrs.form?
- 		)
- 		
- 	common-form.attrs.name = 
-@@ -295,17 +296,9 @@
- 		(	common.attrs
- 		&	common-form.attrs
- 		&	shared-form.attrs.readonly?
--		&	textarea.attrs.rows-and-cols-wf1
- 		&	common.attrs.aria.implicit.input?
- 		#FIXME onfocus, onblur, onselect,onchange
- 		)
--		# This is ugly. 
--		textarea.attrs.rows-and-cols-wf1 = 
--			textarea.attrs.rows-and-cols-wf1.inner	
--		textarea.attrs.rows-and-cols-wf1.inner =
--			(	textarea.attrs.cols
--			&	textarea.attrs.rows
--			)
- 		textarea.attrs.cols = 
- 			attribute cols {
- 				common.data.integer.positive
-@@ -315,7 +308,7 @@
- 				common.data.integer.positive
- 			}
- 	textarea.inner =
--		( text )
-+		( replaceable-character-data )
- 
- 	common.elem.phrasing |= textarea.elem
- 
-@@ -394,10 +387,6 @@
- 	
- ## Shared Definitions for Complex Button
- 	
--	button.attrs.value =
--		attribute value {
--			string
--		}
- 	button.inner = 
- 		( common.inner.phrasing )
- 	
-@@ -409,13 +398,17 @@
- 		(	common.attrs
- 		&	common-form.attrs
- 		&	button.submit.attrs.type?
--		&	button.attrs.value?
-+		&	button.submit.attrs.value?
- 		&	common.attrs.aria.implicit.button?
- 		)
- 		button.submit.attrs.type =
- 			attribute type {
- 				w:string "submit"
- 			}
-+		button.submit.attrs.value =
-+			attribute value {
-+				string
-+			}
- 
- 	button.elem = button.submit.elem
- 	
-@@ -427,13 +420,17 @@
- 		(	common.attrs
- 		&	common-form.attrs
- 		&	button.reset.attrs.type
--		&	button.attrs.value? #REVISIT I guess this still affects the DOM
-+		&	button.reset.attrs.value? #REVISIT I guess this still affects the DOM
- 		&	common.attrs.aria.implicit.button?
- 		)
- 		button.reset.attrs.type =
- 			attribute type {
- 				w:string "reset"
- 			}
-+		button.reset.attrs.value =
-+			attribute value {
-+				string
-+			}
- 
- 	button.elem |= button.reset.elem
- 	
-@@ -445,7 +442,7 @@
- 		(	common.attrs
- 		&	common-form.attrs
- 		&	button.button.attrs.type
--		&	button.attrs.value? #REVISIT I guess this still affects the DOM
-+		&	button.button.attrs.value? #REVISIT I guess this still affects the DOM
- 		&	(	common.attrs.aria
- 			|	common.attrs.aria.implicit.button
- 			)?
-@@ -454,6 +451,10 @@
- 			attribute type {
- 				w:string "button"
- 			}
-+		button.button.attrs.value =
-+			attribute value {
-+				string
-+			}
- 
- 	button.elem |= button.button.elem
- 
-Index: syntax/relaxng/tables.rnc
-===================================================================
---- syntax/relaxng/tables.rnc	(revision 577)
-+++ syntax/relaxng/tables.rnc	(working copy)
-@@ -157,38 +157,6 @@
- 	tr.inner =
- 		( ( td.elem | th.elem )* )
- 
--## Common Table Cell Attributes
--
--	tables.attrs.cell-structure =
--		(	tables.attrs.colspan?
--		&	tables.attrs.rowspan?
+-	common.attrs.interact &=
+-		(	common.attrs.contextmenu?
+-		&	common.attrs.contenteditable?
+-		&	common.attrs.draggable?
+-		&	common.attrs.hidden?
+-		&	common.attrs.spellcheck?
 -		)
--		tables.attrs.colspan =
--			attribute colspan {
--				common.data.integer.positive
--			}
--		tables.attrs.rowspan =
--			attribute rowspan {
--				common.data.integer.non-negative
--			}
+-		
+-	common.attrs.other &= common.attrs.interact
 -
--	tables.attrs.access-headers =
--		( tables.attrs.headers? )
--		tables.attrs.headers =
--			attribute headers {
--				common.data.idrefs
--			}
--
--	tables.attrs.define-headers =
--		( tables.attrs.scope? )
--		tables.attrs.scope =
--			attribute scope {
--				(	w:string "row"
--				|	w:string "col"
--				|	w:string "rowgroup"
--				|	w:string "colgroup"
--				)
--			}
- 		tables.attrs.abbr =
- 			attribute abbr {
- 				text
-@@ -200,11 +168,24 @@
- 		element td { td.inner & td.attrs }
- 	td.attrs =
- 		(	common.attrs
--		&	tables.attrs.cell-structure
--		&	tables.attrs.headers?
-+		&	td.attrs.colspan?
-+		&	td.attrs.rowspan?
-+		&	td.attrs.headers?
- #		&	tables.attrs.alignment
- 		&	common.attrs.aria?
- 		)
-+		td.attrs.colspan =
-+			attribute colspan {
-+				common.data.integer.positive
-+			}
-+		td.attrs.rowspan =
-+			attribute rowspan {
-+				common.data.integer.non-negative
-+			}
-+		td.attrs.headers =
-+			attribute headers {
-+				common.data.idrefs
-+			}
- 	td.inner =
- 		( common.inner.flow )
+ ## Context Menu: contextmenu
  
-@@ -214,11 +195,32 @@
- 		element th { th.inner & th.attrs }
- 	th.attrs =
+ 	common.attrs.contextmenu =
+@@ -89,12 +77,26 @@
+ 	command.command.attrs =
  		(	common.attrs
--		&	tables.attrs.cell-structure
--		&	tables.attrs.scope?
--		&	tables.attrs.headers?
-+		&	th.attrs.scope?
-+		&	th.attrs.colspan?
-+		&	th.attrs.rowspan?
-+		&	th.attrs.headers?
- #		&	tables.attrs.alignment
- 		&	common.attrs.aria.implicit.th?
+ 		&	command.command.attrs.type?
+-		&	common-command.attrs
++		&	command.command.attrs.label?
++		&	command.command.attrs.icon?
++		&	command.command.attrs.disabled?
  		)
-+		th.attrs.scope =
-+			attribute scope {
-+				(	w:string "row"
-+				|	w:string "col"
-+				|	w:string "rowgroup"
-+				|	w:string "colgroup"
-+				)
+ 		command.command.attrs.type =
+ 			attribute type {
+ 				w:string "command"
+ 			}
++		command.command.attrs.label =
++			attribute label {
++				string
 +			}
-+		th.attrs.colspan =
-+			attribute colspan {
-+				common.data.integer.positive
++		command.command.attrs.icon =
++			attribute icon {
++				common.data.uri
 +			}
-+		th.attrs.rowspan =
-+			attribute rowspan {
-+				common.data.integer.non-negative
++		command.command.attrs.disabled =
++			attribute disabled {
++				w:string "disabled" | w:string ""
 +			}
-+		th.attrs.headers =
-+			attribute headers {
-+				common.data.idrefs
+ 	command.elem = command.command.elem
+ 
+ ## Selection of one item from a list of items: <command type='radio'>
+@@ -107,7 +109,9 @@
+ 				&	command.radio.attrs.radiogroup #REVISIT taking liberties here
+ 				&	command.radio.attrs.checked?
+ 				)
+-			&	common-command.attrs
++			&	command.radio.attrs.label?
++			&	command.radio.attrs.icon?
++			&	command.radio.attrs.disabled?
+ 		)
+ 		command.radio.attrs.type =
+ 			attribute type {
+@@ -121,6 +125,18 @@
+ 			attribute checked {
+ 				w:string "checked" | w:string ""
+ 			}
++		command.radio.attrs.label =
++			attribute label {
++				string
 +			}
- 	th.inner =
- 		( common.inner.phrasing )
-Index: syntax/relaxng/embed.rnc
-===================================================================
---- syntax/relaxng/embed.rnc	(revision 577)
-+++ syntax/relaxng/embed.rnc	(working copy)
-@@ -248,7 +248,7 @@
++		command.radio.attrs.icon =
++			attribute icon {
++				common.data.uri
++			}
++		command.radio.attrs.disabled =
++			attribute disabled {
++				w:string "disabled" | w:string ""
++			}
+ 	command.elem |= command.radio.elem
+ 
+ ## State or option that can be toggled: <command type='checkbox'>
+@@ -132,7 +148,9 @@
+ 			&	(	command.checkbox.attrs.type
+ 				&	command.checkbox.attrs.checked?
+ 				)
+-			&	common-command.attrs
++			&	command.checkbox.attrs.label?
++			&	command.checkbox.attrs.icon?
++			&	command.checkbox.attrs.disabled?
+ 			)
+ 		command.checkbox.attrs.type =
+ 			attribute type {
+@@ -142,30 +160,25 @@
+ 			attribute checked {
+ 				w:string "checked" | w:string ""
+ 			}
+-	command.elem |= command.checkbox.elem
+-
+-	common-command.attrs =
+-		(	command.attrs.label?
+-		&	command.attrs.icon?
+-		&	command.attrs.disabled?
+-		)
+-		command.attrs.label =
++		command.checkbox.attrs.label =
+ 			attribute label {
+ 				string
+ 			}
+-		command.attrs.icon =
++		command.checkbox.attrs.icon =
+ 			attribute icon {
+ 				common.data.uri
+ 			}
+-		command.attrs.disabled =
++		command.checkbox.attrs.disabled =
+ 			attribute disabled {
+ 				w:string "disabled" | w:string ""
+ 			}
++	command.elem |= command.checkbox.elem
++
+ 	command.inner =
+ 		( empty )
+ 	
+ 	common.elem.metadata |=
+-		( command.elem & nonHTMLizable )
++		command.elem
+ 	common.elem.phrasing |= command.elem
+ 
+ ## Menu: <menu>
+diff -r b7c516d99a63 relaxng/block.rnc
+--- a/relaxng/block.rnc	Wed Dec 08 01:47:47 2010 +0900
++++ b/relaxng/block.rnc	Wed Dec 08 17:50:00 2010 +0900
+@@ -114,12 +114,12 @@
+ 		element li { oli.inner & oli.attrs }
+ 	oli.attrs =
+ 		(	common.attrs
+-		&	oli.attrs.value?
++		&	li.attrs.value?
+ 		&	(	common.attrs.aria
+ 			|	common.attrs.aria.implicit.listitem
+ 			)?
+ 		)
+-		oli.attrs.value =
++		li.attrs.value =
+ 			attribute value {
+ 				common.data.integer
+ 			}
+diff -r b7c516d99a63 relaxng/common.rnc
+--- a/relaxng/common.rnc	Wed Dec 08 01:47:47 2010 +0900
++++ b/relaxng/common.rnc	Wed Dec 08 17:50:00 2010 +0900
+@@ -38,16 +38,16 @@
+ 	common.attr.anything =
+ 		attribute * { text }*
+ 
+-## Any element from any namespace
++	replaceable-character-data =
++		(	xsd:string {
++				pattern = ".*"
++			}
++		)
+ 
+-	common.elem.anything =
+-		element * { common.inner.anything & common.attr.anything }
+-
+-## Any content from any namespace
+-
+-	common.inner.anything =
+-		(	text
+-		&	common.elem.anything*
++	non-replaceable-character-data =
++		(	xsd:string {
++				pattern = ".*"
++			}
+ 		)
+ 
+ # #####################################################################
+@@ -96,29 +96,30 @@
+ # When updating, check <bdo> definition too
+ 
+ common.attrs =
+-	(	common.attrs.basic
+-	&	common.attrs.i18n
+-	&	common.attrs.present
+-	&	common.attrs.other
++	(	common.attrs.core
++	&	common.attrs.event-handler
++	&	common.attrs.xml
+ 	)
+ 
+-common.attrs.basic =
+-	(	(	common.attrs.id
+-		|	common.attrs.xml-id
+-		)? # REVISIT assuming only either one is allowed
++common.attrs.core =
++	(	common.attrs.accesskey?
+ 	&	common.attrs.class?
++	&	common.attrs.contenteditable?
++	&	common.attrs.contextmenu?
++	&	common.attrs.dir?
++	&	common.attrs.draggable?
++	&	common.attrs.hidden?
++	&	common.attrs.id?
++	&	common.attrs.lang?
++	&	common.attrs.spellcheck?
++	&	common.attrs.style?
++	&	common.attrs.tabindex?
+ 	&	common.attrs.title?
+-	&	common.attrs.base?
+-	&	common.attrs.space?
+ 	)
+ 	common.attrs.id =
+ 		attribute id {
+ 			common.data.id
+ 		}
+-	common.attrs.xml-id =
+-		attribute xml:id {
+-			xsd:NCName
+-		} & XMLonly
+ 	common.attrs.class =
+ 		attribute class {
+ 			common.data.tokens
+@@ -141,10 +142,6 @@
+ 			string "preserve" | string "default"
+ 		} & XMLonly
+ 
+-common.attrs.i18n =
+-	(	common.attrs.dir?
+-	&	common.attrs.language?
+-	)
+ 	common.attrs.dir =
+ 		attribute dir {
+ 			w:string "ltr" | w:string "rtl"
+@@ -177,11 +174,6 @@
+ #			common.data.langcode
+ #		} & XMLonly
+ 
+-common.attrs.present =
+-	(	common.attrs.style?
+-	&	common.attrs.tabindex?
+-	&	common.attrs.accesskey?
+-	)
+ 	common.attrs.style =
+ 		attribute style {
+ 			string
+@@ -199,6 +191,13 @@
+ common.attrs.other =
+ 	empty
+ 
++common.attrs.xml =
++	(	common.attrs.xmllang?
++	&	common.attrs.xmlspace?
++	&	common.attrs.xmlbase?
++	)
++
++
+ # #####################################################################
+ ##  Common Datatypes                                                  #
+ # #####################################################################
+@@ -208,10 +207,10 @@
+ 	common.data.tokens =
+ 		list { token* }
+ 
+-	common.data.browsing-context =
++	common.data.browsing-context-name =
+ 		w:browsing-context
+ 
+-	common.data.browsing-context-or-keyword =
++	common.data.browsing-context-name-or-keyword =
+ 		w:browsing-context-or-keyword
+ #		xsd:string {
+ #			pattern = "()|([^_].*)|(_[bB][lL][aA][nN][kK])|(_[sS][eE][lL][fF])|(_[pP][aA][rR][eE][nN][tT])|(_[tT][oO][pP])"
+@@ -362,16 +361,20 @@
+   common.data.zero =
+     w:zero
+ 
+-# #####################################################################
+-##  WF2 Module Hook                                                   #
+-# #####################################################################
+-		
++## Rectangle
++  common.data.rectangle  =
++    w:rectangle
++
++## Circle
++  common.data.circle =
++    w:circle
++
++## Polygone
++  common.data.polygon =
++    w:polygon
++
+ common-form.attrs.form = ( notAllowed )
+ 
+-# #####################################################################
+-##  ARIA Module Hooks                                                 #
+-# #####################################################################
+-
+ common.attrs.aria = ( notAllowed )
+ common.attrs.aria.implicit.button = ( notAllowed )
+ common.attrs.aria.implicit.input = ( notAllowed )
+diff -r b7c516d99a63 relaxng/core-scripting.rnc
+--- a/relaxng/core-scripting.rnc	Wed Dec 08 01:47:47 2010 +0900
++++ b/relaxng/core-scripting.rnc	Wed Dec 08 17:50:00 2010 +0900
+@@ -52,9 +52,9 @@
+ 				string
+ 			}
+ 	script.inner.embedded =
+-		( common.inner.anything )
++		( non-replaceable-character-data )
+ 	script.inner.imported =
+-		( common.inner.anything )
++		( non-replaceable-character-data )
+ 		
+ 	script.elem = 
+ 		(	script.elem.embedded
+@@ -95,8 +95,8 @@
+ # #####################################################################
+ ## Event Handler Attribute Definitions
+ 
+-	common.attrs.scripting &=
+-		(	scripting.attr.onabort?
++	common.attrs.event-handler =
++			scripting.attr.onabort?
+ 		&	scripting.attr.onblur?
+ 		&	scripting.attr.oncanplay?
+ 		&	scripting.attr.oncanplaythrough?
+@@ -151,9 +151,8 @@
+ 		&	scripting.attr.ontimeupdate?
+ 		&	scripting.attr.onvolumechange?
+ 		&	scripting.attr.onwaiting?
+-		)
+ 		
+-	common.attrs.other &= common.attrs.scripting
++		
+ 
+ 	scripting.attr.onabort =
+ 		attribute onabort { string }
+diff -r b7c516d99a63 relaxng/embed.rnc
+--- a/relaxng/embed.rnc	Wed Dec 08 01:47:47 2010 +0900
++++ b/relaxng/embed.rnc	Wed Dec 08 17:50:00 2010 +0900
+@@ -249,7 +249,7 @@
  			}
  		object.attrs.name =
  			attribute name {
@@ -287,7 +346,7 @@ Index: syntax/relaxng/embed.rnc
  			}
  	object.inner.flow =
  		(	param.elem*
-@@ -304,7 +304,7 @@
+@@ -305,7 +305,7 @@
  			}
  		iframe.attrs.name =
  			attribute name {
@@ -296,7 +355,7 @@ Index: syntax/relaxng/embed.rnc
  			}
  		iframe.attrs.height =
  			attribute height {
-@@ -319,8 +319,11 @@
+@@ -320,8 +320,11 @@
  				w:string "seamless" | w:string ""
  			} & v5only
  		iframe.attrs.sandbox =
@@ -310,7 +369,7 @@ Index: syntax/relaxng/embed.rnc
  					{	( w:string "allow-top-navigation" )?
  					,	( w:string "allow-same-origin" )?
  					,	( w:string "allow-forms" )?
-@@ -464,7 +467,7 @@
+@@ -465,7 +468,7 @@
  					,	( w:string "allow-same-origin" )?
  					,	( w:string "allow-top-navigation" )?
  					}
@@ -319,7 +378,7 @@ Index: syntax/relaxng/embed.rnc
  	iframe.inner =
  		( text )
  
-@@ -502,20 +505,44 @@
+@@ -503,20 +506,44 @@
  	area.attrs =
  		(	common.attrs
  		&	(	area.attrs.alt
@@ -371,7 +430,7 @@ Index: syntax/relaxng/embed.rnc
  		area.attrs.shape =
  			(	( area.attrs.shape.rect?  & area.attrs.coords.rect   )
  			|	( area.attrs.shape.circle & area.attrs.coords.circle )
-@@ -528,7 +555,7 @@
+@@ -529,7 +556,7 @@
  			}
  		area.attrs.coords.rect =
  			attribute coords {
@@ -380,7 +439,7 @@ Index: syntax/relaxng/embed.rnc
  #				xsd:token {
  #					pattern = "-?[0-9]+,-?[0-9]+,-?[0-9]+,-?[0-9]+"
  #				}
-@@ -539,7 +566,7 @@
+@@ -540,7 +567,7 @@
  			}
  		area.attrs.coords.circle =
  			attribute coords {
@@ -389,7 +448,7 @@ Index: syntax/relaxng/embed.rnc
  #				xsd:token {
  #					pattern = "-?[0-9]+,-?[0-9]+,[0-9]+"
  #				}
-@@ -550,7 +577,7 @@
+@@ -551,7 +578,7 @@
  			}
  		area.attrs.coords.poly =
  			attribute coords {
@@ -398,10 +457,9 @@ Index: syntax/relaxng/embed.rnc
  #				xsd:token {
  #					pattern = "-?[0-9]+,-?[0-9]+,-?[0-9]+,-?[0-9]+,-?[0-9]+,-?[0-9]+(,-?[0-9]+,-?[0-9]+)*"
  #				}
-Index: syntax/relaxng/media.rnc
-===================================================================
---- syntax/relaxng/media.rnc	(revision 577)
-+++ syntax/relaxng/media.rnc	(working copy)
+diff -r b7c516d99a63 relaxng/media.rnc
+--- a/relaxng/media.rnc	Wed Dec 08 01:47:47 2010 +0900
++++ b/relaxng/media.rnc	Wed Dec 08 17:50:00 2010 +0900
 @@ -4,32 +4,6 @@
  ##  RELAX NG Schema for HTML 5: Advanced Embedded Content             #
  # #####################################################################
@@ -554,156 +612,9 @@ Index: syntax/relaxng/media.rnc
  		,	common.inner.phrasing
  		)
  
-Index: syntax/relaxng/phrase.rnc
-===================================================================
---- syntax/relaxng/phrase.rnc	(revision 577)
-+++ syntax/relaxng/phrase.rnc	(working copy)
-@@ -13,13 +13,12 @@
- 	a.attrs =
- 		(	common.attrs
- 		& a.attrs.name?
--		&	shared-hyperlink.attrs.href?
--		&	shared-hyperlink.attrs.target?
--		&	shared-hyperlink.attrs.rel?
--		&	shared-hyperlink.attrs.hreflang?
--		&	shared-hyperlink.attrs.media?
--		&	shared-hyperlink.attrs.type?
--		&	shared-hyperlink.attrs.ping?
-+		& a.attrs.href?
-+		& a.attrs.target?
-+		& a.attrs.rel?
-+		& a.attrs.hreflang?
-+		& a.attrs.media?
-+		& a.attrs.type?
- 		&	(	common.attrs.aria
- 			|	common.attrs.aria.implicit.link
- 			)?
-@@ -28,6 +27,31 @@
- 		  attribute name {
- 		    common.data.id # XXX not what the spec says
- 		  }
-+		a.attrs.href =
-+		  attribute href {
-+		    common.data.uri
-+		  }
-+		a.attrs.target =
-+		  attribute target {
-+		    common.data.browsing-context-name-or-keyword
-+		  }
-+		a.attrs.rel =
-+		  attribute rel {
-+		    common.data.tokens
-+		  }
-+		a.attrs.hreflang =
-+		  attribute hreflang {
-+		    common.data.langcode
-+		  }
-+		a.attrs.media =
-+		  attribute media {
-+		    common.data.mediaquery
-+		  }
-+		a.attrs.type =
-+		  attribute type {
-+		    common.data.mimetype
-+		  }
-+
- 	a.inner.phrasing =
- 		( common.inner.phrasing )
- 	a.inner.flow =
-@@ -36,37 +60,6 @@
- 	common.elem.phrasing |= a.elem.phrasing
- 	common.elem.flow |= a.elem.flow
- 
--## Shared hyperlink attributes
--
--  shared-hyperlink.attrs.href =
--    attribute href {
--      common.data.uri
--    }
--  shared-hyperlink.attrs.target =
--    attribute target {
--      common.data.browsing-context-or-keyword
--    }
--  shared-hyperlink.attrs.rel =
--    attribute rel {
--      common.data.tokens
--    }
--  shared-hyperlink.attrs.hreflang =
--    attribute hreflang {
--      common.data.langcode
--    }
--  shared-hyperlink.attrs.media =
--    attribute media {
--      common.data.mediaquery
--    }
--  shared-hyperlink.attrs.type =
--    attribute type {
--      common.data.mimetype
--    }
--  shared-hyperlink.attrs.ping =
--    attribute ping {
--      common.data.uris
--    } & v5only
--
- ## Emphatic Stress: <em>
- 
- 	em.elem =
-Index: syntax/relaxng/web-forms2.rnc
-===================================================================
---- syntax/relaxng/web-forms2.rnc	(revision 577)
-+++ syntax/relaxng/web-forms2.rnc	(working copy)
-@@ -6,9 +6,6 @@
- 
- ## Shared attributes for form controls
- 
--	common-form.attrs &=
--		( common-form.attrs.form? )
--
- 	common-form.attrs.form |= 
- 		attribute form {
- 			common.data.idref
-@@ -42,7 +39,7 @@
- 
- 	shared-form.attrs.formtarget = 
- 		attribute formtarget {
--			common.data.browsing-context-or-keyword
-+			common.data.browsing-context-name-or-keyword
- 		}
- 
- 	shared-form.attrs.formnovalidate = 
-@@ -554,7 +551,7 @@
- 			}
- 		input.url.attrs.value =
- 			attribute value {
--				w:string "" | common.data.uri.absolute
-+				string "" | common.data.uri.absolute
- 			}
- 		
- 	input.elem |= input.url.elem
-@@ -668,10 +665,6 @@
- 
- ## Text Area: <textarea>, extensions
- 
--	textarea.attrs.rows-and-cols-wf1.inner &=
--		notAllowed
--	textarea.attrs.rows-and-cols-wf1 |= 
--		empty
- 	textarea.attrs &=
- 		(	shared-form.attrs.maxlength?
- 		&	shared-form.attrs.autofocus? 
-@@ -741,7 +734,7 @@
- 			}
- 		form.attrs.target = 
- 			attribute target {
--				common.data.browsing-context-or-keyword
-+				common.data.browsing-context-name-or-keyword
- 			}
- 		form.attrs.autocomplete = 
- 			attribute autocomplete {
-Index: syntax/relaxng/meta.rnc
-===================================================================
---- syntax/relaxng/meta.rnc	(revision 577)
-+++ syntax/relaxng/meta.rnc	(working copy)
+diff -r b7c516d99a63 relaxng/meta.rnc
+--- a/relaxng/meta.rnc	Wed Dec 08 01:47:47 2010 +0900
++++ b/relaxng/meta.rnc	Wed Dec 08 17:50:00 2010 +0900
 @@ -53,7 +53,11 @@
  		&	body.attrs.onafterprint?
  		&	body.attrs.onbeforeprint?
@@ -895,343 +806,420 @@ Index: syntax/relaxng/meta.rnc
 -	common.elem.metadata |= ( meta.charset.elem | meta.http-equiv.content-type.elem )
 +	common.elem.metadata |= meta.charset.elem
 +	common.elem.metadata |= meta.http-equiv.content-type.elem
-Index: syntax/relaxng/applications.rnc
-===================================================================
---- syntax/relaxng/applications.rnc	(revision 577)
-+++ syntax/relaxng/applications.rnc	(working copy)
-@@ -4,18 +4,6 @@
- ##  RELAX NG Schema for HTML 5: Web Application Features              #
- # #####################################################################
- 
--## Additions to Common Attributes
--
--	common.attrs.interact &=
--		(	common.attrs.contextmenu?
--		&	common.attrs.contenteditable?
--		&	common.attrs.draggable?
--		&	common.attrs.hidden?
--		&	common.attrs.spellcheck?
--		)
--		
--	common.attrs.other &= common.attrs.interact
--
- ## Context Menu: contextmenu
- 
- 	common.attrs.contextmenu =
-@@ -89,12 +77,26 @@
- 	command.command.attrs =
+diff -r b7c516d99a63 relaxng/phrase.rnc
+--- a/relaxng/phrase.rnc	Wed Dec 08 01:47:47 2010 +0900
++++ b/relaxng/phrase.rnc	Wed Dec 08 17:50:00 2010 +0900
+@@ -13,13 +13,12 @@
+ 	a.attrs =
  		(	common.attrs
- 		&	command.command.attrs.type?
--		&	common-command.attrs
-+		&	command.command.attrs.label?
-+		&	command.command.attrs.icon?
-+		&	command.command.attrs.disabled?
- 		)
- 		command.command.attrs.type =
- 			attribute type {
- 				w:string "command"
- 			}
-+		command.command.attrs.label =
-+			attribute label {
-+				string
-+			}
-+		command.command.attrs.icon =
-+			attribute icon {
-+				common.data.uri
-+			}
-+		command.command.attrs.disabled =
-+			attribute disabled {
-+				w:string "disabled" | w:string ""
-+			}
- 	command.elem = command.command.elem
- 
- ## Selection of one item from a list of items: <command type='radio'>
-@@ -107,7 +109,9 @@
- 				&	command.radio.attrs.radiogroup #REVISIT taking liberties here
- 				&	command.radio.attrs.checked?
- 				)
--			&	common-command.attrs
-+			&	command.radio.attrs.label?
-+			&	command.radio.attrs.icon?
-+			&	command.radio.attrs.disabled?
- 		)
- 		command.radio.attrs.type =
- 			attribute type {
-@@ -121,6 +125,18 @@
- 			attribute checked {
- 				w:string "checked" | w:string ""
- 			}
-+		command.radio.attrs.label =
-+			attribute label {
-+				string
-+			}
-+		command.radio.attrs.icon =
-+			attribute icon {
-+				common.data.uri
-+			}
-+		command.radio.attrs.disabled =
-+			attribute disabled {
-+				w:string "disabled" | w:string ""
-+			}
- 	command.elem |= command.radio.elem
- 
- ## State or option that can be toggled: <command type='checkbox'>
-@@ -132,7 +148,9 @@
- 			&	(	command.checkbox.attrs.type
- 				&	command.checkbox.attrs.checked?
- 				)
--			&	common-command.attrs
-+			&	command.checkbox.attrs.label?
-+			&	command.checkbox.attrs.icon?
-+			&	command.checkbox.attrs.disabled?
- 			)
- 		command.checkbox.attrs.type =
- 			attribute type {
-@@ -142,30 +160,25 @@
- 			attribute checked {
- 				w:string "checked" | w:string ""
- 			}
--	command.elem |= command.checkbox.elem
--
--	common-command.attrs =
--		(	command.attrs.label?
--		&	command.attrs.icon?
--		&	command.attrs.disabled?
--		)
--		command.attrs.label =
-+		command.checkbox.attrs.label =
- 			attribute label {
- 				string
- 			}
--		command.attrs.icon =
-+		command.checkbox.attrs.icon =
- 			attribute icon {
- 				common.data.uri
- 			}
--		command.attrs.disabled =
-+		command.checkbox.attrs.disabled =
- 			attribute disabled {
- 				w:string "disabled" | w:string ""
- 			}
-+	command.elem |= command.checkbox.elem
-+
- 	command.inner =
- 		( empty )
- 	
- 	common.elem.metadata |=
--		( command.elem & nonHTMLizable )
-+		command.elem
- 	common.elem.phrasing |= command.elem
- 
- ## Menu: <menu>
-Index: syntax/relaxng/core-scripting.rnc
-===================================================================
---- syntax/relaxng/core-scripting.rnc	(revision 577)
-+++ syntax/relaxng/core-scripting.rnc	(working copy)
-@@ -52,9 +52,9 @@
- 				string
- 			}
- 	script.inner.embedded =
--		( common.inner.anything )
-+		( non-replaceable-character-data )
- 	script.inner.imported =
--		( common.inner.anything )
-+		( non-replaceable-character-data )
- 		
- 	script.elem = 
- 		(	script.elem.embedded
-@@ -95,8 +95,8 @@
- # #####################################################################
- ## Event Handler Attribute Definitions
- 
--	common.attrs.scripting &=
--		(	scripting.attr.onabort?
-+	common.attrs.event-handler =
-+			scripting.attr.onabort?
- 		&	scripting.attr.onblur?
- 		&	scripting.attr.oncanplay?
- 		&	scripting.attr.oncanplaythrough?
-@@ -150,9 +150,8 @@
- 		&	scripting.attr.ontimeupdate?
- 		&	scripting.attr.onvolumechange?
- 		&	scripting.attr.onwaiting?
--		)
- 		
--	common.attrs.other &= common.attrs.scripting
-+		
- 
- 	scripting.attr.onabort =
- 		attribute onabort { string }
-Index: syntax/relaxng/common.rnc
-===================================================================
---- syntax/relaxng/common.rnc	(revision 577)
-+++ syntax/relaxng/common.rnc	(working copy)
-@@ -38,16 +38,16 @@
- 	common.attr.anything =
- 		attribute * { text }*
- 
--## Any element from any namespace
-+	replaceable-character-data =
-+		(	xsd:string {
-+				pattern = ".*"
-+			}
-+		)
- 
--	common.elem.anything =
--		element * { common.inner.anything & common.attr.anything }
--
--## Any content from any namespace
--
--	common.inner.anything =
--		(	text
--		&	common.elem.anything*
-+	non-replaceable-character-data =
-+		(	xsd:string {
-+				pattern = ".*"
-+			}
- 		)
- 
- # #####################################################################
-@@ -96,29 +96,30 @@
- # When updating, check <bdo> definition too
- 
- common.attrs =
--	(	common.attrs.basic
--	&	common.attrs.i18n
--	&	common.attrs.present
--	&	common.attrs.other
-+	(	common.attrs.core
-+	&	common.attrs.event-handler
-+	&	common.attrs.xml
- 	)
- 
--common.attrs.basic =
--	(	(	common.attrs.id
--		|	common.attrs.xml-id
--		)? # REVISIT assuming only either one is allowed
-+common.attrs.core =
-+	(	common.attrs.accesskey?
- 	&	common.attrs.class?
-+	&	common.attrs.contenteditable?
-+	&	common.attrs.contextmenu?
-+	&	common.attrs.dir?
-+	&	common.attrs.draggable?
-+	&	common.attrs.hidden?
-+	&	common.attrs.id?
-+	&	common.attrs.lang?
-+	&	common.attrs.spellcheck?
-+	&	common.attrs.style?
-+	&	common.attrs.tabindex?
- 	&	common.attrs.title?
--	&	common.attrs.base?
--	&	common.attrs.space?
- 	)
- 	common.attrs.id =
- 		attribute id {
- 			common.data.id
- 		}
--	common.attrs.xml-id =
--		attribute xml:id {
--			xsd:NCName
--		} & XMLonly
- 	common.attrs.class =
- 		attribute class {
- 			common.data.tokens
-@@ -141,10 +142,6 @@
- 			string "preserve" | string "default"
- 		} & XMLonly
- 
--common.attrs.i18n =
--	(	common.attrs.dir?
--	&	common.attrs.language?
--	)
- 	common.attrs.dir =
- 		attribute dir {
- 			w:string "ltr" | w:string "rtl"
-@@ -177,11 +174,6 @@
- #			common.data.langcode
- #		} & XMLonly
- 
--common.attrs.present =
--	(	common.attrs.style?
--	&	common.attrs.tabindex?
--	&	common.attrs.accesskey?
--	)
- 	common.attrs.style =
- 		attribute style {
- 			string
-@@ -199,6 +191,13 @@
- common.attrs.other =
- 	empty
- 
-+common.attrs.xml =
-+	(	common.attrs.xmllang?
-+	&	common.attrs.xmlspace?
-+	&	common.attrs.xmlbase?
-+	)
-+
-+
- # #####################################################################
- ##  Common Datatypes                                                  #
- # #####################################################################
-@@ -208,10 +207,10 @@
- 	common.data.tokens =
- 		list { token* }
- 
--	common.data.browsing-context =
-+	common.data.browsing-context-name =
- 		w:browsing-context
- 
--	common.data.browsing-context-or-keyword =
-+	common.data.browsing-context-name-or-keyword =
- 		w:browsing-context-or-keyword
- #		xsd:string {
- #			pattern = "()|([^_].*)|(_[bB][lL][aA][nN][kK])|(_[sS][eE][lL][fF])|(_[pP][aA][rR][eE][nN][tT])|(_[tT][oO][pP])"
-@@ -362,16 +361,20 @@
-   common.data.zero =
-     w:zero
- 
--# #####################################################################
--##  WF2 Module Hook                                                   #
--# #####################################################################
--		
-+## Rectangle
-+  common.data.rectangle  =
-+    w:rectangle
-+
-+## Circle
-+  common.data.circle =
-+    w:circle
-+
-+## Polygone
-+  common.data.polygon =
-+    w:polygon
-+
- common-form.attrs.form = ( notAllowed )
- 
--# #####################################################################
--##  ARIA Module Hooks                                                 #
--# #####################################################################
--
- common.attrs.aria = ( notAllowed )
- common.attrs.aria.implicit.button = ( notAllowed )
- common.attrs.aria.implicit.input = ( notAllowed )
-Index: syntax/relaxng/block.rnc
-===================================================================
---- syntax/relaxng/block.rnc	(revision 577)
-+++ syntax/relaxng/block.rnc	(working copy)
-@@ -114,12 +114,12 @@
- 		element li { oli.inner & oli.attrs }
- 	oli.attrs =
- 		(	common.attrs
--		&	oli.attrs.value?
-+		&	li.attrs.value?
+ 		& a.attrs.name?
+-		&	shared-hyperlink.attrs.href?
+-		&	shared-hyperlink.attrs.target?
+-		&	shared-hyperlink.attrs.rel?
+-		&	shared-hyperlink.attrs.hreflang?
+-		&	shared-hyperlink.attrs.media?
+-		&	shared-hyperlink.attrs.type?
+-		&	shared-hyperlink.attrs.ping?
++		& a.attrs.href?
++		& a.attrs.target?
++		& a.attrs.rel?
++		& a.attrs.hreflang?
++		& a.attrs.media?
++		& a.attrs.type?
  		&	(	common.attrs.aria
- 			|	common.attrs.aria.implicit.listitem
+ 			|	common.attrs.aria.implicit.link
  			)?
+@@ -28,6 +27,31 @@
+ 		  attribute name {
+ 		    common.data.id # XXX not what the spec says
+ 		  }
++		a.attrs.href =
++		  attribute href {
++		    common.data.uri
++		  }
++		a.attrs.target =
++		  attribute target {
++		    common.data.browsing-context-name-or-keyword
++		  }
++		a.attrs.rel =
++		  attribute rel {
++		    common.data.tokens
++		  }
++		a.attrs.hreflang =
++		  attribute hreflang {
++		    common.data.langcode
++		  }
++		a.attrs.media =
++		  attribute media {
++		    common.data.mediaquery
++		  }
++		a.attrs.type =
++		  attribute type {
++		    common.data.mimetype
++		  }
++
+ 	a.inner.phrasing =
+ 		( common.inner.phrasing )
+ 	a.inner.flow =
+@@ -36,37 +60,6 @@
+ 	common.elem.phrasing |= a.elem.phrasing
+ 	common.elem.flow |= a.elem.flow
+ 
+-## Shared hyperlink attributes
+-
+-  shared-hyperlink.attrs.href =
+-    attribute href {
+-      common.data.uri
+-    }
+-  shared-hyperlink.attrs.target =
+-    attribute target {
+-      common.data.browsing-context-or-keyword
+-    }
+-  shared-hyperlink.attrs.rel =
+-    attribute rel {
+-      common.data.tokens
+-    }
+-  shared-hyperlink.attrs.hreflang =
+-    attribute hreflang {
+-      common.data.langcode
+-    }
+-  shared-hyperlink.attrs.media =
+-    attribute media {
+-      common.data.mediaquery
+-    }
+-  shared-hyperlink.attrs.type =
+-    attribute type {
+-      common.data.mimetype
+-    }
+-  shared-hyperlink.attrs.ping =
+-    attribute ping {
+-      common.data.uris
+-    } & v5only
+-
+ ## Emphatic Stress: <em>
+ 
+ 	em.elem =
+diff -r b7c516d99a63 relaxng/revision.rnc
+--- a/relaxng/revision.rnc	Wed Dec 08 01:47:47 2010 +0900
++++ b/relaxng/revision.rnc	Wed Dec 08 17:50:00 2010 +0900
+@@ -2,17 +2,6 @@
+ ##  RELAX NG Schema for HTML 5: Revision Annotations                  #
+ # #####################################################################
+ 
+-## Common Attributes
+-
+-	edit.attrs.cite =
+-		attribute cite {
+-			common.data.uri
+-		}
+-	edit.attrs.datetime =
+-		attribute datetime {
+-			common.data.datetime | common.data.date
+-		}
+-
+ ## Inserts: <ins>
+ 
+ 	ins.elem.flow =
+@@ -21,9 +10,17 @@
+ 		element ins { ins.inner.phrasing & ins.attrs }
+ 	ins.attrs =
+ 		(	common.attrs
+-		&	edit.attrs.cite?
+-		&	edit.attrs.datetime?
++		&	ins.attrs.cite?
++		&	ins.attrs.datetime?
  		)
--		oli.attrs.value =
-+		li.attrs.value =
- 			attribute value {
- 				common.data.integer
++		ins.attrs.cite =
++			attribute cite {
++				common.data.uri
++			}
++		ins.attrs.datetime =
++			attribute datetime {
++				common.data.datetime | common.data.date
++			}
+ 	ins.inner.flow =
+ 		( common.inner.flow )
+ 	ins.inner.phrasing =
+@@ -40,9 +37,17 @@
+ 		element del { del.inner.phrasing & del.attrs }
+ 	del.attrs =
+ 		(	common.attrs
+-		&	edit.attrs.cite?
+-		&	edit.attrs.datetime?
++		&	del.attrs.cite?
++		&	del.attrs.datetime?
+ 		)
++		del.attrs.cite =
++			attribute cite {
++				common.data.uri
++			}
++		del.attrs.datetime =
++			attribute datetime {
++				common.data.datetime | common.data.date
++			}
+ 	del.inner.flow =
+ 		( common.inner.flow )
+ 	del.inner.phrasing =
+diff -r b7c516d99a63 relaxng/tables.rnc
+--- a/relaxng/tables.rnc	Wed Dec 08 01:47:47 2010 +0900
++++ b/relaxng/tables.rnc	Wed Dec 08 17:50:00 2010 +0900
+@@ -157,38 +157,6 @@
+ 	tr.inner =
+ 		( ( td.elem | th.elem )* )
+ 
+-## Common Table Cell Attributes
+-
+-	tables.attrs.cell-structure =
+-		(	tables.attrs.colspan?
+-		&	tables.attrs.rowspan?
+-		)
+-		tables.attrs.colspan =
+-			attribute colspan {
+-				common.data.integer.positive
+-			}
+-		tables.attrs.rowspan =
+-			attribute rowspan {
+-				common.data.integer.non-negative
+-			}
+-
+-	tables.attrs.access-headers =
+-		( tables.attrs.headers? )
+-		tables.attrs.headers =
+-			attribute headers {
+-				common.data.idrefs
+-			}
+-
+-	tables.attrs.define-headers =
+-		( tables.attrs.scope? )
+-		tables.attrs.scope =
+-			attribute scope {
+-				(	w:string "row"
+-				|	w:string "col"
+-				|	w:string "rowgroup"
+-				|	w:string "colgroup"
+-				)
+-			}
+ 		tables.attrs.abbr =
+ 			attribute abbr {
+ 				text
+@@ -200,11 +168,24 @@
+ 		element td { td.inner & td.attrs }
+ 	td.attrs =
+ 		(	common.attrs
+-		&	tables.attrs.cell-structure
+-		&	tables.attrs.headers?
++		&	td.attrs.colspan?
++		&	td.attrs.rowspan?
++		&	td.attrs.headers?
+ #		&	tables.attrs.alignment
+ 		&	common.attrs.aria?
+ 		)
++		td.attrs.colspan =
++			attribute colspan {
++				common.data.integer.positive
++			}
++		td.attrs.rowspan =
++			attribute rowspan {
++				common.data.integer.non-negative
++			}
++		td.attrs.headers =
++			attribute headers {
++				common.data.idrefs
++			}
+ 	td.inner =
+ 		( common.inner.flow )
+ 
+@@ -214,11 +195,32 @@
+ 		element th { th.inner & th.attrs }
+ 	th.attrs =
+ 		(	common.attrs
+-		&	tables.attrs.cell-structure
+-		&	tables.attrs.scope?
+-		&	tables.attrs.headers?
++		&	th.attrs.scope?
++		&	th.attrs.colspan?
++		&	th.attrs.rowspan?
++		&	th.attrs.headers?
+ #		&	tables.attrs.alignment
+ 		&	common.attrs.aria.implicit.th?
+ 		)
++		th.attrs.scope =
++			attribute scope {
++				(	w:string "row"
++				|	w:string "col"
++				|	w:string "rowgroup"
++				|	w:string "colgroup"
++				)
++			}
++		th.attrs.colspan =
++			attribute colspan {
++				common.data.integer.positive
++			}
++		th.attrs.rowspan =
++			attribute rowspan {
++				common.data.integer.non-negative
++			}
++		th.attrs.headers =
++			attribute headers {
++				common.data.idrefs
++			}
+ 	th.inner =
+ 		( common.inner.phrasing )
+diff -r b7c516d99a63 relaxng/web-forms.rnc
+--- a/relaxng/web-forms.rnc	Wed Dec 08 01:47:47 2010 +0900
++++ b/relaxng/web-forms.rnc	Wed Dec 08 17:50:00 2010 +0900
+@@ -9,6 +9,7 @@
+ 	common-form.attrs =
+ 		(	common-form.attrs.name?
+ 		&	common-form.attrs.disabled?
++		&	common-form.attrs.form?
+ 		)
+ 		
+ 	common-form.attrs.name = 
+@@ -295,17 +296,9 @@
+ 		(	common.attrs
+ 		&	common-form.attrs
+ 		&	shared-form.attrs.readonly?
+-		&	textarea.attrs.rows-and-cols-wf1
+ 		&	common.attrs.aria.implicit.input?
+ 		#FIXME onfocus, onblur, onselect,onchange
+ 		)
+-		# This is ugly. 
+-		textarea.attrs.rows-and-cols-wf1 = 
+-			textarea.attrs.rows-and-cols-wf1.inner	
+-		textarea.attrs.rows-and-cols-wf1.inner =
+-			(	textarea.attrs.cols
+-			&	textarea.attrs.rows
+-			)
+ 		textarea.attrs.cols = 
+ 			attribute cols {
+ 				common.data.integer.positive
+@@ -315,7 +308,7 @@
+ 				common.data.integer.positive
  			}
+ 	textarea.inner =
+-		( text )
++		( replaceable-character-data )
+ 
+ 	common.elem.phrasing |= textarea.elem
+ 
+@@ -394,10 +387,6 @@
+ 	
+ ## Shared Definitions for Complex Button
+ 	
+-	button.attrs.value =
+-		attribute value {
+-			string
+-		}
+ 	button.inner = 
+ 		( common.inner.phrasing )
+ 	
+@@ -409,13 +398,17 @@
+ 		(	common.attrs
+ 		&	common-form.attrs
+ 		&	button.submit.attrs.type?
+-		&	button.attrs.value?
++		&	button.submit.attrs.value?
+ 		&	common.attrs.aria.implicit.button?
+ 		)
+ 		button.submit.attrs.type =
+ 			attribute type {
+ 				w:string "submit"
+ 			}
++		button.submit.attrs.value =
++			attribute value {
++				string
++			}
+ 
+ 	button.elem = button.submit.elem
+ 	
+@@ -427,13 +420,17 @@
+ 		(	common.attrs
+ 		&	common-form.attrs
+ 		&	button.reset.attrs.type
+-		&	button.attrs.value? #REVISIT I guess this still affects the DOM
++		&	button.reset.attrs.value? #REVISIT I guess this still affects the DOM
+ 		&	common.attrs.aria.implicit.button?
+ 		)
+ 		button.reset.attrs.type =
+ 			attribute type {
+ 				w:string "reset"
+ 			}
++		button.reset.attrs.value =
++			attribute value {
++				string
++			}
+ 
+ 	button.elem |= button.reset.elem
+ 	
+@@ -445,7 +442,7 @@
+ 		(	common.attrs
+ 		&	common-form.attrs
+ 		&	button.button.attrs.type
+-		&	button.attrs.value? #REVISIT I guess this still affects the DOM
++		&	button.button.attrs.value? #REVISIT I guess this still affects the DOM
+ 		&	(	common.attrs.aria
+ 			|	common.attrs.aria.implicit.button
+ 			)?
+@@ -454,6 +451,10 @@
+ 			attribute type {
+ 				w:string "button"
+ 			}
++		button.button.attrs.value =
++			attribute value {
++				string
++			}
+ 
+ 	button.elem |= button.button.elem
+ 
+diff -r b7c516d99a63 relaxng/web-forms2.rnc
+--- a/relaxng/web-forms2.rnc	Wed Dec 08 01:47:47 2010 +0900
++++ b/relaxng/web-forms2.rnc	Wed Dec 08 17:50:00 2010 +0900
+@@ -6,9 +6,6 @@
+ 
+ ## Shared attributes for form controls
+ 
+-	common-form.attrs &=
+-		( common-form.attrs.form? )
+-
+ 	common-form.attrs.form |= 
+ 		attribute form {
+ 			common.data.idref
+@@ -40,7 +37,7 @@
+ 
+ 	shared-form.attrs.formtarget = 
+ 		attribute formtarget {
+-			common.data.browsing-context-or-keyword
++			common.data.browsing-context-name-or-keyword
+ 		}
+ 
+ 	shared-form.attrs.formnovalidate = 
+@@ -552,7 +549,7 @@
+ 			}
+ 		input.url.attrs.value =
+ 			attribute value {
+-				w:string "" | common.data.uri.absolute
++				string "" | common.data.uri.absolute
+ 			}
+ 		
+ 	input.elem |= input.url.elem
+@@ -666,10 +663,6 @@
+ 
+ ## Text Area: <textarea>, extensions
+ 
+-	textarea.attrs.rows-and-cols-wf1.inner &=
+-		notAllowed
+-	textarea.attrs.rows-and-cols-wf1 |= 
+-		empty
+ 	textarea.attrs &=
+ 		(	shared-form.attrs.maxlength?
+ 		&	shared-form.attrs.autofocus? 
+@@ -739,7 +732,7 @@
+ 			}
+ 		form.attrs.target = 
+ 			attribute target {
+-				common.data.browsing-context-or-keyword
++				common.data.browsing-context-name-or-keyword
+ 			}
+ 		form.attrs.autocomplete = 
+ 			attribute autocomplete {

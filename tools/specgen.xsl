@@ -643,9 +643,9 @@ color: #3C790A;
     <xsl:text>&#10;    </xsl:text>
     <xsl:choose>
     <xsl:when test="$site = 'W3C'">
-    <p>
       <xsl:choose>
         <xsl:when test='$maturity="REC"'>
+        <p>
           This document has been reviewed by W3C Members, by software developers,
           and by other W3C groups and interested parties, and is endorsed by the
           Director as a W3C Recommendation. It is a stable document and may be
@@ -653,26 +653,19 @@ color: #3C790A;
           in making the Recommendation is to draw attention to the specification
           and to promote its widespread deployment. This enhances the
           functionality and interoperability of the Web.
+        </p>
         </xsl:when>
-        <xsl:otherwise>
-          Publication as
-          <!-- * The existence of this document as -->
-          <xsl:choose>
-            <xsl:when test='$maturity = "ED"'>
-              <xsl:text>an</xsl:text>
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:text>a</xsl:text>
-            </xsl:otherwise>
-          </xsl:choose>
+        <xsl:when test='not($maturity="ED")'>
+        <p>
+          Publication as a
           <xsl:text> </xsl:text>
           <xsl:call-template name='maturity-short'/> does not imply endorsement by the
           W3C Membership. This is a draft document and may be updated, replaced
           or obsoleted by other documents at any time. It is inappropriate to cite
           this document as other than work in progress.
-        </xsl:otherwise>
+        </p>
+        </xsl:when>
       </xsl:choose>
-    </p>
     <xsl:text>&#10;    </xsl:text>
     <xsl:if test="not($maturity='ED')">
       <p>
