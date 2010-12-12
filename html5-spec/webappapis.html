@@ -794,11 +794,14 @@
    <code><a href="infrastructure.html#document">Document</a></code>s are not <a href="browsers.html#fully-active">fully active</a>. The user
    agent may pick any <a href="#task-queue">task queue</a>.</p></li>
 
+   <!-- warning! if you renumber these steps, make sure to update the
+   "spin the event loop" algorith below! -->
+
    <li><p>If the <a href="#storage-mutex">storage mutex</a> is now owned by the
    <a href="#event-loop">event loop</a>, release it so that it is once again
-   free.</p>
+   free.</p></li>
 
-   </li><li><p>Remove that task from its <a href="#task-queue">task queue</a>.</p></li>
+   <li><p>Remove that task from its <a href="#task-queue">task queue</a>.</p></li>
 
    <li><p>If any asynchronously-running algorithms are <dfn id="await-a-stable-state" title="await a stable state">awaiting a stable state</dfn>, then
    run their <dfn id="synchronous-section">synchronous section</dfn> and then resume running
@@ -824,9 +827,16 @@
   <ol><li><p>Let <var title="">task source</var> be the <a href="#task-source">task
    source</a> of the currently running <a href="#concept-task" title="concept-task">task</a>.</p></li>
 
-   <li><p>Stop the currently running <a href="#concept-task" title="concept-task">task</a>, allowing the <a href="#event-loop">event
-   loop</a> to resume, but continue these steps
-   asynchronously.</p></li>
+   <li>
+
+    <p>Stop the currently running <a href="#concept-task" title="concept-task">task</a>, allowing the <a href="#event-loop">event
+    loop</a> to resume, but continue these steps
+    asynchronously.</p>
+
+    <p class="note">This causes the <a href="#event-loop">event loop</a> to move on
+    to the second step of its processing model (defined above).</p>
+
+   </li>
 
    <li><p>Wait until the condition <var title="">goal</var> is
    met.</p></li>
@@ -840,15 +850,27 @@
 
   </ol><hr/><p>Some of the algorithms in this specification, for historical
   reasons, require the user agent to <dfn id="pause">pause</dfn> while running a
-  <a href="#concept-task" title="concept-task">task</a> until some condition has been
-  met. While a user agent has a paused <a href="#concept-task" title="concept-task">task</a>, the corresponding <a href="#event-loop">event
-  loop</a> must not run further <a href="#concept-task" title="concept-task">tasks</a>, and any script in the currently
-  running <a href="#concept-task" title="concept-task">task</a> must block. User
-  agents should remain responsive to user input while paused, however,
-  albeit in a reduced capacity since the <a href="#event-loop">event loop</a> will
-  not be doing anything.</p>
+  <a href="#concept-task" title="concept-task">task</a> until a condition <var title="">goal</var> is met. This means running the following
+  steps:</p>
 
-  <hr/><p>When a user agent is to <dfn id="obtain-the-storage-mutex">obtain the storage mutex</dfn> as
+  <ol><li><p>If any asynchronously-running algorithms are <a href="#await-a-stable-state" title="await a stable state">awaiting a stable state</a>, then
+   run their <a href="#synchronous-section">synchronous section</a> and then resume running
+   their asynchronous algorithm. (See the <a href="#event-loop">event loop</a>
+   processing model definition above for details.)</p>
+
+   </li><li><p>If necessary, update the rendering or user interface of any
+   <code><a href="infrastructure.html#document">Document</a></code> or <a href="browsers.html#browsing-context">browsing context</a> to reflect
+   the current state.</p></li>
+
+   <li><p>Wait until the condition <var title="">goal</var> is met.
+   While a user agent has a paused <a href="#concept-task" title="concept-task">task</a>, the corresponding <a href="#event-loop">event
+   loop</a> must not run further <a href="#concept-task" title="concept-task">tasks</a>, and any script in the currently
+   running <a href="#concept-task" title="concept-task">task</a> must block. User
+   agents should remain responsive to user input while paused,
+   however, albeit in a reduced capacity since the <a href="#event-loop">event
+   loop</a> will not be doing anything.</p></li>
+
+  </ol><hr/><p>When a user agent is to <dfn id="obtain-the-storage-mutex">obtain the storage mutex</dfn> as
   part of running a <a href="#concept-task" title="concept-task">task</a>, it must
   run through the following steps:</p>
 

@@ -684,6 +684,10 @@
    <li><p>Change the <a href="dom.html#document-s-character-encoding">document's character encoding</a> to
    UTF-8.</p></li>
 
+   <li><p>Set the <code><a href="infrastructure.html#document">Document</a></code> object's <a href="dom.html#reload-override-flag">reload override
+   flag</a> and set the <code><a href="infrastructure.html#document">Document</a></code>'s <a href="dom.html#reload-override-buffer">reload
+   override buffer</a> to the empty string.</p></li>
+
    <li><p>Change <a href="dom.html#the-document-s-address">the document's address</a> to the
    <a href="browsers.html#entry-script">entry script</a>'s <a href="webappapis.html#script-s-document" title="script's&#10;   document">document</a>'s <a href="dom.html#the-document-s-address" title="the document's&#10;   address">address</a>.</p></li>
 
@@ -862,10 +866,10 @@
 
    <li>
 
-    <p>If the <a href="parsing.html#insertion-point">insertion point</a> is undefined, the <code title="dom-document-open"><a href="#dom-document-open">open()</a></code> method must be called
-    (with no arguments) on the <code title="Document"><a href="infrastructure.html#document">document</a></code>
-    object. If the user <a href="history.html#refused-to-allow-the-document-to-be-unloaded">refused to allow the document to be
-    unloaded</a>, then these steps must be aborted. Otherwise, the
+    <p>If the <a href="parsing.html#insertion-point">insertion point</a> is undefined, call the
+    <code title="dom-document-open"><a href="#dom-document-open">open()</a></code> method on the <code title="Document"><a href="infrastructure.html#document">document</a></code> object (with no arguments). If
+    the user <a href="history.html#refused-to-allow-the-document-to-be-unloaded">refused to allow the document to be
+    unloaded</a>, then abort these steps. Otherwise, the
     <a href="parsing.html#insertion-point">insertion point</a> will point at just before the end of
     the (empty) <a href="parsing.html#the-input-stream">input stream</a>.</p>
 
@@ -873,28 +877,30 @@
 
    <li>
 
-    <p>The string consisting of the concatenation of all the arguments
-    to the method must be inserted into the <a href="parsing.html#the-input-stream">input stream</a>
-    just before the <a href="parsing.html#insertion-point">insertion point</a>.</p>
+    <p>Insert the string consisting of the concatenation of all the
+    arguments to the method into the <a href="parsing.html#the-input-stream">input stream</a> just
+    before the <a href="parsing.html#insertion-point">insertion point</a>.</p>
 
    </li>
 
    <li>
 
-    <p>If there is a <a href="scripting-1.html#pending-parsing-blocking-script">pending parsing-blocking script</a>, then the
-    method must now return without further processing of the
-    <a href="parsing.html#the-input-stream">input stream</a>.</p>
+    <p>If the <code><a href="infrastructure.html#document">Document</a></code> object's <a href="dom.html#reload-override-flag">reload override
+    flag</a> is set, then append the string consisting of the
+    concatenation of all the arguments to the method to the
+    <code><a href="infrastructure.html#document">Document</a></code>'s <a href="dom.html#reload-override-buffer">reload override buffer</a>.</p>
 
    </li>
 
    <li>
 
-    <p>Otherwise, the tokenizer must process the characters that were
-    inserted, one at a time, processing resulting tokens as they are
-    emitted, and stopping when the tokenizer reaches the insertion
-    point or when the processing of the tokenizer is aborted by the
-    tree construction stage (this can happen if a <code><a href="scripting-1.html#script">script</a></code>
-    end tag token is emitted by the tokenizer).
+    <p>If there is no <a href="scripting-1.html#pending-parsing-blocking-script">pending parsing-blocking script</a>,
+    have the tokenizer process the characters that were inserted, one
+    at a time, processing resulting tokens as they are emitted, and
+    stopping when the tokenizer reaches the insertion point or when
+    the processing of the tokenizer is aborted by the tree
+    construction stage (this can happen if a <code><a href="scripting-1.html#script">script</a></code> end
+    tag token is emitted by the tokenizer).
 
     </p><p class="note">If the <code title="dom-document-write"><a href="#dom-document-write">document.write()</a></code> method was
     called from script executing inline (i.e. executing because the
@@ -906,7 +912,7 @@
 
    <li>
 
-    <p>Finally, the method must return.</p>
+    <p>Finally, return from the method.</p>
 
    </li>
 

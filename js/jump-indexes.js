@@ -14,7 +14,7 @@ document.addEventListener("keyup", function(e) {
 var itemList =
 [
   ["a", "abbr", "address", "area", "article", "aside", "audio"],
-  ["b", "base", "bdo", "blockquote", "body", "br", "button"],
+  ["b", "base", "bdi", "bdo", "blockquote", "body", "br", "button"],
   ["canvas", "caption", "cite", "code", "col", "colgroup", "command"],
   ["datalist", "dd", "del", "details", "dfn", "dir", "div", "dl", "dt"],
   ["em", "embed", "fieldset", "figcaption", "figure", "footer", "form"],
@@ -28,7 +28,7 @@ var itemList =
   ["table", "tbody", "td", "textarea", "tfoot", "th", "thead", "time", "title", "tr"],
   ["ul", "var", "video", "wbr"],
   ["global-attributes","index-of-terms","toc","toggle"]
-  ]
+  ];
 
 function showjumpIndexA(event) {
   var node = event.target;
@@ -41,7 +41,7 @@ function showjumpIndexA(event) {
     indexDiv.className = 'jumpIndexA';
     for (var i=0, len=itemList.length; i<len; ++i) {
       var p = document.createElement('p');
-      var items = itemList[i];
+      items = itemList[i];
       for (var j=0, jlen=items.length; j<jlen; ++j) {
         var a = document.createElement('a');
         var separator = document.createTextNode(" ");

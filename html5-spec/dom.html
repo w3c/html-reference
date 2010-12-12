@@ -384,7 +384,22 @@
   documents</dfn> unless they are flagged as being <dfn id="html-documents">HTML
   documents</dfn> when they are created. Whether a document is an
   <a href="#html-documents" title="HTML documents">HTML document</a> or an <a href="#xml-documents" title="XML documents">XML document</a> affects the behavior of
-  certain APIs and the case-sensitivity of some selectors.</p><h4 id="documents-in-the-dom"><span class="secno">3.1.1 </span>Documents in the DOM</h4><p>All <code><a href="infrastructure.html#document">Document</a></code> objects (in user agents implementing
+  certain APIs and the case-sensitivity of some selectors.</p><p>Each <code><a href="infrastructure.html#document">Document</a></code> object has a <dfn id="reload-override-flag">reload override
+  flag</dfn> that is originally unset. The flag is set by the <code title="dom-document-open"><a href="apis-in-html-documents.html#dom-document-open">document.open()</a></code> and <code title="dom-document-open"><a href="apis-in-html-documents.html#dom-document-open">document.write()</a></code> methods in certain
+  situations. When the flag is set, the <code><a href="infrastructure.html#document">Document</a></code> also has
+  a <dfn id="reload-override-buffer">reload override buffer</dfn> which is a Unicode string that
+  is used as the source of the document when it is reloaded.</p><p>When the user agent is to perform <dfn id="an-overridden-reload">an overridden
+  reload</dfn>, it must act as follows:</p><ol><li><p>Let <var title="">source</var> be the value of the
+   <a href="browsers.html#browsing-context">browsing context</a>'s <a href="browsers.html#active-document">active document</a>'s
+   <a href="#reload-override-buffer">reload override buffer</a>.</p></li>
+
+   <li><p><a href="history.html#navigate">Navigate</a><!--DONAV reload after d.open()--> the
+   <a href="browsers.html#browsing-context">browsing context</a> to a resource whose source is <var title="">source</var>. When the <a href="history.html#navigate">navigate</a> algorithm
+   creates a <code><a href="infrastructure.html#document">Document</a></code> object for this purpose, set that
+   <code><a href="infrastructure.html#document">Document</a></code>'s <a href="#reload-override-flag">reload override flag</a> and set
+   its <a href="#reload-override-buffer">reload override buffer</a> to <var title="">source</var>.</p></li>
+
+  </ol><h4 id="documents-in-the-dom"><span class="secno">3.1.1 </span>Documents in the DOM</h4><p>All <code><a href="infrastructure.html#document">Document</a></code> objects (in user agents implementing
   this specification) <span class="impl">must</span> also implement
   the <code><a href="#htmldocument">HTMLDocument</a></code> interface, available using
   binding-specific methods. (This is the case whether or not the
@@ -570,16 +585,19 @@ interface <dfn id="htmldocument">HTMLDocument</dfn> {
   attribute represents the cookies of the resource from which the
   <code><a href="infrastructure.html#document">Document</a></code> was created.</p>
 
-  <p>Some <code><a href="infrastructure.html#document">Document</a></code> objects are <dfn id="cookie-free-document-object" title="cookie-free&#10;  Document object">cookie-free <code>Document</code>
-  objects</dfn>. Any <code><a href="infrastructure.html#document">Document</a></code> object created by the <code title="">createDocument()</code> or <code title="dom-DOMHTMLImplementation-createHTMLDocument"><a href="#dom-domhtmlimplementation-createhtmldocument">createHTMLDocument()</a></code>
-  factory methods is a <a href="#cookie-free-document-object">cookie-free <code>Document</code>
-  object</a>. Any <code><a href="infrastructure.html#document">Document</a></code> whose <a href="#the-document-s-address" title="the&#10;  document's address">address</a> does not use a server-based
-  naming authority is a <a href="#cookie-free-document-object">cookie-free <code>Document</code>
-  object</a>. Other specifications can also define
-  <code><a href="infrastructure.html#document">Document</a></code> objects as being <a href="#cookie-free-document-object" title="cookie-free&#10;  Document object">cookie-free <code>Document</code>
-  objects</a>.</p>
+  <p>A <code><a href="infrastructure.html#document">Document</a></code> object that falls into one of the
+  following conditions is a <dfn id="cookie-free-document-object">cookie-free <code>Document</code>
+  object</dfn>:</p>
 
-  <p id="sandboxCookies">On getting, if the document is a
+  <ul><li>A <code><a href="infrastructure.html#document">Document</a></code> that has no <a href="browsers.html#browsing-context">browsing
+   context</a>.</li>
+
+   <li>A <code><a href="infrastructure.html#document">Document</a></code> whose <a href="#the-document-s-address" title="the document's&#10;   address">address</a> does not use a server-based naming
+   authority.</li>
+
+  </ul><!--Other specifications can also define <code>Document</code>
+  objects as being <span title="cookie-free Document
+  object">cookie-free <code>Document</code> objects</span>.--><p id="sandboxCookies">On getting, if the document is a
   <a href="#cookie-free-document-object">cookie-free <code>Document</code> object</a>, then the user
   agent must return the empty string. Otherwise, if the
   <code><a href="infrastructure.html#document">Document</a></code>'s <a href="origin-0.html#origin">origin</a> is not a

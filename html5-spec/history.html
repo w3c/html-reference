@@ -971,6 +971,12 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
    <code>iframe</code> attributes</a> of the <a href="browsers.html#browsing-context">browsing
    context</a>'s <a href="browsers.html#browsing-context-container">browsing context container</a>.</p></dd>
 
+   <dt>If the <a href="browsers.html#browsing-context">browsing context</a>'s <a href="browsers.html#active-document">active
+   document</a> has its <a href="dom.html#reload-override-flag">reload override
+   flag</a> set</dt>
+
+   <dd><p>Perform <a href="dom.html#an-overridden-reload">an overridden reload</a>.</p></dd>
+
    <dt>Otherwise</dt>
 
    <dd><p><a href="#navigate">Navigate</a><!--DONAV location.reload()--> the
@@ -982,16 +988,20 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
    <!-- http://software.hixie.ch/utilities/js/live-dom-viewer/saved/141 -->
 
-  </dl><p>When a user requests that the current page be reloaded through a
-  user interface element, the user agent should
-  <a href="#navigate">navigate</a><!--DONAV user reload--> the <a href="browsers.html#browsing-context">browsing
-  context</a> to the same resource as <code><a href="infrastructure.html#document">Document</a></code>, with
-  <a href="#replacement-enabled">replacement enabled</a>. In the case of non-idempotent
-  methods (e.g. HTTP POST), the user agent should prompt the user to
-  confirm the operation first, since otherwise transactions (e.g.
-  purchases or database modifications) could be repeated. User agents
-  may allow the user to explicitly override any caches when
-  reloading.</p>
+  </dl><p>When a user requests that the current page of a <a href="browsers.html#browsing-context">browsing
+  context</a> be reloaded through a user interface element, the
+  user agent should <a href="#navigate">navigate</a><!--DONAV user reload--> the
+  <a href="browsers.html#browsing-context">browsing context</a> to the same resource as
+  <code><a href="infrastructure.html#document">Document</a></code>, with <a href="#replacement-enabled">replacement enabled</a>. In the
+  case of non-idempotent methods (e.g. HTTP POST), the user agent
+  should prompt the user to confirm the operation first, since
+  otherwise transactions (e.g. purchases or database modifications)
+  could be repeated. User agents may allow the user to explicitly
+  override any caches when reloading. If <a href="browsers.html#browsing-context">browsing
+  context</a>'s <a href="browsers.html#active-document">active document</a>'s <a href="dom.html#reload-override-flag">reload
+  override flag</a> is set, then the user agent may instead perform
+  <a href="dom.html#an-overridden-reload">an overridden reload</a> rather than the navigation
+  described in this paragraph.</p>
 
   </div><p>The <code><a href="#location">Location</a></code> interface also has the complement of
   <a href="urls.html#url-decomposition-idl-attributes">URL decomposition IDL attributes</a>, <dfn id="dom-location-protocol" title="dom-location-protocol"><code>protocol</code></dfn>, <dfn id="dom-location-host" title="dom-location-host"><code>host</code></dfn>, <dfn id="dom-location-port" title="dom-location-port"><code>port</code></dfn>, <dfn id="dom-location-hostname" title="dom-location-hostname"><code>hostname</code></dfn>, <dfn id="dom-location-pathname" title="dom-location-pathname"><code>pathname</code></dfn>, <dfn id="dom-location-search" title="dom-location-search"><code>search</code></dfn>, and <dfn id="dom-location-hash" title="dom-location-hash"><code>hash</code></dfn>. <span class="impl">These must follow the rules given for <a href="urls.html#url-decomposition-idl-attributes">URL
