@@ -56,7 +56,7 @@ debug:
 	@echo $(MULTIPAGE_SPEC_FILES)
 
 patch-schema: $(SCHEMA_FILES)
-	$(HG) $(HGFLAGS) diff -X "*datatype/java*" syntax/relaxng > $@
+	$(HG) --cwd syntax $(HGFLAGS) diff -X "relaxng/datatype/java*" relaxng > $@
 
 html.rng: $(SCHEMA_FILES)
 	$(TRANG) $(TRANGFLAGS) html.rnc $@

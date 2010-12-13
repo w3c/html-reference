@@ -440,6 +440,9 @@
                   <xsl:when test="$pattern='sandbox-allow-list'">
                     <h2 class="common-subhead"><dfn id="{@id}">sandbox “allow” keywords list</dfn></h2>
                   </xsl:when>
+                  <xsl:when test="$pattern='audio-states-list'">
+                    <h2 class="common-subhead"><dfn id="{@id}">list of audio states</dfn></h2>
+                  </xsl:when>
                   <xsl:when test="$pattern='charset'">
                     <h2 class="common-subhead"><dfn id="{@id}">character encoding name</dfn></h2>
                   </xsl:when>
@@ -2725,6 +2728,7 @@
                 or $datatype = 'hash-name'
                 or $datatype = 'default-style'
                 or $datatype = 'sandbox-allow-list'
+                or $datatype = 'audio-states-list'
                 or starts-with($datatype,'uri')
                 or starts-with($datatype,'integer')
                 or starts-with($datatype,'float')
@@ -3293,6 +3297,9 @@
       </xsl:when>
       <xsl:when test=".='sandbox-allow-list'">
         <a href="{@href}">sandbox “allow” keywords list</a>
+      </xsl:when>
+      <xsl:when test=".='audio-states-list'">
+        <a href="{@href}">list of audio states</a>
       </xsl:when>
       <xsl:when test=".='charset'">
         <a href="{@href}">character encoding name</a>
