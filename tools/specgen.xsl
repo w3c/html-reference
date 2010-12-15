@@ -187,7 +187,7 @@ color: #3C790A;
           <xsl:with-param name="maturity" select="$maturity"/>
           <xsl:with-param name="quiet" select="$quiet"/>
           <xsl:with-param name="content" select="$index-contents"/>
-          <xsl:with-param name="title">HTML5: Index</xsl:with-param>
+          <xsl:with-param name="title">Index - HTML5</xsl:with-param>
         </xsl:call-template>
         <xsl:call-template name="write.chunk">
           <xsl:with-param name="method">xml</xsl:with-param>
@@ -196,7 +196,7 @@ color: #3C790A;
           <xsl:with-param name="maturity" select="$maturity"/>
           <xsl:with-param name="quiet" select="$quiet"/>
           <xsl:with-param name="content" select="$index-contents"/>
-          <xsl:with-param name="title">HTML5: Index</xsl:with-param>
+          <xsl:with-param name="title">Index - HTML5</xsl:with-param>
         </xsl:call-template>
       </xsl:otherwise>
     </xsl:choose>
@@ -855,7 +855,6 @@ color: #3C790A;
           <xsl:with-param name="quiet" select="$quiet"/>
           <xsl:with-param name="content" select="$content"/>
           <xsl:with-param name="title">
-            <xsl:text>HTML5: </xsl:text>
             <xsl:for-each select='h:h2/node()
               [not(contains(@class,"obsoleted-feature"))]
               [not(contains(@class,"changed-feature"))]
@@ -873,6 +872,7 @@ color: #3C790A;
             <xsl:if test='h:h2/node()[contains(@class,"new-feature")]'>
               <xsl:text>(NEW)</xsl:text>
             </xsl:if>
+            <xsl:text> - HTML5</xsl:text>
           </xsl:with-param>
           <xsl:with-param name="filename">
             <xsl:if test="not($aria=0)">

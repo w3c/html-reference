@@ -1830,7 +1830,7 @@
                 <xsl:text>object</xsl:text>
               </a>
             </xsl:when>
-            <xsl:when test="$name='source'">
+            <xsl:when test="$name='source' or $name='track'">
               <a href="#audio">
                 <xsl:text>audio</xsl:text>
               </a>
