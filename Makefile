@@ -162,12 +162,14 @@ html.spec.src.html: html-compiled.rng schema.html \
 	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|“([^”]+)”\s+element|<span class="element">$$1</span> element|g' \
 	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|“([^”]+)”\s+elements|<span class="element">$$1</span> elements|g' \
 	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|attribute\s+“([^”]+)”|attribute <span class="attribute">$$1</span>|g' \
+	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|Attribute\s+“([^”]+)”|Attribute <span class="attribute">$$1</span>|g' \
 	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|“([^”]+)”\s+attribute|<span class="attribute">$$1</span> attribute|g' \
 	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|element\s+&#8220;([^&]+)&#8221;|element <span class="element">$$1</span>|g' \
 	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|Element\s+&#8220;([^&]+)&#8221;|Element <span class="element">$$1</span>|g' \
 	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|&#8220;([^&]+)&#8221;\s+element|<span class="element">$$1</span> element|g' \
 	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|&#8220;([^&]+)&#8221;\s+elements|<span class="element">$$1</span> elements|g' \
 	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|attribute\s+&#8220;([^&]+)&#8221;|attribute <span class="attribute">$$1</span>|g' \
+	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|Attribute\s+&#8220;([^&]+)&#8221;|Attribute <span class="attribute">$$1</span>|g' \
 	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|&#8220;([^&]+)&#8221;\s+attribute|<span class="attribute">$$1</span> attribute|g' \
 	  > $@
 
