@@ -89,10 +89,15 @@
   </section>
   <section id="conformant-documents">
     <h2>Conformant documents</h2>
+    <p>There are two types of conformant documents:</p>
+    <ul>
+      <li><a href="#syntax-document-html">conformant documents in the HTML syntax</a></li>
+      <li><a href="#syntax-document-xml">conformant documents in the XML syntax</a></li>
+    </ul>
+    <section class="no-toc" id="conformant-html">
+    <h2>Conformant documents in the HTML syntax</h2>
     <p>A conformant
-    <dfn id="syntax-document-html"
-      title="syntax-document-html">document in the HTML
-      syntax</dfn>
+    <dfn id="syntax-document-html">document in the HTML syntax</dfn>
     <a href="#must-requirement">must</a>
     consist of the following parts, in the
     following order:</p>
@@ -110,8 +115,24 @@
       <a href="#html" class="element">html</a> element,
       with its
       <a href="#attribute">attributes</a>
-      and
-      <a href="#contents">contents</a>.</li>
+      (if any) and its
+      <a href="#contents">contents</a>
+      (if any).
+        <p class="note">The
+        <a href="#syntax-start-tags">start tag</a>
+        and
+        <a href="#syntax-end-tags">end tag</a>
+        of the
+        <a href="#html" class="element">html</a>
+        element
+        <a href="#omitted">can be omitted</a>—as
+        well as, possibly, the start tags and end tags of certain
+        descendants of the
+        <a href="#html" class="element">html</a>
+        element—in which case the start tag and end tag are considered to
+        be
+        <a href="#syntax-implied-tags">implied</a>.</p>
+      </li>
       <li>Any number of
       <a href="#syntax-comments">comments</a> and
       <a href="#space">space characters</a>.</li>
@@ -119,8 +140,87 @@
     <p><a href="#syntax-document-html">Documents in the HTML syntax</a>
     <a href="#must-requirement">must</a>
     match the syntax described in the
-    <a href="#html-syntax">HTML syntax</a>
+    <a href="#syntax">HTML syntax</a>
     section of this reference.</p>
+    <section class="no-toc" id="syntax-implied-tags">
+     <h2>Implied start tags and end tags</h2>
+      <p>In
+        <a href="#syntax-document-html">documents in the HTML syntax</a>,
+        the 
+        <a href="#syntax-start-tags">start tags</a>
+        and
+        <a href="#syntax-end-tags">end tags</a>
+        of the
+        <a href="#html" class="element">html</a>
+        element and particular descendants of the
+        <a href="#html" class="element">html</a>
+        element
+        <a href="#omitted">can be omitted</a>.
+        In cases where such tag omission occurs, certain elements (such as
+        the
+        <a href="#html" class="element">html</a>
+        element) are nevertheless still considered, conceptually, to be
+        contained within the document—but with their start tags and end
+        tags <em>implied</em>.</p>
+      <div class="example">
+        <p>The following is an example of a document with implied start tags
+        and end tags for the
+        <a href="#html" class="element">html</a>,
+        <a href="#html" class="element">head</a>,
+        and
+        <a href="#html" class="element">body</a>
+        elements. Note that it is nevertheless a complete, valid document.</p>
+        <pre>&lt;!DOCTYPE html>
+&lt;title>A relatively minimal HTML document&lt;/title>
+&lt;p>Hello World!&lt;/p></pre>
+
+        <p>The
+        <a href="#dom-tree">DOM tree</a>
+        constructed from that example by a conformant
+        <a href="#UA">UA</a>
+        would look like this:</p>
+        <ul id="dom">
+          <li class="t10">DOCTYPE: <code>html</code></li>
+          <li class="t1">
+            <code>HTML</code>
+            <ul>
+              <li class="t1">
+                <code>HEAD</code>
+                <ul>
+                  <li class="t1">
+                    <code>TITLE</code>
+                    <ul>
+                      <li class="t3"><code>#text</code>: <span>A relatively minimal HTML document</span></li>
+                    </ul>
+                  </li>
+                  <li class="t3"><code>#text</code>: <span>↩ </span></li>
+                </ul>
+              </li>
+              <li class="t1">
+                <code>BODY</code>
+                <ul>
+                  <li class="t1">
+                    <code>P</code>
+                    <ul>
+                      <li class="t3"><code>#text</code>: <span>Hello World!</span></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <p>Note that the DOM tree includes the 
+        <a href="#html" class="element">html</a>,
+        <a href="#html" class="element">head</a>,
+        and
+        <a href="#html" class="element">body</a>
+        elements whose start tags and end tags are implied in the document.</p>
+      </div>
+    </section>
+    </section>
+    <section class="no-toc" id="conformant-xml">
+    <h2>Conformant documents in the XML syntax</h2>
     <p>A conformant
     <dfn id="syntax-document-xml"
       title="syntax-document-xml">document in the XML syntax</dfn>
@@ -149,6 +249,7 @@
     <a href="#must-requirement">must</a>
     not
     <a href="#omitted">omit tags</a>).</p>
+  </section>
   </section>
   <section id="case-insensitivity">
     <h2>Case insensitivity in tag names and attribute names</h2>

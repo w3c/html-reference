@@ -10,7 +10,7 @@
 <div id="jump-indexes" class="no-number no-toc"><div id="jumpIndexA-button">jump</div></div>
 <div class="head">
 <h1>HTML: The Markup Language Reference</h1>
-<h2>Unofficial Editor&#8217;s Draft <em>15 December 2010</em>
+<h2>Unofficial Editor&#8217;s Draft <em>16 December 2010</em>
 </h2>
 <dt>Editors:</dt>
 <dd>
@@ -63,7 +63,7 @@
       <h2>Status of this Document </h2>
     
     <p>
-        This document is the 15 December 2010 Editor&#8217;s Draft of 
+        This document is the 16 December 2010 Editor&#8217;s Draft of 
         <cite>HTML: The Markup Language Reference</cite>.
       
       If you&#8217;d like to comment on this document, the preferred
@@ -713,6 +713,15 @@
       and the corresponding characters in the range
       <code title="U+0061 LATIN SMALL LETTER A&#8211;U+007A LATIN SMALL LETTER Z">a-z</code>
       are considered to also match.</dd>
+    <dt><dfn id="dom-tree">DOM tree</dfn></dt>
+    <dd>A representation of a document based on the W3C Document Object
+      Model (DOM), as defined in <cite>Document Object Model (DOM) Level 3
+      Core</cite> specification, and as explained in the &#8220;What is the
+      Document Object Model?&#8221; introduction for that specification
+      <a href="#refsDOMCore" id="refsDOMCore_xref1">[DOM Core]</a>.
+      <a href="#UA" id="UA_xref1">UA</a>s
+      build representations of documents by parsing them and constructing
+      DOM trees from them.</dd>
     <dt><dfn id="fallback" title="fallback">fallback content</dfn></dt>
     <dd>Content associated with embedded content, to be used when
       the embedded content cannot itself be used (for example,
@@ -793,6 +802,9 @@
 </li>
       </ul>
 </dd>
+    <dt><dfn id="UA">UA</dfn></dt>
+    <dd>An HTML user agent; that is, an application (such as a
+    Web browser) which consumes HTML content.</dd>
   </dl>
 </div>
     <div id="documents" class="section">
@@ -892,9 +904,16 @@
   <div id="conformant-documents" class="section">
     <h2>3.3. Conformant documents <a class="hash" href="#conformant-documents">#</a> <a class="toc-bak" href="#conformant-documents-toc">T</a>
 </h2>
+    <p>There are two types of conformant documents:</p>
+    <ul>
+<li><a href="#syntax-document-html" id="syntax-document-html_xref3">conformant documents in the HTML syntax</a></li>
+      <li><a href="#syntax-document-xml" id="syntax-document-xml_xref4">conformant documents in the XML syntax</a></li>
+    </ul>
+<div class="no-toc section" id="conformant-html">
+    <h2>3.3.1. Conformant documents in the HTML syntax <a class="hash" href="#conformant-html">#</a>
+</h2>
     <p>A conformant
-    <dfn id="syntax-document-html" title="syntax-document-html">document in the HTML
-      syntax</dfn>
+    <dfn id="syntax-document-html">document in the HTML syntax</dfn>
     <a href="#must-requirement" id="must-requirement_xref3">must</a>
     consist of the following parts, in the
     following order:</p>
@@ -912,17 +931,121 @@
       <a href="#html" class="element">html</a> element,
       with its
       <a href="#attribute" id="attribute_xref1">attributes</a>
-      and
-      <a href="#contents" id="contents_xref1">contents</a>.</li>
+      (if any) and its
+      <a href="#contents" id="contents_xref1">contents</a>
+      (if any).
+        <p class="note">The
+        <a href="#syntax-start-tags" id="syntax-start-tags_xref1">start tag</a>
+        and
+        <a href="#syntax-end-tags" id="syntax-end-tags_xref1">end tag</a>
+        of the
+        <a href="#html" class="element">html</a>
+        element
+        <a href="#omitted" id="omitted_xref1">can be omitted</a>&#8212;as
+        well as, possibly, the start tags and end tags of certain
+        descendants of the
+        <a href="#html" class="element">html</a>
+        element&#8212;in which case the start tag and end tag are considered to
+        be
+        <a href="#syntax-implied-tags">implied</a>.</p>
+      </li>
       <li>Any number of
       <a href="#syntax-comments" id="syntax-comments_xref3">comments</a> and
       <a href="#space" id="space_xref3">space characters</a>.</li>
     </ol>
-<p><a href="#syntax-document-html" id="syntax-document-html_xref3">Documents in the HTML syntax</a>
+<p><a href="#syntax-document-html" id="syntax-document-html_xref4">Documents in the HTML syntax</a>
     <a href="#must-requirement" id="must-requirement_xref4">must</a>
     match the syntax described in the
-    <a href="#html-syntax" id="html-syntax_xref3">HTML syntax</a>
+    <a href="#syntax">HTML syntax</a>
     section of this reference.</p>
+    <div class="no-toc section" id="syntax-implied-tags">
+     <h2>3.3.1.1. Implied start tags and end tags <a class="hash" href="#syntax-implied-tags">#</a>
+</h2>
+      <p>In
+        <a href="#syntax-document-html" id="syntax-document-html_xref5">documents in the HTML syntax</a>,
+        the 
+        <a href="#syntax-start-tags" id="syntax-start-tags_xref2">start tags</a>
+        and
+        <a href="#syntax-end-tags" id="syntax-end-tags_xref2">end tags</a>
+        of the
+        <a href="#html" class="element">html</a>
+        element and particular descendants of the
+        <a href="#html" class="element">html</a>
+        element
+        <a href="#omitted" id="omitted_xref2">can be omitted</a>.
+        In cases where such tag omission occurs, certain elements (such as
+        the
+        <a href="#html" class="element">html</a>
+        element) are nevertheless still considered, conceptually, to be
+        contained within the document&#8212;but with their start tags and end
+        tags <em>implied</em>.</p>
+      <div class="example">
+        <p>The following is an example of a document with implied start tags
+        and end tags for the
+        <a href="#html" class="element">html</a>,
+        <a href="#html" class="element">head</a>,
+        and
+        <a href="#html" class="element">body</a>
+        elements. Note that it is nevertheless a complete, valid document.</p>
+        <pre>&lt;!DOCTYPE html&gt;
+&lt;title&gt;A relatively minimal HTML document&lt;/title&gt;
+&lt;p&gt;Hello World!&lt;/p&gt;</pre>
+
+        <p>The
+        <a href="#dom-tree" id="dom-tree_xref1">DOM tree</a>
+        constructed from that example by a conformant
+        <a href="#UA" id="UA_xref2">UA</a>
+        would look like this:</p>
+        <ul id="dom">
+<li class="t10">DOCTYPE: <code>html</code>
+</li>
+          <li class="t1">
+            <code>HTML</code>
+            <ul>
+<li class="t1">
+                <code>HEAD</code>
+                <ul>
+<li class="t1">
+                    <code>TITLE</code>
+                    <ul>
+<li class="t3">
+<code>#text</code>: <span>A relatively minimal HTML document</span>
+</li>
+                    </ul>
+</li>
+                  <li class="t3">
+<code>#text</code>: <span>&#8617; </span>
+</li>
+                </ul>
+</li>
+              <li class="t1">
+                <code>BODY</code>
+                <ul>
+<li class="t1">
+                    <code>P</code>
+                    <ul>
+<li class="t3">
+<code>#text</code>: <span>Hello World!</span>
+</li>
+                    </ul>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+        </ul>
+<p>Note that the DOM tree includes the 
+        <a href="#html" class="element">html</a>,
+        <a href="#html" class="element">head</a>,
+        and
+        <a href="#html" class="element">body</a>
+        elements whose start tags and end tags are implied in the document.</p>
+      </div>
+    </div>
+    </div>
+    <div class="no-toc section" id="conformant-xml">
+    <h2>3.3.2. Conformant documents in the XML syntax <a class="hash" href="#conformant-xml">#</a>
+</h2>
     <p>A conformant
     <dfn id="syntax-document-xml" title="syntax-document-xml">document in the XML syntax</dfn>
     <a href="#must-requirement" id="must-requirement_xref5">must</a>
@@ -940,7 +1063,7 @@
     <a href="#must-requirement" id="must-requirement_xref7">must</a>
     not make use of any features
     of the
-    <a href="#html-syntax" id="html-syntax_xref4">HTML syntax</a>
+    <a href="#html-syntax" id="html-syntax_xref3">HTML syntax</a>
     that do not follow XML well-formedness constraints (for
     example, documents in the XML syntax
     <a href="#must-requirement" id="must-requirement_xref8">must</a>
@@ -949,13 +1072,14 @@
     and
     <a href="#must-requirement" id="must-requirement_xref9">must</a>
     not
-    <a href="#omitted" id="omitted_xref1">omit tags</a>).</p>
+    <a href="#omitted" id="omitted_xref3">omit tags</a>).</p>
+  </div>
   </div>
   <div id="case-insensitivity" class="section">
     <h2>3.4. Case insensitivity in tag names and attribute names <a class="hash" href="#case-insensitivity">#</a> <a class="toc-bak" href="#case-insensitivity-toc">T</a>
 </h2>
     <p>In
-    <a href="#syntax-document-html" id="syntax-document-html_xref4">documents in the HTML syntax</a>:</p>
+    <a href="#syntax-document-html" id="syntax-document-html_xref6">documents in the HTML syntax</a>:</p>
     <ul>
 <li>
 <a href="#tag-name" id="tag-name_xref1">Tag names</a>
@@ -981,7 +1105,7 @@
       case-insensitive.</li>
     </ul>
 <p>In
-    <a href="#syntax-document-xml" id="syntax-document-xml_xref4">documents in the XML syntax</a>:</p>
+    <a href="#syntax-document-xml" id="syntax-document-xml_xref5">documents in the XML syntax</a>:</p>
     <ul>
 <li>
 <a href="#tag-name" id="tag-name_xref2">Tag names</a>
@@ -1008,9 +1132,9 @@
   <h2>4. HTML syntax <a class="hash" href="#syntax">#</a> <a class="toc-bak" href="#syntax-toc">T</a>
 </h2>
   <p>This section describes
-  <a href="#html-syntax" id="html-syntax_xref5">the HTML syntax</a>
+  <a href="#html-syntax" id="html-syntax_xref4">the HTML syntax</a>
   in detail. In places, it also notes differences between the
-  <a href="#html-syntax" id="html-syntax_xref6">the HTML syntax</a>
+  <a href="#html-syntax" id="html-syntax_xref5">the HTML syntax</a>
   and
   <a href="#xml-syntax" id="xml-syntax_xref3">the XML syntax</a>,
   but it does not describe the XML syntax in detail (the XML
@@ -1050,7 +1174,7 @@
     (sometimes capitalized as &#8220;DOCTYPE&#8221;) is an special instruction
     which, for legacy reasons that have to do with processing
     modes in browsers, is a required part of any
-    <a href="#syntax-document-html" id="syntax-document-html_xref5">document in the HTML syntax</a>;
+    <a href="#syntax-document-html" id="syntax-document-html_xref7">document in the HTML syntax</a>;
     it
     <a href="#must-requirement" id="must-requirement_xref12">must</a>
     match the characteristics of one of the following three formats:</p>
@@ -1304,7 +1428,7 @@
     or SCSU
     encodings.</p>
     <p>In a
-    <a href="#syntax-document-xml" id="syntax-document-xml_xref5">document in the XML syntax</a>,
+    <a href="#syntax-document-xml" id="syntax-document-xml_xref6">document in the XML syntax</a>,
     the
     <dfn id="xml-declaration" title="xml-declaration">XML declaration</dfn>,
     as defined in the XML specification
@@ -1344,7 +1468,7 @@
     <dfn id="text-content" title="text-content">text content</dfn>
     of an element is as defined in
     <cite>Document Object Model (DOM) Level 3 Core</cite>
-    <a href="#refsDOMCore" id="refsDOMCore_xref1">[DOM Core]</a>.</p>
+    <a href="#refsDOMCore" id="refsDOMCore_xref2">[DOM Core]</a>.</p>
     <p>A
     <dfn id="void-element" title="void-element">void element</dfn>
     is an element whose
@@ -1376,7 +1500,7 @@
     </ul>
 <p id="elements-html-syntax">The following list describes syntax
       rules for the
-      <a href="#html-syntax" id="html-syntax_xref7">the HTML syntax</a>.
+      <a href="#html-syntax" id="html-syntax_xref6">the HTML syntax</a>.
       Rules for the
       <a href="#xml-syntax" id="xml-syntax_xref4">the XML syntax</a>
       are defined in the XML specification
@@ -1386,9 +1510,9 @@
 <dfn id="tags" title="syntax-tags">tags</dfn> are used to
       delimit the start and end of elements in markup. Elements
       have a
-      <a href="#syntax-start-tags" id="syntax-start-tags_xref1">start tag</a>
+      <a href="#syntax-start-tags" id="syntax-start-tags_xref3">start tag</a>
       to indicate where they begin. Non-<a href="#void-element" id="void-element_xref1">void</a> elements have an
-      <a href="#syntax-end-tags" id="syntax-end-tags_xref1">end tag</a>
+      <a href="#syntax-end-tags" id="syntax-end-tags_xref3">end tag</a>
       to
       indicate where they end.</li>
       <li>
@@ -1462,14 +1586,14 @@
       <a href="#must-requirement" id="must-requirement_xref25">must</a>
       have
       an end tag, unless the subsection for that element in the <a href="#elements">HTML elements</a> section of this
-      reference indicates that its end tag can be <a href="#omitted" id="omitted_xref2">omitted</a>.</li>
+      reference indicates that its end tag can be <a href="#omitted" id="omitted_xref4">omitted</a>.</li>
       <li>The <a href="#contents" id="contents_xref5">contents</a> of an element
       <a href="#must-requirement" id="must-requirement_xref26">must</a>
       be
       placed between just after its start tag (which
-      <a href="#omitted" title="syntax-tag-omission" id="omitted_xref3">might be
+      <a href="#omitted" title="syntax-tag-omission" id="omitted_xref5">might be
         implied, in certain cases</a>) and just before its end tag
-      (which <a href="#omitted" title="syntax-tag-omission" id="omitted_xref4">might be
+      (which <a href="#omitted" title="syntax-tag-omission" id="omitted_xref6">might be
         implied in certain cases</a>).</li>
     </ul>
 <div id="misnesting" class="no-toc section">
@@ -1478,26 +1602,26 @@
       <p>If an
       <a href="#syntax-elements">element</a>
       has both a
-      <a href="#syntax-start-tags" id="syntax-start-tags_xref2">start tag</a>
+      <a href="#syntax-start-tags" id="syntax-start-tags_xref4">start tag</a>
       and an
-      <a href="#syntax-end-tags" id="syntax-end-tags_xref2">end tag</a>,
+      <a href="#syntax-end-tags" id="syntax-end-tags_xref4">end tag</a>,
       its end tag
       <a href="#must-requirement" id="must-requirement_xref27">must</a>
       be contained within the
       <a href="#contents" id="contents_xref6">contents</a>
       of the same element in which its start tag is contained.
       An
-      <a href="#syntax-end-tags" id="syntax-end-tags_xref3">end tag</a>
+      <a href="#syntax-end-tags" id="syntax-end-tags_xref5">end tag</a>
       that is not contained within the same 
       <a href="#contents" id="contents_xref7">contents</a>
       as its
-      <a href="#syntax-start-tags" id="syntax-start-tags_xref3">start tag</a>
+      <a href="#syntax-start-tags" id="syntax-start-tags_xref5">start tag</a>
       is said to be a
       <dfn id="misnested-tag" title="misnested-tag">misnested tag</dfn>.</p>
       <div class="example">
         <p>In the following example, the
         "<code>&lt;/i&gt;</code>"
-        <a href="#syntax-end-tags" id="syntax-end-tags_xref4">end tag</a>
+        <a href="#syntax-end-tags" id="syntax-end-tags_xref6">end tag</a>
         is a
         <a href="#misnested-tag" id="misnested-tag_xref1">misnested tag</a>,
         because it is not contained
@@ -1530,9 +1654,9 @@
       for each other.</p>
       <p id="attributes-basic-syntax">The following list describes syntax
         rules for attributes in 
-        <a href="#syntax-document-html" id="syntax-document-html_xref6">documents in the HTML syntax</a>.
+        <a href="#syntax-document-html" id="syntax-document-html_xref8">documents in the HTML syntax</a>.
         Syntax rules for attributes in
-        <a href="#syntax-document-xml" id="syntax-document-xml_xref6">documents in the XML syntax</a>.
+        <a href="#syntax-document-xml" id="syntax-document-xml_xref7">documents in the XML syntax</a>.
         are defined in
         the XML specification <a href="#refsXML" id="refsXML_xref5">[XML]</a>.
       </p>
@@ -1570,7 +1694,7 @@
       <a href="#must-requirement" id="must-requirement_xref30">must</a>
       have values that conform to those restrictions.</li>
     </ul>
-<p>In the <a href="#html-syntax" id="html-syntax_xref8">the HTML syntax</a>,
+<p>In the <a href="#html-syntax" id="html-syntax_xref7">the HTML syntax</a>,
     attributes can be specified in four different ways:</p>
     <ol>
 <li><a href="#syntax-attr-empty" id="syntax-attr-empty_xref1">empty attribute syntax</a></li>
@@ -1811,7 +1935,7 @@
       <dt><dfn id="replaceable-character-data" title="replaceable-character-data">replaceable character data</dfn></dt>
       <dd>
         <p>In
-        <a href="#syntax-document-html" id="syntax-document-html_xref7">documents in the HTML syntax</a>,
+        <a href="#syntax-document-html" id="syntax-document-html_xref9">documents in the HTML syntax</a>,
         the
         <a href="#title" class="element">title</a>
         and 
@@ -1854,10 +1978,10 @@
         </ul>
 <p class="note">Replaceable character data,
         as described in this reference, is a feature of
-        <a href="#html-syntax" id="html-syntax_xref9">the HTML syntax</a>
+        <a href="#html-syntax" id="html-syntax_xref8">the HTML syntax</a>
         that is not available in
         <a href="#xml-syntax" id="xml-syntax_xref5">the XML syntax</a>.
-        <a href="#syntax-document-xml" id="syntax-document-xml_xref7">Documents in the XML
+        <a href="#syntax-document-xml" id="syntax-document-xml_xref8">Documents in the XML
           syntax</a>
         <a href="#must-requirement" id="must-requirement_xref44">must</a>
         not contain replaceable character data
@@ -1869,7 +1993,7 @@
       <dt><dfn id="non-replaceable-character-data" title="non-replaceable-character-data">non-replaceable character data</dfn></dt>
       <dd>
         <p>In
-        <a href="#syntax-document-html" id="syntax-document-html_xref8">documents in the HTML syntax</a>,
+        <a href="#syntax-document-html" id="syntax-document-html_xref10">documents in the HTML syntax</a>,
         the
         <a href="#script" class="element">script</a>,
         and
@@ -1913,10 +2037,10 @@
         </ul>
 <p class="note">Non-replaceable character data,
         as described in this reference, is a feature of
-        <a href="#html-syntax" id="html-syntax_xref10">the HTML syntax</a>
+        <a href="#html-syntax" id="html-syntax_xref9">the HTML syntax</a>
         that is not available in
         <a href="#xml-syntax" id="xml-syntax_xref6">the XML syntax</a>.
-        <a href="#syntax-document-xml" id="syntax-document-xml_xref8">Documents in the XML
+        <a href="#syntax-document-xml" id="syntax-document-xml_xref9">Documents in the XML
           syntax</a>
         <a href="#must-requirement" id="must-requirement_xref48">must</a>
         not contain non-replaceable character
@@ -2104,16 +2228,16 @@
    <dfn id="svg-mathml-elements" title="svg-mathml-elements">SVG and MathML elements</dfn>
    are elements from the SVG and MathML namespaces.
    SVG and MathML elements can be used both in
-   <a href="#syntax-document-html" id="syntax-document-html_xref9">documents in the HTML syntax</a>
+   <a href="#syntax-document-html" id="syntax-document-html_xref11">documents in the HTML syntax</a>
    and in 
-   <a href="#syntax-document-xml" id="syntax-document-xml_xref9">documents in the XML syntax</a>.
+   <a href="#syntax-document-xml" id="syntax-document-xml_xref10">documents in the XML syntax</a>.
    Syntax rules for SVG and MathML elements in
-   <a href="#syntax-document-xml" id="syntax-document-xml_xref10">documents in the XML syntax</a>
+   <a href="#syntax-document-xml" id="syntax-document-xml_xref11">documents in the XML syntax</a>
    are defined in the XML specification
    <a href="#refsXML" id="refsXML_xref9">[XML]</a>.
    The following list describes additional syntax rules
    that specifically apply to SVG and MathML elements in
-   <a href="#syntax-document-html" id="syntax-document-html_xref10">documents in the HTML syntax</a>.
+   <a href="#syntax-document-html" id="syntax-document-html_xref12">documents in the HTML syntax</a>.
    </p>
    <ul>
 <li>SVG and MathML elements whose start tags
@@ -2126,9 +2250,9 @@
      <li>SVG and MathML elements
      <a href="#must-requirement" id="must-requirement_xref54">must</a>
      either have a
-     <a href="#syntax-start-tags" id="syntax-start-tags_xref4">start tag</a>
+     <a href="#syntax-start-tags" id="syntax-start-tags_xref6">start tag</a>
      and an
-     <a href="#syntax-end-tags" id="syntax-end-tags_xref5">end tag</a>,
+     <a href="#syntax-end-tags" id="syntax-end-tags_xref7">end tag</a>,
      or a start tag that is
      <a href="#syntax-self-closing" id="syntax-self-closing_xref1">marked as self-closing</a>,
      in which case they
@@ -2160,7 +2284,7 @@
    <p>
    <dfn id="syntax-cdata-sections" title="syntax-cdata-sections">CDATA sections in SVG and MathML contents</dfn>
    in 
-   <a href="#syntax-document-html" id="syntax-document-html_xref11">documents in the HTML syntax</a>
+   <a href="#syntax-document-html" id="syntax-document-html_xref13">documents in the HTML syntax</a>
    consist of the following parts, in exactly the following
    order:</p>
    <ol>
@@ -18838,7 +18962,7 @@ interface <b>HTMLImageElement</b> : <a href="http://dev.w3.org/html5/spec/elemen
           <li>One of the following:
             <ul>
 <li>For documents in the
-                <a href="#html-syntax" id="html-syntax_xref11">HTML syntax</a>:
+                <a href="#html-syntax" id="html-syntax_xref10">HTML syntax</a>:
                 A
                 <a href="#common.data.charset" id="common.data.charset_xref3">character encoding name</a>.</li>
               <li>For documents in the
@@ -19275,7 +19399,7 @@ interface <b>HTMLImageElement</b> : <a href="http://dev.w3.org/html5/spec/elemen
 <li>The
     <span class="element">noscript</span>
     element must not be used in a
-    <a href="#syntax-document-xml" id="syntax-document-xml_xref11">document in the XML syntax</a>.</li>
+    <a href="#syntax-document-xml" id="syntax-document-xml_xref12">document in the XML syntax</a>.</li>
   
           <li><span>
 				The <span class="element">noscript</span> element must not contain any nested 
@@ -25247,11 +25371,11 @@ interface <b>HTMLOptionElement</b> : <a href="http://dev.w3.org/html5/spec/eleme
         <a href="#refsXML" id="refsXML_xref11">[XML]</a>.</dd>
 <dd>The <code class="attribute">xml:space</code>
         attribute should only be used with 
-        <a href="#syntax-document-xml" id="syntax-document-xml_xref12">documents in the XML syntax</a>;
+        <a href="#syntax-document-xml" id="syntax-document-xml_xref13">documents in the XML syntax</a>;
         it
         <a href="#must-requirement" id="must-requirement_xref89">must</a>
         not be used in 
-        <a href="#syntax-document-html" id="syntax-document-html_xref12">documents in the HTML syntax</a>.</dd>
+        <a href="#syntax-document-html" id="syntax-document-html_xref14">documents in the HTML syntax</a>.</dd>
           
             <dt id="common.attrs.xmlbase" title="common.attrs.xmlbase">
 <a class="spec-link" title="Read about this attribute in the HTML5 spec" href="http://dev.w3.org/html5/spec-author-view/elements.html#the-xml:base-attribute-xml-only">&#9432;</a>
@@ -25264,11 +25388,11 @@ interface <b>HTMLOptionElement</b> : <a href="http://dev.w3.org/html5/spec/eleme
         <a href="#refsXMLBase" id="refsXMLBase_xref1">[XMLBase]</a>.</dd>
 <dd>The <code class="attribute">xml:base</code>
         attribute should only be used with
-        <a href="#syntax-document-xml" id="syntax-document-xml_xref13">documents in the XML syntax</a>;
+        <a href="#syntax-document-xml" id="syntax-document-xml_xref14">documents in the XML syntax</a>;
         it
         <a href="#must-requirement" id="must-requirement_xref90">must</a>
         not be used in 
-        <a href="#syntax-document-html" id="syntax-document-html_xref13">documents in the HTML syntax</a>.</dd>
+        <a href="#syntax-document-html" id="syntax-document-html_xref15">documents in the HTML syntax</a>.</dd>
           
         </dl>
 </div>
@@ -25825,7 +25949,7 @@ interface <b>HTMLOptionElement</b> : <a href="http://dev.w3.org/html5/spec/eleme
           <li>One of the following:
             <ul>
 <li>For documents in the
-                <a href="#html-syntax" id="html-syntax_xref12">HTML syntax</a>:
+                <a href="#html-syntax" id="html-syntax_xref11">HTML syntax</a>:
                 A
                 <a href="#common.data.charset" id="common.data.charset_xref6">character encoding name</a>.</li>
               <li>For documents in the
@@ -26331,7 +26455,10 @@ interface <b>HTMLOptionElement</b> : <a href="http://dev.w3.org/html5/spec/eleme
       Mike Champion,
       Steve Byrne.
       W3C Recommendation.</dd>
-    <dd><span class="references-note">(see in particular <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Node3-textContent">http://www.w3.org/TR/DOM-Level-3-Core/core.html#Node3-textContent</a>)</span></dd>
+    <dd><span class="references-note">(see in particular
+      <a href="http://www.w3.org/TR/DOM-Level-3-Core/introduction.html">http://www.w3.org/TR/DOM-Level-3-Core/introduction.html</a>
+      and
+      <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Node3-textContent">http://www.w3.org/TR/DOM-Level-3-Core/core.html#Node3-textContent</a>)</span></dd>
     <dt><dfn id="refsECMA262">ECMA 262</dfn></dt>
     <dd>
 <cite><a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMAScript Language Specification</a></cite>.
@@ -26539,7 +26666,7 @@ Boston, MA 02110-1301, USA.
 </li>
 </ul>
 <ul id="attribute_index_items">
-<li><a href="#attribute_xref1"><cite class="index">Conformant documents</cite> section</a></li>
+<li><a href="#attribute_xref1"><cite class="index">Conformant documents in the HTML syntax</cite> section</a></li>
 <li><a href="#attribute_xref2"><cite class="index">Elements</cite> section</a></li>
 </ul>
 </div>
@@ -26823,7 +26950,7 @@ Boston, MA 02110-1301, USA.
 </ul>
 <ul id="syntax-comments_index_items">
 <li>
-<a href="#syntax-comments_xref1"><cite class="index">Conformant documents</cite> section</a><span class="index-counter"> [<a href="#syntax-comments_xref2">2</a>]</span><span class="index-counter"> [<a href="#syntax-comments_xref3">3</a>]</span>
+<a href="#syntax-comments_xref1"><cite class="index">Conformant documents in the HTML syntax</cite> section</a><span class="index-counter"> [<a href="#syntax-comments_xref2">2</a>]</span><span class="index-counter"> [<a href="#syntax-comments_xref3">3</a>]</span>
 </li>
 <li><a href="#syntax-comments_xref4"><cite class="index">Elements</cite> section</a></li>
 <li><a href="#syntax-comments_xref5"><cite class="index">Text and character data</cite> section</a></li>
@@ -26849,7 +26976,7 @@ Boston, MA 02110-1301, USA.
 </li>
 </ul>
 <ul id="contents_index_items">
-<li><a href="#contents_xref1"><cite class="index">Conformant documents</cite> section</a></li>
+<li><a href="#contents_xref1"><cite class="index">Conformant documents in the HTML syntax</cite> section</a></li>
 <li>
 <a href="#contents_xref2"><cite class="index">Elements</cite> section</a><span class="index-counter"> [<a href="#contents_xref3">2</a>]</span><span class="index-counter"> [<a href="#contents_xref4">3</a>]</span><span class="index-counter"> [<a href="#contents_xref5">4</a>]</span>
 </li>
@@ -27030,7 +27157,7 @@ Boston, MA 02110-1301, USA.
 </li>
 </ul>
 <ul id="doctype_index_items">
-<li><a href="#doctype_xref1"><cite class="index">Conformant documents</cite> section</a></li>
+<li><a href="#doctype_xref1"><cite class="index">Conformant documents in the HTML syntax</cite> section</a></li>
 </ul>
 </div>
 <div class="index-entry" id="document_index">
@@ -27048,7 +27175,7 @@ Boston, MA 02110-1301, USA.
 <p class="index-term">document in the HTML syntax</p>
 <ul>
 <li>
-<a href="#syntax-document-html"><cite class="index">Conformant documents</cite> section</a> <span class="index-notation">(defining instance)</span>
+<a href="#syntax-document-html"><cite class="index">Conformant documents in the HTML syntax</cite> section</a> <span class="index-notation">(defining instance)</span>
 </li>
 </ul>
 <ul id="syntax-document-html_index_items">
@@ -27056,24 +27183,26 @@ Boston, MA 02110-1301, USA.
 <a href="#syntax-document-html_xref1"><cite class="index">The HTML namespace and MIME types</cite> section</a><span class="index-counter"> [<a href="#syntax-document-html_xref2">2</a>]</span>
 </li>
 <li><a href="#syntax-document-html_xref3"><cite class="index">Conformant documents</cite> section</a></li>
-<li><a href="#syntax-document-html_xref4"><cite class="index">Case insensitivity in tag names and attribute names</cite> section</a></li>
-<li><a href="#syntax-document-html_xref5"><cite class="index">The doctype</cite> section</a></li>
-<li><a href="#syntax-document-html_xref6"><cite class="index">Attributes</cite> section</a></li>
-<li><a href="#syntax-document-html_xref7"><cite class="index">Text and character data</cite> section: <cite class="index-dfn">replaceable character data</cite></a></li>
-<li><a href="#syntax-document-html_xref8"><cite class="index">Text and character data</cite> section: <cite class="index-dfn">non-replaceable character data</cite></a></li>
+<li><a href="#syntax-document-html_xref4"><cite class="index">Conformant documents in the HTML syntax</cite> section</a></li>
+<li><a href="#syntax-document-html_xref5"><cite class="index">Implied start tags and end tags</cite> section</a></li>
+<li><a href="#syntax-document-html_xref6"><cite class="index">Case insensitivity in tag names and attribute names</cite> section</a></li>
+<li><a href="#syntax-document-html_xref7"><cite class="index">The doctype</cite> section</a></li>
+<li><a href="#syntax-document-html_xref8"><cite class="index">Attributes</cite> section</a></li>
+<li><a href="#syntax-document-html_xref9"><cite class="index">Text and character data</cite> section: <cite class="index-dfn">replaceable character data</cite></a></li>
+<li><a href="#syntax-document-html_xref10"><cite class="index">Text and character data</cite> section: <cite class="index-dfn">non-replaceable character data</cite></a></li>
 <li>
-<a href="#syntax-document-html_xref9"><cite class="index">SVG and MathML elements in HTML documents</cite> section</a><span class="index-counter"> [<a href="#syntax-document-html_xref10">2</a>]</span>
+<a href="#syntax-document-html_xref11"><cite class="index">SVG and MathML elements in HTML documents</cite> section</a><span class="index-counter"> [<a href="#syntax-document-html_xref12">2</a>]</span>
 </li>
-<li><a href="#syntax-document-html_xref11"><cite class="index">CDATA sections in SVG and MathML contents</cite> section</a></li>
-<li><a href="#syntax-document-html_xref12"><cite class="index">XML attributes</cite> section: <span class="attribute-name">xml:space</span> attribute</a></li>
-<li><a href="#syntax-document-html_xref13"><cite class="index">XML attributes</cite> section: <span class="attribute-name">xml:base</span> attribute</a></li>
+<li><a href="#syntax-document-html_xref13"><cite class="index">CDATA sections in SVG and MathML contents</cite> section</a></li>
+<li><a href="#syntax-document-html_xref14"><cite class="index">XML attributes</cite> section: <span class="attribute-name">xml:space</span> attribute</a></li>
+<li><a href="#syntax-document-html_xref15"><cite class="index">XML attributes</cite> section: <span class="attribute-name">xml:base</span> attribute</a></li>
 </ul>
 </div>
 <div class="index-entry" id="syntax-document-xml_index">
 <p class="index-term">document in the XML syntax</p>
 <ul>
 <li>
-<a href="#syntax-document-xml"><cite class="index">Conformant documents</cite> section</a> <span class="index-notation">(defining instance)</span>
+<a href="#syntax-document-xml"><cite class="index">Conformant documents in the XML syntax</cite> section</a> <span class="index-notation">(defining instance)</span>
 </li>
 </ul>
 <ul id="syntax-document-xml_index_items">
@@ -27081,17 +27210,18 @@ Boston, MA 02110-1301, USA.
 <li>
 <a href="#syntax-document-xml_xref2"><cite class="index">The HTML namespace and MIME types</cite> section</a><span class="index-counter"> [<a href="#syntax-document-xml_xref3">2</a>]</span>
 </li>
-<li><a href="#syntax-document-xml_xref4"><cite class="index">Case insensitivity in tag names and attribute names</cite> section</a></li>
-<li><a href="#syntax-document-xml_xref5"><cite class="index">Character encoding declaration</cite> section</a></li>
-<li><a href="#syntax-document-xml_xref6"><cite class="index">Attributes</cite> section</a></li>
-<li><a href="#syntax-document-xml_xref7"><cite class="index">Text and character data</cite> section: <cite class="index-dfn">replaceable character data</cite></a></li>
-<li><a href="#syntax-document-xml_xref8"><cite class="index">Text and character data</cite> section: <cite class="index-dfn">non-replaceable character data</cite></a></li>
+<li><a href="#syntax-document-xml_xref4"><cite class="index">Conformant documents</cite> section</a></li>
+<li><a href="#syntax-document-xml_xref5"><cite class="index">Case insensitivity in tag names and attribute names</cite> section</a></li>
+<li><a href="#syntax-document-xml_xref6"><cite class="index">Character encoding declaration</cite> section</a></li>
+<li><a href="#syntax-document-xml_xref7"><cite class="index">Attributes</cite> section</a></li>
+<li><a href="#syntax-document-xml_xref8"><cite class="index">Text and character data</cite> section: <cite class="index-dfn">replaceable character data</cite></a></li>
+<li><a href="#syntax-document-xml_xref9"><cite class="index">Text and character data</cite> section: <cite class="index-dfn">non-replaceable character data</cite></a></li>
 <li>
-<a href="#syntax-document-xml_xref9"><cite class="index">SVG and MathML elements in HTML documents</cite> section</a><span class="index-counter"> [<a href="#syntax-document-xml_xref10">2</a>]</span>
+<a href="#syntax-document-xml_xref10"><cite class="index">SVG and MathML elements in HTML documents</cite> section</a><span class="index-counter"> [<a href="#syntax-document-xml_xref11">2</a>]</span>
 </li>
-<li><a href="#syntax-document-xml_xref11"><span class="element">noscript</span> element: <cite class="index">Additional constraints and admonitions</cite></a></li>
-<li><a href="#syntax-document-xml_xref12"><cite class="index">XML attributes</cite> section: <span class="attribute-name">xml:space</span> attribute</a></li>
-<li><a href="#syntax-document-xml_xref13"><cite class="index">XML attributes</cite> section: <span class="attribute-name">xml:base</span> attribute</a></li>
+<li><a href="#syntax-document-xml_xref12"><span class="element">noscript</span> element: <cite class="index">Additional constraints and admonitions</cite></a></li>
+<li><a href="#syntax-document-xml_xref13"><cite class="index">XML attributes</cite> section: <span class="attribute-name">xml:space</span> attribute</a></li>
+<li><a href="#syntax-document-xml_xref14"><cite class="index">XML attributes</cite> section: <span class="attribute-name">xml:base</span> attribute</a></li>
 </ul>
 </div>
 <div class="index-entry" id="refsDOMCore_index">
@@ -27102,7 +27232,19 @@ Boston, MA 02110-1301, USA.
 </li>
 </ul>
 <ul id="refsDOMCore_index_items">
-<li><a href="#refsDOMCore_xref1"><cite class="index">Elements</cite> section</a></li>
+<li><a href="#refsDOMCore_xref1"><cite class="index">Terminology</cite> section: <cite class="index-dfn">DOM tree</cite></a></li>
+<li><a href="#refsDOMCore_xref2"><cite class="index">Elements</cite> section</a></li>
+</ul>
+</div>
+<div class="index-entry" id="dom-tree_index">
+<p class="index-term">DOM tree</p>
+<ul>
+<li>
+<a href="#dom-tree"><cite class="index">Terminology</cite> section: <cite class="index-dfn">DOM tree</cite></a> <span class="index-notation">(defining instance)</span>
+</li>
+</ul>
+<ul id="dom-tree_index_items">
+<li><a href="#dom-tree_xref1"><cite class="index">Implied start tags and end tags</cite> section</a></li>
 </ul>
 </div>
 <div class="index-entry" id="attr-value-double-quoted_index">
@@ -27327,11 +27469,13 @@ Boston, MA 02110-1301, USA.
 </li>
 </ul>
 <ul id="syntax-end-tags_index_items">
-<li><a href="#syntax-end-tags_xref1"><cite class="index">Elements</cite> section</a></li>
+<li><a href="#syntax-end-tags_xref1"><cite class="index">Conformant documents in the HTML syntax</cite> section</a></li>
+<li><a href="#syntax-end-tags_xref2"><cite class="index">Implied start tags and end tags</cite> section</a></li>
+<li><a href="#syntax-end-tags_xref3"><cite class="index">Elements</cite> section</a></li>
 <li>
-<a href="#syntax-end-tags_xref2"><cite class="index">Misnested tags</cite> section</a><span class="index-counter"> [<a href="#syntax-end-tags_xref3">2</a>]</span><span class="index-counter"> [<a href="#syntax-end-tags_xref4">3</a>]</span>
+<a href="#syntax-end-tags_xref4"><cite class="index">Misnested tags</cite> section</a><span class="index-counter"> [<a href="#syntax-end-tags_xref5">2</a>]</span><span class="index-counter"> [<a href="#syntax-end-tags_xref6">3</a>]</span>
 </li>
-<li><a href="#syntax-end-tags_xref5"><cite class="index">SVG and MathML elements in HTML documents</cite> section</a></li>
+<li><a href="#syntax-end-tags_xref7"><cite class="index">SVG and MathML elements in HTML documents</cite> section</a></li>
 </ul>
 </div>
 <div class="index-entry" id="fallback_index">
@@ -27529,18 +27673,16 @@ Boston, MA 02110-1301, USA.
 <li>
 <a href="#html-syntax_xref1"><cite class="index">The HTML language and HTML and XML syntaxes</cite> section</a><span class="index-counter"> [<a href="#html-syntax_xref2">2</a>]</span>
 </li>
+<li><a href="#html-syntax_xref3"><cite class="index">Conformant documents in the XML syntax</cite> section</a></li>
 <li>
-<a href="#html-syntax_xref3"><cite class="index">Conformant documents</cite> section</a><span class="index-counter"> [<a href="#html-syntax_xref4">2</a>]</span>
+<a href="#html-syntax_xref4"><cite class="index">HTML syntax</cite> section</a><span class="index-counter"> [<a href="#html-syntax_xref5">2</a>]</span>
 </li>
-<li>
-<a href="#html-syntax_xref5"><cite class="index">HTML syntax</cite> section</a><span class="index-counter"> [<a href="#html-syntax_xref6">2</a>]</span>
-</li>
-<li><a href="#html-syntax_xref7"><cite class="index">Elements</cite> section</a></li>
-<li><a href="#html-syntax_xref8"><cite class="index">Attributes</cite> section</a></li>
-<li><a href="#html-syntax_xref9"><cite class="index">Text and character data</cite> section: <cite class="index-dfn">replaceable character data</cite></a></li>
-<li><a href="#html-syntax_xref10"><cite class="index">Text and character data</cite> section: <cite class="index-dfn">non-replaceable character data</cite></a></li>
-<li><a href="#html-syntax_xref11"><span class="element">meta</span><span class="elem-qualifier"> <span class="attribute-name">http-equiv</span>=<span class="equals-value">content-type</span></span> element: <span class="attribute-name">content</span> attribute</a></li>
-<li><a href="#html-syntax_xref12"><cite class="index">meta-charset string</cite> data type</a></li>
+<li><a href="#html-syntax_xref6"><cite class="index">Elements</cite> section</a></li>
+<li><a href="#html-syntax_xref7"><cite class="index">Attributes</cite> section</a></li>
+<li><a href="#html-syntax_xref8"><cite class="index">Text and character data</cite> section: <cite class="index-dfn">replaceable character data</cite></a></li>
+<li><a href="#html-syntax_xref9"><cite class="index">Text and character data</cite> section: <cite class="index-dfn">non-replaceable character data</cite></a></li>
+<li><a href="#html-syntax_xref10"><span class="element">meta</span><span class="elem-qualifier"> <span class="attribute-name">http-equiv</span>=<span class="equals-value">content-type</span></span> element: <span class="attribute-name">content</span> attribute</a></li>
+<li><a href="#html-syntax_xref11"><cite class="index">meta-charset string</cite> data type</a></li>
 </ul>
 </div>
 <div class="index-entry" id="refsHTML5_index">
@@ -27912,7 +28054,10 @@ Boston, MA 02110-1301, USA.
 <a href="#must-requirement_xref1"><cite class="index">The HTML namespace and MIME types</cite> section</a><span class="index-counter"> [<a href="#must-requirement_xref2">2</a>]</span>
 </li>
 <li>
-<a href="#must-requirement_xref3"><cite class="index">Conformant documents</cite> section</a><span class="index-counter"> [<a href="#must-requirement_xref4">2</a>]</span><span class="index-counter"> [<a href="#must-requirement_xref5">3</a>]</span><span class="index-counter"> [<a href="#must-requirement_xref6">4</a>]</span><span class="index-counter"> [<a href="#must-requirement_xref7">5</a>]</span><span class="index-counter"> [<a href="#must-requirement_xref8">6</a>]</span><span class="index-counter"> [<a href="#must-requirement_xref9">7</a>]</span>
+<a href="#must-requirement_xref3"><cite class="index">Conformant documents in the HTML syntax</cite> section</a><span class="index-counter"> [<a href="#must-requirement_xref4">2</a>]</span>
+</li>
+<li>
+<a href="#must-requirement_xref5"><cite class="index">Conformant documents in the XML syntax</cite> section</a><span class="index-counter"> [<a href="#must-requirement_xref6">2</a>]</span><span class="index-counter"> [<a href="#must-requirement_xref7">3</a>]</span><span class="index-counter"> [<a href="#must-requirement_xref8">4</a>]</span><span class="index-counter"> [<a href="#must-requirement_xref9">5</a>]</span>
 </li>
 <li>
 <a href="#must-requirement_xref10"><cite class="index">Case insensitivity in tag names and attribute names</cite> section</a><span class="index-counter"> [<a href="#must-requirement_xref11">2</a>]</span>
@@ -28043,7 +28188,7 @@ Boston, MA 02110-1301, USA.
 <p class="index-term">namespace-well-formed</p>
 <ul>
 <li>
-<a href="#namespace-well-formed-xml-document"><cite class="index">Conformant documents</cite> section</a> <span class="index-notation">(defining instance)</span>
+<a href="#namespace-well-formed-xml-document"><cite class="index">Conformant documents in the XML syntax</cite> section</a> <span class="index-notation">(defining instance)</span>
 </li>
 </ul>
 <ul id="namespace-well-formed-xml-document_index_items"><li class="index-no-references">No references in this document.</li></ul>
@@ -28057,7 +28202,7 @@ Boston, MA 02110-1301, USA.
 </ul>
 <ul id="refsNamespacesInXML_index_items">
 <li><a href="#refsNamespacesInXML_xref1"><cite class="index">The HTML language and HTML and XML syntaxes</cite> section</a></li>
-<li><a href="#refsNamespacesInXML_xref2"><cite class="index">Conformant documents</cite> section</a></li>
+<li><a href="#refsNamespacesInXML_xref2"><cite class="index">Conformant documents in the XML syntax</cite> section</a></li>
 <li><a href="#refsNamespacesInXML_xref3"><cite class="index">HTML syntax</cite> section</a></li>
 </ul>
 </div>
@@ -28174,9 +28319,11 @@ Boston, MA 02110-1301, USA.
 </li>
 </ul>
 <ul id="omitted_index_items">
-<li><a href="#omitted_xref1"><cite class="index">Conformant documents</cite> section</a></li>
+<li><a href="#omitted_xref1"><cite class="index">Conformant documents in the HTML syntax</cite> section</a></li>
+<li><a href="#omitted_xref2"><cite class="index">Implied start tags and end tags</cite> section</a></li>
+<li><a href="#omitted_xref3"><cite class="index">Conformant documents in the XML syntax</cite> section</a></li>
 <li>
-<a href="#omitted_xref2"><cite class="index">Elements</cite> section</a><span class="index-counter"> [<a href="#omitted_xref3">2</a>]</span><span class="index-counter"> [<a href="#omitted_xref4">3</a>]</span>
+<a href="#omitted_xref4"><cite class="index">Elements</cite> section</a><span class="index-counter"> [<a href="#omitted_xref5">2</a>]</span><span class="index-counter"> [<a href="#omitted_xref6">3</a>]</span>
 </li>
 </ul>
 </div>
@@ -28511,7 +28658,7 @@ Boston, MA 02110-1301, USA.
 <p class="index-term">root element</p>
 <ul>
 <li>
-<a href="#root-element"><cite class="index">Conformant documents</cite> section</a> <span class="index-notation">(defining instance)</span>
+<a href="#root-element"><cite class="index">Conformant documents in the XML syntax</cite> section</a> <span class="index-notation">(defining instance)</span>
 </li>
 </ul>
 <ul id="root-element_index_items"><li class="index-no-references">No references in this document.</li></ul>
@@ -28613,7 +28760,7 @@ Boston, MA 02110-1301, USA.
 </ul>
 <ul id="space_index_items">
 <li>
-<a href="#space_xref1"><cite class="index">Conformant documents</cite> section</a><span class="index-counter"> [<a href="#space_xref2">2</a>]</span><span class="index-counter"> [<a href="#space_xref3">3</a>]</span>
+<a href="#space_xref1"><cite class="index">Conformant documents in the HTML syntax</cite> section</a><span class="index-counter"> [<a href="#space_xref2">2</a>]</span><span class="index-counter"> [<a href="#space_xref3">3</a>]</span>
 </li>
 <li>
 <a href="#space_xref4"><cite class="index">The doctype</cite> section</a><span class="index-counter"> [<a href="#space_xref5">2</a>]</span><span class="index-counter"> [<a href="#space_xref6">3</a>]</span><span class="index-counter"> [<a href="#space_xref7">4</a>]</span><span class="index-counter"> [<a href="#space_xref8">5</a>]</span><span class="index-counter"> [<a href="#space_xref9">6</a>]</span><span class="index-counter"> [<a href="#space_xref10">7</a>]</span><span class="index-counter"> [<a href="#space_xref11">8</a>]</span><span class="index-counter"> [<a href="#space_xref12">9</a>]</span><span class="index-counter"> [<a href="#space_xref13">10</a>]</span><span class="index-counter"> [<a href="#space_xref14">11</a>]</span>
@@ -28666,11 +28813,13 @@ Boston, MA 02110-1301, USA.
 </li>
 </ul>
 <ul id="syntax-start-tags_index_items">
-<li><a href="#syntax-start-tags_xref1"><cite class="index">Elements</cite> section</a></li>
+<li><a href="#syntax-start-tags_xref1"><cite class="index">Conformant documents in the HTML syntax</cite> section</a></li>
+<li><a href="#syntax-start-tags_xref2"><cite class="index">Implied start tags and end tags</cite> section</a></li>
+<li><a href="#syntax-start-tags_xref3"><cite class="index">Elements</cite> section</a></li>
 <li>
-<a href="#syntax-start-tags_xref2"><cite class="index">Misnested tags</cite> section</a><span class="index-counter"> [<a href="#syntax-start-tags_xref3">2</a>]</span>
+<a href="#syntax-start-tags_xref4"><cite class="index">Misnested tags</cite> section</a><span class="index-counter"> [<a href="#syntax-start-tags_xref5">2</a>]</span>
 </li>
-<li><a href="#syntax-start-tags_xref4"><cite class="index">SVG and MathML elements in HTML documents</cite> section</a></li>
+<li><a href="#syntax-start-tags_xref6"><cite class="index">SVG and MathML elements in HTML documents</cite> section</a></li>
 </ul>
 </div>
 <div class="index-entry" id="data-string_index">
@@ -28992,6 +29141,18 @@ Boston, MA 02110-1301, USA.
 <li><a href="#transparent_xref10"><span class="element">video</span> element: <cite class="index">Permitted contents</cite></a></li>
 </ul>
 </div>
+<div class="index-entry" id="UA_index">
+<p class="index-term">UA</p>
+<ul>
+<li>
+<a href="#UA"><cite class="index">Terminology</cite> section: <cite class="index-dfn">UA</cite></a> <span class="index-notation">(defining instance)</span>
+</li>
+</ul>
+<ul id="UA_index_items">
+<li><a href="#UA_xref1"><cite class="index">Terminology</cite> section: <cite class="index-dfn">DOM tree</cite></a></li>
+<li><a href="#UA_xref2"><cite class="index">Implied start tags and end tags</cite> section</a></li>
+</ul>
+</div>
 <div class="index-entry" id="data-unordered-tokens_index">
 <p class="index-term">unordered set of unique space-separated tokens</p>
 <ul>
@@ -29033,7 +29194,7 @@ Boston, MA 02110-1301, USA.
 </li>
 </ul>
 <ul id="syntax-attr-unquoted_index_items">
-<li><a href="#syntax-attr-unquoted_xref1"><cite class="index">Conformant documents</cite> section</a></li>
+<li><a href="#syntax-attr-unquoted_xref1"><cite class="index">Conformant documents in the XML syntax</cite> section</a></li>
 <li><a href="#syntax-attr-unquoted_xref2"><cite class="index">Attributes</cite> section</a></li>
 </ul>
 </div>
