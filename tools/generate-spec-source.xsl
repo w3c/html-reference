@@ -494,6 +494,9 @@
                   <xsl:when test="$pattern='uri'">
                     <h2 class="common-subhead"><dfn id="{@id}">URL potentially surrounded by spaces</dfn></h2>
                   </xsl:when>
+                  <xsl:when test="$pattern='uri.non-empty'">
+                    <h2 class="common-subhead"><dfn id="{@id}">Non-empty URL potentially surrounded by spaces</dfn></h2>
+                  </xsl:when>
                   <xsl:when test="$pattern='uris'">
                     <h2 class="common-subhead"><dfn id="{@id}">list of URIs</dfn></h2>
                   </xsl:when>
@@ -3351,6 +3354,9 @@
       </xsl:when>
       <xsl:when test=".='uri'">
         <a href="{@href}">URL potentially surrounded by spaces</a>
+      </xsl:when>
+      <xsl:when test=".='uri.non-empty'">
+        <a href="{@href}">Non-empty URL potentially surrounded by spaces</a>
       </xsl:when>
       <xsl:when test=".='uris'">
         <a href="{@href}">list of URIs</a>
