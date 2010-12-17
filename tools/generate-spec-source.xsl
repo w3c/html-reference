@@ -489,7 +489,7 @@
                     <h2 class="common-subhead"><dfn id="{@id}">positive floating-point number</dfn></h2>
                   </xsl:when>
                   <xsl:when test="$pattern='uri.absolute'">
-                    <h2 class="common-subhead"><dfn id="{@id}">absolute URL</dfn></h2>
+                    <h2 class="common-subhead"><dfn id="{@id}">absolute URL potentially surrounded by spaces</dfn></h2>
                   </xsl:when>
                   <xsl:when test="$pattern='uri'">
                     <h2 class="common-subhead"><dfn id="{@id}">URL potentially surrounded by spaces</dfn></h2>
@@ -3350,7 +3350,7 @@
         <a href="{@href}">positive floating-point number</a>
       </xsl:when>
       <xsl:when test=".='uri.absolute'">
-        <a href="{@href}">absolute URL</a>
+        <a href="{@href}">absolute URL potentially surrounded by spaces</a>
       </xsl:when>
       <xsl:when test=".='uri'">
         <a href="{@href}">URL potentially surrounded by spaces</a>
