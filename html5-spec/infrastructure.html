@@ -1,6 +1,9 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ -->
+<!-- when publishing, change bits marked ZZZ
+     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
+     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
+  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>2 Common infrastructure &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -227,7 +230,7 @@
      color: white;
    }
 
-  ]]></style><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -356,7 +359,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="introduction.html" title="1 Introduction" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="common-microsyntaxes.html" title="2.5 Common microsyntaxes" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="introduction.html" title="1 Introduction" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="common-microsyntaxes.html" title="2.5 Common microsyntaxes" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -494,11 +497,15 @@
   contexts</a> of the <code><a href="#document">Document</a></code> nor introduce any
   <code><a href="#node">Node</a></code> objects to the <code><a href="#document">Document</a></code>'s DOM.</p><p>Typically such content handlers are provided by third parties,
   though a user agent can also designate built-in content handlers as
-  plugins.</p><p>A user agent must not consider the types <code>text/plain</code>
+  plugins.</p><div class="impl">
+
+  <p>A user agent must not consider the types <code>text/plain</code>
   and <code>application/octet-stream</code> as having a registered
-  <a href="#plugin">plugin</a>.</p><!-- because of the way <object> handles
+  <a href="#plugin">plugin</a>.</p> <!-- because of the way <object> handles
   those types, if nothing else (it also doesn't make any sense to have
-  a plugin registered for those types, of course) --><p class="example">One example of a plugin would be a PDF viewer
+  a plugin registered for those types, of course) -->
+
+  </div><p class="example">One example of a plugin would be a PDF viewer
   that is instantiated in a <a href="browsers.html#browsing-context">browsing context</a> when the
   user navigates to a PDF file. This would count as a plugin
   regardless of whether the party that implemented the PDF viewer
@@ -509,11 +516,15 @@
   interacting with plugins, as it is expected to be user-agent- and
   platform-specific. Some UAs might opt to support a plugin mechanism
   such as the Netscape Plugin API; others might use remote content
-  converters or have built-in support for certain types. <a href="references.html#refsNPAPI">[NPAPI]</a></p><p class="warning">Browsers should take extreme care when
+  converters or have built-in support for certain types. <a href="references.html#refsNPAPI">[NPAPI]</a></p><div class="impl">
+
+  <p class="warning">Browsers should take extreme care when
   interacting with external content intended for <a href="#plugin" title="plugin">plugins</a>. When third-party software is run with
   the same privileges as the user agent itself, vulnerabilities in the
   third-party software become as dangerous as those in the user
-  agent.</p><h4 id="character-encodings"><span class="secno">2.1.6 </span>Character encodings</h4><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/101">ISSUE-101</a> (us-ascii-ref) blocks progress to Last Call</span></p><p>The <dfn id="preferred-mime-name">preferred MIME name</dfn> of a character encoding is the
+  agent.</p>
+
+  </div><h4 id="character-encodings"><span class="secno">2.1.6 </span>Character encodings</h4><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/101">ISSUE-101</a> (us-ascii-ref) blocks progress to Last Call</span></p><p>The <dfn id="preferred-mime-name">preferred MIME name</dfn> of a character encoding is the
   name or alias labeled as "preferred MIME name" in the IANA
   <cite>Character Sets</cite> registry, if there is one, or the
   encoding's name, if none of the aliases are so labeled. <a href="references.html#refsIANACHARSET">[IANACHARSET]</a></p><p>An <dfn id="ascii-compatible-character-encoding">ASCII-compatible character encoding</dfn> is a
@@ -804,8 +815,8 @@
   this specification describes two authoring formats: one based on XML
   (referred to as <a href="the-xhtml-syntax.html#the-xhtml-syntax">the XHTML syntax</a>), and one using a <a href="syntax.html#writing">custom format</a> inspired by SGML (referred to as
   <a href="syntax.html#syntax">the HTML syntax</a>). <span class="impl">Implementations
-  may support only one of these two formats, although supporting both
-  is encouraged.</span></p><p class="impl" id="entity-references">The language in this
+  must support at least one of these two formats, although supporting
+  both is encouraged.</span></p><p class="impl" id="entity-references">The language in this
   specification assumes that the user agent expands all entity
   references, and therefore does not include entity reference nodes in
   the DOM. If user agents do include entity reference nodes in the
@@ -970,6 +981,33 @@
 
    </p></dd>
 
+   <dt>CSS modules</dt>
+
+   <dd>
+
+    <p>While support for CSS as a whole is not required of
+    implementations of this specification (though it is encouraged, at
+    least for Web browsers), some features are defined in terms of
+    specific CSS requirements.</p>
+
+    <p>In particular, some features require that a string be
+    <dfn id="parsed-as-a-css-color-value">parsed as a CSS &lt;color&gt; value</dfn>. When parsing a CSS
+    value, user agents are required by the CSS specifications to apply
+    some error handling rules. These apply to this specification also.
+    <a href="references.html#refsCSSCOLOR">[CSSCOLOR]</a> <a href="references.html#refsCSS">[CSS]</a></p>
+
+    <p class="example">For example, user agents are required to close
+    all open constructs upon finding the end of a style sheet
+    unexpectedly. Thus, when parsing the string "<code title="">rgb(0,0,0</code>" (with a missing close-parenthesis) for
+    a color value, the close parenthesis is implied by this error
+    handling rule, and a value is obtained (the color 'black').
+    However, the similar construct "<code title="">rgb(0,0,</code>"
+    (with both a missing parenthesis and a missing "blue" value)
+    cannot be parsed, as it closing the open construct does not result
+    in a viable value.</p>
+
+   </dd>
+
   </dl><p>This specification does not <em>require</em> support of any
   particular network protocol, style sheet language, scripting
   language, or any of the DOM specifications beyond those described
@@ -1074,6 +1112,19 @@
   members should be prefixed by vendor-specific strings to prevent
   clashes with future versions of this specification.</p>
 
+  <p>For events, experimental event names should be prefixed with
+  vendor-specific strings.</p>
+
+  <div class="example">
+
+   <p>For example, if a user agent called "Pleas<!--e h-->old" were to
+   add an event to indicate when the user is going up in an elevator,
+   it could use the prefix "<code title="">pleasold</code>" and thus
+   name the event "<code title="">pleasoldgoingup</code>", possibly
+   with an event handler attribute named "<code title="">onpleasoldgoingup</code>".</p>
+
+  </div>
+
   <p>All extensions must be defined so that the use of extensions
   neither contradicts nor causes the non-conformance of functionality
   defined in the specification.</p> <!-- thanks to QA Framework -->
@@ -1158,7 +1209,11 @@
   </div><p>A string <var title="">pattern</var> is a <dfn id="prefix-match">prefix match</dfn>
   for a string <var title="">s</var> when <var title="">pattern</var>
   is not longer than <var title="">s</var> and truncating <var title="">s</var> to <var title="">pattern</var>'s length leaves the
-  two strings as matches of each other.</p><h3 id="utf-8"><span class="secno">2.4 </span>UTF-8</h3><p>When a user agent is required to <dfn id="decoded-as-utf-8-with-error-handling" title="decoded as UTF-8,&#10;  with error handling">decode a byte string as UTF-8, with error
+  two strings as matches of each other.</p><div class="impl">
+
+  <h3 id="utf-8"><span class="secno">2.4 </span>UTF-8</h3>
+
+  <p>When a user agent is required to <dfn id="decoded-as-utf-8-with-error-handling" title="decoded as UTF-8,&#10;  with error handling">decode a byte string as UTF-8, with error
   handling</dfn>, it means that the byte stream must be converted to a
   Unicode string by interpreting it as UTF-8, except that any errors
   must be handled as described in the following list. Bytes in the
@@ -1166,7 +1221,7 @@
 
   </p><dl class="switch"><dt>One byte in the range FE to FF</dt>
 
-   <dt>Overlong forms (e.g. F0 80 80 A0)</dt>
+   <dt><a href="#overlong-form" title="overlong form">Overlong forms</a> (e.g. F0 80 80 A0)</dt>
 
    <dt>One byte in the range C0 to C1, followed by one byte in the range 80 to BF</dt>
 
@@ -1200,6 +1255,13 @@
 
    <dd>Each byte must be replaced with a U+FFFD REPLACEMENT CHARACTER.</dd>
 
-  </dl><p class="example">For example, the byte string "41 98 BA 42 E2 98
+  </dl><p>For the purposes of the above requirements, an <dfn id="overlong-form">overlong
+  form</dfn> in UTF-8 is a sequence that encodes a codepoint using
+  more bytes than the minimum needed to encode that codepoint in
+  UTF-8.</p>
+
+  <p class="example">For example, the byte string "41 98 BA 42 E2 98
   43 E2 98 BA E2 98" would be converted to the string
-  "A&#xFFFD;&#xFFFD;B&#xFFFD;C&#x263A;&#xFFFD;".</p></body></html>
+  "A&#xFFFD;&#xFFFD;B&#xFFFD;C&#x263A;&#xFFFD;".</p>
+
+  </div></body></html>

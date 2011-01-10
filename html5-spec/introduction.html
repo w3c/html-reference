@@ -1,6 +1,9 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ -->
+<!-- when publishing, change bits marked ZZZ
+     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
+     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
+  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>1 Introduction &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -227,7 +230,7 @@
      color: white;
    }
 
-  ]]></style><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -356,7 +359,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="infrastructure.html" title="2 Common infrastructure" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="infrastructure.html" title="2 Common infrastructure" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -810,8 +813,9 @@ a.setAttribute('href', 'http://example.com/'); // change the content attribute d
 
     <p>Some error-handling behavior, such as the behavior for the
     <code title="">&lt;table&gt;&lt;hr&gt;...</code> example mentioned
-    above, are incompatible with streaming user agents. To avoid
-    interoperability problems with such user agents, any syntax
+    above, are incompatible with streaming user agents (user agents
+    that process HTML files in one pass, without storing state). To
+    avoid interoperability problems with such user agents, any syntax
     resulting in such behavior is considered invalid.</p>
 
    </dd>
@@ -842,13 +846,19 @@ a.setAttribute('href', 'http://example.com/'); // change the content attribute d
 
     <div class="example">
 
-     <p>For example, the following markup results in poor performance
-     when hitting the highlighted end tag, since all the open elements
-     are examined first to see if they match the close tag:</p>
+     <p>For example, the following markup results in poor performance,
+     since all the unclosed <code><a href="text-level-semantics.html#the-i-element">i</a></code> elements have to be
+     reconstructed in each paragraph, resulting in progressively more
+     elements in each paragraph:</p>
 
-     <pre class="bad">&lt;p&gt;&lt;em&gt;&lt;span&gt;&lt;span&gt;&lt;span&gt;...&lt;span&gt;&lt;span&gt;&lt;span&gt;<strong>&lt;/em&gt;</strong></pre>
+     <pre class="bad">&lt;p&gt;&lt;i&gt;He dreamt.
+&lt;p&gt;&lt;i&gt;He dreamt that he ate breakfast.
+&lt;p&gt;&lt;i&gt;Then lunch.
+&lt;p&gt;&lt;i&gt;And finally dinner.</pre>
 
-    </div>
+     <p>The resulting DOM for this fragment would be:</p>
+
+     <ul class="domTree"><li class="t1"><code><a href="grouping-content.html#the-p-element">p</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-i-element">i</a></code><ul><li class="t3"><code>#text</code>: <span title="">He dreamt.</span></li></ul></li></ul></li><li class="t1"><code><a href="grouping-content.html#the-p-element">p</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-i-element">i</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-i-element">i</a></code><ul><li class="t3"><code>#text</code>: <span title="">He dreamt that he ate breakfast.</span></li></ul></li></ul></li></ul></li><li class="t1"><code><a href="grouping-content.html#the-p-element">p</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-i-element">i</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-i-element">i</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-i-element">i</a></code><ul><li class="t3"><code>#text</code>: <span title="">Then lunch.</span></li></ul></li></ul></li></ul></li></ul></li><li class="t1"><code><a href="grouping-content.html#the-p-element">p</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-i-element">i</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-i-element">i</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-i-element">i</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-i-element">i</a></code><ul><li class="t3"><code>#text</code>: <span title="">And finally dinner.</span></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></div>
 
    </dd>
 

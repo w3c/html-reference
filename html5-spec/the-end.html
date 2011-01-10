@@ -1,6 +1,9 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ -->
+<!-- when publishing, change bits marked ZZZ
+     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
+     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
+  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>8.2.6 The end &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -227,7 +230,7 @@
      color: white;
    }
 
-  ]]></style><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -356,7 +359,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="tokenization.html" title="8.2.4 Tokenization" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="named-character-references.html" title="8.5 Named character references" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="tokenization.html" title="8.2.4 Tokenization" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="named-character-references.html" title="8.5 Named character references" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -875,20 +878,72 @@
 
        <dd>
 
-        <p>Append a U+003C LESS-THAN SIGN character (&lt;),
-        followed by the element's tag name. (For nodes created by the
-        <a href="parsing.html#html-parser">HTML parser</a> or <code title="">Document.createElement()</code>, the tag name will be
-        lowercase.)</p>
+        <p>If <var title="">current node</var> is an element in the
+        <a href="namespaces.html#html-namespace-0">HTML namespace</a>, the <a href="namespaces.html#mathml-namespace">MathML
+        namespace</a>, or the <a href="namespaces.html#svg-namespace">SVG namespace</a>, then let
+        <var title="">tagname</var> be <var title="">current
+        node</var>'s local name. Otherwise, let <var title="">tagname</var> be <var title="">current node</var>'s
+        qualified name.</p>
+
+        <p>Append a U+003C LESS-THAN SIGN character (&lt;), followed
+        by <var title="">tagname</var>.</p>
+
+        <p class="note">For <a href="infrastructure.html#html-elements">HTML elements</a> created by the
+        <a href="parsing.html#html-parser">HTML parser</a> or <code title="">Document.createElement()</code>, <var title="">tagname</var> will be lowercase.</p>
 
         <p>For each attribute that the element has, append a U+0020
-        SPACE character, the attribute's name (which, for attributes
-        set by the <a href="parsing.html#html-parser">HTML parser</a> or by <code title="">Element.setAttributeNode()</code> or <code title="">Element.setAttribute()</code>, will be lowercase), a
+        SPACE character, the <a href="#attribute-s-serialized-name" title="attribute's serialized&#10;        name">attribute's serialized name as described below</a>, a
         U+003D EQUALS SIGN character (=), a U+0022 QUOTATION MARK
         character ("), the attribute's value, <a href="#escapingString" title="escaping a string">escaped as described below</a> in
         <i>attribute mode</i>, and a second U+0022 QUOTATION MARK
         character (").</p>
 
-        <p>While the exact order of attributes is UA-defined, and may
+        <p>An <dfn id="attribute-s-serialized-name">attribute's serialized name</dfn> for the purposes
+        of the previous paragraph must be determined as follows:</p>
+
+        <dl class="switch"><dt>If the attribute has no namespace</dt>
+
+         <dd>
+
+          <p>The attribute's serialized name is the attribute's local
+          name.</p>
+
+          <p class="note">For attributes on <a href="infrastructure.html#html-elements">HTML elements</a>
+          set by the <a href="parsing.html#html-parser">HTML parser</a> or by <code title="">Element.setAttributeNode()</code> or <code title="">Element.setAttribute()</code>, the local name will
+          be lowercase.</p>
+
+         </dd>
+
+
+         <dt>If the attribute is in the <a href="namespaces.html#xml-namespace">XML namespace</a></dt>
+
+         <dd><p>The attribute's serialized name is the string "<code title="">xml:</code>" followed by the attribute's local
+         name.</p></dd>
+
+
+         <dt>If the attribute is in the <a href="namespaces.html#xmlns-namespace">XMLNS namespace</a> and the attribute's local name is <code title="">xmlns</code></dt>
+
+         <dd><p>The attribute's serialized name is the string "<code title="">xmlns</code>".</p></dd>
+
+
+         <dt>If the attribute is in the <a href="namespaces.html#xmlns-namespace">XMLNS namespace</a> and the attribute's local name is not <code title="">xmlns</code></dt>
+
+         <dd><p>The attribute's serialized name is the string "<code title="">xmlns:</code>" followed by the attribute's local
+         name.</p></dd>
+
+
+         <dt>If the attribute is in the <a href="namespaces.html#xlink-namespace">XLink namespace</a></dt>
+
+         <dd><p>The attribute's serialized name is the string "<code title="">xlink:</code>" followed by the attribute's local
+         name.</p></dd>
+
+
+         <dt>If the attribute is in some other namespace</dt>
+
+         <dd><p>The attribute's serialized name is the attribute's
+         qualified name.</p></dd>
+
+        </dl><p>While the exact order of attributes is UA-defined, and may
         depend on factors such as the order that the attributes were
         given in the original markup, the sort order must be stable,
         such that consecutive invocations of this algorithm serialize an
@@ -917,9 +972,8 @@
         serialization algorithm</a> on the <var title="">current
         node</var> element (thus recursing into this algorithm for
         that element), followed by a U+003C LESS-THAN SIGN character
-        (&lt;), a U+002F SOLIDUS character (/), the element's tag name
-        again, and finally a U+003E GREATER-THAN SIGN character
-        (&gt;).</p>
+        (&lt;), a U+002F SOLIDUS character (/), <var title="">tagname</var> again, and finally a U+003E
+        GREATER-THAN SIGN character (&gt;).</p>
 
        </dd>
 

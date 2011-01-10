@@ -1,6 +1,9 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ -->
+<!-- when publishing, change bits marked ZZZ
+     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
+     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
+  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>4.10.7.2 Common input element attributes &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -227,7 +230,7 @@
      color: white;
    }
 
-  ]]></style><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -356,7 +359,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="number-state.html" title="4.10.7.1.13 Number state" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="the-button-element.html" title="4.10.8 The button element" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="number-state.html" title="4.10.7.1.13 Number state" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="the-button-element.html" title="4.10.8 The button element" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -484,15 +487,18 @@
 
   </div><h6 id="the-list-attribute"><span class="secno">4.10.7.2.3 </span>The <code title="attr-input-list"><a href="#attr-input-list">list</a></code> attribute</h6><p>The <dfn id="attr-input-list" title="attr-input-list"><code>list</code></dfn>
   attribute is used to identify an element that lists predefined
-  options suggested to the user.</p><p>If present, its value must be the <a href="elements.html#concept-id" title="concept-id">ID</a> of a <code><a href="the-button-element.html#the-datalist-element">datalist</a></code>
-  element in the same document.</p><div class="impl">
+  options suggested to the user.</p><p>If present, its value must be the <a href="elements.html#concept-id" title="concept-id">ID</a> of a <code><a href="the-button-element.html#the-datalist-element">datalist</a></code> element in
+  the same document.</p><div class="impl">
 
   <p>The <dfn id="concept-input-list" title="concept-input-list">suggestions source
   element</dfn> is the first element in the document in <a href="infrastructure.html#tree-order">tree
-  order</a> to have an <a href="elements.html#concept-id" title="concept-id">ID</a> equal to the value of the <code title="attr-input-list"><a href="#attr-input-list">list</a></code> attribute, if that element is a
-  <code><a href="the-button-element.html#the-datalist-element">datalist</a></code> element. If there is no <code title="attr-input-list"><a href="#attr-input-list">list</a></code> attribute, or if there is no
-  element with that <a href="elements.html#concept-id" title="concept-id">ID</a>, or if the first element with that <a href="elements.html#concept-id" title="concept-id">ID</a> is not a
-  <code><a href="the-button-element.html#the-datalist-element">datalist</a></code> element, then there is no <a href="#concept-input-list" title="concept-input-list">suggestions source element</a>.</p>
+  order</a> to have an <a href="elements.html#concept-id" title="concept-id">ID</a> equal to
+  the value of the <code title="attr-input-list"><a href="#attr-input-list">list</a></code>
+  attribute, if that element is a <code><a href="the-button-element.html#the-datalist-element">datalist</a></code> element. If
+  there is no <code title="attr-input-list"><a href="#attr-input-list">list</a></code> attribute, or
+  if there is no element with that <a href="elements.html#concept-id" title="concept-id">ID</a>,
+  or if the first element with that <a href="elements.html#concept-id" title="concept-id">ID</a>
+  is not a <code><a href="the-button-element.html#the-datalist-element">datalist</a></code> element, then there is no <a href="#concept-input-list" title="concept-input-list">suggestions source element</a>.</p>
 
   <p>If there is a <a href="#concept-input-list" title="concept-input-list">suggestions source
   element</a>, then, when the user agent is allowing the user to
@@ -500,19 +506,43 @@
   the suggestions represented by the <a href="#concept-input-list" title="concept-input-list">suggestions source element</a> to the
   user in a manner suitable for the type of control used. The user
   agent may use the suggestion's <a href="the-button-element.html#concept-option-label" title="concept-option-label">label</a> to identify the suggestion
-  if appropriate. If the user selects a suggestion, then the
-  <code><a href="the-input-element.html#the-input-element">input</a></code> element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> must be set to the selected
-  suggestion's <a href="the-button-element.html#concept-option-value" title="concept-option-value">value</a>, as if
-  the user had written that value himself.</p>
+  if appropriate.</p>
 
-  <p>User agents must filter the suggestions to hide suggestions that
-  the user would not be allowed to enter as the <code><a href="the-input-element.html#the-input-element">input</a></code>
-  element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>, and should
-  filter the suggestions to hide suggestions that would cause the
-  element to not <a href="association-of-controls-and-forms.html#concept-fv-valid" title="concept-fv-valid">satisfy its
-  constraints</a>.</p>
+  <p>How user selections of suggestions are handled depends on whether
+  the element is a control accepting a single value only, or whether
+  it accepts multiple values:</p>
 
-  <hr/><p>If the <code title="attr-input-list"><a href="#attr-input-list">list</a></code> attribute does
+  <dl class="switch"><dt>If the element does not have a <code title="attr-input-multiple"><a href="#attr-input-multiple">multiple</a></code> attribute specified or
+   if the <code title="attr-input-multiple"><a href="#attr-input-multiple">multiple</a></code> attribute
+   does not apply</dt>
+
+   <dd>
+
+    <p>When the user selects a suggestion, the <code><a href="the-input-element.html#the-input-element">input</a></code>
+    element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> must be set
+    to the selected suggestion's <a href="the-button-element.html#concept-option-value" title="concept-option-value">value</a>, as if the user had
+    written that value himself.</p>
+
+   </dd>
+
+   <dt>If the element <em>does</em> have a <code title="attr-input-multiple"><a href="#attr-input-multiple">multiple</a></code> attribute specified,
+   and the <code title="attr-input-multiple"><a href="#attr-input-multiple">multiple</a></code> attribute
+   does apply</dt>
+
+   <dd>
+
+    <p>When the user selects a suggestion, the user agent must either
+    add a new entry to the <code><a href="the-input-element.html#the-input-element">input</a></code> element's <a href="association-of-controls-and-forms.html#concept-fe-values" title="concept-fe-values">value<em>s</em></a>, whose value is
+    the selected suggestion's <a href="the-button-element.html#concept-option-value" title="concept-option-value">value</a>, or change an existing
+    entry in the <code><a href="the-input-element.html#the-input-element">input</a></code> element's <a href="association-of-controls-and-forms.html#concept-fe-values" title="concept-fe-values">value<em>s</em></a> to have the value
+    given by the selected suggestion's <a href="the-button-element.html#concept-option-value" title="concept-option-value">value</a>, as if the user had
+    himself added an entry with that value, or edited an existing
+    entry to be that value. Which behavior is to be applied depends on
+    the user interface in a user-agent-defined manner.</p>
+
+   </dd>
+
+  </dl><hr/><p>If the <code title="attr-input-list"><a href="#attr-input-list">list</a></code> attribute does
   not apply, there is no <a href="#concept-input-list" title="concept-input-list">suggestions
   source element</a>.</p>
 
@@ -739,17 +769,36 @@
 
   </div><h6 id="the-pattern-attribute"><span class="secno">4.10.7.2.9 </span>The <code title="attr-input-pattern"><a href="#attr-input-pattern">pattern</a></code> attribute</h6><p>The <dfn id="attr-input-pattern" title="attr-input-pattern"><code>pattern</code></dfn>
   attribute specifies a regular expression against which the control's
-  <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> is to be checked.</p><p>If specified, the attribute's value must match the JavaScript <i title="">Pattern</i> production. <a href="references.html#refsECMA262">[ECMA262]</a></p><div class="impl">
+  <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>, or, when the <code title="attr-input-multiple"><a href="#attr-input-multiple">multiple</a></code> attribute applies and is
+  set, the control's <a href="association-of-controls-and-forms.html#concept-fe-values" title="concept-fe-values">value<em>s</em></a>, are to be
+  checked.</p><p>If specified, the attribute's value must match the JavaScript <i title="">Pattern</i> production. <a href="references.html#refsECMA262">[ECMA262]</a></p><div class="impl">
+
+  <p>If an <code><a href="the-input-element.html#the-input-element">input</a></code> element has a <code title="attr-input-pattern"><a href="#attr-input-pattern">pattern</a></code> attribute specified, and
+  the attribute's value, when compiled as a JavaScript regular
+  expression with the <code title="">global</code>, <code title="">ignoreCase</code>, and <code title="">multiline</code>
+  flags <em>disabled</em> (see ECMA262 Edition 5, sections 15.10.7.2
+  through 15.10.7.4), compiles successfully, then the resulting
+  regular expression is the element's <dfn id="compiled-pattern-regular-expression">compiled pattern regular
+  expression</dfn>. If the element has no such attribute, or if the
+  value doesn't compile successfully, then the element has no
+  <a href="#compiled-pattern-regular-expression">compiled pattern regular expression</a>. <a href="references.html#refsECMA262">[ECMA262]</a></p>
 
   <p><strong>Constraint validation</strong>: If the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> is not the empty string, and
-  the element's <code title="attr-input-pattern"><a href="#attr-input-pattern">pattern</a></code>
-  attribute is specified and the attribute's value, when compiled as a
-  JavaScript regular expression with the <code title="">global</code>,
-  <code title="">ignoreCase</code>, and <code title="">multiline</code> flags <em>disabled</em> (see ECMA262
-  Edition 5, sections 15.10.7.2 through 15.10.7.4), compiles
-  successfully but the resulting regular expression does not match the
+  either the element's <code title="attr-input-multiple"><a href="#attr-input-multiple">multiple</a></code> attribute is not
+  specified or it does not apply to the <code><a href="the-input-element.html#the-input-element">input</a></code> element
+  given its <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute's
+  current state, and the element has a <a href="#compiled-pattern-regular-expression">compiled pattern regular
+  expression</a> but that regular expression does not match the
   entirety of the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>, then the element is
-  <a href="association-of-controls-and-forms.html#suffering-from-a-pattern-mismatch">suffering from a pattern mismatch</a>. <a href="references.html#refsECMA262">[ECMA262]</a></p>
+  <a href="association-of-controls-and-forms.html#suffering-from-a-pattern-mismatch">suffering from a pattern mismatch</a>.</p>
+
+  <p><strong>Constraint validation</strong>: If the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> is not the empty string, and
+  the element's <code title="attr-input-multiple"><a href="#attr-input-multiple">multiple</a></code>
+  attribute is specified and applies to the <code><a href="the-input-element.html#the-input-element">input</a></code>
+  element, and the element has a <a href="#compiled-pattern-regular-expression">compiled pattern regular
+  expression</a> but that regular expression does not match the
+  entirety of each of the element's <a href="association-of-controls-and-forms.html#concept-fe-values" title="concept-fe-values">value<em>s</em></a>, then the element
+  is <a href="association-of-controls-and-forms.html#suffering-from-a-pattern-mismatch">suffering from a pattern mismatch</a>.</p>
 
   <p class="note">This implies that the regular expression language
   used for this attribute is the same as that used in JavaScript,
@@ -1201,14 +1250,26 @@ You cannot submit this form when the field is incorrect.</samp></pre>
   any, or null otherwise.</p>
 
   <p>The <dfn id="dom-input-selectedoption" title="dom-input-selectedOption"><code>selectedOption</code></dfn>
-  IDL attribute must return the first <code><a href="the-button-element.html#the-option-element">option</a></code> element, in
-  <a href="infrastructure.html#tree-order">tree order</a>, to be a child of the <a href="#concept-input-list" title="concept-input-list">suggestions source element</a> and
-  whose <a href="the-button-element.html#concept-option-value" title="concept-option-value">value</a> matches the
-  <code><a href="the-input-element.html#the-input-element">input</a></code> element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>, if any. If there is no <a href="#concept-input-list" title="concept-input-list">suggestions source element</a>, or if
-  it contains no matching <code><a href="the-button-element.html#the-option-element">option</a></code> element, then the <code title="dom-input-selectedOption"><a href="#dom-input-selectedoption">selectedOption</a></code> attribute
-  must return null.</p>
+  IDL attribute must return the value determined by the following
+  steps:</p>
 
-  </div><div class="impl">
+  <ol><li><p>If there is no <a href="#concept-input-list" title="concept-input-list">suggestions
+   source element</a> (e.g. because the <code title="attr-input-list"><a href="#attr-input-list">list</a></code> attribute doesn't apply or is
+   not specified), then return null and abort thee steps.</p></li>
+
+   <li><p>If the <code title="attr-input-multiple"><a href="#attr-input-multiple">multiple</a></code>
+   attribute is specified and applies, then return null and abort
+   these steps. (The <code title="dom-input-selectedOption"><a href="#dom-input-selectedoption">selectedOption</a></code> IDL
+   attribute doesn't apply.)</p></li>
+
+   <li><p>Return the first <code><a href="the-button-element.html#the-option-element">option</a></code> element, in <a href="infrastructure.html#tree-order">tree
+   order</a>, to be a child of the <a href="#concept-input-list" title="concept-input-list">suggestions source element</a> and
+   whose <a href="the-button-element.html#concept-option-value" title="concept-option-value">value</a> matches the
+   <code><a href="the-input-element.html#the-input-element">input</a></code> element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>, if any. If the <a href="#concept-input-list" title="concept-input-list">suggestions source element</a>
+   contains no matching <code><a href="the-button-element.html#the-option-element">option</a></code> element, then return null
+   instead.</p></li>
+
+  </ol></div><div class="impl">
 
   <h5 id="common-event-behaviors"><span class="secno">4.10.7.4 </span>Common event behaviors</h5>
 

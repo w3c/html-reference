@@ -1,6 +1,9 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ -->
+<!-- when publishing, change bits marked ZZZ
+     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
+     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
+  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>4.10.7.1 States of the type attribute &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -227,7 +230,7 @@
      color: white;
    }
 
-  ]]></style><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -356,7 +359,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="the-input-element.html" title="4.10.7 The input element" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="number-state.html" title="4.10.7.1.13 Number state" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="the-input-element.html" title="4.10.7 The input element" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="number-state.html" title="4.10.7.1.13 Number state" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -740,49 +743,141 @@
   <p>When an <code><a href="the-input-element.html#the-input-element">input</a></code> element's <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="#e-mail-state" title="attr-input-type-email">E-mail</a> state, the rules in this
   section apply.</p>
 
-  </div><p>The <code><a href="the-input-element.html#the-input-element">input</a></code> element <a href="rendering.html#represents">represents</a> a control
-  for editing a list of e-mail addresses given in the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>.</p><div class="impl">
+  </div><p>How the <a href="#e-mail-state" title="attr-input-type-email">E-mail</a> state
+  operates depends on whether the <code title="attr-input-multiple"><a href="common-input-element-attributes.html#attr-input-multiple">multiple</a></code> attribute is specified
+  or not.</p><dl class="switch"><dt>When the <code title="attr-input-multiple"><a href="common-input-element-attributes.html#attr-input-multiple">multiple</a></code>
+   attribute is not specified on the element</dt>
 
-  <p>If the element is <i title="concept-input-mutable"><a href="the-input-element.html#concept-input-mutable">mutable</a></i>,
-  the user agent should allow the user to change the e-mail addresses
-  represented by its <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>. If
-  the <code title="attr-input-multiple"><a href="common-input-element-attributes.html#attr-input-multiple">multiple</a></code> attribute is
-  specified, then the user agent should allow the user to select or
-  provide multiple addresses; otherwise, the user agent should act in
-  a manner consistent with expecting the user to provide a single
-  e-mail address. User agents may allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to a string that is not a
-  <a href="#valid-e-mail-address-list">valid e-mail address list</a>. User agents should allow the
-  user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the
-  empty string. User agents must not allow users to insert U+000A LINE
-  FEED (LF) or U+000D CARRIAGE RETURN (CR) characters into the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>. User agents may transform the
-  <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> for display and editing
-  (e.g. converting punycode in the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to IDN in the display and vice
-  versa).</p>
+   <dd>
 
-  </div><p>If the <code title="attr-input-multiple"><a href="common-input-element-attributes.html#attr-input-multiple">multiple</a></code>
-  attribute is specified on the element, then the <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if specified, must
-  have a value that is a <a href="#valid-e-mail-address-list">valid e-mail address list</a>;
-  otherwise, the <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code>
-  attribute, if specified, must have a value that is a single
-  <a href="#valid-e-mail-address">valid e-mail address</a>.</p><div class="impl">
+    <p>The <code><a href="the-input-element.html#the-input-element">input</a></code> element <a href="rendering.html#represents">represents</a> a
+    control for editing an e-mail address given in the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>.</p>
 
-  <p><strong>The <a href="the-input-element.html#value-sanitization-algorithm">value sanitization algorithm</a> is as
-  follows</strong>: <a href="common-microsyntaxes.html#strip-line-breaks">Strip line breaks</a> from the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>.</p>
+    <div class="impl">
 
-  <p><strong>Constraint validation</strong>: If the <code title="attr-input-multiple"><a href="common-input-element-attributes.html#attr-input-multiple">multiple</a></code> attribute is specified
-  on the element, then, while the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> of the element is not a
-  <a href="#valid-e-mail-address-list">valid e-mail address list</a>, the element is
-  <a href="association-of-controls-and-forms.html#suffering-from-a-type-mismatch">suffering from a type mismatch</a>; otherwise, while the
-  <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> of the element is not a
-  single <a href="#valid-e-mail-address">valid e-mail address</a>, the element is
-  <a href="association-of-controls-and-forms.html#suffering-from-a-type-mismatch">suffering from a type mismatch</a>.</p>
+    <p>If the element is <i title="concept-input-mutable"><a href="the-input-element.html#concept-input-mutable">mutable</a></i>,
+    the user agent should allow the user to change the e-mail address
+    represented by its <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>.
+    User agents may allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to a string that is not a
+    <a href="#valid-e-mail-address">valid e-mail address</a>. The user agent should act in a
+    manner consistent with expecting the user to provide a single
+    e-mail address. User agents should allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string. User
+    agents must not allow users to insert U+000A LINE FEED (LF) or
+    U+000D CARRIAGE RETURN (CR) characters into the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>. User agents may transform
+    the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> for display and
+    editing (e.g. converting punycode in the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to IDN in the display and
+    vice versa).</p>
 
-  </div><p>A <dfn id="valid-e-mail-address-list">valid e-mail address list</dfn> is a <a href="common-microsyntaxes.html#set-of-comma-separated-tokens">set of
-  comma-separated tokens</a>, where each token is itself a
-  <a href="#valid-e-mail-address">valid e-mail address</a>. <span class="impl">To obtain the
-  list of tokens from a <a href="#valid-e-mail-address-list">valid e-mail address list</a>, the
-  user agent must <a href="common-microsyntaxes.html#split-a-string-on-commas" title="split a string on commas">split the
-  string on commas</a>.</span></p><p>A <dfn id="valid-e-mail-address">valid e-mail address</dfn> is a string that matches the
+    </div>
+
+    <p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
+    specified, must have a value that is a single <a href="#valid-e-mail-address">valid e-mail
+    address</a>.</p>
+
+    <div class="impl">
+
+    <p><strong>The <a href="the-input-element.html#value-sanitization-algorithm">value sanitization algorithm</a> is as
+    follows</strong>: <a href="common-microsyntaxes.html#strip-line-breaks">Strip line breaks</a> from the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>.</p>
+
+    <p>When the <code title="attr-input-multiple"><a href="common-input-element-attributes.html#attr-input-multiple">multiple</a></code>
+    attribute is removed, the user agent must run the <a href="the-input-element.html#value-sanitization-algorithm">value
+    sanitization algorithm</a>.</p>
+
+    <p><strong>Constraint validation</strong>: While the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> of the element is not a
+    single <a href="#valid-e-mail-address">valid e-mail address</a>, the element is
+    <a href="association-of-controls-and-forms.html#suffering-from-a-type-mismatch">suffering from a type mismatch</a>.</p>
+
+    </div>
+
+   </dd>
+
+   <dt>When the <code title="attr-input-multiple"><a href="common-input-element-attributes.html#attr-input-multiple">multiple</a></code>
+   attribute <em>is</em> specified on the element</dt>
+
+   <dd>
+
+    <div class="impl">
+
+    <p>The element's <a href="association-of-controls-and-forms.html#concept-fe-values" title="concept-fe-values">value<em>s</em></a> are the result of
+    <a href="common-microsyntaxes.html#split-a-string-on-commas" title="split a string on commas">splitting on commas</a>
+    the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>.</p>
+
+    </div>
+
+    <p>The <code><a href="the-input-element.html#the-input-element">input</a></code> element <a href="rendering.html#represents">represents</a> a
+    control for adding, removing, and editing the e-mail addresses
+    given in the element's <a href="association-of-controls-and-forms.html#concept-fe-values" title="concept-fe-values">value<em>s</em></a>.</p>
+
+    <div class="impl">
+
+    <p>If the element is <i title="concept-input-mutable"><a href="the-input-element.html#concept-input-mutable">mutable</a></i>,
+    the user agent should allow the user to add, remove, and edit the
+    e-mail addresses represented by its <a href="association-of-controls-and-forms.html#concept-fe-values" title="concept-fe-values">value<em>s</em></a>. User agents may
+    allow the user to set any individual value in the list of <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value<em>s</em></a> to a string that
+    is not a <a href="#valid-e-mail-address">valid e-mail address</a>, but must not allow
+    users to set any individual value to a string containing U+002C
+    COMMA (,), U+000A LINE FEED (LF), or U+000D CARRIAGE RETURN (CR)
+    characters. User agents should allow the user to remove all the
+    addresses in the element's <a href="association-of-controls-and-forms.html#concept-fe-values" title="concept-fe-values">value<em>s</em></a>. User agents may
+    transform the <a href="association-of-controls-and-forms.html#concept-fe-values" title="concept-fe-values">value<em>s</em></a> for display and
+    editing (e.g. converting punycode in the <a href="association-of-controls-and-forms.html#concept-fe-values" title="concept-fe-values">value<em>s</em></a> to IDN in the
+    display and vice versa).</p>
+
+    <p>Whenever the user changes the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value<em>s</em></a>, the user agent
+    must run the following steps:</p>
+
+    <ol><li><p>Let <var title="">latest values</var> be a copy of the
+     element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value<em>s</em></a>.</p></li>
+
+     <!-- It's a copy because /values/ might include leading and
+     trailing spaces that we don't necessarily want to remove from the
+     UI but that we do want to remove before serialising. -->
+
+     <li><p><a href="common-microsyntaxes.html#strip-leading-and-trailing-whitespace">Strip leading and trailing whitespace</a> from
+     each value in <var title="">latest values</var>.</p></li>
+
+     <li><p>Let the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> be the result of
+     concatenating all the values in <var title="">latest
+     values</var>, separating each value from the next by a single
+     U+002C COMMA character (,), maintaining the list's
+     order.</p></li>
+
+    </ol></div>
+
+    <p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
+    specified, must have a value that is a <a href="#valid-e-mail-address-list">valid e-mail address
+    list</a>.</p>
+
+    <div class="impl">
+
+    <p><strong>The <a href="the-input-element.html#value-sanitization-algorithm">value sanitization algorithm</a> is as
+    follows</strong>:</p>
+
+    <ol><li><p><a href="common-microsyntaxes.html#split-a-string-on-commas" title="split a string on commas">Split on
+     commas</a> the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>, <a href="common-microsyntaxes.html#strip-leading-and-trailing-whitespace">strip leading and
+     trailing whitespace</a> from each resulting token, if any, and
+     let the element's <a href="association-of-controls-and-forms.html#concept-fe-values" title="concept-fe-values">value<em>s</em></a> be the (possibly
+     empty) resulting list of (possibly empty) tokens, maintaining the
+     original order.</p></li>
+
+     <li><p>Let the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> be the result of
+     concatenating the element's <a href="association-of-controls-and-forms.html#concept-fe-values" title="concept-fe-values">value<em>s</em></a>, separating each
+     value from the next by a single U+002C COMMA character (,),
+     maintaining the list's order.</p></li>
+
+    </ol><p>When the <code title="attr-input-multiple"><a href="common-input-element-attributes.html#attr-input-multiple">multiple</a></code>
+    attribute is set, the user agent must run the <a href="the-input-element.html#value-sanitization-algorithm">value
+    sanitization algorithm</a>.</p>
+
+    <p><strong>Constraint validation</strong>: While the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> of the element is not a
+    <a href="#valid-e-mail-address-list">valid e-mail address list</a>, the element is
+    <a href="association-of-controls-and-forms.html#suffering-from-a-type-mismatch">suffering from a type mismatch</a>.</p>
+
+    </div>
+
+   </dd>
+
+  </dl><p>A <dfn id="valid-e-mail-address">valid e-mail address</dfn> is a string that matches the
   ABNF production <code title="">1*(&#xA0;atext&#xA0;/&#xA0;"."&#xA0;)&#xA0;"@"&#xA0;ldh-str&#xA0;1*(&#xA0;"."&#xA0;ldh-str&#xA0;)</code>
   where <code title="">atext</code> is defined in RFC 5322 section
   3.2.3, and <code title="">ldh-str</code> is defined in RFC 1034
@@ -792,7 +887,12 @@
   simultaneously too strict (before the "@" character), too vague
   (after the "@" character), and too lax (allowing comments, white
   space characters, and quoted strings in manners unfamiliar to most
-  users) to be of practical use here.</p><div class="bookkeeping">
+  users) to be of practical use here.</p><p>A <dfn id="valid-e-mail-address-list">valid e-mail address list</dfn> is a <a href="common-microsyntaxes.html#set-of-comma-separated-tokens">set of
+  comma-separated tokens</a>, where each token is itself a
+  <a href="#valid-e-mail-address">valid e-mail address</a>. <span class="impl">To obtain the
+  list of tokens from a <a href="#valid-e-mail-address-list">valid e-mail address list</a>, and
+  implementation must <a href="common-microsyntaxes.html#split-a-string-on-commas" title="split a string on commas">split the
+  string on commas</a>.</span></p><div class="bookkeeping">
 
    <p>The following common <code><a href="the-input-element.html#the-input-element">input</a></code> element content
    attributes, IDL attributes, and methods apply to the element:
@@ -805,13 +905,14 @@
    <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code>,
    <code title="attr-input-required"><a href="common-input-element-attributes.html#attr-input-required">required</a></code>, and
    <code title="attr-input-size"><a href="common-input-element-attributes.html#attr-input-size">size</a></code> content attributes;
-   <code title="dom-input-list"><a href="common-input-element-attributes.html#dom-input-list">list</a></code>,
-   <code title="dom-input-selectedOption"><a href="common-input-element-attributes.html#dom-input-selectedoption">selectedOption</a></code>,
-   <code title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-   <code title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>, and
-   <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attributes;
-   <code title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code> and
-   <code title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code> methods.</p>
+   <code title="dom-input-list"><a href="common-input-element-attributes.html#dom-input-list">list</a></code> and
+   <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attributes.</p>
+
+   <p>The following common <code><a href="the-input-element.html#the-input-element">input</a></code> element content
+   attributes, IDL attributes, and methods apply to the element when
+   the <code title="attr-input-multiple"><a href="common-input-element-attributes.html#attr-input-multiple">multiple</a></code> attribute is
+   not specified:
+   <code title="dom-input-selectedOption"><a href="common-input-element-attributes.html#dom-input-selectedoption">selectedOption</a></code> IDL attribute.</p>
 
    <p>The <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attribute is
    in mode <a href="common-input-element-attributes.html#dom-input-value-value" title="dom-input-value-value">value</a>.</p>
@@ -840,8 +941,12 @@
    element:
    <code class="no-backref" title="dom-input-checked"><a href="common-input-element-attributes.html#dom-input-checked">checked</a></code>,
    <code class="no-backref" title="dom-input-files"><a href="common-input-element-attributes.html#dom-input-files">files</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
    <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code>, and
    <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-attributes.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
+   <code class="no-backref" title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
    <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-attributes.html#dom-input-stepdown">stepDown()</a></code> and
    <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-attributes.html#dom-input-stepup">stepUp()</a></code> methods.</p>
 
@@ -935,12 +1040,13 @@
   its <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>, as obtained by
   <a href="common-microsyntaxes.html#parse-a-global-date-and-time-string" title="parse a global date and time string">parsing a global
   date and time</a> from it. User agents must not allow the user to
-  set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to a string that
-  is not a <a href="common-microsyntaxes.html#valid-global-date-and-time-string">valid global date and time string</a> expressed in
-  UTC, though user agents may allow the user to set and view the time
-  in another time zone and silently translate the time to and from the
-  UTC time zone in the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>. If
-  the user agent provides a user interface for selecting a <a href="common-microsyntaxes.html#concept-datetime" title="concept-datetime">global date and time</a>, then the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> must be set to a <a href="common-microsyntaxes.html#valid-global-date-and-time-string">valid
+  set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to a non-empty
+  string that is not a <a href="common-microsyntaxes.html#valid-global-date-and-time-string">valid global date and time string</a>
+  expressed in UTC, though user agents may allow the user to set and
+  view the time in another time zone and silently translate the time
+  to and from the UTC time zone in the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>. If the user agent provides a
+  user interface for selecting a <a href="common-microsyntaxes.html#concept-datetime" title="concept-datetime">global
+  date and time</a>, then the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> must be set to a <a href="common-microsyntaxes.html#valid-global-date-and-time-string">valid
   global date and time string</a> expressed in UTC representing the
   user's selection. User agents should allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
 
@@ -1081,12 +1187,11 @@
 
   <p>If the element is <i title="concept-input-mutable"><a href="the-input-element.html#concept-input-mutable">mutable</a></i>,
   the user agent should allow the user to change the <a href="common-microsyntaxes.html#concept-date" title="concept-date">date</a> represented by its <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>, as obtained by <a href="common-microsyntaxes.html#parse-a-date-string" title="parse a date string">parsing a date</a> from it. User
-  agents must not allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to a string that is not a
-  <a href="common-microsyntaxes.html#valid-date-string">valid date string</a>. If the user agent provides a user
-  interface for selecting a <a href="common-microsyntaxes.html#concept-date" title="concept-date">date</a>,
-  then the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> must be set to
-  a <a href="common-microsyntaxes.html#valid-date-string">valid date string</a> representing the user's
-  selection. User agents should allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
+  agents must not allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to a non-empty string that is
+  not a <a href="common-microsyntaxes.html#valid-date-string">valid date string</a>. If the user agent provides a
+  user interface for selecting a <a href="common-microsyntaxes.html#concept-date" title="concept-date">date</a>, then the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> must be set to a <a href="common-microsyntaxes.html#valid-date-string">valid
+  date string</a> representing the user's selection. User agents
+  should allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
 
   </div><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
   specified, must have a value that is a <a href="common-microsyntaxes.html#valid-date-string">valid date
@@ -1207,12 +1312,11 @@
 
   <p>If the element is <i title="concept-input-mutable"><a href="the-input-element.html#concept-input-mutable">mutable</a></i>,
   the user agent should allow the user to change the <a href="common-microsyntaxes.html#concept-month" title="concept-month">month</a> represented by its <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>, as obtained by <a href="common-microsyntaxes.html#parse-a-month-string" title="parse a month string">parsing a month</a> from it. User
-  agents must not allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to a string that is not a
-  <a href="common-microsyntaxes.html#valid-month-string">valid month string</a>. If the user agent provides a user
-  interface for selecting a <a href="common-microsyntaxes.html#concept-month" title="concept-month">month</a>,
-  then the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> must be set to
-  a <a href="common-microsyntaxes.html#valid-month-string">valid month string</a> representing the user's
-  selection. User agents should allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
+  agents must not allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to a non-empty string that is
+  not a <a href="common-microsyntaxes.html#valid-month-string">valid month string</a>. If the user agent provides a
+  user interface for selecting a <a href="common-microsyntaxes.html#concept-month" title="concept-month">month</a>, then the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> must be set to a <a href="common-microsyntaxes.html#valid-month-string">valid
+  month string</a> representing the user's selection. User agents
+  should allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
 
   </div><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
   specified, must have a value that is a <a href="common-microsyntaxes.html#valid-month-string">valid month
@@ -1333,12 +1437,11 @@
 
   <p>If the element is <i title="concept-input-mutable"><a href="the-input-element.html#concept-input-mutable">mutable</a></i>,
   the user agent should allow the user to change the <a href="common-microsyntaxes.html#concept-week" title="concept-week">week</a> represented by its <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>, as obtained by <a href="common-microsyntaxes.html#parse-a-week-string" title="parse a week string">parsing a week</a> from it. User
-  agents must not allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to a string that is not a
-  <a href="common-microsyntaxes.html#valid-week-string">valid week string</a>. If the user agent provides a user
-  interface for selecting a <a href="common-microsyntaxes.html#concept-week" title="concept-week">week</a>,
-  then the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> must be set to
-  a <a href="common-microsyntaxes.html#valid-week-string">valid week string</a> representing the user's
-  selection. User agents should allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
+  agents must not allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to a non-empty string that is
+  not a <a href="common-microsyntaxes.html#valid-week-string">valid week string</a>. If the user agent provides a
+  user interface for selecting a <a href="common-microsyntaxes.html#concept-week" title="concept-week">week</a>, then the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> must be set to a <a href="common-microsyntaxes.html#valid-week-string">valid
+  week string</a> representing the user's selection. User agents
+  should allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
 
   </div><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
   specified, must have a value that is a <a href="common-microsyntaxes.html#valid-week-string">valid week
@@ -1463,12 +1566,11 @@
 
   <p>If the element is <i title="concept-input-mutable"><a href="the-input-element.html#concept-input-mutable">mutable</a></i>,
   the user agent should allow the user to change the <a href="common-microsyntaxes.html#concept-time" title="concept-time">time</a> represented by its <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>, as obtained by <a href="common-microsyntaxes.html#parse-a-time-string" title="parse a time string">parsing a time</a> from it. User
-  agents must not allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to a string that is not a
-  <a href="common-microsyntaxes.html#valid-time-string">valid time string</a>. If the user agent provides a user
-  interface for selecting a <a href="common-microsyntaxes.html#concept-time" title="concept-time">time</a>,
-  then the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> must be set to
-  a <a href="common-microsyntaxes.html#valid-time-string">valid time string</a> representing the user's
-  selection. User agents should allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
+  agents must not allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to a non-empty string that is
+  not a <a href="common-microsyntaxes.html#valid-time-string">valid time string</a>. If the user agent provides a
+  user interface for selecting a <a href="common-microsyntaxes.html#concept-time" title="concept-time">time</a>, then the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> must be set to a <a href="common-microsyntaxes.html#valid-time-string">valid
+  time string</a> representing the user's selection. User agents
+  should allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
 
   </div><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
   specified, must have a value that is a <a href="common-microsyntaxes.html#valid-time-string">valid time
@@ -1588,9 +1690,9 @@
   its <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>, as obtained by
   <a href="common-microsyntaxes.html#parse-a-local-date-and-time-string" title="parse a local date and time string">parsing a date and
   time</a> from it. User agents must not allow the user to set the
-  <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to a string that is not
-  a <a href="common-microsyntaxes.html#valid-local-date-and-time-string">valid local date and time string</a>. If the user agent
-  provides a user interface for selecting a <a href="common-microsyntaxes.html#concept-datetime-local" title="concept-datetime-local">local date and time</a>, then the
+  <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to a non-empty string
+  that is not a <a href="common-microsyntaxes.html#valid-local-date-and-time-string">valid local date and time string</a>. If the
+  user agent provides a user interface for selecting a <a href="common-microsyntaxes.html#concept-datetime-local" title="concept-datetime-local">local date and time</a>, then the
   <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> must be set to a
   <a href="common-microsyntaxes.html#valid-local-date-and-time-string">valid local date and time string</a> representing the
   user's selection. User agents should allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>

@@ -1,6 +1,9 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ -->
+<!-- when publishing, change bits marked ZZZ
+     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
+     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
+  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>10 Rendering &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -227,7 +230,7 @@
      color: white;
    }
 
-  ]]></style><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -356,7 +359,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="the-xhtml-syntax.html" title="9 The XHTML syntax" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="obsolete.html" title="11 Obsolete features" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="the-xhtml-syntax.html" title="9 The XHTML syntax" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="obsolete.html" title="11 Obsolete features" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -367,9 +370,9 @@
   <ol class="toc"><li><a href="rendering.html#rendering"><span class="secno">10 </span>Rendering</a>
   <ol><li><a href="rendering.html#introduction-7"><span class="secno">10.1 </span>Introduction</a></li><li><a href="rendering.html#the-css-user-agent-style-sheet-and-presentational-hints"><span class="secno">10.2 </span>The CSS user agent style sheet and presentational hints</a>
     <ol><li><a href="rendering.html#introduction-8"><span class="secno">10.2.1 </span>Introduction</a></li><li><a href="rendering.html#display-types"><span class="secno">10.2.2 </span>Display types</a></li><li><a href="rendering.html#margins-and-padding"><span class="secno">10.2.3 </span>Margins and padding</a></li><li><a href="rendering.html#alignment"><span class="secno">10.2.4 </span>Alignment</a></li><li><a href="rendering.html#fonts-and-colors"><span class="secno">10.2.5 </span>Fonts and colors</a></li><li><a href="rendering.html#punctuation-and-decorations"><span class="secno">10.2.6 </span>Punctuation and decorations</a></li><li><a href="rendering.html#resetting-rules-for-inherited-properties"><span class="secno">10.2.7 </span>Resetting rules for inherited properties</a></li><li><a href="rendering.html#the-hr-element-0"><span class="secno">10.2.8 </span>The <code>hr</code> element</a></li><li><a href="rendering.html#the-fieldset-element-0"><span class="secno">10.2.9 </span>The <code>fieldset</code> element</a></li></ol></li><li><a href="rendering.html#replaced-elements"><span class="secno">10.3 </span>Replaced elements</a>
-    <ol><li><a href="rendering.html#embedded-content-2"><span class="secno">10.3.1 </span>Embedded content</a></li><li><a href="rendering.html#timed-tracks-0"><span class="secno">10.3.2 </span>Timed tracks</a>
-      <ol><li><a href="rendering.html#websrt-cue-text-rendering-rules"><span class="secno">10.3.2.1 </span>WebSRT cue text rendering rules</a></li><li><a href="rendering.html#applying-css-properties-to-websrt-node-objects"><span class="secno">10.3.2.2 </span>Applying CSS properties to <span title="WebSRT Node Object">WebSRT Node Objects</span></a></li><li><a href="rendering.html#css-extensions"><span class="secno">10.3.2.3 </span>CSS extensions</a>
-        <ol><li><a href="rendering.html#the-::cue-pseudo-element"><span class="secno">10.3.2.3.1 </span>The '::cue' pseudo-element</a></li><li><a href="rendering.html#the-::cue-part-pseudo-element"><span class="secno">10.3.2.3.2 </span>The '::cue-part' pseudo-element</a></li></ol></li></ol></li><li><a href="rendering.html#images"><span class="secno">10.3.3 </span>Images</a></li><li><a href="rendering.html#attributes-for-embedded-content-and-images"><span class="secno">10.3.4 </span>Attributes for embedded content and images</a></li><li><a href="rendering.html#image-maps-0"><span class="secno">10.3.5 </span>Image maps</a></li><li><a href="rendering.html#toolbars-0"><span class="secno">10.3.6 </span>Toolbars</a></li></ol></li><li><a href="rendering.html#bindings"><span class="secno">10.4 </span>Bindings</a>
+    <ol><li><a href="rendering.html#embedded-content-2"><span class="secno">10.3.1 </span>Embedded content</a></li><li><a href="rendering.html#timed-text-tracks-0"><span class="secno">10.3.2 </span>Timed text tracks</a>
+      <ol><li><a href="rendering.html#webvtt-cue-text-rendering-rules"><span class="secno">10.3.2.1 </span>WebVTT cue text rendering rules</a></li><li><a href="rendering.html#applying-css-properties-to-webvtt-node-objects"><span class="secno">10.3.2.2 </span>Applying CSS properties to <span title="WebVTT Node Object">WebVTT Node Objects</span></a></li><li><a href="rendering.html#css-extensions"><span class="secno">10.3.2.3 </span>CSS extensions</a>
+        <ol><li><a href="rendering.html#the-::cue-pseudo-element"><span class="secno">10.3.2.3.1 </span>The '::cue' pseudo-element</a></li><li><a href="rendering.html#the-:past-and-:future-pseudo-classes"><span class="secno">10.3.2.3.2 </span>The ':past' and ':future' pseudo-classes</a></li></ol></li></ol></li><li><a href="rendering.html#images"><span class="secno">10.3.3 </span>Images</a></li><li><a href="rendering.html#attributes-for-embedded-content-and-images"><span class="secno">10.3.4 </span>Attributes for embedded content and images</a></li><li><a href="rendering.html#image-maps-0"><span class="secno">10.3.5 </span>Image maps</a></li><li><a href="rendering.html#toolbars-0"><span class="secno">10.3.6 </span>Toolbars</a></li></ol></li><li><a href="rendering.html#bindings"><span class="secno">10.4 </span>Bindings</a>
     <ol><li><a href="rendering.html#introduction-9"><span class="secno">10.4.1 </span>Introduction</a></li><li><a href="rendering.html#the-button-element-0"><span class="secno">10.4.2 </span>The <code>button</code> element</a></li><li><a href="rendering.html#the-details-element-0"><span class="secno">10.4.3 </span>The <code>details</code> element</a></li><li><a href="rendering.html#the-input-element-as-a-text-entry-widget"><span class="secno">10.4.4 </span>The <code>input</code> element as a text entry widget</a></li><li><a href="rendering.html#the-input-element-as-domain-specific-widgets"><span class="secno">10.4.5 </span>The <code>input</code> element as domain-specific widgets</a></li><li><a href="rendering.html#the-input-element-as-a-range-control"><span class="secno">10.4.6 </span>The <code>input</code> element as a range control</a></li><li><a href="rendering.html#the-input-element-as-a-color-well"><span class="secno">10.4.7 </span>The <code>input</code> element as a color well</a></li><li><a href="rendering.html#the-input-element-as-a-check-box-and-radio-button-widgets"><span class="secno">10.4.8 </span>The <code>input</code> element as a check box and radio button widgets</a></li><li><a href="rendering.html#the-input-element-as-a-file-upload-control"><span class="secno">10.4.9 </span>The <code>input</code> element as a file upload control</a></li><li><a href="rendering.html#the-input-element-as-a-button"><span class="secno">10.4.10 </span>The <code>input</code> element as a button</a></li><li><a href="rendering.html#the-marquee-element-0"><span class="secno">10.4.11 </span>The <code>marquee</code> element</a></li><li><a href="rendering.html#the-meter-element-0"><span class="secno">10.4.12 </span>The <code>meter</code> element</a></li><li><a href="rendering.html#the-progress-element-0"><span class="secno">10.4.13 </span>The <code>progress</code> element</a></li><li><a href="rendering.html#the-select-element-0"><span class="secno">10.4.14 </span>The <code>select</code> element</a></li><li><a href="rendering.html#the-textarea-element-0"><span class="secno">10.4.15 </span>The <code>textarea</code> element</a></li><li><a href="rendering.html#the-keygen-element-0"><span class="secno">10.4.16 </span>The <code>keygen</code> element</a></li><li><a href="rendering.html#the-time-element-0"><span class="secno">10.4.17 </span>The <code>time</code> element</a></li></ol></li><li><a href="rendering.html#frames-and-framesets"><span class="secno">10.5 </span>Frames and framesets</a></li><li><a href="rendering.html#interactive-media"><span class="secno">10.6 </span>Interactive media</a>
     <ol><li><a href="rendering.html#links-forms-and-navigation"><span class="secno">10.6.1 </span>Links, forms, and navigation</a></li><li><a href="rendering.html#the-title-attribute-0"><span class="secno">10.6.2 </span>The <code title="attr-title">title</code> attribute</a></li><li><a href="rendering.html#editing-hosts"><span class="secno">10.6.3 </span>Editing hosts</a></li><li><a href="rendering.html#text-rendered-in-native-user-interfaces"><span class="secno">10.6.4 </span>Text rendered in native user interfaces</a></li></ol></li><li><a href="rendering.html#print-media"><span class="secno">10.7 </span>Print media</a></li></ol></li></ol></div><div class="impl">
 
@@ -1419,15 +1422,15 @@ fieldset {
 <!--KEEP-END w3c-html--><!--TT-->
   <p>Any subtitles or captions are expected to be overlayed directly
   on top of their <code><a href="video.html#video">video</a></code> element, as defined by the
-  relevant rendering rules; for <span>WebSRT</span>, those are the
-  <a href="#websrt-cue-text-rendering-rules">WebSRT cue text rendering rules</a> defined below.</p>
+  relevant rendering rules; for <span>WebVTT</span>, those are the
+  <a href="#webvtt-cue-text-rendering-rules">WebVTT cue text rendering rules</a> defined below.</p>
 
   <p>When the user agent starts <a href="video.html#expose-a-user-interface-to-the-user" title="expose a user interface&#10;  to the user">exposing a user interface</a> for a
-  <code><a href="video.html#video">video</a></code> element, user agents should run the <a href="video.html#rules-for-updating-the-timed-track-rendering">rules
-  for updating the timed track rendering</a> of each of the <a href="video.html#timed-track" title="timed track">timed tracks</a> in the <code><a href="video.html#video">video</a></code>
-  element's <a href="video.html#list-of-timed-tracks">list of timed tracks</a> that are <a href="video.html#timed-track-showing" title="timed track showing">showing</a> (e.g., for <a href="video.html#timed-track" title="timed track">timed tracks</a> based on
-  <span>WebSRT</span>, the <a href="#rules-for-updating-the-display-of-websrt-timed-tracks">rules for updating the display of
-  WebSRT timed tracks</a>).</p>
+  <code><a href="video.html#video">video</a></code> element, user agents should run the <a href="video.html#rules-for-updating-the-text-track-rendering">rules
+  for updating the text track rendering</a> of each of the <a href="video.html#text-track" title="text track">text tracks</a> in the <code><a href="video.html#video">video</a></code>
+  element's <a href="video.html#list-of-text-tracks">list of text tracks</a> that are <a href="video.html#text-track-showing" title="text track showing">showing</a> or <a href="video.html#text-track-showing-by-default" title="text&#10;  track showing by default">showing by default</a> (e.g., for <a href="video.html#text-track" title="text track">text tracks</a> based on
+  <span>WebVTT</span>, the <a href="#rules-for-updating-the-display-of-webvtt-text-tracks">rules for updating the display of
+  WebVTT text tracks</a>).</p>
 <!--KEEP-START w3c-html--><!--TT-->
 
   <p class="note">Resizing <code><a href="video.html#video">video</a></code> and <code><a href="the-canvas-element.html#the-canvas-element">canvas</a></code>
@@ -1441,19 +1444,19 @@ iframe:not([seamless]) { border: 2px inset; }</pre>
 
   </div><!--KEEP-END w3c-html--><!--TT--><!--<div data-component="other Hixie drafts (editor: Ian Hickson)">--><div class="impl">
 
-  <h4 id="timed-tracks-0"><span class="secno">10.3.2 </span>Timed tracks</h4><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/9">ISSUE-9</a> (video-accessibility) blocks progress to Last Call</span></p>
+  <h4 id="timed-text-tracks-0"><span class="secno">10.3.2 </span>Timed text tracks</h4>
 
   <p class="note">This section is intended to be moved to its own CSS
   module once an editor is found to run with it.</p>
 
 
-  <h5 id="websrt-cue-text-rendering-rules"><span class="secno">10.3.2.1 </span><dfn>WebSRT cue text rendering rules</dfn></h5>
+  <h5 id="webvtt-cue-text-rendering-rules"><span class="secno">10.3.2.1 </span><dfn>WebVTT cue text rendering rules</dfn></h5>
 
-  <p>The <dfn id="rules-for-updating-the-display-of-websrt-timed-tracks">rules for updating the display of WebSRT timed
-  tracks</dfn> render the <a href="video.html#timed-track" title="timed track">timed
+  <p>The <dfn id="rules-for-updating-the-display-of-webvtt-text-tracks">rules for updating the display of WebVTT text
+  tracks</dfn> render the <a href="video.html#text-track" title="text track">text
   tracks</a> of a <a href="video.html#media-element">media element</a> (specifically, a
   <code><a href="video.html#video">video</a></code> element), or of another playback mechanism, by
-  applying the steps below. All the <a href="video.html#timed-track" title="timed track">timed
+  applying the steps below. All the <a href="video.html#text-track" title="text track">text
   tracks</a> that use these rules for a given <a href="video.html#media-element">media
   element</a>, or other playback mechanism, are rendered together,
   to avoid overlapping subtitles from multiple tracks.</p>
@@ -1484,36 +1487,34 @@ iframe:not([seamless]) { border: 2px inset; }</pre>
    user interface</a> for <var title="">video</var>, but now it is,
    let <var title="">reset</var> be true. Otherwise, let <var title="">reset</var> be false.</p>
 
-   </li><li><p>Let <var title="">tracks</var> be the subset of
-   <var title="">video</var>'s <a href="video.html#list-of-timed-tracks">list of timed tracks</a> that
-   have as their <a href="video.html#rules-for-updating-the-timed-track-rendering">rules for updating the timed track
-   rendering</a> these <a href="#rules-for-updating-the-display-of-websrt-timed-tracks">rules for updating the display of
-   WebSRT timed tracks</a>, and whose <a href="video.html#timed-track-mode">timed track mode</a>
-   is <a href="video.html#timed-track-showing" title="timed track showing">showing</a>.</p></li>
+   </li><li><p>Let <var title="">tracks</var> be the subset of <var title="">video</var>'s <a href="video.html#list-of-text-tracks">list of text tracks</a> that have
+   as their <a href="video.html#rules-for-updating-the-text-track-rendering">rules for updating the text track rendering</a>
+   these <a href="#rules-for-updating-the-display-of-webvtt-text-tracks">rules for updating the display of WebVTT text
+   tracks</a>, and whose <a href="video.html#text-track-mode">text track mode</a> is <a href="video.html#text-track-showing" title="text track showing">showing</a> or <a href="video.html#text-track-showing-by-default" title="text&#10;   track showing by default">showing by default</a>.</p></li>
 
-   <li><p>Let <var title="">cues</var> be an empty list of <a href="video.html#timed-track-cue" title="timed track cue">timed track cues</a>.</p></li>
+   <li><p>Let <var title="">cues</var> be an empty list of <a href="video.html#text-track-cue" title="text track cue">text track cues</a>.</p></li>
 
    <li><p>For each track <var title="">track</var> in <var title="">tracks</var>, append to <var title="">cues</var> all the
-   <a href="video.html#timed-track-cue" title="timed track cue">cues</a> from <var title="">track</var>'s <a href="video.html#timed-track-list-of-cues" title="timed track list of cues">list
-   of cues</a> that have their <a href="video.html#timed-track-cue-active-flag">timed track cue active
+   <a href="video.html#text-track-cue" title="text track cue">cues</a> from <var title="">track</var>'s <a href="video.html#text-track-list-of-cues" title="text track list of cues">list
+   of cues</a> that have their <a href="video.html#text-track-cue-active-flag">text track cue active
    flag</a> set.</p></li>
 
    <li><p>If <var title="">reset</var> is false, then, for each
-   <a href="video.html#timed-track-cue">timed track cue</a> <var title="">cue</var> in <var title="">cues</var>: if <var title="">cue</var>'s <a href="video.html#timed-track-cue-display-state">timed track
+   <a href="video.html#text-track-cue">text track cue</a> <var title="">cue</var> in <var title="">cues</var>: if <var title="">cue</var>'s <a href="video.html#text-track-cue-display-state">text track
    cue display state</a> has a set of CSS boxes, then add those
    boxes to <var title="">output</var>, and remove <var title="">cue</var> from <var title="">cues</var>.</p></li>
 
    <li>
 
-    <p>For each <a href="video.html#timed-track-cue">timed track cue</a> <var title="">cue</var>
+    <p>For each <a href="video.html#text-track-cue">text track cue</a> <var title="">cue</var>
     in <var title="">cues</var> that has not yet had corresponding CSS
-    boxes added to <var title="">output</var>, in <a href="video.html#timed-track-cue-order">timed track
+    boxes added to <var title="">output</var>, in <a href="video.html#text-track-cue-order">text track
     cue order</a>, run the following substeps:</p>
 
-    <ol><li><p>Let <var title="">nodes</var> be the <span>list of WebSRT
-     Node Objects</span> obtained by applying the <span>WebSRT cue
+    <ol><li><p>Let <var title="">nodes</var> be the <span>list of WebVTT
+     Node Objects</span> obtained by applying the <span>WebVTT cue
      text parsing rules</span> to the <var title="">cue</var>'s
-     <a href="video.html#timed-track-cue-text">timed track cue text</a>.</p>
+     <a href="video.html#text-track-cue-text">text track cue text</a>.</p>
 
      </li><li>
 
@@ -1525,8 +1526,8 @@ iframe:not([seamless]) { border: 2px inset; }</pre>
       <ul><li><var title="">nodes</var> represents a single paragraph.</li>
 
        <li>The paragraph's text consists of the concatenation of the
-       values of each <span>WebSRT Text Object</span> in <var title="">nodes</var>, in a pre-order, depth-first traversal,
-       excluding <span title="WebSRT Ruby Text Object">WebSRT Ruby
+       values of each <span>WebVTT Text Object</span> in <var title="">nodes</var>, in a pre-order, depth-first traversal,
+       excluding <span title="WebVTT Ruby Text Object">WebVTT Ruby
        Text Objects</span> and their descendants.</li>
 
       </ul></li>
@@ -1540,12 +1541,12 @@ iframe:not([seamless]) { border: 2px inset; }</pre>
 
      </li>
 
-     <li><p>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is
-     <a href="video.html#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing&#10;     direction">horizontal</a>, then let <var title="">block-flow</var> be 'tb'. Otherwise, if the <a href="video.html#timed-track-cue-writing-direction">timed
-     track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-left-writing-direction" title="timed track&#10;     cue vertical growing left writing direction">vertical growing
+     <li><p>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is
+     <a href="video.html#text-track-cue-horizontal-writing-direction" title="text track cue horizontal writing&#10;     direction">horizontal</a>, then let <var title="">block-flow</var> be 'tb'. Otherwise, if the <a href="video.html#text-track-cue-writing-direction">text
+     track cue writing direction</a> is <a href="video.html#text-track-cue-vertical-growing-left-writing-direction" title="text track&#10;     cue vertical growing left writing direction">vertical growing
      left</a>, then let <var title="">block-flow</var> be
-     'lr'. Otherwise, the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing
-     direction</a> is <a href="video.html#timed-track-cue-vertical-growing-right-writing-direction" title="timed track cue vertical growing&#10;     right writing direction">vertical growing right</a>; let <var title="">block-flow</var> be 'rl'.</p></li>
+     'lr'. Otherwise, the <a href="video.html#text-track-cue-writing-direction">text track cue writing
+     direction</a> is <a href="video.html#text-track-cue-vertical-growing-right-writing-direction" title="text track cue vertical growing&#10;     right writing direction">vertical growing right</a>; let <var title="">block-flow</var> be 'rl'.</p></li>
 
      <li>
 
@@ -1553,144 +1554,120 @@ iframe:not([seamless]) { border: 2px inset; }</pre>
       <var title="">cue</var> as per the appropriate rules from the
       following list:</p>
 
-      <dl class="switch"><dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing direction">horizontal</a>,
-              the <span>timed track cue alignment</span> is <span title="timed track cue start alignment">start</span>,
+      <dl class="switch"><dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-horizontal-writing-direction" title="text track cue horizontal writing direction">horizontal</a>,
+              the <span>text track cue alignment</span> is <span title="text track cue start alignment">start</span>,
               and <var title="">direction</var> is 'ltr'</dt>
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing direction">horizontal</a>,
-              the <span>timed track cue alignment</span> is <span title="timed track cue end alignment">end</span>,
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-horizontal-writing-direction" title="text track cue horizontal writing direction">horizontal</a>,
+              the <span>text track cue alignment</span> is <span title="text track cue end alignment">end</span>,
               and <var title="">direction</var> is 'rtl'</dt>
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-left-writing-direction" title="timed track cue vertical growing left writing direction">vertical growing left</a>,
-              and the <span>timed track cue alignment</span> is <span title="timed track cue start alignment">start</span></dt>
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-right-writing-direction" title="timed track cue vertical growing right writing direction">vertical growing right</a>,
-              and the <span>timed track cue alignment</span> is <span title="timed track cue start alignment">start</span></dt>
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-vertical-growing-left-writing-direction" title="text track cue vertical growing left writing direction">vertical growing left</a>,
+              and the <span>text track cue alignment</span> is <span title="text track cue start alignment">start</span></dt>
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-vertical-growing-right-writing-direction" title="text track cue vertical growing right writing direction">vertical growing right</a>,
+              and the <span>text track cue alignment</span> is <span title="text track cue start alignment">start</span></dt>
        <dd>
-        <p>Let <var title="">maximum size</var> be the <span>timed track cue text position</span> subtracted from 100.</p>
+        <p>Let <var title="">maximum size</var> be the <span>text track cue text position</span> subtracted from 100.</p>
        </dd>
 
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing direction">horizontal</a>,
-              the <span>timed track cue alignment</span> is <span title="timed track cue end alignment">end</span>,
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-horizontal-writing-direction" title="text track cue horizontal writing direction">horizontal</a>,
+              the <span>text track cue alignment</span> is <span title="text track cue end alignment">end</span>,
               and <var title="">direction</var> is 'ltr'</dt>
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing direction">horizontal</a>,
-              the <span>timed track cue alignment</span> is <span title="timed track cue start alignment">start</span>,
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-horizontal-writing-direction" title="text track cue horizontal writing direction">horizontal</a>,
+              the <span>text track cue alignment</span> is <span title="text track cue start alignment">start</span>,
               and <var title="">direction</var> is 'rtl'</dt>
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-left-writing-direction" title="timed track cue vertical growing left writing direction">vertical growing left</a>,
-              and the <span>timed track cue alignment</span> is <span title="timed track cue end alignment">end</span></dt>
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-right-writing-direction" title="timed track cue vertical growing right writing direction">vertical growing right</a>,
-              and the <span>timed track cue alignment</span> is <span title="timed track cue end alignment">end</span></dt>
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-vertical-growing-left-writing-direction" title="text track cue vertical growing left writing direction">vertical growing left</a>,
+              and the <span>text track cue alignment</span> is <span title="text track cue end alignment">end</span></dt>
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-vertical-growing-right-writing-direction" title="text track cue vertical growing right writing direction">vertical growing right</a>,
+              and the <span>text track cue alignment</span> is <span title="text track cue end alignment">end</span></dt>
        <dd>
-        <p>Let <var title="">maximum size</var> be the <span>timed track cue text position</span>.</p>
+        <p>Let <var title="">maximum size</var> be the <span>text track cue text position</span>.</p>
        </dd>
 
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing direction">horizontal</a>,
-              the <span>timed track cue alignment</span> is <span title="timed track cue middle alignment">middle</span>,
-              the <span>timed track cue text position</span> is less than or equal to 50,
-              and <var title="">direction</var> is 'ltr'</dt>
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing direction">horizontal</a>,
-              the <span>timed track cue alignment</span> is <span title="timed track cue middle alignment">middle</span>,
-              the <span>timed track cue text position</span> is greater than <!-- or equal to --> 50,
-              and <var title="">direction</var> is 'rtl'</dt>
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-left-writing-direction" title="timed track cue vertical growing left writing direction">vertical growing left</a>,
-              the <span>timed track cue alignment</span> is <span title="timed track cue middle alignment">middle</span>,
-              and the <span>timed track cue text position</span> is less than or equal to 50</dt>
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-right-writing-direction" title="timed track cue vertical growing right writing direction">vertical growing right</a>,
-              the <span>timed track cue alignment</span> is <span title="timed track cue middle alignment">middle</span>,
-              and the <span>timed track cue text position</span> is less than or equal to 50</dt>
+       <dt>If the <span>text track cue alignment</span> is <span title="text track cue middle alignment">middle</span>,
+              the <span>text track cue text position</span> is less than or equal to 50</dt>
        <dd>
-        <p>Let <var title="">maximum size</var> be the <span>timed track cue text position</span> multiplied by two.</p>
+        <p>Let <var title="">maximum size</var> be the <span>text track cue text position</span> multiplied by two.</p>
        </dd>
 
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing direction">horizontal</a>,
-              the <span>timed track cue alignment</span> is <span title="timed track cue middle alignment">middle</span>,
-              the <span>timed track cue text position</span> is greater than <!-- or equal to --> 50,
-              and <var title="">direction</var> is 'ltr'</dt>
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing direction">horizontal</a>,
-              the <span>timed track cue alignment</span> is <span title="timed track cue middle alignment">middle</span>,
-              the <span>timed track cue text position</span> is less than or equal to 50,
-              and <var title="">direction</var> is 'rtl'</dt>
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-left-writing-direction" title="timed track cue vertical growing left writing direction">vertical growing left</a>,
-              the <span>timed track cue alignment</span> is <span title="timed track cue middle alignment">middle</span>,
-              and the <span>timed track cue text position</span> is greater than <!-- or equal to --> 50</dt>
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-right-writing-direction" title="timed track cue vertical growing right writing direction">vertical growing right</a>,
-              the <span>timed track cue alignment</span> is <span title="timed track cue middle alignment">middle</span>,
-              and the <span>timed track cue text position</span> is greater than <!-- or equal to --> 50</dt>
+       <dt>If the <span>text track cue alignment</span> is <span title="text track cue middle alignment">middle</span>,
+              the <span>text track cue text position</span> is greater than <!-- or equal to --> 50</dt>
        <dd>
-        <p>Let <var title="">maximum size</var> be the result of subtracting <span>timed track cue text position</span> from 100 and then multiplying the result by two.</p>
+        <p>Let <var title="">maximum size</var> be the result of subtracting <span>text track cue text position</span> from 100 and then multiplying the result by two.</p>
        </dd>
 
       </dl></li>
 
-     <li><p>If the <a href="video.html#timed-track-cue-size">timed track cue size</a> is less than <var title="">maximum size</var>, then let <var title="">size</var> be
-     <a href="video.html#timed-track-cue-size">timed track cue size</a>. Otherwise, let <var title="">size</var> be <var title="">maximum size</var>.</p></li>
+     <li><p>If the <a href="video.html#text-track-cue-size">text track cue size</a> is less than <var title="">maximum size</var>, then let <var title="">size</var> be
+     <a href="video.html#text-track-cue-size">text track cue size</a>. Otherwise, let <var title="">size</var> be <var title="">maximum size</var>.</p></li>
 
-     <li><p>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is
-     <a href="video.html#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing&#10;     direction">horizontal</a>, then let <var title="">width</var>
-     be '<var title="">size</var>vw' and <var title="">height</var> be
-     'auto'. Otherwise, let <var title="">width</var> be 'auto' and
-     <var title="">height</var> be '<var title="">size</var>vh'. (These are CSS values used by the next
-     section to set CSS properties for the rendering.)</p></li>
+     <li><p>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is
+     <a href="video.html#text-track-cue-horizontal-writing-direction" title="text track cue horizontal writing&#10;     direction">horizontal</a>, then let <var title="">width</var>
+     be '<var title="">size</var>&#x2009;vw' and <var title="">height</var> be 'auto'. Otherwise, let <var title="">width</var> be 'auto' and <var title="">height</var> be
+     '<var title="">size</var>&#x2009;vh'. (These are CSS values used
+     by the next section to set CSS properties for the rendering; 'vw'
+     and 'vh' are CSS units.) <a href="references.html#refsCSSVALUES">[CSSVALUES]</a></p></li>
 
      <li>
 
       <p>Determine the value of <var title="">x-position</var> or <var title="">y-position</var> for <var title="">cue</var> as per the
       appropriate rules from the following list:</p>
 
-      <dl class="switch"><dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing direction">horizontal</a>,
-              the <span>timed track cue alignment</span> is <span title="timed track cue start alignment">start</span>,
+      <dl class="switch"><dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-horizontal-writing-direction" title="text track cue horizontal writing direction">horizontal</a>,
+              the <span>text track cue alignment</span> is <span title="text track cue start alignment">start</span>,
               and <var title="">direction</var> is 'ltr'</dt>
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing direction">horizontal</a>,
-              the <span>timed track cue alignment</span> is <span title="timed track cue end alignment">end</span>,
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-horizontal-writing-direction" title="text track cue horizontal writing direction">horizontal</a>,
+              the <span>text track cue alignment</span> is <span title="text track cue end alignment">end</span>,
               and <var title="">direction</var> is 'rtl'</dt>
        <dd>
-        <p>Let <var title="">x-position</var> be the <span>timed track cue text position</span>.</p>
+        <p>Let <var title="">x-position</var> be the <span>text track cue text position</span>.</p>
        </dd>
 
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing direction">horizontal</a>,
-              the <span>timed track cue alignment</span> is <span title="timed track cue end alignment">end</span>,
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-horizontal-writing-direction" title="text track cue horizontal writing direction">horizontal</a>,
+              the <span>text track cue alignment</span> is <span title="text track cue end alignment">end</span>,
               and <var title="">direction</var> is 'ltr'</dt>
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing direction">horizontal</a>,
-              the <span>timed track cue alignment</span> is <span title="timed track cue start alignment">start</span>,
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-horizontal-writing-direction" title="text track cue horizontal writing direction">horizontal</a>,
+              the <span>text track cue alignment</span> is <span title="text track cue start alignment">start</span>,
               and <var title="">direction</var> is 'rtl'</dt>
        <dd>
-        <p>Let <var title="">x-position</var> be the <span>timed track cue text position</span> subtracted from 100.</p>
+        <p>Let <var title="">x-position</var> be the <span>text track cue text position</span> subtracted from 100.</p>
        </dd>
 
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-left-writing-direction" title="timed track cue vertical growing left writing direction">vertical growing left</a>,
-              and the <span>timed track cue alignment</span> is <span title="timed track cue start alignment">start</span></dt>
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-right-writing-direction" title="timed track cue vertical growing right writing direction">vertical growing right</a>,
-              and the <span>timed track cue alignment</span> is <span title="timed track cue start alignment">start</span></dt>
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-vertical-growing-left-writing-direction" title="text track cue vertical growing left writing direction">vertical growing left</a>,
+              and the <span>text track cue alignment</span> is <span title="text track cue start alignment">start</span></dt>
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-vertical-growing-right-writing-direction" title="text track cue vertical growing right writing direction">vertical growing right</a>,
+              and the <span>text track cue alignment</span> is <span title="text track cue start alignment">start</span></dt>
        <dd>
-        <p>Let <var title="">y-position</var> be the <span>timed track cue text position</span>.</p>
+        <p>Let <var title="">y-position</var> be the <span>text track cue text position</span>.</p>
        </dd>
 
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-left-writing-direction" title="timed track cue vertical growing left writing direction">vertical growing left</a>,
-              and the <span>timed track cue alignment</span> is <span title="timed track cue end alignment">end</span></dt>
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-right-writing-direction" title="timed track cue vertical growing right writing direction">vertical growing right</a>,
-              and the <span>timed track cue alignment</span> is <span title="timed track cue end alignment">end</span></dt>
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-vertical-growing-left-writing-direction" title="text track cue vertical growing left writing direction">vertical growing left</a>,
+              and the <span>text track cue alignment</span> is <span title="text track cue end alignment">end</span></dt>
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-vertical-growing-right-writing-direction" title="text track cue vertical growing right writing direction">vertical growing right</a>,
+              and the <span>text track cue alignment</span> is <span title="text track cue end alignment">end</span></dt>
        <dd>
-        <p>Let <var title="">y-position</var> be the <span>timed track cue text position</span> subtracted from 100.</p>
+        <p>Let <var title="">y-position</var> be the <span>text track cue text position</span> subtracted from 100.</p>
        </dd>
 
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing direction">horizontal</a>,
-              the <span>timed track cue alignment</span> is <span title="timed track cue middle alignment">middle</span>,
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-horizontal-writing-direction" title="text track cue horizontal writing direction">horizontal</a>,
+              the <span>text track cue alignment</span> is <span title="text track cue middle alignment">middle</span>,
               and <var title="">direction</var> is 'ltr'</dt>
        <dd>
-        <p>Let <var title="">x-position</var> be the <span>timed track cue text position</span> minus half of <var title="">size</var>.</p>
+        <p>Let <var title="">x-position</var> be the <span>text track cue text position</span> minus half of <var title="">size</var>.</p>
        </dd>
 
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing direction">horizontal</a>,
-              the <span>timed track cue alignment</span> is <span title="timed track cue middle alignment">middle</span>,
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-horizontal-writing-direction" title="text track cue horizontal writing direction">horizontal</a>,
+              the <span>text track cue alignment</span> is <span title="text track cue middle alignment">middle</span>,
               and <var title="">direction</var> is 'rtl'</dt>
        <dd>
-        <p>Let <var title="">x-position-reverse</var> be the <span>timed track cue text position</span> minus half of <var title="">size</var>.</p>
+        <p>Let <var title="">x-position-reverse</var> be the <span>text track cue text position</span> minus half of <var title="">size</var>.</p>
         <p>Let <var title="">x-position</var> be <var title="">x-position-reverse</var> subtracted from 100.</p>
        </dd>
 
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-left-writing-direction" title="timed track cue vertical growing left writing direction">vertical growing left</a>,
-              and the <span>timed track cue alignment</span> is <span title="timed track cue middle alignment">middle</span></dt>
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-right-writing-direction" title="timed track cue vertical growing right writing direction">vertical growing right</a>,
-              and the <span>timed track cue alignment</span> is <span title="timed track cue middle alignment">middle</span></dt>
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-vertical-growing-left-writing-direction" title="text track cue vertical growing left writing direction">vertical growing left</a>,
+              and the <span>text track cue alignment</span> is <span title="text track cue middle alignment">middle</span></dt>
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-vertical-growing-right-writing-direction" title="text track cue vertical growing right writing direction">vertical growing right</a>,
+              and the <span>text track cue alignment</span> is <span title="text track cue middle alignment">middle</span></dt>
        <dd>
-        <p>Let <var title="">y-position</var> be the <span>timed track cue text position</span> minus half of <var title="">size</var>.</p>
+        <p>Let <var title="">y-position</var> be the <span>text track cue text position</span> minus half of <var title="">size</var>.</p>
        </dd>
 
       </dl></li>
@@ -1701,39 +1678,40 @@ iframe:not([seamless]) { border: 2px inset; }</pre>
       not yet calculated for <var title="">cue</var> as per the
       appropriate rules from the following list:</p>
 
-      <dl class="switch"><dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing direction">horizontal</a>,
-              and the <span>timed track cue snap-to-lines flag</span> is set</dt>
+      <dl class="switch"><dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-horizontal-writing-direction" title="text track cue horizontal writing direction">horizontal</a>,
+              and the <span>text track cue snap-to-lines flag</span> is set</dt>
        <dd>
         <p>Let <var title="">y-position</var> be zero.</p>
        </dd>
 
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing direction">horizontal</a>,
-              and the <span>timed track cue snap-to-lines flag</span> is not set</dt>
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-horizontal-writing-direction" title="text track cue horizontal writing direction">horizontal</a>,
+              and the <span>text track cue snap-to-lines flag</span> is not set</dt>
        <dd>
-        <p>Let <var title="">y-position</var> be the <span>timed track cue line position</span>.</p>
+        <p>Let <var title="">y-position</var> be the <span>text track cue line position</span>.</p>
        </dd>
 
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-left-writing-direction" title="timed track cue vertical growing left writing direction">vertical growing left</a>,
-              and the <span>timed track cue snap-to-lines flag</span> is set</dt>
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-right-writing-direction" title="timed track cue vertical growing right writing direction">vertical growing right</a>,
-              and the <span>timed track cue snap-to-lines flag</span> is set</dt>
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-vertical-growing-left-writing-direction" title="text track cue vertical growing left writing direction">vertical growing left</a>,
+              and the <span>text track cue snap-to-lines flag</span> is set</dt>
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-vertical-growing-right-writing-direction" title="text track cue vertical growing right writing direction">vertical growing right</a>,
+              and the <span>text track cue snap-to-lines flag</span> is set</dt>
        <dd>
         <p>Let <var title="">x-position</var> be zero.</p>
        </dd>
 
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-left-writing-direction" title="timed track cue vertical growing left writing direction">vertical growing left</a>,
-              and the <span>timed track cue snap-to-lines flag</span> is not set</dt>
-       <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-right-writing-direction" title="timed track cue vertical growing right writing direction">vertical growing right</a>,
-              and the <span>timed track cue snap-to-lines flag</span> is not set</dt>
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-vertical-growing-left-writing-direction" title="text track cue vertical growing left writing direction">vertical growing left</a>,
+              and the <span>text track cue snap-to-lines flag</span> is not set</dt>
+       <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-vertical-growing-right-writing-direction" title="text track cue vertical growing right writing direction">vertical growing right</a>,
+              and the <span>text track cue snap-to-lines flag</span> is not set</dt>
        <dd>
-        <p>Let <var title="">x-position</var> be the <span>timed track cue line position</span>.</p>
+        <p>Let <var title="">x-position</var> be the <span>text track cue line position</span>.</p>
        </dd>
 
       </dl></li>
 
-     <li><p>Let <var title="">left</var> be '<var title="">x-position</var>vw' and <var title="">top</var> be '<var title="">y-position</var>vh'. (These again are CSS values used by
-     the next section to set CSS properties for the
-     rendering.)</p></li>
+     <li><p>Let <var title="">left</var> be '<var title="">x-position</var>&#x2009;vw' and <var title="">top</var>
+     be '<var title="">y-position</var>&#x2009;vh'. (These again are
+     CSS values used by the next section to set CSS properties for the
+     rendering; 'vw' and 'vh' are CSS units.) <a href="references.html#refsCSSVALUES">[CSSVALUES]</a></p></li>
 
      <li>
 
@@ -1741,31 +1719,33 @@ iframe:not([seamless]) { border: 2px inset; }</pre>
       obtaining a set of CSS boxes positioned relative to an initial
       containing block: <a href="references.html#refsCSS">[CSS]</a></p>
 
-      <ul><li>The <i>document tree</i> is the tree of <span title="WebSRT&#10;       Node Object">WebSRT Node Objects</span> rooted at <var title="">nodes</var>.</li>
+      <ul><li><p>The <i>document tree</i> is the tree of <span title="WebVTT Node Object">WebVTT Node Objects</span> rooted at
+       <var title="">nodes</var>.</p></li>
 
-       <li>For the purposes of processing by the CSS specification,
-       <span title="WebSRT Internal Node Object">WebSRT Internal Node
+       <li><p>For the purposes of processing by the CSS specification,
+       <span title="WebVTT Internal Node Object">WebVTT Internal Node
        Objects</span> are equivalent to elements with the same
-       contents. The name of these elements is not explicitly
-       specified. These elements have no attributes.</li>
+       contents.</p></li>
 
        <li>For the purposes of processing by the CSS
-       specification, <span title="WebSRT Text Object">WebSRT Text
+       specification, <span title="WebVTT Text Object">WebVTT Text
        Objects</span> are equivalent to text nodes.</li>
 
-       <li>No style sheets are associated with <var title="">nodes</var>.</li>
+       <li>No style sheets are associated with <var title="">nodes</var>. (The nodes are subsequently restyled
+       using style sheets after their boxes are generated, as
+       described below.)</li>
 
        <li>The children of the <var title="">nodes</var> must be
        wrapped in an anonymous box whose 'display' property has the
-       value 'inline'. This is the <dfn id="websrt-cue-background-box">WebSRT cue background
+       value 'inline'. This is the <dfn id="webvtt-cue-background-box">WebVTT cue background
        box</dfn>.</li>
 
-       <li>Runs of children of <span title="WebSRT Ruby Object">WebSRT
-       Ruby Objects</span> that are not <span title="WebSRT Ruby Text&#10;       Object">WebSRT Ruby Text Objects</span> must be wrapped in
+       <li>Runs of children of <span title="WebVTT Ruby Object">WebVTT
+       Ruby Objects</span> that are not <span title="WebVTT Ruby Text&#10;       Object">WebVTT Ruby Text Objects</span> must be wrapped in
        anonymous boxes whose 'display' property has the value
        'ruby-base'. <a href="references.html#refsCSSRUBY">[CSSRUBY]</a></li>
 
-       <li>Properties on <span title="WebSRT Node Object">WebSRT Node
+       <li>Properties on <span title="WebVTT Node Object">WebVTT Node
        Objects</span> have their values set as defined in the next
        section. (That section uses some of the variables whose values
        were calculated earlier in this algorithm.)</li>
@@ -1792,22 +1772,22 @@ iframe:not([seamless]) { border: 2px inset; }</pre>
       <p>Adjust the positions of <var title="">boxes</var> according
       to the appropriate steps from the following list:</p>
 
-      <dl class="switch"><dt>If <var title="">cue</var>'s <span>timed track cue snap-to-lines flag</span> is set</dt>
+      <dl class="switch"><dt>If <var title="">cue</var>'s <span>text track cue snap-to-lines flag</span> is set</dt>
 
        <dd>
 
         <p>Many of the steps in this algorithm vary according to the
-        <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a>. Steps labeled
+        <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a>. Steps labeled
         "<strong>Horizontal</strong>" must be followed only when the
-        <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing&#10;        direction">horizontal</a>, steps labeled
+        <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-horizontal-writing-direction" title="text track cue horizontal writing&#10;        direction">horizontal</a>, steps labeled
         "<strong>Vertical</strong>" must be followed when the
-        <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is either <a href="video.html#timed-track-cue-vertical-growing-left-writing-direction" title="timed track cue vertical growing left writing&#10;        direction">vertical growing left</a> or <a href="video.html#timed-track-cue-vertical-growing-right-writing-direction" title="timed&#10;        track cue vertical growing right writing direction">vertical
+        <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is either <a href="video.html#text-track-cue-vertical-growing-left-writing-direction" title="text track cue vertical growing left writing&#10;        direction">vertical growing left</a> or <a href="video.html#text-track-cue-vertical-growing-right-writing-direction" title="text&#10;        track cue vertical growing right writing direction">vertical
         growing right</a>, steps labeled "<strong>Vertical Growing
-        Left</strong>" must be followed only when the <a href="video.html#timed-track-cue-writing-direction">timed
-        track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-left-writing-direction" title="timed track&#10;        cue vertical growing left writing direction">vertical growing
+        Left</strong>" must be followed only when the <a href="video.html#text-track-cue-writing-direction">text
+        track cue writing direction</a> is <a href="video.html#text-track-cue-vertical-growing-left-writing-direction" title="text track&#10;        cue vertical growing left writing direction">vertical growing
         left</a>, and steps labeled "<strong>Vertical Growing
-        Right</strong>" must be followed only when the <a href="video.html#timed-track-cue-writing-direction">timed
-        track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-right-writing-direction" title="timed track&#10;        cue vertical growing right writing direction">vertical growing
+        Right</strong>" must be followed only when the <a href="video.html#text-track-cue-writing-direction">text
+        track cue writing direction</a> is <a href="video.html#text-track-cue-vertical-growing-right-writing-direction" title="text track&#10;        cue vertical growing right writing direction">vertical growing
         right</a>.</p>
 
         <ol><li>
@@ -1824,7 +1804,7 @@ iframe:not([seamless]) { border: 2px inset; }</pre>
          step labeled <i>done positioning</i> below.</p></li>
 
          <li><p>Let <var title="">line position</var> be the
-         <span>timed track cue line position</span>.</p></li>
+         <span>text track cue line position</span>.</p></li>
 
          <li><p><strong>Vertical Growing Left</strong>: Add one to
          <var title="">line position</var> then negate it.</p></li>
@@ -1913,7 +1893,7 @@ iframe:not([seamless]) { border: 2px inset; }</pre>
 
         </ol></dd>
 
-       <dt>If <var title="">cue</var>'s <span>timed track cue snap-to-lines flag</span> is not set</dt>
+       <dt>If <var title="">cue</var>'s <span>text track cue snap-to-lines flag</span> is not set</dt>
        <dd>
 
         <ol><li>
@@ -1921,35 +1901,35 @@ iframe:not([seamless]) { border: 2px inset; }</pre>
           <p>Set up <var title="">x</var> and <var title="">y</var> as
           follows:</p>
 
-          <dl class="switch"><dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing direction">horizontal</a>,
+          <dl class="switch"><dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-horizontal-writing-direction" title="text track cue horizontal writing direction">horizontal</a>,
                   and <var title="">direction</var> is 'ltr'</dt>
            <dd>
             <p>Let <var title="">x</var> be a percentage given by the
-            <span>timed track cue text position</span>, and let <var title="">y</var> be a percentage given by the <span>timed
+            <span>text track cue text position</span>, and let <var title="">y</var> be a percentage given by the <span>text
             track cue line position</span>.</p>
            </dd>
 
-           <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-horizontal-writing-direction" title="timed track cue horizontal writing direction">horizontal</a>,
+           <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-horizontal-writing-direction" title="text track cue horizontal writing direction">horizontal</a>,
                   and <var title="">direction</var> is 'rtl'</dt>
            <dd>
             <p>Let <var title="">x</var> be a percentage given by the
-            <span>timed track cue text position</span> subtracted from
+            <span>text track cue text position</span> subtracted from
             100, and let <var title="">y</var> be a percentage given
-            by the <span>timed track cue line position</span>.</p>
+            by the <span>text track cue line position</span>.</p>
            </dd>
 
-           <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-left-writing-direction" title="timed track cue vertical growing left writing direction">vertical growing left</a></dt>
+           <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-vertical-growing-left-writing-direction" title="text track cue vertical growing left writing direction">vertical growing left</a></dt>
            <dd>
             <p>Let <var title="">x</var> be a percentage given by the
-            <span>timed track cue line position</span> subtracted from
+            <span>text track cue line position</span> subtracted from
             100, and let <var title="">y</var> be a percentage given
-            by the <span>timed track cue text position</span>.</p>
+            by the <span>text track cue text position</span>.</p>
            </dd>
 
-           <dt>If the <a href="video.html#timed-track-cue-writing-direction">timed track cue writing direction</a> is <a href="video.html#timed-track-cue-vertical-growing-right-writing-direction" title="timed track cue vertical growing right writing direction">vertical growing right</a></dt>
+           <dt>If the <a href="video.html#text-track-cue-writing-direction">text track cue writing direction</a> is <a href="video.html#text-track-cue-vertical-growing-right-writing-direction" title="text track cue vertical growing right writing direction">vertical growing right</a></dt>
            <dd>
             <p>Let <var title="">x</var> be a percentage given by the
-            <span>timed track cue line position</span>, and let <var title="">y</var> be a percentage given by the <span>timed
+            <span>text track cue line position</span>, and let <var title="">y</var> be a percentage given by the <span>text
             track cue text position</span>.</p>
            </dd>
 
@@ -1994,7 +1974,7 @@ iframe:not([seamless]) { border: 2px inset; }</pre>
      not completely fit inside <var title="">video</var>'s rendering
      area, remove those offending line boxes from <var title="">boxes</var>.</p></li>
 
-     <li><p>Let <var title="">cue</var>'s <a href="video.html#timed-track-cue-display-state">timed track cue
+     <li><p>Let <var title="">cue</var>'s <a href="video.html#text-track-cue-display-state">text track cue
      display state</a> have the CSS boxes in <var title="">boxes</var>.</p></li>
 
      <li><p>Add the CSS boxes in <var title="">boxes</var> to <var title="">output</var>.</p></li>
@@ -2003,13 +1983,13 @@ iframe:not([seamless]) { border: 2px inset; }</pre>
 
    <li><p>Return <var title="">output</var>.</p></li>
 
-  </ol><h5 id="applying-css-properties-to-websrt-node-objects"><span class="secno">10.3.2.2 </span>Applying CSS properties to <span title="WebSRT Node Object">WebSRT Node Objects</span></h5>
+  </ol><h5 id="applying-css-properties-to-webvtt-node-objects"><span class="secno">10.3.2.2 </span>Applying CSS properties to <span title="WebVTT Node Object">WebVTT Node Objects</span></h5>
 
-  <p>When following the <a href="#rules-for-updating-the-display-of-websrt-timed-tracks">rules for updating the display of WebSRT
-  timed tracks</a>, user agents must set properties of <span title="WebSRT Node Object">WebSRT Node Objects</span> as defined in
+  <p>When following the <a href="#rules-for-updating-the-display-of-webvtt-text-tracks">rules for updating the display of WebVTT
+  text tracks</a>, user agents must set properties of <span title="WebVTT Node Object">WebVTT Node Objects</span> as defined in
   this section. <a href="references.html#refsCSS">[CSS]</a></p>
 
-  <p>On the (root) <span>List of WebSRT Node Objects</span>, the
+  <p>On the (root) <span>List of WebVTT Node Objects</span>, the
   'position' property must be set to 'absolute', the 'direction'
   property must be set to <var title="">direction</var>, the
   'block-flow' property must be set to <var title="">block-flow</var>,
@@ -2017,31 +1997,31 @@ iframe:not([seamless]) { border: 2px inset; }</pre>
   'left' property must be set to <var title="">left</var>, the 'width'
   property must be set to <var title="">width</var>, and the 'height'
   property must be set to <var title="">height</var>, where <var title="">direction</var>, <var title="">block-flow</var>, <var title="">top</var>, <var title="">left</var>, <var title="">width</var>, and <var title="">height</var> are the values
-  with those names determined by the <a href="#rules-for-updating-the-display-of-websrt-timed-tracks">rules for updating the
-  display of WebSRT timed tracks</a> for the <a href="video.html#timed-track-cue">timed track
-  cue</a> from whose <a href="video.html#timed-track-cue-text" title="timed track cue text">text</a>
-  the <span>List of WebSRT Node Objects</span> was constructed.</p>
+  with those names determined by the <a href="#rules-for-updating-the-display-of-webvtt-text-tracks">rules for updating the
+  display of WebVTT text tracks</a> for the <a href="video.html#text-track-cue">text track
+  cue</a> from whose <a href="video.html#text-track-cue-text" title="text track cue text">text</a>
+  the <span>List of WebVTT Node Objects</span> was constructed.</p>
 
-  <p>The 'font' shorthand property on the (root) <span>List of WebSRT
+  <p>The 'font' shorthand property on the (root) <span>List of WebVTT
   Node Objects</span> must be set to '0.1vh sans-serif'. <a href="references.html#refsCSSRUBY">[CSSRUBY]</a> <a href="references.html#refsCSSVALUES">[CSSVALUES]</a></p>
 
-  <p>The 'color' property on the (root) <span>List of WebSRT Node
+  <p>The 'color' property on the (root) <span>List of WebVTT Node
   Objects</span> must be set to 'rgba(255,255,255,0)'. <a href="references.html#refsCSSCOLOR">[CSSCOLOR]</a></p>
 
-  <p>The 'background' shorthand property on the <a href="#websrt-cue-background-box">WebSRT cue
+  <p>The 'background' shorthand property on the <a href="#webvtt-cue-background-box">WebVTT cue
   background box</a> must be set to 'rgba(0,0,0,0.8)'. <a href="references.html#refsCSSCOLOR">[CSSCOLOR]</a></p>
 
   <p>A text outline or stroke may also be set on the (root) <span>List
-  of WebSRT Node Objects</span>, if supported.</p> <!-- 'text-outline'
+  of WebVTT Node Objects</span>, if supported.</p> <!-- 'text-outline'
   is in CSS3 Text, but Tab says that's awaiting medical attention. -->
 
-  <p>The 'font-style' property on <span title="WebSRT Italic&#10;  Object">WebSRT Italic Objects</span> must be set to 'italic'.</p>
-  <p>The 'font-weight' property on <span title="WebSRT Bold&#10;  Object">WebSRT Bold Objects</span> must be set to 'bold'.</p>
+  <p>The 'font-style' property on <span title="WebVTT Italic&#10;  Object">WebVTT Italic Objects</span> must be set to 'italic'.</p>
+  <p>The 'font-weight' property on <span title="WebVTT Bold&#10;  Object">WebVTT Bold Objects</span> must be set to 'bold'.</p>
 
-  <p>The 'display' property on <span title="WebSRT Ruby Object">WebSRT
+  <p>The 'display' property on <span title="WebVTT Ruby Object">WebVTT
   Ruby Objects</span> must be set to 'ruby'. <a href="references.html#refsCSSRUBY">[CSSRUBY]</a></p>
 
-  <p>The 'display' property on <span title="WebSRT Ruby Text&#10;  Object">WebSRT Ruby Text Objects</span> must be set to
+  <p>The 'display' property on <span title="WebVTT Ruby Text&#10;  Object">WebVTT Ruby Text Objects</span> must be set to
   'ruby-text'. <a href="references.html#refsCSSRUBY">[CSSRUBY]</a></p>
 
   <p>If there are style sheets that apply to the <a href="video.html#media-element">media
@@ -2049,26 +2029,26 @@ iframe:not([seamless]) { border: 2px inset; }</pre>
   interpreted as defined in the next section.</p>
 
   <p>All other non-inherited properties must be set to their initial
-  values; inherited properties on the root <span>List of WebSRT Node
+  values; inherited properties on the root <span>List of WebVTT Node
   Objects</span> must inherit their values from the <a href="video.html#media-element">media
-  element</a> for which the <a href="video.html#timed-track-cue">timed track cue</a> is being
+  element</a> for which the <a href="video.html#text-track-cue">text track cue</a> is being
   rendered, if any. If there is no <a href="video.html#media-element">media element</a> (i.e. if
-  the <a href="video.html#timed-track">timed track</a> is being rendered for another media
+  the <a href="video.html#text-track">text track</a> is being rendered for another media
   playback mechanism), then inherited properties on the root
-  <span>List of WebSRT Node Objects</span> must take their initial
+  <span>List of WebVTT Node Objects</span> must take their initial
   values.</p>
 
 
   <h5 id="css-extensions"><span class="secno">10.3.2.3 </span>CSS extensions</h5>
 
-  <p>When a user agent is rendering one or more <a href="video.html#timed-track-cue" title="timed&#10;  track cue">timed track cues</a> according to the <a href="#websrt-cue-text-rendering-rules">WebSRT cue
-  text rendering rules</a>, <span title="WebSRT Node Object">WebSRT
-  Node Objects</span> in the <span>list of WebSRT Node Objects</span>
+  <p>When a user agent is rendering one or more <a href="video.html#text-track-cue" title="text&#10;  track cue">text track cues</a> according to the <a href="#webvtt-cue-text-rendering-rules">WebVTT cue
+  text rendering rules</a>, <span title="WebVTT Node Object">WebVTT
+  Node Objects</span> in the <span>list of WebVTT Node Objects</span>
   used in the rendering can be matched by certain pseudo-selectors as
-  defined below. These selector can begin or stop matching individual
-  <span title="WebSRT Node Object">WebSRT Node Objects</span> while a
-  <a href="video.html#timed-track-cue" title="timed track cue">cue</a> is being rendered, even in
-  between applications of the <a href="#websrt-cue-text-rendering-rules">WebSRT cue text rendering
+  defined below. These selectors can begin or stop matching individual
+  <span title="WebVTT Node Object">WebVTT Node Objects</span> while a
+  <a href="video.html#text-track-cue" title="text track cue">cue</a> is being rendered, even in
+  between applications of the <a href="#webvtt-cue-text-rendering-rules">WebVTT cue text rendering
   rules</a> (which are only run when the set of active cues
   changes). User agents that support the pseudo-element described
   below must dynamically update renderings accordingly.</p>
@@ -2076,28 +2056,30 @@ iframe:not([seamless]) { border: 2px inset; }</pre>
   <p>Pseudo-elements apply to elements that are matched by
   selectors. For the purpose of this section, that element is the
   <i>matched element</i>. The pseudo-elements defined in the following
-  sections affect the styling of parts of <a href="video.html#timed-track-cue" title="timed track&#10;  cue">timed track cues</a> that are being rendered for the
+  sections affect the styling of parts of <a href="video.html#text-track-cue" title="text track&#10;  cue">text track cues</a> that are being rendered for the
   <i>matched element</i>.</p>
 
   <p class="note">If the <i>matched element</i> is not a
   <code><a href="video.html#video">video</a></code> element, the pseudo-elements defined below won't
   have any effect according to this specification.</p>
 
+  <p>A CSS user agent that implements the <a href="video.html#text-track" title="text&#10;  track">text tracks</a> model must implement the '::cue' and
+  '::cue(<var title="">selector</var>)' pseudo-elements, and the
+  ':past' and ':future' pseudo-classes.</p>
+
 
   <h6 id="the-::cue-pseudo-element"><span class="secno">10.3.2.3.1 </span>The '::cue' pseudo-element</h6>
 
-  <p>A CSS user agent that implemented the <a href="video.html#timed-track" title="timed&#10;  track">timed tracks</a> model must implement the '::cue'
-  pseudo-element.</p>
+  <p>The '<dfn id="pseudo-cue" title="pseudo-cue">::cue</dfn>' pseudo-element (with no
+  argument) matches any <span>List of WebVTT Node Objects</span>
+  constructed for the <i>matched element</i>, with the exception that
+  the properties corresponding to the 'background' shorthand must be
+  applied to the <a href="#webvtt-cue-background-box">WebVTT cue background box</a> rather than
+  the <span>List of WebVTT Node Objects</span>.</p>
 
-  <p>The '<dfn id="pseudo-cue" title="pseudo-cue">::cue</dfn>' pseudo-element matches
-  any <span>List of WebSRT Node Objects</span> constructed for the
-  <i>matched element</i>, with the exception that the properties
-  corresponding to the 'background' shorthand must be applied to the
-  <a href="#websrt-cue-background-box">WebSRT cue background box</a> rather than the <span>List of
-  WebSRT Node Objects</span>.</p>
-
-  <p>The following properties apply to the '::cue' pseudo-element;
-  other properties set on the pseudo-element must be ignored:</p>
+  <p>The following properties apply to the '::cue' pseudo-element with
+  no argument; other properties set on the pseudo-element must be
+  ignored:</p>
 
   <ul class="brief"><li>'color'</li>
    <li>'text-shadow'</li>
@@ -2113,131 +2095,75 @@ iframe:not([seamless]) { border: 2px inset; }</pre>
           min-height, max-width, min-width, orphans, overflow,
           page-break-*, text-align, unicode-bidi, widows, z-index
    -->
-  </ul><h6 id="the-::cue-part-pseudo-element"><span class="secno">10.3.2.3.2 </span>The '::cue-part' pseudo-element</h6>
+  </ul><p>The '<dfn id="pseudo-cue-selector" title="pseudo-cue-selector">::cue(<var title="">selector</var>)</dfn>' pseudo-element with an argument must
+  have an argument that consists of a group of selectors. It matches
+  any <span>WebVTT Internal Node Object</span> constructed for the
+  <i>matched element</i> that also matches the given group of
+  selectors, with the nodes being treated as follows:</p>
 
-  <p>A CSS user agent that implemented the <a href="video.html#timed-track" title="timed&#10;  track">timed tracks</a> model must implement the '::cue-part(<var title="">filter</var>)' pseudo-element.</p>
+  <ul><li><p>The <i>document tree</i> against which the selectors are
+   matched is the tree of <span title="WebVTT Node Object">WebVTT Node
+   Objects</span> rooted at the <span>list of WebVTT Node
+   Objects</span> for the cue.</p></li>
 
-  <p>The '<dfn id="pseudo-cue-part" title="pseudo-cue-part">::cue-part(<var title="">argument</var>)</dfn>' pseudo-element matches any
-  <span>WebSRT Node Object</span> constructed for the <i>matched
-  element</i> that matches the given <var title="">argument</var>.</p>
+   <li><p><span title="WebVTT Internal Node Object">WebVTT Internal
+   Node Objects</span> are elements in the tree.</p></li>
 
-  <p>The <var title="">argument</var> must match the syntax
-  "&lt;voice&gt;&#xA0;||&#xA0;&lt;part&gt;&#xA0;||&#xA0;&lt;position&gt;&#xA0;||&#xA0;&lt;future-compatibility&gt;". <a href="references.html#refsCSS">[CSS]</a></p>
-  
-  <p>The "&lt;voice&gt;" component must be either a non-negative
-  &lt;integer&gt; or one of the keywords "<code title="pseudo-cue-part-narrator"><a href="#pseudo-cue-part-narrator">narrator</a></code>", "<code title="pseudo-cue-part-music"><a href="#pseudo-cue-part-music">music</a></code>", "<code title="pseudo-cue-part-lyric"><a href="#pseudo-cue-part-lyric">lyric</a></code>", "<code title="pseudo-cue-part-sound"><a href="#pseudo-cue-part-sound">sound</a></code>", "<code title="pseudo-cue-part-comment"><a href="#pseudo-cue-part-comment">comment</a></code>", or "<code title="pseudo-cue-part-credit"><a href="#pseudo-cue-part-credit">credit</a></code>".</p>
+   <li><span title="WebVTT Leaf Node Object">WebVTT Leaf Node
+   Objects</span> cannot be matched.</li>
 
-  <p>The "&lt;part&gt;" component must be one of the keywords "<code title="pseudo-cue-part-i"><a href="#pseudo-cue-part-i">i</a></code>", "<code title="pseudo-cue-part-b"><a href="#pseudo-cue-part-b">b</a></code>", "<code title="pseudo-cue-part-ruby"><a href="#pseudo-cue-part-ruby">ruby</a></code>", or "<code title="pseudo-cue-part-rt"><a href="#pseudo-cue-part-rt">rt</a></code>".</p>
+   <li>
 
-  <p>The "&lt;position&gt;" component must be one of the keywords "<code title="pseudo-cue-part-past"><a href="#pseudo-cue-part-past">past</a></code>" or "<code title="pseudo-cue-part-future"><a href="#pseudo-cue-part-future">future</a></code>".</p>
+    <p>For the purposes of element type selectors, the names of <span title="WebVTT Internal Node Object">WebVTT Internal Node
+    Objects</span> are as given by the following table, where objects
+    having the concrete class given in a cell in the first column have
+    the name given by the second column of the same row:</p>
 
-  <p>The "&lt;future-compatibility&gt;" component can be any
-  identifier.</p>
+    <table><thead><tr><th>Concrete class
+       </th><th>Name
 
-  <p>Each component of <var title="">argument</var> restricts which
-  <span title="WebSRT Node Object">WebSRT Node Objects</span> are
-  matched by the pseudo-element, as follows:</p>
+     </th></tr></thead><tbody><tr><td><span title="WebVTT Class Object">WebVTT Class Objects</span>
+       </td><td><code title="">c</code>
 
-  <dl><dt>An integer greater than or equal to zero</dt>
-   <dd>
-    <p>Restricts the pseudo-element to only matching <span title="WebSRT Node Object">WebSRT Node Objects</span> from <a href="video.html#timed-track-cue" title="timed track cue">timed track cues</a> whose <a href="video.html#timed-track-cue-voice-identifier">timed
-    track cue voice identifier</a> is the given number expressed in
-    base ten with digits in the range U+0030 DIGIT ZERO (0) to U+0039
-    DIGIT NINE (9).</p>
-   </dd>
+      </td></tr><tr><td><span title="WebVTT Italic Object">WebVTT Italic Objects</span>
+       </td><td><code title="">i</code>
 
-   <dt><dfn id="pseudo-cue-part-narrator" title="pseudo-cue-part-narrator"><code>narrator</code></dfn></dt>
-   <dd>
-    <p>Restricts the pseudo-element to only matching <span title="WebSRT Node Object">WebSRT Node Objects</span> from <a href="video.html#timed-track-cue" title="timed track cue">timed track cues</a> whose <a href="video.html#timed-track-cue-voice-identifier">timed
-    track cue voice identifier</a> is "<code title="timed track cue&#10;    narrator voice">narrator</code>".</p>
-   </dd>
+      </td></tr><tr><td><span title="WebVTT Bold Object">WebVTT Bold Objects</span>
+       </td><td><code title="">b</code>
 
-   <dt><dfn id="pseudo-cue-part-music" title="pseudo-cue-part-music"><code>music</code></dfn></dt>
-   <dd>
-    <p>Restricts the pseudo-element to only matching <span title="WebSRT Node Object">WebSRT Node Objects</span> from <a href="video.html#timed-track-cue" title="timed track cue">timed track cues</a> whose <a href="video.html#timed-track-cue-voice-identifier">timed
-    track cue voice identifier</a> is "<code title="timed track cue&#10;    music voice">music</code>".</p>
-   </dd>
+      </td></tr><tr><td><span title="WebVTT Ruby Object">WebVTT Ruby Objects</span>
+       </td><td><code title="">ruby</code>
 
-   <dt><dfn id="pseudo-cue-part-lyric" title="pseudo-cue-part-lyric"><code>lyric</code></dfn></dt>
-   <dd>
-    <p>Restricts the pseudo-element to only matching <span title="WebSRT Node Object">WebSRT Node Objects</span> from <a href="video.html#timed-track-cue" title="timed track cue">timed track cues</a> whose <a href="video.html#timed-track-cue-voice-identifier">timed
-    track cue voice identifier</a> is "<code title="timed track cue&#10;    lyric voice">lyric</code>".</p>
-   </dd>
+      </td></tr><tr><td><span title="WebVTT Ruby Text Object">WebVTT Ruby Text Objects</span>
+       </td><td><code title="">rt</code>
 
-   <dt><dfn id="pseudo-cue-part-sound" title="pseudo-cue-part-sound"><code>sound</code></dfn></dt>
-   <dd>
-    <p>Restricts the pseudo-element to only matching <span title="WebSRT Node Object">WebSRT Node Objects</span> from <a href="video.html#timed-track-cue" title="timed track cue">timed track cues</a> whose <a href="video.html#timed-track-cue-voice-identifier">timed
-    track cue voice identifier</a> is "<code title="timed track cue&#10;    sound voice">sound</code>".</p>
-   </dd>
+      </td></tr><tr><td><span title="WebVTT Voice Object">WebVTT Voice Objects</span>
+       </td><td><code title="">v</code>
 
-   <dt><dfn id="pseudo-cue-part-comment" title="pseudo-cue-part-comment"><code>comment</code></dfn></dt>
-   <dd>
-    <p>Restricts the pseudo-element to only matching <span title="WebSRT Node Object">WebSRT Node Objects</span> from <a href="video.html#timed-track-cue" title="timed track cue">timed track cues</a> whose <a href="video.html#timed-track-cue-voice-identifier">timed
-    track cue voice identifier</a> is "<code title="timed track cue&#10;    comment voice">comment</code>".</p>
-   </dd>
+      </td></tr><tr><td>Other elements (specifically, <span title="List of WebVTT Node Objects">Lists of WebVTT Node Objects</span>)
+       </td><td>No explicit name.
 
-   <dt><dfn id="pseudo-cue-part-credit" title="pseudo-cue-part-credit"><code>credit</code></dfn></dt>
-   <dd>
-    <p>Restricts the pseudo-element to only matching <span title="WebSRT Node Object">WebSRT Node Objects</span> from <a href="video.html#timed-track-cue" title="timed track cue">timed track cues</a> whose <a href="video.html#timed-track-cue-voice-identifier">timed
-    track cue voice identifier</a> is "<code title="timed track cue&#10;    credit voice">credit</code>".</p>
-   </dd>
+    </td></tr></tbody></table></li>
 
-   <dt><dfn id="pseudo-cue-part-i" title="pseudo-cue-part-i"><code>i</code></dfn></dt>
-   <dd>
-    <p>Restricts the pseudo-element to only matching <span title="WebSRT Italic Object">WebSRT Italic Objects</span>.</p>
-   </dd>
+   <li><p>For the purposes of element type and universal selectors,
+   <span title="WebVTT Internal Node Object">WebVTT Internal Node
+   Objects</span> are considered as being in the namespace expressed
+   as the empty string.</p></li>
 
-   <dt><dfn id="pseudo-cue-part-b" title="pseudo-cue-part-b"><code>b</code></dfn></dt>
-   <dd>
-    <p>Restricts the pseudo-element to only matching <span title="WebSRT Bold Object">WebSRT Bold Objects</span>.</p>
-   </dd>
+   <li><p>For the purposes of attribute selector matching, <span title="WebVTT Internal Node Object">WebVTT Internal Node
+   Objects</span> have no attributes, except for <span title="WebVTT Voice Object">WebVTT Voice Objects</span>, which
+   have a single attribute named "<code title="">voice</code>"
+   whose value is the value of the <span>WebVTT Voice
+   Object</span>.</p></li>
 
-   <dt><dfn id="pseudo-cue-part-ruby" title="pseudo-cue-part-ruby"><code>ruby</code></dfn></dt>
-   <dd>
-    <p>Restricts the pseudo-element to only matching <span title="WebSRT Ruby Object">WebSRT Ruby Objects</span>.</p>
-   </dd>
+   <li><p>For the purposes of class selector matching, <span title="WebVTT Internal Node Object">WebVTT Internal Node
+   Objects</span> have the classes described as the <span>WebVTT
+   Node Object's applicable classes</span>.</p></li> <!-- ok, this
+   isn't especially well-defined, but the Selectors spec doesn't
+   really give one much to go on here. -->
 
-   <dt><dfn id="pseudo-cue-part-rt" title="pseudo-cue-part-rt"><code>rt</code></dfn></dt>
-   <dd>
-    <p>Restricts the pseudo-element to only matching <span title="WebSRT Ruby Text Object">WebSRT Ruby Text Objects</span>.</p>
-   </dd>
-
-   <dt><dfn id="pseudo-cue-part-past" title="pseudo-cue-part-past"><code>past</code></dfn></dt>
-   <dd>
-    <p>Restricts the pseudo-element to only matching <span title="WebSRT Node Object">WebSRT Node Objects</span> that are <i><a href="#in-the-past">in the past</a></i>.</p>
-   </dd>
-
-   <dt><dfn id="pseudo-cue-part-future" title="pseudo-cue-part-future"><code>future</code></dfn></dt>
-   <dd>
-    <p>Restricts the pseudo-element to only matching <span title="WebSRT Node Object">WebSRT Node Objects</span> that are <i><a href="#in-the-future">in the future</a></i>.</p>
-   </dd>
-
-   <dt>Any other identifier</dt>
-   <dd>
-    <p>Restricts the pseudo-element to not matching any <span title="WebSRT Node Object">WebSRT Node Objects</span>.</p>
-    <p class="note">This is intended to allow for future extensions
-    while still allowing Selectors to include a mixture of old and new
-    '::cue-part()' pseudo-elements.</p>
-   </dd>
-
-  </dl><p>A <span>WebSRT Node Object</span> <var title="">c</var> is
-  <dfn id="in-the-past">in the past</dfn> if, in a pre-order, depth-first traversal of
-  the <a href="video.html#timed-track-cue">timed track cue</a>'s <span>List of WebSRT Node
-  Objects</span>, there exists a <span>WebSRT Timestamp Object</span>
-  whose value is less than the <a href="video.html#current-playback-position">current playback position</a>
-  of the <a href="video.html#media-element">media element</a> that is the <i>matched
-  element</i>, entirely after the <span>WebSRT Node Object</span> <var title="">c</var>.</p>
-
-  <p>A <span>WebSRT Node Object</span> <var title="">c</var> is
-  <dfn id="in-the-future">in the future</dfn> if, in a pre-order, depth-first traversal
-  of the <a href="video.html#timed-track-cue">timed track cue</a>'s <span>List of WebSRT Node
-  Objects</span>, there exists a <span>WebSRT Timestamp Object</span>
-  whose value is greater than the <a href="video.html#current-playback-position">current playback
-  position</a> of the <a href="video.html#media-element">media element</a> that is the
-  <i>matched element</i>, entirely before the <span>WebSRT Node
-  Object</span> <var title="">c</var>.</p>
-
-  <p>The following properties apply to the '::cue-part(<var title="">filter</var>)' pseudo-element:</p>
+  </ul><p>The following properties apply to the '::cue()' pseudo-element
+  with an argument:</p>
 
   <ul class="brief"><li>'color'</li>
    <li>'text-shadow'</li>
@@ -2253,8 +2179,9 @@ iframe:not([seamless]) { border: 2px inset; }</pre>
    segment when the segment becomes "past", and having the change
    propagate towards the end of the segment so that it reaches the end
    of the segment when the next segment becomes "past".
-  --><p>The following properties apply to the '::cue-part(<var title="">filter</var>)' pseudo-element if the neither of the <code title="pseudo-cue-part-past"><a href="#pseudo-cue-part-past">past</a></code> or <code title="pseudo-cue-part-future"><a href="#pseudo-cue-part-future">future</a></code> keywords are
-  present:</p>
+  --><p>The following properties apply to the '::cue()' pseudo-element
+  with an argument when the selector does not contain the ':past' and
+  ':future' pseudo-classes:</p>
 
   <ul class="brief"><li>the properties corresponding to the 'font' shorthand, including 'line-height'</li>
    <!-- add more... -->
@@ -2265,12 +2192,39 @@ iframe:not([seamless]) { border: 2px inset; }</pre>
           min-height, max-width, min-width, orphans, overflow,
           page-break-*, text-align, unicode-bidi, widows, z-index
    -->
-  </ul><p>Other properties must be ignored.</p>
+  </ul><p>Properties that do not apply must be ignored.</p>
 
   <p>As a special exception, the properties corresponding to the
   'background' shorthand, when they would have been applied to the
-  <span>List of WebSRT Node Objects</span>, must instead be applied to
-  the <a href="#websrt-cue-background-box">WebSRT cue background box</a>.</p>
+  <span>List of WebVTT Node Objects</span>, must instead be applied to
+  the <a href="#webvtt-cue-background-box">WebVTT cue background box</a>.</p>
+
+
+  <h6 id="the-:past-and-:future-pseudo-classes"><span class="secno">10.3.2.3.2 </span>The ':past' and ':future' pseudo-classes</h6>
+
+  <p>The <dfn id="past-pseudo-class" title="past-pseudo-class">':past'</dfn> and <dfn id="future-pseudo-class" title="future-pseudo-class">':future'</dfn> pseudo-classes only
+  match <span title="WebVTT Node Object">WebVTT Node Objects</span>.</p>
+
+  <p>The ':past' pseudo-class only matches <span title="WebVTT Node&#10;  Object">WebVTT Node Objects</span> that are <i><a href="#in-the-past">in the past</a></i>.</p>
+
+  <p>A <span>WebVTT Node Object</span> <var title="">c</var> is
+  <dfn id="in-the-past">in the past</dfn> if, in a pre-order, depth-first traversal of
+  the <a href="video.html#text-track-cue">text track cue</a>'s <span>List of WebVTT Node
+  Objects</span>, there exists a <span>WebVTT Timestamp Object</span>
+  whose value is less than the <a href="video.html#current-playback-position">current playback position</a>
+  of the <a href="video.html#media-element">media element</a> that is the <i>matched
+  element</i>, entirely after the <span>WebVTT Node Object</span> <var title="">c</var>.</p>
+
+  <p>The ':future' pseudo-class only matches <span title="WebVTT Node&#10;  Object">WebVTT Node Objects</span> that are <i><a href="#in-the-future">in the future</a></i>.</p>
+
+  <p>A <span>WebVTT Node Object</span> <var title="">c</var> is
+  <dfn id="in-the-future">in the future</dfn> if, in a pre-order, depth-first traversal
+  of the <a href="video.html#text-track-cue">text track cue</a>'s <span>List of WebVTT Node
+  Objects</span>, there exists a <span>WebVTT Timestamp Object</span>
+  whose value is greater than the <a href="video.html#current-playback-position">current playback
+  position</a> of the <a href="video.html#media-element">media element</a> that is the
+  <i>matched element</i>, entirely before the <span>WebVTT Node
+  Object</span> <var title="">c</var>.</p>
 
   </div><!--</div>--><!--KEEP-START w3c-html--><!--TT--><div class="impl">
 

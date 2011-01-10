@@ -1,6 +1,9 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ -->
+<!-- when publishing, change bits marked ZZZ
+     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
+     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
+  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>3.3 APIs in HTML documents &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -227,7 +230,7 @@
      color: white;
    }
 
-  ]]></style><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -356,7 +359,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="content-models.html" title="3.2.5 Content models" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="semantics.html" title="4 The elements of HTML" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="content-models.html" title="3.2.5 Content models" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="semantics.html" title="4 The elements of HTML" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -670,13 +673,13 @@
    <li><p>Replace the <code><a href="infrastructure.html#document">Document</a></code>'s singleton objects with
    new instances of those objects. (This includes in particular the
    <code><a href="browsers.html#window">Window</a></code>, <code><a href="history.html#location">Location</a></code>, <code><a href="history.html#history-0">History</a></code>,
-   <code><a href="offline.html#applicationcache">ApplicationCache</a></code>, <code><a href="dnd.html#undomanager">UndoManager</a></code>, and
-   <code><a href="timers.html#navigator">Navigator</a></code>, objects, the various <code><a href="browsers.html#barprop">BarProp</a></code>
-   objects, the two <code>Storage</code> objects, the various
-   <code><a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a></code> objects, and objects defined by other
-   specifications, like <code>Selection</code>. It also includes all
-   the Web IDL prototypes in the JavaScript binding, including the
-   <code><a href="infrastructure.html#document">Document</a></code> object's prototype.)</p></li>
+   <code><a href="offline.html#applicationcache">ApplicationCache</a></code>, 
+   and <code><a href="timers.html#navigator">Navigator</a></code>, objects, the various
+   <code><a href="browsers.html#barprop">BarProp</a></code> objects, the two <code>Storage</code> objects,
+   the various <code><a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a></code> objects, and objects
+   defined by other specifications, like <code>Selection</code>. It
+   also includes all the Web IDL prototypes in the JavaScript binding,
+   including the <code><a href="infrastructure.html#document">Document</a></code> object's prototype.)</p></li>
 
    <!-- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E...%3Ciframe%20src%3D%22document%22%3E%3C%2Fiframe%3E%0A%3Cscript%3Eonload%20%3D%20function%20()%20%7B%20f%20%3D%20document.getElementsByTagName('iframe')%5B0%5D%3B%20d%20%3D%20f.contentWindow.document%3B%20%7D%3C%2Fscript%3E%0A%3Cinput%20type%3Dbutton%20onclick%3D%22w(d.documentElement.innerHTML)%22%20value%3D%22dump%22%3E%0A%3Cinput%20type%3Dbutton%20onclick%3D%22d.open()%3B%20d.write('%3Cscript%3Evar%20x%20%3D%20new%20XMLHttpRequest()%3Bx.open(%26quot%3BGET%26quot%3B%2C%20%26quot%3BGET%26quot%3B)%3Bx.onreadystatechange%3Dfunction()%20%7B%20alert(x.readyState)%3B%20%7D%3Bx.send(null)%3B%3C%2Fscript%3E')%3Bd.close()%3B%20setTimeout(function()%20%7B%20d.open()%3B%20d.write('%3Cp%3Etest%3C%2Fp%3E')%3B%20d.close()%20%7D%2C%200)%3B%22%20value%3D%22xhr%22%3E%0A%3Cinput%20type%3Dbutton%20onclick%3D%22d.onclick%20%3D%20function()%20%7B%20w('click')%20%7D%22%20value%3D%22add%20click%20handler%22%3E%0A%3Cinput%20type%3Dbutton%20onclick%3D%22d.open()%3B%20d.write('%3Cp%3Etest%3C%2Fp%3E')%3B%20d.close()%22%20value%3D%22replace%22%3E%0A%3Cinput%20type%3Dbutton%20onclick%3D%22d.open()%3B%20d.write('%3Cp%3E%3Cscript%3Ei%20%3D%200%3B%20setTimeout(%26quot%3Bparent.w(i%2B%2B)%26quot%3B%2C%202000)%3C%2Fscript%3E%3C%2Fp%3E')%3B%20d.close()%22%20value%3D%22replace%20with%20timer%22%3E -->
    <!-- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E%0D%0A...%3Ciframe%3E%3C%2Fiframe%3E%0D%0A%3Cscript%3E%0D%0Aonload%20%3D%20function%20()%20%7B%0D%0A%20frames%5B0%5D.test%20%3D%201%0D%0A%20w(frames%5B0%5D.test)%3B%0D%0A%20var%20a%20%3D%20frames%5B0%5D.document.location.assign%3B%0D%0A%20w(a)%3B%0D%0A%20w(frames%5B0%5D.document.location.assign%20%3D%3D%3D%20a)%3B%0D%0A%20frames%5B0%5D.document.open()%3B%0D%0A%20frames%5B0%5D.document.write('%3Cscript%3Edocument.write(test)%3C%5C%2Fscript%3E')%3B%0D%0A%20frames%5B0%5D.document.close()%3B%0D%0A%20w(frames%5B0%5D.test)%3B%0D%0A%20w(frames%5B0%5D.document.location.assign%20%3D%3D%3D%20a)%3B%0D%0A%7D%0D%0A%3C%2Fscript%3E -->

@@ -1,6 +1,9 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ -->
+<!-- when publishing, change bits marked ZZZ
+     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
+     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
+  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>4.10.18 Association of controls and forms &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -227,7 +230,7 @@
      color: white;
    }
 
-  ]]></style><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -356,7 +359,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="the-button-element.html" title="4.10.8 The button element" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="interactive-elements.html" title="4.11 Interactive elements" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="the-button-element.html" title="4.10.8 The button element" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="interactive-elements.html" title="4.11 Interactive elements" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -553,6 +556,10 @@
   and a <dfn id="concept-fe-checked" title="concept-fe-checked">checkedness</dfn>. (The latter
   is only used by <code><a href="the-input-element.html#the-input-element">input</a></code> elements.) These are used to
   describe how the user interacts with the control.</p>
+
+  <p>To define the behaviour of constraint validation in the face of
+  the <code><a href="the-input-element.html#the-input-element">input</a></code> element's <code title="attr-input-multiple"><a href="common-input-element-attributes.html#attr-input-multiple">multiple</a></code> attribute,
+  <code><a href="the-input-element.html#the-input-element">input</a></code> elements can also have separately defined <dfn id="concept-fe-values" title="concept-fe-values">value<em>s</em></dfn>.</p>
 
   </div><h5 id="autofocusing-a-form-control"><span class="secno">4.10.19.4 </span>Autofocusing a form control</h5><!-- v2: Apply this to contentEditable elements --><p>The <dfn id="attr-fe-autofocus" title="attr-fe-autofocus"><code>autofocus</code></dfn>
   content attribute allows the author to indicate that a control is to
@@ -809,6 +816,11 @@
   <code><a href="the-input-element.html#the-input-element">input</a></code> elements while they don't apply, they must raise
   an <code><a href="common-dom-interfaces.html#invalid_state_err">INVALID_STATE_ERR</a></code> exception. Otherwise, they must
   act as described below.</p>
+
+  <p>For <code><a href="the-input-element.html#the-input-element">input</a></code> elements, these methods and attributes
+  must operate on the element's <a href="#concept-fe-value" title="concept-fe-value">value</a>. For <code><a href="the-button-element.html#the-textarea-element">textarea</a></code>
+  elements, these methods and attributes must operate on the element's
+  <a href="the-button-element.html#concept-textarea-raw-value" title="concept-textarea-raw-value">raw value</a>.</p>
 
   <p>The <dfn id="dom-textarea-input-select" title="dom-textarea/input-select"><code>select()</code></dfn> method
   must cause the contents of the text field to be fully selected.</p>

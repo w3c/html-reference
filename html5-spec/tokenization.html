@@ -1,6 +1,9 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ -->
+<!-- when publishing, change bits marked ZZZ
+     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
+     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
+  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>8.2.4 Tokenization &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -227,7 +230,7 @@
      color: white;
    }
 
-  ]]></style><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -356,7 +359,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="parsing.html" title="8.2 Parsing HTML documents" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="the-end.html" title="8.2.6 The end" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="parsing.html" title="8.2 Parsing HTML documents" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="the-end.html" title="8.2.6 The end" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -4349,7 +4352,7 @@ document.body.appendChild(text);
    </dd>
 
    <dt>A start tag whose tag name is one of: "area", "br", "embed",
-   "img", "input", "keygen", "wbr"</dt>
+   "img", "keygen", "wbr"</dt>
    <dd>
 
     <p><a href="parsing.html#reconstruct-the-active-formatting-elements">Reconstruct the active formatting elements</a>, if
@@ -4364,6 +4367,26 @@ document.body.appendChild(text);
 
     <p>Set the <a href="parsing.html#frameset-ok-flag">frameset-ok flag</a> to "not ok".</p>
     <!-- shouldn't really do this for <area> -->
+
+   </dd>
+
+   <dt>A start tag whose tag name is "input"</dt>
+   <dd>
+
+    <p><a href="parsing.html#reconstruct-the-active-formatting-elements">Reconstruct the active formatting elements</a>, if
+    any.</p>
+
+    <p><a href="#insert-an-html-element">Insert an HTML element</a> for the token. Immediately
+    pop the <a href="parsing.html#current-node">current node</a> off the <a href="parsing.html#stack-of-open-elements">stack of open
+    elements</a>.</p>
+
+    <p><a href="#acknowledge-self-closing-flag" title="acknowledge self-closing flag">Acknowledge the
+    token's <i>self-closing flag</i></a>, if it is set.</p>
+
+    <p>If the token does not have an attribute with the name "type",
+    or if it does, but that attribute's value is not an <a href="infrastructure.html#ascii-case-insensitive">ASCII
+    case-insensitive</a> match for the string "<code title="">hidden</code>", then: set the <a href="parsing.html#frameset-ok-flag">frameset-ok
+    flag</a> to "not ok".</p>
 
    </dd>
 

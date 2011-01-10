@@ -1,6 +1,9 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ -->
+<!-- when publishing, change bits marked ZZZ
+     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
+     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
+  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>7.7 Drag and drop &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -227,7 +230,7 @@
      color: white;
    }
 
-  ]]></style><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -356,7 +359,7 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="editing.html" title="7 User interaction" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="syntax.html" title="8 The HTML syntax" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="editing.html" title="7 User interaction" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="syntax.html" title="8 The HTML syntax" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -366,8 +369,7 @@
    <a href="syntax.html" class="next">8 The HTML syntax</a>
   <ol class="toc"><li><ol><li><a href="dnd.html#dnd"><span class="secno">7.7 </span>Drag and drop</a>
     <ol><li><a href="dnd.html#introduction-6"><span class="secno">7.7.1 </span>Introduction</a></li><li><a href="dnd.html#the-drag-data-store"><span class="secno">7.7.2 </span>The drag data store</a></li><li><a href="dnd.html#the-datatransfer-interface"><span class="secno">7.7.3 </span>The <code>DataTransfer</code> interface</a>
-      <ol><li><a href="dnd.html#the-datatransferitems-interface"><span class="secno">7.7.3.1 </span>The <code>DataTransferItems</code> interface</a></li><li><a href="dnd.html#the-datatransferitem-interface"><span class="secno">7.7.3.2 </span>The <code>DataTransferItem</code> interface</a></li></ol></li><li><a href="dnd.html#the-dragevent-interface"><span class="secno">7.7.4 </span>The <code>DragEvent</code> interface</a></li><li><a href="dnd.html#drag-and-drop-processing-model"><span class="secno">7.7.5 </span>Drag-and-drop processing model</a></li><li><a href="dnd.html#dndevents"><span class="secno">7.7.6 </span>Events summary</a></li><li><a href="dnd.html#the-draggable-attribute"><span class="secno">7.7.7 </span>The <code>draggable</code> attribute</a></li><li><a href="dnd.html#the-dropzone-attribute"><span class="secno">7.7.8 </span>The <code>dropzone</code> attribute</a></li><li><a href="dnd.html#security-risks-in-the-drag-and-drop-model"><span class="secno">7.7.9 </span>Security risks in the drag-and-drop model</a></li></ol></li><li><a href="dnd.html#undo"><span class="secno">7.8 </span>Undo history</a>
-    <ol><li><a href="dnd.html#definitions-2"><span class="secno">7.8.1 </span>Definitions</a></li><li><a href="dnd.html#the-undomanager-interface"><span class="secno">7.8.2 </span>The <code>UndoManager</code> interface</a></li><li><a href="dnd.html#undo:-moving-back-in-the-undo-transaction-history"><span class="secno">7.8.3 </span>Undo: moving back in the undo transaction history</a></li><li><a href="dnd.html#redo:-moving-forward-in-the-undo-transaction-history"><span class="secno">7.8.4 </span>Redo: moving forward in the undo transaction history</a></li><li><a href="dnd.html#the-undomanagerevent-interface-and-the-undo-and-redo-events"><span class="secno">7.8.5 </span>The <code>UndoManagerEvent</code> interface and the <code title="event-undo">undo</code> and <code title="event-redo">redo</code> events</a></li><li><a href="dnd.html#implementation-notes"><span class="secno">7.8.6 </span>Implementation notes</a></li></ol></li><li><a href="dnd.html#editing-apis"><span class="secno">7.9 </span>Editing APIs</a></li></ol></li></ol></div><h3 id="dnd"><span class="secno">7.7 </span><dfn>Drag and drop</dfn></h3><!-- v2: ideas for drag and drop:
+      <ol><li><a href="dnd.html#the-datatransferitems-interface"><span class="secno">7.7.3.1 </span>The <code>DataTransferItems</code> interface</a></li><li><a href="dnd.html#the-datatransferitem-interface"><span class="secno">7.7.3.2 </span>The <code>DataTransferItem</code> interface</a></li></ol></li><li><a href="dnd.html#the-dragevent-interface"><span class="secno">7.7.4 </span>The <code>DragEvent</code> interface</a></li><li><a href="dnd.html#drag-and-drop-processing-model"><span class="secno">7.7.5 </span>Drag-and-drop processing model</a></li><li><a href="dnd.html#dndevents"><span class="secno">7.7.6 </span>Events summary</a></li><li><a href="dnd.html#the-draggable-attribute"><span class="secno">7.7.7 </span>The <code>draggable</code> attribute</a></li><li><a href="dnd.html#the-dropzone-attribute"><span class="secno">7.7.8 </span>The <code>dropzone</code> attribute</a></li><li><a href="dnd.html#security-risks-in-the-drag-and-drop-model"><span class="secno">7.7.9 </span>Security risks in the drag-and-drop model</a></li></ol></li><li><a href="dnd.html#editing-apis"><span class="secno">7.8 </span>Editing APIs</a></li></ol></li></ol></div><h3 id="dnd"><span class="secno">7.7 </span><dfn>Drag and drop</dfn></h3><!-- v2: ideas for drag and drop:
 
      * being able to animate a drop target:
 
@@ -579,6 +581,11 @@
       <p class="note">Strings that contain <a href="common-microsyntaxes.html#space-character" title="space&#10;      character">space characters</a> cannot be used with the <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code> attribute, so authors are
       encouraged to use only <a href="infrastructure.html#mime-type" title="MIME type">MIME types</a>
       or custom strings (without spaces).</p>
+
+      <p>There is a limit of one <i>Plain Unicode string</i> item per
+      <a href="#the-drag-data-item-type-string" title="The drag data item type string">item type
+      string</a>.</p> <!-- DND-v4: consider limiting the structured
+      objects too -->
 
      </dd>
 
@@ -837,9 +844,9 @@
 
    </li>
 
-   <li><p>Remove each item in the <a href="#drag-data-store-item-list">drag data store item
+   <li><p>Remove the item in the <a href="#drag-data-store-item-list">drag data store item
    list</a> whose <a href="#the-drag-data-item-kind" title="the drag data item kind">kind</a>
-   is <i>Plain Unicode string</i> and whose <a href="#the-drag-data-item-type-string" title="the drag data&#10;   item type string">type string</a> is equal to <var title="">format</var>.</p></li>
+   is <i>Plain Unicode string</i> and whose <a href="#the-drag-data-item-type-string" title="the drag data&#10;   item type string">type string</a> is equal to <var title="">format</var>, if there is one.</p></li>
 
   </ol><p class="note">The <code title="dom-DataTransfer-clearData"><a href="#dom-datatransfer-cleardata">clearData()</a></code> method does
   not affect whether any files were included in the drag, so the <code title="dom-DataTransfer-types"><a href="#dom-datatransfer-types">types</a></code> attribute's list might
@@ -868,9 +875,9 @@
 
    </li>
 
-   <li><p>Remove each item in the <a href="#drag-data-store-item-list">drag data store item
+   <li><p>Remove the item in the <a href="#drag-data-store-item-list">drag data store item
    list</a> whose <a href="#the-drag-data-item-kind" title="the drag data item kind">kind</a>
-   is <i>Plain Unicode string</i> and whose <a href="#the-drag-data-item-type-string" title="the drag data&#10;   item type string">type string</a> is equal to <var title="">format</var>.</p></li>
+   is <i>Plain Unicode string</i> and whose <a href="#the-drag-data-item-type-string" title="the drag data&#10;   item type string">type string</a> is equal to <var title="">format</var>, if there is one.</p></li>
 
    <li><p>Add an item to the <a href="#drag-data-store-item-list">drag data store item list</a>
    whose <a href="#the-drag-data-item-kind" title="the drag data item kind">kind</a> is <i>Plain
@@ -902,8 +909,8 @@
    is <i>Plain Unicode string</i> and whose <a href="#the-drag-data-item-type-string" title="the drag data&#10;   item type string">type string</a> is equal to <var title="">format</var>, return the empty string and abort these
    steps.</p></li>
 
-   <li><p>Let <var title="">result</var> be the data of the first item
-   to the <a href="#drag-data-store-item-list">drag data store item list</a> whose <a href="#the-drag-data-item-kind" title="the drag data item kind">kind</a> is <i>Plain Unicode
+   <li><p>Let <var title="">result</var> be the data of the item
+   in the <a href="#drag-data-store-item-list">drag data store item list</a> whose <a href="#the-drag-data-item-kind" title="the drag data item kind">kind</a> is <i>Plain Unicode
    string</i> and whose <a href="#the-drag-data-item-type-string" title="the drag data item type&#10;   string">type string</a> is equal to <var title="">format</var>.</p></li>
 
    <li><p>If <var title="">convert-to-URL</var> is true, then parse
@@ -1080,10 +1087,11 @@ DND-v5:  <span>DataTransferItem</span> <span title="dom-DataTransferItems-add">a
   an indexed property</dfn> <var title="">i</var> of a
   <code><a href="#datatransferitems">DataTransferItems</a></code> object, the user agent must return a
   <code><a href="#datatransferitem">DataTransferItem</a></code> object representing the <var title="">i</var>th item in the <a href="#drag-data-store">drag data store</a>. The
-  same object must be returned each time. The
+  same object must be returned each time a particular item is obtained
+  from this <code><a href="#datatransferitems">DataTransferItems</a></code> object. The
   <code><a href="#datatransferitem">DataTransferItem</a></code> object must be associated with the
   same <code><a href="#datatransfer">DataTransfer</a></code> object as the
-  <code><a href="#datatransferitems">DataTransferItems</a></code> object when it is created.</p>
+  <code><a href="#datatransferitems">DataTransferItems</a></code> object when it is first created.</p>
 
   <p>To <dfn id="dom-datatransferitems-removeitem" title="dom-DataTransferItems-removeItem">delete an
   existing indexed property</dfn> <var title="">i</var> of a
@@ -1118,12 +1126,18 @@ DND-v5:  <span>DataTransferItem</span> <span title="dom-DataTransferItems-add">a
 
      <dd>
 
-      <p>Add an item to the <a href="#drag-data-store-item-list">drag data store item list</a>
-      whose <a href="#the-drag-data-item-kind" title="the drag data item kind">kind</a> is
-      <i>Plain Unicode string</i>, whose <a href="#the-drag-data-item-type-string" title="the drag data&#10;      item type string">type string</a> is equal to the value of
-      the method's second argument, <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII
-      lowercase</a>, and whose data is the string given by the
-      method's first argument.</p>
+      <p>If there is already an item in the <a href="#drag-data-store-item-list">drag data store item
+      list</a> whose <a href="#the-drag-data-item-kind" title="the drag data item&#10;      kind">kind</a> is <i>Plain Unicode string</i> and whose <a href="#the-drag-data-item-type-string" title="the drag data item type string">type string</a> is
+      equal to the value of the method's second argument,
+      <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a>, then throw a
+      <code><a href="common-dom-interfaces.html#not_supported_err">NOT_SUPPORTED_ERR</a></code> exception and abort these
+      steps.</p>
+
+      <p>Otherwise, add an item to the <a href="#drag-data-store-item-list">drag data store item
+      list</a> whose <a href="#the-drag-data-item-kind" title="the drag data item&#10;      kind">kind</a> is <i>Plain Unicode string</i>, whose <a href="#the-drag-data-item-type-string" title="the drag data item type string">type string</a> is
+      equal to the value of the method's second argument,
+      <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a>, and whose data is the
+      string given by the method's first argument.</p>
 
      </dd>
 
@@ -1155,7 +1169,7 @@ DND-v5:  <span>DataTransferItem</span> <span title="dom-DataTransferItems-add">a
 
      </dd>
 
-<!--DND-v4:
+<!--DND-v4: (might want to prevent duplicates like for strings; see above)
      <dt>Otherwise
 
      <dd>
@@ -1758,8 +1772,8 @@ interface <dfn>FunctionObjectCallback</dfn> {
   operation, device input events (e.g. mouse and keyboard events) must
   be suppressed. In addition, the user agent must track all DOM
   changes made during the drag-and-drop operation, and add them to its
-  <a href="#undo">undo history</a> as one atomic operation once the
-  drag-and-drop operation has ended.</p>
+  <span>undo transaction history</span> as one atomic operation once
+  the drag-and-drop operation has ended.</p>
 
   <p>During the drag operation, the element directly indicated by the
   user as the drop target is called the <dfn id="immediate-user-selection">immediate user
@@ -2590,318 +2604,7 @@ interface <dfn>FunctionObjectCallback</dfn> {
   data to be dragged from sensitive sources and dropped into hostile
   documents without the user's consent.</p>
 
-  </div><h3 id="undo"><span class="secno">7.8 </span><dfn>Undo history</dfn></h3><div class="impl">
-
-  <h4 id="definitions-2"><span class="secno">7.8.1 </span>Definitions</h4>
-
-  <p>The user agent must associate an <dfn id="undo-transaction-history">undo transaction
-  history</dfn> with each <code><a href="infrastructure.html#document">Document</a></code> object.</p>
-
-  <p>The <a href="#undo-transaction-history">undo transaction history</a> is a list of
-  entries. The entries are of two types: <a href="#dom-changes">DOM changes</a> and
-  <a href="#undo-object" title="undo object">undo objects</a>.</p>
-
-  <p>Each <dfn id="dom-changes">DOM changes</dfn> entry in the <a href="#undo-transaction-history">undo transaction
-  history</a> consists of batches of one or more of the
-  following:</p>
-
-  <ul><li>Changes to the content attributes of an <code><a href="infrastructure.html#element">Element</a></code>
-   node.</li>
-
-   <li>Changes to the DOM hierarchy of nodes that are descendants of
-   the <code><a href="infrastructure.html#document">Document</a></code> object (<code title="dom-Node-parentNode"><a href="infrastructure.html#dom-node-parentnode">parentNode</a></code>, <code title="dom-Node-childNodes"><a href="infrastructure.html#dom-node-childnodes">childNodes</a></code>).</li>
-
-   <li>Changes to internal state, such as a form control's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> or <a href="the-input-element.html#concept-input-checked-dirty-flag" title="concept-input-checked-dirty-flag">dirty checkedness
-   flag</a>.</li>
-
-  </ul><p><dfn id="undo-object">Undo object</dfn> entries consist of objects representing
-  state that scripts running in the document are managing. For
-  example, a Web mail application could use an <a href="#undo-object">undo
-  object</a> to keep track of the fact that a user has moved an
-  e-mail to a particular folder, so that the user can undo the
-  action and have the e-mail return to its former location.</p>
-
-  <p>Broadly speaking, <a href="#dom-changes">DOM changes</a> entries are handled by
-  the UA in response to user edits of form controls and <a href="editing.html#editing-host" title="editing host">editing hosts</a> on the page, and
-  <a href="#undo-object">undo object</a> entries are handled by script in response
-  to higher-level user actions (such as interactions with server-side
-  state, or in the implementation of a drawing tool).</p>
-
-  </div><h4 id="the-undomanager-interface"><span class="secno">7.8.2 </span>The <code><a href="#undomanager">UndoManager</a></code> interface</h4><p>To manage <a href="#undo-object">undo object</a> entries in the <a href="#undo-transaction-history">undo
-  transaction history</a>, the <code><a href="#undomanager">UndoManager</a></code>
-  interface can be used:</p><pre class="idl">interface <dfn id="undomanager">UndoManager</dfn> {
-  readonly attribute unsigned long <a href="#dom-undomanager-length" title="dom-UndoManager-length">length</a>;
-  getter any <a href="#dom-undomanager-item" title="dom-UndoManager-item">item</a>(in unsigned long index);
-  readonly attribute unsigned long <a href="#dom-undomanager-position" title="dom-UndoManager-position">position</a>;
-  unsigned long <a href="#dom-undomanager-add" title="dom-UndoManager-add">add</a>(in any data, in DOMString title);
-  void <a href="#dom-undomanager-remove" title="dom-UndoManager-remove">remove</a>(in unsigned long index);
-  void <a href="#dom-undomanager-clearundo" title="dom-UndoManager-clearUndo">clearUndo</a>();
-  void <a href="#dom-undomanager-clearredo" title="dom-UndoManager-clearRedo">clearRedo</a>();
-};</pre><dl class="domintro"><dt><var title="">window</var> . <code title="dom-undoManager"><a href="#dom-undomanager">undoManager</a></code></dt>
-
-   <dd>
-
-    <p>Returns the <code><a href="#undomanager">UndoManager</a></code> object.</p>
-
-   </dd>
-
-   <dt><var title="">undoManager</var> . <code title="dom-UndoManager-length"><a href="#dom-undomanager-length">length</a></code></dt>
-   <dd>
-
-    <p>Returns the number of entries in the undo history.</p>
-
-   </dd>
-
-   <dt><var title="">data</var> = <var title="">undoManager</var> . <code title="dom-UndoManager-item"><a href="#dom-undomanager-item">item</a></code>(<var title="">index</var>)</dt>
-   <dt><var title="">undoManager</var>[<var title="">index</var>]</dt>
-   <dd>
-
-    <p>Returns the entry with index <var title="">index</var> in the undo history.</p>
-
-    <p>Returns null if <var title="">index</var> is out of range.</p>
-
-   </dd>
-
-   <dt><var title="">undoManager</var> . <code title="dom-UndoManager-position"><a href="#dom-undomanager-position">position</a></code></dt>
-   <dd>
-
-    <p>Returns the number of the current entry in the undo history. (Entries at and past this point are <em>redo</em> entries.)</p>
-
-   </dd>
-
-   <dt><var title="">undoManager</var> . <code title="dom-UndoManager-add"><a href="#dom-undomanager-add">add</a></code>(<var title="">data</var>, <var title="">title</var>)</dt>
-   <dd>
-
-    <p>Adds the specified entry to the undo history.</p>
-
-   </dd>
-
-   <dt><var title="">undoManager</var> . <code title="dom-UndoManager-remove"><a href="#dom-undomanager-remove">remove</a></code>(<var title="">index</var>)</dt>
-   <dd>
-
-    <p>Removes the specified entry to the undo history.</p>
-
-    <p>Throws an <code><a href="common-dom-interfaces.html#index_size_err">INDEX_SIZE_ERR</a></code> exception if the given index is out of range.</p>
-
-   </dd>
-
-   <dt><var title="">undoManager</var> . <code title="dom-UndoManager-clearUndo"><a href="#dom-undomanager-clearundo">clearUndo</a></code>()</dt>
-   <dd>
-
-    <p>Removes all entries before the current position in the undo history.</p>
-
-   </dd>
-
-   <dt><var title="">undoManager</var> . <code title="dom-UndoManager-clearRedo"><a href="#dom-undomanager-clearredo">clearRedo</a></code>()</dt>
-   <dd>
-
-    <p>Removes all entries at and after the current position in the undo history.</p>
-
-   </dd>
-
-  </dl><div class="impl">
-
-  <p>The <dfn id="dom-undomanager" title="dom-undoManager"><code>undoManager</code></dfn>
-  attribute of the <code><a href="browsers.html#window">Window</a></code> interface must return the
-  object implementing the <code><a href="#undomanager">UndoManager</a></code> interface for that
-  <code><a href="browsers.html#window">Window</a></code> object's associated <code><a href="infrastructure.html#document">Document</a></code>
-  object.</p>
-
-  <p><code><a href="#undomanager">UndoManager</a></code> objects represent their document's
-  <a href="#undo-transaction-history">undo transaction history</a>. Only <a href="#undo-object">undo object</a>
-  entries are visible with this API, but this does not mean that
-  <a href="#dom-changes">DOM changes</a> entries are absent from the <a href="#undo-transaction-history">undo
-  transaction history</a>.</p>
-
-  <p>The <dfn id="dom-undomanager-length" title="dom-UndoManager-length"><code>length</code></dfn>
-  attribute must return the number of <a href="#undo-object">undo object</a> entries
-  in the <a href="#undo-transaction-history">undo transaction history</a>. This is the <var title="dom-UndoManager-length"><a href="#dom-undomanager-length">length</a></var>.</p>
-
-  <p>The object's <a href="infrastructure.html#supported-property-indices">supported property indices</a> are the
-  numbers in the range zero to <span title=""><var title="dom-UndoManager-length"><a href="#dom-undomanager-length">length</a></var>-1</span>, unless the
-  <var title="dom-UndoManager-length"><a href="#dom-undomanager-length">length</a></var> is zero, in which
-  case there are no <a href="infrastructure.html#supported-property-indices">supported property indices</a>.</p>
-
-  <p>The <dfn id="dom-undomanager-item" title="dom-UndoManager-item"><code>item(<var title="">n</var>)</code></dfn> method must return the <var title="">n</var>th <a href="#undo-object">undo object</a> entry in the <a href="#undo-transaction-history">undo
-  transaction history</a>, if there is one, or null otherwise.</p>
-
-  <p>The <a href="#undo-transaction-history">undo transaction history</a> has an <dfn id="undo-position">undo
-  position</dfn>. This is the position between two entries in the
-  <a href="#undo-transaction-history">undo transaction history</a>'s list where the previous
-  entry represents what needs to happen if the user invokes the "undo"
-  command (the "undo" side, lower numbers), and the next entry
-  represents what needs to happen if the user invokes the "redo"
-  command (the "redo" side, higher numbers).</p>
-
-  <p>The <dfn id="dom-undomanager-position" title="dom-UndoManager-position"><code>position</code></dfn>
-  attribute must return the index of the <a href="#undo-object">undo object</a>
-  entry nearest to the <a href="#undo-position">undo position</a>, on the "redo"
-  side. If there are no <a href="#undo-object">undo object</a> entries on the "redo"
-  side, then the attribute must return the same as the <code title="dom-UndoManager-length"><a href="#dom-undomanager-length">length</a></code> attribute. If there are
-  no <a href="#undo-object">undo object</a> entries on the "undo" side of the
-  <a href="#undo-position">undo position</a>, the <code title="dom-UndoManager-position"><a href="#dom-undomanager-position">position</a></code> attribute returns
-  zero.</p>
-
-  <p class="note">Since the <a href="#undo-transaction-history">undo transaction history</a>
-  contains both <a href="#undo-object">undo object</a> entries and <a href="#dom-changes">DOM
-  changes</a> entries, but the <code title="dom-UndoManager-position"><a href="#dom-undomanager-position">position</a></code> attribute only
-  returns indices relative to <a href="#undo-object">undo object</a> entries, it is
-  possible for several "undo" or "redo" actions to be performed
-  without the value of the <code title="dom-UndoManager-position"><a href="#dom-undomanager-position">position</a></code> attribute
-  changing.</p>
-
-  <p>The <dfn id="dom-undomanager-add" title="dom-UndoManager-add"><code>add(<var title="">data</var>,
-  <var title="">title</var>)</code></dfn> method's behavior depends on the
-  current state. Normally, it must insert the <var title="">data</var> object
-  passed as an argument into the <a href="#undo-transaction-history">undo transaction history</a>
-  immediately before the <a href="#undo-position">undo position</a>, optionally
-  remembering the given <var title="">title</var> to use in the UI. If the
-  method is called <a href="#undo:-moving-back-in-the-undo-transaction-history" title="do-undo">during an undo
-  operation</a>, however, the object must instead be added
-  immediately <em>after</em> the <a href="#undo-position">undo position</a>.</p>
-
-  <p>If the method is called and there is neither <a href="#undo:-moving-back-in-the-undo-transaction-history" title="do-undo">an undo operation in progress</a> nor <a href="#redo:-moving-forward-in-the-undo-transaction-history" title="do-redo">a redo operation in progress</a> then any entries
-  in the <a href="#undo-transaction-history">undo transaction history</a> after the <a href="#undo-position">undo
-  position</a> must be removed (as if <code title="dom-UndoManager-clearRedo"><a href="#dom-undomanager-clearredo">clearRedo()</a></code> had been
-  called).</p>
-
-  <p>The <dfn id="dom-undomanager-remove" title="dom-UndoManager-remove"><code>remove(<var title="">index</var>)</code></dfn> method must remove the <a href="#undo-object">undo
-  object</a> entry with the specified <var title="">index</var>. If
-  the index is less than zero or greater than or equal to <code title="dom-UndoManager-length"><a href="#dom-undomanager-length">length</a></code> then the method must
-  raise an <code><a href="common-dom-interfaces.html#index_size_err">INDEX_SIZE_ERR</a></code> exception. <a href="#dom-changes">DOM
-  changes</a> entries are unaffected by this method.</p>
-
-  <p>The <dfn id="dom-undomanager-clearundo" title="dom-UndoManager-clearUndo"><code>clearUndo()</code></dfn>
-  method must remove all entries in the <a href="#undo-transaction-history">undo transaction
-  history</a> before the <a href="#undo-position">undo position</a>, be they
-  <a href="#dom-changes">DOM changes</a> entries or <a href="#undo-object">undo object</a>
-  entries.</p>
-
-  <p>The <dfn id="dom-undomanager-clearredo" title="dom-UndoManager-clearRedo"><code>clearRedo()</code></dfn>
-  method must remove all entries in the <a href="#undo-transaction-history">undo transaction
-  history</a> after the <a href="#undo-position">undo position</a>, be they
-  <a href="#dom-changes">DOM changes</a> entries or <a href="#undo-object">undo object</a>
-  entries.</p>
-
-  </div><div class="impl">
-
-  <h4 id="undo:-moving-back-in-the-undo-transaction-history"><span class="secno">7.8.3 </span><dfn title="do-undo">Undo: moving back in the undo transaction history</dfn></h4>
-
-  <p>When the user invokes an undo operation, or when the <code title="dom-document-execCommand"><a href="#execCommand">execCommand()</a></code> method is
-  called with the <code title="command-undo"><a href="#command-undo">undo</a></code> command, the
-  user agent must perform an undo operation.</p>
-
-  <p>If the <a href="#undo-position">undo position</a> is at the start of the
-  <a href="#undo-transaction-history">undo transaction history</a>, then the user agent must do
-  nothing.</p>
-
-  <p>If the entry immediately before the <a href="#undo-position">undo position</a> is
-  a <a href="#dom-changes">DOM changes</a> entry, then the user agent must remove
-  that <a href="#dom-changes">DOM changes</a> entry, reverse the DOM changes that
-  were listed in that entry, and, if the changes were reversed with no
-  problems, add a new <a href="#dom-changes">DOM changes</a> entry (consisting of
-  the opposite of those DOM changes) to the <a href="#undo-transaction-history">undo transaction
-  history</a> on the other side of the <a href="#undo-position">undo
-  position</a>.</p>
-
-  <p>If the DOM changes cannot be undone (e.g. because the DOM state
-  is no longer consistent with the changes represented in the entry),
-  then the user agent must simply remove the <a href="#dom-changes">DOM changes</a>
-  entry, without doing anything else.</p>
-
-  <p>If the entry immediately before the <a href="#undo-position">undo position</a> is
-  an <a href="#undo-object">undo object</a> entry, then the user agent must first
-  remove that <a href="#undo-object">undo object</a> entry from the <a href="#undo-transaction-history">undo
-  transaction history</a>, and then must fire an <code title="event-undo"><a href="#event-undo">undo</a></code> event at the <code><a href="browsers.html#window">Window</a></code>
-  object, using the <a href="#undo-object">undo object</a> entry's associated undo
-  object as the event's data.</p>
-
-  <p>Any calls to <code title="dom-undoManager-add"><a href="#dom-undomanager-add">add()</a></code> while
-  the event is being handled will be used to populate the redo
-  history, and will then be used if the user invokes the "redo"
-  command to undo his undo.</p>
-
-
-  <h4 id="redo:-moving-forward-in-the-undo-transaction-history"><span class="secno">7.8.4 </span><dfn title="do-redo">Redo: moving forward in the undo transaction history</dfn></h4>
-
-  <p>When the user invokes a redo operation, or when the <code title="dom-document-execCommand"><a href="#execCommand">execCommand()</a></code> method is
-  called with the <code title="command-redo"><a href="#command-redo">redo</a></code> command, the
-  user agent must perform a redo operation.</p>
-
-  <p>This is mostly the opposite of an <a href="#undo:-moving-back-in-the-undo-transaction-history" title="do-undo">undo
-  operation</a>, but the full definition is included here for
-  completeness.</p>
-
-  <p>If the <a href="#undo-position">undo position</a> is at the end of the <a href="#undo-transaction-history">undo
-  transaction history</a>, then the user agent must do nothing.</p>
-
-  <p>If the entry immediately after the <a href="#undo-position">undo position</a> is
-  a <a href="#dom-changes">DOM changes</a> entry, then the user agent must remove
-  that <a href="#dom-changes">DOM changes</a> entry, reverse the DOM changes that
-  were listed in that entry, and, if the changes were reversed with no
-  problems, add a new <a href="#dom-changes">DOM changes</a> entry (consisting of
-  the opposite of those DOM changes) to the <a href="#undo-transaction-history">undo transaction
-  history</a> on the other side of the <a href="#undo-position">undo
-  position</a>.</p>
-
-  <p>If the DOM changes cannot be redone (e.g. because the DOM state
-  is no longer consistent with the changes represented in the entry),
-  then the user agent must simply remove the <a href="#dom-changes">DOM changes</a>
-  entry, without doing anything else.</p>
-
-  <p>If the entry immediately after the <a href="#undo-position">undo position</a> is
-  an <a href="#undo-object">undo object</a> entry, then the user agent must first
-  remove that <a href="#undo-object">undo object</a> entry from the <a href="#undo-transaction-history">undo
-  transaction history</a>, and then must fire a <code title="event-redo"><a href="#event-redo">redo</a></code> event at the <code><a href="browsers.html#window">Window</a></code>
-  object, using the <a href="#undo-object">undo object</a> entry's associated undo
-  object as the event's data.</p>
-
-  </div><h4 id="the-undomanagerevent-interface-and-the-undo-and-redo-events"><span class="secno">7.8.5 </span>The <code><a href="#undomanagerevent">UndoManagerEvent</a></code> interface and the <code title="event-undo"><a href="#event-undo">undo</a></code> and <code title="event-redo"><a href="#event-redo">redo</a></code> events</h4><pre class="idl">interface <dfn id="undomanagerevent">UndoManagerEvent</dfn> : <a href="infrastructure.html#event">Event</a> {
-  readonly attribute any <a href="#dom-undomanagerevent-data" title="dom-UndoManagerEvent-data">data</a>;
-  void <a href="#dom-undomanagerevent-initundomanagerevent" title="dom-UndoManagerEvent-initUndoManagerEvent">initUndoManagerEvent</a>(in DOMString typeArg, in boolean canBubbleArg, in boolean cancelableArg, in any dataArg);
-};</pre><dl class="domintro"><dt><var title="">event</var>  . <code title="dom-UndoManagerEvent-data"><a href="#dom-undomanagerevent-data">data</a></code></dt>
-
-   <dd>
-
-    <p>Returns the data that was passed to the <code title="dom-undomanager-add"><a href="#dom-undomanager-add">add()</a></code> method.</p>
-
-   </dd>
-
-  </dl><div class="impl">
-
-  <p>The <dfn id="dom-undomanagerevent-initundomanagerevent" title="dom-UndoManagerEvent-initUndoManagerEvent"><code>initUndoManagerEvent()</code></dfn>
-  method must initialize the event in a manner analogous to the
-  similarly-named method in the DOM Events interfaces. <a href="references.html#refsDOMEVENTS">[DOMEVENTS]</a></p>
-
-  <p>The <dfn id="dom-undomanagerevent-data" title="dom-UndoManagerEvent-data"><code>data</code></dfn>
-  attribute represents the <a href="#undo-object">undo object</a> for the event.</p>
-
-  <p>The <dfn id="event-undo" title="event-undo"><code>undo</code></dfn> and <dfn id="event-redo" title="event-redo"><code>redo</code></dfn> events do not bubble,
-  cannot be canceled, and have no default action. When the user agent
-  fires one of these events it must use the
-  <code><a href="#undomanagerevent">UndoManagerEvent</a></code> interface, with the <code title="dom-UndoManagerEvent-data"><a href="#dom-undomanagerevent-data">data</a></code> field containing the
-  relevant <a href="#undo-object">undo object</a>.</p>
-
-  </div><div class="impl">
-
-  <h4 id="implementation-notes"><span class="secno">7.8.6 </span>Implementation notes</h4>
-
-  <p>How user agents present the above conceptual model to the user is
-  not defined. The undo interface could be a filtered view of the
-  <a href="#undo-transaction-history">undo transaction history</a>, it could manipulate the
-  <a href="#undo-transaction-history">undo transaction history</a> in ways not described above,
-  and so forth. For example, it is possible to design a UA that
-  appears to have separate <a href="#undo-transaction-history" title="undo transaction history">undo
-  transaction histories</a> for each form control; similarly, it is
-  possible to design systems where the user has access to more undo
-  information than is present in the official (as described above)
-  <a href="#undo-transaction-history">undo transaction history</a> (such as providing a
-  tree-based approach to document state). Such UI models should be
-  based upon the single <a href="#undo-transaction-history">undo transaction history</a>
-  described in this section, however, such that to a script there is
-  no detectable difference.</p>
-
-  </div><h3 id="editing-apis"><span class="secno">7.9 </span>Editing APIs</h3><dl class="domintro"><dt><var title="">document</var> . <code title="dom-document-execCommand"><a href="#execCommand">execCommand</a></code>(<var title="">commandId</var> [, <var title="">showUI</var> [, <var title="">value</var> ] ] )</dt>
+  </div><h3 id="editing-apis"><span class="secno">7.8 </span>Editing APIs</h3><dl class="domintro"><dt><var title="">document</var> . <code title="dom-document-execCommand"><a href="#execCommand">execCommand</a></code>(<var title="">commandId</var> [, <var title="">showUI</var> [, <var title="">value</var> ] ] )</dt>
 
    <dd>
 
@@ -3228,14 +2931,14 @@ interface <dfn>FunctionObjectCallback</dfn> {
 
    <dt><dfn id="command-redo" title="command-redo"><code>redo</code></dfn></dt>
    <dd><strong>Summary</strong>: Acts as if the user had requested a redo.</dd>
-   <dd class="impl"><strong>Action</strong>: The user agent must <a href="#redo:-moving-forward-in-the-undo-transaction-history" title="do-redo">move forward one step</a> in its <a href="#undo-transaction-history">undo
-   transaction history</a>, restoring the associated state. If the
-   <a href="#undo-position">undo position</a> is at the end of the <a href="#undo-transaction-history">undo
-   transaction history</a>, the user agent must do nothing. See the
-   <a href="#undo">undo history</a>.</dd>
-   <dd><strong>Enabled When</strong>: The <a href="#undo-position">undo position</a>
-   is not at the end of the <a href="#undo-transaction-history">undo transaction
-   history</a>.</dd>
+   <dd class="impl"><strong>Action</strong>: The user agent must <span title="do-redo">move forward one step</span> in its <span>undo
+   transaction history</span>, restoring the associated state. If the
+   <span>undo position</span> is at the end of the <span>undo
+   transaction history</span>, the user agent must do nothing.
+   </dd>
+   <dd><strong>Enabled When</strong>: The <span>undo position</span>
+   is not at the end of the <span>undo transaction
+   history</span>.</dd>
    <dd><strong>Indeterminate When</strong>: Never.</dd>
    <dd><strong>State</strong>: Always false.</dd>
    <dd><strong>Value</strong>: Always the string "<code title="">false</code>".</dd>
@@ -3288,14 +2991,14 @@ interface <dfn>FunctionObjectCallback</dfn> {
 
    <dt><dfn id="command-undo" title="command-undo"><code>undo</code></dfn></dt>
    <dd><strong>Summary</strong>: Acts as if the user had requested an undo.</dd>
-   <dd class="impl"><strong>Action</strong>: The user agent must <a href="#undo:-moving-back-in-the-undo-transaction-history" title="do-undo">move back one step</a> in its <a href="#undo-transaction-history">undo
-   transaction history</a>, restoring the associated state. If the
-   <a href="#undo-position">undo position</a> is at the start of the <a href="#undo-transaction-history">undo
-   transaction history</a>, the user agent must do nothing. See the
-   <a href="#undo">undo history</a>.</dd>
-   <dd><strong>Enabled When</strong>: The <a href="#undo-position">undo position</a>
-   is not at the start of the <a href="#undo-transaction-history">undo transaction
-   history</a>.</dd>
+   <dd class="impl"><strong>Action</strong>: The user agent must <span title="do-undo">move back one step</span> in its <span>undo
+   transaction history</span>, restoring the associated state. If the
+   <span>undo position</span> is at the start of the <span>undo
+   transaction history</span>, the user agent must do nothing.
+   </dd>
+   <dd><strong>Enabled When</strong>: The <span>undo position</span>
+   is not at the start of the <span>undo transaction
+   history</span>.</dd>
    <dd><strong>Indeterminate When</strong>: Never.</dd>
    <dd><strong>State</strong>: Always false.</dd>
    <dd><strong>Value</strong>: Always the string "<code title="">false</code>".</dd>
