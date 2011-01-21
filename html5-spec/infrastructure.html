@@ -194,43 +194,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -339,7 +303,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', script);
+     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
      document.body.appendChild(e);
    }
    function init() {
@@ -444,15 +408,18 @@
   not an <a href="#ascii-case-insensitive">ASCII case-insensitive</a> match for the string
   "<code title="">xml</code>". <a href="references.html#refsXML">[XML]</a></p><p>The term <dfn id="xml-mime-type">XML MIME type</dfn> is used to refer to the <a href="#mime-type" title="MIME type">MIME types</a> <code title="">text/xml</code>,
   <code title="">application/xml</code>, and any <a href="#mime-type">MIME
-  type</a> whose subtype ends with the four characters "<code title="">+xml</code>". <a href="references.html#refsRFC3023">[RFC3023]</a></p><h4 id="dom-trees"><span class="secno">2.1.3 </span>DOM trees</h4><p>The term <dfn id="root-element">root element</dfn>, when not explicitly qualified
-  as referring to the document's root element, means the furthest
+  type</a> whose subtype ends with the four characters "<code title="">+xml</code>". <a href="references.html#refsRFC3023">[RFC3023]</a></p><h4 id="dom-trees"><span class="secno">2.1.3 </span>DOM trees</h4><p>The <dfn id="root-element-of-a-document-object">root element of a <code>Document</code> object</dfn> is
+  that <code><a href="#document">Document</a></code>'s first element child, if any. If it does
+  not have one then the <code><a href="#document">Document</a></code> has no root element.</p><p>The term <dfn id="root-element">root element</dfn>, when not referring to a
+  <code><a href="#document">Document</a></code> object's root element, means the furthest
   ancestor element node of whatever node is being discussed, or the
   node itself if it has no ancestors. When the node is a part of the
   document, then the node's <a href="#root-element">root element</a> is indeed the
   document's root element; however, if the node is not currently part
-  of the document tree, the root element will be an orphaned node.</p><p>When an element's <a href="#root-element">root element</a> is the root element
-  of a <code><a href="#document">Document</a></code>, it is said to be <dfn id="in-a-document">in a
-  <code>Document</code></dfn>. An element is said to have been <dfn id="insert-an-element-into-a-document" title="insert an element into a document">inserted into a
+  of the document tree, the root element will be an orphaned node.</p><p>When an element's <a href="#root-element">root element</a> is the <a href="#root-element-of-a-document-object">root
+  element of a <code>Document</code> object</a>, it is said to be
+  <dfn id="in-a-document">in a <code>Document</code></dfn>. An element is said to have
+  been <dfn id="insert-an-element-into-a-document" title="insert an element into a document">inserted into a
   document</dfn> when its <a href="#root-element">root element</a> changes and is now
   the document's <a href="#root-element">root element</a>. Analogously, an element is
   said to have been <dfn id="remove-an-element-from-a-document" title="remove an element from a&#10;  document">removed from a document</dfn> when its <a href="#root-element">root
@@ -516,7 +483,9 @@
   interacting with plugins, as it is expected to be user-agent- and
   platform-specific. Some UAs might opt to support a plugin mechanism
   such as the Netscape Plugin API; others might use remote content
-  converters or have built-in support for certain types. <a href="references.html#refsNPAPI">[NPAPI]</a></p><div class="impl">
+  converters or have built-in support for certain types. Indeed, this
+  specification doesn't require user agents to support plugins at all.
+  <a href="references.html#refsNPAPI">[NPAPI]</a></p><div class="impl">
 
   <p class="warning">Browsers should take extreme care when
   interacting with external content intended for <a href="#plugin" title="plugin">plugins</a>. When third-party software is run with

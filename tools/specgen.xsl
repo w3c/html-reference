@@ -320,6 +320,9 @@ color: #3C790A;
     </div>
     <div class='head'>
       <xsl:choose>
+      <xsl:when test="$maturity = 'ED'">
+        <div><img src="HTML5_Badge_128.png" alt="5"/></div>
+      </xsl:when>
       <xsl:when test="$site = 'W3C' and not($maturity = 'ED')">
         <div><a href="http://www.w3.org/"><img height="48" width="72" alt="W3C" src="http://www.w3.org/Icons/w3c_home"/></a></div>
       </xsl:when>
@@ -360,7 +363,7 @@ color: #3C790A;
         <xsl:choose>
           <xsl:when test='$source and $maturity="ED"'>
           <dl>
-            <dt>Latest Editor’s Draft is also available:</dt>
+            <dt>Editor’s Draft is also available:</dt>
             <dd>
               <a id='latestED' href='{$source}'><xsl:value-of select='$source'/></a>
               <xsl:text> </xsl:text>
@@ -377,7 +380,7 @@ color: #3C790A;
           <xsl:otherwise>
             <xsl:if test='not($latest = "")'>
             <dl class="ed-draft-link">
-              <dt class="ed-draft-link">Latest Editor’s Draft is also available:</dt>
+              <dt class="ed-draft-link">Editor’s Draft is also available:</dt>
               <dd>
                 <a id='latestED' href='{$source}'><xsl:value-of select='$source'/></a>
                 <xsl:text> </xsl:text>
@@ -409,6 +412,7 @@ color: #3C790A;
         </xsl:if>
 
         <xsl:if test="$person-nodeset">
+          <dl>
           <dt>Editor<xsl:if test='count($person-nodeset) &gt; 1'>s</xsl:if>:</dt>
           <xsl:for-each select='$person-nodeset'>
             <xsl:choose>
@@ -436,6 +440,7 @@ color: #3C790A;
               </xsl:otherwise>
             </xsl:choose>
           </xsl:for-each>
+          </dl>
         </xsl:if>
       <p>The content of this document is also available as
         <xsl:choose>

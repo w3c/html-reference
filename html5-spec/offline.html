@@ -194,43 +194,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -339,7 +303,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', script);
+     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
      document.body.appendChild(e);
    }
    function init() {
@@ -1066,8 +1030,9 @@ NETWORK:
       jump back to the step labeled "start of line".</p> <!-- SECURITY
       -->
 
-      <p>Drop any the <a href="urls.html#url-fragment" title="url-fragment">&lt;fragment&gt;</a> components of the
-      resulting <a href="urls.html#absolute-url" title="absolute URL">absolute URLs</a>.</p>
+      <p>Drop any <a href="urls.html#url-fragment" title="url-fragment">&lt;fragment&gt;</a>
+      components of the resulting <a href="urls.html#absolute-url" title="absolute URL">absolute
+      URLs</a>.</p>
 
       <p>If the <a href="urls.html#absolute-url">absolute URL</a> corresponding to <var title="">part one</var> is already in the <var title="">fallback
       URLs</var> mapping as a <a href="#concept-appcache-fallback-ns" title="concept-appcache-fallback-ns">fallback namespace</a>,
@@ -2054,23 +2019,49 @@ NETWORK:
   primed the first time), making the testing of offline applications
   simpler.</p>
 
-  </div><h4 id="expiring-application-caches"><span class="secno">5.6.7 </span>Expiring application caches</h4><p>As a general rule, user agents should not expire application
+  </div><div class="impl">
+
+  <h4 id="expiring-application-caches"><span class="secno">5.6.7 </span>Expiring application caches</h4>
+
+  <p>As a general rule, user agents should not expire application
   caches, except on request from the user, or after having been left
-  unused for an extended period of time.</p><p>Application caches and cookies have similar implications with
+  unused for an extended period of time.</p>
+
+  <p>Application caches and cookies have similar implications with
   respect to privacy (e.g. if the site can identify the user when
   providing the cache, it can store data in the cache that can be used
   for cookie resurrection). Implementors are therefore encouraged to
   expose application caches in a manner related to HTTP cookies,
   allowing caches to be expunged together with cookies and other
-  origin-specific data.</p><p class="example">For example, a user agent could have a "delete
+  origin-specific data.</p>
+
+  <p class="example">For example, a user agent could have a "delete
   site-specific data" feature that clears all cookies, application
   caches, local storage, databases, etc, from an origin all at
-  once.</p><h4 id="disk-space"><span class="secno">5.6.8 </span>Disk space</h4><p>User agents should consider applying constraints on disk usage of
+  once.</p>
+
+  </div><div class="impl">
+
+  <h4 id="disk-space"><span class="secno">5.6.8 </span>Disk space</h4>
+
+  <p>User agents should consider applying constraints on disk usage of
   <a href="#application-cache" title="application cache">application caches</a>, and care
   should be taken to ensure that the restrictions cannot be easily
-  worked around using subdomains.</p><p>User agents should allow users to see how much space each domain
+  worked around using subdomains.</p>
+
+  <p>User agents should allow users to see how much space each domain
   is using, and may offer the user the ability to delete specific
-  <a href="#application-cache" title="application cache">application caches</a>.</p><h4 id="application-cache-api"><span class="secno">5.6.9 </span>Application cache API</h4><pre class="idl">interface <dfn id="applicationcache">ApplicationCache</dfn> {
+  <a href="#application-cache" title="application cache">application caches</a>.</p>
+
+  <p class="note">How quotas are presented to the user is not defined
+  by this specification. User agents are encouraged to provide
+  features such as allowing a user to indicate that certain sites are
+  trusted to use more than the default quota, e.g. by asynchronously
+  presenting a user interface while a cache is being updated, or by
+  having an explicit whitelist in the user agent's configuration
+  interface.</p>
+
+  </div><h4 id="application-cache-api"><span class="secno">5.6.9 </span>Application cache API</h4><pre class="idl">interface <dfn id="applicationcache">ApplicationCache</dfn> {
 
   // <a href="#concept-appcache-status" title="concept-appcache-status">update status</a>
   const unsigned short <a href="#dom-appcache-uncached" title="dom-appcache-UNCACHED">UNCACHED</a> = 0;

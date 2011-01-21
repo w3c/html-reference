@@ -194,43 +194,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -339,7 +303,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', script);
+     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
      document.body.appendChild(e);
    }
    function init() {
@@ -625,7 +589,7 @@
 
          <li><p>Let <var title="">got pragma</var> be false.</p></li>
 
-         <li><p>Let <var title="">mode</var> be null.</p></li>
+         <li><p>Let <var title="">need pragma</var> be null.</p></li>
 
          <li><p>Let <var title="">charset</var> be the null value
          (which, for the purposes of this algorithm, is distinct from
@@ -638,6 +602,9 @@
          <li><p>If the attribute's name is already in <var title="">attribute list</var>, then return to the step
          labeled <i>attributes</i>.</p>
 
+         </li><li><p>Add the attribute's name to <var title="">attribute
+         list</var>.</p>
+
          </li><li>
 
           <p>Run the appropriate step from the following list, if one
@@ -648,29 +615,28 @@
            <dd><p>If the attribute's value is "<code title="">content-type</code>", then set <var title="">got
            pragma</var> to true.</p></dd>
 
-           <dt>If the attribute's name is "<code title="">charset</code>"</dt>
-
-           <dd><p>If <var title="">charset</var> is still set to null,
-           let <var title="">charset</var> be the encoding
-           corresponding to the attribute's value, and set <var title="">mode</var> to "charset".</p></dd>
-
            <dt>If the attribute's name is "<code title="">content</code>"</dt>
 
            <dd><p>Apply the <a href="fetching-resources.html#algorithm-for-extracting-an-encoding-from-a-content-type">algorithm for extracting an encoding
            from a Content-Type</a>, giving the attribute's value as
            the string to parse. If an encoding is returned, and if
            <var title="">charset</var> is still set to null, let <var title="">charset</var> be the encoding returned, and set
-           <var title="">mode</var> to "pragma".</p></dd>
+           <var title="">need pragma</var> to true.</p></dd>
+
+           <dt>If the attribute's name is "<code title="">charset</code>"</dt>
+
+           <dd><p>Let <var title="">charset</var> be the encoding
+           corresponding to the attribute's value, and set <var title="">need pragma</var> to false.</p></dd>
 
           </dl></li>
 
          <li><p>Return to the step labeled <i>attributes</i>.</p></li>
 
-         <li><p><i>Processing</i>: If <var title="">mode</var> is
-         null, then jump to the second step of the overall "two step"
-         algorithm.</p></li>
+         <li><p><i>Processing</i>: If <var title="">need pragma</var>
+         is null, then jump to the second step of the overall "two
+         step" algorithm.</p></li>
 
-         <li><p>If <var title="">mode</var> is "pragma" but <var title="">got pragma</var> is false, then jump to the second
+         <li><p>If <var title="">mode</var> is true but <var title="">got pragma</var> is false, then jump to the second
          step of the overall "two step" algorithm.</p></li>
 
          <li><p>If <var title="">charset</var> is a UTF-16 encoding,

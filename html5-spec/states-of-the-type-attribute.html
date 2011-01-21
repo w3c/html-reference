@@ -194,43 +194,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -339,7 +303,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', script);
+     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
      document.body.appendChild(e);
    }
    function init() {
@@ -724,15 +688,16 @@
    <code>http://www.w3.org/TR/XForms/</code> in the recent past, then
    the rendering might look like this:</p>
 
-   <p><img alt="A text box with an icon on the left followed by the text &quot;www.w3&quot; and a cursor, with a drop down button on the right hand side; with, below, a drop down box containing a list of six URIs on the left, with the first four having grayed out labels on the right; and a scroll bar to the right of the drow down box, indicating further values are available." height="134" src="http://dev.w3.org/html5/spec/images/sample-url.png" width="472"/></p>
+   <p><img alt="A text box with an icon on the left followed by the text &quot;www.w3&quot; and a cursor, with a drop down button on the right hand side; with, below, a drop down box containing a list of six URLs on the left, with the first four having grayed out labels on the right; and a scroll bar to the right of the drow down box, indicating further values are available." height="134" src="http://dev.w3.org/html5/spec/images/sample-url.png" width="472"/></p>
 
-   <p>The first four URIs in this sample consist of the four URIs in
+   <p>The first four URLs in this sample consist of the four URLs in
    the author-specified list that match the text the user has entered,
-   sorted lexically. Note how the UA is using the knowledge that the
-   values are URIs to allow the user to omit the scheme part and
+   sorted in some UA-defined manner (maybe by how frequently the user
+   refers to those URLs). Note how the UA is using the knowledge that
+   the values are URLs to allow the user to omit the scheme part and
    perform intelligent matching on the domain name.</p>
 
-   <p>The last two URIs (and probably many more, given the scrollbar's
+   <p>The last two URLs (and probably many more, given the scrollbar's
    indications of more values being available) are the matches from
    the user agent's session history data. This data is not made
    available to the page DOM. In this particular case, the UA has no
@@ -1050,7 +1015,10 @@
   global date and time string</a> expressed in UTC representing the
   user's selection. User agents should allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
 
-  </div><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
+  </div><p class="note">The format shown to the user is independent of the
+  format used for form submission. Browsers are encouraged to use user
+  interfaces that present dates and times according to the conventions
+  of the user's preferred locale.</p><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
   specified, must have a value that is a <a href="common-microsyntaxes.html#valid-global-date-and-time-string">valid global date and
   time string</a>.</p><!-- ok to set out-of-range value, we never
   know when we might have to represent bogus input --><div class="impl">
@@ -1193,7 +1161,10 @@
   date string</a> representing the user's selection. User agents
   should allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
 
-  </div><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
+  </div><p class="note">The format shown to the user is independent of the
+  format used for form submission. Browsers are encouraged to use user
+  interfaces that present dates according to the conventions of the
+  user's preferred locale.</p><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
   specified, must have a value that is a <a href="common-microsyntaxes.html#valid-date-string">valid date
   string</a>.</p><!-- ok to set out-of-range value, we never know
   when we might have to represent bogus input --><div class="impl">
@@ -1318,7 +1289,10 @@
   month string</a> representing the user's selection. User agents
   should allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
 
-  </div><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
+  </div><p class="note">The format shown to the user is independent of the
+  format used for form submission. Browsers are encouraged to use user
+  interfaces that present months according to the conventions of the
+  user's preferred locale.</p><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
   specified, must have a value that is a <a href="common-microsyntaxes.html#valid-month-string">valid month
   string</a>.</p><!-- ok to set out-of-range value, we never know
   when we might have to represent bogus input --><div class="impl">
@@ -1443,7 +1417,10 @@
   week string</a> representing the user's selection. User agents
   should allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
 
-  </div><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
+  </div><p class="note">The format shown to the user is independent of the
+  format used for form submission. Browsers are encouraged to use user
+  interfaces that present weeks according to the conventions of the
+  user's preferred locale.</p><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
   specified, must have a value that is a <a href="common-microsyntaxes.html#valid-week-string">valid week
   string</a>.</p><!-- ok to set out-of-range value, we never know
   when we might have to represent bogus input --><div class="impl">
@@ -1572,7 +1549,10 @@
   time string</a> representing the user's selection. User agents
   should allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
 
-  </div><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
+  </div><p class="note">The format shown to the user is independent of the
+  format used for form submission. Browsers are encouraged to use user
+  interfaces that present times according to the conventions of the
+  user's preferred locale.</p><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
   specified, must have a value that is a <a href="common-microsyntaxes.html#valid-time-string">valid time
   string</a>.</p><!-- ok to set out-of-range value, we never know
   when we might have to represent bogus input --><div class="impl">
@@ -1697,7 +1677,10 @@
   <a href="common-microsyntaxes.html#valid-local-date-and-time-string">valid local date and time string</a> representing the
   user's selection. User agents should allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
 
-  </div><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
+  </div><p class="note">The format shown to the user is independent of the
+  format used for form submission. Browsers are encouraged to use user
+  interfaces that present dates and times according to the conventions
+  of the user's preferred locale.</p><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
   specified, must have a value that is a <a href="common-microsyntaxes.html#valid-local-date-and-time-string">valid local date and
   time string</a>.</p><!-- ok to set out-of-range value, we never
   know when we might have to represent bogus input --><div class="impl">

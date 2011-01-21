@@ -1,7 +1,7 @@
-diff -r 82eaafbf8365 relaxng/applications.rnc
---- a/relaxng/applications.rnc	Fri Dec 17 19:25:31 2010 +0900
-+++ b/relaxng/applications.rnc	Fri Dec 17 21:14:45 2010 +0900
-@@ -4,18 +4,6 @@
+diff -r 29e5bdfa9fa9 relaxng/applications.rnc
+--- a/relaxng/applications.rnc	Fri Jan 21 07:32:24 2011 +0900
++++ b/relaxng/applications.rnc	Fri Jan 21 08:09:35 2011 +0900
+@@ -4,19 +4,6 @@
  ##  RELAX NG Schema for HTML 5: Web Application Features              #
  # #####################################################################
  
@@ -11,6 +11,7 @@ diff -r 82eaafbf8365 relaxng/applications.rnc
 -		(	common.attrs.contextmenu?
 -		&	common.attrs.contenteditable?
 -		&	common.attrs.draggable?
+-		&	common.attrs.dropzone?
 -		&	common.attrs.hidden?
 -		&	common.attrs.spellcheck?
 -		)
@@ -20,7 +21,29 @@ diff -r 82eaafbf8365 relaxng/applications.rnc
  ## Context Menu: contextmenu
  
  	common.attrs.contextmenu =
-@@ -89,12 +77,26 @@
+@@ -42,20 +29,7 @@
+ 
+ 	common.attrs.dropzone =
+ 		attribute dropzone {
+-			list {
+-				(	xsd:string { pattern = "[sS]:.+" }
+-				|	xsd:string { pattern = "[fF]:.+" }
+-				)*
+-				,
+-				(	w:string "copy"
+-				|	w:string "move"
+-				|	w:string "link"
+-				)?
+-				,
+-				(	xsd:string { pattern = "[sS]:.+" }
+-				|	xsd:string { pattern = "[fF]:.+" }
+-				)*
+-			}
++			common.data.dropzonevalue
+ 		}
+ 
+ ## Hidden Element: hidden
+@@ -110,12 +84,26 @@
  	command.command.attrs =
  		(	common.attrs
  		&	command.command.attrs.type?
@@ -48,18 +71,19 @@ diff -r 82eaafbf8365 relaxng/applications.rnc
  	command.elem = command.command.elem
  
  ## Selection of one item from a list of items: <command type='radio'>
-@@ -107,7 +109,9 @@
+@@ -127,8 +115,10 @@
+ 			&	(	command.radio.attrs.type
  				&	command.radio.attrs.radiogroup #REVISIT taking liberties here
  				&	command.radio.attrs.checked?
- 				)
--			&	common-command.attrs
 +			&	command.radio.attrs.label?
 +			&	command.radio.attrs.icon?
 +			&	command.radio.attrs.disabled?
+ 				)
+-			&	common-command.attrs
  		)
  		command.radio.attrs.type =
  			attribute type {
-@@ -121,6 +125,18 @@
+@@ -142,6 +132,18 @@
  			attribute checked {
  				w:string "checked" | w:string ""
  			}
@@ -78,7 +102,7 @@ diff -r 82eaafbf8365 relaxng/applications.rnc
  	command.elem |= command.radio.elem
  
  ## State or option that can be toggled: <command type='checkbox'>
-@@ -132,7 +148,9 @@
+@@ -153,7 +155,9 @@
  			&	(	command.checkbox.attrs.type
  				&	command.checkbox.attrs.checked?
  				)
@@ -89,7 +113,7 @@ diff -r 82eaafbf8365 relaxng/applications.rnc
  			)
  		command.checkbox.attrs.type =
  			attribute type {
-@@ -142,30 +160,25 @@
+@@ -163,30 +167,25 @@
  			attribute checked {
  				w:string "checked" | w:string ""
  			}
@@ -126,9 +150,9 @@ diff -r 82eaafbf8365 relaxng/applications.rnc
  	common.elem.phrasing |= command.elem
  
  ## Menu: <menu>
-diff -r 82eaafbf8365 relaxng/block.rnc
---- a/relaxng/block.rnc	Fri Dec 17 19:25:31 2010 +0900
-+++ b/relaxng/block.rnc	Fri Dec 17 21:14:45 2010 +0900
+diff -r 29e5bdfa9fa9 relaxng/block.rnc
+--- a/relaxng/block.rnc	Fri Jan 21 07:32:24 2011 +0900
++++ b/relaxng/block.rnc	Fri Jan 21 08:09:35 2011 +0900
 @@ -114,12 +114,12 @@
  		element li { oli.inner & oli.attrs }
  	oli.attrs =
@@ -144,9 +168,9 @@ diff -r 82eaafbf8365 relaxng/block.rnc
  			attribute value {
  				common.data.integer
  			}
-diff -r 82eaafbf8365 relaxng/common.rnc
---- a/relaxng/common.rnc	Fri Dec 17 19:25:31 2010 +0900
-+++ b/relaxng/common.rnc	Fri Dec 17 21:14:45 2010 +0900
+diff -r 29e5bdfa9fa9 relaxng/common.rnc
+--- a/relaxng/common.rnc	Fri Jan 21 07:32:24 2011 +0900
++++ b/relaxng/common.rnc	Fri Jan 21 08:09:35 2011 +0900
 @@ -38,16 +38,16 @@
  	common.attr.anything =
  		attribute * { text }*
@@ -173,7 +197,7 @@ diff -r 82eaafbf8365 relaxng/common.rnc
  		)
  
  # #####################################################################
-@@ -96,29 +96,30 @@
+@@ -96,29 +96,31 @@
  # When updating, check <bdo> definition too
  
  common.attrs =
@@ -197,6 +221,7 @@ diff -r 82eaafbf8365 relaxng/common.rnc
 +	&	common.attrs.contextmenu?
 +	&	common.attrs.dir?
 +	&	common.attrs.draggable?
++	&	common.attrs.dropzone?
 +	&	common.attrs.hidden?
 +	&	common.attrs.id?
 +	&	common.attrs.lang?
@@ -218,7 +243,7 @@ diff -r 82eaafbf8365 relaxng/common.rnc
  	common.attrs.class =
  		attribute class {
  			common.data.tokens
-@@ -141,10 +142,6 @@
+@@ -141,10 +143,6 @@
  			string "preserve" | string "default"
  		} & XMLonly
  
@@ -229,7 +254,7 @@ diff -r 82eaafbf8365 relaxng/common.rnc
  	common.attrs.dir =
  		attribute dir {
  			w:string "ltr" | w:string "rtl" | w:string "auto"
-@@ -177,11 +174,6 @@
+@@ -177,11 +175,6 @@
  #			common.data.langcode
  #		} & XMLonly
  
@@ -241,7 +266,7 @@ diff -r 82eaafbf8365 relaxng/common.rnc
  	common.attrs.style =
  		attribute style {
  			string
-@@ -199,6 +191,13 @@
+@@ -199,6 +192,13 @@
  common.attrs.other =
  	empty
  
@@ -255,7 +280,7 @@ diff -r 82eaafbf8365 relaxng/common.rnc
  # #####################################################################
  ##  Common Datatypes                                                  #
  # #####################################################################
-@@ -208,10 +207,10 @@
+@@ -208,10 +208,10 @@
  	common.data.tokens =
  		list { token* }
  
@@ -268,9 +293,20 @@ diff -r 82eaafbf8365 relaxng/common.rnc
  		w:browsing-context-or-keyword
  #		xsd:string {
  #			pattern = "()|([^_].*)|(_[bB][lL][aA][nN][kK])|(_[sS][eE][lL][fF])|(_[pP][aA][rR][eE][nN][tT])|(_[tT][oO][pP])"
-@@ -365,16 +364,20 @@
-   common.data.zero =
-     w:zero
+@@ -369,6 +369,10 @@
+ 	common.data.keylabellist =
+ 		w:keylabellist
+ 
++## dropzone value
++	common.data.dropzonevalue =
++		w:dropzonevalue
++
+ ## Microdata Identifier
+   common.data.microdata-identifier =
+     w:microdata-identifier
+@@ -381,16 +385,20 @@
+   common.data.functionbody =
+     w:functionbody
  
 -# #####################################################################
 -##  WF2 Module Hook                                                   #
@@ -297,9 +333,9 @@ diff -r 82eaafbf8365 relaxng/common.rnc
  common.attrs.aria = ( notAllowed )
  common.attrs.aria.implicit.button = ( notAllowed )
  common.attrs.aria.implicit.input = ( notAllowed )
-diff -r 82eaafbf8365 relaxng/core-scripting.rnc
---- a/relaxng/core-scripting.rnc	Fri Dec 17 19:25:31 2010 +0900
-+++ b/relaxng/core-scripting.rnc	Fri Dec 17 21:14:45 2010 +0900
+diff -r 29e5bdfa9fa9 relaxng/core-scripting.rnc
+--- a/relaxng/core-scripting.rnc	Fri Jan 21 07:32:24 2011 +0900
++++ b/relaxng/core-scripting.rnc	Fri Jan 21 08:09:35 2011 +0900
 @@ -52,9 +52,9 @@
  				string
  			}
@@ -333,11 +369,11 @@ diff -r 82eaafbf8365 relaxng/core-scripting.rnc
 +		
  
  	scripting.attr.onabort =
- 		attribute onabort { string }
-diff -r 82eaafbf8365 relaxng/embed.rnc
---- a/relaxng/embed.rnc	Fri Dec 17 19:25:31 2010 +0900
-+++ b/relaxng/embed.rnc	Fri Dec 17 21:14:45 2010 +0900
-@@ -249,7 +249,7 @@
+ 		attribute onabort { common.data.functionbody }
+diff -r 29e5bdfa9fa9 relaxng/embed.rnc
+--- a/relaxng/embed.rnc	Fri Jan 21 07:32:24 2011 +0900
++++ b/relaxng/embed.rnc	Fri Jan 21 08:09:35 2011 +0900
+@@ -250,7 +250,7 @@
  			}
  		object.attrs.name =
  			attribute name {
@@ -346,7 +382,7 @@ diff -r 82eaafbf8365 relaxng/embed.rnc
  			}
  	object.inner.flow =
  		(	param.elem*
-@@ -305,7 +305,7 @@
+@@ -306,7 +306,7 @@
  			}
  		iframe.attrs.name =
  			attribute name {
@@ -355,7 +391,7 @@ diff -r 82eaafbf8365 relaxng/embed.rnc
  			}
  		iframe.attrs.height =
  			attribute height {
-@@ -320,8 +320,11 @@
+@@ -321,8 +321,11 @@
  				w:string "seamless" | w:string ""
  			} & v5only
  		iframe.attrs.sandbox =
@@ -369,7 +405,7 @@ diff -r 82eaafbf8365 relaxng/embed.rnc
  					{	( w:string "allow-top-navigation" )?
  					,	( w:string "allow-same-origin" )?
  					,	( w:string "allow-forms" )?
-@@ -465,7 +468,7 @@
+@@ -466,7 +469,7 @@
  					,	( w:string "allow-same-origin" )?
  					,	( w:string "allow-top-navigation" )?
  					}
@@ -378,7 +414,7 @@ diff -r 82eaafbf8365 relaxng/embed.rnc
  	iframe.inner =
  		( text )
  
-@@ -503,20 +506,44 @@
+@@ -504,20 +507,44 @@
  	area.attrs =
  		(	common.attrs
  		&	(	area.attrs.alt
@@ -430,7 +466,7 @@ diff -r 82eaafbf8365 relaxng/embed.rnc
  		area.attrs.shape =
  			(	( area.attrs.shape.rect?  & area.attrs.coords.rect   )
  			|	( area.attrs.shape.circle & area.attrs.coords.circle )
-@@ -529,7 +556,7 @@
+@@ -530,7 +557,7 @@
  			}
  		area.attrs.coords.rect =
  			attribute coords {
@@ -439,7 +475,7 @@ diff -r 82eaafbf8365 relaxng/embed.rnc
  #				xsd:token {
  #					pattern = "-?[0-9]+,-?[0-9]+,-?[0-9]+,-?[0-9]+"
  #				}
-@@ -540,7 +567,7 @@
+@@ -541,7 +568,7 @@
  			}
  		area.attrs.coords.circle =
  			attribute coords {
@@ -448,7 +484,7 @@ diff -r 82eaafbf8365 relaxng/embed.rnc
  #				xsd:token {
  #					pattern = "-?[0-9]+,-?[0-9]+,[0-9]+"
  #				}
-@@ -551,7 +578,7 @@
+@@ -552,7 +579,7 @@
  			}
  		area.attrs.coords.poly =
  			attribute coords {
@@ -457,9 +493,9 @@ diff -r 82eaafbf8365 relaxng/embed.rnc
  #				xsd:token {
  #					pattern = "-?[0-9]+,-?[0-9]+,-?[0-9]+,-?[0-9]+,-?[0-9]+,-?[0-9]+(,-?[0-9]+,-?[0-9]+)*"
  #				}
-diff -r 82eaafbf8365 relaxng/media.rnc
---- a/relaxng/media.rnc	Fri Dec 17 19:25:31 2010 +0900
-+++ b/relaxng/media.rnc	Fri Dec 17 21:14:45 2010 +0900
+diff -r 29e5bdfa9fa9 relaxng/media.rnc
+--- a/relaxng/media.rnc	Fri Jan 21 07:32:24 2011 +0900
++++ b/relaxng/media.rnc	Fri Jan 21 08:09:35 2011 +0900
 @@ -4,32 +4,6 @@
  ##  RELAX NG Schema for HTML 5: Advanced Embedded Content             #
  # #####################################################################
@@ -626,9 +662,9 @@ diff -r 82eaafbf8365 relaxng/media.rnc
  		,	track.elem*
  		,	common.inner.phrasing
  		)
-diff -r 82eaafbf8365 relaxng/meta.rnc
---- a/relaxng/meta.rnc	Fri Dec 17 19:25:31 2010 +0900
-+++ b/relaxng/meta.rnc	Fri Dec 17 21:14:45 2010 +0900
+diff -r 29e5bdfa9fa9 relaxng/meta.rnc
+--- a/relaxng/meta.rnc	Fri Jan 21 07:32:24 2011 +0900
++++ b/relaxng/meta.rnc	Fri Jan 21 08:09:35 2011 +0900
 @@ -53,7 +53,11 @@
  		&	body.attrs.onafterprint?
  		&	body.attrs.onbeforeprint?
@@ -642,21 +678,21 @@ diff -r 82eaafbf8365 relaxng/meta.rnc
  		&	body.attrs.onoffline?
  		&	body.attrs.ononline?
 @@ -73,8 +77,16 @@
- 		attribute onbeforeprint { string }
+ 		attribute onbeforeprint { common.data.functionbody }
  	body.attrs.onbeforeunload =
- 		attribute onbeforeunload { string }
+ 		attribute onbeforeunload { common.data.functionbody }
 +	body.attrs.onblur =
-+		attribute onblur { string }
++		attribute onblur { common.data.functionbody }
 +	body.attrs.onerror =
-+		attribute onerror { string }
++		attribute onerror { common.data.functionbody }
 +	body.attrs.onfocus =
-+		attribute onfocus { string }
++		attribute onfocus { common.data.functionbody }
  	body.attrs.onhashchange =
- 		attribute onhashchange { string }
+ 		attribute onhashchange { common.data.functionbody }
 +	body.attrs.onload =
-+		attribute onload { string }
++		attribute onload { common.data.functionbody }
  	body.attrs.onmessage =
- 		attribute onmessage { string }
+ 		attribute onmessage { common.data.functionbody }
  	body.attrs.onoffline =
 @@ -101,7 +113,7 @@
  	title.attrs =
@@ -813,9 +849,9 @@ diff -r 82eaafbf8365 relaxng/meta.rnc
 -	common.elem.metadata |= ( meta.charset.elem | meta.http-equiv.content-type.elem )
 +	common.elem.metadata |= meta.charset.elem
 +	common.elem.metadata |= meta.http-equiv.content-type.elem
-diff -r 82eaafbf8365 relaxng/phrase.rnc
---- a/relaxng/phrase.rnc	Fri Dec 17 19:25:31 2010 +0900
-+++ b/relaxng/phrase.rnc	Fri Dec 17 21:14:45 2010 +0900
+diff -r 29e5bdfa9fa9 relaxng/phrase.rnc
+--- a/relaxng/phrase.rnc	Fri Jan 21 07:32:24 2011 +0900
++++ b/relaxng/phrase.rnc	Fri Jan 21 08:09:35 2011 +0900
 @@ -13,13 +13,12 @@
  	a.attrs =
  		(	common.attrs
@@ -906,9 +942,9 @@ diff -r 82eaafbf8365 relaxng/phrase.rnc
  ## Emphatic Stress: <em>
  
  	em.elem =
-diff -r 82eaafbf8365 relaxng/revision.rnc
---- a/relaxng/revision.rnc	Fri Dec 17 19:25:31 2010 +0900
-+++ b/relaxng/revision.rnc	Fri Dec 17 21:14:45 2010 +0900
+diff -r 29e5bdfa9fa9 relaxng/revision.rnc
+--- a/relaxng/revision.rnc	Fri Jan 21 07:32:24 2011 +0900
++++ b/relaxng/revision.rnc	Fri Jan 21 08:09:35 2011 +0900
 @@ -2,17 +2,6 @@
  ##  RELAX NG Schema for HTML 5: Revision Annotations                  #
  # #####################################################################
@@ -967,9 +1003,9 @@ diff -r 82eaafbf8365 relaxng/revision.rnc
  	del.inner.flow =
  		( common.inner.flow )
  	del.inner.phrasing =
-diff -r 82eaafbf8365 relaxng/tables.rnc
---- a/relaxng/tables.rnc	Fri Dec 17 19:25:31 2010 +0900
-+++ b/relaxng/tables.rnc	Fri Dec 17 21:14:45 2010 +0900
+diff -r 29e5bdfa9fa9 relaxng/tables.rnc
+--- a/relaxng/tables.rnc	Fri Jan 21 07:32:24 2011 +0900
++++ b/relaxng/tables.rnc	Fri Jan 21 08:09:35 2011 +0900
 @@ -157,38 +157,6 @@
  	tr.inner =
  		( ( td.elem | th.elem )* )
@@ -1072,9 +1108,9 @@ diff -r 82eaafbf8365 relaxng/tables.rnc
 +			}
  	th.inner =
  		( common.inner.phrasing )
-diff -r 82eaafbf8365 relaxng/web-forms.rnc
---- a/relaxng/web-forms.rnc	Fri Dec 17 19:25:31 2010 +0900
-+++ b/relaxng/web-forms.rnc	Fri Dec 17 21:14:45 2010 +0900
+diff -r 29e5bdfa9fa9 relaxng/web-forms.rnc
+--- a/relaxng/web-forms.rnc	Fri Jan 21 07:32:24 2011 +0900
++++ b/relaxng/web-forms.rnc	Fri Jan 21 08:09:35 2011 +0900
 @@ -9,6 +9,7 @@
  	common-form.attrs =
  		(	common-form.attrs.name?
@@ -1179,9 +1215,9 @@ diff -r 82eaafbf8365 relaxng/web-forms.rnc
  
  	button.elem |= button.button.elem
  
-diff -r 82eaafbf8365 relaxng/web-forms2.rnc
---- a/relaxng/web-forms2.rnc	Fri Dec 17 19:25:31 2010 +0900
-+++ b/relaxng/web-forms2.rnc	Fri Dec 17 21:14:45 2010 +0900
+diff -r 29e5bdfa9fa9 relaxng/web-forms2.rnc
+--- a/relaxng/web-forms2.rnc	Fri Jan 21 07:32:24 2011 +0900
++++ b/relaxng/web-forms2.rnc	Fri Jan 21 08:09:35 2011 +0900
 @@ -6,9 +6,6 @@
  
  ## Shared attributes for form controls

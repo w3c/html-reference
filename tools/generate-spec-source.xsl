@@ -452,6 +452,9 @@
                   <xsl:when test="$pattern='keylabellist'">
                     <h2 class="common-subhead"><dfn id="{@id}">list of key labels</dfn></h2>
                   </xsl:when>
+                  <xsl:when test="$pattern='dropzonevalue'">
+                    <h2 class="common-subhead"><dfn id="{@id}">dropzone value</dfn></h2>
+                  </xsl:when>
                   <xsl:when test="$pattern='default-style'">
                     <h2 class="common-subhead"><dfn id="{@id}">default-style name</dfn></h2>
                   </xsl:when>
@@ -787,7 +790,7 @@
             <!-- * <xsl:text>&#10;      </xsl:text> -->
             <p>This document incorporates a modified version of a 
               <a
-                href="http://svn.webkit.org/repository/webkit/trunk/WebCore/css/html.css"
+                href="http://svn.webkit.org/repository/webkit/trunk/Source/WebCore/css/html.css"
                 >CSS stylesheet from the WebKit source repository</a>,
               distributed with the following copyright notice and
               license statement:</p>
@@ -801,7 +804,7 @@
               distributed with the following copyright notice and
               license statement:</p>
             <xsl:text>&#10;      </xsl:text>
-            <pre class="license"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2010 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</pre>
+            <p class="license"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2010 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p>
             <xsl:text>&#10;      </xsl:text>
           </section>
           <!-- * <section id="schema-appendix"> -->
@@ -3312,6 +3315,9 @@
       </xsl:when>
       <xsl:when test=".='keylabellist'">
         <a href="{@href}">list of key labels</a>
+      </xsl:when>
+      <xsl:when test=".='dropzonevalue'">
+        <a href="{@href}">dropzone value</a>
       </xsl:when>
       <xsl:when test=".='default-style'">
         <a href="{@href}">default-style name</a>

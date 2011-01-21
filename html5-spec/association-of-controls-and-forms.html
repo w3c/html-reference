@@ -194,43 +194,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -339,7 +303,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', script);
+     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
      document.body.appendChild(e);
    }
    function init() {
@@ -576,10 +540,10 @@
   <ol><li><p>Let <var title="">target</var> be the element's
    <code><a href="infrastructure.html#document">Document</a></code>.</p></li>
 
-   <li><p>Let <var title="">target</var> has no <a href="browsers.html#browsing-context">browsing
+   <li><p>If <var title="">target</var> has no <a href="browsers.html#browsing-context">browsing
    context</a>, abort these steps.</p></li>
 
-   <li><p>Let <var title="">target</var>'s <a href="browsers.html#browsing-context">browsing
+   <li><p>If <var title="">target</var>'s <a href="browsers.html#browsing-context">browsing
    context</a> has no <a href="browsers.html#top-level-browsing-context">top-level browsing context</a> (e.g.
    it is a <a href="browsers.html#nested-browsing-context">nested browsing context</a> with no <a href="browsers.html#parent-browsing-context">parent
    browsing context</a>), abort these steps.</p></li>
@@ -666,7 +630,8 @@
   <code><a href="forms.html#the-form-element">form</a></code> element.</p><hr/><p>The <dfn id="attr-fs-action" title="attr-fs-action"><code>action</code></dfn> and
   <dfn id="attr-fs-formaction" title="attr-fs-formaction"><code>formaction</code></dfn>
   content attributes, if specified, must have a value that is a
-  <a href="urls.html#valid-url-potentially-surrounded-by-spaces">valid URL potentially surrounded by spaces</a>.</p><p>The <dfn id="concept-fs-action" title="concept-fs-action">action</dfn> of an element is
+  <a href="urls.html#valid-non-empty-url-potentially-surrounded-by-spaces">valid non-empty URL potentially surrounded by
+  spaces</a>.</p><p>The <dfn id="concept-fs-action" title="concept-fs-action">action</dfn> of an element is
   the value of the element's <code title="attr-fs-formaction"><a href="#attr-fs-formaction">formaction</a></code> attribute, if the
   element is a <a href="forms.html#concept-submit-button" title="concept-submit-button">submit
   button</a> and has such an attribute, or the value of its
@@ -741,19 +706,23 @@
 
   </div><div class="impl">
 
-  <hr/><p>The <dfn id="dom-fs-action" title="dom-fs-action"><code>action</code></dfn> and <dfn id="dom-fs-target" title="dom-fs-target"><code>target</code></dfn> IDL attributes must
-  <a href="common-dom-interfaces.html#reflect">reflect</a> the respective content attributes of the same
-  name. The <dfn id="dom-fs-method" title="dom-fs-method"><code>method</code></dfn> and
-  <dfn id="dom-fs-enctype" title="dom-fs-enctype"><code>enctype</code></dfn> IDL
-  attributes must <a href="common-dom-interfaces.html#reflect">reflect</a> the respective content
-  attributes of the same name, <a href="common-dom-interfaces.html#limited-to-only-known-values">limited to only known
-  values</a>. The <dfn id="dom-fs-encoding" title="dom-fs-encoding"><code>encoding</code></dfn> IDL attribute
+  <hr/><p>The <dfn id="dom-fs-action" title="dom-fs-action"><code>action</code></dfn> IDL
+  attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the content attribute of the
+  same name, except that on getting, when the content attribute is
+  missing or its value is the empty string, <a href="dom.html#the-document-s-address">the document's
+  address</a> must be returned instead. The <dfn id="dom-fs-target" title="dom-fs-target"><code>target</code></dfn> IDL attribute must
+  <a href="common-dom-interfaces.html#reflect">reflect</a> the content attribute of the same name. The
+  <dfn id="dom-fs-method" title="dom-fs-method"><code>method</code></dfn> and <dfn id="dom-fs-enctype" title="dom-fs-enctype"><code>enctype</code></dfn> IDL attributes
+  must <a href="common-dom-interfaces.html#reflect">reflect</a> the respective content attributes of the
+  same name, <a href="common-dom-interfaces.html#limited-to-only-known-values">limited to only known values</a>. The <dfn id="dom-fs-encoding" title="dom-fs-encoding"><code>encoding</code></dfn> IDL attribute
   must <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-fs-enctype"><a href="#attr-fs-enctype">enctype</a></code> content attribute,
   <a href="common-dom-interfaces.html#limited-to-only-known-values">limited to only known values</a>. The <dfn id="dom-fs-novalidate" title="dom-fs-noValidate"><code>noValidate</code></dfn> IDL
   attribute must reflect the <code title="attr-fs-novalidate"><a href="#attr-fs-novalidate">novalidate</a></code> content attribute. The
   <dfn id="dom-fs-formaction" title="dom-fs-formAction"><code>formAction</code></dfn> IDL
-  attribute must reflect the <code title="attr-fs-formaction"><a href="#attr-fs-formaction">formaction</a></code> content attribute. The
-  <dfn id="dom-fs-formenctype" title="dom-fs-formEnctype"><code>formEnctype</code></dfn> IDL
+  attribute must reflect the <code title="attr-fs-formaction"><a href="#attr-fs-formaction">formaction</a></code> content attribute,
+  except that on getting, when the content attribute is missing or its
+  value is the empty string, <a href="dom.html#the-document-s-address">the document's address</a> must
+  be returned instead. The <dfn id="dom-fs-formenctype" title="dom-fs-formEnctype"><code>formEnctype</code></dfn> IDL
   attribute must reflect the <code title="attr-fs-formenctype"><a href="#attr-fs-formenctype">formenctype</a></code> content attribute,
   <a href="common-dom-interfaces.html#limited-to-only-known-values">limited to only known values</a>. The <dfn id="dom-fs-formmethod" title="dom-fs-formMethod"><code>formMethod</code></dfn> IDL
   attribute must reflect the <code title="attr-fs-formmethod"><a href="#attr-fs-formmethod">formmethod</a></code> content attribute,
@@ -1318,7 +1287,7 @@ fur
 
   </div><div class="impl">
 
-  <h5 id="form-submission-algorithm"><span class="secno">4.10.22.3 </span>Form submission algorithm</h5><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/138">ISSUE-138</a> (mutate-action) blocks progress to Last Call</span></p>
+  <h5 id="form-submission-algorithm"><span class="secno">4.10.22.3 </span>Form submission algorithm</h5>
 
   <p>When a <code><a href="forms.html#the-form-element">form</a></code> element <var title="">form</var> is <dfn id="concept-form-submit" title="concept-form-submit">submitted</dfn> from an element <var title="">submitter</var> (typically a button), optionally with a
   <var title="">scripted-submit</var> flag set, the user agent must
@@ -1598,19 +1567,19 @@ fur
       </td><th> <a href="#attr-fs-method-get" title="attr-fs-method-GET">GET</a>
       </th><th> <a href="#attr-fs-method-post" title="attr-fs-method-POST">POST</a>
      </th></tr></thead><tbody><tr><th> <code title="">http</code>
-      </th><td> <a href="#submit-mutate-action" title="submit-mutate-action">Mutate action</a>
+      </th><td> <a href="#submit-mutate-action" title="submit-mutate-action">Mutate action URL</a>
       </td><td> <a href="#submit-body" title="submit-body">Submit as entity body</a>
      </td></tr><tr><th> <code title="">https</code>
-      </th><td> <a href="#submit-mutate-action" title="submit-mutate-action">Mutate action</a>
+      </th><td> <a href="#submit-mutate-action" title="submit-mutate-action">Mutate action URL</a>
       </td><td> <a href="#submit-body" title="submit-body">Submit as entity body</a>
      </td></tr><tr><th> <code title="">ftp</code>
-      </th><td> <a href="#submit-get-action" title="submit-get-action">Get action</a>
-      </td><td> <a href="#submit-get-action" title="submit-get-action">Get action</a>
+      </th><td> <a href="#submit-get-action" title="submit-get-action">Get action URL</a>
+      </td><td> <a href="#submit-get-action" title="submit-get-action">Get action URL</a>
      </td></tr><tr><th> <code title="">javascript</code>
-      </th><td> <a href="#submit-get-action" title="submit-get-action">Get action</a>
-      </td><td> <a href="#submit-get-action" title="submit-get-action">Get action</a>
+      </th><td> <a href="#submit-get-action" title="submit-get-action">Get action URL</a>
+      </td><td> <a href="#submit-get-action" title="submit-get-action">Get action URL</a>
      </td></tr><tr><th> <code title="">data</code>
-      </th><td> <a href="#submit-get-action" title="submit-get-action">Get action</a>
+      </th><td> <a href="#submit-get-action" title="submit-get-action">Get action URL</a>
       </td><td> <a href="#submit-data-post" title="submit-data-post">Post to data:</a>
      </td></tr><tr><th> <code title="">mailto</code>
       </th><td> <a href="#submit-mailto-headers" title="submit-mailto-headers">Mail with headers</a>
@@ -1623,7 +1592,7 @@ fur
 
     <p>The behaviors are as follows:</p>
 
-    <dl><dt><dfn id="submit-mutate-action" title="submit-mutate-action">Mutate action</dfn>
+    <dl><dt><dfn id="submit-mutate-action" title="submit-mutate-action">Mutate action URL</dfn>
      </dt><dd>
 
       <p>Let <var title="">query</var> be the result of encoding the
@@ -1682,7 +1651,7 @@ fur
 
      </dd>
 
-     <dt><dfn id="submit-get-action" title="submit-get-action">Get action</dfn>
+     <dt><dfn id="submit-get-action" title="submit-get-action">Get action URL</dfn>
      </dt><dd>
 
       <p><a href="history.html#navigate">Navigate</a><!--DONAV form--> <var title="">target
@@ -1937,6 +1906,8 @@ fur
 
   <!-- http://hixie.ch/tests/adhoc/html/forms/submission/multipart_form-data/ -->
 
+  <!-- NOTE: This algorithm is also used by the XHR spec -->
+
   <p>The <dfn id="multipart-form-data-encoding-algorithm"><code title="">multipart/form-data</code> encoding
   algorithm</dfn> is as follows:</p>
 
@@ -1944,7 +1915,13 @@ fur
 
    <li>
 
-    <p>If the <code><a href="forms.html#the-form-element">form</a></code> element has an <code title="attr-form-accept-charset"><a href="forms.html#attr-form-accept-charset">accept-charset</a></code> attribute,
+    <p>If the algorithm was invoked with an explicit character
+    encoding, let the selected character encoding be that encoding.
+    (This algorithm is used by other specifications, which provide an
+    explicit character encoding to avoid the dependency on the
+    <code><a href="forms.html#the-form-element">form</a></code> element described in the next paragraph.)</p>
+
+    <p>Otherwise, if the <code><a href="forms.html#the-form-element">form</a></code> element has an <code title="attr-form-accept-charset"><a href="forms.html#attr-form-accept-charset">accept-charset</a></code> attribute,
     then, taking into account the characters found in the <var title="">form data set</var>'s names and values, and the character
     encodings supported by the user agent, select a character encoding
     from the list given in the <code><a href="forms.html#the-form-element">form</a></code>'s <code title="attr-form-accept-charset"><a href="forms.html#attr-form-accept-charset">accept-charset</a></code> attribute
@@ -1968,9 +1945,8 @@ fur
     <p>For each entry in the <var title="">form data set</var>,
     perform these substeps:</p>
 
-    <ol><li><p>If the entry's name is "<code title="attr-fe-name-charset"><a href="#attr-fe-name-charset">_charset_</a></code>"
-     and its type is "<code title="">hidden</code>", replace its value
-     with <var title="">charset</var>.</p></li>
+    <ol><li><p>If the entry's name is "<code title="attr-fe-name-charset"><a href="#attr-fe-name-charset">_charset_</a></code>" and its type is
+     "<code title="">hidden</code>", replace its value with <var title="">charset</var>.</p></li>
 
      <!-- the step that replaces a file with its name is missing in
      this version of the algorithm -->

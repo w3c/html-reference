@@ -194,43 +194,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -339,7 +303,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', script);
+     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
      document.body.appendChild(e);
    }
    function init() {
@@ -1403,7 +1367,7 @@ people expect to have work and what is necessary.
 
     <div class="impl">
 
-    <ol><!-- TESTS: http://www.hixie.ch/tests/adhoc/html/meta/refresh/ --><li><p>If another <code><a href="#meta">meta</a></code> element with an <code title="attr-meta-http-equiv"><a href="#attr-meta-http-equiv">http-equiv</a></code> attribute in the
+    <ol><!-- TESTS: http://www.hixie.ch/tests/adhoc/html/meta/refresh/ --><!-- http://software.hixie.ch/utilities/js/live-dom-viewer/saved/734 --><li><p>If another <code><a href="#meta">meta</a></code> element with an <code title="attr-meta-http-equiv"><a href="#attr-meta-http-equiv">http-equiv</a></code> attribute in the
      <a href="#attr-meta-http-equiv-refresh" title="attr-meta-http-equiv-refresh">Refresh state</a>
      has already been successfully processed (i.e. when it was
      inserted the user agent processed it and reached the last step of
@@ -1500,16 +1464,35 @@ people expect to have work and what is necessary.
 
       <p>Perform one or more of the following steps:</p>
 
-      <ul><li><p>Set a timer so that in <var title="">time</var> seconds,
-       adjusted to take into account user or user agent preferences,
-       if the user has not canceled the redirect and if the
-       <code><a href="#meta">meta</a></code> element's <code><a href="infrastructure.html#document">Document</a></code>'s
-       <a href="browsers.html#browsing-context">browsing context</a> did not have the <a href="the-iframe-element.html#sandboxed-automatic-features-browsing-context-flag">sandboxed
-       automatic features browsing context flag</a> set when the
-       <code><a href="infrastructure.html#document">Document</a></code> was created, the user agent <a href="history.html#navigate" title="navigate">navigates</a><!--DONAV meta refresh--> the
-       <code><a href="infrastructure.html#document">Document</a></code>'s <a href="browsers.html#browsing-context">browsing context</a> to <var title="">url</var>, with <a href="history.html#replacement-enabled">replacement enabled</a>, and
-       with the <code><a href="infrastructure.html#document">Document</a></code>'s <a href="browsers.html#browsing-context">browsing context</a>
-       as the <a href="history.html#source-browsing-context">source browsing context</a>.</p></li>
+      <ul><li>
+
+        <p>After the refresh has come due (as defined below), if the
+        user has not canceled the redirect and if the
+        <code><a href="#meta">meta</a></code> element's <code><a href="infrastructure.html#document">Document</a></code>'s
+        <a href="browsers.html#browsing-context">browsing context</a> did not have the <a href="the-iframe-element.html#sandboxed-automatic-features-browsing-context-flag">sandboxed
+        automatic features browsing context flag</a> set when the
+        <code><a href="infrastructure.html#document">Document</a></code> was created, <a href="history.html#navigate" title="navigate">navigate</a><!--DONAV meta refresh--> the
+        <code><a href="infrastructure.html#document">Document</a></code>'s <a href="browsers.html#browsing-context">browsing context</a> to <var title="">url</var>, with <a href="history.html#replacement-enabled">replacement enabled</a>, and
+        with the <code><a href="infrastructure.html#document">Document</a></code>'s <a href="browsers.html#browsing-context">browsing context</a>
+        as the <a href="history.html#source-browsing-context">source browsing context</a>.</p>
+
+        <p>For the purposes of the previous paragraph, a refresh is
+        said to have come due as soon as the <em>later</em> of the
+        following two conditions occurs:</p>
+
+        <ul><li>At least <var title="">time</var> seconds have elapsed
+         since the document has <a href="the-end.html#completely-loaded">completely loaded</a>,
+         adjusted to take into account user or user agent
+         preferences.</li>
+         <!-- http://software.hixie.ch/utilities/js/live-dom-viewer/saved/774 -->
+
+         <li>At least <var title="">time</var> seconds have elapsed
+         since the <code><a href="#meta">meta</a></code> element was <a href="infrastructure.html#insert-an-element-into-a-document" title="insert&#10;         an element into a document">inserted into the
+         <code>Document</code></a>, adjusted to take into account
+         user or user agent preferences.</li>
+         <!-- http://software.hixie.ch/utilities/js/live-dom-viewer/saved/772 -->
+
+        </ul></li>
 
        <li><p>Provide the user with an interface that, when selected,
        <a href="history.html#navigate" title="navigate">navigates</a><!--DONAV meta
@@ -1808,6 +1791,18 @@ people expect to have work and what is necessary.
   information only to the <code><a href="#the-style-element">style</a></code> element's parent element
   (if any), and that element's child nodes. Otherwise, the specified
   styles must, if applied, be applied to the entire document.</p>
+
+  <p>For scoped CSS resources, the effect of @-rules must be scoped to
+  the scoped sheet and its subresources, even if the @-rule in
+  question would ordinarily apply to all style sheets that affect the
+  <code><a href="infrastructure.html#document">Document</a></code>. Any '@page' rules in scoped CSS resources
+  must be ignored.</p>
+
+  <p class="example">For example, an '@font-face' rule defined in a
+  scoped style sheet would only define the font for the purposes of
+  font rules in the scoped section; style sheets outside the scoped
+  section using the same font name would not end up using that
+  embedded font.</p>
 
   </div><p id="title-on-style">The <dfn id="attr-style-title" title="attr-style-title"><code>title</code></dfn> attribute on
   <code><a href="#the-style-element">style</a></code> elements defines <span>alternative style sheet

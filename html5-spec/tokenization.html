@@ -194,43 +194,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -339,7 +303,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', script);
+     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
      document.body.appendChild(e);
    }
    function init() {
@@ -3248,9 +3212,10 @@ document.body.appendChild(text);
     <code title="attr-meta-content"><a href="semantics.html#attr-meta-content">content</a></code> attribute, and
     applying the <a href="fetching-resources.html#algorithm-for-extracting-an-encoding-from-a-content-type">algorithm for extracting an encoding from a
     Content-Type</a> to that attribute's value returns a supported
-    encoding <var title="">encoding</var>, and the <a href="parsing.html#concept-encoding-confidence" title="concept-encoding-confidence">confidence</a> is currently
+    <a href="infrastructure.html#ascii-compatible-character-encoding">ASCII-compatible character encoding</a> or a UTF-16
+    encoding, and the <a href="parsing.html#concept-encoding-confidence" title="concept-encoding-confidence">confidence</a> is currently
     <i>tentative</i>, then <a href="parsing.html#change-the-encoding">change the encoding</a> to the
-    encoding <var title="">encoding</var>.</p>
+    extracted encoding.</p>
 
    </dd>
 
@@ -4447,7 +4412,7 @@ document.body.appendChild(text);
     <p>Act as if a start tag token with the tag name "form" had been seen.</p>
 
     <p>If the token has an attribute called "action", set the
-    <code title="attr-form-action">action</code> attribute on the
+    <code title="attr-fs-action"><a href="association-of-controls-and-forms.html#attr-fs-action">action</a></code> attribute on the
     resulting <code><a href="forms.html#the-form-element">form</a></code> element to the value of the
     "action" attribute of the token.</p>
 
@@ -5108,7 +5073,15 @@ document.body.appendChild(text);
   <p>When the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="#parsing-main-intabletext" title="insertion&#10;  mode: in table text">in table text</a>", tokens must be handled
   as follows:</p>
 
-  <dl class="switch"><dt>A character token</dt>
+  <dl class="switch"><dt>A character token that is U+0000 NULL</dt>
+   <dd>
+
+    <p><a href="parsing.html#parse-error">Parse error</a>. Ignore the token.</p>
+
+   </dd>
+
+
+   <dt>Any other character token</dt>
    <dd>
 
     <p>Append the character token to the <var><a href="#pending-table-character-tokens">pending table character
@@ -5123,9 +5096,10 @@ document.body.appendChild(text);
     <p>If any of the tokens in the <var><a href="#pending-table-character-tokens">pending table character
     tokens</a></var> list are character tokens that are not one of U+0009
     CHARACTER TABULATION, U+000A LINE FEED (LF), U+000C FORM FEED
-    (FF), U+000D CARRIAGE RETURN (CR), or U+0020 SPACE, then
-    reprocess those character tokens using the rules given in the
-    "anything else" entry in the <a href="#parsing-main-intable" title="insertion mode: in&#10;    table">in table</a>" insertion mode.</p>
+    (FF), U+000D CARRIAGE RETURN (CR), or U+0020 SPACE, then reprocess
+    those character tokens using the rules given in the "anything
+    else" entry in the <a href="#parsing-main-intable" title="insertion mode: in table">in
+    table</a>" insertion mode.</p>
 
     <p>Otherwise, <a href="#insert-a-character" title="insert a character">insert the
     characters</a> given by the <var><a href="#pending-table-character-tokens">pending table character

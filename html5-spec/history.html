@@ -194,43 +194,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -339,7 +303,7 @@
    }
    function load(script) {
      var e = document.createElement('script');
-     e.setAttribute('src', script);
+     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
      document.body.appendChild(e);
    }
    function init() {
@@ -585,15 +549,24 @@
    <a href="browsers.html#browsing-context">browsing context</a> of the <var title="">specified
    entry</var>.</p></li>
 
-   <li><p><a href="#prompt-to-unload-a-document" title="prompt to unload a document">Prompt to
-   unload</a> the <a href="browsers.html#active-document">active document</a> of the <var title="">specified browsing context</var>. If the user
-   <a href="#refused-to-allow-the-document-to-be-unloaded">refused to allow the document to be unloaded</a>, then
-   abort these steps.</p></li>
+   <li>
 
-   <li><p><a href="#unload-a-document" title="unload a document">Unload</a> the
-   <a href="browsers.html#active-document">active document</a> of the <var title="">specified
-   browsing context</var> with the <var title="">recycle</var>
-   parameter set to false.</p></li>
+    <p>If the <var title="">specified browsing context</var>'s
+    <a href="browsers.html#active-document">active document</a> is not the same <code><a href="infrastructure.html#document">Document</a></code>
+    as the <code><a href="infrastructure.html#document">Document</a></code> of the <var title="">specified
+    entry</var>, then run these substeps:</p>
+
+    <ol><li><p><a href="#prompt-to-unload-a-document" title="prompt to unload a document">Prompt to
+     unload</a> the <a href="browsers.html#active-document">active document</a> of the <var title="">specified browsing context</var>. If the user
+     <a href="#refused-to-allow-the-document-to-be-unloaded">refused to allow the document to be unloaded</a>, then
+     abort these steps.</p></li>
+
+     <li><p><a href="#unload-a-document" title="unload a document">Unload</a> the
+     <a href="browsers.html#active-document">active document</a> of the <var title="">specified
+     browsing context</var> with the <var title="">recycle</var>
+     parameter set to false.</p></li>
+
+    </ol></li>
 
    <li><p><a href="#traverse-the-history">Traverse the history</a> of the <var title="">specified browsing context</var> to the <var title="">specified entry</var>.</p>
 
@@ -1270,6 +1243,12 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
     <code><a href="the-iframe-element.html#the-object-element">object</a></code> element's <a href="browsers.html#browsing-context-scope-origin">browsing context scope
     origin</a>, if it has one.</p> <!-- potentially http-origin
     privacy sensitive -->
+
+    <p>The <a href="fetching-resources.html#fetch">fetch</a> algorithm must <a href="the-end.html#delay-the-load-event">delay the load
+    event</a> of the <a href="browsers.html#browsing-context">browsing context</a>.</p> <!-- this
+    is what makes <iframe> elements delay the load event of their
+    parent browsing context when their child browsing context is in
+    between this step and the step that starts the parser. -->
 
    </li>
 

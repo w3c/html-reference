@@ -79,7 +79,7 @@ LICENSE.xml: syntax/relaxng/LICENSE
 	echo "</license>" >> $@
 
 html.css:
-	$(CURL) $(CURLFLAGS) -o html.css http://svn.webkit.org/repository/webkit/trunk/WebCore/css/html.css
+	$(CURL) $(CURLFLAGS) -o html.css http://svn.webkit.org/repository/webkit/trunk/Source/WebCore/css/html.css
 	$(PATCH) $(PATCHFLAGS) < patch-css
 
 html.css.LICENSE.xml: html.css
