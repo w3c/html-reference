@@ -4,7 +4,7 @@
      ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
      ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
   -->
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>6.2 Timers &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<html lang="en-US-x-Hixie" class="split chapter"><head><title>6.3 Timers &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -243,6 +243,24 @@
 
    .details-example img { vertical-align: top; }
 
+   #base64-table {
+     white-space: nowrap;
+     font-size: 0.6em;
+     column-width: 6em;
+     column-count: 5;
+     column-gap: 1em;
+     -moz-column-width: 6em;
+     -moz-column-count: 5;
+     -moz-column-gap: 1em;
+     -webkit-column-width: 6em;
+     -webkit-column-count: 5;
+     -webkit-column-gap: 1em;
+   }
+   #base64-table thead { display: none; }
+   #base64-table * { border: none; }
+   #base64-table tbody td:first-child:after { content: ':'; }
+   #base64-table tbody td:last-child { text-align: right; }
+
    #named-character-references-table {
      white-space: nowrap;
      font-size: 0.6em;
@@ -331,10 +349,10 @@
    <a href="webappapis.html" class="prev">6 Web application APIs</a> &#x2013;
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="editing.html" class="next">7 User interaction</a>
-  <ol class="toc"><li><ol><li><a href="timers.html#timers"><span class="secno">6.2 </span>Timers</a></li><li><a href="timers.html#user-prompts"><span class="secno">6.3 </span>User prompts</a>
-    <ol><li><a href="timers.html#simple-dialogs"><span class="secno">6.3.1 </span>Simple dialogs</a></li><li><a href="timers.html#printing"><span class="secno">6.3.2 </span>Printing</a></li><li><a href="timers.html#dialogs-implemented-using-separate-documents"><span class="secno">6.3.3 </span>Dialogs implemented using separate documents</a></li></ol></li><li><a href="timers.html#system-state-and-capabilities:-the-navigator-object"><span class="secno">6.4 </span>System state and capabilities: the <code>Navigator</code> object</a>
-    <ol><li><a href="timers.html#client-identification"><span class="secno">6.4.1 </span>Client identification</a></li><li><a href="timers.html#custom-handlers"><span class="secno">6.4.2 </span>Custom scheme and content handlers</a>
-      <ol><li><a href="timers.html#security-and-privacy"><span class="secno">6.4.2.1 </span>Security and privacy</a></li><li><a href="timers.html#sample-handler-impl"><span class="secno">6.4.2.2 </span>Sample user interface</a></li></ol></li><li><a href="timers.html#manually-releasing-the-storage-mutex"><span class="secno">6.4.3 </span>Manually releasing the storage mutex</a></li></ol></li></ol></li></ol></div><h3 id="timers"><span class="secno">6.2 </span>Timers</h3><p>The <code title="dom-windowtimers-setTimeout"><a href="#dom-windowtimers-settimeout">setTimeout()</a></code>
+  <ol class="toc"><li><ol><li><a href="timers.html#timers"><span class="secno">6.3 </span>Timers</a></li><li><a href="timers.html#user-prompts"><span class="secno">6.4 </span>User prompts</a>
+    <ol><li><a href="timers.html#simple-dialogs"><span class="secno">6.4.1 </span>Simple dialogs</a></li><li><a href="timers.html#printing"><span class="secno">6.4.2 </span>Printing</a></li><li><a href="timers.html#dialogs-implemented-using-separate-documents"><span class="secno">6.4.3 </span>Dialogs implemented using separate documents</a></li></ol></li><li><a href="timers.html#system-state-and-capabilities:-the-navigator-object"><span class="secno">6.5 </span>System state and capabilities: the <code>Navigator</code> object</a>
+    <ol><li><a href="timers.html#client-identification"><span class="secno">6.5.1 </span>Client identification</a></li><li><a href="timers.html#custom-handlers"><span class="secno">6.5.2 </span>Custom scheme and content handlers</a>
+      <ol><li><a href="timers.html#security-and-privacy"><span class="secno">6.5.2.1 </span>Security and privacy</a></li><li><a href="timers.html#sample-handler-impl"><span class="secno">6.5.2.2 </span>Sample user interface</a></li></ol></li><li><a href="timers.html#manually-releasing-the-storage-mutex"><span class="secno">6.5.3 </span>Manually releasing the storage mutex</a></li></ol></li></ol></li></ol></div><h3 id="timers"><span class="secno">6.3 </span>Timers</h3><p>The <code title="dom-windowtimers-setTimeout"><a href="#dom-windowtimers-settimeout">setTimeout()</a></code>
   and <code title="dom-windowtimers-setInterval"><a href="#dom-windowtimers-setinterval">setInterval()</a></code>
   methods allow authors to schedule timer-based callbacks.</p><pre class="idl">[Supplemental, NoInterfaceObject]
 interface <dfn id="windowtimers">WindowTimers</dfn> {
@@ -566,10 +584,15 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
   <ol><li>
 
     <p>If the first argument to the invoked method is an object that
-    has an internal [[Call]] method, then return a <a href="webappapis.html#concept-task" title="concept-task">task</a> that checks if the entry for <var title="">handle</var> in <var title="">list</var> has been cleared,
-    and if it has not, calls the aforementioned [[Call]] method with
-    as its arguments the third and subsequent arguments to the invoked
-    method (if any), and abort these steps.</p>
+    has an internal [[Call]] method, then return a <a href="webappapis.html#concept-task" title="concept-task">task</a> that checks if the entry for <var title="">handle</var> in <var title="">list</var> has been
+    cleared, and if it has not, calls the aforementioned [[Call]]
+    method with as its arguments the third and subsequent arguments to
+    the invoked method (if any), and with an undefined <var title="">thisArg</var>, and abort these steps. <a href="references.html#refsECMA262">[ECMA262]</a></p>
+
+    <p class="note">Setting <var title="">thisArg</var> to undefined
+    means that the function code will be executed with the <code title="">this</code> keyword bound to the <code><a href="browsers.html#windowproxy">WindowProxy</a></code>
+    or the <code>WorkerGlobalScope</code> object, as if the code was
+    running in the global scope.</p>
 
     <p>Otherwise, continue with the remaining steps.</p>
 
@@ -640,14 +663,14 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
   </ol><hr/><p>The <a href="webappapis.html#task-source">task source</a> for these <a href="webappapis.html#concept-task" title="concept-task">tasks</a> is the <dfn id="timer-task-source">timer task
   source</dfn>.</p>
 
-  </div><h3 id="user-prompts"><span class="secno">6.3 </span>User prompts</h3><!--
+  </div><h3 id="user-prompts"><span class="secno">6.4 </span>User prompts</h3><!--
    v2 ideas:
     * in-window modal dialogs
        - escape/enter handling
        - dragging the window out of the tab
     * in-window non-modal palettes
        - with a solution for the mobile space
-  --><h4 id="simple-dialogs"><span class="secno">6.3.1 </span>Simple dialogs</h4><dl class="domintro"><dt><var title="">window</var> . <code title="dom-alert"><a href="#dom-alert">alert</a></code>(<var title="">message</var>)</dt>
+  --><h4 id="simple-dialogs"><span class="secno">6.4.1 </span>Simple dialogs</h4><dl class="domintro"><dt><var title="">window</var> . <code title="dom-alert"><a href="#dom-alert">alert</a></code>(<var title="">message</var>)</dt>
    <dd>
 
     <p>Displays a modal alert with the given message, and waits for the user to dismiss it.</p>
@@ -709,7 +732,7 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
   user aborts, then the method must return null; otherwise, the method
   must return the string that the user responded with.</p>
 
-  </div><h4 id="printing"><span class="secno">6.3.2 </span>Printing</h4><dl class="domintro"><dt><var title="">window</var> . <code title="dom-print"><a href="#dom-print">print</a></code>()</dt>
+  </div><h4 id="printing"><span class="secno">6.4.2 </span>Printing</h4><dl class="domintro"><dt><var title="">window</var> . <code title="dom-print"><a href="#dom-print">print</a></code>()</dt>
 
    <dd>
 
@@ -796,7 +819,7 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
 
    </li>
 
-  </ol></div><h4 id="dialogs-implemented-using-separate-documents"><span class="secno">6.3.3 </span>Dialogs implemented using separate documents</h4><dl class="domintro"><dt><var title="">result</var> = <var title="">window</var> . <code title="dom-showModalDialog"><a href="#dom-showmodaldialog">showModalDialog</a></code>(<var title="">url</var> [, <var title="">argument</var>] )</dt>
+  </ol></div><h4 id="dialogs-implemented-using-separate-documents"><span class="secno">6.4.3 </span>Dialogs implemented using separate documents</h4><dl class="domintro"><dt><var title="">result</var> = <var title="">window</var> . <code title="dom-showModalDialog"><a href="#dom-showmodaldialog">showModalDialog</a></code>(<var title="">url</var> [, <var title="">argument</var>] )</dt>
 
    <dd>
 
@@ -945,10 +968,15 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
 
   </ol><p>The <code><a href="browsers.html#window">Window</a></code> objects of <code><a href="infrastructure.html#document">Document</a></code>s hosted
   by <a href="browsers.html#browsing-context" title="browsing context">browsing contexts</a> created
-  by the above algorithm must all have the <code><a href="#windowmodal">WindowModal</a></code>
-  interface added to their <code><a href="browsers.html#window">Window</a></code> interface:</p>
+  by the above algorithm must also implement the
+  <code><a href="#windowmodal">WindowModal</a></code> interface.</p>
 
-  </div><pre class="idl">[Supplemental, NoInterfaceObject] interface <dfn id="windowmodal">WindowModal</dfn> {
+  <p class="note">When this happens, the members of the
+  <code><a href="#windowmodal">WindowModal</a></code> interface, in JavaScript environments,
+  appear to actually be part of the <code><a href="browsers.html#window">Window</a></code> interface
+  (e.g. they are on the same prototype chain as the <code title="dom-alert"><a href="#dom-alert">window.alert()</a></code> method).</p>
+
+  </div><pre class="idl">[NoInterfaceObject] interface <dfn id="windowmodal">WindowModal</dfn> {
   readonly attribute any <a href="#dom-windowmodal-dialogarguments" title="dom-WindowModal-dialogArguments">dialogArguments</a>;
            attribute DOMString <a href="#dom-windowmodal-returnvalue" title="dom-WindowModal-returnValue">returnValue</a>;
 };</pre><dl class="domintro"><dt><var title="">window</var> . <code title="dom-WindowModal-dialogArguments"><a href="#dom-windowmodal-dialogarguments">dialogArguments</a></code></dt>
@@ -1001,7 +1029,7 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
   value</a> to the given new value.</p>
 
   </div><p class="note">The <code title="dom-window-close"><a href="browsers.html#dom-window-close">window.close()</a></code> method can be used to
-  close the browsing context.</p><h3 id="system-state-and-capabilities:-the-navigator-object"><span class="secno">6.4 </span>System state and capabilities: the <code><a href="#navigator">Navigator</a></code> object</h3><div class="impl">
+  close the browsing context.</p><h3 id="system-state-and-capabilities:-the-navigator-object"><span class="secno">6.5 </span>System state and capabilities: the <code><a href="#navigator">Navigator</a></code> object</h3><div class="impl">
 
   <p>The <dfn id="dom-navigator" title="dom-navigator"><code>navigator</code></dfn>
   attribute of the <code><a href="browsers.html#window">Window</a></code> interface must return an
@@ -1014,34 +1042,14 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
   // objects implementing this interface also implement the interfaces given below
 };
 <a href="#navigator">Navigator</a> implements <a href="#navigatorid">NavigatorID</a>;
-<a href="#navigator">Navigator</a> implements <a href="#navigatoronline">NavigatorOnLine</a>;
-<a href="#navigator">Navigator</a> implements <a href="#navigatorabilities">NavigatorAbilities</a>;
-
-[Supplemental, NoInterfaceObject]
-interface <dfn id="navigatorid">NavigatorID</dfn> {<!--
-  readonly attribute DOMString <span title="dom-navigator-appCodeName">appCodeName</span>;-->
-  readonly attribute DOMString <a href="#dom-navigator-appname" title="dom-navigator-appName">appName</a>;
-  readonly attribute DOMString <a href="#dom-navigator-appversion" title="dom-navigator-appVersion">appVersion</a>;
-  readonly attribute DOMString <a href="#dom-navigator-platform" title="dom-navigator-platform">platform</a>;
-  readonly attribute DOMString <a href="#dom-navigator-useragent" title="dom-navigator-userAgent">userAgent</a>;
-};
-
-[Supplemental, NoInterfaceObject]
-interface <dfn id="navigatoronline">NavigatorOnLine</dfn> {
-  readonly attribute boolean <a href="offline.html#dom-navigator-online" title="dom-navigator-onLine">onLine</a>;
-};
-
-[Supplemental, NoInterfaceObject]
-interface <dfn id="navigatorabilities">NavigatorAbilities</dfn> {
-  // content handler registration
-  void <a href="#dom-navigator-registerprotocolhandler" title="dom-navigator-registerProtocolHandler">registerProtocolHandler</a>(in DOMString scheme, in DOMString url, in DOMString title);
-  void <a href="#dom-navigator-registercontenthandler" title="dom-navigator-registerContentHandler">registerContentHandler</a>(in DOMString mimeType, in DOMString url, in DOMString title);
-  void <a href="#dom-navigator-yieldforstorageupdates" title="dom-navigator-yieldForStorageUpdates">yieldForStorageUpdates</a>();
-<!--  v2: cookieEnabled geolocator javaEnabled mozIsLocallyAvailable preference
+<a href="#navigator">Navigator</a> implements <a href="offline.html#navigatoronline">NavigatorOnLine</a>;
+<a href="#navigator">Navigator</a> implements <a href="#navigatorcontentutils">NavigatorContentUtils</a>;
+<a href="#navigator">Navigator</a> implements <a href="#navigatorstorageutils">NavigatorStorageUtils</a>;</pre><!-- v2:
+  cookieEnabled geolocator javaEnabled mozIsLocallyAvailable preference
   readonly attribute <span>MimeTypeArray</span> <span title="dom-navigator-mimeTypes">mimeTypes</span>;
   readonly attribute <span>PluginArray</span> <span title="dom-navigator-plugins">plugins</span>;
   (the latter is used in a <video> element demo now, so we might need to pull this forward from v2!)
--->};</pre><div class="impl">
+--><div class="impl">
 
   <p>These interfaces are defined separately so that other
   specifications can re-use parts of the <code><a href="#navigator">Navigator</a></code>
@@ -1057,7 +1065,14 @@ interface <dfn id="navigatorabilities">NavigatorAbilities</dfn> {
    <dd><p>Must return either null or a language tag representing the user's preferred language.</p></dd>
    -->
 
-  </div><h4 id="client-identification"><span class="secno">6.4.1 </span>Client identification</h4><p>In certain cases, despite the best efforts of the entire
+  </div><h4 id="client-identification"><span class="secno">6.5.1 </span>Client identification</h4><pre class="idl">[Supplemental, NoInterfaceObject]
+interface <dfn id="navigatorid">NavigatorID</dfn> {<!--
+  readonly attribute DOMString <span title="dom-navigator-appCodeName">appCodeName</span>;-->
+  readonly attribute DOMString <a href="#dom-navigator-appname" title="dom-navigator-appName">appName</a>;
+  readonly attribute DOMString <a href="#dom-navigator-appversion" title="dom-navigator-appVersion">appVersion</a>;
+  readonly attribute DOMString <a href="#dom-navigator-platform" title="dom-navigator-platform">platform</a>;
+  readonly attribute DOMString <a href="#dom-navigator-useragent" title="dom-navigator-userAgent">userAgent</a>;
+};</pre><p>In certain cases, despite the best efforts of the entire
   industry, Web browsers have bugs and limitations that Web authors
   are forced to work around.</p><p>This section defines a collection of attributes that can be used
   to determine, from script, the kind of user agent in use, in order
@@ -1122,7 +1137,12 @@ interface <dfn id="navigatorabilities">NavigatorAbilities</dfn> {
   identified. For this reason, user agent implementors are strongly
   urged to include as little information in this API as possible.</p>
 
-  </div><h4 id="custom-handlers"><span class="secno">6.4.2 </span>Custom scheme and content handlers</h4><p>The <dfn id="dom-navigator-registerprotocolhandler" title="dom-navigator-registerProtocolHandler"><code>registerProtocolHandler()</code></dfn>
+  </div><h4 id="custom-handlers"><span class="secno">6.5.2 </span>Custom scheme and content handlers</h4><pre class="idl">[Supplemental, NoInterfaceObject]
+interface <dfn id="navigatorcontentutils">NavigatorContentUtils</dfn> {
+  // content handler registration
+  void <a href="#dom-navigator-registerprotocolhandler" title="dom-navigator-registerProtocolHandler">registerProtocolHandler</a>(in DOMString scheme, in DOMString url, in DOMString title);
+  void <a href="#dom-navigator-registercontenthandler" title="dom-navigator-registerContentHandler">registerContentHandler</a>(in DOMString mimeType, in DOMString url, in DOMString title);
+};</pre><p>The <dfn id="dom-navigator-registerprotocolhandler" title="dom-navigator-registerProtocolHandler"><code>registerProtocolHandler()</code></dfn>
   method allows Web sites to register themselves as possible handlers
   for particular schemes. For example, an online telephone messaging
   service could register itself as a handler of the <code>sms:</code>
@@ -1309,7 +1329,7 @@ interface <dfn id="navigatorabilities">NavigatorAbilities</dfn> {
 
   </div><div class="impl">
 
-  <h5 id="security-and-privacy"><span class="secno">6.4.2.1 </span>Security and privacy</h5>
+  <h5 id="security-and-privacy"><span class="secno">6.5.2.1 </span>Security and privacy</h5>
 
   <p>These mechanisms can introduce a number of concerns, in
   particular privacy concerns.</p>
@@ -1390,7 +1410,7 @@ interface <dfn id="navigatorabilities">NavigatorAbilities</dfn> {
 
   </div><div class="impl">
 
-  <h5 id="sample-handler-impl"><span class="secno">6.4.2.2 </span>Sample user interface</h5>
+  <h5 id="sample-handler-impl"><span class="secno">6.5.2.2 </span>Sample user interface</h5>
 
   <p><i>This section is non-normative.</i></p>
 
@@ -1418,7 +1438,7 @@ interface <dfn id="navigatorabilities">NavigatorAbilities</dfn> {
   "application/x-meowmeow" <a href="infrastructure.html#mime-type">MIME type</a>, then it might
   display a dialog as follows:</p>
 
-  <p><img alt="The dialog box could have the title 'Unknown File Type' and could say 'You have attempted to access:' followed by a URL, followed by a prompt such as 'How would you like FerretBrowser to handle this resource?' with three radio buttons, one saying 'Contact the FerretBrowser plugin registry to see if there is an official way to handle this resource.', one saying 'Pass this URL to a local application' with an application selector, and one saying 'Pass this URL to the &quot;Kittens-at-work displayer&quot; application at &quot;kittens.example.org&quot;', with a checkbox labeld 'Always do this for resources using the &quot;application/x-meowmeow&quot; type in future.', and with two buttons, 'Ok' and 'Cancel'." height="428" src="http://dev.w3.org/html5/spec/images/sample-content-handler.png" width="577"/></p>
+  <p><img alt="The dialog box could have the title 'Unknown File Type' and could say 'You have attempted to access:' followed by a URL, followed by a prompt such as 'How would you like FerretBrowser to handle this resource?' with three radio buttons, one saying 'Contact the FerretBrowser plugin registry to see if there is an official way to handle this resource.', one saying 'Pass this URL to a local application' with an application selector, and one saying 'Pass this URL to the &quot;Kittens-at-work displayer&quot; application at &quot;kittens.example.org&quot;', with a checkbox labeled 'Always do this for resources using the &quot;application/x-meowmeow&quot; type in future.', and with two buttons, 'Ok' and 'Cancel'." height="428" src="http://dev.w3.org/html5/spec/images/sample-content-handler.png" width="577"/></p>
 
   <p>In this dialog, the third option is the one that was primed by
   the site registering itself earlier.</p>
@@ -1432,7 +1452,10 @@ interface <dfn id="navigatorabilities">NavigatorAbilities</dfn> {
   method would work equivalently, but for schemes instead of unknown
   content types.</p>
 
-  </div><h4 id="manually-releasing-the-storage-mutex"><span class="secno">6.4.3 </span>Manually releasing the storage mutex</h4><dl class="domintro"><dt><var title="">window</var> . <code title="dom-navigator"><a href="#dom-navigator">navigator</a></code> . <code title="dom-navigator-yieldForStorageUpdates"><a href="#dom-navigator-yieldforstorageupdates">yieldForStorageUpdates</a></code>()</dt>
+  </div><h4 id="manually-releasing-the-storage-mutex"><span class="secno">6.5.3 </span>Manually releasing the storage mutex</h4><pre class="idl">[Supplemental, NoInterfaceObject]
+interface <dfn id="navigatorstorageutils">NavigatorStorageUtils</dfn> {
+  void <a href="#dom-navigator-yieldforstorageupdates" title="dom-navigator-yieldForStorageUpdates">yieldForStorageUpdates</a>();
+};</pre><dl class="domintro"><dt><var title="">window</var> . <code title="dom-navigator"><a href="#dom-navigator">navigator</a></code> . <code title="dom-navigator-yieldForStorageUpdates"><a href="#dom-navigator-yieldforstorageupdates">yieldForStorageUpdates</a></code>()</dt>
 
    <dd>
 

@@ -243,6 +243,24 @@
 
    .details-example img { vertical-align: top; }
 
+   #base64-table {
+     white-space: nowrap;
+     font-size: 0.6em;
+     column-width: 6em;
+     column-count: 5;
+     column-gap: 1em;
+     -moz-column-width: 6em;
+     -moz-column-count: 5;
+     -moz-column-gap: 1em;
+     -webkit-column-width: 6em;
+     -webkit-column-count: 5;
+     -webkit-column-gap: 1em;
+   }
+   #base64-table thead { display: none; }
+   #base64-table * { border: none; }
+   #base64-table tbody td:first-child:after { content: ':'; }
+   #base64-table tbody td:last-child { text-align: right; }
+
    #named-character-references-table {
      white-space: nowrap;
      font-size: 0.6em;
@@ -827,14 +845,13 @@ gave me some of the songs they wrote. I love sharing my music.&lt;/p&gt;
   a <code title="attr-link-rel"><a href="#attr-link-rel">rel</a></code> attribute that specifies
   the <code title="rel-icon"><a href="links.html#rel-icon">icon</a></code> keyword.</p><div class="impl">
 
-  <p>Some versions of HTTP defined a <code title="">Link:</code>
-  header, to be processed like a series of <code><a href="#the-link-element">link</a></code> elements.
-  If supported, for the purposes of ordering links defined by HTTP
-  headers must be assumed to come before any links in the document, in
-  the order that they were given in the HTTP entity header. (URIs in
-  these headers are to be processed and resolved according to the
-  rules given in HTTP; the rules of <em>this</em> specification don't
-  apply.) <a href="references.html#refsHTTP">[HTTP]</a> <a href="references.html#refsWEBLINK">[WEBLINK]</a></p> <!-- WEBLINK is ref for Link: header -->
+  <p>HTTP <code title="">Link:</code> headers, if supported, must be
+  assumed to come before any links in the document, in the order that
+  they were given in the HTTP entity header. (URLs in these headers
+  are to be processed and resolved according to the rules given in the
+  relevant specification; the rules of <em>this</em> specification
+  don't apply.) <a href="references.html#refsHTTP">[HTTP]</a> <a href="references.html#refsWEBLINK">[WEBLINK]</a></p> <!-- WEBLINK is ref for Link:
+  header -->
 
   <p>The IDL attributes <dfn id="dom-link-href" title="dom-link-href"><code>href</code></dfn>, <dfn id="dom-link-rel" title="dom-link-rel"><code>rel</code></dfn>, <dfn id="dom-link-media" title="dom-link-media"><code>media</code></dfn>, <dfn id="dom-link-hreflang" title="dom-link-hreflang"><code>hreflang</code></dfn>, and <dfn id="dom-link-type" title="dom-link-type"><code>type</code></dfn>, and <dfn id="dom-link-sizes" title="dom-link-sizes"><code>sizes</code></dfn> each must
   <a href="common-dom-interfaces.html#reflect">reflect</a> the respective content attributes of the same
@@ -1521,8 +1538,9 @@ people expect to have work and what is necessary.
      U+003B SEMICOLON character (;), followed by one or more <a href="common-microsyntaxes.html#space-character" title="space character">space characters</a>, followed by a
      substring that is an <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match
      for the string "<code title="">URL</code>", followed by a U+003D
-     EQUALS SIGN character (=), followed by a <a href="urls.html#valid-url">valid
-     URL</a>.</li>
+     EQUALS SIGN character (=), followed by a <a href="urls.html#valid-url">valid URL</a>
+     that does not start with a literal U+0027 APOSTROPHE (') or
+     U+0022 QUOTATION MARK (") character.</li>
 
     </ul><p>In the former case, the integer represents a number of seconds
     before the page is to be reloaded; in the latter case the integer
@@ -1635,9 +1653,10 @@ people expect to have work and what is necessary.
    the use of <a href="syntax.html#syntax-charref" title="syntax-charref">character references</a>
    or character escapes of any kind.</li>
 
-   <li id="charset512">The element containing the character encoding
-   declaration must be serialized completely within the first 512
-   bytes of the document.</li>
+   <li id="charset1024"><span id="charset512" title="">The element
+   containing the character encoding declaration must be serialized
+   completely within the first 1024 bytes of the document.</span></li>
+   <!-- span is for historical reasons, to keep an old ID alive -->
 
    <li>There can only be one character encoding declaration in the
    document.</li> <!-- conformance criteria for this one are given in

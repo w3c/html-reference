@@ -243,6 +243,24 @@
 
    .details-example img { vertical-align: top; }
 
+   #base64-table {
+     white-space: nowrap;
+     font-size: 0.6em;
+     column-width: 6em;
+     column-count: 5;
+     column-gap: 1em;
+     -moz-column-width: 6em;
+     -moz-column-count: 5;
+     -moz-column-gap: 1em;
+     -webkit-column-width: 6em;
+     -webkit-column-count: 5;
+     -webkit-column-gap: 1em;
+   }
+   #base64-table thead { display: none; }
+   #base64-table * { border: none; }
+   #base64-table tbody td:first-child:after { content: ':'; }
+   #base64-table tbody td:last-child { text-align: right; }
+
    #named-character-references-table {
      white-space: nowrap;
      font-size: 0.6em;
@@ -385,11 +403,14 @@
   <code title="attr-script-src"><a href="#attr-script-src">src</a></code> attribute. If the language
   is not that described by "<code title="">text/javascript</code>",
   then the <code title="attr-script-type"><a href="#attr-script-type">type</a></code> attribute must
-  be present, as described below.</p><p>When used to include data blocks (as opposed to scripts), the
+  be present, as described below. Whatever language is used, the
+  contents of the <code><a href="#script">script</a></code> element must conform with the
+  requirements of that language's specification.</p><p>When used to include data blocks (as opposed to scripts), the
   data must be embedded inline, the format of the data must be given
-  using the <code title="attr-script-type"><a href="#attr-script-type">type</a></code> attribute, and
-  the <code title="attr-script-src"><a href="#attr-script-src">src</a></code> attribute must not be
-  specified.</p><p>The <dfn id="attr-script-type" title="attr-script-type"><code>type</code></dfn>
+  using the <code title="attr-script-type"><a href="#attr-script-type">type</a></code> attribute, the
+  <code title="attr-script-src"><a href="#attr-script-src">src</a></code> attribute must not be
+  specified, and the contents of the <code><a href="#script">script</a></code> element must
+  conform to the requirements defined for the format used.</p><p>The <dfn id="attr-script-type" title="attr-script-type"><code>type</code></dfn>
   attribute gives the language of the script or format of the data. If
   the attribute is present, its value must be a <a href="infrastructure.html#valid-mime-type">valid MIME
   type</a>. The <code title="">charset</code> parameter must not be
@@ -447,8 +468,8 @@
   has been <dfn id="already-started">"already started"</dfn>. Initially,
   <code><a href="#script">script</a></code> elements must have this flag unset (script
   blocks, when created, are not "already started"). When a
-  <code><a href="#script">script</a></code> element is cloned, the "already started" flag,
-  if set, must be propagated to the clone when it is created.</p>
+  <code><a href="#script">script</a></code> element is <a href="infrastructure.html#concept-clone" title="concept-clone">cloned</a>, the "already started" flag, if
+  set, must be propagated to the clone when it is created.</p>
 
   <p>The second is a flag indicating whether the element was
   <dfn id="parser-inserted">"parser-inserted"</dfn>. Initially, <code><a href="#script">script</a></code>
@@ -457,7 +478,17 @@
   elements they insert and affects the processing of those
   elements.</p>
 
-  <p>The third is a flag indicating whether or not the script block is
+  <p>The third is a flag indicating whether the element will
+  <dfn id="force-async">"force-async"</dfn>. Initially, <code><a href="#script">script</a></code> elements
+  must have this flag set. It is unset by the <a href="parsing.html#html-parser">HTML parser</a>
+  and the <a href="the-xhtml-syntax.html#xml-parser">XML parser</a> on <code><a href="#script">script</a></code> elements they
+  insert. In addition, whenever a <code><a href="#script">script</a></code> element whose
+  <a href="#force-async">"force-async"</a> flag is set has a <code title="attr-script-async"><a href="#attr-script-async">async</a></code> content attribute added, the
+  element's <a href="#force-async">"force-async"</a> flag must be unset.</p> <!--
+  there's no need to unset it when the attribute is removed since you
+  can't have the attribute and the flag set at once. -->
+
+  <p>The fourth is a flag indicating whether or not the script block is
   <dfn id="ready-to-be-parser-executed">"ready to be parser-executed"</dfn>. Initially,
   <code><a href="#script">script</a></code> elements must have this flag unset (script
   blocks, when created, are not "ready to be parser-executed"). This
@@ -469,12 +500,13 @@
   type</var></dfn>, <dfn id="the-script-block-s-character-encoding"><var>the script block's character
   encoding</var></dfn>, and <dfn id="the-script-block-s-fallback-character-encoding"><var>the script block's fallback
   character encoding</var></dfn>. They are determined when the script
-  is run, based on the attributes on the element at that time, and the
-  <code><a href="infrastructure.html#document">Document</a></code> of the <code><a href="#script">script</a></code> element.</p>
+  is prepared, based on the attributes on the element at that time,
+  and the <code><a href="infrastructure.html#document">Document</a></code> of the <code><a href="#script">script</a></code>
+  element.</p>
 
   <p>When a <code><a href="#script">script</a></code> element that is not marked as being
   <a href="#parser-inserted">"parser-inserted"</a> experiences one of the events listed
-  in the following list, the user agent must synchronously <a href="#running-a-script" title="running a script">run</a> the <code><a href="#script">script</a></code>
+  in the following list, the user agent must synchronously <a href="#prepare-a-script" title="prepare a script">prepare</a> the <code><a href="#script">script</a></code>
   element:</p>
 
   <ul><li>The <code><a href="#script">script</a></code> element gets <a href="infrastructure.html#insert-an-element-into-a-document" title="insert an&#10;   element into a document">inserted into a document</a>.</li>
@@ -486,9 +518,8 @@
    <code>Document</code></a> and has a <code title="attr-script-src"><a href="#attr-script-src">src</a></code> attribute set where previously
    the element had no such attribute.</li>
 
-  </ul><p><dfn id="running-a-script" title="running a script">Running a script</dfn>: When a
-  <code><a href="#script">script</a></code> element is to be run, the user agent must act as
-  follows:</p>
+  </ul><p>To <dfn id="prepare-a-script" title="prepare a script">prepare a script</dfn>, the user
+  agent must act as follows:</p>
 
   <ol><li>
 
@@ -512,6 +543,21 @@
     them to run again.</p>
 
     <!-- q.v. http://hsivonen.iki.fi/test/moz/script-setting-src-on-parser-inserted-script.html -->
+
+   </li>
+
+   <li>
+
+    <p>If <var title="">was-parser-inserted</var> is true and the
+    element does not have an <code title="attr-script-async"><a href="#attr-script-async">async</a></code> attribute, then set the
+    element's <a href="#force-async">"force-async"</a> flag to true.</p>
+
+    <p class="note">This is done so that if a parser-inserted
+    <code><a href="#script">script</a></code> element fails to run when the parser tries to
+    run it, but it is later executed after a script dynamically
+    updates it, it will execute asynchronously even if the
+    <code title="attr-script-async"><a href="#attr-script-async">async</a></code> attribute isn't
+    set.</p>
 
    </li>
 
@@ -574,17 +620,30 @@
 
    </li>
 
+   <li>
+
+    <p>If <var title="">was-parser-inserted</var> is true, then flag
+    the element as <a href="#parser-inserted">"parser-inserted"</a> again, and set the
+    element's <a href="#force-async">"force-async"</a> flag to false.</p>
+
+   </li>
+
    <li id="script-processing-start">
 
     <p>The user agent must set the element's <a href="#already-started">"already
     started"</a> flag.</p>
 
+    <p class="note">The state of the element at this moment <a href="#establish-script-block-source">is later used</a> to
+    determine the script source.</p>
+
    </li>
 
    <li>
 
-    <p>If <var title="">was-parser-inserted</var> is true, then flag
-    the element as <a href="#parser-inserted">"parser-inserted"</a> again.</p>
+    <p>If the element is flagged as <a href="#parser-inserted">"parser-inserted"</a>,
+    but the element's <code><a href="infrastructure.html#document">Document</a></code> is not the
+    <code><a href="infrastructure.html#document">Document</a></code> of the parser that created the element, then
+    abort these steps.</p>
 
    </li>
 
@@ -594,6 +653,19 @@
     disabled</a> for the <code><a href="#script">script</a></code> element, then the user
     agent must abort these steps at this point. The script is not
     executed.</p>
+
+    <p class="note">The definition of <a href="webappapis.html#concept-n-noscript" title="concept-n-noscript">scripting is disabled</a> means
+    that, amongst others, the following scripts will not execute:
+    scripts in <code>XMLHttpRequest</code>'s <code title="dom-XMLHttpRequest-responseXML">responseXML</code>
+    documents, scripts in <code>DOMParser</code>-created
+    documents, <!--scripts in documents created by
+    <code>XSLTProcessor</code>'s <code
+    title="dom-XSLTProcessor-transformToDocument">transformToDocument</code>
+    feature,--> and scripts that are first inserted by a script into a
+    <code><a href="infrastructure.html#document">Document</a></code> that was created using the <code title="dom-DOMImplementation-createDocument"><a href="infrastructure.html#dom-domimplementation-createdocument">createDocument()</a></code>
+    API. <a href="references.html#refsXHR">[XHR]</a> <a href="references.html#refsDOMPARSER">[DOMPARSER]</a> <!--<a
+    href="#refsXSLTP">[XSLTP]</a>--> <a href="references.html#refsDOMCORE">[DOMCORE]</a></p>
+
 
    </li>
 
@@ -669,6 +741,9 @@
 
    </li>
 
+   <!-- at this point if the element is "parser-inserted" then we know
+   it is not "force-async". -->
+
    <li>
 
     <p>Then, the first of the following options that describes the
@@ -739,6 +814,45 @@
      </dd>
 
 
+     <dt id="script-processing-src-sync">If the element has a <code title="attr-script-src"><a href="#attr-script-src">src</a></code> attribute, does not have an
+     <code title="attr-script-async"><a href="#attr-script-async">async</a></code> attribute, and does
+     not have the <a href="#force-async">"force-async"</a> flag set</dt>
+
+     <dd>
+
+      <p>The element must be added to the end of the <dfn id="list-of-scripts-that-will-execute-in-order-as-soon-as-possible">list of
+      scripts that will execute in order as soon as possible</dfn>
+      associated with the <code><a href="infrastructure.html#document">Document</a></code> of the
+      <code><a href="#script">script</a></code> element at the time the <a href="#prepare-a-script">prepare a
+      script</a> algorithm started.</p>
+
+      <p>The <a href="webappapis.html#concept-task" title="concept-task">task</a> that the
+      <a href="webappapis.html#networking-task-source">networking task source</a> places on the <a href="webappapis.html#task-queue">task
+      queue</a> once the <a href="fetching-resources.html#fetch" title="fetch">fetching
+      algorithm</a> has completed must run the following steps:</p>
+
+      <ol><li><p>If the element is not now the first element in the
+       <a href="#list-of-scripts-that-will-execute-in-order-as-soon-as-possible">list of scripts that will execute in order as soon as
+       possible</a> to which it was added above, then mark the
+       element as ready but abort these steps without executing the
+       script yet.</p></li>
+
+       <li><p><i>Execution</i>: <a href="#execute-the-script-block">Execute the script block</a>
+       corresponding to the first script element in this <a href="#list-of-scripts-that-will-execute-in-order-as-soon-as-possible">list of
+       scripts that will execute in order as soon as
+       possible</a>.</p></li>
+
+       <li><p>Remove the first element from this <a href="#list-of-scripts-that-will-execute-in-order-as-soon-as-possible">list of scripts
+       that will execute in order as soon as possible</a>.</p></li>
+
+       <li><p>If this <a href="#list-of-scripts-that-will-execute-in-order-as-soon-as-possible">list of scripts that will execute in order
+       as soon as possible</a> is still not empty and the first
+       entry has already been marked as ready, then jump back to the
+       step labeled <i>execution</i>.</p></li>
+
+      </ol></dd>
+
+
      <dt id="script-processing-src">If the element has a <code title="attr-script-src"><a href="#attr-script-src">src</a></code> attribute</dt>
 
      <dd>
@@ -746,22 +860,22 @@
       <p>The element must be added to the <dfn id="set-of-scripts-that-will-execute-as-soon-as-possible">set of scripts that
       will execute as soon as possible</dfn> of the
       <code><a href="infrastructure.html#document">Document</a></code> of the <code><a href="#script">script</a></code> element at the
-      time the <a href="#running-a-script">running a script</a> algorithm started.</p>
+      time the <a href="#prepare-a-script">prepare a script</a> algorithm started.</p>
 
       <p>The <a href="webappapis.html#concept-task" title="concept-task">task</a> that the
       <a href="webappapis.html#networking-task-source">networking task source</a> places on the <a href="webappapis.html#task-queue">task
       queue</a> once the <a href="fetching-resources.html#fetch" title="fetch">fetching
-      algorithm</a> has completed must <a href="#executing-a-script-block" title="executing a&#10;      script block">execute the script block</a> and then remove
-      the element from the <a href="#set-of-scripts-that-will-execute-as-soon-as-possible">set of scripts that will execute as
-      soon as possible</a>.</p>
+      algorithm</a> has completed must <a href="#execute-the-script-block">execute the script
+      block</a> and then remove the element from the <a href="#set-of-scripts-that-will-execute-as-soon-as-possible">set of
+      scripts that will execute as soon as possible</a>.</p>
 
      </dd>
 
 
      <dt id="script-processing-inline">Otherwise</dt>
 
-     <dd>The user agent must immediately <a href="#executing-a-script-block" title="executing a&#10;     script block">execute the script block</a>, even if other
-     scripts are already executing.</dd>
+     <dd>The user agent must immediately <a href="#execute-the-script-block">execute the script
+     block</a>, even if other scripts are already executing.</dd>
 
     </dl></li>
 
@@ -794,176 +908,208 @@
   blocking scripts" state, things aren't defined in terms of which
   style sheets are blocking which scripts -->
 
-  <p><dfn id="executing-a-script-block" title="executing a script block">Executing a script
-  block</dfn>: When the steps above require that the script block be
-  executed, the user agent must act as follows:</p>
+  <p>When the user agent is required to <dfn id="execute-the-script-block" title="execute the script&#10;  block">execute a script block</dfn>, it must run the following
+  steps:</p>
 
-  <dl class="switch"><dt>If the load resulted in an error (for example a DNS error, or
-   an HTTP 404 error)</dt>
+  <ol><li>
 
-   <dd><p>Executing the script block must just consist of <a href="webappapis.html#fire-a-simple-event" title="fire a simple event">firing a simple event</a> named
-   <code title="event-error">error</code> at the element.</p></dd>
+    <p>If the element is flagged as <a href="#parser-inserted">"parser-inserted"</a>,
+    but the element's <code><a href="infrastructure.html#document">Document</a></code> is not the
+    <code><a href="infrastructure.html#document">Document</a></code> of the parser that created the element, then
+    abort these steps.</p>
 
-   <dt>If the load was successful</dt>
+   </li>
 
-   <!-- SCRIPT EXEC -->
-   <dd>
+   <li>
 
-    <p>Executing the script block must consists of running the
-    following steps. For the purposes of these steps, the script is
-    considered to be from an <i>external file</i> if, while the
-    <a href="#running-a-script">running a script</a> algorithm above was running for this
-    script, the <code><a href="#script">script</a></code> element had a <code title="attr-script-src"><a href="#attr-script-src">src</a></code> attribute specified.</p>
+    <p>Jump to the appropriate set of steps from the list below:</p>
 
-    <ol><li>
+    <dl class="switch"><dt>If the load resulted in an error (for example a DNS error, or
+     an HTTP 404 error)</dt>
 
-      <p>Initialize <dfn id="the-script-block-s-source"><var>the script block's source</var></dfn> as
-      follows:</p>
+     <dd><p>Executing the script block must just consist of <a href="webappapis.html#fire-a-simple-event" title="fire a simple event">firing a simple event</a> named
+     <code title="event-error">error</code> at the element.</p></dd>
 
-      <dl class="switch"><dt>If the script is from an external file and <var><a href="#the-script-block-s-type">the script block's type</a></var> is a text-based language</dt>
+     <dt>If the load was successful</dt>
 
-       <dd>
+     <!-- SCRIPT EXEC -->
+     <dd>
 
-        <p>The contents of that file, interpreted as string of
-        Unicode characters, are the script source.</p>
+      <p>Executing the script block must consists of running the
+      following steps. For the purposes of these steps, the script is
+      considered to be from an <i>external file</i> if, while the
+      <a href="#prepare-a-script">prepare a script</a> algorithm above was running for
+      this script, the <code><a href="#script">script</a></code> element had a <code title="attr-script-src"><a href="#attr-script-src">src</a></code> attribute specified.</p>
 
-        <p>To obtain the string of Unicode characters, the user agent
-        run the following steps:</p>
+      <ol><li id="establish-script-block-source">
 
-        <ol><li><p>If the resource's <a href="fetching-resources.html#content-type" title="Content-Type">Content
-         Type metadata</a>, if any, specifies a character encoding,
-         and the user agent supports that encoding, then let <var title="">character encoding</var> be that encoding, and jump
-         to the bottom step in this series of steps.</p></li>
+        <p>Initialize <dfn id="the-script-block-s-source"><var>the script block's source</var></dfn>
+        as follows:</p>
 
-         <li><p>If the algorithm above set <var><a href="#the-script-block-s-character-encoding">the script block's
-         character encoding</a></var>, then let <var title="">character
-         encoding</var> be that encoding, and jump to the bottom step
-         in this series of steps.</p></li>
+        <dl class="switch"><dt>If the script is from an external file and <var><a href="#the-script-block-s-type">the
+         script block's type</a></var> is a text-based language</dt>
 
-         <li><p>For each of the rows in the following table, starting
-         with the first one and going down, if the file has as many or
-         more bytes available than the number of bytes in the first
-         column, and the first bytes of the file match the bytes given
-         in the first column, then set <var title="">character
-         encoding</var> to the encoding given in the cell in the
-         second column of that row, and jump to the bottom step in
-         this series of steps:</p>
+         <dd>
 
-          <!-- this table is present in several forms in this file; keep them in sync -->
-          <table id="table-script-bom"><thead><tr><th>Bytes in Hexadecimal
-             </th><th>Encoding
-           </th></tr></thead><tbody><!-- nobody uses this
-            <tr>
-             <td>00 00 FE FF
-             <td>UTF-32BE
-            <tr>
-             <td>FF FE 00 00
-             <td>UTF-32LE
-  --><tr><td>FE FF
-             </td><td>Big-endian UTF-16
-            </td></tr><tr><td>FF FE
-             </td><td>Little-endian UTF-16
-            </td></tr><tr><td>EF BB BF
-             </td><td>UTF-8
-  <!-- nobody uses this
-            <tr>
-             <td>DD 73 66 73
-             <td>UTF-EBCDIC
-  -->
-          </td></tr></tbody></table><p class="note">This step looks for Unicode Byte Order Marks
-          (BOMs).</p>
+          <p>The contents of that file, interpreted as string of
+          Unicode characters, are the script source.</p>
 
-         </li>
+          <p>To obtain the string of Unicode characters, the user
+          agent run the following steps:</p>
 
-         <li><p>Let <var title="">character encoding</var> be <var><a href="#the-script-block-s-fallback-character-encoding">the
-         script block's fallback character encoding</a></var>.</p></li>
+          <ol><li><p>If the resource's <a href="fetching-resources.html#content-type" title="Content-Type">Content
+           Type metadata</a>, if any, specifies a character
+           encoding, and the user agent supports that encoding, then
+           let <var title="">character encoding</var> be that
+           encoding, and jump to the bottom step in this series of
+           steps.</p></li>
 
-         <li><p>Convert the file to Unicode using <var>character
-         encoding</var>, following the rules for doing so given by the
-         specification for <var><a href="#the-script-block-s-type">the script block's
-         type</a></var>.</p></li>
+           <li><p>If the algorithm above set <var><a href="#the-script-block-s-character-encoding">the script block's
+           character encoding</a></var>, then let <var title="">character
+           encoding</var> be that encoding, and jump to the bottom
+           step in this series of steps.</p></li>
 
-        </ol></dd>
+           <li><p>For each of the rows in the following table,
+           starting with the first one and going down, if the file has
+           as many or more bytes available than the number of bytes in
+           the first column, and the first bytes of the file match the
+           bytes given in the first column, then set <var title="">character encoding</var> to the encoding given in
+           the cell in the second column of that row, and jump to the
+           bottom step in this series of steps:</p>
 
-       <dt>If the script is from an external file and <var><a href="#the-script-block-s-type">the script block's type</a></var> is an XML-based language</dt>
+            <!-- this table is present in several forms in this file; keep them in sync -->
+            <table id="table-script-bom"><thead><tr><th>Bytes in Hexadecimal
+               </th><th>Encoding
+             </th></tr></thead><tbody><!-- nobody uses this
+              <tr>
+               <td>00 00 FE FF
+               <td>UTF-32BE
+              <tr>
+               <td>FF FE 00 00
+               <td>UTF-32LE
+    --><tr><td>FE FF
+               </td><td>Big-endian UTF-16
+              </td></tr><tr><td>FF FE
+               </td><td>Little-endian UTF-16
+              </td></tr><tr><td>EF BB BF
+               </td><td>UTF-8
+    <!-- nobody uses this
+              <tr>
+               <td>DD 73 66 73
+               <td>UTF-EBCDIC
+    -->
+            </td></tr></tbody></table><p class="note">This step looks for Unicode Byte Order
+            Marks (BOMs).</p>
 
-       <dd>
+           </li>
 
-        <p>The external file is the script source. When it is later
-        executed, it must be interpreted in a manner consistent with
-        the specification defining the language given by <var><a href="#the-script-block-s-type">the
-        script block's type</a></var>.</p>
+           <li><p>Let <var title="">character encoding</var> be
+           <var><a href="#the-script-block-s-fallback-character-encoding">the script block's fallback character
+           encoding</a></var>.</p></li>
 
-       </dd>
+           <li><p>Convert the file to Unicode using <var>character
+           encoding</var>, following the rules for doing so given by
+           the specification for <var><a href="#the-script-block-s-type">the script block's
+           type</a></var>.</p></li>
 
-       <dt>If the script is inline and <var><a href="#the-script-block-s-type">the script block's type</a></var> is a text-based language</dt>
+          </ol></dd>
 
-       <dd>
+         <dt>If the script is from an external file and <var><a href="#the-script-block-s-type">the
+         script block's type</a></var> is an XML-based language</dt>
 
-        <p>The value of the <code title="dom-script-text"><a href="#dom-script-text">text</a></code>
-        IDL attribute at the time the element's <a href="#already-started">"already
-        started"</a> flag was set is the script source.</p>
+         <dd>
 
-       </dd>
+          <p>The external file is the script source. When it is later
+          executed, it must be interpreted in a manner consistent with
+          the specification defining the language given by <var><a href="#the-script-block-s-type">the
+          script block's type</a></var>.</p>
 
-       <dt>If the script is inline and <var><a href="#the-script-block-s-type">the script block's type</a></var> is an XML-based language</dt>
+         </dd>
 
-       <dd>
+         <dt>If the script is inline and <var><a href="#the-script-block-s-type">the script block's
+         type</a></var> is a text-based language</dt>
 
-        <p>The child nodes of the <code><a href="#script">script</a></code> element at the
-        time the element's <a href="#already-started">"already started"</a> flag was set
-        are the script source.</p>
+         <dd>
 
-       </dd>
+          <p>The value of the <code title="dom-script-text"><a href="#dom-script-text">text</a></code> IDL attribute at the
+          time the element's <a href="#already-started">"already started"</a> flag was
+          last set is the script source.</p>
 
-      </dl></li>
+         </dd>
 
-     <li>
+         <dt>If the script is inline and <var><a href="#the-script-block-s-type">the script block's
+         type</a></var> is an XML-based language</dt>
 
-      <p>If the script is from an external file, then increment the
-      <a href="apis-in-html-documents.html#ignore-destructive-writes-counter">ignore-destructive-writes counter</a> of the
-      <code><a href="#script">script</a></code> element's <code><a href="infrastructure.html#document">Document</a></code>. Let <var title="">neutralized doc</var> be that
-      <code><a href="infrastructure.html#document">Document</a></code>.</p>
+         <dd>
 
-     </li>
+          <p>The child nodes of the <code><a href="#script">script</a></code> element at the
+          time the element's <a href="#already-started">"already started"</a> flag was
+          last set are the script source.</p>
 
-     <li>
+         </dd>
 
-      <p><a href="webappapis.html#create-a-script-from-a-node" title="create a script from a node">Create a
-      script</a> from the <code><a href="#script">script</a></code> element node, using
-      <var><a href="#the-script-block-s-source">the script block's source</a></var> and <var><a href="#the-script-block-s-type">the script
-      block's type</a></var>.</p>
+        </dl></li>
 
-      <p class="note">This is where the script is compiled and
-      actually executed.</p>
+       <li>
 
-     </li>
+        <p>If the script is from an external file, then increment the
+        <a href="apis-in-html-documents.html#ignore-destructive-writes-counter">ignore-destructive-writes counter</a> of the
+        <code><a href="#script">script</a></code> element's <code><a href="infrastructure.html#document">Document</a></code>. Let <var title="">neutralized doc</var> be that
+        <code><a href="infrastructure.html#document">Document</a></code>.</p>
 
-     <li>
+       </li>
 
-      <p>Decrement the <a href="apis-in-html-documents.html#ignore-destructive-writes-counter">ignore-destructive-writes counter</a>
-      of <var title="">neutralized doc</var>, if it was incremented in
-      the earlier step.</p>
+       <li>
 
-     </li>
+        <p><a href="webappapis.html#create-a-script-from-a-node" title="create a script from a node">Create a
+        script</a> from the <code><a href="#script">script</a></code> element node, using
+        <var><a href="#the-script-block-s-source">the script block's source</a></var> and <var><a href="#the-script-block-s-type">the script
+        block's type</a></var>.</p>
 
-     <li>
+        <p class="note">This is where the script is compiled and
+        actually executed.</p>
 
-      <p>If the script is from an external file, <a href="webappapis.html#fire-a-simple-event">fire a simple
-      event</a> named <code title="event-load">load</code> at the
-      <code><a href="#script">script</a></code> element.</p>
+       </li>
 
-      <p>Otherwise, the script is internal; <a href="webappapis.html#queue-a-task">queue a task</a>
-      to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named <code title="event-load">load</code> at the <code><a href="#script">script</a></code>
-      element.</p>
+       <li>
 
-     </li>
+        <p>Decrement the <a href="apis-in-html-documents.html#ignore-destructive-writes-counter">ignore-destructive-writes
+        counter</a> of <var title="">neutralized doc</var>, if it
+        was incremented in the earlier step.</p>
 
-    </ol></dd>
+       </li>
 
-  </dl><p>The IDL attributes <dfn id="dom-script-src" title="dom-script-src"><code>src</code></dfn>, <dfn id="dom-script-type" title="dom-script-type"><code>type</code></dfn>, <dfn id="dom-script-charset" title="dom-script-charset"><code>charset</code></dfn>, <dfn id="dom-script-async" title="dom-script-async"><code>async</code></dfn>, and <dfn id="dom-script-defer" title="dom-script-defer"><code>defer</code></dfn>, each must
+       <li>
+
+        <p>If the script is from an external file, <a href="webappapis.html#fire-a-simple-event">fire a simple
+        event</a> named <code title="event-load">load</code> at the
+        <code><a href="#script">script</a></code> element.</p>
+
+        <p>Otherwise, the script is internal; <a href="webappapis.html#queue-a-task">queue a
+        task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named <code title="event-load">load</code> at the <code><a href="#script">script</a></code>
+        element.</p>
+
+       </li>
+
+      </ol></dd>
+
+    </dl></li>
+
+  </ol><p>The IDL attributes <dfn id="dom-script-src" title="dom-script-src"><code>src</code></dfn>, <dfn id="dom-script-type" title="dom-script-type"><code>type</code></dfn>, <dfn id="dom-script-charset" title="dom-script-charset"><code>charset</code></dfn>, and <dfn id="dom-script-defer" title="dom-script-defer"><code>defer</code></dfn>, each must
   <a href="common-dom-interfaces.html#reflect">reflect</a> the respective content attributes of the same
   name.</p>
+
+  <p>The <dfn id="dom-script-async" title="dom-script-async"><code>async</code></dfn> IDL
+  attribute controls whether the element will execute asynchronously
+  or not. If the element's <a href="#force-async">"force-async"</a> flag is set,
+  then, on getting, the <code title="dom-script-async"><a href="#dom-script-async">async</a></code>
+  IDL attribute must return true, and on setting, the
+  <a href="#force-async">"force-async"</a> flag must first be unset, and then the
+  content attribute must be removed if the IDL attribute's new value
+  is false, and must be set to the empty string if the IDL attribute's
+  new value is true. If the element's <a href="#force-async">"force-async"</a> flag
+  is <em>not</em> set, the IDL attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the
+  <code title="attr-script-async"><a href="#attr-script-async">async</a></code> content attribute.</p>
 
   </div><dl class="domintro"><dt><var title="">script</var> . <code title="dom-script-text"><a href="#dom-script-text">text</a></code> [ = <var title="">value</var> ]</dt>
 

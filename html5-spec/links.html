@@ -243,6 +243,24 @@
 
    .details-example img { vertical-align: top; }
 
+   #base64-table {
+     white-space: nowrap;
+     font-size: 0.6em;
+     column-width: 6em;
+     column-count: 5;
+     column-gap: 1em;
+     -moz-column-width: 6em;
+     -moz-column-count: 5;
+     -moz-column-gap: 1em;
+     -webkit-column-width: 6em;
+     -webkit-column-count: 5;
+     -webkit-column-gap: 1em;
+   }
+   #base64-table thead { display: none; }
+   #base64-table * { border: none; }
+   #base64-table tbody td:first-child:after { content: ':'; }
+   #base64-table tbody td:last-child { text-align: right; }
+
    #named-character-references-table {
      white-space: nowrap;
      font-size: 0.6em;
@@ -876,6 +894,13 @@
   assume that the given icon is appropriate, but less appropriate than
   an icon of a known and appropriate size.</p>
 
+  <p>In the absence of a <code><a href="semantics.html#the-link-element">link</a></code> with the <code title="rel-icon"><a href="#rel-icon">icon</a></code> keyword, for <code><a href="infrastructure.html#document">Document</a></code>s
+  obtained over HTTP or HTTPS, user agents may instead attempt to
+  <a href="fetching-resources.html#fetch">fetch</a> and use an icon with the <a href="urls.html#absolute-url">absolute
+  URL</a> obtained by resolving the <a href="urls.html#url">URL</a> "<code title="">/favicon.ico</code>" against <a href="dom.html#the-document-s-address">the document's
+  address</a>, as if the page had declared that icon using the
+  <code title="rel-icon"><a href="#rel-icon">icon</a></code> keyword.</p>
+
   </div><div class="example">
 
    <p>The following snippet shows the top part of an application with
@@ -1129,8 +1154,8 @@
   must also treat the keyword "<code title="">previous</code>" like
   the <code title="rel-prev"><a href="#link-type-prev">prev</a></code> keyword.</p>
 
-  </div><h5 id="other-link-types"><span class="secno">4.12.4.19 </span>Other link types</h5><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/127">ISSUE-127</a> (link-type-flags) blocks progress to Last Call</span></p><p><span title="concept-rel-extensions">Extensions to the predefined
-  set of link types</span> may be registered in the <a href="http://wiki.whatwg.org/wiki/RelExtensions">WHATWG Wiki
+  </div><h5 id="other-link-types"><span class="secno">4.12.4.19 </span>Other link types</h5><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/127">ISSUE-127</a> (link-type-flags) blocks progress to Last Call</span></p><p><dfn id="concept-rel-extensions" title="concept-rel-extensions">Extensions to the predefined
+  set of link types</dfn> may be registered in the <a href="http://wiki.whatwg.org/wiki/RelExtensions">WHATWG Wiki
   RelExtensions page</a>. <a href="references.html#refsWHATWGWIKI">[WHATWGWIKI]</a></p><p>Anyone is free to edit the WHATWG Wiki RelExtensions page at any
   time to add a type. Extension types must be specified with the
   following information:</p><dl><dt>Keyword</dt>
@@ -1710,31 +1735,63 @@ contradict people?
    <dd>
 
     <p>The <code title="selector-active"><a href="#selector-active">:active</a></code> pseudo-class
-    must match any element falling into one of the following
-    categories between the time the user begins to activate the
-    element and the time the user stops activating the element:</p>
+    is defined to match an element <q cite="http://dev.w3.org/csswg/selectors3/#the-user-action-pseudo-classes-hover-act">while
+    an element is <i>being activated</i> by the user</q>. For the
+    purposes of defining the <code title="selector-active"><a href="#selector-active">:active</a></code> pseudo-class only, an HTML
+    user agent must consider an element as <i>being activated</i> if
+    it is:</p>
 
-    <ul><li><code><a href="text-level-semantics.html#the-a-element">a</a></code> elements that have an <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code> attribute</li>
+    <ul><li>
 
-     <li><code><a href="the-map-element.html#the-area-element">area</a></code> elements that have an <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code> attribute</li>
+      <p>An element falling into one of the following categories
+      between the time the user begins to indicate an intent to
+      trigger the element's <a href="content-models.html#activation-behavior">activation behavior</a> and
+      either the time the user stops indicating an intent to trigger
+      the element's <a href="content-models.html#activation-behavior">activation behavior</a>, or the time the
+      element's <a href="content-models.html#activation-behavior">activation behavior</a> has finished running,
+      which ever comes first:</p>
 
-     <li><code><a href="semantics.html#the-link-element">link</a></code> elements that have an <code title="attr-link-href"><a href="semantics.html#attr-link-href">href</a></code> attribute</li>
+      <ul><li><code><a href="text-level-semantics.html#the-a-element">a</a></code> elements that have an <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code> attribute</li>
 
-     <li><code><a href="the-button-element.html#the-button-element">button</a></code> elements that are not <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
+       <li><code><a href="the-map-element.html#the-area-element">area</a></code> elements that have an <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code> attribute</li>
 
-     <li><code><a href="the-input-element.html#the-input-element">input</a></code> elements whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="number-state.html#submit-button-state" title="attr-input-type-submit">Submit Button</a>, <a href="number-state.html#image-button-state" title="attr-input-type-image">Image Button</a>, <a href="number-state.html#reset-button-state" title="attr-input-type-reset">Reset Button</a>, or <a href="number-state.html#button-state" title="attr-input-type-button">Button</a> state</li>
+       <li><code><a href="semantics.html#the-link-element">link</a></code> elements that have an <code title="attr-link-href"><a href="semantics.html#attr-link-href">href</a></code> attribute</li>
 
-     <li><code><a href="interactive-elements.html#the-command">command</a></code> elements that do not have a <code title="attr-command-disabled"><a href="interactive-elements.html#attr-command-disabled">disabled</a></code> attribute</li>
+       <li><code><a href="the-button-element.html#the-button-element">button</a></code> elements that are not <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
 
-     <li>elements that are <a href="editing.html#specially-focusable">specially focusable</a></li>
+       <li><code><a href="the-input-element.html#the-input-element">input</a></code> elements whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="number-state.html#submit-button-state" title="attr-input-type-submit">Submit Button</a>, <a href="number-state.html#image-button-state" title="attr-input-type-image">Image Button</a>, <a href="number-state.html#reset-button-state" title="attr-input-type-reset">Reset Button</a>, or <a href="number-state.html#button-state" title="attr-input-type-button">Button</a> state</li>
 
-    </ul><p class="example">For example, if the user is using a keyboard to
-    push a <code><a href="the-button-element.html#the-button-element">button</a></code> element by pressing the space bar, the
-    element would match this pseudo-class in between the time that the
-    element received the <code title="event-keydown">keydown</code>
-    event and the time the element received the <code title="event-keyup">keyup</code> event.</p>
+       <li><code><a href="interactive-elements.html#the-command">command</a></code> elements that do not have a <code title="attr-command-disabled"><a href="interactive-elements.html#attr-command-disabled">disabled</a></code> attribute</li>
 
-   </dd>
+       <li>elements that are <a href="editing.html#specially-focusable">specially focusable</a></li>
+
+      </ul><p class="example">For example, if the user is using a keyboard
+      to push a <code><a href="the-button-element.html#the-button-element">button</a></code> element by pressing the space bar,
+      the element would match this pseudo-class in between the time
+      that the element received the <code title="event-keydown">keydown</code> event and the time the
+      element received the <code title="event-keyup">keyup</code>
+      event.</p>
+
+     </li>
+
+     <li>
+
+      <p>An element that the user indicates using a pointing device
+      while that pointing device is in the "down" state (e.g. for a
+      mouse, between the time the mouse button is pressed and the time
+      it is depressed).</p>
+
+     </li>
+
+     <li>
+
+      <p>An element that has a descendant that is currently matching
+      the the <code title="selector-active"><a href="#selector-active">:active</a></code>
+      pseudo-class.</p>
+
+     </li>
+
+    </ul></dd>
 
 
    <dt><dfn id="selector-enabled" title="selector-enabled"><code>:enabled</code></dfn></dt>

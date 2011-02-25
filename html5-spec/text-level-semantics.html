@@ -243,6 +243,24 @@
 
    .details-example img { vertical-align: top; }
 
+   #base64-table {
+     white-space: nowrap;
+     font-size: 0.6em;
+     column-width: 6em;
+     column-count: 5;
+     column-gap: 1em;
+     -moz-column-width: 6em;
+     -moz-column-count: 5;
+     -moz-column-gap: 1em;
+     -webkit-column-width: 6em;
+     -webkit-column-count: 5;
+     -webkit-column-gap: 1em;
+   }
+   #base64-table thead { display: none; }
+   #base64-table * { border: none; }
+   #base64-table tbody td:first-child:after { content: ':'; }
+   #base64-table tbody td:last-child { text-align: right; }
+
    #named-character-references-table {
      white-space: nowrap;
      font-size: 0.6em;
@@ -640,16 +658,16 @@ ten meters.&lt;/strong&gt;&lt;/strong&gt; You have been warned.&lt;/p&gt;</pre>
   candidate for the <code><a href="#the-small-element">small</a></code> element: in such a case, the
   text is not a side comment, it is the main content of the page.</p><div class="example">
 
-   <p>In this example the footer contains contact information and a
-   copyright notice.</p>
+   <p>In this example, the <code><a href="#the-small-element">small</a></code> element is used to
+   indicate that value-added tax is not included in a price of a hotel
+   room:</p>
 
-   <pre>&lt;footer&gt;
- &lt;address&gt;
-  For more details, contact
-  &lt;a href="mailto:js@example.com"&gt;John Smith&lt;/a&gt;.
- &lt;/address&gt;
- &lt;p&gt;&lt;small&gt;&#xA9; copyright 2038 Example Corp.&lt;/small&gt;&lt;/p&gt;
-&lt;/footer&gt;</pre>
+   <pre class="example">&lt;dl&gt;
+ &lt;dt&gt;Single room
+ &lt;dd&gt;199 &#x20AC; &lt;small&gt;breakfast included, VAT not included&lt;/small&gt;
+ &lt;dt&gt;Double room
+ &lt;dd&gt;239 &#x20AC; &lt;small&gt;breakfast included, VAT not included&lt;/small&gt;
+&lt;/dl&gt;</pre>
 
   </div><div class="example">
 
@@ -1095,11 +1113,13 @@ this specification: the &lt;abbr&gt;WHATWG&lt;/abbr&gt; and the
   then the attribute's value must be a <a href="common-microsyntaxes.html#valid-date-string-with-optional-time">valid date string with
   optional time</a>.</p><p>If the element <i><a href="#needs-a-date">needs a date</a></i>, but the <code title="attr-time-datetime"><a href="#attr-time-datetime">datetime</a></code> attribute is not present,
   then the element's <code><a href="infrastructure.html#textcontent">textContent</a></code> must be a <a href="common-microsyntaxes.html#valid-date-string-in-content-with-optional-time">valid
-  date string in content with optional time</a>.</p><p>If the element does not <i>need a date</i>, and the <code title="attr-time-datetime"><a href="#attr-time-datetime">datetime</a></code> attribute is present,
-  then the attribute's value must be a <a href="common-microsyntaxes.html#valid-date-or-time-string">valid date or time
-  string</a>.</p><p>If the element does not <i>need a date</i>, but the <code title="attr-time-datetime"><a href="#attr-time-datetime">datetime</a></code> attribute is not present,
-  then the element's <code><a href="infrastructure.html#textcontent">textContent</a></code> must be a <a href="common-microsyntaxes.html#valid-date-or-time-string-in-content">valid
-  date or time string in content</a>.</p><p>The date, if any, must be expressed using the Gregorian
+  date string in content with optional time</a>.</p><p>If the element does not <i title="needs a date"><a href="#needs-a-date">need a date</a></i>,
+  and the <code title="attr-time-datetime"><a href="#attr-time-datetime">datetime</a></code> attribute
+  is present, then the attribute's value must be a <a href="common-microsyntaxes.html#valid-date-or-time-string">valid date or
+  time string</a>.</p><p>If the element does not <i title="needs a date"><a href="#needs-a-date">need a date</a></i>,
+  but the <code title="attr-time-datetime"><a href="#attr-time-datetime">datetime</a></code> attribute
+  is not present, then the element's <code><a href="infrastructure.html#textcontent">textContent</a></code> must be
+  a <a href="common-microsyntaxes.html#valid-date-or-time-string-in-content">valid date or time string in content</a>.</p><p>The date, if any, must be expressed using the Gregorian
   calendar.</p><div class="impl">
 
   <p>If the <code title="attr-time-datetime"><a href="#attr-time-datetime">datetime</a></code> attribute
@@ -1902,19 +1922,19 @@ wormhole connection.&lt;/mark&gt;&lt;/p&gt;</pre>
   specify a left-to-right override and with the value <code>rtl</code>
   to specify a right-to-left override.</p><div class="impl">
 
-  <p>If the element has the <code title="attr-dir"><a href="elements.html#the-dir-attribute">dir</a></code>
-  attribute set to the exact value <code>ltr</code>, then for the
+  <p>If the element's <code title="attr-dir"><a href="elements.html#the-dir-attribute">dir</a></code> attribute is
+  in the <i title="attr-dir-rtl-state"><a href="elements.html#attr-dir-rtl-state">rtl</a></i> state, then for the
   purposes of the bidirectional algorithm, the user agent must act as
   if there was a U+202D LEFT-TO-RIGHT OVERRIDE character at the start
   of the element, and a U+202C POP DIRECTIONAL FORMATTING at the end
   of the element.</p>
 
-  <p>If the element has the <code title="attr-dir"><a href="elements.html#the-dir-attribute">dir</a></code>
-  attribute set to the exact value <code>rtl</code>, then for the
-  purposes of the bidirectional algorithm, the user agent must act as
-  if there was a U+202E RIGHT-TO-LEFT OVERRIDE character at the start
-  of the element, and a U+202C POP DIRECTIONAL FORMATTING at the end
-  of the element.</p>
+  <p>If the element's <code title="attr-dir"><a href="elements.html#the-dir-attribute">dir</a></code> attribute is
+  in the <i title="attr-dir-ltr-state"><a href="elements.html#attr-dir-ltr-state">ltr</a></i>, then for the purposes
+  of the bidirectional algorithm, the user agent must act as if there
+  was a U+202E RIGHT-TO-LEFT OVERRIDE character at the start of the
+  element, and a U+202C POP DIRECTIONAL FORMATTING at the end of the
+  element.</p>
 
   <p>The requirements on handling the <code><a href="#the-bdo-element">bdo</a></code> element for the
   bidirectional algorithm may be implemented indirectly through the
@@ -2009,8 +2029,12 @@ Sydney&lt;/p&gt;</pre>
   <p>Any content inside <code><a href="#the-br-element">br</a></code> elements must not be
   considered part of the surrounding text.</p>
 
-  <p class="note">A <code><a href="#the-br-element">br</a></code> element separates paragraphs for
-  the purposes of the Unicode bidirectional algorithm. <a href="references.html#refsBIDI">[BIDI]</a></p>
+  <p>A <code><a href="#the-br-element">br</a></code> element should separate paragraphs for the
+  purposes of the Unicode bidirectional algorithm. This requirement
+  may be implemented indirectly through the style layer. For example,
+  an HTML+CSS user agent could implement these requirements by
+  implementing the CSS 'unicode-bidi' property. <a href="references.html#refsBIDI">[BIDI]</a> <a href="references.html#refsCSS">[CSS]</a></p>
+
 
   </div><h4 id="the-wbr-element"><span class="secno">4.6.26 </span>The <dfn><code>wbr</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>

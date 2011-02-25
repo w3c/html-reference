@@ -243,6 +243,24 @@
 
    .details-example img { vertical-align: top; }
 
+   #base64-table {
+     white-space: nowrap;
+     font-size: 0.6em;
+     column-width: 6em;
+     column-count: 5;
+     column-gap: 1em;
+     -moz-column-width: 6em;
+     -moz-column-count: 5;
+     -moz-column-gap: 1em;
+     -webkit-column-width: 6em;
+     -webkit-column-count: 5;
+     -webkit-column-gap: 1em;
+   }
+   #base64-table thead { display: none; }
+   #base64-table * { border: none; }
+   #base64-table tbody td:first-child:after { content: ':'; }
+   #base64-table tbody td:last-child { text-align: right; }
+
    #named-character-references-table {
      white-space: nowrap;
      font-size: 0.6em;
@@ -835,7 +853,8 @@
   must <a href="common-dom-interfaces.html#reflect">reflect</a> the respective content attributes of the
   same name. The <code title="dom-select-size"><a href="#dom-select-size">size</a></code> IDL
   attribute is <a href="common-dom-interfaces.html#limited-to-only-non-negative-numbers-greater-than-zero">limited to only non-negative numbers greater than
-  zero</a>, and has no default value (unlike the <code title="attr-select-size"><a href="#attr-select-size">size</a></code> content attribute that it
+  zero</a>, with the default value zero (which for historical
+  reasons is different from the default value of the <code title="attr-select-size"><a href="#attr-select-size">size</a></code> content attribute that it
   reflects).</p>
 
   <p>The <code title="dom-cva-willValidate"><a href="association-of-controls-and-forms.html#dom-cva-willvalidate">willValidate</a></code>, <code title="dom-cva-validity"><a href="association-of-controls-and-forms.html#dom-cva-validity">validity</a></code>, and <code title="dom-cva-validationMessage"><a href="association-of-controls-and-forms.html#dom-cva-validationmessage">validationMessage</a></code>
@@ -1209,8 +1228,8 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
    <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
    <dd><code title="attr-fe-autofocus"><a href="association-of-controls-and-forms.html#attr-fe-autofocus">autofocus</a></code></dd>
    <dd><code title="attr-textarea-cols"><a href="#attr-textarea-cols">cols</a></code></dd>
-   <dd><code title="attr-fe-disabled"><a href="association-of-controls-and-forms.html#attr-fe-disabled">disabled</a></code></dd>
    <dd><code title="attr-textarea-dirname"><a href="#attr-textarea-dirname">dirname</a></code></dd>
+   <dd><code title="attr-fe-disabled"><a href="association-of-controls-and-forms.html#attr-fe-disabled">disabled</a></code></dd>
    <dd><code title="attr-fae-form"><a href="association-of-controls-and-forms.html#attr-fae-form">form</a></code></dd>
    <dd><code title="attr-textarea-maxlength"><a href="#attr-textarea-maxlength">maxlength</a></code></dd>
    <dd><code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code></dd>
@@ -1224,8 +1243,8 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
 <pre class="idl">interface <dfn id="htmltextareaelement">HTMLTextAreaElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
            attribute boolean <a href="association-of-controls-and-forms.html#dom-fe-autofocus" title="dom-fe-autofocus">autofocus</a>;
            attribute unsigned long <a href="#dom-textarea-cols" title="dom-textarea-cols">cols</a>;
-           attribute boolean <a href="association-of-controls-and-forms.html#dom-fe-disabled" title="dom-fe-disabled">disabled</a>;
            attribute DOMString <a href="#dom-textarea-dirname" title="dom-textarea-dirName">dirName</a>;
+           attribute boolean <a href="association-of-controls-and-forms.html#dom-fe-disabled" title="dom-fe-disabled">disabled</a>;
   readonly attribute <a href="forms.html#htmlformelement">HTMLFormElement</a> <a href="association-of-controls-and-forms.html#dom-fae-form" title="dom-fae-form">form</a>;
            attribute long <a href="#dom-textarea-maxlength" title="dom-textarea-maxLength">maxLength</a>;
            attribute DOMString <a href="association-of-controls-and-forms.html#dom-fe-name" title="dom-fe-name">name</a>;
@@ -1264,10 +1283,13 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
   a <code><a href="#the-textarea-element">textarea</a></code> control must be initially the empty
   string.</p>
 
-  </div><p class="note">A newline in a <code><a href="#the-textarea-element">textarea</a></code> element, and in
-  its <a href="#concept-textarea-raw-value" title="concept-textarea-raw-value">raw value</a>,
-  separates paragraphs for the purposes of the Unicode bidirectional
-  algorithm. <a href="references.html#refsBIDI">[BIDI]</a></p><p>The <dfn id="attr-textarea-readonly" title="attr-textarea-readonly"><code>readonly</code></dfn> attribute
+  <p>A newline in a <code><a href="#the-textarea-element">textarea</a></code> element, and in its <a href="#concept-textarea-raw-value" title="concept-textarea-raw-value">raw value</a>, should separate
+  paragraphs for the purposes of the Unicode bidirectional algorithm.
+  This requirement may be implemented indirectly through the style
+  layer. For example, an HTML+CSS user agent could implement these
+  requirements by implementing the CSS 'unicode-bidi' property. <a href="references.html#refsBIDI">[BIDI]</a> <a href="references.html#refsCSS">[CSS]</a></p>
+
+  </div><p>The <dfn id="attr-textarea-readonly" title="attr-textarea-readonly"><code>readonly</code></dfn> attribute
   is a <a href="common-microsyntaxes.html#boolean-attribute">boolean attribute</a> used to control whether the text
   can be edited by the user or not.</p><div class="impl">
 
@@ -1308,6 +1330,7 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
   attribute.</p>
 
   <!-- this next bit is also in the <input> Text/Search section -->
+  <!-- and something similar is in the session history section -->
   <p>If the element is <a href="#concept-textarea-mutable" title="concept-textarea-mutable">mutable</a>, the user agent
   should allow the user to change the writing direction of the
   element, setting it either to a left-to-right writing direction or a

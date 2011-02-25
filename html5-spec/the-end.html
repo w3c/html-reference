@@ -243,6 +243,24 @@
 
    .details-example img { vertical-align: top; }
 
+   #base64-table {
+     white-space: nowrap;
+     font-size: 0.6em;
+     column-width: 6em;
+     column-count: 5;
+     column-gap: 1em;
+     -moz-column-width: 6em;
+     -moz-column-count: 5;
+     -moz-column-gap: 1em;
+     -webkit-column-width: 6em;
+     -webkit-column-count: 5;
+     -webkit-column-gap: 1em;
+   }
+   #base64-table thead { display: none; }
+   #base64-table * { border: none; }
+   #base64-table tbody td:first-child:after { content: ':'; }
+   #base64-table tbody td:last-child { text-align: right; }
+
    #named-character-references-table {
      white-space: nowrap;
      font-size: 0.6em;
@@ -332,7 +350,7 @@
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="named-character-references.html" class="next">8.5 Named character references</a>
   <ol class="toc"><li><ol><li><ol><li><a href="the-end.html#the-end"><span class="secno">8.2.6 </span>The end</a></li><li><a href="the-end.html#coercing-an-html-dom-into-an-infoset"><span class="secno">8.2.7 </span>Coercing an HTML DOM into an infoset</a></li><li><a href="the-end.html#an-introduction-to-error-handling-and-strange-cases-in-the-parser"><span class="secno">8.2.8 </span>An introduction to error handling and strange cases in the parser</a>
-      <ol><li><a href="the-end.html#misnested-tags:-b-i-b-i"><span class="secno">8.2.8.1 </span>Misnested tags: &lt;b&gt;&lt;i&gt;&lt;/b&gt;&lt;/i&gt;</a></li><li><a href="the-end.html#misnested-tags:-b-p-b-p"><span class="secno">8.2.8.2 </span>Misnested tags: &lt;b&gt;&lt;p&gt;&lt;/b&gt;&lt;/p&gt;</a></li><li><a href="the-end.html#unexpected-markup-in-tables"><span class="secno">8.2.8.3 </span>Unexpected markup in tables</a></li><li><a href="the-end.html#scripts-that-modify-the-page-as-it-is-being-parsed"><span class="secno">8.2.8.4 </span>Scripts that modify the page as it is being parsed</a></li><li><a href="the-end.html#unclosed-formatting-elements"><span class="secno">8.2.8.5 </span>Unclosed formatting elements</a></li></ol></li></ol></li><li><a href="the-end.html#serializing-html-fragments"><span class="secno">8.3 </span>Serializing HTML fragments</a></li><li><a href="the-end.html#parsing-html-fragments"><span class="secno">8.4 </span>Parsing HTML fragments</a></li></ol></li></ol></div><div class="impl">
+      <ol><li><a href="the-end.html#misnested-tags:-b-i-b-i"><span class="secno">8.2.8.1 </span>Misnested tags: &lt;b&gt;&lt;i&gt;&lt;/b&gt;&lt;/i&gt;</a></li><li><a href="the-end.html#misnested-tags:-b-p-b-p"><span class="secno">8.2.8.2 </span>Misnested tags: &lt;b&gt;&lt;p&gt;&lt;/b&gt;&lt;/p&gt;</a></li><li><a href="the-end.html#unexpected-markup-in-tables"><span class="secno">8.2.8.3 </span>Unexpected markup in tables</a></li><li><a href="the-end.html#scripts-that-modify-the-page-as-it-is-being-parsed"><span class="secno">8.2.8.4 </span>Scripts that modify the page as it is being parsed</a></li><li><a href="the-end.html#the-execution-of-scripts-that-are-moving-across-multiple-documents"><span class="secno">8.2.8.5 </span>The execution of scripts that are moving across multiple documents</a></li><li><a href="the-end.html#unclosed-formatting-elements"><span class="secno">8.2.8.6 </span>Unclosed formatting elements</a></li></ol></li></ol></li><li><a href="the-end.html#serializing-html-fragments"><span class="secno">8.3 </span>Serializing HTML fragments</a></li><li><a href="the-end.html#parsing-html-fragments"><span class="secno">8.4 </span>Parsing HTML fragments</a></li></ol></li></ol></div><div class="impl">
 
   <h4 id="the-end"><span class="secno">8.2.6 </span>The end</h4>
 
@@ -357,7 +375,7 @@
      the parser's <code><a href="infrastructure.html#document">Document</a></code> <a href="semantics.html#has-no-style-sheet-that-is-blocking-scripts">has no style sheet that
      is blocking scripts</a>.</p></li>
 
-     <li><p><a href="scripting-1.html#executing-a-script-block" title="executing a script block">Execute</a> the
+     <li><p><a href="scripting-1.html#execute-the-script-block" title="execute the script block">Execute</a> the
      first <code><a href="scripting-1.html#script">script</a></code> in the <a href="scripting-1.html#list-of-scripts-that-will-execute-when-the-document-has-finished-parsing">list of scripts that will
      execute when the document has finished parsing</a>.</p></li>
 
@@ -377,11 +395,14 @@
    <code><a href="infrastructure.html#document">Document</a></code>.</p></li>
 
    <li><p><a href="webappapis.html#spin-the-event-loop">Spin the event loop</a> until the <a href="scripting-1.html#set-of-scripts-that-will-execute-as-soon-as-possible">set of
-   scripts that will execute as soon as possible</a> is
-   empty.</p></li> <!-- this step is redundant with the next one,
-   really, since all those scripts also delay the load event. It's
-   here in case we add an event between this step and the next or if
-   we move the previous step (DOMContentLoaded) down again. -->
+   scripts that will execute as soon as possible</a> and the
+   <a href="scripting-1.html#list-of-scripts-that-will-execute-in-order-as-soon-as-possible">list of scripts that will execute in order as soon as
+   possible</a> are empty.</p></li> <!-- this step is not redundant
+   with the next one, since <script type="text/javascript"> nodes delay the load event of the
+   document they are in, but they might change document between being
+   added to one document's set/list and executing those scripts, so
+   they might be delaying another document but still be in this
+   document's set/list. -->
 
    <li><p><a href="webappapis.html#spin-the-event-loop">Spin the event loop</a> until there is nothing that
    <dfn id="delay-the-load-event" title="delay the load event">delays the load event</dfn> in
@@ -779,7 +800,23 @@
   <ul class="domTree"><li class="t1"><code><a href="semantics.html#the-html-element-0">html</a></code><ul><li class="t1"><code><a href="semantics.html#the-head-element-0">head</a></code></li><li class="t1"><code><a href="sections.html#the-body-element-0">body</a></code><ul><li class="t1"><code><a href="scripting-1.html#script">script</a></code><ul><li class="t3"><code>#text</code>: <span title="">alert(document.URL);</span></li></ul></li></ul></li></ul></li></ul><p>This second alert will say "http://example.com/inner".</p>
 
 
-  <h5 id="unclosed-formatting-elements"><span class="secno">8.2.8.5 </span>Unclosed formatting elements</h5>
+  <h5 id="the-execution-of-scripts-that-are-moving-across-multiple-documents"><span class="secno">8.2.8.5 </span>The execution of scripts that are moving across multiple documents</h5>
+
+  <p><i>This section is non-normative.</i></p>
+
+  <p>Elaborating on the example in the previous section, consider a
+  case where a <code><a href="scripting-1.html#script">script</a></code> element with a <code title="attr-script-src"><a href="scripting-1.html#attr-script-src">src</a></code> attribute is parsed, but while
+  the external script is being downloaded, the element is moved to
+  another document.</p>
+
+  <p>In this case, the <a href="webappapis.html#script-s-global-object">script's global object</a> is that
+  second document's <a href="browsers.html#browsing-context">browsing context</a>'s
+  <code><a href="browsers.html#window">Window</a></code> object, not the <code><a href="browsers.html#window">Window</a></code> object of
+  the document into which the element was parsed.</p>
+
+
+
+  <h5 id="unclosed-formatting-elements"><span class="secno">8.2.8.6 </span>Unclosed formatting elements</h5>
 
   <p><i>This section is non-normative.</i></p>
 
@@ -1019,36 +1056,62 @@
 
    <li><p>The result of the algorithm is the string <var title="">s</var>.</p></li>
 
-  </ol><p><dfn id="escapingString">Escaping a string</dfn> (for the
-  purposes of the algorithm above) consists of replacing any
-  occurrences of the "<code title="">&amp;</code>" character by the
-  string "<code title="">&amp;amp;</code>", any occurrences of the
-  U+00A0 NO-BREAK SPACE character by the string "<code title="">&amp;nbsp;</code>", and, if the algorithm was invoked in
-  the <i>attribute mode</i>, any occurrences of the "<code title="">"</code>" character by the string "<code title="">&amp;quot;</code>", or if it was not, any occurrences of
-  the "<code title="">&lt;</code>" character by the string "<code title="">&amp;lt;</code>", any occurrences of the "<code title="">&gt;</code>" character by the string "<code title="">&amp;gt;</code>".</p>
-
-  <p class="note">Entity reference nodes are <a href="infrastructure.html#entity-references">assumed to be expanded</a> by the user
+  </ol><p class="note">Entity reference nodes are <a href="infrastructure.html#entity-references">assumed to be expanded</a> by the user
   agent, and are therefore not covered in the algorithm above.</p>
 
-  <p class="note">It is possible that the output of this algorithm, if
+  <p class="warning">It is possible that the output of this algorithm, if
   parsed with an <a href="parsing.html#html-parser">HTML parser</a>, will not return the
-  original tree structure. For instance, if a <code><a href="the-button-element.html#the-textarea-element">textarea</a></code>
-  element to which a <code title="">Comment</code> node has been
-  appended is serialized and the output is then reparsed, the comment
-  will end up being displayed in the text field. Similarly, if, as a
-  result of DOM manipulation, an element contains a comment that
-  contains the literal string "<code title="">--&gt;</code>", then
-  when the result of serializing the element is parsed, the comment
-  will be truncated at that point and the rest of the comment will be
-  interpreted as markup. More examples would be making a
-  <code><a href="scripting-1.html#script">script</a></code> element contain a text node with the text string
-  "<code>&lt;/script&gt;</code>", or having a <code><a href="grouping-content.html#the-p-element">p</a></code> element that
-  contains a <code><a href="grouping-content.html#the-ul-element">ul</a></code> element (as the <code><a href="grouping-content.html#the-ul-element">ul</a></code> element's
-  <a href="syntax.html#syntax-start-tag" title="syntax-start-tag">start tag</a> would imply the end
-  tag for the <code><a href="grouping-content.html#the-p-element">p</a></code>).</p>
+  original tree structure.</p>
 
+  <div class="example">
 
-  <h3 id="parsing-html-fragments"><span class="secno">8.4 </span>Parsing HTML fragments</h3>
+   <p>For instance, if a <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> element to which a
+   <code title="">Comment</code> node has been appended is serialized
+   and the output is then reparsed, the comment will end up being
+   displayed in the text field. Similarly, if, as a result of DOM
+   manipulation, an element contains a comment that contains the
+   literal string "<code title="">--&gt;</code>", then when the result
+   of serializing the element is parsed, the comment will be truncated
+   at that point and the rest of the comment will be interpreted as
+   markup. More examples would be making a <code><a href="scripting-1.html#script">script</a></code> element
+   contain a text node with the text string
+   "<code>&lt;/script&gt;</code>", or having a <code><a href="grouping-content.html#the-p-element">p</a></code> element
+   that contains a <code><a href="grouping-content.html#the-ul-element">ul</a></code> element (as the <code><a href="grouping-content.html#the-ul-element">ul</a></code>
+   element's <a href="syntax.html#syntax-start-tag" title="syntax-start-tag">start tag</a> would
+   imply the end tag for the <code><a href="grouping-content.html#the-p-element">p</a></code>).</p>
+
+   <p>This can enable cross-site scripting attacks. An example of this
+   would be a page that lets the user enter some font names that are
+   then inserted into a CSS <code><a href="semantics.html#the-style-element">style</a></code> block via the DOM and
+   which then uses the <code title="dom-innerHTML"><a href="apis-in-html-documents.html#dom-innerhtml">innerHTML</a></code>
+   IDL attribute to get the HTML serialization of that
+   <code><a href="semantics.html#the-style-element">style</a></code> element: if the user enters
+   "<code>&lt;/style&gt;&lt;script&gt;attack&lt;/script&gt;</code>" as a font
+   name, <code title="dom-innerHTML"><a href="apis-in-html-documents.html#dom-innerhtml">innerHTML</a></code> will return
+   markup that, if parsed in a different context, would contain a
+   <code><a href="scripting-1.html#script">script</a></code> node, even though no <code><a href="scripting-1.html#script">script</a></code> node
+   existed in the original DOM.</p>
+
+  </div>
+
+  <p><dfn id="escapingString">Escaping a string</dfn> (for the
+  purposes of the algorithm above) consists of running the following
+  steps:</p>
+
+  <ol><li><p>Replace any occurrence of the "<code title="">&amp;</code>"
+   character by the string "<code title="">&amp;amp;</code>".</p></li>
+
+   <li><p>Replace any occurrences of the U+00A0 NO-BREAK SPACE
+   character by the string "<code title="">&amp;nbsp;</code>".</p></li>
+
+   <li><p>If the algorithm was invoked in the <i>attribute mode</i>,
+   replace any occurrences of the "<code title="">"</code>"
+   character by the string "<code title="">&amp;quot;</code>".</p></li>
+
+   <li><p>If the algorithm was <em>not</em> invoked in the
+   <i>attribute mode</i>, replace any occurrences of the "<code title="">&lt;</code>" character by the string "<code title="">&amp;lt;</code>", and any occurrences of the "<code title="">&gt;</code>" character by the string "<code title="">&amp;gt;</code>".</p></li>
+
+  </ol><h3 id="parsing-html-fragments"><span class="secno">8.4 </span>Parsing HTML fragments</h3>
 
   <p>The following steps form the <dfn id="html-fragment-parsing-algorithm">HTML fragment parsing
   algorithm</dfn>. The algorithm optionally takes as input an

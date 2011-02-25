@@ -243,6 +243,24 @@
 
    .details-example img { vertical-align: top; }
 
+   #base64-table {
+     white-space: nowrap;
+     font-size: 0.6em;
+     column-width: 6em;
+     column-count: 5;
+     column-gap: 1em;
+     -moz-column-width: 6em;
+     -moz-column-count: 5;
+     -moz-column-gap: 1em;
+     -webkit-column-width: 6em;
+     -webkit-column-count: 5;
+     -webkit-column-gap: 1em;
+   }
+   #base64-table thead { display: none; }
+   #base64-table * { border: none; }
+   #base64-table tbody td:first-child:after { content: ':'; }
+   #base64-table tbody td:last-child { text-align: right; }
+
    #named-character-references-table {
      white-space: nowrap;
      font-size: 0.6em;
@@ -1291,9 +1309,14 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
     cache</a>, and was to be fetched using HTTP GET <a href="fetching-resources.html#concept-http-equivalent-get" title="concept-http-equivalent-get">or equivalent</a>, and its
     URL <a href="offline.html#concept-appcache-matches-fallback" title="concept-appcache-matches-fallback">matches the
     fallback namespace</a> of one or more <a href="offline.html#relevant-application-cache" title="relevant&#10;    application cache">relevant application caches</a>, and the
-    user didn't cancel the navigation attempt during the previous
-    step, and the navigation attempt failed (e.g. the server returned
-    a 4xx or 5xx status code <a href="fetching-resources.html#concept-http-equivalent-codes" title="concept-http-equivalent-codes">or equivalent</a>, or
+    <a href="offline.html#concept-appcache-selection" title="concept-appcache-selection">most appropriate
+    application cache</a> of those that match does not have an
+    entry in its <a href="offline.html#concept-appcache-onlinewhitelist" title="concept-appcache-onlinewhitelist">online
+    whitelist</a> that has the <a href="origin-0.html#same-origin">same origin</a> as the
+    resource's URL and that is a <a href="infrastructure.html#prefix-match">prefix match</a> for the
+    resource's URL, and the user didn't cancel the navigation attempt
+    during the previous step, and the navigation attempt failed (e.g.
+    the server returned a 4xx or 5xx status code <a href="fetching-resources.html#concept-http-equivalent-codes" title="concept-http-equivalent-codes">or equivalent</a>, or
     there was a DNS error), then:</p> <!-- note that a redirect can
     never reach this point as it is handled earlier, meaning that a
     captive portal captures URLs in fallback namespaces and you can't
@@ -2012,10 +2035,21 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
    persisted user state</a>, but its URL has a fragment identifier,
    <a href="#scroll-to-the-fragment-identifier">scroll to the fragment identifier</a>.</p></li>
 
-   <li><p>If the entry is <a href="#an-entry-with-persisted-user-state">an entry with persisted user
-   state</a>, the user agent may update aspects of the document and
-   its rendering, for instance the scroll position or values of form
-   fields, that it had previously recorded.</p></li>
+   <li>
+
+    <p>If the entry is <a href="#an-entry-with-persisted-user-state">an entry with persisted user
+    state</a>, the user agent may update aspects of the document
+    and its rendering, for instance the scroll position or values of
+    form fields, that it had previously recorded.</p>
+
+    <!-- see similar paragraphs in the textarea and input sections -->
+    <p class="note">This can even include updating the <code title="attr-dir"><a href="elements.html#the-dir-attribute">dir</a></code> attribute of <code><a href="the-button-element.html#the-textarea-element">textarea</a></code>
+    elements or <code><a href="the-input-element.html#the-input-element">input</a></code> elements whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in either the
+    <a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-text">Text</a> state or the <a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-search">Search</a> state, if the
+    persisted state includes the directionality of user input in such
+    controls.</p>
+
+   </li>
 
    <li><p>If the entry is a <a href="#state-object">state object</a> entry, let <var title="">state</var> be a <a href="common-dom-interfaces.html#structured-clone">structured clone</a> of that
    state object. Otherwise, let <var title="">state</var> be

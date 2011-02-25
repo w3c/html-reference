@@ -91,7 +91,8 @@ html.css.xml: html.css tools/css2xml
 	./tools/css2xml $< > $@
 
 fragment-links.js:
-	$(CURL) $(CURLFLAGS) -o $@ http://dev.w3.org/html5/spec-author-view/fragment-links.js
+#	$(CURL) $(CURLFLAGS) -o $@ http://dev.w3.org/html5/spec-author-view/fragment-links.js
+	$(CURL) $(CURLFLAGS) -o $@ http://developers.whatwg.org/fragment-links.js
 
 fragment-links.html: fragment-links.js
 	$(GREP) $(GREPFLAGS) "var fragment_links" $< \

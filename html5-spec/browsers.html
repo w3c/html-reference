@@ -243,6 +243,24 @@
 
    .details-example img { vertical-align: top; }
 
+   #base64-table {
+     white-space: nowrap;
+     font-size: 0.6em;
+     column-width: 6em;
+     column-count: 5;
+     column-gap: 1em;
+     -moz-column-width: 6em;
+     -moz-column-count: 5;
+     -moz-column-gap: 1em;
+     -webkit-column-width: 6em;
+     -webkit-column-count: 5;
+     -webkit-column-gap: 1em;
+   }
+   #base64-table thead { display: none; }
+   #base64-table * { border: none; }
+   #base64-table tbody td:first-child:after { content: ':'; }
+   #base64-table tbody td:last-child { text-align: right; }
+
    #named-character-references-table {
      white-space: nowrap;
      font-size: 0.6em;
@@ -549,11 +567,16 @@
   browsing context</dfn>, which is the <a href="#browsing-context">browsing context</a>
   from which the <a href="#auxiliary-browsing-context">auxiliary browsing context</a> was
   created.</p><h5 id="navigating-auxiliary-browsing-contexts-in-the-dom"><span class="secno">5.1.2.1 </span>Navigating auxiliary browsing contexts in the DOM</h5><p>The <dfn id="dom-opener" title="dom-opener"><code>opener</code></dfn> IDL
-  attribute on the <code><a href="#window">Window</a></code> object must return the
-  <code><a href="#windowproxy">WindowProxy</a></code> object of the <a href="#browsing-context">browsing context</a>
-  from which the current <a href="#browsing-context">browsing context</a> was created
-  (its <a href="#opener-browsing-context">opener browsing context</a>), if there is one and it
-  is still available.</p><h4 id="secondary-browsing-contexts"><span class="secno">5.1.3 </span>Secondary browsing contexts</h4><p>User agents may support <dfn id="secondary-browsing-context" title="secondary browsing&#10;  context">secondary browsing contexts</dfn>, which are <a href="#browsing-context" title="browsing context">browsing contexts</a> that form part of
+  attribute on the <code><a href="#window">Window</a></code> object, on getting, must return
+  the <code><a href="#windowproxy">WindowProxy</a></code> object of the <a href="#browsing-context">browsing
+  context</a> from which the current <a href="#browsing-context">browsing context</a>
+  was created (its <a href="#opener-browsing-context">opener browsing context</a>), if there is
+  one, if it is still available, and if the current <a href="#browsing-context">browsing
+  context</a> has not <i><a href="#disowned-its-opener">disowned its opener</a></i>. On setting, if
+  the new value is null then the current <a href="#browsing-context">browsing context</a>
+  must <dfn id="disowned-its-opener" title="disowned its opener">disown its opener</dfn>; if
+  the new value is anything else then the user agent must ignore the
+  new value.</p><h4 id="secondary-browsing-contexts"><span class="secno">5.1.3 </span>Secondary browsing contexts</h4><p>User agents may support <dfn id="secondary-browsing-context" title="secondary browsing&#10;  context">secondary browsing contexts</dfn>, which are <a href="#browsing-context" title="browsing context">browsing contexts</a> that form part of
   the user agent's interface, apart from the main content area.</p><div class="impl">
 
   <h4 id="security-nav"><span class="secno">5.1.4 </span>Security</h4>
@@ -783,7 +806,7 @@ interface <dfn id="window">Window</dfn> {
   [Replaceable] readonly attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-frames" title="dom-frames">frames</a>;
   [Replaceable] readonly attribute unsigned long <a href="#dom-length" title="dom-length">length</a>;
   readonly attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-top" title="dom-top">top</a>;
-  [Replaceable] readonly attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-opener" title="dom-opener">opener</a>;
+           attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-opener" title="dom-opener">opener</a>;
   readonly attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-parent" title="dom-parent">parent</a>;
   readonly attribute <a href="infrastructure.html#element">Element</a> <a href="#dom-frameelement" title="dom-frameElement">frameElement</a>;
   <a href="#windowproxy">WindowProxy</a> <a href="#dom-open" title="dom-open">open</a>(in optional DOMString url, in optional DOMString target, in optional DOMString features, in optional DOMString replace);

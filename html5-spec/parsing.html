@@ -243,6 +243,24 @@
 
    .details-example img { vertical-align: top; }
 
+   #base64-table {
+     white-space: nowrap;
+     font-size: 0.6em;
+     column-width: 6em;
+     column-count: 5;
+     column-gap: 1em;
+     -moz-column-width: 6em;
+     -moz-column-count: 5;
+     -moz-column-gap: 1em;
+     -webkit-column-width: 6em;
+     -webkit-column-count: 5;
+     -webkit-column-gap: 1em;
+   }
+   #base64-table thead { display: none; }
+   #base64-table * { border: none; }
+   #base64-table tbody td:first-child:after { content: ':'; }
+   #base64-table tbody td:last-child { text-align: right; }
+
    #named-character-references-table {
      white-space: nowrap;
      font-size: 0.6em;
@@ -501,16 +519,26 @@
    supported, return that encoding with the <a href="#concept-encoding-confidence" title="concept-encoding-confidence">confidence</a>
    <i>certain</i>, and abort these steps.</p></li>
 
-   <li><p>The user agent may wait for more bytes of the resource to be
-   available, either in this step or at any later step in this
-   algorithm. For instance, a user agent might wait 500ms or 512
-   bytes, whichever came first. In general preparsing the source to
-   find the encoding improves performance, as it reduces the need to
-   throw away the data structures used when parsing upon finding the
-   encoding information. However, if the user agent delays too long to
-   obtain data to determine the encoding, then the cost of the delay
-   could outweigh any performance improvements from the
-   preparse.</p></li>
+   <li>
+
+    <p>The user agent may wait for more bytes of the resource to be
+    available, either in this step or at any later step in this
+    algorithm. For instance, a user agent might wait 500ms or 1024
+    bytes, whichever came first. In general preparsing the source to
+    find the encoding improves performance, as it reduces the need to
+    throw away the data structures used when parsing upon finding the
+    encoding information. However, if the user agent delays too long
+    to obtain data to determine the encoding, then the cost of the
+    delay could outweigh any performance improvements from the
+    preparse.</p>
+
+    <p class="note">The authoring conformance requirements for
+    character encoding declarations limit them to only appearing <a href="semantics.html#charset1024">in the first 1024 bytes</a>. User agents are
+    therefore encouraged to use the preparse algorithm below (part of
+    these steps) on the first 1024 bytes, but not to stall beyond
+    that.</p>
+
+   </li>
 
    <li><p>For each of the rows in the following table, starting with
    the first one and going down, if there are as many or more bytes
@@ -1129,13 +1157,6 @@
   the byte order is a <a href="introduction.html#willful-violation">willful violation</a> of Unicode,
   motivated by a desire to increase the resilience of user agents in
   the face of na&#xEF;ve transcoders.</p>
-
-  <p>Code points in the range U+D800 to U+DFFF<!-- surrogates are not
-  allowed e.g. in UTF-8, and we don't want them to suddenly turn into
-  codepoints when they go through a UTF-16 pipe --> in the input must
-  be replaced by U+FFFD REPLACEMENT CHARACTERs. Any occurrences of
-  such characters and code points are <a href="#parse-error" title="parse error">parse
-  errors</a>.</p>
 
   <p>Any occurrences of any characters in the ranges U+0001 to U+0008,
   <!-- HT, LF allowed --> <!-- U+000B is in the next list --> <!-- FF,

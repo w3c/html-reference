@@ -243,6 +243,24 @@
 
    .details-example img { vertical-align: top; }
 
+   #base64-table {
+     white-space: nowrap;
+     font-size: 0.6em;
+     column-width: 6em;
+     column-count: 5;
+     column-gap: 1em;
+     -moz-column-width: 6em;
+     -moz-column-count: 5;
+     -moz-column-gap: 1em;
+     -webkit-column-width: 6em;
+     -webkit-column-count: 5;
+     -webkit-column-gap: 1em;
+   }
+   #base64-table thead { display: none; }
+   #base64-table * { border: none; }
+   #base64-table tbody td:first-child:after { content: ':'; }
+   #base64-table tbody td:last-child { text-align: right; }
+
    #named-character-references-table {
      white-space: nowrap;
      font-size: 0.6em;
@@ -323,12 +341,12 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="timers.html" title="6.2 Timers" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="dnd.html" title="7.7 Drag and drop" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="timers.html" title="6.3 Timers" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="dnd.html" title="7.7 Drag and drop" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
    </div><div>
-   <a href="timers.html" class="prev">6.2 Timers</a> &#x2013;
+   <a href="timers.html" class="prev">6.3 Timers</a> &#x2013;
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="dnd.html" class="next">7.7 Drag and drop</a>
   <ol class="toc"><li><a href="editing.html#editing"><span class="secno">7 </span>User interaction</a>
@@ -634,6 +652,16 @@
 
    </li>
 
+   <li>
+
+    <p>The user agent may apply relevant platform-specific conventions
+    for focusing widgets.</p>
+
+    <p class="note">For example, some platforms select the contents of
+    a text field when that field is focused.</p>
+
+   </li>
+
    <li><p><a href="webappapis.html#fire-a-simple-event">Fire a simple event</a> named <code title="event-focus">focus</code> at the element.</p></li>
    <!-- http://software.hixie.ch/utilities/js/live-dom-viewer/saved/723 -->
 
@@ -880,14 +908,19 @@
   <h4 id="processing-model-3"><span class="secno">7.4.3 </span>Processing model</h4>
 
   <p>An element's <dfn id="assigned-access-key">assigned access key</dfn> is a key combination
-  derived from the element's <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> content attribute as
-  follows:</p>
+  derived from the element's <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> content attribute.
+  Initially, an element must not have an <a href="#assigned-access-key">assigned access
+  key</a>.</p>
+
+  <p>Whenever an element's <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> attribute is set, changed,
+  or removed, the user agent must update the element's <a href="#assigned-access-key">assigned
+  access key</a> by running the following steps:</p>
 
   <ol><li><p>If the element has no <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> attribute, then skip to the
    <i>fallback</i> step below.</p></li>
 
-   <li><p>Otherwise, the user agent must <a href="common-microsyntaxes.html#split-a-string-on-spaces" title="split a string&#10;   on spaces">split the attribute's value on spaces</a>, and let
-   <var title="">keys</var> be the resulting tokens.</p></li>
+   <li><p>Otherwise, <a href="common-microsyntaxes.html#split-a-string-on-spaces" title="split a string on spaces">split the
+   attribute's value on spaces</a>, and let <var title="">keys</var> be the resulting tokens.</p></li>
 
    <li>
 

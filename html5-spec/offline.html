@@ -243,6 +243,24 @@
 
    .details-example img { vertical-align: top; }
 
+   #base64-table {
+     white-space: nowrap;
+     font-size: 0.6em;
+     column-width: 6em;
+     column-count: 5;
+     column-gap: 1em;
+     -moz-column-width: 6em;
+     -moz-column-count: 5;
+     -moz-column-gap: 1em;
+     -webkit-column-width: 6em;
+     -webkit-column-count: 5;
+     -webkit-column-gap: 1em;
+   }
+   #base64-table thead { display: none; }
+   #base64-table * { border: none; }
+   #base64-table tbody td:first-child:after { content: ':'; }
+   #base64-table tbody td:last-child { text-align: right; }
+
    #named-character-references-table {
      white-space: nowrap;
      font-size: 0.6em;
@@ -406,7 +424,7 @@ clock.css
 clock.js</pre><p>With a small change to the HTML file, the manifest (served as
   <code><a href="iana.html#text-cache-manifest">text/cache-manifest</a></code>) is linked to the application:</p><pre>&lt;!-- clock.html --&gt;
 &lt;!DOCTYPE HTML&gt;
-&lt;html manifest="clock.manifest"&gt;
+&lt;html manifest="clock.appcache"&gt;
  &lt;head&gt;
   &lt;title&gt;Clock&lt;/title&gt;
   &lt;script src="clock.js"&gt;&lt;/script&gt;
@@ -487,35 +505,42 @@ clock.js</pre><p>With a small change to the HTML file, the manifest (served as
 
     <dl><dt><dfn id="concept-appcache-master" title="concept-appcache-master">Master entries</dfn>
 
-     </dt><dd>Documents that were added to the cache because a
-     <a href="browsers.html#browsing-context">browsing context</a> was <a href="history.html#navigate" title="navigate">navigated</a> to that document and the
-     document indicated that this was its cache, using the <code title="attr-html-manifest"><a href="semantics.html#attr-html-manifest">manifest</a></code> attribute.
+     </dt><dd><p class="note">These are documents that were added to the
+     cache because a <a href="browsers.html#browsing-context">browsing context</a> was <a href="history.html#navigate" title="navigate">navigated</a> to that document and the
+     document indicated that this was its cache, using the <code title="attr-html-manifest"><a href="semantics.html#attr-html-manifest">manifest</a></code> attribute.</p>
 
 
      </dd><dt><dfn id="concept-appcache-manifest" title="concept-appcache-manifest">The manifest</dfn>
 
-     </dt><dd>The resource corresponding to the URL that was given in a
-     master entry's <code><a href="semantics.html#the-html-element-0">html</a></code> element's <code title="attr-html-manifest"><a href="semantics.html#attr-html-manifest">manifest</a></code> attribute. The
+     </dt><dd><p class="note">This is the resource corresponding to the URL
+     that was given in a master entry's <code><a href="semantics.html#the-html-element-0">html</a></code> element's
+     <code title="attr-html-manifest"><a href="semantics.html#attr-html-manifest">manifest</a></code> attribute. The
      manifest is fetched and processed during the <a href="#application-cache-download-process">application
-     cache download process</a>. All the <a href="#concept-appcache-master" title="concept-appcache-master">master entries</a> have
-     the <a href="origin-0.html#same-origin" title="same origin">same origin</a> as the manifest.
+     cache download process</a>. All the <a href="#concept-appcache-master" title="concept-appcache-master">master entries</a> have the
+     <a href="origin-0.html#same-origin" title="same origin">same origin</a> as the manifest.</p>
 
 
      </dd><dt><dfn id="concept-appcache-explicit" title="concept-appcache-explicit">Explicit entries</dfn>
 
-     </dt><dd>Resources that were listed in the cache's <a href="#concept-appcache-manifest" title="concept-appcache-manifest">manifest</a> in an <a href="#concept-appcache-manifest-explicit" title="concept-appcache-manifest-explicit">explicit
-     section</a>. Explicit entries can also be marked as <dfn id="concept-appcache-foreign" title="concept-appcache-foreign">foreign</dfn>, which means that
-     they have a <code title="attr-html-manifest"><a href="semantics.html#attr-html-manifest">manifest</a></code>
-     attribute but that it doesn't point at this cache's <a href="#concept-appcache-manifest" title="concept-appcache-manifest">manifest</a>.
+     </dt><dd><p class="note">These are the resources that were listed in
+     the cache's <a href="#concept-appcache-manifest" title="concept-appcache-manifest">manifest</a> in an <a href="#concept-appcache-manifest-explicit" title="concept-appcache-manifest-explicit">explicit
+     section</a>.</p>
 
 
      </dd><dt><dfn id="concept-appcache-fallback" title="concept-appcache-fallback">Fallback entries</dfn>
 
-     </dt><dd>Resources that were listed in the cache's <a href="#concept-appcache-manifest" title="concept-appcache-manifest">manifest</a> in a <a href="#concept-appcache-manifest-fallback" title="concept-appcache-manifest-fallback">fallback
-     section</a>.
+     </dt><dd><p class="note">These are the resources that were listed in
+     the cache's <a href="#concept-appcache-manifest" title="concept-appcache-manifest">manifest</a> in a <a href="#concept-appcache-manifest-fallback" title="concept-appcache-manifest-fallback">fallback
+     section</a>.</p>
 
 
-    </dd></dl><p class="note">A URL in the list can be flagged with multiple
+    </dd></dl><p><a href="#concept-appcache-explicit" title="concept-appcache-explicit">Explicit entries</a>
+    and <a href="#concept-appcache-fallback" title="concept-appcache-fallback">Fallback
+    entries</a> can be marked as <dfn id="concept-appcache-foreign" title="concept-appcache-foreign">foreign</dfn>, which means that
+    they have a <code title="attr-html-manifest"><a href="semantics.html#attr-html-manifest">manifest</a></code>
+    attribute but that it doesn't point at this cache's <a href="#concept-appcache-manifest" title="concept-appcache-manifest">manifest</a>.</p>
+
+    <p class="note">A URL in the list can be flagged with multiple
     different types, and thus an entry can end up being categorized as
     multiple entries. For example, an entry can be a manifest entry
     and an explicit entry at the same time, if the manifest is listed
@@ -523,23 +548,42 @@ clock.js</pre><p>With a small change to the HTML file, the manifest (served as
 
    </li>
 
-   <li>Zero or more <dfn id="concept-appcache-fallback-ns" title="concept-appcache-fallback-ns">fallback
-   namespaces</dfn>: URLs, used as <a href="#concept-appcache-matches-fallback" title="concept-appcache-matches-fallback">prefix match
-   patterns</a>, each of which is mapped to a <a href="#concept-appcache-fallback" title="concept-appcache-fallback">fallback entry</a>. Each
-   namespace URL has the <a href="origin-0.html#same-origin">same origin</a> as <a href="#concept-appcache-manifest" title="concept-appcache-manifest">the manifest</a>.</li>
+   <li>
 
-   <li>Zero or more URLs that form the <dfn id="concept-appcache-onlinewhitelist" title="concept-appcache-onlinewhitelist">online whitelist
-   namespaces</dfn>: URLs, used as prefix match patterns, that the
-   user agent will never load from the cache but will instead always
-   attempt to obtain from the network.</li>
+    <p>Zero or more <dfn id="concept-appcache-fallback-ns" title="concept-appcache-fallback-ns">fallback
+    namespaces</dfn>, each of which is mapped to a <a href="#concept-appcache-fallback" title="concept-appcache-fallback">fallback entry</a>.</p>
 
-   <li>An <dfn id="concept-appcache-onlinewhitelist-wildcard" title="concept-appcache-onlinewhitelist-wildcard">online whitelist
-   wildcard flag</dfn>, which is either <i title="">open</i>
-   (indicating that any URL not listed as cached is to be implicitly
-   treated as being in the <a href="#concept-appcache-onlinewhitelist" title="concept-appcache-onlinewhitelist">online whitelist
-   namespaces</a>) or <i title="">blocking</i> (indicating that
-   URLs not listed explicitly in the manifest are to be treated as
-   unavailable).</li>
+    <p class="note">These are URLs used as <a href="#concept-appcache-matches-fallback" title="concept-appcache-matches-fallback">prefix match
+    patterns</a> for resources that are to be fetched from the
+    network if possible, or to be replaced by the corresponding <a href="#concept-appcache-fallback" title="concept-appcache-fallback">fallback entry</a> if not.
+    Each namespace URL has the <a href="origin-0.html#same-origin">same origin</a> as <a href="#concept-appcache-manifest" title="concept-appcache-manifest">the manifest</a>.</p>
+
+   </li>
+
+   <li>
+
+    <p>Zero or more URLs that form the <dfn id="concept-appcache-onlinewhitelist" title="concept-appcache-onlinewhitelist">online whitelist
+    namespaces</dfn>.</p>
+
+    <p class="note">These are used as prefix match patterns, and
+    declare URLs that the user agent will never load from the cache
+    but will instead always attempt to obtain from the network.</p>
+
+   </li>
+
+   <li>
+
+    <p>An <dfn id="concept-appcache-onlinewhitelist-wildcard" title="concept-appcache-onlinewhitelist-wildcard">online whitelist
+    wildcard flag</dfn>, which is either <i title="">open</i> or <i title="">blocking</i>.</p>
+
+    <p class="note">The <i title="">open</i> state indicates that any
+    URL not listed as cached is to be implicitly treated as being in
+    the <a href="#concept-appcache-onlinewhitelist" title="concept-appcache-onlinewhitelist">online
+    whitelist namespaces</a>; the <i title="">blocking</i> state
+    indicates that URLs not listed explicitly in the manifest are to
+    be treated as unavailable.</p>
+
+   </li>
 
   </ul><p>Each <a href="#application-cache">application cache</a> has a <dfn id="concept-appcache-completeness" title="concept-appcache-completeness">completeness flag</dfn>, which is
   either <i>complete</i> or <i>incomplete</i>.</p>
@@ -1093,6 +1137,11 @@ NETWORK:
    wildcard flag</var>.</p></li>
 
   </ol><div class="note">
+
+   <p>The resource that declares the manifest (with the <code title="attr-html-manifest"><a href="semantics.html#attr-html-manifest">manifest</a></code> attribute) will always
+   get taken from the cache, whether it is listed in the cache or not,
+   even if it is listed in an <a href="#concept-appcache-onlinewhitelist" title="concept-appcache-onlinewhitelist">online whitelist
+   namespace</a>.</p>
 
    <p>If a resource is listed in the <a href="#concept-appcache-manifest-explicit" title="concept-appcache-manifest-explicit">explicit section</a>
    or as a <a href="#concept-appcache-fallback" title="concept-appcache-fallback">fallback
@@ -2275,7 +2324,10 @@ NETWORK:
     </td></tr><tr><td><dfn id="handler-appcache-onupdateready" title="handler-appcache-onupdateready"><code>onupdateready</code></dfn> </td><td> <code title="event-appcache-updateready"><a href="#event-appcache-updateready">updateready</a></code>
     </td></tr><tr><td><dfn id="handler-appcache-oncached" title="handler-appcache-oncached"><code>oncached</code></dfn> </td><td> <code title="event-appcache-cached"><a href="#event-appcache-cached">cached</a></code>
     </td></tr><tr><td><dfn id="handler-appcache-onobsolete" title="handler-appcache-onobsolete"><code>onobsolete</code></dfn> </td><td> <code title="event-appcache-obsolete"><a href="#event-appcache-obsolete">obsolete</a></code>
-  </td></tr></tbody></table></div><h4 id="browser-state"><span class="secno">5.6.10 </span>Browser state</h4><dl class="domintro"><dt><var title="">window</var> . <code title="dom-navigator"><a href="timers.html#dom-navigator">navigator</a></code> . <code title="dom-navigator-onLine"><a href="#dom-navigator-online">onLine</a></code></dt>
+  </td></tr></tbody></table></div><h4 id="browser-state"><span class="secno">5.6.10 </span>Browser state</h4><pre class="idl">[Supplemental, NoInterfaceObject]
+interface <dfn id="navigatoronline">NavigatorOnLine</dfn> {
+  readonly attribute boolean <a href="#dom-navigator-online" title="dom-navigator-onLine">onLine</a>;
+};</pre><dl class="domintro"><dt><var title="">window</var> . <code title="dom-navigator"><a href="timers.html#dom-navigator">navigator</a></code> . <code title="dom-navigator-onLine"><a href="#dom-navigator-online">onLine</a></code></dt>
 
    <dd>
 
@@ -2296,18 +2348,18 @@ NETWORK:
   remote page (or knows that such an attempt would fail), and must
   return true otherwise.</p>
 
-  <p>When the value that would be returned by the <code title="dom-navigator-onLine"><a href="#dom-navigator-online">navigator.onLine</a></code> attribute of
-  the <code><a href="browsers.html#window">Window</a></code> changes from true to false, the user agent
-  must <a href="webappapis.html#queue-a-task">queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a>
-  named <dfn id="event-offline" title="event-offline"><code>offline</code></dfn> at the
-  <code><a href="browsers.html#window">Window</a></code> object.</p>
+  <p>When the value that would be returned by the <code title="dom-navigator-onLine"><a href="#dom-navigator-online">navigator.onLine</a></code> attribute of a
+  <code><a href="browsers.html#window">Window</a></code> or <code>WorkerGlobalScope</code> changes from
+  true to false, the user agent must <a href="webappapis.html#queue-a-task">queue a task</a> to
+  <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named <dfn id="event-offline" title="event-offline"><code>offline</code></dfn> at the
+  <code><a href="browsers.html#window">Window</a></code> or <code>WorkerGlobalScope</code> object.</p>
 
   <p>On the other hand, when the value that would be returned by the
   <code title="dom-navigator-onLine"><a href="#dom-navigator-online">navigator.onLine</a></code> attribute
-  of the <code><a href="browsers.html#window">Window</a></code> changes from false to true, the user
-  agent must <a href="webappapis.html#queue-a-task">queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple
-  event</a> named <dfn id="event-online" title="event-online"><code>online</code></dfn> at the
-  <code><a href="browsers.html#window">Window</a></code> object.</p>
+  of a <code><a href="browsers.html#window">Window</a></code> or <code>WorkerGlobalScope</code> changes
+  from false to true, the user agent must <a href="webappapis.html#queue-a-task">queue a task</a> to
+  <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named <dfn id="event-online" title="event-online"><code>online</code></dfn> at the
+  <code><a href="browsers.html#window">Window</a></code> or <code>WorkerGlobalScope</code> object.</p>
 
   <p>The <a href="webappapis.html#task-source">task source</a> for these <a href="webappapis.html#concept-task" title="concept-task">tasks</a> is the <a href="webappapis.html#networking-task-source">networking task
   source</a>.</p>

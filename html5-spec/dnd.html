@@ -243,6 +243,24 @@
 
    .details-example img { vertical-align: top; }
 
+   #base64-table {
+     white-space: nowrap;
+     font-size: 0.6em;
+     column-width: 6em;
+     column-count: 5;
+     column-gap: 1em;
+     -moz-column-width: 6em;
+     -moz-column-count: 5;
+     -moz-column-gap: 1em;
+     -webkit-column-width: 6em;
+     -webkit-column-count: 5;
+     -webkit-column-gap: 1em;
+   }
+   #base64-table thead { display: none; }
+   #base64-table * { border: none; }
+   #base64-table tbody td:first-child:after { content: ':'; }
+   #base64-table tbody td:last-child { text-align: right; }
+
    #named-character-references-table {
      white-space: nowrap;
      font-size: 0.6em;
@@ -395,8 +413,8 @@
   series of <code title="event-mousemove">mousemove</code> events, and
   the drop could be triggered by the mouse being released.</p><p>On media without a pointing device, the user would probably have
   to explicitly indicate his intention to perform a drag-and-drop
-  operation, stating what he wishes to drag and what he wishes to
-  drop, respectively.</p><div class="impl">
+  operation, stating what he wishes to drag and where he wishes to
+  drop it, respectively.</p><div class="impl">
 
   <p>However it is implemented, drag-and-drop operations must have a
   starting point (e.g. where the mouse was clicked, or the start of
@@ -855,11 +873,11 @@
   must run the following steps:</p>
 
   <ol><li><p>If the <code><a href="#datatransfer">DataTransfer</a></code> object is no longer
-   associated with a <a href="#drag-data-store">drag data store</a>, abort these steps.
-   Nothing happens.</p></li>
+   associated with a <a href="#drag-data-store">drag data store</a>, return the empty
+   string and abort these steps.</p></li>
 
-   <li><p>If the <a href="#drag-data-store">drag data store</a>'s <a href="#drag-data-store-mode" title="drag data&#10;   store mode">mode</a> is in the <a href="#concept-dnd-p" title="concept-dnd-p">protected mode</a>, abort these steps.
-   Nothing happens.</p></li>
+   <li><p>If the <a href="#drag-data-store">drag data store</a>'s <a href="#drag-data-store-mode" title="drag data&#10;   store mode">mode</a> is in the <a href="#concept-dnd-p" title="concept-dnd-p">protected mode</a>, return the empty
+   string and abort these steps.</p></li>
 
    <li><p>Let <var title="">format</var> be the first argument,
    <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a>.</p></li>
@@ -2459,7 +2477,7 @@ interface <dfn>FunctionObjectCallback</dfn> {
 
    </li>
 
-  </ol><p>The <dfn id="dom-dropzone" title="dom-dropzone"><code>dropzone</code></dfn>
+  </ol><p>The <dfn id="dom-dropzone" title="dom-dropzone"><code>dropzone</code></dfn> IDL
   attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the content attribute of the
   same name.</p>
 
@@ -2651,7 +2669,7 @@ interface <dfn>FunctionObjectCallback</dfn> {
   except where otherwise stated.</p>
 
   <p>When <code title="dom-document-execCommand"><a href="#execCommand">execCommand()</a></code>
-  is invoked, the user agent must follow the following steps:</p>
+  is invoked, the user agent must run the following steps:</p>
 
   <ol><li>If the given <var title="">commandId</var> maps to an entry in
    the list below whose "Enabled When" entry has a condition that is

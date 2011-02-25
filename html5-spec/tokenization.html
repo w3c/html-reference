@@ -243,6 +243,24 @@
 
    .details-example img { vertical-align: top; }
 
+   #base64-table {
+     white-space: nowrap;
+     font-size: 0.6em;
+     column-width: 6em;
+     column-count: 5;
+     column-gap: 1em;
+     -moz-column-width: 6em;
+     -moz-column-count: 5;
+     -moz-column-gap: 1em;
+     -webkit-column-width: 6em;
+     -webkit-column-count: 5;
+     -webkit-column-gap: 1em;
+   }
+   #base64-table thead { display: none; }
+   #base64-table * { border: none; }
+   #base64-table tbody td:first-child:after { content: ':'; }
+   #base64-table tbody td:last-child { text-align: right; }
+
    #named-character-references-table {
      white-space: nowrap;
      font-size: 0.6em;
@@ -918,8 +936,8 @@
    a U+002D HYPHEN-MINUS character token.</dd>
 
    <dt>U+003C LESS-THAN SIGN (&lt;)</dt>
-   <dd><p>Switch to the <a href="#script-data-escaped-less-than-sign-state">script data escaped less-than sign
-   state</a>.</p></dd>
+   <dd>Switch to the <a href="#script-data-escaped-less-than-sign-state">script data escaped less-than sign
+   state</a>.</dd>
 
    <dt>U+0000 NULL</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Emit a U+FFFD REPLACEMENT CHARACTER
@@ -942,8 +960,8 @@
    state</a>. Emit a U+002D HYPHEN-MINUS character token.</dd>
 
    <dt>U+003C LESS-THAN SIGN (&lt;)</dt>
-   <dd><p>Switch to the <a href="#script-data-escaped-less-than-sign-state">script data escaped less-than sign
-   state</a>.</p></dd>
+   <dd>Switch to the <a href="#script-data-escaped-less-than-sign-state">script data escaped less-than sign
+   state</a>.</dd>
 
    <dt>U+0000 NULL</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#script-data-escaped-state">script data
@@ -966,8 +984,8 @@
    <dd>Emit a U+002D HYPHEN-MINUS character token.</dd>
 
    <dt>U+003C LESS-THAN SIGN (&lt;)</dt>
-   <dd><p>Switch to the <a href="#script-data-escaped-less-than-sign-state">script data escaped less-than sign
-   state</a>.</p></dd>
+   <dd>Switch to the <a href="#script-data-escaped-less-than-sign-state">script data escaped less-than sign
+   state</a>.</dd>
 
    <dt>U+003E GREATER-THAN SIGN (&gt;)</dt>
    <dd>Switch to the <a href="#script-data-state">script data state</a>. Emit a U+003E
@@ -1124,9 +1142,9 @@
    state</a>. Emit a U+002D HYPHEN-MINUS character token.</dd>
 
    <dt>U+003C LESS-THAN SIGN (&lt;)</dt>
-   <dd><p>Switch to the <a href="#script-data-double-escaped-less-than-sign-state">script data double escaped less-than
+   <dd>Switch to the <a href="#script-data-double-escaped-less-than-sign-state">script data double escaped less-than
    sign state</a>. Emit a U+003C LESS-THAN SIGN character
-   token.</p></dd>
+   token.</dd>
 
    <dt>U+0000 NULL</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Emit a U+FFFD REPLACEMENT CHARACTER
@@ -1149,9 +1167,9 @@
    state</a>. Emit a U+002D HYPHEN-MINUS character token.</dd>
 
    <dt>U+003C LESS-THAN SIGN (&lt;)</dt>
-   <dd><p>Switch to the <a href="#script-data-double-escaped-less-than-sign-state">script data double escaped less-than
+   <dd>Switch to the <a href="#script-data-double-escaped-less-than-sign-state">script data double escaped less-than
    sign state</a>. Emit a U+003C LESS-THAN SIGN character
-   token.</p></dd>
+   token.</dd>
 
    <dt>U+0000 NULL</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#script-data-double-escaped-state">script data
@@ -1175,9 +1193,9 @@
    <dd>Emit a U+002D HYPHEN-MINUS character token.</dd>
 
    <dt>U+003C LESS-THAN SIGN (&lt;)</dt>
-   <dd><p>Switch to the <a href="#script-data-double-escaped-less-than-sign-state">script data double escaped less-than
+   <dd>Switch to the <a href="#script-data-double-escaped-less-than-sign-state">script data double escaped less-than
    sign state</a>. Emit a U+003C LESS-THAN SIGN character
-   token.</p></dd>
+   token.</dd>
 
    <dt>U+003E GREATER-THAN SIGN (&gt;)</dt>
    <dd>Switch to the <a href="#script-data-state">script data state</a>. Emit a U+003E
@@ -1474,6 +1492,10 @@
    <dd>Switch to the <a href="#character-reference-in-attribute-value-state">character reference in attribute value
    state</a>, with the <a href="#additional-allowed-character">additional allowed character</a>
    being U+0027 APOSTROPHE (').</dd>
+
+   <dt>U+0000 NULL</dt>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Append a U+FFFD REPLACEMENT CHARACTER
+   character to the current attribute's value.</dd>
 
    <dt>EOF</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
@@ -2415,10 +2437,9 @@
       </td></tr><tr><td>0x9E </td><td>U+017E </td><td>LATIN SMALL LETTER Z WITH CARON (&#x17E;)
       </td></tr><tr><td>0x9F </td><td>U+0178 </td><td>LATIN CAPITAL LETTER Y WITH DIAERESIS (&#x178;)
     </td></tr></tbody></table><p>Otherwise, if the number is in the range 0xD800 to 0xDFFF<!--
-    surrogates not allowed; see the comment in the "preprocessing the
-    input stream" section for details --> or is greater than 0x10FFFF,
-    then this is a <a href="parsing.html#parse-error">parse error</a>. Return a U+FFFD
-    REPLACEMENT CHARACTER.</p>
+    surrogates --> or is greater than 0x10FFFF, then this is a
+    <a href="parsing.html#parse-error">parse error</a>. Return a U+FFFD REPLACEMENT
+    CHARACTER.</p>
 
     <p>Otherwise, return a character token for the Unicode character
     whose code point is that number.
@@ -3250,7 +3271,8 @@ document.body.appendChild(text);
 
      <li>
 
-      <p>Mark the element as being <a href="scripting-1.html#parser-inserted">"parser-inserted"</a>.</p>
+      <p>Mark the element as being <a href="scripting-1.html#parser-inserted">"parser-inserted"</a> and
+      unset the element's <a href="scripting-1.html#force-async">"force-async"</a> flag.</p>
 
       <p class="note">This ensures that, if the script is external,
       any <code title="dom-document-write"><a href="apis-in-html-documents.html#dom-document-write">document.write()</a></code>
@@ -4711,7 +4733,7 @@ document.body.appendChild(text);
      <li><p>Set <var title="">node</var> to the previous entry in the
      <a href="parsing.html#stack-of-open-elements">stack of open elements</a>.</p></li>
 
-     <li><p>Return to the step labeld <i>loop</i>.</p></li>
+     <li><p>Return to the step labeled <i>loop</i>.</p></li>
 
     </ol></dd>
 
@@ -4752,6 +4774,8 @@ document.body.appendChild(text);
    <dt id="scriptEndTag">An end tag whose tag name is "script"</dt>
    <dd>
 
+    <p><a href="webappapis.html#provide-a-stable-state">Provide a stable state</a>.</p>
+
     <p>Let <var title="">script</var> be the <a href="parsing.html#current-node">current node</a>
     (which will be a <code><a href="scripting-1.html#script">script</a></code> element).</p>
 
@@ -4769,7 +4793,7 @@ document.body.appendChild(text);
     <p>Increment the parser's <a href="parsing.html#script-nesting-level">script nesting level</a> by
     one.</p>
 
-    <p><a href="scripting-1.html#running-a-script" title="running a script">Run</a> the <var title="">script</var>. This might cause some script to execute,
+    <p><a href="scripting-1.html#prepare-a-script" title="prepare a script">Prepare</a> the <var title="">script</var>. This might cause some script to execute,
     which might cause <a href="apis-in-html-documents.html#dom-document-write" title="dom-document-write">new characters
     to be inserted into the tokenizer</a>, and might cause the
     tokenizer to output more tokens, resulting in a <a href="parsing.html#nestedParsing">reentrant invocation of the parser</a>.</p>
@@ -4836,7 +4860,7 @@ document.body.appendChild(text);
        by one (it should be zero before this step, so this sets it to
        one).</p></li>
 
-       <li><p><a href="scripting-1.html#executing-a-script-block" title="executing a script block">Execute</a>
+       <li><p><a href="scripting-1.html#execute-the-script-block" title="execute the script block">Execute</a>
        <var title="">the script</var>.</p></li>
 
        <li><p>Decrement the parser's <a href="parsing.html#script-nesting-level">script nesting level</a>

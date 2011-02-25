@@ -243,6 +243,24 @@
 
    .details-example img { vertical-align: top; }
 
+   #base64-table {
+     white-space: nowrap;
+     font-size: 0.6em;
+     column-width: 6em;
+     column-count: 5;
+     column-gap: 1em;
+     -moz-column-width: 6em;
+     -moz-column-count: 5;
+     -moz-column-gap: 1em;
+     -webkit-column-width: 6em;
+     -webkit-column-count: 5;
+     -webkit-column-gap: 1em;
+   }
+   #base64-table thead { display: none; }
+   #base64-table * { border: none; }
+   #base64-table tbody td:first-child:after { content: ':'; }
+   #base64-table tbody td:last-child { text-align: right; }
+
    #named-character-references-table {
      white-space: nowrap;
      font-size: 0.6em;
@@ -412,13 +430,15 @@
 
   <p id="scriptTagXML">When an <a href="#xml-parser">XML parser</a> creates a
   <code><a href="scripting-1.html#script">script</a></code> element, it must be marked as being
-  <a href="scripting-1.html#parser-inserted">"parser-inserted"</a>.  If the parser was originally
-  created for the <a href="#xml-fragment-parsing-algorithm">XML fragment parsing algorithm</a>, then
-  the element must be marked as <a href="scripting-1.html#already-started">"already started"</a>
-  also. When the element's end tag is parsed, the user agent must
-  <a href="scripting-1.html#running-a-script" title="running a script">run</a> the <code><a href="scripting-1.html#script">script</a></code>
-  element. If this causes there to be a <a href="scripting-1.html#pending-parsing-blocking-script">pending parsing-blocking
-  script</a>, then the user agent must run the following steps:</p>
+  <a href="scripting-1.html#parser-inserted">"parser-inserted"</a> and its <a href="scripting-1.html#force-async">"force-async"</a>
+  flag must be unset. If the parser was originally created for the
+  <a href="#xml-fragment-parsing-algorithm">XML fragment parsing algorithm</a>, then the element must
+  be marked as <a href="scripting-1.html#already-started">"already started"</a> also. When the element's
+  end tag is parsed, the user agent must <a href="webappapis.html#provide-a-stable-state">provide a stable
+  state</a>, and then <a href="scripting-1.html#prepare-a-script" title="prepare a script">prepare</a>
+  the <code><a href="scripting-1.html#script">script</a></code> element. If this causes there to be a
+  <a href="scripting-1.html#pending-parsing-blocking-script">pending parsing-blocking script</a>, then the user agent
+  must run the following steps:</p>
 
   <ol><li><p>Block this instance of the <a href="#xml-parser">XML parser</a>, such
    that the <a href="webappapis.html#event-loop">event loop</a> will not run <a href="webappapis.html#concept-task" title="concept-task">tasks</a> that invoke it.</p></li>
@@ -433,7 +453,7 @@
    that <a href="webappapis.html#concept-task" title="concept-task">tasks</a> that invoke it can
    again be run.</p></li>
 
-   <li><p><a href="scripting-1.html#executing-a-script-block" title="executing a script block">Execute</a> the
+   <li><p><a href="scripting-1.html#execute-the-script-block" title="execute the script block">Execute</a> the
    <a href="scripting-1.html#pending-parsing-blocking-script">pending parsing-blocking script</a>.</p></li>
 
    <li><p>There is no longer a <a href="scripting-1.html#pending-parsing-blocking-script">pending parsing-blocking
