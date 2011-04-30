@@ -25,8 +25,8 @@ var itemList =
   ["p", "param", "pre", "progress", "q", "rp", "rt", "ruby"],
   ["s", "samp", "script", "section", "select", "small", "source", "span"],
   ["strong", "style", "sub", "summary", "sup"],
-  ["table", "tbody", "td", "textarea", "tfoot", "th", "thead", "time", "title", "tr"],
-  ["ul", "var", "video", "wbr"],
+  ["table", "tbody", "td", "textarea", "tfoot", "th", "thead", "time", "title"],
+  [ "tr", "track", "u", "ul", "var", "video", "wbr"],
   ["global-attributes","index-of-terms","toc","toggle"]
   ];
 

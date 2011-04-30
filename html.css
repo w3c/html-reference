@@ -113,13 +113,11 @@ q {
 }
 
 q:before {
-    content: '"'
-    /* FIXME: content: open-quote; */
+    content: open-quote;
 }
 
 q:after {
-    content: '"'
-    /* FIXME: content: close-quote; */
+    content: close-quote;
 }
 
 center {
@@ -152,6 +150,36 @@ h1 {
     -webkit-margin-start: 0;
     -webkit-margin-end: 0;
     font-weight: bold
+}
+
+:-webkit-any(article,aside,nav,section) h1 {
+    font-size: 1.5em;
+    -webkit-margin-before: 0.83__qem;
+    -webkit-margin-after: 0.83em;
+}
+
+:-webkit-any(article,aside,nav,section) :-webkit-any(article,aside,nav,section) h1 {
+    font-size: 1.17em;
+    -webkit-margin-before: 1__qem;
+    -webkit-margin-after: 1em;
+}
+
+:-webkit-any(article,aside,nav,section) :-webkit-any(article,aside,nav,section) :-webkit-any(article,aside,nav,section) h1 {
+    font-size: 1.00em;
+    -webkit-margin-before: 1.33__qem;
+    -webkit-margin-after: 1.33em;
+}
+
+:-webkit-any(article,aside,nav,section) :-webkit-any(article,aside,nav,section) :-webkit-any(article,aside,nav,section) :-webkit-any(article,aside,nav,section) h1 {
+    font-size: .83em;
+    -webkit-margin-before: 1.67__qem;
+    -webkit-margin-after: 1.67em;
+}
+
+:-webkit-any(article,aside,nav,section) :-webkit-any(article,aside,nav,section) :-webkit-any(article,aside,nav,section) :-webkit-any(article,aside,nav,section) :-webkit-any(article,aside,nav,section) h1 {
+    font-size: .67em;
+    -webkit-margin-before: 2.33__qem;
+    -webkit-margin-after: 2.33em;
 }
 
 h2 {
@@ -358,7 +386,7 @@ input, textarea, keygen, select, button, isindex, meter, progress {
     -webkit-block-flow: tb !important;
 }
 
-input, textarea, keygen, select, button, isindex, datagrid {
+input, textarea, keygen, select, button, isindex {
     margin: 0__qem;
     font: -webkit-small-control;
     color: initial;
@@ -419,12 +447,16 @@ input::-webkit-input-list-button {
 input::-webkit-inner-spin-button {
     -webkit-appearance: inner-spin-button;
     display: inline-block;
+    position: relative;
+    cursor: default;
     -webkit-user-select: none;
 }
 
 input::-webkit-outer-spin-button {
     -webkit-appearance: outer-spin-button;
     display: inline-block;
+    position: relative;
+    cursor: default;
     margin-left: 2px;
     -webkit-user-select: none;
 }
@@ -479,6 +511,7 @@ input[type="file"] {
 input:-webkit-autofill {
     background-color: #FAFFBD !important;
     background-image:none !important;
+    color: #000000 !important;
 }
 
 input[type="radio"], input[type="checkbox"] {
@@ -518,7 +551,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 input[type="button"]:disabled, input[type="submit"]:disabled, input[type="reset"]:disabled,
 input[type="file"]:disabled::-webkit-file-upload-button, button:disabled,
-select:disabled, keygen:disabled, optgroup:disabled, option:disabled, datagrid:disabled {
+select:disabled, keygen:disabled, optgroup:disabled, option:disabled {
     color: GrayText
 }
 
@@ -590,139 +623,116 @@ output {
 /* form validation message bubble */
 
 ::-webkit-validation-bubble {
-    display: block;
+    display: inline-block;
     z-index: 2147483647;
     position: absolute;
-    opacity: 0.9;
+    opacity: 0.95;
     line-height: 0;
+    margin: 0;
     -webkit-text-security: none;
     -webkit-transition: opacity 05.5s ease;
 }
 
 ::-webkit-validation-bubble-message {
     display: block;
+    position: relative;
+    top: -4px;
     font: message-box;
+    color: black;
     min-width: 50px;
     max-width: 200px;
-    border: solid 2px black;
-    background: -webkit-gradient(linear, left top, left bottom, from(#fbf9f9), to(#f0e4e4));
+    border: solid 2px #400;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f8ecec), to(#e8cccc));
     padding: 8px;
     -webkit-border-radius: 8px;
-    -webkit-box-shadow: 4px 4px 4px rgba(204,204,204,0.7);
+    -webkit-box-shadow: 4px 4px 4px rgba(100,100,100,0.6),
+        inset -2px -2px 1px #d0c4c4,
+        inset 2px 2px 1px white;
     line-height: normal;
+    z-index: 2147483644;
 }
 
-::-webkit-validation-bubble-top-outer-arrow {
+::-webkit-validation-bubble-arrow {
     display: inline-block;
     position: relative;
-    left: 14px;
-    height: 0;
-    width: 0;
+    left: 32px;
+    width: 16px;
+    height: 16px;
+    background-color: #f8ecec;
+    border-width: 2px 0 0 2px;
     border-style: solid;
-    border-width: 14px;
-    border-bottom-color: black;
-    border-right-color: transparent;
-    border-top-width: 0;
-    border-left-width: 0;
+    border-color: #400;
+    box-shadow: inset 2px 2px 1px white;
+    -webkit-transform-origin: 0 0;
+    -webkit-transform: rotate(45deg);
+    z-index: 2147483645;
 }
 
-::-webkit-validation-bubble-top-inner-arrow {
-    display: inline-block;
-    height: 0;
-    width: 0;
-    border-style: solid;
-    border-width: 10px; /* <border box width of outer-arrow> - <message border width> * 2 */
-    border-bottom-color: #fbf9f9;
-    border-right-color: transparent;
-    border-top-width: 0;
-    border-left-width: 0;
-    position: relative;
-    top: 2px; /* <message border width> */
-    left: 2px; /* <outer-arrow position> + <message border width> - <border box width of outer-arrow>  */
+::-webkit-validation-bubble-arrow-clipper {
+    display: block;
+    overflow: hidden;
+    height: 16px;
 }
 
 /* meter */
 
 meter {
     -webkit-appearance: meter;
-    display: inline-block;
+    -webkit-box-sizing: border-box;
+    display: inline-box;
     height: 1em;
     width: 5em;
     vertical-align: -0.2em;
 }
 
-meter::-webkit-meter {
-    -webkit-appearance: meter;
-}
-
-meter::-webkit-meter-horizontal-bar {
-    -webkit-appearance: meter;
+meter::-webkit-meter-bar {
     background: -webkit-gradient(linear, left top, left bottom, from(#ddd), to(#ddd), color-stop(0.20, #eee), color-stop(0.45, #ccc), color-stop(0.55, #ccc));
+    height: 100%;
+    width: 100%;
+    -webkit-box-sizing: border-box;
 }
 
-meter::-webkit-meter-vertical-bar {
-    -webkit-appearance: meter;
-    background: -webkit-gradient(linear, left top, right top, from(#ddd), to(#ddd), color-stop(0.20, #eee), color-stop(0.45, #ccc), color-stop(0.55, #ccc));
-}
-
-meter::-webkit-meter-horizontal-optimum-value {
-    -webkit-appearance: meter;
+meter::-webkit-meter-optimum-value {
     background: -webkit-gradient(linear, left top, left bottom, from(#ad7), to(#ad7), color-stop(0.20, #cea), color-stop(0.45, #7a3), color-stop(0.55, #7a3));
+    height: 100%;
+    -webkit-box-sizing: border-box;
 }
 
-meter::-webkit-meter-horizontal-suboptimal-value {
-    -webkit-appearance: meter;
+meter::-webkit-meter-suboptimum-value {
     background: -webkit-gradient(linear, left top, left bottom, from(#fe7), to(#fe7), color-stop(0.20, #ffc), color-stop(0.45, #db3), color-stop(0.55, #db3));
+    height: 100%;
+    -webkit-box-sizing: border-box;
 }
 
-meter::-webkit-meter-horizontal-even-less-good-value {
-    -webkit-appearance: meter;
+meter::-webkit-meter-even-less-good-value {
     background: -webkit-gradient(linear, left top, left bottom, from(#f77), to(#f77), color-stop(0.20, #fcc), color-stop(0.45, #d44), color-stop(0.55, #d44));
-}
-
-meter::-webkit-meter-vertical-optimum-value {
-    -webkit-appearance: meter;
-    background: -webkit-gradient(linear, left top, right top, from(#ad7), to(#ad7), color-stop(0.20, #cea), color-stop(0.45, #7a3), color-stop(0.55, #7a3));
-}
-
-meter::-webkit-meter-vertical-suboptimal-value {
-    -webkit-appearance: meter;
-    background: -webkit-gradient(linear, left top, right top, from(#fe7), to(#fe7), color-stop(0.20, #ffc), color-stop(0.45, #db3), color-stop(0.55, #db3));
-}
- 
-meter::-webkit-meter-vertical-even-less-good-value {
-    -webkit-appearance: meter;
-    background: -webkit-gradient(linear, left top, right top, from(#f77), to(#f77), color-stop(0.20, #fcc), color-stop(0.45, #d44), color-stop(0.55, #d44));
+    height: 100%;
+    -webkit-box-sizing: border-box;
 }
 
 /* progress */
 
 progress {
     -webkit-appearance: progress-bar;
+    -webkit-box-sizing: border-box;
     display: inline-block;
     height: 1em;
     width: 10em;
     vertical-align: -0.2em;
+}
+
+progress::-webkit-progress-bar {
     background-color: gray;
-}
-
-progress::-webkit-progress-bar-value {
-    -webkit-appearance: progress-bar;
-    background-color: green;
-}
-
-/* datagrid */
-
-datagrid {
-    height: 150px; /* We don't use width:300px in CSS, since we want width:intrinsic and width:min-intrinsic to reset to 300 properly. */
-    -webkit-appearance: datagrid;
+    height: 100%;
+    width: 100%;
     -webkit-box-sizing: border-box;
-    -webkit-rtl-ordering: logical;
-    color: black;
-    background-color: white;
-    cursor: default;
-    border: 1px inset gray;
-    white-space: initial;
+}
+
+progress::-webkit-progress-value {
+    background-color: green;
+    height: 100%;
+    width: 50%; /* should be removed later */
+    -webkit-box-sizing: border-box;
 }
 
 /* inline elements */
@@ -833,7 +843,7 @@ rt {
 ruby > rt {
     display: block;
     font-size: 50%;
-    text-align: center;
+    text-align: -webkit-auto;
 }
 
 ruby > rp {
@@ -864,6 +874,13 @@ details {
 
 summary {
     display: block
+}
+
+summary::-webkit-details-marker {
+    display: inline-block;
+    width: 0.66em;
+    height: 0.66em;
+    margin-right: 0.4em;
 }
 
 /* page */
