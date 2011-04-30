@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>2 Common infrastructure &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -352,7 +348,7 @@
   <ol class="toc"><li><a href="infrastructure.html#infrastructure"><span class="secno">2 </span>Common infrastructure</a>
   <ol><li><a href="infrastructure.html#terminology"><span class="secno">2.1 </span>Terminology</a>
     <ol><li><a href="infrastructure.html#resources"><span class="secno">2.1.1 </span>Resources</a></li><li><a href="infrastructure.html#xml"><span class="secno">2.1.2 </span>XML</a></li><li><a href="infrastructure.html#dom-trees"><span class="secno">2.1.3 </span>DOM trees</a></li><li><a href="infrastructure.html#scripting-0"><span class="secno">2.1.4 </span>Scripting</a></li><li><a href="infrastructure.html#plugins"><span class="secno">2.1.5 </span>Plugins</a></li><li><a href="infrastructure.html#character-encodings"><span class="secno">2.1.6 </span>Character encodings</a></li></ol></li><li><a href="infrastructure.html#conformance-requirements"><span class="secno">2.2 </span>Conformance requirements</a>
-    <ol><li><a href="infrastructure.html#dependencies"><span class="secno">2.2.1 </span>Dependencies</a></li><li><a href="infrastructure.html#extensibility"><span class="secno">2.2.2 </span>Extensibility</a></li></ol></li><li><a href="infrastructure.html#case-sensitivity-and-string-comparison"><span class="secno">2.3 </span>Case-sensitivity and string comparison</a></li><li><a href="infrastructure.html#utf-8"><span class="secno">2.4 </span>UTF-8</a></li></ol></li></ol></div><h2 id="infrastructure"><span class="secno">2 </span>Common infrastructure</h2><h3 id="terminology"><span class="secno">2.1 </span>Terminology</h3><p>This specification refers to both HTML and XML attributes and IDL
+    <ol><li><a href="infrastructure.html#conformance-classes"><span class="secno">2.2.1 </span>Conformance classes</a></li><li><a href="infrastructure.html#dependencies"><span class="secno">2.2.2 </span>Dependencies</a></li><li><a href="infrastructure.html#extensibility"><span class="secno">2.2.3 </span>Extensibility</a></li></ol></li><li><a href="infrastructure.html#case-sensitivity-and-string-comparison"><span class="secno">2.3 </span>Case-sensitivity and string comparison</a></li><li><a href="infrastructure.html#utf-8"><span class="secno">2.4 </span>UTF-8</a></li></ol></li></ol></div><h2 id="infrastructure"><span class="secno">2 </span>Common infrastructure</h2><h3 id="terminology"><span class="secno">2.1 </span>Terminology</h3><p>This specification refers to both HTML and XML attributes and IDL
   attributes, often in the same context. When it is not clear which is
   being referred to, they are referred to as <dfn title="">content
   attributes</dfn> for HTML and XML attributes, and <dfn title="">IDL
@@ -377,7 +373,8 @@
   implies that A called B. Upon returning to A, the implementation
   must continue from where it left off in calling B.</p>
 
-  </div><h4 id="resources"><span class="secno">2.1.1 </span>Resources</h4><p>The specification uses the term <dfn title="">supported</dfn>
+  </div><p>The term "transparent black" refers to the color with red, green,
+  blue, and alpha channels all set to zero.</p><h4 id="resources"><span class="secno">2.1.1 </span>Resources</h4><p>The specification uses the term <dfn title="">supported</dfn>
   when referring to whether a user agent has an implementation capable
   of decoding the semantics of an external resource. A format or type
   is said to be <i>supported</i> if the implementation can process an
@@ -479,8 +476,7 @@
   operate on the actual underlying data, not a snapshot of the
   data.</p><p>The terms <dfn title="">fire</dfn> and <dfn title="">dispatch</dfn> are used interchangeably in the context of
   events, as in the DOM Events specifications. The term <dfn id="concept-events-trusted" title="concept-events-trusted">trusted event</dfn> is used as
-  defined by the DOM Events specification. <!--
-  http://krijnhoetmer.nl/irc-logs/webapps/20091218 --> <a href="references.html#refsDOMEVENTS">[DOMEVENTS]</a></p><h4 id="plugins"><span class="secno">2.1.5 </span>Plugins</h4><p>The term <dfn id="plugin">plugin</dfn> refers to a user-agent defined set of
+  defined by the DOM Events specification.  <a href="references.html#refsDOMEVENTS">[DOMEVENTS]</a></p><h4 id="plugins"><span class="secno">2.1.5 </span>Plugins</h4><p>The term <dfn id="plugin">plugin</dfn> refers to a user-agent defined set of
   content handlers used by the user agent that can take part in the
   user agent's rendering of a <code><a href="#document">Document</a></code> object, but that
   neither act as <a href="browsers.html#child-browsing-context" title="child browsing context">child browsing
@@ -491,10 +487,7 @@
 
   <p>A user agent must not consider the types <code>text/plain</code>
   and <code>application/octet-stream</code> as having a registered
-  <a href="#plugin">plugin</a>.</p> <!-- because of the way <object> handles
-  those types, if nothing else (it also doesn't make any sense to have
-  a plugin registered for those types, of course) -->
-
+  <a href="#plugin">plugin</a>.</p> 
   </div><p class="example">One example of a plugin would be a PDF viewer
   that is instantiated in a <a href="browsers.html#browsing-context">browsing context</a> when the
   user navigates to a PDF file. This would count as a plugin
@@ -516,51 +509,76 @@
   third-party software become as dangerous as those in the user
   agent.</p>
 
-  </div><h4 id="character-encodings"><span class="secno">2.1.6 </span>Character encodings</h4><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/101">ISSUE-101</a> (us-ascii-ref) blocks progress to Last Call</span></p><p>The <dfn id="preferred-mime-name">preferred MIME name</dfn> of a character encoding is the
+  </div><h4 id="character-encodings"><span class="secno">2.1.6 </span>Character encodings</h4><p>The <dfn id="preferred-mime-name">preferred MIME name</dfn> of a character encoding is the
   name or alias labeled as "preferred MIME name" in the IANA
   <cite>Character Sets</cite> registry, if there is one, or the
   encoding's name, if none of the aliases are so labeled. <a href="references.html#refsIANACHARSET">[IANACHARSET]</a></p><p>An <dfn id="ascii-compatible-character-encoding">ASCII-compatible character encoding</dfn> is a
   single-byte or variable-length encoding in which the bytes 0x09,
   0x0A, 0x0C, 0x0D, 0x20 - 0x22, 0x26, 0x27, 0x2C - 0x3F, 0x41 - 0x5A,
-  and 0x61 - 0x7A<!-- is that list ok? do any character sets we want
-  to support do things outside that range?  -->, ignoring bytes that
+  and 0x61 - 0x7A, ignoring bytes that
   are the second and later bytes of multibyte sequences, all
   correspond to single-byte sequences that map to the same Unicode
   characters as those bytes in ANSI_X3.4-1968 (US-ASCII). <a href="references.html#refsRFC1345">[RFC1345]</a></p><p class="note">This includes such encodings as Shift_JIS,
   HZ-GB-2312, and variants of ISO-2022, even though it is possible in
   these encodings for bytes like 0x70 to be part of longer sequences
   that are unrelated to their interpretation as ASCII. It excludes
-  such encodings as UTF-7, UTF-16, GSM03.38, and EBCDIC variants.</p><!--
-   We'll have to change that if anyone comes up with a way to have a
-   document that is valid as two different encodings at once, with
-   different <meta charset> elements applying in each case.
-  --><p>The term <dfn title="">Unicode character</dfn> is used to mean a
+  such encodings as UTF-7, UTF-16, GSM03.38, and EBCDIC variants.</p><p>The term <dfn title="">Unicode character</dfn> is used to mean a
   <i title="">Unicode scalar value</i> (i.e. any Unicode code point
   that is not a surrogate code point). <a href="references.html#refsUNICODE">[UNICODE]</a></p><h3 id="conformance-requirements"><span class="secno">2.2 </span>Conformance requirements</h3><p>All diagrams, examples, and notes in this specification are
   non-normative, as are all sections explicitly marked non-normative.
-  Everything else in this specification is normative.</p><p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL
-  NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
+  Everything else in this specification is normative.</p><p>The key words "MUST", "MUST NOT", "REQUIRED",  "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
   "OPTIONAL" in the normative parts of this document are to be
   interpreted as described in RFC2119. For readability, these words do
-  not appear in all uppercase letters in this specification. <a href="references.html#refsRFC2119">[RFC2119]</a></p><p class="impl">Requirements phrased in the imperative as part of
-  algorithms (such as "strip any leading space characters" or "return
-  false and abort these steps") are to be interpreted with the meaning
-  of the key word ("must", "should", "may", etc) used in introducing
-  the algorithm.</p><p>This specification describes the conformance criteria for <span class="impl">user agents (relevant to implementors) and</span>
+  not appear in all uppercase letters in this specification. <a href="references.html#refsRFC2119">[RFC2119]</a></p><div class="impl">
+
+  <p>Requirements phrased in the imperative as part of algorithms
+  (such as "strip any leading space characters" or "return false and
+  abort these steps") are to be interpreted with the meaning of the
+  key word ("must", "should", "may", etc) used in introducing the
+  algorithm.</p>
+
+  <p>Conformance requirements phrased as algorithms or specific steps
+  may be implemented in any manner, so long as the end result is
+  equivalent. (In particular, the algorithms defined in this
+  specification are intended to be easy to follow, and not intended to
+  be performant.)</p>
+
+  </div><div class="impl">
+
+  <h4 id="conformance-classes"><span class="secno">2.2.1 </span>Conformance classes</h4>
+
+  <p>This specification describes the conformance criteria for <span class="impl">user agents (relevant to implementors) and</span>
   documents<span class="impl"> (relevant to authors and authoring tool
-  implementors)</span>.</p><p><dfn id="conforming-documents">Conforming documents</dfn> are those that comply with all
+  implementors)</span>.</p>
+
+  <p><dfn id="conforming-html5-documents">Conforming
+  HTML5
+  documents</dfn> are those that comply with all
   the conformance criteria for documents. For readability, some of
   these conformance requirements are phrased as conformance
   requirements on authors; such requirements are implicitly
   requirements on documents: by definition, all documents are assumed
   to have had an author. (In some cases, that author may itself be a
   user agent &#x2014; such user agents are subject to additional rules,
-  as explained below.)</p><p class="example">For example, if a requirement states that
+  as explained below.)</p>
+
+  <p class="example">For example, if a requirement states that
   "authors must not use the <code title="">foobar</code> element", it
   would imply that documents are not allowed to contain elements named
-  <code title="">foobar</code>.</p><div class="impl">
+  <code title="">foobar</code>.</p>
 
+  <p class="note">the conformance requirements for documents include
+  syntax (the &lt;table&gt; element is conforming as a child of
+  &lt;body&gt;, but not as a child ot &lt;title&gt;), and semantics (the
+  &lt;table&gt; elements denotes a multi-dimensional data table, not a
+  piece of furniture).</p>
 
+  <p class="note impl">There is no implied relationship between
+  document conformance requirements and implementation conformance
+  requirements. User agents are not free to handle non-conformant
+  documents as they please; the processing model described in this
+  specification applies to implementations regardless of the
+  conformity of the input documents.</p>
 
   <p>User agents fall into several (overlapping) categories with
   different conformance requirements.</p>
@@ -624,6 +642,21 @@
 
    </dd>
 
+   <dt id="renderingUA">Visual user agents that support the suggested default rendering</dt>
+
+   <dd>
+
+    <p>User agents, whether interactive or not, may be designated
+    (possibly as a user option) as supporting the suggested default
+    rendering defined by this specification.</p>
+
+    <p>User agents that are designated as supporting the suggested
+    default rendering must implement the rules in <a href="rendering.html#rendering">the rendering section</a> that that section
+    defines as the behavior that user agents are <em>expected</em> to
+    implement.</p>
+
+   </dd>
+
    <dt><dfn id="non-scripted">User agents with no scripting support</dfn></dt>
 
    <dd>
@@ -642,6 +675,7 @@
     author's intent.</p>
 
    </dd>
+
 
    <dt>Conformance checkers</dt>
 
@@ -699,6 +733,7 @@
     </div>
    </dd>
 
+
    <dt>Data mining tools</dt>
 
    <dd id="data-mining">
@@ -714,13 +749,16 @@
 
    </dd>
 
+
    <dt id="editors">Authoring tools and markup generators</dt>
 
    <dd>
 
     <p>Authoring tools and markup generators must generate
-    <a href="#conforming-documents">conforming documents</a>. Conformance criteria that apply
-    to authors also apply to authoring tools, where appropriate.</p>
+    <a href="#conforming-html5-documents">conforming
+    HTML5
+    documents</a>. Conformance criteria that apply to authors also
+    apply to authoring tools, where appropriate.</p>
 
     <p>Authoring tools are exempt from the strict requirements of
     using elements only for their specified purpose, but only to the
@@ -775,7 +813,31 @@
 
    </dd>
 
-  </dl><p>Some conformance requirements are phrased as requirements on
+  </dl><p id="hardwareLimitations">User agents may impose
+  implementation-specific limits on otherwise unconstrained inputs,
+  e.g. to prevent denial of service attacks, to guard against running
+  out of memory, or to work around platform-specific limitations.</p>
+
+  <p>For compatibility with existing content and prior specifications,
+  this specification describes two authoring formats: one based on XML
+  (referred to as <a href="the-xhtml-syntax.html#the-xhtml-syntax">the XHTML syntax</a>), and one using a <a href="syntax.html#writing">custom format</a> inspired by SGML (referred to as
+  <a href="syntax.html#syntax">the HTML syntax</a>). Implementations must support at least
+  one of these two formats, although supporting both is
+  encouraged.</p>
+
+  <p id="entity-references">The language in this specification assumes
+  that the user agent expands all entity references, and therefore
+  does not include entity reference nodes in the DOM. If user agents
+  do include entity reference nodes in the DOM, then user agents must
+  handle them as if they were fully expanded when implementing this
+  specification. For example, if a requirement talks about an
+  element's child text nodes, then any text nodes that are children of
+  an entity reference that is a child of that element would be used as
+  well. Entity references to unknown entities must be treated as if
+  they contained just an empty text node for the purposes of the
+  algorithms defined in this specification.</p>
+
+  <p>Some conformance requirements are phrased as requirements on
   elements, attributes, methods or objects. Such requirements fall
   into two categories: those describing content model restrictions,
   and those describing implementation behavior. Those in the former
@@ -787,41 +849,9 @@
   specification does not distinguish between conformance criteria on
   authors and conformance criteria on documents.)</p>
 
-  <p>Conformance requirements phrased as algorithms or specific steps
-  may be implemented in any manner, so long as the end result is
-  equivalent. (In particular, the algorithms defined in this
-  specification are intended to be easy to follow, and not intended to
-  be performant.)</p>
+  </div><div class="impl">
 
-  <p id="hardwareLimitations">User agents may impose
-  implementation-specific limits on otherwise unconstrained inputs,
-  e.g. to prevent denial of service attacks, to guard against running
-  out of memory, or to work around platform-specific limitations.</p>
-
-  </div><p class="note impl">There is no implied relationship between
-  document conformance requirements and implementation conformance
-  requirements. User agents are not free to handle non-conformant
-  documents as they please; the processing model described in this
-  specification applies to implementations regardless of the
-  conformity of the input documents.</p><p>For compatibility with existing content and prior specifications,
-  this specification describes two authoring formats: one based on XML
-  (referred to as <a href="the-xhtml-syntax.html#the-xhtml-syntax">the XHTML syntax</a>), and one using a <a href="syntax.html#writing">custom format</a> inspired by SGML (referred to as
-  <a href="syntax.html#syntax">the HTML syntax</a>). <span class="impl">Implementations
-  must support at least one of these two formats, although supporting
-  both is encouraged.</span></p><p class="impl" id="entity-references">The language in this
-  specification assumes that the user agent expands all entity
-  references, and therefore does not include entity reference nodes in
-  the DOM. If user agents do include entity reference nodes in the
-  DOM, then user agents must handle them as if they were fully
-  expanded when implementing this specification. For example, if a
-  requirement talks about an element's child text nodes, then any text
-  nodes that are children of an entity reference that is a child of
-  that element would be used as well. Entity references to unknown
-  entities must be treated as if they contained just an empty text
-  node for the purposes of the algorithms defined in this
-  specification.</p><div class="impl">
-
-  <h4 id="dependencies"><span class="secno">2.2.1 </span>Dependencies</h4>
+  <h4 id="dependencies"><span class="secno">2.2.2 </span>Dependencies</h4>
 
   <p>This specification relies on several other underlying
   specifications.</p>
@@ -1020,7 +1050,7 @@
   requirements on character encodings, image formats, audio formats,
   and video formats in the respective sections.</p>
 
-  </div><h4 id="extensibility"><span class="secno">2.2.2 </span>Extensibility</h4><p>HTML has a wide number of extensibility mechanisms that can be
+  </div><h4 id="extensibility"><span class="secno">2.2.3 </span>Extensibility</h4><p>HTML has a wide number of extensibility mechanisms that can be
   used for adding semantics in a safe manner:</p><ul><li>Authors can use the <code title="attr-class"><a href="elements.html#classes">class</a></code>
    attribute to extend elements, effectively creating their own
    elements, while using the most applicable existing "real" HTML
@@ -1117,7 +1147,7 @@
 
   <div class="example">
 
-   <p>For example, if a user agent called "Pleas<!--e h-->old" were to
+   <p>For example, if a user agent called "Pleasold" were to
    add an event to indicate when the user is going up in an elevator,
    it could use the prefix "<code title="">pleasold</code>" and thus
    name the event "<code title="">pleasoldgoingup</code>", possibly
@@ -1127,7 +1157,7 @@
 
   <p>All extensions must be defined so that the use of extensions
   neither contradicts nor causes the non-conformance of functionality
-  defined in the specification.</p> <!-- thanks to QA Framework -->
+  defined in the specification.</p> 
 
   <div class="example">
 
@@ -1154,19 +1184,40 @@
   specification to their activities decides that they will recognize
   the requirements of such an extension specification, it becomes an
   <dfn id="other-applicable-specifications" title="other applicable specifications">applicable
-  specification</dfn> for the purposes of conformance requirements in
-  this specification.</p>
-  <!-- http://www.w3.org/mid/17E341CD-E790-422C-9F9A-69347EE01CEB@iki.fi -->
+  specification</dfn>.
 
-  <p class="note">Someone could write a specification that defines any
-  arbitrary byte stream as conforming, and then claim that their
-  random junk is conforming. However, that does not mean that their
-  random junk actually is conforming for everyone's purposes: if
-  someone else decides that that specification does not apply to their
-  work, then they can quite legitimately say that the aforementioned
-  random junk is just that, junk, and not conforming at all. As far as
-  conformance goes, what matters in a particular community is what
-  that community <em>agrees</em> is applicable.</p>
+  </p><p>The conformance terminology for documents depends on the nature
+  of the changes introduced by such applicable specificactions, and on
+  the content and intended interpretation of the document. Applicable
+  specifications MAY define new document content (e.g. a foobar
+  element), MAY prohibit certain otherwise conforming content (e.g.
+  prohibit use of &lt;table&gt;s), or MAY change the semantics, DOM
+  mappings, or other processing rules for content defined in this
+  specification. Whether a document is or is not a <a href="#conforming-documents">conforming HTML5 document</a> does not
+  depend on the use of applicable specifications: if the syntax and
+  semantics of a given <a href="#conforming-documents">conforming
+  HTML5 document </a>document is unchanged by the use of applicable
+  specification(s), then that document remains a <a href="#conforming-documents">conforming HTML5 document</a>. If the
+  semantics or processing of a given (otherwise conforming) document
+  is changed by use of applicable specification(s), then it is not a
+  <a href="#conforming-documents">conforming HTML5 document</a>. For
+  such cases, the applicable specifications SHOULD define conformance
+  terminology.</p>
+
+  <p class="note">As a suggested but not required convention, such
+  specifications might define conformance terminology such as:
+  "Conforming HTML5+XXX document", where XXX is a short
+  name for the applicable specification. (Example: "Conforming
+  HTML5+AutomotiveExtensions document").</p>
+ 
+  <p class="note">a consequence of the rule given above is that
+  certain syntactically correct HTML5 documents may not be <a href="#conforming-documents">conforming HTML5 documents</a> in the
+  presence of applicable specifications. (Example: the applicable
+  specification defines &lt;table&gt; to be a piece of furniture &#x2014;
+  a document written to that specification and containing a &lt;table&gt;
+  element is NOT a <a href="#conforming-documents">conforming HTML5
+  document</a>, even if the element happens to be syntactically
+  correct HTML5.)</p>
 
   <hr/><p>User agents must treat elements and attributes that they do not
   understand as semantically neutral; leaving them in the DOM (for DOM
@@ -1221,39 +1272,47 @@
 
   </p><dl class="switch"><dt>One byte in the range FE to FF</dt>
 
+
    <dt><a href="#overlong-form" title="overlong form">Overlong forms</a> (e.g. F0 80 80 A0)</dt>
 
-   <dt>One byte in the range C0 to C1, followed by one byte in the range 80 to BF</dt>
+   <dt>One byte in the range C0 to C1, followed by one byte in the range 80 to BF</dt> 
+
 
    <dt>One byte in the range F0 to F4, followed by three bytes in the range 80 to BF that represent a code point above U+10FFFF</dt>
 
-   <dt>One byte in the range F5 to F7, followed by three bytes in the range 80 to BF</dt>
+   <dt>One byte in the range F5 to F7, followed by three bytes in the range 80 to BF</dt> 
 
-   <dt>One byte in the range F8 to FB, followed by four bytes in the range 80 to BF</dt>
+   <dt>One byte in the range F8 to FB, followed by four bytes in the range 80 to BF</dt> 
 
-   <dt>One byte in the range FC to FD, followed by five bytes in the range 80 to BF</dt>
-
-   <dt>One byte in the range E0 to FD, followed by a byte in the range 80 to BF, not followed by a byte in the range 80 to BF</dt>
-
-   <dt>One byte in the range F0 to FD, followed by two bytes in the range 80 to BF, not followed by a byte in the range 80 to BF</dt>
-
-   <dt>One byte in the range F5 to FD, followed by three bytes in the range 80 to BF, not followed by a byte in the range 80 to BF</dt>
-
-   <dt>One byte in the range FC to FD, followed by four bytes in the range 80 to BF, not followed by a byte in the range 80 to BF</dt>
+   <dt>One byte in the range FC to FD, followed by five bytes in the range 80 to BF</dt> 
 
 
-   <dd>The whole sequence must be replaced by a single U+FFFD
+   <dt>One byte in the range C0 to FD that is not followed by a byte in the range 80 to BF</dt> 
+
+   <dt>One byte in the range E0 to FD, followed by a byte in the range 80 to BF that is not followed by a byte in the range 80 to BF</dt> 
+
+   <dt>One byte in the range F0 to FD, followed by two bytes in the range 80 to BF, the last of which is not followed by a byte in the range 80 to BF</dt> 
+
+   <dt>One byte in the range F8 to FD, followed by three bytes in the range 80 to BF, the last of which is not followed by a byte in the range 80 to BF</dt> 
+
+   <dt>One byte in the range FC to FD, followed by four bytes in the range 80 to BF, the last of which is not followed by a byte in the range 80 to BF</dt> 
+
+
+   <dt>Any byte sequence that represents a code point in the range U+D800 to U+DFFF</dt> 
+
+
+   <dd>The whole matched sequence must be replaced by a single U+FFFD
    REPLACEMENT CHARACTER.</dd>
 
 
    <dt>One byte in the range 80 to BF not preceded by a byte in the range 80 to FD</dt>
 
-   <dt>A sequence of bytes in the range 80 to BF that does not follow a byte in the range C0 to FD</dt>
+   <dt>One byte in the range 80 to BF preceded by a byte that is part of a complete UTF-8 sequence that does not include this byte</dt>
 
-   <dt>One byte in the range C0 to FD not followed by a byte in the range 80 to BF</dt>
+   <dt>One byte in the range 80 to BF preceded by a byte that is part of a sequence that has been replaced by a U+FFFD REPLACEMENT CHARACTER, either alone or as port of a sequence</dt>
 
+   <dd>Each such byte must be replaced with a U+FFFD REPLACEMENT CHARACTER.</dd>
 
-   <dd>Each byte must be replaced with a U+FFFD REPLACEMENT CHARACTER.</dd>
 
   </dl><p>For the purposes of the above requirements, an <dfn id="overlong-form">overlong
   form</dfn> in UTF-8 is a sequence that encodes a code point using

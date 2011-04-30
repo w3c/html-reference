@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>4.8.11 The canvas element &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -368,10 +364,7 @@
            attribute unsigned long <a href="#dom-canvas-width" title="dom-canvas-width">width</a>;
            attribute unsigned long <a href="#dom-canvas-height" title="dom-canvas-height">height</a>;
 
-  DOMString <a href="#dom-canvas-todataurl" title="dom-canvas-toDataURL">toDataURL</a>(in optional DOMString type, in any... args);<!--
-  v5:
-  void <span title="dom-canvas-toBlob">toBlob</span>(in <span>FileCallback</span>, in optional DOMString type, in any... args);-->
-
+  DOMString <a href="#dom-canvas-todataurl" title="dom-canvas-toDataURL">toDataURL</a>(in optional DOMString type, in any... args);
   object <a href="#dom-canvas-getcontext" title="dom-canvas-getContext">getContext</a>(in DOMString contextId, in any... args);
 };</pre>
    </dd>
@@ -481,7 +474,9 @@
   that element. When created, a <code><a href="#the-canvas-element">canvas</a></code> element must not
   have a <a href="#primary-context">primary context</a>.</p>
 
-  <p>The <dfn id="dom-canvas-getcontext" title="dom-canvas-getContext"><code>getContext(<var title="">contextId</var>, <var title="">args...</var>)</code></dfn>
+  <p>The most commonly used primary context is the <a href="http://dev.w3.org/html5/2dcontext/">HTML Canvas 2D Context</a>.
+
+  </p><p>The <dfn id="dom-canvas-getcontext" title="dom-canvas-getContext"><code>getContext(<var title="">contextId</var>, <var title="">args...</var>)</code></dfn>
   method of the <code><a href="#the-canvas-element">canvas</a></code> element, when invoked, must run
   the following steps:</p>
 
@@ -559,7 +554,7 @@
 
    </dd>
 
-   <!-- v5: toBlob -->
+   
 
   </dl><div class="impl">
 
@@ -567,10 +562,6 @@
   must, when called with no arguments, return a <a href="infrastructure.html#data-protocol" title="data&#10;  protocol"><code title="">data:</code> URL</a> containing a
   representation of the image as a PNG file. <a href="references.html#refsPNG">[PNG]</a> <a href="references.html#refsRFC2397">[RFC2397]</a></p>
 
-<!--
-  v5:
-  void <span title="dom-canvas-toBlob">toBlob</span>(in <span>FileCallback</span>, in optional DOMString type, in any... args);
--->
 
   <p>If the canvas has no pixels (i.e. either its horizontal dimension
   or its vertical dimension is zero) then the method must return the
@@ -634,10 +625,7 @@
   more carefully control compression settings, image metadata,
   etc.</p>
 
-  <!-- should we explicitly require the URL to be base64-encoded and
-  not have any parameters, to ensure the same exact URL is generated
-  in each browser? -->
-
+  
   </div><div class="impl">
 
   <h5 id="color-spaces-and-color-correction"><span class="secno">4.8.11.1 </span>Color spaces and color correction</h5>

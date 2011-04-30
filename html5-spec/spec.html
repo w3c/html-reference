@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split index"><head><title>HTML5</title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -346,13 +342,14 @@
 
    <h1>HTML5</h1>
    <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2>
-   <h2 class="no-num no-toc" id="editor-s-draft-19-february-2011">Editor's Draft 19 February 2011</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-29-april-2011">Editor's Draft 29 April 2011</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/html5/">http://www.w3.org/TR/html5/</a></dd>
     <dt>Latest Editor's Draft:</dt>
     <dd><a class="latest-link" href="http://dev.w3.org/html5/spec/Overview.html">http://dev.w3.org/html5/spec/Overview.html</a></dd>
-<!-- ZZZ: add the new version after it has shipped -->
     <dt>Previous Versions:</dt>
+    <dd><a href="http://www.w3.org/TR/2011/WD-html5-20110405/">http://www.w3.org/TR/2011/WD-html5-20110405/</a></dd>
+    <dd><a href="http://www.w3.org/TR/2011/WD-html5-20110113/">http://www.w3.org/TR/2011/WD-html5-20110113/</a></dd>
     <dd><a href="http://www.w3.org/TR/2010/WD-html5-20101019/">http://www.w3.org/TR/2010/WD-html5-20101019/</a></dd>
     <dd><a href="http://www.w3.org/TR/2010/WD-html5-20100624/">http://www.w3.org/TR/2010/WD-html5-20100624/</a></dd>
     <dd><a href="http://www.w3.org/TR/2010/WD-html5-20100304/">http://www.w3.org/TR/2010/WD-html5-20100304/</a></dd>
@@ -368,7 +365,7 @@
     <a href="Overview.html">single page HTML</a>,
     <a href="spec.html">multipage HTML</a>,
     <a href="author/">web developer edition</a>.
-This is revision 1.4751.
+This is revision 1.4852.
    </p> 
      <p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
    &#xA9; 2010 <a href="http://www.w3.org/"><abbr title="World Wide&#10;   Web Consortium">W3C</abbr></a><sup>&#xAE;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts&#10;   Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research&#10;   Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C
@@ -391,12 +388,12 @@ This is revision 1.4751.
   application authors, new elements are introduced based on research
   into prevailing authoring practices, and special attention has been
   given to defining clear conformance criteria for user agents in an
-  effort to improve interoperability.</p><h2 class="no-num no-toc" id="status-of-this-document">Status of This document</h2><!-- intro boilerplate (required) --><p><em>This section describes the status of this document at the
+  effort to improve interoperability.</p><h2 class="no-num no-toc" id="status-of-this-document">Status of This document</h2><p><em>This section describes the status of this document at the
   time of its publication. Other documents may supersede this
   document. A list of current W3C publications and the most recently
   formally published revision of this technical report can be found in
   the <a href="http://www.w3.org/TR/">W3C technical reports index</a>
-  at http://www.w3.org/TR/.</em></p><!-- where to send feedback (required) --><p>If you wish to make comments regarding this document in a manner
+  at http://www.w3.org/TR/.</em></p><p>If you wish to make comments regarding this document in a manner
   that is tracked by the W3C, please submit them via using <a href="http://www.w3.org/Bugs/Public/enter_bug.cgi?product=HTML%20WG">our
   public bug database</a>. If you do not have an account then you can
   enter feedback using this form:</p><form action="http://www.whatwg.org/specs/web-apps/current-work/file-spam.cgi" method="post">
@@ -412,7 +409,14 @@ This is revision 1.4751.
     change rapidly and make your feedback harder to understand.</p>
     <script type="text/javascript"><![CDATA[
      function checkFeedbackForm(form) {
-       if (form.elements.text.value.match(/ [^ ]+ [^ ]+ [^ ]+ [^ ]+ /)) {
+       if (form.elements.text.value.match(/^ *</)) {
+         alert('Please don\'t start your feedback with an angle bracket, instead explain what topic your feedback is about first.');
+         return true;
+       } else if (form.elements.text.value.match(/ [^ ]+ [^ ]+ [^ ]+ [^ ]+ /)) {
+       if (form.elements.text.value.match(/^Please enter your feedback, carefully/)) {
+         alert('Please enter your feedback, explaining what is wrong, and without repeating the instructions. Thanks!');
+         return true;
+       } else if (form.elements.text.value.match(/ [^ ]+ [^ ]+ [^ ]+ [^ ]+ /)) {
          form.action = "http://www.whatwg.org/specs/web-apps/current-work/file-bug.cgi";
          return true;
        } else {
@@ -421,7 +425,7 @@ This is revision 1.4751.
        }
      }
     ]]></script><p>
-     <input onclick="return checkFeedbackForm(form)" type="submit" value="Submit feedback"/><small>(Note: Your IP address will be publicly recorded for spam prevention purposes.)</small>
+     <input onclick="return checkFeedbackForm(form)" type="submit" value="Submit feedback"/><small>(Note: Your IP address and user agent will be publicly recorded for spam prevention purposes.)</small>
     </p>
    </fieldset></form><p>If you cannot do this then you can also e-mail feedback to <a href="mailto:public-html-comments@w3.org">public-html-comments@w3.org</a>
   (<a href="mailto:public-html-comments-request@w3.org?subject=subscribe">subscribe</a>,
@@ -444,21 +448,21 @@ This is revision 1.4751.
   editor also maintains <a href="http://www.whatwg.org/issues/">a list
   of all e-mails that he has not yet tried to address</a>. These bugs,
   issues, and e-mails apply to multiple HTML-related specifications,
-  not just this one.</p><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- stability (required) --><p>Implementors should be aware that this specification is not
+  not just this one.</p><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><p>Implementors should be aware that this specification is not
   stable. <strong>Implementors who are not taking part in the
   discussions are likely to find the specification changing out from
   under them in incompatible ways.</strong> Vendors interested in
   implementing this specification before it eventually reaches the
   Candidate Recommendation stage should join the aforementioned
   mailing lists and take part in the discussions.</p><div id="multipage-common">
-  </div><!-- not everyone agrees with this (requested before html5 fpwd) --><p>The publication of this document by the W3C as a W3C Working
+  </div><p>The publication of this document by the W3C as a W3C Working
   Draft does not imply that all of the participants in the W3C HTML
   working group endorse the contents of the specification. Indeed, for
   any section of the specification, one can usually find many members
   of the working group or of the W3C as a whole who object strongly to
   the current text, the existence of the section at all, or the idea
   that the working group should even spend time discussing the concept
-  of that section.</p><!-- UNDER NO CIRCUMSTANCES IS THE FOLLOWING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- version history or list of changes (required) --><p>The latest stable version of the editor's draft of this
+  of that section.</p><!-- UNDER NO CIRCUMSTANCES IS THE FOLLOWING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><p>The latest stable version of the editor's draft of this
   specification is always available on <a href="http://dev.w3.org/html5/">the W3C CVS server</a> and in the <a href="http://svn.whatwg.org/webapps/">WHATWG Subversion
   repository</a>. The <a href="http://www.whatwg.org/specs/web-apps/current-work/complete.html">latest
   editor's working copy</a> (which may contain unfinished text in the
@@ -474,21 +478,21 @@ This is revision 1.4751.
    <dd>CVSWeb interface with side-by-side diffs: <a href="http://dev.w3.org/cvsweb/html5/">http://dev.w3.org/cvsweb/html5/</a></dd>
    <dd>Annotated summary with unified diffs: <a href="http://html5.org/tools/web-apps-tracker">http://html5.org/tools/web-apps-tracker</a></dd>
    <dd>Raw Subversion interface: <code>svn checkout http://svn.whatwg.org/webapps/</code></dd>
-  </dl><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING LIST TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- status of document, group responsible (required) --><p>The W3C <a href="http://www.w3.org/html/wg/">HTML Working
+  </dl><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING LIST TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><p>The W3C <a href="http://www.w3.org/html/wg/">HTML Working
   Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation
   track.
-  This specification is the 19 February 2011 Editor's Draft.
-  </p><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- relationship to other work (required) --><p>Work on this specification is also done at the <a href="http://www.whatwg.org/">WHATWG</a>. The W3C HTML working group
+  This specification is the 29 April 2011 Editor's Draft.
+  </p><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><p>Work on this specification is also done at the <a href="http://www.whatwg.org/">WHATWG</a>. The W3C HTML working group
   actively pursues convergence with the WHATWG, as required by the <a href="http://www.w3.org/2007/03/HTML-WG-charter">W3C HTML working
-  group charter</a>.</p><!-- UNDER NO CIRCUMSTANCES IS THE FOLLOWING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
+  group charter</a>.</p><!-- UNDER NO CIRCUMSTANCES IS THE FOLLOWING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/40318/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
   of the group; that page also includes instructions for disclosing a
   patent. An individual who has actual knowledge of a patent which the
   individual believes contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
   Claim(s)</a> must disclose the information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
-  6 of the W3C Patent Policy</a>.</p><h2 class="no-num no-toc" id="contents">Table of Contents</h2><!--begin-toc--><ol class="toc"><li><a href="introduction.html#introduction"><span class="secno">1 </span>Introduction</a>
+  6 of the W3C Patent Policy</a>.</p><h2 class="no-num no-toc" id="contents">Table of Contents</h2><ol class="toc"><li><a href="introduction.html#introduction"><span class="secno">1 </span>Introduction</a>
   <ol><li><a href="introduction.html#background"><span class="secno">1.1 </span>Background</a></li>
    <li><a href="introduction.html#audience"><span class="secno">1.2 </span>Audience</a></li>
    <li><a href="introduction.html#scope"><span class="secno">1.3 </span>Scope</a></li>
@@ -515,8 +519,9 @@ This is revision 1.4751.
      <li><a href="infrastructure.html#plugins"><span class="secno">2.1.5 </span>Plugins</a></li>
      <li><a href="infrastructure.html#character-encodings"><span class="secno">2.1.6 </span>Character encodings</a></li></ol></li>
    <li><a href="infrastructure.html#conformance-requirements"><span class="secno">2.2 </span>Conformance requirements</a>
-    <ol><li><a href="infrastructure.html#dependencies"><span class="secno">2.2.1 </span>Dependencies</a></li>
-     <li><a href="infrastructure.html#extensibility"><span class="secno">2.2.2 </span>Extensibility</a></li></ol></li>
+    <ol><li><a href="infrastructure.html#conformance-classes"><span class="secno">2.2.1 </span>Conformance classes</a></li>
+     <li><a href="infrastructure.html#dependencies"><span class="secno">2.2.2 </span>Dependencies</a></li>
+     <li><a href="infrastructure.html#extensibility"><span class="secno">2.2.3 </span>Extensibility</a></li></ol></li>
    <li><a href="infrastructure.html#case-sensitivity-and-string-comparison"><span class="secno">2.3 </span>Case-sensitivity and string comparison</a></li>
    <li><a href="infrastructure.html#utf-8"><span class="secno">2.4 </span>UTF-8</a></li>
    <li><a href="common-microsyntaxes.html#common-microsyntaxes"><span class="secno">2.5 </span>Common microsyntaxes</a>
@@ -545,12 +550,15 @@ This is revision 1.4751.
      <li><a href="common-microsyntaxes.html#mq"><span class="secno">2.5.10 </span>Media queries</a></li></ol></li>
    <li><a href="urls.html#urls"><span class="secno">2.6 </span>URLs</a>
     <ol><li><a href="urls.html#terminology-0"><span class="secno">2.6.1 </span>Terminology</a></li>
-     <li><a href="urls.html#dynamic-changes-to-base-urls"><span class="secno">2.6.2 </span>Dynamic changes to base URLs</a></li>
-     <li><a href="urls.html#interfaces-for-url-manipulation"><span class="secno">2.6.3 </span>Interfaces for URL manipulation</a></li></ol></li>
+     <li><a href="urls.html#parsing-urls"><span class="secno">2.6.2 </span>Parsing URLs</a></li>
+     <li><a href="urls.html#resolving-urls"><span class="secno">2.6.3 </span>Resolving URLs</a></li>
+     <li><a href="urls.html#dynamic-changes-to-base-urls"><span class="secno">2.6.4 </span>Dynamic changes to base URLs</a></li>
+     <li><a href="urls.html#interfaces-for-url-manipulation"><span class="secno">2.6.5 </span>Interfaces for URL manipulation</a></li></ol></li>
    <li><a href="fetching-resources.html#fetching-resources"><span class="secno">2.7 </span>Fetching resources</a>
     <ol><li><a href="fetching-resources.html#concept-http-equivalent"><span class="secno">2.7.1 </span>Protocol concepts</a></li>
      <li><a href="fetching-resources.html#encrypted-http-and-related-security-concerns"><span class="secno">2.7.2 </span>Encrypted HTTP and related security concerns</a></li>
-     <li><a href="fetching-resources.html#content-type-sniffing"><span class="secno">2.7.3 </span>Determining the type of a resource</a></li></ol></li>
+     <li><a href="fetching-resources.html#content-type-sniffing"><span class="secno">2.7.3 </span>Determining the type of a resource</a></li>
+     <li><a href="fetching-resources.html#extracting-encodings-from-meta-elements"><span class="secno">2.7.4 </span>Extracting encodings from <code>meta</code> elements</a></li></ol></li>
    <li><a href="common-dom-interfaces.html#common-dom-interfaces"><span class="secno">2.8 </span>Common DOM interfaces</a>
     <ol><li><a href="common-dom-interfaces.html#reflecting-content-attributes-in-idl-attributes"><span class="secno">2.8.1 </span>Reflecting content attributes in IDL attributes</a></li>
      <li><a href="common-dom-interfaces.html#collections-0"><span class="secno">2.8.2 </span>Collections</a>
@@ -602,7 +610,7 @@ This is revision 1.4751.
        <li><a href="content-models.html#paragraphs"><span class="secno">3.2.5.3 </span>Paragraphs</a></li></ol></li>
      <li><a href="content-models.html#requirements-relating-to-bidirectional-algorithm-formatting-characters"><span class="secno">3.2.6 </span>Requirements relating to bidirectional-algorithm formatting
   characters</a></li>
-     <li><a href="content-models.html#annotations-for-assistive-technology-products-aria"><span class="secno">3.2.7 </span>Annotations for assistive technology products (ARIA)</a></li></ol></li>
+     <li><a href="content-models.html#wai-aria"><span class="secno">3.2.7 </span>WAI-ARIA</a></li></ol></li>
    <li><a href="apis-in-html-documents.html#apis-in-html-documents"><span class="secno">3.3 </span>APIs in HTML documents</a></li>
    <li><a href="apis-in-html-documents.html#interactions-with-xpath-and-xslt"><span class="secno">3.4 </span>Interactions with XPath and XSLT</a></li>
    <li><a href="apis-in-html-documents.html#dynamic-markup-insertion"><span class="secno">3.5 </span>Dynamic markup insertion</a>
@@ -683,16 +691,17 @@ This is revision 1.4751.
      <li><a href="text-level-semantics.html#the-sub-and-sup-elements"><span class="secno">4.6.15 </span>The <code>sub</code> and <code>sup</code> elements</a></li>
      <li><a href="text-level-semantics.html#the-i-element"><span class="secno">4.6.16 </span>The <code>i</code> element</a></li>
      <li><a href="text-level-semantics.html#the-b-element"><span class="secno">4.6.17 </span>The <code>b</code> element</a></li>
-     <li><a href="text-level-semantics.html#the-mark-element"><span class="secno">4.6.18 </span>The <code>mark</code> element</a></li>
-     <li><a href="text-level-semantics.html#the-ruby-element"><span class="secno">4.6.19 </span>The <code>ruby</code> element</a></li>
-     <li><a href="text-level-semantics.html#the-rt-element"><span class="secno">4.6.20 </span>The <code>rt</code> element</a></li>
-     <li><a href="text-level-semantics.html#the-rp-element"><span class="secno">4.6.21 </span>The <code>rp</code> element</a></li>
-     <li><a href="text-level-semantics.html#the-bdi-element"><span class="secno">4.6.22 </span>The <code>bdi</code> element</a></li>
-     <li><a href="text-level-semantics.html#the-bdo-element"><span class="secno">4.6.23 </span>The <code>bdo</code> element</a></li>
-     <li><a href="text-level-semantics.html#the-span-element"><span class="secno">4.6.24 </span>The <code>span</code> element</a></li>
-     <li><a href="text-level-semantics.html#the-br-element"><span class="secno">4.6.25 </span>The <code>br</code> element</a></li>
-     <li><a href="text-level-semantics.html#the-wbr-element"><span class="secno">4.6.26 </span>The <code>wbr</code> element</a></li>
-     <li><a href="text-level-semantics.html#usage-summary"><span class="secno">4.6.27 </span>Usage summary</a></li></ol></li>
+     <li><a href="text-level-semantics.html#the-u-element"><span class="secno">4.6.18 </span>The <code>u</code> element</a></li>
+     <li><a href="text-level-semantics.html#the-mark-element"><span class="secno">4.6.19 </span>The <code>mark</code> element</a></li>
+     <li><a href="text-level-semantics.html#the-ruby-element"><span class="secno">4.6.20 </span>The <code>ruby</code> element</a></li>
+     <li><a href="text-level-semantics.html#the-rt-element"><span class="secno">4.6.21 </span>The <code>rt</code> element</a></li>
+     <li><a href="text-level-semantics.html#the-rp-element"><span class="secno">4.6.22 </span>The <code>rp</code> element</a></li>
+     <li><a href="text-level-semantics.html#the-bdi-element"><span class="secno">4.6.23 </span>The <code>bdi</code> element</a></li>
+     <li><a href="text-level-semantics.html#the-bdo-element"><span class="secno">4.6.24 </span>The <code>bdo</code> element</a></li>
+     <li><a href="text-level-semantics.html#the-span-element"><span class="secno">4.6.25 </span>The <code>span</code> element</a></li>
+     <li><a href="text-level-semantics.html#the-br-element"><span class="secno">4.6.26 </span>The <code>br</code> element</a></li>
+     <li><a href="text-level-semantics.html#the-wbr-element"><span class="secno">4.6.27 </span>The <code>wbr</code> element</a></li>
+     <li><a href="text-level-semantics.html#usage-summary"><span class="secno">4.6.28 </span>Usage summary</a></li></ol></li>
    <li><a href="edits.html#edits"><span class="secno">4.7 </span>Edits</a>
     <ol><li><a href="edits.html#the-ins-element"><span class="secno">4.7.1 </span>The <code>ins</code> element</a></li>
      <li><a href="edits.html#the-del-element"><span class="secno">4.7.2 </span>The <code>del</code> element</a></li>
@@ -713,9 +722,8 @@ This is revision 1.4751.
          <li><a href="embedded-content-1.html#a-group-of-images-that-form-a-single-larger-picture-with-links"><span class="secno">4.8.1.1.9 </span>A group of images that form a single larger picture with links</a></li>
          <li><a href="embedded-content-1.html#a-key-part-of-the-content"><span class="secno">4.8.1.1.10 </span>A key part of the content</a></li>
          <li><a href="embedded-content-1.html#an-image-not-intended-for-the-user"><span class="secno">4.8.1.1.11 </span>An image not intended for the user</a></li>
-         <li><a href="embedded-content-1.html#an-image-in-an-e-mail-or-private-document-intended-for-a-specific-person-who-is-known-to-be-able-to-view-images"><span class="secno">4.8.1.1.12 </span>An image in an e-mail or private document intended for a specific person who is known to be able to view images</a></li>
-         <li><a href="embedded-content-1.html#guidance-for-markup-generators"><span class="secno">4.8.1.1.13 </span>Guidance for markup generators</a></li>
-         <li><a href="embedded-content-1.html#guidance-for-conformance-checkers"><span class="secno">4.8.1.1.14 </span>Guidance for conformance checkers</a></li></ol></li></ol></li>
+         <li><a href="embedded-content-1.html#guidance-for-markup-generators"><span class="secno">4.8.1.1.12 </span>Guidance for markup generators</a></li>
+         <li><a href="embedded-content-1.html#guidance-for-conformance-checkers"><span class="secno">4.8.1.1.13 </span>Guidance for conformance checkers</a></li></ol></li></ol></li>
      <li><a href="the-iframe-element.html#the-iframe-element"><span class="secno">4.8.2 </span>The <code>iframe</code> element</a></li>
      <li><a href="the-iframe-element.html#the-embed-element"><span class="secno">4.8.3 </span>The <code>embed</code> element</a></li>
      <li><a href="the-iframe-element.html#the-object-element"><span class="secno">4.8.4 </span>The <code>object</code> element</a></li>
@@ -734,18 +742,25 @@ This is revision 1.4751.
        <li><a href="video.html#the-ready-states"><span class="secno">4.8.10.7 </span>The ready states</a></li>
        <li><a href="video.html#playing-the-media-resource"><span class="secno">4.8.10.8 </span>Playing the media resource</a></li>
        <li><a href="video.html#seeking"><span class="secno">4.8.10.9 </span>Seeking</a></li>
-       <li><a href="video.html#timed-text-tracks"><span class="secno">4.8.10.10 </span>Timed text tracks</a>
-        <ol><li><a href="video.html#text-track-model"><span class="secno">4.8.10.10.1 </span>Text track model</a></li>
-         <li><a href="video.html#sourcing-in-band-text-tracks"><span class="secno">4.8.10.10.2 </span>Sourcing in-band text tracks</a></li>
-         <li><a href="video.html#sourcing-out-of-band-text-tracks"><span class="secno">4.8.10.10.3 </span>Sourcing out-of-band text tracks</a></li>
-         <li><a href="video.html#text-track-api"><span class="secno">4.8.10.10.4 </span>Text track API</a></li>
-         <li><a href="video.html#cue-events"><span class="secno">4.8.10.10.5 </span>Event definitions</a></li></ol></li>
-       <li><a href="video.html#user-interface"><span class="secno">4.8.10.11 </span>User interface</a></li>
-       <li><a href="video.html#time-ranges"><span class="secno">4.8.10.12 </span>Time ranges</a></li>
-       <li><a href="video.html#mediaevents"><span class="secno">4.8.10.13 </span>Event summary</a></li>
-       <li><a href="video.html#security-and-privacy-considerations"><span class="secno">4.8.10.14 </span>Security and privacy considerations</a></li>
-       <li><a href="video.html#best-practices-for-authors-using-media-elements"><span class="secno">4.8.10.15 </span>Best practices for authors using media elements</a></li>
-       <li><a href="video.html#best-practices-for-implementors-of-media-elements"><span class="secno">4.8.10.16 </span>Best practices for implementors of media elements</a></li></ol></li>
+       <li><a href="video.html#media-resources-with-multiple-media-tracks"><span class="secno">4.8.10.10 </span>Media resources with multiple media tracks</a>
+        <ol><li><a href="video.html#tracklist-objects"><span class="secno">4.8.10.10.1 </span><code>TrackList</code> objects</a></li>
+         <li><a href="video.html#selecting-specific-audio-and-video-tracks-declaratively"><span class="secno">4.8.10.10.2 </span>Selecting specific audio and video tracks declaratively</a></li></ol></li>
+       <li><a href="video.html#synchronising-multiple-media-elements"><span class="secno">4.8.10.11 </span>Synchronising multiple media elements</a>
+        <ol><li><a href="video.html#introduction-0"><span class="secno">4.8.10.11.1 </span>Introduction</a></li>
+         <li><a href="video.html#media-controllers"><span class="secno">4.8.10.11.2 </span>Media controllers</a></li>
+         <li><a href="video.html#assigning-a-media-controller-declaratively"><span class="secno">4.8.10.11.3 </span>Assigning a media controller declaratively</a></li></ol></li>
+       <li><a href="video.html#timed-text-tracks"><span class="secno">4.8.10.12 </span>Timed text tracks</a>
+        <ol><li><a href="video.html#text-track-model"><span class="secno">4.8.10.12.1 </span>Text track model</a></li>
+         <li><a href="video.html#sourcing-in-band-text-tracks"><span class="secno">4.8.10.12.2 </span>Sourcing in-band text tracks</a></li>
+         <li><a href="video.html#sourcing-out-of-band-text-tracks"><span class="secno">4.8.10.12.3 </span>Sourcing out-of-band text tracks</a></li>
+         <li><a href="video.html#text-track-api"><span class="secno">4.8.10.12.4 </span>Text track API</a></li>
+         <li><a href="video.html#cue-events"><span class="secno">4.8.10.12.5 </span>Event definitions</a></li></ol></li>
+       <li><a href="video.html#user-interface"><span class="secno">4.8.10.13 </span>User interface</a></li>
+       <li><a href="video.html#time-ranges"><span class="secno">4.8.10.14 </span>Time ranges</a></li>
+       <li><a href="video.html#mediaevents"><span class="secno">4.8.10.15 </span>Event summary</a></li>
+       <li><a href="video.html#security-and-privacy-considerations"><span class="secno">4.8.10.16 </span>Security and privacy considerations</a></li>
+       <li><a href="video.html#best-practices-for-authors-using-media-elements"><span class="secno">4.8.10.17 </span>Best practices for authors using media elements</a></li>
+       <li><a href="video.html#best-practices-for-implementors-of-media-elements"><span class="secno">4.8.10.18 </span>Best practices for implementors of media elements</a></li></ol></li>
      <li><a href="the-canvas-element.html#the-canvas-element"><span class="secno">4.8.11 </span>The <code>canvas</code> element</a>
       <ol><li><a href="the-canvas-element.html#color-spaces-and-color-correction"><span class="secno">4.8.11.1 </span>Color spaces and color correction</a></li>
        <li><a href="the-canvas-element.html#security-with-canvas-elements"><span class="secno">4.8.11.2 </span>Security with <code>canvas</code> elements</a></li></ol></li>
@@ -758,7 +773,9 @@ This is revision 1.4751.
      <li><a href="the-map-element.html#svg-0"><span class="secno">4.8.16 </span>SVG</a></li>
      <li><a href="the-map-element.html#dimension-attributes"><span class="secno">4.8.17 </span>Dimension attributes</a></li></ol></li>
    <li><a href="tabular-data.html#tabular-data"><span class="secno">4.9 </span>Tabular data</a>
-    <ol><li><a href="tabular-data.html#the-table-element"><span class="secno">4.9.1 </span>The <code>table</code> element</a></li>
+    <ol><li><a href="tabular-data.html#the-table-element"><span class="secno">4.9.1 </span>The <code>table</code> element</a>
+      <ol><li><a href="tabular-data.html#table-descriptions-techniques"><span class="secno">4.9.1.1 </span>Techniques for describing tables</a></li>
+       <li><a href="tabular-data.html#table-layout-techniques"><span class="secno">4.9.1.2 </span>Techniques for table layout</a></li></ol></li>
      <li><a href="tabular-data.html#the-caption-element"><span class="secno">4.9.2 </span>The <code>caption</code> element</a></li>
      <li><a href="tabular-data.html#the-colgroup-element"><span class="secno">4.9.3 </span>The <code>colgroup</code> element</a></li>
      <li><a href="tabular-data.html#the-col-element"><span class="secno">4.9.4 </span>The <code>col</code> element</a></li>
@@ -774,7 +791,7 @@ This is revision 1.4751.
        <li><a href="tabular-data.html#header-and-data-cell-semantics"><span class="secno">4.9.12.2 </span>Forming relationships between data cells and header cells</a></li></ol></li>
      <li><a href="tabular-data.html#examples"><span class="secno">4.9.13 </span>Examples</a></li></ol></li>
    <li><a href="forms.html#forms"><span class="secno">4.10 </span>Forms</a>
-    <ol><li><a href="forms.html#introduction-0"><span class="secno">4.10.1 </span>Introduction</a>
+    <ol><li><a href="forms.html#introduction-1"><span class="secno">4.10.1 </span>Introduction</a>
       <ol><li><a href="forms.html#writing-a-form-s-user-interface"><span class="secno">4.10.1.1 </span>Writing a form's user interface</a></li>
        <li><a href="forms.html#implementing-the-server-side-processing-for-a-form"><span class="secno">4.10.1.2 </span>Implementing the server-side processing for a form</a></li>
        <li><a href="forms.html#configuring-a-form-to-communicate-with-a-server"><span class="secno">4.10.1.3 </span>Configuring a form to communicate with a server</a></li>
@@ -849,14 +866,14 @@ This is revision 1.4751.
        <li><a href="association-of-controls-and-forms.html#the-constraint-validation-api"><span class="secno">4.10.21.3 </span>The constraint validation API</a></li>
        <li><a href="association-of-controls-and-forms.html#security-forms"><span class="secno">4.10.21.4 </span>Security</a></li></ol></li>
      <li><a href="association-of-controls-and-forms.html#form-submission"><span class="secno">4.10.22 </span>Form submission</a>
-      <ol><li><a href="association-of-controls-and-forms.html#introduction-1"><span class="secno">4.10.22.1 </span>Introduction</a></li>
+      <ol><li><a href="association-of-controls-and-forms.html#introduction-2"><span class="secno">4.10.22.1 </span>Introduction</a></li>
        <li><a href="association-of-controls-and-forms.html#implicit-submission"><span class="secno">4.10.22.2 </span>Implicit submission</a></li>
        <li><a href="association-of-controls-and-forms.html#form-submission-algorithm"><span class="secno">4.10.22.3 </span>Form submission algorithm</a></li>
-       <li><a href="association-of-controls-and-forms.html#url-encoded-form-data"><span class="secno">4.10.22.4 </span>URL-encoded form data</a></li>
-       <li><a href="association-of-controls-and-forms.html#multipart-form-data"><span class="secno">4.10.22.5 </span>Multipart form data</a></li>
-       <li><a href="association-of-controls-and-forms.html#plain-text-form-data"><span class="secno">4.10.22.6 </span>Plain text form data</a></li></ol></li>
-     <li><a href="association-of-controls-and-forms.html#resetting-a-form"><span class="secno">4.10.23 </span>Resetting a form</a></li>
-     <li><a href="association-of-controls-and-forms.html#event-dispatch"><span class="secno">4.10.24 </span>Event dispatch</a></li></ol></li>
+       <li><a href="association-of-controls-and-forms.html#constructing-form-data-set"><span class="secno">4.10.22.4 </span>Constructing the form data set</a></li>
+       <li><a href="association-of-controls-and-forms.html#url-encoded-form-data"><span class="secno">4.10.22.5 </span>URL-encoded form data</a></li>
+       <li><a href="association-of-controls-and-forms.html#multipart-form-data"><span class="secno">4.10.22.6 </span>Multipart form data</a></li>
+       <li><a href="association-of-controls-and-forms.html#plain-text-form-data"><span class="secno">4.10.22.7 </span>Plain text form data</a></li></ol></li>
+     <li><a href="association-of-controls-and-forms.html#resetting-a-form"><span class="secno">4.10.23 </span>Resetting a form</a></li></ol></li>
    <li><a href="interactive-elements.html#interactive-elements"><span class="secno">4.11 </span>Interactive elements</a>
     <ol><li><a href="interactive-elements.html#the-details-element"><span class="secno">4.11.1 </span>The <code>details</code> element</a></li>
      <li><a href="interactive-elements.html#the-summary-element"><span class="secno">4.11.2 </span>The <code>summary</code> element</a></li>
@@ -877,40 +894,35 @@ This is revision 1.4751.
        <li><a href="commands.html#using-the-accesskey-attribute-on-a-legend-element-to-define-a-command"><span class="secno">4.11.5.7 </span>Using the <code title="attr-accesskey">accesskey</code> attribute on a <code>legend</code> element to define a command</a></li>
        <li><a href="commands.html#using-the-accesskey-attribute-to-define-a-command-on-other-elements"><span class="secno">4.11.5.8 </span>Using the <code title="attr-accesskey">accesskey</code> attribute to define a command on other elements</a></li></ol></li></ol></li>
    <li><a href="links.html#links"><span class="secno">4.12 </span>Links</a>
-    <ol><li><a href="links.html#introduction-2"><span class="secno">4.12.1 </span>Introduction</a></li>
+    <ol><li><a href="links.html#introduction-3"><span class="secno">4.12.1 </span>Introduction</a></li>
      <li><a href="links.html#links-created-by-a-and-area-elements"><span class="secno">4.12.2 </span>Links created by <code>a</code> and <code>area</code> elements</a></li>
      <li><a href="links.html#following-hyperlinks"><span class="secno">4.12.3 </span>Following hyperlinks</a></li>
      <li><a href="links.html#linkTypes"><span class="secno">4.12.4 </span>Link types</a>
       <ol><li><a href="links.html#rel-alternate"><span class="secno">4.12.4.1 </span>Link type "<code>alternate</code>"</a></li>
-       <li><a href="links.html#rel-archives"><span class="secno">4.12.4.2 </span>Link type "<code>archives</code>"</a></li>
-       <li><a href="links.html#link-type-author"><span class="secno">4.12.4.3 </span>Link type "<code>author</code>"</a></li>
-       <li><a href="links.html#link-type-bookmark"><span class="secno">4.12.4.4 </span>Link type "<code>bookmark</code>"</a></li>
-       <li><a href="links.html#link-type-external"><span class="secno">4.12.4.5 </span>Link type "<code>external</code>"</a></li>
-       <li><a href="links.html#link-type-help"><span class="secno">4.12.4.6 </span>Link type "<code>help</code>"</a></li>
-       <li><a href="links.html#rel-icon"><span class="secno">4.12.4.7 </span>Link type "<code>icon</code>"</a></li>
-       <li><a href="links.html#link-type-license"><span class="secno">4.12.4.8 </span>Link type "<code>license</code>"</a></li>
-       <li><a href="links.html#link-type-nofollow"><span class="secno">4.12.4.9 </span>Link type "<code>nofollow</code>"</a></li>
-       <li><a href="links.html#link-type-noreferrer"><span class="secno">4.12.4.10 </span>Link type "<code>noreferrer</code>"</a></li>
-       <li><a href="links.html#link-type-pingback"><span class="secno">4.12.4.11 </span>Link type "<code>pingback</code>"</a></li>
-       <li><a href="links.html#link-type-prefetch"><span class="secno">4.12.4.12 </span>Link type "<code>prefetch</code>"</a></li>
-       <li><a href="links.html#link-type-search"><span class="secno">4.12.4.13 </span>Link type "<code>search</code>"</a></li>
+       <li><a href="links.html#link-type-author"><span class="secno">4.12.4.2 </span>Link type "<code>author</code>"</a></li>
+       <li><a href="links.html#link-type-bookmark"><span class="secno">4.12.4.3 </span>Link type "<code>bookmark</code>"</a></li>
+       <li><a href="links.html#link-type-external"><span class="secno">4.12.4.4 </span>Link type "<code>external</code>"</a></li>
+       <li><a href="links.html#link-type-help"><span class="secno">4.12.4.5 </span>Link type "<code>help</code>"</a></li>
+       <li><a href="links.html#rel-icon"><span class="secno">4.12.4.6 </span>Link type "<code>icon</code>"</a></li>
+       <li><a href="links.html#link-type-license"><span class="secno">4.12.4.7 </span>Link type "<code>license</code>"</a></li>
+       <li><a href="links.html#link-type-nofollow"><span class="secno">4.12.4.8 </span>Link type "<code>nofollow</code>"</a></li>
+       <li><a href="links.html#link-type-noreferrer"><span class="secno">4.12.4.9 </span>Link type "<code>noreferrer</code>"</a></li>
+       <li><a href="links.html#link-type-pingback"><span class="secno">4.12.4.10 </span>Link type "<code>pingback</code>"</a></li>
+       <li><a href="links.html#link-type-prefetch"><span class="secno">4.12.4.11 </span>Link type "<code>prefetch</code>"</a></li>
+       <li><a href="links.html#link-type-search"><span class="secno">4.12.4.12 </span>Link type "<code>search</code>"</a></li>
+       <li><a href="links.html#link-type-sidebar"><span class="secno">4.12.4.13 </span>Link type "<code>sidebar</code>"</a></li>
        <li><a href="links.html#link-type-stylesheet"><span class="secno">4.12.4.14 </span>Link type "<code>stylesheet</code>"</a></li>
-       <li><a href="links.html#link-type-sidebar"><span class="secno">4.12.4.15 </span>Link type "<code>sidebar</code>"</a></li>
-       <li><a href="links.html#link-type-tag"><span class="secno">4.12.4.16 </span>Link type "<code>tag</code>"</a></li>
-       <li><a href="links.html#hierarchical-link-types"><span class="secno">4.12.4.17 </span>Hierarchical link types</a>
-        <ol><li><a href="links.html#link-type-index"><span class="secno">4.12.4.17.1 </span>Link type "<code>index</code>"</a></li>
-         <li><a href="links.html#link-type-up"><span class="secno">4.12.4.17.2 </span>Link type "<code>up</code>"</a></li></ol></li>
-       <li><a href="links.html#sequential-link-types"><span class="secno">4.12.4.18 </span>Sequential link types</a>
-        <ol><li><a href="links.html#link-type-first"><span class="secno">4.12.4.18.1 </span>Link type "<code>first</code>"</a></li>
-         <li><a href="links.html#link-type-last"><span class="secno">4.12.4.18.2 </span>Link type "<code>last</code>"</a></li>
-         <li><a href="links.html#link-type-next"><span class="secno">4.12.4.18.3 </span>Link type "<code>next</code>"</a></li>
-         <li><a href="links.html#link-type-prev"><span class="secno">4.12.4.18.4 </span>Link type "<code>prev</code>"</a></li></ol></li>
-       <li><a href="links.html#other-link-types"><span class="secno">4.12.4.19 </span>Other link types</a></li></ol></li></ol></li>
+       <li><a href="links.html#link-type-tag"><span class="secno">4.12.4.15 </span>Link type "<code>tag</code>"</a></li>
+       <li><a href="links.html#sequential-link-types"><span class="secno">4.12.4.16 </span>Sequential link types</a>
+        <ol><li><a href="links.html#link-type-next"><span class="secno">4.12.4.16.1 </span>Link type "<code>next</code>"</a></li>
+         <li><a href="links.html#link-type-prev"><span class="secno">4.12.4.16.2 </span>Link type "<code>prev</code>"</a></li></ol></li>
+       <li><a href="links.html#other-link-types"><span class="secno">4.12.4.17 </span>Other link types</a></li></ol></li></ol></li>
    <li><a href="links.html#common-idioms-without-dedicated-elements"><span class="secno">4.13 </span>Common idioms without dedicated elements</a>
     <ol><li><a href="links.html#the-main-part-of-the-content"><span class="secno">4.13.1 </span>The main part of the content</a></li>
-     <li><a href="links.html#tag-clouds"><span class="secno">4.13.2 </span>Tag clouds</a></li>
-     <li><a href="links.html#conversations"><span class="secno">4.13.3 </span>Conversations</a></li>
-     <li><a href="links.html#footnotes"><span class="secno">4.13.4 </span>Footnotes</a></li></ol></li>
+     <li><a href="links.html#rel-up"><span class="secno">4.13.2 </span>Bread crumb navigation</a></li>
+     <li><a href="links.html#tag-clouds"><span class="secno">4.13.3 </span>Tag clouds</a></li>
+     <li><a href="links.html#conversations"><span class="secno">4.13.4 </span>Conversations</a></li>
+     <li><a href="links.html#footnotes"><span class="secno">4.13.5 </span>Footnotes</a></li></ol></li>
    <li><a href="links.html#matching-html-elements-using-selectors"><span class="secno">4.14 </span>Matching HTML elements using selectors</a>
     <ol><li><a href="links.html#selectors"><span class="secno">4.14.1 </span>Case-sensitivity</a></li>
      <li><a href="links.html#pseudo-classes"><span class="secno">4.14.2 </span>Pseudo-classes</a></li></ol></li></ol></li>
@@ -955,7 +967,7 @@ This is revision 1.4751.
       <ol><li><a href="history.html#event-definition"><span class="secno">5.5.10.1 </span>Event definition</a></li></ol></li>
      <li><a href="history.html#aborting-a-document-load"><span class="secno">5.5.11 </span>Aborting a document load</a></li></ol></li>
    <li><a href="offline.html#offline"><span class="secno">5.6 </span>Offline Web applications</a>
-    <ol><li><a href="offline.html#introduction-3"><span class="secno">5.6.1 </span>Introduction</a>
+    <ol><li><a href="offline.html#introduction-4"><span class="secno">5.6.1 </span>Introduction</a>
       <ol><li><a href="offline.html#appcacheevents"><span class="secno">5.6.1.1 </span>Event summary</a></li></ol></li>
      <li><a href="offline.html#appcache"><span class="secno">5.6.2 </span>Application caches</a></li>
      <li><a href="offline.html#manifests"><span class="secno">5.6.3 </span>The cache manifest syntax</a>
@@ -971,7 +983,7 @@ This is revision 1.4751.
      <li><a href="offline.html#browser-state"><span class="secno">5.6.10 </span>Browser state</a></li></ol></li></ol></li>
  <li><a href="webappapis.html#webappapis"><span class="secno">6 </span>Web application APIs</a>
   <ol><li><a href="webappapis.html#scripting"><span class="secno">6.1 </span>Scripting</a>
-    <ol><li><a href="webappapis.html#introduction-4"><span class="secno">6.1.1 </span>Introduction</a></li>
+    <ol><li><a href="webappapis.html#introduction-5"><span class="secno">6.1.1 </span>Introduction</a></li>
      <li><a href="webappapis.html#enabling-and-disabling-scripting"><span class="secno">6.1.2 </span>Enabling and disabling scripting</a></li>
      <li><a href="webappapis.html#processing-model-1"><span class="secno">6.1.3 </span>Processing model</a>
       <ol><li><a href="webappapis.html#definitions-0"><span class="secno">6.1.3.1 </span>Definitions</a></li>
@@ -1010,7 +1022,7 @@ This is revision 1.4751.
      <li><a href="editing.html#document-level-focus-apis"><span class="secno">7.3.3 </span>Document-level focus APIs</a></li>
      <li><a href="editing.html#element-level-focus-apis"><span class="secno">7.3.4 </span>Element-level focus APIs</a></li></ol></li>
    <li><a href="editing.html#assigning-keyboard-shortcuts"><span class="secno">7.4 </span>Assigning keyboard shortcuts</a>
-    <ol><li><a href="editing.html#introduction-5"><span class="secno">7.4.1 </span>Introduction</a></li>
+    <ol><li><a href="editing.html#introduction-6"><span class="secno">7.4.1 </span>Introduction</a></li>
      <li><a href="editing.html#the-accesskey-attribute"><span class="secno">7.4.2 </span>The <code>accesskey</code> attribute</a></li>
      <li><a href="editing.html#processing-model-3"><span class="secno">7.4.3 </span>Processing model</a></li></ol></li>
    <li><a href="editing.html#contenteditable"><span class="secno">7.5 </span>The <code title="attr-contenteditable">contenteditable</code> attribute</a>
@@ -1018,7 +1030,7 @@ This is revision 1.4751.
      <li><a href="editing.html#making-entire-documents-editable"><span class="secno">7.5.2 </span>Making entire documents editable</a></li></ol></li>
    <li><a href="editing.html#spelling-and-grammar-checking"><span class="secno">7.6 </span>Spelling and grammar checking</a></li>
    <li><a href="dnd.html#dnd"><span class="secno">7.7 </span>Drag and drop</a>
-    <ol><li><a href="dnd.html#introduction-6"><span class="secno">7.7.1 </span>Introduction</a></li>
+    <ol><li><a href="dnd.html#introduction-7"><span class="secno">7.7.1 </span>Introduction</a></li>
      <li><a href="dnd.html#the-drag-data-store"><span class="secno">7.7.2 </span>The drag data store</a></li>
      <li><a href="dnd.html#the-datatransfer-interface"><span class="secno">7.7.3 </span>The <code>DataTransfer</code> interface</a>
       <ol><li><a href="dnd.html#the-datatransferitems-interface"><span class="secno">7.7.3.1 </span>The <code>DataTransferItems</code> interface</a></li>
@@ -1128,33 +1140,34 @@ This is revision 1.4751.
        <li><a href="tokenization.html#bogus-doctype-state"><span class="secno">8.2.4.67 </span>Bogus DOCTYPE state</a></li>
        <li><a href="tokenization.html#cdata-section-state"><span class="secno">8.2.4.68 </span>CDATA section state</a></li>
        <li><a href="tokenization.html#tokenizing-character-references"><span class="secno">8.2.4.69 </span>Tokenizing character references</a></li></ol></li>
-     <li><a href="tokenization.html#tree-construction"><span class="secno">8.2.5 </span>Tree construction</a>
-      <ol><li><a href="tokenization.html#creating-and-inserting-elements"><span class="secno">8.2.5.1 </span>Creating and inserting elements</a></li>
-       <li><a href="tokenization.html#closing-elements-that-have-implied-end-tags"><span class="secno">8.2.5.2 </span>Closing elements that have implied end tags</a></li>
-       <li><a href="tokenization.html#foster-parenting"><span class="secno">8.2.5.3 </span>Foster parenting</a></li>
-       <li><a href="tokenization.html#the-initial-insertion-mode"><span class="secno">8.2.5.4 </span>The "initial" insertion mode</a></li>
-       <li><a href="tokenization.html#the-before-html-insertion-mode"><span class="secno">8.2.5.5 </span>The "before html" insertion mode</a></li>
-       <li><a href="tokenization.html#the-before-head-insertion-mode"><span class="secno">8.2.5.6 </span>The "before head" insertion mode</a></li>
-       <li><a href="tokenization.html#parsing-main-inhead"><span class="secno">8.2.5.7 </span>The "in head" insertion mode</a></li>
-       <li><a href="tokenization.html#parsing-main-inheadnoscript"><span class="secno">8.2.5.8 </span>The "in head noscript" insertion mode</a></li>
-       <li><a href="tokenization.html#the-after-head-insertion-mode"><span class="secno">8.2.5.9 </span>The "after head" insertion mode</a></li>
-       <li><a href="tokenization.html#parsing-main-inbody"><span class="secno">8.2.5.10 </span>The "in body" insertion mode</a></li>
-       <li><a href="tokenization.html#parsing-main-incdata"><span class="secno">8.2.5.11 </span>The "text" insertion mode</a></li>
-       <li><a href="tokenization.html#parsing-main-intable"><span class="secno">8.2.5.12 </span>The "in table" insertion mode</a></li>
-       <li><a href="tokenization.html#parsing-main-intabletext"><span class="secno">8.2.5.13 </span>The "in table text" insertion mode</a></li>
-       <li><a href="tokenization.html#parsing-main-incaption"><span class="secno">8.2.5.14 </span>The "in caption" insertion mode</a></li>
-       <li><a href="tokenization.html#parsing-main-incolgroup"><span class="secno">8.2.5.15 </span>The "in column group" insertion mode</a></li>
-       <li><a href="tokenization.html#parsing-main-intbody"><span class="secno">8.2.5.16 </span>The "in table body" insertion mode</a></li>
-       <li><a href="tokenization.html#parsing-main-intr"><span class="secno">8.2.5.17 </span>The "in row" insertion mode</a></li>
-       <li><a href="tokenization.html#parsing-main-intd"><span class="secno">8.2.5.18 </span>The "in cell" insertion mode</a></li>
-       <li><a href="tokenization.html#parsing-main-inselect"><span class="secno">8.2.5.19 </span>The "in select" insertion mode</a></li>
-       <li><a href="tokenization.html#parsing-main-inselectintable"><span class="secno">8.2.5.20 </span>The "in select in table" insertion mode</a></li>
-       <li><a href="tokenization.html#parsing-main-inforeign"><span class="secno">8.2.5.21 </span>The "in foreign content" insertion mode</a></li>
-       <li><a href="tokenization.html#parsing-main-afterbody"><span class="secno">8.2.5.22 </span>The "after body" insertion mode</a></li>
-       <li><a href="tokenization.html#parsing-main-inframeset"><span class="secno">8.2.5.23 </span>The "in frameset" insertion mode</a></li>
-       <li><a href="tokenization.html#parsing-main-afterframeset"><span class="secno">8.2.5.24 </span>The "after frameset" insertion mode</a></li>
-       <li><a href="tokenization.html#the-after-after-body-insertion-mode"><span class="secno">8.2.5.25 </span>The "after after body" insertion mode</a></li>
-       <li><a href="tokenization.html#the-after-after-frameset-insertion-mode"><span class="secno">8.2.5.26 </span>The "after after frameset" insertion mode</a></li></ol></li>
+     <li><a href="tree-construction.html#tree-construction"><span class="secno">8.2.5 </span>Tree construction</a>
+      <ol><li><a href="tree-construction.html#creating-and-inserting-elements"><span class="secno">8.2.5.1 </span>Creating and inserting elements</a></li>
+       <li><a href="tree-construction.html#closing-elements-that-have-implied-end-tags"><span class="secno">8.2.5.2 </span>Closing elements that have implied end tags</a></li>
+       <li><a href="tree-construction.html#foster-parenting"><span class="secno">8.2.5.3 </span>Foster parenting</a></li>
+       <li><a href="tree-construction.html#parsing-main-inhtml"><span class="secno">8.2.5.4 </span>The rules for parsing tokens in HTML content</a>
+        <ol><li><a href="tree-construction.html#the-initial-insertion-mode"><span class="secno">8.2.5.4.1 </span>The "initial" insertion mode</a></li>
+         <li><a href="tree-construction.html#the-before-html-insertion-mode"><span class="secno">8.2.5.4.2 </span>The "before html" insertion mode</a></li>
+         <li><a href="tree-construction.html#the-before-head-insertion-mode"><span class="secno">8.2.5.4.3 </span>The "before head" insertion mode</a></li>
+         <li><a href="tree-construction.html#parsing-main-inhead"><span class="secno">8.2.5.4.4 </span>The "in head" insertion mode</a></li>
+         <li><a href="tree-construction.html#parsing-main-inheadnoscript"><span class="secno">8.2.5.4.5 </span>The "in head noscript" insertion mode</a></li>
+         <li><a href="tree-construction.html#the-after-head-insertion-mode"><span class="secno">8.2.5.4.6 </span>The "after head" insertion mode</a></li>
+         <li><a href="tree-construction.html#parsing-main-inbody"><span class="secno">8.2.5.4.7 </span>The "in body" insertion mode</a></li>
+         <li><a href="tree-construction.html#parsing-main-incdata"><span class="secno">8.2.5.4.8 </span>The "text" insertion mode</a></li>
+         <li><a href="tree-construction.html#parsing-main-intable"><span class="secno">8.2.5.4.9 </span>The "in table" insertion mode</a></li>
+         <li><a href="tree-construction.html#parsing-main-intabletext"><span class="secno">8.2.5.4.10 </span>The "in table text" insertion mode</a></li>
+         <li><a href="tree-construction.html#parsing-main-incaption"><span class="secno">8.2.5.4.11 </span>The "in caption" insertion mode</a></li>
+         <li><a href="tree-construction.html#parsing-main-incolgroup"><span class="secno">8.2.5.4.12 </span>The "in column group" insertion mode</a></li>
+         <li><a href="tree-construction.html#parsing-main-intbody"><span class="secno">8.2.5.4.13 </span>The "in table body" insertion mode</a></li>
+         <li><a href="tree-construction.html#parsing-main-intr"><span class="secno">8.2.5.4.14 </span>The "in row" insertion mode</a></li>
+         <li><a href="tree-construction.html#parsing-main-intd"><span class="secno">8.2.5.4.15 </span>The "in cell" insertion mode</a></li>
+         <li><a href="tree-construction.html#parsing-main-inselect"><span class="secno">8.2.5.4.16 </span>The "in select" insertion mode</a></li>
+         <li><a href="tree-construction.html#parsing-main-inselectintable"><span class="secno">8.2.5.4.17 </span>The "in select in table" insertion mode</a></li>
+         <li><a href="tree-construction.html#parsing-main-afterbody"><span class="secno">8.2.5.4.18 </span>The "after body" insertion mode</a></li>
+         <li><a href="tree-construction.html#parsing-main-inframeset"><span class="secno">8.2.5.4.19 </span>The "in frameset" insertion mode</a></li>
+         <li><a href="tree-construction.html#parsing-main-afterframeset"><span class="secno">8.2.5.4.20 </span>The "after frameset" insertion mode</a></li>
+         <li><a href="tree-construction.html#the-after-after-body-insertion-mode"><span class="secno">8.2.5.4.21 </span>The "after after body" insertion mode</a></li>
+         <li><a href="tree-construction.html#the-after-after-frameset-insertion-mode"><span class="secno">8.2.5.4.22 </span>The "after after frameset" insertion mode</a></li></ol></li>
+       <li><a href="tree-construction.html#parsing-main-inforeign"><span class="secno">8.2.5.5 </span>The rules for parsing tokens in foreign content</a></li></ol></li>
      <li><a href="the-end.html#the-end"><span class="secno">8.2.6 </span>The end</a></li>
      <li><a href="the-end.html#coercing-an-html-dom-into-an-infoset"><span class="secno">8.2.7 </span>Coercing an HTML DOM into an infoset</a></li>
      <li><a href="the-end.html#an-introduction-to-error-handling-and-strange-cases-in-the-parser"><span class="secno">8.2.8 </span>An introduction to error handling and strange cases in the parser</a>
@@ -1173,9 +1186,9 @@ This is revision 1.4751.
    <li><a href="the-xhtml-syntax.html#serializing-xhtml-fragments"><span class="secno">9.3 </span>Serializing XHTML fragments</a></li>
    <li><a href="the-xhtml-syntax.html#parsing-xhtml-fragments"><span class="secno">9.4 </span>Parsing XHTML fragments</a></li></ol></li>
  <li><a href="rendering.html#rendering"><span class="secno">10 </span>Rendering</a>
-  <ol><li><a href="rendering.html#introduction-7"><span class="secno">10.1 </span>Introduction</a></li>
+  <ol><li><a href="rendering.html#introduction-8"><span class="secno">10.1 </span>Introduction</a></li>
    <li><a href="rendering.html#the-css-user-agent-style-sheet-and-presentational-hints"><span class="secno">10.2 </span>The CSS user agent style sheet and presentational hints</a>
-    <ol><li><a href="rendering.html#introduction-8"><span class="secno">10.2.1 </span>Introduction</a></li>
+    <ol><li><a href="rendering.html#introduction-9"><span class="secno">10.2.1 </span>Introduction</a></li>
      <li><a href="rendering.html#display-types"><span class="secno">10.2.2 </span>Display types</a></li>
      <li><a href="rendering.html#margins-and-padding"><span class="secno">10.2.3 </span>Margins and padding</a></li>
      <li><a href="rendering.html#alignment"><span class="secno">10.2.4 </span>Alignment</a></li>
@@ -1197,7 +1210,7 @@ This is revision 1.4751.
      <li><a href="rendering.html#image-maps-0"><span class="secno">10.3.5 </span>Image maps</a></li>
      <li><a href="rendering.html#toolbars-0"><span class="secno">10.3.6 </span>Toolbars</a></li></ol></li>
    <li><a href="rendering.html#bindings"><span class="secno">10.4 </span>Bindings</a>
-    <ol><li><a href="rendering.html#introduction-9"><span class="secno">10.4.1 </span>Introduction</a></li>
+    <ol><li><a href="rendering.html#introduction-10"><span class="secno">10.4.1 </span>Introduction</a></li>
      <li><a href="rendering.html#the-button-element-0"><span class="secno">10.4.2 </span>The <code>button</code> element</a></li>
      <li><a href="rendering.html#the-details-element-0"><span class="secno">10.4.3 </span>The <code>details</code> element</a></li>
      <li><a href="rendering.html#the-input-element-as-a-text-entry-widget"><span class="secno">10.4.4 </span>The <code>input</code> element as a text entry widget</a></li>
@@ -1242,4 +1255,4 @@ This is revision 1.4751.
    <li><a class="no-num" href="index.html#interfaces">Interfaces</a></li>
    <li><a class="no-num" href="index.html#events-0">Events</a></li></ol></li>
  <li><a class="no-num" href="references.html#references">References</a></li>
- <li><a class="no-num" href="acknowledgements.html#acknowledgements">Acknowledgements</a></li></ol><!--end-toc--></body></html>
+ <li><a class="no-num" href="acknowledgements.html#acknowledgements">Acknowledgements</a></li></ol></body></html>

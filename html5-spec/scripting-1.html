@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>4.3 Scripting &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -450,16 +446,15 @@
   therefore by necessity scattered throughout the specification. The
   algorithms below (in this section) describe the core of this
   processing, but these algorithms reference and are referenced by the
-  parsing rules for <code><a href="#script">script</a></code> <a href="tokenization.html#scriptTag">start</a>
-  and <a href="tokenization.html#scriptEndTag">end</a> tags in HTML, <a href="tokenization.html#scriptForeignEndTag">in foreign content</a>, and <a href="the-xhtml-syntax.html#scriptTagXML">in XML</a>, the rules for the <code title="dom-document-write"><a href="apis-in-html-documents.html#dom-document-write">document.write()</a></code> method, the
+  parsing rules for <code><a href="#script">script</a></code> <a href="tree-construction.html#scriptTag">start</a>
+  and <a href="tree-construction.html#scriptEndTag">end</a> tags in HTML, <a href="tree-construction.html#scriptForeignEndTag">in foreign content</a>, and <a href="the-xhtml-syntax.html#scriptTagXML">in XML</a>, the rules for the <code title="dom-document-write"><a href="apis-in-html-documents.html#dom-document-write">document.write()</a></code> method, the
   handling of <a href="webappapis.html#scripting">scripting</a>, etc.</p><p>The <code title="attr-script-defer"><a href="#attr-script-defer">defer</a></code> attribute may be
   specified even if the <code title="attr-script-async"><a href="#attr-script-async">async</a></code>
   attribute is specified, to cause legacy Web browsers that only
   support <code title="attr-script-defer"><a href="#attr-script-defer">defer</a></code> (and not <code title="attr-script-async"><a href="#attr-script-async">async</a></code>) to fall back to the <code title="attr-script-defer"><a href="#attr-script-defer">defer</a></code> behavior instead of the
   synchronous blocking behavior that is the default.</p><p>Changing the <code title="attr-script-src"><a href="#attr-script-src">src</a></code>, <code title="attr-script-type"><a href="#attr-script-type">type</a></code>, <code title="attr-script-charset"><a href="#attr-script-charset">charset</a></code>, <code title="attr-script-async"><a href="#attr-script-async">async</a></code>, and <code title="attr-script-defer"><a href="#attr-script-defer">defer</a></code> attributes dynamically has no
   direct effect; these attribute are only used at specific times
-  described below.</p><!-- by implication, changes to the base URL
-  also have no effect --><div class="impl">
+  described below.</p><div class="impl">
 
   <p>A <code><a href="#script">script</a></code> element has several associated pieces of
   state.</p>
@@ -484,10 +479,7 @@
   and the <a href="the-xhtml-syntax.html#xml-parser">XML parser</a> on <code><a href="#script">script</a></code> elements they
   insert. In addition, whenever a <code><a href="#script">script</a></code> element whose
   <a href="#force-async">"force-async"</a> flag is set has a <code title="attr-script-async"><a href="#attr-script-async">async</a></code> content attribute added, the
-  element's <a href="#force-async">"force-async"</a> flag must be unset.</p> <!--
-  there's no need to unset it when the attribute is removed since you
-  can't have the attribute and the flag set at once. -->
-
+  element's <a href="#force-async">"force-async"</a> flag must be unset.</p> 
   <p>The fourth is a flag indicating whether or not the script block is
   <dfn id="ready-to-be-parser-executed">"ready to be parser-executed"</dfn>. Initially,
   <code><a href="#script">script</a></code> elements must have this flag unset (script
@@ -542,7 +534,7 @@
     scripting language, another script can later mutate them and cause
     them to run again.</p>
 
-    <!-- q.v. http://hsivonen.iki.fi/test/moz/script-setting-src-on-parser-inserted-script.html -->
+    
 
    </li>
 
@@ -602,10 +594,7 @@
 
     <p>Otherwise, the element has a non-empty <code title="attr-script-language"><a href="obsolete.html#attr-script-language">language</a></code> attribute; let
     <var><a href="#the-script-block-s-type">the script block's type</a></var> for this <code><a href="#script">script</a></code>
-    element be the concatenation of the string "<code title="">text/</code>" followed by the value of the <code title="attr-script-language"><a href="obsolete.html#attr-script-language">language</a></code> attribute.</p> <!--
-    user agents already support, e.g., type="text/javascript1.3", so
-    we don't have to support that separately. -->
-
+    element be the concatenation of the string "<code title="">text/</code>" followed by the value of the <code title="attr-script-language"><a href="obsolete.html#attr-script-language">language</a></code> attribute.</p> 
     <p class="note">The <code title="attr-script-language"><a href="obsolete.html#attr-script-language">language</a></code> attribute is never
     conforming, and is always ignored if there is a <code title="attr-script-type"><a href="#attr-script-type">type</a></code> attribute present.</p>
 
@@ -658,13 +647,9 @@
     that, amongst others, the following scripts will not execute:
     scripts in <code>XMLHttpRequest</code>'s <code title="dom-XMLHttpRequest-responseXML">responseXML</code>
     documents, scripts in <code>DOMParser</code>-created
-    documents, <!--scripts in documents created by
-    <code>XSLTProcessor</code>'s <code
-    title="dom-XSLTProcessor-transformToDocument">transformToDocument</code>
-    feature,--> and scripts that are first inserted by a script into a
+    documents,  and scripts that are first inserted by a script into a
     <code><a href="infrastructure.html#document">Document</a></code> that was created using the <code title="dom-DOMImplementation-createDocument"><a href="infrastructure.html#dom-domimplementation-createdocument">createDocument()</a></code>
-    API. <a href="references.html#refsXHR">[XHR]</a> <a href="references.html#refsDOMPARSER">[DOMPARSER]</a> <!--<a
-    href="#refsXSLTP">[XSLTP]</a>--> <a href="references.html#refsDOMCORE">[DOMCORE]</a></p>
+    API. <a href="references.html#refsXHR">[XHR]</a> <a href="references.html#refsDOMPARSER">[DOMPARSER]</a>  <a href="references.html#refsDOMCORE">[DOMCORE]</a></p>
 
 
    </li>
@@ -714,7 +699,7 @@
     relative to the element, and if that is successful, the specified
     resource must then be <a href="fetching-resources.html#fetch" title="fetch">fetched</a>, from the
     <a href="origin-0.html#origin">origin</a> of the element's <code><a href="infrastructure.html#document">Document</a></code>.</p>
-    <!-- not http-origin privacy sensitive -->
+    
 
     <p>If the <code title="attr-script-src"><a href="#attr-script-src">src</a></code> attribute's
     value is the empty string or if it could not be resolved, then the
@@ -735,15 +720,13 @@
     the element is <a href="infrastructure.html#insert-an-element-into-a-document" title="insert an element into a&#10;    document">inserted into the document</a>, the load must have
     started. If the UA performs such prefetching, but the element is
     never inserted in the document, or the <code title="attr-script-src"><a href="#attr-script-src">src</a></code> attribute is dynamically
-    changed,<!-- or the base URL is dynamically changed,--> then the
+    changed, then the
     user agent will not execute the script, and the fetching process
     will have been effectively wasted.</p>
 
    </li>
 
-   <!-- at this point if the element is "parser-inserted" then we know
-   it is not "force-async". -->
-
+   
    <li>
 
     <p>Then, the first of the following options that describes the
@@ -879,7 +862,7 @@
 
     </dl></li>
 
-  </ol><!-- similar text in various places --><p>Fetching an external script must <a href="the-end.html#delay-the-load-event">delay the load
+  </ol><p>Fetching an external script must <a href="the-end.html#delay-the-load-event">delay the load
   event</a> of the element's document until the <a href="webappapis.html#concept-task" title="concept-task">task</a> that is <a href="webappapis.html#queue-a-task" title="queue a&#10;  task">queued</a> by the <a href="webappapis.html#networking-task-source">networking task source</a> once
   the resource has been <a href="fetching-resources.html#fetch" title="fetch">fetched</a> (defined
   above) has been run.</p>
@@ -900,14 +883,7 @@
   blocks the parser until the style sheets are all loaded, at which
   time the script executes and the parser is unblocked).</p>
 
-  <!-- also (and this would be worth testing): the way the spec is
-  written, if you do not have a style sheet that is blocking scripts,
-  then you parse a <script src>, then while waiting for the script to
-  load you insert an external style sheet, the script will delay until
-  the sheet is loaded, because there's just a binary "are style sheets
-  blocking scripts" state, things aren't defined in terms of which
-  style sheets are blocking which scripts -->
-
+  
   <p>When the user agent is required to <dfn id="execute-the-script-block" title="execute the script&#10;  block">execute a script block</dfn>, it must run the following
   steps:</p>
 
@@ -935,7 +911,7 @@
      <!-- SCRIPT EXEC -->
      <dd>
 
-      <p>Executing the script block must consists of running the
+      <p>Executing the script block must consist of running the
       following steps. For the purposes of these steps, the script is
       considered to be from an <i>external file</i> if, while the
       <a href="#prepare-a-script">prepare a script</a> algorithm above was running for
@@ -977,28 +953,16 @@
            the cell in the second column of that row, and jump to the
            bottom step in this series of steps:</p>
 
-            <!-- this table is present in several forms in this file; keep them in sync -->
+            
             <table id="table-script-bom"><thead><tr><th>Bytes in Hexadecimal
                </th><th>Encoding
-             </th></tr></thead><tbody><!-- nobody uses this
-              <tr>
-               <td>00 00 FE FF
-               <td>UTF-32BE
-              <tr>
-               <td>FF FE 00 00
-               <td>UTF-32LE
-    --><tr><td>FE FF
+             </th></tr></thead><tbody><tr><td>FE FF
                </td><td>Big-endian UTF-16
               </td></tr><tr><td>FF FE
                </td><td>Little-endian UTF-16
               </td></tr><tr><td>EF BB BF
                </td><td>UTF-8
-    <!-- nobody uses this
-              <tr>
-               <td>DD 73 66 73
-               <td>UTF-EBCDIC
-    -->
-            </td></tr></tbody></table><p class="note">This step looks for Unicode Byte Order
+                </td></tr></tbody></table><p class="note">This step looks for Unicode Byte Order
             Marks (BOMs).</p>
 
            </li>
@@ -1181,16 +1145,16 @@ o............A....e
   &lt;legend&gt;Work out the price of your car&lt;/legend&gt;
   &lt;p&gt;Base cost: &#xA3;52000.&lt;/p&gt;
   &lt;p&gt;Select additional options:&lt;/p&gt;
-  &lt;ul&gt;
+  &lt;ul onchange="calculate(form)"&gt;
    &lt;li&gt;&lt;label&gt;&lt;input type=checkbox name=brakes&gt; Ceramic brakes (&#xA3;1000)&lt;/label&gt;&lt;/li&gt;
    &lt;li&gt;&lt;label&gt;&lt;input type=checkbox name=radio&gt; Satellite radio (&#xA3;2500)&lt;/label&gt;&lt;/li&gt;
    &lt;li&gt;&lt;label&gt;&lt;input type=checkbox name=turbo&gt; Turbo charger (&#xA3;5000)&lt;/label&gt;&lt;/li&gt;
    &lt;li&gt;&lt;label&gt;&lt;input type=checkbox name=sticker&gt; "XZ" sticker (&#xA3;250)&lt;/label&gt;&lt;/li&gt;
   &lt;/ul&gt;
-  &lt;p&gt;Total: &#xA3;&lt;output name=result onformchange="calculate(form)"&gt;&lt;/output&gt;&lt;/p&gt;
+  &lt;p&gt;Total: &#xA3;&lt;output name=result&gt;&lt;/output&gt;&lt;/p&gt;
  &lt;/fieldset&gt;
  &lt;script&gt;
-  document.forms.pricecalc.dispatchFormChange();
+  calculate(document.forms.pricecalc);
  &lt;/script&gt;
 &lt;/form&gt;</pre>
 
@@ -1228,7 +1192,7 @@ o............A....e
   <p>User agents may support other <a href="infrastructure.html#mime-type" title="MIME type">MIME
   types</a> and other languages.</p>
 
-  <!-- this paragraph is also present in the <style type="text/css"> section -->
+  
   <p>When examining types to determine if they support the language,
   user agents must not ignore unknown MIME parameters &#x2014; types
   with unknown parameters must be assumed to be unsupported. The <code title="">charset</code> parameter must be treated as an unknown
@@ -1241,10 +1205,10 @@ o............A....e
 escape        = "&lt;!--" data2 *( script-start data3 script-end data2 )
 
 data1         = &lt;any string that doesn't contain a substring that matches not-data1&gt;
-not-data1     = <!-- script-end / -->"&lt;!--"             <!-- the script-end is redundant here since it would close the element -->
+not-data1     = "&lt;!--"             
 
 data2         = &lt;any string that doesn't contain a substring that matches not-data2&gt;
-not-data2     = <!-- script-end / -->script-start / "--&gt;"  <!-- the script-end is redundant here since it would close the element -->
+not-data2     = script-start / "--&gt;"  
 
 data3         = &lt;any string that doesn't contain a substring that matches not-data3&gt;
 not-data3     = script-end / "--&gt;"
@@ -1347,7 +1311,7 @@ not-slash     = %x0000-002E / %x0030-10FFFF
 
    <dd><p>The <code><a href="#the-noscript-element">noscript</a></code> element must contain only text,
    except that invoking the <a href="the-end.html#html-fragment-parsing-algorithm">HTML fragment parsing
-   algorithm</a> <!-- (which disables <script type="text/javascript"> execution) --> with
+   algorithm</a>  with
    the <code><a href="#the-noscript-element">noscript</a></code> element as the <var title="">context</var> element and the text contents as the <var title="">input</var> must result in a list of nodes that consists
    only of <code><a href="semantics.html#the-link-element">link</a></code>, <code><a href="semantics.html#the-style-element">style</a></code>, and
    <code><a href="semantics.html#meta">meta</a></code> elements that would be conforming if they were

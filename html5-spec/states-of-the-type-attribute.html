@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>4.10.7.1 States of the type attribute &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -418,9 +414,7 @@
 
    <p>The <code class="no-backref" title="event-input-input"><a href="common-input-element-attributes.html#event-input-input">input</a></code> and <code class="no-backref" title="event-input-change"><a href="common-input-element-attributes.html#event-input-change">change</a></code> events do not apply.</p>
 
-  </div><h6 id="text-state-and-search-state"><span class="secno">4.10.7.1.2 </span><dfn title="attr-input-type-text">Text</dfn> state and <dfn title="attr-input-type-search">Search</dfn> state</h6><!-- v2 idea: applying input masks to <input>, e.g. for entering
-       data with slashes and dashes (ack Greg Kilwein)
-  --><div class="impl">
+  </div><h6 id="text-state-and-search-state"><span class="secno">4.10.7.1.2 </span><dfn title="attr-input-type-text">Text</dfn> state and <dfn title="attr-input-type-search">Search</dfn> state</h6><div class="impl">
 
   <p>When an <code><a href="the-input-element.html#the-input-element">input</a></code> element's <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="#text-state-and-search-state" title="attr-input-type-text">Text</a> state or the <a href="#text-state-and-search-state" title="attr-input-type-search">Search</a> state, the rules in
   this section apply.</p>
@@ -438,8 +432,8 @@
   FEED (LF) or U+000D CARRIAGE RETURN (CR) characters into the
   element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>.</p>
 
-  <!-- this next bit is also in the <textarea> section -->
-  <!-- and something similar is in the session history section -->
+  
+  
   <p>If the element is <i title="concept-input-mutable"><a href="the-input-element.html#concept-input-mutable">mutable</a></i>,
   the user agent should allow the user to change the writing direction
   of the element, setting it either to a left-to-right writing
@@ -451,11 +445,9 @@
    selected a left-to-right writing direction, and "<code title="attr-dir-rtl"><a href="elements.html#attr-dir-rtl">rtl</a></code>" if the user selected a
    right-to-left writing direction.</p></li>
 
-   <li><p><a href="webappapis.html#queue-a-task">Queue a task</a> to first <a href="webappapis.html#fire-a-simple-event">fire a simple
-   event</a> that bubbles named <code title="event-input">input</code> at the <code><a href="the-input-element.html#the-input-element">input</a></code> element,
-   and to then <a href="association-of-controls-and-forms.html#broadcast-forminput-events">broadcast <code title="event-forminput">forminput</code> events</a> from the
-   <code><a href="the-input-element.html#the-input-element">input</a></code> element's <a href="association-of-controls-and-forms.html#form-owner">form owner</a>, if
-   any.</p></li>
+   <li><p><a href="webappapis.html#queue-a-task">Queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple
+   event</a> that bubbles named <code title="event-input">input</code> at the <code><a href="the-input-element.html#the-input-element">input</a></code>
+   element.</p></li>
 
   </ol></div><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
   specified, must have a value that contains no U+000A LINE FEED (LF)
@@ -749,8 +741,9 @@
     agents must not allow users to insert U+000A LINE FEED (LF) or
     U+000D CARRIAGE RETURN (CR) characters into the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>. User agents may transform
     the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> for display and
-    editing (e.g. converting punycode in the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to IDN in the display and
-    vice versa).</p>
+    editing; in particular, user agents should convert punycode in the
+    <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to IDN in the display
+    and vice versa.</p>
 
     </div>
 
@@ -804,8 +797,9 @@
     characters. User agents should allow the user to remove all the
     addresses in the element's <a href="association-of-controls-and-forms.html#concept-fe-values" title="concept-fe-values">value<em>s</em></a>. User agents may
     transform the <a href="association-of-controls-and-forms.html#concept-fe-values" title="concept-fe-values">value<em>s</em></a> for display and
-    editing (e.g. converting punycode in the <a href="association-of-controls-and-forms.html#concept-fe-values" title="concept-fe-values">value<em>s</em></a> to IDN in the
-    display and vice versa).</p>
+    editing; in particular, user agents should convert punycode in the
+    <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to IDN in the display
+    and vice versa.</p>
 
     <p>Whenever the user changes the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value<em>s</em></a>, the user agent
     must run the following steps:</p>
@@ -813,10 +807,7 @@
     <ol><li><p>Let <var title="">latest values</var> be a copy of the
      element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value<em>s</em></a>.</p></li>
 
-     <!-- It's a copy because /values/ might include leading and
-     trailing spaces that we don't necessarily want to remove from the
-     UI but that we do want to remove before serialising. -->
-
+     
      <li><p><a href="common-microsyntaxes.html#strip-leading-and-trailing-whitespace">Strip leading and trailing whitespace</a> from
      each value in <var title="">latest values</var>.</p></li>
 
@@ -865,8 +856,7 @@
   ABNF production <code title="">1*(&#xA0;atext&#xA0;/&#xA0;"."&#xA0;)&#xA0;"@"&#xA0;ldh-str&#xA0;*(&#xA0;"."&#xA0;ldh-str&#xA0;)</code>
   where <code title="">atext</code> is defined in RFC 5322 section
   3.2.3, and <code title="">ldh-str</code> is defined in RFC 1034
-  section 3.5. <a href="references.html#refsABNF">[ABNF]</a> <a href="references.html#refsRFC5322">[RFC5322]</a> <a href="references.html#refsRFC1034">[RFC1034]</a></p><!-- Domain syntax based on
-  section 3.5 of [RFC1034] and section 2.1 of [RFC1123] --><p class="note">This requirement is a <a href="introduction.html#willful-violation">willful violation</a>
+  section 3.5. <a href="references.html#refsABNF">[ABNF]</a> <a href="references.html#refsRFC5322">[RFC5322]</a> <a href="references.html#refsRFC1034">[RFC1034]</a></p><p class="note">This requirement is a <a href="introduction.html#willful-violation">willful violation</a>
   of RFC 5322, which defines a syntax for e-mail addresses that is
   simultaneously too strict (before the "@" character), too vague
   (after the "@" character), and too lax (allowing comments, white
@@ -1039,8 +1029,7 @@
   interfaces that present dates and times according to the conventions
   of the user's preferred locale.</p><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
   specified, must have a value that is a <a href="common-microsyntaxes.html#valid-global-date-and-time-string">valid global date and
-  time string</a>.</p><!-- ok to set out-of-range value, we never
-  know when we might have to represent bogus input --><div class="impl">
+  time string</a>.</p><div class="impl">
 
   <p><strong>The <a href="the-input-element.html#value-sanitization-algorithm">value sanitization algorithm</a> is as
   follows</strong>: If the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>
@@ -1185,8 +1174,7 @@
   interfaces that present dates according to the conventions of the
   user's preferred locale.</p><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
   specified, must have a value that is a <a href="common-microsyntaxes.html#valid-date-string">valid date
-  string</a>.</p><!-- ok to set out-of-range value, we never know
-  when we might have to represent bogus input --><div class="impl">
+  string</a>.</p><div class="impl">
 
   <p><strong>The <a href="the-input-element.html#value-sanitization-algorithm">value sanitization algorithm</a> is as
   follows</strong>: If the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>
@@ -1313,8 +1301,7 @@
   interfaces that present months according to the conventions of the
   user's preferred locale.</p><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
   specified, must have a value that is a <a href="common-microsyntaxes.html#valid-month-string">valid month
-  string</a>.</p><!-- ok to set out-of-range value, we never know
-  when we might have to represent bogus input --><div class="impl">
+  string</a>.</p><div class="impl">
 
   <p><strong>The <a href="the-input-element.html#value-sanitization-algorithm">value sanitization algorithm</a> is as
   follows</strong>: If the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>
@@ -1349,10 +1336,7 @@
   has <var title="">input</var> months between it and January
   1970.</p>
 
-  <!-- note - it doesn't matter exactly how many months are "between"
-  two months, so long as the UA implements this consistently. The
-  number is never actually exposed. -->
-
+  
   <p><strong>The <a href="the-input-element.html#concept-input-value-string-date" title="concept-input-value-string-date">algorithm to convert a
   string to a <code>Date</code> object</a>, given a string <var title="">input</var>, is as follows</strong>: If <a href="common-microsyntaxes.html#parse-a-month-string" title="parse&#10;  a month string">parsing a month</a> from <var title="">input</var> results in an error, then return an error;
   otherwise, return a <code>Date</code> object representing midnight
@@ -1441,8 +1425,7 @@
   interfaces that present weeks according to the conventions of the
   user's preferred locale.</p><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
   specified, must have a value that is a <a href="common-microsyntaxes.html#valid-week-string">valid week
-  string</a>.</p><!-- ok to set out-of-range value, we never know
-  when we might have to represent bogus input --><div class="impl">
+  string</a>.</p><div class="impl">
 
   <p><strong>The <a href="the-input-element.html#value-sanitization-algorithm">value sanitization algorithm</a> is as
   follows</strong>: If the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>
@@ -1549,9 +1532,7 @@
    <code class="no-backref" title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code> and
    <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code> methods.</p>
 
-  </div><h6 id="time-state"><span class="secno">4.10.7.1.11 </span><dfn title="attr-input-type-time">Time</dfn> state</h6><!-- v2: allow min="" and max="" to be set such that the range
-  crosses midnight, as in <input type=time min="23:00" max="02:00">
-  (from http://www.w3.org/Bugs/Public/show_bug.cgi?id=7688) --><div class="impl">
+  </div><h6 id="time-state"><span class="secno">4.10.7.1.11 </span><dfn title="attr-input-type-time">Time</dfn> state</h6><div class="impl">
 
   <p>When an <code><a href="the-input-element.html#the-input-element">input</a></code> element's <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="#time-state" title="attr-input-type-time">Time</a> state, the rules in this
   section apply.</p>
@@ -1573,8 +1554,7 @@
   interfaces that present times according to the conventions of the
   user's preferred locale.</p><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
   specified, must have a value that is a <a href="common-microsyntaxes.html#valid-time-string">valid time
-  string</a>.</p><!-- ok to set out-of-range value, we never know
-  when we might have to represent bogus input --><div class="impl">
+  string</a>.</p><div class="impl">
 
   <p><strong>The <a href="the-input-element.html#value-sanitization-algorithm">value sanitization algorithm</a> is as
   follows</strong>: If the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>
@@ -1701,8 +1681,7 @@
   interfaces that present dates and times according to the conventions
   of the user's preferred locale.</p><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
   specified, must have a value that is a <a href="common-microsyntaxes.html#valid-local-date-and-time-string">valid local date and
-  time string</a>.</p><!-- ok to set out-of-range value, we never
-  know when we might have to represent bogus input --><div class="impl">
+  time string</a>.</p><div class="impl">
 
   <p><strong>The <a href="the-input-element.html#value-sanitization-algorithm">value sanitization algorithm</a> is as
   follows</strong>: If the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>

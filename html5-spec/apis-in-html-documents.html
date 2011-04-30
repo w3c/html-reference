@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>3.3 APIs in HTML documents &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -461,8 +457,8 @@
   <h3 id="interactions-with-xpath-and-xslt"><span class="secno">3.4 </span>Interactions with XPath and XSLT</h3>
 
   <p id="xpath-1.0-processors">Implementations of XPath 1.0 that
-  operate on HTML documents parsed or created in the manners described
-  in this specification (e.g. as part of the <code title="">document.evaluate()</code> API) must act as if the
+  operate on <a href="dom.html#html-documents">HTML documents</a> parsed or created in the
+  manners described in this specification (e.g. as part of the <code title="">document.evaluate()</code> API) must act as if the
   following edit was applied to the XPath 1.0 specification.</p>
 
   <p>First, remove this paragraph:</p>
@@ -487,11 +483,9 @@
 
    <p>A QName in the node test is expanded into an expanded-name using
    the namespace declarations from the expression context. If the
-   QName has a prefix, then there must be a<!-- added 2009-10-27 -
-   http://www.w3.org/Bugs/Public/show_bug.cgi?id=8062 --> namespace
+   QName has a prefix, then there must be a namespace
    declaration for this prefix in the expression context, and the
-   corresponding<!-- typo fixed 2009-10-27 -
-   http://www.w3.org/Bugs/Public/show_bug.cgi?id=8063 --> namespace
+   corresponding namespace
    URI is the one that is associated with this prefix.  It is an error
    if the QName has a prefix for which there is no namespace
    declaration in the expression context. </p>
@@ -524,9 +518,7 @@
   the XPath 1.0 specification, motivated by desire to have
   implementations be compatible with legacy content while still
   supporting the changes that this specification introduces to HTML
-  regarding which namespace is used for HTML elements. <a href="references.html#refsXPATH10">[XPATH10]</a></p> <!-- note: version matters for
-  this ref -->
-
+  regarding which namespace is used for HTML elements. <a href="references.html#refsXPATH10">[XPATH10]</a></p> 
   <hr/><p id="dom-based-xslt-1.0-processors">XSLT 1.0 processors outputting
   to a DOM when the output method is "html" (either explicitly or via
   the defaulting rule in XSLT 1.0) are affected as follows:</p>
@@ -543,9 +535,7 @@
   changes the namespaces and case-sensitivity rules of HTML in a
   manner that would otherwise be incompatible with DOM-based XSLT
   transformations. (Processors that serialize the output are
-  unaffected.) <a href="references.html#refsXSLT10">[XSLT10]</a></p> <!-- note:
-  version matters for this ref -->
-
+  unaffected.) <a href="references.html#refsXSLT10">[XSLT10]</a></p> 
   </div><h3 id="dynamic-markup-insertion"><span class="secno">3.5 </span><dfn>Dynamic markup insertion</dfn></h3><p class="note">APIs for dynamically inserting markup into the
   document interact with the parser, and thus their behavior varies
   depending on whether they are used with <a href="dom.html#html-documents">HTML documents</a>
@@ -644,14 +634,9 @@
 
    </li><li><p>Remove any <a href="webappapis.html#concept-task" title="concept-task">tasks</a>
    associated with the <code><a href="infrastructure.html#document">Document</a></code> in any <a href="webappapis.html#task-source">task
-   source</a>.</p></li> <!-- removes callbacks that fired between
-   this algorithm starting and the times and databases being aborted
-   in the "unload" step above -->
-
+   source</a>.</p></li> 
    <li><p>Remove all child nodes of the document, without firing any
-   mutation events.</p></li> <!-- as of 2009-03-30, only WebKit fired
-   mutation events here. -->
-
+   mutation events.</p></li> 
    <li><p>Replace the <code><a href="infrastructure.html#document">Document</a></code>'s singleton objects with
    new instances of those objects. (This includes in particular the
    <code><a href="browsers.html#window">Window</a></code>, <code><a href="history.html#location">Location</a></code>, <code><a href="history.html#history-0">History</a></code>,
@@ -663,8 +648,8 @@
    also includes all the Web IDL prototypes in the JavaScript binding,
    including the <code><a href="infrastructure.html#document">Document</a></code> object's prototype.)</p></li>
 
-   <!-- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E...%3Ciframe%20src%3D%22document%22%3E%3C%2Fiframe%3E%0A%3Cscript%3Eonload%20%3D%20function%20()%20%7B%20f%20%3D%20document.getElementsByTagName('iframe')%5B0%5D%3B%20d%20%3D%20f.contentWindow.document%3B%20%7D%3C%2Fscript%3E%0A%3Cinput%20type%3Dbutton%20onclick%3D%22w(d.documentElement.innerHTML)%22%20value%3D%22dump%22%3E%0A%3Cinput%20type%3Dbutton%20onclick%3D%22d.open()%3B%20d.write('%3Cscript%3Evar%20x%20%3D%20new%20XMLHttpRequest()%3Bx.open(%26quot%3BGET%26quot%3B%2C%20%26quot%3BGET%26quot%3B)%3Bx.onreadystatechange%3Dfunction()%20%7B%20alert(x.readyState)%3B%20%7D%3Bx.send(null)%3B%3C%2Fscript%3E')%3Bd.close()%3B%20setTimeout(function()%20%7B%20d.open()%3B%20d.write('%3Cp%3Etest%3C%2Fp%3E')%3B%20d.close()%20%7D%2C%200)%3B%22%20value%3D%22xhr%22%3E%0A%3Cinput%20type%3Dbutton%20onclick%3D%22d.onclick%20%3D%20function()%20%7B%20w('click')%20%7D%22%20value%3D%22add%20click%20handler%22%3E%0A%3Cinput%20type%3Dbutton%20onclick%3D%22d.open()%3B%20d.write('%3Cp%3Etest%3C%2Fp%3E')%3B%20d.close()%22%20value%3D%22replace%22%3E%0A%3Cinput%20type%3Dbutton%20onclick%3D%22d.open()%3B%20d.write('%3Cp%3E%3Cscript%3Ei%20%3D%200%3B%20setTimeout(%26quot%3Bparent.w(i%2B%2B)%26quot%3B%2C%202000)%3C%2Fscript%3E%3C%2Fp%3E')%3B%20d.close()%22%20value%3D%22replace%20with%20timer%22%3E -->
-   <!-- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E%0D%0A...%3Ciframe%3E%3C%2Fiframe%3E%0D%0A%3Cscript%3E%0D%0Aonload%20%3D%20function%20()%20%7B%0D%0A%20frames%5B0%5D.test%20%3D%201%0D%0A%20w(frames%5B0%5D.test)%3B%0D%0A%20var%20a%20%3D%20frames%5B0%5D.document.location.assign%3B%0D%0A%20w(a)%3B%0D%0A%20w(frames%5B0%5D.document.location.assign%20%3D%3D%3D%20a)%3B%0D%0A%20frames%5B0%5D.document.open()%3B%0D%0A%20frames%5B0%5D.document.write('%3Cscript%3Edocument.write(test)%3C%5C%2Fscript%3E')%3B%0D%0A%20frames%5B0%5D.document.close()%3B%0D%0A%20w(frames%5B0%5D.test)%3B%0D%0A%20w(frames%5B0%5D.document.location.assign%20%3D%3D%3D%20a)%3B%0D%0A%7D%0D%0A%3C%2Fscript%3E -->
+   
+   
 
    <li><p>Change the <a href="dom.html#document-s-character-encoding">document's character encoding</a> to
    UTF-8.</p></li>
@@ -688,7 +673,7 @@
 
    <li>
 
-    <!-- text/plain handling -->
+    
 
     <p>If the <var title="">type</var> string contains a U+003B
     SEMICOLON character (;), remove the first such character and all
@@ -700,19 +685,11 @@
     case-insensitive</a> match for the string
     "<code><a href="iana.html#text-html">text/html</a></code>", then act as if the tokenizer had emitted
     a start tag token with the tag name "pre" followed by a single
-    U+000A LINE FEED (LF) character<!-- to get eaten, so that a
-    leading LF in the written text doesn't get eaten itself-->, then
+    U+000A LINE FEED (LF) character, then
     switch the <a href="parsing.html#html-parser">HTML parser</a>'s tokenizer to the
     <a href="tokenization.html#plaintext-state">PLAINTEXT state</a>.</p>
 
-    <!--
- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E...%3Ciframe%3E%3C%2Fiframe%3E%3Cscript%3Eonload%20%3D%20function%20()%20%7B%20%0D%0A%20%20var%20d%20%3D%20document.getElementsByTagName('iframe')%5B0%5D.contentDocument%3B%0D%0A%20%20d.open('image%2Fsvg%2Bxml')%3B%0D%0A%20%20d.write(%22%3Cinput%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml'%20value%3D'(x)html'%2F%3E%22)%3B%0D%0A%20%20d.close()%3B%0D%0A%7D%3B%3C%2Fscript%3E
- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E...%3Ciframe%3E%3C%2Fiframe%3E%3Cscript%3Eonload%20%3D%20function%20()%20%7B%20%0D%0A%20%20var%20d%20%3D%20document.getElementsByTagName('iframe')%5B0%5D.contentDocument%3B%0D%0A%20%20d.open('image%2Fgif')%3B%0D%0A%20%20var%20a%20%3D%20%5B%200x47%2C%200x49%2C%200x46%2C%200x38%2C%200x39%2C%200x61%2C%200x01%2C%200x00%2C%200x01%2C%200x00%2C%0D%0A%20%20%20%20%20%20%20%20%20%20%20%200x80%2C%200xff%2C%200x00%2C%200xc0%2C%200xc0%2C%200xc0%2C%200x00%2C%200x00%2C%200x00%2C%200x21%2C%0D%0A%20%20%20%20%20%20%20%20%20%20%20%200xf9%2C%200x04%2C%200x01%2C%200x00%2C%200x00%2C%200x00%2C%200x00%2C%200x2c%2C%200x00%2C%200x00%2C%0D%0A%20%20%20%20%20%20%20%20%20%20%20%200x00%2C%200x00%2C%200x01%2C%200x00%2C%200x01%2C%200x00%2C%200x00%2C%200x02%2C%200x02%2C%200x44%2C%0D%0A%20%20%20%20%20%20%20%20%20%20%20%200x01%2C%200x00%2C%200x3b%20%5D%3B%0D%0A%20%20var%20s%20%3D%20%22%22%3B%0D%0A%20%20for%20(var%20i%20%3D%200%3B%20i%20%3C%20a.length%3B%20i%20%2B%3D%201)%0D%0A%20%20%20%20s%20%2B%3D%20String.fromCharCode(a%5Bi%5D)%3B%0D%0A%20%20d.write(s)%3B%0D%0A%20%20d.close()%3B%0D%0A%7D%3B%3C%2Fscript%3E
- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E...%3Ciframe%3E%3C%2Fiframe%3E%3Cscript%3Eonload%20%3D%20function%20()%20{%20%0A%20%20var%20d%20%3D%20document.getElementsByTagName(%27iframe%27)[0].contentDocument%3B%0A%20%20d.open(%27Text%2Fplain%27)%3B%0A%20%20d.write(%27%3Cb%3Etest%27)%3B%0A%20%20d.close()%3B%0A}%3B%3C%2Fscript%3E
- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E...%3Ciframe%3E%3C%2Fiframe%3E%3Cscript%3Eonload%20%3D%20function%20()%20{%20%0A%20%20var%20d%20%3D%20document.getElementsByTagName(%27iframe%27)[0].contentDocument%3B%0A%20%20d.open(%27%20text%2Fplain%27)%3B%0A%20%20d.write(%27%3Cb%3Etest%27)%3B%0A%20%20d.close()%3B%0A}%3B%3C%2Fscript%3E
- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E...%3Ciframe%3E%3C%2Fiframe%3E%3Cscript%3Eonload%20%3D%20function%20()%20{%20%0A%20%20var%20d%20%3D%20document.getElementsByTagName(%27iframe%27)[0].contentDocument%3B%0A%20%20d.open(%27text%2Fplain%3B%27)%3B%0A%20%20d.write(%27%3Cb%3Etest%27)%3B%0A%20%20d.close()%3B%0A}%3B%3C%2Fscript%3E
-    -->
-
+    
    </li>
 
    <li>
@@ -737,9 +714,12 @@
    entry, just before the last entry, and associate with the new entry
    the text that was parsed by the previous parser associated with the
    <code><a href="infrastructure.html#document">Document</a></code> object, as well as the state of the document
-   at the start of these steps. (This allows the user to step
-   backwards in the session history to see the page before it was
-   blown away by the <code title="dom-document-open"><a href="#dom-document-open">document.open()</a></code> call.)</p></li>
+   at the start of these steps. This allows the user to step backwards
+   in the session history to see the page before it was blown away by
+   the <code title="dom-document-open"><a href="#dom-document-open">document.open()</a></code> call.
+   This new entry does not have a <code><a href="infrastructure.html#document">Document</a></code> object, so a
+   new one will be created if the session history is traversed to that
+   entry.</p></li>
 
    <li><p>Finally, set the <a href="parsing.html#insertion-point">insertion point</a> to point at
    just before the end of the <a href="parsing.html#the-input-stream">input stream</a> (which at this
@@ -834,11 +814,7 @@
     document</a>, throw an <code><a href="common-dom-interfaces.html#invalid_state_err">INVALID_STATE_ERR</a></code>
     exception and abort these steps.</p>
 
-    <!--
-    Where would document.write() insert?
-    Consider: data:text/xml,<script xmlns="http://www.w3.org/1999/xhtml"><![CDATA[ document.write('<foo>Test</foo>'); ]]></script>
-    -->
-
+    
    </li>
 
    <li>

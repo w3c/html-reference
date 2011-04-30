@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>7 User interaction &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -352,7 +348,7 @@
   <ol class="toc"><li><a href="editing.html#editing"><span class="secno">7 </span>User interaction</a>
   <ol><li><a href="editing.html#the-hidden-attribute"><span class="secno">7.1 </span>The <code>hidden</code> attribute</a></li><li><a href="editing.html#activation"><span class="secno">7.2 </span>Activation</a></li><li><a href="editing.html#focus"><span class="secno">7.3 </span>Focus</a>
     <ol><li><a href="editing.html#sequential-focus-navigation-and-the-tabindex-attribute"><span class="secno">7.3.1 </span>Sequential focus navigation and the <code title="attr-tabindex">tabindex</code> attribute</a></li><li><a href="editing.html#focus-management"><span class="secno">7.3.2 </span>Focus management</a></li><li><a href="editing.html#document-level-focus-apis"><span class="secno">7.3.3 </span>Document-level focus APIs</a></li><li><a href="editing.html#element-level-focus-apis"><span class="secno">7.3.4 </span>Element-level focus APIs</a></li></ol></li><li><a href="editing.html#assigning-keyboard-shortcuts"><span class="secno">7.4 </span>Assigning keyboard shortcuts</a>
-    <ol><li><a href="editing.html#introduction-5"><span class="secno">7.4.1 </span>Introduction</a></li><li><a href="editing.html#the-accesskey-attribute"><span class="secno">7.4.2 </span>The <code>accesskey</code> attribute</a></li><li><a href="editing.html#processing-model-3"><span class="secno">7.4.3 </span>Processing model</a></li></ol></li><li><a href="editing.html#contenteditable"><span class="secno">7.5 </span>The <code title="attr-contenteditable">contenteditable</code> attribute</a>
+    <ol><li><a href="editing.html#introduction-6"><span class="secno">7.4.1 </span>Introduction</a></li><li><a href="editing.html#the-accesskey-attribute"><span class="secno">7.4.2 </span>The <code>accesskey</code> attribute</a></li><li><a href="editing.html#processing-model-3"><span class="secno">7.4.3 </span>Processing model</a></li></ol></li><li><a href="editing.html#contenteditable"><span class="secno">7.5 </span>The <code title="attr-contenteditable">contenteditable</code> attribute</a>
     <ol><li><a href="editing.html#user-editing-actions"><span class="secno">7.5.1 </span>User editing actions</a></li><li><a href="editing.html#making-entire-documents-editable"><span class="secno">7.5.2 </span>Making entire documents editable</a></li></ol></li><li><a href="editing.html#spelling-and-grammar-checking"><span class="secno">7.6 </span>Spelling and grammar checking</a></li></ol></li></ol></div><h2 id="editing"><span class="secno">7 </span><dfn>User interaction</dfn></h2><h3 id="the-hidden-attribute"><span class="secno">7.1 </span>The <dfn title="attr-hidden"><code>hidden</code></dfn> attribute</h3><p>All <a href="infrastructure.html#html-elements">HTML elements</a> may have the <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> content attribute set. The <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> attribute is a <a href="common-microsyntaxes.html#boolean-attribute">boolean
   attribute</a>. When specified on an element, it indicates that
   the element is not yet, or is no longer, relevant. <span class="impl">User agents should not render elements that have the
@@ -389,7 +385,7 @@
   controls in one big page with a scrollbar. It is similarly incorrect
   to use this attribute to hide content just from one presentation
   &#x2014; if something is marked <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code>, it is hidden from all
-  presentations, including, for instance, screen readers.</p><!-- for example, "<a hidden href=#content>Skip to content</a>" would be inappropriate. --><!-- (but only add that example if you first add some more good valid examples --><p>Elements that are not <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code>
+  presentations, including, for instance, screen readers.</p><p>Elements that are not <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code>
   should not link to or refer to elements that are <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code>.</p><div class="example">
 
    <p>For example, it would be incorrect to use the <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code> attribute to link to a
@@ -412,11 +408,7 @@
   attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the content attribute of the
   same name.</p>
 
-  </div><h3 id="activation"><span class="secno">7.2 </span>Activation</h3><!-- v2 idea: HTMLImageElement.click(x, y); or clickPoint(), if
-       click() can't be done in IE; can this be emulated in IE by
-       posting a synthetic mouse click event with those X and Y
-       coords? (ack Csaba Gabor)
-  --><dl class="domintro"><dt><var title="">element</var> . <code title="dom-click"><a href="#dom-click">click</a></code>()</dt>
+  </div><h3 id="activation"><span class="secno">7.2 </span>Activation</h3><dl class="domintro"><dt><var title="">element</var> . <code title="dom-click"><a href="#dom-click">click</a></code>()</dt>
 
    <dd>
 
@@ -446,15 +438,7 @@
    <li><p>Set the <var title="">click in progress</var> flag on the
    element to false.</p></li>
 
-  </ol></div><h3 id="focus"><span class="secno">7.3 </span>Focus</h3><!-- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E%20%0A...%3Cform%3E%3Cinput%20name%3Da%20onfocus%3D%22value%2B%3D1%3Bd.name%3D%27a%27%3Bname%3D%27d%27%3Bb.focus()%22%3E%0A%3Cinput%20name%3Db%20onfocus%3D%22value%2B%3D1%3Bc.focus()%22%3E%0A%3Cinput%20name%3Dc%20onfocus%3D%22value%2B%3D1%3Bd.focus()%22%3E%0A%3Cinput%20name%3Dd%20onfocus%3D%22value%2B%3D1%3Ba.focus()%22%3E --><!-- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E%0A...%3Cform%3E%0A%3Ctextarea%20name%3Dt%20cols%3D100%20rows%3D3%3E%3C%2Ftextarea%3E%3Cp%3E%0A%3Cinput%20name%3Da%20onfocus%3D%22t.value%2B%3D%27af1%20%27%3Bb.focus()%3Balert(document.activeElement.name)%3Bt.value%2B%3D%27af2%20%27%3B%22%20onblur%3D%22t.value%2B%3D%27ab%20%27%3B%22%3E%0A%3Cinput%20name%3Db%20onfocus%3D%22t.value%2B%3D%27bf1%20%27%3Bc.focus()%3Bt.value%2B%3D%27bf2%20%27%3B%22%20onblur%3D%22t.value%2B%3D%27bb%20%27%3B%22%3E%0A%3Cinput%20name%3Dc%20onfocus%3D%22t.value%2B%3D%27cf1%20%27%3Bc.focus()%3Bt.value%2B%3D%27cf2%20%27%3B%22%20onblur%3D%22t.value%2B%3D%27cb%20%27%3B%22%3E%0A --><!-- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E%3Cbody%20onload%3D%22document.forms%5B0%5D.a.focus()%22%3E%0A...%3Cform%3E%0A%3Ctextarea%20name%3Dt%20cols%3D100%20rows%3D3%3E%3C%2Ftextarea%3E%3Cp%3E%0A%3Cinput%20name%3Da%20onblur%3D%22t.value%2B%3D'ab%20'%3B%20b.focus()%3B%22%3E%0A%3Cinput%20name%3Db%20onfocus%3D%22t.value%2B%3D'bf1%20'%3Ba.focus()%3Bt.value%2B%3D'bf2%20'%3B%22%20onblur%3D%22t.value%2B%3D'bb%20'%3B%22%3E --><!-- http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E%3Cbody%3E...%3Cform%3E%0A%3Ctextarea%20name%3Dt%20cols%3D100%20rows%3D3%3E%3C%2Ftextarea%3E%3Cp%3E%0A%3Cinput%20name%3Da%20onfocus%3D%22t.value%2B%3D%27af%20%27%3B%22%20onblur%3D%22t.value%2B%3D%27ab1%20%27%3Bb.focus()%3Bt.value%2B%3D%27ab2%20%27%3B%22%3E%0A%3Cinput%20name%3Db%20onfocus%3D%22t.value%2B%3D%27bf1%20%27%3Ba.focus()%3Bt.value%2B%3D%27bf2%20%27%3B%22%20onblur%3D%22t.value%2B%3D%27bb%20%27%3B%22%3E --><!-- v2: more things to define, if no other specs define them:
-   - define onfocus/onblur behaviour for Window
-   - Other things to look at are IE's focus APIs (HTMLElement.setActive(),
-     onBeforeActivate, onActivate, onBeforeDeactivate, onDeactivate):
-       https://bugzilla.mozilla.org/show_bug.cgi?id=296471
-       https://bugzilla.mozilla.org/show_bug.cgi?id=296469
-       http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/setactive.asp
-       http://msdn.microsoft.com/workshop/author/dhtml/reference/events/onbeforeactivate.asp
-  --><div class="impl">
+  </ol></div><h3 id="focus"><span class="secno">7.3 </span>Focus</h3><div class="impl">
 
   <p>When an element is <i>focused</i>, key events received by the
   document must be targeted at that element. There may be no element
@@ -631,7 +615,7 @@
   <ol><li><p>If the element is not <a href="infrastructure.html#in-a-document" title="in a Document">in a
    <code>Document</code></a>, or if the element's
    <code><a href="infrastructure.html#document">Document</a></code> has no <a href="browsers.html#browsing-context">browsing context</a>, or if
-   the element's <code><a href="infrastructure.html#document">Document</a></code>' <a href="browsers.html#browsing-context">browsing context</a>
+   the element's <code><a href="infrastructure.html#document">Document</a></code>'s <a href="browsers.html#browsing-context">browsing context</a>
    has no <a href="browsers.html#top-level-browsing-context">top-level browsing context</a>, then abort these
    steps.</p>
 
@@ -663,7 +647,7 @@
    </li>
 
    <li><p><a href="webappapis.html#fire-a-simple-event">Fire a simple event</a> named <code title="event-focus">focus</code> at the element.</p></li>
-   <!-- http://software.hixie.ch/utilities/js/live-dom-viewer/saved/723 -->
+   
 
   </ol><p>User agents must synchronously run the <a href="#focusing-steps">focusing
   steps</a> for an element whenever the user moves the focus to a
@@ -676,14 +660,12 @@
    element, and the element does not have a defined <a href="content-models.html#activation-behavior">activation
    behavior</a>, and the user has changed the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> or its list of <a href="number-state.html#concept-input-type-file-selected" title="concept-input-type-file-selected">selected files</a>
    while the control was focused without committing that change, then
-   <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> that bubbles named <code title="event-change">change</code> at the element, then
-   <a href="association-of-controls-and-forms.html#broadcast-formchange-events">broadcast <code title="event-formchange">formchange</code>
-   events</a> at the element's <a href="association-of-controls-and-forms.html#form-owner">form owner</a>.</p>
+   <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> that bubbles named <code title="event-change">change</code> at the element.</p>
 
    </li><li><p>Unfocus the element.</p></li>
 
    <li><p><a href="webappapis.html#fire-a-simple-event">Fire a simple event</a> named <code title="event-blur">blur</code> at the element.</p></li>
-   <!-- http://software.hixie.ch/utilities/js/live-dom-viewer/saved/723 -->
+   
 
   </ol><p>When an element that is focused stops being a
   <a href="#focusable">focusable</a> element, or stops being focused without
@@ -829,7 +811,7 @@
   unusable by keyboard users. Ignoring calls to this method would thus
   allow keyboard users to interact with the page.</p>
 
-  </div><h3 id="assigning-keyboard-shortcuts"><span class="secno">7.4 </span>Assigning keyboard shortcuts</h3><h4 id="introduction-5"><span class="secno">7.4.1 </span>Introduction</h4><p><i>This section is non-normative.</i></p><p>Each element that can be activated or focused can be assigned a
+  </div><h3 id="assigning-keyboard-shortcuts"><span class="secno">7.4 </span>Assigning keyboard shortcuts</h3><h4 id="introduction-6"><span class="secno">7.4.1 </span>Introduction</h4><p><i>This section is non-normative.</i></p><p>Each element that can be activated or focused can be assigned a
   single key combination to activate it, using the <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> attribute.</p><p>The exact shortcut is determined by the user agent, based on
   information about the user's keyboard, what keyboard shortcuts
   already exist on the platform, and what other shortcuts have been
@@ -1062,9 +1044,7 @@
   <p class="note">How the caret and selection are represented depends
   entirely on the UA.</p>
 
-  <!-- v2: would be useful to have a way to mark an element as
-  unremovable. -->
-
+  
   </div><div class="impl">
 
   <h4 id="user-editing-actions"><span class="secno">7.5.1 </span>User editing actions</h4>
@@ -1388,13 +1368,13 @@
   grammar-checking enabled, the UA must use the following
   algorithm:</p>
 
-  <ol><!-- user override --><li>If the user has disabled the checking for this text, then the
+  <ol><li>If the user has disabled the checking for this text, then the
    checking is disabled.</li>
 
    <li>Otherwise, if the user has forced the checking for this text to
    always be enabled, then the checking is enabled.</li>
 
-   <!-- content attribute: on, off -->
+   
 
    <li>Otherwise, if the element with which the text is associated has
    a <code title="attr-spellcheck"><a href="#attr-spellcheck">spellcheck</a></code> content
@@ -1402,7 +1382,7 @@
    then checking is enabled; otherwise, if that attribute is in the
    <i>false</i> state, then checking is disabled.</li>
 
-   <!-- inherit, if there is one to inherit from -->
+   
 
    <li>Otherwise, if there is an ancestor element with a <code title="attr-spellcheck"><a href="#attr-spellcheck">spellcheck</a></code> content attribute that is
    not in the <i>default</i> state, then: if the nearest such
@@ -1410,7 +1390,7 @@
    attribute is in the <i>true</i> state, then checking is enabled;
    otherwise, checking is disabled.</li>
 
-   <!-- default -->
+   
 
    <li>Otherwise, if the element's <a href="#concept-spellcheck-default" title="concept-spellcheck-default">default behavior</a> is <a href="#concept-spellcheck-default-true" title="concept-spellcheck-default-true">true-by-default</a>,
    then checking is enabled.</li>
@@ -1418,7 +1398,7 @@
    <li>Otherwise, if the element's <a href="#concept-spellcheck-default" title="concept-spellcheck-default">default behavior</a> is <a href="#concept-spellcheck-default-false" title="concept-spellcheck-default-false">false-by-default</a>,
    then checking is disabled.</li>
 
-   <!-- default inheritance -->
+   
 
    <li>Otherwise, if the element's parent element has <em>its</em>
    checking enabled, then checking is enabled.</li>

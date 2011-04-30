@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>4.10.7.2 Common input element attributes &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -675,7 +671,8 @@
    password field and this third field.</p>
 
    <pre>&lt;h1&gt;Create new account&lt;/h1&gt;
-&lt;form action="/newaccount" method=post&gt;
+&lt;form action="/newaccount" method=post
+      oninput="up2.setCustomValidity(up2.value != up.value ? 'Passwords do not match.' : '')"&gt;
  &lt;p&gt;
   &lt;label for="username"&gt;E-mail address:&lt;/label&gt;
   &lt;input id="username" type=email required name=un&gt;
@@ -684,7 +681,7 @@
   &lt;input id="password1" type=password required name=up&gt;
  &lt;p&gt;
   &lt;label for="password2"&gt;Confirm password:&lt;/label&gt;
-  &lt;input id="password2" type=password onforminput="setCustomValidity(value != password1.value ? 'Passwords do not match.' : '')"&gt;
+  &lt;input id="password2" type=password name=up2&gt;
  &lt;p&gt;
   &lt;input type=submit value="Create account"&gt;
 &lt;/form&gt;</pre>
@@ -947,7 +944,7 @@ You cannot submit this form when the field is incorrect.</samp></pre>
    <p>Normally, time controls are limited to an accuracy of one
    minute.</p>
 
-  </div><h6 id="the-placeholder-attribute"><span class="secno">4.10.7.2.12 </span>The <code title="attr-input-placeholder"><a href="#attr-input-placeholder">placeholder</a></code> attribute</h6><!-- similar text in the <textarea> section --><p>The <dfn id="attr-input-placeholder" title="attr-input-placeholder"><code>placeholder</code></dfn>
+  </div><h6 id="the-placeholder-attribute"><span class="secno">4.10.7.2.12 </span>The <code title="attr-input-placeholder"><a href="#attr-input-placeholder">placeholder</a></code> attribute</h6><p>The <dfn id="attr-input-placeholder" title="attr-input-placeholder"><code>placeholder</code></dfn>
   attribute represents a <em>short</em> hint (a word or short phrase)
   intended to aid the user with data entry. A hint could be a sample
   value or a brief description of the expected format. The attribute,
@@ -1237,7 +1234,7 @@ You cannot submit this form when the field is incorrect.</samp></pre>
 
   <ol><li><p>If there is no <a href="#concept-input-list" title="concept-input-list">suggestions
    source element</a> (e.g. because the <code title="attr-input-list"><a href="#attr-input-list">list</a></code> attribute doesn't apply or is
-   not specified), then return null and abort thee steps.</p></li>
+   not specified), then return null and abort these steps.</p></li>
 
    <li><p>If the <code title="attr-input-multiple"><a href="#attr-input-multiple">multiple</a></code>
    attribute is specified and applies, then return null and abort
@@ -1257,17 +1254,13 @@ You cannot submit this form when the field is incorrect.</samp></pre>
 
   <p>When the <dfn id="event-input-input" title="event-input-input"><code>input</code></dfn>
   event applies, any time the user causes the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to change, the user agent must
-  <a href="webappapis.html#queue-a-task">queue a task</a> to first <a href="webappapis.html#fire-a-simple-event">fire a simple event</a>
-  that bubbles named <code title="event-input">input</code> at the
-  <code><a href="the-input-element.html#the-input-element">input</a></code> element, and then to <a href="association-of-controls-and-forms.html#broadcast-forminput-events">broadcast <code title="event-forminput">forminput</code> events</a> from the
-  <code><a href="the-input-element.html#the-input-element">input</a></code> element's <a href="association-of-controls-and-forms.html#form-owner">form owner</a>, if any. User
-  agents may wait for a suitable break in the user's interaction
-  before queuing the task; for example, a user agent could wait for
-  the user to have not hit a key for 100ms, so as to only fire the
-  event when the user pauses, instead of continuously for each
-  keystroke.</p> <!-- same text is present in the <textarea> section
-  -->
-
+  <a href="webappapis.html#queue-a-task">queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> that
+  bubbles named <code title="event-input">input</code> at the
+  <code><a href="the-input-element.html#the-input-element">input</a></code> element. User agents may wait for a suitable
+  break in the user's interaction before queuing the task; for
+  example, a user agent could wait for the user to have not hit a key
+  for 100ms, so as to only fire the event when the user pauses,
+  instead of continuously for each keystroke.</p> 
   <p class="example">Examples of a user changing the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> would include the user typing
   into a text field, pasting a new value into the field, or undoing an
   edit in that field. Some user interactions do not cause changes to
@@ -1280,10 +1273,9 @@ You cannot submit this form when the field is incorrect.</samp></pre>
   defined but uses a user interface that involves an explicit commit
   action, then any time the user commits a change to the element's
   <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> or list of <a href="number-state.html#concept-input-type-file-selected" title="concept-input-type-file-selected">selected files</a>, the
-  user agent must <a href="webappapis.html#queue-a-task">queue a task</a> to first <a href="webappapis.html#fire-a-simple-event">fire a
-  simple event</a> that bubbles named <code title="event-change">change</code> at the <code><a href="the-input-element.html#the-input-element">input</a></code>
-  element, and then to <a href="association-of-controls-and-forms.html#broadcast-formchange-events">broadcast <code title="event-formchange">formchange</code> events</a> from the
-  <code><a href="the-input-element.html#the-input-element">input</a></code> element's <a href="association-of-controls-and-forms.html#form-owner">form owner</a>, if any.</p>
+  user agent must <a href="webappapis.html#queue-a-task">queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple
+  event</a> that bubbles named <code title="event-change">change</code> at the <code><a href="the-input-element.html#the-input-element">input</a></code>
+  element.</p>
 
   <p class="example">An example of a user interface with a commit
   action would be a <a href="number-state.html#file-upload-state" title="attr-input-type-file">File
@@ -1308,18 +1300,10 @@ You cannot submit this form when the field is incorrect.</samp></pre>
    event</a> that bubbles named <code title="event-input">input</code> at the <code><a href="the-input-element.html#the-input-element">input</a></code>
    element.</li>
 
-   <li>If the <code title="event-input-input"><a href="#event-input-input">input</a></code> event
-   applies, <a href="webappapis.html#queue-a-task">queue a task</a> to <a href="association-of-controls-and-forms.html#broadcast-forminput-events">broadcast <code title="event-forminput">forminput</code> events</a> from the
-   <code><a href="the-input-element.html#the-input-element">input</a></code> element's <a href="association-of-controls-and-forms.html#form-owner">form owner</a>, if any.</li>
-
    <li>If the <code title="event-input-change"><a href="#event-input-change">change</a></code> event
    applies, <a href="webappapis.html#queue-a-task">queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple
    event</a> that bubbles named <code title="event-change">change</code> at the <code><a href="the-input-element.html#the-input-element">input</a></code>
    element.</li>
-
-   <li>If the <code title="event-input-change"><a href="#event-input-change">change</a></code> event
-   applies, <a href="webappapis.html#queue-a-task">queue a task</a> to <a href="association-of-controls-and-forms.html#broadcast-formchange-events">broadcast <code title="event-formchange">formchange</code> events</a> from the
-   <code><a href="the-input-element.html#the-input-element">input</a></code> element's <a href="association-of-controls-and-forms.html#form-owner">form owner</a>, if any.</li>
 
   </ol><p class="note">In addition, when the <code title="event-input-change"><a href="#event-input-change">change</a></code> event applies, <code title="event-change">change</code> events can also be fired as part
   of the element's <a href="content-models.html#activation-behavior">activation behavior</a> and as part of the

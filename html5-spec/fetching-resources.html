@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>2.7 Fetching resources &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -350,7 +346,7 @@
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="common-dom-interfaces.html" class="next">2.8 Common DOM interfaces</a>
   <ol class="toc"><li><ol><li><a href="fetching-resources.html#fetching-resources"><span class="secno">2.7 </span>Fetching resources</a>
-    <ol><li><a href="fetching-resources.html#concept-http-equivalent"><span class="secno">2.7.1 </span>Protocol concepts</a></li><li><a href="fetching-resources.html#encrypted-http-and-related-security-concerns"><span class="secno">2.7.2 </span>Encrypted HTTP and related security concerns</a></li><li><a href="fetching-resources.html#content-type-sniffing"><span class="secno">2.7.3 </span>Determining the type of a resource</a></li></ol></li></ol></li></ol></div><div class="impl">
+    <ol><li><a href="fetching-resources.html#concept-http-equivalent"><span class="secno">2.7.1 </span>Protocol concepts</a></li><li><a href="fetching-resources.html#encrypted-http-and-related-security-concerns"><span class="secno">2.7.2 </span>Encrypted HTTP and related security concerns</a></li><li><a href="fetching-resources.html#content-type-sniffing"><span class="secno">2.7.3 </span>Determining the type of a resource</a></li><li><a href="fetching-resources.html#extracting-encodings-from-meta-elements"><span class="secno">2.7.4 </span>Extracting encodings from <code>meta</code> elements</a></li></ol></li></ol></li></ol></div><div class="impl">
 
   <h3 id="fetching-resources"><span class="secno">2.7 </span>Fetching resources</h3>
 
@@ -361,20 +357,10 @@
   flag</i>, the following steps must be run. (When a <em>URL</em> is
   to be fetched, the URL identifies a resource to be obtained.)</p>
 
-  <!-- if invoked with the synchronous flag, make sure to release the
-  storage mutex first -->
-
-  <!-- synchronous flag is only to be used in algorithms that are
-  themselves asynchronous! Only sync-XHR is allowed to make the
-  mistake of screwing that up. :-P -->
-
-  <!-- the force same-origin flag is for use in places where we'll be
-  moving to CORS one day; when used, the algorithm must be invoked
-  with a URL (not something else, like a POST request) whose origin is
-  the same as the /origin/, which must also be present, and the
-  algorithm must not be invoked with the manual redirect flag. -->
-
-  <!-- "block cookies" is currently only used by XHR -->
+  
+  
+  
+  
 
   <ol><li>
 
@@ -398,7 +384,7 @@
 
    <li>
 
-    <p>While <var title="">document</var> is is <a href="the-iframe-element.html#an-iframe-srcdoc-document">an
+    <p>While <var title="">document</var> is <a href="the-iframe-element.html#an-iframe-srcdoc-document">an
     <code>iframe</code> <code title="attr-iframe-srcdoc">srcdoc</code>
     document</a>, let <var title="">document</var> be <var title="">document</var>'s <a href="browsers.html#browsing-context">browsing context</a>'s
     <a href="browsers.html#browsing-context-container">browsing context container</a>'s <code><a href="infrastructure.html#document">Document</a></code>
@@ -415,9 +401,7 @@
 
     <p>Remove any <a href="urls.html#url-fragment" title="url-fragment">&lt;fragment&gt;</a>
     component from the generated <i>address of the resource from which
-    Request-URIs are obtained</i>.</p> <!-- RFC2616 says "The URI MUST
-    NOT include a fragment." (section 14.36) -->
-
+    Request-URIs are obtained</i>.</p> 
     <p>If the <a href="origin-0.html#origin">origin</a> of the appropriate
     <code><a href="infrastructure.html#document">Document</a></code> is not a scheme/host/port tuple, then the
     <code title="http-referer">Referer</code> (sic) header must be
@@ -649,7 +633,7 @@
   </div>
 
 
-  <h4 id="content-type-sniffing"><span class="secno">2.7.3 </span>Determining the type of a resource</h4><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/125">ISSUE-125</a> (charset-vs-quotes), <a href="http://www.w3.org/html/wg/tracker/issues/126">ISSUE-126</a> (charset-vs-backslashes) and <a href="http://www.w3.org/html/wg/tracker/issues/148">ISSUE-148</a> (charset-detect) block progress to Last Call</span></p>
+  <h4 id="content-type-sniffing"><span class="secno">2.7.3 </span>Determining the type of a resource</h4><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/125">ISSUE-125</a> (charset-vs-quotes) blocks progress to Last Call</span></p>
 
   <p>The <dfn id="content-type" title="Content-Type">Content-Type metadata</dfn> of a
   resource must be obtained and interpreted in a manner consistent
@@ -675,11 +659,14 @@
   occur. For more details, see the Media Type Sniffing
   specification. <a href="references.html#refsMIMESNIFF">[MIMESNIFF]</a></p>
 
-  <p>The <dfn id="algorithm-for-extracting-an-encoding-from-a-content-type">algorithm for extracting an encoding from a
-  Content-Type</dfn>, given a string <var title="">s</var>, is as
-  follows. It either returns an encoding or nothing.</p>
 
-  <ol><!-- http://www.hixie.ch/tests/adhoc/html/parsing/encoding/all.html --><li><p>Let <var title="">position</var> be a pointer into <var title="">s</var>, initially pointing at the start of the
+  <h4 id="extracting-encodings-from-meta-elements"><span class="secno">2.7.4 </span>Extracting encodings from <code><a href="semantics.html#meta">meta</a></code> elements</h4>
+
+  <p>The <dfn id="algorithm-for-extracting-an-encoding-from-a-meta-element">algorithm for extracting an encoding from a
+  <code>meta</code> element</dfn>, given a string <var title="">s</var>, is as follows. It either returns an encoding or
+  nothing.</p>
+
+  <ol><li><p>Let <var title="">position</var> be a pointer into <var title="">s</var>, initially pointing at the start of the
    string.</p></li>
 
    <li><p><i>Loop</i>: Find the first seven characters in <var title="">s</var> after <var title="">position</var> that are an
@@ -719,12 +706,11 @@
 
     </dl></li>
 
-  </ol><p class="note">This requirement is a <a href="introduction.html#willful-violation">willful violation</a>
-  of the HTTP specification (for example, HTTP doesn't allow the use
-  of single quotes and requires supporting a backslash-escape
-  mechanism that is not supported by this algorithm<!-- not to mention
-  not having any rules for error-handling, which is of course why
-  we're having to define it ourselves -->), motivated by the need for
-  backwards compatibility with legacy content. <a href="references.html#refsHTTP">[HTTP]</a></p>
+  </ol><p class="note">This algorithm is distinct from those in the HTTP
+  specification (for example, HTTP doesn't allow the use of single
+  quotes and requires supporting a backslash-escape mechanism that is
+  not supported by this algorithm). While the algorithm is used in contexts
+  that, historically, were related to HTTP, the syntax as supported by
+  implementations diverged some time ago. <a href="references.html#refsHTTP">[HTTP]</a></p>
 
   </div></body></html>

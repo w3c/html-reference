@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>4.8.2 The iframe element &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -429,9 +425,7 @@
   <a href="browsers.html#nested-browsing-context">nested browsing context</a> but with no <code title="attr-iframe-srcdoc"><a href="#attr-iframe-srcdoc">srcdoc</a></code> attribute specified has its
   <code title="attr-iframe-src"><a href="#attr-iframe-src">src</a></code> attribute set, changed, or
   removed, the user agent must <a href="#process-the-iframe-attributes">process the <code>iframe</code>
-  attributes</a>.</p> <!-- It doesn't happen when the base URL is
-  changed, though. -->
-
+  attributes</a>.</p> 
   <p>When the user agent is to <dfn id="process-the-iframe-attributes">process the <code>iframe</code>
   attributes</dfn>, it must run the first appropriate steps from the
   following list:</p>
@@ -439,7 +433,7 @@
   <dl class="switch"><dt>If the <code title="attr-iframe-srcdoc"><a href="#attr-iframe-srcdoc">srcdoc</a></code> attribute
    is specified</dt>
 
-   <dd><p><a href="history.html#navigate">Navigate</a><!--DONAV iframe--> the element's
+   <dd><p><a href="history.html#navigate">Navigate</a> the element's
    <a href="browsers.html#browsing-context">browsing context</a> to a resource whose
    <a href="fetching-resources.html#content-type">Content-Type</a> is <code><a href="iana.html#text-html">text/html</a></code>, whose
    <a href="urls.html#url">URL</a> is <code><a href="urls.html#about:srcdoc">about:srcdoc</a></code>, and whose data
@@ -470,7 +464,7 @@
      first time, <code><a href="fetching-resources.html#about:blank">about:blank</a></code> is loaded
      normally.)</p></li>
 
-     <li><p><a href="history.html#navigate">Navigate</a><!--DONAV iframe--> the element's
+     <li><p><a href="history.html#navigate">Navigate</a> the element's
      <a href="browsers.html#browsing-context">browsing context</a> to the resulting <a href="urls.html#absolute-url">absolute
      URL</a>.</p></li>
 
@@ -507,9 +501,7 @@
   <code><a href="infrastructure.html#document">Document</a></code> created when the <a href="browsers.html#browsing-context">browsing context</a>
   was created, then any <a href="history.html#navigate" title="navigate">navigation</a>
   required of the user agent in that algorithm must be completed with
-  <a href="history.html#replacement-enabled">replacement enabled</a>.</p> <!-- see also the note near
-  similar text for the location.assign() method -->
-
+  <a href="history.html#replacement-enabled">replacement enabled</a>.</p> 
   </div><p class="note">If, when the element is created, the <code title="attr-iframe-srcdoc"><a href="#attr-iframe-srcdoc">srcdoc</a></code> attribute is not set, and
   the <code title="attr-iframe-src"><a href="#attr-iframe-src">src</a></code> attribute is either
   also not set or set but its value cannot be <a href="urls.html#resolve-a-url" title="resolve a&#10;  url">resolved</a>, the browsing context will remain at the
@@ -663,13 +655,7 @@
   damage that can be caused by hostile HTML content, it should be
   served using the <code><a href="iana.html#text-html-sandboxed">text/html-sandboxed</a></code> MIME type.</p><div class="impl">
 
-  <!-- v2: Add a new attribute that enables new restrictions, e.g.:
-       - disallow cross-origin loads of any kind (networking
-         override that only allows same-origin URLs or about:,
-         javascript:, data:)
-       - block access to 'parent.frames' from sandbox
-  -->
-
+  
   <p>While the <code title="attr-iframe-sandbox"><a href="#attr-iframe-sandbox">sandbox</a></code>
   attribute is specified, the <code><a href="#the-iframe-element">iframe</a></code> element's
   <a href="browsers.html#nested-browsing-context">nested browsing context</a> must have the flags given in
@@ -742,7 +728,7 @@
     of other pages on the same site (in particular, pages that contain
     user-sensitive information).</p>
 
-    <!-- http://lists.w3.org/Archives/Public/public-web-security/2009Dec/thread.html#msg51 -->
+    
 
    </dd>
 
@@ -931,9 +917,7 @@
   <code><a href="#the-iframe-element">iframe</a></code>'s <code><a href="infrastructure.html#document">Document</a></code>, then a script in the
   "sandboxed" iframe could just reach out, remove the <code title="attr-iframe-sandbox"><a href="#attr-iframe-sandbox">sandbox</a></code> attribute, and then
   reload itself, effectively breaking out of the sandbox
-  altogether.</p><hr/><!-- v2: Might be interesting to have a value on seamless that
-  allowed event propagation of some sort, maybe based on the WICD
-  work: http://www.w3.org/TR/WICD/ --><p>The <dfn id="attr-iframe-seamless" title="attr-iframe-seamless"><code>seamless</code></dfn>
+  altogether.</p><hr/><p>The <dfn id="attr-iframe-seamless" title="attr-iframe-seamless"><code>seamless</code></dfn>
   attribute is a <a href="common-microsyntaxes.html#boolean-attribute">boolean attribute</a>. When specified, it
   indicates that the <code><a href="#the-iframe-element">iframe</a></code> element's <a href="browsers.html#browsing-context">browsing
   context</a> is to be rendered in a manner that makes it appear to
@@ -1097,21 +1081,7 @@
    <pre>&lt;iframe src="http://ads.example.com/?customerid=923513721&amp;amp;format=banner"
         width="468" height="60"&gt;&lt;/iframe&gt;</pre>
 
-  </div><h4 id="the-embed-element"><span class="secno">4.8.3 </span>The <dfn><code>embed</code></dfn> element</h4><!-- (v2?)
- we have all kinds of quirks we should define if they come up during
- testing, as e.g. shown in:
- http://mxr.mozilla.org/mozilla-central/source/layout/generic/nsObjectFrame.cpp
- http://trac.webkit.org/browser/trunk/WebCore/html/HTMLEmbedElement.cpp
- http://trac.webkit.org/browser/trunk/WebCore/rendering/RenderPartObject.cpp (updateWidget)
- e.g. - 240x200 default
-      - the attributes/params are sent in a name/value pair list as follows (for Gecko):
-         + attributes of the element, in source order
-         + a synthesised 'src' attribute, if there was no 'src' but
-           there was a 'data', with the value of the 'data' attribute
-         + the params, in source order
-        (WebKit does something different still)
-      - the HIDDEN attribute (might be moot now)
---><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-embed-element"><span class="secno">4.8.3 </span>The <dfn><code>embed</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
    <dd><a href="content-models.html#embedded-content">Embedded content</a>.</dd>
@@ -1217,27 +1187,16 @@
     attribute, relative to the element. If that is successful, the
     user agent should <a href="fetching-resources.html#fetch">fetch</a> the resulting <a href="urls.html#absolute-url">absolute
     URL</a>, from the element's <a href="browsers.html#browsing-context-scope-origin">browsing context scope
-    origin</a> if it has one<!-- potentially http-origin privacy
-    sensitive -->. The <a href="webappapis.html#concept-task" title="concept-task">task</a> that is
+    origin</a> if it has one. The <a href="webappapis.html#concept-task" title="concept-task">task</a> that is
     <a href="webappapis.html#queue-a-task" title="queue a task">queued</a> by the <a href="webappapis.html#networking-task-source">networking
     task source</a> once the resource has been <a href="fetching-resources.html#fetch" title="fetch">fetched</a> must find and instantiate an
     appropriate <a href="infrastructure.html#plugin">plugin</a> based on the <a href="#concept-embed-type" title="concept-embed-type">content's type</a>, and hand that
     <a href="infrastructure.html#plugin">plugin</a> the content of the resource, replacing any
-    previously instantiated plugin for the element.</p> <!-- Note that
-    this doesn't happen when the base URL changes. -->
-
+    previously instantiated plugin for the element.</p> 
     <p>Fetching the resource must <a href="the-end.html#delay-the-load-event">delay the load event</a> of
     the element's document.</p>
-    <!-- if we add load/error events, then replace the previous
-    paragraph with the text one: -->
-    <!-- similar text in various places -->
-    <!--<p>Fetching the resource must <span>delay the load
-    event</span> of the element's document until the final <span
-    title="concept-task">task</span> that is <span title="queue a
-    task">queued</span> by the <span>networking task source</span>
-    once the resource has been <span title="fetch">fetched</span> has
-    been run.</p>-->
-
+        
+    
    </dd>
 
    <dt>If the element has no <code title="attr-embed-src"><a href="#attr-embed-src">src</a></code>
@@ -1265,10 +1224,7 @@
 
    <li>
 
-    <!-- if we get to this point we know we can successfully parsed
-    the URL, since this algorithm is only used after fetching the
-    resource in the steps above -->
-
+    
     <p>Otherwise, if the <a href="urls.html#url-path" title="url-path">&lt;path&gt;</a>
     component of the <a href="urls.html#url">URL</a> of the specified resource (after
     any redirects) matches a pattern that a <a href="infrastructure.html#plugin">plugin</a>
@@ -1279,8 +1235,8 @@
     handle resources with <a href="urls.html#url-path" title="url-path">&lt;path&gt;</a>
     components that end with the four character string "<code title="">.swf</code>".</p>
 
-    <!-- it's sad that we have to do extension sniffing. sigh. -->
-    <!-- see also <object> which has a similar step -->
+    
+    
 
    </li>
 
@@ -1291,7 +1247,7 @@
    <li><p>Otherwise, the content has no type and there can be no
    appropriate <a href="infrastructure.html#plugin">plugin</a> for it.</p></li>
 
-   <!-- This algorithm is a monument to bad design. Go legacy! -->
+   
 
   </ol><p>The <code><a href="#the-embed-element">embed</a></code> element has no <a href="content-models.html#fallback-content">fallback
   content</a>. If the user agent can't find a suitable plugin, then
@@ -1307,8 +1263,7 @@
   with error responses (e.g. HTTP 500 Internal Server Error codes can
   still contain plugin data).</p>
 
-  </div><p>Any namespace-less attribute other than <code title="attr-embed-name"><a href="obsolete.html#attr-embed-name">name</a></code>, <code title="attr-embed-align"><a href="obsolete.html#attr-embed-align">align</a></code>, <code title="attr-embed-hspace"><a href="obsolete.html#attr-embed-hspace">hspace</a></code>, and <code title="attr-embed-vspace"><a href="obsolete.html#attr-embed-vspace">vspace</a></code> <!-- when editing, see also
-  note below --> may be specified on the <code><a href="#the-embed-element">embed</a></code> element,
+  </div><p>Any namespace-less attribute other than <code title="attr-embed-name"><a href="obsolete.html#attr-embed-name">name</a></code>, <code title="attr-embed-align"><a href="obsolete.html#attr-embed-align">align</a></code>, <code title="attr-embed-hspace"><a href="obsolete.html#attr-embed-hspace">hspace</a></code>, and <code title="attr-embed-vspace"><a href="obsolete.html#attr-embed-vspace">vspace</a></code>  may be specified on the <code><a href="#the-embed-element">embed</a></code> element,
   so long as its name is <a href="infrastructure.html#xml-compatible">XML-compatible</a> and contains no
   characters in the range U+0041 to U+005A (LATIN CAPITAL LETTER A to
   LATIN CAPITAL LETTER Z). These attributes are then passed as
@@ -1361,7 +1316,7 @@
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
    <dd><a href="content-models.html#embedded-content">Embedded content</a>.</dd>
-   <dd>If the element has a <code title="attr-hyperlink-usemap"><a href="the-map-element.html#attr-hyperlink-usemap">usemap</a></code> attribute: <a href="content-models.html#interactive-content">Interactive content</a>.</dd> <!-- also when showing a plugin or a nested browsing context, but checking that statically is hard...) -->
+   <dd>If the element has a <code title="attr-hyperlink-usemap"><a href="the-map-element.html#attr-hyperlink-usemap">usemap</a></code> attribute: <a href="content-models.html#interactive-content">Interactive content</a>.</dd> 
    <dd><a href="forms.html#category-listed" title="category-listed">Listed</a>,  <a href="forms.html#category-submit" title="category-submit">submittable</a>, <a href="forms.html#form-associated-element">form-associated element</a>.</dd>
    <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#embedded-content">embedded content</a> is expected.</dd>
@@ -1432,9 +1387,7 @@
   to run the following steps to (re)determine what the
   <code><a href="#the-object-element">object</a></code> element represents. The <a href="webappapis.html#task-source">task source</a>
   for this <a href="webappapis.html#concept-task" title="concept-task">task</a> is the <a href="webappapis.html#dom-manipulation-task-source">DOM
-  manipulation task source</a>.</p> <!-- Changing the base URL
-  doesn't trigger this. -->
-
+  manipulation task source</a>.</p> 
   <ol><li>
 
     <p>If the user has indicated a preference that this
@@ -1464,9 +1417,7 @@
 
    <li>
 
-    <!-- what if it's not in the document? if that should prevent
-    plugin instantiation, then here just skip to the last step -->
-
+    
     <p>If the <code title="attr-object-classid"><a href="obsolete.html#attr-object-classid">classid</a></code>
     attribute is present, and has a value that isn't the empty string,
     then: if the user agent can find a <a href="infrastructure.html#plugin">plugin</a> suitable
@@ -1478,34 +1429,10 @@
     reports an error, jump to the last step in the overall set of
     steps (fallback).</p>
 
-    <!--
-     case insensitive:
-      is "clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" -> application/x-shockwave-flash
-      is "clsid:cfcdaa03-8be4-11cf-b84b-0020afbbccfa" -> audio/x-pn-realaudio-plugin
-      is "clsid:02bf25d5-8c17-4b23-bc80-d3488abddc6b" -> video/quicktime
-      is "clsid:166b1bca-3f9c-11cf-8075-444553540000" -> application/x-director
-      is "clsid:6bf52a52-394a-11d3-b153-00c04f79faa6" -> application/x-mplayer2
-      starts with "java:"                             -> application/x-java-vm
-      starts with "clsid:"                            -> application/x-oleobject
-    -->
-
+    
    </li>
 
-   <!-- (v2?)
-   we may have to define magic fallback to <param> if it turns out to
-   be needed in testing:
-   <hyatt> apparently your url can come from <param>
-   <hyatt> not just the data attribute
-   <hyatt> our code looks for params with "src", "movie", "code" and "url"
-   <hyatt> and also tries to find the type on a param
-   <Hixie> oh that's you trying to have hacky activex support
-   <Hixie> opera does that too
-   <hyatt> yeah we support activex versions of plugins that are common
-   <hyatt> like flash and quicktime and realaudio
-   <Hixie> that would be a step 1b. if no data attribute, then look for a <param> to get you a URL instead.
-   <Hixie> and if you find one, carry on as if that was your data="".
-   -->
-
+   
    <li><p>If the <code title="attr-object-data"><a href="#attr-object-data">data</a></code> attribute
    is present and its value is not the empty string, then:</p>
 
@@ -1528,13 +1455,17 @@
 
       <p><a href="fetching-resources.html#fetch">Fetch</a> the resulting <a href="urls.html#absolute-url">absolute URL</a>,
       from the element's <a href="browsers.html#browsing-context-scope-origin">browsing context scope origin</a> if
-      it has one<!-- potentially http-origin privacy sensitive
-      -->.</p>
+      it has one.</p>
 
-      <!-- similar text in various places --> <p>Fetching the resource
+       <p>Fetching the resource
       must <a href="the-end.html#delay-the-load-event">delay the load event</a> of the element's document
       until the <a href="webappapis.html#concept-task" title="concept-task">task</a> that is <a href="webappapis.html#queue-a-task" title="queue a task">queued</a> by the <a href="webappapis.html#networking-task-source">networking task
       source</a> once the resource has been <a href="fetching-resources.html#fetch" title="fetch">fetched</a> (defined next) has been run.</p>
+
+      <p>For the purposes of the <a href="offline.html#application-cache">application cache</a>
+      networking model, this <a href="fetching-resources.html#fetch">fetch</a> operation is not for a
+      <a href="browsers.html#child-browsing-context">child browsing context</a> (though it might end up
+      being used for one after all, as defined below).</p>
 
      </li>
 
@@ -1557,57 +1488,6 @@
 
       <p>Determine the <var title="">resource type</var>, as follows:</p>
 
-<!-- Hopefully this step is exactly equivalent to the following:
-
- START
-   |
-   V
- Is there a Content-Type and is the UA going to obey it blindly?
-   |                   |
-   | YES               | NO
-   |                   V                                                          YES
-   |                 Is there a type="" attribute whose value is a plugin type? ============================================-.
-   |                   |                                                                                                     |
-   |                   | NO                                                                                                  |
-   |                   V                        NO                                       YES                                 |
-   |                 Is there a Content type? ========-> Is there a type="" attribute? ==========> Let TYPE be type=""       |
-   |                   |                                                           |               attribute value           |
-   |                   | YES                                                       | NO                    |                 |
-   V            NO     V                                                           |                       V                 |
-   +-<============== Is it text/plain or application/octet-stream?                 `==> Let TYPE be  =====>+                 |
-   |                   |                                     |                          Sniffed type       |                 |
-   |                   | text/plain                          | octet-stream                                V                 |
-   |                   V                              YES    V                                          Is TYPE              |
-   |                 Does the page sniff as binary? ======> Is there a type="" attribute?       application/octet-stream?    |
-   |                   |                                     |              |                      |                |        |
-   |                   | NO                                  | YES          | NO                   | YES            | NO     |
-   |                   |                                     |       YES    V                      V                |        |
-   |                   |                  application/octet-stream? =====> Extension that is plugin type?           |        |
-   |                   |                                     |                          |          |                |        |
-   |                   |                                     | NO                       | NO       | YES            |        |
-   |                   |                                     V                          |          |                |        |
-   |                   |                           Type attribute is XML or     YES     V          |                |        |
-   |                   |                           doesn't start with image/* ======> FALLBACK     |                |        |
-   |                   |                           and is not a plugin type?                       |                |        |
-   |                   |                                          |                                |                |        |
-   |                   |                                          | NO                             |                |        V
-   V                   V                                          V                                V                V       Use
-  Use                 Use                                        Use it (will be                  Use              Use      type=""
-  Content-Type        text/plain                                 bitmap or plugin)                extension        TYPE     attribute
-   |                   |                                          |                                |                |        |
-   |                   V                                          V                                V                V        |
-   `================->-+========================================>-+==============>-+-<============-+-<==============+-<======'
-                                                                                   |
-                                                                                   V
-                                                                  Continue following rules in the spec, which might
-                                                                  result in a plugin, a browsing context, an image,
-                                                                  or using fallback, depending on the UA and the type.
-
-
-   "Extension that is plugin type?" means "Is there an extension that matches one that a plugin supports?".
-   Plugins are not allowed to register text/plain or application/octet-stream.
-
--->
 
       <ol><li>
 
@@ -1617,7 +1497,7 @@
 
        <li>
 
-        <!-- by request: http://www.w3.org/Bugs/Public/show_bug.cgi?id=8479 -->
+        
 
         <p>If the user agent is configured to strictly obey
         Content-Type headers for this resource, and the resource has
@@ -1745,10 +1625,7 @@
 
        <li>
 
-        <!-- if we get to this point we know we can successfully
-        parsed the URL, since this algorithm is only used after
-        fetching the resource in the steps above -->
-
+        
         <p>If the <a href="urls.html#url-path" title="url-path">&lt;path&gt;</a> component
         of the <a href="urls.html#url">URL</a> of the specified resource (after any
         redirects) matches a pattern that a <a href="infrastructure.html#plugin">plugin</a>
@@ -1759,8 +1636,8 @@
         handle resources with <a href="urls.html#url-path" title="url-path">&lt;path&gt;</a> components that end with
         the four character string "<code title="">.swf</code>".</p>
 
-        <!-- it's sad that we have to do extension sniffing. sigh. -->
-        <!-- see also <embed> which has a similar step -->
+        
+        
 
        </li>
 
@@ -1793,7 +1670,7 @@
 
        <dt>If the <var title="">resource type</var> is an <a href="infrastructure.html#xml-mime-type">XML MIME
        type</a>, or
-       <!-- (redundant with the next one) if the <var title="">resource type</var> is HTML, or -->
+       
        if the <var title="">resource type</var> does not start with
        "<code>image/</code>"</dt>
 
@@ -1805,7 +1682,7 @@
 
         <p>If the <a href="urls.html#url">URL</a> of the given resource is not
         <code><a href="fetching-resources.html#about:blank">about:blank</a></code>, the element's <a href="browsers.html#nested-browsing-context">nested browsing
-        context</a> must then be <a href="history.html#navigate" title="navigate">navigated</a><!--DONAV object--> to that
+        context</a> must then be <a href="history.html#navigate" title="navigate">navigated</a> to that
         resource, with <a href="history.html#replacement-enabled">replacement enabled</a>, and with the
         <code><a href="#the-object-element">object</a></code> element's document's <a href="browsers.html#browsing-context">browsing
         context</a> as the <a href="history.html#source-browsing-context">source browsing context</a>.
@@ -1828,14 +1705,21 @@
         to the value of this attribute; otherwise, the <a href="browsers.html#browsing-context-name">browsing
         context name</a> must be set to the empty string.</p>
 
-        <p class="note">It's possible that the <a href="history.html#navigate" title="navigate">navigation</a> of the <a href="browsers.html#browsing-context">browsing
-        context</a> will actually obtain the resource from a
-        different <a href="offline.html#application-cache">application cache</a>. Even if the resource
-        is then found to have a different type, it is still used as
-        part of a <a href="browsers.html#nested-browsing-context">nested browsing context</a>; this algorithm
-        doesn't restart with the new resource.</p>
+        <p class="note">In certain situations, e.g. if the resource
+        was <a href="fetching-resources.html#fetch" title="fetch">fetched</a> from an
+        <a href="offline.html#application-cache">application cache</a> but it is an HTML file with a
+        <code title="attr-html-manifest"><a href="semantics.html#attr-html-manifest">manifest</a></code> attribute
+        that points to a different <a href="offline.html#concept-appcache-manifest" title="concept-appcache-manifest">application cache
+        manifest</a>, the <a href="history.html#navigate" title="navigate">navigation</a>
+        of the <a href="browsers.html#browsing-context">browsing context</a> will be restarted so as
+        to load the resource afresh from the network or a different
+        <a href="offline.html#application-cache">application cache</a>. Even if the resource is then
+        found to have a different type, it is still used as part of a
+        <a href="browsers.html#nested-browsing-context">nested browsing context</a>: only the
+        <a href="history.html#navigate">navigate</a> algorithm is restarted, not this
+        <code><a href="#the-object-element">object</a></code> algorithm.</p>
 
-        <!-- note that malformed XML files don't cause fallback -->
+        
 
        </dd>
 
@@ -1883,8 +1767,7 @@
       <p>Once the resource is completely loaded, <a href="webappapis.html#queue-a-task">queue a
       task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named <code title="event-load">load</code> at the element.</p>
 
-      <p>The <a href="webappapis.html#task-source">task source</a> for this task<!--tasks mentioned
-      in this section--> is the <a href="webappapis.html#dom-manipulation-task-source">DOM manipulation task
+      <p>The <a href="webappapis.html#task-source">task source</a> for this task is the <a href="webappapis.html#dom-manipulation-task-source">DOM manipulation task
       source</a>.</p>
 
      </li>

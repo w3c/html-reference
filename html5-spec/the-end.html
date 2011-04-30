@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>8.2.6 The end &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -341,12 +337,12 @@
        document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
      fixBrokenLink();
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="tokenization.html" title="8.2.4 Tokenization" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="named-character-references.html" title="8.5 Named character references" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="tree-construction.html" title="8.2.5 Tree construction" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="named-character-references.html" title="8.5 Named character references" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
    </div><div>
-   <a href="tokenization.html" class="prev">8.2.4 Tokenization</a> &#x2013;
+   <a href="tree-construction.html" class="prev">8.2.5 Tree construction</a> &#x2013;
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="named-character-references.html" class="next">8.5 Named character references</a>
   <ol class="toc"><li><ol><li><ol><li><a href="the-end.html#the-end"><span class="secno">8.2.6 </span>The end</a></li><li><a href="the-end.html#coercing-an-html-dom-into-an-infoset"><span class="secno">8.2.7 </span>Coercing an HTML DOM into an infoset</a></li><li><a href="the-end.html#an-introduction-to-error-handling-and-strange-cases-in-the-parser"><span class="secno">8.2.8 </span>An introduction to error handling and strange cases in the parser</a>
@@ -357,8 +353,8 @@
   <p>Once the user agent <dfn id="stop-parsing" title="stop parsing">stops parsing</dfn>
   the document, the user agent must run the following steps:</p>
 
-  <ol><!-- this happens as part of one of the tasks that runs the parser --><li><p>Set the <a href="dom.html#current-document-readiness">current document readiness</a> to
-   "interactive" <!-- this also synchronously fires an event --> and
+  <ol><li><p>Set the <a href="dom.html#current-document-readiness">current document readiness</a> to
+   "interactive"  and
    the <a href="parsing.html#insertion-point">insertion point</a> to undefined.</p></li>
 
    <li><p>Pop <em>all</em> the nodes off the <a href="parsing.html#stack-of-open-elements">stack of open
@@ -397,20 +393,13 @@
    <li><p><a href="webappapis.html#spin-the-event-loop">Spin the event loop</a> until the <a href="scripting-1.html#set-of-scripts-that-will-execute-as-soon-as-possible">set of
    scripts that will execute as soon as possible</a> and the
    <a href="scripting-1.html#list-of-scripts-that-will-execute-in-order-as-soon-as-possible">list of scripts that will execute in order as soon as
-   possible</a> are empty.</p></li> <!-- this step is not redundant
-   with the next one, since <script type="text/javascript"> nodes delay the load event of the
-   document they are in, but they might change document between being
-   added to one document's set/list and executing those scripts, so
-   they might be delaying another document but still be in this
-   document's set/list. -->
-
+   possible</a> are empty.</p></li> 
    <li><p><a href="webappapis.html#spin-the-event-loop">Spin the event loop</a> until there is nothing that
    <dfn id="delay-the-load-event" title="delay the load event">delays the load event</dfn> in
    the <code><a href="infrastructure.html#document">Document</a></code>.</p></li>
 
    <li><p><a href="webappapis.html#queue-a-task">Queue a task</a> to set the <a href="dom.html#current-document-readiness">current document
-   readiness</a> to "complete". <!-- this also fires an event
-   synchronously during the task --></p></li>
+   readiness</a> to "complete". </p></li>
 
    <li><p>If the <code><a href="infrastructure.html#document">Document</a></code> is in a <a href="browsers.html#browsing-context">browsing
    context</a>, then <a href="webappapis.html#queue-a-task">queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a
@@ -429,14 +418,6 @@
    <code><a href="history.html#pagetransitionevent">PageTransitionEvent</a></code> interface, with the <code title="dom-PageTransitionEvent-persisted"><a href="history.html#dom-pagetransitionevent-persisted">persisted</a></code>
    attribute set to false. This event must not bubble, must not be
    cancelable, and has no default action.</p></li>
-
-   <li><p>If the <code><a href="infrastructure.html#document">Document</a></code> is in a <a href="browsers.html#browsing-context">browsing
-   context</a>, then <a href="webappapis.html#queue-a-task">queue a task</a> to fire a <code title="event-popstate"><a href="history.html#event-popstate">popstate</a></code> event at the
-   <code><a href="infrastructure.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code> object using the
-   <code><a href="history.html#popstateevent">PopStateEvent</a></code> interface, with the <code title="dom-PopStateEvent-state"><a href="history.html#dom-popstateevent-state">state</a></code> attribute set to the
-   current value of the <a href="history.html#pending-state-object">pending state object</a>. This event
-   must bubble but not be cancelable and has no default
-   action.</p></li>
 
    <li><p>If the <code><a href="infrastructure.html#document">Document</a></code> has any <a href="offline.html#pending-application-cache-download-process-tasks">pending
    application cache download process tasks</a>, then <a href="webappapis.html#queue-a-task" title="queue a task">queue</a> each such <a href="webappapis.html#concept-task" title="concept-task">task</a> in the order they were added to
@@ -462,13 +443,7 @@
    <li><p>Pop <em>all</em> the nodes off the <a href="parsing.html#stack-of-open-elements">stack of open
    elements</a>.</p></li>
 
-   <!-- anything else? this is things that happen when you call
-   document.open() on a document that's still being parsed, or when
-   you navigate a document that's still parsing, or navigate the
-   parent of a frame with a document that's still parsing, or the user
-   hits "stop". Should the pending scripts be blown away or anything?
-   -->
-
+   
   </ol><p>Except where otherwise specified, the <a href="webappapis.html#task-source">task source</a>
   for the <a href="webappapis.html#concept-task" title="concept-task">tasks</a> mentioned in this
   section is the <a href="webappapis.html#dom-manipulation-task-source">DOM manipulation task source</a>.</p>
@@ -515,7 +490,7 @@
 
   <p class="example">As another example, consider the attribute
   <code>xlink:href</code>. Used on a MathML element, it becomes, after
-  being <a href="tokenization.html#adjust-foreign-attributes" title="adjust foreign attributes">adjusted</a>, an
+  being <a href="tree-construction.html#adjust-foreign-attributes" title="adjust foreign attributes">adjusted</a>, an
   attribute with a prefix "<code title="">xlink</code>" and a local
   name "<code title="">href</code>". However, used on an HTML element,
   it becomes an attribute with no prefix and the local name "<code title="">xlink:href</code>", which is not a valid NCName, and thus
@@ -525,7 +500,7 @@
   <p class="note">The resulting names from this conversion
   conveniently can't clash with any attribute generated by the
   <a href="parsing.html#html-parser">HTML parser</a>, since those are all either lowercase or
-  those listed in the <a href="tokenization.html#adjust-foreign-attributes">adjust foreign attributes</a>
+  those listed in the <a href="tree-construction.html#adjust-foreign-attributes">adjust foreign attributes</a>
   algorithm's table.</p>
 
   <p>If the XML API restricts comments from having two consecutive
@@ -585,9 +560,9 @@
   on it: <code><a href="semantics.html#the-html-element-0">html</a></code>, <code><a href="sections.html#the-body-element-0">body</a></code>, <code><a href="grouping-content.html#the-p-element">p</a></code>,
   <code><a href="text-level-semantics.html#the-b-element">b</a></code>, and <code><a href="text-level-semantics.html#the-i-element">i</a></code>. The <a href="parsing.html#list-of-active-formatting-elements">list of active
   formatting elements</a> just has two: <code><a href="text-level-semantics.html#the-b-element">b</a></code> and
-  <code><a href="text-level-semantics.html#the-i-element">i</a></code>. The <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="tokenization.html#parsing-main-inbody" title="insertion mode: in body">in body</a>".</p>
+  <code><a href="text-level-semantics.html#the-i-element">i</a></code>. The <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="tree-construction.html#parsing-main-inbody" title="insertion mode: in body">in body</a>".</p>
 
-  <p>Upon receiving the end tag token with the tag name "b", the "<a href="tokenization.html#adoptionAgency">adoption agency algorithm</a>" is
+  <p>Upon receiving the end tag token with the tag name "b", the "<a href="tree-construction.html#adoptionAgency">adoption agency algorithm</a>" is
   invoked. This is a simple case, in that the <var title="">formatting
   element</var> is the <code><a href="text-level-semantics.html#the-b-element">b</a></code> element, and there is no
   <var title="">furthest block</var>. Thus, the <a href="parsing.html#stack-of-open-elements">stack of open
@@ -620,9 +595,9 @@
   elements</a> has four elements on it: <code><a href="semantics.html#the-html-element-0">html</a></code>,
   <code><a href="sections.html#the-body-element-0">body</a></code>, <code><a href="text-level-semantics.html#the-b-element">b</a></code>, and <code><a href="grouping-content.html#the-p-element">p</a></code>. The
   <a href="parsing.html#list-of-active-formatting-elements">list of active formatting elements</a> just has the one:
-  <code><a href="text-level-semantics.html#the-b-element">b</a></code>. The <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="tokenization.html#parsing-main-inbody" title="insertion mode: in body">in body</a>".</p>
+  <code><a href="text-level-semantics.html#the-b-element">b</a></code>. The <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="tree-construction.html#parsing-main-inbody" title="insertion mode: in body">in body</a>".</p>
 
-  <p>Upon receiving the end tag token with the tag name "b", the "<a href="tokenization.html#adoptionAgency">adoption agency algorithm</a>" is invoked, as
+  <p>Upon receiving the end tag token with the tag name "b", the "<a href="tree-construction.html#adoptionAgency">adoption agency algorithm</a>" is invoked, as
   in the previous example. However, in this case, there <em>is</em> a
   <var title="">furthest block</var>, namely the <code><a href="grouping-content.html#the-p-element">p</a></code> element. Thus,
   this time the adoption agency algorithm isn't skipped over.</p>
@@ -631,7 +606,7 @@
   element. A conceptual "bookmark" marks the position of the
   <code><a href="text-level-semantics.html#the-b-element">b</a></code> in the <a href="parsing.html#list-of-active-formatting-elements">list of active formatting
   elements</a>, but since that list has only one element in it,
-  it won't have much effect.</p>
+  the bookmark won't have much effect.</p>
 
   <p>As the algorithm progresses, <var title="">node</var> ends up set
   to the formatting element (<code><a href="text-level-semantics.html#the-b-element">b</a></code>), and <var title="">last
@@ -663,7 +638,7 @@
 
   <p>The highlighted <code><a href="text-level-semantics.html#the-b-element">b</a></code> element start tag is not allowed
   directly inside a table like that, and the parser handles this case
-  by placing the element <em>before</em> the table. (This is called <i title="foster parent"><a href="tokenization.html#foster-parent">foster parenting</a></i>.) This can be seen by
+  by placing the element <em>before</em> the table. (This is called <i title="foster parent"><a href="tree-construction.html#foster-parent">foster parenting</a></i>.) This can be seen by
   examining the DOM tree as it stands just after the
   <code><a href="tabular-data.html#the-table-element">table</a></code> element's start tag has been seen:</p>
 
@@ -675,14 +650,14 @@
   <code><a href="tabular-data.html#the-table-element">table</a></code>, and <code><a href="text-level-semantics.html#the-b-element">b</a></code> (in that order, despite the
   resulting DOM tree); the <a href="parsing.html#list-of-active-formatting-elements">list of active formatting
   elements</a> just has the <code><a href="text-level-semantics.html#the-b-element">b</a></code> element in it; and the
-  <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="tokenization.html#parsing-main-intable" title="insertion mode: in&#10;  table">in table</a>".</p>
+  <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="tree-construction.html#parsing-main-intable" title="insertion mode: in&#10;  table">in table</a>".</p>
 
   <p>The <code><a href="tabular-data.html#the-tr-element">tr</a></code> start tag causes the <code><a href="text-level-semantics.html#the-b-element">b</a></code> element
   to be popped off the stack and a <code><a href="tabular-data.html#the-tbody-element">tbody</a></code> start tag to be
   implied; the <code><a href="tabular-data.html#the-tbody-element">tbody</a></code> and <code><a href="tabular-data.html#the-tr-element">tr</a></code> elements are
   then handled in a rather straight-forward manner, taking the parser
-  through the "<a href="tokenization.html#parsing-main-intbody" title="insertion mode: in table body">in table
-  body</a>" and "<a href="tokenization.html#parsing-main-intr" title="insertion mode: in row">in
+  through the "<a href="tree-construction.html#parsing-main-intbody" title="insertion mode: in table body">in table
+  body</a>" and "<a href="tree-construction.html#parsing-main-intr" title="insertion mode: in row">in
   row</a>" insertion modes, after which the DOM looks as
   follows:</p>
 
@@ -690,11 +665,11 @@
   elements <code><a href="semantics.html#the-html-element-0">html</a></code>, <code><a href="sections.html#the-body-element-0">body</a></code>, <code><a href="tabular-data.html#the-table-element">table</a></code>,
   <code><a href="tabular-data.html#the-tbody-element">tbody</a></code>, and <code><a href="tabular-data.html#the-tr-element">tr</a></code>; the <a href="parsing.html#list-of-active-formatting-elements">list of active
   formatting elements</a> still has the <code><a href="text-level-semantics.html#the-b-element">b</a></code> element in
-  it; and the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="tokenization.html#parsing-main-intr" title="insertion&#10;  mode: in row">in row</a>".</p>
+  it; and the <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="tree-construction.html#parsing-main-intr" title="insertion&#10;  mode: in row">in row</a>".</p>
 
   <p>The <code><a href="tabular-data.html#the-td-element">td</a></code> element start tag token, after putting a
   <code><a href="tabular-data.html#the-td-element">td</a></code> element on the tree, puts a marker on the <a href="parsing.html#list-of-active-formatting-elements">list
-  of active formatting elements</a> (it also switches to the "<a href="tokenization.html#parsing-main-intd" title="insertion mode: in cell">in cell</a>" <a href="parsing.html#insertion-mode">insertion
+  of active formatting elements</a> (it also switches to the "<a href="tree-construction.html#parsing-main-intd" title="insertion mode: in cell">in cell</a>" <a href="parsing.html#insertion-mode">insertion
   mode</a>).</p>
 
   <ul class="domTree"><li class="t1"><code><a href="semantics.html#the-html-element-0">html</a></code><ul><li class="t1"><code><a href="semantics.html#the-head-element-0">head</a></code></li><li class="t1"><code><a href="sections.html#the-body-element-0">body</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code></li><li class="t1"><code><a href="tabular-data.html#the-table-element">table</a></code><ul><li class="t1"><code><a href="tabular-data.html#the-tbody-element">tbody</a></code><ul><li class="t1"><code><a href="tabular-data.html#the-tr-element">tr</a></code><ul><li class="t1"><code><a href="tabular-data.html#the-td-element">td</a></code></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul><p>The marker means that when the "aaa" character tokens are seen,
@@ -707,21 +682,21 @@
   and <code><a href="tabular-data.html#the-tbody-element">tbody</a></code>; the <a href="parsing.html#list-of-active-formatting-elements">list of active formatting
   elements</a> still has the <code><a href="text-level-semantics.html#the-b-element">b</a></code> element in it (the
   marker having been removed by the "td" end tag token); and the
-  <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="tokenization.html#parsing-main-intbody" title="insertion mode: in&#10;  table body">in table body</a>".</p>
+  <a href="parsing.html#insertion-mode">insertion mode</a> is "<a href="tree-construction.html#parsing-main-intbody" title="insertion mode: in&#10;  table body">in table body</a>".</p>
 
   <p>Thus it is that the "bbb" character tokens are found. These
-  trigger the "<a href="tokenization.html#parsing-main-intabletext" title="insertion mode: in table text">in table
+  trigger the "<a href="tree-construction.html#parsing-main-intabletext" title="insertion mode: in table text">in table
   text</a>" insertion mode to be used (with the <a href="parsing.html#original-insertion-mode">original
-  insertion mode</a> set to "<a href="tokenization.html#parsing-main-intbody" title="insertion mode: in table&#10;  body">in table body</a>"). The character tokens are collected,
+  insertion mode</a> set to "<a href="tree-construction.html#parsing-main-intbody" title="insertion mode: in table&#10;  body">in table body</a>"). The character tokens are collected,
   and when the next token (the <code><a href="tabular-data.html#the-table-element">table</a></code> element end tag) is
   seen, they are processed as a group. Since they are not all spaces,
-  they are handled as per the "anything else" rules in the "<a href="tokenization.html#parsing-main-intable" title="insertion mode: in table">in table</a>" insertion mode,
-  which defer to the "<a href="tokenization.html#parsing-main-inbody" title="insertion mode: in body">in
-  body</a>" insertion mode but with <a href="tokenization.html#foster-parent" title="foster&#10;  parent">foster parenting</a>.</p>
+  they are handled as per the "anything else" rules in the "<a href="tree-construction.html#parsing-main-intable" title="insertion mode: in table">in table</a>" insertion mode,
+  which defer to the "<a href="tree-construction.html#parsing-main-inbody" title="insertion mode: in body">in
+  body</a>" insertion mode but with <a href="tree-construction.html#foster-parent" title="foster&#10;  parent">foster parenting</a>.</p>
 
   <p>When <a href="parsing.html#reconstruct-the-active-formatting-elements" title="reconstruct the active formatting elements">the
   active formatting elements are reconstructed</a>, a
-  <code><a href="text-level-semantics.html#the-b-element">b</a></code> element is created and <a href="tokenization.html#foster-parent" title="foster&#10;  parent">foster parented</a>, and then the "bbb" text node is
+  <code><a href="text-level-semantics.html#the-b-element">b</a></code> element is created and <a href="tree-construction.html#foster-parent" title="foster&#10;  parent">foster parented</a>, and then the "bbb" text node is
   appended to it:</p>
 
   <ul class="domTree"><li class="t1"><code><a href="semantics.html#the-html-element-0">html</a></code><ul><li class="t1"><code><a href="semantics.html#the-head-element-0">head</a></code></li><li class="t1"><code><a href="sections.html#the-body-element-0">body</a></code><ul><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code></li><li class="t1"><code><a href="text-level-semantics.html#the-b-element">b</a></code><ul><li class="t3"><code>#text</code>: <span title="">bbb</span></li></ul></li><li class="t1"><code><a href="tabular-data.html#the-table-element">table</a></code><ul><li class="t1"><code><a href="tabular-data.html#the-tbody-element">tbody</a></code><ul><li class="t1"><code><a href="tabular-data.html#the-tr-element">tr</a></code><ul><li class="t1"><code><a href="tabular-data.html#the-td-element">td</a></code><ul><li class="t3"><code>#text</code>: <span title="">aaa</span></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul><p>The <a href="parsing.html#stack-of-open-elements">stack of open elements</a> has on it the elements
@@ -729,7 +704,7 @@
   <code><a href="tabular-data.html#the-tbody-element">tbody</a></code>, and the new <code><a href="text-level-semantics.html#the-b-element">b</a></code> (again, note that
   this doesn't match the resulting tree!); the <a href="parsing.html#list-of-active-formatting-elements">list of active
   formatting elements</a> has the new <code><a href="text-level-semantics.html#the-b-element">b</a></code> element in it;
-  and the <a href="parsing.html#insertion-mode">insertion mode</a> is still "<a href="tokenization.html#parsing-main-intbody" title="insertion&#10;  mode: in table body">in table body</a>".</p>
+  and the <a href="parsing.html#insertion-mode">insertion mode</a> is still "<a href="tree-construction.html#parsing-main-intbody" title="insertion&#10;  mode: in table body">in table body</a>".</p>
 
   <p>Had the character tokens been only <a href="common-microsyntaxes.html#space-character" title="space&#10;  character">space characters</a> instead of "bbb", then those
   <a href="common-microsyntaxes.html#space-character" title="space character">space characters</a> would just be
@@ -960,11 +935,8 @@
         <code><a href="the-button-element.html#the-keygen-element">keygen</a></code>, <code><a href="semantics.html#the-link-element">link</a></code>, <code><a href="semantics.html#meta">meta</a></code>,
         <code><a href="the-iframe-element.html#the-param-element">param</a></code>, <code><a href="video.html#the-source-element">source</a></code>, <code><a href="video.html#the-track-element">track</a></code> or
         <code><a href="text-level-semantics.html#the-wbr-element">wbr</a></code> element, then continue on to the next child
-        node at this point.</p> <!-- VOIDLIST superset -->
-        <!-- also, i guess: image and isindex, but we don't list those
-        because we don't consider those "elements", more "macros", and
-        thus we should never serialize them -->
-
+        node at this point.</p> 
+        
         <p>If <var title="">current node</var> is a <code><a href="grouping-content.html#the-pre-element">pre</a></code>,
         <code><a href="the-button-element.html#the-textarea-element">textarea</a></code>, or <code><a href="obsolete.html#listing">listing</a></code> element, append
         a U+000A LINE FEED (LF) character.</p>

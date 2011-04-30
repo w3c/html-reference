@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>4.10.8 The button element &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -541,12 +537,7 @@
   readonly attribute <a href="infrastructure.html#nodelist">NodeList</a> <a href="forms.html#dom-lfe-labels" title="dom-lfe-labels">labels</a>;
 };</pre>
    </dd>
-  </dl><!-- Proposals for v2:
-       * <select value=""> as an alternative to <option selected>
-         http://developers.slashdot.org/comments.pl?sid=426306&cid=22142072
-         <Philip`> http://www.ipiao.com.cn/ does <select size="1" name="to"><script type="text/javascript">City_Default="PEK"</script><SCRIPT language=javascript
-                   src="/js/flightcity.js"></SCRIPT></select> which is the kind of thing that could be much simpler with <select value="PEK">
-    --><p>The <code><a href="#the-select-element">select</a></code> element represents a control for
+  </dl><p>The <code><a href="#the-select-element">select</a></code> element represents a control for
   selecting amongst a set of options.</p><p>The <dfn id="attr-select-multiple" title="attr-select-multiple"><code>multiple</code></dfn>
   attribute is a <a href="common-microsyntaxes.html#boolean-attribute">boolean attribute</a>. If the attribute is
   present, then the <code><a href="#the-select-element">select</a></code> element
@@ -582,15 +573,19 @@
   user will be required to select a value before submitting the
   form.</p><p>If a <code><a href="#the-select-element">select</a></code> element has a <code title="attr-select-required"><a href="#attr-select-required">required</a></code> attribute specified,
   does not have a <code title="attr-select-multiple"><a href="#attr-select-multiple">multiple</a></code>
-  attribute specified, and has a <a href="#concept-select-size" title="concept-select-size">display size</a> of 1; and if the
-  <a href="#concept-option-value" title="concept-option-value">value</a> of the first
-  <code><a href="#the-option-element">option</a></code> element in the <code><a href="#the-select-element">select</a></code> element's
-  <a href="#concept-select-option-list" title="concept-select-option-list">list of options</a> (if
-  any) is the empty string, and that <code><a href="#the-option-element">option</a></code> is not <a href="#concept-option-disabled" title="concept-option-disabled">disabled</a>, and, finally, that
+  attribute specified, and has a <a href="#concept-select-size" title="concept-select-size">display size</a> of 1;
+  and if the <a href="#concept-option-value" title="concept-option-value">value</a> of the
+  first <code><a href="#the-option-element">option</a></code> element in the <code><a href="#the-select-element">select</a></code>
+  element's <a href="#concept-select-option-list" title="concept-select-option-list">list of
+  options</a> (if any) is the empty string, and that
   <code><a href="#the-option-element">option</a></code> element's parent node is the <code><a href="#the-select-element">select</a></code>
   element (and not an <code><a href="#the-optgroup-element">optgroup</a></code> element), then that
   <code><a href="#the-option-element">option</a></code> is the <code><a href="#the-select-element">select</a></code> element's
-  <dfn id="placeholder-label-option">placeholder label option</dfn>.</p><div class="impl">
+  <dfn id="placeholder-label-option">placeholder label option</dfn>.</p><p>If a <code><a href="#the-select-element">select</a></code> element has a <code title="attr-select-required"><a href="#attr-select-required">required</a></code> attribute specified,
+  does not have a <code title="attr-select-multiple"><a href="#attr-select-multiple">multiple</a></code>
+  attribute specified, and has a <a href="#concept-select-size" title="concept-select-size">display size</a> of 1,
+  then the <code><a href="#the-select-element">select</a></code> element must have a <a href="#placeholder-label-option">placeholder
+  label option</a>.</p><div class="impl">
 
   <p><strong>Constraint validation</strong>: If the element has its
   <code title="attr-select-required"><a href="#attr-select-required">required</a></code> attribute
@@ -598,7 +593,7 @@
   the <code><a href="#the-select-element">select</a></code> element's <a href="#concept-select-option-list" title="concept-select-option-list">list of options</a> have their
   <a href="#concept-option-selectedness" title="concept-option-selectedness">selectedness</a> set to
   true, or the only <code><a href="#the-option-element">option</a></code> element in the
-  <code>selected</code> element's <a href="#concept-select-option-list" title="concept-select-option-list">list of options</a> with its
+  <code><a href="#the-select-element">select</a></code> element's <a href="#concept-select-option-list" title="concept-select-option-list">list of options</a> with its
   <a href="#concept-option-selectedness" title="concept-option-selectedness">selectedness</a> set to
   true is the <a href="#placeholder-label-option">placeholder label option</a>, then the element
   is <a href="association-of-controls-and-forms.html#suffering-from-being-missing">suffering from being missing</a>.</p>
@@ -614,15 +609,14 @@
   through unfocusing the element after changing its value, or through
   a <a href="commands.html#using-the-option-element-to-define-a-command" title="option-command">menu command</a>, or through any
   other mechanism), and before the relevant user interaction event
-  <!-- interaction event spec point --> is queued (e.g. before the
+   is queued (e.g. before the
   <code title="event-click"><a href="infrastructure.html#event-click">click</a></code> event), the user agent must
   set the <a href="#concept-option-selectedness" title="concept-option-selectedness">selectedness</a> of the
   picked <code><a href="#the-option-element">option</a></code> element to true and then <a href="webappapis.html#queue-a-task">queue a
-  task</a> to first <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> that bubbles
-  named <code title="event-change">change</code> at the
-  <code><a href="#the-select-element">select</a></code> element, using the <a href="webappapis.html#user-interaction-task-source">user interaction task
-  source</a> as the task source, and then to <a href="association-of-controls-and-forms.html#broadcast-formchange-events">broadcast <code title="event-formchange">formchange</code> events</a> from the
-  element's <a href="association-of-controls-and-forms.html#form-owner">form owner</a>.</p>
+  task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> that bubbles named
+  <code title="event-change">change</code> at the <code><a href="#the-select-element">select</a></code>
+  element, using the <a href="webappapis.html#user-interaction-task-source">user interaction task source</a> as the
+  task source.</p>
 
   <p>If the <code title="attr-select-multiple"><a href="#attr-select-multiple">multiple</a></code>
   attribute is absent, whenever an <code><a href="#the-option-element">option</a></code> element in the
@@ -639,15 +633,13 @@
   then the user agent should also allow the user to request that the
   <code><a href="#the-option-element">option</a></code> whose <a href="#concept-option-selectedness" title="concept-option-selectedness">selectedness</a> is true, if
   any, be unselected. Upon this request being conveyed to the user
-  agent, and before the relevant user interaction event <!--
-  interaction event spec point --> is queued (e.g. before the <code title="event-click"><a href="infrastructure.html#event-click">click</a></code> event), the user agent must set the
+  agent, and before the relevant user interaction event  is queued (e.g. before the <code title="event-click"><a href="infrastructure.html#event-click">click</a></code> event), the user agent must set the
   <a href="#concept-option-selectedness" title="concept-option-selectedness">selectedness</a> of
   that <code><a href="#the-option-element">option</a></code> element to false and then <a href="webappapis.html#queue-a-task">queue a
-  task</a> to first <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> that bubbles
-  named <code title="event-change">change</code> at the
-  <code><a href="#the-select-element">select</a></code> element, using the <a href="webappapis.html#user-interaction-task-source">user interaction task
-  source</a> as the task source, and then to <a href="association-of-controls-and-forms.html#broadcast-formchange-events">broadcast <code title="event-formchange">formchange</code> events</a> from the
-  element's <a href="association-of-controls-and-forms.html#form-owner">form owner</a>.</p>
+  task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> that bubbles named
+  <code title="event-change">change</code> at the <code><a href="#the-select-element">select</a></code>
+  element, using the <a href="webappapis.html#user-interaction-task-source">user interaction task source</a> as the
+  task source.</p>
 
   <p>If the <code title="attr-select-multiple"><a href="#attr-select-multiple">multiple</a></code>
   attribute is absent and the element's <a href="#concept-select-size" title="concept-select-size">display size</a> is 1, then whenever
@@ -667,13 +659,11 @@
   (either through a click, or through a <a href="commands.html#using-the-option-element-to-define-a-command" title="option-command">menu command</a>, or any other mechanism).
   Upon the <a href="#concept-option-selectedness" title="concept-option-selectedness">selectedness</a> of one or
   more <code><a href="#the-option-element">option</a></code> elements being changed by the user, and
-  before the relevant user interaction event <!-- interaction event
-  spec point --> is queued (e.g. before a related <code title="event-click"><a href="infrastructure.html#event-click">click</a></code> event), the user agent must
-  <a href="webappapis.html#queue-a-task">queue a task</a> to first <a href="webappapis.html#fire-a-simple-event">fire a simple event</a>
-  that bubbles named <code title="event-change">change</code> at the
+  before the relevant user interaction event  is queued (e.g. before a related <code title="event-click"><a href="infrastructure.html#event-click">click</a></code> event), the user agent must
+  <a href="webappapis.html#queue-a-task">queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> that
+  bubbles named <code title="event-change">change</code> at the
   <code><a href="#the-select-element">select</a></code> element, using the <a href="webappapis.html#user-interaction-task-source">user interaction task
-  source</a> as the task source, and then to <a href="association-of-controls-and-forms.html#broadcast-formchange-events">broadcast <code title="event-formchange">formchange</code> events</a> from the
-  element's <a href="association-of-controls-and-forms.html#form-owner">form owner</a>.</p>
+  source</a> as the task source.</p>
 
   <p>The <a href="association-of-controls-and-forms.html#concept-form-reset-control" title="concept-form-reset-control">reset
   algorithm</a> for <code><a href="#the-select-element">select</a></code> elements is to go through
@@ -961,7 +951,7 @@
            attribute DOMString <a href="#dom-optgroup-label" title="dom-optgroup-label">label</a>;
 };</pre>
    </dd>
-  </dl><!-- v2: make optgroups selectable if they have a value. --><p>The <code><a href="#the-optgroup-element">optgroup</a></code> element <a href="rendering.html#represents">represents</a> a group of
+  </dl><p>The <code><a href="#the-optgroup-element">optgroup</a></code> element <a href="rendering.html#represents">represents</a> a group of
   <code><a href="#the-option-element">option</a></code> elements with a common label.</p><p>The element's group of <code><a href="#the-option-element">option</a></code> elements consists of
   the <code><a href="#the-option-element">option</a></code> elements that are children of the
   <code><a href="#the-optgroup-element">optgroup</a></code> element.</p><div class="impl">
@@ -1089,7 +1079,7 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
   initial <a href="#concept-option-selectedness" title="concept-option-selectedness">selectedness</a> state when
   using the constructor.</p>
 
-  <!-- http://software.hixie.ch/utilities/js/live-dom-viewer/saved/604 -->
+  
 
   </div><p>A <code><a href="#the-select-element">select</a></code> element whose <code title="attr-select-multiple"><a href="#attr-select-multiple">multiple</a></code> attribute is not
   specified must not have more than one descendant <code><a href="#the-option-element">option</a></code>
@@ -1200,9 +1190,7 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
   <code><a href="#the-option-element">option</a></code> element). If the <var title="">text</var>
   argument is present, the new object must have as its only child a
   <code><a href="infrastructure.html#node">Node</a></code> with node type <code title="">TEXT_NODE</code> (3)
-  whose data is the value of that argument<!-- we mention TEXT_NODE
-  and all that explicitly here because we redefine "text node" in this
-  spec to also include CDATA sections -->. If the <var title="">value</var> argument is present, the new object must have a
+  whose data is the value of that argument. If the <var title="">value</var> argument is present, the new object must have a
   <code title="attr-option-value"><a href="#attr-option-value">value</a></code> attribute set with the
   value of the argument as its value. If the <var title="">defaultSelected</var> argument is present and true, the new
   object must have a <code title="attr-option-selected"><a href="#attr-option-selected">selected</a></code> attribute set with no
@@ -1303,16 +1291,13 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
 
   <p>When a <code><a href="#the-textarea-element">textarea</a></code> is <a href="#concept-textarea-mutable" title="concept-textarea-mutable">mutable</a>, its <a href="#concept-textarea-raw-value" title="concept-textarea-raw-value">raw value</a> should be
   editable by the user. Any time the user causes the element's <a href="#concept-textarea-raw-value" title="concept-textarea-raw-value">raw value</a> to change, the
-  user agent must <a href="webappapis.html#queue-a-task">queue a task</a> to first <a href="webappapis.html#fire-a-simple-event">fire a
-  simple event</a> that bubbles named <code title="event-input">input</code> at the <code><a href="#the-textarea-element">textarea</a></code>
-  element, and then to <a href="association-of-controls-and-forms.html#broadcast-forminput-events">broadcast <code title="event-forminput">forminput</code> events</a> from the
-  <code><a href="#the-textarea-element">textarea</a></code> element's <a href="association-of-controls-and-forms.html#form-owner">form owner</a>. User agents
-  may wait for a suitable break in the user's interaction before
-  queuing the task; for example, a user agent could wait for the user
-  to have not hit a key for 100ms, so as to only fire the event when
-  the user pauses, instead of continuously for each keystroke.</p>
-  <!-- same text is present in the <input> section -->
-
+  user agent must <a href="webappapis.html#queue-a-task">queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple
+  event</a> that bubbles named <code title="event-input">input</code> at the <code><a href="#the-textarea-element">textarea</a></code>
+  element. User agents may wait for a suitable break in the user's
+  interaction before queuing the task; for example, a user agent could
+  wait for the user to have not hit a key for 100ms, so as to only
+  fire the event when the user pauses, instead of continuously for
+  each keystroke.</p> 
   <p>A <code><a href="#the-textarea-element">textarea</a></code> element has a <dfn id="concept-textarea-dirty" title="concept-textarea-dirty">dirty value flag</dfn>, which must be
   initially set to false, and must be set to true whenever the user
   interacts with the control in a way that changes the <a href="#concept-textarea-raw-value" title="concept-textarea-raw-value">raw value</a>.</p>
@@ -1329,8 +1314,8 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
   the value of the element's <code><a href="infrastructure.html#textcontent">textContent</a></code> IDL
   attribute.</p>
 
-  <!-- this next bit is also in the <input> Text/Search section -->
-  <!-- and something similar is in the session history section -->
+  
+  
   <p>If the element is <a href="#concept-textarea-mutable" title="concept-textarea-mutable">mutable</a>, the user agent
   should allow the user to change the writing direction of the
   element, setting it either to a left-to-right writing direction or a
@@ -1342,11 +1327,9 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
    selected a left-to-right writing direction, and "<code title="attr-dir-rtl"><a href="elements.html#attr-dir-rtl">rtl</a></code>" if the user selected a
    right-to-left writing direction.</p></li>
 
-   <li><p><a href="webappapis.html#queue-a-task">Queue a task</a> to first <a href="webappapis.html#fire-a-simple-event">fire a simple
+   <li><p><a href="webappapis.html#queue-a-task">Queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple
    event</a> that bubbles named <code title="event-input">input</code> at the <code><a href="#the-textarea-element">textarea</a></code>
-   element, and to then <a href="association-of-controls-and-forms.html#broadcast-forminput-events">broadcast <code title="event-forminput">forminput</code> events</a> from the
-   <code><a href="#the-textarea-element">textarea</a></code> element's <a href="association-of-controls-and-forms.html#form-owner">form owner</a>, if
-   any.</p></li>
+   element.</p></li>
 
   </ol></div><p>The <dfn id="attr-textarea-cols" title="attr-textarea-cols"><code>cols</code></dfn>
   attribute specifies the expected maximum number of characters per
@@ -1390,9 +1373,7 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
   newlines added by the user agent so that the text is wrapped when it
   is submitted.</p><p>If the element's <code title="attr-textarea-wrap"><a href="#attr-textarea-wrap">wrap</a></code>
   attribute is in the <a href="#attr-textarea-wrap-hard-state" title="attr-textarea-wrap-hard-state">Hard</a> state, the <code title="attr-textarea-cols"><a href="#attr-textarea-cols">cols</a></code> attribute must be
-  specified.</p><!-- attr-textarea-wrap-off (attr-textarea-wrap-off-state): not
-  conforming; turns off the rendering of wrapping but otherwise acts
-  like 'soft' --><div class="impl">
+  specified.</p><div class="impl">
 
   <p>The element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> is
   defined to be the element's <a href="#concept-textarea-raw-value" title="concept-textarea-raw-value">raw value</a> with the
@@ -1430,7 +1411,7 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
   <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> is the empty string,
   then the element is <a href="association-of-controls-and-forms.html#suffering-from-being-missing">suffering from being missing</a>.</p>
 
-  </div><!-- similar text in the <input> section --><p>The <dfn id="attr-textarea-placeholder" title="attr-textarea-placeholder"><code>placeholder</code></dfn>
+  </div><p>The <dfn id="attr-textarea-placeholder" title="attr-textarea-placeholder"><code>placeholder</code></dfn>
   attribute represents a hint (a word or short phrase) intended to aid
   the user with data entry. A hint could be a sample value or a brief
   description of the expected format. The attribute, if specified,
@@ -1521,7 +1502,7 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
 
    <pre>&lt;p&gt;If you have any comments, please let us know: &lt;textarea cols=80 name=comments&gt;&lt;/textarea&gt;&lt;/p&gt;</pre>
 
-   <p>To specify that a maximum length for the comments, one can use
+   <p>To specify a maximum length for the comments, one can use
    the <code title="attr-textarea-maxlength"><a href="#attr-textarea-maxlength">maxlength</a></code>
    attribute:</p>
 
@@ -1590,11 +1571,6 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
   whose corresponding algorithms they support.</p><table><thead><tr><th> Keyword </th><th> State
    </th></tr></thead><tbody><tr><td> <code title="">rsa</code>
      </td><td> <i title="">RSA</i>
-<!-- v2 (see below)
-    <tr>
-     <td> <code title="">ec</code>
-     <td> <i title="">EC</i>
--->
   </td></tr></tbody></table><p>The <i>invalid value default</i> state is the <i title="">unknown</i> state. The <i>missing value default</i> state
   is the <i title="">RSA</i> state, if it is supported, or the <i title="">unknown</i> state otherwise.</p><p class="note">This specification does not specify what key types
   user agents are to support &#x2014; it is possible for a user agent
@@ -1615,20 +1591,7 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
 
     <p>Use the appropriate step from the following list:</p>
 
-    <dl class="switch"><!-- v2 (see above)
-
-     <dt>If the <code title="attr-keygen-keytype">keytype</code>
-     attribute is in the <i title="">EC</i> state</dt>
-
-     <dd>
-
-      <p>...
-
-      http://www.mail-archive.com/dev-tech-crypto@lists.mozilla.org/msg05902.html
-
-     </dd>
-
-     --><dt>If the <code title="attr-keygen-keytype"><a href="#attr-keygen-keytype">keytype</a></code>
+    <dl class="switch"><dt>If the <code title="attr-keygen-keytype"><a href="#attr-keygen-keytype">keytype</a></code>
      attribute is in the <i title="">RSA</i> state</dt>
 
      <dd>
@@ -1722,7 +1685,7 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
 
     <p>Return the result of base64 encoding the result of ASN.1 DER
     encoding the <var title="">signedPublicKeyAndChallenge</var>
-    structure. <a href="references.html#refsRFC4648">[RFC4648]</a><!--base64--> <a href="references.html#refsX690">[X690]</a></p>
+    structure. <a href="references.html#refsRFC4648">[RFC4648]</a> <a href="references.html#refsX690">[X690]</a></p>
 
    </li>
 
@@ -1785,9 +1748,7 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
   user for download; this certificate, once downloaded and stored in
   the key store along with the private key, can then be used to
   authenticate to services that use TLS and certificate
-  authentication.</p><!-- how does the UA know which private key is associated with a
-  certificate it gets back after the server has taken the public key
-  created by <keygen> and turned it into a client cert? --><div class="example">
+  authentication.</p><div class="example">
 
    <p>To generate a key pair, add the private key to the user's key
    store, and submit the public key to the server, markup such as the
@@ -1949,13 +1910,13 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
    <p>A simple calculator could use <code><a href="#the-output-element">output</a></code> for its
    display of calculated results:</p>
 
-   <pre>&lt;form onsubmit="return false"&gt;
+   <pre>&lt;form onsubmit="return false" oninput="o.value = a.valueAsNumber + b.valueAsNumber"&gt;
  &lt;input name=a type=number step=any&gt; +
  &lt;input name=b type=number step=any&gt; =
- &lt;output onforminput="value = a.valueAsNumber + b.valueAsNumber"&gt;&lt;/output&gt;
+ &lt;output name=o&gt;&lt;/output&gt;
 &lt;/form&gt;</pre>
 
-  </div><h4 id="the-progress-element"><span class="secno">4.10.16 </span>The <dfn><code>progress</code></dfn> element</h4><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/96">ISSUE-96</a> (progress) blocks progress to Last Call</span></p><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-progress-element"><span class="secno">4.10.16 </span>The <dfn><code>progress</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
    <dd><a href="forms.html#category-label" title="category-label">Labelable</a> <a href="forms.html#form-associated-element">form-associated element</a>.</dd>
@@ -2078,14 +2039,19 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
   attribute must return &#x2212;1. Otherwise, it must return the
   result of dividing the <a href="#concept-progress-value" title="concept-progress-value">current value</a> by the <a href="#concept-progress-maximum" title="concept-progress-maximum">maximum value</a>.</p>
 
-  <p>Similarly, if the progress bar is an indeterminate progress bar,
-  then the <dfn id="dom-progress-value" title="dom-progress-value"><code>value</code></dfn>
-  IDL attribute, on getting, must return &#x2212;1. Otherwise, it must
-  return the <a href="#concept-progress-value" title="concept-progress-value">current
-  value</a>. On setting, the given value must be converted to the
-  <a href="common-microsyntaxes.html#best-representation-of-the-number-as-a-floating-point-number">best representation of the number as a floating point
-  number</a> and then the <code title="dom-progress-value"><a href="#dom-progress-value">value</a></code> content attribute must be
-  set to that string.</p>
+  <p>If the progress bar is an indeterminate progress bar, then the
+  <dfn id="dom-progress-value" title="dom-progress-value"><code>value</code></dfn> IDL
+  attribute, on getting, must return 0. Otherwise, it must return the
+  <a href="#concept-progress-value" title="concept-progress-value">current value</a>. On
+  setting, the given value must be converted to the <a href="common-microsyntaxes.html#best-representation-of-the-number-as-a-floating-point-number">best
+  representation of the number as a floating point number</a> and
+  then the <code title="dom-progress-value"><a href="#dom-progress-value">value</a></code> content
+  attribute must be set to that string.</p>
+
+  <p class="note">Setting the <code title="dom-progress-value"><a href="#dom-progress-value">value</a></code> IDL attribute to itself when
+  the corresponding content attribute is absent would change the
+  progress bar from an indeterminate progress bar to a determinate
+  progress bar with no progress.</p>
 
   <p>The <dfn id="dom-progress-max" title="dom-progress-max"><code>max</code></dfn> IDL
   attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the content attribute of the
@@ -2095,7 +2061,7 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
   a list of the element's <code><a href="forms.html#the-label-element">label</a></code>s. The <code title="dom-fae-form"><a href="association-of-controls-and-forms.html#dom-fae-form">form</a></code> IDL attribute is part of the
   element's forms API.</p>
 
-  </div><h4 id="the-meter-element"><span class="secno">4.10.17 </span>The <dfn><code>meter</code></dfn> element</h4><!-- Keep this after <progress> and NOT close to <time> --><dl class="element"><dt>Categories</dt>
+  </div><h4 id="the-meter-element"><span class="secno">4.10.17 </span>The <dfn><code>meter</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
    <dd><a href="forms.html#category-label" title="category-label">Labelable</a> <a href="forms.html#form-associated-element">form-associated element</a>.</dd>

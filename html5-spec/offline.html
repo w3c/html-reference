@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>5.6 Offline Web applications &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -350,49 +346,9 @@
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="webappapis.html" class="next">6 Web application APIs</a>
   <ol class="toc"><li><ol><li><a href="offline.html#offline"><span class="secno">5.6 </span>Offline Web applications</a>
-    <ol><li><a href="offline.html#introduction-3"><span class="secno">5.6.1 </span>Introduction</a>
+    <ol><li><a href="offline.html#introduction-4"><span class="secno">5.6.1 </span>Introduction</a>
       <ol><li><a href="offline.html#appcacheevents"><span class="secno">5.6.1.1 </span>Event summary</a></li></ol></li><li><a href="offline.html#appcache"><span class="secno">5.6.2 </span>Application caches</a></li><li><a href="offline.html#manifests"><span class="secno">5.6.3 </span>The cache manifest syntax</a>
-      <ol><li><a href="offline.html#some-sample-manifests"><span class="secno">5.6.3.1 </span>Some sample manifests</a></li><li><a href="offline.html#writing-cache-manifests"><span class="secno">5.6.3.2 </span>Writing cache manifests</a></li><li><a href="offline.html#parsing-cache-manifests"><span class="secno">5.6.3.3 </span>Parsing cache manifests</a></li></ol></li><li><a href="offline.html#downloading-or-updating-an-application-cache"><span class="secno">5.6.4 </span>Downloading or updating an application cache</a></li><li><a href="offline.html#the-application-cache-selection-algorithm"><span class="secno">5.6.5 </span>The application cache selection algorithm</a></li><li><a href="offline.html#changesToNetworkingModel"><span class="secno">5.6.6 </span>Changes to the networking model</a></li><li><a href="offline.html#expiring-application-caches"><span class="secno">5.6.7 </span>Expiring application caches</a></li><li><a href="offline.html#disk-space"><span class="secno">5.6.8 </span>Disk space</a></li><li><a href="offline.html#application-cache-api"><span class="secno">5.6.9 </span>Application cache API</a></li><li><a href="offline.html#browser-state"><span class="secno">5.6.10 </span>Browser state</a></li></ol></li></ol></li></ol></div><h3 id="offline"><span class="secno">5.6 </span>Offline Web applications</h3><!-- v2 ideas for appcache:
-
-     * A way to limit what gets download when the user agent is
-       updating the application cache and it turns out the server has
-       changed EVERY page because every page has a dynamic "site last
-       modified" date on it.
-
-       http://groups.google.com/group/gears-users/browse_thread/thread/efbd808325df607a/c73adb34f9b63cf7?hl=en&q=whatwg#c73adb34f9b63cf7
-
-
-     * Multiuser appcaches.
-
-       If the application code (HTML, JS, CSS) is all the same for two
-       users, then appcache works for multiple users by just having
-       the data for the users separate from the logic.
-
-       This is the expected model for most apps. For example, your
-       typical blog has just one set of CSS for all users.
-
-       For systems where the user affects what HTML, JS, and CSS is
-       served back, the spec as written pretty much requires that
-       there be one app per user, and one generic "login" app that
-       then redirects to one of those other apps - and where each app
-       has a different base URL, separate manifest, etc.
-
-       An alternative that we could explore in a future version is to
-       have the manifest include a manifest name, and then have script
-       that allows you to "activate" a particular manifest name for a
-       given appcache.
-
-       So each appcache group would be futher subdivided into named
-       subgroups, and for a given manifest URL with such a group of
-       subgroups, one subgroup would be the default one at a time. The
-       inactive ones would just lie dormant, but and the active ones
-       would act like now, but there'd be a scripted way to change the
-       default (and maybe query what available variants exist for the
-       current appcache), so that you could log back in as someone
-       else by just making the script pick the other user's variant,
-       and then reloading.
-
-  --><h4 id="introduction-3"><span class="secno">5.6.1 </span>Introduction</h4><p><i>This section is non-normative.</i></p><p>In order to enable users to continue interacting with Web
+      <ol><li><a href="offline.html#some-sample-manifests"><span class="secno">5.6.3.1 </span>Some sample manifests</a></li><li><a href="offline.html#writing-cache-manifests"><span class="secno">5.6.3.2 </span>Writing cache manifests</a></li><li><a href="offline.html#parsing-cache-manifests"><span class="secno">5.6.3.3 </span>Parsing cache manifests</a></li></ol></li><li><a href="offline.html#downloading-or-updating-an-application-cache"><span class="secno">5.6.4 </span>Downloading or updating an application cache</a></li><li><a href="offline.html#the-application-cache-selection-algorithm"><span class="secno">5.6.5 </span>The application cache selection algorithm</a></li><li><a href="offline.html#changesToNetworkingModel"><span class="secno">5.6.6 </span>Changes to the networking model</a></li><li><a href="offline.html#expiring-application-caches"><span class="secno">5.6.7 </span>Expiring application caches</a></li><li><a href="offline.html#disk-space"><span class="secno">5.6.8 </span>Disk space</a></li><li><a href="offline.html#application-cache-api"><span class="secno">5.6.9 </span>Application cache API</a></li><li><a href="offline.html#browser-state"><span class="secno">5.6.10 </span>Browser state</a></li></ol></li></ol></li></ol></div><h3 id="offline"><span class="secno">5.6 </span>Offline Web applications</h3><h4 id="introduction-4"><span class="secno">5.6.1 </span>Introduction</h4><p><i>This section is non-normative.</i></p><p>In order to enable users to continue interacting with Web
   applications and documents even when their network connection is
   unavailable &#x2014; for instance, because they are traveling outside
   of their ISP's coverage area &#x2014; authors can provide a manifest
@@ -441,9 +397,7 @@ clock.js</pre><p>With a small change to the HTML file, the manifest (served as
   served over TLS (encrypted, using <code title="">https:</code>) are
   overridden by manifests. Thus, pages will not expire from an
   application cache before the user agent has updated it, and even
-  applications served over TLS can be made to work offline.</p><!--(doesn't currently function)
-  <p><a href="http://www.whatwg.org/demos/offline/clock/clock2.html">View this example online</a>.</p>
---><h5 id="appcacheevents"><span class="secno">5.6.1.1 </span>Event summary</h5><p><i>This section is non-normative.</i></p><p>When the user visits a page that declares a manifest, the browser
+  applications served over TLS can be made to work offline.</p><h5 id="appcacheevents"><span class="secno">5.6.1.1 </span>Event summary</h5><p><i>This section is non-normative.</i></p><p>When the user visits a page that declares a manifest, the browser
   will try to update the cache. It does this by fetching a copy of the
   manifest and, if the manifest has changed since the user agent last
   saw it, redownloading all the resources it mentions and caching them
@@ -629,7 +583,7 @@ clock.js</pre><p>With a small change to the HTML file, the manifest (served as
 
   <p>A <code><a href="infrastructure.html#document">Document</a></code> initially is not associated with an
   <a href="#application-cache">application cache</a>, but can become associated with one
-  early during the page load process, when steps <a href="tokenization.html#parser-appcache">in the parser</a> and in the <a href="history.html#navigate" title="navigate">navigation</a> sections cause <a href="#concept-appcache-init" title="concept-appcache-init">cache selection</a> to occur.</p>
+  early during the page load process, when steps <a href="tree-construction.html#parser-appcache">in the parser</a> and in the <a href="history.html#navigate" title="navigate">navigation</a> sections cause <a href="#concept-appcache-init" title="concept-appcache-init">cache selection</a> to occur.</p>
 
   <p>A <code>SharedWorkerGlobalScope</code> can be associated with an
   <a href="#application-cache">application cache</a> when it is created.
@@ -678,9 +632,7 @@ clock.js</pre><p>With a small change to the HTML file, the manifest (served as
    identified by <code title="">http://example.com/app1/manifest</code> contains a
    namespace with a match for that URL.</p>
 
-   <!-- "resolve a url" canonicalises the case for the scheme and host
-   and removes the port if it is the default -->
-
+   
   </div>
 
   </div><h4 id="manifests"><span class="secno">5.6.3 </span>The cache manifest syntax</h4><h5 id="some-sample-manifests"><span class="secno">5.6.3.1 </span>Some sample manifests</h5><p><i>This section is non-normative.</i></p><div class="example">
@@ -850,17 +802,11 @@ NETWORK:
     <p>When the current section is the <a href="#concept-appcache-manifest-network" title="concept-appcache-manifest-network">online whitelist
     section</a>, data lines must consist of zero or more U+0020
     SPACE and U+0009 CHARACTER TABULATION (tab) characters, either a
-    single U+002A ASTERISK character (*) <!--
-    concept-appcache-onlinewhitelist-wildcard --> or a <a href="urls.html#valid-url">valid
+    single U+002A ASTERISK character (*)  or a <a href="urls.html#valid-url">valid
     URL</a> identifying a resource other than the manifest itself,
     and then zero or more U+0020 SPACE and U+0009 CHARACTER TABULATION
     (tab) characters.</p>
 
-<!--
-    <p class="note">The URLs in data lines can't be empty strings,
-    since those would be relative URLs to the manifest itself. Such
-    lines would be confused with blank or invalid lines, anyway.</p>
--->
 
   </dd></dl><p>Manifests may contain sections more than once. Sections may be
   empty.</p><p>If the manifest's <a href="urls.html#url-scheme" title="url-scheme">&lt;scheme&gt;</a>
@@ -879,8 +825,7 @@ NETWORK:
   sections</a>. (This is needed for any URL that the page is
   intending to use to communicate back to the server.) To specify that
   all URLs are automatically whitelisted in this way, a U+002A
-  ASTERISK character (*) may be specified as one of the URLs. <!--
-  concept-appcache-onlinewhitelist-wildcard --></p><p>Authors should not include namespaces in the <a href="#concept-appcache-onlinewhitelist" title="concept-appcache-onlinewhitelist">online whitelist</a> for
+  ASTERISK character (*) may be specified as one of the URLs. </p><p>Authors should not include namespaces in the <a href="#concept-appcache-onlinewhitelist" title="concept-appcache-onlinewhitelist">online whitelist</a> for
   which another namespace in the <a href="#concept-appcache-onlinewhitelist" title="concept-appcache-onlinewhitelist">online whitelist</a> is
   a <a href="infrastructure.html#prefix-match">prefix match</a>.</p><p>Relative URLs must be given relative to the manifest's own
   URL. All URLs in the manifest must have the same <a href="urls.html#url-scheme" title="url-scheme">&lt;scheme&gt;</a> as the manifest itself
@@ -897,11 +842,7 @@ NETWORK:
   that the user agent must run the following steps:</p>
 
   <ol><li><p>The user agent must decode the byte stream corresponding
-   with the manifest to be parsed <a href="infrastructure.html#decoded-as-utf-8-with-error-handling" title="decoded as UTF-8, with&#10;   error handling">as UTF-8, with error handling</a>. <!--All
-   U+0000 NULL characters must be replaced by U+FFFD REPLACEMENT
-   CHARACTERs. (this isn't black-box testable since neither U+0000 nor
-   U+FFFD are valid anywhere in the syntax and thus both will be
-   treated the same anyway)--></p></li>
+   with the manifest to be parsed <a href="infrastructure.html#decoded-as-utf-8-with-error-handling" title="decoded as UTF-8, with&#10;   error handling">as UTF-8, with error handling</a>. </p></li>
 
    <li><p>Let <var title="">base URL</var> be the <a href="urls.html#absolute-url">absolute
    URL</a> representing the manifest.</p></li>
@@ -920,8 +861,7 @@ NETWORK:
    URLs</a> for an <a href="#concept-appcache-onlinewhitelist" title="concept-appcache-onlinewhitelist">online
    whitelist</a>.</p></li>
 
-   <li><p>Let <var title="">online whitelist wildcard flag</var> be <i title="">blocking</i>. <!--
-   concept-appcache-onlinewhitelist-wildcard --></p></li>
+   <li><p>Let <var title="">online whitelist wildcard flag</var> be <i title="">blocking</i>. </p></li>
 
    <li><p>Let <var title="">input</var> be the decoded text of the
    manifest's byte stream.</p></li>
@@ -961,7 +901,7 @@ NETWORK:
    step. Otherwise, <a href="common-microsyntaxes.html#collect-a-sequence-of-characters">collect a sequence of characters</a> that
    are U+000A LINE FEED (LF), U+000D CARRIAGE RETURN (CR), U+0020
    SPACE, or U+0009 CHARACTER TABULATION (tab) characters.</p></li>
-   <!-- strips leading spaces, ignores space-only lines, ignores blank lines -->
+   
 
    <li><p>Now, <a href="common-microsyntaxes.html#collect-a-sequence-of-characters">collect a sequence of characters</a> that are
    <em>not</em> U+000A LINE FEED (LF) or U+000D CARRIAGE RETURN (CR)
@@ -1071,9 +1011,7 @@ NETWORK:
 
       <p>If the <a href="urls.html#absolute-url">absolute URL</a> corresponding to either <var title="">part one</var> or <var title="">part two</var> does not
       have the <a href="origin-0.html#same-origin">same origin</a> as the manifest's URL, then
-      jump back to the step labeled "start of line".</p> <!-- SECURITY
-      -->
-
+      jump back to the step labeled "start of line".</p> 
       <p>Drop any <a href="urls.html#url-fragment" title="url-fragment">&lt;fragment&gt;</a>
       components of the resulting <a href="urls.html#absolute-url" title="absolute URL">absolute
       URLs</a>.</p>
@@ -1321,9 +1259,7 @@ NETWORK:
     <p><i>Fetching the manifest</i>: <a href="fetching-resources.html#fetch">Fetch</a> the resource
     from <var title="">manifest URL</var> with the <i>synchronous
     flag</i> set, and let <var title="">manifest</var> be that
-    resource.</p> <!-- http-origin privacy sensitive, though it
-    doesn't matter, since this can never be cross-origin -->
-
+    resource.</p> 
     <p>If the resource is labeled with the <a href="infrastructure.html#mime-type">MIME type</a>
     <code><a href="iana.html#text-cache-manifest">text/cache-manifest</a></code>, parse <var title="">manifest</var> according to the <a href="#parse-a-manifest" title="parse a&#10;    manifest">rules for parsing manifests</a>, obtaining a list of
     <a href="#concept-appcache-explicit" title="concept-appcache-explicit">explicit entries</a>,
@@ -1564,7 +1500,7 @@ NETWORK:
       group</var> as an HTTP cache, and honor HTTP caching semantics
       (such as expiration, ETags, and so forth) with respect to that
       cache. User agents may also have other caches in place that are
-      also honored.</p> <!-- not http-origin privacy sensitive -->
+      also honored.</p> 
 
       <p class="note">If the resource in question is already being
       downloaded for other reasons then the existing download process
@@ -1752,10 +1688,7 @@ NETWORK:
 
     <p><a href="fetching-resources.html#fetch">Fetch</a> the resource from <var title="">manifest
     URL</var> again, with the <i>synchronous flag</i> set, and let
-    <var title="">second manifest</var> be that resource.</p> <!--
-    http-origin privacy sensitive, though it doesn't matter, since
-    this can never be cross-origin -->
-
+    <var title="">second manifest</var> be that resource.</p> 
    </li>
 
    <li>
@@ -1956,11 +1889,7 @@ NETWORK:
 
    <dt>If <var title="">document</var> was loaded from an
    <a href="#application-cache">application cache</a>, and that <a href="#application-cache">application
-   cache</a> still exists (it is not now <a href="#concept-appcache-obsolete" title="concept-appcache-obsolete">obsolete</a>)<!--[redundant],
-   and either there is no <var title="">manifest URL</var>, or the URL
-   of the <span title="concept-appcache-manifest">manifest</span> of
-   the cache's <span>application cache group</span> is the same as
-   <var title="">manifest URL</var>--></dt>
+   cache</a> still exists (it is not now <a href="#concept-appcache-obsolete" title="concept-appcache-obsolete">obsolete</a>)</dt>
 
    <dd>
 
@@ -1973,8 +1902,7 @@ NETWORK:
    </dd>
 
 
-   <dt>If <var title="">document</var> <!--[redundant] was not loaded
-   from an <span>application cache</span>, but it--> was loaded using
+   <dt>If <var title="">document</var>  was loaded using
    HTTP GET <a href="fetching-resources.html#concept-http-equivalent-get" title="concept-http-equivalent-get">or
    equivalent</a>, and, there is a <var title="">manifest
    URL</var>, and <var title="">manifest URL</var> has the <a href="origin-0.html#same-origin">same
@@ -1991,9 +1919,7 @@ NETWORK:
    </dd>
 
 
-   <dt>Otherwise</dt> <!-- not from cache and either no <var
-   title="">manifest URL</var>, or non-GET, or wrong-origin manifest -->
-
+   <dt>Otherwise</dt> 
    <dd>
 
     <p>The <code><a href="infrastructure.html#document">Document</a></code> is not associated with any

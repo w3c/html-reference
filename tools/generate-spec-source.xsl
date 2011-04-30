@@ -3154,7 +3154,8 @@
   </xsl:template>
   <xsl:template name="get-spec-filename">
     <xsl:param name="ref"/>
-    <xsl:param name="base">http://developers.whatwg.org/</xsl:param>
+    <xsl:param name="base">http://dev.w3.org/html5/spec-author-view/</xsl:param>
+    <!-- * <xsl:param name="base">http://developers.whatwg.org/</xsl:param> -->
     <xsl:param name="fragment-file">../fragment-links.html</xsl:param>
     <xsl:for-each select="document($fragment-file)">
       <xsl:choose>

@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>2.8 Common DOM interfaces &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -355,10 +351,7 @@
   particular content attribute. This means that on getting, the IDL
   attribute returns the current value of the content attribute, and on
   setting, the IDL attribute changes the value of the content
-  attribute to the given value.</p><!-- v2 for completeness: (also search for REFLECTIDL)
-  <p class="note">A list of <span>reflecting IDL attributes</span> and
-  their corresponding content attributes is given in the index.</p>
---><div class="impl">
+  attribute to the given value.</p><div class="impl">
 
   <p>In general, on getting, if the content attribute is not present,
   the IDL attribute must act as if the content attribute's value is
@@ -447,11 +440,7 @@
   string representing the number as a <a href="common-microsyntaxes.html#valid-non-negative-integer">valid non-negative
   integer</a> and then that string must be used as the new content
   attribute value.</p>
-  <!-- see http://www.w3.org/Bugs/Public/show_bug.cgi?id=10352 and
-  https://bugzilla.mozilla.org/show_bug.cgi?id=586118 for why the
-  range is clamped to 2147483647 rather the normal unsigned long
-  maximum value of 4294967295 -->
-
+  
   <p>If a reflecting IDL attribute is an unsigned integer type
   (<code>unsigned long</code>) that is <dfn id="limited-to-only-non-negative-numbers-greater-than-zero">limited to only
   non-negative numbers greater than zero</dfn>, then the behavior is
@@ -467,7 +456,7 @@
   given value must be converted to the shortest possible string
   representing the number as a <a href="common-microsyntaxes.html#valid-non-negative-integer">valid non-negative integer</a>
   and then that string must be used as the new content attribute
-  value.</p> <!-- see previous paragraph for note about the range -->
+  value.</p> 
 
   <p>If a reflecting IDL attribute is a floating point number type
   (<code>double</code>), then, on getting, the content attribute must
@@ -616,7 +605,8 @@
   collection</a> have.</p>
 
   <p>The <dfn id="dom-htmlcollection-nameditem" title="dom-HTMLCollection-namedItem"><code>namedItem(<var title="">key</var>)</code></dfn> method must return the first node
-  in the collection that matches the following requirements:</p>
+  in the collection that matches either of the following
+  requirements:</p>
 
   <ul><li>It is an <code><a href="text-level-semantics.html#the-a-element">a</a></code>, <code><a href="obsolete.html#the-applet-element">applet</a></code>,
    <code><a href="the-map-element.html#the-area-element">area</a></code>, <code><a href="the-iframe-element.html#the-embed-element">embed</a></code>, <code><a href="forms.html#the-form-element">form</a></code>,
@@ -824,9 +814,7 @@ interface <dfn id="radionodelist">RadioNodeList</dfn> : <a href="infrastructure.
    <li><p>If <var title="">element</var> is not null, then set its
    <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> to true.</p>
 
-  </li></ol><!--
-http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E...%0A%3Cform%20name%3D%22a%22%3E%3Cinput%20id%3D%22x%22%20name%3D%22y%22%3E%3Cinput%20name%3D%22x%22%20id%3D%22y%22%3E%3C/form%3E%0A%3Cscript%3E%0A%20%20var%20x%3B%0A%20%20w%28x%20%3D%20document.forms%5B%27a%27%5D%5B%27x%27%5D%29%3B%0A%20%20w%28x.length%29%3B%0A%20%20x%5B0%5D.parentNode.removeChild%28x%5B0%5D%29%3B%0A%20%20w%28x.length%29%3B%0A%20%20w%28x%20%3D%3D%20document.forms%5B%27a%27%5D%5B%27x%27%5D%29%3B%0A%3C/script%3E%0A
---></div><h5 id="htmloptionscollection-0"><span class="secno">2.8.2.4 </span>HTMLOptionsCollection</h5><p>The <code><a href="#htmloptionscollection">HTMLOptionsCollection</a></code> interface represents a
+  </li></ol></div><h5 id="htmloptionscollection-0"><span class="secno">2.8.2.4 </span>HTMLOptionsCollection</h5><p>The <code><a href="#htmloptionscollection">HTMLOptionsCollection</a></code> interface represents a
   list of <code><a href="the-button-element.html#the-option-element">option</a></code> elements. It is always rooted on a
   <code><a href="the-button-element.html#the-select-element">select</a></code> element and has attributes and methods that
   manipulate that element's descendants.</p><pre class="idl">interface <dfn id="htmloptionscollection">HTMLOptionsCollection</dfn> : <a href="#htmlcollection">HTMLCollection</a> {
@@ -932,7 +920,7 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E..
    <li>Otherwise, if there are no nodes in the collection that have
    either an <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> attribute or a <code title="attr-option-name"><a href="obsolete.html#attr-option-name">name</a></code> attribute equal to <var title="">name</var>, then return null and stop the algorithm.</li>
 
-   <!-- IE returns an HTMLCollection instead; we may need to change to that for compat -->
+   
    <li>Otherwise, create a new <code><a href="infrastructure.html#nodelist">NodeList</a></code> object
    representing a <a href="infrastructure.html#live">live</a> view of the
    <code><a href="#htmloptionscollection">HTMLOptionsCollection</a></code> object, further filtered so that
@@ -991,7 +979,7 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E..
   <code><a href="the-button-element.html#the-select-element">select</a></code> element on which the
   <code><a href="#htmloptionscollection">HTMLOptionsCollection</a></code> is rooted</p>
 
-  <!-- see also http://ln.hixie.ch/?start=1161042744&count=1 -->
+  
 
   </div><h4 id="domtokenlist-0"><span class="secno">2.8.3 </span>DOMTokenList</h4><p>The <code><a href="#domtokenlist">DOMTokenList</a></code> interface represents an interface
   to an underlying string that consists of a <a href="common-microsyntaxes.html#set-of-space-separated-tokens">set of
@@ -1417,17 +1405,13 @@ http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C%21DOCTYPE%20html%3E..
    <li value="15"><dfn id="invalid_access_err"><code>INVALID_ACCESS_ERR</code></dfn></li>
    <li value="16"><dfn id="validation_err"><code>VALIDATION_ERR</code></dfn></li>
    <li value="17"><dfn id="type_mismatch_err"><code>TYPE_MISMATCH_ERR</code></dfn></li>
-   <li value="18"><dfn id="security_err"><code>SECURITY_ERR</code></dfn></li> <!-- actually in XHR for now -->
-   <li value="19"><dfn id="network_err"><code>NETWORK_ERR</code></dfn></li> <!-- actually in XHR for now -->
-   <li value="20"><dfn id="abort_err"><code>ABORT_ERR</code></dfn></li> <!-- actually in XHR for now -->
-   <li value="21"><dfn id="url_mismatch_err"><code>URL_MISMATCH_ERR</code></dfn></li> <!-- actually defined right here for now -->
-   <li value="22"><dfn id="quota_exceeded_err"><code>QUOTA_EXCEEDED_ERR</code></dfn></li> <!-- actually defined right here for now -->
-   <li value="23"><dfn id="timeout_err"><code>TIMEOUT_ERR</code></dfn></li> <!-- actually in XHR for now -->
-   <li value="25"><dfn id="data_clone_err"><code>DATA_CLONE_ERR</code></dfn></li> <!-- actually defined right here for now -->
-<!--
-   <li value="81"><dfn><code>PARSE_ERR</code></dfn></li> <!- - actually defined in dom3ls - ->
-   <li value="82"><dfn><code>SERIALIZE_ERR</code></dfn></li> <!- - actually defined in dom3ls - ->
--->
+   <li value="18"><dfn id="security_err"><code>SECURITY_ERR</code></dfn></li> 
+   <li value="19"><dfn id="network_err"><code>NETWORK_ERR</code></dfn></li> 
+   <li value="20"><dfn id="abort_err"><code>ABORT_ERR</code></dfn></li> 
+   <li value="21"><dfn id="url_mismatch_err"><code>URL_MISMATCH_ERR</code></dfn></li> 
+   <li value="22"><dfn id="quota_exceeded_err"><code>QUOTA_EXCEEDED_ERR</code></dfn></li> 
+   <li value="23"><dfn id="timeout_err"><code>TIMEOUT_ERR</code></dfn></li> 
+   <li value="25"><dfn id="data_clone_err"><code>DATA_CLONE_ERR</code></dfn></li> 
   </ol><div class="impl">
 
   <pre class="idl">[Supplemental] exception DOMException {

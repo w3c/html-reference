@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>4.11 Interactive elements &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -465,7 +461,7 @@
    <dd><code title="attr-command-disabled"><a href="#attr-command-disabled">disabled</a></code></dd>
    <dd><code title="attr-command-checked"><a href="#attr-command-checked">checked</a></code></dd>
    <dd><code title="attr-command-radiogroup"><a href="#attr-command-radiogroup">radiogroup</a></code></dd>
-   <!--<dd><code title="attr-command-default">default</code></dd>-->
+   
    <dd>Also, the <code title="attr-command-title"><a href="#attr-command-title">title</a></code> attribute has special semantics on this element.</dd>
    <dt>DOM interface:</dt>
    <dd>
@@ -475,16 +471,12 @@
            attribute DOMString <a href="#dom-command-icon" title="dom-command-icon">icon</a>;
            attribute boolean <a href="#dom-command-disabled" title="dom-command-disabled">disabled</a>;
            attribute boolean <a href="#dom-command-checked" title="dom-command-checked">checked</a>;
-           attribute DOMString <a href="#dom-command-radiogroup" title="dom-command-radiogroup">radiogroup</a>;<!--
-           attribute boolean <span title="dom-command-default">default</span>;-->
-};</pre>
+           attribute DOMString <a href="#dom-command-radiogroup" title="dom-command-radiogroup">radiogroup</a>;};</pre>
    </dd>
   </dl><p>The <code><a href="#the-command">command</a></code> element represents a command that the user
   can invoke.</p><p>A command can be part of a context menu or toolbar, using the
   <code><a href="#menus">menu</a></code> element, or can be put anywhere else in the page,
-  to define a keyboard shortcut.</p><!-- in the future we'll also add
-  a command="" attribute to refer to a command, which can then be
-  defined anywhere --><p>The <dfn id="attr-command-type" title="attr-command-type"><code>type</code></dfn>
+  to define a keyboard shortcut.</p><p>The <dfn id="attr-command-type" title="attr-command-type"><code>type</code></dfn>
   attribute indicates the kind of command: either a normal command
   with an associated action, or a state or option that can be toggled,
   or a selection of one item from a list of items.</p><p>The attribute is an <a href="common-microsyntaxes.html#enumerated-attribute">enumerated attribute</a> with three
@@ -518,9 +510,7 @@
   spaces</a>. <span class="impl">To obtain the <a href="urls.html#absolute-url">absolute
   URL</a> of the icon when the attribute's value is not the empty
   string, the attribute's value must be <a href="urls.html#resolve-a-url" title="resolve a&#10;  url">resolved</a> relative to the element. When the attribute is
-  absent, or its value is the empty string, or <a href="urls.html#resolve-a-url" title="resolve a&#10;  url">resolving</a> its value fails, there is no icon.</span></p><!-- this is affected by the base URL being changed, so users of
-  this should cache the image once they've fetched it once, at least
-  until the relative url changes again --><p>The <dfn id="attr-command-disabled" title="attr-command-disabled"><code>disabled</code></dfn> attribute
+  absent, or its value is the empty string, or <a href="urls.html#resolve-a-url" title="resolve a&#10;  url">resolving</a> its value fails, there is no icon.</span></p><p>The <dfn id="attr-command-disabled" title="attr-command-disabled"><code>disabled</code></dfn> attribute
   is a <a href="common-microsyntaxes.html#boolean-attribute">boolean attribute</a> that, if present, indicates that
   the command is not available in the current state.</p><p class="note">The distinction between <code title="attr-command-disabled"><a href="#attr-command-disabled">disabled</a></code> and <code title="attr-hidden"><a href="editing.html#the-hidden-attribute">hidden</a></code> is subtle. A command would be
   disabled if, in the same context, it could be enabled if only
@@ -538,37 +528,13 @@
   state.</p><p>The <dfn id="attr-command-radiogroup" title="attr-command-radiogroup"><code>radiogroup</code></dfn>
   attribute gives the name of the group of commands that will be
   toggled when the command itself is toggled, for commands whose <code title="attr-command-type"><a href="#attr-command-type">type</a></code> attribute has the value "<code title="">radio</code>". The scope of the name is the child list of
-  the parent element. The attribute must be omitted unless the <code title="attr-command-type"><a href="#attr-command-type">type</a></code> attribute is in the <a href="#attr-command-type-state-radio" title="attr-command-type-state-radio">Radio</a> state.</p><!--
-  <p>If the <code>command</code> element is used when <span
-  title="menu generation">generating</span> a <span>context
-  menu</span>, then the <dfn
-  title="attr-command-default"><code>default</code></dfn> attribute
-  indicates, if present, that the command is the one that would have
-  been invoked if the user had directly activated the menu's subject
-  instead of using its context menu. The <code
-  title="attr-command-default">default</code> attribute is a
-  <span>boolean attribute</span>. The attribute must be omitted unless
-  the <code title="attr-command-type">type</code> attribute is in the
-  <span title="attr-command-type-state-command">Command</span>
-  state.</p>
-
-  <div class="example">
-
-   ...an example that shows an element that, if double-clicked,
-   invokes an action, but that also has a context menu, showing the
-   various <code>command</code> attributes off, and that has a default
-   command...
-
-  </div>
---><div class="impl">
+  the parent element. The attribute must be omitted unless the <code title="attr-command-type"><a href="#attr-command-type">type</a></code> attribute is in the <a href="#attr-command-type-state-radio" title="attr-command-type-state-radio">Radio</a> state.</p><div class="impl">
 
   <p>The <dfn id="dom-command-type" title="dom-command-type"><code>type</code></dfn> IDL
   attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the content attribute of the
   same name, <a href="common-dom-interfaces.html#limited-to-only-known-values">limited to only known values</a>.</p>
 
-  <p>The <dfn id="dom-command-label" title="dom-command-label"><code>label</code></dfn>, <dfn id="dom-command-icon" title="dom-command-icon"><code>icon</code></dfn>, <dfn id="dom-command-disabled" title="dom-command-disabled"><code>disabled</code></dfn>, <dfn id="dom-command-checked" title="dom-command-checked"><code>checked</code></dfn>, and <dfn id="dom-command-radiogroup" title="dom-command-radiogroup"><code>radiogroup</code></dfn><!--,
-  and <dfn title="dom-command-default"><code>default</code></dfn>-->
-  IDL attributes must <a href="common-dom-interfaces.html#reflect">reflect</a> the respective content
+  <p>The <dfn id="dom-command-label" title="dom-command-label"><code>label</code></dfn>, <dfn id="dom-command-icon" title="dom-command-icon"><code>icon</code></dfn>, <dfn id="dom-command-disabled" title="dom-command-disabled"><code>disabled</code></dfn>, <dfn id="dom-command-checked" title="dom-command-checked"><code>checked</code></dfn>, and <dfn id="dom-command-radiogroup" title="dom-command-radiogroup"><code>radiogroup</code></dfn>  IDL attributes must <a href="common-dom-interfaces.html#reflect">reflect</a> the respective content
   attributes of the same name.</p>
 
   <p>The element's <a href="content-models.html#activation-behavior">activation behavior</a> depends on the
@@ -608,12 +574,7 @@
   </dl><p class="note">Firing a synthetic <code title="event-click"><a href="infrastructure.html#event-click">click</a></code> event at the element does not cause
   any of the actions described above to happen.</p>
 
-  <!-- v2COMMAND: the command="" attribute to make a <command> element
-  reflect the state of another command, so that the script can update
-  one place in the page and have context menus, toolbars, shortcuts,
-  etc, automatically update. Once we add this, expose the Triggers
-  facet again. -->
-
+  
   </div><p class="note"><code><a href="#the-command">command</a></code> elements are not rendered
   unless they <a href="#menus" title="menu">form part of a menu</a>.</p><div class="example">
 
@@ -653,7 +614,7 @@
            attribute DOMString <a href="#dom-menu-type" title="dom-menu-type">type</a>;
            attribute DOMString <a href="#dom-menu-label" title="dom-menu-label">label</a>;
 };</pre>
-  </dd></dl><p>The <code><a href="#menus">menu</a></code> element represents a list of commands.</p><!-- v2 idea: <menu> should get an icon, like <command> --><p>The <dfn id="attr-menu-type" title="attr-menu-type"><code>type</code></dfn> attribute
+  </dd></dl><p>The <code><a href="#menus">menu</a></code> element represents a list of commands.</p><p>The <dfn id="attr-menu-type" title="attr-menu-type"><code>type</code></dfn> attribute
   is an <a href="common-microsyntaxes.html#enumerated-attribute">enumerated attribute</a> indicating the kind of menu
   being declared. The attribute has three states. The <code title="attr-menu-type-context">context</code> keyword maps to the
   <dfn id="context-menu-state" title="context menu state">context menu</dfn> state, in which
@@ -715,9 +676,7 @@
  &lt;menu type="toolbar"&gt;
   &lt;label for="goto"&gt;Go to...&lt;/label&gt;
   &lt;menu label="Go"&gt;
-   &lt;select id="goto"<!--
-           onchange="if (this.options[this.selectedIndex].value)
-                     window.location = this.options[this.selectedIndex].value"-->&gt;
+   &lt;select id="goto"&gt;
     &lt;option value="" selected="selected"&gt; Select site: &lt;/option&gt;
     &lt;option value="http://www.apple.com/"&gt; Apple &lt;/option&gt;
     &lt;option value="http://www.mozilla.org/"&gt; Mozilla &lt;/option&gt;
@@ -748,18 +707,7 @@
 
   <dl class="switch"><dt>An element that <a href="commands.html#concept-command" title="concept-command">defines a command</a></dt>
 
-   <dd>Append the command to the menu, respecting its <a href="commands.html#concept-facet" title="concept-facet">facets</a><!-- we might need to be
-   explicit about what this means for each facet, if testing shows
-   this isn't well-implemented. e.g.: If there's an Icon facet for the
-   command, it should be <span title="fetch">fetched</span> (this
-   would be http-origin privacy-sensitive), and then that image should
-   be associated with the command, such that each command only has its
-   image fetched once, to prevent changes to the base URL from having
-   effects after the image has been fetched once. (no need to resolve
-   the Icon facet, it's an absolute URL) -->. <!--If the element is a
-   <code>command</code> element with a <code
-   title="attr-command-default">default</code> attribute, mark the
-   command as being a default command.--></dd>
+   <dd>Append the command to the menu, respecting its <a href="commands.html#concept-facet" title="concept-facet">facets</a>. </dd>
 
 
    <dt>An <code><a href="grouping-content.html#the-hr-element">hr</a></code> element</dt>
@@ -784,7 +732,7 @@
    of the <code><a href="#menus">menu</a></code> or <code><a href="the-button-element.html#the-select-element">select</a></code> element, then
    append another separator.</dd>
 
-   <!-- v2: we might want to support <select> in <label> as giving a named submenu -->
+   
 
 
    <dt>A <code><a href="#menus">menu</a></code> element with a <code title="attr-menu-label"><a href="#attr-menu-label">label</a></code> attribute</dt>
@@ -859,7 +807,7 @@
   event</a> named <code title="event-show">show</code> at the
   <code><a href="#menus">menu</a></code> element of the context menu of the nearest
   ancestor (including the element itself) with one assigned.</p>
-  <!-- v2: include modifier key information -->
+  
 
   <p>The default action of <em>this</em> event is that the user agent
   must show a context menu <a href="#building-menus-and-toolbars" title="building menus and&#10;  toolbars">built</a> from the <code><a href="#menus">menu</a></code> element.</p>

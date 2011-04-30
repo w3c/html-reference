@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>1 Introduction &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -451,7 +447,7 @@
   chartered to work with the WHATWG on the development of the HTML5
   specification. Apple, Mozilla, and Opera allowed the W3C to publish
   the specification under the W3C copyright, while keeping a version
-  with the less restrictive license on the WHATWG site.</p><p>Since then, both groups have been working together.</p><!--w3c-html--><!--VERSION--><p>The <a href="http://www.whatwg.org/specs/web-apps/current-work/">HTML
+  with the less restrictive license on the WHATWG site.</p><p>Since then, both groups have been working together.</p><p>The <a href="http://www.whatwg.org/specs/web-apps/current-work/">HTML
   specification</a> published by the WHATWG is not identical to
   this specification. The main differences are that the WHATWG version
   includes features not included in this W3C version: some features
@@ -459,7 +455,7 @@
   HTML, not HTML5; and other features are omitted because at the W3C
   they are published as separate specifications. There are also some
   minor differences. For an exact list of differences, please see the
-  WHATWG specification.</p><!--w3c-html--><!--VERSION--><p>A separate document has been published by the W3C HTML working
+  WHATWG specification.</p><p>A separate document has been published by the W3C HTML working
   group to document the differences between this specification and the
   language described in the HTML4 specification. <a href="references.html#refsHTMLDIFF">[HTMLDIFF]</a></p><h3 id="design-notes"><span class="secno">1.5 </span>Design notes</h3><p><i>This section is non-normative.</i></p><p>It must be admitted that many aspects of HTML appear at first
   glance to be nonsensical and inconsistent.</p><p>HTML, its supporting DOM APIs, as well as many of its supporting
@@ -686,9 +682,7 @@ a.setAttribute('href', 'http://example.com/'); // change the content attribute d
   language with a level of detail that might be difficult to
   understand at first.</p><h3 id="conformance-requirements-for-authors"><span class="secno">1.9 </span>Conformance requirements for authors</h3><p><i>This section is non-normative.</i></p><p>Unlike previous versions of the HTML specification, this
   specification defines in some detail the required processing for
-  invalid documents as well as valid documents.</p><!-- This has led
-  to some questioning the purpose of conformance criteria: if there is
-  no ambiguity in how something will be processed, why disallow it? --><p>However, even though the processing of invalid content is in most
+  invalid documents as well as valid documents.</p><p>However, even though the processing of invalid content is in most
   cases well-defined, conformance requirements for documents are still
   important: in practice, interoperability (the situation in which all
   implementations process particular content in a reliable and
@@ -757,7 +751,7 @@ a.setAttribute('href', 'http://example.com/'); // change the content attribute d
   pages.</p><p>It is also worth noting that some elements that were previously
   presentational have been redefined in this specification to be
   media-independent: <code><a href="text-level-semantics.html#the-b-element">b</a></code>, <code><a href="text-level-semantics.html#the-i-element">i</a></code>, <code><a href="grouping-content.html#the-hr-element">hr</a></code>,
-  <code><a href="text-level-semantics.html#the-s-element">s</a></code>, and <code><a href="text-level-semantics.html#the-small-element">small</a></code>.</p><h4 id="syntax-errors"><span class="secno">1.9.2 </span>Syntax errors</h4><p><i>This section is non-normative.</i></p><p>The syntax of HTML is constrained to avoid a wide variety of
+  <code><a href="text-level-semantics.html#the-s-element">s</a></code>, <code><a href="text-level-semantics.html#the-small-element">small</a></code>, and <code><a href="text-level-semantics.html#the-u-element">u</a></code>.</p><h4 id="syntax-errors"><span class="secno">1.9.2 </span>Syntax errors</h4><p><i>This section is non-normative.</i></p><p>The syntax of HTML is constrained to avoid a wide variety of
   problems.</p><dl><dt>Unintuitive error-handling behavior</dt>
 
    <dd>
@@ -869,8 +863,11 @@ a.setAttribute('href', 'http://example.com/'); // change the content attribute d
      <pre class="bad">&lt;a href="?bill&amp;ted"&gt;Bill and Ted&lt;/a&gt;</pre>
 
      <p>In the following fragment, however, the attribute's value is
-     actually "<code title="">?art&#xA9;</code>",
-     <em>not</em> the intended "<code title="">?art&amp;copy</code>":</p>
+     actually "<code title="">?art&#xA9;</code>", <em>not</em> the
+     intended "<code title="">?art&amp;copy</code>", because even
+     without the final semicolon, "<code title="">&amp;copy</code>" is
+     handled the same as "<code title="">&amp;copy;</code>" and thus
+     gets interpreted as "<code title="">&#xA9;</code>":</p>
 
      <pre class="bad">&lt;a href="?art&amp;copy"&gt;Art and Copy&lt;/a&gt;</pre>
 
@@ -901,7 +898,7 @@ a.setAttribute('href', 'http://example.com/'); // change the content attribute d
 
      <p>For example, this is why the U+0060 GRAVE ACCENT character (`)
      is not allowed in unquoted attributes. In certain legacy user
-     agents, <!-- namely IE --> it is sometimes treated as a quote
+     agents,  it is sometimes treated as a quote
      character.</p>
 
     </div>
@@ -1317,5 +1314,14 @@ a.setAttribute('href', 'http://example.com/'); // change the content attribute d
    attribute values. Further constraints include those on empty
    elements, named entity references, and the use of scripts and
    style.</p></blockquote></dd>
+
+   <dt><cite>HTML to Platform Accessibility APIs Implementation Guide</cite> <a href="references.html#refsHPAAIG">[HPAAIG]</a></dt>
+
+   <dd><blockquote><p>This is draft documentation mapping HTML
+   elements and attributes to accessibility API Roles, States and
+   Properties on a variety of platforms. It provides recommendations
+   on deriving the accessible names and descriptions for HTML
+   elements. It also provides accessible feature implementation
+   examples.</p></blockquote></dd>
 
   </dl></body></html>

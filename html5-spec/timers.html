@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>6.3 Timers &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -516,15 +512,11 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
    <li><p><a href="#get-the-timeout">Get the timeout</a>, and let <var title="">timeout</var> be the result.</p></li>
 
    <li><p>If <var title="">timeout</var> is less than 10, then
-   increase <var title="">timeout</var> to 10.</p></li> <!-- (but see
-   note below about IE) -->
-
+   increase <var title="">timeout</var> to 10.</p></li> 
    <li><p>Return <var title="">handle</var>, and then continue running
    this algorithm asynchronously.</p></li>
 
-   <!-- Note: IE doesn't actually run intervals with duration zero, it
-   aborts roughly here in the algorithm for them. -->
-
+   
    <li>
 
     <p><i title="">Wait</i>: If the <a href="#method-context">method context</a> is a
@@ -663,14 +655,7 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
   </ol><hr/><p>The <a href="webappapis.html#task-source">task source</a> for these <a href="webappapis.html#concept-task" title="concept-task">tasks</a> is the <dfn id="timer-task-source">timer task
   source</dfn>.</p>
 
-  </div><h3 id="user-prompts"><span class="secno">6.4 </span>User prompts</h3><!--
-   v2 ideas:
-    * in-window modal dialogs
-       - escape/enter handling
-       - dragging the window out of the tab
-    * in-window non-modal palettes
-       - with a solution for the mobile space
-  --><h4 id="simple-dialogs"><span class="secno">6.4.1 </span>Simple dialogs</h4><dl class="domintro"><dt><var title="">window</var> . <code title="dom-alert"><a href="#dom-alert">alert</a></code>(<var title="">message</var>)</dt>
+  </div><h3 id="user-prompts"><span class="secno">6.4 </span>User prompts</h3><h4 id="simple-dialogs"><span class="secno">6.4.1 </span>Simple dialogs</h4><dl class="domintro"><dt><var title="">window</var> . <code title="dom-alert"><a href="#dom-alert">alert</a></code>(<var title="">message</var>)</dt>
    <dd>
 
     <p>Displays a modal alert with the given message, and waits for the user to dismiss it.</p>
@@ -833,8 +818,7 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
 
   </dl><div class="impl">
 
-  <p>The <dfn id="dom-showmodaldialog" title="dom-showModalDialog"><code>showModalDialog(<var title="">url</var>, <var title="">argument</var><!--, <var
-  title="">features</var>-->)</code></dfn> method, when invoked, must
+  <p>The <dfn id="dom-showmodaldialog" title="dom-showModalDialog"><code>showModalDialog(<var title="">url</var>, <var title="">argument</var>)</code></dfn> method, when invoked, must
   cause the user agent to run the following steps:</p>
 
   <ol><li>
@@ -882,10 +866,7 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
      <li>have an <a href="browsers.html#active-document">active document</a> whose
      <a href="origin-0.html#origin">origin</a> is the <a href="origin-0.html#same-origin" title="same origin">same</a>
      as the <a href="origin-0.html#origin">origin</a> of the <a href="webappapis.html#concept-script" title="concept-script">script</a> that called the <code title="dom-showModalDialog"><a href="#dom-showmodaldialog">showModalDialog()</a></code> method at
-     the time the method was called,</li> <!-- Note that changing
-     document.domain to talk to another domain doesn't make you able
-     to block that domain -->
-
+     the time the method was called,</li> 
     </ul><p>...as well as any browsing contexts that are nested inside any
     of the browsing contexts matching those conditions.</p>
 
@@ -934,7 +915,7 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
 
    <li>
 
-    <p><a href="history.html#navigate">Navigate</a><!--DONAV showModalDialog--> the new
+    <p><a href="history.html#navigate">Navigate</a> the new
     <a href="browsers.html#browsing-context">browsing context</a> to the <a href="urls.html#absolute-url">absolute URL</a>
     that resulted from <a href="urls.html#resolve-a-url" title="resolve a url">resolving</a>
     <var title="">url</var> earlier, with <a href="history.html#replacement-enabled">replacement
@@ -1044,31 +1025,17 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
 <a href="#navigator">Navigator</a> implements <a href="#navigatorid">NavigatorID</a>;
 <a href="#navigator">Navigator</a> implements <a href="offline.html#navigatoronline">NavigatorOnLine</a>;
 <a href="#navigator">Navigator</a> implements <a href="#navigatorcontentutils">NavigatorContentUtils</a>;
-<a href="#navigator">Navigator</a> implements <a href="#navigatorstorageutils">NavigatorStorageUtils</a>;</pre><!-- v2:
-  cookieEnabled geolocator javaEnabled mozIsLocallyAvailable preference
-  readonly attribute <span>MimeTypeArray</span> <span title="dom-navigator-mimeTypes">mimeTypes</span>;
-  readonly attribute <span>PluginArray</span> <span title="dom-navigator-plugins">plugins</span>;
-  (the latter is used in a <video> element demo now, so we might need to pull this forward from v2!)
---><div class="impl">
+<a href="#navigator">Navigator</a> implements <a href="#navigatorstorageutils">NavigatorStorageUtils</a>;</pre><div class="impl">
 
   <p>These interfaces are defined separately so that other
   specifications can re-use parts of the <code><a href="#navigator">Navigator</a></code>
   interface.</p>
 
-   <!-- v2: also, see window.external.AddSearchProvider() and similar DOM APIs from IE -->
+   
 
-   <!-- v2: also, could expose languages:
-   <dt><dfn title="dom-navigator-browserLanguage"><code>browserLanguage</code></dfn></dt> <!- - Opera and IE only - ->
-   <dd><p>Must return either null or a language tag representing the language the browser uses in its interface.</p></dd>
-   <dt><dfn title="dom-navigator-userLanguage"><code>userLanguage</code></dfn></dt> <!- - Opera and IE only - ->
-   <dt><dfn title="dom-navigator-language"><code>language</code></dfn></dt> <!- - Opera, Safari, and Mozilla only - ->
-   <dd><p>Must return either null or a language tag representing the user's preferred language.</p></dd>
-   -->
-
+   
   </div><h4 id="client-identification"><span class="secno">6.5.1 </span>Client identification</h4><pre class="idl">[Supplemental, NoInterfaceObject]
-interface <dfn id="navigatorid">NavigatorID</dfn> {<!--
-  readonly attribute DOMString <span title="dom-navigator-appCodeName">appCodeName</span>;-->
-  readonly attribute DOMString <a href="#dom-navigator-appname" title="dom-navigator-appName">appName</a>;
+interface <dfn id="navigatorid">NavigatorID</dfn> {  readonly attribute DOMString <a href="#dom-navigator-appname" title="dom-navigator-appName">appName</a>;
   readonly attribute DOMString <a href="#dom-navigator-appversion" title="dom-navigator-appVersion">appVersion</a>;
   readonly attribute DOMString <a href="#dom-navigator-platform" title="dom-navigator-platform">platform</a>;
   readonly attribute DOMString <a href="#dom-navigator-useragent" title="dom-navigator-userAgent">userAgent</a>;
@@ -1100,36 +1067,33 @@ interface <dfn id="navigatorid">NavigatorID</dfn> {<!--
 
   </dl><div class="impl">
 
-  <dl><!-- redundant
-   <dt><dfn title="dom-navigator-appCodeName"><code>appCodeName</code></dfn></dt>
-   <dd><p>Must return the string "<code title="">Mozilla</code>".</p></dd>
-   --><!-- appMinorVersion: IE only. In IE8b1, returns " Beta" (with the space) --><dt><dfn id="dom-navigator-appname" title="dom-navigator-appName"><code>appName</code></dfn></dt>
+  <dl><dt><dfn id="dom-navigator-appname" title="dom-navigator-appName"><code>appName</code></dfn></dt>
    <dd><p>Must return either the string "<code title="">Netscape</code>" or the full name of the browser, e.g. "<code title="">Mellblom Browsernator</code>".</p></dd>
 
    <dt><dfn id="dom-navigator-appversion" title="dom-navigator-appVersion"><code>appVersion</code></dfn></dt>
    <dd><p>Must return either the string "<code title="">4.0</code>" or a string representing the version of the browser in detail, e.g. "<code title="">1.0 (VMS; en-US) Mellblomenator/9000</code>".</p></dd>
 
-   <!-- buildID: Mozilla only -->
+   
 
-   <!-- oscpu: Mozilla only -->
+   
 
    <dt><dfn id="dom-navigator-platform" title="dom-navigator-platform"><code>platform</code></dfn></dt>
    <dd><p>Must return either the empty string or a string representing the platform on which the browser is executing, e.g. "<code title="">MacIntel</code>", "<code title="">Win32</code>", "<code title="">FreeBSD i386</code>", "<code title="">WebTV OS</code>".</p></dd>
 
-   <!-- product: Mozilla and Safari only; always returns "Gecko" -->
+   
 
-   <!-- productSub: Mozilla and Safari only; returns same as buildID in Mozilla, and returns the fixed string "20030107" in Safari -->
+   
 
-   <!-- securityPolicy: Mozilla only; always returns "" -->
+   
 
-   <!-- taintEnabled(): Opera, IE and Mozilla have this function as one that always returns false -->
+   
 
    <dt><dfn id="dom-navigator-useragent" title="dom-navigator-userAgent"><code>userAgent</code></dfn></dt>
    <dd><p>Must return the string used for the value of the "<code title="">User-Agent</code>" header in HTTP requests, or the empty string if no such header is ever sent.</p></dd>
 
-   <!-- vendor: Mozilla and Safari only; always returns "" in Mozilla, and returns the fixed string "Apple Computer, Inc." in Safari -->
+   
 
-   <!-- vendorSub: Mozilla and Safari only; always returns "" -->
+   
 
   </dl><p class="warning">Any information in this API that varies from user
   to user can be used to profile the user. In fact, if enough such
@@ -1251,8 +1215,7 @@ interface <dfn id="navigatorcontentutils">NavigatorContentUtils</dfn> {
     content in question (as defined below), then <a href="urls.html#resolve-a-url" title="resolve&#10;    a url">resolve</a> the resulting URL, relative to the <a href="webappapis.html#script-s-base-url" title="script's base URL">base URL</a> of the <a href="browsers.html#entry-script">entry
     script</a> at the time the <code title="dom-navigator-registerContentHandler"><a href="#dom-navigator-registercontenthandler">registerContentHandler()</a></code>
     or <code title="dom-navigator-registerProtocolHandler"><a href="#dom-navigator-registerprotocolhandler">registerProtocolHandler()</a></code>
-    methods were invoked, and then <a href="history.html#navigate">navigate</a><!--DONAV
-    user--> an appropriate <a href="browsers.html#browsing-context">browsing context</a> to the
+    methods were invoked, and then <a href="history.html#navigate">navigate</a> an appropriate <a href="browsers.html#browsing-context">browsing context</a> to the
     resulting URL using the GET method (<a href="fetching-resources.html#concept-http-equivalent-get" title="concept-http-equivalent-get">or equivalent</a> for
     non-HTTP URLs).</p>
 

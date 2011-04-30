@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>2.6 URLs &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -350,7 +346,16 @@
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="fetching-resources.html" class="next">2.7 Fetching resources</a>
   <ol class="toc"><li><ol><li><a href="urls.html#urls"><span class="secno">2.6 </span>URLs</a>
-    <ol><li><a href="urls.html#terminology-0"><span class="secno">2.6.1 </span>Terminology</a></li><li><a href="urls.html#dynamic-changes-to-base-urls"><span class="secno">2.6.2 </span>Dynamic changes to base URLs</a></li><li><a href="urls.html#interfaces-for-url-manipulation"><span class="secno">2.6.3 </span>Interfaces for URL manipulation</a></li></ol></li></ol></li></ol></div><h3 id="urls"><span class="secno">2.6 </span>URLs</h3><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/56">ISSUE-56</a> (urls-webarch) blocks progress to Last Call</span></p><h4 id="terminology-0"><span class="secno">2.6.1 </span>Terminology</h4><!-- see also: svn diff -r3244:3245 source --><p>A <dfn id="url">URL</dfn> is a string used to identify a resource.</p><p>A <a href="#url">URL</a> is a <dfn id="valid-url">valid URL</dfn> if at least one of
+    <ol><li><a href="urls.html#terminology-0"><span class="secno">2.6.1 </span>Terminology</a></li><li><a href="urls.html#parsing-urls"><span class="secno">2.6.2 </span>Parsing URLs</a></li><li><a href="urls.html#resolving-urls"><span class="secno">2.6.3 </span>Resolving URLs</a></li><li><a href="urls.html#dynamic-changes-to-base-urls"><span class="secno">2.6.4 </span>Dynamic changes to base URLs</a></li><li><a href="urls.html#interfaces-for-url-manipulation"><span class="secno">2.6.5 </span>Interfaces for URL manipulation</a></li></ol></li></ol></li></ol></div><h3 id="urls"><span class="secno">2.6 </span>URLs</h3><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/56">ISSUE-56</a> (urls-webarch) blocks progress to Last Call</span></p><p>This specification defines the term <a href="#url">URL</a>, and defines
+  various algorithms for dealing with URLs, because for historical
+  reasons the rules defined by the URI and IRI specifications are not
+  a complete description of what HTML user agents need to implement to
+  be compatible with Web content.</p><p class="note">The term "URL" in this specification is used in a
+  manner distinct from the precise technical meaning it is given in
+  RFC 3986. Readers familiar with that RFC will find it easier to read
+  <em>this</em> specification if they pretend the term "URL" as used
+  herein is really called something else altogether. This is a
+  <a href="introduction.html#willful-violation">willful violation</a> of RFC 3986. <a href="references.html#refsRFC3986">[RFC3986]</a></p><h4 id="terminology-0"><span class="secno">2.6.1 </span>Terminology</h4><p>A <dfn id="url">URL</dfn> is a string used to identify a resource.</p><p>A <a href="#url">URL</a> is a <dfn id="valid-url">valid URL</dfn> if at least one of
   the following conditions holds:</p><ul><li><p>The <a href="#url">URL</a> is a valid URI reference <a href="references.html#refsRFC3986">[RFC3986]</a>.</p></li>
 
    <li><p>The <a href="#url">URL</a> is a valid IRI reference and it has no
@@ -367,24 +372,138 @@
   spaces</dfn> if, after <a href="common-microsyntaxes.html#strip-leading-and-trailing-whitespace" title="strip leading and trailing&#10;  whitespace">stripping leading and trailing whitespace</a> from
   it, it is a <a href="#valid-url">valid URL</a>.</p><p>A string is a <dfn id="valid-non-empty-url-potentially-surrounded-by-spaces">valid non-empty URL potentially surrounded by
   spaces</dfn> if, after <a href="common-microsyntaxes.html#strip-leading-and-trailing-whitespace" title="strip leading and trailing&#10;  whitespace">stripping leading and trailing whitespace</a> from
-  it, it is a <a href="#valid-non-empty-url">valid non-empty URL</a>.</p><div class="impl">
+  it, it is a <a href="#valid-non-empty-url">valid non-empty URL</a>.</p><p>This specification defines the URL
+  <dfn id="about:legacy-compat"><code>about:legacy-compat</code></dfn> as a reserved, though
+  unresolvable, <code title="">about:</code> URI, for use in <a href="syntax.html#syntax-doctype" title="syntax-doctype">DOCTYPE</a>s in <a href="dom.html#html-documents">HTML
+  documents</a> when needed for compatibility with XML tools. <a href="references.html#refsABOUT">[ABOUT]</a></p><p>This specification defines the URL
+  <dfn id="about:srcdoc"><code>about:srcdoc</code></dfn> as a reserved, though
+  unresolvable, <code title="">about:</code> URI, that is used as
+  <a href="dom.html#the-document-s-address">the document's address</a> of <a href="the-iframe-element.html#an-iframe-srcdoc-document" title="an iframe srcdoc&#10;  document"><code>iframe</code> <code title="attr-iframe-srcdoc">srcdoc</code> documents</a>. <a href="references.html#refsABOUT">[ABOUT]</a></p><div class="impl">
+
+  <h4 id="parsing-urls"><span class="secno">2.6.2 </span>Parsing URLs</h4>
 
   <p>To <dfn id="parse-a-url">parse a URL</dfn> <var title="">url</var> into its
-  component parts, the user agent must use the <span class="XXX">parse
-  an address</span> algorithm defined by the IRI specification. <a href="references.html#refsRFC3987">[RFC3987]</a></p>
+  component parts, the user agent must use the following steps:</p>
 
-  <p>Parsing a URL can fail. If it does not, then it results in the
-  following components, again as defined by the IRI specification:</p>
+  <ol><li><p>Strip leading and trailing <a href="common-microsyntaxes.html#space-character" title="space&#10;   character">space characters</a> from <var title="">url</var>.</p></li>
 
-  <ul class="brief"><li><dfn id="url-scheme" title="url-scheme">&lt;scheme&gt;</dfn></li>
-   <li><dfn id="url-host" title="url-host">&lt;host&gt;</dfn></li>
-   <li><dfn id="url-port" title="url-port">&lt;port&gt;</dfn></li>
-   <li><dfn id="url-hostport" title="url-hostport">&lt;hostport&gt;</dfn></li>
-   <li><dfn id="url-path" title="url-path">&lt;path&gt;</dfn></li>
-   <li><dfn id="url-query" title="url-query">&lt;query&gt;</dfn></li>
-   <li><dfn id="url-fragment" title="url-fragment">&lt;fragment&gt;</dfn></li>
-   <li><dfn id="url-host-specific" title="url-host-specific">&lt;host-specific&gt;</dfn></li>
-  </ul><hr/><p>To <dfn id="resolve-a-url">resolve a URL</dfn> to an <a href="#absolute-url">absolute URL</a>
+   <li>
+
+    <p>Parse <var title="">url</var> in the manner defined by RFC
+    3986, with the following exceptions:</p>
+
+    <ul><li>Add all characters with code points less than or equal to
+     U+0020 or greater than or equal to U+007F to the
+     &lt;unreserved&gt; production.</li>
+
+     <li>Add the characters U+0022, U+003C, U+003E, U+005B .. U+005E,
+     U+0060, and U+007B .. U+007D to the &lt;unreserved&gt;
+     production.
+      <!--      <!--
+       0022 QUOTATION MARK
+       003C LESS-THAN SIGN
+       003E GREATER-THAN SIGN
+       005B LEFT SQUARE BRACKET
+       005C REVERSE SOLIDUS
+       005D RIGHT SQUARE BRACKET
+       005E CIRCUMFLEX ACCENT
+       0060 GRAVE ACCENT
+       007B LEFT CURLY BRACKET
+       007C VERTICAL LINE
+       007D RIGHT CURLY BRACKET
+      -->
+     </li>
+
+     <li>Add a single U+0025 PERCENT SIGN character as a second
+     alternative way of matching the &lt;pct-encoded&gt; production,
+     except when the &lt;pct-encoded&gt; is used in the
+     &lt;reg-name&gt; production.</li>
+
+     <li>Add the U+0023 NUMBER SIGN character to the characters
+     allowed in the &lt;fragment&gt; production.</li>
+
+     
+    </ul></li>
+
+   <li>
+
+    <p>If <var title="">url</var> doesn't match the
+    &lt;URI-reference&gt; production, even after the above changes are
+    made to the ABNF definitions, then parsing the URL fails with an
+    error. <a href="references.html#refsRFC3986">[RFC3986]</a></p>
+
+    <p>Otherwise, parsing <var title="">url</var> was successful; the
+    components of the URL are substrings of <var title="">url</var>
+    defined as follows:</p>
+
+    <dl><dt><dfn id="url-scheme" title="url-scheme">&lt;scheme&gt;</dfn></dt>
+
+     <dd><p>The substring matched by the &lt;scheme&gt; production, if any.</p></dd>
+
+
+     <dt><dfn id="url-host" title="url-host">&lt;host&gt;</dfn></dt>
+
+     <dd><p>The substring matched by the &lt;host&gt; production, if any.</p></dd>
+
+
+     <dt><dfn id="url-port" title="url-port">&lt;port&gt;</dfn></dt>
+
+     <dd><p>The substring matched by the &lt;port&gt; production, if any.</p></dd>
+
+
+     <dt><dfn id="url-hostport" title="url-hostport">&lt;hostport&gt;</dfn></dt>
+
+     <dd><p>If there is a &lt;scheme&gt; component and a &lt;port&gt;
+     component and the port given by the &lt;port&gt; component is
+     different than the default port defined for the protocol given by
+     the &lt;scheme&gt; component, then &lt;hostport&gt; is the
+     substring that starts with the substring matched by the
+     &lt;host&gt; production and ends with the substring matched by the
+     &lt;port&gt; production, and includes the colon in between the
+     two. Otherwise, it is the same as the &lt;host&gt; component.</p>
+
+
+     </dd><dt><dfn id="url-path" title="url-path">&lt;path&gt;</dfn></dt>
+
+     <dd>
+
+      <p>The substring matched by one of the following productions, if
+      one of them was matched:</p>
+
+      <ul class="brief"><li>&lt;path-abempty&gt;</li>
+       <li>&lt;path-absolute&gt;</li>
+       <li>&lt;path-noscheme&gt;</li>
+       <li>&lt;path-rootless&gt;</li>
+       <li>&lt;path-empty&gt;</li>
+      </ul></dd>
+
+
+     <dt><dfn id="url-query" title="url-query">&lt;query&gt;</dfn></dt>
+
+     <dd><p>The substring matched by the &lt;query&gt; production, if any.</p></dd>
+
+
+     <dt><dfn id="url-fragment" title="url-fragment">&lt;fragment&gt;</dfn></dt>
+
+     <dd><p>The substring matched by the &lt;fragment&gt; production, if any.</p></dd>
+
+
+     <dt><dfn id="url-host-specific" title="url-host-specific">&lt;host-specific&gt;</dfn></dt>
+
+     <dd><p>The substring that <em>follows</em> the substring matched
+     by the &lt;authority&gt; production, or the whole string if the
+     &lt;authority&gt; production wasn't matched.</p></dd>
+
+    </dl></li>
+
+  </ol><p class="note">These parsing rules are a <a href="introduction.html#willful-violation">willful
+  violation</a> of RFC 3986 and RFC 3987 (which do not define error
+  handling), motivated by a desire to handle legacy content. <a href="references.html#refsRFC3986">[RFC3986]</a> <a href="references.html#refsRFC3987">[RFC3987]</a></p>
+
+  </div><h4 id="resolving-urls"><span class="secno">2.6.3 </span>Resolving URLs</h4><p>Resolving a URL is the process of taking a relative URL and
+  obtaining the absolute URL that it implies.</p><div class="impl">
+
+  <p>To <dfn id="resolve-a-url">resolve a URL</dfn> to an <a href="#absolute-url">absolute URL</a>
   relative to either another <a href="#absolute-url">absolute URL</a> or an element,
   the user agent must use the following steps. Resolving a URL can
   result in an error, in which case the URL is not resolvable.</p>
@@ -448,13 +567,9 @@
 
      <li>
 
-      <!-- http://www.hixie.ch/tests/adhoc/html/navigation/javascript-url/ -->
+      
 
-      <!-- this should be tested in the case of a browsing context that
-      was navigated to about:blank after having been elsewhere, as
-      opposed to the about:blank used at the time of the browsing
-      context's creation. -->
-
+      
       <p>If <var title="">fallback base url</var> is
       <code><a href="fetching-resources.html#about:blank">about:blank</a></code>, and the <code><a href="infrastructure.html#document">Document</a></code>'s
       <a href="browsers.html#browsing-context">browsing context</a> has a <a href="browsers.html#creator-browsing-context">creator browsing
@@ -486,11 +601,112 @@
 
     </ol></li>
 
-   <li><p>Return the result of applying the <span class="XXX">resolve
-   an address</span> algorithm defined by the IRI specification to
-   resolve <var title="">url</var> relative to <var title="">base</var> using encoding <var title="">encoding</var>. <a href="references.html#refsRFC3987">[RFC3987]</a></p></li>
+   <li><p><a href="#parse-a-url" title="parse a URL">Parse</a> <var title="">url</var> into its component parts.</p></li>
 
-  </ol></div><p>A <a href="#url">URL</a> is an <dfn id="absolute-url">absolute URL</dfn> if <a href="#resolve-a-url" title="resolve a url">resolving</a> it results in the same output
+   <li>
+
+    <p>If parsing <var title="">url</var> resulted in a <a href="#url-host" title="url-host">&lt;host&gt;</a> component, then replace the
+    matching substring of <var title="">url</var> with the string that
+    results from expanding any sequences of percent-encoded octets in
+    that component that are valid UTF-8 sequences into Unicode
+    characters as defined by UTF-8.</p>
+
+    <p>If any percent-encoded octets in that component are not valid
+    UTF-8 sequences, then return an error and abort these steps.</p>
+
+    <p>Apply the IDNA ToASCII algorithm to the matching substring,
+    with both the AllowUnassigned and UseSTD3ASCIIRules flags
+    set. Replace the matching substring with the result of the ToASCII
+    algorithm.</p>
+
+    <p>If ToASCII fails to convert one of the components of the
+    string, e.g. because it is too long or because it contains invalid
+    characters, then return an error and abort these steps. <a href="references.html#refsRFC3490">[RFC3490]</a></p>
+
+   </li>
+
+   <li>
+
+    <p>If parsing <var title="">url</var> resulted in a <a href="#url-path" title="url-path">&lt;path&gt;</a> component, then replace the
+    matching substring of <var title="">url</var> with the string that
+    results from applying the following steps to each character other
+    than U+0025 PERCENT SIGN (%) that doesn't match the original
+    &lt;path&gt; production defined in RFC 3986:</p>
+
+    <ol><li>Encode the character into a sequence of octets as defined by
+     UTF-8.</li>
+
+     <li>Replace the character with the percent-encoded form of those
+     octets. <a href="references.html#refsRFC3986">[RFC3986]</a></li>
+
+    </ol><div class="example">
+
+     <p>For instance if <var title="">url</var> was "<code title="">//example.com/a^b&#x263A;c%FFd%z/?e</code>", then the
+     <a href="#url-path" title="url-path">&lt;path&gt;</a> component's substring
+     would be "<code title="">/a^b&#x263A;c%FFd%z/</code>" and the two
+     characters that would have to be escaped would be "<code title="">^</code>" and "<code title="">&#x263A;</code>". The
+     result after this step was applied would therefore be that <var title="">url</var> now had the value "<code title="">//example.com/a%5Eb%E2%98%BAc%FFd%z/?e</code>".</p>
+
+    </div>
+
+   </li>
+
+   <li>
+
+    <p>If parsing <var title="">url</var> resulted in a <a href="#url-query" title="url-query">&lt;query&gt;</a> component, then replace the
+    matching substring of <var title="">url</var> with the string that
+    results from applying the following steps to each character other
+    than U+0025 PERCENT SIGN (%) that doesn't match the original
+    &lt;query&gt; production defined in RFC 3986:</p>
+
+    <ol><li>If the character in question cannot be expressed in the
+     encoding <var title="">encoding</var>, then replace it with a
+     single 0x3F octet (an ASCII question mark) and skip the remaining
+     substeps for this character.</li>
+
+     <li>Encode the character into a sequence of octets as defined by
+     the encoding <var title="">encoding</var>.</li>
+
+     <li>Replace the character with the percent-encoded form of those
+     octets. <a href="references.html#refsRFC3986">[RFC3986]</a></li>
+
+    </ol></li>
+
+   <li><p>Apply the algorithm described in RFC 3986 section 5.2
+   Relative Resolution, using <var title="">url</var> as the
+   potentially relative URI reference (<var title="">R</var>), and
+   <var title="">base</var> as the base URI (<var title="">Base</var>). <a href="references.html#refsRFC3986">[RFC3986]</a></p></li>
+
+   <li>
+
+    <p>Apply any relevant conformance criteria of RFC 3986 and RFC
+    3987, returning an error and aborting these steps if
+    appropriate. <a href="references.html#refsRFC3986">[RFC3986]</a> <a href="references.html#refsRFC3987">[RFC3987]</a></p>
+
+    <p class="example">For instance, if an absolute URI that would be
+    returned by the above algorithm violates the restrictions specific
+    to its scheme, e.g. a <code title="">data:</code> URI using the
+    "<code title="">//</code>" server-based naming authority syntax,
+    then user agents are to treat this as an error instead.</p>
+
+   </li>
+
+   <li><p>Let <var title="">result</var> be the target URI (<var title="">T</var>) returned by the Relative Resolution
+   algorithm.</p></li>
+
+   <li><p>If <var title="">result</var> uses a scheme with a
+   server-based naming authority, replace all U+005C REVERSE SOLIDUS
+   (\) characters in <var title="">result</var> with U+002F SOLIDUS
+   (/) characters.</p></li>
+
+   <li><p>Return <var title="">result</var>.</p></li>
+
+  </ol><p class="note">Some of the steps in these rules, for example the
+  processing of U+005C REVERSE SOLIDUS (\) characters, are a
+  <a href="introduction.html#willful-violation">willful violation</a> of RFC 3986 and RFC 3987, motivated
+  by a desire to handle legacy content. <a href="references.html#refsRFC3986">[RFC3986]</a> <a href="references.html#refsRFC3987">[RFC3987]</a></p>
+
+  </div><p>A <a href="#url">URL</a> is an <dfn id="absolute-url">absolute URL</dfn> if <a href="#resolve-a-url" title="resolve a url">resolving</a> it results in the same output
   regardless of what it is resolved relative to, and that output is
   not a failure.</p><p>An <a href="#absolute-url">absolute URL</a> is a <dfn id="hierarchical-url">hierarchical URL</dfn> if,
   when <a href="#resolve-a-url" title="resolve a url">resolved</a> and then <a href="#parse-a-url" title="parse a url">parsed</a>, there is a character immediately
@@ -498,20 +714,9 @@
   and it is a U+002F SOLIDUS character (/).</p><p>An <a href="#absolute-url">absolute URL</a> is an <dfn id="authority-based-url">authority-based URL</dfn>
   if, when <a href="#resolve-a-url" title="resolve a url">resolved</a> and then <a href="#parse-a-url" title="parse a url">parsed</a>, there are two characters
   immediately after the <a href="#url-scheme" title="url-scheme">&lt;scheme&gt;</a>
-  component and they are both U+002F SOLIDUS characters (//).</p><hr/><p>This specification defines the URL
-  <dfn id="about:legacy-compat"><code>about:legacy-compat</code></dfn> as a reserved, though
-  unresolvable, <code title="">about:</code> URI, for use in <a href="syntax.html#syntax-doctype" title="syntax-doctype">DOCTYPE</a>s in <a href="dom.html#html-documents">HTML
-  documents</a> when needed for compatibility with XML tools. <a href="references.html#refsABOUT">[ABOUT]</a></p><p>This specification defines the URL
-  <dfn id="about:srcdoc"><code>about:srcdoc</code></dfn> as a reserved, though
-  unresolvable, <code title="">about:</code> URI, that is used as
-  <a href="dom.html#the-document-s-address">the document's address</a> of <a href="the-iframe-element.html#an-iframe-srcdoc-document" title="an iframe srcdoc&#10;  document"><code>iframe</code> <code title="attr-iframe-srcdoc">srcdoc</code> documents</a>. <a href="references.html#refsABOUT">[ABOUT]</a></p><p class="note">The term "URL" in this specification is used in a
-  manner distinct from the precise technical meaning it is given in
-  RFC 3986. Readers familiar with that RFC will find it easier to read
-  <em>this</em> specification if they pretend the term "URL" as used
-  herein is really called something else altogether. This is a
-  <a href="introduction.html#willful-violation">willful violation</a> of RFC 3986. <a href="references.html#refsRFC3986">[RFC3986]</a></p><div class="impl">
+  component and they are both U+002F SOLIDUS characters (//).</p><div class="impl">
 
-  <h4 id="dynamic-changes-to-base-urls"><span class="secno">2.6.2 </span>Dynamic changes to base URLs</h4>
+  <h4 id="dynamic-changes-to-base-urls"><span class="secno">2.6.4 </span>Dynamic changes to base URLs</h4>
 
   <p>When an <code title="attr-xml-base"><a href="elements.html#the-xml:base-attribute-xml-only">xml:base</a></code> attribute
   changes, the attribute's element, and all descendant elements, are
@@ -572,7 +777,7 @@
 
    </dd>
 
-  </dl></div><h4 id="interfaces-for-url-manipulation"><span class="secno">2.6.3 </span>Interfaces for URL manipulation</h4><p>An interface that has a complement of <dfn id="url-decomposition-idl-attributes">URL decomposition IDL
+  </dl></div><h4 id="interfaces-for-url-manipulation"><span class="secno">2.6.5 </span>Interfaces for URL manipulation</h4><p>An interface that has a complement of <dfn id="url-decomposition-idl-attributes">URL decomposition IDL
   attributes</dfn> has seven attributes with the following
   definitions:</p><pre class="idl extract">           attribute DOMString <a href="#dom-uda-protocol" title="dom-uda-protocol">protocol</a>;
            attribute DOMString <a href="#dom-uda-host" title="dom-uda-host">host</a>;
@@ -735,11 +940,7 @@
      </td><td>&#x2014;
      </td><td>Remove one leading U+0023 NUMBER SIGN character (#), if any
      </td><td>&#x2014;
-  </td></tr></tbody></table><!--
-  http://www.hixie.ch/tests/adhoc/dom/level0/location/components/
-  http://lxr.mozilla.org/seamonkey/source/dom/src/base/nsLocation.cpp
-  http://wp.netscape.com/eng/mozilla/3.0/handbook/javascript/ref_h-l.htm#84722
---></div><div class="example">
+  </td></tr></tbody></table></div><div class="example">
 
    <p>The table below demonstrates how the getter <span class="impl">condition</span> for <code title="dom-uda-search"><a href="#dom-uda-search">search</a></code> results in different results
    depending on the exact original syntax of the URL:</p>

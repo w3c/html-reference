@@ -32,6 +32,7 @@ for my $style (@{$css->{styles}}) {
     next if ($selector_name =~ /::/);
     next if ($selector_name =~ /-webkit-autofill/);
     next if ($selector_name =~ /audio|video/);
+    next if ($selector_name =~ /meter|progress/);
     next if ($selector_name =~ /button|input|keygen|option|optgroup|select|textarea/);
     $selector_name =~ s/([^\[]+)(\[[^\]]+])/$1<span class="predicate">$2<\/span>/g;
     $selector_name =~ s/([^:]+)(:.+)/$1<span class="pseudo">$2<\/span>/g;
@@ -54,6 +55,8 @@ for my $style (@{$css->{styles}}) {
     for my $values (@{$property->{values}}) {
       my $propname = $property->{property};
       next if ($propname =~ /-webkit-rtl-ordering/);
+      next if ($propname =~ /-webkit-block-flow/);
+      next if ($propname =~ /-webkit-text-emphasis/);
       next if ($propname =~ /-webkit-text-security/);
       next if ($propname =~ /-webkit-box-align/);
       next if ($propname =~ /-webkit-box-orient/);
@@ -62,7 +65,13 @@ for my $style (@{$css->{styles}}) {
       next if ($propname =~ /-webkit-user-select/);
       $propname =~ s/-webkit-border-radius/border-radius/g;
       $propname =~ s/-webkit-margin-start/margin-start/g;
+      $propname =~ s/-webkit-margin-end/margin-end/g;
+      $propname =~ s/-webkit-margin-before/margin-before/g;
+      $propname =~ s/-webkit-margin-after/margin-after/g;
+      $propname =~ s/-webkit-padding-before/padding-before/g;
+      $propname =~ s/-webkit-padding-after/padding-after/g;
       $propname =~ s/-webkit-padding-start/padding-start/g;
+      $propname =~ s/-webkit-padding-end/padding-end/g;
       my $value = $values->{value};
       $value =~ s/__q//g;
       $value =~ s/darkGray/<i class="vendor-value">(internal value)<\/i>/g;

@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>7.7 Drag and drop &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -350,64 +346,8 @@
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="syntax.html" class="next">8 The HTML syntax</a>
   <ol class="toc"><li><ol><li><a href="dnd.html#dnd"><span class="secno">7.7 </span>Drag and drop</a>
-    <ol><li><a href="dnd.html#introduction-6"><span class="secno">7.7.1 </span>Introduction</a></li><li><a href="dnd.html#the-drag-data-store"><span class="secno">7.7.2 </span>The drag data store</a></li><li><a href="dnd.html#the-datatransfer-interface"><span class="secno">7.7.3 </span>The <code>DataTransfer</code> interface</a>
-      <ol><li><a href="dnd.html#the-datatransferitems-interface"><span class="secno">7.7.3.1 </span>The <code>DataTransferItems</code> interface</a></li><li><a href="dnd.html#the-datatransferitem-interface"><span class="secno">7.7.3.2 </span>The <code>DataTransferItem</code> interface</a></li></ol></li><li><a href="dnd.html#the-dragevent-interface"><span class="secno">7.7.4 </span>The <code>DragEvent</code> interface</a></li><li><a href="dnd.html#drag-and-drop-processing-model"><span class="secno">7.7.5 </span>Drag-and-drop processing model</a></li><li><a href="dnd.html#dndevents"><span class="secno">7.7.6 </span>Events summary</a></li><li><a href="dnd.html#the-draggable-attribute"><span class="secno">7.7.7 </span>The <code>draggable</code> attribute</a></li><li><a href="dnd.html#the-dropzone-attribute"><span class="secno">7.7.8 </span>The <code>dropzone</code> attribute</a></li><li><a href="dnd.html#security-risks-in-the-drag-and-drop-model"><span class="secno">7.7.9 </span>Security risks in the drag-and-drop model</a></li></ol></li><li><a href="dnd.html#editing-apis"><span class="secno">7.8 </span>Editing APIs</a></li></ol></li></ol></div><h3 id="dnd"><span class="secno">7.7 </span><dfn>Drag and drop</dfn></h3><!-- v2: ideas for drag and drop:
-
-     * being able to animate a drop target:
-
-       > To implement this with simple interface I've proposed, events
-       > should be handled either by existing elements (like list
-       > items that compare their size and position of dragged element
-       > to decide whether element should be dropped before or after)
-       > or handled by container that would probably need to calculate
-       > positions of it's children and create new element to show
-       > drop target. Smooth Mac-like drag'n'drop can be implemented
-       > by animating drop target's padding/margin. So that's quite a
-       > bit of code that's going to be reinvented each time someone
-       > implements reordering.
-
-       <hyatt> :droptarget
-       <hyatt> or something
-       <hyatt> we don't support a pseudo-class for the drop target but that's a great idea
-       <Hixie_> yeah, thinking about that too
-       <Hixie_> :drop-target, :drop-target(above), :drop-target(below) and having ondragover be able to say "not on me, but next to me maybe"
-
-     * We should let drop targets communicate back to drag sources if
-       they want to communicate. (e.g. expose Window, and thus
-       postMessage(), on the dataTransfer object on drop.)
-       Or maybe just use a MessagePort!
-
-       We should let drag sources provide a set of options via a
-       context menu when the drop happens. (So that, e.g., the source
-       can know whether a capabilities URI that it is passing along is
-       supposed to be read-write access or read-only access to the
-       object being dragged.)
-
-       We should let potential drop targets see the types (but not the
-       contents!) of dragged data so they can establish if they care
-       or not. (dataTransfer.hasType())
-
-       Ack: Ben Laurie (@g)
-
-     * Interop with native apps. In particular, we probably want to
-       whitelist the list of types that a Web page can see, since
-       otherwise we'll end up exposing things like the username (if a
-       user drags a file from their desktop, the path is exposed on
-       some OSes).
-
-     Other things listed below:
-      DND-v2: more native support: text/html from selections, etc
-      DND-v3: add Blob support
-      DND-v4: add structured clone support
-      DND-v5: add promises (should be able to say "if you accept this
-              drop, then I can provide the File object that
-              corresponds to it eventually")
-
-         DataTransferPromise.type = 'string' or 'file' or 'blob' or 'data'
-                            .onneeddata - can wait until this fires to provide data
-                            .setData() - call this once you have data, must be the right type
-
---><p>This section defines an event-based drag-and-drop mechanism.</p><p>This specification does not define exactly what a
+    <ol><li><a href="dnd.html#introduction-7"><span class="secno">7.7.1 </span>Introduction</a></li><li><a href="dnd.html#the-drag-data-store"><span class="secno">7.7.2 </span>The drag data store</a></li><li><a href="dnd.html#the-datatransfer-interface"><span class="secno">7.7.3 </span>The <code>DataTransfer</code> interface</a>
+      <ol><li><a href="dnd.html#the-datatransferitems-interface"><span class="secno">7.7.3.1 </span>The <code>DataTransferItems</code> interface</a></li><li><a href="dnd.html#the-datatransferitem-interface"><span class="secno">7.7.3.2 </span>The <code>DataTransferItem</code> interface</a></li></ol></li><li><a href="dnd.html#the-dragevent-interface"><span class="secno">7.7.4 </span>The <code>DragEvent</code> interface</a></li><li><a href="dnd.html#drag-and-drop-processing-model"><span class="secno">7.7.5 </span>Drag-and-drop processing model</a></li><li><a href="dnd.html#dndevents"><span class="secno">7.7.6 </span>Events summary</a></li><li><a href="dnd.html#the-draggable-attribute"><span class="secno">7.7.7 </span>The <code>draggable</code> attribute</a></li><li><a href="dnd.html#the-dropzone-attribute"><span class="secno">7.7.8 </span>The <code>dropzone</code> attribute</a></li><li><a href="dnd.html#security-risks-in-the-drag-and-drop-model"><span class="secno">7.7.9 </span>Security risks in the drag-and-drop model</a></li></ol></li><li><a href="dnd.html#editing-apis"><span class="secno">7.8 </span>Editing APIs</a></li></ol></li></ol></div><h3 id="dnd"><span class="secno">7.7 </span><dfn>Drag and drop</dfn></h3><p>This section defines an event-based drag-and-drop mechanism.</p><p>This specification does not define exactly what a
   <em>drag-and-drop operation</em> actually is.</p><p>On a visual medium with a pointing device, a drag operation could
   be the default action of a <code title="event-mousedown">mousedown</code> event that is followed by a
   series of <code title="event-mousemove">mousemove</code> events, and
@@ -428,7 +368,7 @@
   before the drop occurs (so if the operation is not canceled, there
   must be at least one element in the middle step).</p>
 
-  </div><h4 id="introduction-6"><span class="secno">7.7.1 </span>Introduction</h4><p><i>This section is non-normative.</i></p><p>To make an element draggable is simple: give the element a <code title="attr-draggable"><a href="#the-draggable-attribute">draggable</a></code> attribute, and set an event
+  </div><h4 id="introduction-7"><span class="secno">7.7.1 </span>Introduction</h4><p><i>This section is non-normative.</i></p><p>To make an element draggable is simple: give the element a <code title="attr-draggable"><a href="#the-draggable-attribute">draggable</a></code> attribute, and set an event
   listener for <code title="event-dragstart"><a href="#event-dragstart">dragstart</a></code> that
   stores the data being dragged.</p><p>The event handler typically needs to check that it's not a text
   selection that is being dragged, and then needs to store data into
@@ -450,39 +390,27 @@
       event.preventDefault(); // don't allow selection to be dragged
     }
   }
-&lt;/script&gt;</pre><hr/><!-- v2: once dropzone="" is implemented, add text here to use that
-  instead of the events --><p>To accept a drop, the drop target has to listen to at least three
-  events. First, the <code title="event-dragenter"><a href="#event-dragenter">dragenter</a></code>
-  event, which is used to determine whether or not the drop target is
-  to accept the drop. If the drop is to be accepted, then this event
-  has to be canceled. Second, the <code title="event-dragover"><a href="#event-dragover">dragover</a></code> event, which is used to
-  determine what feedback is to be shown to the user. If the event is
-  canceled, then the feedback (typically the cursor) is updated based
-  on the <code title="dom-DataTransfer-DropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code>
-  attribute's value, as set by the event handler; otherwise, the
-  default behavior (typically to do nothing) is used instead. Finally,
-  the <code title="event-drop"><a href="#event-drop">drop</a></code> event, which allows the
-  actual drop to be performed. This event also needs to be canceled,
-  so that the <code title="dom-DataTransfer-DropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code> attribute's
-  value can be used by the source (otherwise it's reset).</p><p>For example:</p><pre>&lt;p&gt;Drop your favorite fruits below:&lt;/p&gt;
-&lt;ol class="dropzone"
-    ondragenter="dragEnterHandler(event)"
-    ondragover="dragOverHandler(event)"
-    ondrop="dropHandler(event)"&gt;
+&lt;/script&gt;</pre><hr/><p>To accept a drop, the drop target has to have a <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code> attribute and listen to the
+  <code title="drop-event">drop</code> event.</p><p>The value of the <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code>
+  attribute specifies what kind of data to accept (e.g. "<code title="">s:text/plain</code>" to accept any text strings, or
+  "<code>f:image/png</code>" to accept a PNG image file) and what kind
+  of feedback to give (e.g. "<code>move</code>" to indicate that the
+  data will be moved).</p><p class="note">Instead of using the <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code> attribute, a drop target can
+  handle the <code title="event-dragenter"><a href="#event-dragenter">dragenter</a></code> event (to
+  report whether or not the drop target is to accept the drop) and the
+  <code title="event-dragover"><a href="#event-dragover">dragover</a></code> event (to specify what
+  feedback is to be shown to the user).</p><p>The <code title="event-drop"><a href="#event-drop">drop</a></code> event allows the actual
+  drop to be performed. This event needs to be canceled, so that the
+  <code title="dom-DataTransfer-DropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code>
+  attribute's value can be used by the source (otherwise it's
+  reset).</p><p>For example:</p><pre>&lt;p&gt;Drop your favorite fruits below:&lt;/p&gt;
+&lt;ol dropzone="move s:text/x-example" ondrop="dropHandler(event)"&gt;
+ &lt;-- don't forget to change the "text/x-example" type to something
+ specific to your site --&gt;
 &lt;/ol&gt;
 &lt;script&gt;
   var internalDNDType = 'text/x-example'; // set this to something specific to your site
-  function dragEnterHandler(event) {
-    // cancel the event if the drag contains data of our type
-    if (event.dataTransfer.types.contains(internalDNDType))
-      event.preventDefault();
-  }
-  function dragOverHandler(event) {
-    event.dataTransfer.dropEffect = 'move';
-    event.preventDefault(); // override default drag feedback
-  }
   function dropHandler(event) {
-    // drop the data
     var li = document.createElement('li');
     var data = event.dataTransfer.getData(internalDNDType);
     if (data == 'fruit-apple') {
@@ -527,24 +455,12 @@
         <p>Text.</p>
        </dd>
 
-<!-- DND-v3:
-       <dt><i>Blob</i></dt>
-       <dd>
-        <p>Binary data.</p>
-       </dd>
--->
 
        <dt><i>File</i></dt>
        <dd>
         <p>Binary data with a file name.</p>
        </dd>
 
-<!-- DND-v4:
-       <dt><i>Structured object</i></dt>
-       <dd>
-        <p>An object that will be cloned using the <span>structured clone</span> algorithm.</p>
-       </dd>
--->
 
       </dl></dd>
 
@@ -566,16 +482,14 @@
 
       <p>There is a limit of one <i>Plain Unicode string</i> item per
       <a href="#the-drag-data-item-type-string" title="The drag data item type string">item type
-      string</a>.</p> <!-- DND-v4: consider limiting the structured
-      objects too -->
-
+      string</a>.</p> 
      </dd>
 
      <dt>The actual data</dt>
 
-     <dd><p>A Unicode or binary string, optionally with a file name
-     (itself a Unicode string), <!-- (DND-v4:) or an object, --> as per
-     <a href="#the-drag-data-item-kind">the drag data item kind</a>.</p></dd>
+     <dd><p>A Unicode or binary string, in some cases with a file name
+     (itself a Unicode string),  as
+     per <a href="#the-drag-data-item-kind">the drag data item kind</a>.</p></dd>
 
     </dl><p>The <a href="#drag-data-store-item-list">drag data store item list</a> is ordered in the
     order that the items were added to the list; most recently added
@@ -854,7 +768,7 @@
    empty list <var title="">L</var>.</p></li>
 
    <li><p>For each item in the <a href="#drag-data-store-item-list">drag data store item list</a>
-   <!-- in some order...? --> whose <a href="#the-drag-data-item-kind" title="the drag data item&#10;   kind">kind</a> is <i>Plain Unicode string</i>, add an entry to
+    whose <a href="#the-drag-data-item-kind" title="the drag data item&#10;   kind">kind</a> is <i>Plain Unicode string</i>, add an entry to
    the list <var title="">L</var> consisting of the item's <a href="#the-drag-data-item-type-string" title="the drag data item type string">type string</a>.</p></li>
 
    <li><p>If there are any items in the <a href="#drag-data-store-item-list">drag data store item
@@ -864,7 +778,7 @@
    can be distinguished from the other values because it is not
    lowercase.)</p></li>
 
-   <!-- <li><p>Sort the list...?</p></li> -->
+   
 
    <li><p>The strings produced by these steps are those in the list
    <var title="">L</var>.</p></li>
@@ -988,11 +902,11 @@
    return the empty list <var title="">L</var>.</p></li>
 
    <li><p>For each item in the <a href="#drag-data-store-item-list">drag data store item list</a>
-   <!-- in some order...? --> whose <a href="#the-drag-data-item-kind" title="the drag data item&#10;   kind">kind</a> is <i>File</i> <!-- DND-v3: (not <i>Blob</i>) -->,
+    whose <a href="#the-drag-data-item-kind" title="the drag data item&#10;   kind">kind</a> is <i>File</i> ,
    add the item's data (the file, in particular its name and contents,
    as well as its <a href="#the-drag-data-item-type-string" title="the drag data item type&#10;   string">type</a>) to the list <var title="">L</var>.</p></li>
 
-   <!-- <li><p>Sort the list...?</p></li> -->
+   
 
    <li><p>The files found by these steps are those in the list <var title="">L</var>.</p></li>
 
@@ -1006,12 +920,7 @@
   <a href="#dom-datatransferitems-removeitem" title="dom-DataTransferItems-removeItem">deleter</a> void (in unsigned long index);
   void <a href="#dom-datatransferitems-clear" title="dom-DataTransferItems-clear">clear</a>();
 
-  <a href="#datatransferitem">DataTransferItem</a> <a href="#dom-datatransferitems-add" title="dom-DataTransferItems-add">add</a>(in DOMString data, in DOMString type);<!--
-DND-v3:  <span>DataTransferItem</span> <span title="dom-DataTransferItems-add">add</span>(in <span>Blob</span> data);-->
-  <a href="#datatransferitem">DataTransferItem</a> <a href="#dom-datatransferitems-add" title="dom-DataTransferItems-add">add</a>(in <span>File</span> data);<!--
-DND-v4:  <span>DataTransferItem</span> <span title="dom-DataTransferItems-add">add</span>(in any data, in DOMString type);--><!--
-DND-v5:  <span>DataTransferItem</span> <span title="dom-DataTransferItems-add">add</span>(in <span>DataTransferPromise</span> data);-->
-};</pre><dl class="domintro"><dt><var title="">items</var> . <code title="dom-DataTransferItems-length"><a href="#dom-datatransferitems-length">length</a></code></dt>
+  <a href="#datatransferitem">DataTransferItem</a> <a href="#dom-datatransferitems-add" title="dom-DataTransferItems-add">add</a>(in DOMString data, in DOMString type);  <a href="#datatransferitem">DataTransferItem</a> <a href="#dom-datatransferitems-add" title="dom-DataTransferItems-add">add</a>(in <span>File</span> data);};</pre><dl class="domintro"><dt><var title="">items</var> . <code title="dom-DataTransferItems-length"><a href="#dom-datatransferitems-length">length</a></code></dt>
 
    <dd><p>Returns the number of items in the <a href="#drag-data-store">drag data store</a>.</p></dd>
 
@@ -1049,7 +958,7 @@ DND-v5:  <span>DataTransferItem</span> <span title="dom-DataTransferItems-add">a
    <dd>
 
     <p>Adds a new entry for the given data to the <a href="#drag-data-store">drag data
-    store</a>. If the data is plain text <!-- DND-v4: or an object -->
+    store</a>. If the data is plain text 
     then a <var title="">type</var> string has to be provided
     also.</p>
 
@@ -1143,21 +1052,6 @@ DND-v5:  <span>DataTransferItem</span> <span title="dom-DataTransferItems-add">a
 
      </dd>
 
-<!--DND-v3:
-     <dt>If the first argument to the method is a <code>Blob</code></dt>
-
-     <dd>
-
-      <p>Add an item to the <span>drag data store item list</span>
-      whose <span title="the drag data item kind">kind</span> is
-      <i>Blob</i>, whose <span title="the drag data item type
-      string">type string</span> is the <code
-      title="dom-Blob-type">type</code> of the <code>Blob</code>,
-      <span>converted to ASCII lowercase</span>, and whose data is the
-      same as the <code>Blob</code>'s data.</p>
-
-     </dd>
--->
 
      <dt>If the first argument to the method is a <code>File</code></dt>
 
@@ -1171,22 +1065,6 @@ DND-v5:  <span>DataTransferItem</span> <span title="dom-DataTransferItems-add">a
 
      </dd>
 
-<!--DND-v4: (might want to prevent duplicates like for strings; see above)
-     <dt>Otherwise
-
-     <dd>
-
-      <p>Add an item to the <span>drag data store item list</span>
-      whose <span title="the drag data item kind">kind</span> is
-      <i>Object</i>, whose <span title="the drag data item type
-      string">type string</span> is equal to the value of the method's
-      second argument, <span>converted to ASCII lowercase</span>, and
-      whose data is a <span>structured clone</span> of the method's
-      first argument. If creating the clone throws an exception, then
-      throw that exception and abort these steps.</p>
-
-     </dd>
--->
 
     </dl></li>
 
@@ -1199,26 +1077,16 @@ DND-v5:  <span>DataTransferItem</span> <span title="dom-DataTransferItems-add">a
   <code><a href="#datatransfer">DataTransfer</a></code> object.</p><pre class="idl">interface <dfn id="datatransferitem">DataTransferItem</dfn> {
     readonly attribute DOMString <a href="#dom-datatransferitem-kind" title="dom-DataTransferItem-kind">kind</a>;
     readonly attribute DOMString <a href="#dom-datatransferitem-type" title="dom-DataTransferItem-type">type</a>;
-    void <a href="#dom-datatransferitem-getasstring" title="dom-DataTransferItem-getAsString">getAsString</a>(in <a href="#functionstringcallback">FunctionStringCallback</a> callback);<!--
-DND-v3:    <span>Blob</span> <span title="dom-DataTransferItem-getAsBlob">getAsBlob</span>();-->
-    <span>File</span> <a href="#dom-datatransferitem-getasfile" title="dom-DataTransferItem-getAsFile">getAsFile</a>();<!--
-DND-v4:    void <span title="dom-DataTransferItem-getAsObject">getAsObject</span>(in <span>FunctionObjectCallback</span> callback);-->
-};
+    void <a href="#dom-datatransferitem-getasstring" title="dom-DataTransferItem-getAsString">getAsString</a>(in <a href="#functionstringcallback">FunctionStringCallback</a> callback);    <span>File</span> <a href="#dom-datatransferitem-getasfile" title="dom-DataTransferItem-getAsFile">getAsFile</a>();};
 
 [Callback=FunctionOnly, NoInterfaceObject]
 interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
   void <span title="dom-FunctionStringCallback-handleEvent">handleEvent</span>(in DOMString data);
-};<!--
-
-// DND-v4:
-[Callback=FunctionOnly, NoInterfaceObject]
-interface <dfn>FunctionObjectCallback</dfn> {
-  void <span title="dom-FunctionObjectCallback-handleEvent">handleEvent</span>(in DOMString data);
-};--></pre><dl class="domintro"><dt><var title="">item</var> . <code title="dom-DataTransferItem-kind"><a href="#dom-datatransferitem-kind">kind</a></code></dt>
+};</pre><dl class="domintro"><dt><var title="">item</var> . <code title="dom-DataTransferItem-kind"><a href="#dom-datatransferitem-kind">kind</a></code></dt>
    <dd>
 
     <p>Returns <a href="#the-drag-data-item-kind">the drag data item kind</a>, one of: "string",
-    <!-- DND-v3: "blob", --> "file"<!-- DND-v4: , "object" -->.</p>
+     "file".</p>
 
    </dd>
 
@@ -1236,14 +1104,6 @@ interface <dfn>FunctionObjectCallback</dfn> {
 
    </dd>
 
-<!-- DND-v3:
-   <dt><var title="">file</var> = <var title="">item</var> . <code title="dom-DataTransferItem-getAsBlob">getAsBlob</code>()</dt>
-   <dd>
-
-    <p>Returns a <code>Blob</code> object, if <span>the drag data item kind</span> is <i>Blob</i> or <i>File</i>.</p>
-
-   </dd>
--->
 
    <dt><var title="">file</var> = <var title="">item</var> . <code title="dom-DataTransferItem-getAsFile"><a href="#dom-datatransferitem-getasfile">getAsFile</a></code>()</dt>
    <dd>
@@ -1252,14 +1112,6 @@ interface <dfn>FunctionObjectCallback</dfn> {
 
    </dd>
 
-<!-- DND-v4:
-   <dt><var title="">file</var> = <var title="">item</var> . <code title="dom-DataTransferItem-getAsFile">getAsFile</code>()</dt>
-   <dd>
-
-    <p>Invokes the callback with the cloned object data as the argument, if <span>the drag data item kind</span> is <i>Plain Unicode string</i> or <i>Object</i>.</p>
-
-   </dd>
--->
 
   </dl><div class="impl">
 
@@ -1292,9 +1144,7 @@ interface <dfn>FunctionObjectCallback</dfn> {
 
   <table><thead><tr><th> Kind </th><th> String
    </th></tr></thead><tbody><tr><td> <i>Plain Unicode string</i> </td><td> "<code title="">string</code>"
-<!-- DND-v3:    <tr> <td> <i>Blob</i> <td> "<code title="">blob</code>"-->
     </td></tr><tr><td> <i>File</i> </td><td> "<code title="">file</code>"
-<!-- DND-v4:    <tr> <td> <i>Object</i> <td> "<code title="">object</code>"-->
   </td></tr></tbody></table><p>The <dfn id="dom-datatransferitem-type" title="dom-DataTransferItem-type"><code>type</code></dfn> attribute
   must return the empty string if the <code><a href="#datatransferitem">DataTransferItem</a></code>
   object is in the <i>disabled mode</i>; otherwise it must return
@@ -1318,48 +1168,7 @@ interface <dfn>FunctionObjectCallback</dfn> {
    represented by the <code><a href="#datatransferitem">DataTransferItem</a></code> object as the
    argument.</p></li>
 
-  </ol><!--DND-v3:
-  <p>The <dfn
-  title="dom-DataTransferItem-getAsBlob"><code>getAsBlob()</code></dfn>
-  method must run the following steps:</p>
-
-  <ol>
-
-   <li><p>If the <code>DataTransferItem</code> object is not in the <i
-   title="concept-dnd-rw">read/write mode</i> or the <i
-   title="concept-dnd-ro">read-only mode</i>, return null and abort
-   these steps.</p></li>
-
-   <li>
-
---><!--DND-v4:
-    <p>If <span>the drag data item kind</span> is <i>Object</i>,
-    return null.</p></li>
---><!--DND-v3:
-
-    <p>If <span>the drag data item kind</span> is <i>File</i>, then
-    return a new <code>File</code> object representing the actual data
-    of the item represented by the <code>DataTransferItem</code>
-    object.</p>
-
-    <p>If <span>the drag data item kind</span> is <i>Unicode Data
-    string</i>, then return a new <code>Blob</code> object
-    representing the actual data of the item represented by the
-    <code>DataTransferItem</code> object, with the <code
-    title="dom-Blob-type">type</code> of the <code>Blob</code> being
-    <span>the drag data item type string</span> and with the binary
-    data of the <code>Blob</code> object being the Unicode string
-    encoded as UTF-8. <a href="#refsRFC3629">[RFC3629]</a></p>
-
-    <p>Otherwise, <span>the drag data item kind</span> is <i>Blob</i>;
-    return a new <code>Blob</code> object representing the actual data
-    of the item represented by the <code>DataTransferItem</code>
-    object.</p>
-
-   </li>
-
-  </ol>
---><p>The <dfn id="dom-datatransferitem-getasfile" title="dom-DataTransferItem-getAsFile"><code>getAsFile()</code></dfn>
+  </ol><p>The <dfn id="dom-datatransferitem-getasfile" title="dom-DataTransferItem-getAsFile"><code>getAsFile()</code></dfn>
   method must run the following steps:</p>
 
   <ol><li><p>If the <code><a href="#datatransferitem">DataTransferItem</a></code> object is not in the <i title="concept-dnd-rw"><a href="#concept-dnd-rw">read/write mode</a></i> or the <i title="concept-dnd-ro"><a href="#concept-dnd-ro">read-only mode</a></i>, return null and abort
@@ -1372,52 +1181,11 @@ interface <dfn>FunctionObjectCallback</dfn> {
    actual data of the item represented by the
    <code><a href="#datatransferitem">DataTransferItem</a></code> object.</p>
 
-  </li></ol><!--DND-v4:
-  <p>The <dfn
-  title="dom-DataTransferItem-getAsObject"><code>getAsObject(<var
-  title="">callback</var>)</code></dfn> method must run the following
-  steps:</p>
-
-  <ol>
-
-   <li><p>If the <code>DataTransferItem</code> object is not in the <i
-   title="concept-dnd-rw">read/write mode</i> or the <i
-   title="concept-dnd-ro">read-only mode</i>, return null and abort
-   these steps.</p></li>
-
-   <li>
-
-    <p>Let <var title="">data</var> be the actual data of the item
-    represented by the <code>DataTransferItem</code> object.</p>
-
-    <p>If <span>the drag data item kind</span> is <i>Unicode Data
-    string</i>, then <var title="">data</var> is a <code
-    title="">DOMString</code> containing the actual data.</p>
-
-    <p>If <span>the drag data item kind</span> is <i>Blob</i>, then
-    <var title="">data</var> is a <code>Blob</code> representing the
-    actual data.</p>
-
-    <p>If <span>the drag data item kind</span> is <i>File</i>, then
-    <var title="">data</var> is a <code>File</code> representing the
-    actual data.</p>
-
-    <p>If <span>the drag data item kind</span> is <i>Object</i>, then
-    <var title="">data</var> is the object that is the actual
-    data.</p>
-
-   </li>
-
-   <li><span>Queue a task</span> to invoke <var
-   title="">callback</var>, passing a <span>structured clone</span> of
-   <var title="">data</var> as the argument.</p></li>
-
-  </ol>
---></div><h4 id="the-dragevent-interface"><span class="secno">7.7.4 </span>The <code><a href="#dragevent">DragEvent</a></code> interface</h4><p>The drag-and-drop processing model involves several events. They
+  </li></ol></div><h4 id="the-dragevent-interface"><span class="secno">7.7.4 </span>The <code><a href="#dragevent">DragEvent</a></code> interface</h4><p>The drag-and-drop processing model involves several events. They
   all use the <code><a href="#dragevent">DragEvent</a></code> interface.</p><pre class="idl">interface <dfn id="dragevent">DragEvent</dfn> : <span>MouseEvent</span> {
   readonly attribute <a href="#datatransfer">DataTransfer</a> <a href="#dom-dragevent-datatransfer" title="dom-DragEvent-dataTransfer">dataTransfer</a>;
 
-  void <a href="#dom-dragevent-initdragevent" title="dom-DragEvent-initDragEvent">initDragEvent</a>(in DOMString typeArg, in boolean canBubbleArg, in boolean cancelableArg, in any dummyArg<!-- used to be viewArg, back when we had views -->, in long detailArg, in long screenXArg, in long screenYArg, in long clientXArg, in long clientYArg, in boolean ctrlKeyArg, in boolean altKeyArg, in boolean shiftKeyArg, in boolean metaKeyArg, in unsigned short buttonArg, in EventTarget relatedTargetArg, in <a href="#datatransfer">DataTransfer</a> dataTransferArg);
+  void <a href="#dom-dragevent-initdragevent" title="dom-DragEvent-initDragEvent">initDragEvent</a>(in DOMString typeArg, in boolean canBubbleArg, in boolean cancelableArg, in any dummyArg, in long detailArg, in long screenXArg, in long screenYArg, in long clientXArg, in long clientYArg, in boolean ctrlKeyArg, in boolean altKeyArg, in boolean shiftKeyArg, in boolean metaKeyArg, in unsigned short buttonArg, in EventTarget relatedTargetArg, in <a href="#datatransfer">DataTransfer</a> dataTransferArg);
 };</pre><dl class="domintro"><dt><var title="">event</var> . <code title="dom-DragEvent-dataTransfer"><a href="#dom-dragevent-datatransfer">dataTransfer</a></code></dt>
 
    <dd>
@@ -1505,7 +1273,7 @@ interface <dfn>FunctionObjectCallback</dfn> {
     attribute set to <var title="">dataTransfer</var>, the
     <code><a href="#datatransfer">DataTransfer</a></code> object created above.</p>
 
-    <!-- interaction event spec point -->
+    
 
     <p>If there is no relevant pointing device, the object must have
     its <code title="">screenX</code>, <code title="">screenY</code>,
@@ -1653,12 +1421,11 @@ interface <dfn>FunctionObjectCallback</dfn> {
 
    </li>
 
-   <!-- DND-v2: text/html as an export format -->
+   
 
 
    <li>Perform <dfn id="drag-and-drop-initialization-steps">drag-and-drop initialization steps</dfn> defined
    in any <a href="infrastructure.html#other-applicable-specifications">other applicable specifications</a>.</li>
-
 
 
    <li>
@@ -1682,7 +1449,7 @@ interface <dfn>FunctionObjectCallback</dfn> {
        <dd>Add to <var title="">urls</var> the result of <a href="urls.html#resolve-a-url" title="resolve a url">resolving</a> the element's <code title="attr-img-src"><a href="embedded-content-1.html#attr-img-src">src</a></code> content attribute relative to
        the element.</dd>
 
-       <!-- DND-v2: more -->
+       
 
       </dl></li>
 
@@ -1735,10 +1502,7 @@ interface <dfn>FunctionObjectCallback</dfn> {
     node</a>.</p>
 
     <p>If the event is canceled, then the drag-and-drop operation
-    should not occur; abort these steps.</p> <!-- only a should
-    because the UA can always allow the user to drag without the page
-    knowing -->
-
+    should not occur; abort these steps.</p> 
     <p class="note">Since events with no event listeners registered
     are, almost by definition, never canceled, drag-and-drop is always
     available to the user if the author does not specifically prevent
@@ -2155,66 +1919,66 @@ interface <dfn>FunctionObjectCallback</dfn> {
   </div><h4 id="dndevents"><span class="secno">7.7.6 </span>Events summary</h4><p><i>This section is non-normative.</i></p><p>The following events are involved in the drag-and-drop
   model.</p><table><thead><tr><th> Event Name </th>
      <th> Target </th>
-     <!-- <th> Bubbles? </th> -->
+     
      <th> Cancelable? </th>
      <th> <a href="#drag-data-store-mode">Drag data store mode</a> </th>
-     <!-- <th> <code title="dom-DataTransfer-effectAllowed">effectAllowed</code> </th> -->
+     
      <th> <code title="dom-DataTransfer-dropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code> </th>
      <th> Default Action </th>
     </tr></thead><tbody><tr><td><dfn id="event-dragstart" title="event-dragstart"><code>dragstart</code></dfn></td>
      <td><a href="#source-node">Source node</a></td>
-     <!-- <td>&#x2713; Bubbles</td> -->
+     
      <td>&#x2713; Cancelable</td>
      <td><a href="#concept-dnd-rw" title="concept-dnd-rw">Read/write mode</a>
-     <!-- <td>"<code title="">uninitialized</code>"</td> -->
+     
      </td><td>"<code title="">none</code>"</td>
      <td>Initiate the drag-and-drop operation</td>
     </tr><tr><td><dfn id="event-drag" title="event-drag"><code>drag</code></dfn></td>
      <td><a href="#source-node">Source node</a></td>
-     <!-- <td>&#x2713; Bubbles</td> -->
+     
      <td>&#x2713; Cancelable</td>
      <td><a href="#concept-dnd-p" title="concept-dnd-p">Protected mode</a>
-     <!-- <td>Same as last event</td> -->
+     
      </td><td>"<code title="">none</code>"</td>
      <td>Continue the drag-and-drop operation</td>
     </tr><tr><td><dfn id="event-dragenter" title="event-dragenter"><code>dragenter</code></dfn></td>
      <td><a href="#immediate-user-selection">Immediate user selection</a> or <a href="dom.html#the-body-element">the body element</a></td>
-     <!-- <td>&#x2713; Bubbles</td> -->
+     
      <td>&#x2713; Cancelable</td>
      <td><a href="#concept-dnd-p" title="concept-dnd-p">Protected mode</a>
-     <!-- <td>Same as last event</td> -->
+     
      </td><td><a href="#dropEffect-initialization">Based on <code>effectAllowed</code> value</a></td>
      <td>Reject <a href="#immediate-user-selection">immediate user selection</a> as potential <a href="#current-target-element" title="current target element">target element</a></td>
     </tr><tr><td><dfn id="event-dragleave" title="event-dragleave"><code>dragleave</code></dfn></td>
      <td><a href="#current-target-element" title="current target element">Previous target element</a></td>
-     <!-- <td>&#x2713; Bubbles</td> -->
+     
      <td>&#x2014;</td>
      <td><a href="#concept-dnd-p" title="concept-dnd-p">Protected mode</a>
-     <!-- <td>Same as last event</td> -->
+     
      </td><td>"<code title="">none</code>"</td>
      <td>None</td>
     </tr><tr><td><dfn id="event-dragover" title="event-dragover"><code>dragover</code></dfn></td>
      <td><a href="#current-target-element">Current target element</a></td>
-     <!-- <td>&#x2713; Bubbles</td> -->
+     
      <td>&#x2713; Cancelable</td>
      <td><a href="#concept-dnd-p" title="concept-dnd-p">Protected mode</a>
-     <!-- <td>Same as last event</td> -->
+     
      </td><td><a href="#dropEffect-initialization">Based on <code>effectAllowed</code> value</a></td>
      <td>Reset the <a href="#current-drag-operation">current drag operation</a> to "none"</td>
     </tr><tr><td><dfn id="event-drop" title="event-drop"><code>drop</code></dfn></td>
      <td><a href="#current-target-element">Current target element</a></td>
-     <!-- <td>&#x2713; Bubbles</td> -->
+     
      <td>&#x2713; Cancelable</td>
      <td><a href="#concept-dnd-ro" title="concept-dnd-ro">Read-only mode</a>
-     <!-- <td>Same as last event</td> -->
+     
      </td><td><a href="#current-drag-operation">Current drag operation</a></td>
      <td>Varies</td>
     </tr><tr><td><dfn id="event-dragend" title="event-dragend"><code>dragend</code></dfn></td>
      <td><a href="#source-node">Source node</a></td>
-     <!-- <td>&#x2713; Bubbles</td> -->
+     
      <td>&#x2014;</td>
      <td><a href="#concept-dnd-p" title="concept-dnd-p">Protected mode</a>
-     <!-- <td>Same as last event</td> -->
+     
      </td><td><a href="#current-drag-operation">Current drag operation</a></td>
      <td>Varies</td>
     </tr></tbody></table><p>Not shown in the above table: all these events bubble, and the
@@ -2302,19 +2066,6 @@ interface <dfn>FunctionObjectCallback</dfn> {
    item type string</a> set to a value that matches the remainder
    of the keyword are accepted.</p></dd>
 
-<!--DND-v3:
-   <dt>Any keyword with three characters or more, beginning with the
-   two characters U+0062 LATIN SMALL LETTER B and U+003A COLON or
-   U+0042 LATIN CAPITAL LETTER B and U+003A COLON (i.e. an <span>ASCII
-   case-insensitive</span> match for the string "<code
-   title="">b:</code>")<dt>
-
-   <dd><p>Indicates that items with <span>the drag data item
-   kind</span> <i>Blob</i>, <i>File</i>, or <i>Plain Unicode
-   string</i> and <span>the drag data item type string</span> set to a
-   value that matches the remainder of the keyword are
-   accepted.</p></dd>
--->
 
    <dt>Any keyword with three characters or more, beginning with the
    two characters U+0066 LATIN SMALL LETTER F and U+003A COLON or
@@ -2326,17 +2077,6 @@ interface <dfn>FunctionObjectCallback</dfn> {
    string</a> set to a value that matches the remainder of the
    keyword are accepted.</p></dd>
 
-<!--DND-v4:
-   <dt>Any keyword with three characters or more, beginning with the
-   two characters U+006F LATIN SMALL LETTER O and U+003A COLON or
-   U+004F LATIN CAPITAL LETTER O and U+003A COLON (i.e. an <span>ASCII
-   case-insensitive</span> match for the string "<code
-   title="">o:</code>")<dt>
-
-   <dd><p>Indicates that items with <span>the drag data item type
-   string</span> set to a value that matches the remainder of the
-   keyword are accepted.</p></dd>
--->
 
   </dl><p>The <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code> content
   attribute's values must not have more than one of the three feedback
@@ -2408,38 +2148,20 @@ interface <dfn>FunctionObjectCallback</dfn> {
       <dl class="switch"><dt>If <var title="">kind code</var> is a U+0073 LATIN SMALL LETTER S character</dt>
        <dd>
 
-        <p>Let <var title="">kind<!--DND-v3:/DND-v4: s--></var> be
+        <p>Let <var title="">kind</var> be
         <i>Plain Unicode string</i>.</p>
 
        </dd>
 
-<!--DND-v3:
-       <dt>If <var title="">kind code</var> is a U+0062 LATIN SMALL LETTER B character</dt>
-       <dd>
-
-        <p>Let <var title="">kinds</var> be <i>Plain Unicode
-        string</i>, <i>Blob</i>, and <i>File</i>.</p>
-
-       </dd>
--->
 
        <dt>If <var title="">kind code</var> is a U+0066 LATIN SMALL LETTER F character</dt>
        <dd>
 
-        <p>Let <var title="">kind<!--DND-v3:/DND-v4: s--></var> be
+        <p>Let <var title="">kind</var> be
         <i>File</i>.</p>
 
        </dd>
 
-<!--DND-v4:
-       <dt>If <var title="">kind code</var> is a U+006F LATIN SMALL LETTER O character</dt>
-       <dd>
-
-        <p>Let <var title="">kinds</var> be <i>Plain Unicode
-        string</i>, <i>Blob</i>, <i>File</i>, and <i>Object</i>.</p>
-
-       </dd>
--->
 
        <dt>Otherwise</dt>
        <dd>
@@ -2456,8 +2178,8 @@ interface <dfn>FunctionObjectCallback</dfn> {
 
      <li><p>If there exist any items in the <a href="#drag-data-store-item-list">drag data store item
      list</a> whose <a href="#the-drag-data-item-kind" title="the drag data item kind">drag data
-     item kind</a> is <!--DND-v3:/DND-v4: one of--> the
-     kind<!--DND-v3:/DND-v4: s--> given in <var title="">kind<!--DND-v3:/DND-v4: s--></var> and whose <span title="the drag data item type">drag data item type</span> is
+     item kind</a> is  the
+     kind given in <var title="">kind</var> and whose <span title="the drag data item type">drag data item type</span> is
      <var title="">type</var>, then let <var title="">matched</var> be
      true.</p></li>
 
@@ -2503,85 +2225,7 @@ interface <dfn>FunctionObjectCallback</dfn> {
  }
 &lt;/script&gt;</pre>
 
-  </div><!--
-  <h4>Copy and paste</h4>
-
-  <p>Copy-and-paste is a form of drag-and-drop: the "copy" part is
-  equivalent to dragging content to another application (the
-  "clipboard"), and the "paste" part is equivalent to dragging content
-  <em>from</em> another application.</p>
-
-  <p>Select-and-paste (a model used by mouse operations in the X
-  Window System) is equivalent to a drag-and-drop operation where the
-  source is the selection.</p>
-
-
-  <div class="impl">
-
-  <h5>Copy to clipboard</h5>
-
-  <p>When the user invokes a copy operation, the user agent must act
-  as if the user had invoked a drag on the current selection. If the
-  drag-and-drop operation initiates, then the user agent must act as
-  if the user had indicated (as the <span>immediate user
-  selection</span>) a hypothetical application representing the
-  clipboard. Then, the user agent must act as if the user had ended
-  the drag-and-drop operation without canceling it. If the
-  drag-and-drop operation didn't get canceled, the user agent should
-  then follow the relevant platform-specific conventions for copy
-  operations (e.g. updating the clipboard).</p>
-
-  <p>The events involved in this process are the <code
-  title="event-dragstart">dragstart</code>, <code
-  title="event-drag">drag</code>, and <code
-  title="event-dragend">dragend</code> events.</p>
-
-
-  <h5>Cut to clipboard</h5>
-
-  <p>When the user invokes a cut operation, the user agent must act as
-  if the user had invoked a copy operation (see the previous section),
-  followed, if the copy was completed successfully, by <a
-  href="#contenteditable-delete">a selection delete operation</a>.</p>
-
-  <p>The events involved in this process are the <code
-  title="event-dragstart">dragstart</code>, <code
-  title="event-drag">drag</code>, and <code
-  title="event-dragend">dragend</code> events.</p>
-
-
-  <h5>Paste from clipboard</h5>
-
-  <p>When the user invokes a clipboard paste operation, the user agent
-  must act as if the user had invoked a drag on a hypothetical
-  application representing the clipboard, setting the data associated
-  with the drag as the content on the clipboard (in whatever formats
-  are available).</p>
-
-  <p>Then, the user agent must act as if the user had indicated (as
-  the <span>immediate user selection</span>) the element with the
-  keyboard focus, and then ended the drag-and-drop operation without
-  canceling it.</p>
-
-  <p>The events involved in this process are the <code
-  title="event-dragenter">dragenter</code>, <code
-  title="event-dragover">dragover</code>, <code
-  title="event-dragleave">dragleave</code>, and <code
-  title="event-drop">drop</code> events.</p>
-
-
-  <h5>Paste from selection</h5>
-
-  <p>When the user invokes a selection paste operation, the user agent
-  must act as if the user had invoked a drag on the current selection,
-  then indicated (as the <span>immediate user selection</span>) the
-  element with the keyboard focus, and then ended the drag-and-drop
-  operation without canceling it.</p>
-
-  <p>All the drag-and-drop events can be involved in this process.</p>
-
-  </div>
---><div class="impl">
+  </div><div class="impl">
 
   <h4 id="security-risks-in-the-drag-and-drop-model"><span class="secno">7.7.9 </span>Security risks in the drag-and-drop model</h4>
 
@@ -2835,7 +2479,7 @@ interface <dfn>FunctionObjectCallback</dfn> {
     steps:</p>
     <ol><li><p>If the document is an <a href="dom.html#xml-documents" title="XML documents">XML
      document</a>, then throw an <code><a href="common-dom-interfaces.html#invalid_access_err">INVALID_ACCESS_ERR</a></code>
-     exception and abort these steps.</p></li><!-- v2 support XML? -->
+     exception and abort these steps.</p></li>
      <li><p>If the <var title="">value</var> argument wasn't
      specified, abort these steps without doing anything.</p></li>
      <li><p>If there is a selection, act as if the user had requested
@@ -3045,8 +2689,4 @@ interface <dfn>FunctionObjectCallback</dfn> {
    <dd class="impl"><strong>State</strong>: Always false.</dd>
    <dd class="impl"><strong>Value</strong>: Always the string "<code title="">false</code>".</dd>
 
-  </dl><!--
-v2 (well, really v0):
- "forecolor", "hilitecolor", "fontname", "fontsize", "justifyleft",
- "justifycenter", "justifyright", "justifyfull", "indent", "outdent"
---></body></html>
+  </dl></body></html>

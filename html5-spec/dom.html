@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>3 Semantics, structure, and APIs of HTML documents &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -378,11 +374,12 @@
    <a href="browsers.html#browsing-context">browsing context</a>'s <a href="browsers.html#active-document">active document</a>'s
    <a href="#reload-override-buffer">reload override buffer</a>.</p></li>
 
-   <li><p><a href="history.html#navigate">Navigate</a><!--DONAV reload after d.open()--> the
-   <a href="browsers.html#browsing-context">browsing context</a> to a resource whose source is <var title="">source</var>. When the <a href="history.html#navigate">navigate</a> algorithm
-   creates a <code><a href="infrastructure.html#document">Document</a></code> object for this purpose, set that
-   <code><a href="infrastructure.html#document">Document</a></code>'s <a href="#reload-override-flag">reload override flag</a> and set
-   its <a href="#reload-override-buffer">reload override buffer</a> to <var title="">source</var>.</p></li>
+   <li><p><a href="history.html#navigate">Navigate</a> the
+   <a href="browsers.html#browsing-context">browsing context</a> to a resource whose source is <var title="">source</var>, with <a href="history.html#replacement-enabled">replacement enabled</a>. When
+   the <a href="history.html#navigate">navigate</a> algorithm creates a <code><a href="infrastructure.html#document">Document</a></code>
+   object for this purpose, set that <code><a href="infrastructure.html#document">Document</a></code>'s
+   <a href="#reload-override-flag">reload override flag</a> and set its <a href="#reload-override-buffer">reload override
+   buffer</a> to <var title="">source</var>.</p></li>
 
   </ol><h4 id="documents-in-the-dom"><span class="secno">3.1.1 </span>Documents in the DOM</h4><p>All <code><a href="infrastructure.html#document">Document</a></code> objects (in user agents implementing
   this specification) <span class="impl">must</span> also implement
@@ -457,9 +454,7 @@ interface <dfn id="htmldocument">HTMLDocument</dfn> {
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onchange" title="handler-onchange">onchange</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onclick" title="handler-onclick">onclick</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oncontextmenu" title="handler-oncontextmenu">oncontextmenu</a>;
-<!--KEEP-END w3c-html--><!--TT-->
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oncuechange" title="handler-oncuechange">oncuechange</a>;
-<!--KEEP-START w3c-html--><!--TT-->
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondblclick" title="handler-ondblclick">ondblclick</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondrag" title="handler-ondrag">ondrag</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondragend" title="handler-ondragend">ondragend</a>;
@@ -473,8 +468,6 @@ interface <dfn id="htmldocument">HTMLDocument</dfn> {
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onended" title="handler-onended">onended</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onerror" title="handler-onerror">onerror</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onfocus" title="handler-onfocus">onfocus</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onformchange" title="handler-onformchange">onformchange</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onforminput" title="handler-onforminput">onforminput</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oninput" title="handler-oninput">oninput</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oninvalid" title="handler-oninvalid">oninvalid</a>;
            attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onkeydown" title="handler-onkeydown">onkeydown</a>;
@@ -580,9 +573,7 @@ interface <dfn id="htmldocument">HTMLDocument</dfn> {
    <li>A <code><a href="infrastructure.html#document">Document</a></code> whose <a href="#the-document-s-address" title="the document's&#10;   address">address</a> does not use a server-based naming
    authority.</li>
 
-  </ul><!--Other specifications can also define <code>Document</code>
-  objects as being <span title="cookie-free Document
-  object">cookie-free <code>Document</code> objects</span>.--><p id="sandboxCookies">On getting, if the document is a
+  </ul><p id="sandboxCookies">On getting, if the document is a
   <a href="#cookie-free-document-object">cookie-free <code>Document</code> object</a>, then the user
   agent must return the empty string. Otherwise, if the
   <code><a href="infrastructure.html#document">Document</a></code>'s <a href="origin-0.html#origin">origin</a> is not a
@@ -860,14 +851,7 @@ interface <dfn id="htmldocument">HTMLDocument</dfn> {
   <code><a href="obsolete.html#frameset">frameset</a></code> element, or null). On setting, the following
   algorithm must be run:</p>
 
-  <ol><!-- if changes are requested:
-    http://lxr.mozilla.org/seamonkey/source/content/html/document/src/nsHTMLDocument.cpp
-    search for ::GetBody ::SetBody
-    http://trac.webkit.org/projects/webkit/browser/trunk/WebCore/html/HTMLDocument.cpp
-    search for ::setBody
-    http://trac.webkit.org/projects/webkit/browser/trunk/WebCore/dom/Document.cpp
-    search for ::body
-   --><li>If the new value is not a <code><a href="sections.html#the-body-element-0">body</a></code> or
+  <ol><li>If the new value is not a <code><a href="sections.html#the-body-element-0">body</a></code> or
    <code><a href="obsolete.html#frameset">frameset</a></code> element, then raise a
    <code><a href="common-dom-interfaces.html#hierarchy_request_err">HIERARCHY_REQUEST_ERR</a></code> exception and abort these
    steps.</li>
@@ -913,9 +897,7 @@ interface <dfn id="htmldocument">HTMLDocument</dfn> {
 
   </dl><div class="impl">
 
-  <!-- these all return the same object each time because of a rule in
-  the collection section -->
-
+  
   <p>The <dfn id="dom-document-images" title="dom-document-images"><code>images</code></dfn>
   attribute must return an <code><a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a></code> rooted at the
   <code><a href="infrastructure.html#document">Document</a></code> node, whose filter matches only
@@ -1028,11 +1010,7 @@ interface <dfn id="htmldocument">HTMLDocument</dfn> {
    <p>A call to <code title="">getElementsByClassName('aaa,bbb')</code> would return no
    nodes; none of the elements above are in the "aaa,bbb" class.</p>
 
-  </div><!-- v2:
->         * xGetParentElementByClassName(rootElement, className, tagName) -
-> Navigates upwards until we hit a parent element with the given class name and
-> optional tag name.
---><div class="impl">
+  </div><div class="impl">
 
   <hr/><p>The <code><a href="#htmldocument">HTMLDocument</a></code> interface <span title="support&#10;  named properties">supports named properties</span>. The
   <a href="infrastructure.html#supported-property-names">supported property names</a> at any moment consist of the
@@ -1061,8 +1039,7 @@ interface <dfn id="htmldocument">HTMLDocument</dfn> {
     the name <var title="">name</var> in the <code><a href="infrastructure.html#document">Document</a></code>.
 
     </p><p class="note">There will be at least one such element, by
-    definition.<!-- (If there wasn't, then this algorithm wouldn't
-    have been invoked by Web IDL.) --></p>
+    definition.</p>
 
    </li>
 
@@ -1087,17 +1064,10 @@ interface <dfn id="htmldocument">HTMLDocument</dfn> {
 
     <p>Otherwise return an <code><a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a></code> rooted at the
     <code><a href="infrastructure.html#document">Document</a></code> node, whose filter matches only <a href="#dom-document-nameditem-filter" title="dom-document-namedItem-filter">named elements</a> with
-    the name <var title="">name</var>.</p> <!-- the same one each time
-    is returned, because of the rule under collections -->
-
+    the name <var title="">name</var>.</p> 
    </li>
 
-  <!--
-  Note that this named getter overrides built-in properties, as in:
-     http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E%0D%0A...%3Ciframe%20name%3Dbody%3E%3C%2Fiframe%3E%3Cscript%3Ew(document.body)%3C%2Fscript%3E
-  This is what the "OverrideBuiltins" bit means in the IDL.
-  -->
-
+  
   </ol><p><dfn id="dom-document-nameditem-filter" title="dom-document-nameditem-filter">Named elements</dfn>
   with the name <var title="">name</var>, for the purposes of the
   above algorithm, are those that are either:</p>
@@ -1167,7 +1137,7 @@ interface <dfn id="domhtmlimplementation">DOMHTMLImplementation</dfn> {
 
    </li><li><p>Return <var title="">doc</var>.</p></li>
 
-  </ol></div><div class="impl"> <!-- very deprecated API; use XHR instead -->
+  </ol></div><div class="impl"> 
 
   <h4 id="loading-xml-documents"><span class="secno">3.1.6 </span>Loading XML documents</h4>
 
@@ -1177,30 +1147,17 @@ interface <dfn id="domhtmlimplementation">DOMHTMLImplementation</dfn> {
 
   <pre class="idl">[Supplemental, NoInterfaceObject]
 interface <dfn id="xmldocumentloader">XMLDocumentLoader</dfn> {
-<!--SYNCLOAD           attribute boolean <span title="dom-XMLDocumentLoader-async">async</span>;
--->  boolean <a href="#dom-xmldocumentloader-load" title="dom-XMLDocumentLoader-load">load</a>(in DOMString url);
+  boolean <a href="#dom-xmldocumentloader-load" title="dom-XMLDocumentLoader-load">load</a>(in DOMString url);
 };</pre>
 
-  <!-- http://software.hixie.ch/utilities/js/live-dom-viewer/saved/576 -->
-  <!-- http://software.hixie.ch/utilities/js/live-dom-viewer/saved/577 -->
-  <!-- http://www.hixie.ch/tests/adhoc/dom/level0/document/load/001.html -->
+  
+  
+  
 
-<!--SYNCLOAD
-  <p>The <dfn
-  title="dom-XMLDocumentLoader-async"><code>async</code></dfn>
-  attribute must initially be true. On getting, it must return its
-  current value. On setting, its current value must be changed to the
-  new value.</p>
--->
   <p>The <dfn id="dom-xmldocumentloader-load" title="dom-XMLDocumentLoader-load"><code>load(<var title="">url</var>)</code></dfn> method must run the following
   steps:</p>
 
-  <ol><!--SYNCLOAD
-   <li><p>If <code title="dom-XMLDocumentLoader-async">async</code> is
-   set to false and the <var title="">document</var> is
-   <span>load-blocked</span>, return false and abort these
-   steps.</p></li>
---><li><p>Let <var title="">document</var> be the <code><a href="infrastructure.html#document">Document</a></code>
+  <ol><li><p>Let <var title="">document</var> be the <code><a href="infrastructure.html#document">Document</a></code>
    object on which the method was invoked.</p></li>
 
    <li><p><a href="urls.html#resolve-a-url" title="resolve a url">Resolve</a> the method's
@@ -1212,21 +1169,12 @@ interface <dfn id="xmldocumentloader">XMLDocumentLoader</dfn> {
    <li><p>If the <a href="origin-0.html#origin">origin</a> of <var title="">url</var> is not
    the same as the <a href="origin-0.html#origin">origin</a> of <var title="">document</var>, throw a <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code>
    exception and abort these steps.</p></li>
-<!--SYNCLOAD
-   <li><p>If <code title="dom-XMLDocumentLoader-async">async</code> is
-   set to false, let <var title="">document</var> be
-   <dfn>load-blocked</dfn>.</p></li>
--->
    <li><p>Remove all child nodes of <var title="">document</var>,
-   without firing any mutation events.</p></li> <!-- as of 2010-07-26,
-   only Opera fired mutation events here. -->
-
+   without firing any mutation events.</p></li> 
    <li><p>Set the <a href="#current-document-readiness">current document readiness</a> of <var title="">document</var> to "loading".</p></li>
 
-   <li><p><!--SYNCLOAD If <code title="dom-XMLDocumentLoader-async">async</code> is
-   set to true, then run--> Run the remainder of these steps asynchronously,
-   and return true from the method.<!--SYNCLOAD Otherwise, continue running these
-   steps without yet returning.--></p></li>
+   <li><p> Run the remainder of these steps asynchronously,
+   and return true from the method.</p></li>
 
    <li><p>Let <var title="">result</var> be an <code><a href="infrastructure.html#document">Document</a></code>
    object.</p></li>
@@ -1245,10 +1193,7 @@ interface <dfn id="xmldocumentloader">XMLDocumentLoader</dfn> {
     <ol><li><p>Create a new <a href="the-xhtml-syntax.html#xml-parser">XML parser</a> associated with the
      <var title="">result</var> document.</p></li>
 
-     <li><p>Pass this parser the fetched document.</p></li> <!-- no
-     worries about scripts running; there's no browsing context for
-     the document so scripts are automatically disabled -->
-
+     <li><p>Pass this parser the fetched document.</p></li> 
      <li><p>If there is an XML well-formedness or XML namespace
      well-formedness error, then remove all child nodes from <var title="">result</var>. Otherwise let <var title="">success</var>
      be true.</p></li>
@@ -1257,9 +1202,8 @@ interface <dfn id="xmldocumentloader">XMLDocumentLoader</dfn> {
 
    <li>
 
-    <p><!--SYNCLOAD If <code title="dom-XMLDocumentLoader-async">async</code> is
-    set to true, then <span>queue--> <a href="webappapis.html#queue-a-task">Queue a task</a> to run the following
-    steps. <!--SYNCLOAD Otherwise, run them synchronously.--></p>
+    <p> <a href="webappapis.html#queue-a-task">Queue a task</a> to run the following
+    steps. </p>
 
     <ol><li><p>Set the <a href="#current-document-readiness">current document readiness</a> of <var title="">document</var> to "complete".</p></li>
 
@@ -1267,25 +1211,9 @@ interface <dfn id="xmldocumentloader">XMLDocumentLoader</dfn> {
      by the children of <var title="">result</var> (even if it has no
      children), firing mutation events as if a
      <code><a href="infrastructure.html#documentfragment">DocumentFragment</a></code> containing the new children had
-     been inserted.</p></li> <!-- as of 2010-07-26, both Firefox and
-     Opera fired mutation events here. -->
-
-     <!-- If the document doesn't have no nodes here, at time of
-     writing, Opera would leave the new nodes and drop the parsed
-     ones, while Firefox would basically abort instead, failing to
-     fire the 'load' event -->
-
+     been inserted.</p></li> 
+     
      <li><p><a href="webappapis.html#fire-a-simple-event">Fire a simple event</a> named <code title="event-load">load</code> at <var title="">document</var>.</p></li>
 
     </ol></li>
-<!--SYNCLOAD
-   <li><p>If <code title="dom-XMLDocumentLoader-async">async</code>
-   was set to false when this algorithm started, let <var
-   title="">document</var> be no longer
-   <span>load-blocked</span>.</p></li>
-
-   <li><p>If <code title="dom-XMLDocumentLoader-async">async</code>
-   was set to false when this algorithm started, return <var
-   title="">success</var>.</p></li>
--->
   </ol></div></body></html>

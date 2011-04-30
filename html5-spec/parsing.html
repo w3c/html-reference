@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>8.2 Parsing HTML documents &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -424,7 +420,7 @@
 
   <p>The input to the HTML parsing process consists of a stream of
   Unicode characters, which is passed through a
-  <a href="tokenization.html#tokenization">tokenization</a> stage followed by a <a href="tokenization.html#tree-construction">tree
+  <a href="tokenization.html#tokenization">tokenization</a> stage followed by a <a href="tree-construction.html#tree-construction">tree
   construction</a> stage. The output is a <code><a href="infrastructure.html#document">Document</a></code>
   object.</p>
 
@@ -503,7 +499,7 @@
   <dfn id="concept-encoding-confidence" title="concept-encoding-confidence">confidence</dfn>. The
   confidence is either <i>tentative</i>, <i>certain</i>, or
   <i>irrelevant</i>. The encoding used, and whether the confidence in
-  that encoding is <i>tentative</i> or <i>certain</i>, is <a href="tokenization.html#meta-charset-during-parse">used during the parsing</a> to
+  that encoding is <i>tentative</i> or <i>certain</i>, is <a href="tree-construction.html#meta-charset-during-parse">used during the parsing</a> to
   determine whether to <a href="#change-the-encoding">change the encoding</a>. If no
   encoding is necessary, e.g. because the parser is operating on a
   stream of Unicode characters and doesn't have to use an encoding at
@@ -548,27 +544,15 @@
    that row, with the <a href="#concept-encoding-confidence" title="concept-encoding-confidence">confidence</a>
    <i>certain</i>, and abort these steps:</p>
 
-    <!-- this table is present in several forms in this file; keep them in sync -->
+    
     <table><thead><tr><th>Bytes in Hexadecimal
        </th><th>Encoding
-     </th></tr></thead><tbody><!-- nobody uses this
-      <tr>
-       <td>00 00 FE FF
-       <td>UTF-32BE
-      <tr>
-       <td>FF FE 00 00
-       <td>UTF-32LE
---><tr><td>FE FF
+     </th></tr></thead><tbody><tr><td>FE FF
        </td><td>Big-endian UTF-16
       </td></tr><tr><td>FF FE
        </td><td>Little-endian UTF-16
       </td></tr><tr><td>EF BB BF
        </td><td>UTF-8
-<!-- nobody uses this
-      <tr>
-       <td>DD 73 66 73
-       <td>UTF-EBCDIC
--->
     </td></tr></tbody></table><p class="note">This step looks for Unicode Byte Order Marks
    (BOMs).</p></li>
 
@@ -611,10 +595,7 @@
          above).</p></li>
 
          <li><p>Let <var title="">attribute list</var> be an empty
-         list of strings.</p></li> <!-- so long as we only care about
-         http-equiv, content, and charset, this can be a 3-bit
-         bitfield -->
-
+         list of strings.</p></li> 
          <li><p>Let <var title="">got pragma</var> be false.</p></li>
 
          <li><p>Let <var title="">need pragma</var> be null.</p></li>
@@ -645,11 +626,13 @@
 
            <dt>If the attribute's name is "<code title="">content</code>"</dt>
 
-           <dd><p>Apply the <a href="fetching-resources.html#algorithm-for-extracting-an-encoding-from-a-content-type">algorithm for extracting an encoding
-           from a Content-Type</a>, giving the attribute's value as
-           the string to parse. If an encoding is returned, and if
-           <var title="">charset</var> is still set to null, let <var title="">charset</var> be the encoding returned, and set
-           <var title="">need pragma</var> to true.</p></dd>
+           <dd><p>Apply the <a href="fetching-resources.html#algorithm-for-extracting-an-encoding-from-a-meta-element">algorithm for extracting an encoding
+           from a <code>meta</code> element</a>, giving the
+           attribute's value as the string to parse. If an encoding is
+           returned, and if <var title="">charset</var> is still set
+           to null, let <var title="">charset</var> be the encoding
+           returned, and set <var title="">need pragma</var> to
+           true.</p></dd>
 
            <dt>If the attribute's name is "<code title="">charset</code>"</dt>
 
@@ -922,9 +905,7 @@
     the user's locale, for compatibility with legacy content. Locales
     are identified by BCP 47 language tags. <a href="references.html#refsBCP47">[BCP47]</a></p>
 
-    <!-- based on mozilla 1.9.1 localizations:
-         http://mxr.mozilla.org/l10n-mozilla1.9.1/find?string=global%2Fintl.properties&tree=l10n-mozilla1.9.1&hint= -->
-
+    
     <table><thead><tr><th>Locale language
        </th><th>Suggested default encoding
      </th></tr></thead><tbody><tr><td>ar
@@ -954,8 +935,8 @@
       </td></tr><tr><td>hu<!-- -HU -->
        </td><td>ISO-8859-2
 
-      </td></tr><tr><td>ja <!-- and ja-JP-mac -->
-       </td><td>Windows-31J <!-- Shift_JIS -->
+      </td></tr><tr><td>ja 
+       </td><td>Windows-31J 
 
       </td></tr><tr><td>kk
        </td><td>UTF-8
@@ -1130,10 +1111,7 @@
   converted to Unicode characters for the tokenizer, as described by
   the rules for that encoding, except that the leading U+FEFF BYTE
   ORDER MARK character, if any, must not be stripped by the encoding
-  layer (it is stripped by the rule below).</p> <!-- this is to
-  prevent two leading BOMs from being both stripped, once by the
-  decoder, and once by the parser -->
-
+  layer (it is stripped by the rule below).</p> 
   <p>Bytes or sequences of bytes in the original byte stream that
   could not be converted to Unicode code points must be converted to
   U+FFFD REPLACEMENT CHARACTERs. Specifically, if the encoding is
@@ -1159,9 +1137,8 @@
   the face of na&#xEF;ve transcoders.</p>
 
   <p>Any occurrences of any characters in the ranges U+0001 to U+0008,
-  <!-- HT, LF allowed --> <!-- U+000B is in the next list --> <!-- FF,
-  CR allowed --> U+000E to U+001F, <!-- ASCII allowed --> U+007F
-  <!--to U+0084, (U+0085 NEL not allowed), U+0086--> to U+009F, U+FDD0
+     U+000E to U+001F,  U+007F
+   to U+009F, U+FDD0
   to U+FDEF, and characters U+000B, U+FFFE, U+FFFF, U+1FFFE, U+1FFFF,
   U+2FFFE, U+2FFFF, U+3FFFE, U+3FFFF, U+4FFFE, U+4FFFF, U+5FFFE,
   U+5FFFF, U+6FFFE, U+6FFFF, U+7FFFE, U+7FFFF, U+8FFFE, U+8FFFF,
@@ -1238,7 +1215,7 @@
    convert the input stream to the new encoding, set the <a href="#concept-encoding-confidence" title="concept-encoding-confidence">confidence</a> to
    <i>certain</i>, and abort these steps.</li>
 
-   <li>Otherwise, <a href="history.html#navigate">navigate</a><!--DONAV reparse--> to the
+   <li>Otherwise, <a href="history.html#navigate">navigate</a> to the
    document again, with <a href="history.html#replacement-enabled">replacement enabled</a>, and using
    the same <a href="history.html#source-browsing-context">source browsing context</a>, but this time skip
    the <a href="#encoding-sniffing-algorithm">encoding sniffing algorithm</a> and instead just set
@@ -1263,24 +1240,22 @@
   <p>The <dfn id="insertion-mode">insertion mode</dfn> is a state variable that controls
   the primary operation of the tree construction stage.</p>
 
-  <p>Initially, the <a href="#insertion-mode">insertion mode</a> is "<a href="tokenization.html#the-initial-insertion-mode" title="insertion mode: initial">initial</a>". It can change to
-  "<a href="tokenization.html#the-before-html-insertion-mode" title="insertion mode: before html">before html</a>",
-  "<a href="tokenization.html#the-before-head-insertion-mode" title="insertion mode: before head">before head</a>",
-  "<a href="tokenization.html#parsing-main-inhead" title="insertion mode: in head">in head</a>", "<a href="tokenization.html#parsing-main-inheadnoscript" title="insertion mode: in head noscript">in head noscript</a>",
-  "<a href="tokenization.html#the-after-head-insertion-mode" title="insertion mode: after head">after head</a>", "<a href="tokenization.html#parsing-main-inbody" title="insertion mode: in body">in body</a>", "<a href="tokenization.html#parsing-main-incdata" title="insertion mode: text">text</a>",
-  "<a href="tokenization.html#parsing-main-intable" title="insertion mode: in table">in table</a>", "<a href="tokenization.html#parsing-main-intabletext" title="insertion mode: in table text">in table text</a>", "<a href="tokenization.html#parsing-main-incaption" title="insertion mode: in caption">in caption</a>", "<a href="tokenization.html#parsing-main-incolgroup" title="insertion mode: in column group">in column group</a>",
-  "<a href="tokenization.html#parsing-main-intbody" title="insertion mode: in table body">in table body</a>",
-  "<a href="tokenization.html#parsing-main-intr" title="insertion mode: in row">in row</a>", "<a href="tokenization.html#parsing-main-intd" title="insertion mode: in cell">in cell</a>", "<a href="tokenization.html#parsing-main-inselect" title="insertion mode: in select">in select</a>", "<a href="tokenization.html#parsing-main-inselectintable" title="insertion mode: in select in table">in select in
-  table</a>", "<a href="tokenization.html#parsing-main-inforeign" title="insertion mode: in foreign content">in
-  foreign content</a>", "<a href="tokenization.html#parsing-main-afterbody" title="insertion mode: after&#10;  body">after body</a>", "<a href="tokenization.html#parsing-main-inframeset" title="insertion mode: in&#10;  frameset">in frameset</a>", "<a href="tokenization.html#parsing-main-afterframeset" title="insertion mode: after&#10;  frameset">after frameset</a>", "<a href="tokenization.html#the-after-after-body-insertion-mode" title="insertion mode:&#10;  after after body">after after body</a>", and "<a href="tokenization.html#the-after-after-frameset-insertion-mode" title="insertion mode: after after frameset">after after
+  <p>Initially, the <a href="#insertion-mode">insertion mode</a> is "<a href="tree-construction.html#the-initial-insertion-mode" title="insertion mode: initial">initial</a>". It can change to
+  "<a href="tree-construction.html#the-before-html-insertion-mode" title="insertion mode: before html">before html</a>",
+  "<a href="tree-construction.html#the-before-head-insertion-mode" title="insertion mode: before head">before head</a>",
+  "<a href="tree-construction.html#parsing-main-inhead" title="insertion mode: in head">in head</a>", "<a href="tree-construction.html#parsing-main-inheadnoscript" title="insertion mode: in head noscript">in head noscript</a>",
+  "<a href="tree-construction.html#the-after-head-insertion-mode" title="insertion mode: after head">after head</a>", "<a href="tree-construction.html#parsing-main-inbody" title="insertion mode: in body">in body</a>", "<a href="tree-construction.html#parsing-main-incdata" title="insertion mode: text">text</a>", "<a href="tree-construction.html#parsing-main-intable" title="insertion&#10;  mode: in table">in table</a>", "<a href="tree-construction.html#parsing-main-intabletext" title="insertion mode: in&#10;  table text">in table text</a>", "<a href="tree-construction.html#parsing-main-incaption" title="insertion mode: in&#10;  caption">in caption</a>", "<a href="tree-construction.html#parsing-main-incolgroup" title="insertion mode: in column&#10;  group">in column group</a>", "<a href="tree-construction.html#parsing-main-intbody" title="insertion mode: in&#10;  table body">in table body</a>", "<a href="tree-construction.html#parsing-main-intr" title="insertion mode: in&#10;  row">in row</a>", "<a href="tree-construction.html#parsing-main-intd" title="insertion mode: in cell">in
+  cell</a>", "<a href="tree-construction.html#parsing-main-inselect" title="insertion mode: in select">in
+  select</a>", "<a href="tree-construction.html#parsing-main-inselectintable" title="insertion mode: in select in table">in
+  select in table</a>", "<a href="tree-construction.html#parsing-main-afterbody" title="insertion mode: after&#10;  body">after body</a>", "<a href="tree-construction.html#parsing-main-inframeset" title="insertion mode: in&#10;  frameset">in frameset</a>", "<a href="tree-construction.html#parsing-main-afterframeset" title="insertion mode: after&#10;  frameset">after frameset</a>", "<a href="tree-construction.html#the-after-after-body-insertion-mode" title="insertion mode:&#10;  after after body">after after body</a>", and "<a href="tree-construction.html#the-after-after-frameset-insertion-mode" title="insertion mode: after after frameset">after after
   frameset</a>" during the course of the parsing, as described in
-  the <a href="tokenization.html#tree-construction">tree construction</a> stage. The insertion mode affects
+  the <a href="tree-construction.html#tree-construction">tree construction</a> stage. The insertion mode affects
   how tokens are processed and whether CDATA sections are
   supported.</p>
 
-  <p>Several of these modes, namely "<a href="tokenization.html#parsing-main-inhead" title="insertion mode: in&#10;  head">in head</a>", "<a href="tokenization.html#parsing-main-inbody" title="insertion mode: in body">in
-  body</a>", "<a href="tokenization.html#parsing-main-intable" title="insertion mode: in table">in
-  table</a>", and "<a href="tokenization.html#parsing-main-inselect" title="insertion mode: in select">in
+  <p>Several of these modes, namely "<a href="tree-construction.html#parsing-main-inhead" title="insertion mode: in&#10;  head">in head</a>", "<a href="tree-construction.html#parsing-main-inbody" title="insertion mode: in body">in
+  body</a>", "<a href="tree-construction.html#parsing-main-intable" title="insertion mode: in table">in
+  table</a>", and "<a href="tree-construction.html#parsing-main-inselect" title="insertion mode: in select">in
   select</a>", are special, in that the other modes defer to them
   at various times. When the algorithm below says that the user agent
   is to do something "<dfn id="using-the-rules-for">using the rules for</dfn> the <var title="">m</var> insertion mode", where <var title="">m</var> is one
@@ -1290,7 +1265,7 @@
   rules in <var title="">m</var> themselves switch the <a href="#insertion-mode">insertion
   mode</a> to a new value.</p>
 
-  <p>When the insertion mode is switched to "<a href="tokenization.html#parsing-main-incdata" title="insertion&#10;  mode: text">text</a>" or "<a href="tokenization.html#parsing-main-intabletext" title="insertion mode: in table&#10;  text">in table text</a>", the <dfn id="original-insertion-mode">original insertion mode</dfn>
+  <p>When the insertion mode is switched to "<a href="tree-construction.html#parsing-main-incdata" title="insertion&#10;  mode: text">text</a>" or "<a href="tree-construction.html#parsing-main-intabletext" title="insertion mode: in table&#10;  text">in table text</a>", the <dfn id="original-insertion-mode">original insertion mode</dfn>
   is also set. This is the insertion mode to which the tree
   construction stage will return.</p>
 
@@ -1308,72 +1283,50 @@
    true and set <var title="">node</var> to the <var title="">context</var> element. (<a href="the-end.html#fragment-case">fragment case</a>)</li>
 
    <li>If <var title="">node</var> is a <code><a href="the-button-element.html#the-select-element">select</a></code> element,
-   then switch the <a href="#insertion-mode">insertion mode</a> to "<a href="tokenization.html#parsing-main-inselect" title="insertion mode: in select">in select</a>" and abort these
+   then switch the <a href="#insertion-mode">insertion mode</a> to "<a href="tree-construction.html#parsing-main-inselect" title="insertion mode: in select">in select</a>" and abort these
    steps. (<a href="the-end.html#fragment-case">fragment case</a>)</li>
 
    <li>If <var title="">node</var> is a <code><a href="tabular-data.html#the-td-element">td</a></code> or
    <code><a href="tabular-data.html#the-th-element">th</a></code> element and <var title="">last</var> is false, then
-   switch the <a href="#insertion-mode">insertion mode</a> to "<a href="tokenization.html#parsing-main-intd" title="insertion&#10;   mode: in cell">in cell</a>" and abort these steps.</li>
+   switch the <a href="#insertion-mode">insertion mode</a> to "<a href="tree-construction.html#parsing-main-intd" title="insertion&#10;   mode: in cell">in cell</a>" and abort these steps.</li>
 
    <li>If <var title="">node</var> is a <code><a href="tabular-data.html#the-tr-element">tr</a></code> element, then
-   switch the <a href="#insertion-mode">insertion mode</a> to "<a href="tokenization.html#parsing-main-intr" title="insertion&#10;   mode: in row">in row</a>" and abort these steps.</li>
+   switch the <a href="#insertion-mode">insertion mode</a> to "<a href="tree-construction.html#parsing-main-intr" title="insertion&#10;   mode: in row">in row</a>" and abort these steps.</li>
 
    <li>If <var title="">node</var> is a <code><a href="tabular-data.html#the-tbody-element">tbody</a></code>,
    <code><a href="tabular-data.html#the-thead-element">thead</a></code>, or <code><a href="tabular-data.html#the-tfoot-element">tfoot</a></code> element, then switch the
-   <a href="#insertion-mode">insertion mode</a> to "<a href="tokenization.html#parsing-main-intbody" title="insertion mode: in&#10;   table body">in table body</a>" and abort these steps.</li>
+   <a href="#insertion-mode">insertion mode</a> to "<a href="tree-construction.html#parsing-main-intbody" title="insertion mode: in&#10;   table body">in table body</a>" and abort these steps.</li>
 
    <li>If <var title="">node</var> is a <code><a href="tabular-data.html#the-caption-element">caption</a></code> element,
-   then switch the <a href="#insertion-mode">insertion mode</a> to "<a href="tokenization.html#parsing-main-incaption" title="insertion mode: in caption">in caption</a>" and abort
+   then switch the <a href="#insertion-mode">insertion mode</a> to "<a href="tree-construction.html#parsing-main-incaption" title="insertion mode: in caption">in caption</a>" and abort
    these steps.</li>
 
    <li>If <var title="">node</var> is a <code><a href="tabular-data.html#the-colgroup-element">colgroup</a></code> element,
-   then switch the <a href="#insertion-mode">insertion mode</a> to "<a href="tokenization.html#parsing-main-incolgroup" title="insertion mode: in column group">in column group</a>" and
+   then switch the <a href="#insertion-mode">insertion mode</a> to "<a href="tree-construction.html#parsing-main-incolgroup" title="insertion mode: in column group">in column group</a>" and
    abort these steps. (<a href="the-end.html#fragment-case">fragment case</a>)</li>
 
    <li>If <var title="">node</var> is a <code><a href="tabular-data.html#the-table-element">table</a></code> element,
-   then switch the <a href="#insertion-mode">insertion mode</a> to "<a href="tokenization.html#parsing-main-intable" title="insertion mode: in table">in table</a>" and abort these
+   then switch the <a href="#insertion-mode">insertion mode</a> to "<a href="tree-construction.html#parsing-main-intable" title="insertion mode: in table">in table</a>" and abort these
    steps.</li>
 
    <li>If <var title="">node</var> is a <code><a href="semantics.html#the-head-element-0">head</a></code> element,
-   then switch the <a href="#insertion-mode">insertion mode</a> to "<a href="tokenization.html#parsing-main-inbody" title="insertion mode: in body">in body</a>" ("<a href="tokenization.html#parsing-main-inbody" title="insertion mode: in body">in body</a>"! <em> not "<a href="tokenization.html#parsing-main-inhead" title="insertion mode: in head">in head</a>"</em>!) and abort
-   these steps. (<a href="the-end.html#fragment-case">fragment case</a>)</li> <!-- This is only
-   here for now in case people think that the spec accidentally
-   omitted it and try to "fix" it. Note that noscript-in-head is also
-   handled this way. This is all intentional. The only thing it
-   doesn't handle is the scripting-disabled fragment parsing case for
-   a <head> element containing a <noscript> which itself contains
-   something other than a <link> or a <style type="text/css"> element; you'd expect
-   that to break out of the <noscript> but it doesn't. This is an edge
-   case that doesn't affect the spec, since the algorithm for fragment
-   parsing is only used for innerHTML/outerHTML/insertAdjacentHTML(),
-   where we know scripting is enabled. -->
-
+   then switch the <a href="#insertion-mode">insertion mode</a> to "<a href="tree-construction.html#parsing-main-inbody" title="insertion mode: in body">in body</a>" ("<a href="tree-construction.html#parsing-main-inbody" title="insertion mode: in body">in body</a>"! <em> not "<a href="tree-construction.html#parsing-main-inhead" title="insertion mode: in head">in head</a>"</em>!) and abort
+   these steps. (<a href="the-end.html#fragment-case">fragment case</a>)</li> 
    <li>If <var title="">node</var> is a <code><a href="sections.html#the-body-element-0">body</a></code> element,
-   then switch the <a href="#insertion-mode">insertion mode</a> to "<a href="tokenization.html#parsing-main-inbody" title="insertion mode: in body">in body</a>" and abort these
+   then switch the <a href="#insertion-mode">insertion mode</a> to "<a href="tree-construction.html#parsing-main-inbody" title="insertion mode: in body">in body</a>" and abort these
    steps.</li>
 
    <li>If <var title="">node</var> is a <code><a href="obsolete.html#frameset">frameset</a></code> element,
-   then switch the <a href="#insertion-mode">insertion mode</a> to "<a href="tokenization.html#parsing-main-inframeset" title="insertion mode: in frameset">in frameset</a>" and abort
+   then switch the <a href="#insertion-mode">insertion mode</a> to "<a href="tree-construction.html#parsing-main-inframeset" title="insertion mode: in frameset">in frameset</a>" and abort
    these steps. (<a href="the-end.html#fragment-case">fragment case</a>)</li>
 
    <li>If <var title="">node</var> is an <code><a href="semantics.html#the-html-element-0">html</a></code> element,
-   then <!--: if the <span><code title="">head</code> element
-   pointer</span> is null,--> switch the <a href="#insertion-mode">insertion mode</a>
-   to "<a href="tokenization.html#the-before-head-insertion-mode" title="insertion mode: before head">before
-   head</a>"<!--, otherwise, switch the <span>insertion mode</span>
-   to "<span title="insertion mode: after head">after head</span>".-->
-   Then, <!-- in either case, --> abort these steps. (<a href="the-end.html#fragment-case">fragment
-   case</a>)</li> <!-- if the head element pointer can ever be
-   non-null when we're going through these steps, we'll need to
-   uncomment out the commented-out bits -->
-
-   <li>If <var title="">node</var> is an element from the <a href="namespaces.html#mathml-namespace">MathML
-   namespace</a> or the <a href="namespaces.html#svg-namespace">SVG namespace</a>, then switch the
-   <a href="#insertion-mode">insertion mode</a> to "<a href="tokenization.html#parsing-main-inforeign" title="insertion mode: in&#10;   foreign content">in foreign content</a>" and abort these
-   steps.</li>
-
+   then  switch the <a href="#insertion-mode">insertion mode</a>
+   to "<a href="tree-construction.html#the-before-head-insertion-mode" title="insertion mode: before head">before
+   head</a>"   Then,  abort these steps. (<a href="the-end.html#fragment-case">fragment
+   case</a>)</li> 
    <li>If <var title="">last</var> is true, then switch the
-   <a href="#insertion-mode">insertion mode</a> to "<a href="tokenization.html#parsing-main-inbody" title="insertion mode: in&#10;   body">in body</a>" and abort these steps. (<a href="the-end.html#fragment-case">fragment
+   <a href="#insertion-mode">insertion mode</a> to "<a href="tree-construction.html#parsing-main-inbody" title="insertion mode: in&#10;   body">in body</a>" and abort these steps. (<a href="the-end.html#fragment-case">fragment
    case</a>)</li>
 
    <li>Let <var title="">node</var> now be the node before <var title="">node</var> in the <a href="#stack-of-open-elements">stack of open
@@ -1387,9 +1340,9 @@
   stack grows downwards; the topmost node on the stack is the first
   one added to the stack, and the bottommost node of the stack is the
   most recently added node in the stack (notwithstanding when the
-  stack is manipulated in a random access fashion as part of <a href="tokenization.html#adoptionAgency">the handling for misnested tags</a>).</p>
+  stack is manipulated in a random access fashion as part of <a href="tree-construction.html#adoptionAgency">the handling for misnested tags</a>).</p>
 
-  <p>The "<a href="tokenization.html#the-before-html-insertion-mode" title="insertion mode: before html">before
+  <p>The "<a href="tree-construction.html#the-before-html-insertion-mode" title="insertion mode: before html">before
   html</a>" <a href="#insertion-mode">insertion mode</a> creates the
   <code><a href="semantics.html#the-html-element-0">html</a></code> root element node, which is then added to the
   stack.</p>
@@ -1397,7 +1350,7 @@
   <p>In the <a href="the-end.html#fragment-case">fragment case</a>, the <a href="#stack-of-open-elements">stack of open
   elements</a> is initialized to contain an <code><a href="semantics.html#the-html-element-0">html</a></code>
   element that is created as part of <a href="the-end.html#html-fragment-parsing-algorithm" title="html fragment&#10;  parsing algorithm">that algorithm</a>. (The <a href="the-end.html#fragment-case">fragment
-  case</a> skips the "<a href="tokenization.html#the-before-html-insertion-mode" title="insertion mode: before&#10;  html">before html</a>" <a href="#insertion-mode">insertion mode</a>.)</p>
+  case</a> skips the "<a href="tree-construction.html#the-before-html-insertion-mode" title="insertion mode: before&#10;  html">before html</a>" <a href="#insertion-mode">insertion mode</a>.)</p>
 
   <p>The <code><a href="semantics.html#the-html-element-0">html</a></code> node, however it is created, is the topmost
   node of the stack. It only gets popped off the stack when the parser
@@ -1431,9 +1384,7 @@
    <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h2</a></code>, <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h3</a></code>, <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h4</a></code>, <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h5</a></code>,
    <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h6</a></code>, <code><a href="semantics.html#the-head-element-0">head</a></code>, <code><a href="sections.html#the-header-element">header</a></code>,
    <code><a href="sections.html#the-hgroup-element">hgroup</a></code>, <code><a href="grouping-content.html#the-hr-element">hr</a></code>, <code><a href="semantics.html#the-html-element-0">html</a></code>,
-   <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <!-- <code>image</code>, (commented out
-   because this isn't an element that can end up on the stack, so it
-   doesn't matter) --> <code><a href="embedded-content-1.html#the-img-element">img</a></code>, <code><a href="the-input-element.html#the-input-element">input</a></code>,
+   <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>,  <code><a href="embedded-content-1.html#the-img-element">img</a></code>, <code><a href="the-input-element.html#the-input-element">input</a></code>,
    <code><a href="obsolete.html#isindex-0">isindex</a></code>, <code><a href="grouping-content.html#the-li-element">li</a></code>, <code><a href="semantics.html#the-link-element">link</a></code>,
    <code><a href="obsolete.html#listing">listing</a></code>, <code><a href="obsolete.html#the-marquee-element">marquee</a></code>, <code><a href="interactive-elements.html#menus">menu</a></code>,
    <code><a href="semantics.html#meta">meta</a></code>, <code><a href="sections.html#the-nav-element">nav</a></code>, <code><a href="obsolete.html#noembed">noembed</a></code>,
@@ -1446,9 +1397,7 @@
    <code><a href="tabular-data.html#the-th-element">th</a></code>, <code><a href="tabular-data.html#the-thead-element">thead</a></code>, <code><a href="semantics.html#the-title-element-0">title</a></code>,
    <code><a href="tabular-data.html#the-tr-element">tr</a></code>, <code><a href="grouping-content.html#the-ul-element">ul</a></code>, <code><a href="text-level-semantics.html#the-wbr-element">wbr</a></code>, and
    <code><a href="obsolete.html#xmp">xmp</a></code>; MathML's <code title="">mi</code>, <code title="">mo</code>, <code title="">mn</code>, <code title="">ms</code>, <code title="">mtext</code>, and <code title="">annotation-xml</code>; and SVG's <code title="">foreignObject</code>, <code title="">desc</code>, and
-   <code title="">title</code>.</p></dd> <!-- we could actually put
-   all non-HTML elements in this list, I think -->
-
+   <code title="">title</code>.</p></dd> 
    <dt><dfn id="formatting">Formatting</dfn></dt>
    <dd><p>The following HTML elements are those that end up in the
    <a href="#list-of-active-formatting-elements">list of active formatting elements</a>: <code><a href="text-level-semantics.html#the-a-element">a</a></code>,
@@ -1456,7 +1405,7 @@
    <code><a href="text-level-semantics.html#the-em-element">em</a></code>, <code><a href="obsolete.html#font">font</a></code>, <code><a href="text-level-semantics.html#the-i-element">i</a></code>,
    <code><a href="obsolete.html#nobr">nobr</a></code>, <code><a href="text-level-semantics.html#the-s-element">s</a></code>, <code><a href="text-level-semantics.html#the-small-element">small</a></code>,
    <code><a href="obsolete.html#strike">strike</a></code>, <code><a href="text-level-semantics.html#the-strong-element">strong</a></code>, <code><a href="obsolete.html#tt">tt</a></code>, and
-   <code><a href="obsolete.html#u">u</a></code>.</p></dd>
+   <code><a href="text-level-semantics.html#the-u-element">u</a></code>.</p></dd>
 
    <dt><dfn id="ordinary">Ordinary</dfn></dt>
    <dd><p>All other elements found while parsing an HTML
@@ -1488,7 +1437,7 @@
 
   <ul class="brief"><li><code><a href="obsolete.html#the-applet-element">applet</a></code> in the <a href="namespaces.html#html-namespace-0">HTML namespace</a></li>
    <li><code><a href="tabular-data.html#the-caption-element">caption</a></code> in the <a href="namespaces.html#html-namespace-0">HTML namespace</a></li>
-   <li><code><a href="semantics.html#the-html-element-0">html</a></code> in the <a href="namespaces.html#html-namespace-0">HTML namespace</a></li> <!-- (This can only happen if the <var title="">node</var> is the topmost node of the <span>stack of open elements</span>, and prevents the next step from being invoked if there are no more elements in the stack.) -->
+   <li><code><a href="semantics.html#the-html-element-0">html</a></code> in the <a href="namespaces.html#html-namespace-0">HTML namespace</a></li> 
    <li><code><a href="tabular-data.html#the-table-element">table</a></code> in the <a href="namespaces.html#html-namespace-0">HTML namespace</a></li>
    <li><code><a href="tabular-data.html#the-td-element">td</a></code> in the <a href="namespaces.html#html-namespace-0">HTML namespace</a></li>
    <li><code><a href="tabular-data.html#the-th-element">th</a></code> in the <a href="namespaces.html#html-namespace-0">HTML namespace</a></li>
@@ -1522,14 +1471,14 @@
   scope</dfn> when it <a href="#has-an-element-in-the-specific-scope">has an element in the specific
   scope</a> consisting of the following element types:</p>
 
-  <ul class="brief"><li><code><a href="semantics.html#the-html-element-0">html</a></code> in the <a href="namespaces.html#html-namespace-0">HTML namespace</a></li> <!-- (This can only happen if the <var title="">node</var> is the topmost node of the <span>stack of open elements</span>, and prevents the next step from being invoked if there are no more elements in the stack.) -->
+  <ul class="brief"><li><code><a href="semantics.html#the-html-element-0">html</a></code> in the <a href="namespaces.html#html-namespace-0">HTML namespace</a></li> 
    <li><code><a href="tabular-data.html#the-table-element">table</a></code> in the <a href="namespaces.html#html-namespace-0">HTML namespace</a></li>
   </ul><p>The <a href="#stack-of-open-elements">stack of open elements</a> is said to <dfn id="has-an-element-in-select-scope" title="has an element in select scope">have an element in select
   scope</dfn> when it <a href="#has-an-element-in-the-specific-scope">has an element in the specific
   scope</a> consisting of all element types <em>except</em> the
   following:</p>
 
-  <ul class="brief"><!--<li><code>select</code> in the <span>HTML namespace</span></li>--><li><code><a href="the-button-element.html#the-optgroup-element">optgroup</a></code> in the <a href="namespaces.html#html-namespace-0">HTML namespace</a></li>
+  <ul class="brief"><li><code><a href="the-button-element.html#the-optgroup-element">optgroup</a></code> in the <a href="namespaces.html#html-namespace-0">HTML namespace</a></li>
    <li><code><a href="the-button-element.html#the-option-element">option</a></code> in the <a href="namespaces.html#html-namespace-0">HTML namespace</a></li>
   </ul><p>Nothing happens if at any time any of the elements in the
   <a href="#stack-of-open-elements">stack of open elements</a> are moved to a new location in,
@@ -1538,7 +1487,7 @@
   other strange effects, content to be appended to nodes that are no
   longer in the DOM.</p>
 
-  <p class="note">In some cases (namely, when <a href="tokenization.html#adoptionAgency">closing misnested formatting elements</a>),
+  <p class="note">In some cases (namely, when <a href="tree-construction.html#adoptionAgency">closing misnested formatting elements</a>),
   the stack is manipulated in a random-access fashion.</p>
 
 
@@ -1579,9 +1528,7 @@
    and values (the order of the attributes does not matter).</p>
 
    <p class="note">This is the Noah's Ark clause. But with three per
-   family instead of two.</p></li> <!-- A sort of polyamorous Noah's
-   Ark, if you will. -->
-
+   family instead of two.</p></li> 
    <li><p>Add <var title="">element</var> to the <a href="#list-of-active-formatting-elements">list of active
    formatting elements</a>.</p></li>
 
@@ -1618,7 +1565,7 @@
    <var title="">entry</var> in the <a href="#list-of-active-formatting-elements">list of active formatting
    elements</a>.</li>
 
-   <li><a href="tokenization.html#create-an-element-for-the-token">Create an element for the token</a> for which the
+   <li><a href="tree-construction.html#create-an-element-for-the-token">Create an element for the token</a> for which the
    element <var title="">entry</var> was created, to obtain <var title="">new element</var>.</li>
 
    <li>Append <var title="">new element</var> to the <a href="#current-node">current

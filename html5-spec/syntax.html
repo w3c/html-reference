@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>8 The HTML syntax &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -403,12 +399,11 @@
   the ranges U+0041 to U+005A (LATIN CAPITAL LETTER A to LATIN CAPITAL
   LETTER Z) and U+0061 to U+007A (LATIN SMALL LETTER A to LATIN SMALL
   LETTER Z). For convenience, in this section this is just referred to
-  as "case-insensitive".</p><h4 id="the-doctype"><span class="secno">8.1.1 </span>The DOCTYPE</h4><p>A <dfn id="syntax-doctype" title="syntax-doctype">DOCTYPE</dfn> is a <!-- mostly
-  useless but nonetheless --> required preamble.</p><p class="note">DOCTYPEs are required for legacy reasons. When
+  as "case-insensitive".</p><h4 id="the-doctype"><span class="secno">8.1.1 </span>The DOCTYPE</h4><p>A <dfn id="syntax-doctype" title="syntax-doctype">DOCTYPE</dfn> is a  required preamble.</p><p class="note">DOCTYPEs are required for legacy reasons. When
   omitted, browsers tend to use a different rendering mode that is
   incompatible with some specifications. Including the DOCTYPE in a
   document ensures that the browser makes a best-effort attempt at
-  following the relevant specifications.</p><p>A DOCTYPE must consist of the following characters, in this
+  following the relevant specifications.</p><p>A DOCTYPE must consist of the following components, in this
   order:</p><ol class="brief"><li>A string that is an <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for the string "<code title="">&lt;!DOCTYPE</code>".</li>
    <li>One or more <a href="common-microsyntaxes.html#space-character" title="space character">space characters</a>.</li>
    <li>A string that is an <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for the string "<code title="">html</code>".</li>
@@ -431,7 +426,7 @@
   'about:legacy-compat'&gt;</code>, case-insensitively except for the
   part in single or double quotes.</p><p>The <a href="#doctype-legacy-string">DOCTYPE legacy string</a> should not be used unless
   the document is generated from a system that cannot output the
-  shorter string.</p><hr/><!-- see the parser section before changing this bit --><p>To help authors transition from HTML4 and XHTML1, an
+  shorter string.</p><hr/><p>To help authors transition from HTML4 and XHTML1, an
   <dfn id="obsolete-permitted-doctype-string">obsolete permitted DOCTYPE string</dfn> can be inserted into
   the DOCTYPE (in the position defined above). This string must
   consist of:</p><ol class="brief"><li>One or more <a href="common-microsyntaxes.html#space-character" title="space character">space characters</a>.</li>
@@ -474,13 +469,11 @@
    <code><a href="the-button-element.html#the-keygen-element">keygen</a></code>, <code><a href="semantics.html#the-link-element">link</a></code>, <code><a href="semantics.html#meta">meta</a></code>,
    <code><a href="the-iframe-element.html#the-param-element">param</a></code>, <code><a href="video.html#the-source-element">source</a></code>, <code><a href="video.html#the-track-element">track</a></code>,
    <code><a href="text-level-semantics.html#the-wbr-element">wbr</a></code></dd>
-   <!-- see also other places that say VOIDLIST -->
+   
 
    <dt><dfn id="raw-text-elements">Raw text elements</dfn></dt>
 
-   <dd><code><a href="scripting-1.html#script">script</a></code>, <code><a href="semantics.html#the-style-element">style</a></code></dd> <!-- iframe and
-   noscript don't count as raw text for syntax purposes -->
-
+   <dd><code><a href="scripting-1.html#script">script</a></code>, <code><a href="semantics.html#the-style-element">style</a></code></dd> 
    <dt><dfn id="rcdata-elements">RCDATA elements</dfn></dt>
 
    <dd><code><a href="the-button-element.html#the-textarea-element">textarea</a></code>, <code><a href="semantics.html#the-title-element-0">title</a></code></dd>
@@ -655,35 +648,7 @@
     GREATER-THAN SIGN characters (&gt;), or U+0060 GRAVE ACCENT
     characters (`), and must not be the empty string.</p>
 
-    <!-- The ` character is in this list on a temporary basis, waiting
-         for IE to fix its parsing bug whereby it treats ` as an
-         attribute value delimiter. Otherwise, escaping software that
-         tries to be clever and not use quotes when it doesn't need to
-         could be tricked by an attacker.
-
-         Posit a site that allows the user to input text that is used
-         verbatim in two attributes, such that the user can set the
-         first attribute's value to:
-
-            `
-
-         ...and the second to:
-
-            ` onload='...payload...' end=x
-
-         ...with the assumption that the site is going to not quote
-         the first one, and quote the second one with double quotes:
-
-            <body title=` class="` onload='...payload...' end=x">
-
-         In IE, this is treated as:
-
-            <body title=' class="'
-                  onload='...payload...'
-                  end='x"'>
-
-    -->
-
+    
 
     <div class="example">
 
@@ -773,7 +738,7 @@
     </td></tr><tr><td> <code title="">show</code> </td><td> <a href="namespaces.html#xlink-namespace">XLink namespace</a> </td><td> <code title="">xlink:show</code>
     </td></tr><tr><td> <code title="">title</code> </td><td> <a href="namespaces.html#xlink-namespace">XLink namespace</a> </td><td> <code title="">xlink:title</code>
     </td></tr><tr><td> <code title="">type</code> </td><td> <a href="namespaces.html#xlink-namespace">XLink namespace</a> </td><td> <code title="">xlink:type</code>
-    </td></tr><tr><td> <code title="">base</code> </td><td> <a href="namespaces.html#xml-namespace">XML namespace</a> <!-- attr-xml-base --> </td><td> <code title="">xml:base</code>
+    </td></tr><tr><td> <code title="">base</code> </td><td> <a href="namespaces.html#xml-namespace">XML namespace</a>  </td><td> <code title="">xml:base</code>
     </td></tr><tr><td> <code title="">lang</code> </td><td> <a href="namespaces.html#xml-namespace">XML namespace</a> </td><td> <code title="">xml:lang</code>
     </td></tr><tr><td> <code title="">space</code> </td><td> <a href="namespaces.html#xml-namespace">XML namespace</a> </td><td> <code title="">xml:space</code>
     </td></tr><tr><td> <code title="">xmlns</code> </td><td> <a href="namespaces.html#xmlns-namespace">XMLNS namespace</a> </td><td> <code title="">xmlns</code>
@@ -783,33 +748,30 @@
   is not present; it is implied, but it is still there. An HTML
   document always has a root <code><a href="semantics.html#the-html-element-0">html</a></code> element, even if the
   string <code title="">&lt;html&gt;</code> doesn't appear anywhere in
-  the markup.</p><!-- <html> --><p>An <code><a href="semantics.html#the-html-element-0">html</a></code> element's <a href="#syntax-start-tag" title="syntax-start-tag">start tag</a> may be omitted if the
-  first thing inside the <code><a href="semantics.html#the-html-element-0">html</a></code> element is not a <a href="#syntax-comments" title="syntax-comments">comment</a>.</p><!-- </html> --><p>An <code><a href="semantics.html#the-html-element-0">html</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
+  the markup.</p><p>An <code><a href="semantics.html#the-html-element-0">html</a></code> element's <a href="#syntax-start-tag" title="syntax-start-tag">start tag</a> may be omitted if the
+  first thing inside the <code><a href="semantics.html#the-html-element-0">html</a></code> element is not a <a href="#syntax-comments" title="syntax-comments">comment</a>.</p><p>An <code><a href="semantics.html#the-html-element-0">html</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
   tag</a> may be omitted if the <code><a href="semantics.html#the-html-element-0">html</a></code> element is not
-  immediately followed by a <a href="#syntax-comments" title="syntax-comments">comment</a>.</p><!-- <head> --><p>A <code><a href="semantics.html#the-head-element-0">head</a></code> element's <a href="#syntax-start-tag" title="syntax-start-tag">start tag</a> may be omitted if the
+  immediately followed by a <a href="#syntax-comments" title="syntax-comments">comment</a>.</p><p>A <code><a href="semantics.html#the-head-element-0">head</a></code> element's <a href="#syntax-start-tag" title="syntax-start-tag">start tag</a> may be omitted if the
   element is empty, or if the first thing inside the
-  <code><a href="semantics.html#the-head-element-0">head</a></code> element is an element.</p><!-- </head> --><p>A <code><a href="semantics.html#the-head-element-0">head</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
+  <code><a href="semantics.html#the-head-element-0">head</a></code> element is an element.</p><p>A <code><a href="semantics.html#the-head-element-0">head</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
   tag</a> may be omitted if the <code><a href="semantics.html#the-head-element-0">head</a></code> element is not
-  immediately followed by a <a href="common-microsyntaxes.html#space-character">space character</a> or a <a href="#syntax-comments" title="syntax-comments">comment</a>.</p><!-- <body> --><p>A <code><a href="sections.html#the-body-element-0">body</a></code> element's <a href="#syntax-start-tag" title="syntax-start-tag">start tag</a> may be omitted if the
+  immediately followed by a <a href="common-microsyntaxes.html#space-character">space character</a> or a <a href="#syntax-comments" title="syntax-comments">comment</a>.</p><p>A <code><a href="sections.html#the-body-element-0">body</a></code> element's <a href="#syntax-start-tag" title="syntax-start-tag">start tag</a> may be omitted if the
   element is empty, or if the first thing inside the <code><a href="sections.html#the-body-element-0">body</a></code>
   element is not a <a href="common-microsyntaxes.html#space-character">space character</a> or a <a href="#syntax-comments" title="syntax-comments">comment</a>, except if the first thing
   inside the <code><a href="sections.html#the-body-element-0">body</a></code> element is a <code><a href="scripting-1.html#script">script</a></code> or
-  <code><a href="semantics.html#the-style-element">style</a></code> element. <!-- Note that even if the </head> end
-  tag is present, the parser makes <style type="text/css"> and <script type="text/javascript"> elements
-  between </head> and <body> end up in the <head> instead of implying
-  the <body> --></p><!-- </body> --><p>A <code><a href="sections.html#the-body-element-0">body</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
+  <code><a href="semantics.html#the-style-element">style</a></code> element. </p><p>A <code><a href="sections.html#the-body-element-0">body</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
   tag</a> may be omitted if the <code><a href="sections.html#the-body-element-0">body</a></code> element is not
-  immediately followed by a <a href="#syntax-comments" title="syntax-comments">comment</a>.</p><!-- </li> --><p>A <code><a href="grouping-content.html#the-li-element">li</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
+  immediately followed by a <a href="#syntax-comments" title="syntax-comments">comment</a>.</p><p>A <code><a href="grouping-content.html#the-li-element">li</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
   tag</a> may be omitted if the <code><a href="grouping-content.html#the-li-element">li</a></code> element is
   immediately followed by another <code><a href="grouping-content.html#the-li-element">li</a></code> element or if there
-  is no more content in the parent element.</p><!-- </dt> --><p>A <code><a href="grouping-content.html#the-dt-element">dt</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
+  is no more content in the parent element.</p><p>A <code><a href="grouping-content.html#the-dt-element">dt</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
   tag</a> may be omitted if the <code><a href="grouping-content.html#the-dt-element">dt</a></code> element is
   immediately followed by another <code><a href="grouping-content.html#the-dt-element">dt</a></code> element or a
-  <code><a href="grouping-content.html#the-dd-element">dd</a></code> element.</p><!-- </dd> --><p>A <code><a href="grouping-content.html#the-dd-element">dd</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
+  <code><a href="grouping-content.html#the-dd-element">dd</a></code> element.</p><p>A <code><a href="grouping-content.html#the-dd-element">dd</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
   tag</a> may be omitted if the <code><a href="grouping-content.html#the-dd-element">dd</a></code> element is
   immediately followed by another <code><a href="grouping-content.html#the-dd-element">dd</a></code> element or a
   <code><a href="grouping-content.html#the-dt-element">dt</a></code> element, or if there is no more content in the
-  parent element.</p><!-- </p> --><p>A <code><a href="grouping-content.html#the-p-element">p</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
+  parent element.</p><p>A <code><a href="grouping-content.html#the-p-element">p</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
   tag</a> may be omitted if the <code><a href="grouping-content.html#the-p-element">p</a></code> element is
   immediately followed by an <code><a href="sections.html#the-address-element">address</a></code>,
   <code><a href="sections.html#the-article-element">article</a></code>, <code><a href="sections.html#the-aside-element">aside</a></code>, <code><a href="grouping-content.html#the-blockquote-element">blockquote</a></code>,
@@ -821,59 +783,47 @@
   <code><a href="sections.html#the-nav-element">nav</a></code>, <code><a href="grouping-content.html#the-ol-element">ol</a></code>, <code><a href="grouping-content.html#the-p-element">p</a></code>, <code><a href="grouping-content.html#the-pre-element">pre</a></code>,
   <code><a href="sections.html#the-section-element">section</a></code>, <code><a href="tabular-data.html#the-table-element">table</a></code>, or <code><a href="grouping-content.html#the-ul-element">ul</a></code>,
   element, or if there is no more content in the parent element and
-  the parent element is not an <code><a href="text-level-semantics.html#the-a-element">a</a></code> element.</p><!-- </rt> --><p>An <code><a href="text-level-semantics.html#the-rt-element">rt</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
+  the parent element is not an <code><a href="text-level-semantics.html#the-a-element">a</a></code> element.</p><p>An <code><a href="text-level-semantics.html#the-rt-element">rt</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
   tag</a> may be omitted if the <code><a href="text-level-semantics.html#the-rt-element">rt</a></code> element is
   immediately followed by an <code><a href="text-level-semantics.html#the-rt-element">rt</a></code> or <code><a href="text-level-semantics.html#the-rp-element">rp</a></code>
-  element, or if there is no more content in the parent element.</p><!-- </rp> --><p>An <code><a href="text-level-semantics.html#the-rp-element">rp</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
+  element, or if there is no more content in the parent element.</p><p>An <code><a href="text-level-semantics.html#the-rp-element">rp</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
   tag</a> may be omitted if the <code><a href="text-level-semantics.html#the-rp-element">rp</a></code> element is
   immediately followed by an <code><a href="text-level-semantics.html#the-rt-element">rt</a></code> or <code><a href="text-level-semantics.html#the-rp-element">rp</a></code>
-  element, or if there is no more content in the parent element.</p><!-- </optgroup> (the text assumes <optgroup> can only be inside a
-  <select>; commented out text below can handle the non-<select> case
-  if we ever allow it) --><p>An <code><a href="the-button-element.html#the-optgroup-element">optgroup</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end tag</a> may be omitted if the
-  <code><a href="the-button-element.html#the-optgroup-element">optgroup</a></code> element <!--has an ancestor
-  <code>select</code> element and--> is immediately followed by
-  another <code><a href="the-button-element.html#the-optgroup-element">optgroup</a></code> element, or if <!--all of the elements
-  that are ancestors of the <code>optgroup</code> element, up to and
-  including the first ancestor element that is not an
-  <code>optgroup</code> element, have no more content--> there is no
-  more content in the parent element.</p><!-- so e.g. the max number of </optgroup>s are omitted here:
-   <select><optgroup></select>
-   <p id=x><optgroup></optgroup>x</p>
-   <p id=x><optgroup><optgroup></optgroup></optgroup>x</p>
-   <p><optgroup id=x><optgroup></optgroup>x</p>
-   <p><optgroup><optgroup id=x>x</p>
-  --><!-- </option> --><p>An <code><a href="the-button-element.html#the-option-element">option</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
+  element, or if there is no more content in the parent element.</p><p>An <code><a href="the-button-element.html#the-optgroup-element">optgroup</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end tag</a> may be omitted if the
+  <code><a href="the-button-element.html#the-optgroup-element">optgroup</a></code> element  is immediately followed by
+  another <code><a href="the-button-element.html#the-optgroup-element">optgroup</a></code> element, or if  there is no
+  more content in the parent element.</p><p>An <code><a href="the-button-element.html#the-option-element">option</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
   tag</a> may be omitted if the <code><a href="the-button-element.html#the-option-element">option</a></code> element is
   immediately followed by another <code><a href="the-button-element.html#the-option-element">option</a></code> element, or if
   it is immediately followed by an <code><a href="the-button-element.html#the-optgroup-element">optgroup</a></code> element, or
-  if there is no more content in the parent element.</p><!-- <colgroup> --><p>A <code><a href="tabular-data.html#the-colgroup-element">colgroup</a></code> element's <a href="#syntax-start-tag" title="syntax-start-tag">start tag</a> may be omitted if the
+  if there is no more content in the parent element.</p><p>A <code><a href="tabular-data.html#the-colgroup-element">colgroup</a></code> element's <a href="#syntax-start-tag" title="syntax-start-tag">start tag</a> may be omitted if the
   first thing inside the <code><a href="tabular-data.html#the-colgroup-element">colgroup</a></code> element is a
   <code><a href="tabular-data.html#the-col-element">col</a></code> element, and if the element is not immediately
   preceded by another <code><a href="tabular-data.html#the-colgroup-element">colgroup</a></code> element whose <a href="#syntax-end-tag" title="syntax-end-tag">end tag</a> has been omitted. (It can't be
-  omitted if the element is empty.)</p><!-- </colgroup> --><p>A <code><a href="tabular-data.html#the-colgroup-element">colgroup</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end tag</a> may be omitted if the
+  omitted if the element is empty.)</p><p>A <code><a href="tabular-data.html#the-colgroup-element">colgroup</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end tag</a> may be omitted if the
   <code><a href="tabular-data.html#the-colgroup-element">colgroup</a></code> element is not immediately followed by a
-  <a href="common-microsyntaxes.html#space-character">space character</a> or a <a href="#syntax-comments" title="syntax-comments">comment</a>.</p><!-- </thead> --><p>A <code><a href="tabular-data.html#the-thead-element">thead</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
+  <a href="common-microsyntaxes.html#space-character">space character</a> or a <a href="#syntax-comments" title="syntax-comments">comment</a>.</p><p>A <code><a href="tabular-data.html#the-thead-element">thead</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
   tag</a> may be omitted if the <code><a href="tabular-data.html#the-thead-element">thead</a></code> element is
   immediately followed by a <code><a href="tabular-data.html#the-tbody-element">tbody</a></code> or <code><a href="tabular-data.html#the-tfoot-element">tfoot</a></code>
-  element.</p><!-- <tbody> --><p>A <code><a href="tabular-data.html#the-tbody-element">tbody</a></code> element's <a href="#syntax-start-tag" title="syntax-start-tag">start tag</a> may be omitted if the
+  element.</p><p>A <code><a href="tabular-data.html#the-tbody-element">tbody</a></code> element's <a href="#syntax-start-tag" title="syntax-start-tag">start tag</a> may be omitted if the
   first thing inside the <code><a href="tabular-data.html#the-tbody-element">tbody</a></code> element is a
   <code><a href="tabular-data.html#the-tr-element">tr</a></code> element, and if the element is not immediately
   preceded by a <code><a href="tabular-data.html#the-tbody-element">tbody</a></code>, <code><a href="tabular-data.html#the-thead-element">thead</a></code>, or
   <code><a href="tabular-data.html#the-tfoot-element">tfoot</a></code> element whose <a href="#syntax-end-tag" title="syntax-end-tag">end
   tag</a> has been omitted. (It can't be omitted if the element is
-  empty.)</p><!-- </tbody> --><p>A <code><a href="tabular-data.html#the-tbody-element">tbody</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
+  empty.)</p><p>A <code><a href="tabular-data.html#the-tbody-element">tbody</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
   tag</a> may be omitted if the <code><a href="tabular-data.html#the-tbody-element">tbody</a></code> element is
   immediately followed by a <code><a href="tabular-data.html#the-tbody-element">tbody</a></code> or <code><a href="tabular-data.html#the-tfoot-element">tfoot</a></code>
-  element, or if there is no more content in the parent element.</p><!-- </tfoot> --><p>A <code><a href="tabular-data.html#the-tfoot-element">tfoot</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
+  element, or if there is no more content in the parent element.</p><p>A <code><a href="tabular-data.html#the-tfoot-element">tfoot</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
   tag</a> may be omitted if the <code><a href="tabular-data.html#the-tfoot-element">tfoot</a></code> element is
   immediately followed by a <code><a href="tabular-data.html#the-tbody-element">tbody</a></code> element, or if there is
-  no more content in the parent element.</p><!-- </tr> --><p>A <code><a href="tabular-data.html#the-tr-element">tr</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
+  no more content in the parent element.</p><p>A <code><a href="tabular-data.html#the-tr-element">tr</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
   tag</a> may be omitted if the <code><a href="tabular-data.html#the-tr-element">tr</a></code> element is
   immediately followed by another <code><a href="tabular-data.html#the-tr-element">tr</a></code> element, or if there
-  is no more content in the parent element.</p><!-- </td> --><p>A <code><a href="tabular-data.html#the-td-element">td</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
+  is no more content in the parent element.</p><p>A <code><a href="tabular-data.html#the-td-element">td</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
   tag</a> may be omitted if the <code><a href="tabular-data.html#the-td-element">td</a></code> element is
   immediately followed by a <code><a href="tabular-data.html#the-td-element">td</a></code> or <code><a href="tabular-data.html#the-th-element">th</a></code>
-  element, or if there is no more content in the parent element.</p><!-- </th> --><p>A <code><a href="tabular-data.html#the-th-element">th</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
+  element, or if there is no more content in the parent element.</p><p>A <code><a href="tabular-data.html#the-th-element">th</a></code> element's <a href="#syntax-end-tag" title="syntax-end-tag">end
   tag</a> may be omitted if the <code><a href="tabular-data.html#the-th-element">th</a></code> element is
   immediately followed by a <code><a href="tabular-data.html#the-td-element">td</a></code> or <code><a href="tabular-data.html#the-th-element">th</a></code>
   element, or if there is no more content in the parent element.</p><p><strong>However</strong>, a <a href="#syntax-start-tag" title="syntax-start-tag">start
@@ -961,19 +911,16 @@
   LATIN SMALL LETTER Z, and U+0041 LATIN CAPITAL LETTER A to U+005A
   LATIN CAPITAL LETTER Z, followed by a U+003B SEMICOLON character
   (;), where these characters do not match any of the names given in
-  the <a href="named-character-references.html#named-character-references">named character references</a> section.</p><h4 id="cdata-sections"><span class="secno">8.1.5 </span>CDATA sections</h4><p><dfn id="syntax-cdata" title="syntax-cdata">CDATA sections</dfn> must start with
-  the character sequence U+003C LESS-THAN SIGN, U+0021 EXCLAMATION
-  MARK, U+005B LEFT SQUARE BRACKET, U+0043 LATIN CAPITAL LETTER C,
-  U+0044 LATIN CAPITAL LETTER D, U+0041 LATIN CAPITAL LETTER A, U+0054
-  LATIN CAPITAL LETTER T, U+0041 LATIN CAPITAL LETTER A, U+005B LEFT
-  SQUARE BRACKET (<code title="">&lt;![CDATA[</code>). Following this
-  sequence, the CDATA section may have <a href="#syntax-text" title="syntax-text">text</a>, with the additional restriction
-  that the text must not contain the three character sequence U+005D
-  RIGHT SQUARE BRACKET, U+005D RIGHT SQUARE BRACKET, U+003E
-  GREATER-THAN SIGN (<code title="">]]&gt;</code>). Finally, the CDATA
-  section must be ended by the three character sequence U+005D RIGHT
-  SQUARE BRACKET, U+005D RIGHT SQUARE BRACKET, U+003E GREATER-THAN
-  SIGN (<code title="">]]&gt;</code>).</p><div class="example">
+  the <a href="named-character-references.html#named-character-references">named character references</a> section.</p><h4 id="cdata-sections"><span class="secno">8.1.5 </span>CDATA sections</h4><p><dfn id="syntax-cdata" title="syntax-cdata">CDATA sections</dfn> must consist of
+  the following components, in this order:</p><ol><li>The string "<code title="">&lt;![CDATA[</code>".</li>
+
+   <li>Optionally, <a href="#syntax-text" title="syntax-text">text</a>, with the
+   additional restriction that the text must not contain the string
+   "<code title="">]]&gt;</code>".</li>
+
+   <li>The string "<code title="">]]&gt;</code>".</li>
+
+  </ol><div class="example">
 
    <p>CDATA sections can only be used in foreign content (MathML or
    SVG). In this example, a CDATA section is used to escape the

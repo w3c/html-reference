@@ -1,9 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<!-- when publishing, change bits marked ZZZ
-     ZZZ: Set PUB to 1 for TR/ drafts, 0 for dev drafts; PUB-Y lines are used if it's 1 and PUB-N lines if it's 0.
-     ZZZ: Set YEAR, SHORTDAY (month/day), and LONGDAY accordingly. They are used by the INSERT FOO bits below.
-  -->
 <html lang="en-US-x-Hixie" class="split chapter"><head><title>2.5 Common microsyntaxes &#x2014; HTML5 </title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
@@ -503,10 +499,7 @@
    is not one of U+0030 DIGIT ZERO (0) to U+0039 DIGIT NINE (9), then
    return an error.</p></li>
 
-   <!-- Ok. At this point we know we have a number. It might have
-   trailing garbage which we'll ignore, but it's a number, and we
-   won't return an error. -->
-
+   
    <li><p><a href="#collect-a-sequence-of-characters">Collect a sequence of characters</a> in the range
    U+0030 DIGIT ZERO (0) to U+0039 DIGIT NINE (9), and interpret the
    resulting sequence as a base-ten integer. Let <var title="">value</var> be that integer.</p></li>
@@ -570,10 +563,7 @@
    is not one of U+0030 DIGIT ZERO (0) to U+0039 DIGIT NINE (9), then
    return an error.</p></li>
 
-   <!-- Ok. At this point we know we have a number. It might have
-   trailing garbage which we'll ignore, but it's a number, and we
-   won't return an error. -->
-
+   
    <li><p><a href="#collect-a-sequence-of-characters">Collect a sequence of characters</a> in the range
    U+0030 DIGIT ZERO (0) to U+0039 DIGIT NINE (9), and interpret the
    resulting sequence as a base-ten integer. Let <var title="">value</var> be that integer.</p></li>
@@ -672,10 +662,7 @@
    is not one of U+0030 DIGIT ZERO (0) to U+0039 DIGIT NINE (9), then
    return an error.</p></li>
 
-   <!-- Ok. At this point we know we have a number. It might have
-   trailing garbage which we'll ignore, but it's a number, and we
-   won't return an error unless it's out of range. -->
-
+   
    <li><p><a href="#collect-a-sequence-of-characters">Collect a sequence of characters</a> in the range
    U+0030 DIGIT ZERO (0) to U+0039 DIGIT NINE (9), and interpret the
    resulting sequence as a base-ten integer. Multiply <var title="">value</var> by that integer.</p></li>
@@ -759,7 +746,7 @@
     </ol></li>
 
    <li><p><i>Conversion</i>: Let <var title="">S</var> be the set of
-   finite IEEE 754 single-precision floating point values except
+   finite IEEE 754 double-precision floating point values except
    &#x2212;0, but with two special values added: 2<sup title="">1024</sup> and &#x2212;2<sup title="">1024</sup>.</p></li>
 
    <li><p>Let <var title="">rounded-value</var> be the number in <var title="">S</var> that is closest to <var title="">value</var>,
@@ -774,24 +761,6 @@
 
   </ol></div><div class="impl">
   <h5 id="percentages-and-dimensions"><span class="secno">2.5.4.4 </span>Percentages and lengths</h5>
-<!--(percentages are not used in valid html anymore)
-  <p>A string is a <dfn>valid dimension value</dfn> if it consists of
-  a character in the range U+0031 DIGIT ONE (1) to U+0039 DIGIT NINE
-  (9), optionally followed by zero of more characters in the range
-  U+0030 DIGIT ZERO (0) to U+0039 DIGIT NINE (9), optionally followed
-  by a U+002E FULL STOP character (.) and one or more characters in
-  the range U+0030 DIGIT ZERO (0) to U+0039 DIGIT NINE (9), and
-  optionally suffixed by a U+0025 PERCENT SIGN character (%).</p>
-
-  <p>A <span>valid dimension value</span> represents the number that
-  is represented in base ten by that string of digits, optionally with
-  a fractional component. If the U+0025 PERCENT SIGN is present, then
-  the dimension is a percentage; otherwise, it is a length.</p>
-
-  <p class="note">For historical reasons, percentanges and lengths
-  less than 1.0 cannot be represented as <span title="valid dimension
-  value">valid dimension values</span>.</p>
--->
   <p>The <dfn id="rules-for-parsing-dimension-values">rules for parsing dimension values</dfn> are as given in
   the following algorithm. When invoked, the steps must be followed in
   the order given, aborting at the first step that returns a
@@ -821,10 +790,7 @@
    is not one of U+0031 DIGIT ONE (1) to U+0039 DIGIT NINE (9), then
    return an error.</p></li>
 
-   <!-- Ok. At this point we know we have a number. It might have
-   trailing garbage which we'll ignore, but it's a number, and we
-   won't return an error. -->
-
+   
    <li><p><a href="#collect-a-sequence-of-characters">Collect a sequence of characters</a> in the range
    U+0030 DIGIT ZERO (0) to U+0039 DIGIT NINE (9), and interpret the
    resulting sequence as a base-ten integer. Let <var title="">value</var> be that number.</p></li>
@@ -987,103 +953,11 @@
       </ol></dd>
 
 
-     <!-- <dt>A U+002E FULL STOP character</dt> -->
-     <dt>A character in the range U+0001 to U+001F, <!-- space --> U+0021 to U+002B, <!-- comma --> U+002D to U+002F, <!-- digits --> U+003A, <!-- semicolon --> U+003C to U+0040, <!-- a-z --> U+005B to U+0060, <!-- A-Z --> U+007b to U+007F
+     
+     <dt>A character in the range U+0001 to U+001F,  U+0021 to U+002B,  U+002D to U+002F,  U+003A,  U+003C to U+0040,  U+005B to U+0060, <!-- A-Z --> U+007b to U+007F
         (i.e. any other non-alphabetic ASCII character)</dt>
 
- <!--
- Test: http://www.hixie.ch/tests/adhoc/html/flow/image-maps/004-demo.html
- IE6 on Wine treats the following characters like this also: U+1-U+1f,
- U+21-U+2b, U+2d-U+2f, U+3a, U+3c-U+40, U+5b-U+60, U+7b-U+82,
- U+84-U+89, U+8b, U+8d, U+8f-U+99, U+9b, U+9d, U+a0-U+bf, U+d7, U+f7,
- U+1f6-U+1f9, U+218-U+24f, U+2a9-U+385, U+387, U+38b, U+38d, U+3a2,
- U+3cf, U+3d7-U+3d9, U+3db, U+3dd, U+3df, U+3e1, U+3f4-U+400, U+40d,
- U+450, U+45d, U+482-U+48f, U+4c5-U+4c6, U+4c9-U+4ca, U+4cd-U+4cf,
- U+4ec-U+4ed, U+4f6-U+4f7, U+4fa-U+530, U+557-U+560, U+588-U+5cf,
- U+5eb-U+5ef, U+5f3-U+620, U+63b-U+640, U+64b-U+670, U+6b8-U+6b9,
- U+6bf, U+6cf, U+6d4, U+6d6-U+904, U+93a-U+957, U+962-U+984,
- U+98d-U+98e, U+991-U+992, U+9a9, U+9b1, U+9b3-U+9b5, U+9ba-U+9db,
- U+9de, U+9e2-U+9ef, U+9f2-U+a04, U+a0b-U+a0e, U+a11-U+a12, U+a29,
- U+a31, U+a34, U+a37, U+a3a-U+a58, U+a5d, U+a5f-U+a84, U+a8c, U+a8e,
- U+a92, U+aa9, U+ab1, U+ab4, U+aba-U+adf, U+ae1-U+b04, U+b0d-U+b0e,
- U+b11-U+b12, U+b29, U+b31, U+b34-U+b35, U+b3a-U+b5b, U+b5e,
- U+b62-U+b84, U+b8b-U+b8d, U+b91, U+b96-U+b98, U+b9b, U+b9d,
- U+ba0-U+ba2, U+ba5-U+ba7, U+bab-U+bad, U+bb6, U+bba-U+c04, U+c0d,
- U+c11, U+c29, U+c34, U+c3a-U+c5f, U+c62-U+c84, U+c8d, U+c91, U+ca9,
- U+cb4, U+cba-U+cdd, U+cdf, U+ce2-U+d04, U+d0d, U+d11, U+d29,
- U+d3a-U+d5f, U+d62-U+e00, U+e2f, U+e31, U+e34-U+e3f, U+e46-U+e80,
- U+e83, U+e85-U+e86, U+e89, U+e8b-U+e8c, U+e8e-U+e93, U+e98, U+ea0,
- U+ea4, U+ea6, U+ea8-U+ea9, U+eac, U+eaf-U+edb, U+ede-U+109f,
- U+10c6-U+10cf, U+10f7-U+10ff, U+115a-U+115e, U+11a3-U+11a7,
- U+11fa-U+1dff, U+1e9b-U+1e9f, U+1efa-U+1eff, U+1f16-U+1f17,
- U+1f1e-U+1f1f, U+1f46-U+1f47, U+1f4e-U+1f4f, U+1f58, U+1f5a, U+1f5c,
- U+1f5e, U+1f7e-U+1f7f, U+1fb5, U+1fbd-U+1fc1, U+1fc5, U+1fcd-U+1fcf,
- U+1fd4-U+1fd5, U+1fdc-U+1fdf, U+1fed-U+1ff1, U+1ff5, U+1ffd-U+249b,
- U+24ea-U+3004, U+3006-U+3040, U+3095-U+309a, U+309f-U+30a0, U+30fb,
- U+30ff-U+3104, U+312d-U+3130, U+318f-U+4dff, U+9fa6-U+abff,
- U+d7a4-U+d7ff, U+e000-U+f8ff, U+fa2e-U+faff, U+fb07-U+fb12,
- U+fb18-U+fb1e, U+fb37, U+fb3d, U+fb3f, U+fb42, U+fb45, U+fbb2-U+fbd2,
- U+fbe9, U+fce1, U+fd3e-U+fd4f, U+fd90-U+fd91, U+fdc8-U+fdef,
- U+fdfc-U+fe7f, U+fefd-U+ff20, U+ff3b-U+ff40, U+ff5b-U+ff65, U+ffa0,
- U+ffbf-U+ffc1, U+ffc8-U+ffc9, U+ffd0-U+ffd1, U+ffd8-U+ffd9,
- U+ffdd-U+ffff
- IE7 on Win2003 treats the following characters like this also
- instead: U+1-U+1f, U+21-U+2b, U+2d-U+2f, U+3a, U+3c-U+40, U+5b-U+60,
- U+7b-U+82, U+84-U+89, U+8b, U+8d, U+8f-U+99, U+9b, U+9d, U+a0-U+a9,
- U+ab-U+b4, U+b6-U+b9, U+bb-U+bf, U+d7, U+f7, U+220-U+221,
- U+234-U+24f, U+2ae-U+2af, U+2b9-U+2ba, U+2c2-U+2df, U+2e5-U+2ed,
- U+2ef-U+344, U+346-U+379, U+37b-U+385, U+387, U+38b, U+38d, U+3a2,
- U+3cf, U+3d8-U+3d9, U+3f4-U+3ff, U+482-U+48b, U+4c5-U+4c6,
- U+4c9-U+4ca, U+4cd-U+4cf, U+4f6-U+4f7, U+4fa-U+530, U+557-U+558,
- U+55a-U+560, U+588-U+5cf, U+5eb-U+5ef, U+5f3-U+620, U+63b-U+640,
- U+656-U+66f, U+6d4, U+6dd-U+6e0, U+6e9-U+6ec, U+6ee-U+6f9,
- U+6fd-U+70f, U+72d-U+72f, U+740-U+77f, U+7b1-U+900, U+904,
- U+93a-U+93c, U+94d - U+94f, U+951-U+957, U+964-U+980, U+984,
- U+98d-U+98e, U+991-U+992, U+9a9, U+9b1, U+9b3-U+9b5, U+9ba-U+9bd,
- U+9c5-U+9c6, U+9c9-U+9ca, U+9cd-U+9d6, U+9d8-U+9db, U+9de,
- U+9e4-U+9ef, U+9f2-U+a01, U+a03-U+a04, U+a0b-U+a0e, U+a11-U+a12,
- U+a29, U+a31, U+a34, U+a37, U+a3a-U+a3d, U+a43-U+a46, U+a49-U+a4a,
- U+a4d-U+a58, U+a5d, U+a5f-U+a6f, U+a75-U+a80, U+a84, U+a8c, U+a8e,
- U+a92, U+aa9, U+ab1, U+ab4, U+aba-U+abc, U+ac6, U+aca, U+acd-U+acf,
- U+ad1-U+adf, U+ae1-U+b00, U+b04, U+b0d-U+b0e, U+b11-U+b12, U+b29,
- U+b31, U+b34-U+b35, U+b3a-U+b3c, U+b44-U+b46, U+b49 - U+b4a,
- U+b4d-U+b55, U+b58-U+b5b, U+b5e, U+b62-U+b81, U+b84, U+b8b-U+b8d,
- U+b91, U+b96-U+b98, U+b9b, U+b9d, U+ba0 - U+ba2, U+ba5-U+ba7,
- U+bab-U+bad, U+bb6, U+bba-U+bbd, U+bc3-U+bc5, U+bc9, U+bcd-U+bd6,
- U+bd8-U+c00, U+c04, U+c0d, U+c11, U+c29, U+c34, U+c3a-U+c3d, U+c45,
- U+c49, U+c4d-U+c54, U+c57-U+c5f, U+c62-U+c81, U+c84, U+c8d, U+c91,
- U+ca9, U+cb4, U+cba-U+cbd, U+cc5, U+cc9, U+ccd-U+cd4, U+cd7-U+cdd,
- U+cdf, U+ce2-U+d01, U+d04, U+d0d, U+d11, U+d29, U+d3a-U+d3d,
- U+d44-U+d45, U+d49, U+d4d-U+d56, U+d58-U+d5f, U+d62-U+d81, U+d84,
- U+d97-U+d99, U+db2, U+dbc, U+dbe - U+dbf, U+dc7-U+dce, U+dd5, U+dd7,
- U+de0-U+df1, U+df4-U+e00, U+e3b-U+e3f, U+e4f-U+e80, U+e83,
- U+e85-U+e86, U+e89, U+e8b-U+e8c, U+e8e-U+e93, U+e98, U+ea0, U+ea4,
- U+ea6, U+ea8-U+ea9, U+eac, U+eba, U+ebe-U+ebf, U+ec5-U+ecc,
- U+ece-U+edb, U+ede-U+eff, U+f01-U+f3f, U+f48, U+f6b-U+f70,
- U+f82-U+f87, U+f8c-U+f8f, U+f98, U+fbd-U+fff, U+1022, U+1028, U+102b,
- U+1033-U+1035, U+1037, U+1039-U+104f, U+105a-U+109f, U+10c6-U+10cf,
- U+10f7-U+10ff, U+115a - U+115e, U+11a3-U+11a7, U+11fa-U+11ff, U+1207,
- U+1247, U+1249, U+124e-U+124f, U+1257, U+1259, U+125e-U+125f, U+1287,
- U+1289, U+128e-U+128f, U+12af, U+12b1, U+12b6-U+12b7, U+12bf, U+12c1,
- U+12c6-U+12c7, U+12cf, U+12d7, U+12ef, U+130f, U+1311, U+1316-U+1317,
- U+131f, U+1347, U+135b-U+139f, U+13f5-U+1400, U+166d-U+166e,
- U+1677-U+1680, U+169b - U+169f, U+16eb-U+177f, U+17c9-U+181f, U+1843,
- U+1878-U+187f, U+18aa-U+1dff, U+1e9c-U+1e9f, U+1efa-U+1eff,
- U+1f16-U+1f17, U+1f1e-U+1f1f, U+1f46-U+1f47, U+1f4e-U+1f4f, U+1f58,
- U+1f5a, U+1f5c, U+1f5e, U+1f7e-U+1f7f, U+1fb5, U+1fbd, U+1fbf-U+1fc1,
- U+1fc5, U+1fcd-U+1fcf, U+1fd4-U+1fd5, U+1fdc-U+1fdf, U+1fed-U+1ff1,
- U+1ff5, U+1ffd-U+207e, U+2080-U+2101, U+2103-U+2106, U+2108-U+2109,
- U+2114, U+2116-U+2118, U+211e-U+2123, U+2125, U+2127, U+2129, U+212e,
- U+2132, U+213a-U+215f, U+2184-U+3005, U+3008-U+3020, U+302a-U+3037,
- U+303b-U+3104, U+312d-U+3130, U+318f - U+319f, U+31b8-U+33ff,
- U+4db6-U+4dff, U+9fa6-U+9fff, U+a48d-U+abff, U+d7a4-U+d7ff,
- U+e000-U+f8ff, U+fa2e-U+faff, U+fb07-U+fb12, U+fb18-U+fb1c, U+fb1e,
- U+fb29, U+fb37, U+fb3d, U+fb3f, U+fb42, U+fb45, U+fbb2-U+fbd2,
- U+fd3e-U+fd4f, U+fd90-U+fd91, U+fdc8-U+fdef, U+fdfc-U+fe6f, U+fe73,
- U+fe75, U+fefd-U+ff20, U+ff3b-U+ff40, U+ff5b-U+ff9f, U+ffbf-U+ffc1,
- U+ffc8-U+ffc9, U+ffd0-U+ffd1, U+ffd8-U+ffd9, U+ffdd-U+ffff
- -->
-
+ 
      <dd>
 
       <p>Follow these substeps:</p>
@@ -1099,7 +973,7 @@
 
 
      <dt>Any other character</dt>
-     <!-- alphabetic a-z A-Z, and non-ASCII -->
+     
 
      <dd>
 
@@ -1139,9 +1013,7 @@
 
   <h5 id="lists-of-dimensions"><span class="secno">2.5.4.6 </span>Lists of dimensions</h5>
 
-  <!-- no definition of a type since no conforming feature uses this
-  syntax (it's only used in cols="" and rows="" on <frameset> -->
-
+  
   <p>The <dfn id="rules-for-parsing-a-list-of-dimensions">rules for parsing a list of dimensions</dfn> are as
   follows. These rules return a list of zero or more pairs consisting
   of a number and a unit, the unit being one of <i>percentage</i>,
@@ -1228,7 +1100,7 @@
 
      </li>
 
-     <!-- the remaining characters in /input/ are ignored -->
+     
 
      <li><p>Add an entry to <var title="">result</var> consisting of
      the number given by <var title="">value</var> and the unit given
@@ -1573,9 +1445,7 @@
       <ol><li>Either a U+002B PLUS SIGN character (+) or, if the
        time-zone offset is not zero, a U+002D HYPHEN-MINUS character
        (-), representing the sign of the time-zone offset</li>
-       <!-- the -00:00 offset is disallowed because RFC3339 gives it a
-       special semantic -->
-
+       
        <li>Two <a href="#concept-datetime-digit" title="concept-datetime-digit">digits</a>,
        representing the hours component <var title="">hour</var> of
        the time-zone offset, in the range 0&#xA0;&#x2264;&#xA0;<var title="">hour</var>&#xA0;&#x2264;&#xA0;23</li>
@@ -1593,16 +1463,23 @@
   </ol><p class="note">This format allows for time-zone offsets from -23:59
   to +23:59. In practice, however, the range of offsets of actual time
   zones is -12:00 to +14:00, and the minutes component of offsets of
-  actual time zones is always either 00, 30, or 45.</p><div class="example">
+  actual time zones is always either 00, 30, or 45.</p><p>Times in dates before the formation of UTC in the mid twentieth
+  century must be expressed and interpreted in terms of UT1
+  (contemporary Earth solar time at the 0&#xB0; longitude), not UTC
+  (the approximation of UT1 that ticks in SI seconds). Time before the
+  formation of time zones must be expressed and interpeted as UT1
+  times with explicit time zones that approximate the contemporary
+  difference between the appropriate local time and the time observed
+  at the location of Greenwich, London.</p><div class="example">
 
    <p>The following are some examples of dates written as <a href="#valid-global-date-and-time-string" title="valid global date and time string">valid global date and
    time strings</a>.</p>
 
    <dl><dt>"<code>0037-12-13T00:00Z</code>"</dt>
 
-    <dd>Midnight UTC on the birthday of Nero (the Roman Emperor). See
-    below for further discussion on which date this actually
-    corresponds to.</dd>
+    <dd>Midnight in areas using London time on the birthday of Nero
+    (the Roman Emperor). See below for further discussion on which
+    date this actually corresponds to.</dd>
 
     <dt>"<code>1979-10-14T12:00:00.001-04:00</code>"</dt>
 
@@ -1623,20 +1500,21 @@
     zero-padded. The date "37-12-13" would not be a valid date.</li>
 
     <li>To unambiguously identify a moment in time prior to the
-    introduction of the Gregorian calendar, the date has to be first
-    converted to the Gregorian calendar from the calendar in use at
-    the time (e.g. from the Julian calendar). The date of Nero's birth
-    is the 15th of December 37, in the Julian Calendar, which is the
-    13th of December 37 in the proleptic Gregorian Calendar.</li> <!--
-    This might not be true. I can't find a reference that gives his
-    birthday with an explicit statement about the calendar being
-    used. However, it seems unlikely that it would be given in the
-    Gregorian calendar, so I assume sites use the Julian one. -->
-
+    introduction of the Gregorian calendar (insofar as moments in time
+    before the formation of UTC can be unambiguously identified), the
+    date has to be first converted to the Gregorian calendar from the
+    calendar in use at the time (e.g. from the Julian calendar). The
+    date of Nero's birth is the 15th of December 37, in the Julian
+    Calendar, which is the 13th of December 37 in the proleptic
+    Gregorian Calendar.</li> 
     <li>The time and time-zone offset components are not optional.</li>
 
     <li>Dates before the year one can't be represented as a datetime
     in this version of HTML.</li>
+
+    <li>Times of specific events in ancient times are, at best,
+    approximations, since time was not well coordinated or measured
+    until relatively recent decades.</li>
 
     <li>Time-zone offsets differ based on daylight savings time.</li>
 
@@ -1653,7 +1531,7 @@
 
   <p>The rules to <dfn id="parse-a-global-date-and-time-string">parse a global date and time string</dfn> are
   as follows. This will return either a time in UTC, with associated
-  time-zone offset information for round tripping or display purposes,
+  time-zone offset information for round-tripping or display purposes,
   or nothing. If at any point the algorithm says that it "fails", this
   means that it is aborted at that point and returns nothing.</p>
 
@@ -2024,9 +1902,7 @@
     <p>If <var title="">keyword</var> is an <a href="infrastructure.html#ascii-case-insensitive">ASCII
     case-insensitive</a> match for one of the keywords listed in
     the <a href="http://www.w3.org/TR/css3-color/#svg-color">SVG color
-    keywords</a> <!-- or <a
-    href="http://www.w3.org/TR/css3-color/#css2-system">CSS2 System
-    Colors</a> --> section<!--s--> of the CSS3 Color specification,
+    keywords</a>  section of the CSS3 Color specification,
     then return the <a href="#simple-color">simple color</a> corresponding to that
     keyword. <a href="references.html#refsCSSCOLOR">[CSSCOLOR]</a></p>
 
@@ -2291,15 +2167,7 @@
    a <code title="">name</code> attribute whose value is a
    <a href="infrastructure.html#compatibility-caseless">compatibility caseless</a> match for <var title="">s</var>.</p></li>
 
-   <!--
-   IE is also doing case-insensitive id="" matching.
-   Tests:
-   http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E%0A%3Cmap%20name%3D%22T%26eacute%3B%26%23x01F1%3B%26%23x2075%3B%22%3E%3Carea%20href%3D%22%2F%22%20shape%3Drect%20coords%3D0%2C0%2C200%2C200%3E%3C%2Fmap%3E%0A%3Cimg%20usemap%3D%22%23t%26Eacute%3BDZ5%22%20src%3Dimage%3E
-   ...except that doesn't explain why this fails:
-   http://software.hixie.ch/utilities/js/live-dom-viewer/?%3C!DOCTYPE%20html%3E%0A%3Cmap%20name%3D%22T%26eacute%3B%26%23x01F1%3B%26%23x2075%3B%26%23xFB01%3B%22%3E%3Carea%20href%3D%22%2F%22%20shape%3Drect%20coords%3D0%2C0%2C200%2C200%3E%3C%2Fmap%3E%0A%3Cimg%20usemap%3D%22%23t%26Eacute%3BDZ5F%26%23x0131%3B%26%23x0307%3B%22%20src%3Dimage%3E
-   maybe they just don't know about combining dot above?
-   -->
-
+   
   </ol></div><h4 id="mq"><span class="secno">2.5.10 </span>Media queries</h4><p>A string is a <dfn id="valid-media-query">valid media query</dfn> if it matches the
   <code title="">media_query_list</code> production of the Media
   Queries specification. <a href="references.html#refsMQ">[MQ]</a></p><p>A string <dfn id="matches-the-environment">matches the environment</dfn> of the user if it is
