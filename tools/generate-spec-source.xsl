@@ -1213,24 +1213,6 @@
                   <xsl:with-param name="element-name">meta</xsl:with-param>
                   <xsl:with-param name="filename">
                     <xsl:call-template name="get-spec-filename">
-                      <xsl:with-param name="ref">#attr-meta-http-equiv-content-language</xsl:with-param>
-                    </xsl:call-template>
-                  </xsl:with-param>
-                  <xsl:with-param name="target">#attr-meta-http-equiv-content-language</xsl:with-param>
-                </xsl:call-template>
-                <span><xsl:text> </xsl:text></span>
-                <a href="#meta.http-equiv.content-type">meta http-equiv=content-language</a>
-                <span><xsl:text> </xsl:text></span>
-                <span class="obsoleted-feature"
-                  title="This markup feature has been obsoleted in HTML5."
-                  >OBSOLETE</span>
-              </li>
-              <xsl:text>&#10;      </xsl:text>
-              <li>
-                <xsl:call-template name="make-element-spec-link">
-                  <xsl:with-param name="element-name">meta</xsl:with-param>
-                  <xsl:with-param name="filename">
-                    <xsl:call-template name="get-spec-filename">
                       <xsl:with-param name="ref">#attr-meta-charset</xsl:with-param>
                     </xsl:call-template>
                   </xsl:with-param>
