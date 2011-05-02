@@ -2716,6 +2716,7 @@
                 or $datatype = 'hash-name'
                 or $datatype = 'default-style'
                 or $datatype = 'sandbox-allow-list'
+                or $datatype = 'functionbody'
                 or $datatype = 'audio-states-list'
                 or starts-with($datatype,'uri')
                 or starts-with($datatype,'integer')
