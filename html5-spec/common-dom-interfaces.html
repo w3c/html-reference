@@ -381,18 +381,19 @@
   attribute must set the content attribute to the specified literal
   value.</p>
 
-  <p>If a reflecting IDL attribute is a <code>DOMString</code> whose
-  content attribute is an <a href="common-microsyntaxes.html#enumerated-attribute">enumerated attribute</a>, and the
-  IDL attribute is <dfn id="limited-to-only-known-values">limited to only known values</dfn>, then, on
-  getting, the IDL attribute must return the conforming value
-  associated with the state the attribute is in (in its canonical
-  case), or the empty string if the attribute is in a state that has
-  no associated keyword value; and on setting, the content attribute
-  must be set to the specified new value.</p>
+  <p>If a reflecting IDL attribute is a <code>DOMString</code>
+  attribute whose content attribute is an <a href="common-microsyntaxes.html#enumerated-attribute">enumerated
+  attribute</a>, and the IDL attribute is <dfn id="limited-to-only-known-values">limited to only
+  known values</dfn>, then, on getting, the IDL attribute must return
+  the conforming value associated with the state the attribute is in
+  (in its canonical case), or the empty string if the attribute is in
+  a state that has no associated keyword value; and on setting, the
+  content attribute must be set to the specified new value.</p>
 
-  <p>If a reflecting IDL attribute is a <code>DOMString</code> but
-  doesn't fall into any of the above categories, then the getting and
-  setting must be done in a transparent, case-preserving manner.</p>
+  <p>If a reflecting IDL attribute is a <code>DOMString</code>
+  attribute but doesn't fall into any of the above categories, then
+  the getting and setting must be done in a transparent,
+  case-preserving manner.</p>
 
   <p>If a reflecting IDL attribute is a <code title="">boolean</code>
   attribute, then on getting the IDL attribute must return true if the
@@ -401,7 +402,7 @@
   false, and must be set to the empty string if the IDL attribute is
   set to true. (This corresponds to the rules for <a href="common-microsyntaxes.html#boolean-attribute" title="boolean&#10;  attribute">boolean content attributes</a>.)</p>
 
-  <p>If a reflecting IDL attribute is a signed integer type
+  <p>If a reflecting IDL attribute has a signed integer type
   (<code>long</code>) then, on getting, the content attribute must be
   parsed according to the <a href="common-microsyntaxes.html#rules-for-parsing-integers" title="rules for parsing&#10;  integers">rules for parsing signed integers</a>, and if that is
   successful, and the value is in the range of the IDL attribute's
@@ -413,7 +414,7 @@
   a <a href="common-microsyntaxes.html#valid-integer">valid integer</a> and then that string must be used as
   the new content attribute value.</p>
 
-  <p>If a reflecting IDL attribute is a signed integer type
+  <p>If a reflecting IDL attribute has a signed integer type
   (<code>long</code>) that is <dfn id="limited-to-only-non-negative-numbers">limited to only non-negative
   numbers</dfn> then, on getting, the content attribute must be parsed
   according to the <a href="common-microsyntaxes.html#rules-for-parsing-non-negative-integers">rules for parsing non-negative
@@ -428,7 +429,7 @@
   number as a <a href="common-microsyntaxes.html#valid-non-negative-integer">valid non-negative integer</a> and then that
   string must be used as the new content attribute value.</p>
 
-  <p>If a reflecting IDL attribute is an <em>unsigned</em> integer
+  <p>If a reflecting IDL attribute has an <em>unsigned</em> integer
   type (<code>unsigned long</code>) then, on getting, the content
   attribute must be parsed according to the <a href="common-microsyntaxes.html#rules-for-parsing-non-negative-integers">rules for parsing
   non-negative integers</a>, and if that is successful, and the
@@ -441,7 +442,7 @@
   integer</a> and then that string must be used as the new content
   attribute value.</p>
   
-  <p>If a reflecting IDL attribute is an unsigned integer type
+  <p>If a reflecting IDL attribute has an unsigned integer type
   (<code>unsigned long</code>) that is <dfn id="limited-to-only-non-negative-numbers-greater-than-zero">limited to only
   non-negative numbers greater than zero</dfn>, then the behavior is
   similar to the previous case, but zero is not allowed. On getting,
@@ -458,7 +459,7 @@
   and then that string must be used as the new content attribute
   value.</p> 
 
-  <p>If a reflecting IDL attribute is a floating point number type
+  <p>If a reflecting IDL attribute has a floating point number type
   (<code>double</code>), then, on getting, the content attribute must
   be parsed according to the <a href="common-microsyntaxes.html#rules-for-parsing-floating-point-number-values">rules for parsing floating point
   number values</a>, and if that is successful, the resulting value
@@ -473,20 +474,19 @@
   throw an exception on setting, as <a href="infrastructure.html#float-nan">defined
   earlier</a>.</p>
 
-  <p>If a reflecting IDL attribute is of the type
+  <p>If a reflecting IDL attribute has the type
   <code><a href="#domtokenlist">DOMTokenList</a></code> or <code><a href="#domsettabletokenlist">DOMSettableTokenList</a></code>, then
   on getting it must return a <code><a href="#domtokenlist">DOMTokenList</a></code> or
   <code><a href="#domsettabletokenlist">DOMSettableTokenList</a></code> object (as appropriate) whose
-  underlying string is the element's corresponding content
-  attribute. When the object mutates its underlying string, the
-  content attribute must itself be immediately mutated. When the
-  attribute is absent, then the string represented by the object is
-  the empty string; when the object mutates this empty string, the
-  user agent must add the corresponding content attribute, with its
-  value set to the value it would have been set to after mutating the
-  empty string. The same <code><a href="#domtokenlist">DOMTokenList</a></code> or
-  <code><a href="#domsettabletokenlist">DOMSettableTokenList</a></code> object must be returned every time
-  for each attribute.</p>
+  underlying string is the element's corresponding content attribute.
+  When the object mutates its underlying string, the content attribute
+  must itself be immediately mutated. When the attribute is absent,
+  then the string represented by the object is the empty string; when
+  the object mutates this empty string, the user agent must add the
+  corresponding content attribute, with its value set to the value it
+  would have been set to after mutating the empty string. The same
+  <code><a href="#domtokenlist">DOMTokenList</a></code> or <code><a href="#domsettabletokenlist">DOMSettableTokenList</a></code>
+  object must be returned every time for each attribute.</p>
 
   <div class="example">
 
@@ -1250,17 +1250,17 @@ interface <dfn id="radionodelist">RadioNodeList</dfn> : <a href="infrastructure.
      <code title="dom-canvaspixelarray-length">length</code> and pixel
      values as the <var title="">input</var>'s.</p></dd>
 
-     <dt>If <var title="">input</var> is a <code>File</code> object</dt>
+     <dt>If <var title="">input</var> is a <code><a href="infrastructure.html#file">File</a></code> object</dt>
 
-     <dd><p>Let <var title="">output</var> be a newly constructed <code>File</code> object corresponding to the same underlying data.</p></dd>
+     <dd><p>Let <var title="">output</var> be a newly constructed <code><a href="infrastructure.html#file">File</a></code> object corresponding to the same underlying data.</p></dd>
 
-     <dt>If <var title="">input</var> is a <code>Blob</code> object</dt>
+     <dt>If <var title="">input</var> is a <code><a href="infrastructure.html#blob">Blob</a></code> object</dt>
 
-     <dd><p>Let <var title="">output</var> be a newly constructed <code>Blob</code> object corresponding to the same underlying data.</p></dd>
+     <dd><p>Let <var title="">output</var> be a newly constructed <code><a href="infrastructure.html#blob">Blob</a></code> object corresponding to the same underlying data.</p></dd>
 
-     <dt>If <var title="">input</var> is a <code>FileList</code> object</dt>
+     <dt>If <var title="">input</var> is a <code><a href="infrastructure.html#filelist">FileList</a></code> object</dt>
 
-     <dd><p>Let <var title="">output</var> be a newly constructed <code>FileList</code> object containing a list of newly constructed <code>File</code> objects corresponding to the same underlying data as those in <var title="">input</var>, maintaining their relative order.</p></dd>
+     <dd><p>Let <var title="">output</var> be a newly constructed <code><a href="infrastructure.html#filelist">FileList</a></code> object containing a list of newly constructed <code><a href="infrastructure.html#file">File</a></code> objects corresponding to the same underlying data as those in <var title="">input</var>, maintaining their relative order.</p></dd>
 
      <dt>If <var title="">input</var> is an Array object</dt>
 
@@ -1268,7 +1268,7 @@ interface <dfn id="radionodelist">RadioNodeList</dfn> : <a href="infrastructure.
 
      <dt>If <var title="">input</var> is an Object object</dt>
 
-     <dd><p>Let <var title="">output</var> be a newly constructed empty <code><a href="the-iframe-element.html#the-object-element">Object</a></code> object.</p></dd>
+     <dd><p>Let <var title="">output</var> be a newly constructed empty <code title="">Object</code> object.</p></dd>
 
      <dt>If <var title="">input</var> is another native object type (e.g. <code>Error</code>, <code><a href="webappapis.html#function">Function</a></code>)</dt>
      <dt>If <var title="">input</var> is a host object (e.g. a DOM node)</dt>

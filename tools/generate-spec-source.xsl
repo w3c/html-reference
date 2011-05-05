@@ -3105,31 +3105,31 @@
         <xsl:value-of select="concat('#',substring-after($name,'input.'),'-state')"/>
       </xsl:when>
       <xsl:when test="starts-with($name,'button')">#the-button-element</xsl:when>
-      <xsl:when test="starts-with($name,'command')">#the-command</xsl:when>
+      <xsl:when test="starts-with($name,'command')">#the-command-element</xsl:when>
       <xsl:when test="$name = 'meta.http-equiv.content-language'">#attr-meta-http-equiv-content-language</xsl:when>
       <xsl:when test="$name = 'meta.http-equiv.content-type'">#attr-meta-http-equiv-content-type</xsl:when>
       <xsl:when test="$name = 'meta.http-equiv.default-style'">#attr-meta-http-equiv-default-style</xsl:when>
       <xsl:when test="$name = 'meta.http-equiv.refresh'">#attr-meta-http-equiv-refresh</xsl:when>
       <xsl:when test="$name = 'meta.charset'">#attr-meta-charset</xsl:when>
       <xsl:when test="$name = 'meta.name'">#attr-meta-name</xsl:when>
-      <xsl:when test="$name = 'meta'">#meta</xsl:when>
-      <xsl:when test="$name = 'audio'">#audio</xsl:when>
-      <xsl:when test="$name = 'body'">#the-body-element-0</xsl:when>
-      <xsl:when test="$name = 'command'">#the-command</xsl:when>
-      <xsl:when test="$name = 'h1'">#the-h1-h2-h3-h4-h5-and-h6-elements</xsl:when>
-      <xsl:when test="$name = 'h2'">#the-h1-h2-h3-h4-h5-and-h6-elements</xsl:when>
-      <xsl:when test="$name = 'h3'">#the-h1-h2-h3-h4-h5-and-h6-elements</xsl:when>
-      <xsl:when test="$name = 'h4'">#the-h1-h2-h3-h4-h5-and-h6-elements</xsl:when>
-      <xsl:when test="$name = 'h5'">#the-h1-h2-h3-h4-h5-and-h6-elements</xsl:when>
-      <xsl:when test="$name = 'h6'">#the-h1-h2-h3-h4-h5-and-h6-elements</xsl:when>
-      <xsl:when test="$name = 'head'">#the-head-element-0</xsl:when>
-      <xsl:when test="$name = 'html'">#the-html-element-0</xsl:when>
-      <xsl:when test="$name = 'menu'">#menus</xsl:when>
-      <xsl:when test="$name = 'script'">#script</xsl:when>
-      <xsl:when test="$name = 'sub'">#the-sub-and-sup-elements</xsl:when>
-      <xsl:when test="$name = 'sup'">#the-sub-and-sup-elements</xsl:when>
-      <xsl:when test="$name = 'title'">#the-title-element-0</xsl:when>
-      <xsl:when test="$name = 'video'">#video</xsl:when>
+      <!-- * <xsl:when test="$name = 'meta'">#meta</xsl:when> -->
+      <!-- * <xsl:when test="$name = 'audio'">#audio</xsl:when> -->
+      <!-- * <xsl:when test="$name = 'body'">#the-body-element-0</xsl:when> -->
+      <!-- * <xsl:when test="$name = 'command'">#the-command</xsl:when> -->
+      <!-- * <xsl:when test="$name = 'h1'">#the-h1-h2-h3-h4-h5-and-h6-elements</xsl:when> -->
+      <!-- * <xsl:when test="$name = 'h2'">#the-h1-h2-h3-h4-h5-and-h6-elements</xsl:when> -->
+      <!-- * <xsl:when test="$name = 'h3'">#the-h1-h2-h3-h4-h5-and-h6-elements</xsl:when> -->
+      <!-- * <xsl:when test="$name = 'h4'">#the-h1-h2-h3-h4-h5-and-h6-elements</xsl:when> -->
+      <!-- * <xsl:when test="$name = 'h5'">#the-h1-h2-h3-h4-h5-and-h6-elements</xsl:when> -->
+      <!-- * <xsl:when test="$name = 'h6'">#the-h1-h2-h3-h4-h5-and-h6-elements</xsl:when> -->
+      <!-- * <xsl:when test="$name = 'head'">#the-head-element-0</xsl:when> -->
+      <!-- * <xsl:when test="$name = 'html'">#the-html-element-0</xsl:when> -->
+      <!-- * <xsl:when test="$name = 'menu'">#menus</xsl:when> -->
+      <!-- * <xsl:when test="$name = 'script'">#script</xsl:when> -->
+      <!-- * <xsl:when test="$name = 'sub'">#the-sub-and-sup-elements</xsl:when> -->
+      <!-- * <xsl:when test="$name = 'sup'">#the-sub-and-sup-elements</xsl:when> -->
+      <!-- * <xsl:when test="$name = 'title'">#the-title-element-0</xsl:when> -->
+      <!-- * <xsl:when test="$name = 'video'">#video</xsl:when> -->
       <xsl:otherwise>
         <xsl:value-of select="concat('#the-',$name,'-element')"/>
       </xsl:otherwise>

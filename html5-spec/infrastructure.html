@@ -464,7 +464,7 @@
   described in the DOM Core specification. For example, the <code title="dom-cloneNode">cloneNode()</code> and <code title="dom-importNode">importNode()</code> methods of the
   <code><a href="#node">Node</a></code> interface both clone nodes, as do a number of
   algorithms in this specification. Certain <a href="#html-elements">HTML elements</a>
-  (in particular, <code><a href="the-input-element.html#the-input-element">input</a></code> and <code><a href="scripting-1.html#script">script</a></code>) apply
+  (in particular, <code><a href="the-input-element.html#the-input-element">input</a></code> and <code><a href="scripting-1.html#the-script-element">script</a></code>) apply
   additional requirements on how they are cloned. <a href="references.html#refsDOMCORE">[DOMCORE]</a></p><h4 id="scripting-0"><span class="secno">2.1.4 </span>Scripting</h4><p>The construction "a <code>Foo</code> object", where
   <code>Foo</code> is actually an interface, is sometimes used instead
   of the more accurate "an object implementing the interface
@@ -595,11 +595,11 @@
     specifications.</p>
 
     <p class="example">A conforming XHTML processor would, upon
-    finding an XHTML <code><a href="scripting-1.html#script">script</a></code> element in an XML document,
+    finding an XHTML <code><a href="scripting-1.html#the-script-element">script</a></code> element in an XML document,
     execute the script contained in that element. However, if the
     element is found within a transformation expressed in XSLT
     (assuming the user agent also supports XSLT), then the processor
-    would instead treat the <code><a href="scripting-1.html#script">script</a></code> element as an opaque
+    would instead treat the <code><a href="scripting-1.html#the-script-element">script</a></code> element as an opaque
     element that forms part of the transform.</p>
 
     <p>Web browsers that support <a href="syntax.html#syntax">the HTML syntax</a> must
@@ -614,7 +614,7 @@
     <p class="note">Unless explicitly stated, specifications that
     override the semantics of HTML elements do not override the
     requirements on DOM objects representing those elements. For
-    example, the <code><a href="scripting-1.html#script">script</a></code> element in the example above
+    example, the <code><a href="scripting-1.html#the-script-element">script</a></code> element in the example above
     would still implement the <code><a href="scripting-1.html#htmlscriptelement">HTMLScriptElement</a></code>
     interface.</p>
 
@@ -657,7 +657,7 @@
 
    </dd>
 
-   <dt><dfn id="non-scripted">User agents with no scripting support</dfn></dt>
+   <dt id="non-scripted">User agents with no scripting support</dt>
 
    <dd>
 
@@ -900,6 +900,8 @@
      <li><dfn id="text"><code>Text</code></dfn> interface</li>
 
      <li><dfn id="dom-domimplementation-createdocument" title="dom-DOMImplementation-createDocument"><code>createDocument()</code></dfn> method</li>
+     <li><dfn id="dom-document-createelement" title="dom-Document-createElement"><code>createElement()</code></dfn> method</li>
+     <li><dfn id="dom-document-createelementns" title="dom-Document-createElementNS"><code>createElementNS()</code></dfn> method</li>
      <li><dfn id="dom-document-getelementbyid" title="dom-Document-getElementById"><code>getElementById()</code></dfn> method</li>
      <li><dfn id="dom-node-insertbefore" title="dom-Node-insertBefore"><code>insertBefore()</code></dfn> method</li>
 
@@ -922,21 +924,18 @@
 
      <li><dfn id="dom-event-target" title="dom-Event-target"><code>target</code></dfn> attribute</li>
 
-    </ul><p>The following features are defined in the DOM
-    Range specification: <a href="references.html#refsDOMRANGE">[DOMRANGE]</a></p>
+    </ul></dd>
 
-    <ul class="brief"><li><dfn id="range"><code>Range</code></dfn> interface</li>
+   <dt>File API</dt>
 
-     <li><dfn id="dom-range-deletecontents" title="dom-Range-deleteContents"><code>deleteContents()</code></dfn> method </li>
-     <li><dfn id="dom-range-selectnodecontents" title="dom-Range-selectNodeContents"><code>selectNodeContents()</code></dfn> method </li>
-     <li><dfn id="dom-range-setend" title="dom-Range-setEnd"><code>setEnd()</code></dfn> method </li>
-     <li><dfn id="dom-range-setstart" title="dom-Range-setStart"><code>setStart()</code></dfn> method </li>
+   <dd>
 
-     <li><dfn id="dom-range-collapsed" title="dom-Range-collapsed"><code>collapsed</code></dfn> attribute </li>
-     <li><dfn id="dom-range-endcontainer" title="dom-Range-endContainer"><code>endContainer</code></dfn> attribute </li>
-     <li><dfn id="dom-range-endoffset" title="dom-Range-endOffset"><code>endOffset</code></dfn> attribute </li>
-     <li><dfn id="dom-range-startcontainer" title="dom-Range-startContainer"><code>startContainer</code></dfn> attribute </li>
-     <li><dfn id="dom-range-startoffset" title="dom-Range-startOffset"><code>startOffset</code></dfn> attribute </li>
+    <p>This specification uses the following interfaces defined in the
+    File API specification: <a href="references.html#refsFILEAPI">[FILEAPI]</a></p>
+
+    <ul class="brief"><li><dfn id="blob">Blob</dfn></li>
+     <li><dfn id="file">File</dfn></li>
+     <li><dfn id="filelist">FileList</dfn></li>
 
     </ul></dd>
 
@@ -1064,7 +1063,7 @@
    include data on HTML elements that scripts can then look for and
    process.</li>
 
-   <li>Authors can use the <code title="meta"><a href="semantics.html#meta">&lt;meta name=""
+   <li>Authors can use the <code title="meta"><a href="semantics.html#the-meta-element">&lt;meta name=""
    content=""&gt;</a></code> mechanism to include page-wide metadata by
    registering <a href="semantics.html#concept-meta-extensions" title="concept-meta-extensions">extensions to the
    predefined set of metadata names</a>.</li>
@@ -1073,7 +1072,7 @@
    links with specific meanings by registering <a href="links.html#concept-rel-extensions" title="concept-rel-extensions">extensions to the predefined set of
    link types</a>. This is also used by Microformats.</li>
 
-   <li>Authors can embed raw data using the <code title="script"><a href="scripting-1.html#script">&lt;script type=""&gt;</a></code> mechanism with a custom
+   <li>Authors can embed raw data using the <code title="script"><a href="scripting-1.html#the-script-element">&lt;script type=""&gt;</a></code> mechanism with a custom
    type, for further handling by inline or server-side scripts.</li>
 
    <li>Authors can create <a href="#plugin" title="plugin">plugins</a> and

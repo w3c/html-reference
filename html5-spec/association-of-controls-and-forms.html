@@ -754,7 +754,8 @@
   selection:</p><pre class="idl extract">  void <a href="#dom-textarea-input-select" title="dom-textarea/input-select">select</a>();
            attribute unsigned long <a href="#dom-textarea-input-selectionstart" title="dom-textarea/input-selectionStart">selectionStart</a>;
            attribute unsigned long <a href="#dom-textarea-input-selectionend" title="dom-textarea/input-selectionEnd">selectionEnd</a>;
-  void <a href="#dom-textarea-input-setselectionrange" title="dom-textarea/input-setSelectionRange">setSelectionRange</a>(in unsigned long start, in unsigned long end);</pre><p>These methods and attributes expose and control the selection of
+           attribute DOMString <a href="#dom-textarea-input-selectiondirection" title="dom-textarea/input-selectionDirection">selectionDirection</a>;
+  void <a href="#dom-textarea-input-setselectionrange" title="dom-textarea/input-setSelectionRange">setSelectionRange</a>(in unsigned long start, in unsigned long end, in optional DOMString direction);</pre><p>These methods and attributes expose and control the selection of
   <code><a href="the-input-element.html#the-input-element">input</a></code> and <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> text fields.</p><dl class="domintro"><dt><var title="">element</var> . <code title="dom-textarea/input-select"><a href="#dom-textarea-input-select">select</a></code>()</dt>
 
    <dd>
@@ -783,11 +784,23 @@
 
    </dd>
 
-   <dt><var title="">element</var> . <code title="dom-textarea/input-setSelectionRange"><a href="#dom-textarea-input-setselectionrange">setSelectionRange</a></code>(<var title="">start</var>, <var title="">end</var>)</dt>
+   <dt><var title="">element</var> . <code title="dom-textarea/input-selecionDirection">selectionDirection</code> [ = <var title="">value</var> ]</dt>
 
    <dd>
 
-    <p>Changes the selection to cover the given substring.</p>
+    <p>Returns the current direction of the selection.</p>
+
+    <p>Can be set, to change the direction of the selection.</p>
+
+    <p>The possible values are "<code title="">forward</code>", "<code title="">backward</code>", and "<code title="">none</code>".</p>
+
+   </dd>
+
+   <dt><var title="">element</var> . <code title="dom-textarea/input-setSelectionRange"><a href="#dom-textarea-input-setselectionrange">setSelectionRange</a></code>(<var title="">start</var>, <var title="">end</var> [, <var title="">direction</var>] )</dt>
+
+   <dd>
+
+    <p>Changes the selection to cover the given substring in the given direction. If the direction is omitted, it will be reset to be the platform default (none or forward).</p>
 
    </dd>
 
@@ -803,8 +816,41 @@
   elements, these methods and attributes must operate on the element's
   <a href="the-button-element.html#concept-textarea-raw-value" title="concept-textarea-raw-value">raw value</a>.</p>
 
+  <p>Where possible, user interface features for changing the text
+  selection in <code><a href="the-input-element.html#the-input-element">input</a></code> and <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> elements
+  must be implemented in terms of the DOM API described in this
+  section, so that, e.g., all the same events fire.</p>
+
+
+  <p>The selections of <code><a href="the-input-element.html#the-input-element">input</a></code> and <code><a href="the-button-element.html#the-textarea-element">textarea</a></code>
+  elements have a <i>direction</i>, which is either <i>forward</i>,
+  <i>backward</i>, or <i>none</i>. This direction is set when the user
+  manipulates the selection. The exact meaning of the selection
+  direction depends on the platform.</p>
+
+  <p class="note">On Windows, the direction indicates the position of
+  the caret relative to the selection: a <i>forward</i> selection has
+  the caret at the end of the selection and a <i>backward</i>
+  selection has the caret at the start of the selection. Windows has
+  no <i>none</i> direction. On Mac, the direction indicates which end
+  of the selection is affected when the user adjusts the size of the
+  selection using the arrow keys with the Shift modifier: the forward
+  direction means the end of the selection is modified, and the
+  backwards direction means the start of the selection is modified.
+  The none direction is the default on Mac, it indicates that no
+  particular direction has yet been selected. The user sets the
+  direction implicitly when first adjusting the selection, based on
+  which directional arrow key was used.</p>
+
+
   <p>The <dfn id="dom-textarea-input-select" title="dom-textarea/input-select"><code>select()</code></dfn> method
-  must cause the contents of the text field to be fully selected.</p>
+  must cause the contents of the text field to be fully selected, with
+  the selection direction being none, if the platform support
+  selections with the direction <i>none</i>, or otherwise
+  <i>forward</i>. The user agent must then <a href="webappapis.html#queue-a-task">queue a task</a>
+  to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> that bubbles named <code title="event-select">select</code> at the element, using the
+  <a href="webappapis.html#user-interaction-task-source">user interaction task source</a> as the task source.</p>
+
 
   <p>The <dfn id="dom-textarea-input-selectionstart" title="dom-textarea/input-selectionStart"><code>selectionStart</code></dfn>
   attribute must, on getting, return the offset (in logical order) to
@@ -814,12 +860,14 @@
   text entry cursor.</p>
 
   <p>On setting, it must act as if the <code title="dom-textarea/input-setSelectionRange"><a href="#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>
-  method had been called, with the new value as the first argument,
-  and the current value of the <code title="dom-textarea/input-selectionEnd"><a href="#dom-textarea-input-selectionend">selectionEnd</a></code>
+  method had been called, with the new value as the first argument;
+  the current value of the <code title="dom-textarea/input-selectionEnd"><a href="#dom-textarea-input-selectionend">selectionEnd</a></code>
   attribute as the second argument, unless the current value of the
   <code title="dom-textarea/input-selectionEnd"><a href="#dom-textarea-input-selectionend">selectionEnd</a></code> is
   less than the new value, in which case the second argument must also
-  be the new value.</p>
+  be the new value; and the current value of the <code title="dom-textarea/input-selectionDirection"><a href="#dom-textarea-input-selectiondirection">selectionDirection</a></code>
+  as the third argument.</p>
+
 
   <p>The <dfn id="dom-textarea-input-selectionend" title="dom-textarea/input-selectionEnd"><code>selectionEnd</code></dfn>
   attribute must, on getting, return the offset (in logical order) to
@@ -830,27 +878,55 @@
 
   <p>On setting, it must act as if the <code title="dom-textarea/input-setSelectionRange"><a href="#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>
   method had been called, with the current value of the <code title="dom-textarea/input-selectionStart"><a href="#dom-textarea-input-selectionstart">selectionStart</a></code>
-  attribute as the first argument, and new value as the second
+  attribute as the first argument, the new value as the second
+  argument, and the current value of the <code title="dom-textarea/input-selectionDirection"><a href="#dom-textarea-input-selectiondirection">selectionDirection</a></code>
+  as the third argument.</p>
+
+
+  <p>The <dfn id="dom-textarea-input-selectiondirection" title="dom-textarea/input-selectionDirection"><code>selectionDirection</code></dfn>
+  attribute must, on getting, return the string corresponding to the
+  current selection direction: if the direction is <i>forward</i>,
+  "<code title="">forward</code>"; if the direction is
+  <i>backward</i>, "<code title="">backward</code>"; and otherwise,
+  "<code title="">none</code>".</p>
+
+  <p>On setting, it must act as if the <code title="dom-textarea/input-setSelectionRange"><a href="#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>
+  method had been called, with the current value of the <code title="dom-textarea/input-selectionStart"><a href="#dom-textarea-input-selectionstart">selectionStart</a></code>
+  attribute as the first argument, the current value of the <code title="dom-textarea/input-selectionEnd"><a href="#dom-textarea-input-selectionend">selectionEnd</a></code>
+  attribute as the first argument, and the new value as the third
   argument.</p>
 
-  <p>The <dfn id="dom-textarea-input-setselectionrange" title="dom-textarea/input-setSelectionRange"><code>setSelectionRange(<var title="">start</var>, <var title="">end</var>)</code></dfn> method
-  must set the selection of the text field to the sequence of
-  characters starting with the character at the <var title="">start</var>th position (in logical order) and ending with
-  the character at the <span title="">(<var title="">end</var>-1)</span>th position. Arguments greater than the
+
+  <p>The <dfn id="dom-textarea-input-setselectionrange" title="dom-textarea/input-setSelectionRange"><code>setSelectionRange(<var title="">start</var>, <var title="">end</var>, <var title="">direction</var>)</code></dfn> method must set the selection
+  of the text field to the sequence of characters starting with the
+  character at the <var title="">start</var>th position (in logical
+  order) and ending with the character at the <span title="">(<var title="">end</var>-1)</span>th position. Arguments greater than the
   length of the value in the text field must be treated as pointing at
   the end of the text field. If <var title="">end</var> is less than
   or equal to <var title="">start</var> then the start of the
   selection and the end of the selection must both be placed
   immediately before the character with offset <var title="">end</var>. In UAs where there is no concept of an empty
   selection, this must set the cursor to be just before the character
-  with offset <var title="">end</var>.</p>
+  with offset <var title="">end</var>. The direction of the selection
+  must be set to <i>backward</i> if <var title="">direction</var> is a
+  <a href="infrastructure.html#case-sensitive">case-sensitive</a> match for the string "<code title="">backward</code>", <i>forward</i> if <var title="">direction</var> is a <a href="infrastructure.html#case-sensitive">case-sensitive</a> match for
+  the string "<code title="">forward</code>" or if the platform does
+  not support selections with the direction <i>none</i>, and
+  <i>none</i> otherwise (including if the argument is omitted). The
+  user agent must then <a href="webappapis.html#queue-a-task">queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a
+  simple event</a> that bubbles named <code title="event-select">select</code> at the element, using the
+  <a href="webappapis.html#user-interaction-task-source">user interaction task source</a> as the task source.</p>
+
 
   <p>All elements to which this API applies have either a selection or
   a text entry cursor position at all times (even for elements that
   are not <a href="rendering.html#being-rendered">being rendered</a>). User agents should follow
   platform conventions to determine their initial state.</p>
 
-  </div><div class="example">
+  </div><p>Characters with no visible rendering, such as U+200D ZERO WIDTH
+  JOINER, still count as characters. Thus, for instance, the selection
+  can include just an invisible character, and the text insertion
+  cursor can be placed to one side or another of such a character.</p><div class="example">
 
    <p>To obtain the currently selected text, the following JavaScript
    suffices:</p>
@@ -860,10 +936,23 @@
    <p>...where <var title="">control</var> is the <code><a href="the-input-element.html#the-input-element">input</a></code>
    or <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> element.</p>
 
-  </div><p>Characters with no visible rendering, such as U+200D ZERO WIDTH
-  JOINER, still count as characters. Thus, for instance, the selection
-  can include just an invisible character, and the text insertion
-  cursor can be placed to one side or another of such a character.</p><h4 id="constraints"><span class="secno">4.10.21 </span>Constraints</h4><h5 id="definitions"><span class="secno">4.10.21.1 </span>Definitions</h5><div class="impl">
+  </div><div class="example">
+
+   <p>To add some text at the start of a text control, while
+   maintaining the text selection, the three attributes must be
+   preserved:</p>
+
+   <pre>var oldStart = control.selectionStart;
+var oldEnd = control.selectionEnd;
+var oldDirection = control.selectionDirection;
+var prefix = "http://";
+control.value = prefix + control.value;
+control.setSelectionRange(oldStart + prefix.length, oldEnd + prefix.length, oldDirection);</pre>
+
+   <p>...where <var title="">control</var> is the <code><a href="the-input-element.html#the-input-element">input</a></code>
+   or <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> element.</p>
+
+  </div><h4 id="constraints"><span class="secno">4.10.21 </span>Constraints</h4><h5 id="definitions"><span class="secno">4.10.21.1 </span>Definitions</h5><div class="impl">
 
   <p>A <a href="forms.html#category-listed" title="category-listed">listed form-associated
   element</a> is a <dfn id="candidate-for-constraint-validation">candidate for constraint validation</dfn>
@@ -1976,6 +2065,12 @@ fur
     <p>The order of parts must be the same as the order of fields in
     the <var title="">form data set</var>. Multiple entries with the
     same name must be treated as distinct fields.</p>
+
+    <p class="note">In particular, this means that multiple files
+    submitted as part of a single <code title="">&lt;input&#xA0;type=file&#xA0;multiple&gt;</code> element
+    will result in each file having its own field; the "sets of files"
+    feature ("<code title="">multipart/mixed</code>") of RFC 2388 is
+    not used.</p>
 
     <p>The parts of the generated <code title="">multipart/form-data</code> resource that correspond to
     non-file fields must not have a <code><a href="fetching-resources.html#content-type">Content-Type</a></code> header

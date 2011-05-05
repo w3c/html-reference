@@ -1258,7 +1258,8 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
   void <a href="association-of-controls-and-forms.html#dom-textarea-input-select" title="dom-textarea/input-select">select</a>();
            attribute unsigned long <a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart" title="dom-textarea/input-selectionStart">selectionStart</a>;
            attribute unsigned long <a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend" title="dom-textarea/input-selectionEnd">selectionEnd</a>;
-  void <a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange" title="dom-textarea/input-setSelectionRange">setSelectionRange</a>(in unsigned long start, in unsigned long end);
+           attribute DOMString <a href="association-of-controls-and-forms.html#dom-textarea-input-selectiondirection" title="dom-textarea/input-selectionDirection">selectionDirection</a>;
+  void <a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange" title="dom-textarea/input-setSelectionRange">setSelectionRange</a>(in unsigned long start, in unsigned long end, in optional DOMString direction);
 };</pre>
    </dd>
   </dl><p>The <code><a href="#the-textarea-element">textarea</a></code> element <a href="rendering.html#represents">represents</a> a
@@ -1290,9 +1291,13 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
   specified.</p>
 
   <p>When a <code><a href="#the-textarea-element">textarea</a></code> is <a href="#concept-textarea-mutable" title="concept-textarea-mutable">mutable</a>, its <a href="#concept-textarea-raw-value" title="concept-textarea-raw-value">raw value</a> should be
-  editable by the user. Any time the user causes the element's <a href="#concept-textarea-raw-value" title="concept-textarea-raw-value">raw value</a> to change, the
-  user agent must <a href="webappapis.html#queue-a-task">queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple
-  event</a> that bubbles named <code title="event-input">input</code> at the <code><a href="#the-textarea-element">textarea</a></code>
+  editable by the user: the user agent should allow the user to edit,
+  insert, and remove text, and to insert and remove line breaks in the
+  form of U+000A LINE FEED (LF) characters. Any time the user causes
+  the element's <a href="#concept-textarea-raw-value" title="concept-textarea-raw-value">raw
+  value</a> to change, the user agent must <a href="webappapis.html#queue-a-task">queue a
+  task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> that bubbles named
+  <code title="event-input">input</code> at the <code><a href="#the-textarea-element">textarea</a></code>
   element. User agents may wait for a suitable break in the user's
   interaction before queuing the task; for example, a user agent could
   wait for the user to have not hit a key for 100ms, so as to only
@@ -1490,6 +1495,7 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
   <code title="dom-lfe-labels"><a href="forms.html#dom-lfe-labels">labels</a></code> attribute provides a list
   of the element's <code><a href="forms.html#the-label-element">label</a></code>s. The <code title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code>, <code title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
   <code title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
+  <code title="dom-textarea/input-selectionDirection"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>,
   and <code title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>
   methods and attributes expose the element's text selection. The
   <code title="dom-fe-autofocus"><a href="association-of-controls-and-forms.html#dom-fe-autofocus">autofocus</a></code>, <code title="dom-fe-disabled"><a href="association-of-controls-and-forms.html#dom-fe-disabled">disabled</a></code>, <code title="dom-fae-form"><a href="association-of-controls-and-forms.html#dom-fae-form">form</a></code>, and <code title="dom-fe-name"><a href="association-of-controls-and-forms.html#dom-fe-name">name</a></code> IDL attributes are part of the
@@ -1949,7 +1955,10 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
   completion represented by the element. The <dfn id="attr-progress-value" title="attr-progress-value"><code>value</code></dfn> attribute
   specifies how much of the task has been completed, and the <dfn id="attr-progress-max" title="attr-progress-max"><code>max</code></dfn> attribute specifies
   how much work the task requires in total. The units are arbitrary
-  and not specified.</p><p>Authors are encouraged to also include the current value and the
+  and not specified.</p><p class="note">To make an determinate progress bar, add a <code title="attr-progress-value"><a href="#attr-progress-value">value</a></code> attribute with the current
+  progress (either a number from 0.0 to 1.0, or, if the <code title="attr-progress-max"><a href="#attr-progress-max">max</a></code> attribute is specified, a
+  number from 0 to the value of the <code title="attr-progress-max"><a href="#attr-progress-max">max</a></code> attribute. To make an
+  indeterminate progress bar, remove the <code title="attr-progress-value"><a href="#attr-progress-value">value</a></code> attribute.</p><p>Authors are encouraged to also include the current value and the
   maximum value inline as text inside the element, so that the
   progress is made available to users of legacy user agents.</p><div class="example">
    <p>Here is a snippet of a Web application that shows the progress
