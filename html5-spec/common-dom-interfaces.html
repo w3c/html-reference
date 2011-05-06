@@ -1069,12 +1069,12 @@ interface <dfn id="radionodelist">RadioNodeList</dfn> : <a href="infrastructure.
 
    <li>Otherwise, <a href="common-microsyntaxes.html#split-a-string-on-spaces" title="split a string on spaces">split the
    underlying string on spaces</a> to get the list of tokens in the
-   object's underlying string.</li>
+   <code><a href="#domtokenlist">DOMTokenList</a></code> object's underlying string.</li>
 
    <li>If the token indicated by <var title="">token</var> is a
    <a href="infrastructure.html#case-sensitive">case-sensitive</a> match for one of the tokens in the
-   object's underlying string then return true and stop this
-   algorithm.</li>
+   <code><a href="#domtokenlist">DOMTokenList</a></code> object's underlying string then return
+   true and stop this algorithm.</li>
 
    <li>Otherwise, return false.</li>
 
@@ -1091,7 +1091,7 @@ interface <dfn id="radionodelist">RadioNodeList</dfn> : <a href="infrastructure.
 
    <li>Otherwise, <a href="common-microsyntaxes.html#split-a-string-on-spaces" title="split a string on spaces">split the
    underlying string on spaces</a> to get the list of tokens in the
-   object's underlying string.</li>
+   <code><a href="#domtokenlist">DOMTokenList</a></code> object's underlying string.</li>
 
    <li>If the given <var title="">token</var> is a
    <a href="infrastructure.html#case-sensitive">case-sensitive</a> match for one of the tokens in the
@@ -1134,7 +1134,7 @@ interface <dfn id="radionodelist">RadioNodeList</dfn> : <a href="infrastructure.
 
    <li>Otherwise, <a href="common-microsyntaxes.html#split-a-string-on-spaces" title="split a string on spaces">split the
    underlying string on spaces</a> to get the list of tokens in the
-   object's underlying string.</li>
+   <code><a href="#domtokenlist">DOMTokenList</a></code> object's underlying string.</li>
 
    <li>If the given <var title="">token</var> is a
    <a href="infrastructure.html#case-sensitive">case-sensitive</a> match for one of the tokens in the
@@ -1151,9 +1151,8 @@ interface <dfn id="radionodelist">RadioNodeList</dfn> : <a href="infrastructure.
 
    <li>Return true.</li>
 
-  </ol><p>Objects implementing the <code><a href="#domtokenlist">DOMTokenList</a></code> interface must
-  <dfn id="dom-tokenlist-tostring" title="dom-tokenlist-toString">stringify</dfn> to the object's
-  underlying string representation.</p>
+  </ol><p>A <code><a href="#domtokenlist">DOMTokenList</a></code> object must <dfn id="dom-tokenlist-tostring" title="dom-tokenlist-toString">stringify</dfn> to the value of the
+  <code><a href="#domtokenlist">DOMTokenList</a></code> object's underlying string.</p>
 
   </div><h4 id="domsettabletokenlist-0"><span class="secno">2.8.4 </span>DOMSettableTokenList</h4><p>The <code><a href="#domsettabletokenlist">DOMSettableTokenList</a></code> interface is the same as the
   <code><a href="#domtokenlist">DOMTokenList</a></code> interface, except that it allows the
@@ -1285,7 +1284,7 @@ interface <dfn id="radionodelist">RadioNodeList</dfn> : <a href="infrastructure.
    <li>
 
     <p>If <var title="">input</var> is an Array object or an Object
-    object, then, for each enumerable property in <var title="">input</var>, add a corresponding property to <var title="">output</var> having the same name, and having a value
+    object, then, for each enumerable property in <var title="">input</var>, add a new property to <var title="">output</var> having the same name, and having a value
     created from invoking the <a href="#internal-structured-cloning-algorithm">internal structured cloning
     algorithm</a> recursively with the value of the property as the
     "<var title="">input</var>" argument and <var title="">memory</var> as the "<var title="">memory</var>"
@@ -1293,6 +1292,12 @@ interface <dfn id="radionodelist">RadioNodeList</dfn> : <a href="infrastructure.
     be the same.</p>
 
     <p class="note">This does not walk the prototype chain.</p>
+
+    <p class="note">Property descriptors, setters, getters, and
+    analogous features are not copied in this process. For example,
+    the property in the input could be marked as read-only, but in the
+    output it would just have the default state (typically read-write,
+    though that could depend on the scripting environment).</p>
 
    </li>
 

@@ -1126,17 +1126,17 @@ isn't his only passion. He also enjoys other pleasures.&lt;/p&gt;
   for its nearest ancestor <a href="content-models.html#sectioning-content">sectioning content</a> or
   <a href="#sectioning-root">sectioning root</a> element. A footer typically contains
   information about its section such as who wrote it, links to related
-  documents, copyright data, and the like.</p><p class="note">Contact information for the author or editor of a
-  section belongs in an <code><a href="#the-address-element">address</a></code> element, possibly itself
-  inside a <code><a href="#the-footer-element">footer</a></code>.</p><p>Footers don't necessarily have to appear at the <em>end</em> of a
-  section, though they usually do.</p><p>When the <code><a href="#the-footer-element">footer</a></code> element contains entire sections,
+  documents, copyright data, and the like.</p><p>When the <code><a href="#the-footer-element">footer</a></code> element contains entire sections,
   they <a href="rendering.html#represents" title="represents">represent</a> appendices, indexes,
   long colophons, verbose license agreements, and other such
-  content.</p><p class="note">The <code><a href="#the-footer-element">footer</a></code> element is not
-  <a href="content-models.html#sectioning-content">sectioning content</a>; it doesn't introduce a new
-  section.</p><p>When the nearest ancestor <a href="content-models.html#sectioning-content">sectioning content</a> or
+  content.</p><p class="note">Contact information for the author or editor of a
+  section belongs in an <code><a href="#the-address-element">address</a></code> element, possibly itself
+  inside a <code><a href="#the-footer-element">footer</a></code>.</p><p>Footers don't necessarily have to appear at the <em>end</em> of a
+  section, though they usually do.</p><p>When the nearest ancestor <a href="content-models.html#sectioning-content">sectioning content</a> or
   <a href="#sectioning-root">sectioning root</a> element is <a href="dom.html#the-body-element-0">the body
-  element</a>, then it applies to the whole page.</p><div class="example">
+  element</a>, then it applies to the whole page.</p><p class="note">The <code><a href="#the-footer-element">footer</a></code> element is not
+  <a href="content-models.html#sectioning-content">sectioning content</a>; it doesn't introduce a new
+  section.</p><div class="example">
 
    <p>Here is a page with two footers, one at the top and one at the
    bottom, with the same content:</p>
@@ -1196,6 +1196,45 @@ isn't his only passion. He also enjoys other pleasures.&lt;/p&gt;
 &lt;/FOOTER&gt;
 &lt;/BODY&gt;
 &lt;/HTML&gt;</pre>
+
+  </div><div class="example">
+
+   <p>Some site designs have what is sometimes referred to as "fat
+   footers" &#x2014; footers that contain a lot of material, including
+   images, links to other articles, links to pages for sending
+   feedback, special offers... in some ways, a whole "front page" in
+   the footer.</p>
+
+   <p>This fragment shows the bottom of a page on a site with a "fat
+   footer":</p>
+
+   <pre>...
+ &lt;footer&gt;
+  &lt;nav&gt;
+   &lt;section&gt;
+    &lt;h1&gt;Articles&lt;/h1&gt;
+    &lt;p&gt;&lt;img src="http://dev.w3.org/html5/spec/images/somersaults.jpeg" alt=""&gt; Go to the gym with
+    our somersaults class! Our teacher Jim takes you through the paces
+    in this two-part article. &lt;a href="articles/somersaults/1"&gt;Part
+    1&lt;/a&gt; &#xB7; &lt;a href="articles/somersaults/1"&gt;Part 2&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;img src="http://dev.w3.org/html5/spec/images/kindplus.jpeg"&gt; Tired of walking on the edge of
+    a clif&lt;!-- sic --&gt;? Our guest writer Lara shows you how to bumble
+    your way through the bars. &lt;a href="articles/kindplus/1"&gt;Read
+    more...&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;img src="http://dev.w3.org/html5/spec/images/crisps.jpeg"&gt; The chips are down, now all
+    that's left is a potato. What can you do with it? &lt;a
+    href="articles/crisps/1"&gt;Read more...&lt;/a&gt;&lt;/p&gt;
+   &lt;/section&gt;
+   &lt;ul&gt;
+    &lt;li&gt; &lt;a href="/about"&gt;About us...&lt;/a&gt;
+    &lt;li&gt; &lt;a href="/feedback"&gt;Send feedback!&lt;/a&gt;
+    &lt;li&gt; &lt;a href="/sitemap"&gt;Sitemap&lt;/a&gt;
+   &lt;/ul&gt;
+  &lt;/nav&gt;
+  &lt;p&gt;&lt;small&gt;Copyright &#xA9; 2015 The Snacker &#x2014;
+  &lt;a href="/tos"&gt;Terms of Service&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+ &lt;/footer&gt;
+&lt;/body&gt;</pre>
 
   </div><h4 id="the-address-element"><span class="secno">4.4.10 </span>The <dfn><code>address</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
@@ -1490,8 +1529,8 @@ isn't his only passion. He also enjoys other pleasures.&lt;/p&gt;
     the first relevant step below for each element as you enter and
     exit it.</p>
 
-    <dl class="switch"><dt>If the top of the stack is an element, and you are exiting
-     that element</dt>
+    <dl class="switch"><dt>If you are exiting an element and that element is the element
+     at the top of the stack</dt>
 
      <dd>
 
@@ -1526,6 +1565,8 @@ isn't his only passion. He also enjoys other pleasures.&lt;/p&gt;
 
       <p>Let <var title="">current section</var> be a newly created
       <a href="#concept-section" title="concept-section">section</a> for the <var title="">current outlinee</var> element.</p>
+
+      <p>Associate <var title="">current outlinee</var> with <var title="">current section</var>.</p>
 
       <p>Let there be a new <a href="#outline">outline</a> for the new <var title="">current outlinee</var>, initialized with just the new
       <var title="">current section</var> as the only <a href="#concept-section" title="concept-section">section</a> in the outline.</p>
@@ -1649,9 +1690,9 @@ isn't his only passion. He also enjoys other pleasures.&lt;/p&gt;
      <dd><p>Do nothing.</p></dd>
 
     </dl><p id="associatedSection">In addition, whenever you exit a node,
-    after doing the steps above, if <var title="">current
-    section</var> is not null, associate the node with the <a href="#concept-section" title="concept-section">section</a> <var title="">current
-    section</var>.</p>
+    after doing the steps above, if the node is not associated with a
+    <a href="#concept-section" title="concept-section">section</a> yet and <var title="">current section</var> is not null, associate the node
+    with the <a href="#concept-section" title="concept-section">section</a> <var title="">current section</var>.</p>
 
    </li>
 

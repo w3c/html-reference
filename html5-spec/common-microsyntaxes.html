@@ -656,6 +656,15 @@
 
      <li>If <var title="">position</var> is past the end of <var title="">input</var>, return an error.</li>
 
+    </ol><p>Otherwise, if the character indicated by <var title="">position</var> (the first character) is a U+002B PLUS
+    SIGN character (+):</p>
+
+    <ol><li>Advance <var title="">position</var> to the next
+     character. (The "<code title="">+</code>" is ignored, but it is
+     not conforming.)</li>
+
+     <li>If <var title="">position</var> is past the end of <var title="">input</var>, return an error.</li>
+
     </ol></li>
 
    <li><p>If the character indicated by <var title="">position</var>
@@ -677,10 +686,16 @@
      character.</p></li>
 
      <li><p>If <var title="">position</var> is past the end of <var title="">input</var>, or if the character indicated by <var title="">position</var> is not one of U+0030 DIGIT ZERO (0) to
-     U+0039 DIGIT NINE (9), then jump to the step labeled
+     U+0039 DIGIT NINE (9), U+0065 LATIN SMALL LETTER E (e), or U+0045
+     LATIN CAPITAL LETTER E (E), then jump to the step labeled
      <i>conversion</i>.</p></li>
 
-     <li><p><i>Fraction loop</i>: Multiply <var title="">divisor</var>
+     <li><p>If the character indicated by <var title="">position</var>
+     is a U+0065 LATIN SMALL LETTER E character (e) or a U+0045 LATIN
+     CAPITAL LETTER E character (E), skip the remainder of these
+     substeps.</p>
+
+     </li><li><p><i>Fraction loop</i>: Multiply <var title="">divisor</var>
      by ten.</p></li>
 
      <li>Add the value of the character indicated by <var title="">position</var>, interpreted as a base-ten digit (0..9)

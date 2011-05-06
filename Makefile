@@ -128,6 +128,7 @@ html.spec.src.html: html-compiled.rng schema.html \
 	  --param show-content-models $(SHOW_CONTENT_MODELS) \
 	  tools/generate-spec-source.xsl $< \
 	  | $(PERL) $(PERLFLAGS) -pi -e 's|(Use CSS instead). (http://wiki.whatwg.org/wiki/Presentational_elements_and_attributes)|<a href="$$2">$$1</a>.|g' \
+	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s|(guidance\s+on\s+providing\s+text\s+alternatives\s+for\s+images).\s+(http://www.w3.org/wiki/HTML/Usage/TextAlternatives)|<a href="$$2">$$1</a>.|g' \
 	  | $(PERL) $(PERLFLAGS) -pi -e 's|(meta extensions). &lt;(http://wiki.whatwg.org/wiki/MetaExtensions)&gt;|<a href="$$2">$$1</a>.|g' \
 	  | $(PERL) $(PERLFLAGS) -pi -e 's|d:string ""|"" <span class="attr-qualifier">(empty string)</span> <span class="postfix or">or</span> <a href="#syntax-attr-empty">empty</a>|g' \
 	  | $(PERL) $(PERLFLAGS) -pi -e 's|d:string||g' \
