@@ -26,13 +26,25 @@ function initDfn() {
   document.body.className += " dfnEnabled";
 }
 var dfnPanel;
-document.addEventListener('click', dfnShow, false);
-document.addEventListener("keyup", function(e) {
-  if(!e) e=window.event;
+document.addEventListener('click', window.dfnShow, false);
+document.addEventListener("keydown", function (e) {
+  if (!e) {
+    e = window.event;
+  }
   var key = e.keyCode ? e.keyCode : e.which;
-  if ( key == 27 && dfnPanel) {
+  if (key === 27 && dfnPanel) {
     dfnPanel.parentNode.removeChild(dfnPanel);
     dfnPanel = null;
+  }
+  if (key === 32 || key === 13) {
+    window.dfnShow(e);
+    if (e.target.nodeName === "DFN") {
+      e.preventDefault();
+      e.stopPropagation();
+      e.returnValue = false;
+      e.cancelBubble = true;
+      return false;
+    }
   }
 }, true);
 function dfnShow(event) {
