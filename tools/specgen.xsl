@@ -163,7 +163,9 @@ color: #3C790A;
                   <xsl:call-template name="make-consolidated-index-entry"/>
                 </xsl:when>
                 <xsl:otherwise>
-                  <li class="index-no-references">No references in this document.</li>
+                  <li class="index-no-references">
+                    <a href="" class="placeholder">No references in this document.</a>
+                  </li>
                 </xsl:otherwise>
               </xsl:choose>
             </ul>
@@ -902,6 +904,15 @@ color: #3C790A;
     </xsl:choose>
   </xsl:template>
   <xsl:template match='*'/>
+  <xsl:template match="h:dfn">
+    <dfn>
+      <xsl:copy-of select="@*"/>
+      <xsl:attribute name="role">button</xsl:attribute>
+      <xsl:attribute name="tabindex">0</xsl:attribute>
+      <xsl:attribute name="aria-haspopup">true</xsl:attribute>
+      <xsl:copy-of select="node()"/>
+    </dfn>
+  </xsl:template>
   <xsl:template match="h:a[@href[starts-with(.,'#')]][ancestor::*[@class='elem-mdl']]"
     priority="100">
     <xsl:choose>

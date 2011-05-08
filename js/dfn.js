@@ -28,13 +28,32 @@ function initDfn() {
 var dfnPanel;
 document.addEventListener('click', window.dfnShow, false);
 document.addEventListener("keydown", function (e) {
+  var key, ns, p;
   if (!e) {
     e = window.event;
   }
-  var key = e.keyCode ? e.keyCode : e.which;
+  key = e.keyCode ? e.keyCode : e.which;
   if (key === 27 && dfnPanel) {
     dfnPanel.parentNode.removeChild(dfnPanel);
     dfnPanel = null;
+  }
+  if (key === 9 && dfnPanel && e.target.parentNode.nodeName === "LI") {
+    ns = e.target.nextSibling;
+    while (ns && ns.nodeType !== ns.ELEMENT_NODE) {
+      ns = ns.nextSibling;
+    }
+    if (ns === null) {
+      p = event.target.parentNode;
+      while (p) {
+        p = p.nextSibling;
+        if (p && p.nodeName === "LI") {
+          break;
+        }
+      }
+      if (!p) {
+        dfnPanel.style.display = "none";
+      }
+    }
   }
   if (key === 32 || key === 13) {
     window.dfnShow(e);
