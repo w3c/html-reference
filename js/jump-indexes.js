@@ -1,13 +1,27 @@
 // No copyright is asserted on this file.
 
 var jumpIndexA;
-document.addEventListener('click', showjumpIndexA, false);
-document.addEventListener("keyup", function(e) {
-  if(!e) e=window.event;
+document.addEventListener('click', window.showjumpIndexA, false);
+document.addEventListener("keydown", function (e) {
+  if (!e) {
+    e = window.event;
+  }
   var key = e.keyCode ? e.keyCode : e.which;
-  if ( key == 27 && jumpIndexA) {
+  if (key === 27 && jumpIndexA) {
+    document.getElementById('jumpIndexA-button').firstChild.textContent = "jump";
     jumpIndexA.parentNode.removeChild(jumpIndexA);
     jumpIndexA = null;
+  }
+  if ((key === 32 || key === 13) && !jumpIndexA) {
+    window.showjumpIndexA(e);
+    if (e.target.id === "jumpIndexA-button") {
+      console.log("FOO");
+      e.preventDefault();
+      e.stopPropagation();
+      e.returnValue = false;
+      e.cancelBubble = true;
+      return false;
+    }
   }
 }, true);
 
@@ -27,15 +41,16 @@ var itemList =
   ["strong", "style", "sub", "summary", "sup"],
   ["table", "tbody", "td", "textarea", "tfoot", "th", "thead", "time", "title"],
   [ "tr", "track", "u", "ul", "var", "video", "wbr"],
-  ["global-attributes","index-of-terms","toc","toggle"]
-  ];
+  ["global-attributes", "index-of-terms", "toc", "toggle"]
+];
 
 function showjumpIndexA(event) {
   var node = event.target;
   if (jumpIndexA) {
+    document.getElementById('jumpIndexA-button').firstChild.textContent = "jump";
     jumpIndexA.parentNode.removeChild(jumpIndexA);
     jumpIndexA = null;
-  } else if (node.id == 'jumpIndexA-button') {
+  } else if (event.target.id == 'jumpIndexA-button') {
     var indexDiv = document.createElement('div');
     var items;
     indexDiv.className = 'jumpIndexA';
@@ -100,10 +115,13 @@ function showjumpIndexA(event) {
       }
       indexDiv.appendChild(p);
     }
-    var posY = event.pageY - 371;
-    var posX = event.pageX - 449;
-    indexDiv.setAttribute("style","top: " + posY+ "px; left: " + posX + "px;");
-    document.getElementById('jump-indexes').appendChild(indexDiv);
+    //var posY = event.pageY - 371;
+    var posY = document.body.scrollTop + 100;
+    //var posX = event.pageX - 449;
+    var posX = document.body.scrollLeft + 100;
+    indexDiv.setAttribute("style","position: relative; top: " + 500 + "px; left: " + 500 + "px;");
+    document.getElementById('jumpIndexA-button').firstChild.textContent = "(ESC to close)";
+    document.getElementById('jumpIndexA-button').appendChild(indexDiv);
     jumpIndexA = indexDiv;
   }
 }

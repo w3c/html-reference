@@ -318,7 +318,9 @@ color: #3C790A;
   </xsl:template>
   <xsl:template name='top'>
     <div id="jump-indexes" class="no-number no-toc">
-      <div id="jumpIndexA-button">jump</div>
+      <div id="jumpIndexA-button"
+        role="button" aria-haspopup="true"
+        tabindex="0">jump</div>
     </div>
     <div class='head'>
       <xsl:choose>

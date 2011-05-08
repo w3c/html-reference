@@ -182,7 +182,9 @@ color: #3C790A;
       <xsl:text>&#10;</xsl:text>
       <body class="chunk" onload="initDfn()">
         <div id="jump-indexes" class="no-number no-toc">
-          <div id="jumpIndexA-button">jump</div>
+          <div id="jumpIndexA-button"
+            role="button" aria-haspopup="true"
+            tabindex="0">jump</div>
         </div>
         <xsl:call-template name="header.navigation">
           <xsl:with-param name="prev" select="$prev"/>

@@ -55,7 +55,7 @@ document.addEventListener("keydown", function (e) {
       }
     }
   }
-  if (key === 32 || key === 13) {
+  if ((key === 32 || key === 13) && !dfnPanel) {
     window.dfnShow(e);
     if (e.target.nodeName === "DFN") {
       e.preventDefault();
