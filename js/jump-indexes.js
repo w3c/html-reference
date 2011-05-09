@@ -15,7 +15,6 @@ document.addEventListener("keydown", function (e) {
   if ((key === 32 || key === 13) && !jumpIndexA) {
     window.showjumpIndexA(e);
     if (e.target.id === "jumpIndexA-button") {
-      console.log("FOO");
       e.preventDefault();
       e.stopPropagation();
       e.returnValue = false;
@@ -115,11 +114,6 @@ function showjumpIndexA(event) {
       }
       indexDiv.appendChild(p);
     }
-    //var posY = event.pageY - 371;
-    var posY = document.body.scrollTop + 100;
-    //var posX = event.pageX - 449;
-    var posX = document.body.scrollLeft + 100;
-    indexDiv.setAttribute("style","position: relative; top: " + 500 + "px; left: " + 500 + "px;");
     document.getElementById('jumpIndexA-button').firstChild.textContent = "(ESC to close)";
     document.getElementById('jumpIndexA-button').appendChild(indexDiv);
     jumpIndexA = indexDiv;
