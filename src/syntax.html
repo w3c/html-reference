@@ -542,10 +542,17 @@
       <a href="#case-insensitive">case-insensitive match</a>
       for the string "<code>xml</code>".</li>
       <li>
-      <dfn id="syntax-attribute-value">attribute values</dfn>, in
-      general, are
-      <a href="#normal-character-data">normal character data</a>;
-      however, the <a href="#elements">HTML elements</a> section
+      <dfn id="syntax-attribute-value">attribute values</dfn>
+      can contain 
+      <a href="#syntax-text">text</a>
+      and 
+      <a href="#syntax-charref">character references</a>,
+      with additional restrictions depending on whether they are
+      <a href="#attr-value-unquoted">unquoted attribute values</a>,
+      <a href="#attr-value-single-quoted">single-quoted attribute values</a>,
+      or
+      <a href="#attr-value-double-quoted">double-quoted attribute values</a>.
+      Also, the <a href="#elements">HTML elements</a> section
       of this reference describes further restrictions on the
       allowed values of particular attributes, and attributes
       <a href="#must-requirement">must</a>
@@ -571,6 +578,11 @@
             attribute is given with the empty attribute
             syntax:</p>
             <pre>&lt;input <em>disabled</em>&gt;</pre>
+            <p>Note that
+            <a href="#syntax-attr-empty">empty attribute syntax</a>
+            is exactly equivalent to specifying the empty string as the
+            value for the attribute, as in the following example.</p>
+            <pre>&lt;input <em>disabled=""</em>&gt;</pre>
           </div>
         </dd>
         <dt><dfn id="syntax-attr-unquoted"
@@ -595,9 +607,9 @@
             <li>an
             <a href="#syntax-attribute-value" >attribute value</a></li>
           </ol>
-          <p>In addition to the general requirements given above for
-          attribute values, an unquoted attribute value has the
-          following restrictions:</p>
+          <p>In addition to the
+          <a href="#syntax-attribute-value">general requirements for attribute values</a>,
+          an unquoted attribute value has the following restrictions:</p>
           <ul>
             <li><a href="#must-requirement">must</a>
             not contain any literal
@@ -606,8 +618,11 @@
             not contain any
             "<code title="U+0022 QUOTATION MARK">"</code>",
             "<code title="U+0027 APOSTROPHE">'</code>",
-            "<code title="U+003E GREATER-THAN SIGN">&gt;</code>",
             "<code title="U+003D EQUALS SIGN">=</code>",
+            "<code title="U+003E GREATER-THAN SIGN">&gt;</code>",
+            "<code title="U+003C LESS-THAN SIGN ">&lt;</code>",
+            or
+            "<code title="U+0060 GRAVE ACCENT">`</code>",
             characters</li>
             <li><a href="#must-requirement">must</a>
             not be the empty string</li>
@@ -657,9 +672,9 @@
             "<code title="U+0027 APOSTROPHE">'</code>"
             character.</li>
           </ol>
-          <p>In addition to the general requirements given above
-          for attribute values, a single-quoted attribute value
-          has the following restriction:</p>
+          <p>In addition to the
+          <a href="#syntax-attribute-value">general requirements for attribute values</a>,
+          a single-quoted attribute value has the following restriction:</p>
           <ul>
             <li><a href="#must-requirement">must</a>
             not contain any literal
@@ -701,9 +716,9 @@
             "<code title="double U+0022 QUOTATION MARK">"</code>"
             character</li>
           </ol>
-          <p>In addition to the general requirements given above for
-          attribute values, a double-quoted attribute value has
-          the following restriction:</p>
+          <p>In addition to the
+          <a href="#syntax-attribute-value">general requirements for attribute values</a>,
+          a double-quoted attribute value has the following restriction:</p>
           <ul>
             <li><a href="#must-requirement">must</a>
             not contain any literal
@@ -765,8 +780,7 @@
           id="normal-character-data"
           title="normal-character-data">normal character data</dfn></dt>
       <dd>
-        <p>Certain elements and strings in the values of
-        particular attributes contain normal character data.
+        <p>Certain elements contain normal character data.
         Normal character data can contain the following:</p>
         <ul>
           <li><a href="#syntax-text">text</a></li>

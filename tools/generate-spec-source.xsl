@@ -3373,7 +3373,7 @@
         <a href="{@href}">polygon coordinates</a>
       </xsl:when>
       <xsl:when test=".='normal-character-data'">
-        <a href="{@href}">normal character data</a>
+        <a href="#syntax-attribute-value">any value</a>
       </xsl:when>
       <xsl:otherwise>
         <xsl:copy-of select="."/>

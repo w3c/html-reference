@@ -576,10 +576,17 @@
       <a href="terminology.html#case-insensitive" id="case-insensitive_xref12">case-insensitive match</a>
       for the string "<code>xml</code>".</li>
       <li>
-      <dfn id="syntax-attribute-value" role="button" tabindex="0" aria-haspopup="true">attribute values</dfn>, in
-      general, are
-      <a href="syntax.html#normal-character-data" id="normal-character-data_xref3">normal character data</a>;
-      however, the <a href="elements.html">HTML elements</a> section
+      <dfn id="syntax-attribute-value" role="button" tabindex="0" aria-haspopup="true">attribute values</dfn>
+      can contain 
+      <a href="syntax.html#syntax-text" id="syntax-text_xref1">text</a>
+      and 
+      <a href="syntax.html#syntax-charref" id="syntax-charref_xref2">character references</a>,
+      with additional restrictions depending on whether they are
+      <a href="syntax.html#attr-value-unquoted" id="attr-value-unquoted_xref1">unquoted attribute values</a>,
+      <a href="syntax.html#attr-value-single-quoted" id="attr-value-single-quoted_xref1">single-quoted attribute values</a>,
+      or
+      <a href="syntax.html#attr-value-double-quoted" id="attr-value-double-quoted_xref1">double-quoted attribute values</a>.
+      Also, the <a href="elements.html">HTML elements</a> section
       of this reference describes further restrictions on the
       allowed values of particular attributes, and attributes
       <a href="terminology.html#must-requirement" id="must-requirement_xref30">must</a>
@@ -605,6 +612,11 @@
             attribute is given with the empty attribute
             syntax:</p>
             <pre>&lt;input <em>disabled</em>&gt;</pre>
+            <p>Note that
+            <a href="syntax.html#syntax-attr-empty" id="syntax-attr-empty_xref2">empty attribute syntax</a>
+            is exactly equivalent to specifying the empty string as the
+            value for the attribute, as in the following example.</p>
+            <pre>&lt;input <em>disabled=""</em>&gt;</pre>
           </div>
         </dd>
         <dt><dfn id="syntax-attr-unquoted" title="syntax-attr-unquoted" role="button" tabindex="0" aria-haspopup="true">unquoted attribute-value syntax</dfn></dt>
@@ -630,9 +642,9 @@
             <a href="syntax.html#syntax-attribute-value" id="syntax-attribute-value_xref2">attribute value</a>
 </li>
           </ol>
-<p>In addition to the general requirements given above for
-          attribute values, an unquoted attribute value has the
-          following restrictions:</p>
+<p>In addition to the
+          <a href="syntax.html#syntax-attribute-value" id="syntax-attribute-value_xref3">general requirements for attribute values</a>,
+          an unquoted attribute value has the following restrictions:</p>
           <ul>
 <li>
 <a href="terminology.html#must-requirement" id="must-requirement_xref31">must</a>
@@ -644,8 +656,11 @@
             not contain any
             "<code title="U+0022 QUOTATION MARK">"</code>",
             "<code title="U+0027 APOSTROPHE">'</code>",
-            "<code title="U+003E GREATER-THAN SIGN">&gt;</code>",
             "<code title="U+003D EQUALS SIGN">=</code>",
+            "<code title="U+003E GREATER-THAN SIGN">&gt;</code>",
+            "<code title="U+003C LESS-THAN SIGN ">&lt;</code>",
+            or
+            "<code title="U+0060 GRAVE ACCENT">`</code>",
             characters</li>
             <li>
 <a href="terminology.html#must-requirement" id="must-requirement_xref33">must</a>
@@ -692,15 +707,15 @@
             "<code title="U+0027 APOSTROPHE">'</code>"
             character</li>
             <li>an
-            <a href="syntax.html#syntax-attribute-value" id="syntax-attribute-value_xref3">attribute value</a>
+            <a href="syntax.html#syntax-attribute-value" id="syntax-attribute-value_xref4">attribute value</a>
 </li>
             <li>a
             "<code title="U+0027 APOSTROPHE">'</code>"
             character.</li>
           </ol>
-<p>In addition to the general requirements given above
-          for attribute values, a single-quoted attribute value
-          has the following restriction:</p>
+<p>In addition to the
+          <a href="syntax.html#syntax-attribute-value" id="syntax-attribute-value_xref5">general requirements for attribute values</a>,
+          a single-quoted attribute value has the following restriction:</p>
           <ul>
 <li>
 <a href="terminology.html#must-requirement" id="must-requirement_xref35">must</a>
@@ -739,15 +754,15 @@
             "<code title="U+0022 QUOTATION MARK">"</code>"
             character</li>
             <li>an
-            <a href="syntax.html#syntax-attribute-value" id="syntax-attribute-value_xref4">attribute value</a>
+            <a href="syntax.html#syntax-attribute-value" id="syntax-attribute-value_xref6">attribute value</a>
 </li>
             <li>a
             "<code title="double U+0022 QUOTATION MARK">"</code>"
             character</li>
           </ol>
-<p>In addition to the general requirements given above for
-          attribute values, a double-quoted attribute value has
-          the following restriction:</p>
+<p>In addition to the
+          <a href="syntax.html#syntax-attribute-value" id="syntax-attribute-value_xref7">general requirements for attribute values</a>,
+          a double-quoted attribute value has the following restriction:</p>
           <ul>
 <li>
 <a href="terminology.html#must-requirement" id="must-requirement_xref36">must</a>
@@ -773,7 +788,7 @@
       (including in
       <a href="syntax.html#syntax-comments" id="syntax-comments_xref5">comments</a>)
       and
-      <a href="syntax.html#syntax-attribute-value" id="syntax-attribute-value_xref5">attribute values</a>
+      <a href="syntax.html#syntax-attribute-value" id="syntax-attribute-value_xref8">attribute values</a>
       <a href="terminology.html#must-requirement" id="must-requirement_xref37">must</a>
       consist of Unicode characters, with the following
       restrictions:</p>
@@ -791,24 +806,23 @@
 </li>
     </ul>
 <p><dfn id="character-data" title="character-data" role="button" tabindex="0" aria-haspopup="true">character data</dfn> contains
-    <a href="syntax.html#syntax-text" id="syntax-text_xref1">text</a>, in some cases in combination with
-    <a href="syntax.html#syntax-charref" id="syntax-charref_xref2">character references</a>,
+    <a href="syntax.html#syntax-text" id="syntax-text_xref2">text</a>, in some cases in combination with
+    <a href="syntax.html#syntax-charref" id="syntax-charref_xref3">character references</a>,
     along with certain additional restrictions. There are three
     types of character data that can occur in documents:</p>
     <ol>
-<li><a href="syntax.html#normal-character-data" id="normal-character-data_xref4">normal character data</a></li>
+<li><a href="syntax.html#normal-character-data" id="normal-character-data_xref3">normal character data</a></li>
       <li><a href="syntax.html#replaceable-character-data" id="replaceable-character-data_xref1">replaceable character data</a></li>
       <li><a href="syntax.html#non-replaceable-character-data" id="non-replaceable-character-data_xref1">non-replaceable character data</a></li>
     </ol>
 <dl id="character-data-types-list">
 <dt><dfn id="normal-character-data" title="normal-character-data" role="button" tabindex="0" aria-haspopup="true">normal character data</dfn></dt>
       <dd>
-        <p>Certain elements and strings in the values of
-        particular attributes contain normal character data.
+        <p>Certain elements contain normal character data.
         Normal character data can contain the following:</p>
         <ul>
-<li><a href="syntax.html#syntax-text" id="syntax-text_xref2">text</a></li>
-          <li><a href="syntax.html#syntax-charref" id="syntax-charref_xref3">character references</a></li>
+<li><a href="syntax.html#syntax-text" id="syntax-text_xref3">text</a></li>
+          <li><a href="syntax.html#syntax-charref" id="syntax-charref_xref4">character references</a></li>
         </ul>
 <p>Normal character data has the following restrictions:</p>
         <ul>
@@ -835,14 +849,14 @@
         Replaceable character data can contain the following:</p>
         <ul>
 <li>
-<a href="syntax.html#syntax-text" id="syntax-text_xref3">text</a>,
+<a href="syntax.html#syntax-text" id="syntax-text_xref4">text</a>,
           optionally including
           "<code title="U+003C LESS-THAN SIGN">&lt;</code>"
           characters
           
           
           </li>
-          <li><a href="syntax.html#syntax-charref" id="syntax-charref_xref4">character references</a></li>
+          <li><a href="syntax.html#syntax-charref" id="syntax-charref_xref5">character references</a></li>
         </ul>
 <p>Replaceable character data has the following restrictions:</p>
         <ul>
@@ -894,7 +908,7 @@
         following:</p>
         <ul>
 <li>
-<a href="syntax.html#syntax-text" id="syntax-text_xref4">text</a>,
+<a href="syntax.html#syntax-text" id="syntax-text_xref5">text</a>,
           optionally including
           "<code title="U+003C LESS-THAN SIGN">&lt;</code>"
           characters
@@ -907,7 +921,7 @@
         <ul>
 <li>
 <a href="terminology.html#must-requirement" id="must-requirement_xref46">must</a>
-          not contain <a href="syntax.html#syntax-charref" id="syntax-charref_xref5">character references</a>
+          not contain <a href="syntax.html#syntax-charref" id="syntax-charref_xref6">character references</a>
 </li>
           <li>
 <a href="terminology.html#must-requirement" id="must-requirement_xref47">must</a>
@@ -1056,17 +1070,17 @@
       </dd>
     </dl>
 <p class="note">
-    <a href="syntax.html#syntax-charref" id="syntax-charref_xref6">Character references</a>
+    <a href="syntax.html#syntax-charref" id="syntax-charref_xref7">Character references</a>
     are not themselves
-    <a href="syntax.html#syntax-text" id="syntax-text_xref5">text</a>,
+    <a href="syntax.html#syntax-text" id="syntax-text_xref6">text</a>,
     and no part of a character reference is
-    <a href="syntax.html#syntax-text" id="syntax-text_xref6">text</a>.</p>
+    <a href="syntax.html#syntax-text" id="syntax-text_xref7">text</a>.</p>
     <p>An
     <dfn id="syntax-ambiguous-ampersand" role="button" tabindex="0" aria-haspopup="true">ambiguous ampersand</dfn>
     is an
     "<code title="U+0026 AMPERSAND">&amp;</code>"
     character that is followed by some
-    <a href="syntax.html#syntax-text" title="syntax-text" id="syntax-text_xref7">text</a>
+    <a href="syntax.html#syntax-text" title="syntax-text" id="syntax-text_xref8">text</a>
     other than a
     <a href="terminology.html#space" id="space_xref30">space character</a>,
     a
@@ -1087,13 +1101,13 @@
       <dfn id="comment-start-delimiter" title="comment-start-delimiter" role="button" tabindex="0" aria-haspopup="true">comment start delimiter</dfn>
       "<code title="U+003C LESS-THAN SIGN, U+0021 EXCLAMATION MARK, U+002D HYPHEN-MINUS, U+002D HYPHEN-MINUS">&lt;!--</code>"
       </li>
-      <li><a href="syntax.html#syntax-text" id="syntax-text_xref8">text</a></li>
+      <li><a href="syntax.html#syntax-text" id="syntax-text_xref9">text</a></li>
       <li>the
       <dfn id="comment-end-delimiter" title="comment-end-delimiter" role="button" tabindex="0" aria-haspopup="true">comment end delimiter</dfn>
       "<code title="U+002D HYPHEN-MINUS, U+002D HYPHEN-MINUS, U+003E GREATER-THAN SIGN">--&gt;</code>"
       </li>
     </ol>
-<p>The <a href="syntax.html#syntax-text" id="syntax-text_xref9">text</a>
+<p>The <a href="syntax.html#syntax-text" id="syntax-text_xref10">text</a>
     part of comments has the following restrictions:</p>
     <ul>
 <li>
@@ -1172,7 +1186,7 @@
      it contains
      <a href="terminology.html#must-requirement" id="must-requirement_xref56">must</a>
      be
-     <a href="syntax.html#normal-character-data" id="normal-character-data_xref5">normal character data</a>.</li>
+     <a href="syntax.html#normal-character-data" id="normal-character-data_xref4">normal character data</a>.</li>
    </ul>
 </div>
  <div id="cdata-sections" class="section">
@@ -1189,7 +1203,7 @@
      <dfn id="cdata-start-delimiter" title="cdata-start-delimiter" role="button" tabindex="0" aria-haspopup="true">CDATA start delimiter</dfn>
      "<code title="U+003C LESS-THAN SIGN, U+0021 EXCLAMATION MARK, U+005B LEFT SQUARE BRACKET, U+0043 LATIN CAPITAL LETTER C, U+0044 LATIN CAPITAL LETTER D, U+0041 LATIN CAPITAL LETTER A, U+0054 LATIN CAPITAL LETTER T, U+0041 LATIN CAPITAL LETTER A, U+005B LEFT SQUARE BRACKET">&lt;![CDATA[</code>"</li>
      <li>
-<a href="syntax.html#syntax-text" title="syntax-text" id="syntax-text_xref10">text</a>, with the
+<a href="syntax.html#syntax-text" title="syntax-text" id="syntax-text_xref11">text</a>, with the
      additional restriction that the text
      <a href="terminology.html#must-requirement" id="must-requirement_xref57">must</a>
      not contain the
