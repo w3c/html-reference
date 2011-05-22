@@ -382,26 +382,26 @@ color: #3C790A;
             </xsl:if>
           </xsl:when>
           <xsl:otherwise>
+            <dl>
+              <dt>This Version:</dt>
+              <dd>
+                <a href='{$this}'><xsl:value-of select='$this'/></a>
+              </dd>
+            </dl>
             <xsl:if test='not($latest = "")'>
+            <dl>
+              <dt>Latest Published Version:</dt>
+              <dd><a href='{$latest}'><xsl:value-of select='$latest'/></a></dd>
+            </dl>
             <dl class="ed-draft-link">
-              <dt class="ed-draft-link">Editor’s Draft is also available:</dt>
+              <dt class="ed-draft-link">Editor’s Draft:</dt>
               <dd>
                 <a id='latestED' href='{$source}'><xsl:value-of select='$source'/></a>
                 <xsl:text> </xsl:text>
                 <!-- * <xsl:value-of select='date:date-time()'/> -->
               </dd>
             </dl>
-            <dl>
-              <dt>Latest Published Version:</dt>
-              <dd><a href='{$latest}'><xsl:value-of select='$latest'/></a></dd>
-            </dl>
             </xsl:if>
-            <dl>
-            <dt>This Version:</dt>
-            <dd>
-              <a href='{$this}'><xsl:value-of select='$this'/></a>
-            </dd>
-            </dl>
           </xsl:otherwise>
         </xsl:choose>
         <xsl:if test='$previous-nodeset
@@ -420,7 +420,8 @@ color: #3C790A;
           <dt>Editor<xsl:if test='count($person-nodeset) &gt; 1'>s</xsl:if>:</dt>
           <xsl:for-each select='$person-nodeset'>
             <xsl:choose>
-              <xsl:when test="h:span[contains(@class, 'affiliation') = 'W3C']"/>
+              <xsl:when test="h:span[contains(@class, 'affiliation') = 'W3C'] and $maturity = 'ED'"/>
+              <xsl:when test="not(h:span[contains(@class, 'affiliation')]) and not($maturity = 'ED')"/>
               <xsl:otherwise>
             <dd>
               <xsl:choose>

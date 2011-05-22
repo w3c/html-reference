@@ -44,32 +44,33 @@ var itemList =
 ];
 
 function showjumpIndexA(event) {
-  var node = event.target;
+  var node = event.target, indexDiv, i, j, items, len, jlen, ul, li, a,
+  separator, itemName, fragID, pageNode;
   if (jumpIndexA) {
     document.getElementById('jumpIndexA-button').firstChild.textContent = "jump";
     jumpIndexA.parentNode.removeChild(jumpIndexA);
     jumpIndexA = null;
-  } else if (event.target.id == 'jumpIndexA-button') {
-    var indexDiv = document.createElement('div');
-    var items;
-    indexDiv.className = 'jumpIndexA';
-    for (var i=0, len=itemList.length; i<len; ++i) {
-      var p = document.createElement('p');
+  } else if (event.target.id === 'jumpIndexA-button') {
+    indexDiv = document.createElement('div');
+    indexDiv.id = 'jumpIndexA';
+    ul = document.createElement('ul');
+    for (i = 0, len = itemList.length; i < len; i = i + 1) {
+      li = document.createElement('li');
       items = itemList[i];
-      for (var j=0, jlen=items.length; j<jlen; ++j) {
-        var a = document.createElement('a');
-        var separator = document.createTextNode(" ");
-        var itemName = items[j];
-        if (document.body.className.indexOf("chunk") != -1) {
-          if (itemName == 'toc') {
+      for (j = 0, jlen = items.length; j < jlen; j = j + 1) {
+        a = document.createElement('a');
+        separator = document.createTextNode(" ");
+        itemName = items[j];
+        if (document.body.className.indexOf("chunk") !== -1) {
+          if (itemName === 'toc') {
             a.setAttribute("href", "Overview.html#toc");
-          } else if (itemName == 'toggle') {
+          } else if (itemName === 'toggle') {
             itemName = "";
             if (document.documentElement.id) {
               itemName = "#" + document.documentElement.id;
             }
             if (window.location.hash) {
-              itemName = "#" + window.location.hash.substring(1,window.location.hash.length);
+              itemName = "#" + window.location.hash.substring(1, window.location.hash.length);
             }
             a.setAttribute("href", "spec.html" + itemName);
             itemName = "single";
@@ -77,18 +78,18 @@ function showjumpIndexA(event) {
             a.setAttribute("href", itemName + ".html");
           }
         } else {
-          if (itemName == 'toc') {
+          if (itemName === 'toc') {
             a.setAttribute("href", "#toc");
-          } else if (itemName == 'toggle') {
+          } else if (itemName === 'toggle') {
             itemName = "Overview.html";
             if (window.location.hash) {
-              var fragID = window.location.hash.substring(1,window.location.hash.length);
-              if (fragID == "index-of-terms") {
+              fragID = window.location.hash.substring(1, window.location.hash.length);
+              if (fragID === "index-of-terms") {
                 itemName = "index-of-terms.html";
-              } else if (fragID == "elements") {
+              } else if (fragID === "elements") {
                 itemName = "elements.html";
               } else {
-                var pageNode = document.evaluate("//*[@id = '" + fragID +"']/ancestor-or-self::div[contains(@class,'section')][count(ancestor::div[contains(@class,'section')])=0 and not(@id='elements')]|//*[@id = '" + fragID + "']/ancestor-or-self::div[contains(@class,'section')][child::h2[@class='element-head']]",
+                pageNode = document.evaluate("//*[@id = '" + fragID + "']/ancestor-or-self::div[contains(@class,'section')][count(ancestor::div[contains(@class,'section')])=0 and not(@id='elements')]|//*[@id = '" + fragID + "']/ancestor-or-self::div[contains(@class,'section')][child::h2[@class='element-head']]",
                     document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
                 if (pageNode) {
                   itemName = pageNode.id + ".html" + window.location.hash;
@@ -101,18 +102,19 @@ function showjumpIndexA(event) {
             a.setAttribute("href", "#" + itemName);
           }
         }
-        if (itemName == 'global-attributes') {
+        if (itemName === 'global-attributes') {
           itemName = 'global attributes';
-          p.setAttribute("class", "jumpIndexA-other");
+          li.setAttribute("class", "jumpIndexA-other");
         }
-        if (itemName == 'index-of-terms') {
+        if (itemName === 'index-of-terms') {
           itemName = 'terms';
         }
         a.textContent = itemName;
-        p.appendChild(a);
-        p.appendChild(separator);
+        li.appendChild(a);
+        li.appendChild(separator);
+        ul.appendChild(li);
       }
-      indexDiv.appendChild(p);
+      indexDiv.appendChild(ul);
     }
     document.getElementById('jumpIndexA-button').firstChild.textContent = "(ESC to close)";
     document.getElementById('jumpIndexA-button').appendChild(indexDiv);
