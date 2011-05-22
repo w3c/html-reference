@@ -190,7 +190,43 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -315,29 +351,7 @@
      }
      return null;
    }
-   function load(script) {
-     var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
-     document.body.appendChild(e);
-   }
-   function init() {
-     if (location.search == '?slow-browser')
-       return;
-     var configUI = document.createElement('div');
-     configUI.id = 'configUI';
-     document.body.appendChild(configUI);
-     // load('reviewer.js'); // would need cross-site XHR
-     if (document.getElementById('head'))
-       load('toc.js');
-     load('styler.js');
-     // load('updater.js'); // would need cross-site XHR
-     load('dfn.js'); // doesn't support split-out specs, but, oh well.
-     // load('status.js'); // would need cross-site XHR
-     if (getCookie('profile') == '1')
-       document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
-     fixBrokenLink();
-   }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="links.html" title="4.12 Links" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="origin-0.html" title="5.3 Origin" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="links.html" title="4.12 Links" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="origin-0.html" title="5.3 Origin" rel="next"/></head><body><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -809,6 +823,7 @@ interface <dfn id="window">Window</dfn> {
 
   // the user agent
   readonly attribute <a href="timers.html#navigator">Navigator</a> <a href="timers.html#dom-navigator" title="dom-navigator">navigator</a>; 
+  readonly attribute <a href="timers.html#external">External</a> <a href="timers.html#dom-external" title="dom-external">external</a>;
   readonly attribute <a href="offline.html#applicationcache">ApplicationCache</a> <a href="offline.html#dom-applicationcache" title="dom-applicationCache">applicationCache</a>;
 
   // user prompts
@@ -1184,7 +1199,12 @@ interface <dfn id="window">Window</dfn> {
    attribute of any <a href="infrastructure.html#html-elements" title="HTML elements">HTML element</a> in
    the <a href="#active-document">active document</a> with an <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content attribute.</li>
 
-  </ul><p>When <dfn id="dom-window-nameditem" title="dom-window-namedItem">the <code>Window</code>
+  </ul><p class="critical">It is possible that this will change. Browser
+  vendors are considering limiting this behaviour to <a href="dom.html#quirks-mode">quirks
+  mode</a>. <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=11960">Read
+  more...</a></p>
+
+  <p>When <dfn id="dom-window-nameditem" title="dom-window-namedItem">the <code>Window</code>
   object is indexed for property retrieval</dfn> using a name <var title="">name</var>, then the user agent must return the value
   obtained using the following steps:</p>
 

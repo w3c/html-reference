@@ -190,7 +190,43 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -315,29 +351,7 @@
      }
      return null;
    }
-   function load(script) {
-     var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
-     document.body.appendChild(e);
-   }
-   function init() {
-     if (location.search == '?slow-browser')
-       return;
-     var configUI = document.createElement('div');
-     configUI.id = 'configUI';
-     document.body.appendChild(configUI);
-     // load('reviewer.js'); // would need cross-site XHR
-     if (document.getElementById('head'))
-       load('toc.js');
-     load('styler.js');
-     // load('updater.js'); // would need cross-site XHR
-     load('dfn.js'); // doesn't support split-out specs, but, oh well.
-     // load('status.js'); // would need cross-site XHR
-     if (getCookie('profile') == '1')
-       document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
-     fixBrokenLink();
-   }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="urls.html" title="2.6 URLs" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="common-dom-interfaces.html" title="2.8 Common DOM interfaces" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="urls.html" title="2.6 URLs" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="common-dom-interfaces.html" title="2.8 Common DOM interfaces" rel="next"/></head><body><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -346,7 +360,7 @@
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="common-dom-interfaces.html" class="next">2.8 Common DOM interfaces</a>
   <ol class="toc"><li><ol><li><a href="fetching-resources.html#fetching-resources"><span class="secno">2.7 </span>Fetching resources</a>
-    <ol><li><a href="fetching-resources.html#concept-http-equivalent"><span class="secno">2.7.1 </span>Protocol concepts</a></li><li><a href="fetching-resources.html#encrypted-http-and-related-security-concerns"><span class="secno">2.7.2 </span>Encrypted HTTP and related security concerns</a></li><li><a href="fetching-resources.html#content-type-sniffing"><span class="secno">2.7.3 </span>Determining the type of a resource</a></li><li><a href="fetching-resources.html#extracting-encodings-from-meta-elements"><span class="secno">2.7.4 </span>Extracting encodings from <code>meta</code> elements</a></li></ol></li></ol></li></ol></div><div class="impl">
+    <ol><li><a href="fetching-resources.html#concept-http-equivalent"><span class="secno">2.7.1 </span>Protocol concepts</a></li><li><a href="fetching-resources.html#encrypted-http-and-related-security-concerns"><span class="secno">2.7.2 </span>Encrypted HTTP and related security concerns</a></li><li><a href="fetching-resources.html#content-type-sniffing"><span class="secno">2.7.3 </span>Determining the type of a resource</a></li><li><a href="fetching-resources.html#extracting-encodings-from-meta-elements"><span class="secno">2.7.4 </span>Extracting encodings from <code>meta</code> elements</a></li><li><a href="fetching-resources.html#cors-settings-attributes"><span class="secno">2.7.5 </span>CORS settings attributes</a></li></ol></li></ol></li></ol></div><div class="impl">
 
   <h3 id="fetching-resources"><span class="secno">2.7 </span>Fetching resources</h3>
 
@@ -633,7 +647,7 @@
   </div>
 
 
-  <h4 id="content-type-sniffing"><span class="secno">2.7.3 </span>Determining the type of a resource</h4><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/125">ISSUE-125</a> (charset-vs-quotes) blocks progress to Last Call</span></p>
+  <h4 id="content-type-sniffing"><span class="secno">2.7.3 </span>Determining the type of a resource</h4>
 
   <p>The <dfn id="content-type" title="Content-Type">Content-Type metadata</dfn> of a
   resource must be obtained and interpreted in a manner consistent
@@ -713,4 +727,20 @@
   that, historically, were related to HTTP, the syntax as supported by
   implementations diverged some time ago. <a href="references.html#refsHTTP">[HTTP]</a></p>
 
-  </div></body></html>
+  </div><h4 id="cors-settings-attributes"><span class="secno">2.7.5 </span>CORS settings attributes</h4><p>A <dfn id="cors-settings-attribute">CORS settings attribute</dfn> is an <a href="common-microsyntaxes.html#enumerated-attribute">enumerated
+  attribute</a>. The following table lists the keywords and states
+  for the attribute &#x2014; the keywords in the left column map to the
+  states in the cell in the second column on the same row as the
+  keyword.</p><table><thead><tr><th> Keyword
+     </th><th> State
+     </th><th> Brief description
+   </th></tr></thead><tbody><tr><td><dfn id="attr-cross-origin-anonymous-keyword" title="attr-cross-origin-anonymous-keyword"><code>anonymous</code></dfn>
+     </td><td><dfn id="attr-cross-origin-anonymous" title="attr-cross-origin-anonymous">Anonymous</dfn>
+     </td><td>Cross-origin CORS requests for the element will not have the <i>credentials flag</i> set.
+    </td></tr><tr><td><dfn id="attr-cross-origin-use-credentials-keyword" title="attr-cross-origin-use-credentials-keyword"><code>use-credentials</code></dfn>
+     </td><td><dfn id="attr-cross-origin-use-credentials" title="attr-cross-origin-use-credentials">Use Credentials</dfn>
+     </td><td>Cross-origin CORS requests for the element will have the <i>credentials flag</i> set.
+  </td></tr></tbody></table><p>The empty string is also a valid keyword, and maps to the <a href="#attr-cross-origin-anonymous" title="attr-cross-origin-anonymous">Anonymous</a> state. The
+  attribute's <i>invalid value default</i> is the <a href="#attr-cross-origin-anonymous" title="attr-cross-origin-anonymous">Anonymous</a> state. The
+  <i>missing value default</i>, used when the attribute is omitted, is
+  the <dfn id="attr-cross-origin-none" title="attr-cross-origin-none">No CORS</dfn> state.</p></body></html>

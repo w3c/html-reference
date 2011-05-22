@@ -190,7 +190,43 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -315,29 +351,7 @@
      }
      return null;
    }
-   function load(script) {
-     var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
-     document.body.appendChild(e);
-   }
-   function init() {
-     if (location.search == '?slow-browser')
-       return;
-     var configUI = document.createElement('div');
-     configUI.id = 'configUI';
-     document.body.appendChild(configUI);
-     // load('reviewer.js'); // would need cross-site XHR
-     if (document.getElementById('head'))
-       load('toc.js');
-     load('styler.js');
-     // load('updater.js'); // would need cross-site XHR
-     load('dfn.js'); // doesn't support split-out specs, but, oh well.
-     // load('status.js'); // would need cross-site XHR
-     if (getCookie('profile') == '1')
-       document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
-     fixBrokenLink();
-   }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="elements.html" title="3.2 Elements" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="apis-in-html-documents.html" title="3.3 APIs in HTML documents" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="elements.html" title="3.2 Elements" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="apis-in-html-documents.html" title="3.3 APIs in HTML documents" rel="next"/></head><body><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -624,7 +638,7 @@
   phrasing content, not any flow content.</p><p><dfn id="text-content" title="text content">Text</dfn>, in the context of content
   models, means <a href="infrastructure.html#text-node" title="text node">text nodes</a>. <a href="#text-content" title="text content">Text</a> is sometimes used as a content
   model on its own, but is also <a href="#phrasing-content">phrasing content</a>, and can
-  be <a href="#inter-element-whitespace">inter-element whitespace</a> (if the <a href="infrastructure.html#text-node" title="text&#10;  node">text nodes</a> are empty or contain just <a href="common-microsyntaxes.html#space-character" title="space&#10;  character">space characters</a>).</p><h6 id="embedded-content-0"><span class="secno">3.2.5.1.6 </span>Embedded content</h6><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/80">ISSUE-80</a> (title-alternative) blocks progress to Last Call</span></p><p><dfn id="embedded-content">Embedded content</dfn> is content that imports another
+  be <a href="#inter-element-whitespace">inter-element whitespace</a> (if the <a href="infrastructure.html#text-node" title="text&#10;  node">text nodes</a> are empty or contain just <a href="common-microsyntaxes.html#space-character" title="space&#10;  character">space characters</a>).</p><h6 id="embedded-content-0"><span class="secno">3.2.5.1.6 </span>Embedded content</h6><p><dfn id="embedded-content">Embedded content</dfn> is content that imports another
   resource into the document, or content from another vocabulary that
   is inserted into the document.</p><ul class="brief category-list"><li><code><a href="the-iframe-element.html#the-audio-element">audio</a></code></li>
    <li><code><a href="the-canvas-element.html#the-canvas-element">canvas</a></code></li>
@@ -977,14 +991,14 @@ plaintext     = *( %x0000-2029 / %x202F-10FFFF )
   given in the cell in the second column of the same row. <span class="impl">When multiple rows apply to an element, the role from
   the last row to define a role must be applied, and the states and
   properties from all the rows must be combined.</span></p><table id="table-aria-strong"><thead><tr><th>Language feature
-     </th><th>Strong native semantics and default implied ARIA semantics
+     </th><th><span>Strong native semantics</span> and <span>default implied ARIA semantics</span>
 
    </th></tr></thead><tbody><tr><td><code><a href="the-map-element.html#the-area-element">area</a></code> element that creates a <a href="links.html#hyperlink">hyperlink</a>
      </td><td><code title="attr-aria-role-link">link</code> role
      
 
     </td></tr><tr><td><code><a href="semantics.html#the-base-element">base</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
 
     </td></tr><tr><td><code><a href="the-button-element.html#the-datalist-element">datalist</a></code> element
      </td><td><code title="attr-aria-role-listbox">listbox</code> role, with the <code title="attr-aria-multiselectable">aria-multiselectable</code> property set to "false"
@@ -994,7 +1008,7 @@ plaintext     = *( %x0000-2029 / %x202F-10FFFF )
 
 
     </td></tr><tr><td><code><a href="semantics.html#the-head-element">head</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
 
     </td></tr><tr><td><code><a href="sections.html#the-hgroup-element">hgroup</a></code> element
      </td><td><code title="attr-aria-role-heading">heading</code> role, with the <code title="attr-aria-level">aria-level</code> property set to the element's <a href="sections.html#outline-depth">outline depth</a>
@@ -1003,7 +1017,7 @@ plaintext     = *( %x0000-2029 / %x202F-10FFFF )
      </td><td><code title="attr-aria-role-separator">separator</code> role
 
     </td></tr><tr><td><code><a href="semantics.html#the-html-element">html</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
 
     </td></tr><tr><td><code><a href="embedded-content-1.html#the-img-element">img</a></code> element whose <code title="attr-img-alt"><a href="embedded-content-1.html#attr-img-alt">alt</a></code> attribute's value is empty
      </td><td><code title="attr-aria-role-presentation">presentation</code> role
@@ -1012,28 +1026,28 @@ plaintext     = *( %x0000-2029 / %x202F-10FFFF )
      </td><td><code title="attr-aria-checked">aria-checked</code> state set to "mixed" if the element's <code title="dom-input-indeterminate"><a href="the-input-element.html#dom-input-indeterminate">indeterminate</a></code> IDL attribute is true, or "true" if the element's <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> is true, or "false" otherwise
 
     </td></tr><tr><td><code><a href="the-input-element.html#the-input-element">input</a></code> element with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute in the <a href="number-state.html#color-state" title="attr-input-type-color">Color</a> state
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
 
     </td></tr><tr><td><code><a href="the-input-element.html#the-input-element">input</a></code> element with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute in the <a href="states-of-the-type-attribute.html#date-state" title="attr-input-type-date">Date</a> state
-     </td><td>No role, with the <code title="title-aria-readonly">aria-readonly</code> state set to "true" if the element has a <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code> attribute
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>, with the <code title="title-aria-readonly">aria-readonly</code> state set to "true" if the element has a <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code> attribute
 
     </td></tr><tr><td><code><a href="the-input-element.html#the-input-element">input</a></code> element with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute in the <a href="states-of-the-type-attribute.html#date-and-time-state" title="attr-input-type-datetime">Date and Time</a> state
-     </td><td>No role, with the <code title="title-aria-readonly">aria-readonly</code> state set to "true" if the element has a <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code> attribute
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>, with the <code title="title-aria-readonly">aria-readonly</code> state set to "true" if the element has a <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code> attribute
 
     </td></tr><tr><td><code><a href="the-input-element.html#the-input-element">input</a></code> element with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute in the <a href="states-of-the-type-attribute.html#local-date-and-time-state" title="attr-input-type-datetime-local">Local Date and Time</a> state
-     </td><td>No role, with the <code title="title-aria-readonly">aria-readonly</code> state set to "true" if the element has a <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code> attribute
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>, with the <code title="title-aria-readonly">aria-readonly</code> state set to "true" if the element has a <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code> attribute
 
     </td></tr><tr><td><code><a href="the-input-element.html#the-input-element">input</a></code> element with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute in the <a href="states-of-the-type-attribute.html#e-mail-state" title="attr-input-type-email">E-mail</a> state with no <a href="common-input-element-attributes.html#concept-input-list" title="concept-input-list">suggestions source element</a>
      </td><td><code title="attr-aria-role-textbox">textbox</code> role, with the <code title="title-aria-readonly">aria-readonly</code> state set to "true" if the element has a <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code> attribute
 
     </td></tr><tr><td><code><a href="the-input-element.html#the-input-element">input</a></code> element with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute in the <a href="number-state.html#file-upload-state" title="attr-input-type-file">File Upload</a> state
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
 
     </td></tr><tr><td><code><a href="the-input-element.html#the-input-element">input</a></code> element with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute in the <a href="states-of-the-type-attribute.html#hidden-state" title="attr-input-type-hidden">Hidden</a> state
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
 
     </td></tr><tr><td><code><a href="the-input-element.html#the-input-element">input</a></code> element with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute in the <a href="states-of-the-type-attribute.html#month-state" title="attr-input-type-month">Month</a> state
-     </td><td>No role, with the <code title="title-aria-readonly">aria-readonly</code> state set to "true" if the element has a <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code> attribute
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>, with the <code title="title-aria-readonly">aria-readonly</code> state set to "true" if the element has a <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code> attribute
 
     </td></tr><tr><td><code><a href="the-input-element.html#the-input-element">input</a></code> element with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute in the <a href="number-state.html#number-state" title="attr-input-type-number">Number</a> state
      </td><td><code title="attr-aria-role-spinbutton">spinbutton</code> role, with the <code title="title-aria-readonly">aria-readonly</code> state set to "true" if the element has a <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code> attribute, the <code title="attr-aria-valuemax">aria-valuemax</code> property set to the element's <a href="common-input-element-attributes.html#concept-input-max" title="concept-input-max">maximum</a>, the <code title="attr-aria-valuemin">aria-valuemin</code> property set to the element's <a href="common-input-element-attributes.html#concept-input-min" title="concept-input-min">minimum</a>, and, if the result of applying the <a href="common-microsyntaxes.html#rules-for-parsing-floating-point-number-values">rules for parsing floating point number values</a> to the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> is a number, with the <code title="attr-aria-valuenow">aria-valuenow</code> property set to that number
@@ -1066,28 +1080,28 @@ plaintext     = *( %x0000-2029 / %x202F-10FFFF )
      </td><td><code title="attr-aria-role-combobox">combobox</code> role, with the <code title="attr-aria-owns">aria-owns</code> property set to the same value as the <code title="attr-input-list"><a href="common-input-element-attributes.html#attr-input-list">list</a></code> attribute, and the <code title="title-aria-readonly">aria-readonly</code> state set to "true" if the element has a <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code> attribute
 
     </td></tr><tr><td><code><a href="the-input-element.html#the-input-element">input</a></code> element with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute in the <a href="states-of-the-type-attribute.html#time-state" title="attr-input-type-time">Time</a> state
-     </td><td>No role, with the <code title="title-aria-readonly">aria-readonly</code> state set to "true" if the element has a <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code> attribute
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>, with the <code title="title-aria-readonly">aria-readonly</code> state set to "true" if the element has a <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code> attribute
 
     </td></tr><tr><td><code><a href="the-input-element.html#the-input-element">input</a></code> element with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute in the <a href="states-of-the-type-attribute.html#url-state" title="attr-input-type-url">URL</a> state with no <a href="common-input-element-attributes.html#concept-input-list" title="concept-input-list">suggestions source element</a>
      </td><td><code title="attr-aria-role-textbox">textbox</code> role, with the <code title="title-aria-readonly">aria-readonly</code> state set to "true" if the element has a <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code> attribute
 
     </td></tr><tr><td><code><a href="the-input-element.html#the-input-element">input</a></code> element with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute in the <a href="states-of-the-type-attribute.html#week-state" title="attr-input-type-week">Week</a> state
-     </td><td>No role, with the <code title="title-aria-readonly">aria-readonly</code> state set to "true" if the element has a <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code> attribute
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>, with the <code title="title-aria-readonly">aria-readonly</code> state set to "true" if the element has a <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code> attribute
 
     </td></tr><tr><td><code><a href="the-input-element.html#the-input-element">input</a></code> element that is <a href="common-input-element-attributes.html#concept-input-required" title="concept-input-required">required</a>
      </td><td>The <code title="title-aria-required">aria-required</code> state set to "true"
 
     </td></tr><tr><td><code><a href="the-button-element.html#the-keygen-element">keygen</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
 
     </td></tr><tr><td><code><a href="forms.html#the-label-element">label</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
 
     </td></tr><tr><td><code><a href="semantics.html#the-link-element">link</a></code> element that creates a <a href="links.html#hyperlink">hyperlink</a>
      </td><td><code title="attr-aria-role-link">link</code> role
 
     </td></tr><tr><td><code><a href="interactive-elements.html#the-menu-element">menu</a></code> element with a <code title="attr-menu-type"><a href="interactive-elements.html#attr-menu-type">type</a></code> attribute in the <a href="interactive-elements.html#context-menu-state" title="context menu state">context menu</a> state
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
 
     </td></tr><tr><td><code><a href="interactive-elements.html#the-menu-element">menu</a></code> element with a <code title="attr-menu-type"><a href="interactive-elements.html#attr-menu-type">type</a></code> attribute in the <a href="interactive-elements.html#list-state" title="list state">list</a> state
      </td><td><code title="attr-aria-role-menu">menu</code> role
@@ -1096,31 +1110,31 @@ plaintext     = *( %x0000-2029 / %x202F-10FFFF )
      </td><td><code title="attr-aria-role-toolbar">toolbar</code> role
 
     </td></tr><tr><td><code><a href="semantics.html#the-meta-element">meta</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
 
     </td></tr><tr><td><code><a href="the-button-element.html#the-meter-element">meter</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
 
     </td></tr><tr><td><code><a href="sections.html#the-nav-element">nav</a></code> element
      </td><td><code title="attr-aria-role-navigation">navigation</code> role
 
     </td></tr><tr><td><code><a href="scripting-1.html#the-noscript-element">noscript</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
 
     </td></tr><tr><td><code><a href="the-button-element.html#the-optgroup-element">optgroup</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
 
     </td></tr><tr><td><code><a href="the-button-element.html#the-option-element">option</a></code> element that is in a <a href="the-button-element.html#concept-select-option-list" title="concept-select-option-list">list of options</a> or that represents a suggestion in a <code><a href="the-button-element.html#the-datalist-element">datalist</a></code> element
      </td><td><code title="attr-aria-role-option">option</code> role, with the <code title="attr-aria-selected">aria-selected</code> state set to "true" if the element's <a href="the-button-element.html#concept-option-selectedness" title="concept-option-selectedness">selectedness</a> is true, or "false" otherwise.
 
     </td></tr><tr><td><code><a href="the-iframe-element.html#the-param-element">param</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
 
     </td></tr><tr><td><code><a href="the-button-element.html#the-progress-element">progress</a></code> element
      </td><td><code title="attr-aria-role-progressbar">progressbar</code> role, with, if the progress bar is determinate, the <code title="attr-aria-valuemax">aria-valuemax</code> property set to the maximum value of the progress bar, the <code title="attr-aria-valuemin">aria-valuemin</code> property set to zero, and the <code title="attr-aria-valuenow">aria-valuenow</code> property set to the current value of the progress bar
 
     </td></tr><tr><td><code><a href="scripting-1.html#the-script-element">script</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
 
     </td></tr><tr><td><code><a href="the-button-element.html#the-select-element">select</a></code> element with a <code title="attr-select-multiple"><a href="the-button-element.html#attr-select-multiple">multiple</a></code> attribute
      </td><td><code title="attr-aria-role-listbox">listbox</code> role, with the <code title="attr-aria-multiselectable">aria-multiselectable</code> property set to "true"
@@ -1132,13 +1146,13 @@ plaintext     = *( %x0000-2029 / %x202F-10FFFF )
      </td><td>The <code title="title-aria-required">aria-required</code> state set to "true"
 
     </td></tr><tr><td><code><a href="the-iframe-element.html#the-source-element">source</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
 
     </td></tr><tr><td><code><a href="semantics.html#the-style-element">style</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
 
     </td></tr><tr><td><code><a href="interactive-elements.html#the-summary-element">summary</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
 
     </td></tr><tr><td><code><a href="the-button-element.html#the-textarea-element">textarea</a></code> element
      </td><td><code title="attr-aria-role-textbox">textbox</code> role, with the <code title="attr-aria-multiline">aria-multiline</code> property set to "true", and the <code title="title-aria-readonly">aria-readonly</code> state set to "true" if the element has a <code title="attr-textarea-readonly"><a href="the-button-element.html#attr-textarea-readonly">readonly</a></code> attribute
@@ -1147,7 +1161,7 @@ plaintext     = *( %x0000-2029 / %x202F-10FFFF )
      </td><td>The <code title="title-aria-required">aria-required</code> state set to "true"
 
     </td></tr><tr><td><code><a href="semantics.html#the-title-element">title</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
 
     </td></tr><tr><td>An element that <a href="commands.html#concept-command" title="concept-command">defines a command</a>, whose <a href="commands.html#command-facet-type" title="command-facet-type">Type</a> facet is "checkbox", and that is a descendant of a <code><a href="interactive-elements.html#the-menu-element">menu</a></code> element whose <code title="attr-menu-type"><a href="interactive-elements.html#attr-menu-type">type</a></code> attribute in the <a href="interactive-elements.html#list-state" title="list state">list</a> state
      </td><td><code title="attr-aria-role-menuitemcheckbox">menuitemcheckbox</code> role, with the <code title="attr-aria-checked">aria-checked</code> state set to "true" if the command's <a href="commands.html#command-facet-checkedstate" title="command-facet-checkedstate">Checked State</a> facet is true, and "false" otherwise
@@ -1186,7 +1200,7 @@ plaintext     = *( %x0000-2029 / %x202F-10FFFF )
      </td><td>Role must be either <code title="attr-aria-role-link">link</code>, <code title="attr-aria-role-button">button</code>, <code title="attr-aria-role-checkbox">checkbox</code>, <code title="attr-aria-role-menuitem">menuitem</code>, <code title="attr-aria-role-menuitemcheckbox">menuitemcheckbox</code>, <code title="attr-aria-role-menuitemradio">menuitemradio</code>, <code title="attr-aria-role-tab">tab</code>, or <code title="attr-aria-role-treeitem">treeitem</code>
 
     </td></tr><tr><td><code><a href="sections.html#the-address-element">address</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
      </td><td>If specified, role must be <code title="attr-aria-role-contentinfo">contentinfo</code>
 
     </td></tr><tr><td><code><a href="sections.html#the-article-element">article</a></code> element
@@ -1198,7 +1212,7 @@ plaintext     = *( %x0000-2029 / %x202F-10FFFF )
      </td><td>Role must be either <code title="attr-aria-role-note">note</code>, <code title="attr-aria-role-complementary">complementary</code>, or <code title="attr-aria-role-search">search</code>
 
     </td></tr><tr><td><code><a href="the-iframe-element.html#the-audio-element">audio</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
      </td><td>If specified, role must be <code title="attr-aria-role-application">application</code>
 
     </td></tr><tr><td><code><a href="the-button-element.html#the-button-element">button</a></code> element
@@ -1210,11 +1224,11 @@ plaintext     = *( %x0000-2029 / %x202F-10FFFF )
      </td><td>Role must be a role that supports <code title="attr-aria-expanded">aria-expanded</code>
 
     </td></tr><tr><td><code><a href="the-iframe-element.html#the-embed-element">embed</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
      </td><td>If specified, role must be either <code title="attr-aria-role-application">application</code>, <code title="attr-aria-role-document">document</code>, or <code title="attr-aria-role-img">img</code>
 
     </td></tr><tr><td><code><a href="sections.html#the-footer-element">footer</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
      </td><td>If specified, role must be <code title="attr-aria-role-contentinfo">contentinfo</code>
 
     </td></tr><tr><td><code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code> element that does not have an <code><a href="sections.html#the-hgroup-element">hgroup</a></code> ancestor
@@ -1242,11 +1256,11 @@ plaintext     = *( %x0000-2029 / %x202F-10FFFF )
      </td><td>Role must be either <code title="attr-aria-role-link">link</code>, <code title="attr-aria-role-menuitem">menuitem</code>, <code title="attr-aria-role-menuitemcheckbox">menuitemcheckbox</code>, <code title="attr-aria-role-menuitemradio">menuitemradio</code>, <code title="attr-aria-role-tab">tab</code>, or <code title="attr-aria-role-treeitem">treeitem</code>
 
     </td></tr><tr><td><code><a href="sections.html#the-header-element">header</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
      </td><td>If specified, role must be <code title="attr-aria-role-banner">banner</code>
 
     </td></tr><tr><td><code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
      </td><td>If specified, role must be either <code title="attr-aria-role-application">application</code>, <code title="attr-aria-role-document">document</code>, or <code title="attr-aria-role-img">img</code>
 
     </td></tr><tr><td><code><a href="embedded-content-1.html#the-img-element">img</a></code> element whose <code title="attr-img-alt"><a href="embedded-content-1.html#attr-img-alt">alt</a></code> attribute's value is absent
@@ -1278,7 +1292,7 @@ plaintext     = *( %x0000-2029 / %x202F-10FFFF )
      </td><td>Role must be either <code title="attr-aria-role-listitem">listitem</code>, <code title="attr-aria-role-menuitemcheckbox">menuitemcheckbox</code>, <code title="attr-aria-role-menuitemradio">menuitemradio</code>, <code title="attr-aria-role-option">option</code>, <code title="attr-aria-role-tab">tab</code>, or <code title="attr-aria-role-treeitem">treeitem</code>
 
     </td></tr><tr><td><code><a href="the-iframe-element.html#the-object-element">object</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
      </td><td>If specified, role must be either <code title="attr-aria-role-application">application</code>, <code title="attr-aria-role-document">document</code>, or <code title="attr-aria-role-img">img</code>
 
     </td></tr><tr><td><code><a href="grouping-content.html#the-ol-element">ol</a></code> element
@@ -1310,14 +1324,20 @@ plaintext     = *( %x0000-2029 / %x202F-10FFFF )
      </td><td>Role must be either <code title="attr-aria-role-directory">directory</code>, <code title="attr-aria-role-list">list</code>, <code title="attr-aria-role-listbox">listbox</code>, <code title="attr-aria-role-menu">menu</code>, <code title="attr-aria-role-menubar">menubar</code>, <code title="attr-aria-role-tablist">tablist</code>, <code title="attr-aria-role-toolbar ">toolbar</code>, <code title="attr-aria-role-tree">tree</code>
 
     </td></tr><tr><td><code><a href="the-iframe-element.html#the-video-element">video</a></code> element
-     </td><td>No role
+     </td><td><a href="#concept-role-none" title="concept-role-none">No role</a>
      </td><td>If specified, role must be <code title="attr-aria-role-application">application</code>
 
     </td></tr><tr><td><a href="dom.html#the-body-element-0">The body element</a>
      </td><td><code title="attr-aria-role-document">document</code> role
      </td><td>Role must be either <code title="attr-aria-role-document">document</code> or <code title="attr-aria-role-application">application</code>
 
-  </td></tr></tbody></table><div class="impl">
+  </td></tr></tbody></table><p>The entry "<dfn id="concept-role-none" title="concept-role-none">no role</dfn>", when
+  used as a <span title="strong native semantics">strong native
+  semantic</span>, means that no role other than <code title="attr-aria-role-presentation">presentation</code> can be used.
+  When used as a <span title="default implied ARIA semantics">default
+  implied ARIA semantic</span>, it means the user agent has no default
+  mapping to ARIA roles. (However, it probably will have its own
+  mappings to the accessibility layer.)</p><div class="impl">
 
   <p>The WAI-ARIA specification neither requires or forbids user
   agents from enhancing native presentation and interaction behaviors

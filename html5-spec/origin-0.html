@@ -190,7 +190,43 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -315,29 +351,7 @@
      }
      return null;
    }
-   function load(script) {
-     var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
-     document.body.appendChild(e);
-   }
-   function init() {
-     if (location.search == '?slow-browser')
-       return;
-     var configUI = document.createElement('div');
-     configUI.id = 'configUI';
-     document.body.appendChild(configUI);
-     // load('reviewer.js'); // would need cross-site XHR
-     if (document.getElementById('head'))
-       load('toc.js');
-     load('styler.js');
-     // load('updater.js'); // would need cross-site XHR
-     load('dfn.js'); // doesn't support split-out specs, but, oh well.
-     // load('status.js'); // would need cross-site XHR
-     if (getCookie('profile') == '1')
-       document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
-     fixBrokenLink();
-   }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="browsers.html" title="5 Loading Web pages" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="history.html" title="5.4 Session history and navigation" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="browsers.html" title="5 Loading Web pages" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="history.html" title="5.4 Session history and navigation" rel="next"/></head><body><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -503,7 +517,7 @@
    </dd>
 
 
-   <dt>For <code><a href="infrastructure.html#document">Document</a></code> objects and images</dt>
+   <dt>For <code><a href="infrastructure.html#document">Document</a></code> objects</dt>
 
    <dd>
 
@@ -519,38 +533,31 @@
      assigned when the <code><a href="infrastructure.html#document">Document</a></code> is created.</dd>
 
 
-     <dt>If a <code><a href="infrastructure.html#document">Document</a></code> or image was generated from a
-     <a href="webappapis.html#javascript-protocol" title="javascript protocol"><code>javascript:</code>
+     <dt>If a <code><a href="infrastructure.html#document">Document</a></code> was generated from a <a href="webappapis.html#javascript-protocol" title="javascript protocol"><code>javascript:</code>
      URL</a></dt>
 
      <dd>The <a href="#origin">origin</a> is equal to the <a href="#origin">origin</a>
      of the script of that <a href="webappapis.html#javascript-protocol" title="javascript&#10;     protocol"><code>javascript:</code> URL</a>.</dd>
 
 
-     <dt>If a <code><a href="infrastructure.html#document">Document</a></code> or image was served over the
-     network and has an address that uses a URL scheme with a
-     server-based naming authority</dt>
+     <dt>If a <code><a href="infrastructure.html#document">Document</a></code> was served over the network and
+     has an address that uses a URL scheme with a server-based naming
+     authority</dt>
 
-     <dd>The <a href="#origin">origin</a> is the <a href="#origin">origin</a> of the
-     <a href="dom.html#the-document-s-address" title="the document's address">address</a> of the
-     <code><a href="infrastructure.html#document">Document</a></code> or the <a href="urls.html#url">URL</a> of the image, as
-     appropriate.</dd>
+     <dd>The <a href="#origin">origin</a> is the <a href="#origin">origin</a> of
+     <a href="dom.html#the-document-s-address">the <code>Document</code>'s address</a>.</dd>
 
 
-     <dt>If a <code><a href="infrastructure.html#document">Document</a></code> or image was generated from a
-     <a href="infrastructure.html#data-protocol" title="data protocol"><code title="">data:</code>
-     URL</a> that was returned as the location of an HTTP redirect
-     (<a href="fetching-resources.html#concept-http-equivalent-codes" title="concept-http-equivalent-codes">or equivalent</a>
-     in other protocols)</dt>
+     <dt>If a <code><a href="infrastructure.html#document">Document</a></code> was generated from a <a href="infrastructure.html#data-protocol" title="data protocol"><code title="">data:</code> URL</a> that
+     was returned as the location of an HTTP redirect (<a href="fetching-resources.html#concept-http-equivalent-codes" title="concept-http-equivalent-codes">or equivalent</a> in
+     other protocols)</dt>
 
      <dd>The <a href="#origin">origin</a> is the <a href="#origin">origin</a> of the
      <a href="urls.html#url">URL</a> that redirected to the <a href="infrastructure.html#data-protocol" title="data&#10;     protocol"><code title="">data:</code> URL</a>.</dd>
 
 
-     <dt>If a <code><a href="infrastructure.html#document">Document</a></code> or image was generated from a
-     <a href="infrastructure.html#data-protocol" title="data protocol"><code title="">data:</code>
-     URL</a> found in another <code><a href="infrastructure.html#document">Document</a></code> or in a
-     script</dt>
+     <dt>If a <code><a href="infrastructure.html#document">Document</a></code> was generated from a <a href="infrastructure.html#data-protocol" title="data protocol"><code title="">data:</code> URL</a>
+     found in another <code><a href="infrastructure.html#document">Document</a></code> or in a script</dt>
 
      <dd>The <a href="#origin">origin</a> is the <a href="#origin">origin</a> of the
      <code><a href="infrastructure.html#document">Document</a></code> or script that initiated the <a href="history.html#navigate" title="navigate">navigation</a> to that <a href="urls.html#url">URL</a>.</dd>
@@ -571,13 +578,14 @@
      <code><a href="infrastructure.html#document">Document</a></code>.</dd>
 
 
-     <dt>If a <code><a href="infrastructure.html#document">Document</a></code> or image was obtained in some
-     other manner (e.g. a <a href="infrastructure.html#data-protocol" title="data protocol"><code title="">data:</code> URL</a> typed in by the user, a
-     <code><a href="infrastructure.html#document">Document</a></code> created using the <code title="dom-DOMImplementation-createDocument"><a href="infrastructure.html#dom-domimplementation-createdocument">createDocument()</a></code>
+     <dt>If a <code><a href="infrastructure.html#document">Document</a></code> was obtained in some other manner
+     (e.g. a <a href="infrastructure.html#data-protocol" title="data protocol"><code title="">data:</code>
+     URL</a> typed in by the user, a <code><a href="infrastructure.html#document">Document</a></code> created
+     using the <code title="dom-DOMImplementation-createDocument"><a href="infrastructure.html#dom-domimplementation-createdocument">createDocument()</a></code>
      API, etc)</dt>
 
      <dd>The <a href="#origin">origin</a> is a globally unique identifier
-     assigned when the <code><a href="infrastructure.html#document">Document</a></code> or image is created.</dd>
+     assigned when the <code><a href="infrastructure.html#document">Document</a></code> is created.</dd>
 
     </dl><p>When a <code><a href="infrastructure.html#document">Document</a></code> is created, its <a href="#effective-script-origin">effective
     script origin</a> is initialized to the <a href="#origin">origin</a> of
@@ -587,18 +595,57 @@
    </dd>
 
 
+   <dt>For images</dt>
+
+   <dd>
+
+    <dl class="switch"><dt>If an image is the image of an <code><a href="embedded-content-1.html#the-img-element">img</a></code> element and
+     its image data has a <a href="#concept-origin-forced-img" title="concept-origin-forced-img">forced origin</a></dt>
+
+     <dd>The <a href="#origin">origin</a> is the image data's <dfn id="concept-origin-forced-img" title="concept-origin-forced-img">forced origin</dfn>. (This
+     occurs when the image was successfully obtained using CORS.)</dd>
+
+
+     <dt>If an image was served over the network and has an address
+     that uses a URL scheme with a server-based naming authority</dt>
+
+     <dd>The <a href="#origin">origin</a> is the <a href="#origin">origin</a> of the
+     image's <a href="urls.html#url">URL</a>.</dd>
+
+
+     <dt>If an image was generated from a <a href="infrastructure.html#data-protocol" title="data&#10;     protocol"><code title="">data:</code> URL</a> that was
+     returned as the location of an HTTP redirect (<a href="fetching-resources.html#concept-http-equivalent-codes" title="concept-http-equivalent-codes">or equivalent</a> in
+     other protocols)</dt>
+
+     <dd>The <a href="#origin">origin</a> is the <a href="#origin">origin</a> of the
+     <a href="urls.html#url">URL</a> that redirected to the <a href="infrastructure.html#data-protocol" title="data&#10;     protocol"><code title="">data:</code> URL</a>.</dd>
+
+
+     <dt>If an image was generated from a <a href="infrastructure.html#data-protocol" title="data&#10;     protocol"><code title="">data:</code> URL</a> found in another
+     <code><a href="infrastructure.html#document">Document</a></code> or in a script</dt>
+
+     <dd>The <a href="#origin">origin</a> is the <a href="#origin">origin</a> of the
+     <code><a href="infrastructure.html#document">Document</a></code> or script that loaded that image.</dd>
+
+
+     <dt>If an image was obtained in some other manner (e.g. a <a href="infrastructure.html#data-protocol" title="data protocol"><code title="">data:</code> URL</a>
+     typed in by the user)</dt>
+
+     <dd>The <a href="#origin">origin</a> is a globally unique identifier
+     assigned when the image is created.</dd>
+
+    </dl></dd>
+
+
    <dt>For <code><a href="the-iframe-element.html#the-audio-element">audio</a></code> and <code><a href="the-iframe-element.html#the-video-element">video</a></code> elements</dt>
 
    <dd>
 
-    <p>If value of the <a href="the-iframe-element.html#media-element">media element</a>'s <code title="dom-media-currentSrc"><a href="the-iframe-element.html#dom-media-currentsrc">currentSrc</a></code> attribute is the
-    empty string, the <a href="#origin">origin</a> is the same as the
+    <p>The <a href="#origin">origin</a> is always the same as the
     <a href="#origin">origin</a> of the element's <code><a href="infrastructure.html#document">Document</a></code>'s
-    <a href="#origin">origin</a>.</p>
-
-    <p>Otherwise, the <a href="#origin">origin</a> is equal to the
-    <a href="#origin">origin</a> of the <a href="urls.html#absolute-url">absolute URL</a> given by the
-    <a href="the-iframe-element.html#media-element">media element</a>'s <code title="dom-media-currentSrc"><a href="the-iframe-element.html#dom-media-currentsrc">currentSrc</a></code> attribute.</p>
+    <a href="#origin">origin</a>, as <a href="the-iframe-element.html#media-resource" title="media resource">media
+    resources</a> cannot be fetched cross-origin without the
+    server's permission (using CORS).</p>
 
    </dd>
 

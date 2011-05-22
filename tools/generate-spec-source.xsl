@@ -3105,6 +3105,14 @@
       <xsl:when test="starts-with($name,'input.')">
         <xsl:value-of select="concat('#',substring-after($name,'input.'),'-state')"/>
       </xsl:when>
+      <xsl:when test="$name = 'h1'">#the-h1-h2-h3-h4-h5-and-h6-elements</xsl:when>
+      <xsl:when test="$name = 'h2'">#the-h1-h2-h3-h4-h5-and-h6-elements</xsl:when>
+      <xsl:when test="$name = 'h3'">#the-h1-h2-h3-h4-h5-and-h6-elements</xsl:when>
+      <xsl:when test="$name = 'h4'">#the-h1-h2-h3-h4-h5-and-h6-elements</xsl:when>
+      <xsl:when test="$name = 'h5'">#the-h1-h2-h3-h4-h5-and-h6-elements</xsl:when>
+      <xsl:when test="$name = 'h6'">#the-h1-h2-h3-h4-h5-and-h6-elements</xsl:when>
+      <xsl:when test="$name = 'sub'">#the-sub-and-sup-elements</xsl:when>
+      <xsl:when test="$name = 'sup'">#the-sub-and-sup-elements</xsl:when>
       <xsl:when test="starts-with($name,'button')">#the-button-element</xsl:when>
       <xsl:when test="starts-with($name,'command')">#the-command-element</xsl:when>
       <xsl:when test="$name = 'meta.http-equiv.content-language'">#attr-meta-http-equiv-content-language</xsl:when>
@@ -3140,7 +3148,7 @@
     <xsl:param name="ref"/>
     <xsl:param name="base">http://dev.w3.org/html5/spec-author-view/</xsl:param>
     <!-- * <xsl:param name="base">http://developers.whatwg.org/</xsl:param> -->
-    <xsl:param name="fragment-file">../fragment-links.html</xsl:param>
+    <xsl:param name="fragment-file">../fragment-links-full.html</xsl:param>
     <xsl:for-each select="document($fragment-file)">
       <xsl:choose>
         <xsl:when test="key('filename-map',$ref)">

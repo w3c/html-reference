@@ -190,7 +190,43 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -315,29 +351,7 @@
      }
      return null;
    }
-   function load(script) {
-     var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
-     document.body.appendChild(e);
-   }
-   function init() {
-     if (location.search == '?slow-browser')
-       return;
-     var configUI = document.createElement('div');
-     configUI.id = 'configUI';
-     document.body.appendChild(configUI);
-     // load('reviewer.js'); // would need cross-site XHR
-     if (document.getElementById('head'))
-       load('toc.js');
-     load('styler.js');
-     // load('updater.js'); // would need cross-site XHR
-     load('dfn.js'); // doesn't support split-out specs, but, oh well.
-     // load('status.js'); // would need cross-site XHR
-     if (getCookie('profile') == '1')
-       document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
-     fixBrokenLink();
-   }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="tree-construction.html" title="8.2.5 Tree construction" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="named-character-references.html" title="8.5 Named character references" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="tree-construction.html" title="8.2.5 Tree construction" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="named-character-references.html" title="8.5 Named character references" rel="next"/></head><body><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -756,38 +770,35 @@
   is inserted <em>into the outer <code><a href="infrastructure.html#document">Document</a></code>
   object</em>.</p>
 
-  <p>This also means that the <a href="webappapis.html#script-s-global-object">script's global object</a> is
-  the outer <a href="browsers.html#browsing-context">browsing context</a>'s <code><a href="browsers.html#window">Window</a></code>
-  object, <em>not</em> the <code><a href="browsers.html#window">Window</a></code> object inside the
-  <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>.</p>
-
-  <p class="note">This isn't a security problem since the script that
-  moves the <code><a href="grouping-content.html#the-div-element">div</a></code> into the outer <code><a href="infrastructure.html#document">Document</a></code> can
-  only do so because the two <code><a href="infrastructure.html#document">Document</a></code> object have the
-  same <a href="origin-0.html#origin">origin</a>.</p>
-
-  <p>Thus, the first alert says "http://example.com/outer".</p>
+  <p>This parsed into different <code><a href="infrastructure.html#document">Document</a></code>s than the one
+  the parser was created for do not execute, so the first alert does
+  not show.</p>
 
   <p>Once the <code><a href="grouping-content.html#the-div-element">div</a></code> element's end tag is parsed, the
   <code><a href="grouping-content.html#the-div-element">div</a></code> element is popped off the stack, and so the next
   <code><a href="scripting-1.html#the-script-element">script</a></code> element is in the inner <code><a href="infrastructure.html#document">Document</a></code>:</p>
 
-  <ul class="domTree"><li class="t1"><code><a href="semantics.html#the-html-element">html</a></code><ul><li class="t1"><code><a href="semantics.html#the-head-element">head</a></code></li><li class="t1"><code><a href="sections.html#the-body-element">body</a></code><ul><li class="t1"><code><a href="scripting-1.html#the-script-element">script</a></code><ul><li class="t3"><code>#text</code>: <span title="">alert(document.URL);</span></li></ul></li></ul></li></ul></li></ul><p>This second alert will say "http://example.com/inner".</p>
+  <ul class="domTree"><li class="t1"><code><a href="semantics.html#the-html-element">html</a></code><ul><li class="t1"><code><a href="semantics.html#the-head-element">head</a></code></li><li class="t1"><code><a href="sections.html#the-body-element">body</a></code><ul><li class="t1"><code><a href="scripting-1.html#the-script-element">script</a></code><ul><li class="t3"><code>#text</code>: <span title="">alert(document.URL);</span></li></ul></li></ul></li></ul></li></ul><p>This script does execute, resulting in an alert that says "http://example.com/inner".</p>
 
 
   <h5 id="the-execution-of-scripts-that-are-moving-across-multiple-documents"><span class="secno">8.2.8.5 </span>The execution of scripts that are moving across multiple documents</h5>
 
   <p><i>This section is non-normative.</i></p>
 
-  <p>Elaborating on the example in the previous section, consider a
-  case where a <code><a href="scripting-1.html#the-script-element">script</a></code> element with a <code title="attr-script-src"><a href="scripting-1.html#attr-script-src">src</a></code> attribute is parsed, but while
-  the external script is being downloaded, the element is moved to
-  another document.</p>
+  <p>Elaborating on the example in the previous section, consider the
+  case where the second <code><a href="scripting-1.html#the-script-element">script</a></code> element is an external
+  script (i.e. one with a <code title="attr-script-src"><a href="scripting-1.html#attr-script-src">src</a></code>
+  attribute). Since the element was not in the parser's
+  <code><a href="infrastructure.html#document">Document</a></code> when it was created, that external script is
+  not even downloaded.</p>
 
-  <p>In this case, the <a href="webappapis.html#script-s-global-object">script's global object</a> is that
-  second document's <a href="browsers.html#browsing-context">browsing context</a>'s
-  <code><a href="browsers.html#window">Window</a></code> object, not the <code><a href="browsers.html#window">Window</a></code> object of
-  the document into which the element was parsed.</p>
+  <p>In a case where a <code><a href="scripting-1.html#the-script-element">script</a></code> element with a <code title="attr-script-src"><a href="scripting-1.html#attr-script-src">src</a></code> attribute is parsed normally into
+  its parser's <code><a href="infrastructure.html#document">Document</a></code>, but while the external script is
+  being downloaded, the element is moved to another document, the
+  script continues to download, but does not execute.</p>
+
+  <p class="note">In general, moving <code><a href="scripting-1.html#the-script-element">script</a></code> elements
+  between <code><a href="infrastructure.html#document">Document</a></code>s is considered a bad practice.</p>
 
 
 
@@ -1256,4 +1267,7 @@
 
    </li>
 
-  </ol></div></body></html>
+  </ol><p class="note">This algorithm is invoked without a <var title="concept-frag-parse-context"><a href="#concept-frag-parse-context">context</a></var> element in the case
+  of <code title="dom-Document-innerHTML">Document.innerHTML</code>.</p>
+
+  </div></body></html>

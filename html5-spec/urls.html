@@ -190,7 +190,43 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -315,29 +351,7 @@
      }
      return null;
    }
-   function load(script) {
-     var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
-     document.body.appendChild(e);
-   }
-   function init() {
-     if (location.search == '?slow-browser')
-       return;
-     var configUI = document.createElement('div');
-     configUI.id = 'configUI';
-     document.body.appendChild(configUI);
-     // load('reviewer.js'); // would need cross-site XHR
-     if (document.getElementById('head'))
-       load('toc.js');
-     load('styler.js');
-     // load('updater.js'); // would need cross-site XHR
-     load('dfn.js'); // doesn't support split-out specs, but, oh well.
-     // load('status.js'); // would need cross-site XHR
-     if (getCookie('profile') == '1')
-       document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
-     fixBrokenLink();
-   }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="common-microsyntaxes.html" title="2.5 Common microsyntaxes" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="fetching-resources.html" title="2.7 Fetching resources" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="common-microsyntaxes.html" title="2.5 Common microsyntaxes" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="fetching-resources.html" title="2.7 Fetching resources" rel="next"/></head><body><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -346,7 +360,7 @@
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="fetching-resources.html" class="next">2.7 Fetching resources</a>
   <ol class="toc"><li><ol><li><a href="urls.html#urls"><span class="secno">2.6 </span>URLs</a>
-    <ol><li><a href="urls.html#terminology-0"><span class="secno">2.6.1 </span>Terminology</a></li><li><a href="urls.html#parsing-urls"><span class="secno">2.6.2 </span>Parsing URLs</a></li><li><a href="urls.html#resolving-urls"><span class="secno">2.6.3 </span>Resolving URLs</a></li><li><a href="urls.html#dynamic-changes-to-base-urls"><span class="secno">2.6.4 </span>Dynamic changes to base URLs</a></li><li><a href="urls.html#interfaces-for-url-manipulation"><span class="secno">2.6.5 </span>Interfaces for URL manipulation</a></li></ol></li></ol></li></ol></div><h3 id="urls"><span class="secno">2.6 </span>URLs</h3><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/56">ISSUE-56</a> (urls-webarch) blocks progress to Last Call</span></p><p>This specification defines the term <a href="#url">URL</a>, and defines
+    <ol><li><a href="urls.html#terminology-0"><span class="secno">2.6.1 </span>Terminology</a></li><li><a href="urls.html#parsing-urls"><span class="secno">2.6.2 </span>Parsing URLs</a></li><li><a href="urls.html#resolving-urls"><span class="secno">2.6.3 </span>Resolving URLs</a></li><li><a href="urls.html#url-manipulation-and-creation"><span class="secno">2.6.4 </span>URL manipulation and creation</a></li><li><a href="urls.html#dynamic-changes-to-base-urls"><span class="secno">2.6.5 </span>Dynamic changes to base URLs</a></li><li><a href="urls.html#interfaces-for-url-manipulation"><span class="secno">2.6.6 </span>Interfaces for URL manipulation</a></li></ol></li></ol></li></ol></div><h3 id="urls"><span class="secno">2.6 </span>URLs</h3><p>This specification defines the term <a href="#url">URL</a>, and defines
   various algorithms for dealing with URLs, because for historical
   reasons the rules defined by the URI and IRI specifications are not
   a complete description of what HTML user agents need to implement to
@@ -715,7 +729,62 @@
   immediately after the <a href="#url-scheme" title="url-scheme">&lt;scheme&gt;</a>
   component and they are both U+002F SOLIDUS characters (//).</p><div class="impl">
 
-  <h4 id="dynamic-changes-to-base-urls"><span class="secno">2.6.4 </span>Dynamic changes to base URLs</h4>
+  <h4 id="url-manipulation-and-creation"><span class="secno">2.6.4 </span>URL manipulation and creation</h4>
+
+  <p>To <dfn id="fragment-escaped" title="fragment-escaped">fragment-escape</dfn> a string
+  <var title="">input</var>, a user agent must run the following
+  steps:</p>
+
+  <ol><li><p>Let <var title="">input</var> be the string to be
+   escaped.</p></li>
+
+   <li><p>Let <var title="">position</var> point at the first
+   character of <var title="">input</var>.</p></li>
+
+   <li><p>Let <var title="">output</var> be an empty string.</p></li>
+
+   <li><p><i>Loop</i>: If <var title="">position</var> is past the end
+   of <var title="">input</var>, then jump to the step labeled
+   <i>end</i>.</p></li>
+
+   <li>
+
+    <p>If the character in <var title="">input</var> pointed to by
+    <var title="">position</var> is in the range U+0000 to U+0020 or
+    is one of the following characters:</p>
+
+    <ul class="brief"><li>U+0022 QUOTATION MARK character (")
+     </li><li>U+0023 NUMBER SIGN character (#)
+     </li><li>U+0025 PERCENT SIGN character (%)
+     </li><li>U+003C LESS-THAN SIGN character (&lt;)
+     </li><li>U+003E GREATER-THAN SIGN character (&gt;)
+     </li><li>U+005B LEFT SQUARE BRACKET character ([)
+     </li><li>U+005C REVERSE SOLIDUS character (\)
+     </li><li>U+005D RIGHT SQUARE BRACKET character (])
+     </li><li>U+005E CIRCUMFLEX ACCENT character (^)
+     </li><li>U+007B LEFT CURLY BRACKET character ({)
+     </li><li>U+007C VERTICAL LINE character (|)
+     </li><li>U+007D RIGHT CURLY BRACKET character (})
+    </li></ul><p>...then append the percent-encoded form of the character to
+    <var title="">output</var>. <a href="references.html#refsRFC3986">[RFC3986]</a></p> 
+    <p>Otherwise, append the character itself to <var title="">output</var>.</p>
+
+    <p class="note">This escapes any ASCII characters that are not
+    valid in the URI &lt;fragment&gt; production without being
+    escaped.</p>
+
+   </li>
+
+   <li><p>Advance <var title="">position</var> to the next character
+   in <var title="">input</var>.</p></li>
+
+   <li><p>Return to the step labeled <i>loop</i>.</p></li>
+
+   <li><p><i>End</i>: Return <var title="">output</var>.</p></li>
+
+  </ol></div><div class="impl">
+
+  <h4 id="dynamic-changes-to-base-urls"><span class="secno">2.6.5 </span>Dynamic changes to base URLs</h4>
 
   <p>When an <code title="attr-xml-base"><a href="elements.html#the-xml:base-attribute-xml-only">xml:base</a></code> attribute
   changes, the attribute's element, and all descendant elements, are
@@ -776,7 +845,7 @@
 
    </dd>
 
-  </dl></div><h4 id="interfaces-for-url-manipulation"><span class="secno">2.6.5 </span>Interfaces for URL manipulation</h4><p>An interface that has a complement of <dfn id="url-decomposition-idl-attributes">URL decomposition IDL
+  </dl></div><h4 id="interfaces-for-url-manipulation"><span class="secno">2.6.6 </span>Interfaces for URL manipulation</h4><p>An interface that has a complement of <dfn id="url-decomposition-idl-attributes">URL decomposition IDL
   attributes</dfn> has seven attributes with the following
   definitions:</p><pre class="idl extract">           attribute DOMString <a href="#dom-uda-protocol" title="dom-uda-protocol">protocol</a>;
            attribute DOMString <a href="#dom-uda-host" title="dom-uda-host">host</a>;

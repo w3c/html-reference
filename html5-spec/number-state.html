@@ -190,7 +190,43 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -315,29 +351,7 @@
      }
      return null;
    }
-   function load(script) {
-     var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
-     document.body.appendChild(e);
-   }
-   function init() {
-     if (location.search == '?slow-browser')
-       return;
-     var configUI = document.createElement('div');
-     configUI.id = 'configUI';
-     document.body.appendChild(configUI);
-     // load('reviewer.js'); // would need cross-site XHR
-     if (document.getElementById('head'))
-       load('toc.js');
-     load('styler.js');
-     // load('updater.js'); // would need cross-site XHR
-     load('dfn.js'); // doesn't support split-out specs, but, oh well.
-     // load('status.js'); // would need cross-site XHR
-     if (getCookie('profile') == '1')
-       document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
-     fixBrokenLink();
-   }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="states-of-the-type-attribute.html" title="4.10.7.1 States of the type attribute" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="common-input-element-attributes.html" title="4.10.7.2 Common input element attributes" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="states-of-the-type-attribute.html" title="4.10.7.1 States of the type attribute" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="common-input-element-attributes.html" title="4.10.7.2 Common input element attributes" rel="next"/></head><body><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -368,8 +382,8 @@
   should allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
 
   </div><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
-  specified, must have a value that is a <a href="common-microsyntaxes.html#valid-floating-point-number">valid floating point
-  number</a>.</p><div class="impl">
+  specified and not empty, must have a value that is a <a href="common-microsyntaxes.html#valid-floating-point-number">valid
+  floating point number</a>.</p><div class="impl">
 
   <p><strong>The <a href="the-input-element.html#value-sanitization-algorithm">value sanitization algorithm</a> is as
   follows</strong>: If the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>
@@ -676,8 +690,8 @@
   <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
 
   </div><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
-  specified, must have a value that is a <a href="common-microsyntaxes.html#valid-simple-color">valid simple
-  color</a>.</p><div class="impl">
+  specified and not empty, must have a value that is a <a href="common-microsyntaxes.html#valid-simple-color">valid
+  simple color</a>.</p><div class="impl">
 
   <p><strong>The <a href="the-input-element.html#value-sanitization-algorithm">value sanitization algorithm</a> is as
   follows</strong>: If the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>
@@ -858,9 +872,10 @@
    owner</a>.</li>
 
    <li>They both have a <code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code>
-   attribute, and the value of <var title="">a</var>'s <code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code> attribute is a
-   <a href="infrastructure.html#compatibility-caseless">compatibility caseless</a> match for the value of <var title="">b</var>'s <code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code>
-   attribute.</li>
+   attribute, their <code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code> attributes
+   are not empty, and the value of <var title="">a</var>'s <code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code> attribute is a <a href="infrastructure.html#compatibility-caseless">compatibility
+   caseless</a> match for the value of <var title="">b</var>'s
+   <code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code> attribute.</li>
 
   </ul><p>A document must not contain an <code><a href="the-input-element.html#the-input-element">input</a></code> element whose
   <i><a href="#radio-button-group">radio button group</a></i> contains only that element.</p><div class="impl">
@@ -1005,13 +1020,12 @@
   </dl><p>The tokens must not be <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a>
   matches for any of the other tokens (i.e. duplicates are not
   allowed). <span class="impl">To obtain the list of tokens from the
-  attribute, the user agent must <a href="common-microsyntaxes.html#split-a-string-on-commas" title="split a string on&#10;  commas">split the attribute value on commas</a>.</span></p><p>User agents may use the value of this attribute to display
-  appropriate a more appropriate user interface than a generic file
-  picker. For instance, given the value <code title="">image/*</code>,
-  a user agent could offer the user the option of using a local camera
-  or selecting a photograph from their photo collection; given the
-  value <code title="">audio/*</code>, a user agent could offer the
-  user the option of recording a clip using a headset microphone.</p><div class="impl">
+  attribute, the user agent must <a href="common-microsyntaxes.html#split-a-string-on-commas" title="split a string on&#10;  commas">split the attribute value on commas</a>.</span></p><p>User agents may use the value of this attribute to display a more
+  appropriate user interface than a generic file picker. For instance,
+  given the value <code title="">image/*</code>, a user agent could
+  offer the user the option of using a local camera or selecting a
+  photograph from their photo collection; given the value <code title="">audio/*</code>, a user agent could offer the user the
+  option of recording a clip using a headset microphone.</p><div class="impl">
 
   <p>User agents should prevent the user from selecting files that are
   not accepted by one (or more) of these tokens.</p>

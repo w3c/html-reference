@@ -333,3 +333,5 @@ distclean: clean schemaclean syntax
 	$(RM) html.css
 	$(RM) fragment-links.js
 	$(RM) fragment-links.html
+	$(RM) fragment-links-full.js
+	$(RM) fragment-links-full.html

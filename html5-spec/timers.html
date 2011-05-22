@@ -190,7 +190,43 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -315,29 +351,7 @@
      }
      return null;
    }
-   function load(script) {
-     var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
-     document.body.appendChild(e);
-   }
-   function init() {
-     if (location.search == '?slow-browser')
-       return;
-     var configUI = document.createElement('div');
-     configUI.id = 'configUI';
-     document.body.appendChild(configUI);
-     // load('reviewer.js'); // would need cross-site XHR
-     if (document.getElementById('head'))
-       load('toc.js');
-     load('styler.js');
-     // load('updater.js'); // would need cross-site XHR
-     load('dfn.js'); // doesn't support split-out specs, but, oh well.
-     // load('status.js'); // would need cross-site XHR
-     if (getCookie('profile') == '1')
-       document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
-     fixBrokenLink();
-   }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="webappapis.html" title="6 Web application APIs" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="editing.html" title="7 User interaction" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="webappapis.html" title="6 Web application APIs" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="editing.html" title="7 User interaction" rel="next"/></head><body><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -346,9 +360,9 @@
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="editing.html" class="next">7 User interaction</a>
   <ol class="toc"><li><ol><li><a href="timers.html#timers"><span class="secno">6.3 </span>Timers</a></li><li><a href="timers.html#user-prompts"><span class="secno">6.4 </span>User prompts</a>
-    <ol><li><a href="timers.html#simple-dialogs"><span class="secno">6.4.1 </span>Simple dialogs</a></li><li><a href="timers.html#printing"><span class="secno">6.4.2 </span>Printing</a></li><li><a href="timers.html#dialogs-implemented-using-separate-documents"><span class="secno">6.4.3 </span>Dialogs implemented using separate documents</a></li></ol></li><li><a href="timers.html#system-state-and-capabilities:-the-navigator-object"><span class="secno">6.5 </span>System state and capabilities: the <code>Navigator</code> object</a>
-    <ol><li><a href="timers.html#client-identification"><span class="secno">6.5.1 </span>Client identification</a></li><li><a href="timers.html#custom-handlers"><span class="secno">6.5.2 </span>Custom scheme and content handlers</a>
-      <ol><li><a href="timers.html#security-and-privacy"><span class="secno">6.5.2.1 </span>Security and privacy</a></li><li><a href="timers.html#sample-handler-impl"><span class="secno">6.5.2.2 </span>Sample user interface</a></li></ol></li><li><a href="timers.html#manually-releasing-the-storage-mutex"><span class="secno">6.5.3 </span>Manually releasing the storage mutex</a></li></ol></li></ol></li></ol></div><h3 id="timers"><span class="secno">6.3 </span>Timers</h3><p>The <code title="dom-windowtimers-setTimeout"><a href="#dom-windowtimers-settimeout">setTimeout()</a></code>
+    <ol><li><a href="timers.html#simple-dialogs"><span class="secno">6.4.1 </span>Simple dialogs</a></li><li><a href="timers.html#printing"><span class="secno">6.4.2 </span>Printing</a></li><li><a href="timers.html#dialogs-implemented-using-separate-documents"><span class="secno">6.4.3 </span>Dialogs implemented using separate documents</a></li></ol></li><li><a href="timers.html#system-state-and-capabilities"><span class="secno">6.5 </span>System state and capabilities</a>
+    <ol><li><a href="timers.html#the-navigator-object"><span class="secno">6.5.1 </span>The <code>Navigator</code> object</a>
+      <ol><li><a href="timers.html#client-identification"><span class="secno">6.5.1.1 </span>Client identification</a></li><li><a href="timers.html#custom-handlers"><span class="secno">6.5.1.2 </span>Custom scheme and content handlers</a></li><li><a href="timers.html#security-and-privacy"><span class="secno">6.5.1.3 </span>Security and privacy</a></li><li><a href="timers.html#sample-handler-impl"><span class="secno">6.5.1.4 </span>Sample user interface</a></li><li><a href="timers.html#manually-releasing-the-storage-mutex"><span class="secno">6.5.1.5 </span>Manually releasing the storage mutex</a></li></ol></li><li><a href="timers.html#the-external-interface"><span class="secno">6.5.2 </span>The <code>External</code> interface</a></li></ol></li></ol></li></ol></div><h3 id="timers"><span class="secno">6.3 </span>Timers</h3><p>The <code title="dom-windowtimers-setTimeout"><a href="#dom-windowtimers-settimeout">setTimeout()</a></code>
   and <code title="dom-windowtimers-setInterval"><a href="#dom-windowtimers-setinterval">setInterval()</a></code>
   methods allow authors to schedule timer-based callbacks.</p><pre class="idl">[Supplemental, NoInterfaceObject]
 interface <dfn id="windowtimers">WindowTimers</dfn> {
@@ -1010,7 +1024,7 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
   value</a> to the given new value.</p>
 
   </div><p class="note">The <code title="dom-window-close"><a href="browsers.html#dom-window-close">window.close()</a></code> method can be used to
-  close the browsing context.</p><h3 id="system-state-and-capabilities:-the-navigator-object"><span class="secno">6.5 </span>System state and capabilities: the <code><a href="#navigator">Navigator</a></code> object</h3><div class="impl">
+  close the browsing context.</p><h3 id="system-state-and-capabilities"><span class="secno">6.5 </span>System state and capabilities</h3><h4 id="the-navigator-object"><span class="secno">6.5.1 </span>The <code><a href="#navigator">Navigator</a></code> object</h4><div class="impl">
 
   <p>The <dfn id="dom-navigator" title="dom-navigator"><code>navigator</code></dfn>
   attribute of the <code><a href="browsers.html#window">Window</a></code> interface must return an
@@ -1034,7 +1048,7 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
    
 
    
-  </div><h4 id="client-identification"><span class="secno">6.5.1 </span>Client identification</h4><pre class="idl">[Supplemental, NoInterfaceObject]
+  </div><h5 id="client-identification"><span class="secno">6.5.1.1 </span>Client identification</h5><pre class="idl">[Supplemental, NoInterfaceObject]
 interface <dfn id="navigatorid">NavigatorID</dfn> {  readonly attribute DOMString <a href="#dom-navigator-appname" title="dom-navigator-appName">appName</a>;
   readonly attribute DOMString <a href="#dom-navigator-appversion" title="dom-navigator-appVersion">appVersion</a>;
   readonly attribute DOMString <a href="#dom-navigator-platform" title="dom-navigator-platform">platform</a>;
@@ -1101,7 +1115,7 @@ interface <dfn id="navigatorid">NavigatorID</dfn> {  readonly attribute DOMStrin
   identified. For this reason, user agent implementors are strongly
   urged to include as little information in this API as possible.</p>
 
-  </div><h4 id="custom-handlers"><span class="secno">6.5.2 </span>Custom scheme and content handlers</h4><pre class="idl">[Supplemental, NoInterfaceObject]
+  </div><h5 id="custom-handlers"><span class="secno">6.5.1.2 </span>Custom scheme and content handlers</h5><pre class="idl">[Supplemental, NoInterfaceObject]
 interface <dfn id="navigatorcontentutils">NavigatorContentUtils</dfn> {
   // content handler registration
   void <a href="#dom-navigator-registerprotocolhandler" title="dom-navigator-registerProtocolHandler">registerProtocolHandler</a>(in DOMString scheme, in DOMString url, in DOMString title);
@@ -1292,7 +1306,7 @@ interface <dfn id="navigatorcontentutils">NavigatorContentUtils</dfn> {
 
   </div><div class="impl">
 
-  <h5 id="security-and-privacy"><span class="secno">6.5.2.1 </span>Security and privacy</h5>
+  <h5 id="security-and-privacy"><span class="secno">6.5.1.3 </span>Security and privacy</h5>
 
   <p>These mechanisms can introduce a number of concerns, in
   particular privacy concerns.</p>
@@ -1373,7 +1387,7 @@ interface <dfn id="navigatorcontentutils">NavigatorContentUtils</dfn> {
 
   </div><div class="impl">
 
-  <h5 id="sample-handler-impl"><span class="secno">6.5.2.2 </span>Sample user interface</h5>
+  <h5 id="sample-handler-impl"><span class="secno">6.5.1.4 </span>Sample user interface</h5>
 
   <p><i>This section is non-normative.</i></p>
 
@@ -1415,7 +1429,7 @@ interface <dfn id="navigatorcontentutils">NavigatorContentUtils</dfn> {
   method would work equivalently, but for schemes instead of unknown
   content types.</p>
 
-  </div><h4 id="manually-releasing-the-storage-mutex"><span class="secno">6.5.3 </span>Manually releasing the storage mutex</h4><pre class="idl">[Supplemental, NoInterfaceObject]
+  </div><h5 id="manually-releasing-the-storage-mutex"><span class="secno">6.5.1.5 </span>Manually releasing the storage mutex</h5><pre class="idl">[Supplemental, NoInterfaceObject]
 interface <dfn id="navigatorstorageutils">NavigatorStorageUtils</dfn> {
   void <a href="#dom-navigator-yieldforstorageupdates" title="dom-navigator-yieldForStorageUpdates">yieldForStorageUpdates</a>();
 };</pre><dl class="domintro"><dt><var title="">window</var> . <code title="dom-navigator"><a href="#dom-navigator">navigator</a></code> . <code title="dom-navigator-yieldForStorageUpdates"><a href="#dom-navigator-yieldforstorageupdates">yieldForStorageUpdates</a></code>()</dt>
@@ -1453,4 +1467,130 @@ interface <dfn id="navigatorstorageutils">NavigatorStorageUtils</dfn> {
    called, release the <a href="webappapis.html#storage-mutex">storage mutex</a> so that it is once
    again free. Otherwise, it must do nothing.</p>
 
-  </div></body></html>
+  </div><h4 id="the-external-interface"><span class="secno">6.5.2 </span>The <code><a href="#external">External</a></code> interface</h4><div class="impl">
+
+  <p>The <dfn id="dom-external" title="dom-external"><code>external</code></dfn>
+  attribute of the <code><a href="browsers.html#window">Window</a></code> interface must return an
+  instance of the <code><a href="#external">External</a></code> interface. The same object
+  must be returned each time.</p>
+
+  </div><pre class="idl">interface <dfn id="external">External</dfn> {
+  void <a href="#dom-external-addsearchprovider" title="dom-external-AddSearchProvider">AddSearchProvider</a>(in DOMString engineURL);
+  unsigned long <a href="#dom-external-issearchproviderinstalled" title="dom-external-IsSearchProviderInstalled">IsSearchProviderInstalled</a>(in DOMString engineURL);
+};</pre><dl class="domintro"><dt><var title="">window</var> . <code title="dom-external"><a href="#dom-external">external</a></code> . <code title="dom-external-AddSearchProvider"><a href="#dom-external-addsearchprovider">AddSearchProvider</a></code>( <var title="">url</var> )</dt>
+   <dd>
+
+    <p>Adds the search engine described by the OpenSearch description
+    document at <var title="">url</var>. <a href="references.html#refsOPENSEARCH">[OPENSEARCH]</a></p>
+
+    <p>The OpenSearch description document has to be on the same
+    server as the script that calls this method.</p>
+
+   </dd>
+
+   <dt><var title="">installed</var> = <var title="">window</var> . <code title="dom-external"><a href="#dom-external">external</a></code> . <code title="dom-external-IsSearchProviderInstalled"><a href="#dom-external-issearchproviderinstalled">IsSearchProviderInstalled</a></code>( <var title="">url</var> )</dt>
+   <dd>
+
+    <p>Returns a value based on comparing <var title="">url</var> to
+    the URLs of the results pages of the installed search engines.</p>
+
+    <dl><dt>0 </dt><dd>None of the installed search engines match <var title="">url</var>.
+     </dd><dt>1 </dt><dd>One or more installed search engines match <var title="">url</var>, but none are the user's default search engine.
+     </dd><dt>2 </dt><dd>The user's default search engine matches <var title="">url</var>.
+    </dd></dl><p>The <var title="">url</var> is compared to the URLs of the
+    results pages of the installed search engines using a prefix
+    match. Only results pages on the same domain as the script that
+    calls this method are checked.</p>
+
+   </dd>
+
+  </dl><p class="note">Another way of exposing search engines using
+  OpenSearch description documents is using a <code><a href="semantics.html#the-link-element">link</a></code>
+  element with the <code title="rel-search"><a href="links.html#link-type-search">search</a></code> link
+  type.</p><div class="impl">
+
+   <p>The <dfn id="dom-external-addsearchprovider" title="dom-external-AddSearchProvider"><code>AddSearchProvider()</code></dfn>
+   method, when invoked, must run the following steps:</p>
+
+   <ol><li><p>Optionally, abort these steps. User agents may implement
+    the method as a stub method that never does anything, or may
+    arbitrarily ignore invocations with particular arguments for
+    security, privacy, or usability reasons.</p></li>
+
+    <li><p><a href="urls.html#resolve-a-url" title="resolve a url">Resolve</a> the <var title="">scriptURL</var> argument relative to the <a href="browsers.html#entry-script">entry
+    script</a>'s <a href="webappapis.html#script-s-base-url" title="script's base URL">base
+    URL</a>.</p></li>
+
+    <li><p>If this fails, abort these steps.</p></li>
+
+    <li><p>If the <a href="origin-0.html#origin">origin</a> of the resulting <a href="urls.html#absolute-url">absolute
+    URL</a> is not the <a href="origin-0.html#same-origin" title="same origin">same</a> as the
+    origin of the <a href="browsers.html#entry-script">entry script</a>, then abort these
+    steps.</p></li>
+
+    <li><p>Process the resulting <a href="urls.html#absolute-url">absolute URL</a> as the
+    <a href="urls.html#url">URL</a> to an OpenSearch description document. <a href="references.html#refsOPENSEARCH">[OPENSEARCH]</a></p></li>
+
+   </ol><p>The <dfn id="dom-external-issearchproviderinstalled" title="dom-external-IsSearchProviderInstalled"><code>IsSearchProviderInstalled()</code></dfn>
+   method, when invoked, must run the following steps:</p>
+
+   <ol><li><p>Optionally, return 0 and abort these steps. User agents may
+    implement the method as a stub method that never returns a
+    non-zero value, or may arbitrarily ignore invocations with
+    particular arguments for security, privacy, or usability
+    reasons.</p></li>
+
+    <li><p>If the <a href="origin-0.html#origin">origin</a> of the <a href="browsers.html#entry-script">entry script</a>
+    is an opaque identifier (i.e. it has no host component), then
+    return 0 and abort these steps.</p></li>
+
+    <li><p>Let <var title="">host1</var> be the host component of the
+    <a href="origin-0.html#origin">origin</a> of the <a href="browsers.html#entry-script">entry script</a>.</p></li>
+
+    <li><p><a href="urls.html#resolve-a-url" title="resolve a url">Resolve</a> the <var title="">scriptURL</var> argument relative to the <a href="browsers.html#entry-script">entry
+    script</a>'s <a href="webappapis.html#script-s-base-url" title="script's base URL">base
+    URL</a>.</p></li>
+
+    <li><p>If this fails, return 0 and abort these steps.</p></li>
+
+    <li><p>Let <var title="">host2</var> be be the <a href="urls.html#url-host" title="url-host">&lt;host&gt;</a> component of the resulting
+    <a href="urls.html#absolute-url">absolute URL</a>.</p></li>
+
+    <li>
+
+     <p>If the longest suffix in the Public Suffix List that matches
+     the end of <var title="">host1</var> is different than the
+     longest suffix in the Public Suffix List that matches the end of
+     <var title="">host2</var>, then return 0 and abort these steps.
+     <a href="references.html#refsPSL">[PSL]</a></p>
+
+     <p>If the next domain component of <var title="">host1</var> and
+     <var title="">host2</var> after their common suffix are not the
+     same, then return 0 and abort these steps.</p>
+
+     <p>Domain labels must be compared after applying the IDNA ToASCII
+     algorithm to them, with both the AllowUnassigned and
+     UseSTD3ASCIIRules flags set, in an <a href="infrastructure.html#ascii-case-insensitive">ASCII
+     case-insensitive</a> manner. <a href="references.html#refsRFC3490">[RFC3490]</a></p>
+
+    </li>
+
+    <li><p>Let <var title="">search engines</var> be the list of
+    search engines known by the user agent and made available to the
+    user by the user agent for which the resulting <a href="urls.html#absolute-url">absolute
+    URL</a> is a <a href="infrastructure.html#prefix-match">prefix match</a> of the search engine's
+    <a href="urls.html#url">URL</a>, if any. For search engines registered using
+    OpenSearch description documents, the <a href="urls.html#url">URL</a> of the
+    search engine corresponds to the URL given in a <code title="">Url</code> element whose <code title="">rel</code>
+    attribute is "<code title="">results</code>" (the default). <a href="references.html#refsOPENSEARCH">[OPENSEARCH]</a></p></li>
+
+    <li><p>If <var title="">search engines</var> is empty, return 0
+    and abort these steps.</p></li>
+
+    <li><p>If the user's default search engine (as determined by the
+    user agent) is one of the search engines in <var title="">search
+    engines</var>, then return 2 and abort these steps.</p></li>
+
+    <li><p>Return 1.</p></li>
+
+   </ol></div></body></html>

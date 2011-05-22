@@ -190,7 +190,43 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -315,29 +351,7 @@
      }
      return null;
    }
-   function load(script) {
-     var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
-     document.body.appendChild(e);
-   }
-   function init() {
-     if (location.search == '?slow-browser')
-       return;
-     var configUI = document.createElement('div');
-     configUI.id = 'configUI';
-     document.body.appendChild(configUI);
-     // load('reviewer.js'); // would need cross-site XHR
-     if (document.getElementById('head'))
-       load('toc.js');
-     load('styler.js');
-     // load('updater.js'); // would need cross-site XHR
-     load('dfn.js'); // doesn't support split-out specs, but, oh well.
-     // load('status.js'); // would need cross-site XHR
-     if (getCookie('profile') == '1')
-       document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
-     fixBrokenLink();
-   }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="association-of-controls-and-forms.html" title="4.10.18 Association of controls and forms" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="commands.html" title="4.11.5 Commands" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="association-of-controls-and-forms.html" title="4.10.18 Association of controls and forms" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="commands.html" title="4.11.5 Commands" rel="next"/></head><body><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -377,8 +391,11 @@
   it indicates that the details are to be shown to the user. If the
   attribute is absent, the details are not to be shown.</p><div class="impl">
 
-  <p>If the attribute is removed, then the details should be
-  hidden. If the attribute is added, the details should be shown.</p>
+  <p>When the element is created, if the attribute is absent, the
+  details should be hidden; if the attribute is absent, the details
+  should be shown. Subsequently, if the attribute is removed, then the
+  details should be hidden; if the attribute is added, the details
+  should be shown.</p>
 
   <p>The user agent should allow the user to request that the details
   be shown or hidden. To honor a request for the details to be shown,
@@ -421,7 +438,7 @@
  &lt;p&gt;&lt;label&gt;&lt;input type=checkbox name=ext checked&gt; Hide extension&lt;/label&gt;
 &lt;/details&gt;</pre>
 
-   <p>One could use this in conjuction with other <code><a href="#the-details-element">details</a></code>
+   <p>One could use this in conjunction with other <code><a href="#the-details-element">details</a></code>
    in a list to allow the user to collapse a set of fields down to a
    small set of headings, with the ability to open each one.</p>
 
@@ -779,10 +796,10 @@
   <dl class="switch"><dt>If the user requested a context menu using a pointing device</dt>
 
    <dd><p>The user agent must dispatch an event with the name <code title="event-contextmenu">contextmenu</code>, that bubbles and is
-   cancelable, and that uses the <code>MouseEvent</code> interface, at
+   cancelable, and that uses the <code><a href="infrastructure.html#mouseevent">MouseEvent</a></code> interface, at
    the element for which the menu was requested. The context
    information of the event must be set to the same values as the last
-   <code>MouseEvent</code> user interaction event that was dispatched
+   <code><a href="infrastructure.html#mouseevent">MouseEvent</a></code> user interaction event that was dispatched
    as part of the gesture that that was interpreted as a request for
    the context menu.</p></dd>
 

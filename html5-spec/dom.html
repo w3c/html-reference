@@ -190,7 +190,43 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -315,29 +351,7 @@
      }
      return null;
    }
-   function load(script) {
-     var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
-     document.body.appendChild(e);
-   }
-   function init() {
-     if (location.search == '?slow-browser')
-       return;
-     var configUI = document.createElement('div');
-     configUI.id = 'configUI';
-     document.body.appendChild(configUI);
-     // load('reviewer.js'); // would need cross-site XHR
-     if (document.getElementById('head'))
-       load('toc.js');
-     load('styler.js');
-     // load('updater.js'); // would need cross-site XHR
-     load('dfn.js'); // doesn't support split-out specs, but, oh well.
-     // load('status.js'); // would need cross-site XHR
-     if (getCookie('profile') == '1')
-       document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
-     fixBrokenLink();
-   }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="namespaces.html" title="2.9 Namespaces" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="elements.html" title="3.2 Elements" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="namespaces.html" title="2.9 Namespaces" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="elements.html" title="3.2 Elements" rel="next"/></head><body><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -1015,18 +1029,21 @@ interface <dfn id="htmldocument">HTMLDocument</dfn> {
   <hr/><p>The <code><a href="#htmldocument">HTMLDocument</a></code> interface <span title="support&#10;  named properties">supports named properties</span>. The
   <a href="infrastructure.html#supported-property-names">supported property names</a> at any moment consist of the
   values of the <code title="attr-name">name</code> content attributes
-  of all the <code><a href="obsolete.html#the-applet-element">applet</a></code>, <code><a href="the-iframe-element.html#the-embed-element">embed</a></code>,
-  <code><a href="forms.html#the-form-element">form</a></code>, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <code><a href="embedded-content-1.html#the-img-element">img</a></code>, and
-  <a href="#fallback-free">fallback-free</a> <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements in the
-  <code><a href="infrastructure.html#document">Document</a></code> that have <code title="attr-name">name</code>
-  content attributes, and the values of the <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content attributes of all the
-  <code><a href="obsolete.html#the-applet-element">applet</a></code> and <a href="#fallback-free">fallback-free</a>
-  <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements in the <code><a href="infrastructure.html#document">Document</a></code> that have
-  <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content attributes, and the values
-  of the <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content attributes of all the
-  <code><a href="embedded-content-1.html#the-img-element">img</a></code> elements in the <code><a href="infrastructure.html#document">Document</a></code> that have
-  both <code title="attr-name">name</code> content attributes and
-  <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content attributes.</p>
+  of all the
+    <code><a href="obsolete.html#the-applet-element">applet</a></code>,
+    <a href="#exposed">exposed</a> <code><a href="the-iframe-element.html#the-embed-element">embed</a></code>,
+    <code><a href="forms.html#the-form-element">form</a></code>,
+    <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>,
+    <code><a href="embedded-content-1.html#the-img-element">img</a></code>, and
+    <a href="#exposed">exposed</a> <code><a href="the-iframe-element.html#the-object-element">object</a></code>
+  elements in the <code><a href="infrastructure.html#document">Document</a></code> that have <code title="attr-name">name</code> content attributes, and the values of
+  the <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content attributes of all the
+    <code><a href="obsolete.html#the-applet-element">applet</a></code> and
+    <a href="#exposed">exposed</a> <code><a href="the-iframe-element.html#the-object-element">object</a></code>
+  elements in the <code><a href="infrastructure.html#document">Document</a></code> that have <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content attributes, and the values of the
+  <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content attributes of all the
+    <code><a href="embedded-content-1.html#the-img-element">img</a></code>
+  elements in the <code><a href="infrastructure.html#document">Document</a></code> that have both <code title="attr-name">name</code> content attributes and <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content attributes.</p>
 
   <p>When <dfn id="dom-document-nameditem" title="dom-document-namedItem">the
   <code>HTMLDocument</code> object is indexed for property
@@ -1072,20 +1089,21 @@ interface <dfn id="htmldocument">HTMLDocument</dfn> {
   with the name <var title="">name</var>, for the purposes of the
   above algorithm, are those that are either:</p>
 
-  <ul><li><code><a href="obsolete.html#the-applet-element">applet</a></code>, <code><a href="the-iframe-element.html#the-embed-element">embed</a></code>, <code><a href="forms.html#the-form-element">form</a></code>,
-   <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <code><a href="embedded-content-1.html#the-img-element">img</a></code>, or
-   <a href="#fallback-free">fallback-free</a> <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements that have a
-   <code title="attr-name">name</code> content attribute whose value
-   is <var title="">name</var>, or</li>
+  <ul><li><code><a href="obsolete.html#the-applet-element">applet</a></code>, <a href="#exposed">exposed</a> <code><a href="the-iframe-element.html#the-embed-element">embed</a></code>,
+   <code><a href="forms.html#the-form-element">form</a></code>, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <code><a href="embedded-content-1.html#the-img-element">img</a></code>, or
+   <a href="#exposed">exposed</a> <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements that have a <code title="attr-name">name</code> content attribute whose value is <var title="">name</var>, or</li>
 
-   <li><code><a href="obsolete.html#the-applet-element">applet</a></code> or <a href="#fallback-free">fallback-free</a>
-   <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements that have an <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content attribute whose value is <var title="">name</var>, or</li>
+   <li><code><a href="obsolete.html#the-applet-element">applet</a></code> or <a href="#exposed">exposed</a> <code><a href="the-iframe-element.html#the-object-element">object</a></code>
+   elements that have an <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content
+   attribute whose value is <var title="">name</var>, or</li>
 
    <li><code><a href="embedded-content-1.html#the-img-element">img</a></code> elements that have an <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content attribute whose value is <var title="">name</var>, and that have a <code title="attr-name">name</code> content attribute present also.</li>
 
-  </ul><p>An <code><a href="the-iframe-element.html#the-object-element">object</a></code> element is said to be
-  <dfn id="fallback-free">fallback-free</dfn> if it has no <code><a href="the-iframe-element.html#the-object-element">object</a></code> or
-  <code><a href="the-iframe-element.html#the-embed-element">embed</a></code> descendants.</p>
+  </ul><p>An <code><a href="the-iframe-element.html#the-embed-element">embed</a></code> or <code><a href="the-iframe-element.html#the-object-element">object</a></code> element is said to
+  be <dfn id="exposed">exposed</dfn> if it has no <a href="#exposed">exposed</a>
+  <code><a href="the-iframe-element.html#the-object-element">object</a></code> ancestor, and, for <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements,
+  is additionally either not showing its <a href="content-models.html#fallback-content">fallback content</a>
+  or has no <code><a href="the-iframe-element.html#the-object-element">object</a></code> or <code><a href="the-iframe-element.html#the-embed-element">embed</a></code> descendants.</p>
 
   </div><hr/><p class="note">The <code title="dom-document-dir"><a href="elements.html#dom-document-dir">dir</a></code>
   attribute on the <code><a href="#htmldocument">HTMLDocument</a></code> interface is defined

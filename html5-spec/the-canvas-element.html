@@ -190,7 +190,43 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -315,29 +351,7 @@
      }
      return null;
    }
-   function load(script) {
-     var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
-     document.body.appendChild(e);
-   }
-   function init() {
-     if (location.search == '?slow-browser')
-       return;
-     var configUI = document.createElement('div');
-     configUI.id = 'configUI';
-     document.body.appendChild(configUI);
-     // load('reviewer.js'); // would need cross-site XHR
-     if (document.getElementById('head'))
-       load('toc.js');
-     load('styler.js');
-     // load('updater.js'); // would need cross-site XHR
-     load('dfn.js'); // doesn't support split-out specs, but, oh well.
-     // load('status.js'); // would need cross-site XHR
-     if (getCookie('profile') == '1')
-       document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
-     fixBrokenLink();
-   }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="the-iframe-element.html" title="4.8.2 The iframe element" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="the-map-element.html" title="4.8.12 The map element" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="the-iframe-element.html" title="4.8.2 The iframe element" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="the-map-element.html" title="4.8.12 The map element" rel="next"/></head><body><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -365,6 +379,8 @@
            attribute unsigned long <a href="#dom-canvas-height" title="dom-canvas-height">height</a>;
 
   DOMString <a href="#dom-canvas-todataurl" title="dom-canvas-toDataURL">toDataURL</a>(in optional DOMString type, in any... args);
+  void <a href="#dom-canvas-toblob" title="dom-canvas-toBlob">toBlob</a>(in <span>FileCallback</span>, in optional DOMString type, in any... args);
+
   object <a href="#dom-canvas-getcontext" title="dom-canvas-getContext">getContext</a>(in DOMString contextId, in any... args);
 };</pre>
    </dd>
@@ -486,9 +502,21 @@
   <ol><li><p>Let <var title="">contextId</var> be the first argument to
    the method.</p></li>
 
-   <li><p>If <var title="">contextId</var> is not the name of a
-   context supported by the user agent, return null and abort these
-   steps.</p></li>
+   <li>
+
+    <p>If <var title="">contextId</var> is not the name of a context
+    supported by the user agent, return null and abort these
+    steps.</p>
+
+    <p class="note">An example of this would be a user agent that
+    theoretically supports the "<code title="canvas-context-webgl">webgl</code>" 3D context, in the case
+    where the platform does not have hardware support for OpenGL and
+    the user agent does not have a software OpenGL implementation.
+    Despite the user agent recognising the "<code title="canvas-context-webgl">webgl</code>" name, it would return
+    null at this step because that context is not, in practice,
+    supported at the time of the call.</p>
+
+   </li>
 
    <li><p>If the element has a <a href="#primary-context">primary context</a> and that
    context's entry in the <a href="http://wiki.whatwg.org/wiki/CanvasContexts">WHATWG Wiki
@@ -555,66 +583,116 @@
     type, and control the way that the image is generated, as given in
     the table below.</p>
 
+    <p>When trying to use types other than "<code>image/png</code>",
+    authors can check if the image was really returned in the
+    requested format by checking to see if the returned string starts
+    with one of the exact strings "<code title="">data:image/png,</code>" or "<code title="">data:image/png;</code>". If it does, the image is PNG,
+    and thus the requested type was not supported. (The one exception
+    to this is if the canvas has either no height or no width, in
+    which case the result might simply be "<code title="">data:,</code>".)</p>
+
    </dd>
 
-   
+   <dt><var title="">canvas</var> . <code title="dom-canvas-toBlob"><a href="#dom-canvas-toblob">toBlob</a></code>(<var title="">callback</var> [, <var title="">type</var>, ... ])</dt>
+
+   <dd>
+
+    <p>Creates a <code><a href="infrastructure.html#blob">Blob</a></code> object representing a file
+    containing the image in the canvas, and invokes a callback with a
+    handle to that object.</p>
+
+    <p>The second argument, if provided, controls the type of the
+    image to be returned (e.g. PNG or JPEG). The default is <code title="">image/png</code>; that type is also used if the given
+    type isn't supported. The other arguments are specific to the
+    type, and control the way that the image is generated, as given in
+    the table below.</p>
+
+   </dd>
 
   </dl><div class="impl">
 
   <p>The <dfn id="dom-canvas-todataurl" title="dom-canvas-toDataURL"><code>toDataURL()</code></dfn> method
-  must, when called with no arguments, return a <a href="infrastructure.html#data-protocol" title="data&#10;  protocol"><code title="">data:</code> URL</a> containing a
-  representation of the image as a PNG file. <a href="references.html#refsPNG">[PNG]</a> <a href="references.html#refsRFC2397">[RFC2397]</a></p>
+  must run the following steps:</p>
 
+  <ol><li><p>If the canvas has no pixels (i.e. either its horizontal
+   dimension or its vertical dimension is zero) then return the string
+   "<code title="">data:,</code>" and abort these steps. (This is the
+   shortest <a href="infrastructure.html#data-protocol" title="data protocol"><code title="">data:</code>
+   URL</a>; it represents the empty string in a <code title="">text/plain</code> resource.)</p></li>
 
-  <p>If the canvas has no pixels (i.e. either its horizontal dimension
-  or its vertical dimension is zero) then the method must return the
-  string "<code title="">data:,</code>". (This is the shortest <a href="infrastructure.html#data-protocol" title="data protocol"><code title="">data:</code> URL</a>; it
-  represents the empty string in a <code title="">text/plain</code>
-  resource.)</p>
+   <li><p>Let <var title="">file</var> be <a href="#a-serialization-of-the-image-as-a-file">a serialization of the
+   image as a file</a>, using the method's arguments (if any) as
+   the <var title="">arguments</var>.</p></li>
 
-  <p>When the <code title="dom-canvas-toDataURL"><a href="#dom-canvas-todataurl">toDataURL(<var title="">type</var>)</a></code> method is called with one <em>or
-  more</em> arguments, it must return a <a href="infrastructure.html#data-protocol" title="data&#10;  protocol"><code title="">data:</code> URL</a> containing a
-  representation of the image in the format given by <var title="">type</var>. The possible values are <a href="infrastructure.html#mime-type" title="MIME&#10;  type">MIME types</a> with no parameters, for example
-  <code>image/png</code>, <code>image/jpeg</code>, or even maybe
-  <code>image/svg+xml</code> if the implementation actually keeps
-  enough information to reliably render an SVG image from the
-  canvas.</p>
+   <li><p>Return a <a href="infrastructure.html#data-protocol" title="data protocol"><code title="">data:</code> URL</a> representing <var title="">file</var>. <a href="references.html#refsRFC2397">[RFC2397]</a></p>
 
-  <p>For image types that do not support an alpha channel, the image
-  must be composited onto a solid black background using the
-  source-over operator, and the resulting image must be the one used
-  to create the <a href="infrastructure.html#data-protocol" title="data protocol"><code title="">data:</code> URL</a>.</p>
+   
+  </li></ol><p>The <dfn id="dom-canvas-toblob" title="dom-canvas-toBlob"><code>toBlob()</code></dfn> method
+  must run the following steps:</p>
 
-  <p>Only support for <code>image/png</code> is required. User agents
-  may support other types. If the user agent does not support the
-  requested type, it must return the image using the PNG format.</p>
+  <ol><li><p>Let <var title="">callback</var> be the first
+   argument.</p></li>
+
+   <li><p>Let <var title="">arguments</var> be the second and
+   subsequent arguments to the method, if any.</p></li>
+
+   <li><p>Let <var title="">file</var> be <a href="#a-serialization-of-the-image-as-a-file">a serialization of the
+   image as a file</a>, using <var title="">arguments</var>.</p></li>
+
+   <li><p>Return, but continue running these steps
+   asynchronously.</p></li>
+
+   <li><p>If <var title="">callback</var> is null, abort these
+   steps.</p></li>
+
+   <li><p><a href="webappapis.html#queue-a-task">Queue a task</a> to invoke the
+   <code>FileCallback</code> <var title="">callback</var> with a
+   <code><a href="infrastructure.html#blob">Blob</a></code> object representing <var title="">file</var> as
+   its argument. The <a href="webappapis.html#task-source">task source</a> for this task is the
+   <dfn id="canvas-blob-serialization-task-source">canvas blob serialization task source</dfn>. <a href="references.html#refsFILESYSTEMAPI">[FILESYSTEMAPI]</a> <a href="references.html#refsFILEAPI">[FILEAPI]</a> </p></li>
+
+  </ol><p>When a user agent is to create <dfn id="a-serialization-of-the-image-as-a-file">a serialization of the image
+  as a file</dfn>, optionally with some given <var title="">arguments</var>, it must create an image file in the format
+  given by the first value of <var title="">arguments</var>, or, if
+  there are no <var title="">arguments</var>, in the PNG format. <a href="references.html#refsPNG">[PNG]</a></p>
+
+  <p>If <var title="">arguments</var> is not empty, the first value
+  must be interpreted as a <a href="infrastructure.html#mime-type" title="MIME type">MIME type</a>
+  giving the format to use. If the type has any parameters, it must be
+  treated as not supported.</p>
+
+  <p class="example">For example, the value "<code>image/png</code>" would
+  mean to generate a PNG image, the value "<code>image/jpeg</code>"
+  would mean to generate a JPEG image, and the value
+  "<code>image/svg+xml</code>" would mean to generate an SVG image
+  (which would probably require that the implementation actually keep
+  enough information to reliably render an SVG image from the canvas).</p>
+
+  <p>User agents must support PNG ("<code>image/png</code>"). User
+  agents may support other types. If the user agent does not support
+  the requested type, it must create the file using the PNG format. <a href="references.html#refsPNG">[PNG]</a></p>
 
   <p>User agents must <a href="infrastructure.html#converted-to-ascii-lowercase" title="converted to ASCII&#10;  lowercase">convert the provided type to ASCII lowercase</a>
-  before establishing if they support that type and before creating
-  the <a href="infrastructure.html#data-protocol" title="data protocol"><code title="">data:</code>
-  URL</a>.</p>
+  before establishing if they support that type.</p>
 
-  </div><p class="note">When trying to use types other than
-  <code>image/png</code>, authors can check if the image was really
-  returned in the requested format by checking to see if the returned
-  string starts with one of the exact strings "<code title="">data:image/png,</code>" or "<code title="">data:image/png;</code>". If it does, the image is PNG, and
-  thus the requested type was not supported. (The one exception to
-  this is if the canvas has either no height or no width, in which
-  case the result might simply be "<code title="">data:,</code>".)</p><div class="impl">
+  <p>For image types that do not support an alpha channel, the
+  serialized image must be the canvas image composited onto a solid
+  black background using the source-over operator.</p>
 
-  <p>If the method is invoked with the first argument giving a type
-  corresponding to one of the types given in the first column of the
-  following table, and the user agent supports that type, then the
+  <p>If the first argument in <var title="">arguments</var> gives a
+  type corresponding to one of the types given in the first column of
+  the following table, and the user agent supports that type, then the
   subsequent arguments, if any, must be treated as described in the
   second cell of that row.</p>
 
-  </div><table><thead><tr><th> Type </th><th> Other arguments
-   </th></tr></thead><tbody><tr><td> image/jpeg
+  </div><table><thead><tr><th> Type </th><th> Other arguments </th><th> Reference
+   </th></tr></thead><tbody><tr><td> <code>image/jpeg</code>
      </td><td> The second argument<span class="impl">, if it</span> is a
      number in the range 0.0 to 1.0 inclusive<span class="impl">, must
      be</span> treated as the desired quality level. <span class="impl">If it is not a number or is outside that range, the
      user agent must use its default value, as if the argument had
      been omitted.</span>
+     </td><td> <a href="references.html#refsJPEG">[JPEG]</a>
   </td></tr></tbody></table><div class="impl">
 
   <p>For the purposes of these rules, an argument is considered to be
@@ -624,11 +702,10 @@
 
   <p>Other arguments must be ignored and must not cause the user agent
   to raise an exception. A future version of this specification will
-  probably define other parameters to be passed to <code title="dom-canvas-toDataURL"><a href="#dom-canvas-todataurl">toDataURL()</a></code> to allow authors to
-  more carefully control compression settings, image metadata,
-  etc.</p>
+  probably define other parameters to be passed to these methods to
+  allow authors to more carefully control compression settings, image
+  metadata, etc.</p>
 
-  
   </div><div class="impl">
 
   <h5 id="color-spaces-and-color-correction"><span class="secno">4.8.11.1 </span>Color spaces and color correction</h5>
@@ -718,11 +795,12 @@
    false when the pattern was created.</p></li>
 
    <li><p>The element's 2D context's <code title="dom-context-2d-fillText">fillText()</code> or <code title="dom-context-2d-fillText">strokeText()</code> methods are
-   invoked and end up using a font that has an <a href="origin-0.html#origin">origin</a>
+   invoked and consider using a font that has an <a href="origin-0.html#origin">origin</a>
    that is not the <a href="origin-0.html#same-origin" title="same origin">same</a> as that of
    the <code><a href="infrastructure.html#document">Document</a></code> object that owns the <code><a href="#the-canvas-element">canvas</a></code>
-   element.</p></li>
-
+   element. (The font doesn't even have to be used; all that matters
+   is whether the font was considered for any of the glyphs
+   drawn.)</p></li> 
   </ul><p>Whenever the <code title="dom-canvas-toDataURL"><a href="#dom-canvas-todataurl">toDataURL()</a></code> method of a
   <code><a href="#the-canvas-element">canvas</a></code> element whose <i>origin-clean</i> flag is set to
   false is called, the method must raise a <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code>

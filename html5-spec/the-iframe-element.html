@@ -190,7 +190,43 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+   .stability {
+     position: fixed;
+     bottom: 0;
+     left: 0; right: 0;
+     margin: 0 auto 0 auto;
+     width: 50%;
+     background: maroon; color: yellow;
+     -webkit-border-radius: 1em 1em 0 0;
+     -moz-border-radius: 1em 1em 0 0;
+     border-radius: 1em 1em 0 0;
+     -moz-box-shadow: 0 0 1em #500;
+     -webkit-box-shadow: 0 0 1em #500;
+     box-shadow: 0 0 1em red;
+     padding: 0.5em 1em;
+     text-align: center;
+   }
+   .stability strong {
+     display: block;
+   }
+   .stability input {
+     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
+     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
+   }
+   .stability input:hover {
+     color: white;
+     text-shadow: 0 0 2px black;
+   }
+   .stability input:active {
+     padding: 0.3em 0.45em 0.2em 0.55em;
+   }
+   .stability :link, .stability :visited,
+   .stability :link:hover, .stability :visited:hover {
+     background: transparent;
+     color: white;
+   }
+
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -315,29 +351,7 @@
      }
      return null;
    }
-   function load(script) {
-     var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
-     document.body.appendChild(e);
-   }
-   function init() {
-     if (location.search == '?slow-browser')
-       return;
-     var configUI = document.createElement('div');
-     configUI.id = 'configUI';
-     document.body.appendChild(configUI);
-     // load('reviewer.js'); // would need cross-site XHR
-     if (document.getElementById('head'))
-       load('toc.js');
-     load('styler.js');
-     // load('updater.js'); // would need cross-site XHR
-     load('dfn.js'); // doesn't support split-out specs, but, oh well.
-     // load('status.js'); // would need cross-site XHR
-     if (getCookie('profile') == '1')
-       document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
-     fixBrokenLink();
-   }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="embedded-content-1.html" title="4.8 Embedded content" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="the-canvas-element.html" title="4.8.11 The canvas element" rel="next"/></head><body onload="fixBrokenLink(); init()"><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="embedded-content-1.html" title="4.8 Embedded content" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="the-canvas-element.html" title="4.8.11 The canvas element" rel="next"/></head><body><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
@@ -585,7 +599,7 @@
   in XML the U+003C LESS-THAN SIGN character (&lt;) needs to be
   escaped as well. In order to prevent <a href="http://www.w3.org/TR/REC-xml/#AVNormalize">attribute-value
   normalization</a>, some of XML's whitespace characters &#x2014;
-  specifically U+0009 CHARACTER TABULATION (HT), U+000A LINE FEED
+  specifically U+0009 CHARACTER TABULATION (tab), U+000A LINE FEED
   (LF), and U+000D CARRIAGE RETURN (CR) &#x2014; also need to be
   escaped. <a href="references.html#refsXML">[XML]</a></p><hr/><p>The <dfn id="attr-iframe-name" title="attr-iframe-name"><code>name</code></dfn>
   attribute, if present, must be a <a href="browsers.html#valid-browsing-context-name">valid browsing context
@@ -2020,6 +2034,7 @@
    <dt>Content attributes:</dt>
    <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
    <dd><code title="attr-media-src"><a href="#attr-media-src">src</a></code></dd>
+   <dd><code title="attr-media-cross-origin"><a href="#attr-media-cross-origin">cross-origin</a></code></dd>
    <dd><code title="attr-video-poster"><a href="#attr-video-poster">poster</a></code></dd>
    <dd><code title="attr-media-preload"><a href="#attr-media-preload">preload</a></code></dd>
    <dd><code title="attr-media-autoplay"><a href="#attr-media-autoplay">autoplay</a></code></dd>
@@ -2073,8 +2088,9 @@
    algorithm without changing the <a href="#poster-frame">poster frame</a>.</p></li>
 
    <li><p>If the <code title="attr-video-poster"><a href="#attr-video-poster">poster</a></code>
-   attribute's value is the empty string, then there is no
-   <a href="#poster-frame">poster frame</a>; abort these steps.</p></li>
+   attribute's value is the empty string or if the attribute is
+   absent, then there is no <a href="#poster-frame">poster frame</a>; abort these
+   steps.</p></li>
 
    <li><p><a href="urls.html#resolve-a-url" title="resolve a url">Resolve</a> the <code title="attr-video-poster"><a href="#attr-video-poster">poster</a></code> attribute's value relative
    to the element. If this fails, then there is no <a href="#poster-frame">poster
@@ -2288,6 +2304,7 @@ zero or more <code><a href="#the-track-element">track</a></code> elements, then
    <dt>Content attributes:</dt>
    <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
    <dd><code title="attr-media-src"><a href="#attr-media-src">src</a></code></dd>
+   <dd><code title="attr-media-cross-origin"><a href="#attr-media-cross-origin">cross-origin</a></code></dd>
    <dd><code title="attr-media-preload"><a href="#attr-media-preload">preload</a></code></dd>
    <dd><code title="attr-media-autoplay"><a href="#attr-media-autoplay">autoplay</a></code></dd>
    <dd><code title="attr-media-mediagroup"><a href="#attr-media-mediagroup">mediagroup</a></code></dd>
@@ -2631,6 +2648,7 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   // network state
            attribute DOMString <a href="#dom-media-src" title="dom-media-src">src</a>;
   readonly attribute DOMString <a href="#dom-media-currentsrc" title="dom-media-currentSrc">currentSrc</a>;
+           attribute DOMString <a href="#dom-media-crossorigin" title="dom-media-crossOrigin">crossOrigin</a>;
   const unsigned short <a href="#dom-media-network_empty" title="dom-media-NETWORK_EMPTY">NETWORK_EMPTY</a> = 0;
   const unsigned short <a href="#dom-media-network_idle" title="dom-media-NETWORK_IDLE">NETWORK_IDLE</a> = 1;
   const unsigned short <a href="#dom-media-network_loading" title="dom-media-NETWORK_LOADING">NETWORK_LOADING</a> = 2;
@@ -2681,7 +2699,7 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   readonly attribute <a href="#exclusivetracklist">ExclusiveTrackList</a> <a href="#dom-media-videotracks" title="dom-media-videoTracks">videoTracks</a>;
   readonly attribute <a href="#texttrack">TextTrack</a>[] <a href="#dom-media-texttracks" title="dom-media-textTracks">textTracks</a>;
   <a href="#mutabletexttrack">MutableTextTrack</a> <a href="#dom-media-addtexttrack" title="dom-media-addTextTrack">addTextTrack</a>(in DOMString kind, in optional DOMString label, in optional DOMString language);
-};</pre><p>The <dfn id="media-element-attributes">media element attributes</dfn>, <code title="attr-media-src"><a href="#attr-media-src">src</a></code>, <code title="attr-media-preload"><a href="#attr-media-preload">preload</a></code>, <code title="attr-media-autoplay"><a href="#attr-media-autoplay">autoplay</a></code>, 
+};</pre><p>The <dfn id="media-element-attributes">media element attributes</dfn>, <code title="attr-media-src"><a href="#attr-media-src">src</a></code>, <code title="attr-media-cross-origin"><a href="#attr-media-cross-origin">cross-origin</a></code>, <code title="attr-media-preload"><a href="#attr-media-preload">preload</a></code>, <code title="attr-media-autoplay"><a href="#attr-media-autoplay">autoplay</a></code>, 
   <code title="attr-media-mediagroup"><a href="#attr-media-mediagroup">mediagroup</a></code>, 
   <code title="attr-media-loop"><a href="#attr-media-loop">loop</a></code>,
   <code title="attr-media-muted"><a href="#attr-media-muted">muted</a></code>, and <code title="attr-media-controls"><a href="#attr-media-controls">controls</a></code>, apply to all <a href="#media-element" title="media element">media elements</a>. They are defined in
@@ -2689,9 +2707,11 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   present audio data, or video and audio data, to the user. This is
   referred to as <dfn id="media-data">media data</dfn> in this section, since this
   section applies equally to <a href="#media-element" title="media element">media
-  elements</a> for audio or for video. The term <dfn id="media-resource">media
-  resource</dfn> is used to refer to the complete set of media data,
-  e.g. the complete video file, or complete audio file.</p><p>A <a href="#media-resource">media resource</a> can have multiple audio and video
+  elements</a> for audio or for video.
+  The term <dfn id="media-resource">media resource</dfn> is used to refer to the complete
+  set of media data, e.g. the complete video file, or complete audio
+  file.
+  </p><p>A <a href="#media-resource">media resource</a> can have multiple audio and video
   tracks. For the purposes of a <a href="#media-element">media element</a>, the video
   data of the <a href="#media-resource">media resource</a> is only that of the
   currently selected track (if any) given by the element's <code title="dom-media-videoTracks"><a href="#dom-media-videotracks">videoTracks</a></code> attribute, and the
@@ -2774,7 +2794,9 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   attribute on <a href="#media-element" title="media element">media elements</a> gives
   the address of the media resource (video, audio) to show. The
   attribute, if present, must contain a <a href="urls.html#valid-non-empty-url-potentially-surrounded-by-spaces">valid non-empty
-  URL potentially surrounded by spaces</a>.</p><div class="impl">
+  URL potentially surrounded by spaces</a>.</p><p>The <dfn id="attr-media-cross-origin" title="attr-media-cross-origin"><code>cross-origin</code></dfn>
+  content attribute on <a href="#media-element" title="media element">media
+  elements</a> is a <a href="fetching-resources.html#cors-settings-attribute">CORS settings attribute</a>.</p><div class="impl">
 
   <p>If a <code title="attr-media-src"><a href="#attr-media-src">src</a></code> attribute of a
   <a href="#media-element">media element</a> is set or changed, the user agent must
@@ -2785,6 +2807,10 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   <p>The <dfn id="dom-media-src" title="dom-media-src"><code>src</code></dfn> IDL
   attribute on <a href="#media-element" title="media element">media elements</a> must
   <a href="common-dom-interfaces.html#reflect">reflect</a> the content attribute of the same name.</p>
+
+  <p>The <dfn id="dom-media-crossorigin" title="dom-media-crossOrigin"><code>crossOrigin</code></dfn> IDL
+  attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-media-cross-origin"><a href="#attr-media-cross-origin">cross-origin</a></code> content
+  attribute.</p>
 
   </div><dl class="domintro"><dt><var title="">media</var> . <code title="dom-media-currentSrc"><a href="#dom-media-currentsrc">currentSrc</a></code></dt>
 
@@ -2806,7 +2832,7 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   </div><p class="note">There are two ways to specify a <a href="#media-resource">media
   resource</a>, the <code title="attr-media-src"><a href="#attr-media-src">src</a></code>
   attribute, or <code><a href="#the-source-element">source</a></code> elements. The attribute overrides
-  the elements.</p><h5 id="mime-types"><span class="secno">4.8.10.3 </span>MIME types</h5><p class="XXX annotation"><span><a href="http://www.w3.org/html/wg/tracker/issues/145">ISSUE-145</a> (codecs-vs-octet) blocks progress to Last Call</span></p><p>A <a href="#media-resource">media resource</a> can be described in terms of its
+  the elements.</p><h5 id="mime-types"><span class="secno">4.8.10.3 </span>MIME types</h5><p>A <a href="#media-resource">media resource</a> can be described in terms of its
   <em>type</em>, specifically a <a href="infrastructure.html#mime-type">MIME type</a>, in some cases
   with a <code title="">codecs</code> parameter. (Whether the <code title="">codecs</code> parameter is allowed or not depends on the
   MIME type.) <a href="references.html#refsRFC4281">[RFC4281]</a></p><p>Types are usually somewhat incomplete descriptions; for example
@@ -3324,7 +3350,23 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
 
    <li>
 
-    <p>Begin to <a href="fetching-resources.html#fetch">fetch</a> the <var title="">current media
+    <p>If the <a href="origin-0.html#origin">origin</a> of <var title="">current media
+    resource</var>'s <a href="urls.html#absolute-url">absolute URL</a> is not the <a href="origin-0.html#same-origin">same
+    origin</a> as the <a href="#media-element">media element</a>'s
+    <code><a href="infrastructure.html#document">Document</a></code>'s <a href="origin-0.html#origin">origin</a>, and the <a href="#media-element">media
+    element</a> has a <code title="attr-media-cross-origin"><a href="#attr-media-cross-origin">cross-origin</a></code> attribute,
+    then perform a <a href="infrastructure.html#cross-origin-request">cross-origin request</a>, with the
+    <i>request URL</i> set to <var title="">current media
+    resource</var>'s <a href="urls.html#absolute-url">absolute URL</a>, the <i>source
+    origin</i> set to the <a href="origin-0.html#origin">origin</a> of the <a href="#media-element">media
+    element</a>'s <code><a href="infrastructure.html#document">Document</a></code>, and the <i>credentials
+    flag</i> set unless the <code title="attr-media-cross-origin"><a href="#attr-media-cross-origin">cross-origin</a></code> attribute is
+    in the <a href="fetching-resources.html#attr-cross-origin-anonymous" title="attr-cross-origin-anonymous">Anonymous</a>
+    state. Discard any data fetched in this way unless the
+    <a href="infrastructure.html#cross-origin-request-status">cross-origin request status</a> is set to <i>success</i>.
+    <a href="references.html#refsCORS">[CORS]</a></p> 
+
+    <p>Otherwise, <a href="fetching-resources.html#fetch">fetch</a> the <var title="">current media
     resource</var>, from the <a href="#media-element">media element</a>'s
     <code><a href="infrastructure.html#document">Document</a></code>'s <a href="origin-0.html#origin">origin</a>, with the <i>force
     same-origin flag</i> set.</p> 
@@ -3699,17 +3741,11 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
 
      <dd>
 
-      <p>If the <a href="#media-resource">media resource</a>'s <a href="origin-0.html#origin">origin</a> is
-      the <a href="origin-0.html#same-origin">same origin</a> as the <a href="#media-element">media element</a>'s
-      <code><a href="infrastructure.html#document">Document</a></code>'s <a href="origin-0.html#origin">origin</a>, <a href="webappapis.html#queue-a-task">queue a
-      task</a> to run the <a href="#steps-to-expose-a-media-resource-specific-text-track">steps to expose a
+      <p><a href="webappapis.html#queue-a-task">Queue a task</a> to run the <a href="#steps-to-expose-a-media-resource-specific-text-track">steps to expose a
       media-resource-specific text track</a> with the relevant
-      data.</p> <!-- CORS -->
+      data.</p>
 
-      <p class="note">Cross-origin files do not expose their subtitles
-      in the DOM, for security reasons. However, user agents may still
-      provide the user with access to such data in their user
-      interface.</p>
+      
 
      </dd>
 
@@ -3955,7 +3991,7 @@ interface <dfn id="htmlaudioelement">HTMLAudioElement</dfn> : <a href="#htmlmedi
   resource</a> is loaded. The <a href="#initial-playback-position">initial playback
   position</a> is a time on the <a href="#media-timeline">media timeline</a>.</p>
 
-  <p>The <dfn id="dom-media-initialtime" title="dom-media-initialTime">initialTime<code/></dfn>
+  <p>The <dfn id="dom-media-initialtime" title="dom-media-initialTime"><code>initialTime</code></dfn>
   attribute must, on getting, return the <a href="#initial-playback-position">initial playback
   position</a>, expressed in seconds.</p>
 
@@ -6456,9 +6492,25 @@ interface <dfn id="mediacontroller">MediaController</dfn> {
 
    <li>
 
-    <p><i>Download</i>: If <var title="">URL</var> is not the empty
-    string, and its <a href="origin-0.html#origin">origin</a> is the same as the <a href="#media-element">media
-    element</a>'s <code><a href="infrastructure.html#document">Document</a></code>'s <a href="origin-0.html#origin">origin</a>, then
+    <p><i>Download</i>: At this point, the text track is downloaded.</p>
+
+    <p>If <var title="">URL</var> is not the empty string, and its
+    <a href="origin-0.html#origin">origin</a> is not the <a href="origin-0.html#same-origin">same origin</a> as the
+    <a href="#media-element">media element</a>'s <code><a href="infrastructure.html#document">Document</a></code>'s
+    <a href="origin-0.html#origin">origin</a>, and the <a href="#media-element">media element</a> has a
+    <code title="attr-media-cross-origin"><a href="#attr-media-cross-origin">cross-origin</a></code>
+    attribute, then perform a <a href="infrastructure.html#cross-origin-request">cross-origin request</a>, with
+    the <i>request URL</i> set to <var title="">URL</var>, the
+    <i>source origin</i> set to the <a href="origin-0.html#origin">origin</a> of the
+    <a href="#media-element">media element</a>'s <code><a href="infrastructure.html#document">Document</a></code>, and the
+    <i>credentials flag</i> set unless the <a href="#media-element">media
+    element</a>'s <code title="attr-media-cross-origin"><a href="#attr-media-cross-origin">cross-origin</a></code> attribute is
+    in the <a href="fetching-resources.html#attr-cross-origin-anonymous" title="attr-cross-origin-anonymous">Anonymous</a>
+    state. Discard any data fetched in this way unless the
+    <a href="infrastructure.html#cross-origin-request-status">cross-origin request status</a> is set to <i>success</i>.
+    <a href="references.html#refsCORS">[CORS]</a></p> 
+
+    <p>Otherwise, if <var title="">URL</var> is not the empty string,
     <a href="fetching-resources.html#fetch">fetch</a> <var title="">URL</var>, from the <a href="#media-element">media
     element</a>'s <code><a href="infrastructure.html#document">Document</a></code>'s <a href="origin-0.html#origin">origin</a>, with
     the <i>force same-origin flag</i> set.</p> 
@@ -7553,26 +7605,16 @@ interface <dfn id="texttrackcue">TextTrackCue</dfn> {
 
   <hr/><p>If a hostile page embeds victim content, the threat is that the
   embedding page could obtain information from the content that it
-  would not otherwise have access to. The API does expose some
-  information: the existence of the media, its type, its duration, its
-  size, and the performance characteristics of its host. Such
-  information is already potentially problematic, but in practice the
-  same information can more or less be obtained using the
-  <code><a href="embedded-content-1.html#the-img-element">img</a></code> element, and so it has been deemed acceptable.</p>
+  would not otherwise have access to. To avoid this, the API will not
+  allow videos to be shown cross-origin unless the <code title="attr-media-cross-origin"><a href="#attr-media-cross-origin">cross-origin</a></code> attribute is
+  present and the remote server opts-in to cross-origin requsts. <a href="references.html#refsCORS">[CORS]</a></p>
 
-  <p>However, significantly more sensitive information could be
-  obtained if the user agent further exposes metadata within the
-  content such as subtitles or chapter titles. This version of the API
-  does not expose such information. Future extensions to this API will
-  likely reuse a mechanism such as CORS to check that the embedded
-  content's site has opted in to exposing such information. <a href="references.html#refsCORS">[CORS]</a></p> 
-
-  <p class="example">An attacker could trick a user running within a
-  corporate network into visiting a site that attempts to load a video
-  from a previously leaked location on the corporation's intranet. If
-  such a video included confidential plans for a new product, then
-  being able to read the subtitles would present a confidentiality
-  breach.</p>
+  <p class="example">Without this restriction, an attacker could trick
+  a user running within a corporate network into visiting a site that
+  attempts to load a video from a previously leaked location on the
+  corporation's intranet. If such a video included confidential plans
+  for a new product, then being able to read the subtitles would
+  present a serious confidentiality breach.</p>
 
   </div><h5 id="best-practices-for-authors-using-media-elements"><span class="secno">4.8.10.17 </span>Best practices for authors using media elements</h5><p><i>This section is non-normative.</i></p><p>Playing audio and video resources on small devices such as
   set-top boxes or mobile phones is often constrained by limited
