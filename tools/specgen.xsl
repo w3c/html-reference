@@ -355,6 +355,7 @@ color: #3C790A;
           <xsl:when test='$maturity="PER"'>Proposed Edited Recommendation</xsl:when>
           <xsl:when test='$maturity="REC"'>Recommendation</xsl:when>
           <xsl:when test='$maturity="WG-NOTE"'>Working Group Note</xsl:when>
+          <xsl:when test='$maturity="NOTE"'>Working Group Note</xsl:when>
           <xsl:otherwise>Editor’s Draft</xsl:otherwise>
         </xsl:choose>
         <xsl:text> </xsl:text>
@@ -551,6 +552,7 @@ color: #3C790A;
       <xsl:when test='$maturity="PER"'>Proposed Edited Recommendation</xsl:when>
       <xsl:when test='$maturity="REC"'>Recommendation</xsl:when>
       <xsl:when test='$maturity="WG-NOTE"'>Working Group Note</xsl:when>
+      <xsl:when test='$maturity="NOTE"'>Working Group Note</xsl:when>
       <xsl:otherwise>Editor’s Draft</xsl:otherwise>
     </xsl:choose>
   </xsl:template>

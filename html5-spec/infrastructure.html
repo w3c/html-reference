@@ -190,43 +190,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -488,9 +452,12 @@
   it.</p><p>If a DOM object is said to be <dfn id="live">live</dfn>, then the
   attributes and methods on that object <span class="impl">must</span>
   operate on the actual underlying data, not a snapshot of the
-  data.</p><p>The terms <dfn title="">fire</dfn> and <dfn title="">dispatch</dfn> are used interchangeably in the context of
-  events, as in the DOM Events specifications. The term <dfn id="concept-events-trusted" title="concept-events-trusted">trusted event</dfn> is used as
-  defined by the DOM Events specification.  <a href="references.html#refsDOMEVENTS">[DOMEVENTS]</a></p><h4 id="plugins"><span class="secno">2.1.5 </span>Plugins</h4><p>The term <dfn id="plugin">plugin</dfn> refers to a user-agent defined set of
+  data.</p><p>In the contexts of events, the terms <dfn title="">fire</dfn> and
+  <dfn title="">dispatch</dfn> are used as defined in the DOM Core
+  specification: firing an event means to create and dispatch it, and
+  dispatching an event means to follow the steps that propagate the
+  event through the tree. The term <dfn id="concept-events-trusted" title="concept-events-trusted">trusted event</dfn> is used to refer
+  to events that have the <span>trusted flag</span> set. <a href="references.html#refsDOMCORE">[DOMCORE]</a></p><h4 id="plugins"><span class="secno">2.1.5 </span>Plugins</h4><p>The term <dfn id="plugin">plugin</dfn> refers to a user-agent defined set of
   content handlers used by the user agent that can take part in the
   user agent's rendering of a <code><a href="#document">Document</a></code> object, but that
   neither act as <a href="browsers.html#child-browsing-context" title="child browsing context">child browsing
@@ -536,9 +503,8 @@
   HZ-GB-2312, and variants of ISO-2022, even though it is possible in
   these encodings for bytes like 0x70 to be part of longer sequences
   that are unrelated to their interpretation as ASCII. It excludes
-  such encodings as UTF-7, UTF-16, GSM03.38, and EBCDIC variants.</p><p>The term <dfn title="">Unicode character</dfn> is used to mean a
-  <i title="">Unicode scalar value</i> (i.e. any Unicode code point
-  that is not a surrogate code point). <a href="references.html#refsUNICODE">[UNICODE]</a></p><h3 id="conformance-requirements"><span class="secno">2.2 </span>Conformance requirements</h3><p>All diagrams, examples, and notes in this specification are
+  such encodings as UTF-7, UTF-16, GSM03.38, and EBCDIC variants.</p><p>The term <dfn id="unicode-character">Unicode character</dfn> is used to mean a <i title="">Unicode scalar value</i> (i.e. any Unicode code point that
+  is not a surrogate code point). <a href="references.html#refsUNICODE">[UNICODE]</a></p><h3 id="conformance-requirements"><span class="secno">2.2 </span>Conformance requirements</h3><p>All diagrams, examples, and notes in this specification are
   non-normative, as are all sections explicitly marked non-normative.
   Everything else in this specification is normative.</p><p>The key words "MUST", "MUST NOT", "REQUIRED",  "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
   "OPTIONAL" in the normative parts of this document are to be
@@ -962,8 +928,9 @@
     required for conforming IDL fragments, as described in the Web IDL
     specification. <a href="references.html#refsWEBIDL">[WEBIDL]</a></p>
 
-    <p>The terms <dfn id="supported-property-indices">supported property indices</dfn> and
-    <dfn id="supported-property-names">supported property names</dfn> are used as defined in the
+    <p>The terms <dfn id="supported-property-indices">supported property indices</dfn>, <dfn id="supported-property-names">supported
+    property names</dfn>, and <dfn id="dfn-read-only-array" title="dfn-read-only-array">read
+    only</dfn> (when applied to arrays) are used as defined in the
     WebIDL specification.</p>
 
     <p id="float-nan">Except where otherwise specified, if an IDL
@@ -975,14 +942,6 @@
     that is a floating point number type (<code title="">double</code>)
     is passed an Infinity or Not-a-Number (NaN) value, a
     <code><a href="common-dom-interfaces.html#not_supported_err">NOT_SUPPORTED_ERR</a></code> exception must be raised.</p>
-
-    <p>Except where otherwise specified, if a method has an argument
-    of type <code>DOMString</code>, or if an IDL attribute is assigned
-    a new value of type <code>DOMString</code>, the user agent must
-    <span title="dfn-obtain-unicode">convert the
-    <code>DOMString</code> to a sequence of Unicode characters</span>
-    to obtain the string on which the algorithms in this specification
-    are to operate. <a href="references.html#refsWEBIDL">[WEBIDL]</a></p>
 
    </dd>
 
@@ -1025,14 +984,27 @@
 
    </p></dd>
 
+   <dt>Cookies</dt>
+
+   <dd>
+
+    <p>The following term is defined in the Cookie specification: <a href="references.html#refsCOOKIES">[COOKIES]</a></p>
+
+    <ul class="brief"><li><dfn id="cookie-string">cookie-string</dfn>
+     </li><li><dfn id="receives-a-set-cookie-string">receives a set-cookie-string</dfn>
+    </li></ul></dd>
+
    <dt>CORS</dt>
 
    <dd>
 
-    <p>The following terms are defined in the CORS specification:</p>
+    <p>The following terms are defined in the CORS specification: <a href="references.html#refsCORS">[CORS]</a></p>
 
     <ul class="brief"><li><dfn id="cross-origin-request">cross-origin request</dfn>
      </li><li><dfn id="cross-origin-request-status">cross-origin request status</dfn>
+     </li><li><dfn id="redirect-steps">redirect steps</dfn>
+     </li><li><dfn id="credential-flag">credential flag</dfn>
+     </li><li><dfn id="resource-sharing-check">resource sharing check</dfn>
     </li></ul></dd>
 
    <dt>CSS modules</dt>
@@ -1061,6 +1033,7 @@
     in a viable value.</p>
 
    </dd>
+
 
   </dl><p>This specification does not <em>require</em> support of any
   particular network protocol, style sheet language, scripting

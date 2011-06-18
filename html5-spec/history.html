@@ -190,43 +190,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -627,7 +591,7 @@
   <p>When either of these methods is invoked, the user agent must run
   the following steps:</p>
 
-  <ol><li><p>Let <var title="">clone data</var> be a <a href="common-dom-interfaces.html#structured-clone">structured
+  <ol><li><p>Let <var title="">cloned data</var> be a <a href="common-dom-interfaces.html#structured-clone">structured
    clone</a> of the specified <var title="">data</var>. If this
    throws an exception, then rethrow that exception and abort these
    steps.</p></li>
@@ -722,9 +686,9 @@
 
    <li>
 
-     <p>Set <code title="dom-history-state"><a href="#dom-history-state">history.state</a></code> to
-     another <a href="common-dom-interfaces.html#structured-clone">structured clone</a> of the specified <var title="">data</var>.</p>
-
+     <p>Set <code title="dom-history-state"><a href="#dom-history-state">history.state</a></code> to a
+     <a href="common-dom-interfaces.html#structured-clone">structured clone</a> of <var title="">cloned
+     data</var>.</p> 
    </li>
 
   </ol><p class="note">The <var title="">title</var> is purely
@@ -1860,14 +1824,14 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
    <li><p>Let <var title="">decoded fragid</var> be the result of
    expanding any sequences of percent-encoded octets in <var title="">fragid</var> that are valid UTF-8 sequences into Unicode
    characters as defined by UTF-8. If any percent-encoded octets in
-   that string are not valid UTF-8 sequences, then skip this step and
-   the next one.</p>
+   that string are not valid UTF-8 sequences (e.g. they expand to
+   surrogate code points), then skip this step and the next one.</p>
 
    </li><li><p>If this step was not skipped and there is an element in the
-   DOM that has an <a href="elements.html#concept-id" title="concept-id">ID</a> exactly equal to <var title="">decoded
-   fragid</var>, then the first such element in tree order is
-   <a href="#the-indicated-part-of-the-document">the indicated part of the document</a>; stop the algorithm
-   here.</p></li>
+   DOM that has an <a href="elements.html#concept-id" title="concept-id">ID</a> exactly equal to
+   <var title="">decoded fragid</var>, then the first such element in
+   tree order is <a href="#the-indicated-part-of-the-document">the indicated part of the document</a>; stop
+   the algorithm here.</p></li>
 
    <li><p>If there is an <code><a href="text-level-semantics.html#the-a-element">a</a></code> element in the DOM that has a
    <code title="attr-a-name"><a href="obsolete.html#attr-a-name">name</a></code> attribute whose value is
@@ -2272,16 +2236,34 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   </ol><p>This specification defines the following <dfn id="unloading-document-cleanup-steps">unloading document
   cleanup steps</dfn>. Other specifications can define more.</p>
 
-  <ol><li><p><span>Close the WebSocket connection</span> of any
-   <code>WebSocket</code> objects that were created by the <code title="dom-WebSocket">WebSocket()</code> constructor visible on the
-   <code><a href="infrastructure.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code> object. If this
-   affected any <code>WebSocket</code> objects, the set
-   <code><a href="infrastructure.html#document">Document</a></code>'s <var title="concept-document-salvageable">salvageable</var> state to
-   false.
-   
-   <a href="references.html#refsWEBSOCKET">[WEBSOCKET]</a>
-   
-   </p></li>
+  <ol><li>
+
+    <p><span>Make disappear</span> any <code>WebSocket</code> objects
+    that were created by the <code title="dom-WebSocket">WebSocket()</code> constructor whose global
+    object is the <code><a href="infrastructure.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code> object.
+
+
+    <a href="references.html#refsWEBSOCKET">[WEBSOCKET]</a>
+
+
+    </p>
+
+    <p>If this affected any <code>WebSocket</code> objects, the set
+    <code><a href="infrastructure.html#document">Document</a></code>'s <var title="concept-document-salvageable">salvageable</var> state to
+    false.</p>
+
+   </li>
+
+   <li>
+
+    <p>If the <code><a href="infrastructure.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code> object <span title="concept-PeerConnection-owner">owns</span> any
+    <code>PeerConnection</code> objects whose
+    <span><code>PeerConnection</code> readiness state</span> is not
+    <code title="dom-PeerConnection-CLOSED">CLOSED</code>, then set
+    <code><a href="infrastructure.html#document">Document</a></code>'s <var title="concept-document-salvageable">salvageable</var> state to
+    false.</p>
+
+   </li>
 
    <li><p>If the <code><a href="infrastructure.html#document">Document</a></code>'s <var title="concept-document-salvageable">salvageable</var> state is
    false, empty the <code><a href="infrastructure.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code>'s

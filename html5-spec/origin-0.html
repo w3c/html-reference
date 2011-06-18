@@ -190,43 +190,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -600,10 +564,18 @@
    <dd>
 
     <dl class="switch"><dt>If an image is the image of an <code><a href="embedded-content-1.html#the-img-element">img</a></code> element and
-     its image data has a <a href="#concept-origin-forced-img" title="concept-origin-forced-img">forced origin</a></dt>
+     its image data is <a href="fetching-resources.html#cors-cross-origin">CORS-cross-origin</a></dt>
 
-     <dd>The <a href="#origin">origin</a> is the image data's <dfn id="concept-origin-forced-img" title="concept-origin-forced-img">forced origin</dfn>. (This
-     occurs when the image was successfully obtained using CORS.)</dd>
+     <dd>The <a href="#origin">origin</a> is a globally unique identifier
+     assigned when the image is created.</dd>
+
+
+     <dt>If an image is the image of an <code><a href="embedded-content-1.html#the-img-element">img</a></code> element and
+     its image data is <a href="fetching-resources.html#cors-same-origin">CORS-same-origin</a></dt>
+
+     <dd>The <a href="#origin">origin</a> is the <a href="#origin">origin</a> of the
+     <code><a href="embedded-content-1.html#the-img-element">img</a></code> element's <code><a href="infrastructure.html#document">Document</a></code>.</dd>
+
 
 
      <dt>If an image was served over the network and has an address
@@ -641,13 +613,20 @@
 
    <dd>
 
-    <p>The <a href="#origin">origin</a> is always the same as the
-    <a href="#origin">origin</a> of the element's <code><a href="infrastructure.html#document">Document</a></code>'s
-    <a href="#origin">origin</a>, as <a href="the-iframe-element.html#media-resource" title="media resource">media
-    resources</a> cannot be fetched cross-origin without the
-    server's permission (using CORS).</p>
+    <dl class="switch"><dt>If the <a href="the-iframe-element.html#media-data">media data</a> is
+     <a href="fetching-resources.html#cors-cross-origin">CORS-cross-origin</a></dt>
 
-   </dd>
+     <dd>The <a href="#origin">origin</a> is a globally unique identifier
+     assigned when the image is created.</dd>
+
+
+     <dt>If the <a href="the-iframe-element.html#media-data">media data</a> is
+     <a href="fetching-resources.html#cors-same-origin">CORS-same-origin</a></dt>
+
+     <dd>The <a href="#origin">origin</a> is the <a href="#origin">origin</a> of the
+     <a href="the-iframe-element.html#media-element">media element</a>'s <code><a href="infrastructure.html#document">Document</a></code>.</dd>
+
+    </dl></dd>
 
 
    <dt>For fonts</dt>
@@ -656,8 +635,7 @@
 
     <p>The <a href="#origin">origin</a> of a downloadable Web font is equal to
     the <a href="#origin">origin</a> of the <a href="urls.html#absolute-url">absolute URL</a> used to
-    obtain the font (after any redirects). <a href="references.html#refsCSSFONTS">[CSSFONTS]</a></p>
-
+    obtain the font (after any redirects). <a href="references.html#refsCSSFONTS">[CSSFONTS]</a></p> 
     <p>The <a href="#origin">origin</a> of a locally installed system font is
     equal to the <a href="#origin">origin</a> of the <code><a href="infrastructure.html#document">Document</a></code> in
     which that font is being used.</p>

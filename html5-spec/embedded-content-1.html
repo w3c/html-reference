@@ -190,43 +190,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -375,7 +339,7 @@
    <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
    <dd><code title="attr-img-alt"><a href="#attr-img-alt">alt</a></code></dd>
    <dd><code title="attr-img-src"><a href="#attr-img-src">src</a></code></dd>
-   <dd><code title="attr-img-cross-origin"><a href="#attr-img-cross-origin">cross-origin</a></code></dd>
+   <dd><code title="attr-img-crossorigin"><a href="#attr-img-crossorigin">crossorigin</a></code></dd>
    <dd><code title="attr-hyperlink-usemap"><a href="the-map-element.html#attr-hyperlink-usemap">usemap</a></code></dd>
    <dd><code title="attr-img-ismap"><a href="#attr-img-ismap">ismap</a></code></dd>
    <dd><code title="attr-dim-width"><a href="the-map-element.html#attr-dim-width">width</a></code></dd>
@@ -416,7 +380,7 @@ interface <dfn id="htmlimageelement">HTMLImageElement</dfn> : <a href="elements.
   section</a>.</p><p>The <code><a href="#the-img-element">img</a></code> element must not be used as a layout tool.
   In particular, <code><a href="#the-img-element">img</a></code> elements should not be used to
   display transparent images, as they rarely convey meaning and rarely
-  add anything useful to the document.</p><p>The <dfn id="attr-img-cross-origin" title="attr-img-cross-origin"><code>cross-origin</code></dfn>
+  add anything useful to the document.</p><p>The <dfn id="attr-img-crossorigin" title="attr-img-crossorigin"><code>crossorigin</code></dfn>
   attribute is a <a href="fetching-resources.html#cors-settings-attribute">CORS settings attribute</a>.</p><div class="impl">
 
   <hr/><p>An <code><a href="#the-img-element">img</a></code> is always in one of the following states:</p>
@@ -486,29 +450,18 @@ interface <dfn id="htmlimageelement">HTMLImageElement</dfn> : <a href="elements.
 
     <p>If that is not successful, abort these steps.</p>
 
-    <p>Otherwise, if the <code><a href="#the-img-element">img</a></code> element has a <code title="attr-img-cross-origin"><a href="#attr-img-cross-origin">cross-origin</a></code> attribute, then
-    perform a <a href="infrastructure.html#cross-origin-request">cross-origin request</a>, with the <i>request
-    URL</i> set to the resulting <a href="urls.html#absolute-url">absolute URL</a>, the
-    <i>source origin</i> set to the <a href="origin-0.html#origin">origin</a> of the
+    <p>Otherwise, do a <a href="fetching-resources.html#potentially-cors-enabled-fetch">potentially CORS-enabled fetch</a> of
+    the resulting <a href="urls.html#absolute-url">absolute URL</a>, with the <i>mode</i>
+    being the state of the element's <code title="attr-img-crossorigin"><a href="#attr-img-crossorigin">crossorigin</a></code> content
+    attribute, the <i><a href="origin-0.html#origin">origin</a></i> being the <a href="origin-0.html#origin">origin</a> of the
     <code><a href="#the-img-element">img</a></code> element's <code><a href="infrastructure.html#document">Document</a></code>, and the
-    <i>credentials flag</i> set unless the <code title="attr-img-cross-origin"><a href="#attr-img-cross-origin">cross-origin</a></code> attribute is in
-    the <a href="fetching-resources.html#attr-cross-origin-anonymous" title="attr-cross-origin-anonymous">Anonymous</a>
-    state. Discard any data fetched in this way unless the
-    <a href="infrastructure.html#cross-origin-request-status">cross-origin request status</a> is set to <i>success</i>
-    by the <a href="infrastructure.html#cross-origin-request">cross-origin request</a> algorithm. If the
-    <a href="infrastructure.html#cross-origin-request-status">cross-origin request status</a> is set to <i>success</i>,
-    then the element's image data's <a href="origin-0.html#origin">origin</a> is <a href="origin-0.html#concept-origin-forced-img" title="concept-origin-forced-img">forced</a> to be the
-    <code><a href="#the-img-element">img</a></code> element's <code><a href="infrastructure.html#document">Document</a></code>'s
-    <a href="origin-0.html#origin">origin</a>. <a href="references.html#refsCORS">[CORS]</a></p> 
-    <p>Otherwise, <a href="fetching-resources.html#fetch">fetch</a> the resulting <a href="urls.html#absolute-url">absolute
-    URL</a>. If the returned resource has an <code title="http-Access-Control-Allow-Origin">Access-Control-Allow-Origin</code>
-    response header, and its value is the literal "<code title="">*</code>" character, then the element's image data's
-    <a href="origin-0.html#origin">origin</a> is <a href="origin-0.html#concept-origin-forced-img" title="concept-origin-forced-img">forced</a> to be the
-    <code><a href="#the-img-element">img</a></code> element's <code><a href="infrastructure.html#document">Document</a></code>'s
-    <a href="origin-0.html#origin">origin</a>.</p> 
+    <i>default origin behaviour</i> set to <i>taint</i>.</p>
 
-    <p>The resouce obtained in this fashion is the <code><a href="#the-img-element">img</a></code>
-    element's image data.</p>
+    <p>The resource obtained in this fashion, if any, is the
+    <code><a href="#the-img-element">img</a></code> element's image data. It can be either
+    <a href="fetching-resources.html#cors-same-origin">CORS-same-origin</a> or <a href="fetching-resources.html#cors-cross-origin">CORS-cross-origin</a>;
+    this affects the <a href="origin-0.html#origin">origin</a> of the image itself (e.g.
+    when used on a <code><a href="the-canvas-element.html#the-canvas-element">canvas</a></code>).</p>
 
      <p>Fetching the image must <a href="the-end.html#delay-the-load-event">delay the load
     event</a> of the element's document until the <a href="webappapis.html#concept-task" title="concept-task">task</a> that is <a href="webappapis.html#queue-a-task" title="queue a&#10;    task">queued</a> by the <a href="webappapis.html#networking-task-source">networking task source</a>
@@ -519,8 +472,9 @@ interface <dfn id="htmlimageelement">HTMLImageElement</dfn> : <a href="elements.
     conjunction with scripting, though scripting isn't actually
     necessary to carry out such an attack). User agents may implement
     <a href="origin-0.html#origin" title="origin">cross-origin</a> access control policies
-    that mitigate this attack, but unfortunately such policies are
-    typically not compatible with existing Web content.</p>
+    that are stricter than those described above to mitigate this
+    attack, but unfortunately such policies are typically not
+    compatible with existing Web content.</p>
 
    </li>
 
@@ -731,7 +685,7 @@ interface <dfn id="htmlimageelement">HTMLImageElement</dfn> : <a href="elements.
   name.</p>
 
   <p>The <dfn id="dom-img-crossorigin" title="dom-img-crossOrigin"><code>crossOrigin</code></dfn> IDL
-  attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-img-cross-origin"><a href="#attr-img-cross-origin">cross-origin</a></code> content
+  attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-img-crossorigin"><a href="#attr-img-crossorigin">crossorigin</a></code> content
   attribute.</p>
 
   <p>The <dfn id="dom-img-usemap" title="dom-img-useMap"><code>useMap</code></dfn> IDL

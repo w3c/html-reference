@@ -190,43 +190,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -425,6 +389,7 @@
    <code title="attr-input-list"><a href="common-input-element-attributes.html#attr-input-list">list</a></code>,
    <code title="attr-input-max"><a href="common-input-element-attributes.html#attr-input-max">max</a></code>,
    <code title="attr-input-min"><a href="common-input-element-attributes.html#attr-input-min">min</a></code>,
+   <code title="attr-input-placeholder"><a href="common-input-element-attributes.html#attr-input-placeholder">placeholder</a></code>,
    <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code>,
    <code title="attr-input-required"><a href="common-input-element-attributes.html#attr-input-required">required</a></code>, and
    <code title="attr-input-step"><a href="common-input-element-attributes.html#attr-input-step">step</a></code> content attributes;
@@ -455,7 +420,6 @@
    <code class="no-backref" title="attr-input-maxlength"><a href="common-input-element-attributes.html#attr-input-maxlength">maxlength</a></code>,
    <code class="no-backref" title="attr-input-multiple"><a href="common-input-element-attributes.html#attr-input-multiple">multiple</a></code>,
    <code class="no-backref" title="attr-input-pattern"><a href="common-input-element-attributes.html#attr-input-pattern">pattern</a></code>,
-   <code class="no-backref" title="attr-input-placeholder"><a href="common-input-element-attributes.html#attr-input-placeholder">placeholder</a></code>,
    <code class="no-backref" title="attr-input-size"><a href="common-input-element-attributes.html#attr-input-size">size</a></code>,
    <code class="no-backref" title="attr-input-src"><a href="#attr-input-src">src</a></code>, and
    <code class="no-backref" title="attr-dim-width"><a href="the-map-element.html#attr-dim-width">width</a></code>.</p>
@@ -1041,12 +1005,15 @@
    following function extracts the filename in a suitably compatible
    manner:</p>
 
-   <pre>function extractFilename(path) {  var x;
-  x = path.lastIndexOf('\\');
-  if (x &gt;= 0) // Windows-based path
-    return path.substr(x+1);
+   <pre>function extractFilename(path) {
+  if (path.substr(0, 12) == "C:\\fakepath\\")
+    return path.substr(12); // modern browser
+  var x;
   x = path.lastIndexOf('/');
   if (x &gt;= 0) // Unix-based path
+    return path.substr(x+1);
+  x = path.lastIndexOf('\\');
+  if (x &gt;= 0) // Windows-based path
     return path.substr(x+1);
   return path; // just the filename
 }</pre>

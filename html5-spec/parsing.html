@@ -190,43 +190,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -433,7 +397,7 @@
   <h4 id="overview-of-the-parsing-model"><span class="secno">8.2.1 </span>Overview of the parsing model</h4>
 
   <p>The input to the HTML parsing process consists of a stream of
-  Unicode characters, which is passed through a
+  Unicode code points, which is passed through a
   <a href="tokenization.html#tokenization">tokenization</a> stage followed by a <a href="tree-construction.html#tree-construction">tree
   construction</a> stage. The output is a <code><a href="infrastructure.html#document">Document</a></code>
   object.</p>
@@ -478,7 +442,7 @@
 
   <h4 id="the-input-stream"><span class="secno">8.2.2 </span>The <dfn>input stream</dfn></h4>
 
-  <p>The stream of Unicode characters that comprises the input to the
+  <p>The stream of Unicode code points that comprises the input to the
   tokenization stage will be initially seen by the user agent as a
   stream of bytes (typically coming over the network or from the local
   file system). The bytes encode the actual characters according to a
@@ -516,8 +480,8 @@
   that encoding is <i>tentative</i> or <i>certain</i>, is <a href="tree-construction.html#meta-charset-during-parse">used during the parsing</a> to
   determine whether to <a href="#change-the-encoding">change the encoding</a>. If no
   encoding is necessary, e.g. because the parser is operating on a
-  stream of Unicode characters and doesn't have to use an encoding at
-  all, then the <a href="#concept-encoding-confidence" title="concept-encoding-confidence">confidence</a> is
+  Unicode stream and doesn't have to use an encoding at all, then the
+  <a href="#concept-encoding-confidence" title="concept-encoding-confidence">confidence</a> is
   <i>irrelevant</i>.</p>
 
   <ol><li><p>If the user has explicitly instructed the user agent to
@@ -1122,7 +1086,7 @@
   <h5 id="preprocessing-the-input-stream"><span class="secno">8.2.2.3 </span>Preprocessing the input stream</h5>
 
   <p>Given an encoding, the bytes in the input stream must be
-  converted to Unicode characters for the tokenizer, as described by
+  converted to Unicode code points for the tokenizer, as described by
   the rules for that encoding, except that the leading U+FEFF BYTE
   ORDER MARK character, if any, must not be stripped by the encoding
   layer (it is stripped by the rule below).</p> 

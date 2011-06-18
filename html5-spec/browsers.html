@@ -190,43 +190,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -385,13 +349,16 @@
   <code><a href="#windowproxy">WindowProxy</a></code> object forwards everything to the
   <a href="#browsing-context">browsing context</a>'s <a href="#active-document">active document</a>'s
   <code><a href="#window">Window</a></code> object.</p><p class="note">In general, there is a 1-to-1 mapping from the
-  <code><a href="#window">Window</a></code> object to the <code><a href="infrastructure.html#document">Document</a></code> object. In
-  one particular case, a <code><a href="#window">Window</a></code> can be reused for the
-  presentation of a second <code><a href="infrastructure.html#document">Document</a></code> in the same
-  <a href="#browsing-context">browsing context</a>, such that the mapping is then
-  2-to-1. This occurs when a <a href="#browsing-context">browsing context</a> is <a href="history.html#navigate" title="navigate">navigated</a> from the initial
+  <code><a href="#window">Window</a></code> object to the <code><a href="infrastructure.html#document">Document</a></code> object.
+  There are two exceptions. First, a <code><a href="#window">Window</a></code> can be reused
+  for the presentation of a second <code><a href="infrastructure.html#document">Document</a></code> in the same
+  <a href="#browsing-context">browsing context</a>, such that the mapping is then 2-to-1.
+  This occurs when a <a href="#browsing-context">browsing context</a> is <a href="history.html#navigate" title="navigate">navigated</a> from the initial
   <code><a href="fetching-resources.html#about:blank">about:blank</a></code> <code><a href="infrastructure.html#document">Document</a></code> to another, with
-  <a href="history.html#replacement-enabled">replacement enabled</a>.</p><p class="note">A <code><a href="infrastructure.html#document">Document</a></code> does not necessarily have a
+  <a href="history.html#replacement-enabled">replacement enabled</a>. Second, a <code><a href="infrastructure.html#document">Document</a></code>
+  can end up being reused for several <code><a href="#window">Window</a></code> objects when
+  the <code title="dom-document-open"><a href="apis-in-html-documents.html#dom-document-open">document.open()</a></code> method is
+  used, such that the mapping is then 1-to-many.</p><p class="note">A <code><a href="infrastructure.html#document">Document</a></code> does not necessarily have a
   <a href="#browsing-context">browsing context</a> associated with it. In particular,
   data mining tools are likely to never instantiate browsing
   contexts.</p><hr/><p>A <a href="#browsing-context">browsing context</a> can have a <dfn id="creator-browsing-context">creator browsing
@@ -677,7 +644,152 @@
   character. (Names starting with an underscore are reserved for
   special keywords.)</p><p>A <dfn id="valid-browsing-context-name-or-keyword">valid browsing context name or keyword</dfn> is any string
   that is either a <a href="#valid-browsing-context-name">valid browsing context name</a> or that is
-  an <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for one of: <code title="">_blank</code>, <code title="">_self</code>, <code title="">_parent</code>, or <code title="">_top</code>.</p><div class="impl">
+  an <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for one of: <code title="">_blank</code>, <code title="">_self</code>, <code title="">_parent</code>, or <code title="">_top</code>.</p><p>These values have different meanings based on whether the page is
+  sandboxed or not, as summarized in the following (non-normative)
+  table. In this table, "current" means the <a href="#browsing-context">browsing
+  context</a> that the link or script is in, "parent" means the
+  <a href="#parent-browsing-context">parent browsing context</a> of the one the link or script
+  is in, "master" means the nearest <a href="#ancestor-browsing-context">ancestor browsing
+  context</a> of the one the link or script is in that is not
+  itself in a <a href="the-iframe-element.html#attr-iframe-seamless" title="attr-iframe-seamless">seamless
+  iframe</a>, "top" means the <a href="#top-level-browsing-context">top-level browsing
+  context</a> of the one the link or script is in, "new" means a
+  new <a href="#top-level-browsing-context">top-level browsing context</a> or <a href="#auxiliary-browsing-context">auxiliary
+  browsing context</a> is to be created, subject to various user
+  preferences and user agent policies, "maybe new" means the same as
+  "new" but the requirements for those cases encourage user agents to
+  treat it more like "none", and "none" means that by default nothing
+  will happen.</p><table><thead><tr><th rowspan="2">Keyword
+     </th><th rowspan="2">Ordinary effect
+     </th><th colspan="5">Effect in an <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> with...
+    </th></tr><tr><th><code title="">seamless=""</code>
+     </th><th><code title="">sandbox=""</code>
+     </th><th><code title="">sandbox="" seamless=""</code>
+     </th><th><code title="">sandbox="allow-top-navigation"</code>
+     </th><th><code title="">sandbox="allow-top-navigation" seamless=""</code>
+
+   </th></tr></thead><tbody><tr><td>none specified, for links and form submissions 
+     </td><td>current
+     </td><td>master
+     </td><td>current
+     </td><td>master
+     </td><td>current
+     </td><td>master
+
+    </td></tr><tr><td>none specified, for <code title="dom-open"><a href="#dom-open">window.open()</a></code> 
+     </td><td>new
+     </td><td>new
+     </td><td>maybe new&#x2020;
+     </td><td>maybe new&#x2020;
+     </td><td>maybe new&#x2020;
+     </td><td>maybe new&#x2020;
+
+    </td></tr><tr><td>empty string
+     </td><td>current
+     </td><td>master
+     </td><td>current
+     </td><td>master
+     </td><td>current
+     </td><td>master
+
+    </td></tr><tr><td><code title="">_blank</code>
+     </td><td>new
+     </td><td>new
+     </td><td>maybe new
+     </td><td>maybe new
+     </td><td>maybe new
+     </td><td>maybe new
+
+    </td></tr><tr><td><code title="">_self</code>
+     </td><td>current
+     </td><td>current
+     </td><td>current
+     </td><td>current
+     </td><td>current
+     </td><td>current
+
+    </td></tr><tr><td><code title="">_parent</code> if there isn't a parent
+     </td><td>current
+     </td><td>current
+     </td><td>current
+     </td><td>current
+     </td><td>current
+     </td><td>current
+
+    </td></tr><tr><td><code title="">_parent</code> if parent is also top
+     </td><td>parent/top
+     </td><td>parent/top
+     </td><td>none
+     </td><td>none
+     </td><td>parent/top
+     </td><td>parent/top
+
+    </td></tr><tr><td><code title="">_parent</code> if there is one and it's not top
+     </td><td>parent
+     </td><td>parent
+     </td><td>none
+     </td><td>none
+     </td><td>none
+     </td><td>none
+
+    </td></tr><tr><td><code title="">_top</code> if top is current
+     </td><td>current
+     </td><td>current
+     </td><td>current
+     </td><td>current
+     </td><td>current
+     </td><td>current
+
+    </td></tr><tr><td><code title="">_top</code> if top is not current
+     </td><td>top
+     </td><td>top
+     </td><td>none
+     </td><td>none
+     </td><td>top
+     </td><td>top
+
+    </td></tr><tr><td>name that doesn't exist
+     </td><td>new
+     </td><td>new
+     </td><td>maybe new
+     </td><td>maybe new
+     </td><td>maybe new
+     </td><td>maybe new
+
+    </td></tr><tr><td>name that exists and is a descendant
+     </td><td>specified descendant
+     </td><td>specified descendant
+     </td><td>specified descendant
+     </td><td>specified descendant
+     </td><td>specified descendant
+     </td><td>specified descendant
+
+    </td></tr><tr><td>name that exists and is current
+     </td><td>current
+     </td><td>current
+     </td><td>current
+     </td><td>current
+     </td><td>current
+     </td><td>current
+
+    </td></tr><tr><td>name that exists and is a ancestor that is top
+     </td><td>specified ancestor
+     </td><td>specified ancestor
+     </td><td>none
+     </td><td>none
+     </td><td>specified ancestor/top
+     </td><td>specified ancestor/top
+
+    </td></tr><tr><td>name that exists and is a ancestor that is not top
+     </td><td>specified ancestor
+     </td><td>specified ancestor
+     </td><td>none
+     </td><td>none
+     </td><td>none
+     </td><td>none
+
+  </td></tr></tbody></table><p><small>&#x2020; This case is only possible if the <code title="attr-iframe-sandbox"><a href="the-iframe-element.html#attr-iframe-sandbox">sandbox</a></code> attribute also allows
+  scripts.</small></p><div class="impl">
 
   <p><dfn id="the-rules-for-choosing-a-browsing-context-given-a-browsing-context-name">The rules for choosing a browsing context given a browsing
   context name</dfn> are as follows. The rules assume that they are
@@ -726,10 +838,11 @@
    <li>
 
     <p>Otherwise, a new browsing context is being requested, and what
-    happens depends on the user agent's configuration and/or
-    abilities:</p>
+    happens depends on the user agent's configuration and/or abilities
+    &#x2014; it is determined by the rules given for the first
+    applicable option from the following list:</p>
 
-    <dl><dt id="sandboxWindowOpen">If the current browsing context had
+    <dl class="switch"><dt id="sandboxWindowOpen">If the current browsing context had
      the <a href="the-iframe-element.html#sandboxed-navigation-browsing-context-flag">sandboxed navigation browsing context flag</a> set
      when its <a href="#active-document">active document</a> was created.</dt>
 
@@ -738,9 +851,10 @@
      browsing context</a>. If the user picks one of those options,
      then the designated browsing context must be the chosen one (the
      browsing context's name isn't set to the given browsing context
-     name). Otherwise (if the user agent doesn't offer the option to
-     the user, or if the user declines to allow a browsing context to
-     be used) there must not be a chosen browsing context.</p></dd>
+     name). The default behaviour (if the user agent doesn't offer the
+     option to the user, or if the user declines to allow a browsing
+     context to be used) there must not be a chosen browsing
+     context.</p></dd>
 
 
      <dt id="noopener">If the user agent has been configured such that
@@ -805,7 +919,8 @@ interface <dfn id="window">Window</dfn> {
   [Replaceable] readonly attribute <a href="#barprop">BarProp</a> <a href="#dom-window-personalbar" title="dom-window-personalbar">personalbar</a>;
   [Replaceable] readonly attribute <a href="#barprop">BarProp</a> <a href="#dom-window-scrollbars" title="dom-window-scrollbars">scrollbars</a>;
   [Replaceable] readonly attribute <a href="#barprop">BarProp</a> <a href="#dom-window-statusbar" title="dom-window-statusbar">statusbar</a>;
-  [Replaceable] readonly attribute <a href="#barprop">BarProp</a> <a href="#dom-window-toolbar" title="dom-window-toolbar">toolbar</a>;  void <a href="#dom-window-close" title="dom-window-close">close</a>();
+  [Replaceable] readonly attribute <a href="#barprop">BarProp</a> <a href="#dom-window-toolbar" title="dom-window-toolbar">toolbar</a>;           attribute DOMString <a href="#dom-window-status" title="dom-window-status">status</a>;
+  void <a href="#dom-window-close" title="dom-window-close">close</a>();
   void <a href="#dom-window-stop" title="dom-window-stop">stop</a>();
   void <a href="editing.html#dom-window-focus" title="dom-window-focus">focus</a>();
   void <a href="editing.html#dom-window-blur" title="dom-window-blur">blur</a>();
@@ -816,7 +931,7 @@ interface <dfn id="window">Window</dfn> {
   readonly attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-top" title="dom-top">top</a>;
            attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-opener" title="dom-opener">opener</a>;
   readonly attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-parent" title="dom-parent">parent</a>;
-  readonly attribute <a href="infrastructure.html#element">Element</a> <a href="#dom-frameelement" title="dom-frameElement">frameElement</a>;
+  readonly attribute <a href="infrastructure.html#element">Element</a>? <a href="#dom-frameelement" title="dom-frameElement">frameElement</a>;
   <a href="#windowproxy">WindowProxy</a> <a href="#dom-open" title="dom-open">open</a>(in optional DOMString url, in optional DOMString target, in optional DOMString features, in optional DOMString replace);
   <a href="#dom-window-item" title="dom-window-item">getter</a> <a href="#windowproxy">WindowProxy</a> (in unsigned long index);
   <a href="#dom-window-nameditem" title="dom-window-namedItem">getter</a> any (in DOMString name);
@@ -829,80 +944,80 @@ interface <dfn id="window">Window</dfn> {
   // user prompts
   void <a href="timers.html#dom-alert" title="dom-alert">alert</a>(in DOMString message);
   boolean <a href="timers.html#dom-confirm" title="dom-confirm">confirm</a>(in DOMString message);
-  DOMString <a href="timers.html#dom-prompt" title="dom-prompt">prompt</a>(in DOMString message, in optional DOMString default);
+  DOMString? <a href="timers.html#dom-prompt" title="dom-prompt">prompt</a>(in DOMString message, in optional DOMString default);
   void <a href="timers.html#dom-print" title="dom-print">print</a>();
   any <a href="timers.html#dom-showmodaldialog" title="dom-showModalDialog">showModalDialog</a>(in DOMString url, in optional any argument);
 
   // <a href="webappapis.html#event-handler-idl-attributes">event handler IDL attributes</a>
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onabort" title="handler-onabort">onabort</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onafterprint" title="handler-window-onafterprint">onafterprint</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onbeforeprint" title="handler-window-onbeforeprint">onbeforeprint</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onbeforeunload" title="handler-window-onbeforeunload">onbeforeunload</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onblur" title="handler-window-onblur">onblur</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oncanplay" title="handler-oncanplay">oncanplay</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oncanplaythrough" title="handler-oncanplaythrough">oncanplaythrough</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onchange" title="handler-onchange">onchange</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onclick" title="handler-onclick">onclick</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oncontextmenu" title="handler-oncontextmenu">oncontextmenu</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oncuechange" title="handler-oncuechange">oncuechange</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondblclick" title="handler-ondblclick">ondblclick</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondrag" title="handler-ondrag">ondrag</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondragend" title="handler-ondragend">ondragend</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondragenter" title="handler-ondragenter">ondragenter</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondragleave" title="handler-ondragleave">ondragleave</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondragover" title="handler-ondragover">ondragover</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondragstart" title="handler-ondragstart">ondragstart</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondrop" title="handler-ondrop">ondrop</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondurationchange" title="handler-ondurationchange">ondurationchange</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onemptied" title="handler-onemptied">onemptied</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onended" title="handler-onended">onended</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onerror" title="handler-window-onerror">onerror</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onfocus" title="handler-window-onfocus">onfocus</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onhashchange" title="handler-window-onhashchange">onhashchange</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oninput" title="handler-oninput">oninput</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oninvalid" title="handler-oninvalid">oninvalid</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onkeydown" title="handler-onkeydown">onkeydown</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onkeypress" title="handler-onkeypress">onkeypress</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onkeyup" title="handler-onkeyup">onkeyup</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onload" title="handler-window-onload">onload</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onloadeddata" title="handler-onloadeddata">onloadeddata</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onloadedmetadata" title="handler-onloadedmetadata">onloadedmetadata</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onloadstart" title="handler-onloadstart">onloadstart</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onmessage" title="handler-window-onmessage">onmessage</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmousedown" title="handler-onmousedown">onmousedown</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmousemove" title="handler-onmousemove">onmousemove</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmouseout" title="handler-onmouseout">onmouseout</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmouseover" title="handler-onmouseover">onmouseover</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmouseup" title="handler-onmouseup">onmouseup</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmousewheel" title="handler-onmousewheel">onmousewheel</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onoffline" title="handler-window-onoffline">onoffline</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-ononline" title="handler-window-ononline">ononline</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onpause" title="handler-onpause">onpause</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onplay" title="handler-onplay">onplay</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onplaying" title="handler-onplaying">onplaying</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onpagehide" title="handler-window-onpagehide">onpagehide</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onpageshow" title="handler-window-onpageshow">onpageshow</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onpopstate" title="handler-window-onpopstate">onpopstate</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onprogress" title="handler-onprogress">onprogress</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onratechange" title="handler-onratechange">onratechange</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onreadystatechange" title="handler-onreadystatechange">onreadystatechange</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onredo" title="handler-window-onredo">onredo</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onreset" title="handler-onreset">onreset</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onresize" title="handler-window-onresize">onresize</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onscroll" title="handler-onscroll">onscroll</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onseeked" title="handler-onseeked">onseeked</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onseeking" title="handler-onseeking">onseeking</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onselect" title="handler-onselect">onselect</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onshow" title="handler-onshow">onshow</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onstalled" title="handler-onstalled">onstalled</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onstorage" title="handler-window-onstorage">onstorage</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onsubmit" title="handler-onsubmit">onsubmit</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onsuspend" title="handler-onsuspend">onsuspend</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ontimeupdate" title="handler-ontimeupdate">ontimeupdate</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onundo" title="handler-window-onundo">onundo</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-window-onunload" title="handler-window-onunload">onunload</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onvolumechange" title="handler-onvolumechange">onvolumechange</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onwaiting" title="handler-onwaiting">onwaiting</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onabort" title="handler-onabort">onabort</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onafterprint" title="handler-window-onafterprint">onafterprint</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onbeforeprint" title="handler-window-onbeforeprint">onbeforeprint</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onbeforeunload" title="handler-window-onbeforeunload">onbeforeunload</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onblur" title="handler-window-onblur">onblur</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncanplay" title="handler-oncanplay">oncanplay</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncanplaythrough" title="handler-oncanplaythrough">oncanplaythrough</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onchange" title="handler-onchange">onchange</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onclick" title="handler-onclick">onclick</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncontextmenu" title="handler-oncontextmenu">oncontextmenu</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncuechange" title="handler-oncuechange">oncuechange</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondblclick" title="handler-ondblclick">ondblclick</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondrag" title="handler-ondrag">ondrag</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragend" title="handler-ondragend">ondragend</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragenter" title="handler-ondragenter">ondragenter</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragleave" title="handler-ondragleave">ondragleave</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragover" title="handler-ondragover">ondragover</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragstart" title="handler-ondragstart">ondragstart</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondrop" title="handler-ondrop">ondrop</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondurationchange" title="handler-ondurationchange">ondurationchange</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onemptied" title="handler-onemptied">onemptied</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onended" title="handler-onended">onended</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onerror" title="handler-window-onerror">onerror</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onfocus" title="handler-window-onfocus">onfocus</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onhashchange" title="handler-window-onhashchange">onhashchange</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oninput" title="handler-oninput">oninput</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oninvalid" title="handler-oninvalid">oninvalid</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onkeydown" title="handler-onkeydown">onkeydown</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onkeypress" title="handler-onkeypress">onkeypress</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onkeyup" title="handler-onkeyup">onkeyup</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onload" title="handler-window-onload">onload</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onloadeddata" title="handler-onloadeddata">onloadeddata</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onloadedmetadata" title="handler-onloadedmetadata">onloadedmetadata</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onloadstart" title="handler-onloadstart">onloadstart</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onmessage" title="handler-window-onmessage">onmessage</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmousedown" title="handler-onmousedown">onmousedown</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmousemove" title="handler-onmousemove">onmousemove</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmouseout" title="handler-onmouseout">onmouseout</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmouseover" title="handler-onmouseover">onmouseover</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmouseup" title="handler-onmouseup">onmouseup</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmousewheel" title="handler-onmousewheel">onmousewheel</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onoffline" title="handler-window-onoffline">onoffline</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-ononline" title="handler-window-ononline">ononline</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onpause" title="handler-onpause">onpause</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onplay" title="handler-onplay">onplay</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onplaying" title="handler-onplaying">onplaying</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onpagehide" title="handler-window-onpagehide">onpagehide</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onpageshow" title="handler-window-onpageshow">onpageshow</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onpopstate" title="handler-window-onpopstate">onpopstate</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onprogress" title="handler-onprogress">onprogress</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onratechange" title="handler-onratechange">onratechange</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onreadystatechange" title="handler-onreadystatechange">onreadystatechange</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onredo" title="handler-window-onredo">onredo</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onreset" title="handler-onreset">onreset</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onresize" title="handler-window-onresize">onresize</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onscroll" title="handler-onscroll">onscroll</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onseeked" title="handler-onseeked">onseeked</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onseeking" title="handler-onseeking">onseeking</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onselect" title="handler-onselect">onselect</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onshow" title="handler-onshow">onshow</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onstalled" title="handler-onstalled">onstalled</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onstorage" title="handler-window-onstorage">onstorage</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onsubmit" title="handler-onsubmit">onsubmit</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onsuspend" title="handler-onsuspend">onsuspend</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ontimeupdate" title="handler-ontimeupdate">ontimeupdate</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onundo" title="handler-window-onundo">onundo</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onunload" title="handler-window-onunload">onunload</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onvolumechange" title="handler-onvolumechange">onvolumechange</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onwaiting" title="handler-onwaiting">onwaiting</a>;
 };
 <a href="#window">Window</a> implements <a href="infrastructure.html#eventtarget">EventTarget</a>;</pre><dl class="domintro"><dt><var title="">window</var> . <code title="dom-window"><a href="#dom-window">window</a></code></dt>
    <dt><var title="">window</var> . <code title="dom-frames"><a href="#dom-frames">frames</a></code></dt>
@@ -1088,15 +1203,26 @@ interface <dfn id="window">Window</dfn> {
   agent could override the selection of the target browsing context to
   instead target a new tab.</p>
 
-  <p>Then, the user agent must <a href="history.html#navigate">navigate</a> the selected <a href="#browsing-context">browsing context</a> to the
-  <a href="urls.html#absolute-url">absolute URL</a> (or error) obtained from <a href="urls.html#resolve-a-url" title="resolve a url">resolving</a> <var title="">url</var>
-  earlier. If the <var title="">replace</var> is true or if the
-  <a href="#browsing-context">browsing context</a> was just created as part of <a href="#the-rules-for-choosing-a-browsing-context-given-a-browsing-context-name">the
-  rules for choosing a browsing context given a browsing context
-  name</a>, then <a href="history.html#replacement-enabled" title="replacement enabled">replacement must
-  be enabled</a>. The navigation must be done with the <a href="webappapis.html#script-s-browsing-context" title="script's browsing context">browsing context</a> of the
-  <a href="#entry-script">entry script</a> as the <a href="history.html#source-browsing-context">source browsing
-  context</a>.</p>
+  <p>Then, if <var title="">url</var> is not
+  "<code><a href="fetching-resources.html#about:blank">about:blank</a></code>", the user agent must
+  <a href="history.html#navigate">navigate</a> the selected
+  <a href="#browsing-context">browsing context</a> to the <a href="urls.html#absolute-url">absolute URL</a> (or
+  error) obtained from <a href="urls.html#resolve-a-url" title="resolve a url">resolving</a>
+  <var title="">url</var> earlier. If the <var title="">replace</var>
+  is true or if the <a href="#browsing-context">browsing context</a> was just created as
+  part of <a href="#the-rules-for-choosing-a-browsing-context-given-a-browsing-context-name">the rules for choosing a browsing context given a
+  browsing context name</a>, then <a href="history.html#replacement-enabled" title="replacement&#10;  enabled">replacement must be enabled</a>. The navigation must be
+  done with the <a href="webappapis.html#script-s-browsing-context" title="script's browsing context">browsing
+  context</a> of the <a href="#entry-script">entry script</a> as the <a href="history.html#source-browsing-context">source
+  browsing context</a>.</p>
+
+  <p>If <var title="">url</var> <em>is</em>
+  "<code><a href="fetching-resources.html#about:blank">about:blank</a></code>", the user agent must instead <a href="webappapis.html#queue-a-task">queue
+  a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named <code title="event-load">load</code> at the the selected <a href="#browsing-context">browsing
+  context</a>'s <code><a href="#window">Window</a></code> object, but with its <code title="dom-event-target"><a href="infrastructure.html#dom-event-target">target</a></code> set to the the selected
+  <a href="#browsing-context">browsing context</a>'s <code><a href="#window">Window</a></code> object's
+  <code><a href="infrastructure.html#document">Document</a></code> object (and the <code title="dom-event-currentTarget">currentTarget</code> set to the
+  <code><a href="#window">Window</a></code> object).</p>
 
   <p>The method must return the <code><a href="#windowproxy">WindowProxy</a></code> object of the
   <a href="#browsing-context">browsing context</a> that was navigated, or null if no
@@ -1430,6 +1556,10 @@ interface <dfn id="window">Window</dfn> {
   attribute must return <a href="#the-toolbar-barprop-object">the toolbar <code>BarProp</code>
   object</a>.</p>
 
+
+  <hr/><p>For historical reasons, the <dfn id="dom-window-status" title="dom-window-status"><code>status</code></dfn> attribute on the
+  <code><a href="#window">Window</a></code> object must return an empty string on getting,
+  and do nothing on setting.</p>
 
   </div><div class="impl">
 

@@ -190,43 +190,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -360,7 +324,7 @@
    <a href="spec.html#contents">Table of contents</a> &#x2013;
    <a href="common-dom-interfaces.html" class="next">2.8 Common DOM interfaces</a>
   <ol class="toc"><li><ol><li><a href="fetching-resources.html#fetching-resources"><span class="secno">2.7 </span>Fetching resources</a>
-    <ol><li><a href="fetching-resources.html#concept-http-equivalent"><span class="secno">2.7.1 </span>Protocol concepts</a></li><li><a href="fetching-resources.html#encrypted-http-and-related-security-concerns"><span class="secno">2.7.2 </span>Encrypted HTTP and related security concerns</a></li><li><a href="fetching-resources.html#content-type-sniffing"><span class="secno">2.7.3 </span>Determining the type of a resource</a></li><li><a href="fetching-resources.html#extracting-encodings-from-meta-elements"><span class="secno">2.7.4 </span>Extracting encodings from <code>meta</code> elements</a></li><li><a href="fetching-resources.html#cors-settings-attributes"><span class="secno">2.7.5 </span>CORS settings attributes</a></li></ol></li></ol></li></ol></div><div class="impl">
+    <ol><li><a href="fetching-resources.html#concept-http-equivalent"><span class="secno">2.7.1 </span>Protocol concepts</a></li><li><a href="fetching-resources.html#encrypted-http-and-related-security-concerns"><span class="secno">2.7.2 </span>Encrypted HTTP and related security concerns</a></li><li><a href="fetching-resources.html#content-type-sniffing"><span class="secno">2.7.3 </span>Determining the type of a resource</a></li><li><a href="fetching-resources.html#extracting-encodings-from-meta-elements"><span class="secno">2.7.4 </span>Extracting encodings from <code>meta</code> elements</a></li><li><a href="fetching-resources.html#cors-settings-attributes"><span class="secno">2.7.5 </span>CORS settings attributes</a></li><li><a href="fetching-resources.html#cors-enabled-fetch"><span class="secno">2.7.6 </span>CORS-enabled fetch</a></li></ol></li></ol></li></ol></div><div class="impl">
 
   <h3 id="fetching-resources"><span class="secno">2.7 </span>Fetching resources</h3>
 
@@ -509,7 +473,11 @@
      <dd>
 
       <p>Continue, using the fetched resource (the redirect) as the
-      result of the algorithm.</p>
+      result of the algorithm. If the calling algorithm subsequently
+      requires the user agent to <dfn id="transparently-follow-the-redirect">transparently follow the
+      redirect</dfn>, then the user agent must resume this algorithm
+      from the <i>main step</i>, but using the target of the redirect
+      as the resource to fetch, rather than the original resource.</p>
 
      </dd>
 
@@ -734,13 +702,162 @@
   keyword.</p><table><thead><tr><th> Keyword
      </th><th> State
      </th><th> Brief description
-   </th></tr></thead><tbody><tr><td><dfn id="attr-cross-origin-anonymous-keyword" title="attr-cross-origin-anonymous-keyword"><code>anonymous</code></dfn>
-     </td><td><dfn id="attr-cross-origin-anonymous" title="attr-cross-origin-anonymous">Anonymous</dfn>
+   </th></tr></thead><tbody><tr><td><dfn id="attr-crossorigin-anonymous-keyword" title="attr-crossorigin-anonymous-keyword"><code>anonymous</code></dfn>
+     </td><td><dfn id="attr-crossorigin-anonymous" title="attr-crossorigin-anonymous">Anonymous</dfn>
      </td><td>Cross-origin CORS requests for the element will not have the <i>credentials flag</i> set.
-    </td></tr><tr><td><dfn id="attr-cross-origin-use-credentials-keyword" title="attr-cross-origin-use-credentials-keyword"><code>use-credentials</code></dfn>
-     </td><td><dfn id="attr-cross-origin-use-credentials" title="attr-cross-origin-use-credentials">Use Credentials</dfn>
+    </td></tr><tr><td><dfn id="attr-crossorigin-use-credentials-keyword" title="attr-crossorigin-use-credentials-keyword"><code>use-credentials</code></dfn>
+     </td><td><dfn id="attr-crossorigin-use-credentials" title="attr-crossorigin-use-credentials">Use Credentials</dfn>
      </td><td>Cross-origin CORS requests for the element will have the <i>credentials flag</i> set.
-  </td></tr></tbody></table><p>The empty string is also a valid keyword, and maps to the <a href="#attr-cross-origin-anonymous" title="attr-cross-origin-anonymous">Anonymous</a> state. The
-  attribute's <i>invalid value default</i> is the <a href="#attr-cross-origin-anonymous" title="attr-cross-origin-anonymous">Anonymous</a> state. The
+  </td></tr></tbody></table><p>The empty string is also a valid keyword, and maps to the <a href="#attr-crossorigin-anonymous" title="attr-crossorigin-anonymous">Anonymous</a> state. The
+  attribute's <i>invalid value default</i> is the <a href="#attr-crossorigin-anonymous" title="attr-crossorigin-anonymous">Anonymous</a> state. The
   <i>missing value default</i>, used when the attribute is omitted, is
-  the <dfn id="attr-cross-origin-none" title="attr-cross-origin-none">No CORS</dfn> state.</p></body></html>
+  the <dfn id="attr-crossorigin-none" title="attr-crossorigin-none">No CORS</dfn> state.</p><h4 id="cors-enabled-fetch"><span class="secno">2.7.6 </span>CORS-enabled fetch</h4><p>When the user agent is required to perform a <dfn id="potentially-cors-enabled-fetch">potentially
+  CORS-enabled fetch</dfn> of an <a href="urls.html#absolute-url">absolute URL</a> <var title="">URL</var>, with a mode <var title="">mode</var> that is
+  either "<a href="#attr-crossorigin-none" title="attr-crossorigin-none">No CORS</a>", "<a href="#attr-crossorigin-anonymous" title="attr-crossorigin-anonymous">Anonymous</a>", or "<a href="#attr-crossorigin-use-credentials" title="attr-crossorigin-use-credentials">Use Credentials</a>",
+  an <a href="origin-0.html#origin">origin</a> <var title="">origin</var>, and a default
+  origin behaviour <var title="">default</var> which is either
+  "<i>taint</i>" or "<i>fail</i>", it must run the first applicable
+  set of steps from the following list. The default origin behaviour
+  is only used if <var title="">mode</var> is "<a href="#attr-crossorigin-none" title="attr-crossorigin-none">No CORS</a>". This algorithm wraps
+  the <a href="#fetch">fetch</a> algorithm above, and labels the obtained
+  resource as either <dfn id="cors-same-origin">CORS-same-origin</dfn> or
+  <dfn id="cors-cross-origin">CORS-cross-origin</dfn>, or blocks the resource entirely.</p><dl class="switch"><dt>If <var title="">mode</var> is "<a href="#attr-crossorigin-none" title="attr-crossorigin-none">No CORS</a>"</dt>
+
+   <dd>
+
+    <p>Run these substeps:</p>
+
+    <ol><li><p>Let <var title="">result</var> have no value.</p></li>
+
+     <li><p><a href="#fetch">Fetch</a> <var title="">URL</var>, with the
+     <i>manual redirect flag</i> set.</p></li> 
+     <li><p><i>Loop</i>: Wait for the <a href="#fetch">fetch</a> algorithm
+     to know if the result is a redirect or not.</p></li>
+
+     <li>
+
+      <p>If the result of the <a href="#fetch">fetch</a> is a redirect, and
+      <var title="">result</var> still has no value, then apply the
+      CORS <a href="infrastructure.html#redirect-steps">redirect steps</a>, with the CORS
+      <a href="infrastructure.html#credential-flag">credential flag</a> set to true and the <i>request
+      rules</i> being that the user agent continue to follow these
+      steps. If this resumes the <a href="#fetch">fetch</a> algorithm, then
+      return to the <i>loop</i> step. If it failed due to a failure
+      of the CORS <a href="infrastructure.html#resource-sharing-check">resource sharing check</a>, then: if <var title="">default</var> is <i>fail</i>, then set <var title="">result</var> to <i>fail</i> and jump to the step
+      labeled <i>end</i>; if <var title="">default</var> is
+      <i>taint</i>, then set <var title="">result</var> to
+      <i>taint</i>, <a href="#transparently-follow-the-redirect">transparently follow the redirect</a>
+      but with the <i>manual redirect flag</i> no longer set, and
+      jump to the step labeled <i>end</i> below.</p>
+
+      <p>Otherwise, if the resource is not available (e.g. there is
+      a network error) then set <var title="">result</var> to the
+      same value as <var title="">default</var>, and jump to the
+      step labeled <i>end</i> below.</p>
+
+      <p>Otherwise, perform a <a href="infrastructure.html#resource-sharing-check">resource sharing check</a>,
+      with the CORS <a href="infrastructure.html#credential-flag">credential flag</a> set to true. If it
+      returns fail, then set <var title="">result</var> to the same
+      value as <var title="">default</var>; otherwise, set <var title="">result</var> to <i>success</i>. Then, jump to the
+      step labeled <i>end</i> below.</p>
+
+     </li>
+
+     <li>
+
+      <p><i>End</i>: Jump to the appropriate step from the following
+      list:</p>
+
+      <dl class="switch"><dt>If <var title="">result</var> is <i>fail</i></dt>
+
+       <dd>
+
+        <p>Discard all fetched data and prevent any <a href="webappapis.html#concept-task" title="concept-task">tasks</a> from the <a href="#fetch">fetch</a>
+        algorithm from being <a href="webappapis.html#queue-a-task" title="queue a task">queued</a>.
+        For the purposes of the calling algorithm, the user agent must
+        act as if there was a fatal network error and no resource was
+        obtained. The user agent may report a cross-origin resource
+        access failure to the user (e.g. in a debugging console).</p>
+
+       </dd>
+
+       <dt>If <var title="">result</var> is <i>taint</i></dt>
+
+       <dd>
+
+        <p>Tbe <a href="webappapis.html#concept-task" title="concept-task">tasks</a> from the
+        <a href="#fetch">fetch</a> algorithm are <a href="webappapis.html#queue-a-task" title="queue a&#10;        task">queued</a> normally, but for the purposes of the
+        calling algorithm, the obtained resource is
+        <a href="#cors-cross-origin">CORS-cross-origin</a>. The user agent may report a
+        cross-origin resource access failure to the user (e.g. in a
+        debugging console).</p>
+
+       </dd>
+
+       <dt>If <var title="">result</var> is <i>success</i></dt>
+
+       <dd>
+
+        <p>Tbe <a href="webappapis.html#concept-task" title="concept-task">tasks</a> from the
+        <a href="#fetch">fetch</a> algorithm are <a href="webappapis.html#queue-a-task" title="queue a&#10;        task">queued</a> normally, and for the purposes of the
+        calling algorithm, the obtained resource is
+        <a href="#cors-same-origin">CORS-same-origin</a>.</p>
+
+       </dd>
+
+      </dl></li>
+
+    </ol></dd>
+
+
+   <dt>If <var title="">mode</var> is "<a href="#attr-crossorigin-anonymous" title="attr-crossorigin-anonymous">Anonymous</a>" or "<a href="#attr-crossorigin-use-credentials" title="attr-crossorigin-use-credentials">Use
+   Credentials</a>"</dt>
+
+   <dd>
+
+    <p>Run these steps:</p>
+
+    <ol><li><p>Perform a <a href="infrastructure.html#cross-origin-request">cross-origin request</a> with the
+     <i>request URL</i> set to <var title="">URL</var>, the
+     <i>source origin</i> set to <var title="">origin</var>, and the
+     <i>credentials flag</i> set to true if <var title="">mode</var>
+     is "<a href="#attr-crossorigin-use-credentials" title="attr-crossorigin-use-credentials">Use
+     Credentials</a>" and set to false otherwise. <a href="references.html#refsCORS">[CORS]</a></p></li>
+
+     <li><p>Wait for the CORS <a href="infrastructure.html#cross-origin-request-status">cross-origin request status</a>
+     to have a value.</p></li>
+
+     <li>
+
+      <p>Jump to the appropriate step from the following list:</p>
+
+      <dl class="switch"><dt>If the CORS <a href="infrastructure.html#cross-origin-request-status">cross-origin request status</a> is not <i>success</i></dt>
+
+       <dd>
+
+        <p>Discard all fetched data and prevent any <a href="webappapis.html#concept-task" title="concept-task">tasks</a> from the <a href="#fetch">fetch</a>
+        algorithm from being <a href="webappapis.html#queue-a-task" title="queue a task">queued</a>.
+        For the purposes of the calling algorithm, the user agent must
+        act as if there was a fatal network error and no resource was
+        obtained. If a CORS <a href="infrastructure.html#resource-sharing-check">resource sharing check</a>
+        failed, the user agent may report a cross-origin resource
+        access failure to the user (e.g. in a debugging console).</p>
+
+       </dd>
+
+       <dt>If the CORS <a href="infrastructure.html#cross-origin-request-status">cross-origin request status</a> is <i>success</i></dt>
+
+       <dd>
+
+        <p>Tbe <a href="webappapis.html#concept-task" title="concept-task">tasks</a> from the
+        <a href="#fetch">fetch</a> algorithm are <a href="webappapis.html#queue-a-task" title="queue a&#10;        task">queued</a> normally, and for the purposes of the
+        calling algorithm, the obtained resource is
+        <a href="#cors-same-origin">CORS-same-origin</a>.</p>
+
+       </dd>
+
+      </dl></li>
+
+    </ol></dd>
+
+  </dl></body></html>

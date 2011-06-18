@@ -190,43 +190,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -700,9 +664,9 @@ td, th { padding: 1px; }</pre>
 form { margin-bottom: 1em; }</pre>
 
   <p>When a <code><a href="infrastructure.html#document">Document</a></code> is in <a href="dom.html#quirks-mode">quirks mode</a>,
-  margins on <a href="infrastructure.html#html-elements">HTML elements</a> at the top or bottom of
-  <code><a href="sections.html#the-body-element">body</a></code>, <code><a href="tabular-data.html#the-td-element">td</a></code>, or <code><a href="tabular-data.html#the-th-element">th</a></code> elements are
-  expected to be collapsed to zero.</p>
+  vertical margins on <a href="infrastructure.html#html-elements">HTML elements</a> at the top or bottom
+  of <code><a href="sections.html#the-body-element">body</a></code>, <code><a href="tabular-data.html#the-td-element">td</a></code>, or <code><a href="tabular-data.html#the-th-element">th</a></code> elements
+  are expected to be collapsed to zero.</p>
 
   </div><div class="impl">
 
@@ -1215,6 +1179,16 @@ table[border] &gt; tfoot &gt; tr &gt; td, table[border] &gt; tfoot &gt; tr &gt; 
   error, a default value of 1px is expected to be used for that
   property instead.</p>
 
+  <p>When a <code><a href="tabular-data.html#the-table-element">table</a></code> element's <code title="attr-table-border"><a href="tabular-data.html#attr-table-border">border</a></code> attribute is present and,
+  when parsed using the <a href="common-microsyntaxes.html#rules-for-parsing-non-negative-integers">rules for parsing non-negative
+  integers</a>, is found to have the value zero, the user agent is
+  expected to use the attribute as a <a href="#presentational-hints" title="presentational&#10;  hints">presentational hint</a> setting the 'border-top-width',
+  'border-right-width', 'border-bottom-width', and 'border-left-width'
+  properties of any <code><a href="tabular-data.html#the-td-element">td</a></code> and <code><a href="tabular-data.html#the-th-element">th</a></code> elements that
+  are are <a href="tabular-data.html#concept-cell" title="concept-cell">cells</a> in the same
+  <a href="tabular-data.html#table-model">table model</a> as the <code><a href="tabular-data.html#the-table-element">table</a></code> element to
+  zero.</p>
+
   <p>The <code><a href="text-level-semantics.html#the-wbr-element">wbr</a></code> element is expected to override the
   'white-space' property and always provide a line-breaking
   opportunity.</p>
@@ -1725,10 +1699,15 @@ iframe:not([seamless]) { border: 2px inset; }
        section. (That section uses some of the variables whose values
        were calculated earlier in this algorithm.)</li>
 
-       <li>Text runs must be wrapped at the edge of their containing
-       blocks, regardless of the value of the 'white-space' property,
-       even if doing so requires splitting a word where there is no
-       line breaking opportunity.</li>
+       <li>Text runs must be wrapped according to the CSS
+       line-wrapping rules, except that additionally, regardless of
+       the value of the 'white-space' property, lines must be wrapped
+       at the edge of their containing blocks, even if doing so
+       requires splitting a word where there is no line breaking
+       opportunity. (Thus, normally text wraps as needed, but if there
+       is a particularly long word, it does not overflow as it
+       normally would in CSS, it is instead forcibly wrapped at the
+       box's edge.)</li>
 
        <li>The viewport (and initial containing block) is
        <var title="">video</var>'s rendering area.</li>
@@ -1958,7 +1937,13 @@ iframe:not([seamless]) { border: 2px inset; }
 
    <li><p>Return <var title="">output</var>.</p></li>
 
-  </ol><h5 id="applying-css-properties-to-webvtt-node-objects"><span class="secno">10.3.2.2 </span>Applying CSS properties to <span title="WebVTT Node Object">WebVTT Node Objects</span></h5>
+  </ol><p>User agents may allow the user to override the above algorithm's
+  positioning of cues, e.g. by dragging them to another location on
+  the <code><a href="the-iframe-element.html#the-video-element">video</a></code>, or even off the <code><a href="the-iframe-element.html#the-video-element">video</a></code>
+  entirely.</p>
+
+
+  <h5 id="applying-css-properties-to-webvtt-node-objects"><span class="secno">10.3.2.2 </span>Applying CSS properties to <span title="WebVTT Node Object">WebVTT Node Objects</span></h5>
 
   <p>When following the <a href="#rules-for-updating-the-display-of-webvtt-text-tracks">rules for updating the display of WebVTT
   text tracks</a>, user agents must set properties of <span title="WebVTT Node Object">WebVTT Node Objects</span> as defined in
@@ -2058,8 +2043,9 @@ iframe:not([seamless]) { border: 2px inset; }
   ignored:</p>
 
   <ul class="brief"><li>'color'</li>
-   <li>'text-shadow'</li>
+   <li>'text-decoration'</li>
    <li>'text-outline'</li>
+   <li>'text-shadow'</li>
    <li>the properties corresponding to the 'background' shorthand</li>
    <li>the properties corresponding to the 'outline' shorthand</li>
    <li>the properties corresponding to the 'font' shorthand, including 'line-height'</li>
@@ -2131,20 +2117,25 @@ iframe:not([seamless]) { border: 2px inset; }
    <li><p>For the purposes of class selector matching, <span title="WebVTT Internal Node Object">WebVTT Internal Node
    Objects</span> have the classes described as the <span>WebVTT
    Node Object's applicable classes</span>.</p></li> 
+   <li><p>For the purposes of ID selector matching, <span title="List&#10;   of WebVTT Node Objects">Lists of WebVTT Node Objects</span> have
+   the ID given by the cue's <a href="the-iframe-element.html#text-track-cue-identifier">text track cue identifier</a>,
+   if any.</p></li>
+
   </ul><p>The following properties apply to the '::cue()' pseudo-element
   with an argument:</p>
 
   <ul class="brief"><li>'color'</li>
-   <li>'text-shadow'</li>
+   <li>'text-decoration'</li>
    <li>'text-outline'</li>
+   <li>'text-shadow'</li>
    <li>the properties corresponding to the 'background' shorthand</li>
    <li>the properties corresponding to the 'outline' shorthand</li>
    <li>properties relating to the transition and animation features</li>
    
    
-  </ul><p>The following properties apply to the '::cue()' pseudo-element
-  with an argument when the selector does not contain the ':past' and
-  ':future' pseudo-classes:</p>
+  </ul><p>In addition, the following properties apply to the '::cue()'
+  pseudo-element with an argument when the selector does not contain
+  the ':past' and ':future' pseudo-classes:</p>
 
   <ul class="brief"><li>the properties corresponding to the 'font' shorthand, including 'line-height'</li>
    
@@ -3348,7 +3339,7 @@ time[datetime] { binding: <i title="">time</i>; }</pre>
   <p>U+000A LINE FEED (LF) characters are expected to cause line
   breaks in the tooltip, U+0009 CHARACTER TABULATION (tab) characters
   are expected to render as a non-zero horizontal shift that lines up
-  the next glpyh with the next tab stop, with tab stops occurring at
+  the next glyph with the next tab stop, with tab stops occurring at
   points that are multiples of 8 times the width of a U+0020 SPACE
   character.</p>
 

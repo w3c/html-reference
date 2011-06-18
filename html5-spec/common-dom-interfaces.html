@@ -190,43 +190,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -437,7 +401,7 @@
   returned. If, on the other hand, it fails or returns an out of range
   value, or if the attribute is absent, the default value must be
   returned instead, or &#x2212;1 if there is no default value. On
-  setting, if the value is negative, the user agent must fire an
+  setting, if the value is negative, the user agent must throw an
   <code><a href="#index_size_err">INDEX_SIZE_ERR</a></code> exception. Otherwise, the given value
   must be converted to the shortest possible string representing the
   number as a <a href="common-microsyntaxes.html#valid-non-negative-integer">valid non-negative integer</a> and then that
@@ -467,7 +431,7 @@
   fails or returns an out of range value, or if the attribute is
   absent, the default value must be returned instead, or 1 if there is
   no default value. On setting, if the value is zero, the user agent
-  must fire an <code><a href="#index_size_err">INDEX_SIZE_ERR</a></code> exception. Otherwise, the
+  must throw an <code><a href="#index_size_err">INDEX_SIZE_ERR</a></code> exception. Otherwise, the
   given value must be converted to the shortest possible string
   representing the number as a <a href="common-microsyntaxes.html#valid-non-negative-integer">valid non-negative integer</a>
   and then that string must be used as the new content attribute
@@ -565,8 +529,8 @@
   </div><h5 id="htmlcollection-0"><span class="secno">2.8.2.1 </span>HTMLCollection</h5><p>The <code><a href="#htmlcollection">HTMLCollection</a></code> interface represents a generic
   <a href="#collections" title="collections">collection</a> of elements.</p><pre class="idl">interface <dfn id="htmlcollection">HTMLCollection</dfn> {
   readonly attribute unsigned long <a href="#dom-htmlcollection-length" title="dom-HTMLCollection-length">length</a>;
-  caller getter <a href="infrastructure.html#element">Element</a> <a href="#dom-htmlcollection-item" title="dom-HTMLCollection-item">item</a>(in unsigned long index);
-  caller getter object <a href="#dom-htmlcollection-nameditem" title="dom-HTMLCollection-namedItem">namedItem</a>(in DOMString name); // only returns Element
+  caller getter <a href="infrastructure.html#element">Element</a>? <a href="#dom-htmlcollection-item" title="dom-HTMLCollection-item">item</a>(in unsigned long index);
+  caller getter object? <a href="#dom-htmlcollection-nameditem" title="dom-HTMLCollection-namedItem">namedItem</a>(in DOMString name); // only returns Element
 };</pre><dl class="domintro"><dt><var title="">collection</var> . <code title="dom-HTMLCollection-length"><a href="#dom-htmlcollection-length">length</a></code></dt>
    <dd>
     <p>Returns the number of elements in the collection.</p>
@@ -577,7 +541,6 @@
    <dt><var title="">collection</var>(<var title="">index</var>)</dt>
    <dd>
     <p>Returns the item with index <var title="">index</var> from the collection. The items are sorted in <a href="infrastructure.html#tree-order">tree order</a>.</p>
-    <p>Returns null if <var title="">index</var> is out of range.</p>
    </dd>
 
    <dt><var title="">element</var> = <var title="">collection</var> . <code title="dom-HTMLCollection-namedItem"><a href="#dom-htmlcollection-nameditem">namedItem</a></code>(<var title="">name</var>)</dt>
@@ -586,7 +549,6 @@
    <dd>
     <p>Returns the first item with <a href="elements.html#concept-id" title="concept-id">ID</a> or name <var title="">name</var>
     from the collection.</p>
-    <p>Returns null if no element with that <a href="elements.html#concept-id" title="concept-id">ID</a> or name could be found.</p>
     <p>Only <code><a href="text-level-semantics.html#the-a-element">a</a></code>, <code><a href="obsolete.html#the-applet-element">applet</a></code>, <code><a href="the-map-element.html#the-area-element">area</a></code>,
     <code><a href="the-iframe-element.html#the-embed-element">embed</a></code>, <code><a href="forms.html#the-form-element">form</a></code>, <code><a href="obsolete.html#frame">frame</a></code>,
     <code><a href="obsolete.html#frameset">frameset</a></code>, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <code><a href="embedded-content-1.html#the-img-element">img</a></code>, and
@@ -640,7 +602,7 @@
   returns an <code><a href="#htmlallcollection">HTMLAllCollection</a></code> object when there are
   multiple matching elements.</p><pre class="idl">interface <dfn id="htmlallcollection">HTMLAllCollection</dfn> : <a href="#htmlcollection">HTMLCollection</a> {
   // inherits <a href="#dom-htmlcollection-length" title="dom-HTMLCollection-length">length</a> and <a href="#dom-htmlcollection-item" title="dom-HTMLCollection-item">item</a>()
-  caller getter object <a href="#dom-htmlallcollection-nameditem" title="dom-HTMLAllCollection-namedItem">namedItem</a>(in DOMString name); // overrides inherited namedItem()
+  caller getter object? <a href="#dom-htmlallcollection-nameditem" title="dom-HTMLAllCollection-namedItem">namedItem</a>(in DOMString name); // overrides inherited namedItem()
   <a href="#htmlallcollection">HTMLAllCollection</a> <a href="#dom-htmlallcollection-tags" title="dom-HTMLAllCollection-tags">tags</a>(in DOMString tagName);
 };</pre><dl class="domintro"><dt><var title="">collection</var> . <code title="dom-HTMLCollection-length"><a href="#dom-htmlcollection-length">length</a></code></dt>
    <dd>
@@ -652,7 +614,6 @@
    <dt><var title="">collection</var>(<var title="">index</var>)</dt>
    <dd>
     <p>Returns the item with index <var title="">index</var> from the collection. The items are sorted in <a href="infrastructure.html#tree-order">tree order</a>.</p>
-    <p>Returns null if <var title="">index</var> is out of range.</p>
    </dd>
 
    <dt><var title="">element</var> = <var title="">collection</var> . <code title="dom-HTMLAllCollection-namedItem"><a href="#dom-htmlallcollection-nameditem">namedItem</a></code>(<var title="">name</var>)</dt>
@@ -662,7 +623,6 @@
    <dd>
     <p>Returns the item with <a href="elements.html#concept-id" title="concept-id">ID</a> or name <var title="">name</var> from the collection.</p>
     <p>If there are multiple matching items, then an <code><a href="#htmlallcollection">HTMLAllCollection</a></code> object containing all those elements is returned.</p>
-    <p>Returns null if no element with that <a href="elements.html#concept-id" title="concept-id">ID</a> or name could be found.</p>
     <p>Only <code><a href="text-level-semantics.html#the-a-element">a</a></code>, <code><a href="obsolete.html#the-applet-element">applet</a></code>, <code><a href="the-map-element.html#the-area-element">area</a></code>,
     <code><a href="the-iframe-element.html#the-embed-element">embed</a></code>, <code><a href="forms.html#the-form-element">form</a></code>, <code><a href="obsolete.html#frame">frame</a></code>,
     <code><a href="obsolete.html#frameset">frameset</a></code>, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <code><a href="embedded-content-1.html#the-img-element">img</a></code>, and
@@ -727,7 +687,7 @@
   a <a href="#collections" title="collections">collection</a> of <a href="forms.html#category-listed" title="category-listed">listed elements</a> in <code><a href="forms.html#the-form-element">form</a></code>
   and <code><a href="forms.html#the-fieldset-element">fieldset</a></code> elements.</p><pre class="idl">interface <dfn id="htmlformcontrolscollection">HTMLFormControlsCollection</dfn> : <a href="#htmlcollection">HTMLCollection</a> {
   // inherits <a href="#dom-htmlcollection-length" title="dom-HTMLCollection-length">length</a> and <a href="#dom-htmlcollection-item" title="dom-HTMLCollection-item">item</a>()
-  caller getter object <a href="#dom-htmlformcontrolscollection-nameditem" title="dom-HTMLFormControlsCollection-namedItem">namedItem</a>(in DOMString name); // overrides inherited namedItem()
+  caller getter object? <a href="#dom-htmlformcontrolscollection-nameditem" title="dom-HTMLFormControlsCollection-namedItem">namedItem</a>(in DOMString name); // overrides inherited namedItem()
 };
 
 interface <dfn id="radionodelist">RadioNodeList</dfn> : <a href="infrastructure.html#nodelist">NodeList</a> {
@@ -742,7 +702,6 @@ interface <dfn id="radionodelist">RadioNodeList</dfn> : <a href="infrastructure.
    <dt><var title="">collection</var>(<var title="">index</var>)</dt>
    <dd>
     <p>Returns the item with index <var title="">index</var> from the collection. The items are sorted in <a href="infrastructure.html#tree-order">tree order</a>.</p>
-    <p>Returns null if <var title="">index</var> is out of range.</p>
    </dd>
 
    <dt><var title="">element</var> = <var title="">collection</var> . <code title="dom-HTMLFormControlsCollection-namedItem"><a href="#dom-htmlformcontrolscollection-nameditem">namedItem</a></code>(<var title="">name</var>)</dt>
@@ -752,7 +711,6 @@ interface <dfn id="radionodelist">RadioNodeList</dfn> : <a href="infrastructure.
    <dd>
     <p>Returns the item with <a href="elements.html#concept-id" title="concept-id">ID</a> or <code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code> <var title="">name</var> from the collection.</p>
     <p>If there are multiple matching items, then a <code><a href="#radionodelist">RadioNodeList</a></code> object containing all those elements is returned.</p>
-    <p>Returns null if no element with that <a href="elements.html#concept-id" title="concept-id">ID</a> or <code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code> could be found.</p>
    </dd>
 
    <dt><var title="">radioNodeList</var> . <var title="">value</var> [ = <var title="">value</var> ]</dt>
@@ -834,8 +792,8 @@ interface <dfn id="radionodelist">RadioNodeList</dfn> : <a href="infrastructure.
   manipulate that element's descendants.</p><pre class="idl">interface <dfn id="htmloptionscollection">HTMLOptionsCollection</dfn> : <a href="#htmlcollection">HTMLCollection</a> {
   // inherits <a href="#dom-htmlcollection-item" title="dom-HTMLCollection-item">item</a>()
            attribute unsigned long <a href="#dom-htmloptionscollection-length" title="dom-HTMLOptionsCollection-length">length</a>; // overrides inherited length
-  caller getter object <a href="#dom-htmloptionscollection-nameditem" title="dom-HTMLOptionsCollection-namedItem">namedItem</a>(in DOMString name); // overrides inherited namedItem()
-  void <a href="#dom-htmloptionscollection-add" title="dom-HTMLOptionsCollection-add">add</a>(in <a href="elements.html#htmlelement">HTMLElement</a> element, in optional <a href="elements.html#htmlelement">HTMLElement</a> before);
+  caller getter object? <a href="#dom-htmloptionscollection-nameditem" title="dom-HTMLOptionsCollection-namedItem">namedItem</a>(in DOMString name); // overrides inherited namedItem()
+  void <a href="#dom-htmloptionscollection-add" title="dom-HTMLOptionsCollection-add">add</a>(in <a href="elements.html#htmlelement">HTMLElement</a> element, in optional <a href="elements.html#htmlelement">HTMLElement</a>? before);
   void <a href="#dom-htmloptionscollection-add" title="dom-HTMLOptionsCollection-add">add</a>(in <a href="elements.html#htmlelement">HTMLElement</a> element, in long before);
   void <a href="#dom-htmloptionscollection-remove" title="dom-HTMLOptionsCollection-remove">remove</a>(in long index);
            attribute long <a href="#dom-htmloptionscollection-selectedindex" title="dom-HTMLOptionsCollection-selectedIndex">selectedIndex</a>;
@@ -851,7 +809,6 @@ interface <dfn id="radionodelist">RadioNodeList</dfn> : <a href="infrastructure.
    <dt><var title="">collection</var>(<var title="">index</var>)</dt>
    <dd>
     <p>Returns the item with index <var title="">index</var> from the collection. The items are sorted in <a href="infrastructure.html#tree-order">tree order</a>.</p>
-    <p>Returns null if <var title="">index</var> is out of range.</p>
    </dd>
 
    <dt><var title="">element</var> = <var title="">collection</var> . <code title="dom-HTMLOptionsCollection-namedItem"><a href="#dom-htmloptionscollection-nameditem">namedItem</a></code>(<var title="">name</var>)</dt>
@@ -861,7 +818,6 @@ interface <dfn id="radionodelist">RadioNodeList</dfn> : <a href="infrastructure.
    <dd>
     <p>Returns the item with <a href="elements.html#concept-id" title="concept-id">ID</a> or <code title="attr-option-name"><a href="obsolete.html#attr-option-name">name</a></code> <var title="">name</var> from the collection.</p>
     <p>If there are multiple matching items, then a <code><a href="infrastructure.html#nodelist">NodeList</a></code> object containing all those elements is returned.</p>
-    <p>Returns null if no element with that <a href="elements.html#concept-id" title="concept-id">ID</a> could be found.</p>
    </dd>
 
    <dt><var title="">collection</var> . <code title="dom-HTMLOptionsCollection-add"><a href="#dom-htmloptionscollection-add">add</a></code>(<var title="">element</var> [, <var title="">before</var> ] )</dt>
@@ -1001,7 +957,7 @@ interface <dfn id="radionodelist">RadioNodeList</dfn> : <a href="infrastructure.
   <a href="infrastructure.html#case-sensitive">case-sensitive</a>, even when the underlying string might
   ordinarily be treated in a case-insensitive manner.</p><pre class="idl">interface <dfn id="domtokenlist">DOMTokenList</dfn> {
   readonly attribute unsigned long <a href="#dom-tokenlist-length" title="dom-tokenlist-length">length</a>;
-  getter DOMString <a href="#dom-tokenlist-item" title="dom-tokenlist-item">item</a>(in unsigned long index);
+  getter DOMString? <a href="#dom-tokenlist-item" title="dom-tokenlist-item">item</a>(in unsigned long index);
   boolean <a href="#dom-tokenlist-contains" title="dom-tokenlist-contains">contains</a>(in DOMString token);
   void <a href="#dom-tokenlist-add" title="dom-tokenlist-add">add</a>(in DOMString token);
   void <a href="#dom-tokenlist-remove" title="dom-tokenlist-remove">remove</a>(in DOMString token);
@@ -1016,7 +972,6 @@ interface <dfn id="radionodelist">RadioNodeList</dfn> : <a href="infrastructure.
    <dt><var title="">tokenlist</var>[<var title="">index</var>]</dt>
    <dd>
     <p>Returns the token with index <var title="">index</var>. The tokens are returned in the order they are found in the underlying string.</p>
-    <p>Returns null if <var title="">index</var> is out of range.</p>
    </dd>
 
    <dt><var title="">hastoken</var> = <var title="">tokenlist</var> . <code title="dom-tokenlist-contains"><a href="#dom-tokenlist-contains">contains</a></code>(<var title="">token</var>)</dt>
@@ -1208,14 +1163,19 @@ interface <dfn id="radionodelist">RadioNodeList</dfn> : <a href="infrastructure.
 
    <li><p>Let <var title="">output</var> be the value resulting from
    calling the <a href="#internal-structured-cloning-algorithm">internal structured cloning algorithm</a> with
-   <var title="">input</var> and <var title="">memory</var>.</p></li>
+   <var title="">input</var> as the "<var title="">input</var>"
+   argument, <var title="">memory</var> as the "<var title="">memory</var>" argument, and zero as the "<var title="">depth</var>" argument.</p></li>
 
    <li><p>Return <var title="">output</var>.</p></li>
 
   </ol><p>The <dfn id="internal-structured-cloning-algorithm">internal structured cloning algorithm</dfn> is always
-  called with two arguments, <var title="">input</var> and <var title="">memory</var>, and its behavior is as follows:</p>
+  called with three arguments, <var title="">input</var>, <var title="">memory</var>, and <var title="">depth</var>, and its
+  behavior is as follows:</p>
 
-  <ol><li><p>If <var title="">input</var> is the source object of a pair
+  <ol><li><p>If <var title="">depth</var> is greater than 1, return null
+   and abort these steps.</p></li>
+
+   <li><p>If <var title="">input</var> is the source object of a pair
    of objects in <var title="">memory</var>, then return the
    destination object in that pair of objects and abort these
    steps.</p></li>
@@ -1301,9 +1261,17 @@ interface <dfn id="radionodelist">RadioNodeList</dfn> : <a href="infrastructure.
     object, then, for each enumerable property in <var title="">input</var>, add a new property to <var title="">output</var> having the same name, and having a value
     created from invoking the <a href="#internal-structured-cloning-algorithm">internal structured cloning
     algorithm</a> recursively with the value of the property as the
-    "<var title="">input</var>" argument and <var title="">memory</var> as the "<var title="">memory</var>"
-    argument. The order of the properties in the <var title="">input</var> and <var title="">output</var> objects must
-    be the same.</p>
+    "<var title="">input</var>" argument, <var title="">memory</var>
+    as the "<var title="">memory</var>" argument, and <span title=""><var title="">depth</var>+<var title="">newDepth</var></span> as the "<var title="">depth</var>"
+    argument, where <var title="">newDepth</var> is zero except if
+    obtaining the value of the property involved executing script, in
+    which case it is one (1). The order of the properties in the <var title="">input</var> and <var title="">output</var> objects must
+    be the same, and any properties that involve running script must
+    be processed in that same order. If obtaining the value of the
+    property involved executing script, and that script threw an
+    uncaught exception, then abort the overall <a href="#structured-clone">structured
+    clone</a> algorithm, with that exception being passed through
+    to the caller.</p>
 
     <p class="note">This does not walk the prototype chain.</p>
 

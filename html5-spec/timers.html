@@ -190,43 +190,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -371,7 +335,7 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
   long <a href="#dom-windowtimers-setinterval" title="dom-windowtimers-setInterval">setInterval</a>(in any handler, in optional any timeout, in any... args);
   void <a href="#dom-windowtimers-clearinterval" title="dom-windowtimers-clearInterval">clearInterval</a>(in long handle);
 };
-<a href="browsers.html#window">Window</a> implements <a href="#windowtimers">WindowTimers</a>;</pre><dl class="domintro"><dt><var title="">handle</var> = <var title="">window</var> . <code title="dom-windowtimers-setTimeout"><a href="#dom-windowtimers-settimeout">setTimeout</a></code>( <var title="">handler</var> [, <var title="">timeout</var> [, <var title="">arguments</var> ] ] )</dt>
+<a href="browsers.html#window">Window</a> implements <a href="#windowtimers">WindowTimers</a>;</pre><dl class="domintro"><dt><var title="">handle</var> = <var title="">window</var> . <code title="dom-windowtimers-setTimeout"><a href="#dom-windowtimers-settimeout">setTimeout</a></code>( <var title="">handler</var> [, <var title="">timeout</var> [, <var title="">arguments</var>... ] ] )</dt>
 
    <dd>
 
@@ -397,7 +361,7 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
 
    </dd>
 
-   <dt><var title="">handle</var> = <var title="">window</var> . <code title="dom-windowtimers-setInterval"><a href="#dom-windowtimers-setinterval">setInterval</a></code>( <var title="">handler</var> [, <var title="">timeout</var> [, <var title="">arguments</var> ] ] )</dt>
+   <dt><var title="">handle</var> = <var title="">window</var> . <code title="dom-windowtimers-setInterval"><a href="#dom-windowtimers-setinterval">setInterval</a></code>( <var title="">handler</var> [, <var title="">timeout</var> [, <var title="">arguments</var>... ] ] )</dt>
 
    <dd>
 
@@ -423,7 +387,7 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
 
    </dd>
 
-  </dl><p class="note">This API does not guarantee that timers will fire
+  </dl><p class="note">This API does not guarantee that timers will run
   exactly on schedule. Delays due to CPU load, other tasks, etc, are
   to be expected.</p><div class="impl">
 
@@ -869,6 +833,15 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
 
    <li>
 
+    <p>If the current browsing context had the <a href="the-iframe-element.html#sandboxed-navigation-browsing-context-flag">sandboxed
+    navigation browsing context flag</a> set when its <a href="browsers.html#active-document">active
+    document</a> was created, then return the empty string and
+    abort these steps.</p>
+
+   </li>
+
+   <li>
+
     <p>Let <var title="">the list of background browsing
     contexts</var> be a list of all the browsing contexts that:</p>
 
@@ -1044,8 +1017,6 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
   <p>These interfaces are defined separately so that other
   specifications can re-use parts of the <code><a href="#navigator">Navigator</a></code>
   interface.</p>
-
-   
 
    
   </div><h5 id="client-identification"><span class="secno">6.5.1.1 </span>Client identification</h5><pre class="idl">[Supplemental, NoInterfaceObject]
@@ -1517,16 +1488,12 @@ interface <dfn id="navigatorstorageutils">NavigatorStorageUtils</dfn> {
     arbitrarily ignore invocations with particular arguments for
     security, privacy, or usability reasons.</p></li>
 
-    <li><p><a href="urls.html#resolve-a-url" title="resolve a url">Resolve</a> the <var title="">scriptURL</var> argument relative to the <a href="browsers.html#entry-script">entry
+    <li><p><a href="urls.html#resolve-a-url" title="resolve a url">Resolve</a> the value of the
+    method's first argument relative to the <a href="browsers.html#entry-script">entry
     script</a>'s <a href="webappapis.html#script-s-base-url" title="script's base URL">base
     URL</a>.</p></li>
 
     <li><p>If this fails, abort these steps.</p></li>
-
-    <li><p>If the <a href="origin-0.html#origin">origin</a> of the resulting <a href="urls.html#absolute-url">absolute
-    URL</a> is not the <a href="origin-0.html#same-origin" title="same origin">same</a> as the
-    origin of the <a href="browsers.html#entry-script">entry script</a>, then abort these
-    steps.</p></li>
 
     <li><p>Process the resulting <a href="urls.html#absolute-url">absolute URL</a> as the
     <a href="urls.html#url">URL</a> to an OpenSearch description document. <a href="references.html#refsOPENSEARCH">[OPENSEARCH]</a></p></li>

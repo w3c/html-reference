@@ -190,43 +190,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -407,11 +371,12 @@ clock.js</pre><p>With a small change to the HTML file, the manifest (served as
   files and make them available even when the user is offline.</p><p class="note">Authors are encouraged to include the main page in
   the manifest also, but in practice the page that referenced the
   manifest is automatically cached even if it isn't explicitly
-  mentioned.</p><p class="note">HTTP cache headers and restrictions on caching pages
-  served over TLS (encrypted, using <code title="">https:</code>) are
-  overridden by manifests. Thus, pages will not expire from an
-  application cache before the user agent has updated it, and even
-  applications served over TLS can be made to work offline.</p><h5 id="appcacheevents"><span class="secno">5.6.1.1 </span>Event summary</h5><p><i>This section is non-normative.</i></p><p>When the user visits a page that declares a manifest, the browser
+  mentioned.</p><p class="note">With the exception of "no-store" directive, HTTP
+  cache headers and restrictions on caching pages served over TLS
+  (encrypted, using <code title="">https:</code>) are overridden by
+  manifests. Thus, pages will not expire from an application cache
+  before the user agent has updated it, and even applications served
+  over TLS can be made to work offline.</p><h5 id="appcacheevents"><span class="secno">5.6.1.1 </span>Event summary</h5><p><i>This section is non-normative.</i></p><p>When the user visits a page that declares a manifest, the browser
   will try to update the cache. It does this by fetching a copy of the
   manifest and, if the manifest has changed since the user agent last
   saw it, redownloading all the resources it mentions and caching them
@@ -420,7 +385,7 @@ clock.js</pre><p>With a small change to the HTML file, the manifest (served as
   to the state of the cache update, so that the user can be notified
   appropriately. The events are as follows:</p><table><thead><tr><th> Event name
      </th><th> Interface
-     </th><th> Dispatched when...
+     </th><th> Fired when...
      </th><th> Next events
    </th></tr></thead><tbody><tr><td> <dfn id="event-appcache-checking" title="event-appcache-checking"><code>checking</code></dfn>
      </td><td> <code><a href="infrastructure.html#event">Event</a></code>
@@ -823,10 +788,7 @@ NETWORK:
 
 
   </dd></dl><p>Manifests may contain sections more than once. Sections may be
-  empty.</p><p>If the manifest's <a href="urls.html#url-scheme" title="url-scheme">&lt;scheme&gt;</a>
-  is <code title="">https:</code> or another scheme intended for
-  encrypted data transfer, then all URLs in <a href="#concept-appcache-manifest-explicit" title="concept-appcache-manifest-explicit">explicit sections</a>
-  must have the <a href="origin-0.html#same-origin">same origin</a> as the manifest itself.</p><p>URLs that are to be fallback pages associated with <a href="#concept-appcache-fallback-ns" title="concept-appcache-fallback-ns">fallback namespaces</a>, and
+  empty.</p><p>URLs that are to be fallback pages associated with <a href="#concept-appcache-fallback-ns" title="concept-appcache-fallback-ns">fallback namespaces</a>, and
   those namespaces themselves, must be given in <a href="#concept-appcache-manifest-fallback" title="concept-appcache-manifest-fallback">fallback sections</a>,
   with the namespace being the first URL of the data line, and the
   corresponding fallback page being the second URL. All the other
@@ -997,10 +959,7 @@ NETWORK:
       <a href="urls.html#url-scheme" title="url-scheme">&lt;scheme&gt;</a> component than
       the manifest's URL (compared in an <a href="infrastructure.html#ascii-case-insensitive">ASCII
       case-insensitive</a> manner), then jump back to the step
-      labeled "start of line". If the manifest's <a href="urls.html#url-scheme" title="url-scheme">&lt;scheme&gt;</a> is <code title="">https:</code> or another scheme intended for encrypted
-      data transfer, and the resulting <a href="urls.html#absolute-url">absolute URL</a> does
-      not have the <a href="origin-0.html#same-origin">same origin</a> as the manifest's URL,
-      then jump back to the step labeled "start of line".</p>
+      labeled "start of line".</p>
 
       <p>Drop the <a href="urls.html#url-fragment" title="url-fragment">&lt;fragment&gt;</a>
       component of the resulting <a href="urls.html#absolute-url">absolute URL</a>, if it has
@@ -1275,10 +1234,12 @@ NETWORK:
     flag</i> set, and let <var title="">manifest</var> be that
     resource.</p> 
     <p>If the resource is labeled with the <a href="infrastructure.html#mime-type">MIME type</a>
-    <code><a href="iana.html#text-cache-manifest">text/cache-manifest</a></code>, parse <var title="">manifest</var> according to the <a href="#parse-a-manifest" title="parse a&#10;    manifest">rules for parsing manifests</a>, obtaining a list of
-    <a href="#concept-appcache-explicit" title="concept-appcache-explicit">explicit entries</a>,
-    <a href="#concept-appcache-fallback" title="concept-appcache-fallback">fallback entries</a>
-    and the <a href="#concept-appcache-fallback-ns" title="concept-appcache-fallback-ns">fallback
+    <code><a href="iana.html#text-cache-manifest">text/cache-manifest</a></code>, either with no parameters or
+    with a single parameter with the name "<code title="">charset</code>" whose value is an <a href="infrastructure.html#ascii-case-insensitive">ASCII
+    case-insensitive</a> match for the string "<code title="">utf-8</code>", parse <var title="">manifest</var>
+    according to the <a href="#parse-a-manifest" title="parse a manifest">rules for parsing
+    manifests</a>, obtaining a list of <a href="#concept-appcache-explicit" title="concept-appcache-explicit">explicit entries</a>, <a href="#concept-appcache-fallback" title="concept-appcache-fallback">fallback entries</a> and the
+    <a href="#concept-appcache-fallback-ns" title="concept-appcache-fallback-ns">fallback
     namespaces</a> that map to them, entries for the <a href="#concept-appcache-onlinewhitelist" title="concept-appcache-onlinewhitelist">online whitelist</a>,
     and a value for the <a href="#concept-appcache-onlinewhitelist-wildcard" title="concept-appcache-onlinewhitelist-wildcard">online whitelist
     wildcard flag</a>.</p>
@@ -1346,8 +1307,9 @@ NETWORK:
     cancels the download, or the parser for manifests fails when
     checking the magic signature), or if the server returned a
     redirect, or if the resource is labeled with a <a href="infrastructure.html#mime-type">MIME
-    type</a> other than <code><a href="iana.html#text-cache-manifest">text/cache-manifest</a></code>, then run
-    the <a href="#cache-failure-steps">cache failure steps</a>.</p>
+    type</a> other than <code><a href="iana.html#text-cache-manifest">text/cache-manifest</a></code> or has
+    parameters that do not match the conditions listed earlier, then
+    run the <a href="#cache-failure-steps">cache failure steps</a>. <a href="references.html#refsHTTP">[HTTP]</a></p>
 
    </li>
 
@@ -1372,13 +1334,16 @@ NETWORK:
       entries</a>, wait for the resource for this entry to have
       either completely downloaded or failed.</p>
 
-      <p>If the download failed (e.g. the connection times out, or the
-      user cancels the download), then create a <a href="webappapis.html#concept-task" title="concept-task">task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple
+      <p>If the download failed (e.g. the server returns a 4xx or 5xx
+      response <a href="fetching-resources.html#concept-http-equivalent-codes" title="concept-http-equivalent-codes">or
+      equivalent</a>, or there is a DNS error, the connection times
+      out, or the user cancels the download), or if the resource is
+      labeled with the "no-store" cache directive, then create a <a href="webappapis.html#concept-task" title="concept-task">task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple
       event</a> that is cancelable named <code title="event-appcache-error"><a href="#event-appcache-error">error</a></code> at the
       <code><a href="#applicationcache">ApplicationCache</a></code> singleton of the <a href="#cache-host">cache
       host</a> the <code><a href="infrastructure.html#document">Document</a></code> for this entry, if there
-      still is one, and append it to <var title="">task list</var>. The
-      default action of this event must be, if the user agent
+      still is one, and append it to <var title="">task list</var>.
+      The default action of this event must be, if the user agent
       <a href="#shows-caching-progress">shows caching progress</a>, the display of some sort of
       user interface indicating to the user that the user agent failed
       to save the application for offline use.</p>
@@ -1390,10 +1355,6 @@ NETWORK:
       resource's <a href="urls.html#url">URL</a> has a <a href="urls.html#url-fragment" title="url-fragment">&lt;fragment&gt;</a> component, it must
       be removed from the entry in <var title="">cache</var>
       (application caches never include fragment identifiers).</p>
-
-      <p class="note">HTTP caching rules, such as <code title="">Cache-Control: no-store</code>, are ignored for the
-      purposes of the <a href="#application-cache-download-process">application cache download
-      process</a>.</p>
 
      </li>
 
@@ -1538,8 +1499,9 @@ NETWORK:
       5xx response <a href="fetching-resources.html#concept-http-equivalent-codes" title="concept-http-equivalent-codes">or
       equivalent</a>, or there is a DNS error, or the connection
       times out, or the user cancels the download), or if the server
-      returned a redirect, then run the first appropriate step from
-      the following list:</p>
+      returned a redirect, or if the resource is labeled with the
+      "no-store" cache directive, then run the first appropriate step
+      from the following list: <a href="references.html#refsHTTP">[HTTP]</a></p>
 
       <dl class="switch"><dt>If the URL being processed was flagged as an "explicit
        entry" or a "fallback entry"</dt>
@@ -1559,6 +1521,9 @@ NETWORK:
        </dd>
 
        <dt>If the error was a 404 or 410 HTTP response <a href="fetching-resources.html#concept-http-equivalent-codes" title="concept-http-equivalent-codes">or equivalent</a></dt>
+
+       <dt>If the resource was labeled with the "no-store" cache
+       directive</dt>
 
        <dd>
 
@@ -1585,6 +1550,10 @@ NETWORK:
       to be removed from caches when they are removed from the server,
       without errors, and making non-manifest resources survive
       server-side errors.</p>
+
+      <p class="note">Except for the "no-store" directive, HTTP
+      caching rules are ignored for the purposes of the
+      <a href="#application-cache-download-process">application cache download process</a>.</p>
 
      </li>
 
@@ -1656,8 +1625,12 @@ NETWORK:
     entries</a>, wait for the resource for this entry to have
     either completely downloaded or failed.</p>
 
-    <p>If the download failed (e.g. the connection times out, or the
-    user cancels the download), then run these substeps:</p>
+    <p>If the download failed (e.g. the server returns a 4xx or 5xx
+    response <a href="fetching-resources.html#concept-http-equivalent-codes" title="concept-http-equivalent-codes">or
+    equivalent</a>, or there is a DNS error, the connection times
+    out, or the user cancels the download), or if the resource is
+    labeled with the "no-store" cache directive, then run these
+    substeps:</p>
 
     <ol><li><p>Unassociate the <code><a href="infrastructure.html#document">Document</a></code> for this entry from
      <var title="">new cache</var>.</p></li>
@@ -2066,14 +2039,14 @@ NETWORK:
   void <a href="#dom-appcache-swapcache" title="dom-appcache-swapCache">swapCache</a>();
 
   // events
-           attribute <a href="webappapis.html#function">Function</a> <a href="#handler-appcache-onchecking" title="handler-appcache-onchecking">onchecking</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="#handler-appcache-onerror" title="handler-appcache-onerror">onerror</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="#handler-appcache-onnoupdate" title="handler-appcache-onnoupdate">onnoupdate</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="#handler-appcache-ondownloading" title="handler-appcache-ondownloading">ondownloading</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="#handler-appcache-onprogress" title="handler-appcache-onprogress">onprogress</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="#handler-appcache-onupdateready" title="handler-appcache-onupdateready">onupdateready</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="#handler-appcache-oncached" title="handler-appcache-oncached">oncached</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="#handler-appcache-onobsolete" title="handler-appcache-onobsolete">onobsolete</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="#handler-appcache-onchecking" title="handler-appcache-onchecking">onchecking</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="#handler-appcache-onerror" title="handler-appcache-onerror">onerror</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="#handler-appcache-onnoupdate" title="handler-appcache-onnoupdate">onnoupdate</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="#handler-appcache-ondownloading" title="handler-appcache-ondownloading">ondownloading</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="#handler-appcache-onprogress" title="handler-appcache-onprogress">onprogress</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="#handler-appcache-onupdateready" title="handler-appcache-onupdateready">onupdateready</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="#handler-appcache-oncached" title="handler-appcache-oncached">oncached</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="#handler-appcache-onobsolete" title="handler-appcache-onobsolete">onobsolete</a>;
 };
 <a href="#applicationcache">ApplicationCache</a> implements <a href="infrastructure.html#eventtarget">EventTarget</a>;</pre><dl class="domintro"><dt><var title="">cache</var> = <var title="">window</var> . <code title="dom-applicationCache"><a href="#dom-applicationcache">applicationCache</a></code></dt>
    <dd>

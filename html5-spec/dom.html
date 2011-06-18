@@ -190,43 +190,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -410,7 +374,7 @@
   longer defined as inheriting from <code><a href="infrastructure.html#document">Document</a></code>.</p><pre class="idl">[OverrideBuiltins]
 interface <dfn id="htmldocument">HTMLDocument</dfn> {
   // <a href="#resource-metadata-management">resource metadata management</a>
-  [PutForwards=<a href="history.html#dom-location-href" title="dom-location-href">href</a>] readonly attribute <a href="history.html#location">Location</a> <a href="history.html#dom-document-location" title="dom-document-location">location</a>;
+  [PutForwards=<a href="history.html#dom-location-href" title="dom-location-href">href</a>] readonly attribute <a href="history.html#location">Location</a>? <a href="history.html#dom-document-location" title="dom-document-location">location</a>;
   readonly attribute DOMString <a href="#dom-document-url" title="dom-document-URL">URL</a>;
            attribute DOMString <a href="origin-0.html#dom-document-domain" title="dom-document-domain">domain</a>;
   readonly attribute DOMString <a href="#dom-document-referrer" title="dom-document-referrer">referrer</a>;
@@ -426,8 +390,8 @@ interface <dfn id="htmldocument">HTMLDocument</dfn> {
   <a href="#dom-document-nameditem" title="dom-document-namedItem">getter</a> any (in DOMString name);
            attribute DOMString <a href="#document.title" title="dom-document-title">title</a>;
            attribute DOMString <a href="elements.html#dom-document-dir" title="dom-document-dir">dir</a>;
-           attribute <a href="elements.html#htmlelement">HTMLElement</a> <a href="#dom-document-body" title="dom-document-body">body</a>;
-  readonly attribute <a href="semantics.html#htmlheadelement">HTMLHeadElement</a> <a href="#dom-document-head" title="dom-document-head">head</a>;
+           attribute <a href="elements.html#htmlelement">HTMLElement</a>? <a href="#dom-document-body" title="dom-document-body">body</a>;
+  readonly attribute <a href="semantics.html#htmlheadelement">HTMLHeadElement</a>? <a href="#dom-document-head" title="dom-document-head">head</a>;
   readonly attribute <a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a> <a href="#dom-document-images" title="dom-document-images">images</a>;
   readonly attribute <a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a> <a href="#dom-document-embeds" title="dom-document-embeds">embeds</a>;
   readonly attribute <a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a> <a href="#dom-document-plugins" title="dom-document-plugins">plugins</a>;
@@ -446,8 +410,8 @@ interface <dfn id="htmldocument">HTMLDocument</dfn> {
   void <a href="apis-in-html-documents.html#dom-document-writeln" title="dom-document-writeln">writeln</a>(in DOMString... text);
 
   // <a href="editing.html#editing">user interaction</a>
-  readonly attribute <a href="browsers.html#windowproxy">WindowProxy</a> <a href="browsers.html#dom-document-defaultview" title="dom-document-defaultView">defaultView</a>;
-  readonly attribute <a href="infrastructure.html#element">Element</a> <a href="editing.html#dom-document-activeelement" title="dom-document-activeElement">activeElement</a>;
+  readonly attribute <a href="browsers.html#windowproxy">WindowProxy</a>? <a href="browsers.html#dom-document-defaultview" title="dom-document-defaultView">defaultView</a>;
+  readonly attribute <a href="infrastructure.html#element">Element</a>? <a href="editing.html#dom-document-activeelement" title="dom-document-activeElement">activeElement</a>;
   boolean <a href="editing.html#dom-document-hasfocus" title="dom-document-hasFocus">hasFocus</a>();
            attribute DOMString <a href="editing.html#designMode" title="dom-document-designMode">designMode</a>;
   boolean <a href="dnd.html#execCommand" title="dom-document-execCommand">execCommand</a>(in DOMString commandId);
@@ -461,60 +425,60 @@ interface <dfn id="htmldocument">HTMLDocument</dfn> {
   readonly attribute <a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a> <a href="commands.html#dom-document-commands" title="dom-document-commands">commands</a>;
 
   // <a href="webappapis.html#event-handler-idl-attributes">event handler IDL attributes</a>
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onabort" title="handler-onabort">onabort</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onblur" title="handler-onblur">onblur</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oncanplay" title="handler-oncanplay">oncanplay</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oncanplaythrough" title="handler-oncanplaythrough">oncanplaythrough</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onchange" title="handler-onchange">onchange</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onclick" title="handler-onclick">onclick</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oncontextmenu" title="handler-oncontextmenu">oncontextmenu</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oncuechange" title="handler-oncuechange">oncuechange</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondblclick" title="handler-ondblclick">ondblclick</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondrag" title="handler-ondrag">ondrag</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondragend" title="handler-ondragend">ondragend</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondragenter" title="handler-ondragenter">ondragenter</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondragleave" title="handler-ondragleave">ondragleave</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondragover" title="handler-ondragover">ondragover</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondragstart" title="handler-ondragstart">ondragstart</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondrop" title="handler-ondrop">ondrop</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ondurationchange" title="handler-ondurationchange">ondurationchange</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onemptied" title="handler-onemptied">onemptied</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onended" title="handler-onended">onended</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onerror" title="handler-onerror">onerror</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onfocus" title="handler-onfocus">onfocus</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oninput" title="handler-oninput">oninput</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-oninvalid" title="handler-oninvalid">oninvalid</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onkeydown" title="handler-onkeydown">onkeydown</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onkeypress" title="handler-onkeypress">onkeypress</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onkeyup" title="handler-onkeyup">onkeyup</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onload" title="handler-onload">onload</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onloadeddata" title="handler-onloadeddata">onloadeddata</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onloadedmetadata" title="handler-onloadedmetadata">onloadedmetadata</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onloadstart" title="handler-onloadstart">onloadstart</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmousedown" title="handler-onmousedown">onmousedown</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmousemove" title="handler-onmousemove">onmousemove</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmouseout" title="handler-onmouseout">onmouseout</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmouseover" title="handler-onmouseover">onmouseover</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmouseup" title="handler-onmouseup">onmouseup</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onmousewheel" title="handler-onmousewheel">onmousewheel</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onpause" title="handler-onpause">onpause</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onplay" title="handler-onplay">onplay</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onplaying" title="handler-onplaying">onplaying</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onprogress" title="handler-onprogress">onprogress</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onratechange" title="handler-onratechange">onratechange</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onreadystatechange" title="handler-onreadystatechange">onreadystatechange</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onreset" title="handler-onreset">onreset</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onscroll" title="handler-onscroll">onscroll</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onseeked" title="handler-onseeked">onseeked</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onseeking" title="handler-onseeking">onseeking</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onselect" title="handler-onselect">onselect</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onshow" title="handler-onshow">onshow</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onstalled" title="handler-onstalled">onstalled</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onsubmit" title="handler-onsubmit">onsubmit</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onsuspend" title="handler-onsuspend">onsuspend</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-ontimeupdate" title="handler-ontimeupdate">ontimeupdate</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onvolumechange" title="handler-onvolumechange">onvolumechange</a>;
-           attribute <a href="webappapis.html#function">Function</a> <a href="webappapis.html#handler-onwaiting" title="handler-onwaiting">onwaiting</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onabort" title="handler-onabort">onabort</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onblur" title="handler-onblur">onblur</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncanplay" title="handler-oncanplay">oncanplay</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncanplaythrough" title="handler-oncanplaythrough">oncanplaythrough</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onchange" title="handler-onchange">onchange</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onclick" title="handler-onclick">onclick</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncontextmenu" title="handler-oncontextmenu">oncontextmenu</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncuechange" title="handler-oncuechange">oncuechange</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondblclick" title="handler-ondblclick">ondblclick</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondrag" title="handler-ondrag">ondrag</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragend" title="handler-ondragend">ondragend</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragenter" title="handler-ondragenter">ondragenter</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragleave" title="handler-ondragleave">ondragleave</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragover" title="handler-ondragover">ondragover</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragstart" title="handler-ondragstart">ondragstart</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondrop" title="handler-ondrop">ondrop</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondurationchange" title="handler-ondurationchange">ondurationchange</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onemptied" title="handler-onemptied">onemptied</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onended" title="handler-onended">onended</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onerror" title="handler-onerror">onerror</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onfocus" title="handler-onfocus">onfocus</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oninput" title="handler-oninput">oninput</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oninvalid" title="handler-oninvalid">oninvalid</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onkeydown" title="handler-onkeydown">onkeydown</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onkeypress" title="handler-onkeypress">onkeypress</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onkeyup" title="handler-onkeyup">onkeyup</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onload" title="handler-onload">onload</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onloadeddata" title="handler-onloadeddata">onloadeddata</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onloadedmetadata" title="handler-onloadedmetadata">onloadedmetadata</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onloadstart" title="handler-onloadstart">onloadstart</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmousedown" title="handler-onmousedown">onmousedown</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmousemove" title="handler-onmousemove">onmousemove</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmouseout" title="handler-onmouseout">onmouseout</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmouseover" title="handler-onmouseover">onmouseover</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmouseup" title="handler-onmouseup">onmouseup</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmousewheel" title="handler-onmousewheel">onmousewheel</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onpause" title="handler-onpause">onpause</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onplay" title="handler-onplay">onplay</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onplaying" title="handler-onplaying">onplaying</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onprogress" title="handler-onprogress">onprogress</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onratechange" title="handler-onratechange">onratechange</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onreadystatechange" title="handler-onreadystatechange">onreadystatechange</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onreset" title="handler-onreset">onreset</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onscroll" title="handler-onscroll">onscroll</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onseeked" title="handler-onseeked">onseeked</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onseeking" title="handler-onseeking">onseeking</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onselect" title="handler-onselect">onselect</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onshow" title="handler-onshow">onshow</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onstalled" title="handler-onstalled">onstalled</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onsubmit" title="handler-onsubmit">onsubmit</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onsuspend" title="handler-onsuspend">onsuspend</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ontimeupdate" title="handler-ontimeupdate">ontimeupdate</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onvolumechange" title="handler-onvolumechange">onvolumechange</a>;
+           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onwaiting" title="handler-onwaiting">onwaiting</a>;
 };
 <a href="infrastructure.html#document">Document</a> implements <a href="#htmldocument">HTMLDocument</a>;</pre><p>Since the <code><a href="#htmldocument">HTMLDocument</a></code> interface holds methods and
   attributes related to a number of disparate features, the members of
@@ -604,7 +568,7 @@ interface <dfn id="htmldocument">HTMLDocument</dfn> {
   <a href="origin-0.html#origin">origin</a> is not a scheme/host/port tuple, the user agent
   must raise a <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code> exception. Otherwise, the
   user agent must <a href="webappapis.html#obtain-the-storage-mutex">obtain the storage mutex</a> and then act
-  as it would when <span title="receives a&#10;  set-cookie-string">receiving a set-cookie-string</span> for
+  as it would when <a href="infrastructure.html#receives-a-set-cookie-string" title="receives a&#10;  set-cookie-string">receiving a set-cookie-string</a> for
   <a href="#the-document-s-address">the document's address</a> via a "non-HTTP" API, consisting
   of the new value encoded as UTF-8. <a href="references.html#refsCOOKIES">[COOKIES]</a> <a href="references.html#refsRFC3629">[RFC3629]</a></p>
 

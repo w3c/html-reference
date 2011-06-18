@@ -190,43 +190,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -1392,8 +1356,9 @@
      <li><p><a href="#collect-a-sequence-of-characters">Collect a sequence of characters</a> that are
      either characters in the range U+0030 DIGIT ZERO (0) to U+0039
      DIGIT NINE (9) or U+002E FULL STOP characters. If the collected
-     sequence has more than one U+002E FULL STOP characters, or if the
-     last character in the sequence is a U+002E FULL STOP character,
+     sequence is three characters long, or if it is longer than three
+     characters long and the third character is not a U+002E FULL STOP
+     character, or if it has more than one U+002E FULL STOP character,
      then fail. Otherwise, let the collected string be <var title="">second</var> instead of its previous value.</p></li>
 
     </ol></li>
@@ -1547,7 +1512,17 @@
 
     <li>Time-zone offsets differ based on daylight savings time.</li>
 
-   </ul></div><div class="impl">
+   </ul></div><p>A string is a <dfn id="valid-forced-utc-global-date-and-time-string">valid forced-UTC global date and time
+  string</dfn> representing a date, time, and a time-zone offset if it
+  consists of the following components in the given order:</p><ol><li>A <a href="#valid-date-string">valid date string</a> representing the date converted to the UTC time zone</li>
+
+   <li>A U+0054 LATIN CAPITAL LETTER T character (T)</li>
+
+   <li>A <a href="#valid-time-string">valid time string</a> representing the time converted to the UTC time zone and expressed as the shortest possible string for the given time (e.g. omitting the seconds component entirely if the given time is zero seconds past the minute)</li>
+
+   <li>A U+005A LATIN CAPITAL LETTER Z character (Z)</li>
+
+  </ol><div class="impl">
 
   <p>The <dfn id="best-representation-of-the-global-date-and-time-string">best representation of the global date and time
   string</dfn> <var title="">datetime</var> is the <a href="#valid-global-date-and-time-string">valid global

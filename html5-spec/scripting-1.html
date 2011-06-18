@@ -190,43 +190,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -942,11 +906,11 @@
 
          <dd>
 
-          <p>The contents of that file, interpreted as string of
-          Unicode characters, are the script source.</p>
+          <p>The contents of that file, interpreted as a Unicode
+          string, are the script source.</p>
 
-          <p>To obtain the string of Unicode characters, the user
-          agent run the following steps:</p>
+          <p>To obtain the Unicode string, the user agent run the
+          following steps:</p>
 
           <ol><li><p>If the resource's <a href="fetching-resources.html#content-type" title="Content-Type">Content
            Type metadata</a>, if any, specifies a character
@@ -1207,6 +1171,23 @@ o............A....e
   <p>User agents may support other <a href="infrastructure.html#mime-type" title="MIME type">MIME
   types</a> and other languages.</p>
 
+  <p>The following <a href="infrastructure.html#mime-type" title="MIME type">MIME types</a> must not
+  be interpreted as scripting languages:</p>
+
+  <ul class="brief"><li>"<code>text/plain</code>"
+   </li><li>"<code>text/xml</code>"
+   
+   </li><li>"<code>application/octet-stream</code>"
+   </li><li>"<code>application/xml</code>"
+   
+   
+
+   
+  </li></ul><p class="note">These types are explicitly listed here because they
+  are poorly-defined types that are nonetheless likely to be used as
+  formats for data blocks, and it would be problematic if they were
+  suddenly to be interpreted as script by a user agent.</p>
+
   
   <p>When examining types to determine if they support the language,
   user agents must not ignore unknown MIME parameters &#x2014; types
@@ -1270,11 +1251,11 @@ space         = %x0020 ; U+0020 SPACE
 star          = %x002A ; U+002A ASTERISK (*)
 slash         = %x002F ; U+002F SOLIDUS (/)
 not-newline   = %x0000-0009 / %x000B-10FFFF
-                ; a Unicode character other than U+000A LINE FEED (LF)
+                ; a <a href="infrastructure.html#unicode-character">Unicode character</a> other than U+000A LINE FEED (LF)
 not-star      = %x0000-0029 / %x002B-10FFFF
-                ; a Unicode character other than U+002A ASTERISK (*)
+                ; a <a href="infrastructure.html#unicode-character">Unicode character</a> other than U+002A ASTERISK (*)
 not-slash     = %x0000-002E / %x0030-10FFFF
-                ; a Unicode character other than U+002F SOLIDUS (/)</pre><p class="note">This corresponds to putting the contents of the
+                ; a <a href="infrastructure.html#unicode-character">Unicode character</a> other than U+002F SOLIDUS (/)</pre><p class="note">This corresponds to putting the contents of the
   element in JavaScript comments.</p><p class="note">This requirement is in addition to the earlier
   restrictions on the syntax of contents of <code><a href="#the-script-element">script</a></code>
   elements.</p><div class="example">
@@ -1444,9 +1425,12 @@ not-slash     = %x0000-002E / %x0030-10FFFF
   historical reasons, the <code><a href="#the-noscript-element">noscript</a></code> element is handled
   differently by the <a href="parsing.html#html-parser">HTML parser</a> based on whether <a href="parsing.html#scripting-flag" title="scripting flag">scripting was enabled or not</a> when the
   parser was invoked.</p><p>The <code><a href="#the-noscript-element">noscript</a></code> element must not be used in <a href="dom.html#xml-documents">XML
-  documents</a>.</p><p class="note"><strong>The <code><a href="#the-noscript-element">noscript</a></code> element is only
-  effective in <a href="syntax.html#syntax">the HTML syntax</a>, it has no effect in
-  <a href="the-xhtml-syntax.html#the-xhtml-syntax">the XHTML syntax</a>.</strong></p><div class="impl">
+  documents</a>.</p><p class="note">The <code><a href="#the-noscript-element">noscript</a></code> element is only effective
+  in <a href="syntax.html#syntax">the HTML syntax</a>, it has no effect in <a href="the-xhtml-syntax.html#the-xhtml-syntax">the XHTML
+  syntax</a>. This is because the way it works is by essentially
+  "turning off" the parser when scripts are enabled, so that the
+  contents of the element are treated as pure text and not as real
+  elements. XML does not define a mechanism by which to do this.</p><div class="impl">
 
   <p>The <code><a href="#the-noscript-element">noscript</a></code> element has no other requirements. In
   particular, children of the <code><a href="#the-noscript-element">noscript</a></code> element are not

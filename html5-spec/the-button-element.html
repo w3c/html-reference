@@ -190,43 +190,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -386,7 +350,7 @@
 <pre class="idl">interface <dfn id="htmlbuttonelement">HTMLButtonElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
            attribute boolean <a href="association-of-controls-and-forms.html#dom-fe-autofocus" title="dom-fe-autofocus">autofocus</a>;
            attribute boolean <a href="association-of-controls-and-forms.html#dom-fe-disabled" title="dom-fe-disabled">disabled</a>;
-  readonly attribute <a href="forms.html#htmlformelement">HTMLFormElement</a> <a href="association-of-controls-and-forms.html#dom-fae-form" title="dom-fae-form">form</a>;
+  readonly attribute <a href="forms.html#htmlformelement">HTMLFormElement</a>? <a href="association-of-controls-and-forms.html#dom-fae-form" title="dom-fae-form">form</a>;
            attribute DOMString <a href="association-of-controls-and-forms.html#dom-fs-formaction" title="dom-fs-formAction">formAction</a>;
            attribute DOMString <a href="association-of-controls-and-forms.html#dom-fs-formenctype" title="dom-fs-formEnctype">formEnctype</a>;
            attribute DOMString <a href="association-of-controls-and-forms.html#dom-fs-formmethod" title="dom-fs-formMethod">formMethod</a>;
@@ -522,7 +486,7 @@
 <pre class="idl">interface <dfn id="htmlselectelement">HTMLSelectElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
            attribute boolean <a href="association-of-controls-and-forms.html#dom-fe-autofocus" title="dom-fe-autofocus">autofocus</a>;
            attribute boolean <a href="association-of-controls-and-forms.html#dom-fe-disabled" title="dom-fe-disabled">disabled</a>;
-  readonly attribute <a href="forms.html#htmlformelement">HTMLFormElement</a> <a href="association-of-controls-and-forms.html#dom-fae-form" title="dom-fae-form">form</a>;
+  readonly attribute <a href="forms.html#htmlformelement">HTMLFormElement</a>? <a href="association-of-controls-and-forms.html#dom-fae-form" title="dom-fae-form">form</a>;
            attribute boolean <a href="#dom-select-multiple" title="dom-select-multiple">multiple</a>;
            attribute DOMString <a href="association-of-controls-and-forms.html#dom-fe-name" title="dom-fe-name">name</a>;
            attribute boolean <a href="#dom-select-required" title="dom-select-required">required</a>;
@@ -534,7 +498,7 @@
            attribute unsigned long <a href="#dom-select-length" title="dom-select-length">length</a>;
   getter any <a href="#dom-select-item" title="dom-select-item">item</a>(in unsigned long index);
   any <a href="#dom-select-nameditem" title="dom-select-namedItem">namedItem</a>(in DOMString name);
-  void <a href="#dom-select-add" title="dom-select-add">add</a>(in <a href="elements.html#htmlelement">HTMLElement</a> element, in optional <a href="elements.html#htmlelement">HTMLElement</a> before);
+  void <a href="#dom-select-add" title="dom-select-add">add</a>(in <a href="elements.html#htmlelement">HTMLElement</a> element, in optional <a href="elements.html#htmlelement">HTMLElement</a>? before);
   void <a href="#dom-select-add" title="dom-select-add">add</a>(in <a href="elements.html#htmlelement">HTMLElement</a> element, in long before);
   void <a href="#dom-select-remove" title="dom-select-remove">remove</a>(in long index);
 
@@ -722,7 +686,6 @@
    <dt><var title="">select</var>[<var title="">index</var>]</dt>
    <dd>
     <p>Returns the item with index <var title="">index</var> from the <a href="#concept-select-option-list" title="concept-select-option-list">list of options</a>. The items are sorted in <a href="infrastructure.html#tree-order">tree order</a>.</p>
-    <p>Returns null if <var title="">index</var> is out of range.</p>
    </dd>
 
    <dt><var title="">element</var> = <var title="">select</var> . <code title="dom-select-item"><a href="#dom-select-item">namedItem</a></code>(<var title="">name</var>)</dt>
@@ -1037,7 +1000,7 @@
  NamedConstructor=<a href="#dom-option-tvds" title="dom-option-tvds">Option</a>(in DOMString text, in DOMString value, in boolean defaultSelected, in boolean selected)]
 interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
            attribute boolean <a href="#dom-option-disabled" title="dom-option-disabled">disabled</a>;
-  readonly attribute <a href="forms.html#htmlformelement">HTMLFormElement</a> <a href="#dom-option-form" title="dom-option-form">form</a>;
+  readonly attribute <a href="forms.html#htmlformelement">HTMLFormElement</a>? <a href="#dom-option-form" title="dom-option-form">form</a>;
            attribute DOMString <a href="#dom-option-label" title="dom-option-label">label</a>;
            attribute boolean <a href="#dom-option-defaultselected" title="dom-option-defaultSelected">defaultSelected</a>;
            attribute boolean <a href="#dom-option-selected" title="dom-option-selected">selected</a>;
@@ -1246,7 +1209,7 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
            attribute unsigned long <a href="#dom-textarea-cols" title="dom-textarea-cols">cols</a>;
            attribute DOMString <a href="#dom-textarea-dirname" title="dom-textarea-dirName">dirName</a>;
            attribute boolean <a href="association-of-controls-and-forms.html#dom-fe-disabled" title="dom-fe-disabled">disabled</a>;
-  readonly attribute <a href="forms.html#htmlformelement">HTMLFormElement</a> <a href="association-of-controls-and-forms.html#dom-fae-form" title="dom-fae-form">form</a>;
+  readonly attribute <a href="forms.html#htmlformelement">HTMLFormElement</a>? <a href="association-of-controls-and-forms.html#dom-fae-form" title="dom-fae-form">form</a>;
            attribute long <a href="#dom-textarea-maxlength" title="dom-textarea-maxLength">maxLength</a>;
            attribute DOMString <a href="association-of-controls-and-forms.html#dom-fe-name" title="dom-fe-name">name</a>;
            attribute DOMString <a href="#dom-textarea-placeholder" title="dom-textarea-placeholder">placeholder</a>;
@@ -1496,7 +1459,10 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
   <p>The <dfn id="dom-textarea-value" title="dom-textarea-value"><code>value</code></dfn>
   attribute must, on getting, return the element's <a href="#concept-textarea-raw-value" title="concept-textarea-raw-value">raw value</a>; on setting, it
   must set the element's <a href="#concept-textarea-raw-value" title="concept-textarea-raw-value">raw
-  value</a> to the new value.</p>
+  value</a> to the new value, set the element's <a href="#concept-textarea-dirty" title="concept-textarea-dirty">dirty value flag</a> to true, and
+  should then move the text entry cursor position to the end of the
+  text field, unselecting any selected text and resetting the
+  selection direction to <i>none</i>.</p>
 
   <p>The <dfn id="dom-textarea-textlength" title="dom-textarea-textLength"><code>textLength</code></dfn> IDL
   attribute must return the <a href="common-microsyntaxes.html#code-point-length">code-point length</a> of the
@@ -1561,7 +1527,7 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
            attribute boolean <a href="association-of-controls-and-forms.html#dom-fe-autofocus" title="dom-fe-autofocus">autofocus</a>;
            attribute DOMString <a href="#dom-keygen-challenge" title="dom-keygen-challenge">challenge</a>;
            attribute boolean <a href="association-of-controls-and-forms.html#dom-fe-disabled" title="dom-fe-disabled">disabled</a>;
-  readonly attribute <a href="forms.html#htmlformelement">HTMLFormElement</a> <a href="association-of-controls-and-forms.html#dom-fae-form" title="dom-fae-form">form</a>;
+  readonly attribute <a href="forms.html#htmlformelement">HTMLFormElement</a>? <a href="association-of-controls-and-forms.html#dom-fae-form" title="dom-fae-form">form</a>;
            attribute DOMString <a href="#dom-keygen-keytype" title="dom-keygen-keytype">keytype</a>;
            attribute DOMString <a href="association-of-controls-and-forms.html#dom-fe-name" title="dom-fe-name">name</a>;
 
@@ -1800,7 +1766,7 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
    <dd>
 <pre class="idl">interface <dfn id="htmloutputelement">HTMLOutputElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
   [PutForwards=<a href="common-dom-interfaces.html#dom-domsettabletokenlist-value" title="dom-DOMSettableTokenList-value">value</a>] readonly attribute <a href="common-dom-interfaces.html#domsettabletokenlist">DOMSettableTokenList</a> <a href="#dom-output-htmlfor" title="dom-output-htmlFor">htmlFor</a>;
-  readonly attribute <a href="forms.html#htmlformelement">HTMLFormElement</a> <a href="association-of-controls-and-forms.html#dom-fae-form" title="dom-fae-form">form</a>;
+  readonly attribute <a href="forms.html#htmlformelement">HTMLFormElement</a>? <a href="association-of-controls-and-forms.html#dom-fae-form" title="dom-fae-form">form</a>;
            attribute DOMString <a href="association-of-controls-and-forms.html#dom-fe-name" title="dom-fe-name">name</a>;
 
   readonly attribute DOMString <a href="#dom-output-type" title="dom-output-type">type</a>;
@@ -1938,7 +1904,7 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
   </div><h4 id="the-progress-element"><span class="secno">4.10.16 </span>The <dfn><code>progress</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dd><a href="forms.html#category-label" title="category-label">Labelable</a> <a href="forms.html#form-associated-element">form-associated element</a>.</dd>
+   <dd><a href="forms.html#category-label" title="category-label">Labelable element</a>.</dd>
    <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
@@ -1947,14 +1913,12 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
    <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
    <dd><code title="attr-progress-value"><a href="#attr-progress-value">value</a></code></dd>
    <dd><code title="attr-progress-max"><a href="#attr-progress-max">max</a></code></dd>
-   <dd><code title="attr-fae-form"><a href="association-of-controls-and-forms.html#attr-fae-form">form</a></code></dd>
    <dt>DOM interface:</dt>
    <dd>
 <pre class="idl">interface <dfn id="htmlprogresselement">HTMLProgressElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
            attribute double <a href="#dom-progress-value" title="dom-progress-value">value</a>;
            attribute double <a href="#dom-progress-max" title="dom-progress-max">max</a>;
   readonly attribute double <a href="#dom-progress-position" title="dom-progress-position">position</a>;
-  readonly attribute <a href="forms.html#htmlformelement">HTMLFormElement</a> <a href="association-of-controls-and-forms.html#dom-fae-form" title="dom-fae-form">form</a>;
   readonly attribute <a href="infrastructure.html#nodelist">NodeList</a> <a href="forms.html#dom-lfe-labels" title="dom-lfe-labels">labels</a>;
 };</pre>
    </dd>
@@ -2038,10 +2002,6 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
   position of the <a href="#concept-progress-value" title="concept-progress-value">current
   value</a> relative to the <a href="#concept-progress-maximum" title="concept-progress-maximum">maximum value</a>.</p>
 
-  <p>The <code title="attr-fae-form"><a href="association-of-controls-and-forms.html#attr-fae-form">form</a></code> attribute is used to
-  explicitly associate the <code><a href="#the-progress-element">progress</a></code> element with its
-  <a href="association-of-controls-and-forms.html#form-owner">form owner</a>.</p>
-
   </div><dl class="domintro"><dt><var title="">progress</var> . <code title="dom-progress-position"><a href="#dom-progress-position">position</a></code></dt>
 
    <dd>
@@ -2080,13 +2040,12 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
   same name. The default value for <code title="dom-progress-max"><a href="#dom-progress-max">max</a></code> is 1.0.</p>
 
   <p>The <code title="dom-lfe-labels"><a href="forms.html#dom-lfe-labels">labels</a></code> attribute provides
-  a list of the element's <code><a href="forms.html#the-label-element">label</a></code>s. The <code title="dom-fae-form"><a href="association-of-controls-and-forms.html#dom-fae-form">form</a></code> IDL attribute is part of the
-  element's forms API.</p>
+  a list of the element's <code><a href="forms.html#the-label-element">label</a></code>s.</p>
 
   </div><h4 id="the-meter-element"><span class="secno">4.10.17 </span>The <dfn><code>meter</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dd><a href="forms.html#category-label" title="category-label">Labelable</a> <a href="forms.html#form-associated-element">form-associated element</a>.</dd>
+   <dd><a href="forms.html#category-label" title="category-label">Labelable element</a>.</dd>
    <dt>Contexts in which this element can be used:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
    <dt>Content model:</dt>
@@ -2099,7 +2058,6 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
    <dd><code title="attr-meter-low"><a href="#attr-meter-low">low</a></code></dd>
    <dd><code title="attr-meter-high"><a href="#attr-meter-high">high</a></code></dd>
    <dd><code title="attr-meter-optimum"><a href="#attr-meter-optimum">optimum</a></code></dd>
-   <dd><code title="attr-fae-form"><a href="association-of-controls-and-forms.html#attr-fae-form">form</a></code></dd>
    <dt>DOM interface:</dt>
    <dd>
 <pre class="idl">interface <dfn id="htmlmeterelement">HTMLMeterElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
@@ -2109,7 +2067,6 @@ interface <dfn id="htmloptionelement">HTMLOptionElement</dfn> : <a href="element
            attribute double <a href="#dom-meter-low" title="dom-meter-low">low</a>;
            attribute double <a href="#dom-meter-high" title="dom-meter-high">high</a>;
            attribute double <a href="#dom-meter-optimum" title="dom-meter-optimum">optimum</a>;
-  readonly attribute <a href="forms.html#htmlformelement">HTMLFormElement</a> <a href="association-of-controls-and-forms.html#dom-fae-form" title="dom-fae-form">form</a>;
   readonly attribute <a href="infrastructure.html#nodelist">NodeList</a> <a href="forms.html#dom-lfe-labels" title="dom-lfe-labels">labels</a>;
 };</pre>
    </dd>
@@ -2352,9 +2309,7 @@ and a height of &lt;meter value=2&gt;2cm&lt;/meter&gt;.&lt;/p&gt; &lt;!-- <stron
    <p>...might cause the user agent to display a gauge with a tooltip
    saying "Value: 23.2 out of 60." on one line and "seconds" on a
    second line.</p>
-  </div><p>The <code title="attr-fae-form"><a href="association-of-controls-and-forms.html#attr-fae-form">form</a></code> attribute is used to
-  explicitly associate the <code><a href="#the-meter-element">meter</a></code> element with its
-  <a href="association-of-controls-and-forms.html#form-owner">form owner</a>.</p><div class="impl">
+  </div><div class="impl">
 
   <p>The <dfn id="dom-meter-value" title="dom-meter-value"><code>value</code></dfn> IDL
   attribute, on getting, must return the <a href="#concept-meter-actual" title="concept-meter-actual">actual value</a>. On setting, the
@@ -2367,8 +2322,7 @@ and a height of &lt;meter value=2&gt;2cm&lt;/meter&gt;.&lt;/p&gt; &lt;!-- <stron
   same name.</p>
 
   <p>The <code title="dom-lfe-labels"><a href="forms.html#dom-lfe-labels">labels</a></code> attribute provides
-  a list of the element's <code><a href="forms.html#the-label-element">label</a></code>s. The <code title="dom-fae-form"><a href="association-of-controls-and-forms.html#dom-fae-form">form</a></code> IDL attribute is part of the
-  element's forms API.</p>
+  a list of the element's <code><a href="forms.html#the-label-element">label</a></code>s.</p>
 
   </div><div class="example">
 

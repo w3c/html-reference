@@ -190,43 +190,7 @@
    fieldset > :last-child { margin-bottom: 0; }
    fieldset p { margin: 0.5em 0; }
 
-   .stability {
-     position: fixed;
-     bottom: 0;
-     left: 0; right: 0;
-     margin: 0 auto 0 auto;
-     width: 50%;
-     background: maroon; color: yellow;
-     -webkit-border-radius: 1em 1em 0 0;
-     -moz-border-radius: 1em 1em 0 0;
-     border-radius: 1em 1em 0 0;
-     -moz-box-shadow: 0 0 1em #500;
-     -webkit-box-shadow: 0 0 1em #500;
-     box-shadow: 0 0 1em red;
-     padding: 0.5em 1em;
-     text-align: center;
-   }
-   .stability strong {
-     display: block;
-   }
-   .stability input {
-     appearance: none; margin: 0; border: 0; padding: 0.25em 0.5em; background: transparent; color: black;
-     position: absolute; top: -0.5em; right: 0; font: 1.25em sans-serif; text-align: center;
-   }
-   .stability input:hover {
-     color: white;
-     text-shadow: 0 0 2px black;
-   }
-   .stability input:active {
-     padding: 0.3em 0.45em 0.2em 0.55em;
-   }
-   .stability :link, .stability :visited,
-   .stability :link:hover, .stability :visited:hover {
-     background: transparent;
-     color: white;
-   }
-
-  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-LC" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
+  ]]></style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"/><style type="text/css"><![CDATA[
 
    .applies thead th > * { display: block; }
    .applies thead code { display: block; }
@@ -386,22 +350,24 @@
   child of the element, if any, <a href="rendering.html#represents">represents</a> the summary or
   legend of the details. <span class="impl">If there is no child
   <code><a href="#the-summary-element">summary</a></code> element, the user agent should provide its own
-  legend (e.g. "Details").</span></p><p>The <dfn id="attr-details-open" title="attr-details-open"><code>open</code></dfn>
+  legend (e.g. "Details").</span></p><p>The rest of the element's contents <a href="rendering.html#represents">represents</a> the
+  additional information or controls.</p><p>The <dfn id="attr-details-open" title="attr-details-open"><code>open</code></dfn>
   content attribute is a <a href="common-microsyntaxes.html#boolean-attribute">boolean attribute</a>. If present,
-  it indicates that the details are to be shown to the user. If the
-  attribute is absent, the details are not to be shown.</p><div class="impl">
+  it indicates that both the summary and the additional information is
+  to be shown to the user. If the attribute is absent, only the
+  summary is to be shown.</p><div class="impl">
 
   <p>When the element is created, if the attribute is absent, the
-  details should be hidden; if the attribute is absent, the details
-  should be shown. Subsequently, if the attribute is removed, then the
-  details should be hidden; if the attribute is added, the details
-  should be shown.</p>
+  additional information should be hidden; if the attribute is absent,
+  that information should be shown. Subsequently, if the attribute is
+  removed, then the information should be hidden; if the attribute is
+  added, the information should be shown.</p>
 
-  <p>The user agent should allow the user to request that the details
-  be shown or hidden. To honor a request for the details to be shown,
-  the user agent must set the <code title="attr-details-open"><a href="#attr-details-open">open</a></code> attribute on the element to
+  <p>The user agent should allow the user to request that the
+  additional information be shown or hidden. To honor a request for
+  the details to be shown, the user agent must set the <code title="attr-details-open"><a href="#attr-details-open">open</a></code> attribute on the element to
   the value <code title="">open</code>. To honor a request for the
-  details to be hidden, the user agent must remove the <code title="attr-details-open"><a href="#attr-details-open">open</a></code> attribute from the
+  information to be hidden, the user agent must remove the <code title="attr-details-open"><a href="#attr-details-open">open</a></code> attribute from the
   element.</p>
 
   <p>The <dfn id="dom-details-open" title="dom-details-open"><code>open</code></dfn> IDL
@@ -795,13 +761,13 @@
 
   <dl class="switch"><dt>If the user requested a context menu using a pointing device</dt>
 
-   <dd><p>The user agent must dispatch an event with the name <code title="event-contextmenu">contextmenu</code>, that bubbles and is
+   <dd><p>The user agent must fire an event with the name <code title="event-contextmenu">contextmenu</code>, that bubbles and is
    cancelable, and that uses the <code><a href="infrastructure.html#mouseevent">MouseEvent</a></code> interface, at
    the element for which the menu was requested. The context
    information of the event must be set to the same values as the last
-   <code><a href="infrastructure.html#mouseevent">MouseEvent</a></code> user interaction event that was dispatched
-   as part of the gesture that that was interpreted as a request for
-   the context menu.</p></dd>
+   <code><a href="infrastructure.html#mouseevent">MouseEvent</a></code> user interaction event that was fired as
+   part of the gesture that that was interpreted as a request for the
+   context menu.</p></dd>
 
    <dt>Otherwise</dt>
 
