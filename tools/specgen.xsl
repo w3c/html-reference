@@ -1199,6 +1199,15 @@ color: #3C790A;
   </xsl:otherwise>
   </xsl:choose>
   </xsl:template>
+  <xsl:template match="h:a[. = 'datetime']">
+    <a href="#time.attrs.datetime">datetime (any)</a>
+  </xsl:template>
+  <xsl:template match="h:a[. = 'datetime.dateonly']">
+    <a href="#time.attrs.datetime.dateonly">datetime (date only)</a>
+  </xsl:template>
+  <xsl:template match="h:a[. = 'datetime.tz']">
+    <a href="#time.attrs.datetime.tz">datetime (date and time)</a>
+  </xsl:template>
   <xsl:template match="h:div[@id='tocjump']">
     <div id="tocjump" class="skip-link" style="text-align: center">
       <a href="{$toc-link}">Skip to Table of Contents</a>

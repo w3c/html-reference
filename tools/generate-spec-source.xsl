@@ -498,7 +498,7 @@
                     <h2 class="common-subhead"><dfn id="{@id}">URL potentially surrounded by spaces</dfn></h2>
                   </xsl:when>
                   <xsl:when test="$pattern='uri.non-empty'">
-                    <h2 class="common-subhead"><dfn id="{@id}">Non-empty URL potentially surrounded by spaces</dfn></h2>
+                    <h2 class="common-subhead"><dfn id="{@id}">non-empty URL potentially surrounded by spaces</dfn></h2>
                   </xsl:when>
                   <xsl:when test="$pattern='uris'">
                     <h2 class="common-subhead"><dfn id="{@id}">list of URIs</dfn></h2>
@@ -1476,7 +1476,7 @@
                   or starts-with(.,$name-colon)
                   or starts-with(.,$name-bracket)
                   ]]">
-                  <xsl:if test="properties/property">
+                  <xsl:if test="properties/property and not(selector[contains(., '(')])">
                     <!-- * only include this rule if it actually has some -->
                     <!-- * properties -->
                   <div class="selectors">
@@ -2486,6 +2486,15 @@
                 <xsl:with-param name="ref" select="$ref"/>
               </xsl:call-template>
             </xsl:when>
+            <xsl:when test="$ref = 'time.attrs.datetime'">
+              <span class="attribute-name">datetime</span> (any)
+            </xsl:when>
+            <xsl:when test="$ref = 'time.attrs.datetime.dateonly'">
+              <span class="attribute-name">datetime</span> (date only)
+            </xsl:when>
+            <xsl:when test="$ref = 'time.attrs.datetime.tz'">
+              <span class="attribute-name">datetime</span> (date and time)
+            </xsl:when>
             <xsl:when test="contains(node(),'.')">
               <span class="attribute-name">
                 <xsl:choose>
@@ -2590,6 +2599,12 @@
                       </xsl:for-each>
                     </xsl:when>
                     <xsl:when test="normalize-space(key('elements',$ref)//*[@class='model'])='string'">
+                      <a href="#data-string">string</a>
+                    </xsl:when>
+                    <xsl:when test="normalize-space(key('elements',$ref)//*[@class='model'])='d:link-rel'">
+                      <a href="#common.data.tokens">set of space-separated tokens</a>
+                    </xsl:when>
+                    <xsl:when test="normalize-space(key('elements',$ref)//*[@class='model'])='d:meta-name'">
                       <a href="#data-string">string</a>
                     </xsl:when>
                     <xsl:when
@@ -3200,6 +3215,17 @@
       </xsl:choose>
     </xsl:for-each>
   </xsl:template>
+  <xsl:template match="h:a[@class = 'html5-spec']" priority="100">
+    <xsl:message> FOO FOO FOO </xsl:message>
+    <xsl:variable name="filename">
+      <xsl:call-template name="get-spec-filename">
+        <xsl:with-param name="ref" select="@href"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <a href="{$filename}{@href}" class="html5-spec">
+      <xsl:copy-of select="node()"/>
+    </a>
+  </xsl:template>
 
 <!-- * ***************************************************************** -->
 <!-- * * UTILITY TEMPLATES -->
@@ -3355,7 +3381,7 @@
         <a href="{@href}">URL potentially surrounded by spaces</a>
       </xsl:when>
       <xsl:when test=".='uri.non-empty'">
-        <a href="{@href}">Non-empty URL potentially surrounded by spaces</a>
+        <a href="{@href}">non-empty URL potentially surrounded by spaces</a>
       </xsl:when>
       <xsl:when test=".='uris'">
         <a href="{@href}">list of URIs</a>

@@ -1,6 +1,6 @@
-diff -r faf3698e1913 relaxng/applications.rnc
---- a/relaxng/applications.rnc	Thu Jun 16 17:50:20 2011 +0900
-+++ b/relaxng/applications.rnc	Sat Jun 18 18:54:40 2011 +0900
+diff -r cf48538fa1b8 relaxng/applications.rnc
+--- a/relaxng/applications.rnc	Tue Aug 23 19:13:41 2011 +0900
++++ b/relaxng/applications.rnc	Tue Aug 23 19:48:32 2011 +0900
 @@ -4,19 +4,6 @@
  ##  RELAX NG Schema for HTML 5: Web Application Features              #
  # #####################################################################
@@ -150,9 +150,9 @@ diff -r faf3698e1913 relaxng/applications.rnc
  	common.elem.phrasing |= command.elem
  
  ## Menu: <menu>
-diff -r faf3698e1913 relaxng/block.rnc
---- a/relaxng/block.rnc	Thu Jun 16 17:50:20 2011 +0900
-+++ b/relaxng/block.rnc	Sat Jun 18 18:54:40 2011 +0900
+diff -r cf48538fa1b8 relaxng/block.rnc
+--- a/relaxng/block.rnc	Tue Aug 23 19:13:41 2011 +0900
++++ b/relaxng/block.rnc	Tue Aug 23 19:48:32 2011 +0900
 @@ -114,12 +114,12 @@
  		element li { oli.inner & oli.attrs }
  	oli.attrs =
@@ -168,9 +168,9 @@ diff -r faf3698e1913 relaxng/block.rnc
  			attribute value {
  				common.data.integer
  			}
-diff -r faf3698e1913 relaxng/common.rnc
---- a/relaxng/common.rnc	Thu Jun 16 17:50:20 2011 +0900
-+++ b/relaxng/common.rnc	Sat Jun 18 18:54:40 2011 +0900
+diff -r cf48538fa1b8 relaxng/common.rnc
+--- a/relaxng/common.rnc	Tue Aug 23 19:13:41 2011 +0900
++++ b/relaxng/common.rnc	Tue Aug 23 19:48:32 2011 +0900
 @@ -38,16 +38,16 @@
  	common.attr.anything =
  		attribute * { text }*
@@ -301,9 +301,9 @@ diff -r faf3698e1913 relaxng/common.rnc
 +	common.data.dropzonevalue =
 +		w:dropzonevalue
 +
- ## Microdata Identifier
-   common.data.microdata-identifier =
-     w:microdata-identifier
+ ## Microdata Properties
+   common.data.microdata-properties =
+     list { w:microdata-property+ }
 @@ -381,16 +385,20 @@
    common.data.functionbody =
      w:functionbody
@@ -333,9 +333,9 @@ diff -r faf3698e1913 relaxng/common.rnc
  common.attrs.aria = ( notAllowed )
  common.attrs.aria.implicit.button = ( notAllowed )
  common.attrs.aria.implicit.input = ( notAllowed )
-diff -r faf3698e1913 relaxng/core-scripting.rnc
---- a/relaxng/core-scripting.rnc	Thu Jun 16 17:50:20 2011 +0900
-+++ b/relaxng/core-scripting.rnc	Sat Jun 18 18:54:40 2011 +0900
+diff -r cf48538fa1b8 relaxng/core-scripting.rnc
+--- a/relaxng/core-scripting.rnc	Tue Aug 23 19:13:41 2011 +0900
++++ b/relaxng/core-scripting.rnc	Tue Aug 23 19:48:32 2011 +0900
 @@ -52,9 +52,9 @@
  				string
  			}
@@ -370,9 +370,9 @@ diff -r faf3698e1913 relaxng/core-scripting.rnc
  
  	scripting.attr.onabort =
  		attribute onabort { common.data.functionbody }
-diff -r faf3698e1913 relaxng/embed.rnc
---- a/relaxng/embed.rnc	Thu Jun 16 17:50:20 2011 +0900
-+++ b/relaxng/embed.rnc	Sat Jun 18 18:54:40 2011 +0900
+diff -r cf48538fa1b8 relaxng/embed.rnc
+--- a/relaxng/embed.rnc	Tue Aug 23 19:13:41 2011 +0900
++++ b/relaxng/embed.rnc	Tue Aug 23 19:48:32 2011 +0900
 @@ -248,7 +248,7 @@
  			}
  		object.attrs.name =
@@ -493,10 +493,10 @@ diff -r faf3698e1913 relaxng/embed.rnc
  #				xsd:token {
  #					pattern = "-?[0-9]+,-?[0-9]+,-?[0-9]+,-?[0-9]+,-?[0-9]+,-?[0-9]+(,-?[0-9]+,-?[0-9]+)*"
  #				}
-diff -r faf3698e1913 relaxng/media.rnc
---- a/relaxng/media.rnc	Thu Jun 16 17:50:20 2011 +0900
-+++ b/relaxng/media.rnc	Sat Jun 18 18:54:40 2011 +0900
-@@ -4,37 +4,6 @@
+diff -r cf48538fa1b8 relaxng/media.rnc
+--- a/relaxng/media.rnc	Tue Aug 23 19:13:41 2011 +0900
++++ b/relaxng/media.rnc	Tue Aug 23 19:48:32 2011 +0900
+@@ -4,42 +4,6 @@
  ##  RELAX NG Schema for HTML 5: Advanced Embedded Content             #
  # #####################################################################
  
@@ -509,6 +509,7 @@ diff -r faf3698e1913 relaxng/media.rnc
 -		&	media.attrs.controls?
 -		&	media.attrs.loop?
 -		&	media.attrs.mediagroup?
+-		&	media.attrs.muted?
 -		)
 -		media.attrs.autoplay   =
 -			attribute autoplay   {
@@ -530,11 +531,15 @@ diff -r faf3698e1913 relaxng/media.rnc
 -			attribute mediagroup {
 -				string
 -			}
+-		media.attrs.muted =
+-			attribute muted {
+-				w:string "muted" | w:string ""
+-			}
 -		
  ## Source: <source>
  
  	source.elem =
-@@ -60,18 +29,6 @@
+@@ -65,18 +29,6 @@
  	source.inner =
  		( empty )
  
@@ -542,7 +547,7 @@ diff -r faf3698e1913 relaxng/media.rnc
 -
 -	media.source = 
 -		(	media.attrs.src
--		|	source.elem+
+-		|	source.elem*
 -		)
 -
 -	media.attrs.src =
@@ -553,7 +558,7 @@ diff -r faf3698e1913 relaxng/media.rnc
  ## Video: <video>
  
  	video.elem.flow =
-@@ -80,12 +37,32 @@
+@@ -85,11 +37,32 @@
  		element video { video.inner.phrasing & video.attrs }
  	video.attrs =
  		(	common.attrs
@@ -565,8 +570,8 @@ diff -r faf3698e1913 relaxng/media.rnc
  		&	video.attrs.poster?
  		&	video.attrs.height?
  		&	video.attrs.width?
- 		&	video.attrs.muted?
 +		&	video.attrs.mediagroup?
++		&	video.attrs.muted?
  		)
 +		video.attrs.autoplay   =
 +			attribute autoplay   {
@@ -587,17 +592,21 @@ diff -r faf3698e1913 relaxng/media.rnc
  		video.attrs.poster =
  			attribute poster {
  				common.data.uri.non-empty
-@@ -102,13 +79,25 @@
- 			attribute muted {
- 				w:string "muted" | w:string ""
+@@ -102,13 +75,29 @@
+ 			attribute width {
+ 				common.data.integer.non-negative
  			}
-+		video.attrs.src =
-+			attribute src {
-+				common.data.uri.non-empty
-+			}
 +		video.attrs.mediagroup =
 +			attribute mediagroup {
 +				string
++			}
++		video.attrs.muted =
++			attribute muted {
++				w:string "muted" | w:string ""
++			}
++		video.attrs.src =
++			attribute src {
++				common.data.uri.non-empty
 +			}
  	video.inner.flow =
 -		(	media.source
@@ -610,12 +619,12 @@ diff -r faf3698e1913 relaxng/media.rnc
  	video.inner.phrasing =
 -		(	media.source
 +		(	(	video.attrs.src
-+			|	source.elem+
++			|	source.elem*
 +			)
  		,	track.elem*
  		,	common.inner.phrasing
  		)
-@@ -124,15 +113,47 @@
+@@ -124,15 +113,52 @@
  		element audio { audio.inner.phrasing & audio.attrs }
  	audio.attrs =
  		(	common.attrs
@@ -625,6 +634,7 @@ diff -r faf3698e1913 relaxng/media.rnc
 +		&	audio.attrs.controls?
 +		&	audio.attrs.loop?
 +		&	audio.attrs.mediagroup?
++		&	audio.attrs.muted?
  		)
 +		audio.attrs.autoplay   =
 +			attribute autoplay   {
@@ -646,6 +656,10 @@ diff -r faf3698e1913 relaxng/media.rnc
 +			attribute mediagroup {
 +				string
 +			}
++		video.attrs.muted =
++			attribute muted {
++				w:string "muted" | w:string ""
++			}
 +		audio.attrs.src =
 +			attribute src {
 +				common.data.uri.non-empty
@@ -653,7 +667,7 @@ diff -r faf3698e1913 relaxng/media.rnc
  	audio.inner.flow =
 -		(	media.source
 +		(	(	audio.attrs.src
-+			|	source.elem+
++			|	source.elem*
 +			)
  		,	track.elem*
  		,	common.inner.flow
@@ -666,9 +680,9 @@ diff -r faf3698e1913 relaxng/media.rnc
  		,	track.elem*
  		,	common.inner.phrasing
  		)
-diff -r faf3698e1913 relaxng/meta.rnc
---- a/relaxng/meta.rnc	Thu Jun 16 17:50:20 2011 +0900
-+++ b/relaxng/meta.rnc	Sat Jun 18 18:54:40 2011 +0900
+diff -r cf48538fa1b8 relaxng/meta.rnc
+--- a/relaxng/meta.rnc	Tue Aug 23 19:13:41 2011 +0900
++++ b/relaxng/meta.rnc	Tue Aug 23 19:48:32 2011 +0900
 @@ -53,7 +53,11 @@
  		&	body.attrs.onafterprint?
  		&	body.attrs.onbeforeprint?
@@ -716,8 +730,17 @@ diff -r faf3698e1913 relaxng/meta.rnc
  		}
  	base.inner =
  		( empty )
-@@ -134,9 +146,9 @@
- 		(	common.attrs
+@@ -130,16 +142,13 @@
+ 
+ 	link.elem =
+ 		element link { link.inner & link.attrs }
+-	link.attrs =
+-		(	common.attrs.basic
+-		&	common.attrs.i18n
+-		&	common.attrs.present
+-		&	common.attrs.other
++link.attrs =
++		(	common.attrs
  		&	link.attrs.href
  		&	link.attrs.rel
 -		&	shared-hyperlink.attrs.hreflang?
@@ -729,14 +752,10 @@ diff -r faf3698e1913 relaxng/meta.rnc
  		&	link.attrs.sizes?
  		#	link.attrs.title included in common.attrs
  		)
-@@ -148,6 +160,22 @@
+@@ -151,6 +160,18 @@
  			attribute rel {
  				w:link-rel
  			}
-+		link.attrs.rel =
-+		  attribute rel {
-+		    common.data.tokens
-+		  }
 +		link.attrs.hreflang =
 +		  attribute hreflang {
 +		    common.data.langcode
@@ -752,7 +771,7 @@ diff -r faf3698e1913 relaxng/meta.rnc
  		link.attrs.sizes =
  			attribute sizes {
  				w:string "any" | common.data.sizes
-@@ -176,7 +204,7 @@
+@@ -179,7 +200,7 @@
  				common.data.mediaquery
  			}
  	style.inner =
@@ -761,7 +780,7 @@ diff -r faf3698e1913 relaxng/meta.rnc
  		
  	common.elem.metadata |= style.elem
  
-@@ -201,10 +229,7 @@
+@@ -204,10 +225,7 @@
  	meta.name.elem =
  		element meta { meta.inner & meta.name.attrs }
  	meta.name.attrs =
@@ -773,7 +792,7 @@ diff -r faf3698e1913 relaxng/meta.rnc
  		&	meta.name.attrs.name
  		&	meta.name.attrs.content
  		)
-@@ -226,10 +251,7 @@
+@@ -229,10 +247,7 @@
  	meta.http-equiv.refresh.elem =
  		element meta { meta.inner & meta.http-equiv.refresh.attrs }
  	meta.http-equiv.refresh.attrs =
@@ -785,7 +804,7 @@ diff -r faf3698e1913 relaxng/meta.rnc
  		&	meta.http-equiv.attrs.http-equiv.refresh
  		&	meta.http-equiv.attrs.content.refresh
  		)
-@@ -250,10 +272,7 @@
+@@ -253,10 +268,7 @@
  	meta.http-equiv.default-style.elem =
  		element meta { meta.inner & meta.http-equiv.default-style.attrs }
  	meta.http-equiv.default-style.attrs =
@@ -797,7 +816,7 @@ diff -r faf3698e1913 relaxng/meta.rnc
  		&	meta.http-equiv.attrs.http-equiv.default-style
  		&	meta.http-equiv.attrs.content.default-style
  		)
-@@ -275,19 +294,13 @@
+@@ -278,19 +290,13 @@
  	meta.charset.elem =
  		element meta { meta.inner & meta.charset.attrs }
  	meta.charset.attrs =
@@ -820,7 +839,7 @@ diff -r faf3698e1913 relaxng/meta.rnc
  
  ## Inline Character Encoding Statement for HTML: <meta http-equiv='content-type'>
  
-@@ -295,10 +308,7 @@
+@@ -298,10 +304,7 @@
  		element meta { meta.inner & meta.http-equiv.content-type.attrs }
  		& HTMLonly
  	meta.http-equiv.content-type.attrs =
@@ -832,16 +851,16 @@ diff -r faf3698e1913 relaxng/meta.rnc
  		&	meta.http-equiv.attrs.http-equiv.content-type
  		&	meta.http-equiv.attrs.content.content-type
  		)
-@@ -311,4 +321,5 @@
+@@ -314,4 +317,5 @@
  				common.data.meta-charset
  			}
  
 -	common.elem.metadata |= ( meta.charset.elem | meta.http-equiv.content-type.elem )
 +	common.elem.metadata |= meta.charset.elem
 +	common.elem.metadata |= meta.http-equiv.content-type.elem
-diff -r faf3698e1913 relaxng/phrase.rnc
---- a/relaxng/phrase.rnc	Thu Jun 16 17:50:20 2011 +0900
-+++ b/relaxng/phrase.rnc	Sat Jun 18 18:54:40 2011 +0900
+diff -r cf48538fa1b8 relaxng/phrase.rnc
+--- a/relaxng/phrase.rnc	Tue Aug 23 19:13:41 2011 +0900
++++ b/relaxng/phrase.rnc	Tue Aug 23 19:48:32 2011 +0900
 @@ -13,13 +13,12 @@
  	a.attrs =
  		(	common.attrs
@@ -932,9 +951,9 @@ diff -r faf3698e1913 relaxng/phrase.rnc
  ## Emphatic Stress: <em>
  
  	em.elem =
-diff -r faf3698e1913 relaxng/revision.rnc
---- a/relaxng/revision.rnc	Thu Jun 16 17:50:20 2011 +0900
-+++ b/relaxng/revision.rnc	Sat Jun 18 18:54:40 2011 +0900
+diff -r cf48538fa1b8 relaxng/revision.rnc
+--- a/relaxng/revision.rnc	Tue Aug 23 19:13:41 2011 +0900
++++ b/relaxng/revision.rnc	Tue Aug 23 19:48:32 2011 +0900
 @@ -2,17 +2,6 @@
  ##  RELAX NG Schema for HTML 5: Revision Annotations                  #
  # #####################################################################
@@ -993,9 +1012,9 @@ diff -r faf3698e1913 relaxng/revision.rnc
  	del.inner.flow =
  		( common.inner.flow )
  	del.inner.phrasing =
-diff -r faf3698e1913 relaxng/tables.rnc
---- a/relaxng/tables.rnc	Thu Jun 16 17:50:20 2011 +0900
-+++ b/relaxng/tables.rnc	Sat Jun 18 18:54:40 2011 +0900
+diff -r cf48538fa1b8 relaxng/tables.rnc
+--- a/relaxng/tables.rnc	Tue Aug 23 19:13:41 2011 +0900
++++ b/relaxng/tables.rnc	Tue Aug 23 19:48:32 2011 +0900
 @@ -157,38 +157,6 @@
  	tr.inner =
  		( ( td.elem | th.elem )* )
@@ -1098,9 +1117,9 @@ diff -r faf3698e1913 relaxng/tables.rnc
 +			}
  	th.inner =
  		( common.inner.phrasing )
-diff -r faf3698e1913 relaxng/web-forms.rnc
---- a/relaxng/web-forms.rnc	Thu Jun 16 17:50:20 2011 +0900
-+++ b/relaxng/web-forms.rnc	Sat Jun 18 18:54:40 2011 +0900
+diff -r cf48538fa1b8 relaxng/web-forms.rnc
+--- a/relaxng/web-forms.rnc	Tue Aug 23 19:13:41 2011 +0900
++++ b/relaxng/web-forms.rnc	Tue Aug 23 19:48:32 2011 +0900
 @@ -9,6 +9,7 @@
  	common-form.attrs =
  		(	common-form.attrs.name?
@@ -1205,9 +1224,9 @@ diff -r faf3698e1913 relaxng/web-forms.rnc
  
  	button.elem |= button.button.elem
  
-diff -r faf3698e1913 relaxng/web-forms2.rnc
---- a/relaxng/web-forms2.rnc	Thu Jun 16 17:50:20 2011 +0900
-+++ b/relaxng/web-forms2.rnc	Sat Jun 18 18:54:40 2011 +0900
+diff -r cf48538fa1b8 relaxng/web-forms2.rnc
+--- a/relaxng/web-forms2.rnc	Tue Aug 23 19:13:41 2011 +0900
++++ b/relaxng/web-forms2.rnc	Tue Aug 23 19:48:32 2011 +0900
 @@ -6,9 +6,6 @@
  
  ## Shared attributes for form controls
