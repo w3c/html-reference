@@ -515,6 +515,12 @@
                   <xsl:when test="$pattern='color'">
                     <h2 class="common-subhead"><dfn id="{@id}">simple color</dfn></h2>
                   </xsl:when>
+                  <xsl:when test="$pattern='nonemptystring'">
+                    <h2 class="common-subhead"><dfn id="{@id}">non-empty string</dfn></h2>
+                  </xsl:when>
+                  <xsl:when test="$pattern='stringwithoutlinebreaks'">
+                    <h2 class="common-subhead"><dfn id="{@id}">string without line breaks</dfn></h2>
+                  </xsl:when>
                   <xsl:when test="$pattern='rectangle'">
                     <h2 class="common-subhead"><dfn id="{@id}">rectangle coordinates</dfn></h2>
                   </xsl:when>
@@ -3410,6 +3416,12 @@
       </xsl:when>
       <xsl:when test=".='color'">
         <a href="{@href}">simple color</a>
+      </xsl:when>
+      <xsl:when test=".='nonemptystring'">
+        <a href="{@href}">non-empty string</a>
+      </xsl:when>
+      <xsl:when test=".='stringwithoutlinebreaks'">
+        <a href="{@href}">string without line breaks</a>
       </xsl:when>
       <xsl:when test=".='rectangle'">
         <a href="{@href}">rectangle coordinates</a>
