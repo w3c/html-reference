@@ -3106,17 +3106,30 @@
     <xsl:param name="name"/>
     <xsl:choose>
       <xsl:when test="$name = 'input'">#the-input-element</xsl:when>
-      <xsl:when test="$name = 'input.text'">#text-state-and-search-state</xsl:when>
-      <xsl:when test="$name = 'input.search'">#text-state-and-search-state</xsl:when>
-      <xsl:when test="$name = 'input.radio'">#radio-button-state</xsl:when>
-      <xsl:when test="$name = 'input.submit'">#submit-button-state</xsl:when>
-      <xsl:when test="$name = 'input.reset'">#reset-button-state</xsl:when>
-      <xsl:when test="$name = 'input.tel'">#telephone-state</xsl:when>
-      <xsl:when test="$name = 'input.datetime'">#date-and-time-state</xsl:when>
-      <xsl:when test="$name = 'input.datetime-local'">#local-date-and-time-state</xsl:when>
-      <xsl:when test="$name = 'input.file'">#file-upload-state</xsl:when>
-      <xsl:when test="$name = 'input.image'">#image-button-state</xsl:when>
-      <xsl:when test="$name = 'input.email'">#e-mail-state</xsl:when>
+      <xsl:when test="$name = 'input.password'">#password-state-type-password</xsl:when>
+      <xsl:when test="$name = 'input.checkbox'">#checkbox-state-type-checkbox</xsl:when>
+      <xsl:when test="$name = 'input.hidden'">#hidden-state-type-hidden</xsl:when>
+      <xsl:when test="$name = 'input.button'">#button-state-type-button</xsl:when>
+      <xsl:when test="$name = 'input.date'">#date-state-type-date</xsl:when>
+      <xsl:when test="$name = 'input.month'">#month-state-type-month</xsl:when>
+      <xsl:when test="$name = 'input.time'">#time-state-type-time</xsl:when>
+      <xsl:when test="$name = 'input.week'">#week-state-type-week</xsl:when>
+      <xsl:when test="$name = 'input.number'">#number-state-type-number</xsl:when>
+      <xsl:when test="$name = 'input.range'">#range-state-type-range</xsl:when>
+      <xsl:when test="$name = 'input.url'">#url-state-type-url</xsl:when>
+      <xsl:when test="$name = 'input.color'">#color-state-type-color</xsl:when>
+      <xsl:when test="$name = 'input.text'">#text-type-text-state-and-search-state-type-search</xsl:when>
+      <xsl:when test="$name = 'input.text'">#text-type-text-state-and-search-state-type-search</xsl:when>
+      <xsl:when test="$name = 'input.search'">#text-type-text-state-and-search-state-type-search</xsl:when>
+      <xsl:when test="$name = 'input.radio'">#radio-button-state-type-radio</xsl:when>
+      <xsl:when test="$name = 'input.submit'">#submit-button-state-type-submit</xsl:when>
+      <xsl:when test="$name = 'input.reset'">#reset-button-state-type-reset</xsl:when>
+      <xsl:when test="$name = 'input.tel'">#telephone-state-type-tel</xsl:when>
+      <xsl:when test="$name = 'input.datetime'">#date-and-time-state-type-datetime</xsl:when>
+      <xsl:when test="$name = 'input.datetime-local'">#local-date-and-time-state-type-datetime-local</xsl:when>
+      <xsl:when test="$name = 'input.file'">#file-upload-state-type-file</xsl:when>
+      <xsl:when test="$name = 'input.image'">#image-button-state-type-image</xsl:when>
+      <xsl:when test="$name = 'input.email'">#e-mail-state-type-email</xsl:when>
       <xsl:when test="starts-with($name,'input.')">
         <xsl:value-of select="concat('#',substring-after($name,'input.'),'-state')"/>
       </xsl:when>

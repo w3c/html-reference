@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>4.8.11 The canvas element &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<!DOCTYPE html>
+<html lang="en-US-x-Hixie"><head><title>4.8.11 The canvas element &#x2014; HTML5</title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -19,6 +19,7 @@
    dd table + p { margin-top: 1em; }
    p + * > li, dd li { margin: 1em 0; }
    dt, dfn { font-weight: bold; font-style: normal; }
+   i, em { font-style: italic; }
    dt dfn { font-style: italic; }
    pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
    pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
@@ -40,9 +41,10 @@
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
 
    .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   img.extra { float: right; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   img.extra, p.overview { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; position: relative; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl::before { content: "IDL"; font: bold small sans-serif; padding: 0.5em; background: white; position: absolute; top: 0; margin: -1px 0 0 -4em; width: 1.5em; border: thin solid; border-radius: 0 0 0 0.5em }
    pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
    pre.css:first-line { color: #AAAA50; }
    dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
@@ -50,6 +52,7 @@
    dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
    dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
    dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
    dl.switch { padding-left: 2em; }
    dl.switch > dt { text-indent: -1.5em; }
    dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
@@ -104,6 +107,7 @@
    .note { color: green; background: transparent; font-family: sans-serif; }
    .warning { color: red; background: transparent; }
    .note, .warning { font-weight: bolder; font-style: italic; }
+   .note em, .warning em, .note i, .warning i { font-style: normal; }
    p.note, div.note { padding: 0.5em 2em; }
    span.note { padding: 0 2em; }
    .note p:first-child, .warning p:first-child { margin-top: 0; }
@@ -295,8 +299,6 @@
      src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
    }
 
-  ]]></style><style type="text/css"><![CDATA[
-   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
   ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
    function getCookie(name) {
      var params = location.search.substr(1).split("&");
@@ -315,38 +317,40 @@
      }
      return null;
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="the-iframe-element.html" title="4.8.2 The iframe element" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="the-map-element.html" title="4.8.12 The map element" rel="next"/></head><body><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="media-elements.html" title="4.8.10 Media elements" rel="prev"/><link href="index.html#contents" title="Table of contents" rel="contents"/><link href="the-map-element.html" title="4.8.12 The map element" rel="next"/></head><body onload="fixBrokenLink();" class="split chapter"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   </div><div>
-   <a href="the-iframe-element.html" class="prev">4.8.2 The iframe element</a> &#x2013;
-   <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="the-map-element.html" class="next">4.8.12 The map element</a>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
+
+   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   </div><nav class="prev_next"><a href="media-elements.html">&#x2190; 4.8.10 Media elements</a> &#x2013;
+   <a href="index.html#contents">Table of contents</a> &#x2013;
+   <a href="the-map-element.html">4.8.12 The map element &#x2192;</a>
   <ol class="toc"><li><ol><li><ol><li><a href="the-canvas-element.html#the-canvas-element"><span class="secno">4.8.11 </span>The <code>canvas</code> element</a>
-      <ol><li><a href="the-canvas-element.html#color-spaces-and-color-correction"><span class="secno">4.8.11.1 </span>Color spaces and color correction</a></li><li><a href="the-canvas-element.html#security-with-canvas-elements"><span class="secno">4.8.11.2 </span>Security with <code>canvas</code> elements</a></li></ol></li></ol></li></ol></li></ol></div><h4 id="the-canvas-element"><span class="secno">4.8.11 </span>The <dfn id="canvas"><code>canvas</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
+      <ol><li><a href="the-canvas-element.html#color-spaces-and-color-correction"><span class="secno">4.8.11.1 </span>Color spaces and color correction</a></li><li><a href="the-canvas-element.html#security-with-canvas-elements"><span class="secno">4.8.11.2 </span>Security with <code>canvas</code> elements</a></li></ol></li></ol></li></ol></li></ol></nav><h4 id="the-canvas-element"><span class="secno">4.8.11 </span>The <dfn id="canvas"><code>canvas</code></dfn> element</h4><dl class="element"><dt><a href="element-definitions.html#element-dfn-categories" title="element-dfn-categories">Categories</a>:</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
    <dd><a href="content-models.html#embedded-content">Embedded content</a>.</dd>
-   <dt>Contexts in which this element can be used:</dt>
+   <dd><a href="content-models.html#palpable-content">Palpable content</a>.</dd>
+   <dt><a href="element-definitions.html#element-dfn-contexts" title="element-dfn-contexts">Contexts in which this element can be used</a>:</dt>
    <dd>Where <a href="content-models.html#embedded-content">embedded content</a> is expected.</dd>
-   <dt>Content model:</dt>
-   <dd><a href="content-models.html#transparent">Transparent</a>.</dd>
+   <dt><a href="element-definitions.html#element-dfn-content-model" title="element-dfn-content-model">Content model</a>:</dt>
    <dd><a href="content-models.html#transparent">Transparent</a>.</dd> 
-   <dt>Content attributes:</dt>
-   <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
+   <dt><a href="element-definitions.html#element-dfn-attributes" title="element-dfn-attributes">Content attributes</a>:</dt>
+   <dd><a href="global-attributes.html#global-attributes">Global attributes</a></dd>
    <dd><code title="attr-canvas-width"><a href="#attr-canvas-width">width</a></code></dd>
    <dd><code title="attr-canvas-height"><a href="#attr-canvas-height">height</a></code></dd>
-   <dt>DOM interface:</dt>
+   <dt><a href="element-definitions.html#element-dfn-dom" title="element-dfn-dom">DOM interface</a>:</dt>
    <dd>
     <pre class="idl">interface <dfn id="htmlcanvaselement">HTMLCanvasElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
            attribute unsigned long <a href="#dom-canvas-width" title="dom-canvas-width">width</a>;
            attribute unsigned long <a href="#dom-canvas-height" title="dom-canvas-height">height</a>;
 
-  DOMString <a href="#dom-canvas-todataurl" title="dom-canvas-toDataURL">toDataURL</a>(in optional DOMString type, in any... args);
-  void <a href="#dom-canvas-toblob" title="dom-canvas-toBlob">toBlob</a>(in <span>FileCallback</span>? callback, in optional DOMString type, in any... args);
+  DOMString <a href="#dom-canvas-todataurl" title="dom-canvas-toDataURL">toDataURL</a>(optional DOMString type, any... args);
+  void <a href="#dom-canvas-toblob" title="dom-canvas-toBlob">toBlob</a>(<a href="infrastructure.html#filecallback">FileCallback</a>? callback, optional DOMString type, any... args);
 
-  object? <a href="#dom-canvas-getcontext" title="dom-canvas-getContext">getContext</a>(in DOMString contextId, in any... args);
+  object? <a href="#dom-canvas-getcontext" title="dom-canvas-getContext">getContext</a>(DOMString contextId, any... args);
 };</pre>
    </dd>
   </dl><p>The <code><a href="#the-canvas-element">canvas</a></code> element provides scripts with a
@@ -356,7 +360,7 @@
   is inappropriate to use a <code><a href="#the-canvas-element">canvas</a></code> element to render a
   page heading: if the desired presentation of the heading is
   graphically intense, it should be marked up using appropriate
-  elements (typically <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code>) and then styled using CSS and
+  elements (typically <code><a href="the-h1-h2-h3-h4-h5-and-h6-elements.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code>) and then styled using CSS and
   supporting technologies such as XBL.</p><p>When authors use the <code><a href="#the-canvas-element">canvas</a></code> element, they must also
   provide content that, when presented to the user, conveys
   essentially the same function or purpose as the bitmap canvas. This
@@ -386,7 +390,7 @@
   keyboard-accessible: authors should have a one-to-one mapping of
   interactive regions to focusable elements in the <a href="content-models.html#fallback-content">fallback
   content</a>. (Focus has no effect on mouse interaction
-  events.) <a href="#DOMEVENTS">[DOMEVENTS]</a></p><p>The <code><a href="#the-canvas-element">canvas</a></code> element has two attributes to control the
+  events.) <a href="references.html#refsDOMEVENTS">[DOMEVENTS]</a></p><p>The <code><a href="#the-canvas-element">canvas</a></code> element has two attributes to control the
   size of the coordinate space: <dfn id="attr-canvas-width" title="attr-canvas-width"><code>width</code></dfn> and <dfn id="attr-canvas-height" title="attr-canvas-height"><code>height</code></dfn>. These
   attributes, when specified, must have values that are <a href="common-microsyntaxes.html#valid-non-negative-integer" title="valid non-negative integer">valid non-negative
   integers</a>. <span class="impl">The <a href="common-microsyntaxes.html#rules-for-parsing-non-negative-integers">rules for parsing
@@ -417,6 +421,12 @@
 
   <p>When the canvas is initialized, its bitmap must be cleared to
   transparent black.</p>
+
+  <p>When a <code><a href="#the-canvas-element">canvas</a></code> element does not represent its
+  <a href="content-models.html#fallback-content">fallback content</a>, it <a href="infrastructure.html#provides-a-paint-source">provides a paint
+  source</a> whose width is the element's intrinsic width, whose
+  height is the element's intrinsic height, and whose appearance is
+  the element's bitmap.</p>
 
   <p>The <dfn id="dom-canvas-width" title="dom-canvas-width"><code>width</code></dfn> and
   <dfn id="dom-canvas-height" title="dom-canvas-height"><code>height</code></dfn> IDL
@@ -458,7 +468,9 @@
   that element. When created, a <code><a href="#the-canvas-element">canvas</a></code> element must not
   have a <a href="#primary-context">primary context</a>.</p>
 
+
   <p>The most commonly used primary context is the <a href="http://dev.w3.org/html5/2dcontext/">HTML Canvas 2D Context</a>.
+
 
   </p><p>The <dfn id="dom-canvas-getcontext" title="dom-canvas-getContext"><code>getContext(<var title="">contextId</var>, <var title="">args...</var>)</code></dfn>
   method of the <code><a href="#the-canvas-element">canvas</a></code> element, when invoked, must run
@@ -579,7 +591,12 @@
   <p>The <dfn id="dom-canvas-todataurl" title="dom-canvas-toDataURL"><code>toDataURL()</code></dfn> method
   must run the following steps:</p>
 
-  <ol><li><p>If the canvas has no pixels (i.e. either its horizontal
+  <ol><li><p>If the <code><a href="#the-canvas-element">canvas</a></code> element's <i>origin-clean</i>
+   flag is set to false, throw a <code><a href="infrastructure.html#securityerror">SecurityError</a></code> exception
+   and abort these steps.</p>
+
+
+   </li><li><p>If the canvas has no pixels (i.e. either its horizontal
    dimension or its vertical dimension is zero) then return the string
    "<code title="">data:,</code>" and abort these steps. (This is the
    shortest <a href="infrastructure.html#data-protocol" title="data protocol"><code title="">data:</code>
@@ -592,17 +609,31 @@
    <li><p>Return a <a href="infrastructure.html#data-protocol" title="data protocol"><code title="">data:</code> URL</a> representing <var title="">file</var>. <a href="references.html#refsRFC2397">[RFC2397]</a></p>
 
    
+
   </li></ol><p>The <dfn id="dom-canvas-toblob" title="dom-canvas-toBlob"><code>toBlob()</code></dfn> method
   must run the following steps:</p>
 
-  <ol><li><p>Let <var title="">callback</var> be the first
+  <ol><li><p>If the <code><a href="#the-canvas-element">canvas</a></code> element's <i>origin-clean</i>
+   flag is set to false, throw a <code><a href="infrastructure.html#securityerror">SecurityError</a></code> exception
+   and abort these steps.</p>
+
+
+   </li><li><p>Let <var title="">callback</var> be the first
    argument.</p></li>
 
    <li><p>Let <var title="">arguments</var> be the second and
    subsequent arguments to the method, if any.</p></li>
 
-   <li><p>Let <var title="">file</var> be <a href="#a-serialization-of-the-image-as-a-file">a serialization of the
-   image as a file</a>, using <var title="">arguments</var>.</p></li>
+   <li>
+
+    <p>If the canvas has no pixels (i.e. either its horizontal
+    dimension or its vertical dimension is zero) then let <var title="">result</var> be null.</p>
+
+    <p>Otherwise, let <var title="">result</var> be a
+    <code><a href="infrastructure.html#blob">Blob</a></code> object representing <a href="#a-serialization-of-the-image-as-a-file">a serialization of the
+    image as a file</a>, using <var title="">arguments</var>. <a href="references.html#refsFILEAPI">[FILEAPI]</a> </p>
+
+   </li>
 
    <li><p>Return, but continue running these steps
    asynchronously.</p></li>
@@ -611,10 +642,9 @@
    steps.</p></li>
 
    <li><p><a href="webappapis.html#queue-a-task">Queue a task</a> to invoke the
-   <code>FileCallback</code> <var title="">callback</var> with a
-   <code><a href="infrastructure.html#blob">Blob</a></code> object representing <var title="">file</var> as
-   its argument. The <a href="webappapis.html#task-source">task source</a> for this task is the
-   <dfn id="canvas-blob-serialization-task-source">canvas blob serialization task source</dfn>. <a href="references.html#refsFILESYSTEMAPI">[FILESYSTEMAPI]</a> <a href="references.html#refsFILEAPI">[FILEAPI]</a> </p></li>
+   <code><a href="infrastructure.html#filecallback">FileCallback</a></code> <var title="">callback</var> with <var title="">result</var> as its argument. The <a href="webappapis.html#task-source">task source</a>
+   for this task is the <dfn id="canvas-blob-serialization-task-source">canvas blob serialization task
+   source</dfn>. <a href="references.html#refsFILESYSTEMAPI">[FILESYSTEMAPI]</a></p></li>
 
   </ol><p>When a user agent is to create <dfn id="a-serialization-of-the-image-as-a-file">a serialization of the image
   as a file</dfn>, optionally with some given <var title="">arguments</var>, it must create an image file in the format
@@ -666,7 +696,7 @@
   specification. <a href="references.html#refsWEBIDL">[WEBIDL]</a></p>
 
   <p>Other arguments must be ignored and must not cause the user agent
-  to raise an exception. A future version of this specification will
+  to throw an exception. A future version of this specification will
   probably define other parameters to be passed to these methods to
   allow authors to more carefully control compression settings, image
   metadata, etc.</p>
@@ -680,7 +710,7 @@
   correction and color space information onto the canvas, to convert
   the image to the color space used by the canvas (e.g. using the 2D
   Context's <code title="dom-context-2d-drawImage">drawImage()</code>
-  method with an <code><a href="embedded-content-1.html#htmlimageelement">HTMLImageElement</a></code> object), and when
+  method with an <code><a href="the-img-element.html#htmlimageelement">HTMLImageElement</a></code> object), and when
   rendering the actual canvas bitmap to the output device.</p>
 
   <p class="note">Thus, in the 2D context, colors used to draw shapes
@@ -700,7 +730,7 @@
 
   <p>The gamma correction and color space information of images must
   be handled in such a way that an image rendered directly using an
-  <code><a href="embedded-content-1.html#the-img-element">img</a></code> element would use the same colors as one painted on
+  <code><a href="the-img-element.html#the-img-element">img</a></code> element would use the same colors as one painted on
   a <code><a href="#the-canvas-element">canvas</a></code> element that is then itself
   rendered. Furthermore, the rendering of images that have no color
   correction information (such as those returned by the <code title="dom-canvas-toDataURL"><a href="#dom-canvas-todataurl">toDataURL()</a></code> method) must be
@@ -725,10 +755,10 @@
   any of the following actions occur:</p>
 
   <ul><li><p>The element's 2D context's <code title="dom-context-2d-drawImage">drawImage()</code> method is
-   called with an <code><a href="embedded-content-1.html#htmlimageelement">HTMLImageElement</a></code> or an
-   <code><a href="the-iframe-element.html#htmlvideoelement">HTMLVideoElement</a></code> whose <a href="origin-0.html#origin">origin</a> is not the
+   called with an <code><a href="the-img-element.html#htmlimageelement">HTMLImageElement</a></code> or an
+   <code><a href="the-video-element.html#htmlvideoelement">HTMLVideoElement</a></code> whose <a href="origin-0.html#origin">origin</a> is not the
    <a href="origin-0.html#same-origin" title="same origin">same</a> as that of the
-   <code><a href="infrastructure.html#document">Document</a></code> object that owns the <code><a href="#the-canvas-element">canvas</a></code>
+   <code><a href="dom.html#document">Document</a></code> object that owns the <code><a href="#the-canvas-element">canvas</a></code>
    element.</p></li>
 
    <li><p>The element's 2D context's <code title="dom-context-2d-drawImage">drawImage()</code> method is
@@ -737,8 +767,8 @@
 
    <li><p>The element's 2D context's <code title="dom-context-2d-fillStyle">fillStyle</code> attribute is set
    to a <code>CanvasPattern</code> object that was created from an
-   <code><a href="embedded-content-1.html#htmlimageelement">HTMLImageElement</a></code> or an <code><a href="the-iframe-element.html#htmlvideoelement">HTMLVideoElement</a></code>
-   whose <a href="origin-0.html#origin">origin</a> was not the <a href="origin-0.html#same-origin" title="same&#10;   origin">same</a> as that of the <code><a href="infrastructure.html#document">Document</a></code> object
+   <code><a href="the-img-element.html#htmlimageelement">HTMLImageElement</a></code> or an <code><a href="the-video-element.html#htmlvideoelement">HTMLVideoElement</a></code>
+   whose <a href="origin-0.html#origin">origin</a> was not the <a href="origin-0.html#same-origin" title="same&#10;   origin">same</a> as that of the <code><a href="dom.html#document">Document</a></code> object
    that owns the <code><a href="#the-canvas-element">canvas</a></code> element when the pattern was
    created.</p></li>
 
@@ -749,8 +779,8 @@
 
    <li><p>The element's 2D context's <code title="dom-context-2d-strokeStyle">strokeStyle</code> attribute is
    set to a <code>CanvasPattern</code> object that was created from an
-   <code><a href="embedded-content-1.html#htmlimageelement">HTMLImageElement</a></code> or an <code><a href="the-iframe-element.html#htmlvideoelement">HTMLVideoElement</a></code>
-   whose <a href="origin-0.html#origin">origin</a> was not the <a href="origin-0.html#same-origin" title="same&#10;   origin">same</a> as that of the <code><a href="infrastructure.html#document">Document</a></code> object
+   <code><a href="the-img-element.html#htmlimageelement">HTMLImageElement</a></code> or an <code><a href="the-video-element.html#htmlvideoelement">HTMLVideoElement</a></code>
+   whose <a href="origin-0.html#origin">origin</a> was not the <a href="origin-0.html#same-origin" title="same&#10;   origin">same</a> as that of the <code><a href="dom.html#document">Document</a></code> object
    that owns the <code><a href="#the-canvas-element">canvas</a></code> element when the pattern was
    created.</p></li>
 
@@ -762,26 +792,14 @@
    <li><p>The element's 2D context's <code title="dom-context-2d-fillText">fillText()</code> or <code title="dom-context-2d-fillText">strokeText()</code> methods are
    invoked and consider using a font that has an <a href="origin-0.html#origin">origin</a>
    that is not the <a href="origin-0.html#same-origin" title="same origin">same</a> as that of
-   the <code><a href="infrastructure.html#document">Document</a></code> object that owns the <code><a href="#the-canvas-element">canvas</a></code>
+   the <code><a href="dom.html#document">Document</a></code> object that owns the <code><a href="#the-canvas-element">canvas</a></code>
    element. (The font doesn't even have to be used; all that matters
    is whether the font was considered for any of the glyphs
    drawn.)</p></li> 
-  </ul><p>Whenever the <code title="dom-canvas-toDataURL"><a href="#dom-canvas-todataurl">toDataURL()</a></code> method of a
-  <code><a href="#the-canvas-element">canvas</a></code> element whose <i>origin-clean</i> flag is set to
-  false is called, the method must raise a <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code>
-  exception.</p>
 
-  <p>Whenever the <code title="dom-context-2d-getImageData">getImageData()</code> method of
-  the 2D context of a <code><a href="#the-canvas-element">canvas</a></code> element whose
-  <i>origin-clean</i> flag is set to false is called with otherwise
-  correct arguments, the method must raise a <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code>
-  exception.</p>
-
-  <p>Whenever the <code title="dom-context-2d-measureText">measureText()</code> method of
-  the 2D context of a <code><a href="#the-canvas-element">canvas</a></code> element ends up using a font
-  that has an <a href="origin-0.html#origin">origin</a> that is not the <a href="origin-0.html#same-origin" title="same&#10;  origin">same</a> as that of the <code><a href="infrastructure.html#document">Document</a></code> object that
-  owns the <code><a href="#the-canvas-element">canvas</a></code> element, the method must raise a
-  <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code> exception.</p>
+  </ul><p>The <code title="dom-canvas-toDataURL"><a href="#dom-canvas-todataurl">toDataURL()</a></code>, <code title="dom-canvas-toBlob"><a href="#dom-canvas-toblob">toBlob()</a></code>, and <code title="dom-context-2d-getImageData">getImageData()</code> methods
+  check the flag and will throw a <code><a href="infrastructure.html#securityerror">SecurityError</a></code> exception
+  rather than leak cross-origin data.</p>
 
   <p class="note">Even resetting the canvas state by changing its
   <code title="attr-canvas-width"><a href="#attr-canvas-width">width</a></code> or <code title="attr-canvas-height"><a href="#attr-canvas-height">height</a></code> attributes doesn't reset

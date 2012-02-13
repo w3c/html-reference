@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>4.10 Forms &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<!DOCTYPE html>
+<html lang="en-US-x-Hixie"><head><title>4.10 Forms &#x2014; HTML5</title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -19,6 +19,7 @@
    dd table + p { margin-top: 1em; }
    p + * > li, dd li { margin: 1em 0; }
    dt, dfn { font-weight: bold; font-style: normal; }
+   i, em { font-style: italic; }
    dt dfn { font-style: italic; }
    pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
    pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
@@ -40,9 +41,10 @@
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
 
    .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   img.extra { float: right; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   img.extra, p.overview { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; position: relative; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl::before { content: "IDL"; font: bold small sans-serif; padding: 0.5em; background: white; position: absolute; top: 0; margin: -1px 0 0 -4em; width: 1.5em; border: thin solid; border-radius: 0 0 0 0.5em }
    pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
    pre.css:first-line { color: #AAAA50; }
    dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
@@ -50,6 +52,7 @@
    dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
    dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
    dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
    dl.switch { padding-left: 2em; }
    dl.switch > dt { text-indent: -1.5em; }
    dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
@@ -104,6 +107,7 @@
    .note { color: green; background: transparent; font-family: sans-serif; }
    .warning { color: red; background: transparent; }
    .note, .warning { font-weight: bolder; font-style: italic; }
+   .note em, .warning em, .note i, .warning i { font-style: normal; }
    p.note, div.note { padding: 0.5em 2em; }
    span.note { padding: 0 2em; }
    .note p:first-child, .warning p:first-child { margin-top: 0; }
@@ -295,8 +299,6 @@
      src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
    }
 
-  ]]></style><style type="text/css"><![CDATA[
-   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
   ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
    function getCookie(name) {
      var params = location.search.substr(1).split("&");
@@ -315,17 +317,19 @@
      }
      return null;
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="tabular-data.html" title="4.9 Tabular data" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="the-input-element.html" title="4.10.7 The input element" rel="next"/></head><body><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="examples.html" title="4.9.13 Examples" rel="prev"/><link href="index.html#contents" title="Table of contents" rel="contents"/><link href="the-form-element.html" title="4.10.3 The form element" rel="next"/></head><body onload="fixBrokenLink();" class="split chapter"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   </div><div>
-   <a href="tabular-data.html" class="prev">4.9 Tabular data</a> &#x2013;
-   <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="the-input-element.html" class="next">4.10.7 The input element</a>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
+
+   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   </div><nav class="prev_next"><a href="examples.html">&#x2190; 4.9.13 Examples</a> &#x2013;
+   <a href="index.html#contents">Table of contents</a> &#x2013;
+   <a href="the-form-element.html">4.10.3 The form element &#x2192;</a>
   <ol class="toc"><li><ol><li><a href="forms.html#forms"><span class="secno">4.10 </span>Forms</a>
     <ol><li><a href="forms.html#introduction-1"><span class="secno">4.10.1 </span>Introduction</a>
-      <ol><li><a href="forms.html#writing-a-form-s-user-interface"><span class="secno">4.10.1.1 </span>Writing a form's user interface</a></li><li><a href="forms.html#implementing-the-server-side-processing-for-a-form"><span class="secno">4.10.1.2 </span>Implementing the server-side processing for a form</a></li><li><a href="forms.html#configuring-a-form-to-communicate-with-a-server"><span class="secno">4.10.1.3 </span>Configuring a form to communicate with a server</a></li><li><a href="forms.html#client-side-form-validation"><span class="secno">4.10.1.4 </span>Client-side form validation</a></li></ol></li><li><a href="forms.html#categories"><span class="secno">4.10.2 </span>Categories</a></li><li><a href="forms.html#the-form-element"><span class="secno">4.10.3 </span>The <code>form</code> element</a></li><li><a href="forms.html#the-fieldset-element"><span class="secno">4.10.4 </span>The <code>fieldset</code> element</a></li><li><a href="forms.html#the-legend-element"><span class="secno">4.10.5 </span>The <code>legend</code> element</a></li><li><a href="forms.html#the-label-element"><span class="secno">4.10.6 </span>The <code>label</code> element</a></li></ol></li></ol></li></ol></div><h3 id="forms"><span class="secno">4.10 </span>Forms</h3><h4 id="introduction-1"><span class="secno">4.10.1 </span>Introduction</h4><p><i>This section is non-normative.</i></p><p>A form is a component of a Web page that has form controls, such
+      <ol><li><a href="forms.html#writing-a-form-s-user-interface"><span class="secno">4.10.1.1 </span>Writing a form's user interface</a></li><li><a href="forms.html#implementing-the-server-side-processing-for-a-form"><span class="secno">4.10.1.2 </span>Implementing the server-side processing for a form</a></li><li><a href="forms.html#configuring-a-form-to-communicate-with-a-server"><span class="secno">4.10.1.3 </span>Configuring a form to communicate with a server</a></li><li><a href="forms.html#client-side-form-validation"><span class="secno">4.10.1.4 </span>Client-side form validation</a></li><li><a href="forms.html#input-author-notes"><span class="secno">4.10.1.5 </span>Date, time, and number formats</a></li></ol></li><li><a href="forms.html#categories"><span class="secno">4.10.2 </span>Categories</a></li></ol></li></ol></li></ol></nav><h3 id="forms"><span class="secno">4.10 </span>Forms</h3><h4 id="introduction-1"><span class="secno">4.10.1 </span>Introduction</h4><p><i>This section is non-normative.</i></p><p>A form is a component of a Web page that has form controls, such
   as text fields, buttons, checkboxes, range controls, or color
   pickers. A user can interact with such a form, providing data that
   can then be sent to the server for further processing (e.g.
@@ -336,26 +340,26 @@
   in any order: writing the user interface, implementing the
   server-side processing, and configuring the user interface to
   communicate with the server.</p><h5 id="writing-a-form-s-user-interface"><span class="secno">4.10.1.1 </span>Writing a form's user interface</h5><p><i>This section is non-normative.</i></p><p>For the purposes of this brief introduction, we will create a
-  pizza ordering form.</p><p>Any form starts with a <code><a href="#the-form-element">form</a></code> element, inside which
+  pizza ordering form.</p><p>Any form starts with a <code><a href="the-form-element.html#the-form-element">form</a></code> element, inside which
   are placed the controls. Most controls are represented by the
   <code><a href="the-input-element.html#the-input-element">input</a></code> element, which by default provides a one-line
-  text field. To label a control, the <code><a href="#the-label-element">label</a></code> element is
+  text field. To label a control, the <code><a href="the-label-element.html#the-label-element">label</a></code> element is
   used; the label text and the control itself go inside the
-  <code><a href="#the-label-element">label</a></code> element. Each part of a form is considered a
+  <code><a href="the-label-element.html#the-label-element">label</a></code> element. Each part of a form is considered a
   <a href="content-models.html#paragraph">paragraph</a>, and is typically separated from other parts
-  using <code><a href="grouping-content.html#the-p-element">p</a></code> elements. Putting this together, here is how
+  using <code><a href="the-p-element.html#the-p-element">p</a></code> elements. Putting this together, here is how
   one might ask for the customer's name:</p><pre><strong>&lt;form&gt;
  &lt;p&gt;&lt;label&gt;Customer name: &lt;input&gt;&lt;/label&gt;&lt;/p&gt;
 &lt;/form&gt;</strong></pre><p>To let the user select the size of the pizza, we can use a set of
   radio buttons. Radio buttons also use the <code><a href="the-input-element.html#the-input-element">input</a></code>
   element, this time with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code>
-  attribute with the value <code title="attr-input-type-radio"><a href="number-state.html#radio-button-state">radio</a></code>. To make the radio
+  attribute with the value <code title="attr-input-type-radio"><a href="states-of-the-type-attribute.html#radio-button-state-type-radio">radio</a></code>. To make the radio
   buttons work as a group, they are given a common name using the
-  <code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code> attribute. To group a batch
+  <code title="attr-fe-name"><a href="attributes-common-to-form-controls.html#attr-fe-name">name</a></code> attribute. To group a batch
   of controls together, such as, in this case, the radio buttons, one
-  can use the <code><a href="#the-fieldset-element">fieldset</a></code> element. The title of such a group
+  can use the <code><a href="the-fieldset-element.html#the-fieldset-element">fieldset</a></code> element. The title of such a group
   of controls is given by the first element in the
-  <code><a href="#the-fieldset-element">fieldset</a></code>, which has to be a <code><a href="#the-legend-element">legend</a></code>
+  <code><a href="the-fieldset-element.html#the-fieldset-element">fieldset</a></code>, which has to be a <code><a href="the-legend-element.html#the-legend-element">legend</a></code>
   element.</p><pre>&lt;form&gt;
  &lt;p&gt;&lt;label&gt;Customer name: &lt;input&gt;&lt;/label&gt;&lt;/p&gt;
 <strong> &lt;fieldset&gt;
@@ -365,7 +369,7 @@
   &lt;p&gt;&lt;label&gt; &lt;input type=radio name=size&gt; Large &lt;/label&gt;&lt;/p&gt;
  &lt;/fieldset&gt;</strong>
 &lt;/form&gt;</pre><p class="note">Changes from the previous step are highlighted.</p><p>To pick toppings, we can use checkboxes. These use the
-  <code><a href="the-input-element.html#the-input-element">input</a></code> element with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute with the value <code title="attr-input-type-checkbox"><a href="number-state.html#checkbox-state">checkbox</a></code>:</p><pre>&lt;form&gt;
+  <code><a href="the-input-element.html#the-input-element">input</a></code> element with a <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute with the value <code title="attr-input-type-checkbox"><a href="states-of-the-type-attribute.html#checkbox-state-type-checkbox">checkbox</a></code>:</p><pre>&lt;form&gt;
  &lt;p&gt;&lt;label&gt;Customer name: &lt;input&gt;&lt;/label&gt;&lt;/p&gt;
  &lt;fieldset&gt;
   &lt;legend&gt; Pizza Size &lt;/legend&gt;
@@ -383,8 +387,8 @@
 &lt;/form&gt;</pre><p>The pizzeria for which this form is being written is always
   making mistakes, so it needs a way to contact the customer. For this
   purpose, we can use form controls specifically for telephone numbers
-  (<code><a href="the-input-element.html#the-input-element">input</a></code> elements with their <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute set to <code title="attr-input-type-tel"><a href="states-of-the-type-attribute.html#telephone-state">tel</a></code>) and e-mail addresses
-  (<code><a href="the-input-element.html#the-input-element">input</a></code> elements with their <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute set to <code title="attr-input-type-email"><a href="states-of-the-type-attribute.html#e-mail-state">email</a></code>):</p><pre>&lt;form&gt;
+  (<code><a href="the-input-element.html#the-input-element">input</a></code> elements with their <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute set to <code title="attr-input-type-tel"><a href="states-of-the-type-attribute.html#telephone-state-type-tel">tel</a></code>) and e-mail addresses
+  (<code><a href="the-input-element.html#the-input-element">input</a></code> elements with their <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute set to <code title="attr-input-type-email"><a href="states-of-the-type-attribute.html#e-mail-state-type-email">email</a></code>):</p><pre>&lt;form&gt;
  &lt;p&gt;&lt;label&gt;Customer name: &lt;input&gt;&lt;/label&gt;&lt;/p&gt;
 <strong> &lt;p&gt;&lt;label&gt;Telephone: &lt;input type=tel&gt;&lt;/label&gt;&lt;/p&gt;
  &lt;p&gt;&lt;label&gt;E-mail address: &lt;input type=email&gt;&lt;/label&gt;&lt;/p&gt;</strong>
@@ -401,7 +405,7 @@
   &lt;p&gt;&lt;label&gt; &lt;input type=checkbox&gt; Onion &lt;/label&gt;&lt;/p&gt;
   &lt;p&gt;&lt;label&gt; &lt;input type=checkbox&gt; Mushroom &lt;/label&gt;&lt;/p&gt;
  &lt;/fieldset&gt;
-&lt;/form&gt;</pre><p>We can use an <code><a href="the-input-element.html#the-input-element">input</a></code> element with its <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute set to <code title="attr-input-type-time"><a href="states-of-the-type-attribute.html#time-state">time</a></code> to ask for a delivery
+&lt;/form&gt;</pre><p>We can use an <code><a href="the-input-element.html#the-input-element">input</a></code> element with its <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute set to <code title="attr-input-type-time"><a href="states-of-the-type-attribute.html#time-state-type-time">time</a></code> to ask for a delivery
   time. Many of these form controls have attributes to control exactly
   what values can be specified; in this case, three attributes of
   particular interest are <code title="attr-input-min"><a href="common-input-element-attributes.html#attr-input-min">min</a></code>,
@@ -427,7 +431,7 @@
   &lt;p&gt;&lt;label&gt; &lt;input type=checkbox&gt; Mushroom &lt;/label&gt;&lt;/p&gt;
  &lt;/fieldset&gt;
 <strong> &lt;p&gt;&lt;label&gt;Preferred delivery time: &lt;input type=time min="11:00" max="21:00" step="900"&gt;&lt;/label&gt;&lt;/p&gt;</strong>
-&lt;/form&gt;</pre><p>The <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> element can be used to provide a
+&lt;/form&gt;</pre><p>The <code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code> element can be used to provide a
   free-form text field. In this instance, we are going to use it to
   provide a space for the customer to give delivery instructions:</p><pre>&lt;form&gt;
  &lt;p&gt;&lt;label&gt;Customer name: &lt;input&gt;&lt;/label&gt;&lt;/p&gt;
@@ -472,7 +476,7 @@
 &lt;/form&gt;</pre><h5 id="implementing-the-server-side-processing-for-a-form"><span class="secno">4.10.1.2 </span>Implementing the server-side processing for a form</h5><p><i>This section is non-normative.</i></p><p>The exact details for writing a server-side processor are out of
   scope for this specification. For the purposes of this introduction,
   we will assume that the script at <code title="">https://pizza.example.com/order.cgi</code> is configured to
-  accept submissions using the <code title="attr-fs-enctype-urlencoded"><a href="association-of-controls-and-forms.html#attr-fs-enctype-urlencoded">application/x-www-form-urlencoded</a></code>
+  accept submissions using the <code title="attr-fs-enctype-urlencoded"><a href="attributes-common-to-form-controls.html#attr-fs-enctype-urlencoded">application/x-www-form-urlencoded</a></code>
   format, expecting the following parameters sent in an HTTP POST
   body:</p><dl><dt><code title="">custname</code></dt>
    <dd>Customer's name</dd>
@@ -497,15 +501,15 @@
 
   </dl><h5 id="configuring-a-form-to-communicate-with-a-server"><span class="secno">4.10.1.3 </span>Configuring a form to communicate with a server</h5><p><i>This section is non-normative.</i></p><p>Form submissions are exposed to servers in a variety of ways,
   most commonly as HTTP GET or POST requests. To specify the exact
-  method used, the <code title="attr-fs-method"><a href="association-of-controls-and-forms.html#attr-fs-method">method</a></code>
-  attribute is specified on the <code><a href="#the-form-element">form</a></code> element. This
+  method used, the <code title="attr-fs-method"><a href="attributes-common-to-form-controls.html#attr-fs-method">method</a></code>
+  attribute is specified on the <code><a href="the-form-element.html#the-form-element">form</a></code> element. This
   doesn't specify how the form data is encoded, though; to specify
-  that, you use the <code title="attr-fs-enctype"><a href="association-of-controls-and-forms.html#attr-fs-enctype">enctype</a></code>
+  that, you use the <code title="attr-fs-enctype"><a href="attributes-common-to-form-controls.html#attr-fs-enctype">enctype</a></code>
   attribute. You also have to specify the <a href="urls.html#url">URL</a> of the
-  service that will handle the submitted data, using the <code title="attr-fs-action"><a href="association-of-controls-and-forms.html#attr-fs-action">action</a></code> attribute.</p><p>For each form control you want submitted, you then have to give a
+  service that will handle the submitted data, using the <code title="attr-fs-action"><a href="attributes-common-to-form-controls.html#attr-fs-action">action</a></code> attribute.</p><p>For each form control you want submitted, you then have to give a
   name that will be used to refer to the data in the submission. We
   already specified the name for the group of radio buttons; the same
-  attribute (<code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code>) also specifies
+  attribute (<code title="attr-fe-name"><a href="attributes-common-to-form-controls.html#attr-fe-name">name</a></code>) also specifies
   the submission name. Radio buttons can be distinguished from each
   other in the submission by giving them different values, using the
   <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute.</p><p>Multiple controls can have the same name; for example, here we
@@ -534,7 +538,7 @@
  &lt;/fieldset&gt;
  &lt;p&gt;&lt;label&gt;Preferred delivery time: &lt;input type=time min="11:00" max="21:00" step="900"<strong> name="delivery"</strong>&gt;&lt;/label&gt;&lt;/p&gt;
  &lt;p&gt;&lt;label&gt;Delivery instructions: &lt;textarea<strong> name="comments"</strong>&gt;&lt;/textarea&gt;&lt;/label&gt;&lt;/p&gt;
- &lt;p&gt;&lt;button&gt;Submit order&lt;/button&gt;&lt;p&gt;
+ &lt;p&gt;&lt;button&gt;Submit order&lt;/button&gt;&lt;/p&gt;
 &lt;/form&gt;</pre><p>For example, if the customer entered "Denise Lawrence" as their
   name, "555-321-8642" as their telephone number, did not specify an
   e-mail address, asked for a medium-sized pizza, selected the Extra
@@ -571,10 +575,10 @@
  &lt;/fieldset&gt;
  &lt;p&gt;&lt;label&gt;Preferred delivery time: &lt;input type=time min="11:00" max="21:00" step="900" name="delivery"<strong> required</strong>&gt;&lt;/label&gt;&lt;/p&gt;
  &lt;p&gt;&lt;label&gt;Delivery instructions: &lt;textarea name="comments"&gt;&lt;/textarea&gt;&lt;/label&gt;&lt;/p&gt;
- &lt;p&gt;&lt;button&gt;Submit order&lt;/button&gt;&lt;p&gt;
+ &lt;p&gt;&lt;button&gt;Submit order&lt;/button&gt;&lt;/p&gt;
 &lt;/form&gt;</pre><p>It is also possible to limit the length of the input, using the
-  <code title="attr-fe-maxlength"><a href="association-of-controls-and-forms.html#attr-fe-maxlength">maxlength</a></code> attribute. By
-  adding this to the <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> element, we can limit users
+  <code title="attr-fe-maxlength"><a href="attributes-common-to-form-controls.html#attr-fe-maxlength">maxlength</a></code> attribute. By
+  adding this to the <code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code> element, we can limit users
   to 1000 characters, preventing them from writing huge essays to the
   busy delivery drivers instead of staying focused and to the
   point:</p><pre>&lt;form method="post"
@@ -598,54 +602,89 @@
  &lt;/fieldset&gt;
  &lt;p&gt;&lt;label&gt;Preferred delivery time: &lt;input type=time min="11:00" max="21:00" step="900" name="delivery" required&gt;&lt;/label&gt;&lt;/p&gt;
  &lt;p&gt;&lt;label&gt;Delivery instructions: &lt;textarea name="comments"<strong> maxlength=1000</strong>&gt;&lt;/textarea&gt;&lt;/label&gt;&lt;/p&gt;
- &lt;p&gt;&lt;button&gt;Submit order&lt;/button&gt;&lt;p&gt;
-&lt;/form&gt;</pre><h4 id="categories"><span class="secno">4.10.2 </span>Categories</h4><p>Mostly for historical reasons, elements in this section fall into
+ &lt;p&gt;&lt;button&gt;Submit order&lt;/button&gt;&lt;/p&gt;
+&lt;/form&gt;</pre><h5 id="input-author-notes"><span class="secno">4.10.1.5 </span>Date, time, and number formats</h5><p><i>This section is non-normative.</i></p><p>In this pizze delivery example, the times are specified in the
+  format "HH:MM": two digits for the hour, in 24-hour format, and two
+  digits for the time. (Seconds could also be specified, though they
+  are not necessary in this example.)</p><p>In some locales, however, times are often expressed differently
+  when presented to users. For example, in the United States, it is
+  still common to use the 12-hour clock with an am/pm indicator, as in
+  "2pm". In France, it is common to separate the hours from the
+  minutes using an "h" character, as in "14h00".</p><p>Similar issues exist with dates, with the added complication that
+  even the order of the components is not always consistent &#x2014;
+  for example, in Cyprus the first of February 2003 would typically be
+  written "1/2/03", while that same date in Japan would typically be
+  written as "2003&#x5E74;02&#x6708;01&#x65E5;" &#x2014; and even with
+  numbers, where locales differ, for example, in what punctuation is
+  used as the decimal separator and the thousands separator.</p><p>It therefore is important to distinguish the time, date, and
+  number formats used in HTML and in form submissions, which are
+  always the formats defined in this specification (and based on the
+  well-established ISO 8601 standard for computer-readable date and
+  time formats), from the time, date, and number formats presented to
+  the user by the browser and accepted as input from the user by the
+  browser.</p><p>The format used "on the wire", i.e. in HTML markup and in form
+  submissions, is intended to be computer-readable and consistent
+  irrespective of the user's locale. Dates, for instance, are always
+  written in the format "YYYY-MM-DD", as in "2003-02-01". Users are
+  not expected to ever see this format.</p><p>The time, date, or number given by the page in the wire format is
+  then translated to the user's preferred presentation (based on user
+  preferences or on the locale of the page itself), before being
+  displayed to the user. Similarly, after the user inputs a time,
+  date, or number using their preferred format, the user agent
+  converts it back to the wire format before putting it in the DOM or
+  submitting it.</p><p>This allows scripts in pages and on servers to process times,
+  dates, and numbers in a consistent manner without needing to support
+  dozens of different formats, while still supporting the users'
+  needs.</p><div class="impl">
+  <p class="note">See also the <a href="states-of-the-type-attribute.html#input-impl-notes">implementation notes</a> regarding
+  localization of form controls.</p>
+  </div><h4 id="categories"><span class="secno">4.10.2 </span>Categories</h4><p>Mostly for historical reasons, elements in this section fall into
   several overlapping (but subtly different) categories in addition to
   the usual ones like <a href="content-models.html#flow-content">flow content</a>, <a href="content-models.html#phrasing-content">phrasing
   content</a>, and <a href="content-models.html#interactive-content">interactive content</a>.</p><p>A number of the elements are <dfn id="form-associated-element" title="form-associated&#10;  element">form-associated elements</dfn>, which means they can have a
   <a href="association-of-controls-and-forms.html#form-owner">form owner</a> and, to expose this, have a <code title="attr-fae-form"><a href="association-of-controls-and-forms.html#attr-fae-form">form</a></code> content attribute with a matching
   <code title="dom-fae-form"><a href="association-of-controls-and-forms.html#dom-fae-form">form</a></code> IDL attribute.</p><ul class="brief category-list"><li><code><a href="the-button-element.html#the-button-element">button</a></code></li>
-   <li><code><a href="#the-fieldset-element">fieldset</a></code></li>
+   <li><code><a href="the-fieldset-element.html#the-fieldset-element">fieldset</a></code></li>
    <li><code><a href="the-input-element.html#the-input-element">input</a></code></li>
-   <li><code><a href="the-button-element.html#the-keygen-element">keygen</a></code></li>
-   <li><code><a href="#the-label-element">label</a></code></li>
-   <li><code><a href="the-iframe-element.html#the-object-element">object</a></code></li>
-   <li><code><a href="the-button-element.html#the-output-element">output</a></code></li>
-   <li><code><a href="the-button-element.html#the-select-element">select</a></code></li>
-   <li><code><a href="the-button-element.html#the-textarea-element">textarea</a></code></li>
+   <li><code><a href="the-keygen-element.html#the-keygen-element">keygen</a></code></li>
+   <li><code><a href="the-label-element.html#the-label-element">label</a></code></li>
+   <li><code><a href="the-object-element.html#the-object-element">object</a></code></li>
+   <li><code><a href="the-output-element.html#the-output-element">output</a></code></li>
+   <li><code><a href="the-select-element.html#the-select-element">select</a></code></li>
+   <li><code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code></li>
   </ul><p>The <a href="#form-associated-element" title="form-associated element">form-associated
   elements</a> fall into several subcategories:</p><dl><dt><dfn id="category-listed" title="category-listed">Listed elements</dfn></dt>
 
    <dd>
 
-    <p>Denotes elements that are listed in the <code title="dom-form-elements"><a href="#dom-form-elements"><var title="">form</var>.elements</a></code>
-    and <code title="dom-fieldset-elements"><a href="#dom-fieldset-elements"><var title="">fieldset</var>.elements</a></code> APIs.</p>
+    <p>Denotes elements that are listed in the <code title="dom-form-elements"><a href="the-form-element.html#dom-form-elements"><var title="">form</var>.elements</a></code>
+    and <code title="dom-fieldset-elements"><a href="the-fieldset-element.html#dom-fieldset-elements"><var title="">fieldset</var>.elements</a></code> APIs.</p>
 
     
     <ul class="brief category-list"><li><code><a href="the-button-element.html#the-button-element">button</a></code></li>
-     <li><code><a href="#the-fieldset-element">fieldset</a></code></li>
+     <li><code><a href="the-fieldset-element.html#the-fieldset-element">fieldset</a></code></li>
      <li><code><a href="the-input-element.html#the-input-element">input</a></code></li>
-     <li><code><a href="the-button-element.html#the-keygen-element">keygen</a></code></li>
-     <li><code><a href="the-iframe-element.html#the-object-element">object</a></code></li>
-     <li><code><a href="the-button-element.html#the-output-element">output</a></code></li>
-     <li><code><a href="the-button-element.html#the-select-element">select</a></code></li>
-     <li><code><a href="the-button-element.html#the-textarea-element">textarea</a></code></li>
+     <li><code><a href="the-keygen-element.html#the-keygen-element">keygen</a></code></li>
+     <li><code><a href="the-object-element.html#the-object-element">object</a></code></li>
+     <li><code><a href="the-output-element.html#the-output-element">output</a></code></li>
+     <li><code><a href="the-select-element.html#the-select-element">select</a></code></li>
+     <li><code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code></li>
     </ul></dd>
 
    <dt><dfn id="category-submit" title="category-submit">Submittable elements</dfn></dt>
 
    <dd>
 
-    <p>Denotes elements that can be used for <a href="association-of-controls-and-forms.html#constructing-form-data-set">constructing the form data
-    set</a> when a <code><a href="#the-form-element">form</a></code> element is <a href="association-of-controls-and-forms.html#concept-form-submit" title="concept-form-submit">submitted</a>.</p>
+    <p>Denotes elements that can be used for <a href="form-submission.html#constructing-form-data-set">constructing the form data
+    set</a> when a <code><a href="the-form-element.html#the-form-element">form</a></code> element is <a href="form-submission.html#concept-form-submit" title="concept-form-submit">submitted</a>.</p>
 
     
     <ul class="brief category-list"><li><code><a href="the-button-element.html#the-button-element">button</a></code></li>
      <li><code><a href="the-input-element.html#the-input-element">input</a></code></li>
-     <li><code><a href="the-button-element.html#the-keygen-element">keygen</a></code></li>
-     <li><code><a href="the-iframe-element.html#the-object-element">object</a></code></li>
-     <li><code><a href="the-button-element.html#the-select-element">select</a></code></li>
-     <li><code><a href="the-button-element.html#the-textarea-element">textarea</a></code></li>
+     <li><code><a href="the-keygen-element.html#the-keygen-element">keygen</a></code></li>
+     <li><code><a href="the-object-element.html#the-object-element">object</a></code></li>
+     <li><code><a href="the-select-element.html#the-select-element">select</a></code></li>
+     <li><code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code></li>
     </ul><p>Some <a href="#category-submit" title="category-submit">submittable elements</a>
     can be, depending on their attributes, <dfn id="concept-button" title="concept-button">buttons</dfn>. The prose below defines when
     an element is a button. Some buttons are specifically <dfn id="concept-submit-button" title="concept-submit-button">submit buttons</dfn>.</p>
@@ -656,567 +695,27 @@
 
    <dd>
 
-    <p>Denotes elements that can be affected when a <code><a href="#the-form-element">form</a></code>
-    element is <a href="association-of-controls-and-forms.html#concept-form-reset" title="concept-form-reset">reset</a>.</p>
+    <p>Denotes elements that can be affected when a <code><a href="the-form-element.html#the-form-element">form</a></code>
+    element is <a href="form-submission.html#concept-form-reset" title="concept-form-reset">reset</a>.</p>
 
     
     <ul class="brief category-list"><li><code><a href="the-input-element.html#the-input-element">input</a></code></li>
-     <li><code><a href="the-button-element.html#the-keygen-element">keygen</a></code></li>
-     <li><code><a href="the-button-element.html#the-output-element">output</a></code></li>
-     <li><code><a href="the-button-element.html#the-select-element">select</a></code></li>
-     <li><code><a href="the-button-element.html#the-textarea-element">textarea</a></code></li>
+     <li><code><a href="the-keygen-element.html#the-keygen-element">keygen</a></code></li>
+     <li><code><a href="the-output-element.html#the-output-element">output</a></code></li>
+     <li><code><a href="the-select-element.html#the-select-element">select</a></code></li>
+     <li><code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code></li>
     </ul></dd>
 
   </dl><p>Some elements, not all of them <a href="#form-associated-element" title="form-associated&#10;  element">form-associated</a>, are categorized as <dfn id="category-label" title="category-label">labelable elements</dfn>. These are elements
-  that can be associated with a <code><a href="#the-label-element">label</a></code> element.
+  that can be associated with a <code><a href="the-label-element.html#the-label-element">label</a></code> element.
 
   
   </p><ul class="brief category-list"><li><code><a href="the-button-element.html#the-button-element">button</a></code></li>
-   <li><code><a href="the-input-element.html#the-input-element">input</a></code> (if the <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is <em>not</em> in the <a href="states-of-the-type-attribute.html#hidden-state" title="attr-input-type-hidden">Hidden</a> state)</li>
-   <li><code><a href="the-button-element.html#the-keygen-element">keygen</a></code></li>
-   <li><code><a href="the-button-element.html#the-meter-element">meter</a></code></li>
-   <li><code><a href="the-button-element.html#the-output-element">output</a></code></li>
-   <li><code><a href="the-button-element.html#the-progress-element">progress</a></code></li>
-   <li><code><a href="the-button-element.html#the-select-element">select</a></code></li>
-   <li><code><a href="the-button-element.html#the-textarea-element">textarea</a></code></li>
-  </ul><h4 id="the-form-element"><span class="secno">4.10.3 </span>The <dfn><code>form</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
-   <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
-   <dt>Contexts in which this element can be used:</dt>
-   <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
-   <dt>Content model:</dt>
-   <dd><a href="content-models.html#flow-content">Flow content</a>, but with no <code><a href="#the-form-element">form</a></code> element descendants.</dd>
-   <dt>Content attributes:</dt>
-   <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
-   <dd><code title="attr-form-accept-charset"><a href="#attr-form-accept-charset">accept-charset</a></code></dd>
-   <dd><code title="attr-fs-action"><a href="association-of-controls-and-forms.html#attr-fs-action">action</a></code></dd>
-   <dd><code title="attr-form-autocomplete"><a href="#attr-form-autocomplete">autocomplete</a></code></dd>
-   <dd><code title="attr-fs-enctype"><a href="association-of-controls-and-forms.html#attr-fs-enctype">enctype</a></code></dd>
-   <dd><code title="attr-fs-method"><a href="association-of-controls-and-forms.html#attr-fs-method">method</a></code></dd>
-   <dd><code title="attr-form-name"><a href="#attr-form-name">name</a></code></dd>
-   <dd><code title="attr-fs-novalidate"><a href="association-of-controls-and-forms.html#attr-fs-novalidate">novalidate</a></code></dd>
-   <dd><code title="attr-fs-target"><a href="association-of-controls-and-forms.html#attr-fs-target">target</a></code></dd>
-   <dt>DOM interface:</dt>
-   <dd>
-<pre class="idl">[OverrideBuiltins]
-interface <dfn id="htmlformelement">HTMLFormElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
-           attribute DOMString <a href="#dom-form-acceptcharset" title="dom-form-acceptCharset">acceptCharset</a>;
-           attribute DOMString <a href="association-of-controls-and-forms.html#dom-fs-action" title="dom-fs-action">action</a>;
-           attribute DOMString <a href="#dom-form-autocomplete" title="dom-form-autocomplete">autocomplete</a>;
-           attribute DOMString <a href="association-of-controls-and-forms.html#dom-fs-enctype" title="dom-fs-enctype">enctype</a>;
-           attribute DOMString <a href="association-of-controls-and-forms.html#dom-fs-encoding" title="dom-fs-encoding">encoding</a>;
-           attribute DOMString <a href="association-of-controls-and-forms.html#dom-fs-method" title="dom-fs-method">method</a>;
-           attribute DOMString <a href="#dom-form-name" title="dom-form-name">name</a>;
-           attribute boolean <a href="association-of-controls-and-forms.html#dom-fs-novalidate" title="dom-fs-noValidate">noValidate</a>;
-           attribute DOMString <a href="association-of-controls-and-forms.html#dom-fs-target" title="dom-fs-target">target</a>;
-
-  readonly attribute <a href="common-dom-interfaces.html#htmlformcontrolscollection">HTMLFormControlsCollection</a> <a href="#dom-form-elements" title="dom-form-elements">elements</a>;
-  readonly attribute long <a href="#dom-form-length" title="dom-form-length">length</a>;
-  caller <a href="#dom-form-item" title="dom-form-item">getter</a> any (in unsigned long index);
-  caller <a href="#dom-form-nameditem" title="dom-form-namedItem">getter</a> any (in DOMString name);
-
-  void <a href="#dom-form-submit" title="dom-form-submit">submit</a>();
-  void <a href="#dom-form-reset" title="dom-form-reset">reset</a>();
-  boolean <a href="#dom-form-checkvalidity" title="dom-form-checkValidity">checkValidity</a>();
-};</pre>
-   </dd>
-  </dl><p>The <code><a href="#the-form-element">form</a></code> element <a href="rendering.html#represents">represents</a> a
-  collection of <a href="#form-associated-element" title="form-associated element">form-associated
-  elements</a>, some of which can represent editable values that
-  can be submitted to a server for processing.</p><p>The <dfn id="attr-form-accept-charset" title="attr-form-accept-charset"><code>accept-charset</code></dfn>
-  attribute gives the character encodings that are to be used for the
-  submission. If specified, the value must be an <a href="common-microsyntaxes.html#ordered-set-of-unique-space-separated-tokens">ordered set of
-  unique space-separated tokens</a> that are <a href="infrastructure.html#ascii-case-insensitive">ASCII
-  case-insensitive</a>, and each token must be an <a href="infrastructure.html#ascii-case-insensitive">ASCII
-  case-insensitive</a> match for the <a href="infrastructure.html#preferred-mime-name">preferred MIME
-  name</a> of an <a href="infrastructure.html#ascii-compatible-character-encoding">ASCII-compatible character encoding</a>.
-  <a href="references.html#refsIANACHARSET">[IANACHARSET]</a></p><p>The <dfn id="attr-form-name" title="attr-form-name"><code>name</code></dfn> attribute
-  represents the <code><a href="#the-form-element">form</a></code>'s name within the <code title="dom-document-forms"><a href="dom.html#dom-document-forms">forms</a></code> collection. The value must
-  not be the empty string, and the value must be unique amongst the
-  <code><a href="#the-form-element">form</a></code> elements in the <code title="dom-document-forms"><a href="dom.html#dom-document-forms">forms</a></code> collection that it is in, if
-  any.</p><p>The <dfn id="attr-form-autocomplete" title="attr-form-autocomplete"><code>autocomplete</code></dfn>
-  attribute is an <a href="common-microsyntaxes.html#enumerated-attribute">enumerated attribute</a>. The attribute has
-  two states. The <code title="attr-form-autocomplete-on">on</code>
-  keyword maps to the <dfn id="attr-form-autocomplete-on-state" title="attr-form-autocomplete-on-state">on</dfn> state, and the
-  <code title="attr-form-autocomplete-off">off</code> keyword maps to
-  the <dfn id="attr-form-autocomplete-off-state" title="attr-form-autocomplete-off-state">off</dfn>
-  state. The attribute may also be omitted. The <i>missing value
-  default</i> is the <a href="#attr-form-autocomplete-on-state" title="attr-form-autocomplete-on-state">on</a> state. The <a href="#attr-form-autocomplete-off-state" title="attr-form-autocomplete-off-state">off</a> state indicates
-  that by default, <code><a href="the-input-element.html#the-input-element">input</a></code> elements in the form will have
-  their <a href="common-input-element-attributes.html#resulting-autocompletion-state">resulting autocompletion state</a> set to <i title="">off</i>; the <a href="#attr-form-autocomplete-on-state" title="attr-form-autocomplete-on-state">on</a> state indicates
-  that by default, <code><a href="the-input-element.html#the-input-element">input</a></code> elements in the form will have
-  their <a href="common-input-element-attributes.html#resulting-autocompletion-state">resulting autocompletion state</a> set to <i title="">on</i>.</p><p>The <code title="attr-fs-action"><a href="association-of-controls-and-forms.html#attr-fs-action">action</a></code>, <code title="attr-fs-enctype"><a href="association-of-controls-and-forms.html#attr-fs-enctype">enctype</a></code>, <code title="attr-fs-method"><a href="association-of-controls-and-forms.html#attr-fs-method">method</a></code>, <code title="attr-fs-novalidate"><a href="association-of-controls-and-forms.html#attr-fs-novalidate">novalidate</a></code>, and <code title="attr-fs-target"><a href="association-of-controls-and-forms.html#attr-fs-target">target</a></code> attributes are <a href="association-of-controls-and-forms.html#attributes-for-form-submission">attributes
-  for form submission</a>.</p><dl class="domintro"><dt><var title="">form</var> . <code title="dom-form-elements"><a href="#dom-form-elements">elements</a></code></dt>
-
-   <dd>
-
-    <p>Returns an <code><a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a></code> of the form controls in
-    the form (excluding image buttons for historical reasons).</p>
-
-   </dd>
-
-   <dt><var title="">form</var> . <code title="dom-form-length"><a href="#dom-form-length">length</a></code></dt>
-
-   <dd>
-
-    <p>Returns the number of form controls in the form (excluding
-    image buttons for historical reasons).</p>
-
-   </dd>
-
-   <dt><var title="">form</var>[<var title="">index</var>]</dt>
-   <dt><var title="">form</var>(<var title="">index</var>)</dt>
-
-   <dd>
-
-    <p>Returns the <var title="">index</var>th element in the form
-    (excluding image buttons for historical reasons).</p>
-
-   </dd>
-
-   <dt><var title="">form</var>[<var title="">name</var>]</dt>
-   <dt><var title="">form</var>(<var title="">name</var>)</dt>
-
-   <dd>
-
-    <p>Returns the form control in the form with the given <a href="elements.html#concept-id" title="concept-id">ID</a> or <code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code> (excluding image buttons for
-    historical reasons).</p>
-
-    <p>Once an element has been referenced using a particular name,
-    that name will continue being available as a way to reference that
-    element in this method, even if the element's actual <a href="elements.html#concept-id" title="concept-id">ID</a> or <code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code> changes, for as long as the
-    element remains in the <code><a href="infrastructure.html#document">Document</a></code>.</p>
-
-    <p>If there are multiple matching items, then a
-    <code><a href="infrastructure.html#nodelist">NodeList</a></code> object containing all those elements is
-    returned.</p>
-
-   </dd>
-
-   <dt><var title="">form</var> . <code title="dom-form-submit"><a href="#dom-form-submit">submit</a></code>()</dt>
-
-   <dd>
-
-    <p>Submits the form.</p>
-
-   </dd>
-
-   <dt><var title="">form</var> . <code title="dom-form-reset"><a href="#dom-form-reset">reset</a></code>()</dt>
-
-   <dd>
-
-    <p>Resets the form.</p>
-
-   </dd>
-
-   <dt><var title="">form</var> . <code title="dom-form-checkValidity"><a href="#dom-form-checkvalidity">checkValidity</a></code>()</dt>
-
-   <dd>
-
-    <p>Returns true if the form's controls are all valid; otherwise,
-    returns false.</p>
-
-   </dd>
-
-  </dl><div class="impl">
-
-  <p>The <dfn id="dom-form-autocomplete" title="dom-form-autocomplete"><code>autocomplete</code></dfn> IDL
-  attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the content attribute of the
-  same name, <a href="common-dom-interfaces.html#limited-to-only-known-values">limited to only known values</a>.</p>
-
-  <p>The <dfn id="dom-form-name" title="dom-form-name"><code>name</code></dfn> IDL
-  attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the content attribute of the
-  same name.</p>
-
-  <p>The <dfn id="dom-form-acceptcharset" title="dom-form-acceptCharset"><code>acceptCharset</code></dfn> IDL
-  attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-form-accept-charset"><a href="#attr-form-accept-charset">accept-charset</a></code> content
-  attribute.</p>
-
-  <hr/><p>The <dfn id="dom-form-elements" title="dom-form-elements"><code>elements</code></dfn>
-  IDL attribute must return an <code><a href="common-dom-interfaces.html#htmlformcontrolscollection">HTMLFormControlsCollection</a></code>
-  rooted at the <code><a href="infrastructure.html#document">Document</a></code> node, whose filter matches <a href="#category-listed" title="category-listed">listed elements</a> whose <a href="association-of-controls-and-forms.html#form-owner">form
-  owner</a> is the <code><a href="#the-form-element">form</a></code> element, with the exception of
-  <code><a href="the-input-element.html#the-input-element">input</a></code> elements whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="number-state.html#image-button-state" title="attr-input-type-image">Image Button</a> state, which must,
-  for historical reasons, be excluded from this particular
-  collection.</p>
-
-  <p>The <dfn id="dom-form-length" title="dom-form-length"><code>length</code></dfn> IDL
-  attribute must return the number of nodes <a href="common-dom-interfaces.html#represented-by-the-collection" title="represented&#10;  by the collection">represented</a> by the <code title="dom-form-elements"><a href="#dom-form-elements">elements</a></code> collection.</p>
-
-  <p>The <a href="infrastructure.html#supported-property-indices">supported property indices</a> at any instant are
-  the indices supported by the object returned by the <code title="dom-form-elements"><a href="#dom-form-elements">elements</a></code> attribute at that
-  instant.</p>
-
-  <p>When a <code><a href="#the-form-element">form</a></code> element is <dfn id="dom-form-item" title="dom-form-item">indexed for indexed property retrieval</dfn>,
-  the user agent must return the value returned by the <code title="dom-HTMLFormControlsCollection-item">item</code> method on
-  the <code title="dom-form-elements"><a href="#dom-form-elements">elements</a></code> collection, when
-  invoked with the given index as its argument.</p>
-
-  <p>Each <code><a href="#the-form-element">form</a></code> element has a mapping of names to elements
-  called the <dfn id="past-names-map">past names map</dfn>. It is used to persist names of
-  controls even when they change names.</p>
-
-  <p>The <a href="infrastructure.html#supported-property-names">supported property names</a> are the union of the
-  names currently supported by the object returned by the <code title="dom-form-elements"><a href="#dom-form-elements">elements</a></code> attribute, and the names
-  currently in the <a href="#past-names-map">past names map</a>.</p>
-
-  <p>When a <code><a href="#the-form-element">form</a></code> element is <dfn id="dom-form-nameditem" title="dom-form-namedItem">indexed for named property
-  retrieval</dfn>, the user agent must run the following steps:</p>
-
-  <ol><li>
-
-    <p>If <var title="">name</var> is one of the <a href="infrastructure.html#supported-property-names">supported
-    property names</a> of the object returned by the <code title="dom-form-elements"><a href="#dom-form-elements">elements</a></code> attribute, then run
-    these substeps:</p>
-
-    <ol><li><p>Let <var title="">candidate</var> be the object returned
-     by the <code title="dom-HTMLFormControlsCollection-namedItem"><a href="common-dom-interfaces.html#dom-htmlformcontrolscollection-nameditem">namedItem()</a></code>
-     method on the object returned by the <code title="dom-form-elements"><a href="#dom-form-elements">elements</a></code> attribute when passed
-     the <var title="">name</var> argument.</p></li>
-
-     <li><p>If <var title="">candidate</var> is an element, then add a
-     mapping from <var title="">name</var> to <var title="">candidate</var> in the <code><a href="#the-form-element">form</a></code> element's
-     <a href="#past-names-map">past names map</a>, replacing the previous entry with
-     the same name, if any.</p></li>
-
-     <li><p>Return <var title="">candidate</var> and abort these
-     steps.</p></li>
-
-    </ol></li>
-
-   <li><p>Otherwise, <var title="">name</var> is the name of one of
-   the entries in the <code><a href="#the-form-element">form</a></code> element's <a href="#past-names-map">past names
-   map</a>: return the object associated with <var title="">name</var> in that map.</p></li>
-
-  </ol><p>If an element listed in the <code><a href="#the-form-element">form</a></code> element's <a href="#past-names-map">past
-  names map</a> is removed from the <code><a href="infrastructure.html#document">Document</a></code>, then its
-  entries must be removed from the map.</p>
-
-  
-  <hr/><p>The <dfn id="dom-form-submit" title="dom-form-submit"><code>submit()</code></dfn>
-  method, when invoked, must <a href="association-of-controls-and-forms.html#concept-form-submit" title="concept-form-submit">submit</a> the <code><a href="#the-form-element">form</a></code>
-  element from the <code><a href="#the-form-element">form</a></code> element itself, with the <var title="">scripted-submit</var> flag set.</p>
-
-  <p>The <dfn id="dom-form-reset" title="dom-form-reset"><code>reset()</code></dfn>
-  method, when invoked, must run the following steps:</p>
-
-  <ol><li><p>If the <code><a href="#the-form-element">form</a></code> element is marked as <i><a href="#locked-for-reset">locked for
-   reset</a></i>, then abort these steps.</p></li>
-
-   <li><p>Mark the <code><a href="#the-form-element">form</a></code> element as <dfn id="locked-for-reset">locked for
-   reset</dfn>.</p></li>
-
-   <li><p><a href="association-of-controls-and-forms.html#concept-form-reset" title="concept-form-reset">Reset</a> the
-   <code><a href="#the-form-element">form</a></code> element.</p></li>
-
-   <li><p>Unmark the <code><a href="#the-form-element">form</a></code> element as <i><a href="#locked-for-reset">locked for
-   reset</a></i>.</p></li>
-
-  </ol><p>If the <dfn id="dom-form-checkvalidity" title="dom-form-checkValidity"><code>checkValidity()</code></dfn>
-  method is invoked, the user agent must <a href="association-of-controls-and-forms.html#statically-validate-the-constraints">statically validate the
-  constraints</a> of the <code><a href="#the-form-element">form</a></code> element, and return true
-  if the constraint validation return a <i>positive</i> result, and
-  false if it returned a <i>negative</i> result.</p>
-
-  </div><div class="example">
-
-   <p>This example shows two search forms:</p>
-
-   <pre>&lt;form action="http://www.google.com/search" method="get"&gt;
- &lt;label&gt;Google: &lt;input type="search" name="q"&gt;&lt;/label&gt; &lt;input type="submit" value="Search..."&gt;
-&lt;/form&gt;
-&lt;form action="http://www.bing.com/search" method="get"&gt;
- &lt;label&gt;Bing: &lt;input type="search" name="q"&gt;&lt;/label&gt; &lt;input type="submit" value="Search..."&gt;
-&lt;/form&gt;</pre>
-
-  </div><h4 id="the-fieldset-element"><span class="secno">4.10.4 </span>The <dfn><code>fieldset</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
-   <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
-   <dd><a href="sections.html#sectioning-root">Sectioning root</a>.</dd>
-   <dd><a href="#category-listed" title="category-listed">Listed</a> <a href="#form-associated-element">form-associated element</a>.</dd>
-   <dt>Contexts in which this element can be used:</dt>
-   <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
-   <dt>Content model:</dt>
-   <dd>Optionally a <code><a href="#the-legend-element">legend</a></code> element, followed by <a href="content-models.html#flow-content">flow content</a>.</dd>
-   <dt>Content attributes:</dt>
-   <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
-   <dd><code title="attr-fieldset-disabled"><a href="#attr-fieldset-disabled">disabled</a></code></dd>
-   <dd><code title="attr-fae-form"><a href="association-of-controls-and-forms.html#attr-fae-form">form</a></code></dd>
-   <dd><code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code></dd>
-   <dt>DOM interface:</dt>
-   <dd>
-<pre class="idl">interface <dfn id="htmlfieldsetelement">HTMLFieldSetElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
-           attribute boolean <a href="#dom-fieldset-disabled" title="dom-fieldset-disabled">disabled</a>;
-  readonly attribute <a href="#htmlformelement">HTMLFormElement</a>? <a href="association-of-controls-and-forms.html#dom-fae-form" title="dom-fae-form">form</a>;
-           attribute DOMString <a href="association-of-controls-and-forms.html#dom-fe-name" title="dom-fe-name">name</a>;
-
-  readonly attribute DOMString <a href="#dom-fieldset-type" title="dom-fieldset-type">type</a>;
-
-  readonly attribute <a href="common-dom-interfaces.html#htmlformcontrolscollection">HTMLFormControlsCollection</a> <a href="#dom-fieldset-elements" title="dom-fieldset-elements">elements</a>;
-
-  readonly attribute boolean <a href="association-of-controls-and-forms.html#dom-cva-willvalidate" title="dom-cva-willValidate">willValidate</a>;
-  readonly attribute <a href="association-of-controls-and-forms.html#validitystate">ValidityState</a> <a href="association-of-controls-and-forms.html#dom-cva-validity" title="dom-cva-validity">validity</a>;
-  readonly attribute DOMString <a href="association-of-controls-and-forms.html#dom-cva-validationmessage" title="dom-cva-validationMessage">validationMessage</a>;
-  boolean <a href="association-of-controls-and-forms.html#dom-cva-checkvalidatity" title="dom-cva-checkValidatity">checkValidity</a>();
-  void <a href="association-of-controls-and-forms.html#dom-cva-setcustomvalidity" title="dom-cva-setCustomValidity">setCustomValidity</a>(in DOMString error);
-};</pre>
-   </dd>
-  </dl><p>The <code><a href="#the-fieldset-element">fieldset</a></code> element <a href="rendering.html#represents">represents</a> a set
-  of form controls optionally grouped under a common name.</p><p>The name of the group is given by the first <code><a href="#the-legend-element">legend</a></code>
-  element that is a child of the <code><a href="#the-fieldset-element">fieldset</a></code> element, if
-  any. The remainder of the descendants form the group.</p><p>The <dfn id="attr-fieldset-disabled" title="attr-fieldset-disabled"><code>disabled</code></dfn>
-  attribute, when specified, causes all the form control descendants
-  of the <code><a href="#the-fieldset-element">fieldset</a></code> element, excluding those that are
-  descendants of the <code><a href="#the-fieldset-element">fieldset</a></code> element's first
-  <code><a href="#the-legend-element">legend</a></code> element child, if any, to be <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a>.</p><p>The <code title="attr-fae-form"><a href="association-of-controls-and-forms.html#attr-fae-form">form</a></code> attribute is used to
-  explicitly associate the <code><a href="#the-fieldset-element">fieldset</a></code> element with its
-  <a href="association-of-controls-and-forms.html#form-owner">form owner</a>. The <code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code>
-  attribute represents the element's name.</p><dl class="domintro"><dt><var title="">fieldset</var> . <code title="dom-fieldset-type"><a href="#dom-fieldset-type">type</a></code></dt>
-
-   <dd>
-
-    <p>Returns the string "fieldset".</p>
-
-   </dd>
-
-   <dt><var title="">fieldset</var> . <code title="dom-form-elements"><a href="#dom-form-elements">elements</a></code></dt>
-
-   <dd>
-
-    <p>Returns an <code><a href="common-dom-interfaces.html#htmlformcontrolscollection">HTMLFormControlsCollection</a></code> of the form
-    controls in the element.</p>
-
-   </dd>
-
-  </dl><div class="impl">
-
-  <p>The <dfn id="dom-fieldset-disabled" title="dom-fieldset-disabled"><code>disabled</code></dfn> IDL
-  attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the content attribute of the
-  same name.</p>
-
-  <p>The <dfn id="dom-fieldset-type" title="dom-fieldset-type"><code>type</code></dfn> IDL
-  attribute must return the string "<code title="">fieldset</code>".</p>
-
-  <p>The <dfn id="dom-fieldset-elements" title="dom-fieldset-elements"><code>elements</code></dfn> IDL
-  attribute must return an <code><a href="common-dom-interfaces.html#htmlformcontrolscollection">HTMLFormControlsCollection</a></code>
-  rooted at the <code><a href="#the-fieldset-element">fieldset</a></code> element, whose filter matches
-  <a href="#category-listed" title="category-listed">listed elements</a>.</p>
-
-  <p>The <code title="dom-cva-willValidate"><a href="association-of-controls-and-forms.html#dom-cva-willvalidate">willValidate</a></code>, <code title="dom-cva-validity"><a href="association-of-controls-and-forms.html#dom-cva-validity">validity</a></code>, and <code title="dom-cva-validationMessage"><a href="association-of-controls-and-forms.html#dom-cva-validationmessage">validationMessage</a></code>
-  attributes, and the <code title="dom-cva-checkValidatity"><a href="association-of-controls-and-forms.html#dom-cva-checkvalidatity">checkValidity()</a></code> and <code title="dom-cva-setCustomValidity"><a href="association-of-controls-and-forms.html#dom-cva-setcustomvalidity">setCustomValidity()</a></code>
-  methods, are part of the <a href="association-of-controls-and-forms.html#the-constraint-validation-api">constraint validation API</a>. The
-  <code title="dom-fae-form"><a href="association-of-controls-and-forms.html#dom-fae-form">form</a></code> and <code title="dom-fe-name"><a href="association-of-controls-and-forms.html#dom-fe-name">name</a></code> IDL attributes are part of the
-  element's forms API.</p>
-
-  <p><strong>Constraint validation</strong>: <code><a href="#the-fieldset-element">fieldset</a></code>
-  elements are always <a href="association-of-controls-and-forms.html#barred-from-constraint-validation">barred from constraint
-  validation</a>.</p>
-
-  </div><div class="example">
-
-   <p>The following snippet shows a fieldset with a checkbox in the
-   legend that controls whether or not the fieldset is enabled. The
-   contents of the fieldset consist of two required text fields and an
-   optional year/month control.</p>
-
-   <pre>&lt;fieldset name="clubfields" disabled&gt;
- &lt;legend&gt; &lt;label&gt;
-  &lt;input type=checkbox name=club onchange="form.clubfields.disabled = !checked"&gt;
-  Use Club Card
- &lt;/label&gt; &lt;/legend&gt;
- &lt;p&gt;&lt;label&gt;Name on card: &lt;input name=clubname required&gt;&lt;/label&gt;&lt;/p&gt;
- &lt;p&gt;&lt;label&gt;Card number: &lt;input name=clubnum required pattern="[-0-9]+"&gt;&lt;/label&gt;&lt;/p&gt;
- &lt;p&gt;&lt;label&gt;Expiry date: &lt;input name=clubexp type=month&gt;&lt;/label&gt;&lt;/p&gt;
-&lt;/fieldset&gt;</pre>
-
-  </div><div class="example">
-
-   <p>You can also nest <code><a href="#the-fieldset-element">fieldset</a></code> elements. Here is an
-   example expanding on the previous one that does so:</p>
-
-   <pre>&lt;fieldset name="clubfields" disabled&gt;
- &lt;legend&gt; &lt;label&gt;
-  &lt;input type=checkbox name=club onchange="form.clubfields.disabled = !checked"&gt;
-  Use Club Card
- &lt;/label&gt; &lt;/legend&gt;
- &lt;p&gt;&lt;label&gt;Name on card: &lt;input name=clubname required&gt;&lt;/label&gt;&lt;/p&gt;
- &lt;fieldset name="numfields"&gt;
-  &lt;legend&gt; &lt;label&gt;
-   &lt;input type=radio checked name=clubtype onchange="form.numfields.disabled = !checked"&gt;
-   My card has numbers on it
-  &lt;/label&gt; &lt;/legend&gt;
-  &lt;p&gt;&lt;label&gt;Card number: &lt;input name=clubnum required pattern="[-0-9]+"&gt;&lt;/label&gt;&lt;/p&gt;
- &lt;/fieldset&gt;
- &lt;fieldset name="letfields" disabled&gt;
-  &lt;legend&gt; &lt;label&gt;
-   &lt;input type=radio name=clubtype onchange="form.letfields.disabled = !checked"&gt;
-   My card has letters on it
-  &lt;/label&gt; &lt;/legend&gt;
-  &lt;p&gt;&lt;label&gt;Card code: &lt;input name=clublet required pattern="[A-Za-z]+"&gt;&lt;/label&gt;&lt;/p&gt;
- &lt;/fieldset&gt;
-&lt;/fieldset&gt;</pre>
-
-   <p>In this example, if the outer "Use Club Card" checkbox is not
-   checked, everything inside the outer <code><a href="#the-fieldset-element">fieldset</a></code>,
-   including the two radio buttons in the legends of the two nested
-   <code><a href="#the-fieldset-element">fieldset</a></code>s, will be disabled. However, if the checkbox
-   is checked, then the radio buttons will both be enabled and will
-   let you select which of the two inner <code><a href="#the-fieldset-element">fieldset</a></code>s is to
-   be enabled.</p>
-
-  </div><h4 id="the-legend-element"><span class="secno">4.10.5 </span>The <dfn><code>legend</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
-   <dd>None.</dd>
-   <dt>Contexts in which this element can be used:</dt>
-   <dd>As the first child of a <code><a href="#the-fieldset-element">fieldset</a></code> element.</dd>
-   <dt>Content model:</dt>
-   <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Content attributes:</dt>
-   <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
-   <dt>DOM interface:</dt>
-   <dd>
-    <pre class="idl">interface <dfn id="htmllegendelement">HTMLLegendElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
-  readonly attribute <a href="#htmlformelement">HTMLFormElement</a>? <a href="#dom-legend-form" title="dom-legend-form">form</a>;
-};</pre>
-   </dd>
-  </dl><p>The <code><a href="#the-legend-element">legend</a></code> element <a href="rendering.html#represents">represents</a> a caption
-  for the rest of the contents of the <code><a href="#the-legend-element">legend</a></code> element's
-  parent <code><a href="#the-fieldset-element">fieldset</a></code> element<span class="impl">, if
-  any</span>.</p><dl class="domintro"><dt><var title="">legend</var> . <code title="dom-legend-form"><a href="#dom-legend-form">form</a></code></dt>
-
-   <dd>
-
-    <p>Returns the element's <code><a href="#the-form-element">form</a></code> element, if any, or
-    null otherwise.</p>
-
-   </dd>
-
-  </dl><div class="impl">
-
-  <p>The <dfn id="dom-legend-form" title="dom-legend-form"><code>form</code></dfn> IDL
-  attribute's behavior depends on whether the <code><a href="#the-legend-element">legend</a></code>
-  element is in a <code><a href="#the-fieldset-element">fieldset</a></code> element or not. If the
-  <code><a href="#the-legend-element">legend</a></code> has a <code><a href="#the-fieldset-element">fieldset</a></code> element as its
-  parent, then the <code title="dom-legend-form"><a href="#dom-legend-form">form</a></code> IDL
-  attribute must return the same value as the <code title="dom-fae-form"><a href="association-of-controls-and-forms.html#dom-fae-form">form</a></code> IDL attribute on that
-  <code><a href="#the-fieldset-element">fieldset</a></code> element. Otherwise, it must return null.</p>
-
-  </div><h4 id="the-label-element"><span class="secno">4.10.6 </span>The <dfn><code>label</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
-   <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
-   <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dd><a href="content-models.html#interactive-content">Interactive content</a>.</dd>
-   <dd><a href="#form-associated-element">Form-associated element</a>.</dd>
-   <dt>Contexts in which this element can be used:</dt>
-   <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
-   <dt>Content model:</dt>
-   <dd><a href="content-models.html#phrasing-content">Phrasing content</a>, but with no descendant <a href="#category-label" title="category-label">labelable elements</a> unless it is the element's <a href="#labeled-control">labeled control</a>, and no descendant <code><a href="#the-label-element">label</a></code> elements.</dd>
-   <dt>Content attributes:</dt>
-   <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
-   <dd><code title="attr-fae-form"><a href="association-of-controls-and-forms.html#attr-fae-form">form</a></code></dd>
-   <dd><code title="attr-label-for"><a href="#attr-label-for">for</a></code></dd>
-   <dt>DOM interface:</dt>
-   <dd>
-<pre class="idl">interface <dfn id="htmllabelelement">HTMLLabelElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
-  readonly attribute <a href="#htmlformelement">HTMLFormElement</a>? <a href="association-of-controls-and-forms.html#dom-fae-form" title="dom-fae-form">form</a>;
-           attribute DOMString <a href="#dom-label-htmlfor" title="dom-label-htmlFor">htmlFor</a>;
-  readonly attribute <a href="elements.html#htmlelement">HTMLElement</a>? <a href="#dom-label-control" title="dom-label-control">control</a>;
-};</pre>
-   </dd>
-  </dl><p>The <code><a href="#the-label-element">label</a></code> <a href="rendering.html#represents">represents</a> a caption in a
-  user interface. The caption can be associated with a specific form
-  control<span class="impl">, known as the <code><a href="#the-label-element">label</a></code>
-  element's <dfn id="labeled-control">labeled control</dfn></span>, either using <code title="attr-label-for"><a href="#attr-label-for">for</a></code> attribute, or by putting the form
-  control inside the <code><a href="#the-label-element">label</a></code> element itself.</p><div class="impl">
-
-  <p>Except where otherwise specified by the following rules, a
-  <code><a href="#the-label-element">label</a></code> element has no <a href="#labeled-control">labeled control</a>.</p>
-
-  </div><p>The <dfn id="attr-label-for" title="attr-label-for"><code>for</code></dfn> attribute
-  may be specified to indicate a form control with which the caption
-  is to be associated. If the attribute is specified, the attribute's
-  value must be the <a href="elements.html#concept-id" title="concept-id">ID</a> of a <a href="#category-label" title="category-label">labelable element</a> in the same
-  <code><a href="infrastructure.html#document">Document</a></code> as the <code><a href="#the-label-element">label</a></code> element. <span class="impl">If the attribute is specified and there is an element
-  in the <code><a href="infrastructure.html#document">Document</a></code> whose <a href="elements.html#concept-id" title="concept-id">ID</a> is equal to the value of the <code title="attr-label-for"><a href="#attr-label-for">for</a></code> attribute, and the first such
-  element is a <a href="#category-label" title="category-label">labelable element</a>,
-  then that element is the <code><a href="#the-label-element">label</a></code> element's <a href="#labeled-control">labeled
-  control</a>.</span></p><div class="impl">
-
-  <p>If the <code title="attr-label-for"><a href="#attr-label-for">for</a></code> attribute is not
-  specified, but the <code><a href="#the-label-element">label</a></code> element has a <a href="#category-label" title="category-label">labelable element</a> descendant, then the
-  first such descendant in <a href="infrastructure.html#tree-order">tree order</a> is the
-  <code><a href="#the-label-element">label</a></code> element's <a href="#labeled-control">labeled control</a>.</p>
-
-  <p>The <code><a href="#the-label-element">label</a></code> element's exact default presentation and
-  behavior, in particular what its <a href="content-models.html#activation-behavior">activation behavior</a>
-  might be, if anything, should match the platform's label behavior.
-  The <a href="content-models.html#activation-behavior">activation behavior</a> of a <code><a href="#the-label-element">label</a></code> element
-  for events targetted at <a href="content-models.html#interactive-content">interactive content</a> descendants
-  of a <code><a href="#the-label-element">label</a></code> element, and any descendants of those
-  <a href="content-models.html#interactive-content">interactive content</a> descendants, must be to do
-  nothing.</p>
-
-  
-  <div class="example">
-
-   <p>For example, on platforms where clicking a checkbox label checks
-   the checkbox, clicking the <code><a href="#the-label-element">label</a></code> in the following
-   snippet could trigger the user agent to <a href="content-models.html#run-synthetic-click-activation-steps">run synthetic click
-   activation steps</a> on the <code><a href="the-input-element.html#the-input-element">input</a></code> element, as if
-   the element itself had been triggered by the user:</p>
-
-   <pre>&lt;label&gt;&lt;input type=checkbox name=lost&gt; Lost&lt;/label&gt;</pre>
-
-   <p>On other platforms, the behavior might be just to focus the
-   control, or do nothing.</p>
-
-  </div>
-
-  </div><dl class="domintro"><dt><var title="">label</var> . <code title="dom-label-control"><a href="#dom-label-control">control</a></code></dt>
-
-   <dd>
-
-    <p>Returns the form control that is associated with this element.</p>
-
-   </dd>
-
-  </dl><p>The <code title="attr-fae-form"><a href="association-of-controls-and-forms.html#attr-fae-form">form</a></code> attribute is used to
-  explicitly associate the <code><a href="#the-label-element">label</a></code> element with its
-  <a href="association-of-controls-and-forms.html#form-owner">form owner</a>.</p><div class="impl">
-
-  <p>The <dfn id="dom-label-htmlfor" title="dom-label-htmlFor"><code>htmlFor</code></dfn> IDL
-  attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-label-for"><a href="#attr-label-for">for</a></code> content attribute.</p>
-
-  <p>The <dfn id="dom-label-control" title="dom-label-control"><code>control</code></dfn> IDL
-  attribute must return the <code><a href="#the-label-element">label</a></code> element's <a href="#labeled-control">labeled
-  control</a>, if any, or null if there isn't one.</p>
-
-  </div><hr/><dl class="domintro"><dt><var title="">control</var> . <code title="dom-lfe-labels"><a href="#dom-lfe-labels">labels</a></code></dt>
-
-   <dd>
-
-    <p>Returns a <code><a href="infrastructure.html#nodelist">NodeList</a></code> of all the <code><a href="#the-label-element">label</a></code>
-    elements that the form control is associated with.</p>
-
-   </dd>
-
-  </dl><div class="impl">
-
-  <p><a href="#category-label" title="category-label">Labelable elements</a> have a
-  <code><a href="infrastructure.html#nodelist">NodeList</a></code> object associated with them that represents
-  the list of <code><a href="#the-label-element">label</a></code> elements, in <a href="infrastructure.html#tree-order">tree order</a>,
-  whose <a href="#labeled-control">labeled control</a> is the element in question. The
-  <dfn id="dom-lfe-labels" title="dom-lfe-labels"><code>labels</code></dfn> IDL attribute
-  of <a href="#category-label" title="category-label">labelable elements</a>, on
-  getting, must return that <code><a href="infrastructure.html#nodelist">NodeList</a></code> object.</p>
-
-  <p>The <code title="dom-fae-form"><a href="association-of-controls-and-forms.html#dom-fae-form">form</a></code> IDL attribute is part
-  of the element's forms API.</p>
-
-  </div><div class="example">
-
-   <p>The following example shows three form controls each with a
-   label, two of which have small text showing the right format for
-   users to use.</p>
-
-   <pre>&lt;p&gt;&lt;label&gt;Full name: &lt;input name=fn&gt; &lt;small&gt;Format: First Last&lt;/small&gt;&lt;/label&gt;&lt;/p&gt;
-&lt;p&gt;&lt;label&gt;Age: &lt;input name=age type=number min=0&gt;&lt;/label&gt;&lt;/p&gt;
-&lt;p&gt;&lt;label&gt;Post code: &lt;input name=pc&gt; &lt;small&gt;Format: AB12 3CD&lt;/small&gt;&lt;/label&gt;&lt;/p&gt;</pre>
-
-  </div></body></html>
+   <li><code><a href="the-input-element.html#the-input-element">input</a></code> (if the <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is <em>not</em> in the <a href="states-of-the-type-attribute.html#hidden-state-type-hidden" title="attr-input-type-hidden">Hidden</a> state)</li>
+   <li><code><a href="the-keygen-element.html#the-keygen-element">keygen</a></code></li>
+   <li><code><a href="the-meter-element.html#the-meter-element">meter</a></code></li>
+   <li><code><a href="the-output-element.html#the-output-element">output</a></code></li>
+   <li><code><a href="the-progress-element.html#the-progress-element">progress</a></code></li>
+   <li><code><a href="the-select-element.html#the-select-element">select</a></code></li>
+   <li><code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code></li>
+  </ul></body></html>

@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>11 Obsolete features &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<!DOCTYPE html>
+<html lang="en-US-x-Hixie"><head><title>11 Obsolete features &#x2014; HTML5</title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -19,6 +19,7 @@
    dd table + p { margin-top: 1em; }
    p + * > li, dd li { margin: 1em 0; }
    dt, dfn { font-weight: bold; font-style: normal; }
+   i, em { font-style: italic; }
    dt dfn { font-style: italic; }
    pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
    pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
@@ -40,9 +41,10 @@
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
 
    .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   img.extra { float: right; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   img.extra, p.overview { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; position: relative; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl::before { content: "IDL"; font: bold small sans-serif; padding: 0.5em; background: white; position: absolute; top: 0; margin: -1px 0 0 -4em; width: 1.5em; border: thin solid; border-radius: 0 0 0 0.5em }
    pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
    pre.css:first-line { color: #AAAA50; }
    dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
@@ -50,6 +52,7 @@
    dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
    dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
    dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
    dl.switch { padding-left: 2em; }
    dl.switch > dt { text-indent: -1.5em; }
    dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
@@ -104,6 +107,7 @@
    .note { color: green; background: transparent; font-family: sans-serif; }
    .warning { color: red; background: transparent; }
    .note, .warning { font-weight: bolder; font-style: italic; }
+   .note em, .warning em, .note i, .warning i { font-style: normal; }
    p.note, div.note { padding: 0.5em 2em; }
    span.note { padding: 0 2em; }
    .note p:first-child, .warning p:first-child { margin-top: 0; }
@@ -295,8 +299,6 @@
      src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
    }
 
-  ]]></style><style type="text/css"><![CDATA[
-   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
   ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
    function getCookie(name) {
      var params = location.search.substr(1).split("&");
@@ -315,41 +317,50 @@
      }
      return null;
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="rendering.html" title="10 Rendering" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="iana.html" title="12 IANA considerations" rel="next"/></head><body><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="rendering.html" title="10 Rendering" rel="prev"/><link href="index.html#contents" title="Table of contents" rel="contents"/><link href="iana.html" title="12 IANA considerations" rel="next"/></head><body onload="fixBrokenLink();" class="split chapter"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   </div><div>
-   <a href="rendering.html" class="prev">10 Rendering</a> &#x2013;
-   <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="iana.html" class="next">12 IANA considerations</a>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
+
+   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   </div><nav class="prev_next"><a href="rendering.html">&#x2190; 10 Rendering</a> &#x2013;
+   <a href="index.html#contents">Table of contents</a> &#x2013;
+   <a href="iana.html">12 IANA considerations &#x2192;</a>
   <ol class="toc"><li><a href="obsolete.html#obsolete"><span class="secno">11 </span>Obsolete features</a>
   <ol><li><a href="obsolete.html#obsolete-but-conforming-features"><span class="secno">11.1 </span>Obsolete but conforming features</a>
     <ol><li><a href="obsolete.html#warnings-for-obsolete-but-conforming-features"><span class="secno">11.1.1 </span>Warnings for obsolete but conforming features</a></li></ol></li><li><a href="obsolete.html#non-conforming-features"><span class="secno">11.2 </span>Non-conforming features</a></li><li><a href="obsolete.html#requirements-for-implementations"><span class="secno">11.3 </span>Requirements for implementations</a>
-    <ol><li><a href="obsolete.html#the-applet-element"><span class="secno">11.3.1 </span>The <code>applet</code> element</a></li><li><a href="obsolete.html#the-marquee-element"><span class="secno">11.3.2 </span>The <code>marquee</code> element</a></li><li><a href="obsolete.html#frames"><span class="secno">11.3.3 </span>Frames</a></li><li><a href="obsolete.html#other-elements-attributes-and-apis"><span class="secno">11.3.4 </span>Other elements, attributes and APIs</a></li></ol></li></ol></li></ol></div><h2 id="obsolete"><span class="secno">11 </span>Obsolete features</h2><h3 id="obsolete-but-conforming-features"><span class="secno">11.1 </span>Obsolete but conforming features</h3><p>Features listed in this section will trigger warnings in
+    <ol><li><a href="obsolete.html#the-applet-element"><span class="secno">11.3.1 </span>The <code>applet</code> element</a></li><li><a href="obsolete.html#the-marquee-element"><span class="secno">11.3.2 </span>The <code>marquee</code> element</a></li><li><a href="obsolete.html#frames"><span class="secno">11.3.3 </span>Frames</a></li><li><a href="obsolete.html#other-elements-attributes-and-apis"><span class="secno">11.3.4 </span>Other elements, attributes and APIs</a></li></ol></li></ol></li></ol></nav><h2 id="obsolete"><span class="secno">11 </span>Obsolete features</h2><h3 id="obsolete-but-conforming-features"><span class="secno">11.1 </span>Obsolete but conforming features</h3><p>Features listed in this section will trigger warnings in
   conformance checkers.</p><p>Authors should not specify a <code title="attr-img-border"><a href="#attr-img-border">border</a></code> attribute on an
-  <code><a href="embedded-content-1.html#the-img-element">img</a></code> element. If the attribute is present, its value
+  <code><a href="the-img-element.html#the-img-element">img</a></code> element. If the attribute is present, its value
   must be the string "<code title="">0</code>". CSS should be used
   instead.</p><p>Authors should not specify a <code title="attr-script-language"><a href="#attr-script-language">language</a></code> attribute on a
-  <code><a href="scripting-1.html#the-script-element">script</a></code> element. If the attribute is present, its value
+  <code><a href="the-script-element.html#the-script-element">script</a></code> element. If the attribute is present, its value
   must be an <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for the string
-  "<code title="">JavaScript</code>" and either the <code title="attr-script-type"><a href="scripting-1.html#attr-script-type">type</a></code> attribute must be omitted or
+  "<code title="">JavaScript</code>" and either the <code title="attr-script-type"><a href="the-script-element.html#attr-script-type">type</a></code> attribute must be omitted or
   its value must be an <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for
   the string "<code title="">text/javascript</code>". The attribute
   should be entirely omitted instead (with the value "<code title="">JavaScript</code>", it has no effect), or replaced with use
-  of the <code title="attr-script-type"><a href="scripting-1.html#attr-script-type">type</a></code> attribute.</p><p>Authors should not specify the <code title="attr-a-name"><a href="#attr-a-name">name</a></code> attribute on <code><a href="text-level-semantics.html#the-a-element">a</a></code>
+  of the <code title="attr-script-type"><a href="the-script-element.html#attr-script-type">type</a></code> attribute.</p><p>Authors should not specify the <code title="attr-a-name"><a href="#attr-a-name">name</a></code> attribute on <code><a href="the-a-element.html#the-a-element">a</a></code>
   elements. If the attribute is present, its value must not be the
   empty string and must neither be equal to the value of any of the
-  <a href="elements.html#concept-id" title="concept-id">IDs</a> in the element's <a href="infrastructure.html#home-subtree">home
-  subtree</a> other than the element's own <a href="elements.html#concept-id" title="concept-id">ID</a>, if any, nor be equal to the value of
+  <a href="infrastructure.html#concept-id" title="concept-id">IDs</a> in the element's <a href="infrastructure.html#home-subtree">home
+  subtree</a> other than the element's own <a href="infrastructure.html#concept-id" title="concept-id">ID</a>, if any, nor be equal to the value of
   any of the other <code title="attr-a-name"><a href="#attr-a-name">name</a></code> attributes on
-  <code><a href="text-level-semantics.html#the-a-element">a</a></code> elements in the element's <a href="infrastructure.html#home-subtree">home
+  <code><a href="the-a-element.html#the-a-element">a</a></code> elements in the element's <a href="infrastructure.html#home-subtree">home
   subtree</a>. If this attribute is present and the element has an
-  <a href="elements.html#concept-id" title="concept-id">ID</a>, then the attribute's value must
-  be equal to the element's <a href="elements.html#concept-id" title="concept-id">ID</a>. In
+  <a href="infrastructure.html#concept-id" title="concept-id">ID</a>, then the attribute's value must
+  be equal to the element's <a href="infrastructure.html#concept-id" title="concept-id">ID</a>. In
   earlier versions of the language, this attribute was intended as a
-  way to specify possible targets for fragment identifiers in <a href="urls.html#url" title="URL">URLs</a>. The <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code>
-  attribute should be used instead.</p><p class="note">In <a href="syntax.html#syntax">the HTML syntax</a>, specifying a <a href="syntax.html#syntax-doctype" title="syntax-DOCTYPE">DOCTYPE</a> that is an <a href="syntax.html#obsolete-permitted-doctype">obsolete
+  way to specify possible targets for fragment identifiers in <a href="urls.html#url" title="URL">URLs</a>. The <code title="attr-id"><a href="global-attributes.html#the-id-attribute">id</a></code>
+  attribute should be used instead.</p><p>Authors should not, but may despite requirements to the contrary
+  elsewhere in this specification, specify the <code title="attr-input-maxlength"><a href="common-input-element-attributes.html#attr-input-maxlength">maxlength</a></code> and <code title="attr-input-size"><a href="common-input-element-attributes.html#attr-input-size">size</a></code> attributes on <code><a href="the-input-element.html#the-input-element">input</a></code>
+  elements whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attributes
+  are in the <a href="states-of-the-type-attribute.html#number-state-type-number" title="attr-input-type-number">Number</a> state.
+  One valid reason for using these attributes regardless is to help
+  legacy user agents that do not support <code><a href="the-input-element.html#the-input-element">input</a></code> elements
+  with <code title="">type="number"</code> to still render the text
+  field with a useful width.</p><p class="note">In <a href="syntax.html#syntax">the HTML syntax</a>, specifying a <a href="syntax.html#syntax-doctype" title="syntax-DOCTYPE">DOCTYPE</a> that is an <a href="syntax.html#obsolete-permitted-doctype">obsolete
   permitted DOCTYPE</a> will also trigger a warning.</p><div class="impl">
 
   <h4 id="warnings-for-obsolete-but-conforming-features"><span class="secno">11.1.1 </span>Warnings for obsolete but conforming features</h4>
@@ -368,20 +379,26 @@
   above:</p>
 
   <ul><li><p>The presence of an <a href="syntax.html#obsolete-permitted-doctype">obsolete permitted DOCTYPE</a>
-   in an <a href="dom.html#html-documents" title="HTML documents">HTML document</a>.</p></li>
+   in an <a href="infrastructure.html#html-documents" title="HTML documents">HTML document</a>.</p></li>
 
    <li><p>The presence of a <code title="attr-img-border"><a href="#attr-img-border">border</a></code> attribute on an
-   <code><a href="embedded-content-1.html#the-img-element">img</a></code> element if its value is the string "<code title="">0</code>".</p></li>
+   <code><a href="the-img-element.html#the-img-element">img</a></code> element if its value is the string "<code title="">0</code>".</p></li>
 
    <li><p>The presence of a <code title="attr-script-language"><a href="#attr-script-language">language</a></code> attribute on a
-   <code><a href="scripting-1.html#the-script-element">script</a></code> element if its value is an <a href="infrastructure.html#ascii-case-insensitive">ASCII
-   case-insensitive</a> match for the string "<code title="">JavaScript</code>" and if there is no <code title="attr-script-type"><a href="scripting-1.html#attr-script-type">type</a></code> attribute or there is and its
+   <code><a href="the-script-element.html#the-script-element">script</a></code> element if its value is an <a href="infrastructure.html#ascii-case-insensitive">ASCII
+   case-insensitive</a> match for the string "<code title="">JavaScript</code>" and if there is no <code title="attr-script-type"><a href="the-script-element.html#attr-script-type">type</a></code> attribute or there is and its
    value is an <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for the
    string "<code title="">text/javascript</code>".</p></li>
 
    <li><p>The presence of a <code title="attr-a-name"><a href="#attr-a-name">name</a></code>
-   attribute on an <code><a href="text-level-semantics.html#the-a-element">a</a></code> element, if its value is not the
+   attribute on an <code><a href="the-a-element.html#the-a-element">a</a></code> element, if its value is not the
    empty string.</p></li>
+
+   <li><p>The presence of a <code title="attr-input-maxlength"><a href="common-input-element-attributes.html#attr-input-maxlength">maxlength</a></code> attribute on an
+   <code><a href="the-input-element.html#the-input-element">input</a></code> element whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="states-of-the-type-attribute.html#number-state-type-number" title="attr-input-type-number">Number</a> state.</p></li>
+
+   <li><p>The presence of a <code title="attr-input-size"><a href="common-input-element-attributes.html#attr-input-size">size</a></code> attribute on an
+   <code><a href="the-input-element.html#the-input-element">input</a></code> element whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="states-of-the-type-attribute.html#number-state-type-number" title="attr-input-type-number">Number</a> state.</p></li>
 
   </ul><p>Conformance checkers must distinguish between pages that have no
   conformance errors and have none of these obsolete features, and
@@ -393,16 +410,16 @@
 
   </div><h3 id="non-conforming-features"><span class="secno">11.2 </span>Non-conforming features</h3><p>Elements in the following list are entirely obsolete, and must
   not be used by authors:</p><dl><dt><code><a href="#the-applet-element">applet</a></code></dt>
-   <dd><p>Use <code><a href="the-iframe-element.html#the-embed-element">embed</a></code> or <code><a href="the-iframe-element.html#the-object-element">object</a></code> instead.</p></dd>
+   <dd><p>Use <code><a href="the-embed-element.html#the-embed-element">embed</a></code> or <code><a href="the-object-element.html#the-object-element">object</a></code> instead.</p></dd>
 
    <dt><dfn id="acronym"><code>acronym</code></dfn></dt>
-   <dd><p>Use <code><a href="text-level-semantics.html#the-abbr-element">abbr</a></code> instead.</p></dd>
+   <dd><p>Use <code><a href="the-abbr-element.html#the-abbr-element">abbr</a></code> instead.</p></dd>
 
    <dt><dfn id="bgsound"><code>bgsound</code></dfn></dt>
-   <dd><p>Use <code><a href="the-iframe-element.html#the-audio-element">audio</a></code> instead.</p></dd>
+   <dd><p>Use <code><a href="the-audio-element.html#the-audio-element">audio</a></code> instead.</p></dd>
 
    <dt><dfn id="dir"><code>dir</code></dfn></dt>
-   <dd><p>Use <code><a href="grouping-content.html#the-ul-element">ul</a></code> instead.</p></dd>
+   <dd><p>Use <code><a href="the-ul-element.html#the-ul-element">ul</a></code> instead.</p></dd>
 
    <dt><code><a href="#frame">frame</a></code></dt>
    <dt><code><a href="#frameset">frameset</a></code></dt>
@@ -410,28 +427,28 @@
    <dd><p>Either use <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> and CSS instead, or use server-side includes to generate complete pages with the various invariant parts merged in.</p></dd>
 
    <dt><dfn id="isindex-0"><code>isindex</code></dfn></dt>
-   <dd><p>Use an explicit <code><a href="forms.html#the-form-element">form</a></code> and <a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-text">text field</a> combination instead.</p></dd>
+   <dd><p>Use an explicit <code><a href="the-form-element.html#the-form-element">form</a></code> and <a href="states-of-the-type-attribute.html#text-type-text-state-and-search-state-type-search" title="attr-input-type-text">text field</a> combination instead.</p></dd>
 
    <dt><dfn id="listing"><code>listing</code></dfn></dt>
-   <dd><p>Use <code><a href="grouping-content.html#the-pre-element">pre</a></code> and <code><a href="text-level-semantics.html#the-code-element">code</a></code> instead.</p></dd>
+   <dd><p>Use <code><a href="the-pre-element.html#the-pre-element">pre</a></code> and <code><a href="the-code-element.html#the-code-element">code</a></code> instead.</p></dd>
 
    <dt><dfn id="nextid"><code>nextid</code></dfn></dt>
    <dd><p>Use GUIDs instead.</p></dd>
 
    <dt><dfn id="noembed"><code>noembed</code></dfn></dt>
-   <dd><p>Use <code><a href="the-iframe-element.html#the-object-element">object</a></code> instead of <code><a href="the-iframe-element.html#the-embed-element">embed</a></code> when fallback is necessary.</p></dd>
+   <dd><p>Use <code><a href="the-object-element.html#the-object-element">object</a></code> instead of <code><a href="the-embed-element.html#the-embed-element">embed</a></code> when fallback is necessary.</p></dd>
 
    <dt><dfn id="plaintext"><code>plaintext</code></dfn></dt>
    <dd><p>Use the "<code>text/plain</code>" <a href="infrastructure.html#mime-type">MIME type</a> instead.</p></dd>
 
    <dt><dfn id="rb"><code>rb</code></dfn></dt>
-   <dd><p>Providing the ruby base directly inside the <code><a href="text-level-semantics.html#the-ruby-element">ruby</a></code> element is sufficient; the <code><a href="#rb">rb</a></code> element is unnecessary. Omit it altogether.</p></dd>
+   <dd><p>Providing the ruby base directly inside the <code><a href="the-ruby-element.html#the-ruby-element">ruby</a></code> element is sufficient; the <code><a href="#rb">rb</a></code> element is unnecessary. Omit it altogether.</p></dd>
 
    <dt><dfn id="strike"><code>strike</code></dfn></dt>
-   <dd><p>Use <code><a href="edits.html#the-del-element">del</a></code> instead if the element is marking an edit, otherwise use <code><a href="text-level-semantics.html#the-s-element">s</a></code> instead.</p></dd>
+   <dd><p>Use <code><a href="the-del-element.html#the-del-element">del</a></code> instead if the element is marking an edit, otherwise use <code><a href="the-s-element.html#the-s-element">s</a></code> instead.</p></dd>
 
    <dt><dfn id="xmp"><code>xmp</code></dfn></dt>
-   <dd><p>Use <code><a href="text-level-semantics.html#the-code-element">code</a></code> instead, and escape "<code title="">&lt;</code>" and "<code title="">&amp;</code>" characters as "<code title="">&amp;lt;</code>" and "<code title="">&amp;amp;</code>" respectively.</p></dd>
+   <dd><p>Use <code><a href="the-pre-element.html#the-pre-element">pre</a></code> and <code><a href="the-code-element.html#the-code-element">code</a></code> instead, and escape "<code title="">&lt;</code>" and "<code title="">&amp;</code>" characters as "<code title="">&amp;lt;</code>" and "<code title="">&amp;amp;</code>" respectively.</p></dd>
 
    <dt><dfn id="basefont"><code>basefont</code></dfn></dt>
    <dt><dfn id="big"><code>big</code></dfn></dt>
@@ -449,161 +466,167 @@
     <p>Use appropriate elements and/or CSS instead.</p>
 
     <p>Where the <code><a href="#tt">tt</a></code> element would have been used for
-    marking up keyboard input, consider the <code><a href="text-level-semantics.html#the-kbd-element">kbd</a></code> element;
-    for variables, consider the <code><a href="text-level-semantics.html#the-var-element">var</a></code> element; for computer
-    code, consider the <code><a href="text-level-semantics.html#the-code-element">code</a></code> element; and for computer
-    output, consider the <code><a href="text-level-semantics.html#the-samp-element">samp</a></code> element.</p>
+    marking up keyboard input, consider the <code><a href="the-kbd-element.html#the-kbd-element">kbd</a></code> element;
+    for variables, consider the <code><a href="the-var-element.html#the-var-element">var</a></code> element; for computer
+    code, consider the <code><a href="the-code-element.html#the-code-element">code</a></code> element; and for computer
+    output, consider the <code><a href="the-samp-element.html#the-samp-element">samp</a></code> element.</p>
 
     <p>Similarly, if the <code><a href="#big">big</a></code> element is being used to
-    denote a heading, consider using the <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code> element; if
+    denote a heading, consider using the <code><a href="the-h1-h2-h3-h4-h5-and-h6-elements.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code> element; if
     it is being used for marking up important passages, consider the
-    <code><a href="text-level-semantics.html#the-strong-element">strong</a></code> element; and if it is being used for
+    <code><a href="the-strong-element.html#the-strong-element">strong</a></code> element; and if it is being used for
     highlighting text for reference purposes, consider the
-    <code><a href="text-level-semantics.html#the-mark-element">mark</a></code> element.</p>
+    <code><a href="the-mark-element.html#the-mark-element">mark</a></code> element.</p>
 
-    <p>See also the <a href="text-level-semantics.html#usage-summary">text-level semantics
+    <p>See also the <a href="usage-summary.html#usage-summary">text-level semantics
     usage summary</a> for more suggestions with examples.</p>
 
    </dd>
 
   </dl><hr/><p>The following attributes are obsolete (though the elements are
-  still part of the language), and must not be used by authors:</p><dl><dt><dfn id="attr-a-charset" title="attr-a-charset"><code>charset</code></dfn> on <code><a href="text-level-semantics.html#the-a-element">a</a></code> elements</dt>
-   <dt><dfn id="attr-link-charset" title="attr-link-charset"><code>charset</code></dfn> on <code><a href="semantics.html#the-link-element">link</a></code> elements</dt>
+  still part of the language), and must not be used by authors:</p><dl><dt><dfn id="attr-a-charset" title="attr-a-charset"><code>charset</code></dfn> on <code><a href="the-a-element.html#the-a-element">a</a></code> elements</dt>
+   <dt><dfn id="attr-link-charset" title="attr-link-charset"><code>charset</code></dfn> on <code><a href="the-link-element.html#the-link-element">link</a></code> elements</dt>
    <dd><p>Use an HTTP Content-Type header on the linked resource instead.</p></dd>
 
-   <dt><dfn id="attr-a-coords" title="attr-a-coords"><code>coords</code></dfn> on <code><a href="text-level-semantics.html#the-a-element">a</a></code> elements</dt>
-   <dt><dfn id="attr-a-shape" title="attr-a-shape"><code>shape</code></dfn> on <code><a href="text-level-semantics.html#the-a-element">a</a></code> elements</dt>
-   <dd><p>Use <code><a href="the-map-element.html#the-area-element">area</a></code> instead of <code><a href="text-level-semantics.html#the-a-element">a</a></code> for image maps.</p></dd>
+   <dt><dfn id="attr-a-coords" title="attr-a-coords"><code>coords</code></dfn> on <code><a href="the-a-element.html#the-a-element">a</a></code> elements</dt>
+   <dt><dfn id="attr-a-shape" title="attr-a-shape"><code>shape</code></dfn> on <code><a href="the-a-element.html#the-a-element">a</a></code> elements</dt>
+   <dd><p>Use <code><a href="the-area-element.html#the-area-element">area</a></code> instead of <code><a href="the-a-element.html#the-a-element">a</a></code> for image maps.</p></dd>
 
-   <dt><dfn id="attr-a-methods" title="attr-a-methods"><code>methods</code></dfn> on <code><a href="text-level-semantics.html#the-a-element">a</a></code> elements</dt>
-   <dt><dfn id="attr-link-methods" title="attr-link-methods"><code>methods</code></dfn> on <code><a href="semantics.html#the-link-element">link</a></code> elements</dt>
+   <dt><dfn id="attr-a-methods" title="attr-a-methods"><code>methods</code></dfn> on <code><a href="the-a-element.html#the-a-element">a</a></code> elements</dt>
+   <dt><dfn id="attr-link-methods" title="attr-link-methods"><code>methods</code></dfn> on <code><a href="the-link-element.html#the-link-element">link</a></code> elements</dt>
    <dd><p>Use the HTTP OPTIONS feature instead.</p></dd>
 
-   <dt><dfn id="attr-a-name" title="attr-a-name"><code>name</code></dfn> on <code><a href="text-level-semantics.html#the-a-element">a</a></code> elements (except as noted in the previous section)</dt>
-   <dt><dfn id="attr-embed-name" title="attr-embed-name"><code>name</code></dfn> on <code><a href="the-iframe-element.html#the-embed-element">embed</a></code> elements</dt>
-   <dt><dfn id="attr-img-name" title="attr-img-name"><code>name</code></dfn> on <code><a href="embedded-content-1.html#the-img-element">img</a></code> elements</dt>
-   <dt><dfn id="attr-option-name" title="attr-option-name"><code>name</code></dfn> on <code><a href="the-button-element.html#the-option-element">option</a></code> elements</dt>
-   <dd><p>Use the <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> attribute instead.</p></dd>
+   <dt><dfn id="attr-a-name" title="attr-a-name"><code>name</code></dfn> on <code><a href="the-a-element.html#the-a-element">a</a></code> elements (except as noted in the previous section)</dt>
+   <dt><dfn id="attr-embed-name" title="attr-embed-name"><code>name</code></dfn> on <code><a href="the-embed-element.html#the-embed-element">embed</a></code> elements</dt>
+   <dt><dfn id="attr-img-name" title="attr-img-name"><code>name</code></dfn> on <code><a href="the-img-element.html#the-img-element">img</a></code> elements</dt>
+   <dt><dfn id="attr-option-name" title="attr-option-name"><code>name</code></dfn> on <code><a href="the-option-element.html#the-option-element">option</a></code> elements</dt>
+   <dd><p>Use the <code title="attr-id"><a href="global-attributes.html#the-id-attribute">id</a></code> attribute instead.</p></dd>
 
-   <dt><dfn id="attr-a-rev" title="attr-a-rev"><code>rev</code></dfn> on <code><a href="text-level-semantics.html#the-a-element">a</a></code> elements</dt>
-   <dt><dfn id="attr-link-rev" title="attr-link-rev"><code>rev</code></dfn> on <code><a href="semantics.html#the-link-element">link</a></code> elements</dt>
+   <dt><dfn id="attr-a-rev" title="attr-a-rev"><code>rev</code></dfn> on <code><a href="the-a-element.html#the-a-element">a</a></code> elements</dt>
+   <dt><dfn id="attr-link-rev" title="attr-link-rev"><code>rev</code></dfn> on <code><a href="the-link-element.html#the-link-element">link</a></code> elements</dt>
    <dd><p>Use the <code title="attr-hyperlink-rel"><a href="links.html#attr-hyperlink-rel">rel</a></code>
    attribute instead, with an opposite term. (For example, instead of
    <code title="">rev="made"</code>, use <code title="">rel="author"</code>.)</p></dd>
 
-   <dt><dfn id="attr-a-urn" title="attr-a-urn"><code>urn</code></dfn> on <code><a href="text-level-semantics.html#the-a-element">a</a></code> elements</dt>
-   <dt><dfn id="attr-link-urn" title="attr-link-urn"><code>urn</code></dfn> on <code><a href="semantics.html#the-link-element">link</a></code> elements</dt>
+   <dt><dfn id="attr-a-urn" title="attr-a-urn"><code>urn</code></dfn> on <code><a href="the-a-element.html#the-a-element">a</a></code> elements</dt>
+   <dt><dfn id="attr-link-urn" title="attr-link-urn"><code>urn</code></dfn> on <code><a href="the-link-element.html#the-link-element">link</a></code> elements</dt>
    <dd><p>Specify the preferred persistent identifier using the <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code> attribute instead.</p></dd>
 
-   <dt><dfn id="attr-area-nohref" title="attr-area-nohref"><code>nohref</code></dfn> on <code><a href="the-map-element.html#the-area-element">area</a></code> elements</dt>
+   <dt><dfn id="attr-form-accept" title="attr-form-accept"><code>accept</code></dfn> on <code><a href="the-form-element.html#the-form-element">form</a></code> elements</dt>
+   <dd><p>Use the <code title="attr-input-accept"><a href="states-of-the-type-attribute.html#attr-input-accept">accept</a></code> attribute directly on the <code><a href="the-input-element.html#the-input-element">input</a></code> elements instead.</p></dd>
+
+   <dt><dfn id="attr-area-nohref" title="attr-area-nohref"><code>nohref</code></dfn> on <code><a href="the-area-element.html#the-area-element">area</a></code> elements</dt>
    <dd><p>Omitting the <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code>
    attribute is sufficient; the <code title="attr-area-nohref"><a href="#attr-area-nohref">nohref</a></code> attribute is
    unnecessary. Omit it altogether.</p></dd>
 
-   <dt><dfn id="attr-head-profile" title="attr-head-profile"><code>profile</code></dfn> on <code><a href="semantics.html#the-head-element">head</a></code> elements</dt>
-   <dd><p>When used for declaring which <code><a href="semantics.html#the-meta-element">meta</a></code> terms are
-   used in the document, unnecessary; omit it altogether, and <a href="semantics.html#concept-meta-extensions" title="concept-meta-extensions">register the names</a>.</p></dd>
+   <dt><dfn id="attr-head-profile" title="attr-head-profile"><code>profile</code></dfn> on <code><a href="the-head-element.html#the-head-element">head</a></code> elements</dt>
+   <dd><p>When used for declaring which <code><a href="the-meta-element.html#the-meta-element">meta</a></code> terms are
+   used in the document, unnecessary; omit it altogether, and <a href="the-meta-element.html#concept-meta-extensions" title="concept-meta-extensions">register the names</a>.</p></dd>
    <dd><p>When used for triggering specific user agent behaviors: use
-   a <code><a href="semantics.html#the-link-element">link</a></code> element instead.</p></dd>
+   a <code><a href="the-link-element.html#the-link-element">link</a></code> element instead.</p></dd>
 
-   <dt><dfn id="attr-html-version" title="attr-html-version"><code>version</code></dfn> on <code><a href="semantics.html#the-html-element">html</a></code> elements</dt>
+   <dt><dfn id="attr-html-version" title="attr-html-version"><code>version</code></dfn> on <code><a href="the-html-element.html#the-html-element">html</a></code> elements</dt>
    <dd><p>Unnecessary. Omit it altogether.</p></dd>
 
    <dt><dfn id="attr-input-usemap" title="attr-input-usemap"><code>usemap</code></dfn> on <code><a href="the-input-element.html#the-input-element">input</a></code> elements</dt>
-   <dd><p>Use <code><a href="embedded-content-1.html#the-img-element">img</a></code> instead of <code><a href="the-input-element.html#the-input-element">input</a></code> for image maps.</p></dd>
+   <dd><p>Use <code><a href="the-img-element.html#the-img-element">img</a></code> instead of <code><a href="the-input-element.html#the-input-element">input</a></code> for image maps.</p></dd>
 
    <dt><dfn id="attr-iframe-longdesc" title="attr-iframe-longdesc"><code>longdesc</code></dfn> on <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> elements</dt>
-   <dt><dfn id="attr-img-longdesc" title="attr-img-longdesc"><code>longdesc</code></dfn> on <code><a href="embedded-content-1.html#the-img-element">img</a></code> elements</dt>
-   <dd><p>Use a regular <code><a href="text-level-semantics.html#the-a-element">a</a></code> element to link to the
-   description, or (in the case of images) use an <a href="the-map-element.html#image-map">image
+   <dt><dfn id="attr-img-longdesc" title="attr-img-longdesc"><code>longdesc</code></dfn> on <code><a href="the-img-element.html#the-img-element">img</a></code> elements</dt>
+   <dd><p>Use a regular <code><a href="the-a-element.html#the-a-element">a</a></code> element to link to the
+   description, or (in the case of images) use an <a href="image-maps.html#image-map">image
    map</a> to provide a link from the image to the image's
    description.</p></dd>
 
-   <dt><dfn id="attr-img-lowsrc" title="attr-img-lowsrc"><code>lowsrc</code></dfn> on <code><a href="embedded-content-1.html#the-img-element">img</a></code> elements</dt>
-   <dd><p>Use a progressive JPEG image (given in the <code title="attr-img-src"><a href="embedded-content-1.html#attr-img-src">src</a></code> attribute),
+   <dt><dfn id="attr-img-lowsrc" title="attr-img-lowsrc"><code>lowsrc</code></dfn> on <code><a href="the-img-element.html#the-img-element">img</a></code> elements</dt>
+   <dd><p>Use a progressive JPEG image (given in the <code title="attr-img-src"><a href="the-img-element.html#attr-img-src">src</a></code> attribute),
    instead of using two separate images.</p></dd>
 
-   <dt><dfn id="attr-link-target" title="attr-link-target"><code>target</code></dfn> on <code><a href="semantics.html#the-link-element">link</a></code> elements</dt>
+   <dt><dfn id="attr-link-target" title="attr-link-target"><code>target</code></dfn> on <code><a href="the-link-element.html#the-link-element">link</a></code> elements</dt>
    <dd><p>Unnecessary. Omit it altogether.</p></dd>
 
-   <dt><dfn id="attr-meta-scheme" title="attr-meta-scheme"><code>scheme</code></dfn> on <code><a href="semantics.html#the-meta-element">meta</a></code> elements</dt>
+   <dt><dfn id="attr-meta-scheme" title="attr-meta-scheme"><code>scheme</code></dfn> on <code><a href="the-meta-element.html#the-meta-element">meta</a></code> elements</dt>
    <dd><p>Use only one scheme per field, or make the scheme declaration part of the value.</p></dd>
 
-   <dt><dfn id="attr-object-archive" title="attr-object-archive"><code>archive</code></dfn> on <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements</dt>
-   <dt><dfn id="attr-object-classid" title="attr-object-classid"><code>classid</code></dfn> on <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements</dt>
-   <dt><dfn id="attr-object-code" title="attr-object-code"><code>code</code></dfn> on <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements</dt>
-   <dt><dfn id="attr-object-codebase" title="attr-object-codebase"><code>codebase</code></dfn> on <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements</dt>
-   <dt><dfn id="attr-object-codetype" title="attr-object-codetype"><code>codetype</code></dfn> on <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements</dt>
-   <dd><p>Use the <code title="attr-object-data"><a href="the-iframe-element.html#attr-object-data">data</a></code> and <code title="attr-object-type"><a href="the-iframe-element.html#attr-object-type">type</a></code> attributes to invoke <a href="infrastructure.html#plugin" title="plugin">plugins</a>. To set parameters with these names
-   in particular, the <code><a href="the-iframe-element.html#the-param-element">param</a></code> element can be used.</p></dd>
+   <dt><dfn id="attr-object-archive" title="attr-object-archive"><code>archive</code></dfn> on <code><a href="the-object-element.html#the-object-element">object</a></code> elements</dt>
+   <dt><dfn id="attr-object-classid" title="attr-object-classid"><code>classid</code></dfn> on <code><a href="the-object-element.html#the-object-element">object</a></code> elements</dt>
+   <dt><dfn id="attr-object-code" title="attr-object-code"><code>code</code></dfn> on <code><a href="the-object-element.html#the-object-element">object</a></code> elements</dt>
+   <dt><dfn id="attr-object-codebase" title="attr-object-codebase"><code>codebase</code></dfn> on <code><a href="the-object-element.html#the-object-element">object</a></code> elements</dt>
+   <dt><dfn id="attr-object-codetype" title="attr-object-codetype"><code>codetype</code></dfn> on <code><a href="the-object-element.html#the-object-element">object</a></code> elements</dt>
+   <dd><p>Use the <code title="attr-object-data"><a href="the-object-element.html#attr-object-data">data</a></code> and <code title="attr-object-type"><a href="the-object-element.html#attr-object-type">type</a></code> attributes to invoke <a href="infrastructure.html#plugin" title="plugin">plugins</a>. To set parameters with these names
+   in particular, the <code><a href="the-param-element.html#the-param-element">param</a></code> element can be used.</p></dd>
 
-   <dt><dfn id="attr-object-declare" title="attr-object-declare"><code>declare</code></dfn> on <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements</dt>
-   <dd><p>Repeat the <code><a href="the-iframe-element.html#the-object-element">object</a></code> element completely each time the resource is to be reused.</p></dd>
+   <dt><dfn id="attr-object-declare" title="attr-object-declare"><code>declare</code></dfn> on <code><a href="the-object-element.html#the-object-element">object</a></code> elements</dt>
+   <dd><p>Repeat the <code><a href="the-object-element.html#the-object-element">object</a></code> element completely each time the resource is to be reused.</p></dd>
 
-   <dt><dfn id="attr-object-standby" title="attr-object-standby"><code>standby</code></dfn> on <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements</dt>
+   <dt><dfn id="attr-object-standby" title="attr-object-standby"><code>standby</code></dfn> on <code><a href="the-object-element.html#the-object-element">object</a></code> elements</dt>
    <dd><p>Optimize the linked resource so that it loads quickly or, at least, incrementally.</p></dd>
 
-   <dt><dfn id="attr-param-type" title="attr-param-type"><code>type</code></dfn> on <code><a href="the-iframe-element.html#the-param-element">param</a></code> elements</dt>
-   <dt><dfn id="attr-param-valuetype" title="attr-param-valuetype"><code>valuetype</code></dfn> on <code><a href="the-iframe-element.html#the-param-element">param</a></code> elements</dt>
-   <dd><p>Use the <code title="attr-param-name"><a href="the-iframe-element.html#attr-param-name">name</a></code> and <code title="attr-param-value"><a href="the-iframe-element.html#attr-param-value">value</a></code> attributes without declaring
+   <dt><dfn id="attr-param-type" title="attr-param-type"><code>type</code></dfn> on <code><a href="the-param-element.html#the-param-element">param</a></code> elements</dt>
+   <dt><dfn id="attr-param-valuetype" title="attr-param-valuetype"><code>valuetype</code></dfn> on <code><a href="the-param-element.html#the-param-element">param</a></code> elements</dt>
+   <dd><p>Use the <code title="attr-param-name"><a href="the-param-element.html#attr-param-name">name</a></code> and <code title="attr-param-value"><a href="the-param-element.html#attr-param-value">value</a></code> attributes without declaring
    value types.</p></dd>
 
-   <dt><dfn id="attr-script-language" title="attr-script-language"><code>language</code></dfn> on <code><a href="scripting-1.html#the-script-element">script</a></code> elements (except as noted in the previous section)</dt>
-   <dd><p>Use the <code title="attr-script-type"><a href="scripting-1.html#attr-script-type">type</a></code> attribute
+   <dt><dfn id="attr-script-language" title="attr-script-language"><code>language</code></dfn> on <code><a href="the-script-element.html#the-script-element">script</a></code> elements (except as noted in the previous section)</dt>
+   <dd><p>Use the <code title="attr-script-type"><a href="the-script-element.html#attr-script-type">type</a></code> attribute
    instead.</p></dd>
 
-   <dt><dfn id="attr-script-event" title="attr-script-event"><code>event</code></dfn> on <code><a href="scripting-1.html#the-script-element">script</a></code> elements</dt>
-   <dt><dfn id="attr-script-for" title="attr-script-for"><code>for</code></dfn> on <code><a href="scripting-1.html#the-script-element">script</a></code> elements</dt>
-   <dd><p>Use DOM Events mechanisms to register event listeners. <a href="references.html#refsDOMEVENTS">[DOMEVENTS]</a></p></dd>
+   <dt><dfn id="attr-script-event" title="attr-script-event"><code>event</code></dfn> on <code><a href="the-script-element.html#the-script-element">script</a></code> elements</dt>
+   <dt><dfn id="attr-script-for" title="attr-script-for"><code>for</code></dfn> on <code><a href="the-script-element.html#the-script-element">script</a></code> elements</dt>
+   <dd><p>Use DOM Events mechanisms to register event listeners. <a href="references.html#refsDOMCORE">[DOMCORE]</a></p></dd>
 
-   <dt><dfn id="attr-table-datapagesize" title="attr-table-datapagesize"><code>datapagesize</code></dfn> on <code><a href="tabular-data.html#the-table-element">table</a></code> elements</dt>
+   <dt><dfn id="attr-table-datapagesize" title="attr-table-datapagesize"><code>datapagesize</code></dfn> on <code><a href="the-table-element.html#the-table-element">table</a></code> elements</dt>
    <dd><p>Unnecessary. Omit it altogether.</p></dd>
 
-   <dt><dfn id="attr-table-summary" title="attr-table-summary"><code>summary</code></dfn> on <code><a href="tabular-data.html#the-table-element">table</a></code> elements</dt>
-   <dd><p>Use one of the <a href="tabular-data.html#table-descriptions-techniques">techniques for describing
-   tables</a> given in the <code><a href="tabular-data.html#the-table-element">table</a></code> section
+   <dt><dfn id="attr-table-summary" title="attr-table-summary"><code>summary</code></dfn> on <code><a href="the-table-element.html#the-table-element">table</a></code> elements</dt>
+   <dd><p>Use one of the <a href="the-table-element.html#table-descriptions-techniques">techniques for describing
+   tables</a> given in the <code><a href="the-table-element.html#the-table-element">table</a></code> section
    instead.</p></dd>
 
-   <dt><dfn id="attr-tdth-abbr" title="attr-tdth-abbr"><code>abbr</code></dfn> on <code><a href="tabular-data.html#the-td-element">td</a></code> and <code><a href="tabular-data.html#the-th-element">th</a></code> elements</dt>
-   <dd><p>Use text that begins in an unambiguous and terse manner, and include any more elaborate text after that. The <code title="attr-title"><a href="elements.html#the-title-attribute">title</a></code> attribute can also be useful in including more detailed text, so that the cell's contents can be made terse.</p>
+   <dt><dfn id="attr-tdth-abbr" title="attr-tdth-abbr"><code>abbr</code></dfn> on <code><a href="the-td-element.html#the-td-element">td</a></code> and <code><a href="the-th-element.html#the-th-element">th</a></code> elements</dt>
+   <dd><p>Use text that begins in an unambiguous and terse manner, and include any more elaborate text after that. The <code title="attr-title"><a href="global-attributes.html#the-title-attribute">title</a></code> attribute can also be useful in including more detailed text, so that the cell's contents can be made terse.</p>
 
-   </dd><dt><dfn id="attr-tdth-axis" title="attr-tdth-axis"><code>axis</code></dfn> on <code><a href="tabular-data.html#the-td-element">td</a></code> and <code><a href="tabular-data.html#the-th-element">th</a></code> elements</dt>
-   <dd><p>Use the <code title="attr-th-scope"><a href="tabular-data.html#attr-th-scope">scope</a></code> attribute on the relevant <code><a href="tabular-data.html#the-th-element">th</a></code>.</p>
+   </dd><dt><dfn id="attr-tdth-axis" title="attr-tdth-axis"><code>axis</code></dfn> on <code><a href="the-td-element.html#the-td-element">td</a></code> and <code><a href="the-th-element.html#the-th-element">th</a></code> elements</dt>
+   <dd><p>Use the <code title="attr-th-scope"><a href="the-th-element.html#attr-th-scope">scope</a></code> attribute on the relevant <code><a href="the-th-element.html#the-th-element">th</a></code>.</p>
 
-   </dd><dt><dfn id="attr-datasrc" title="attr-datasrc"><code>datasrc</code></dfn> on <code><a href="text-level-semantics.html#the-a-element">a</a></code>, <code><a href="#the-applet-element">applet</a></code>, <code><a href="the-button-element.html#the-button-element">button</a></code>, <code><a href="grouping-content.html#the-div-element">div</a></code>, <code><a href="#frame">frame</a></code>, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <code><a href="embedded-content-1.html#the-img-element">img</a></code>, <code><a href="the-input-element.html#the-input-element">input</a></code>, <code><a href="forms.html#the-label-element">label</a></code>, <code><a href="forms.html#the-legend-element">legend</a></code>, <code><a href="#the-marquee-element">marquee</a></code>, <code><a href="the-iframe-element.html#the-object-element">object</a></code>, <code><a href="the-button-element.html#the-option-element">option</a></code>, <code><a href="the-button-element.html#the-select-element">select</a></code>, <code><a href="text-level-semantics.html#the-span-element">span</a></code>, <code><a href="tabular-data.html#the-table-element">table</a></code>, and <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> elements</dt>
-   <dt><dfn id="attr-datafld" title="attr-datafld"><code>datafld</code></dfn> on <code><a href="text-level-semantics.html#the-a-element">a</a></code>, <code><a href="#the-applet-element">applet</a></code>, <code><a href="the-button-element.html#the-button-element">button</a></code>, <code><a href="grouping-content.html#the-div-element">div</a></code>, <code><a href="forms.html#the-fieldset-element">fieldset</a></code>, <code><a href="#frame">frame</a></code>, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <code><a href="embedded-content-1.html#the-img-element">img</a></code>, <code><a href="the-input-element.html#the-input-element">input</a></code>, <code><a href="forms.html#the-label-element">label</a></code>, <code><a href="forms.html#the-legend-element">legend</a></code>, <code><a href="#the-marquee-element">marquee</a></code>, <code><a href="the-iframe-element.html#the-object-element">object</a></code>, <code><a href="the-iframe-element.html#the-param-element">param</a></code>, <code><a href="the-button-element.html#the-select-element">select</a></code>, <code><a href="text-level-semantics.html#the-span-element">span</a></code>, and <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> elements</dt>
-   <dt><dfn id="attr-dataformatas" title="attr-dataformatas"><code>dataformatas</code></dfn> on <code><a href="the-button-element.html#the-button-element">button</a></code>, <code><a href="grouping-content.html#the-div-element">div</a></code>, <code><a href="the-input-element.html#the-input-element">input</a></code>, <code><a href="forms.html#the-label-element">label</a></code>, <code><a href="forms.html#the-legend-element">legend</a></code>, <code><a href="#the-marquee-element">marquee</a></code>, <code><a href="the-iframe-element.html#the-object-element">object</a></code>, <code><a href="the-button-element.html#the-option-element">option</a></code>, <code><a href="the-button-element.html#the-select-element">select</a></code>, <code><a href="text-level-semantics.html#the-span-element">span</a></code>, and <code><a href="tabular-data.html#the-table-element">table</a></code> elements</dt>
+   </dd><dt><dfn id="attr-td-scope" title="attr-td-scope"><code>scope</code></dfn> on <code><a href="the-td-element.html#the-td-element">td</a></code> elements</dt>
+   <dd><p>Use <code><a href="the-th-element.html#the-th-element">th</a></code> elements for heading cells.</p>
+
+   </dd><dt><dfn id="attr-datasrc" title="attr-datasrc"><code>datasrc</code></dfn> on <code><a href="the-a-element.html#the-a-element">a</a></code>, <code><a href="#the-applet-element">applet</a></code>, <code><a href="the-button-element.html#the-button-element">button</a></code>, <code><a href="the-div-element.html#the-div-element">div</a></code>, <code><a href="#frame">frame</a></code>, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <code><a href="the-img-element.html#the-img-element">img</a></code>, <code><a href="the-input-element.html#the-input-element">input</a></code>, <code><a href="the-label-element.html#the-label-element">label</a></code>, <code><a href="the-legend-element.html#the-legend-element">legend</a></code>, <code><a href="#the-marquee-element">marquee</a></code>, <code><a href="the-object-element.html#the-object-element">object</a></code>, <code><a href="the-option-element.html#the-option-element">option</a></code>, <code><a href="the-select-element.html#the-select-element">select</a></code>, <code><a href="the-span-element.html#the-span-element">span</a></code>, <code><a href="the-table-element.html#the-table-element">table</a></code>, and <code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code> elements</dt>
+   <dt><dfn id="attr-datafld" title="attr-datafld"><code>datafld</code></dfn> on <code><a href="the-a-element.html#the-a-element">a</a></code>, <code><a href="#the-applet-element">applet</a></code>, <code><a href="the-button-element.html#the-button-element">button</a></code>, <code><a href="the-div-element.html#the-div-element">div</a></code>, <code><a href="the-fieldset-element.html#the-fieldset-element">fieldset</a></code>, <code><a href="#frame">frame</a></code>, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <code><a href="the-img-element.html#the-img-element">img</a></code>, <code><a href="the-input-element.html#the-input-element">input</a></code>, <code><a href="the-label-element.html#the-label-element">label</a></code>, <code><a href="the-legend-element.html#the-legend-element">legend</a></code>, <code><a href="#the-marquee-element">marquee</a></code>, <code><a href="the-object-element.html#the-object-element">object</a></code>, <code><a href="the-param-element.html#the-param-element">param</a></code>, <code><a href="the-select-element.html#the-select-element">select</a></code>, <code><a href="the-span-element.html#the-span-element">span</a></code>, and <code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code> elements</dt>
+   <dt><dfn id="attr-dataformatas" title="attr-dataformatas"><code>dataformatas</code></dfn> on <code><a href="the-button-element.html#the-button-element">button</a></code>, <code><a href="the-div-element.html#the-div-element">div</a></code>, <code><a href="the-input-element.html#the-input-element">input</a></code>, <code><a href="the-label-element.html#the-label-element">label</a></code>, <code><a href="the-legend-element.html#the-legend-element">legend</a></code>, <code><a href="#the-marquee-element">marquee</a></code>, <code><a href="the-object-element.html#the-object-element">object</a></code>, <code><a href="the-option-element.html#the-option-element">option</a></code>, <code><a href="the-select-element.html#the-select-element">select</a></code>, <code><a href="the-span-element.html#the-span-element">span</a></code>, and <code><a href="the-table-element.html#the-table-element">table</a></code> elements</dt>
    <dd><p>Use script and a mechanism such as <code>XMLHttpRequest</code> to populate the page dynamically. <a href="references.html#refsXHR">[XHR]</a></p></dd>
 
-   <dt><dfn id="attr-body-alink" title="attr-body-alink"><code>alink</code></dfn> on <code><a href="sections.html#the-body-element">body</a></code> elements</dt>
-   <dt><dfn id="attr-body-bgcolor" title="attr-body-bgcolor"><code>bgcolor</code></dfn> on <code><a href="sections.html#the-body-element">body</a></code> elements</dt>
-   <dt><dfn id="attr-body-link" title="attr-body-link"><code>link</code></dfn> on <code><a href="sections.html#the-body-element">body</a></code> elements</dt>
-   <dt><dfn id="attr-body-marginbottom" title="attr-body-marginbottom"><code>marginbottom</code></dfn> on <code><a href="sections.html#the-body-element">body</a></code> elements</dt>
-   <dt><dfn id="attr-body-marginheight" title="attr-body-marginheight"><code>marginheight</code></dfn> on <code><a href="sections.html#the-body-element">body</a></code> elements</dt>
-   <dt><dfn id="attr-body-marginleft" title="attr-body-marginleft"><code>marginleft</code></dfn> on <code><a href="sections.html#the-body-element">body</a></code> elements</dt>
-   <dt><dfn id="attr-body-marginright" title="attr-body-marginright"><code>marginright</code></dfn> on <code><a href="sections.html#the-body-element">body</a></code> elements</dt>
-   <dt><dfn id="attr-body-margintop" title="attr-body-margintop"><code>margintop</code></dfn> on <code><a href="sections.html#the-body-element">body</a></code> elements</dt>
-   <dt><dfn id="attr-body-marginwidth" title="attr-body-marginwidth"><code>marginwidth</code></dfn> on <code><a href="sections.html#the-body-element">body</a></code> elements</dt>
-   <dt><dfn id="attr-body-text" title="attr-body-text"><code>text</code></dfn> on <code><a href="sections.html#the-body-element">body</a></code> elements</dt>
-   <dt><dfn id="attr-body-vlink" title="attr-body-vlink"><code>vlink</code></dfn> on <code><a href="sections.html#the-body-element">body</a></code> elements</dt>
-   <dt><dfn id="attr-br-clear" title="attr-br-clear"><code>clear</code></dfn> on <code><a href="text-level-semantics.html#the-br-element">br</a></code> elements</dt>
-   <dt><dfn id="attr-caption-align" title="attr-caption-align"><code>align</code></dfn> on <code><a href="tabular-data.html#the-caption-element">caption</a></code> elements</dt>
-   <dt><dfn id="attr-col-align" title="attr-col-align"><code>align</code></dfn> on <code><a href="tabular-data.html#the-col-element">col</a></code> elements</dt>
-   <dt><dfn id="attr-col-char" title="attr-col-char"><code>char</code></dfn> on <code><a href="tabular-data.html#the-col-element">col</a></code> elements</dt>
-   <dt><dfn id="attr-col-charoff" title="attr-col-charoff"><code>charoff</code></dfn> on <code><a href="tabular-data.html#the-col-element">col</a></code> elements</dt>
-   <dt><dfn id="attr-col-valign" title="attr-col-valign"><code>valign</code></dfn> on <code><a href="tabular-data.html#the-col-element">col</a></code> elements</dt>
-   <dt><dfn id="attr-col-width" title="attr-col-width"><code>width</code></dfn> on <code><a href="tabular-data.html#the-col-element">col</a></code> elements</dt>
-   <dt><dfn id="attr-div-align" title="attr-div-align"><code>align</code></dfn> on <code><a href="grouping-content.html#the-div-element">div</a></code> elements</dt>
-   <dt><dfn id="attr-dl-compact" title="attr-dl-compact"><code>compact</code></dfn> on <code><a href="grouping-content.html#the-dl-element">dl</a></code> elements</dt>
-   <dt><dfn id="attr-embed-align" title="attr-embed-align"><code>align</code></dfn> on <code><a href="the-iframe-element.html#the-embed-element">embed</a></code> elements</dt>
-   <dt><dfn id="attr-embed-hspace" title="attr-embed-hspace"><code>hspace</code></dfn> on <code><a href="the-iframe-element.html#the-embed-element">embed</a></code> elements</dt>
-   <dt><dfn id="attr-embed-vspace" title="attr-embed-vspace"><code>vspace</code></dfn> on <code><a href="the-iframe-element.html#the-embed-element">embed</a></code> elements</dt>
-   <dt><dfn id="attr-hr-align" title="attr-hr-align"><code>align</code></dfn> on <code><a href="grouping-content.html#the-hr-element">hr</a></code> elements</dt>
-   <dt><dfn id="attr-hr-color" title="attr-hr-color"><code>color</code></dfn> on <code><a href="grouping-content.html#the-hr-element">hr</a></code> elements</dt>
-   <dt><dfn id="attr-hr-noshade" title="attr-hr-noshade"><code>noshade</code></dfn> on <code><a href="grouping-content.html#the-hr-element">hr</a></code> elements</dt>
-   <dt><dfn id="attr-hr-size" title="attr-hr-size"><code>size</code></dfn> on <code><a href="grouping-content.html#the-hr-element">hr</a></code> elements</dt>
-   <dt><dfn id="attr-hr-width" title="attr-hr-width"><code>width</code></dfn> on <code><a href="grouping-content.html#the-hr-element">hr</a></code> elements</dt>
-   <dt><dfn id="attr-hx-align" title="attr-hx-align"><code>align</code></dfn> on <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code>&#x2014;<code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h6</a></code> elements</dt>
+   <dt><dfn id="attr-body-alink" title="attr-body-alink"><code>alink</code></dfn> on <code><a href="the-body-element.html#the-body-element">body</a></code> elements</dt>
+   <dt><dfn id="attr-body-bgcolor" title="attr-body-bgcolor"><code>bgcolor</code></dfn> on <code><a href="the-body-element.html#the-body-element">body</a></code> elements</dt>
+   <dt><dfn id="attr-body-link" title="attr-body-link"><code>link</code></dfn> on <code><a href="the-body-element.html#the-body-element">body</a></code> elements</dt>
+   <dt><dfn id="attr-body-marginbottom" title="attr-body-marginbottom"><code>marginbottom</code></dfn> on <code><a href="the-body-element.html#the-body-element">body</a></code> elements</dt>
+   <dt><dfn id="attr-body-marginheight" title="attr-body-marginheight"><code>marginheight</code></dfn> on <code><a href="the-body-element.html#the-body-element">body</a></code> elements</dt>
+   <dt><dfn id="attr-body-marginleft" title="attr-body-marginleft"><code>marginleft</code></dfn> on <code><a href="the-body-element.html#the-body-element">body</a></code> elements</dt>
+   <dt><dfn id="attr-body-marginright" title="attr-body-marginright"><code>marginright</code></dfn> on <code><a href="the-body-element.html#the-body-element">body</a></code> elements</dt>
+   <dt><dfn id="attr-body-margintop" title="attr-body-margintop"><code>margintop</code></dfn> on <code><a href="the-body-element.html#the-body-element">body</a></code> elements</dt>
+   <dt><dfn id="attr-body-marginwidth" title="attr-body-marginwidth"><code>marginwidth</code></dfn> on <code><a href="the-body-element.html#the-body-element">body</a></code> elements</dt>
+   <dt><dfn id="attr-body-text" title="attr-body-text"><code>text</code></dfn> on <code><a href="the-body-element.html#the-body-element">body</a></code> elements</dt>
+   <dt><dfn id="attr-body-vlink" title="attr-body-vlink"><code>vlink</code></dfn> on <code><a href="the-body-element.html#the-body-element">body</a></code> elements</dt>
+   <dt><dfn id="attr-br-clear" title="attr-br-clear"><code>clear</code></dfn> on <code><a href="the-br-element.html#the-br-element">br</a></code> elements</dt>
+   <dt><dfn id="attr-caption-align" title="attr-caption-align"><code>align</code></dfn> on <code><a href="the-caption-element.html#the-caption-element">caption</a></code> elements</dt>
+   <dt><dfn id="attr-col-align" title="attr-col-align"><code>align</code></dfn> on <code><a href="the-col-element.html#the-col-element">col</a></code> elements</dt>
+   <dt><dfn id="attr-col-char" title="attr-col-char"><code>char</code></dfn> on <code><a href="the-col-element.html#the-col-element">col</a></code> elements</dt>
+   <dt><dfn id="attr-col-charoff" title="attr-col-charoff"><code>charoff</code></dfn> on <code><a href="the-col-element.html#the-col-element">col</a></code> elements</dt>
+   <dt><dfn id="attr-col-valign" title="attr-col-valign"><code>valign</code></dfn> on <code><a href="the-col-element.html#the-col-element">col</a></code> elements</dt>
+   <dt><dfn id="attr-col-width" title="attr-col-width"><code>width</code></dfn> on <code><a href="the-col-element.html#the-col-element">col</a></code> elements</dt>
+   <dt><dfn id="attr-div-align" title="attr-div-align"><code>align</code></dfn> on <code><a href="the-div-element.html#the-div-element">div</a></code> elements</dt>
+   <dt><dfn id="attr-dl-compact" title="attr-dl-compact"><code>compact</code></dfn> on <code><a href="the-dl-element.html#the-dl-element">dl</a></code> elements</dt>
+   <dt><dfn id="attr-embed-align" title="attr-embed-align"><code>align</code></dfn> on <code><a href="the-embed-element.html#the-embed-element">embed</a></code> elements</dt>
+   <dt><dfn id="attr-embed-hspace" title="attr-embed-hspace"><code>hspace</code></dfn> on <code><a href="the-embed-element.html#the-embed-element">embed</a></code> elements</dt>
+   <dt><dfn id="attr-embed-vspace" title="attr-embed-vspace"><code>vspace</code></dfn> on <code><a href="the-embed-element.html#the-embed-element">embed</a></code> elements</dt>
+   <dt><dfn id="attr-hr-align" title="attr-hr-align"><code>align</code></dfn> on <code><a href="the-hr-element.html#the-hr-element">hr</a></code> elements</dt>
+   <dt><dfn id="attr-hr-color" title="attr-hr-color"><code>color</code></dfn> on <code><a href="the-hr-element.html#the-hr-element">hr</a></code> elements</dt>
+   <dt><dfn id="attr-hr-noshade" title="attr-hr-noshade"><code>noshade</code></dfn> on <code><a href="the-hr-element.html#the-hr-element">hr</a></code> elements</dt>
+   <dt><dfn id="attr-hr-size" title="attr-hr-size"><code>size</code></dfn> on <code><a href="the-hr-element.html#the-hr-element">hr</a></code> elements</dt>
+   <dt><dfn id="attr-hr-width" title="attr-hr-width"><code>width</code></dfn> on <code><a href="the-hr-element.html#the-hr-element">hr</a></code> elements</dt>
+   <dt><dfn id="attr-hx-align" title="attr-hx-align"><code>align</code></dfn> on <code><a href="the-h1-h2-h3-h4-h5-and-h6-elements.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code>&#x2014;<code><a href="the-h1-h2-h3-h4-h5-and-h6-elements.html#the-h1-h2-h3-h4-h5-and-h6-elements">h6</a></code> elements</dt>
    <dt><dfn id="attr-iframe-align" title="attr-iframe-align"><code>align</code></dfn> on <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> elements</dt>
    <dt><dfn id="attr-iframe-allowtransparency" title="attr-iframe-allowtransparency"><code>allowtransparency</code></dfn> on <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> elements</dt>
    <dt><dfn id="attr-iframe-frameborder" title="attr-iframe-frameborder"><code>frameborder</code></dfn> on <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> elements</dt>
@@ -615,56 +638,56 @@
    <dt><dfn id="attr-input-align" title="attr-input-align"><code>align</code></dfn> on <code><a href="the-input-element.html#the-input-element">input</a></code> elements</dt>
    <dt><dfn id="attr-input-hspace" title="attr-input-hspace"><code>hspace</code></dfn> on <code><a href="the-input-element.html#the-input-element">input</a></code> elements</dt>
    <dt><dfn id="attr-input-vspace" title="attr-input-vspace"><code>vspace</code></dfn> on <code><a href="the-input-element.html#the-input-element">input</a></code> elements</dt>
-   <dt><dfn id="attr-img-align" title="attr-img-align"><code>align</code></dfn> on <code><a href="embedded-content-1.html#the-img-element">img</a></code> elements</dt>
-   <dt><dfn id="attr-img-border" title="attr-img-border"><code>border</code></dfn> on <code><a href="embedded-content-1.html#the-img-element">img</a></code> elements (except as noted in the previous section)</dt>
-   <dt><dfn id="attr-img-hspace" title="attr-img-hspace"><code>hspace</code></dfn> on <code><a href="embedded-content-1.html#the-img-element">img</a></code> elements</dt>
-   <dt><dfn id="attr-img-vspace" title="attr-img-vspace"><code>vspace</code></dfn> on <code><a href="embedded-content-1.html#the-img-element">img</a></code> elements</dt>
-   <dt><dfn id="attr-legend-align" title="attr-legend-align"><code>align</code></dfn> on <code><a href="forms.html#the-legend-element">legend</a></code> elements</dt>
-   <dt><dfn id="attr-li-type" title="attr-li-type"><code>type</code></dfn> on <code><a href="grouping-content.html#the-li-element">li</a></code> elements</dt>
-   <dt><dfn id="attr-menu-compact" title="attr-menu-compact"><code>compact</code></dfn> on <code><a href="interactive-elements.html#the-menu-element">menu</a></code> elements</dt>
-   <dt><dfn id="attr-object-align" title="attr-object-align"><code>align</code></dfn> on <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements</dt>
-   <dt><dfn id="attr-object-border" title="attr-object-border"><code>border</code></dfn> on <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements</dt>
-   <dt><dfn id="attr-object-hspace" title="attr-object-hspace"><code>hspace</code></dfn> on <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements</dt>
-   <dt><dfn id="attr-object-vspace" title="attr-object-vspace"><code>vspace</code></dfn> on <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements</dt>
-   <dt><dfn id="attr-ol-compact" title="attr-ol-compact"><code>compact</code></dfn> on <code><a href="grouping-content.html#the-ol-element">ol</a></code> elements</dt>
-   <dt><dfn id="attr-p-align" title="attr-p-align"><code>align</code></dfn> on <code><a href="grouping-content.html#the-p-element">p</a></code> elements</dt>
-   <dt><dfn id="attr-pre-width" title="attr-pre-width"><code>width</code></dfn> on <code><a href="grouping-content.html#the-pre-element">pre</a></code> elements</dt>
-   <dt><dfn id="attr-table-align" title="attr-table-align"><code>align</code></dfn> on <code><a href="tabular-data.html#the-table-element">table</a></code> elements</dt>
-   <dt><dfn id="attr-table-bgcolor" title="attr-table-bgcolor"><code>bgcolor</code></dfn> on <code><a href="tabular-data.html#the-table-element">table</a></code> elements</dt>
-   <dt><dfn id="attr-table-cellpadding" title="attr-table-cellpadding"><code>cellpadding</code></dfn> on <code><a href="tabular-data.html#the-table-element">table</a></code> elements</dt>
-   <dt><dfn id="attr-table-cellspacing" title="attr-table-cellspacing"><code>cellspacing</code></dfn> on <code><a href="tabular-data.html#the-table-element">table</a></code> elements</dt>
-   <dt><dfn id="attr-table-frame" title="attr-table-frame"><code>frame</code></dfn> on <code><a href="tabular-data.html#the-table-element">table</a></code> elements</dt>
-   <dt><dfn id="attr-table-rules" title="attr-table-rules"><code>rules</code></dfn> on <code><a href="tabular-data.html#the-table-element">table</a></code> elements</dt>
-   <dt><dfn id="attr-table-width" title="attr-table-width"><code>width</code></dfn> on <code><a href="tabular-data.html#the-table-element">table</a></code> elements</dt>
-   <dt><dfn id="attr-tbody-align" title="attr-tbody-align"><code>align</code></dfn> on <code><a href="tabular-data.html#the-tbody-element">tbody</a></code>, <code><a href="tabular-data.html#the-thead-element">thead</a></code>, and <code><a href="tabular-data.html#the-tfoot-element">tfoot</a></code> elements</dt>
-   <dt><dfn id="attr-tbody-char" title="attr-tbody-char"><code>char</code></dfn> on <code><a href="tabular-data.html#the-tbody-element">tbody</a></code>, <code><a href="tabular-data.html#the-thead-element">thead</a></code>, and <code><a href="tabular-data.html#the-tfoot-element">tfoot</a></code> elements</dt>
-   <dt><dfn id="attr-tbody-charoff" title="attr-tbody-charoff"><code>charoff</code></dfn> on <code><a href="tabular-data.html#the-tbody-element">tbody</a></code>, <code><a href="tabular-data.html#the-thead-element">thead</a></code>, and <code><a href="tabular-data.html#the-tfoot-element">tfoot</a></code> elements</dt>
-   <dt><dfn id="attr-tbody-valign" title="attr-tbody-vAlign"><code>valign</code></dfn> on <code><a href="tabular-data.html#the-tbody-element">tbody</a></code>, <code><a href="tabular-data.html#the-thead-element">thead</a></code>, and <code><a href="tabular-data.html#the-tfoot-element">tfoot</a></code> elements</dt>
-   <dt><dfn id="attr-tdth-align" title="attr-tdth-align"><code>align</code></dfn> on <code><a href="tabular-data.html#the-td-element">td</a></code> and <code><a href="tabular-data.html#the-th-element">th</a></code> elements</dt>
-   <dt><dfn id="attr-tdth-bgcolor" title="attr-tdth-bgcolor"><code>bgcolor</code></dfn> on <code><a href="tabular-data.html#the-td-element">td</a></code> and <code><a href="tabular-data.html#the-th-element">th</a></code> elements</dt>
-   <dt><dfn id="attr-tdth-char" title="attr-tdth-char"><code>char</code></dfn> on <code><a href="tabular-data.html#the-td-element">td</a></code> and <code><a href="tabular-data.html#the-th-element">th</a></code> elements</dt>
-   <dt><dfn id="attr-tdth-charoff" title="attr-tdth-charoff"><code>charoff</code></dfn> on <code><a href="tabular-data.html#the-td-element">td</a></code> and <code><a href="tabular-data.html#the-th-element">th</a></code> elements</dt>
-   <dt><dfn id="attr-tdth-height" title="attr-tdth-height"><code>height</code></dfn> on <code><a href="tabular-data.html#the-td-element">td</a></code> and <code><a href="tabular-data.html#the-th-element">th</a></code> elements</dt>
-   <dt><dfn id="attr-tdth-nowrap" title="attr-tdth-nowrap"><code>nowrap</code></dfn> on <code><a href="tabular-data.html#the-td-element">td</a></code> and <code><a href="tabular-data.html#the-th-element">th</a></code> elements</dt>
-   <dt><dfn id="attr-tdth-valign" title="attr-tdth-valign"><code>valign</code></dfn> on <code><a href="tabular-data.html#the-td-element">td</a></code> and <code><a href="tabular-data.html#the-th-element">th</a></code> elements</dt>
-   <dt><dfn id="attr-tdth-width" title="attr-tdth-width"><code>width</code></dfn> on <code><a href="tabular-data.html#the-td-element">td</a></code> and <code><a href="tabular-data.html#the-th-element">th</a></code> elements</dt>
-   <dt><dfn id="attr-tr-align" title="attr-tr-align"><code>align</code></dfn> on <code><a href="tabular-data.html#the-tr-element">tr</a></code> elements</dt>
-   <dt><dfn id="attr-tr-bgcolor" title="attr-tr-bgcolor"><code>bgcolor</code></dfn> on <code><a href="tabular-data.html#the-tr-element">tr</a></code> elements</dt>
-   <dt><dfn id="attr-tr-char" title="attr-tr-char"><code>char</code></dfn> on <code><a href="tabular-data.html#the-tr-element">tr</a></code> elements</dt>
-   <dt><dfn id="attr-tr-charoff" title="attr-tr-charoff"><code>charoff</code></dfn> on <code><a href="tabular-data.html#the-tr-element">tr</a></code> elements</dt>
-   <dt><dfn id="attr-tr-valign" title="attr-tr-valign"><code>valign</code></dfn> on <code><a href="tabular-data.html#the-tr-element">tr</a></code> elements</dt>
-   <dt><dfn id="attr-ul-compact" title="attr-ul-compact"><code>compact</code></dfn> on <code><a href="grouping-content.html#the-ul-element">ul</a></code> elements</dt>
-   <dt><dfn id="attr-ul-type" title="attr-ul-type"><code>type</code></dfn> on <code><a href="grouping-content.html#the-ul-element">ul</a></code> elements</dt>
-   <dt><dfn id="attr-background" title="attr-background"><code>background</code></dfn> on <code><a href="sections.html#the-body-element">body</a></code>, <code><a href="tabular-data.html#the-table-element">table</a></code>, <code><a href="tabular-data.html#the-thead-element">thead</a></code>, <code><a href="tabular-data.html#the-tbody-element">tbody</a></code>, <code><a href="tabular-data.html#the-tfoot-element">tfoot</a></code>, <code><a href="tabular-data.html#the-tr-element">tr</a></code>, <code><a href="tabular-data.html#the-td-element">td</a></code>, and <code><a href="tabular-data.html#the-th-element">th</a></code> elements</dt>
+   <dt><dfn id="attr-img-align" title="attr-img-align"><code>align</code></dfn> on <code><a href="the-img-element.html#the-img-element">img</a></code> elements</dt>
+   <dt><dfn id="attr-img-border" title="attr-img-border"><code>border</code></dfn> on <code><a href="the-img-element.html#the-img-element">img</a></code> elements (except as noted in the previous section)</dt>
+   <dt><dfn id="attr-img-hspace" title="attr-img-hspace"><code>hspace</code></dfn> on <code><a href="the-img-element.html#the-img-element">img</a></code> elements</dt>
+   <dt><dfn id="attr-img-vspace" title="attr-img-vspace"><code>vspace</code></dfn> on <code><a href="the-img-element.html#the-img-element">img</a></code> elements</dt>
+   <dt><dfn id="attr-legend-align" title="attr-legend-align"><code>align</code></dfn> on <code><a href="the-legend-element.html#the-legend-element">legend</a></code> elements</dt>
+   <dt><dfn id="attr-li-type" title="attr-li-type"><code>type</code></dfn> on <code><a href="the-li-element.html#the-li-element">li</a></code> elements</dt>
+   <dt><dfn id="attr-menu-compact" title="attr-menu-compact"><code>compact</code></dfn> on <code><a href="the-menu-element.html#the-menu-element">menu</a></code> elements</dt>
+   <dt><dfn id="attr-object-align" title="attr-object-align"><code>align</code></dfn> on <code><a href="the-object-element.html#the-object-element">object</a></code> elements</dt>
+   <dt><dfn id="attr-object-border" title="attr-object-border"><code>border</code></dfn> on <code><a href="the-object-element.html#the-object-element">object</a></code> elements</dt>
+   <dt><dfn id="attr-object-hspace" title="attr-object-hspace"><code>hspace</code></dfn> on <code><a href="the-object-element.html#the-object-element">object</a></code> elements</dt>
+   <dt><dfn id="attr-object-vspace" title="attr-object-vspace"><code>vspace</code></dfn> on <code><a href="the-object-element.html#the-object-element">object</a></code> elements</dt>
+   <dt><dfn id="attr-ol-compact" title="attr-ol-compact"><code>compact</code></dfn> on <code><a href="the-ol-element.html#the-ol-element">ol</a></code> elements</dt>
+   <dt><dfn id="attr-p-align" title="attr-p-align"><code>align</code></dfn> on <code><a href="the-p-element.html#the-p-element">p</a></code> elements</dt>
+   <dt><dfn id="attr-pre-width" title="attr-pre-width"><code>width</code></dfn> on <code><a href="the-pre-element.html#the-pre-element">pre</a></code> elements</dt>
+   <dt><dfn id="attr-table-align" title="attr-table-align"><code>align</code></dfn> on <code><a href="the-table-element.html#the-table-element">table</a></code> elements</dt>
+   <dt><dfn id="attr-table-bgcolor" title="attr-table-bgcolor"><code>bgcolor</code></dfn> on <code><a href="the-table-element.html#the-table-element">table</a></code> elements</dt>
+   <dt><dfn id="attr-table-cellpadding" title="attr-table-cellpadding"><code>cellpadding</code></dfn> on <code><a href="the-table-element.html#the-table-element">table</a></code> elements</dt>
+   <dt><dfn id="attr-table-cellspacing" title="attr-table-cellspacing"><code>cellspacing</code></dfn> on <code><a href="the-table-element.html#the-table-element">table</a></code> elements</dt>
+   <dt><dfn id="attr-table-frame" title="attr-table-frame"><code>frame</code></dfn> on <code><a href="the-table-element.html#the-table-element">table</a></code> elements</dt>
+   <dt><dfn id="attr-table-rules" title="attr-table-rules"><code>rules</code></dfn> on <code><a href="the-table-element.html#the-table-element">table</a></code> elements</dt>
+   <dt><dfn id="attr-table-width" title="attr-table-width"><code>width</code></dfn> on <code><a href="the-table-element.html#the-table-element">table</a></code> elements</dt>
+   <dt><dfn id="attr-tbody-align" title="attr-tbody-align"><code>align</code></dfn> on <code><a href="the-tbody-element.html#the-tbody-element">tbody</a></code>, <code><a href="the-thead-element.html#the-thead-element">thead</a></code>, and <code><a href="the-tfoot-element.html#the-tfoot-element">tfoot</a></code> elements</dt>
+   <dt><dfn id="attr-tbody-char" title="attr-tbody-char"><code>char</code></dfn> on <code><a href="the-tbody-element.html#the-tbody-element">tbody</a></code>, <code><a href="the-thead-element.html#the-thead-element">thead</a></code>, and <code><a href="the-tfoot-element.html#the-tfoot-element">tfoot</a></code> elements</dt>
+   <dt><dfn id="attr-tbody-charoff" title="attr-tbody-charoff"><code>charoff</code></dfn> on <code><a href="the-tbody-element.html#the-tbody-element">tbody</a></code>, <code><a href="the-thead-element.html#the-thead-element">thead</a></code>, and <code><a href="the-tfoot-element.html#the-tfoot-element">tfoot</a></code> elements</dt>
+   <dt><dfn id="attr-tbody-valign" title="attr-tbody-vAlign"><code>valign</code></dfn> on <code><a href="the-tbody-element.html#the-tbody-element">tbody</a></code>, <code><a href="the-thead-element.html#the-thead-element">thead</a></code>, and <code><a href="the-tfoot-element.html#the-tfoot-element">tfoot</a></code> elements</dt>
+   <dt><dfn id="attr-tdth-align" title="attr-tdth-align"><code>align</code></dfn> on <code><a href="the-td-element.html#the-td-element">td</a></code> and <code><a href="the-th-element.html#the-th-element">th</a></code> elements</dt>
+   <dt><dfn id="attr-tdth-bgcolor" title="attr-tdth-bgcolor"><code>bgcolor</code></dfn> on <code><a href="the-td-element.html#the-td-element">td</a></code> and <code><a href="the-th-element.html#the-th-element">th</a></code> elements</dt>
+   <dt><dfn id="attr-tdth-char" title="attr-tdth-char"><code>char</code></dfn> on <code><a href="the-td-element.html#the-td-element">td</a></code> and <code><a href="the-th-element.html#the-th-element">th</a></code> elements</dt>
+   <dt><dfn id="attr-tdth-charoff" title="attr-tdth-charoff"><code>charoff</code></dfn> on <code><a href="the-td-element.html#the-td-element">td</a></code> and <code><a href="the-th-element.html#the-th-element">th</a></code> elements</dt>
+   <dt><dfn id="attr-tdth-height" title="attr-tdth-height"><code>height</code></dfn> on <code><a href="the-td-element.html#the-td-element">td</a></code> and <code><a href="the-th-element.html#the-th-element">th</a></code> elements</dt>
+   <dt><dfn id="attr-tdth-nowrap" title="attr-tdth-nowrap"><code>nowrap</code></dfn> on <code><a href="the-td-element.html#the-td-element">td</a></code> and <code><a href="the-th-element.html#the-th-element">th</a></code> elements</dt>
+   <dt><dfn id="attr-tdth-valign" title="attr-tdth-valign"><code>valign</code></dfn> on <code><a href="the-td-element.html#the-td-element">td</a></code> and <code><a href="the-th-element.html#the-th-element">th</a></code> elements</dt>
+   <dt><dfn id="attr-tdth-width" title="attr-tdth-width"><code>width</code></dfn> on <code><a href="the-td-element.html#the-td-element">td</a></code> and <code><a href="the-th-element.html#the-th-element">th</a></code> elements</dt>
+   <dt><dfn id="attr-tr-align" title="attr-tr-align"><code>align</code></dfn> on <code><a href="the-tr-element.html#the-tr-element">tr</a></code> elements</dt>
+   <dt><dfn id="attr-tr-bgcolor" title="attr-tr-bgcolor"><code>bgcolor</code></dfn> on <code><a href="the-tr-element.html#the-tr-element">tr</a></code> elements</dt>
+   <dt><dfn id="attr-tr-char" title="attr-tr-char"><code>char</code></dfn> on <code><a href="the-tr-element.html#the-tr-element">tr</a></code> elements</dt>
+   <dt><dfn id="attr-tr-charoff" title="attr-tr-charoff"><code>charoff</code></dfn> on <code><a href="the-tr-element.html#the-tr-element">tr</a></code> elements</dt>
+   <dt><dfn id="attr-tr-valign" title="attr-tr-valign"><code>valign</code></dfn> on <code><a href="the-tr-element.html#the-tr-element">tr</a></code> elements</dt>
+   <dt><dfn id="attr-ul-compact" title="attr-ul-compact"><code>compact</code></dfn> on <code><a href="the-ul-element.html#the-ul-element">ul</a></code> elements</dt>
+   <dt><dfn id="attr-ul-type" title="attr-ul-type"><code>type</code></dfn> on <code><a href="the-ul-element.html#the-ul-element">ul</a></code> elements</dt>
+   <dt><dfn id="attr-background" title="attr-background"><code>background</code></dfn> on <code><a href="the-body-element.html#the-body-element">body</a></code>, <code><a href="the-table-element.html#the-table-element">table</a></code>, <code><a href="the-thead-element.html#the-thead-element">thead</a></code>, <code><a href="the-tbody-element.html#the-tbody-element">tbody</a></code>, <code><a href="the-tfoot-element.html#the-tfoot-element">tfoot</a></code>, <code><a href="the-tr-element.html#the-tr-element">tr</a></code>, <code><a href="the-td-element.html#the-td-element">td</a></code>, and <code><a href="the-th-element.html#the-th-element">th</a></code> elements</dt>
    <dd><p>Use CSS instead.</p></dd>
 
-  </dl><hr/><p>The <code title="attr-table-border"><a href="tabular-data.html#attr-table-border">border</a></code> attribute on
-  the <code><a href="tabular-data.html#the-table-element">table</a></code> element can be used to provide basic fallback
+  </dl><hr/><p>The <code title="attr-table-border"><a href="the-table-element.html#attr-table-border">border</a></code> attribute on
+  the <code><a href="the-table-element.html#the-table-element">table</a></code> element can be used to provide basic fallback
   styling for the purpose of making tables legible in browsing
   environments where CSS support is limited or absent, such as
   text-based browsers, WYSIWYG editors, and in situations where CSS
   support is disabled or the style sheet is lost. Only the empty
-  string and the value "<code title="">1</code>" may be used as <code title="attr-table-border"><a href="tabular-data.html#attr-table-border">border</a></code> values for this purpose.
+  string and the value "<code title="">1</code>" may be used as <code title="attr-table-border"><a href="the-table-element.html#attr-table-border">border</a></code> values for this purpose.
   Other values are considered obsolete. To regulate the thickness of
   such borders, authors should instead use CSS.</p><div class="impl">
 
@@ -673,7 +696,7 @@
   <h4 id="the-applet-element"><span class="secno">11.3.1 </span>The <dfn><code>applet</code></dfn> element</h4>
 
   <p>The <code><a href="#the-applet-element">applet</a></code> element is a Java-specific variant of the
-  <code><a href="the-iframe-element.html#the-embed-element">embed</a></code> element. The <code><a href="#the-applet-element">applet</a></code> element is now
+  <code><a href="the-embed-element.html#the-embed-element">embed</a></code> element. The <code><a href="#the-applet-element">applet</a></code> element is now
   obsoleted so that all extension frameworks (Java, .NET, Flash, etc)
   are handled in a consistent manner.</p>
 
@@ -682,26 +705,25 @@
   or <a href="the-xhtml-syntax.html#xml-parser">XML parser</a>, and when the element is not <a href="infrastructure.html#in-a-document">in a
   <code>Document</code></a>, and when the element's document is not
   <a href="browsers.html#fully-active">fully active</a>, and when the element's
-  <code><a href="infrastructure.html#document">Document</a></code>'s <a href="browsers.html#browsing-context">browsing context</a> had its
+  <code><a href="dom.html#document">Document</a></code>'s <a href="browsers.html#browsing-context">browsing context</a> had its
   <a href="the-iframe-element.html#sandboxed-plugins-browsing-context-flag">sandboxed plugins browsing context flag</a> when that
-  <code><a href="infrastructure.html#document">Document</a></code> was created, and when the element's
-  <code><a href="infrastructure.html#document">Document</a></code> was parsed from a resource whose <a href="fetching-resources.html#content-type-sniffing-0" title="Content-Type sniffing">sniffed type</a> as determined
-  during <a href="history.html#navigate" title="navigate">navigation</a> is
-  <code><a href="iana.html#text-html-sandboxed">text/html-sandboxed</a></code>, and when the element has an
-  ancestor <a href="the-iframe-element.html#media-element">media element</a>, and when the element has an
-  ancestor <code><a href="the-iframe-element.html#the-object-element">object</a></code> element that is <em>not</em> showing
+  <code><a href="dom.html#document">Document</a></code> was created, and when the element has an
+  ancestor <a href="media-elements.html#media-element">media element</a>, and when the element has an
+  ancestor <code><a href="the-object-element.html#the-object-element">object</a></code> element that is <em>not</em> showing
   its <a href="content-models.html#fallback-content">fallback content</a>, and when no Java Language runtime
   <a href="infrastructure.html#plugin">plugin</a> is available, and when one <em>is</em> available
   but it is disabled, the element <a href="rendering.html#represents">represents</a> its
   contents.</p>
+
+  
 
   <p>Otherwise, the user agent should instantiate a Java Language
   runtime <a href="infrastructure.html#plugin">plugin</a>, and should pass the names and values of
   all the attributes on the element, in the order they were added to
   the element, with the attributes added by the parser being ordered
   in source order, and then a parameter named "PARAM" whose value is
-  null, and then all the names and values of <a href="the-iframe-element.html#concept-param-parameter" title="concept-param-parameter">parameters</a> given by
-  <code><a href="the-iframe-element.html#the-param-element">param</a></code> elements that are children of the
+  null, and then all the names and values of <a href="the-param-element.html#concept-param-parameter" title="concept-param-parameter">parameters</a> given by
+  <code><a href="the-param-element.html#the-param-element">param</a></code> elements that are children of the
   <code><a href="#the-applet-element">applet</a></code> element, in <a href="infrastructure.html#tree-order">tree order</a>, to the
   <a href="infrastructure.html#plugin">plugin</a> used. If the <a href="infrastructure.html#plugin">plugin</a> supports a
   scriptable interface, the <code><a href="#htmlappletelement">HTMLAppletElement</a></code> object
@@ -710,6 +732,7 @@
   <a href="infrastructure.html#plugin">plugin</a>.</p>
 
   
+
   <p class="note">The <code><a href="#the-applet-element">applet</a></code> element is unaffected by the
   CSS 'display' property. The Java Language runtime is instantiated
   even if the element is hidden with a 'display:none' CSS style.</p>
@@ -768,9 +791,9 @@
            attribute unsigned long <a href="#dom-marquee-vspace" title="dom-marquee-vspace">vspace</a>;
            attribute DOMString <a href="#dom-marquee-width" title="dom-marquee-width">width</a>;
 
-           attribute <a href="webappapis.html#function">Function</a>? <a href="#handler-marquee-onbounce" title="handler-marquee-onbounce">onbounce</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="#handler-marquee-onfinish" title="handler-marquee-onfinish">onfinish</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="#handler-marquee-onstart" title="handler-marquee-onstart">onstart</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="#handler-marquee-onbounce" title="handler-marquee-onbounce">onbounce</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="#handler-marquee-onfinish" title="handler-marquee-onfinish">onfinish</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="#handler-marquee-onstart" title="handler-marquee-onstart">onstart</a>;
 
   void <a href="#dom-marquee-start" title="dom-marquee-start">start</a>();
   void <a href="#dom-marquee-stop" title="dom-marquee-stop">stop</a>();
@@ -931,26 +954,24 @@
   <pre class="idl">interface <dfn id="htmlframesetelement">HTMLFrameSetElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
            attribute DOMString <a href="#dom-frameset-cols" title="dom-frameset-cols">cols</a>;
            attribute DOMString <a href="#dom-frameset-rows" title="dom-frameset-rows">rows</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onafterprint" title="handler-window-onafterprint">onafterprint</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onbeforeprint" title="handler-window-onbeforeprint">onbeforeprint</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onbeforeunload" title="handler-window-onbeforeunload">onbeforeunload</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onblur" title="handler-window-onblur">onblur</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onerror" title="handler-window-onerror">onerror</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onfocus" title="handler-window-onfocus">onfocus</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onhashchange" title="handler-window-onhashchange">onhashchange</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onload" title="handler-window-onload">onload</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onmessage" title="handler-window-onmessage">onmessage</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onoffline" title="handler-window-onoffline">onoffline</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-ononline" title="handler-window-ononline">ononline</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onpagehide" title="handler-window-onpagehide">onpagehide</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onpageshow" title="handler-window-onpageshow">onpageshow</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onpopstate" title="handler-window-onpopstate">onpopstate</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onredo" title="handler-window-onredo">onredo</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onresize" title="handler-window-onresize">onresize</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onscroll" title="handler-window-onscroll">onscroll</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onstorage" title="handler-window-onstorage">onstorage</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onundo" title="handler-window-onundo">onundo</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onunload" title="handler-window-onunload">onunload</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onafterprint" title="handler-window-onafterprint">onafterprint</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onbeforeprint" title="handler-window-onbeforeprint">onbeforeprint</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onbeforeunload" title="handler-window-onbeforeunload">onbeforeunload</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onblur" title="handler-window-onblur">onblur</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onerror" title="handler-window-onerror">onerror</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onfocus" title="handler-window-onfocus">onfocus</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onhashchange" title="handler-window-onhashchange">onhashchange</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onload" title="handler-window-onload">onload</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onmessage" title="handler-window-onmessage">onmessage</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onoffline" title="handler-window-onoffline">onoffline</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-ononline" title="handler-window-ononline">ononline</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onpagehide" title="handler-window-onpagehide">onpagehide</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onpageshow" title="handler-window-onpageshow">onpageshow</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onpopstate" title="handler-window-onpopstate">onpopstate</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onresize" title="handler-window-onresize">onresize</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onscroll" title="handler-window-onscroll">onscroll</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onstorage" title="handler-window-onstorage">onstorage</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onunload" title="handler-window-onunload">onunload</a>;
 };</pre>
 
   <p>The <dfn id="dom-frameset-cols" title="dom-frameset-cols"><code>cols</code></dfn> and
@@ -977,11 +998,9 @@
    <li><code title="handler-window-onpagehide"><a href="webappapis.html#handler-window-onpagehide">onpagehide</a></code></li>
    <li><code title="handler-window-onpageshow"><a href="webappapis.html#handler-window-onpageshow">onpageshow</a></code></li>
    <li><code title="handler-window-onpopstate"><a href="webappapis.html#handler-window-onpopstate">onpopstate</a></code></li>
-   <li><code title="handler-window-onredo"><a href="webappapis.html#handler-window-onredo">onredo</a></code></li>
    <li><code title="handler-window-onresize"><a href="webappapis.html#handler-window-onresize">onresize</a></code></li>
    <li><code title="handler-window-onscroll"><a href="webappapis.html#handler-window-onscroll">onscroll</a></code></li>
    <li><code title="handler-window-onstorage"><a href="webappapis.html#handler-window-onstorage">onstorage</a></code></li>
-   <li><code title="handler-window-onundo"><a href="webappapis.html#handler-window-onundo">onundo</a></code></li>
    <li><code title="handler-window-onunload"><a href="webappapis.html#handler-window-onunload">onunload</a></code></li>
   </ul><p>The DOM interface also exposes <a href="webappapis.html#event-handler-idl-attributes">event handler IDL
   attributes</a> that mirror those on the <code><a href="browsers.html#window">Window</a></code>
@@ -1045,16 +1064,17 @@
   <code><a href="#htmlframeelement">HTMLFrameElement</a></code> interface.</p>
 
   <pre class="idl">interface <dfn id="htmlframeelement">HTMLFrameElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
-           attribute DOMString <a href="#dom-frame-frameborder" title="dom-frame-frameBorder">frameBorder</a>;
-           attribute DOMString <a href="#dom-frame-longdesc" title="dom-frame-longDesc">longDesc</a>;
-           attribute DOMString <a href="#dom-frame-marginheight" title="dom-frame-marginHeight">marginHeight</a>;
-           attribute DOMString <a href="#dom-frame-marginwidth" title="dom-frame-marginWidth">marginWidth</a>;
            attribute DOMString <a href="#dom-frame-name" title="dom-frame-name">name</a>;
-           attribute boolean <a href="#dom-frame-noresize" title="dom-frame-noResize">noResize</a>;
            attribute DOMString <a href="#dom-frame-scrolling" title="dom-frame-scrolling">scrolling</a>;
            attribute DOMString <a href="#dom-frame-src" title="dom-frame-src">src</a>;
+           attribute DOMString <a href="#dom-frame-frameborder" title="dom-frame-frameBorder">frameBorder</a>;
+           attribute DOMString <a href="#dom-frame-longdesc" title="dom-frame-longDesc">longDesc</a>;
+           attribute boolean <a href="#dom-frame-noresize" title="dom-frame-noResize">noResize</a>;
   readonly attribute Document? <a href="#dom-frame-contentdocument" title="dom-frame-contentDocument">contentDocument</a>;
   readonly attribute <a href="browsers.html#windowproxy">WindowProxy</a>? <a href="#dom-frame-contentwindow" title="dom-frame-contentWindow">contentWindow</a>;
+
+  [TreatNullAs=EmptyString] attribute DOMString <a href="#dom-frame-marginheight" title="dom-frame-marginHeight">marginHeight</a>;
+  [TreatNullAs=EmptyString] attribute DOMString <a href="#dom-frame-marginwidth" title="dom-frame-marginWidth">marginWidth</a>;
 };</pre>
 
   <p>The <dfn id="dom-frame-name" title="dom-frame-name"><code>name</code></dfn>, <dfn id="dom-frame-scrolling" title="dom-frame-scrolling"><code>scrolling</code></dfn>, and <dfn id="dom-frame-src" title="dom-frame-src"><code>src</code></dfn> IDL attributes of the
@@ -1072,6 +1092,21 @@
   for the purposes of reflection is defined as containing a
   <a href="urls.html#url">URL</a>.</p>
 
+  <p>The <dfn id="dom-frame-noresize" title="dom-frame-noResize"><code>noResize</code></dfn>
+  IDL attribute of the <code><a href="#frame">frame</a></code> element must
+  <a href="common-dom-interfaces.html#reflect">reflect</a> the element's <code title="attr-frame-noresize">noresize</code> content attribute.</p>
+
+  <p>The <dfn id="dom-frame-contentdocument" title="dom-frame-contentDocument"><code>contentDocument</code></dfn>
+  IDL attribute of the <code><a href="#frame">frame</a></code> element must return the
+  <code><a href="dom.html#document">Document</a></code> object of the <a href="browsers.html#active-document">active document</a> of
+  the <code><a href="#frame">frame</a></code> element's <a href="browsers.html#nested-browsing-context">nested browsing
+  context</a>.</p>
+
+  <p>The <dfn id="dom-frame-contentwindow" title="dom-frame-contentWindow"><code>contentWindow</code></dfn>
+  IDL attribute must return the <code><a href="browsers.html#windowproxy">WindowProxy</a></code> object of the
+  <code><a href="#frame">frame</a></code> element's <a href="browsers.html#nested-browsing-context">nested browsing
+  context</a>.</p>
+
   <p>The <dfn id="dom-frame-marginheight" title="dom-frame-marginHeight"><code>marginHeight</code></dfn> IDL
   attribute of the <code><a href="#frame">frame</a></code> element must
   <a href="common-dom-interfaces.html#reflect">reflect</a> the element's <code title="attr-frame-marginheight">marginheight</code> content
@@ -1082,31 +1117,15 @@
   <a href="common-dom-interfaces.html#reflect">reflect</a> the element's <code title="attr-frame-marginwidth">marginwidth</code> content
   attribute.</p>
 
-  <p>The <dfn id="dom-frame-noresize" title="dom-frame-noResize"><code>noResize</code></dfn>
-  IDL attribute of the <code><a href="#frame">frame</a></code> element must
-  <a href="common-dom-interfaces.html#reflect">reflect</a> the element's <code title="attr-frame-noresize">noresize</code> content attribute.</p>
-
-  <p>The <dfn id="dom-frame-contentdocument" title="dom-frame-contentDocument"><code>contentDocument</code></dfn>
-  IDL attribute of the <code><a href="#frame">frame</a></code> element must return the
-  <code><a href="infrastructure.html#document">Document</a></code> object of the <a href="browsers.html#active-document">active document</a> of
-  the <code><a href="#frame">frame</a></code> element's <a href="browsers.html#nested-browsing-context">nested browsing
-  context</a>.</p>
-
-  <p>The <dfn id="dom-frame-contentwindow" title="dom-frame-contentWindow"><code>contentWindow</code></dfn>
-  IDL attribute must return the <code><a href="browsers.html#windowproxy">WindowProxy</a></code> object of the
-  <code><a href="#frame">frame</a></code> element's <a href="browsers.html#nested-browsing-context">nested browsing
-  context</a>.</p>
-
 
 
   <h4 id="other-elements-attributes-and-apis"><span class="secno">11.3.4 </span>Other elements, attributes and APIs</h4> 
 
   <p>User agents must treat <code><a href="#acronym">acronym</a></code> elements in a manner
-  equivalent to <code><a href="text-level-semantics.html#the-abbr-element">abbr</a></code> elements in terms of semantics and
+  equivalent to <code><a href="the-abbr-element.html#the-abbr-element">abbr</a></code> elements in terms of semantics and
   for purposes of rendering.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="text-level-semantics.html#htmlanchorelement">HTMLAnchorElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-a-element.html#htmlanchorelement">HTMLAnchorElement</a> {
            attribute DOMString <a href="#dom-a-coords" title="dom-a-coords">coords</a>;
            attribute DOMString <a href="#dom-a-charset" title="dom-a-charset">charset</a>;
            attribute DOMString <a href="#dom-a-name" title="dom-a-name">name</a>;
@@ -1115,16 +1134,15 @@ interface <a href="text-level-semantics.html#htmlanchorelement">HTMLAnchorElemen
 };</pre>
 
   <p>The <dfn id="dom-a-coords" title="dom-a-coords"><code>coords</code></dfn>, <dfn id="dom-a-charset" title="dom-a-charset"><code>charset</code></dfn>, <dfn id="dom-a-name" title="dom-a-name"><code>name</code></dfn>, <dfn id="dom-a-rev" title="dom-a-rev"><code>rev</code></dfn>, and <dfn id="dom-a-shape" title="dom-a-shape"><code>shape</code></dfn> IDL attributes of the
-  <code><a href="text-level-semantics.html#the-a-element">a</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the respective
+  <code><a href="the-a-element.html#the-a-element">a</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the respective
   content attributes of the same name.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="the-map-element.html#htmlareaelement">HTMLAreaElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-area-element.html#htmlareaelement">HTMLAreaElement</a> {
            attribute boolean <a href="#dom-area-nohref" title="dom-area-noHref">noHref</a>;
 };</pre>
 
   <p>The <dfn id="dom-area-nohref" title="dom-area-noHref"><code>noHref</code></dfn> IDL
-  attribute of the <code><a href="the-map-element.html#the-area-element">area</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-area-element.html#the-area-element">area</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the element's <code title="attr-area-nohref"><a href="#attr-area-nohref">nohref</a></code> content
   attribute.</p>
 
@@ -1142,68 +1160,64 @@ interface <a href="the-map-element.html#htmlareaelement">HTMLAreaElement</a> {
   the <code><a href="#basefont">basefont</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the
   respective content attributes of the same name.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="sections.html#htmlbodyelement">HTMLBodyElement</a> {
-           attribute DOMString <a href="#dom-body-text" title="dom-body-text">text</a>;
-           attribute DOMString <a href="#dom-body-bgcolor" title="dom-body-bgColor">bgColor</a>;
-           attribute DOMString <a href="#dom-body-background" title="dom-body-background">background</a>;
-           attribute DOMString <a href="#dom-body-link" title="dom-body-link">link</a>;
-           attribute DOMString <a href="#dom-body-vlink" title="dom-body-vLink">vLink</a>;
-           attribute DOMString <a href="#dom-body-alink" title="dom-body-aLink">aLink</a>;
+  <hr/><pre class="idl">partial interface <a href="the-body-element.html#htmlbodyelement">HTMLBodyElement</a> {
+  [TreatNullAs=EmptyString] attribute DOMString <a href="#dom-body-text" title="dom-body-text">text</a>;
+  [TreatNullAs=EmptyString] attribute DOMString <a href="#dom-body-link" title="dom-body-link">link</a>;
+  [TreatNullAs=EmptyString] attribute DOMString <a href="#dom-body-vlink" title="dom-body-vLink">vLink</a>;
+  [TreatNullAs=EmptyString] attribute DOMString <a href="#dom-body-alink" title="dom-body-aLink">aLink</a>;
+  [TreatNullAs=EmptyString] attribute DOMString <a href="#dom-body-bgcolor" title="dom-body-bgColor">bgColor</a>;
+                            attribute DOMString <a href="#dom-body-background" title="dom-body-background">background</a>;
 };</pre>
 
   <p>The <dfn id="dom-body-text" title="dom-body-text"><code>text</code></dfn> IDL
-  attribute of the <code><a href="sections.html#the-body-element">body</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-body-element.html#the-body-element">body</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the element's <code title="attr-body-text"><a href="#attr-body-text">text</a></code> content
   attribute.</p>
 
+  <p>The <dfn id="dom-body-link" title="dom-body-link"><code>link</code></dfn> IDL
+  attribute of the <code><a href="the-body-element.html#the-body-element">body</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  the element's <code title="attr-body-link"><a href="#attr-body-link">link</a></code> content
+  attribute.</p>
+
+  <p>The <dfn id="dom-body-alink" title="dom-body-aLink"><code>aLink</code></dfn> IDL
+  attribute of the <code><a href="the-body-element.html#the-body-element">body</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  the element's <code title="attr-body-alink"><a href="#attr-body-alink">alink</a></code> content
+  attribute.</p>
+
+  <p>The <dfn id="dom-body-vlink" title="dom-body-vLink"><code>vLink</code></dfn> IDL
+  attribute of the <code><a href="the-body-element.html#the-body-element">body</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  the element's <code title="attr-body-vlink"><a href="#attr-body-vlink">vlink</a></code> content
+  attribute.</p>
+
   <p>The <dfn id="dom-body-bgcolor" title="dom-body-bgColor"><code>bgColor</code></dfn> IDL
-  attribute of the <code><a href="sections.html#the-body-element">body</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-body-element.html#the-body-element">body</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the element's <code title="attr-body-bgcolor"><a href="#attr-body-bgcolor">bgcolor</a></code> content
   attribute.</p>
 
   <p>The <dfn id="dom-body-background" title="dom-body-background"><code>background</code></dfn> IDL
-  attribute of the <code><a href="sections.html#the-body-element">body</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-body-element.html#the-body-element">body</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the element's <code title="attr-background"><a href="#attr-background">background</a></code>
   content attribute. (The <code title="attr-background"><a href="#attr-background">background</a></code> content is <em>not</em>
   defined to contain a <a href="urls.html#url">URL</a>, despite rules regarding its
   handling in the rendering section above.)</p>
 
-  <p>The <dfn id="dom-body-link" title="dom-body-link"><code>link</code></dfn> IDL
-  attribute of the <code><a href="sections.html#the-body-element">body</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
-  the element's <code title="attr-body-link"><a href="#attr-body-link">link</a></code> content
-  attribute.</p>
-
-  <p>The <dfn id="dom-body-alink" title="dom-body-aLink"><code>aLink</code></dfn> IDL
-  attribute of the <code><a href="sections.html#the-body-element">body</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
-  the element's <code title="attr-body-alink"><a href="#attr-body-alink">alink</a></code> content
-  attribute.</p>
-
-  <p>The <dfn id="dom-body-vlink" title="dom-body-vLink"><code>vLink</code></dfn> IDL
-  attribute of the <code><a href="sections.html#the-body-element">body</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
-  the element's <code title="attr-body-vlink"><a href="#attr-body-vlink">vlink</a></code> content
-  attribute.</p>
-
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="text-level-semantics.html#htmlbrelement">HTMLBRElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-br-element.html#htmlbrelement">HTMLBRElement</a> {
            attribute DOMString <a href="#dom-br-clear" title="dom-br-clear">clear</a>;
 };</pre>
 
   <p>The <dfn id="dom-br-clear" title="dom-br-clear"><code>clear</code></dfn> IDL
-  attribute of the <code><a href="text-level-semantics.html#the-br-element">br</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-br-element.html#the-br-element">br</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the content attribute of the same name.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="tabular-data.html#htmltablecaptionelement">HTMLTableCaptionElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-caption-element.html#htmltablecaptionelement">HTMLTableCaptionElement</a> {
            attribute DOMString <a href="#dom-caption-align" title="dom-caption-align">align</a>;
 };</pre>
 
   <p>The <dfn id="dom-caption-align" title="dom-caption-align"><code>align</code></dfn> IDL
-  attribute of the <code><a href="tabular-data.html#the-caption-element">caption</a></code> element must
+  attribute of the <code><a href="the-caption-element.html#the-caption-element">caption</a></code> element must
   <a href="common-dom-interfaces.html#reflect">reflect</a> the content attribute of the same name.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="tabular-data.html#htmltablecolelement">HTMLTableColElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-colgroup-element.html#htmltablecolelement">HTMLTableColElement</a> {
            attribute DOMString <a href="#dom-col-align" title="dom-col-align">align</a>;
            attribute DOMString <a href="#dom-col-ch" title="dom-col-ch">ch</a>;
            attribute DOMString <a href="#dom-col-choff" title="dom-col-chOff">chOff</a>;
@@ -1212,26 +1226,26 @@ interface <a href="tabular-data.html#htmltablecolelement">HTMLTableColElement</a
 };</pre>
 
   <p>The <dfn id="dom-col-align" title="dom-col-align"><code>align</code></dfn> and <dfn id="dom-col-width" title="dom-col-width"><code>width</code></dfn> IDL attributes of
-  the <code><a href="tabular-data.html#the-col-element">col</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the
+  the <code><a href="the-col-element.html#the-col-element">col</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the
   respective content attributes of the same name.</p>
 
   <p>The <dfn id="dom-col-ch" title="dom-col-ch"><code>ch</code></dfn> IDL attribute
-  of the <code><a href="tabular-data.html#the-col-element">col</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the
+  of the <code><a href="the-col-element.html#the-col-element">col</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the
   element's <code title="attr-col-char"><a href="#attr-col-char">char</a></code> content
   attribute.</p>
 
   <p>The <dfn id="dom-col-choff" title="dom-col-chOff"><code>chOff</code></dfn> IDL
-  attribute of the <code><a href="tabular-data.html#the-col-element">col</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-col-element.html#the-col-element">col</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the element's <code title="attr-col-charoff"><a href="#attr-col-charoff">charoff</a></code> content
   attribute.</p>
 
   <p>The <dfn id="dom-col-valign" title="dom-col-vAlign"><code>vAlign</code></dfn> IDL
-  attribute of the <code><a href="tabular-data.html#the-col-element">col</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-col-element.html#the-col-element">col</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the element's <code title="attr-col-valign"><a href="#attr-col-valign">valign</a></code> content
   attribute.</p>
 
   <hr/><p>User agents must treat <code><a href="#dir">dir</a></code> elements in a manner
-  equivalent to <code><a href="grouping-content.html#the-ul-element">ul</a></code> elements in terms of semantics and for
+  equivalent to <code><a href="the-ul-element.html#the-ul-element">ul</a></code> elements in terms of semantics and for
   purposes of rendering.</p>
 
   <p>The <code><a href="#dir">dir</a></code> element must implement the
@@ -1245,41 +1259,38 @@ interface <a href="tabular-data.html#htmltablecolelement">HTMLTableColElement</a
   attribute of the <code><a href="#dir">dir</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the content attribute of the same name.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="grouping-content.html#htmldivelement">HTMLDivElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-div-element.html#htmldivelement">HTMLDivElement</a> {
            attribute DOMString <a href="#dom-div-align" title="dom-div-align">align</a>;
 };</pre>
 
   <p>The <dfn id="dom-div-align" title="dom-div-align"><code>align</code></dfn> IDL
-  attribute of the <code><a href="grouping-content.html#the-div-element">div</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-div-element.html#the-div-element">div</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the content attribute of the same name.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="grouping-content.html#htmldlistelement">HTMLDListElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-dl-element.html#htmldlistelement">HTMLDListElement</a> {
            attribute boolean <a href="#dom-dl-compact" title="dom-dl-compact">compact</a>;
 };</pre>
 
   <p>The <dfn id="dom-dl-compact" title="dom-dl-compact"><code>compact</code></dfn> IDL
-  attribute of the <code><a href="grouping-content.html#the-dl-element">dl</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-dl-element.html#the-dl-element">dl</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the content attribute of the same name.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="the-iframe-element.html#htmlembedelement">HTMLEmbedElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-embed-element.html#htmlembedelement">HTMLEmbedElement</a> {
            attribute DOMString <a href="#dom-embed-align" title="dom-embed-align">align</a>;
            attribute DOMString <a href="#dom-embed-name" title="dom-embed-name">name</a>;
 };</pre>
 
   <p>The <dfn id="dom-embed-name" title="dom-embed-name"><code>name</code></dfn> and <dfn id="dom-embed-align" title="dom-embed-align"><code>align</code></dfn> IDL attributes of
-  the <code><a href="the-iframe-element.html#the-embed-element">embed</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the
+  the <code><a href="the-embed-element.html#the-embed-element">embed</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the
   respective content attributes of the same name.</p>
 
   <hr/><p>The <code><a href="#font">font</a></code> element must implement the
   <code><a href="#htmlfontelement">HTMLFontElement</a></code> interface.</p>
 
   <pre class="idl">interface <dfn id="htmlfontelement">HTMLFontElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
-           attribute DOMString <a href="#dom-font-color" title="dom-font-color">color</a>;
-           attribute DOMString <a href="#dom-font-face" title="dom-font-face">face</a>;
-           attribute DOMString <a href="#dom-font-size" title="dom-font-size">size</a>; 
+  [TreatNullAs=EmptyString] attribute DOMString <a href="#dom-font-color" title="dom-font-color">color</a>;
+                            attribute DOMString <a href="#dom-font-face" title="dom-font-face">face</a>;
+                            attribute DOMString <a href="#dom-font-size" title="dom-font-size">size</a>; 
 };</pre>
 
   <p>The <dfn id="dom-font-color" title="dom-font-color"><code>color</code></dfn>,
@@ -1287,24 +1298,22 @@ interface <a href="the-iframe-element.html#htmlembedelement">HTMLEmbedElement</a
   the <code><a href="#font">font</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the
   respective content attributes of the same name.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="sections.html#htmlheadingelement">HTMLHeadingElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-h1-h2-h3-h4-h5-and-h6-elements.html#htmlheadingelement">HTMLHeadingElement</a> {
            attribute DOMString <a href="#dom-hx-align" title="dom-hx-align">align</a>;
 };</pre>
 
   <p>The <dfn id="dom-hx-align" title="dom-hx-align"><code>align</code></dfn> IDL
-  attribute of the <code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code>&#x2013;<code><a href="sections.html#the-h1-h2-h3-h4-h5-and-h6-elements">h6</a></code> elements must
+  attribute of the <code><a href="the-h1-h2-h3-h4-h5-and-h6-elements.html#the-h1-h2-h3-h4-h5-and-h6-elements">h1</a></code>&#x2013;<code><a href="the-h1-h2-h3-h4-h5-and-h6-elements.html#the-h1-h2-h3-h4-h5-and-h6-elements">h6</a></code> elements must
   <a href="common-dom-interfaces.html#reflect">reflect</a> the content attribute of the same name.</p>
 
   <hr/><p class="note">The <dfn id="dom-head-profile" title="dom-head-profile"><code>profile</code></dfn> IDL attribute on
-  <code><a href="semantics.html#the-head-element">head</a></code> elements (with the <code><a href="semantics.html#htmlheadelement">HTMLHeadElement</a></code>
+  <code><a href="the-head-element.html#the-head-element">head</a></code> elements (with the <code><a href="the-head-element.html#htmlheadelement">HTMLHeadElement</a></code>
   interface) is intentionally omitted. Unless so required by <a href="infrastructure.html#other-applicable-specifications" title="other applicable specifications">another applicable
   specification</a>, implementations would therefore not support
   this attribute. (It is mentioned here as it was defined in a
   previous version of the DOM specifications.)</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="grouping-content.html#htmlhrelement">HTMLHRElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-hr-element.html#htmlhrelement">HTMLHRElement</a> {
            attribute DOMString <a href="#dom-hr-align" title="dom-hr-align">align</a>;
            attribute DOMString <a href="#dom-hr-color" title="dom-hr-color">color</a>;
            attribute boolean <a href="#dom-hr-noshade" title="dom-hr-noShade">noShade</a>;
@@ -1313,31 +1322,30 @@ interface <a href="grouping-content.html#htmlhrelement">HTMLHRElement</a> {
 };</pre>
 
   <p>The <dfn id="dom-hr-align" title="dom-hr-align"><code>align</code></dfn>, <dfn id="dom-hr-color" title="dom-hr-color"><code>color</code></dfn>, <dfn id="dom-hr-size" title="dom-hr-size"><code>size</code></dfn>, and <dfn id="dom-hr-width" title="dom-hr-width"><code>width</code></dfn> IDL attributes of the
-  <code><a href="grouping-content.html#the-hr-element">hr</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the respective
+  <code><a href="the-hr-element.html#the-hr-element">hr</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the respective
   content attributes of the same name.</p>
 
   <p>The <dfn id="dom-hr-noshade" title="dom-hr-noShade"><code>noShade</code></dfn> IDL
-  attribute of the <code><a href="grouping-content.html#the-hr-element">hr</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
-  the element's <code title="attr-input-noshade">noshade</code>
-  content attribute.</p>
+  attribute of the <code><a href="the-hr-element.html#the-hr-element">hr</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  the element's <code title="attr-hr-noshade"><a href="#attr-hr-noshade">noshade</a></code> content
+  attribute.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="semantics.html#htmlhtmlelement">HTMLHtmlElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-html-element.html#htmlhtmlelement">HTMLHtmlElement</a> {
            attribute DOMString <a href="#dom-html-version" title="dom-html-version">version</a>;
 };</pre>
 
   <p>The <dfn id="dom-html-version" title="dom-html-version"><code>version</code></dfn> IDL
-  attribute of the <code><a href="semantics.html#the-html-element">html</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-html-element.html#the-html-element">html</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the content attribute of the same name.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="the-iframe-element.html#htmliframeelement">HTMLIFrameElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-iframe-element.html#htmliframeelement">HTMLIFrameElement</a> {
            attribute DOMString <a href="#dom-iframe-align" title="dom-iframe-align">align</a>;
+           attribute DOMString <a href="#dom-iframe-scrolling" title="dom-iframe-scrolling">scrolling</a>;
            attribute DOMString <a href="#dom-iframe-frameborder" title="dom-iframe-frameBorder">frameBorder</a>;
            attribute DOMString <a href="#dom-iframe-longdesc" title="dom-iframe-longDesc">longDesc</a>;
-           attribute DOMString <a href="#dom-iframe-marginheight" title="dom-iframe-marginHeight">marginHeight</a>;
-           attribute DOMString <a href="#dom-iframe-marginwidth" title="dom-iframe-marginWidth">marginWidth</a>;
-           attribute DOMString <a href="#dom-iframe-scrolling" title="dom-iframe-scrolling">scrolling</a>;
+
+  [TreatNullAs=EmptyString] attribute DOMString <a href="#dom-iframe-marginheight" title="dom-iframe-marginHeight">marginHeight</a>;
+  [TreatNullAs=EmptyString] attribute DOMString <a href="#dom-iframe-marginwidth" title="dom-iframe-marginWidth">marginWidth</a>;
 };</pre>
 
   <p>The <dfn id="dom-iframe-align" title="dom-iframe-align"><code>align</code></dfn> and
@@ -1367,30 +1375,29 @@ interface <a href="the-iframe-element.html#htmliframeelement">HTMLIFrameElement<
   <a href="common-dom-interfaces.html#reflect">reflect</a> the element's <code title="attr-iframe-marginwidth"><a href="#attr-iframe-marginwidth">marginwidth</a></code> content
   attribute.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="embedded-content-1.html#htmlimageelement">HTMLImageElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-img-element.html#htmlimageelement">HTMLImageElement</a> {
            attribute DOMString <a href="#dom-img-name" title="dom-img-name">name</a>;
            attribute DOMString <a href="#dom-img-align" title="dom-img-align">align</a>;
-           attribute DOMString <a href="#dom-img-border" title="dom-img-border">border</a>;
            attribute unsigned long <a href="#dom-img-hspace" title="dom-img-hspace">hspace</a>;
-           attribute DOMString <a href="#dom-img-longdesc" title="dom-img-longDesc">longDesc</a>;
            attribute unsigned long <a href="#dom-img-vspace" title="dom-img-vspace">vspace</a>;
+           attribute DOMString <a href="#dom-img-longdesc" title="dom-img-longDesc">longDesc</a>;
+
+  [TreatNullAs=EmptyString] attribute DOMString <a href="#dom-img-border" title="dom-img-border">border</a>;
 };</pre>
 
   <p>The <dfn id="dom-img-name" title="dom-img-name"><code>name</code></dfn>, <dfn id="dom-img-align" title="dom-img-align"><code>align</code></dfn>, <dfn id="dom-img-border" title="dom-img-border"><code>border</code></dfn>, <dfn id="dom-img-hspace" title="dom-img-hspace"><code>hspace</code></dfn>, and <dfn id="dom-img-vspace" title="dom-img-vspace"><code>vspace</code></dfn> IDL attributes of
-  the <code><a href="embedded-content-1.html#the-img-element">img</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the
+  the <code><a href="the-img-element.html#the-img-element">img</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the
   respective content attributes of the same name.</p>
 
   <p>The <dfn id="dom-img-longdesc" title="dom-img-longDesc"><code>longDesc</code></dfn> IDL
-  attribute of the <code><a href="embedded-content-1.html#the-img-element">img</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-img-element.html#the-img-element">img</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the element's <code title="attr-img-longdesc"><a href="#attr-img-longdesc">longdesc</a></code>
   content attribute, which for the purposes of reflection is defined
   as containing a <a href="urls.html#url">URL</a>.</p>
 
   
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="the-input-element.html#htmlinputelement">HTMLInputElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-input-element.html#htmlinputelement">HTMLInputElement</a> {
            attribute DOMString <a href="#dom-input-align" title="dom-input-align">align</a>;
            attribute DOMString <a href="#dom-input-usemap" title="dom-input-useMap">useMap</a>;
 };</pre>
@@ -1403,26 +1410,23 @@ interface <a href="the-input-element.html#htmlinputelement">HTMLInputElement</a>
   attribute of the <code><a href="the-input-element.html#the-input-element">input</a></code> element must
   <a href="common-dom-interfaces.html#reflect">reflect</a> the element's <code title="attr-input-usemap"><a href="#attr-input-usemap">usemap</a></code> content attribute.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="forms.html#htmllegendelement">HTMLLegendElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-legend-element.html#htmllegendelement">HTMLLegendElement</a> {
            attribute DOMString <a href="#dom-legend-align" title="dom-legend-align">align</a>;
 };</pre>
 
   <p>The <dfn id="dom-legend-align" title="dom-legend-align"><code>align</code></dfn> IDL
-  attribute of the <code><a href="forms.html#the-legend-element">legend</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-legend-element.html#the-legend-element">legend</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the content attribute of the same name.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="grouping-content.html#htmllielement">HTMLLIElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-li-element.html#htmllielement">HTMLLIElement</a> {
            attribute DOMString <a href="#dom-li-type" title="dom-li-type">type</a>;
 };</pre>
 
   <p>The <dfn id="dom-li-type" title="dom-li-type"><code>type</code></dfn> IDL
-  attribute of the <code><a href="grouping-content.html#the-li-element">li</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-li-element.html#the-li-element">li</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the content attribute of the same name.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="semantics.html#htmllinkelement">HTMLLinkElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-link-element.html#htmllinkelement">HTMLLinkElement</a> {
            attribute DOMString <a href="#dom-link-charset" title="dom-link-charset">charset</a>;
            attribute DOMString <a href="#dom-link-rev" title="dom-link-rev">rev</a>;
            attribute DOMString <a href="#dom-link-target" title="dom-link-target">target</a>;
@@ -1430,30 +1434,28 @@ interface <a href="semantics.html#htmllinkelement">HTMLLinkElement</a> {
 
   <p>The <dfn id="dom-link-charset" title="dom-link-charset"><code>charset</code></dfn>,
   <dfn id="dom-link-rev" title="dom-link-rev"><code>rev</code></dfn>, and <dfn id="dom-link-target" title="dom-link-target"><code>target</code></dfn> IDL attributes of
-  the <code><a href="semantics.html#the-link-element">link</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the
+  the <code><a href="the-link-element.html#the-link-element">link</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the
   respective content attributes of the same name.</p>
 
   <hr/><p>User agents must treat <code><a href="#listing">listing</a></code> elements in a manner
-  equivalent to <code><a href="grouping-content.html#the-pre-element">pre</a></code> elements in terms of semantics and
+  equivalent to <code><a href="the-pre-element.html#the-pre-element">pre</a></code> elements in terms of semantics and
   for purposes of rendering.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="interactive-elements.html#htmlmenuelement">HTMLMenuElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-menu-element.html#htmlmenuelement">HTMLMenuElement</a> {
            attribute boolean <a href="#dom-menu-compact" title="dom-menu-compact">compact</a>;
 };</pre>
 
   <p>The <dfn id="dom-menu-compact" title="dom-menu-compact"><code>compact</code></dfn> IDL
-  attribute of the <code><a href="interactive-elements.html#the-menu-element">menu</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-menu-element.html#the-menu-element">menu</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the content attribute of the same name.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="semantics.html#htmlmetaelement">HTMLMetaElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-meta-element.html#htmlmetaelement">HTMLMetaElement</a> {
            attribute DOMString <a href="#dom-meta-scheme" title="dom-meta-scheme">scheme</a>;
 };</pre>
 
   <p>User agents may treat the <code title="attr-meta-scheme"><a href="#attr-meta-scheme">scheme</a></code> content attribute on the
-  <code><a href="semantics.html#the-meta-element">meta</a></code> element as an extension of the element's <code title="attr-meta-name"><a href="semantics.html#attr-meta-name">name</a></code> content attribute when processing
-  a <code><a href="semantics.html#the-meta-element">meta</a></code> element with a <code title="attr-meta-name"><a href="semantics.html#attr-meta-name">name</a></code> attribute whose value is one that
+  <code><a href="the-meta-element.html#the-meta-element">meta</a></code> element as an extension of the element's <code title="attr-meta-name"><a href="the-meta-element.html#attr-meta-name">name</a></code> content attribute when processing
+  a <code><a href="the-meta-element.html#the-meta-element">meta</a></code> element with a <code title="attr-meta-name"><a href="the-meta-element.html#attr-meta-name">name</a></code> attribute whose value is one that
   the user agent recognizes as supporting the <code title="attr-meta-scheme"><a href="#attr-meta-scheme">scheme</a></code> attribute.</p>
 
   <p>User agents are encouraged to ignore the <code title="attr-meta-scheme"><a href="#attr-meta-scheme">scheme</a></code> attribute and instead process
@@ -1462,12 +1464,12 @@ interface <a href="semantics.html#htmlmetaelement">HTMLMetaElement</a> {
 
   <div class="example">
 
-   <p>For example, if the user agent acts on <code><a href="semantics.html#the-meta-element">meta</a></code>
-   elements with <code title="attr-meta-name"><a href="semantics.html#attr-meta-name">name</a></code> attributes
+   <p>For example, if the user agent acts on <code><a href="the-meta-element.html#the-meta-element">meta</a></code>
+   elements with <code title="attr-meta-name"><a href="the-meta-element.html#attr-meta-name">name</a></code> attributes
    having the value "eGMS.subject.keyword", and knows that the <code title="attr-meta-scheme"><a href="#attr-meta-scheme">scheme</a></code> attribute is used with this
    metadata name, then it could take the <code title="attr-meta-scheme"><a href="#attr-meta-scheme">scheme</a></code> attribute into account,
-   acting as if it was an extension of the <code title="attr-meta-name"><a href="semantics.html#attr-meta-name">name</a></code> attribute. Thus the following
-   two <code><a href="semantics.html#the-meta-element">meta</a></code> elements could be treated as two elements
+   acting as if it was an extension of the <code title="attr-meta-name"><a href="the-meta-element.html#attr-meta-name">name</a></code> attribute. Thus the following
+   two <code><a href="the-meta-element.html#the-meta-element">meta</a></code> elements could be treated as two elements
    giving values for two different metadata names, one consisting of a
    combination of "eGMS.subject.keyword" and "LGCL", and the other
    consisting of a combination of "eGMS.subject.keyword" and
@@ -1486,128 +1488,122 @@ interface <a href="semantics.html#htmlmetaelement">HTMLMetaElement</a> {
   </div>
 
   <p>The <dfn id="dom-meta-scheme" title="dom-meta-scheme"><code>scheme</code></dfn> IDL
-  attribute of the <code><a href="semantics.html#the-meta-element">meta</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-meta-element.html#the-meta-element">meta</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the content attribute of the same name.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="the-iframe-element.html#htmlobjectelement">HTMLObjectElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-object-element.html#htmlobjectelement">HTMLObjectElement</a> {
            attribute DOMString <a href="#dom-object-align" title="dom-object-align">align</a>;
            attribute DOMString <a href="#dom-object-archive" title="dom-object-archive">archive</a>;
-           attribute DOMString <a href="#dom-object-border" title="dom-object-border">border</a>;
            attribute DOMString <a href="#dom-object-code" title="dom-object-code">code</a>;
-           attribute DOMString <a href="#dom-object-codebase" title="dom-object-codeBase">codeBase</a>;
-           attribute DOMString <a href="#dom-object-codetype" title="dom-object-codeType">codeType</a>;
            attribute boolean <a href="#dom-object-declare" title="dom-object-declare">declare</a>;
            attribute unsigned long <a href="#dom-object-hspace" title="dom-object-hspace">hspace</a>;
            attribute DOMString <a href="#dom-object-standby" title="dom-object-standby">standby</a>;
            attribute unsigned long <a href="#dom-object-vspace" title="dom-object-vspace">vspace</a>;
+           attribute DOMString <a href="#dom-object-codebase" title="dom-object-codeBase">codeBase</a>;
+           attribute DOMString <a href="#dom-object-codetype" title="dom-object-codeType">codeType</a>;
+
+  [TreatNullAs=EmptyString] attribute DOMString <a href="#dom-object-border" title="dom-object-border">border</a>;
 };</pre>
 
   <p>The <dfn id="dom-object-align" title="dom-object-align"><code>align</code></dfn>, <dfn id="dom-object-archive" title="dom-object-archive"><code>archive</code></dfn>, <dfn id="dom-object-border" title="dom-object-border"><code>border</code></dfn>, <dfn id="dom-object-code" title="dom-object-code"><code>code</code></dfn>, <dfn id="dom-object-declare" title="dom-object-declare"><code>declare</code></dfn>, <dfn id="dom-object-hspace" title="dom-object-hspace"><code>hspace</code></dfn>, <dfn id="dom-object-standby" title="dom-object-standby"><code>standby</code></dfn>, and <dfn id="dom-object-vspace" title="dom-object-vspace"><code>vspace</code></dfn> IDL attributes
-  of the <code><a href="the-iframe-element.html#the-object-element">object</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the
+  of the <code><a href="the-object-element.html#the-object-element">object</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the
   respective content attributes of the same name.</p>
 
   <p>The <dfn id="dom-object-codebase" title="dom-object-codeBase"><code>codeBase</code></dfn>
-  IDL attribute of the <code><a href="the-iframe-element.html#the-object-element">object</a></code> element must
+  IDL attribute of the <code><a href="the-object-element.html#the-object-element">object</a></code> element must
   <a href="common-dom-interfaces.html#reflect">reflect</a> the element's <code title="attr-object-codebase"><a href="#attr-object-codebase">codebase</a></code> content attribute,
   which for the purposes of reflection is defined as containing a
   <a href="urls.html#url">URL</a>.</p>
 
   <p>The <dfn id="dom-object-codetype" title="dom-object-codeType"><code>codeType</code></dfn> IDL
-  attribute of the <code><a href="the-iframe-element.html#the-object-element">object</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-object-element.html#the-object-element">object</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the element's <code title="attr-object-codetype"><a href="#attr-object-codetype">codetype</a></code> content
   attribute.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="grouping-content.html#htmlolistelement">HTMLOListElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-ol-element.html#htmlolistelement">HTMLOListElement</a> {
            attribute boolean <a href="#dom-ol-compact" title="dom-ol-compact">compact</a>;
 };</pre>
 
   <p>The <dfn id="dom-ol-compact" title="dom-ol-compact"><code>compact</code></dfn> IDL
-  attribute of the <code><a href="grouping-content.html#the-ol-element">ol</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-ol-element.html#the-ol-element">ol</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the content attribute of the same name.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="grouping-content.html#htmlparagraphelement">HTMLParagraphElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-p-element.html#htmlparagraphelement">HTMLParagraphElement</a> {
            attribute DOMString <a href="#dom-p-align" title="dom-p-align">align</a>;
 };</pre>
 
   <p>The <dfn id="dom-p-align" title="dom-p-align"><code>align</code></dfn> IDL
-  attribute of the <code><a href="grouping-content.html#the-p-element">p</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-p-element.html#the-p-element">p</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the content attribute of the same name.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="the-iframe-element.html#htmlparamelement">HTMLParamElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-param-element.html#htmlparamelement">HTMLParamElement</a> {
            attribute DOMString <a href="#dom-param-type" title="dom-param-type">type</a>;
            attribute DOMString <a href="#dom-param-valuetype" title="dom-param-valueType">valueType</a>;
 };</pre>
 
   <p>The <dfn id="dom-param-type" title="dom-param-type"><code>type</code></dfn> IDL
-  attribute of the <code><a href="the-iframe-element.html#the-param-element">param</a></code> element must
+  attribute of the <code><a href="the-param-element.html#the-param-element">param</a></code> element must
   <a href="common-dom-interfaces.html#reflect">reflect</a> the content attribute of the same name.</p>
 
   <p>The <dfn id="dom-param-valuetype" title="dom-param-valueType"><code>valueType</code></dfn>
-  IDL attribute of the <code><a href="the-iframe-element.html#the-param-element">param</a></code> element must
+  IDL attribute of the <code><a href="the-param-element.html#the-param-element">param</a></code> element must
   <a href="common-dom-interfaces.html#reflect">reflect</a> the element's <code title="attr-param-valuetype"><a href="#attr-param-valuetype">valuetype</a></code> content attribute.</p>
 
   <hr/><p>User agents must treat <code><a href="#plaintext">plaintext</a></code> elements in a
-  manner equivalent to <code><a href="grouping-content.html#the-pre-element">pre</a></code> elements in terms of semantics
+  manner equivalent to <code><a href="the-pre-element.html#the-pre-element">pre</a></code> elements in terms of semantics
   and for purposes of rendering. (The parser has special behavior for
   this element, though.)</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="grouping-content.html#htmlpreelement">HTMLPreElement</a> {
-           attribute unsigned long <a href="#dom-pre-width" title="dom-pre-width">width</a>;
+  <hr/><pre class="idl">partial interface <a href="the-pre-element.html#htmlpreelement">HTMLPreElement</a> {
+           attribute long <a href="#dom-pre-width" title="dom-pre-width">width</a>;
 };</pre>
 
   <p>The <dfn id="dom-pre-width" title="dom-pre-width"><code>width</code></dfn> IDL
-  attribute of the <code><a href="grouping-content.html#the-pre-element">pre</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-pre-element.html#the-pre-element">pre</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the content attribute of the same name.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="scripting-1.html#htmlscriptelement">HTMLScriptElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-script-element.html#htmlscriptelement">HTMLScriptElement</a> {
            attribute DOMString <a href="#dom-script-event" title="dom-script-event">event</a>;
            attribute DOMString <a href="#dom-script-htmlfor" title="dom-script-htmlFor">htmlFor</a>;
 };</pre>
 
   <p>The <dfn id="dom-script-event" title="dom-script-event"><code>event</code></dfn> and
   <dfn id="dom-script-htmlfor" title="dom-script-htmlFor"><code>htmlFor</code></dfn> IDL
-  attributes of the <code><a href="scripting-1.html#the-script-element">script</a></code> element must return the empty
+  attributes of the <code><a href="the-script-element.html#the-script-element">script</a></code> element must return the empty
   string on getting, and do nothing on setting.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="tabular-data.html#htmltableelement">HTMLTableElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-table-element.html#htmltableelement">HTMLTableElement</a> {
            attribute DOMString <a href="#dom-table-align" title="dom-table-align">align</a>;
-           attribute DOMString <a href="#dom-table-bgcolor" title="dom-table-bgColor">bgColor</a>;
-           attribute DOMString <a href="#dom-table-cellpadding" title="dom-table-cellPadding">cellPadding</a>;
-           attribute DOMString <a href="#dom-table-cellspacing" title="dom-table-cellSpacing">cellSpacing</a>;
            attribute DOMString <a href="#dom-table-frame" title="dom-table-frame">frame</a>;
            attribute DOMString <a href="#dom-table-rules" title="dom-table-rules">rules</a>;
            attribute DOMString <a href="#dom-table-summary" title="dom-table-summary">summary</a>;
            attribute DOMString <a href="#dom-table-width" title="dom-table-width">width</a>;
+
+  [TreatNullAs=EmptyString] attribute DOMString <a href="#dom-table-bgcolor" title="dom-table-bgColor">bgColor</a>;
+  [TreatNullAs=EmptyString] attribute DOMString <a href="#dom-table-cellpadding" title="dom-table-cellPadding">cellPadding</a>;
+  [TreatNullAs=EmptyString] attribute DOMString <a href="#dom-table-cellspacing" title="dom-table-cellSpacing">cellSpacing</a>;
 };</pre>
 
   <p>The <dfn id="dom-table-align" title="dom-table-align"><code>align</code></dfn>, <dfn id="dom-table-frame" title="dom-table-frame"><code>frame</code></dfn>, <dfn id="dom-table-summary" title="dom-table-summary"><code>summary</code></dfn>, <dfn id="dom-table-rules" title="dom-table-rules"><code>rules</code></dfn>, and <dfn id="dom-table-width" title="dom-table-width"><code>width</code></dfn>, IDL attributes of
-  the <code><a href="tabular-data.html#the-table-element">table</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the
+  the <code><a href="the-table-element.html#the-table-element">table</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the
   respective content attributes of the same name.</p>
 
   <p>The <dfn id="dom-table-bgcolor" title="dom-table-bgColor"><code>bgColor</code></dfn> IDL
-  attribute of the <code><a href="tabular-data.html#the-table-element">table</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-table-element.html#the-table-element">table</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the element's <code title="attr-table-bgcolor"><a href="#attr-table-bgcolor">bgcolor</a></code> content
   attribute.</p>
 
   <p>The <dfn id="dom-table-cellpadding" title="dom-table-cellPadding"><code>cellPadding</code></dfn> IDL
-  attribute of the <code><a href="tabular-data.html#the-table-element">table</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-table-element.html#the-table-element">table</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the element's <code title="attr-table-cellpadding"><a href="#attr-table-cellpadding">cellpadding</a></code> content
   attribute.</p>
 
   <p>The <dfn id="dom-table-cellspacing" title="dom-table-cellSpacing"><code>cellSpacing</code></dfn> IDL
-  attribute of the <code><a href="tabular-data.html#the-table-element">table</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-table-element.html#the-table-element">table</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the element's <code title="attr-table-cellspacing"><a href="#attr-table-cellspacing">cellspacing</a></code> content
   attribute.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="tabular-data.html#htmltablesectionelement">HTMLTableSectionElement</a> {
+  <hr/><pre class="idl">partial interface <a href="the-tbody-element.html#htmltablesectionelement">HTMLTableSectionElement</a> {
            attribute DOMString <a href="#dom-tbody-align" title="dom-tbody-align">align</a>;
            attribute DOMString <a href="#dom-tbody-ch" title="dom-tbody-ch">ch</a>;
            attribute DOMString <a href="#dom-tbody-choff" title="dom-tbody-chOff">chOff</a>;
@@ -1615,110 +1611,110 @@ interface <a href="tabular-data.html#htmltablesectionelement">HTMLTableSectionEl
 };</pre>
 
   <p>The <dfn id="dom-tbody-align" title="dom-tbody-align"><code>align</code></dfn> IDL
-  attribute of the <code><a href="tabular-data.html#the-tbody-element">tbody</a></code>, <code><a href="tabular-data.html#the-thead-element">thead</a></code>, and
-  <code><a href="tabular-data.html#the-tfoot-element">tfoot</a></code> elements must <a href="common-dom-interfaces.html#reflect">reflect</a> the content
+  attribute of the <code><a href="the-tbody-element.html#the-tbody-element">tbody</a></code>, <code><a href="the-thead-element.html#the-thead-element">thead</a></code>, and
+  <code><a href="the-tfoot-element.html#the-tfoot-element">tfoot</a></code> elements must <a href="common-dom-interfaces.html#reflect">reflect</a> the content
   attribute of the same name.</p>
 
   <p>The <dfn id="dom-tbody-ch" title="dom-tbody-ch"><code>ch</code></dfn> IDL attribute
-  of the <code><a href="tabular-data.html#the-tbody-element">tbody</a></code>, <code><a href="tabular-data.html#the-thead-element">thead</a></code>, and
-  <code><a href="tabular-data.html#the-tfoot-element">tfoot</a></code> elements must <a href="common-dom-interfaces.html#reflect">reflect</a> the elements'
+  of the <code><a href="the-tbody-element.html#the-tbody-element">tbody</a></code>, <code><a href="the-thead-element.html#the-thead-element">thead</a></code>, and
+  <code><a href="the-tfoot-element.html#the-tfoot-element">tfoot</a></code> elements must <a href="common-dom-interfaces.html#reflect">reflect</a> the elements'
   <code title="attr-tbody-char"><a href="#attr-tbody-char">char</a></code> content attributes.</p>
 
   <p>The <dfn id="dom-tbody-choff" title="dom-tbody-chOff"><code>chOff</code></dfn> IDL
-  attribute of the <code><a href="tabular-data.html#the-tbody-element">tbody</a></code>, <code><a href="tabular-data.html#the-thead-element">thead</a></code>, and
-  <code><a href="tabular-data.html#the-tfoot-element">tfoot</a></code> elements must <a href="common-dom-interfaces.html#reflect">reflect</a> the elements'
+  attribute of the <code><a href="the-tbody-element.html#the-tbody-element">tbody</a></code>, <code><a href="the-thead-element.html#the-thead-element">thead</a></code>, and
+  <code><a href="the-tfoot-element.html#the-tfoot-element">tfoot</a></code> elements must <a href="common-dom-interfaces.html#reflect">reflect</a> the elements'
   <code title="attr-tbody-charoff"><a href="#attr-tbody-charoff">charoff</a></code> content attributes.</p>
 
   <p>The <dfn id="dom-tbody-valign" title="dom-tbody-vAlign"><code>vAlign</code></dfn> IDL
-  attribute of the <code><a href="tabular-data.html#the-tbody-element">tbody</a></code>, <code><a href="tabular-data.html#the-thead-element">thead</a></code>, and
-  <code><a href="tabular-data.html#the-tfoot-element">tfoot</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the elements'
+  attribute of the <code><a href="the-tbody-element.html#the-tbody-element">tbody</a></code>, <code><a href="the-thead-element.html#the-thead-element">thead</a></code>, and
+  <code><a href="the-tfoot-element.html#the-tfoot-element">tfoot</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the elements'
   <code title="attr-tbody-valign"><a href="#attr-tbody-valign">valign</a></code> content
   attributes.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="tabular-data.html#htmltablecellelement">HTMLTableCellElement</a> {
+  <hr/><pre class="idl">partial interface <a href="attributes-common-to-td-and-th-elements.html#htmltablecellelement">HTMLTableCellElement</a> {
            attribute DOMString <a href="#dom-tdth-abbr" title="dom-tdth-abbr">abbr</a>;
            attribute DOMString <a href="#dom-tdth-align" title="dom-tdth-align">align</a>;
            attribute DOMString <a href="#dom-tdth-axis" title="dom-tdth-axis">axis</a>;
-           attribute DOMString <a href="#dom-tdth-bgcolor" title="dom-tdth-bgColor">bgColor</a>;
+           attribute DOMString <a href="#dom-tdth-height" title="dom-tdth-height">height</a>;
+           attribute DOMString <a href="#dom-tdth-width" title="dom-tdth-width">width</a>;
+
            attribute DOMString <a href="#dom-tdth-ch" title="dom-tdth-ch">ch</a>;
            attribute DOMString <a href="#dom-tdth-choff" title="dom-tdth-chOff">chOff</a>;
-           attribute DOMString <a href="#dom-tdth-height" title="dom-tdth-height">height</a>;
            attribute boolean <a href="#dom-tdth-nowrap" title="dom-tdth-noWrap">noWrap</a>;
            attribute DOMString <a href="#dom-tdth-valign" title="dom-tdth-vAlign">vAlign</a>;
-           attribute DOMString <a href="#dom-tdth-width" title="dom-tdth-width">width</a>;
+
+  [TreatNullAs=EmptyString] attribute DOMString <a href="#dom-tdth-bgcolor" title="dom-tdth-bgColor">bgColor</a>;
 };</pre>
 
   <p>The <dfn id="dom-tdth-abbr" title="dom-tdth-abbr"><code>abbr</code></dfn>, <dfn id="dom-tdth-align" title="dom-tdth-align"><code>align</code></dfn>, <dfn id="dom-tdth-axis" title="dom-tdth-axis"><code>axis</code></dfn>, <dfn id="dom-tdth-height" title="dom-tdth-height"><code>height</code></dfn>, and <dfn id="dom-tdth-width" title="dom-tdth-width"><code>width</code></dfn> IDL attributes of
-  the <code><a href="tabular-data.html#the-td-element">td</a></code> and <code><a href="tabular-data.html#the-th-element">th</a></code> elements must
+  the <code><a href="the-td-element.html#the-td-element">td</a></code> and <code><a href="the-th-element.html#the-th-element">th</a></code> elements must
   <a href="common-dom-interfaces.html#reflect">reflect</a> the respective content attributes of the same
   name.</p>
 
-  <p>The <dfn id="dom-tdth-bgcolor" title="dom-tdth-bgColor"><code>bgColor</code></dfn> IDL
-  attribute of the <code><a href="tabular-data.html#the-td-element">td</a></code> and <code><a href="tabular-data.html#the-th-element">th</a></code> elements must
-  <a href="common-dom-interfaces.html#reflect">reflect</a> the elements' <code title="attr-tdth-bgcolor"><a href="#attr-tdth-bgcolor">bgcolor</a></code> content attributes.</p>
-
   <p>The <dfn id="dom-tdth-ch" title="dom-tdth-ch"><code>ch</code></dfn> IDL
-  attribute of the <code><a href="tabular-data.html#the-td-element">td</a></code> and <code><a href="tabular-data.html#the-th-element">th</a></code> elements must
+  attribute of the <code><a href="the-td-element.html#the-td-element">td</a></code> and <code><a href="the-th-element.html#the-th-element">th</a></code> elements must
   <a href="common-dom-interfaces.html#reflect">reflect</a> the elements' <code title="attr-tdth-char"><a href="#attr-tdth-char">char</a></code> content attributes.</p>
 
   <p>The <dfn id="dom-tdth-choff" title="dom-tdth-chOff"><code>chOff</code></dfn> IDL
-  attribute of the <code><a href="tabular-data.html#the-td-element">td</a></code> and <code><a href="tabular-data.html#the-th-element">th</a></code> elements must
+  attribute of the <code><a href="the-td-element.html#the-td-element">td</a></code> and <code><a href="the-th-element.html#the-th-element">th</a></code> elements must
   <a href="common-dom-interfaces.html#reflect">reflect</a> the elements' <code title="attr-tdth-charoff"><a href="#attr-tdth-charoff">charoff</a></code> content attributes.</p>
 
   <p>The <dfn id="dom-tdth-nowrap" title="dom-tdth-noWrap"><code>noWrap</code></dfn> IDL
-  attribute of the <code><a href="tabular-data.html#the-td-element">td</a></code> and <code><a href="tabular-data.html#the-th-element">th</a></code> elements must
+  attribute of the <code><a href="the-td-element.html#the-td-element">td</a></code> and <code><a href="the-th-element.html#the-th-element">th</a></code> elements must
   <a href="common-dom-interfaces.html#reflect">reflect</a> the elements' <code title="attr-tdth-nowrap"><a href="#attr-tdth-nowrap">nowrap</a></code> content attributes.</p>
 
   <p>The <dfn id="dom-tdth-valign" title="dom-tdth-vAlign"><code>vAlign</code></dfn> IDL
-  attribute of the <code><a href="tabular-data.html#the-td-element">td</a></code> and <code><a href="tabular-data.html#the-th-element">th</a></code> element must
+  attribute of the <code><a href="the-td-element.html#the-td-element">td</a></code> and <code><a href="the-th-element.html#the-th-element">th</a></code> element must
   <a href="common-dom-interfaces.html#reflect">reflect</a> the elements' <code title="attr-tdth-valign"><a href="#attr-tdth-valign">valign</a></code> content attributes.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="tabular-data.html#htmltablerowelement">HTMLTableRowElement</a> {
+  <p>The <dfn id="dom-tdth-bgcolor" title="dom-tdth-bgColor"><code>bgColor</code></dfn> IDL
+  attribute of the <code><a href="the-td-element.html#the-td-element">td</a></code> and <code><a href="the-th-element.html#the-th-element">th</a></code> elements must
+  <a href="common-dom-interfaces.html#reflect">reflect</a> the elements' <code title="attr-tdth-bgcolor"><a href="#attr-tdth-bgcolor">bgcolor</a></code> content attributes.</p>
+
+  <hr/><pre class="idl">partial interface <a href="the-tr-element.html#htmltablerowelement">HTMLTableRowElement</a> {
            attribute DOMString <a href="#dom-tr-align" title="dom-tr-align">align</a>;
-           attribute DOMString <a href="#dom-tr-bgcolor" title="dom-tr-bgColor">bgColor</a>;
            attribute DOMString <a href="#dom-tr-ch" title="dom-tr-ch">ch</a>;
            attribute DOMString <a href="#dom-tr-choff" title="dom-tr-chOff">chOff</a>;
            attribute DOMString <a href="#dom-tr-valign" title="dom-tr-vAlign">vAlign</a>;
+
+  [TreatNullAs=EmptyString] attribute DOMString <a href="#dom-tr-bgcolor" title="dom-tr-bgColor">bgColor</a>;
 };</pre>
 
   <p>The <dfn id="dom-tr-align" title="dom-tr-align"><code>align</code></dfn> IDL
-  attribute of the <code><a href="tabular-data.html#the-tr-element">tr</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-tr-element.html#the-tr-element">tr</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the content attribute of the same name.</p>
 
-  <p>The <dfn id="dom-tr-bgcolor" title="dom-tr-bgColor"><code>bgColor</code></dfn> IDL
-  attribute of the <code><a href="tabular-data.html#the-tr-element">tr</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
-  the element's <code title="attr-tr-bgcolor"><a href="#attr-tr-bgcolor">bgcolor</a></code> content
-  attribute.</p>
-
   <p>The <dfn id="dom-tr-ch" title="dom-tr-ch"><code>ch</code></dfn> IDL attribute of
-  the <code><a href="tabular-data.html#the-tr-element">tr</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the element's
+  the <code><a href="the-tr-element.html#the-tr-element">tr</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the element's
   <code title="attr-tr-char"><a href="#attr-tr-char">char</a></code> content attribute.</p>
 
   <p>The <dfn id="dom-tr-choff" title="dom-tr-chOff"><code>chOff</code></dfn> IDL
-  attribute of the <code><a href="tabular-data.html#the-tr-element">tr</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-tr-element.html#the-tr-element">tr</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the element's <code title="attr-tr-charoff"><a href="#attr-tr-charoff">charoff</a></code> content
   attribute.</p>
 
   <p>The <dfn id="dom-tr-valign" title="dom-tr-vAlign"><code>vAlign</code></dfn> IDL
-  attribute of the <code><a href="tabular-data.html#the-tr-element">tr</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  attribute of the <code><a href="the-tr-element.html#the-tr-element">tr</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
   the element's <code title="attr-tr-valign"><a href="#attr-tr-valign">valign</a></code> content
   attribute.</p>
 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="grouping-content.html#htmlulistelement">HTMLUListElement</a> {
+  <p>The <dfn id="dom-tr-bgcolor" title="dom-tr-bgColor"><code>bgColor</code></dfn> IDL
+  attribute of the <code><a href="the-tr-element.html#the-tr-element">tr</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a>
+  the element's <code title="attr-tr-bgcolor"><a href="#attr-tr-bgcolor">bgcolor</a></code> content
+  attribute.</p>
+
+  <hr/><pre class="idl">partial interface <a href="the-ul-element.html#htmlulistelement">HTMLUListElement</a> {
            attribute boolean <a href="#dom-ul-compact" title="dom-ul-compact">compact</a>;
            attribute DOMString <a href="#dom-ul-type" title="dom-ul-type">type</a>;
 };</pre>
 
   <p>The <dfn id="dom-ul-compact" title="dom-ul-compact"><code>compact</code></dfn> and
   <dfn id="dom-ul-type" title="dom-ul-type"><code>type</code></dfn> IDL attributes of
-  the <code><a href="grouping-content.html#the-ul-element">ul</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the respective
+  the <code><a href="the-ul-element.html#the-ul-element">ul</a></code> element must <a href="common-dom-interfaces.html#reflect">reflect</a> the respective
   content attributes of the same name.</p>
 
   <hr/><p>User agents must treat <code><a href="#xmp">xmp</a></code> elements in a manner
-  equivalent to <code><a href="grouping-content.html#the-pre-element">pre</a></code> elements in terms of semantics and
+  equivalent to <code><a href="the-pre-element.html#the-pre-element">pre</a></code> elements in terms of semantics and
   for purposes of rendering. (The parser has special behavior for this
   element though.)</p>
 
@@ -1726,27 +1722,27 @@ interface <a href="grouping-content.html#htmlulistelement">HTMLUListElement</a> 
   <code><a href="#multicol">multicol</a></code>, <code><a href="#nextid">nextid</a></code>, <code><a href="#rb">rb</a></code>, and
   <code><a href="#spacer">spacer</a></code> elements must use the
   <code><a href="elements.html#htmlunknownelement">HTMLUnknownElement</a></code> interface.</p> 
-  <hr/><pre class="idl">[Supplemental]
-interface <a href="dom.html#htmldocument">HTMLDocument</a> {
-           attribute DOMString <a href="#dom-document-fgcolor" title="dom-document-fgColor">fgColor</a>;
-           attribute DOMString <a href="#dom-document-bgcolor" title="dom-document-bgColor">bgColor</a>;
-           attribute DOMString <a href="#dom-document-linkcolor" title="dom-document-linkColor">linkColor</a>;
-           attribute DOMString <a href="#dom-document-vlinkcolor" title="dom-document-vlinkColor">vlinkColor</a>;
-           attribute DOMString <a href="#dom-document-alinkcolor" title="dom-document-alinkColor">alinkColor</a>;
 
-  readonly attribute <a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a> <a href="#dom-document-anchors" title="dom-document-anchors">anchors</a>;
-  readonly attribute <a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a> <a href="#dom-document-applets" title="dom-document-applets">applets</a>;
+  <hr/><pre class="idl">partial interface <a href="dom.html#document">Document</a> {
+  [TreatNullAs=EmptyString] attribute DOMString <a href="#dom-document-fgcolor" title="dom-document-fgColor">fgColor</a>;
+  [TreatNullAs=EmptyString] attribute DOMString <a href="#dom-document-linkcolor" title="dom-document-linkColor">linkColor</a>;
+  [TreatNullAs=EmptyString] attribute DOMString <a href="#dom-document-vlinkcolor" title="dom-document-vlinkColor">vlinkColor</a>;
+  [TreatNullAs=EmptyString] attribute DOMString <a href="#dom-document-alinkcolor" title="dom-document-alinkColor">alinkColor</a>;
+  [TreatNullAs=EmptyString] attribute DOMString <a href="#dom-document-bgcolor" title="dom-document-bgColor">bgColor</a>;
+
+  readonly attribute <a href="infrastructure.html#htmlcollection">HTMLCollection</a> <a href="#dom-document-anchors" title="dom-document-anchors">anchors</a>;
+  readonly attribute <a href="infrastructure.html#htmlcollection">HTMLCollection</a> <a href="#dom-document-applets" title="dom-document-applets">applets</a>;
 
   void <a href="#dom-document-clear" title="dom-document-clear">clear</a>();
 
   readonly attribute <a href="common-dom-interfaces.html#htmlallcollection">HTMLAllCollection</a> <a href="#dom-document-all" title="dom-document-all">all</a>;
 };</pre>
 
-  <p>The attributes of the <code><a href="infrastructure.html#document">Document</a></code> object listed in the
+  <p>The attributes of the <code><a href="dom.html#document">Document</a></code> object listed in the
   first column of the following table must <a href="common-dom-interfaces.html#reflect">reflect</a> the
   content attribute on <a href="dom.html#the-body-element-0">the body element</a> with the name
   given in the corresponding cell in the second column on the same
-  row, if <a href="dom.html#the-body-element-0">the body element</a> is a <code><a href="sections.html#the-body-element">body</a></code> element
+  row, if <a href="dom.html#the-body-element-0">the body element</a> is a <code><a href="the-body-element.html#the-body-element">body</a></code> element
   (as opposed to a <code><a href="#frameset">frameset</a></code> element). When there is no
   <a href="dom.html#the-body-element-0" title="the body element">body element</a> or if it is a
   <code><a href="#frameset">frameset</a></code> element, the attributes must instead return
@@ -1756,23 +1752,23 @@ interface <a href="dom.html#htmldocument">HTMLDocument</a> {
      </th><th> Content attribute
    </th></tr></thead><tbody><tr><td><dfn id="dom-document-fgcolor" title="dom-document-fgColor"><code>fgColor</code></dfn>
      </td><td><code title="attr-body-text"><a href="#attr-body-text">text</a></code>
-    </td></tr><tr><td><dfn id="dom-document-bgcolor" title="dom-document-bgColor"><code>bgColor</code></dfn>
-     </td><td><code title="attr-body-bgcolor"><a href="#attr-body-bgcolor">bgcolor</a></code>
     </td></tr><tr><td><dfn id="dom-document-linkcolor" title="dom-document-linkColor"><code>linkColor</code></dfn>
      </td><td><code title="attr-body-link"><a href="#attr-body-link">link</a></code>
     </td></tr><tr><td><dfn id="dom-document-vlinkcolor" title="dom-document-vlinkColor"><code>vlinkColor</code></dfn>
      </td><td><code title="attr-body-vlink"><a href="#attr-body-vlink">vlink</a></code>
     </td></tr><tr><td><dfn id="dom-document-alinkcolor" title="dom-document-alinkColor"><code>alinkColor</code></dfn>
      </td><td><code title="attr-body-alink"><a href="#attr-body-alink">alink</a></code>
+    </td></tr><tr><td><dfn id="dom-document-bgcolor" title="dom-document-bgColor"><code>bgColor</code></dfn>
+     </td><td><code title="attr-body-bgcolor"><a href="#attr-body-bgcolor">bgcolor</a></code>
   </td></tr></tbody></table><hr/><p>The <dfn id="dom-document-anchors" title="dom-document-anchors"><code>anchors</code></dfn>
-  attribute must return an <code><a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a></code> rooted at the
-  <code><a href="infrastructure.html#document">Document</a></code> node, whose filter matches only <code><a href="text-level-semantics.html#the-a-element">a</a></code>
+  attribute must return an <code><a href="infrastructure.html#htmlcollection">HTMLCollection</a></code> rooted at the
+  <code><a href="dom.html#document">Document</a></code> node, whose filter matches only <code><a href="the-a-element.html#the-a-element">a</a></code>
   elements with <code title="attr-a-name"><a href="#attr-a-name">name</a></code>
   attributes.</p>
 
   <p>The <dfn id="dom-document-applets" title="dom-document-applets"><code>applets</code></dfn>
-  attribute must return an <code><a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a></code> rooted at the
-  <code><a href="infrastructure.html#document">Document</a></code> node, whose filter matches only
+  attribute must return an <code><a href="infrastructure.html#htmlcollection">HTMLCollection</a></code> rooted at the
+  <code><a href="dom.html#document">Document</a></code> node, whose filter matches only
   <code><a href="#the-applet-element">applet</a></code> elements.</p>
 
   <p>The <dfn id="dom-document-clear" title="dom-document-clear"><code>clear()</code></dfn>
@@ -1780,7 +1776,7 @@ interface <a href="dom.html#htmldocument">HTMLDocument</a> {
 
   <hr/><p>The <dfn id="dom-document-all" title="dom-document-all"><code>all</code></dfn>
   attribute must return an <code><a href="common-dom-interfaces.html#htmlallcollection">HTMLAllCollection</a></code> rooted at the
-  <code><a href="infrastructure.html#document">Document</a></code> node, whose filter matches all elements.</p>
+  <code><a href="dom.html#document">Document</a></code> node, whose filter matches all elements.</p>
 
   <p>The object returned for <code title="dom-document-all"><a href="#dom-document-all">all</a></code>
   has several unusual behaviors:</p>
@@ -1797,7 +1793,7 @@ interface <a href="dom.html#htmldocument">HTMLDocument</a> {
 
   </ul><p class="note">These requirements are a <a href="introduction.html#willful-violation">willful
   violation</a> of the JavaScript specification current at the time
-  of writing (ECMAScript edition 3). The JavaScript specification
+  of writing (ECMAScript edition 5). The JavaScript specification
   requires that the ToBoolean() operator convert all objects to the
   true value, and does not have provisions for objects acting as if
   they were <code title="">undefined</code> for the purposes of

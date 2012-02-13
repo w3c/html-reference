@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>2.9 Namespaces &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<!DOCTYPE html>
+<html lang="en-US-x-Hixie"><head><title>2.9 Namespaces &#x2014; HTML5</title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -19,6 +19,7 @@
    dd table + p { margin-top: 1em; }
    p + * > li, dd li { margin: 1em 0; }
    dt, dfn { font-weight: bold; font-style: normal; }
+   i, em { font-style: italic; }
    dt dfn { font-style: italic; }
    pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
    pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
@@ -40,9 +41,10 @@
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
 
    .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   img.extra { float: right; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   img.extra, p.overview { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; position: relative; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl::before { content: "IDL"; font: bold small sans-serif; padding: 0.5em; background: white; position: absolute; top: 0; margin: -1px 0 0 -4em; width: 1.5em; border: thin solid; border-radius: 0 0 0 0.5em }
    pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
    pre.css:first-line { color: #AAAA50; }
    dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
@@ -50,6 +52,7 @@
    dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
    dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
    dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
    dl.switch { padding-left: 2em; }
    dl.switch > dt { text-indent: -1.5em; }
    dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
@@ -104,6 +107,7 @@
    .note { color: green; background: transparent; font-family: sans-serif; }
    .warning { color: red; background: transparent; }
    .note, .warning { font-weight: bolder; font-style: italic; }
+   .note em, .warning em, .note i, .warning i { font-style: normal; }
    p.note, div.note { padding: 0.5em 2em; }
    span.note { padding: 0 2em; }
    .note p:first-child, .warning p:first-child { margin-top: 0; }
@@ -295,8 +299,6 @@
      src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
    }
 
-  ]]></style><style type="text/css"><![CDATA[
-   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
   ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
    function getCookie(name) {
      var params = location.search.substr(1).split("&");
@@ -315,15 +317,17 @@
      }
      return null;
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="common-dom-interfaces.html" title="2.8 Common DOM interfaces" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="dom.html" title="3 Semantics, structure, and APIs of HTML documents" rel="next"/></head><body><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="common-dom-interfaces.html" title="2.8 Common DOM interfaces" rel="prev"/><link href="index.html#contents" title="Table of contents" rel="contents"/><link href="dom.html" title="3 Semantics, structure, and APIs of HTML documents" rel="next"/></head><body onload="fixBrokenLink();" class="split chapter"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   </div><div>
-   <a href="common-dom-interfaces.html" class="prev">2.8 Common DOM interfaces</a> &#x2013;
-   <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="dom.html" class="next">3 Semantics, structure, and APIs of HTML documents</a>
-  </div><h3 id="namespaces"><span class="secno">2.9 </span>Namespaces</h3><p>The <dfn id="html-namespace-0">HTML namespace</dfn> is: <code>http://www.w3.org/1999/xhtml</code></p><p>The <dfn id="mathml-namespace">MathML namespace</dfn> is: <code>http://www.w3.org/1998/Math/MathML</code></p><p>The <dfn id="svg-namespace">SVG namespace</dfn> is: <code>http://www.w3.org/2000/svg</code></p><p>The <dfn id="xlink-namespace">XLink namespace</dfn> is: <code>http://www.w3.org/1999/xlink</code></p><p>The <dfn id="xml-namespace">XML namespace</dfn> is: <code>http://www.w3.org/XML/1998/namespace</code></p><p>The <dfn id="xmlns-namespace">XMLNS namespace</dfn> is: <code>http://www.w3.org/2000/xmlns/</code></p><hr/><p>Data mining tools and other user agents that perform operations
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
+
+   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   </div><nav class="prev_next"><a href="common-dom-interfaces.html">&#x2190; 2.8 Common DOM interfaces</a> &#x2013;
+   <a href="index.html#contents">Table of contents</a> &#x2013;
+   <a href="dom.html">3 Semantics, structure, and APIs of HTML documents &#x2192;</a>
+  </nav><h3 id="namespaces"><span class="secno">2.9 </span>Namespaces</h3><p>The <dfn id="html-namespace-0">HTML namespace</dfn> is: <code>http://www.w3.org/1999/xhtml</code></p><p>The <dfn id="mathml-namespace">MathML namespace</dfn> is: <code>http://www.w3.org/1998/Math/MathML</code></p><p>The <dfn id="svg-namespace">SVG namespace</dfn> is: <code>http://www.w3.org/2000/svg</code></p><p>The <dfn id="xlink-namespace">XLink namespace</dfn> is: <code>http://www.w3.org/1999/xlink</code></p><p>The <dfn id="xml-namespace">XML namespace</dfn> is: <code>http://www.w3.org/XML/1998/namespace</code></p><p>The <dfn id="xmlns-namespace">XMLNS namespace</dfn> is: <code>http://www.w3.org/2000/xmlns/</code></p><hr/><p>Data mining tools and other user agents that perform operations
   on content without running scripts, evaluating CSS or XPath
   expressions, or otherwise exposing the resulting DOM to arbitrary
   content, may "support namespaces" by just asserting that their DOM

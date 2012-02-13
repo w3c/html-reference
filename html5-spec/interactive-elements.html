@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>4.11 Interactive elements &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<!DOCTYPE html>
+<html lang="en-US-x-Hixie"><head><title>4.11 Interactive elements &#x2014; HTML5</title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -19,6 +19,7 @@
    dd table + p { margin-top: 1em; }
    p + * > li, dd li { margin: 1em 0; }
    dt, dfn { font-weight: bold; font-style: normal; }
+   i, em { font-style: italic; }
    dt dfn { font-style: italic; }
    pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
    pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
@@ -40,9 +41,10 @@
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
 
    .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   img.extra { float: right; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   img.extra, p.overview { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; position: relative; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl::before { content: "IDL"; font: bold small sans-serif; padding: 0.5em; background: white; position: absolute; top: 0; margin: -1px 0 0 -4em; width: 1.5em; border: thin solid; border-radius: 0 0 0 0.5em }
    pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
    pre.css:first-line { color: #AAAA50; }
    dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
@@ -50,6 +52,7 @@
    dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
    dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
    dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
    dl.switch { padding-left: 2em; }
    dl.switch > dt { text-indent: -1.5em; }
    dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
@@ -104,6 +107,7 @@
    .note { color: green; background: transparent; font-family: sans-serif; }
    .warning { color: red; background: transparent; }
    .note, .warning { font-weight: bolder; font-style: italic; }
+   .note em, .warning em, .note i, .warning i { font-style: normal; }
    p.note, div.note { padding: 0.5em 2em; }
    span.note { padding: 0 2em; }
    .note p:first-child, .warning p:first-child { margin-top: 0; }
@@ -295,8 +299,6 @@
      src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
    }
 
-  ]]></style><style type="text/css"><![CDATA[
-   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
   ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
    function getCookie(name) {
      var params = location.search.substr(1).split("&");
@@ -315,538 +317,14 @@
      }
      return null;
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="association-of-controls-and-forms.html" title="4.10.18 Association of controls and forms" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="commands.html" title="4.11.5 Commands" rel="next"/></head><body><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="form-submission.html" title="4.10.22 Form submission" rel="prev"/><link href="index.html#contents" title="Table of contents" rel="contents"/><link href="the-details-element.html" title="4.11.1 The details element" rel="next"/></head><body onload="fixBrokenLink();" class="split chapter"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   </div><div>
-   <a href="association-of-controls-and-forms.html" class="prev">4.10.18 Association of controls and forms</a> &#x2013;
-   <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="commands.html" class="next">4.11.5 Commands</a>
-  <ol class="toc"><li><ol><li><a href="interactive-elements.html#interactive-elements"><span class="secno">4.11 </span>Interactive elements</a>
-    <ol><li><a href="interactive-elements.html#the-details-element"><span class="secno">4.11.1 </span>The <code>details</code> element</a></li><li><a href="interactive-elements.html#the-summary-element"><span class="secno">4.11.2 </span>The <code>summary</code> element</a></li><li><a href="interactive-elements.html#the-command-element"><span class="secno">4.11.3 </span>The <code>command</code> element</a></li><li><a href="interactive-elements.html#the-menu-element"><span class="secno">4.11.4 </span>The <code>menu</code> element</a>
-      <ol><li><a href="interactive-elements.html#menus-intro"><span class="secno">4.11.4.1 </span>Introduction</a></li><li><a href="interactive-elements.html#building-menus-and-toolbars"><span class="secno">4.11.4.2 </span>Building menus and toolbars</a></li><li><a href="interactive-elements.html#context-menus"><span class="secno">4.11.4.3 </span>Context menus</a></li><li><a href="interactive-elements.html#toolbars"><span class="secno">4.11.4.4 </span>Toolbars</a></li></ol></li></ol></li></ol></li></ol></div><h3 id="interactive-elements"><span class="secno">4.11 </span>Interactive elements</h3><h4 id="the-details-element"><span class="secno">4.11.1 </span>The <dfn><code>details</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
-   <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
-   <dd><a href="sections.html#sectioning-root">Sectioning root</a>.</dd>
-   <dd><a href="content-models.html#interactive-content">Interactive content</a>.</dd>
-   <dt>Contexts in which this element can be used:</dt>
-   <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
-   <dt>Content model:</dt>
-   <dd>One <code><a href="#the-summary-element">summary</a></code> element followed by <a href="content-models.html#flow-content">flow content</a>.</dd>
-   <dt>Content attributes:</dt>
-   <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
-   <dd><code title="attr-details-open"><a href="#attr-details-open">open</a></code></dd>
-   <dt>DOM interface:</dt>
-   <dd>
-<pre class="idl">interface <dfn id="htmldetailselement">HTMLDetailsElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
-           attribute boolean <a href="#dom-details-open" title="dom-details-open">open</a>;
-};</pre>
-   </dd>
-  </dl><p>The <code><a href="#the-details-element">details</a></code> element <a href="rendering.html#represents">represents</a> a
-  disclosure widget from which the user can obtain additional
-  information or controls.</p><p class="note">The <code><a href="#the-details-element">details</a></code> element is not appropriate
-  for footnotes. Please see <a href="links.html#footnotes">the section on
-  footnotes</a> for details on how to mark up footnotes.</p><p>The <span class="impl">first</span> <code><a href="#the-summary-element">summary</a></code> element
-  child of the element, if any, <a href="rendering.html#represents">represents</a> the summary or
-  legend of the details. <span class="impl">If there is no child
-  <code><a href="#the-summary-element">summary</a></code> element, the user agent should provide its own
-  legend (e.g. "Details").</span></p><p>The rest of the element's contents <a href="rendering.html#represents">represents</a> the
-  additional information or controls.</p><p>The <dfn id="attr-details-open" title="attr-details-open"><code>open</code></dfn>
-  content attribute is a <a href="common-microsyntaxes.html#boolean-attribute">boolean attribute</a>. If present,
-  it indicates that both the summary and the additional information is
-  to be shown to the user. If the attribute is absent, only the
-  summary is to be shown.</p><div class="impl">
-
-  <p>When the element is created, if the attribute is absent, the
-  additional information should be hidden; if the attribute is absent,
-  that information should be shown. Subsequently, if the attribute is
-  removed, then the information should be hidden; if the attribute is
-  added, the information should be shown.</p>
-
-  <p>The user agent should allow the user to request that the
-  additional information be shown or hidden. To honor a request for
-  the details to be shown, the user agent must set the <code title="attr-details-open"><a href="#attr-details-open">open</a></code> attribute on the element to
-  the value <code title="">open</code>. To honor a request for the
-  information to be hidden, the user agent must remove the <code title="attr-details-open"><a href="#attr-details-open">open</a></code> attribute from the
-  element.</p>
-
-  <p>The <dfn id="dom-details-open" title="dom-details-open"><code>open</code></dfn> IDL
-  attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-details-open"><a href="#attr-details-open">open</a></code> content attribute.</p>
-
-  </div><div class="example">
-
-   <p>The following example shows the <code><a href="#the-details-element">details</a></code> element
-   being used to hide technical details in a progress report.</p>
-
-   <pre>&lt;section class="progress window"&gt;
- &lt;h1&gt;Copying "Really Achieving Your Childhood Dreams"&lt;/h1&gt;
- &lt;details&gt;
-  &lt;summary&gt;Copying... &lt;progress max="375505392" value="97543282"&gt;&lt;/progress&gt; 25%&lt;/summary&gt;
-  &lt;dl&gt;
-   &lt;dt&gt;Transfer rate:&lt;/dt&gt; &lt;dd&gt;452KB/s&lt;/dd&gt;
-   &lt;dt&gt;Local filename:&lt;/dt&gt; &lt;dd&gt;/home/rpausch/raycd.m4v&lt;/dd&gt;
-   &lt;dt&gt;Remote filename:&lt;/dt&gt; &lt;dd&gt;/var/www/lectures/raycd.m4v&lt;/dd&gt;
-   &lt;dt&gt;Duration:&lt;/dt&gt; &lt;dd&gt;01:16:27&lt;/dd&gt;
-   &lt;dt&gt;Color profile:&lt;/dt&gt; &lt;dd&gt;SD (6-1-6)&lt;/dd&gt;
-   &lt;dt&gt;Dimensions:&lt;/dt&gt; &lt;dd&gt;320&#xD7;240&lt;/dd&gt;
-  &lt;/dl&gt;
- &lt;/details&gt;
-&lt;/section&gt;</pre>
-
-  </div><div class="example">
-
-   <p>The following shows how a <code><a href="#the-details-element">details</a></code> element can be
-   used to hide some controls by default:</p>
-
-   <pre>&lt;details&gt;
- &lt;summary&gt;&lt;label for=fn&gt;Name &amp; Extension:&lt;/label&gt;&lt;/summary&gt;
- &lt;p&gt;&lt;input type=text id=fn name=fn value="Pillar Magazine.pdf"&gt;
- &lt;p&gt;&lt;label&gt;&lt;input type=checkbox name=ext checked&gt; Hide extension&lt;/label&gt;
-&lt;/details&gt;</pre>
-
-   <p>One could use this in conjunction with other <code><a href="#the-details-element">details</a></code>
-   in a list to allow the user to collapse a set of fields down to a
-   small set of headings, with the ability to open each one.</p>
-
-   <p class="details-example"><img alt="" height="611" src="http://dev.w3.org/html5/spec/images/sample-details-1.png" width="345"/><img alt="" height="666" src="http://dev.w3.org/html5/spec/images/sample-details-2.png" width="345"/></p>
-
-   <p>In these examples, the summary really just summarises what the
-   controls can change, and not the actual values, which is less than
-   ideal.</p>
-
-  </div><h4 id="the-summary-element"><span class="secno">4.11.2 </span>The <dfn><code>summary</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
-   <dd>None.</dd>
-   <dt>Contexts in which this element can be used:</dt>
-   <dd>As the first child of a <code><a href="#the-details-element">details</a></code> element.</dd>
-   <dt>Content model:</dt>
-   <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Content attributes:</dt>
-   <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
-   <dt>DOM interface:</dt>
-   <dd>Uses <code><a href="elements.html#htmlelement">HTMLElement</a></code>.</dd>
-  </dl><p>The <code><a href="#the-summary-element">summary</a></code> element <a href="rendering.html#represents">represents</a> a
-  summary, caption, or legend for the rest of the contents of the
-  <code><a href="#the-summary-element">summary</a></code> element's parent <code><a href="#the-details-element">details</a></code>
-  element<span class="impl">, if any</span>.</p><h4 id="the-command-element"><span class="secno">4.11.3 </span>The <dfn id="the-command"><code>command</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
-   <dd><a href="content-models.html#metadata-content">Metadata content</a>.</dd>
-   <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
-   <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dt>Contexts in which this element can be used:</dt>
-   <dd>Where <a href="content-models.html#metadata-content">metadata content</a> is expected.</dd>
-   <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
-   <dt>Content model:</dt>
-   <dd>Empty.</dd>
-   <dt>Content attributes:</dt>
-   <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
-   <dd><code title="attr-command-type"><a href="#attr-command-type">type</a></code></dd>
-   <dd><code title="attr-command-label"><a href="#attr-command-label">label</a></code></dd>
-   <dd><code title="attr-command-icon"><a href="#attr-command-icon">icon</a></code></dd>
-   <dd><code title="attr-command-disabled"><a href="#attr-command-disabled">disabled</a></code></dd>
-   <dd><code title="attr-command-checked"><a href="#attr-command-checked">checked</a></code></dd>
-   <dd><code title="attr-command-radiogroup"><a href="#attr-command-radiogroup">radiogroup</a></code></dd>
-   
-   <dd>Also, the <code title="attr-command-title"><a href="#attr-command-title">title</a></code> attribute has special semantics on this element.</dd>
-   <dt>DOM interface:</dt>
-   <dd>
-<pre class="idl">interface <dfn id="htmlcommandelement">HTMLCommandElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
-           attribute DOMString <a href="#dom-command-type" title="dom-command-type">type</a>;
-           attribute DOMString <a href="#dom-command-label" title="dom-command-label">label</a>;
-           attribute DOMString <a href="#dom-command-icon" title="dom-command-icon">icon</a>;
-           attribute boolean <a href="#dom-command-disabled" title="dom-command-disabled">disabled</a>;
-           attribute boolean <a href="#dom-command-checked" title="dom-command-checked">checked</a>;
-           attribute DOMString <a href="#dom-command-radiogroup" title="dom-command-radiogroup">radiogroup</a>;};</pre>
-   </dd>
-  </dl><p>The <code><a href="#the-command-element">command</a></code> element represents a command that the user
-  can invoke.</p><p>A command can be part of a context menu or toolbar, using the
-  <code><a href="#the-menu-element">menu</a></code> element, or can be put anywhere else in the page,
-  to define a keyboard shortcut.</p><p>The <dfn id="attr-command-type" title="attr-command-type"><code>type</code></dfn>
-  attribute indicates the kind of command: either a normal command
-  with an associated action, or a state or option that can be toggled,
-  or a selection of one item from a list of items.</p><p>The attribute is an <a href="common-microsyntaxes.html#enumerated-attribute">enumerated attribute</a> with three
-  keywords and states. The "<dfn id="attr-command-type-keyword-command" title="attr-command-type-keyword-command"><code>command</code></dfn>"
-  keyword maps to the <a href="#attr-command-type-state-command" title="attr-command-type-state-command">Command</a> state, the
-  "<dfn id="attr-command-type-keyword-checkbox" title="attr-command-type-keyword-checkbox"><code>checkbox</code></dfn>"
-  keyword maps to the <a href="#attr-command-type-state-checkbox" title="attr-command-type-state-checkbox">Checkbox</a> state, and
-  the "<dfn id="attr-command-type-keyword-radio" title="attr-command-type-keyword-radio"><code>radio</code></dfn>"
-  keyword maps to the <a href="#attr-command-type-state-radio" title="attr-command-type-state-radio">Radio</a> state. The
-  <i>missing value default</i> is the <a href="#attr-command-type-state-command" title="attr-command-type-state-command">Command</a> state.</p><dl><dt>The <dfn id="attr-command-type-state-command" title="attr-command-type-state-command">Command</dfn> state</dt>
-
-   <dd><p>The element <a href="rendering.html#represents">represents</a> a normal command with an associated action.</p></dd>
-
-   <dt>The <dfn id="attr-command-type-state-checkbox" title="attr-command-type-state-checkbox">Checkbox</dfn> state</dt>
-
-   <dd><p>The element <a href="rendering.html#represents">represents</a> a state or option that can be toggled.</p></dd>
-
-   <dt>The <dfn id="attr-command-type-state-radio" title="attr-command-type-state-radio">Radio</dfn> state</dt>
-
-   <dd><p>The element <a href="rendering.html#represents">represents</a> a selection of one item from a list of items.</p></dd>
-
-  </dl><p>The <dfn id="attr-command-label" title="attr-command-label"><code>label</code></dfn>
-  attribute gives the name of the command, as shown to the user. The
-  <code title="attr-command-label"><a href="#attr-command-label">label</a></code> attribute must be
-  specified and must have a value that is not the empty string.</p><p>The <dfn id="attr-command-title" title="attr-command-title"><code>title</code></dfn>
-  attribute gives a hint describing the command, which might be shown
-  to the user to help him.</p><p>The <dfn id="attr-command-icon" title="attr-command-icon"><code>icon</code></dfn>
-  attribute gives a picture that represents the command. If the
-  attribute is specified, the attribute's value must contain a
-  <a href="urls.html#valid-non-empty-url-potentially-surrounded-by-spaces">valid non-empty URL potentially surrounded by
-  spaces</a>. <span class="impl">To obtain the <a href="urls.html#absolute-url">absolute
-  URL</a> of the icon when the attribute's value is not the empty
-  string, the attribute's value must be <a href="urls.html#resolve-a-url" title="resolve a&#10;  url">resolved</a> relative to the element. When the attribute is
-  absent, or its value is the empty string, or <a href="urls.html#resolve-a-url" title="resolve a&#10;  url">resolving</a> its value fails, there is no icon.</span></p><p>The <dfn id="attr-command-disabled" title="attr-command-disabled"><code>disabled</code></dfn> attribute
-  is a <a href="common-microsyntaxes.html#boolean-attribute">boolean attribute</a> that, if present, indicates that
-  the command is not available in the current state.</p><p class="note">The distinction between <code title="attr-command-disabled"><a href="#attr-command-disabled">disabled</a></code> and <code title="attr-hidden"><a href="editing.html#the-hidden-attribute">hidden</a></code> is subtle. A command would be
-  disabled if, in the same context, it could be enabled if only
-  certain aspects of the situation were changed. A command would be
-  marked as hidden if, in that situation, the command will never be
-  enabled. For example, in the context menu for a water faucet, the
-  command "open" might be disabled if the faucet is already open, but
-  the command "eat" would be marked hidden since the faucet could
-  never be eaten.</p><p>The <dfn id="attr-command-checked" title="attr-command-checked"><code>checked</code></dfn>
-  attribute is a <a href="common-microsyntaxes.html#boolean-attribute">boolean attribute</a> that, if present,
-  indicates that the command is selected. The attribute must be
-  omitted unless the <code title="attr-command-type"><a href="#attr-command-type">type</a></code>
-  attribute is in either the <a href="#attr-command-type-state-checkbox" title="attr-command-type-state-checkbox">Checkbox</a> state or
-  the <a href="#attr-command-type-state-radio" title="attr-command-type-state-radio">Radio</a>
-  state.</p><p>The <dfn id="attr-command-radiogroup" title="attr-command-radiogroup"><code>radiogroup</code></dfn>
-  attribute gives the name of the group of commands that will be
-  toggled when the command itself is toggled, for commands whose <code title="attr-command-type"><a href="#attr-command-type">type</a></code> attribute has the value "<code title="">radio</code>". The scope of the name is the child list of
-  the parent element. The attribute must be omitted unless the <code title="attr-command-type"><a href="#attr-command-type">type</a></code> attribute is in the <a href="#attr-command-type-state-radio" title="attr-command-type-state-radio">Radio</a> state.</p><div class="impl">
-
-  <p>The <dfn id="dom-command-type" title="dom-command-type"><code>type</code></dfn> IDL
-  attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the content attribute of the
-  same name, <a href="common-dom-interfaces.html#limited-to-only-known-values">limited to only known values</a>.</p>
-
-  <p>The <dfn id="dom-command-label" title="dom-command-label"><code>label</code></dfn>, <dfn id="dom-command-icon" title="dom-command-icon"><code>icon</code></dfn>, <dfn id="dom-command-disabled" title="dom-command-disabled"><code>disabled</code></dfn>, <dfn id="dom-command-checked" title="dom-command-checked"><code>checked</code></dfn>, and <dfn id="dom-command-radiogroup" title="dom-command-radiogroup"><code>radiogroup</code></dfn>  IDL attributes must <a href="common-dom-interfaces.html#reflect">reflect</a> the respective content
-  attributes of the same name.</p>
-
-  <p>The element's <a href="content-models.html#activation-behavior">activation behavior</a> depends on the
-  value of the <code title="attr-command-type"><a href="#attr-command-type">type</a></code> attribute
-  of the element, as follows:</p>
-
-  <dl class="switch"><dt>If the <code title="attr-command-type"><a href="#attr-command-type">type</a></code> attribute is
-   in the <a href="#attr-command-type-state-checkbox" title="attr-command-type-state-checkbox">Checkbox</a> state</dt>
-
-   <dd><p>If the element has a <code title="attr-command-checked"><a href="#attr-command-checked">checked</a></code> attribute, the UA must
-   remove that attribute. Otherwise, the UA must add a <code title="attr-command-checked"><a href="#attr-command-checked">checked</a></code> attribute, with the
-   literal value <code title="">checked</code>. The UA must then
-   <a href="webappapis.html#fire-a-click-event">fire a <code title="event-click">click</code> event</a> at the
-   element.</p></dd>
-
-
-   <dt>If the <code title="attr-command-type"><a href="#attr-command-type">type</a></code> attribute is
-   in the <a href="#attr-command-type-state-radio" title="attr-command-type-state-radio">Radio</a> state</dt>
-
-   <dd><p>If the element has a parent, then the UA must walk the list
-   of child nodes of that parent element, and for each node that is a
-   <code><a href="#the-command-element">command</a></code> element, if that element has a <code title="attr-command-radiogroup"><a href="#attr-command-radiogroup">radiogroup</a></code> attribute whose
-   value exactly matches the current element's (treating missing <code title="attr-command-radiogroup"><a href="#attr-command-radiogroup">radiogroup</a></code> attributes as if
-   they were the empty string), and has a <code title="attr-command-checked"><a href="#attr-command-checked">checked</a></code> attribute, must remove
-   that attribute.</p>
-
-   <p>Then, the element's <code title="attr-command-checked"><a href="#attr-command-checked">checked</a></code> attribute attribute
-   must be set to the literal value <code title="">checked</code> and
-   the user agent must <a href="webappapis.html#fire-a-click-event">fire a <code title="event-click">click</code>
-   event</a> at the element.</p></dd>
-
-
-   <dt>Otherwise</dt>
-
-   <dd><p>The element has no <a href="content-models.html#activation-behavior">activation behavior</a>.</p></dd>
-
-  </dl><p class="note">Firing a synthetic <code title="event-click"><a href="infrastructure.html#event-click">click</a></code> event at the element does not cause
-  any of the actions described above to happen.</p>
-
-  
-  </div><p class="note"><code><a href="#the-command-element">command</a></code> elements are not rendered
-  unless they <a href="#the-menu-element" title="menu">form part of a menu</a>.</p><div class="example">
-
-   <p>Here is an example of a toolbar with three buttons that let the
-   user toggle between left, center, and right alignment. One could
-   imagine such a toolbar as part of a text editor. The toolbar also
-   has a separator followed by another button labeled "Publish",
-   though that button is disabled.</p>
-
-   <pre>&lt;menu type="toolbar"&gt;
- &lt;command type="radio" radiogroup="alignment" checked="checked"
-          label="Left" icon="icons/alL.png" onclick="setAlign('left')"&gt;
- &lt;command type="radio" radiogroup="alignment"
-          label="Center" icon="icons/alC.png" onclick="setAlign('center')"&gt;
- &lt;command type="radio" radiogroup="alignment"
-          label="Right" icon="icons/alR.png" onclick="setAlign('right')"&gt;
- &lt;hr&gt;
- &lt;command type="command" disabled
-          label="Publish" icon="icons/pub.png" onclick="publish()"&gt;
-&lt;/menu&gt;</pre>
-
-  </div><h4 id="the-menu-element"><span class="secno">4.11.4 </span>The <dfn id="menus"><code>menu</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
-   <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
-   <dd>If the element's <code title="attr-menu-type"><a href="#attr-menu-type">type</a></code> attribute is in the <a href="#toolbar-state" title="toolbar state">toolbar</a> state: <a href="content-models.html#interactive-content">Interactive content</a>.</dd>
-   <dt>Contexts in which this element can be used:</dt>
-   <dd>Where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
-   <dt>Content model:</dt>
-   <dd>Either: Zero or more <code><a href="grouping-content.html#the-li-element">li</a></code> elements.</dd>
-   <dd>Or: <a href="content-models.html#flow-content">Flow content</a>.</dd>
-   <dt>Content attributes:</dt>
-   <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
-   <dd><code title="attr-menu-type"><a href="#attr-menu-type">type</a></code></dd>
-   <dd><code title="attr-menu-label"><a href="#attr-menu-label">label</a></code></dd>
-   <dt>DOM interface:</dt>
-   <dd>
-<pre class="idl">interface <dfn id="htmlmenuelement">HTMLMenuElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
-           attribute DOMString <a href="#dom-menu-type" title="dom-menu-type">type</a>;
-           attribute DOMString <a href="#dom-menu-label" title="dom-menu-label">label</a>;
-};</pre>
-  </dd></dl><p>The <code><a href="#the-menu-element">menu</a></code> element represents a list of commands.</p><p>The <dfn id="attr-menu-type" title="attr-menu-type"><code>type</code></dfn> attribute
-  is an <a href="common-microsyntaxes.html#enumerated-attribute">enumerated attribute</a> indicating the kind of menu
-  being declared. The attribute has three states. The <code title="attr-menu-type-context">context</code> keyword maps to the
-  <dfn id="context-menu-state" title="context menu state">context menu</dfn> state, in which
-  the element is declaring a context menu. The <code title="attr-menu-type-toolbar">toolbar</code> keyword maps to the
-  <dfn id="toolbar-state" title="toolbar state">toolbar</dfn> state, in which the
-  element is declaring a toolbar. The attribute may also be
-  omitted. The <i>missing value default</i> is the <dfn id="list-state" title="list&#10;  state">list</dfn> state, which indicates that the element is merely
-  a list of commands that is neither declaring a context menu nor
-  defining a toolbar.</p><p>If a <code><a href="#the-menu-element">menu</a></code> element's <code title="attr-menu-type"><a href="#attr-menu-type">type</a></code> attribute is in the <a href="#context-menu-state" title="context menu state">context menu</a> state, then the
-  element <a href="rendering.html#represents">represents</a> the commands of a context menu, and
-  the user can only interact with the commands if that context menu is
-  activated.</p><p>If a <code><a href="#the-menu-element">menu</a></code> element's <code title="attr-menu-type"><a href="#attr-menu-type">type</a></code> attribute is in the <a href="#toolbar-state" title="toolbar state">toolbar</a> state, then the element
-  <a href="rendering.html#represents">represents</a> a list of active commands that the user can
-  immediately interact with.</p><p>If a <code><a href="#the-menu-element">menu</a></code> element's <code title="attr-menu-type"><a href="#attr-menu-type">type</a></code> attribute is in the <a href="#list-state" title="list state">list</a> state, then the element either
-  <a href="rendering.html#represents">represents</a> an unordered list of items (each represented
-  by an <code><a href="grouping-content.html#the-li-element">li</a></code> element), each of which represents a command
-  that the user can perform or activate, or, if the element has no
-  <code><a href="grouping-content.html#the-li-element">li</a></code> element children, <a href="content-models.html#flow-content">flow content</a>
-  describing available commands.</p><p>The <dfn id="attr-menu-label" title="attr-menu-label"><code>label</code></dfn>
-  attribute gives the label of the menu. It is used by user agents to
-  display nested menus in the UI. For example, a context menu
-  containing another menu would use the nested menu's <code title="attr-menu-label"><a href="#attr-menu-label">label</a></code> attribute for the submenu's
-  menu label.</p><div class="impl">
-
-  <p>The <dfn id="dom-menu-type" title="dom-menu-type"><code>type</code></dfn> and <dfn id="dom-menu-label" title="dom-menu-label"><code>label</code></dfn> IDL attributes must
-  <a href="common-dom-interfaces.html#reflect">reflect</a> the respective content attributes of the same
-  name.</p>
-
-  </div><h5 id="menus-intro"><span class="secno">4.11.4.1 </span>Introduction</h5><p><i>This section is non-normative.</i></p><p>The <code><a href="#the-menu-element">menu</a></code> element is used to define context menus and
-  toolbars.</p><p>For example, the following represents a toolbar with three menu
-  buttons on it, each of which has a dropdown menu with a series of
-  options:</p><pre>&lt;menu type="toolbar"&gt;
- &lt;li&gt;
-  &lt;menu label="File"&gt;
-   &lt;button type="button" onclick="fnew()"&gt;New...&lt;/button&gt;
-   &lt;button type="button" onclick="fopen()"&gt;Open...&lt;/button&gt;
-   &lt;button type="button" onclick="fsave()"&gt;Save&lt;/button&gt;
-   &lt;button type="button" onclick="fsaveas()"&gt;Save as...&lt;/button&gt;
-  &lt;/menu&gt;
- &lt;/li&gt;
- &lt;li&gt;
-  &lt;menu label="Edit"&gt;
-   &lt;button type="button" onclick="ecopy()"&gt;Copy&lt;/button&gt;
-   &lt;button type="button" onclick="ecut()"&gt;Cut&lt;/button&gt;
-   &lt;button type="button" onclick="epaste()"&gt;Paste&lt;/button&gt;
-  &lt;/menu&gt;
- &lt;/li&gt;
- &lt;li&gt;
-  &lt;menu label="Help"&gt;
-   &lt;li&gt;&lt;a href="help.html"&gt;Help&lt;/a&gt;&lt;/li&gt;
-   &lt;li&gt;&lt;a href="about.html"&gt;About&lt;/a&gt;&lt;/li&gt;
-  &lt;/menu&gt;
- &lt;/li&gt;
-&lt;/menu&gt;</pre><p>In a supporting user agent, this might look like this:</p><p><img alt="A toolbar with three buttons, labeled 'File', 'Edit', and 'Help'; where if you select the 'Edit' button you get a drop-down menu with three more options, 'Copy', 'Cut', and 'Paste'." height="101" src="http://dev.w3.org/html5/spec/images/sample-toolbar-1.png" width="303"/></p><p>In a legacy user agent, the above would look like a bulleted list
-  with three items, the first of which has four buttons, the second of
-  which has three, and the third of which has two nested bullet points
-  with two items consisting of links.</p><hr/><p>The following implements a similar toolbar, with a single button
-  whose values, when selected, redirect the user to Web sites.</p><pre>&lt;form action="redirect.cgi"&gt;
- &lt;menu type="toolbar"&gt;
-  &lt;label for="goto"&gt;Go to...&lt;/label&gt;
-  &lt;menu label="Go"&gt;
-   &lt;select id="goto"&gt;
-    &lt;option value="" selected="selected"&gt; Select site: &lt;/option&gt;
-    &lt;option value="http://www.apple.com/"&gt; Apple &lt;/option&gt;
-    &lt;option value="http://www.mozilla.org/"&gt; Mozilla &lt;/option&gt;
-    &lt;option value="http://www.opera.com/"&gt; Opera &lt;/option&gt;
-   &lt;/select&gt;
-   &lt;span&gt;&lt;input type="submit" value="Go"&gt;&lt;/span&gt;
-  &lt;/menu&gt;
- &lt;/menu&gt;
-&lt;/form&gt;</pre><p>The behavior in supporting user agents is similar to the example
-  above, but here the legacy behavior consists of a single
-  <code><a href="the-button-element.html#the-select-element">select</a></code> element with a submit button. The submit button
-  doesn't appear in the toolbar, because it is not a direct child of
-  the <code><a href="#the-menu-element">menu</a></code> element or of its <code><a href="grouping-content.html#the-li-element">li</a></code>
-  children.</p><div class="impl">
-
-  <h5 id="building-menus-and-toolbars"><span class="secno">4.11.4.2 </span><dfn>Building menus and toolbars</dfn></h5>
-
-  <p>A menu (or toolbar) consists of a list of zero or more of the
-  following components:</p>
-
-  <ul class="brief"><li><a href="commands.html#concept-command" title="concept-command">Commands</a>, which can be marked as default commands</li>
-   <li>Separators</li>
-   <li>Other menus (which allows the list to be nested)</li>
-  </ul><p>The list corresponding to a particular <code><a href="#the-menu-element">menu</a></code> element
-  is built by iterating over its child nodes. For each child node in
-  <a href="infrastructure.html#tree-order">tree order</a>, the required behavior depends on what the
-  node is, as follows:</p>
-
-  <dl class="switch"><dt>An element that <a href="commands.html#concept-command" title="concept-command">defines a command</a></dt>
-
-   <dd>Append the command to the menu, respecting its <a href="commands.html#concept-facet" title="concept-facet">facets</a>. </dd>
-
-
-   <dt>An <code><a href="grouping-content.html#the-hr-element">hr</a></code> element</dt>
-   <dt>An <code><a href="the-button-element.html#the-option-element">option</a></code> element that has a <code title="attr-option-value"><a href="the-button-element.html#attr-option-value">value</a></code> attribute set to the empty
-   string, and has a <code title="attr-option-disabled"><a href="the-button-element.html#attr-option-disabled">disabled</a></code> attribute, and whose
-   <code><a href="infrastructure.html#textcontent">textContent</a></code> consists of a string of one or more
-   hyphens (U+002D HYPHEN-MINUS)</dt>
-
-   <dd>Append a separator to the menu.</dd>
-
-
-   <dt>An <code><a href="grouping-content.html#the-li-element">li</a></code> element</dt>
-   <dt>A <code><a href="forms.html#the-label-element">label</a></code> element</dt>
-
-   <dd>Iterate over the children of the element.</dd>
-
-
-   <dt>A <code><a href="#the-menu-element">menu</a></code> element with no <code title="attr-menu-label"><a href="#attr-menu-label">label</a></code> attribute</dt>
-   <dt>A <code><a href="the-button-element.html#the-select-element">select</a></code> element</dt>
-
-   <dd>Append a separator to the menu, then iterate over the children
-   of the <code><a href="#the-menu-element">menu</a></code> or <code><a href="the-button-element.html#the-select-element">select</a></code> element, then
-   append another separator.</dd>
-
-   
-
-
-   <dt>A <code><a href="#the-menu-element">menu</a></code> element with a <code title="attr-menu-label"><a href="#attr-menu-label">label</a></code> attribute</dt>
-   <dt>An <code><a href="the-button-element.html#the-optgroup-element">optgroup</a></code> element with a <code title="attr-menu-label"><a href="#attr-menu-label">label</a></code> attribute</dt>
-
-   <dd>Append a submenu to the menu, using the value of the element's
-   <code title="">label</code> attribute as the label of the menu. The
-   submenu must be constructed by taking the element and creating a
-   new menu for it using the complete process described in this
-   section.</dd>
-
-
-   <dt>Any other node</dt>
-
-   <dd><a href="infrastructure.html#ignore">Ignore</a> the node.</dd>
-
-  </dl><p>Once all the nodes have been processed as described above, the
-  user agent must the post-process the menu as follows:</p>
-
-  <ol><li>Except for separators, any menu item with no label, or whose
-   label is the empty string, must be removed.</li>
-
-   <li>Any sequence of two or more separators in a row must be
-   collapsed to a single separator.</li>
-
-   <li>Any separator at the start or end of the menu must be
-   removed.</li>
-
-  </ol></div><h5 id="context-menus"><span class="secno">4.11.4.3 </span><dfn>Context menus</dfn></h5><p>The <dfn id="attr-contextmenu" title="attr-contextmenu"><code>contextmenu</code></dfn>
-  attribute gives the element's <a href="#context-menus" title="context menus">context
-  menu</a>. The value must be the <a href="elements.html#concept-id" title="concept-id">ID</a> of a <code><a href="#the-menu-element">menu</a></code> element
-  in the DOM. <span class="impl">If the node that would be obtained by
-  the invoking the <code title="dom-Document-getElementById"><a href="infrastructure.html#dom-document-getelementbyid">getElementById()</a></code> method
-  using the attribute's value as the only argument is null or not a
-  <code><a href="#the-menu-element">menu</a></code> element, then the element has no assigned context
-  menu. Otherwise, the element's assigned context menu is the element
-  so identified.</span></p><div class="impl">
-
-  <p>When an element's context menu is requested (e.g. by the user
-  right-clicking the element, or pressing a context menu key), the
-  user agent must apply the appropriate rules from the following
-  list:</p>
-
-  <dl class="switch"><dt>If the user requested a context menu using a pointing device</dt>
-
-   <dd><p>The user agent must fire an event with the name <code title="event-contextmenu">contextmenu</code>, that bubbles and is
-   cancelable, and that uses the <code><a href="infrastructure.html#mouseevent">MouseEvent</a></code> interface, at
-   the element for which the menu was requested. The context
-   information of the event must be set to the same values as the last
-   <code><a href="infrastructure.html#mouseevent">MouseEvent</a></code> user interaction event that was fired as
-   part of the gesture that that was interpreted as a request for the
-   context menu.</p></dd>
-
-   <dt>Otherwise</dt>
-
-   <dd><p>The user agent must <a href="webappapis.html#fire-a-synthetic-mouse-event" title="fire a synthetic mouse&#10;   event">fire a synthetic mouse event named <code title="event-contextmenu">contextmenu</code></a> that bubbles
-   and is cancelable at the element for which the menu was
-   requested.</p></dd>
-
-  </dl><p class="note">Typically, therefore, the firing of the <code title="event-contextmenu">contextmenu</code> event will be the
-  default action of a <code title="mouseup">mouseup</code> or <code title="event-keyup">keyup</code> event. The exact sequence of events
-  is UA-dependent, as it will vary based on platform conventions.</p>
-
-  <p>The default action of the <code title="event-contextmenu">contextmenu</code> event depends on
-  whether the element or one of its ancestors has a context menu
-  assigned (using the <code title="attr-contextmenu"><a href="#attr-contextmenu">contextmenu</a></code> attribute) or not. If
-  there is no context menu assigned, the default action must be for
-  the user agent to show its default context menu, if it has one.</p>
-
-  <p>If the element or one of its ancestors <em>does</em> have a
-  context menu assigned, then the user agent must <a href="webappapis.html#fire-a-simple-event">fire a simple
-  event</a> named <code title="event-show">show</code> at the
-  <code><a href="#the-menu-element">menu</a></code> element of the context menu of the nearest
-  ancestor (including the element itself) with one assigned.</p>
-  
-
-  <p>The default action of <em>this</em> event is that the user agent
-  must show a context menu <a href="#building-menus-and-toolbars" title="building menus and&#10;  toolbars">built</a> from the <code><a href="#the-menu-element">menu</a></code> element.</p>
-
-  <p>The user agent may also provide access to its default context
-  menu, if any, with the context menu shown. For example, it could
-  merge the menu items from the two menus together, or provide the
-  page's context menu as a submenu of the default menu.</p>
-
-  <p>If the user dismisses the menu without making a selection,
-  nothing in particular happens.</p>
-
-  <p>If the user selects a menu item that represents a <a href="commands.html#concept-command" title="concept-command">command</a>, then the UA must invoke
-  that command's <a href="commands.html#command-facet-action" title="command-facet-Action">Action</a>.</p>
-
-  <p>Context menus must not, while being shown, reflect changes in the
-  DOM; they are constructed as the default action of the <code title="event-show">show</code> event and must remain as constructed
-  until dismissed.</p>
-
-  <p>User agents may provide means for bypassing the context menu
-  processing model, ensuring that the user can always access the UA's
-  default context menus. For example, the user agent could handle
-  right-clicks that have the Shift key depressed in such a way that it
-  does not fire the <code title="event-contextmenu">contextmenu</code>
-  event and instead always shows the default context menu.</p>
-
-  <p>The <dfn id="dom-contextmenu" title="dom-contextMenu"><code>contextMenu</code></dfn>
-  IDL attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-contextmenu"><a href="#attr-contextmenu">contextmenu</a></code> content attribute.</p>
-
-  </div><div class="example">
-
-   <p>Here is an example of a context menu for an input control:</p>
-
-   <pre>&lt;form name="npc"&gt;
- &lt;label&gt;Character name: &lt;input name=char type=text contextmenu=namemenu required&gt;&lt;/label&gt;
- &lt;menu type=context id=namemenu&gt;
-  &lt;command label="Pick random name" onclick="document.forms.npc.elements.char.value = getRandomName()"&gt;
-  &lt;command label="Prefill other fields based on name" onclick="prefillFields(document.forms.npc.elements.char.value)"&gt;
- &lt;/menu&gt;
-&lt;/form&gt;</pre>
-
-   <p>This adds two items to the control's context menu, one called
-   "Pick random name", and one called "Prefill other fields based on
-   name". They invoke scripts that are not shown in the example
-   above.</p>
-
-  </div><div class="impl">
-
-  <h5 id="toolbars"><span class="secno">4.11.4.4 </span><dfn>Toolbars</dfn></h5>
-
-  <p>When a <code><a href="#the-menu-element">menu</a></code> element has a <code title="attr-menu-type"><a href="#attr-menu-type">type</a></code> attribute in the <a href="#toolbar-state" title="toolbar state">toolbar</a> state, then the user agent
-  must <a href="#building-menus-and-toolbars" title="building menus and toolbars">build</a> the
-  menu for that <code><a href="#the-menu-element">menu</a></code> element, and use the result in the
-  rendering.</p>
-
-  <p>The user agent must reflect changes made to the
-  <code><a href="#the-menu-element">menu</a></code>'s DOM, by immediately <a href="#building-menus-and-toolbars" title="building menus&#10;  and toolbars">rebuilding</a> the menu.</p>
-
-  </div></body></html>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
+
+   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   </div><nav class="prev_next"><a href="form-submission.html">&#x2190; 4.10.22 Form submission</a> &#x2013;
+   <a href="index.html#contents">Table of contents</a> &#x2013;
+   <a href="the-details-element.html">4.11.1 The details element &#x2192;</a>
+  </nav><h3 id="interactive-elements"><span class="secno">4.11 </span>Interactive elements</h3></body></html>

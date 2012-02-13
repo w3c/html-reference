@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>Acknowledgements &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<!DOCTYPE html>
+<html lang="en-US-x-Hixie"><head><title>Acknowledgements &#x2014; HTML5</title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -19,6 +19,7 @@
    dd table + p { margin-top: 1em; }
    p + * > li, dd li { margin: 1em 0; }
    dt, dfn { font-weight: bold; font-style: normal; }
+   i, em { font-style: italic; }
    dt dfn { font-style: italic; }
    pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
    pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
@@ -40,9 +41,10 @@
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
 
    .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   img.extra { float: right; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   img.extra, p.overview { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; position: relative; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl::before { content: "IDL"; font: bold small sans-serif; padding: 0.5em; background: white; position: absolute; top: 0; margin: -1px 0 0 -4em; width: 1.5em; border: thin solid; border-radius: 0 0 0 0.5em }
    pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
    pre.css:first-line { color: #AAAA50; }
    dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
@@ -50,6 +52,7 @@
    dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
    dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
    dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
    dl.switch { padding-left: 2em; }
    dl.switch > dt { text-indent: -1.5em; }
    dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
@@ -104,6 +107,7 @@
    .note { color: green; background: transparent; font-family: sans-serif; }
    .warning { color: red; background: transparent; }
    .note, .warning { font-weight: bolder; font-style: italic; }
+   .note em, .warning em, .note i, .warning i { font-style: normal; }
    p.note, div.note { padding: 0.5em 2em; }
    span.note { padding: 0 2em; }
    .note p:first-child, .warning p:first-child { margin-top: 0; }
@@ -295,8 +299,6 @@
      src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
    }
 
-  ]]></style><style type="text/css"><![CDATA[
-   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
   ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
    function getCookie(name) {
      var params = location.search.substr(1).split("&");
@@ -315,14 +317,16 @@
      }
      return null;
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="references.html" title="References" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/></head><body><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="references.html" title="References" rel="prev"/><link href="index.html#contents" title="Table of contents" rel="contents"/></head><body onload="fixBrokenLink();" class="split chapter"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   </div><div>
-   <a href="references.html" class="prev">References</a> &#x2013;
-   <a href="spec.html#contents">Table of contents</a>
-  </div><h2 class="no-num" id="acknowledgements">Acknowledgements</h2><!-- ACKS --><p>Thanks to Tim Berners-Lee for inventing HTML, without which none
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
+
+   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   </div><nav class="prev_next"><a href="references.html">&#x2190; References</a> &#x2013;
+   <a href="index.html#contents">Table of contents</a>
+  </nav><h2 class="no-num" id="acknowledgements">Acknowledgements</h2><!-- ACKS --><p>Thanks to Tim Berners-Lee for inventing HTML, without which none
   of this would exist.</p><p>Thanks to
 
   Aankhen,
@@ -378,6 +382,7 @@
   Arne Thomassen,
   Aron Spohr,
   Arphen Lin,
+  Arun Patole,
   Aryeh Gregor,
   Asbj&#xF8;rn Ulsberg,
   Ashley Sheridan,
@@ -439,6 +444,7 @@
   Christian Johansen,
   Christian Schmidt,
   Christopher Aillon,
+  Christopher Ferris,
   Chriswa,
   Clark Buehler,
   Cole Robison,
@@ -510,9 +516,11 @@
   Edward O'Connor,
   Edward Welbourne,
   Edward Z. Yang,
+  Ehsan Akhgari,
   Eira Monstad,
   Eitan Adler,
   Eliot Graff,
+  Elisabeth Robson,
   Elizabeth Castro,
   Elliott Sprehn,
   Elliotte Harold,
@@ -534,6 +542,7 @@
   &#x9D5C;&#x98FC;&#x6587;&#x654F; (Fumitoshi Ukai),
   Futomi Hatano,
   Gavin Carothers,
+  Gavin Kistner,
   Gareth Rees,
   Garrett Smith,
   Geoffrey Garen,
@@ -565,6 +574,7 @@
   Ian Clelland,
   Ian Davis,
   Ian Fette,
+  Ido Green,
   Ignacio Javier,
   Ivan Enderlin,
   Ivo Emanuel Gon&#xE7;alves,
@@ -573,6 +583,7 @@
   James Craig,
   James Graham,
   James Justin Harrell,
+  James Kozianski,
   James M Snell,
   James Perrett,
   James Robinson,
@@ -594,6 +605,7 @@
   Jens Fendler,
   Jens Lindstr&#xF6;m,
   Jens Meiert,
+  Jeremey Hustman,
   Jeremy Keith,
   Jeremy Orlow,
   Jeroen van der Meer,
@@ -601,6 +613,7 @@
   Jim Jewett,
   Jim Ley,
   Jim Meehan,
+  Jirka Kosek,
   Jjgod Jiang,
   Jo&#xE3;o Eiras,
   Joe Clark,
@@ -638,13 +651,17 @@
   Julian Reschke,
   J&#xFC;rgen Jeka,
   Justin Lebar,
+  Justin Novosad,
   Justin Schuh,
   Justin Sinclair,
   Kai Hendry,
+  &#x5442;&#x5EB7;&#x8C6A; (KangHao Lu),
   Kartikaya Gupta,
   Kathy Walton,
+  Kelly Ford,
   Kelly Norton,
   Kevin Benson,
+  Kevin Cole,
   Korn&#xE9;l P&#xE1;l,
   Kornel Lesinski,
   Kris Northfield,
@@ -654,6 +671,7 @@
   Kyle Hofmann,
   Kyle Huey,
   L&#xE9;onard Bouchet,
+  L&#xE9;onie Watson,
   Lachlan Hunt,
   Larry Masinter,
   Larry Page,
@@ -667,6 +685,7 @@
   Lee Kowalkowski,
   Leif Halvard Silli,
   Lenny Domnitser,
+  Leonard Rosenthol,
   Leons Petrazickis,
   Lobotom Dysmon,
   Logan,
@@ -677,6 +696,7 @@
   Maik Merten,
   Malcolm Rowe,
   Mark Birbeck,
+  Mark Davis,
   Mark Miller,
   Mark Nottingham,
   Mark Pilgrim,
@@ -741,6 +761,7 @@
   Nicolas Gallagher,
   Noah Mendelsohn,
   Noah Slater,
+  Noel Gordon,
   NoozNooz42,
   Ojan Vafai,
   Olaf Hoffmann,
@@ -760,19 +781,23 @@
   Peter Beverloo,
   Peter Karlsson,
   Peter Kasting,
+  Peter Moulder,
   Peter Stark,
   Peter-Paul Koch,
   Phil Pickering,
   Philip J&#xE4;genstedt,
   Philip Taylor,
   Philip TAYLOR,
+  Philippe De Ryck,
   Prateek Rungta,
   Pravir Gupta,
   Rachid Finge,
+  Rafa&#x142; Mi&#x142;ecki,
   Rajas Moonka,
   Ralf Stoltze,
   Ralph Giles,
   Raphael Champeimont,
+  Remci Mizkur,
   Remco,
   Remy Sharp,
   Rene Saarsoo,
@@ -786,6 +811,7 @@
   Riona Macnamara,
   Rob Ennals,
   Rob Jellinghaus,
+  Rob S,
   Robert Blaut,
   Robert Collins,
   Robert O'Callahan,
@@ -871,6 +897,7 @@
   Wayne Pollock,
   Wellington Fernando de Macedo,
   Weston Ruter,
+  Wilhelm Joys Andersen,
   Will Levine,
   William Swanson,
   Wladimir Palant,
@@ -898,10 +925,7 @@
   canvas feature was designed.</p><p>Special thanks also to the Microsoft employees who first
   implemented the event-based drag-and-drop mechanism, <code title="attr-contenteditable"><a href="editing.html#attr-contenteditable">contenteditable</a></code>, and other
   features first widely deployed by the Windows Internet Explorer
-  browser.</p><p>Thanks to the SubRip community, including in particular Zuggy and
-  ai4spam, for their work on the SubRip software program whose SRT
-  file format was used as the basis for the WebVTT text track file
-  format.</p><div class="impl">
+  browser.</p><div class="impl">
 
   <p>Special thanks and $10,000 to David Hyatt who came up with a
   broken implementation of the <a href="tree-construction.html#adoptionAgency">adoption

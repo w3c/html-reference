@@ -463,42 +463,42 @@ color: #3C790A;
         <p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © <xsl:value-of select="date:year()"/><xsl:text> </xsl:text><a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:if test="$person-nodeset">
-          <div class="main-license">
-            <p class="copyright">
-              Copyright © <xsl:value-of select="date:year()"/>
-              <xsl:text> </xsl:text>
-              <xsl:for-each select='$person-nodeset'>
-                <xsl:choose>
-                  <xsl:when test="h:span[contains(@class, 'affiliation') = 'W3C']"/>
-                  <xsl:otherwise>
-                    <span>
-                      <xsl:value-of select='h:span[@class = "name"]'/>
-                    </span>
-                    <xsl:if test="not(position() = last())">
-                      <xsl:text>, </xsl:text>
-                    </xsl:if>
-                  </xsl:otherwise>
-                </xsl:choose>
-              </xsl:for-each>
-            </p>
-            <xsl:if test="$maturity = 'ED'">
-            <p class="copyright">
-              Permission is hereby granted, free of charge, to any
-              person obtaining a copy of this document (the “Document”), to deal
-              in the Document without restriction, including without limitation
-              the rights to use, copy, modify, merge, publish, distribute,
-              sublicense, and/or sell copies of the Document, and to permit
-              persons to whom the Document is furnished to do so, subject to the
-              following conditions:
-            </p>
-            <p class="copyright">
-              The above copyright notice and this permission notice shall be
-              included in all copies or substantial portions of the Document.
-            </p>
-            </xsl:if>
-          </div>
-        </xsl:if>
+        <!-- * <xsl:if test="$person-nodeset"> -->
+          <!-- * <div class="main-license"> -->
+            <!-- * <p class="copyright"> -->
+              <!-- * Copyright © <xsl:value-of select="date:year()"/> -->
+              <!-- * <xsl:text> </xsl:text> -->
+              <!-- * <xsl:for-each select='$person-nodeset'> -->
+                <!-- * <xsl:choose> -->
+                  <!-- * <xsl:when test="h:span[contains(@class, 'affiliation') = 'W3C']"/> -->
+                  <!-- * <xsl:otherwise> -->
+                    <!-- * <span> -->
+                      <!-- * <xsl:value-of select='h:span[@class = "name"]'/> -->
+                    <!-- * </span> -->
+                    <!-- * <xsl:if test="not(position() = last())"> -->
+                      <!-- * <xsl:text>, </xsl:text> -->
+                    <!-- * </xsl:if> -->
+                  <!-- * </xsl:otherwise> -->
+                <!-- * </xsl:choose> -->
+              <!-- * </xsl:for-each> -->
+            <!-- * </p> -->
+            <!-- * <xsl:if test="$maturity = 'ED'"> -->
+            <!-- * <p class="copyright"> -->
+              <!-- * Permission is hereby granted, free of charge, to any -->
+              <!-- * person obtaining a copy of this document (the “Document”), to deal -->
+              <!-- * in the Document without restriction, including without limitation -->
+              <!-- * the rights to use, copy, modify, merge, publish, distribute, -->
+              <!-- * sublicense, and/or sell copies of the Document, and to permit -->
+              <!-- * persons to whom the Document is furnished to do so, subject to the -->
+              <!-- * following conditions: -->
+            <!-- * </p> -->
+            <!-- * <p class="copyright"> -->
+              <!-- * The above copyright notice and this permission notice shall be -->
+              <!-- * included in all copies or substantial portions of the Document. -->
+            <!-- * </p> -->
+            <!-- * </xsl:if> -->
+          <!-- * </div> -->
+        <!-- * </xsl:if> -->
       </xsl:otherwise>
       </xsl:choose>
     </div>

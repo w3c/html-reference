@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>2.6 URLs &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<!DOCTYPE html>
+<html lang="en-US-x-Hixie"><head><title>2.6 URLs &#x2014; HTML5</title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -19,6 +19,7 @@
    dd table + p { margin-top: 1em; }
    p + * > li, dd li { margin: 1em 0; }
    dt, dfn { font-weight: bold; font-style: normal; }
+   i, em { font-style: italic; }
    dt dfn { font-style: italic; }
    pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
    pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
@@ -40,9 +41,10 @@
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
 
    .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   img.extra { float: right; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   img.extra, p.overview { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; position: relative; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl::before { content: "IDL"; font: bold small sans-serif; padding: 0.5em; background: white; position: absolute; top: 0; margin: -1px 0 0 -4em; width: 1.5em; border: thin solid; border-radius: 0 0 0 0.5em }
    pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
    pre.css:first-line { color: #AAAA50; }
    dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
@@ -50,6 +52,7 @@
    dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
    dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
    dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
    dl.switch { padding-left: 2em; }
    dl.switch > dt { text-indent: -1.5em; }
    dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
@@ -104,6 +107,7 @@
    .note { color: green; background: transparent; font-family: sans-serif; }
    .warning { color: red; background: transparent; }
    .note, .warning { font-weight: bolder; font-style: italic; }
+   .note em, .warning em, .note i, .warning i { font-style: normal; }
    p.note, div.note { padding: 0.5em 2em; }
    span.note { padding: 0 2em; }
    .note p:first-child, .warning p:first-child { margin-top: 0; }
@@ -295,8 +299,6 @@
      src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
    }
 
-  ]]></style><style type="text/css"><![CDATA[
-   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
   ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
    function getCookie(name) {
      var params = location.search.substr(1).split("&");
@@ -315,16 +317,19 @@
      }
      return null;
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="common-microsyntaxes.html" title="2.5 Common microsyntaxes" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="fetching-resources.html" title="2.7 Fetching resources" rel="next"/></head><body><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="common-microsyntaxes.html" title="2.5 Common microsyntaxes" rel="prev"/><link href="index.html#contents" title="Table of contents" rel="contents"/><link href="common-dom-interfaces.html" title="2.8 Common DOM interfaces" rel="next"/></head><body onload="fixBrokenLink();" class="split chapter"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   </div><div>
-   <a href="common-microsyntaxes.html" class="prev">2.5 Common microsyntaxes</a> &#x2013;
-   <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="fetching-resources.html" class="next">2.7 Fetching resources</a>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
+
+   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   </div><nav class="prev_next"><a href="common-microsyntaxes.html">&#x2190; 2.5 Common microsyntaxes</a> &#x2013;
+   <a href="index.html#contents">Table of contents</a> &#x2013;
+   <a href="common-dom-interfaces.html">2.8 Common DOM interfaces &#x2192;</a>
   <ol class="toc"><li><ol><li><a href="urls.html#urls"><span class="secno">2.6 </span>URLs</a>
-    <ol><li><a href="urls.html#terminology-0"><span class="secno">2.6.1 </span>Terminology</a></li><li><a href="urls.html#parsing-urls"><span class="secno">2.6.2 </span>Parsing URLs</a></li><li><a href="urls.html#resolving-urls"><span class="secno">2.6.3 </span>Resolving URLs</a></li><li><a href="urls.html#url-manipulation-and-creation"><span class="secno">2.6.4 </span>URL manipulation and creation</a></li><li><a href="urls.html#dynamic-changes-to-base-urls"><span class="secno">2.6.5 </span>Dynamic changes to base URLs</a></li><li><a href="urls.html#interfaces-for-url-manipulation"><span class="secno">2.6.6 </span>Interfaces for URL manipulation</a></li></ol></li></ol></li></ol></div><h3 id="urls"><span class="secno">2.6 </span>URLs</h3><p>This specification defines the term <a href="#url">URL</a>, and defines
+    <ol><li><a href="urls.html#terminology-0"><span class="secno">2.6.1 </span>Terminology</a></li><li><a href="urls.html#parsing-urls"><span class="secno">2.6.2 </span>Parsing URLs</a></li><li><a href="urls.html#resolving-urls"><span class="secno">2.6.3 </span>Resolving URLs</a></li><li><a href="urls.html#url-manipulation-and-creation"><span class="secno">2.6.4 </span>URL manipulation and creation</a></li><li><a href="urls.html#dynamic-changes-to-base-urls"><span class="secno">2.6.5 </span>Dynamic changes to base URLs</a></li><li><a href="urls.html#interfaces-for-url-manipulation"><span class="secno">2.6.6 </span>Interfaces for URL manipulation</a></li></ol></li><li><a href="urls.html#fetching-resources"><span class="secno">2.7 </span>Fetching resources</a>
+    <ol><li><a href="urls.html#concept-http-equivalent"><span class="secno">2.7.1 </span>Protocol concepts</a></li><li><a href="urls.html#encrypted-http-and-related-security-concerns"><span class="secno">2.7.2 </span>Encrypted HTTP and related security concerns</a></li><li><a href="urls.html#content-type-sniffing"><span class="secno">2.7.3 </span>Determining the type of a resource</a></li><li><a href="urls.html#extracting-encodings-from-meta-elements"><span class="secno">2.7.4 </span>Extracting encodings from <code>meta</code> elements</a></li><li><a href="urls.html#cors-settings-attributes"><span class="secno">2.7.5 </span>CORS settings attributes</a></li><li><a href="urls.html#cors-enabled-fetch"><span class="secno">2.7.6 </span>CORS-enabled fetch</a></li></ol></li></ol></li></ol></nav><h3 id="urls"><span class="secno">2.6 </span>URLs</h3><p>This specification defines the term <a href="#url">URL</a>, and defines
   various algorithms for dealing with URLs, because for historical
   reasons the rules defined by the URI and IRI specifications are not
   a complete description of what HTML user agents need to implement to
@@ -342,8 +347,9 @@
    <li><p>The <a href="#url">URL</a> is a valid IRI reference and its query
    component contains no unescaped non-ASCII characters. <a href="references.html#refsRFC3987">[RFC3987]</a></p></li>
 
-   <li><p>The <a href="#url">URL</a> is a valid IRI reference and the <a href="dom.html#document-s-character-encoding" title="document's character encoding">character encoding</a> of
-   the URL's <code><a href="infrastructure.html#document">Document</a></code> is UTF-8 or UTF-16. <a href="references.html#refsRFC3987">[RFC3987]</a></p></li>
+   <li><p>The <a href="#url">URL</a> is a valid IRI reference and the <a href="infrastructure.html#document-s-character-encoding" title="document's character encoding">character encoding</a> of
+   the URL's <code><a href="dom.html#document">Document</a></code> is UTF-8 or <a href="infrastructure.html#a-utf-16-encoding">a UTF-16
+   encoding</a>. <a href="references.html#refsRFC3987">[RFC3987]</a></p></li>
 
   </ul><p>A string is a <dfn id="valid-non-empty-url">valid non-empty URL</dfn> if it is a
   <a href="#valid-url">valid URL</a> but it is not the empty string.</p><p>A string is a <dfn id="valid-url-potentially-surrounded-by-spaces">valid URL potentially surrounded by
@@ -352,7 +358,7 @@
   spaces</dfn> if, after <a href="common-microsyntaxes.html#strip-leading-and-trailing-whitespace" title="strip leading and trailing&#10;  whitespace">stripping leading and trailing whitespace</a> from
   it, it is a <a href="#valid-non-empty-url">valid non-empty URL</a>.</p><p>This specification defines the URL
   <dfn id="about:legacy-compat"><code>about:legacy-compat</code></dfn> as a reserved, though
-  unresolvable, <code title="">about:</code> URI, for use in <a href="syntax.html#syntax-doctype" title="syntax-doctype">DOCTYPE</a>s in <a href="dom.html#html-documents">HTML
+  unresolvable, <code title="">about:</code> URI, for use in <a href="syntax.html#syntax-doctype" title="syntax-doctype">DOCTYPE</a>s in <a href="infrastructure.html#html-documents">HTML
   documents</a> when needed for compatibility with XML tools. <a href="references.html#refsABOUT">[ABOUT]</a></p><p>This specification defines the URL
   <dfn id="about:srcdoc"><code>about:srcdoc</code></dfn> as a reserved, though
   unresolvable, <code title="">about:</code> URI, that is used as
@@ -363,7 +369,7 @@
   <p>To <dfn id="parse-a-url">parse a URL</dfn> <var title="">url</var> into its
   component parts, the user agent must use the following steps:</p>
 
-  <ol><li><p>Strip leading and trailing <a href="common-microsyntaxes.html#space-character" title="space&#10;   character">space characters</a> from <var title="">url</var>.</p></li>
+  <ol><li><p><a href="common-microsyntaxes.html#strip-leading-and-trailing-whitespace">Strip leading and trailing whitespace</a> from <var title="">url</var>.</p></li>
 
    <li>
 
@@ -401,6 +407,7 @@
      allowed in the &lt;fragment&gt; production.</li>
 
      
+
     </ul></li>
 
    <li>
@@ -506,13 +513,13 @@
 
      <dt>If the URL came from a DOM node (e.g. from an element)</dt>
 
-     <dd>The node has a <code><a href="infrastructure.html#document">Document</a></code>, and the URL character
-     encoding is the <a href="dom.html#document-s-character-encoding">document's character encoding</a>.</dd>
+     <dd>The node has a <code><a href="dom.html#document">Document</a></code>, and the URL character
+     encoding is the <a href="infrastructure.html#document-s-character-encoding">document's character encoding</a>.</dd>
 
     </dl></li>
 
-   <li><p>If <var title="">encoding</var> is a UTF-16 encoding, then
-   change the value of <var title="">encoding</var> to UTF-8.</p></li>
+   <li><p>If <var title="">encoding</var> is <a href="infrastructure.html#a-utf-16-encoding">a UTF-16
+   encoding</a>, then change the value of <var title="">encoding</var> to UTF-8.</p></li>
 
    <li>
 
@@ -523,20 +530,20 @@
     <p>Otherwise, let <var title="">base</var> be the <i>base URI of
     the element</i>, as defined by the XML Base specification, with
     <i>the base URI of the document entity</i> being defined as the
-    <a href="#document-base-url">document base URL</a> of the <code><a href="infrastructure.html#document">Document</a></code> that
+    <a href="#document-base-url">document base URL</a> of the <code><a href="dom.html#document">Document</a></code> that
     owns the element. <a href="references.html#refsXMLBASE">[XMLBASE]</a></p>
 
     <p>For the purposes of the XML Base specification, user agents
-    must act as if all <code><a href="infrastructure.html#document">Document</a></code> objects represented XML
+    must act as if all <code><a href="dom.html#document">Document</a></code> objects represented XML
     documents.</p>
 
-    <p class="note">It is possible for <code title="attr-xml-base"><a href="elements.html#the-xml:base-attribute-xml-only">xml:base</a></code> attributes to be present
+    <p class="note">It is possible for <code title="attr-xml-base"><a href="global-attributes.html#the-xml:base-attribute-xml-only">xml:base</a></code> attributes to be present
     even in HTML fragments, as such attributes can be added
     dynamically using script. (Such scripts would not be conforming,
-    however, as <code title="attr-xml-base"><a href="elements.html#the-xml:base-attribute-xml-only">xml:base</a></code> attributes
-    are not allowed in <a href="dom.html#html-documents">HTML documents</a>.)</p>
+    however, as <code title="attr-xml-base"><a href="global-attributes.html#the-xml:base-attribute-xml-only">xml:base</a></code> attributes
+    are not allowed in <a href="infrastructure.html#html-documents">HTML documents</a>.)</p>
 
-    <p>The <dfn id="document-base-url">document base URL</dfn> of a <code><a href="infrastructure.html#document">Document</a></code>
+    <p>The <dfn id="document-base-url">document base URL</dfn> of a <code><a href="dom.html#document">Document</a></code>
     object is the <a href="#absolute-url">absolute URL</a> obtained by running these
     substeps:</p>
 
@@ -548,8 +555,9 @@
       
 
       
+
       <p>If <var title="">fallback base url</var> is
-      <code><a href="fetching-resources.html#about:blank">about:blank</a></code>, and the <code><a href="infrastructure.html#document">Document</a></code>'s
+      <code><a href="#about:blank">about:blank</a></code>, and the <code><a href="dom.html#document">Document</a></code>'s
       <a href="browsers.html#browsing-context">browsing context</a> has a <a href="browsers.html#creator-browsing-context">creator browsing
       context</a>, then let <var title="">fallback base url</var>
       be the <a href="#document-base-url">document base URL</a> of the <a href="browsers.html#creator-document">creator
@@ -557,21 +565,21 @@
 
      </li>
 
-     <li><p>If the <code><a href="infrastructure.html#document">Document</a></code> is <a href="the-iframe-element.html#an-iframe-srcdoc-document">an
+     <li><p>If the <code><a href="dom.html#document">Document</a></code> is <a href="the-iframe-element.html#an-iframe-srcdoc-document">an
      <code>iframe</code> <code title="attr-iframe-srcdoc">srcdoc</code> document</a>, then
      let <var title="">fallback base url</var> be the <a href="#document-base-url">document
-     base URL</a> of the <code><a href="infrastructure.html#document">Document</a></code>'s <a href="browsers.html#browsing-context">browsing
+     base URL</a> of the <code><a href="dom.html#document">Document</a></code>'s <a href="browsers.html#browsing-context">browsing
      context</a>'s <a href="browsers.html#browsing-context-container">browsing context container</a>'s
-     <code><a href="infrastructure.html#document">Document</a></code> instead.</p></li>
+     <code><a href="dom.html#document">Document</a></code> instead.</p></li>
 
-     <li><p>If there is no <code><a href="semantics.html#the-base-element">base</a></code> element that has an <code title="attr-base-href"><a href="semantics.html#attr-base-href">href</a></code> attribute, then the
+     <li><p>If there is no <code><a href="the-base-element.html#the-base-element">base</a></code> element that has an <code title="attr-base-href"><a href="the-base-element.html#attr-base-href">href</a></code> attribute, then the
      <a href="#document-base-url">document base URL</a> is <var title="">fallback base
-     url</var>; abort these steps. Otherwise, let <var title="">url</var> be the value of the <code title="attr-base-href"><a href="semantics.html#attr-base-href">href</a></code> attribute of the first such
+     url</var>; abort these steps. Otherwise, let <var title="">url</var> be the value of the <code title="attr-base-href"><a href="the-base-element.html#attr-base-href">href</a></code> attribute of the first such
      element.</p></li>
 
      <li><p><a href="#resolve-a-url" title="resolve a URL">Resolve</a> <var title="">url</var> relative to <var title="">fallback base
-     url</var> (thus, the <code><a href="semantics.html#the-base-element">base</a></code> <code title="attr-base-href"><a href="semantics.html#attr-base-href">href</a></code> attribute isn't affected by
-     <code title="attr-xml-base"><a href="elements.html#the-xml:base-attribute-xml-only">xml:base</a></code> attributes).</p></li>
+     url</var> (thus, the <code><a href="the-base-element.html#the-base-element">base</a></code> <code title="attr-base-href"><a href="the-base-element.html#attr-base-href">href</a></code> attribute isn't affected by
+     <code title="attr-xml-base"><a href="global-attributes.html#the-xml:base-attribute-xml-only">xml:base</a></code> attributes).</p></li>
 
      <li><p>The <a href="#document-base-url">document base URL</a> is the result of the
      previous step if it was successful; otherwise it is <var title="">fallback base url</var>.</p></li>
@@ -733,6 +741,7 @@
      </li><li>U+007D RIGHT CURLY BRACKET character (})
     </li></ul><p>...then append the percent-encoded form of the character to
     <var title="">output</var>. <a href="references.html#refsRFC3986">[RFC3986]</a></p> 
+
     <p>Otherwise, append the character itself to <var title="">output</var>.</p>
 
     <p class="note">This escapes any ASCII characters that are not
@@ -752,21 +761,17 @@
 
   <h4 id="dynamic-changes-to-base-urls"><span class="secno">2.6.5 </span>Dynamic changes to base URLs</h4>
 
-  <p>When an <code title="attr-xml-base"><a href="elements.html#the-xml:base-attribute-xml-only">xml:base</a></code> attribute
+  <p>When an <code title="attr-xml-base"><a href="global-attributes.html#the-xml:base-attribute-xml-only">xml:base</a></code> attribute
   changes, the attribute's element, and all descendant elements, are
-  <a href="#affected-by-a-base-url-change">affected by a base URL change</a>.</p>
+  <a href="infrastructure.html#affected-by-a-base-url-change">affected by a base URL change</a>.</p>
 
   <p>When a document's <a href="#document-base-url">document base URL</a> changes, all
-  elements in that document are <a href="#affected-by-a-base-url-change">affected by a base URL
+  elements in that document are <a href="infrastructure.html#affected-by-a-base-url-change">affected by a base URL
   change</a>.</p>
 
-  <p>When an element is moved from one document to another, if the two
-  documents have different <a href="#document-base-url" title="document base URL">base
-  URLs</a>, then that element and all its descendants are
-  <a href="#affected-by-a-base-url-change">affected by a base URL change</a>.</p>
-
-  <p>When an element is <dfn id="affected-by-a-base-url-change">affected by a base URL change</dfn>, it
-  must act as described in the following list:</p>
+  <p>The following are <a href="infrastructure.html#base-url-change-steps">base URL change steps</a>, which run
+  when an element is <a href="infrastructure.html#affected-by-a-base-url-change">affected by a base URL change</a> (as
+  defined by the DOM Core specification):</p>
 
   <dl class="switch"><dt>If the element creates a <a href="links.html#hyperlink">hyperlink</a></dt>
 
@@ -783,10 +788,8 @@
 
    </dd>
 
-   <dt>If the element is a <code><a href="text-level-semantics.html#the-q-element">q</a></code>, <code><a href="grouping-content.html#the-blockquote-element">blockquote</a></code>,
-   <code><a href="sections.html#the-section-element">section</a></code>, <code><a href="sections.html#the-article-element">article</a></code>, <code><a href="edits.html#the-ins-element">ins</a></code>, or
-   <code><a href="edits.html#the-del-element">del</a></code> element with a <code title="">cite</code>
-   attribute</dt>
+   <dt>If the element is a <code><a href="the-q-element.html#the-q-element">q</a></code>, <code><a href="the-blockquote-element.html#the-blockquote-element">blockquote</a></code>,
+   <code><a href="the-ins-element.html#the-ins-element">ins</a></code>, or <code><a href="the-del-element.html#the-del-element">del</a></code> element with a <code title="">cite</code> attribute</dt>
 
    <dd>
 
@@ -804,8 +807,8 @@
     <p>The element is not directly affected.</p>
 
     <p class="example">For instance, changing the base URL doesn't
-    affect the image displayed by <code><a href="embedded-content-1.html#the-img-element">img</a></code> elements, although
-    subsequent accesses of the <code title="dom-img-src"><a href="embedded-content-1.html#dom-img-src">src</a></code>
+    affect the image displayed by <code><a href="the-img-element.html#the-img-element">img</a></code> elements, although
+    subsequent accesses of the <code title="dom-img-src"><a href="the-img-element.html#dom-img-src">src</a></code>
     IDL attribute from script will return a new <a href="#absolute-url">absolute
     URL</a> that might no longer correspond to the image being
     shown.</p>
@@ -1026,4 +1029,564 @@
       </td><td><code title="">/</code>
       </td><td><code title="">?</code>
       </td><td>(empty string)
-   </td></tr></tbody></table></div></body></html>
+   </td></tr></tbody></table></div><div class="impl">
+
+  <h3 id="fetching-resources"><span class="secno">2.7 </span>Fetching resources</h3>
+
+  <p>When a user agent is to <dfn id="fetch">fetch</dfn> a resource or
+  <a href="#url">URL</a>, optionally from an origin <i title="">origin</i>,
+  and optionally with a <i>synchronous flag</i>, a <i>manual redirect
+  flag</i>, a <i>force same-origin flag</i>, and/or a <i>block cookies
+  flag</i>, the following steps must be run. (When a <em>URL</em> is
+  to be fetched, the URL identifies a resource to be obtained.)</p>
+
+  
+
+  
+
+  
+
+  
+
+  <ol><li>
+
+    <p>Let <var title="">document</var> be the appropriate
+    <code><a href="dom.html#document">Document</a></code> as given by the following list:</p>
+
+    <dl class="switch"><dt>When <a href="history.html#navigate" title="navigate">navigating</a></dt>
+
+     <dd>The <a href="browsers.html#active-document">active document</a> of the <a href="history.html#source-browsing-context">source browsing
+     context</a>.</dd>
+
+     <dt>When fetching resources for an element</dt>
+
+     <dd>The element's <code><a href="dom.html#document">Document</a></code>.</dd>
+
+     <dt>When fetching resources in response to a call to an API</dt>
+
+     <dd>The <a href="browsers.html#entry-script">entry script</a>'s <a href="webappapis.html#script-s-document" title="script's&#10;     document">document</a>.</dd>
+
+    </dl></li>
+
+   <li>
+
+    <p>While <var title="">document</var> is <a href="the-iframe-element.html#an-iframe-srcdoc-document">an
+    <code>iframe</code> <code title="attr-iframe-srcdoc">srcdoc</code>
+    document</a>, let <var title="">document</var> be <var title="">document</var>'s <a href="browsers.html#browsing-context">browsing context</a>'s
+    <a href="browsers.html#browsing-context-container">browsing context container</a>'s <code><a href="dom.html#document">Document</a></code>
+    instead.</p>
+
+   </li>
+
+   <li>
+
+    <p>Generate the <i>address of the resource from which Request-URIs
+    are obtained</i> as required by HTTP for the <code title="http-referer">Referer</code> (sic) header from <a href="dom.html#the-document-s-current-address">the
+    document's current address</a> of <var title="">document</var>.
+    <a href="references.html#refsHTTP">[HTTP]</a></p>
+
+    <p>Remove any <a href="#url-fragment" title="url-fragment">&lt;fragment&gt;</a>
+    component from the generated <i>address of the resource from which
+    Request-URIs are obtained</i>.</p> 
+
+    <p>If the <a href="origin-0.html#origin">origin</a> of the appropriate
+    <code><a href="dom.html#document">Document</a></code> is not a scheme/host/port tuple, then the
+    <code title="http-referer">Referer</code> (sic) header must be
+    omitted, regardless of its value.</p>
+
+   </li>
+
+   <li><p>If the algorithm was not invoked with the <i>synchronous
+   flag</i>, perform the remaining steps asynchronously.</p></li>
+
+   <li>
+
+    <p>This is the <i>main step</i>.</p>
+
+    <p>If the resource is identified by an <a href="#absolute-url">absolute URL</a>,
+    and the resource is to be obtained using an idempotent action
+    (such as an HTTP GET <a href="#concept-http-equivalent-get" title="concept-http-equivalent-get">or
+    equivalent</a>), and it is already being downloaded for other
+    reasons (e.g. another invocation of this algorithm), and this
+    request would be identical to the previous one (e.g. same <code title="http-accept">Accept</code> and <code title="http-origin">Origin</code> headers), and the user agent is
+    configured such that it is to reuse the data from the existing
+    download instead of initiating a new one, then use the results of
+    the existing download instead of starting a new one.</p>
+
+    <p>Otherwise, if the resource is identified by an <a href="#absolute-url">absolute
+    URL</a> with a scheme that does not define a mechanism to
+    obtain the resource (e.g. it is a <code title="">mailto:</code>
+    URL) or that the user agent does not support, then act as if the
+    resource was an HTTP 204 No Content response with no other
+    metadata.</p>
+
+    <p>Otherwise, if the resource is identified by the
+    <a href="#url">URL</a> <dfn id="about:blank"><code>about:blank</code></dfn>, then the
+    resource is immediately available and consists of the empty
+    string, with no metadata.</p>
+
+    <p>Otherwise, at a time convenient to the user and the user agent,
+    download (or otherwise obtain) the resource, applying the
+    semantics of the relevant specifications (e.g. performing an HTTP
+    GET or POST operation, or reading the file from disk, <a href="webappapis.html#concept-js-deref" title="concept-js-deref">dereferencing <span title="javascript&#10;    protocol"><code title="">javascript:</code> URLs</span></a>,
+    etc).</p>
+
+    <p>For the purposes of the <code title="http-referer">Referer</code> (sic) header, use the
+    <i>address of the resource from which Request-URIs are
+    obtained</i> generated in the earlier step.</p>
+
+    <p>For the purposes of the <code title="http-origin">Origin</code>
+    header, if the <a href="#fetch" title="fetch">fetching algorithm</a> was
+    explicitly initiated from an <i title="">origin</i>, then <i title="">the origin that initiated the HTTP request</i> is <i title="">origin</i>. Otherwise, this is <i title="">a request from
+    a "privacy-sensitive" context</i>. <a href="references.html#refsORIGIN">[ORIGIN]</a></p>
+
+   </li>
+
+   <li>
+
+    <p>If the algorithm was not invoked with the <i>block cookies
+    flag</i>, and there are cookies to be set, then the user agent
+    must run the following substeps:</p>
+
+    <ol><li><p>Wait until ownership of the <a href="webappapis.html#storage-mutex">storage mutex</a> can
+     be taken by this instance of the <a href="#fetch" title="fetch">fetching</a> algorithm.</p></li>
+
+     <li><p>Take ownership of the <a href="webappapis.html#storage-mutex">storage mutex</a>.</p></li>
+
+     <li><p>Update the cookies. <a href="references.html#refsCOOKIES">[COOKIES]</a></p></li>
+
+     <li><p>Release the <a href="webappapis.html#storage-mutex">storage mutex</a> so that it is once
+     again free.</p></li>
+
+    </ol></li>
+
+   <li>
+
+    <p>If the fetched resource is an HTTP redirect <a href="#concept-http-equivalent-codes" title="concept-http-equivalent-codes">or equivalent</a>,
+    then:</p>
+
+    <dl class="switch"><dt>If the <i>force same-origin flag</i> is set and the
+     <a href="#url">URL</a> of the target of the redirect does not have the
+     <a href="origin-0.html#same-origin">same origin</a> as the <a href="#url">URL</a> for which the
+     <a href="#fetch">fetch</a> algorithm was invoked</dt>
+
+     <dd>
+
+      <p>Abort these steps and return failure from this algorithm, as
+      if the remote host could not be contacted.</p>
+
+     </dd>
+
+     <dt>If the <i>manual redirect flag</i> is set</dt>
+
+     <dd>
+
+      <p>Continue, using the fetched resource (the redirect) as the
+      result of the algorithm. If the calling algorithm subsequently
+      requires the user agent to <dfn id="transparently-follow-the-redirect">transparently follow the
+      redirect</dfn>, then the user agent must resume this algorithm
+      from the <i>main step</i>, but using the target of the redirect
+      as the resource to fetch, rather than the original resource.</p>
+
+     </dd>
+
+     <dt>Otherwise</dt>
+
+     <dd>
+
+      <p>First, apply any relevant requirements for redirects (such as
+      showing any appropriate prompts). Then, redo <i>main step</i>,
+      but using the target of the redirect as the resource to fetch,
+      rather than the original resource.</p>
+
+      <p class="note">The HTTP specification requires that 301, 302,
+      and 307 redirects, when applied to methods other than the safe
+      methods, not be followed without user confirmation. That would
+      be an appropriate prompt for the purposes of the requirement in
+      the paragraph above. <a href="references.html#refsHTTP">[HTTP]</a></p>
+
+     </dd>
+
+    </dl></li>
+
+   <li>
+
+    <p>If the algorithm was not invoked with the <i>synchronous
+    flag</i>: When the resource is available, or if there is an error
+    of some description, <a href="webappapis.html#queue-a-task">queue a task</a> that uses the
+    resource as appropriate. If the resource can be processed
+    incrementally, as, for instance, with a progressively interlaced
+    JPEG or an HTML file, additional tasks may be queued to process
+    the data as it is downloaded. The <a href="webappapis.html#task-source">task source</a> for
+    these <a href="webappapis.html#concept-task" title="concept-task">tasks</a> is the
+    <a href="webappapis.html#networking-task-source">networking task source</a>.</p>
+
+    <p>Otherwise, return the resource or error information to the
+    calling algorithm.</p>
+
+   </li>
+
+  </ol><p>If the user agent can determine the actual length of the resource
+  being <a href="#fetch" title="fetch">fetched</a> for an instance of this
+  algorithm, and if that length is finite, then that length is the
+  file's <dfn id="concept-fetch-total" title="concept-fetch-total">size</dfn>. Otherwise, the
+  subject of the algorithm (that is, the resource being fetched) has
+  no known <a href="#concept-fetch-total" title="concept-fetch-total">size</a>. (For
+  example, the HTTP <code title="http-content-length">Content-Length</code> header might
+  provide this information.)</p>
+
+  <p>The user agent must also keep track of the <dfn id="concept-fetch-loaded" title="concept-fetch-loaded">number of bytes downloaded</dfn> for
+  each instance of this algorithm. This number must exclude any
+  out-of-band metadata, such as HTTP headers.</p>
+
+  <p class="note">The <a href="offline.html#application-cache">application cache</a> processing model
+  introduces some <a href="offline.html#changesToNetworkingModel">changes to the
+  networking model</a> to handle the returning of cached
+  resources.</p>
+
+  <p class="note">The <a href="history.html#navigate" title="navigate">navigation</a>
+  processing model handles redirects itself, overriding the
+  redirection handling that would be done by the fetching
+  algorithm.</p>
+
+  <p class="note">Whether the <a href="#content-type-sniffing">type
+  sniffing rules</a> apply to the fetched resource depends on the
+  algorithm that invokes the rules &#x2014; they are not always
+  applicable.</p>
+
+
+  <h4 id="concept-http-equivalent"><span class="secno">2.7.1 </span>Protocol concepts</h4>
+
+  <p>User agents can implement a variety of transfer protocols, but
+  this specification mostly defines behavior in terms of HTTP. <a href="references.html#refsHTTP">[HTTP]</a></p>
+
+  <p>The <dfn id="concept-http-equivalent-get" title="concept-http-equivalent-get">HTTP GET
+  method</dfn> is equivalent to the default retrieval action of the
+  protocol. For example, RETR in FTP. Such actions are idempotent and
+  safe, in HTTP terms.</p>
+
+  <p>The <dfn id="concept-http-equivalent-codes" title="concept-http-equivalent-codes">HTTP response
+  codes</dfn> are equivalent to statuses in other protocols that have
+  the same basic meanings. For example, a "file not found" error is
+  equivalent to a 404 code, a server error is equivalent to a 5xx
+  code, and so on.</p>
+
+  <p>The <dfn id="concept-http-equivalent-headers" title="concept-http-equivalent-headers">HTTP
+  headers</dfn> are equivalent to fields in other protocols that have
+  the same basic meaning. For example, the HTTP authentication
+  headers are equivalent to the authentication aspects of the FTP
+  protocol.</p>
+
+
+
+  <h4 id="encrypted-http-and-related-security-concerns"><span class="secno">2.7.2 </span>Encrypted HTTP and related security concerns</h4>
+
+  <p>Anything in this specification that refers to HTTP also applies
+  to HTTP-over-TLS, as represented by <a href="#url" title="url">URLs</a>
+  representing the <code title="">https</code> scheme.</p>
+
+  <p class="warning">User agents should report certificate errors to
+  the user and must either refuse to download resources sent with
+  erroneous certificates or must act as if such resources were in fact
+  served with no encryption.</p>
+
+  <p>User agents should warn the user that there is a potential
+  problem whenever the user visits a page that the user has previously
+  visited, if the page uses less secure encryption on the second
+  visit.</p>
+
+  <p>Not doing so can result in users not noticing man-in-the-middle
+  attacks.</p>
+
+  <div class="example">
+
+   <p>If a user connects to a server with a self-signed certificate,
+   the user agent could allow the connection but just act as if there
+   had been no encryption. If the user agent instead allowed the user
+   to override the problem and then displayed the page as if it was
+   fully and safely encrypted, the user could be easily tricked into
+   accepting man-in-the-middle connections.</p>
+
+   <p>If a user connects to a server with full encryption, but the
+   page then refers to an external resource that has an expired
+   certificate, then the user agent will act as if the resource was
+   unavailable, possibly also reporting the problem to the user. If
+   the user agent instead allowed the resource to be used, then an
+   attacker could just look for "secure" sites that used resources
+   from a different host and only apply man-in-the-middle attacks to
+   that host, for example taking over scripts in the page.</p>
+
+   <p>If a user bookmarks a site that uses a CA-signed certificate,
+   and then later revisits that site directly but the site has started
+   using a self-signed certificate, the user agent could warn the user
+   that a man-in-the-middle attack is likely underway, instead of
+   simply acting as if the page was not encrypted.</p>
+
+  </div>
+
+
+
+  <h4 id="content-type-sniffing"><span class="secno">2.7.3 </span>Determining the type of a resource</h4>
+
+  <p>The <dfn id="content-type" title="Content-Type">Content-Type metadata</dfn> of a
+  resource must be obtained and interpreted in a manner consistent
+  with the requirements of the Media Type Sniffing
+  specification. <a href="references.html#refsMIMESNIFF">[MIMESNIFF]</a></p>
+
+  <p>The <dfn id="content-type-sniffing-0" title="Content-Type sniffing">sniffed type of a
+  resource</dfn> must be found in a manner consistent with the
+  requirements given in the Media Type Sniffing
+  specification for finding the <i>sniffed-type</i> of the relevant
+  sequence of octets. <a href="references.html#refsMIMESNIFF">[MIMESNIFF]</a></p>
+
+  <p>The <dfn id="content-type-sniffing:-image" title="Content-Type sniffing: image">rules for sniffing
+  images specifically</dfn> and the <dfn id="content-type-sniffing:-text-or-binary" title="Content-Type sniffing:&#10;  text or binary">rules for distinguishing if a resource is text or
+  binary</dfn> are also defined in the Media Type Sniffing
+  specification. Both sets of rules return a <a href="infrastructure.html#mime-type">MIME type</a> as
+  their result. <a href="references.html#refsMIMESNIFF">[MIMESNIFF]</a></p>
+
+  <p class="warning">It is imperative that the rules in the
+  Media Type Sniffing specification be followed
+  exactly. When a user agent uses different heuristics for content
+  type detection than the server expects, security problems can
+  occur. For more details, see the Media Type Sniffing
+  specification. <a href="references.html#refsMIMESNIFF">[MIMESNIFF]</a></p>
+
+
+  <h4 id="extracting-encodings-from-meta-elements"><span class="secno">2.7.4 </span>Extracting encodings from <code><a href="the-meta-element.html#the-meta-element">meta</a></code> elements</h4>
+
+  <p>The <dfn id="algorithm-for-extracting-an-encoding-from-a-meta-element">algorithm for extracting an encoding from a
+  <code>meta</code> element</dfn>, given a string <var title="">s</var>, is as follows. It either returns an encoding or
+  nothing.</p>
+
+  <ol><li><p>Let <var title="">position</var> be a pointer into <var title="">s</var>, initially pointing at the start of the
+   string.</p></li>
+
+   <li><p><i>Loop</i>: Find the first seven characters in <var title="">s</var> after <var title="">position</var> that are an
+   <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for the word "<code title="">charset</code>". If no such match is found, return nothing
+   and abort these steps.</p></li>
+
+   <li><p>Skip any U+0009, U+000A, U+000C, U+000D, or U+0020
+   characters that immediately follow the word "<code title="">charset</code>" (there might not be any).</p></li>
+
+   <li><p>If the next character is not a U+003D EQUALS SIGN (=),
+   then move <var title="">position</var> to point just before that
+   next character, and jump back to the step labeled
+   <i>loop</i>.</p></li>
+
+   <li><p>Skip any U+0009, U+000A, U+000C, U+000D, or U+0020
+   characters that immediately follow the equals sign (there might not
+   be any).</p></li>
+
+   <li>
+
+    <p>Process the next character as follows:</p>
+
+    <dl class="switch"><dt>If it is a U+0022 QUOTATION MARK (") and there is a later U+0022 QUOTATION MARK (") in <var title="">s</var></dt>
+     <dt>If it is a U+0027 APOSTROPHE (') and there is a later U+0027 APOSTROPHE (') in <var title="">s</var></dt>
+     <dd>Return the encoding corresponding to the string between this character and the next earliest occurrence of this character.</dd>
+
+     <dt>If it is an unmatched U+0022 QUOTATION MARK (")</dt>
+     <dt>If it is an unmatched U+0027 APOSTROPHE (')</dt>
+     <dt>If there is no next character</dt>
+     <dd>Return nothing.</dd>
+
+     <dt>Otherwise</dt>
+     <dd>Return the encoding corresponding to the string from this
+     character to the first U+0009, U+000A, U+000C, U+000D, U+0020, or
+     U+003B character or the end of <var title="">s</var>, whichever
+     comes first.</dd>
+
+    </dl></li>
+
+  </ol><p class="note">This algorithm is distinct from those in the HTTP
+  specification (for example, HTTP doesn't allow the use of single
+  quotes and requires supporting a backslash-escape mechanism that is
+  not supported by this algorithm). While the algorithm is used in contexts
+  that, historically, were related to HTTP, the syntax as supported by
+  implementations diverged some time ago. <a href="references.html#refsHTTP">[HTTP]</a></p>
+
+  </div><h4 id="cors-settings-attributes"><span class="secno">2.7.5 </span>CORS settings attributes</h4><p>A <dfn id="cors-settings-attribute">CORS settings attribute</dfn> is an <a href="common-microsyntaxes.html#enumerated-attribute">enumerated
+  attribute</a>. The following table lists the keywords and states
+  for the attribute &#x2014; the keywords in the left column map to the
+  states in the cell in the second column on the same row as the
+  keyword.</p><table><thead><tr><th> Keyword
+     </th><th> State
+     </th><th> Brief description
+   </th></tr></thead><tbody><tr><td><dfn id="attr-crossorigin-anonymous-keyword" title="attr-crossorigin-anonymous-keyword"><code>anonymous</code></dfn>
+     </td><td><dfn id="attr-crossorigin-anonymous" title="attr-crossorigin-anonymous">Anonymous</dfn>
+     </td><td>Cross-origin CORS requests for the element will not have the <i>credentials flag</i> set.
+    </td></tr><tr><td><dfn id="attr-crossorigin-use-credentials-keyword" title="attr-crossorigin-use-credentials-keyword"><code>use-credentials</code></dfn>
+     </td><td><dfn id="attr-crossorigin-use-credentials" title="attr-crossorigin-use-credentials">Use Credentials</dfn>
+     </td><td>Cross-origin CORS requests for the element will have the <i>credentials flag</i> set.
+  </td></tr></tbody></table><p>The empty string is also a valid keyword, and maps to the <a href="#attr-crossorigin-anonymous" title="attr-crossorigin-anonymous">Anonymous</a> state. The
+  attribute's <i>invalid value default</i> is the <a href="#attr-crossorigin-anonymous" title="attr-crossorigin-anonymous">Anonymous</a> state. The
+  <i>missing value default</i>, used when the attribute is omitted, is
+  the <dfn id="attr-crossorigin-none" title="attr-crossorigin-none">No CORS</dfn> state.</p><div class="impl">
+  <h4 id="cors-enabled-fetch"><span class="secno">2.7.6 </span>CORS-enabled fetch</h4>
+
+  <p>When the user agent is required to perform a <dfn id="potentially-cors-enabled-fetch">potentially
+  CORS-enabled fetch</dfn> of an <a href="#absolute-url">absolute URL</a> <var title="">URL</var>, with a mode <var title="">mode</var> that is
+  either "<a href="#attr-crossorigin-none" title="attr-crossorigin-none">No CORS</a>", "<a href="#attr-crossorigin-anonymous" title="attr-crossorigin-anonymous">Anonymous</a>", or "<a href="#attr-crossorigin-use-credentials" title="attr-crossorigin-use-credentials">Use Credentials</a>",
+  an <a href="origin-0.html#origin">origin</a> <var title="">origin</var>, and a default
+  origin behaviour <var title="">default</var> which is either
+  "<i>taint</i>" or "<i>fail</i>", it must run the first applicable
+  set of steps from the following list. The default origin behaviour
+  is only used if <var title="">mode</var> is "<a href="#attr-crossorigin-none" title="attr-crossorigin-none">No CORS</a>". This algorithm wraps
+  the <a href="#fetch">fetch</a> algorithm above, and labels the obtained
+  resource as either <dfn id="cors-same-origin">CORS-same-origin</dfn> or
+  <dfn id="cors-cross-origin">CORS-cross-origin</dfn>, or blocks the resource entirely.</p>
+
+  <dl class="switch"><dt>If the <var title="">URL</var> has the <a href="origin-0.html#same-origin">same origin</a> as <var title="">origin</var></dt>
+
+   <dt>If <var title="">mode</var> is "<a href="#attr-crossorigin-none" title="attr-crossorigin-none">No CORS</a>"</dt>
+
+   <dd>
+
+    <p>Run these substeps:</p>
+
+    <ol><li><p>Let <var title="">result</var> have no value.</p></li>
+
+     <li><p><a href="#fetch">Fetch</a> <var title="">URL</var>, with the
+     <i>manual redirect flag</i> set.</p></li> 
+
+     <li><p><i>Loop</i>: Wait for the <a href="#fetch">fetch</a> algorithm
+     to know if the result is a redirect or not.</p></li>
+
+     <li>
+
+      <p>If the result of the <a href="#fetch">fetch</a> is a redirect, and
+      the <var title="">mode</var> is not "<a href="#attr-crossorigin-none" title="attr-crossorigin-none">No CORS</a>", and the
+      <a href="origin-0.html#origin">origin</a> of the target URL of the redirect is not the
+      <a href="origin-0.html#same-origin">same origin</a> as <var title="">origin</var>, then set
+      <var title="">URL</var> to the the target URL of the redirect
+      and return to the top of the <a href="#potentially-cors-enabled-fetch">potentially CORS-enabled
+      fetch</a> algorithm (this time, the branch below will be
+      taken, resulting in the fetch being done in a CORS-aware
+      fashion).</p>
+
+      <p>Otherwise, if the result of the <a href="#fetch">fetch</a> is a
+      redirect, and <var title="">result</var> still has no value,
+      then apply the CORS <a href="infrastructure.html#redirect-steps">redirect steps</a>, with the CORS
+      <a href="infrastructure.html#credential-flag">credential flag</a> set to true and the <i>request
+      rules</i> being that the user agent continue to follow these
+      steps. If this resumes the <a href="#fetch">fetch</a> algorithm, then
+      return to the <i>loop</i> step. If it failed due to a failure of
+      the CORS <a href="infrastructure.html#resource-sharing-check">resource sharing check</a>, then: if <var title="">default</var> is <i>fail</i>, then set <var title="">result</var> to <i>fail</i> and jump to the step
+      labeled <i>end</i>; if <var title="">default</var> is
+      <i>taint</i>, then set <var title="">result</var> to
+      <i>taint</i>, <a href="#transparently-follow-the-redirect">transparently follow the redirect</a> but
+      with the <i>manual redirect flag</i> no longer set, and jump to
+      the step labeled <i>end</i> below.</p>
+
+      <p>Otherwise, if the resource is not available (e.g. there is
+      a network error) then set <var title="">result</var> to the
+      same value as <var title="">default</var>, and jump to the
+      step labeled <i>end</i> below.</p>
+
+      <p>Otherwise, perform a <a href="infrastructure.html#resource-sharing-check">resource sharing check</a>,
+      with the CORS <a href="infrastructure.html#credential-flag">credential flag</a> set to true. If it
+      returns fail, then set <var title="">result</var> to the same
+      value as <var title="">default</var>; otherwise, set <var title="">result</var> to <i>success</i>. Then, jump to the
+      step labeled <i>end</i> below.</p>
+
+     </li>
+
+     <li>
+
+      <p><i>End</i>: Jump to the appropriate step from the following
+      list:</p>
+
+      <dl class="switch"><dt>If <var title="">result</var> is <i>fail</i></dt>
+
+       <dd>
+
+        <p>Discard all fetched data and prevent any <a href="webappapis.html#concept-task" title="concept-task">tasks</a> from the <a href="#fetch">fetch</a>
+        algorithm from being <a href="webappapis.html#queue-a-task" title="queue a task">queued</a>.
+        For the purposes of the calling algorithm, the user agent must
+        act as if there was a fatal network error and no resource was
+        obtained. The user agent may report a cross-origin resource
+        access failure to the user (e.g. in a debugging console).</p>
+
+       </dd>
+
+       <dt>If <var title="">result</var> is <i>taint</i></dt>
+
+       <dd>
+
+        <p>The <a href="webappapis.html#concept-task" title="concept-task">tasks</a> from the
+        <a href="#fetch">fetch</a> algorithm are <a href="webappapis.html#queue-a-task" title="queue a&#10;        task">queued</a> normally, but for the purposes of the
+        calling algorithm, the obtained resource is
+        <a href="#cors-cross-origin">CORS-cross-origin</a>. The user agent may report a
+        cross-origin resource access failure to the user (e.g. in a
+        debugging console).</p>
+
+       </dd>
+
+       <dt>If <var title="">result</var> is <i>success</i></dt>
+
+       <dd>
+
+        <p>The <a href="webappapis.html#concept-task" title="concept-task">tasks</a> from the
+        <a href="#fetch">fetch</a> algorithm are <a href="webappapis.html#queue-a-task" title="queue a&#10;        task">queued</a> normally, and for the purposes of the
+        calling algorithm, the obtained resource is
+        <a href="#cors-same-origin">CORS-same-origin</a>.</p>
+
+       </dd>
+
+      </dl></li>
+
+    </ol></dd>
+
+
+   <dt>If <var title="">mode</var> is "<a href="#attr-crossorigin-anonymous" title="attr-crossorigin-anonymous">Anonymous</a>" or "<a href="#attr-crossorigin-use-credentials" title="attr-crossorigin-use-credentials">Use
+   Credentials</a>"</dt>
+
+   <dd>
+
+    <p>Run these steps:</p>
+
+    <ol><li><p>Perform a <a href="infrastructure.html#cross-origin-request">cross-origin request</a> with the
+     <i>request URL</i> set to <var title="">URL</var>, the
+     <i>source origin</i> set to <var title="">origin</var>, and the
+     <i>credentials flag</i> set to true if <var title="">mode</var>
+     is "<a href="#attr-crossorigin-use-credentials" title="attr-crossorigin-use-credentials">Use
+     Credentials</a>" and set to false otherwise. <a href="references.html#refsCORS">[CORS]</a></p></li>
+
+     <li><p>Wait for the CORS <a href="infrastructure.html#cross-origin-request-status">cross-origin request status</a>
+     to have a value.</p></li>
+
+     <li>
+
+      <p>Jump to the appropriate step from the following list:</p>
+
+      <dl class="switch"><dt>If the CORS <a href="infrastructure.html#cross-origin-request-status">cross-origin request status</a> is not <i>success</i></dt>
+
+       <dd>
+
+        <p>Discard all fetched data and prevent any <a href="webappapis.html#concept-task" title="concept-task">tasks</a> from the <a href="#fetch">fetch</a>
+        algorithm from being <a href="webappapis.html#queue-a-task" title="queue a task">queued</a>.
+        For the purposes of the calling algorithm, the user agent must
+        act as if there was a fatal network error and no resource was
+        obtained. If a CORS <a href="infrastructure.html#resource-sharing-check">resource sharing check</a>
+        failed, the user agent may report a cross-origin resource
+        access failure to the user (e.g. in a debugging console).</p>
+
+       </dd>
+
+       <dt>If the CORS <a href="infrastructure.html#cross-origin-request-status">cross-origin request status</a> is <i>success</i></dt>
+
+       <dd>
+
+        <p>The <a href="webappapis.html#concept-task" title="concept-task">tasks</a> from the
+        <a href="#fetch">fetch</a> algorithm are <a href="webappapis.html#queue-a-task" title="queue a&#10;        task">queued</a> normally, and for the purposes of the
+        calling algorithm, the obtained resource is
+        <a href="#cors-same-origin">CORS-same-origin</a>.</p>
+
+       </dd>
+
+      </dl></li>
+
+    </ol></dd>
+
+  </dl></div></body></html>

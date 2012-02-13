@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>12 IANA considerations &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<!DOCTYPE html>
+<html lang="en-US-x-Hixie"><head><title>12 IANA considerations &#x2014; HTML5</title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -19,6 +19,7 @@
    dd table + p { margin-top: 1em; }
    p + * > li, dd li { margin: 1em 0; }
    dt, dfn { font-weight: bold; font-style: normal; }
+   i, em { font-style: italic; }
    dt dfn { font-style: italic; }
    pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
    pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
@@ -40,9 +41,10 @@
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
 
    .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   img.extra { float: right; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   img.extra, p.overview { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; position: relative; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl::before { content: "IDL"; font: bold small sans-serif; padding: 0.5em; background: white; position: absolute; top: 0; margin: -1px 0 0 -4em; width: 1.5em; border: thin solid; border-radius: 0 0 0 0.5em }
    pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
    pre.css:first-line { color: #AAAA50; }
    dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
@@ -50,6 +52,7 @@
    dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
    dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
    dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
    dl.switch { padding-left: 2em; }
    dl.switch > dt { text-indent: -1.5em; }
    dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
@@ -104,6 +107,7 @@
    .note { color: green; background: transparent; font-family: sans-serif; }
    .warning { color: red; background: transparent; }
    .note, .warning { font-weight: bolder; font-style: italic; }
+   .note em, .warning em, .note i, .warning i { font-style: normal; }
    p.note, div.note { padding: 0.5em 2em; }
    span.note { padding: 0 2em; }
    .note p:first-child, .warning p:first-child { margin-top: 0; }
@@ -295,8 +299,6 @@
      src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
    }
 
-  ]]></style><style type="text/css"><![CDATA[
-   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
   ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
    function getCookie(name) {
      var params = location.search.substr(1).split("&");
@@ -315,16 +317,18 @@
      }
      return null;
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="obsolete.html" title="11 Obsolete features" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="index.html" title="Index" rel="next"/></head><body><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="obsolete.html" title="11 Obsolete features" rel="prev"/><link href="index.html#contents" title="Table of contents" rel="contents"/><link href="section-index.html" title="Index" rel="next"/></head><body onload="fixBrokenLink();" class="split chapter"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   </div><div>
-   <a href="obsolete.html" class="prev">11 Obsolete features</a> &#x2013;
-   <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="index.html" class="next">Index</a>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
+
+   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   </div><nav class="prev_next"><a href="obsolete.html">&#x2190; 11 Obsolete features</a> &#x2013;
+   <a href="index.html#contents">Table of contents</a> &#x2013;
+   <a href="section-index.html">Index &#x2192;</a>
   <ol class="toc"><li><a href="iana.html#iana"><span class="secno">12 </span>IANA considerations</a>
-  <ol><li><a href="iana.html#text-html"><span class="secno">12.1 </span><code>text/html</code></a></li><li><a href="iana.html#text-html-sandboxed"><span class="secno">12.2 </span><code>text/html-sandboxed</code></a></li><li><a href="iana.html#application-xhtml-xml"><span class="secno">12.3 </span><code>application/xhtml+xml</code></a></li><li><a href="iana.html#text-cache-manifest"><span class="secno">12.4 </span><code>text/cache-manifest</code></a></li></ol></li></ol></div><h2 id="iana"><span class="secno">12 </span>IANA considerations</h2><h3 id="text-html"><span class="secno">12.1 </span><dfn><code>text/html</code></dfn></h3><p>This registration is for community review and will be submitted
+  <ol><li><a href="iana.html#text-html"><span class="secno">12.1 </span><code>text/html</code></a></li><li><a href="iana.html#multipart-x-mixed-replace"><span class="secno">12.2 </span><code>multipart/x-mixed-replace</code></a></li><li><a href="iana.html#application-xhtml-xml"><span class="secno">12.3 </span><code>application/xhtml+xml</code></a></li><li><a href="iana.html#application-x-www-form-urlencoded"><span class="secno">12.4 </span><code>application/x-www-form-urlencoded</code></a></li><li><a href="iana.html#text-cache-manifest"><span class="secno">12.5 </span><code>text/cache-manifest</code></a></li><li><a href="iana.html#web-scheme-prefix"><span class="secno">12.6 </span><code>web+</code> scheme prefix</a></li></ol></li></ol></nav><h2 id="iana"><span class="secno">12 </span>IANA considerations</h2><h3 id="text-html"><span class="secno">12.1 </span><dfn><code>text/html</code></dfn></h3><p>This registration is for community review and will be submitted
   to the IESG for review, approval, and registration with IANA.</p><dl><dt>Type name:</dt>
    <dd>text</dd>
    <dt>Subtype name:</dt>
@@ -336,8 +340,8 @@
     <dl><dt><code title="">charset</code></dt>
      <dd>
       <p>The <code title="">charset</code> parameter may be provided
-      to definitively specify the <a href="dom.html#document-s-character-encoding">document's character
-      encoding</a>, overriding any <a href="semantics.html#character-encoding-declaration" title="character encoding&#10;      declaration">character encoding declarations</a> in the
+      to definitively specify the <a href="infrastructure.html#document-s-character-encoding">document's character
+      encoding</a>, overriding any <a href="the-meta-element.html#character-encoding-declaration" title="character encoding&#10;      declaration">character encoding declarations</a> in the
       document. The parameter's value must be the name of the
       character encoding used to serialize the file, must be a valid
       character encoding name, and must be an <a href="infrastructure.html#ascii-case-insensitive">ASCII
@@ -346,7 +350,10 @@
      </dd>
     </dl></dd>
    <dt>Encoding considerations:</dt>
-   <dd>See the section on <a href="semantics.html#character-encoding-declaration" title="character encoding&#10;   declaration">character encoding declarations</a>.</dd>
+   <dd>
+    8bit (see the section on <a href="the-meta-element.html#character-encoding-declaration" title="character encoding&#10;    declaration">character encoding declarations</a>)
+   </dd>
+
    <dt>Security considerations:</dt>
    <dd>
 
@@ -367,7 +374,7 @@
     <p>Even without scripting, there are specific features in HTML
     which, for historical reasons, are required for broad
     compatibility with legacy content but that expose the user to
-    unfortunate security problems. In particular, the <code><a href="embedded-content-1.html#the-img-element">img</a></code>
+    unfortunate security problems. In particular, the <code><a href="the-img-element.html#the-img-element">img</a></code>
     element can be used in conjunction with some other features as a
     way to effect a port scan from the user's location on the
     Internet. This can expose local network topologies that the
@@ -389,6 +396,7 @@
     rights granted to that origin.</p>
 
    </dd>
+
    <dt>Interoperability considerations:</dt>
    <dd>
     Rules for processing both conforming and non-conforming content
@@ -398,7 +406,7 @@
    <dd id="authors-using-html">
     This document is the relevant specification. Labeling a resource
     with the <code><a href="#text-html">text/html</a></code> type asserts that the resource is
-    an <a href="dom.html#html-documents" title="HTML documents">HTML document</a> using
+    an <a href="infrastructure.html#html-documents" title="HTML documents">HTML document</a> using
     <a href="syntax.html#syntax">the HTML syntax</a>.
    </dd>
    <dt>Applications that use this media type:</dt>
@@ -430,63 +438,49 @@
    <dt>Change controller:</dt>
    <dd>W3C</dd>
   </dl><p>Fragment identifiers used with <code><a href="#text-html">text/html</a></code> resources
-  refer to <a href="history.html#the-indicated-part-of-the-document">the indicated part of the document</a>.</p><h3 id="text-html-sandboxed"><span class="secno">12.2 </span><dfn><code>text/html-sandboxed</code></dfn></h3><p>This registration is for community review and will be submitted
+  either refer to <a href="history.html#the-indicated-part-of-the-document">the indicated part of the document</a> or
+  provide state information for in-page scripts.</p><h3 id="multipart-x-mixed-replace"><span class="secno">12.2 </span><dfn><code>multipart/x-mixed-replace</code></dfn></h3><p>This registration is for community review and will be submitted
   to the IESG for review, approval, and registration with IANA.</p><dl><dt>Type name:</dt>
-   <dd>text</dd>
+   <dd>multipart</dd>
    <dt>Subtype name:</dt>
-   <dd>html-sandboxed</dd>
+   <dd>x-mixed-replace</dd>
    <dt>Required parameters:</dt>
-   <dd>No required parameters</dd>
+   <dd>
+    <ul class="brief"><li><code title="">boundary</code> (defined in RFC2046) <a href="references.html#refsRFC2046">[RFC2046]</a>
+    </li></ul></dd>
    <dt>Optional parameters:</dt>
-   <dd>Same as for <code><a href="#text-html">text/html</a></code></dd>
+   <dd>No optional parameters.</dd>
    <dt>Encoding considerations:</dt>
-   <dd>Same as for <code><a href="#text-html">text/html</a></code></dd>
+   <dd>binary</dd>
+
    <dt>Security considerations:</dt>
    <dd>
-    <p>The purpose of the <code><a href="#text-html-sandboxed">text/html-sandboxed</a></code> MIME type
-    is to provide a way for content providers to indicate that they
-    want the file to be interpreted in a manner that does not give the
-    file's contents access to the rest of the site. This is achieved
-    by assigning the <code><a href="infrastructure.html#document">Document</a></code> objects generated from
-    resources labeled as <code><a href="#text-html-sandboxed">text/html-sandboxed</a></code> unique
-    origins.</p>
-    <p>To avoid having legacy user agents treating resources labeled
-    as <code><a href="#text-html-sandboxed">text/html-sandboxed</a></code> as regular
-    <code><a href="#text-html">text/html</a></code> files, authors should avoid using the <code title="">.html</code> or <code title="">.htm</code> extensions for
-    resources labeled as <code><a href="#text-html-sandboxed">text/html-sandboxed</a></code>.</p>
-    <p>Furthermore, since the <code><a href="#text-html-sandboxed">text/html-sandboxed</a></code> MIME
-    type impacts the origin security model, authors should be careful
-    to prevent tampering with the MIME type labeling mechanism itself
-    when documents are labeled as <code><a href="#text-html-sandboxed">text/html-sandboxed</a></code>. If
-    an attacker can cause a file to be served as
-    <code><a href="#text-html">text/html</a></code> instead of
-    <code><a href="#text-html-sandboxed">text/html-sandboxed</a></code>, then the sandboxing will not
-    take effect and a cross-site scripting attack will become
-    possible.</p>
-    <p>Beyond this, the type is identical to <code><a href="#text-html">text/html</a></code>,
-    and the same considerations apply.</p>
+    Subresources of a <code><a href="#multipart-x-mixed-replace">multipart/x-mixed-replace</a></code>
+    resource can be of any type, including types with non-trivial
+    security implications such as <code><a href="#text-html">text/html</a></code>.
    </dd>
+
    <dt>Interoperability considerations:</dt>
-   <dd>Same as for <code><a href="#text-html">text/html</a></code></dd>
+   <dd>
+    None.
+   </dd>
    <dt>Published specification:</dt>
    <dd>
-    This document is the relevant specification. Labeling a resource
-    with the <code><a href="#text-html-sandboxed">text/html-sandboxed</a></code> type asserts that the
-    resource is an <a href="dom.html#html-documents" title="HTML documents">HTML document</a>
-    using <a href="syntax.html#syntax">the HTML syntax</a>.
+    This specification describes processing rules for Web browsers.
+    Conformance requirements for generating resources with this type are the same as for <code>multipart/mixed</code>. <a href="references.html#refsRFC2046">[RFC2046]</a>
    </dd>
    <dt>Applications that use this media type:</dt>
-   <dd>Same as for <code><a href="#text-html">text/html</a></code></dd>
+   <dd>
+    This type is intended to be used in resources generated by Web servers, for consumption by Web browsers.
+   </dd>
    <dt>Additional information:</dt>
    <dd>
     <dl><dt>Magic number(s):</dt>
-     <dd>Documents labeled as <code><a href="#text-html-sandboxed">text/html-sandboxed</a></code> are
-     heuristically indistinguishable from those labeled as
-     <code><a href="#text-html">text/html</a></code>.</dd>
+     <dd>No sequence of bytes can uniquely identify a <code><a href="#multipart-x-mixed-replace">multipart/x-mixed-replace</a></code> resource.</dd>
      <dt>File extension(s):</dt>
-     <dd>"<code title="">sandboxed</code>"</dd>
+     <dd>No specific file extensions are recommended for this type.</dd>
      <dt>Macintosh file type code(s):</dt>
-     <dd><code title="">TEXT</code></dd>
+     <dd>No specific Macintosh file type codes are recommended for this type.</dd>
     </dl></dd>
    <dt>Person &amp; email address to contact for further information:</dt>
    <dd>Ian Hickson &lt;ian@hixie.ch&gt;</dd>
@@ -498,9 +492,9 @@
    <dd>Ian Hickson &lt;ian@hixie.ch&gt;</dd>
    <dt>Change controller:</dt>
    <dd>W3C</dd>
-  </dl><p>Fragment identifiers used with <code><a href="#text-html-sandboxed">text/html-sandboxed</a></code>
-  resources refer to <a href="history.html#the-indicated-part-of-the-document">the indicated part of the
-  document</a>.</p><h3 id="application-xhtml-xml"><span class="secno">12.3 </span><dfn><code>application/xhtml+xml</code></dfn></h3><p>This registration is for community review and will be submitted
+  </dl><p>Fragment identifiers used with
+  <code><a href="#multipart-x-mixed-replace">multipart/x-mixed-replace</a></code> resources apply to each body
+  part as defined by the type used by that body part.</p><h3 id="application-xhtml-xml"><span class="secno">12.3 </span><dfn><code>application/xhtml+xml</code></dfn></h3><p>This registration is for community review and will be submitted
   to the IESG for review, approval, and registration with IANA.</p><dl><dt>Type name:</dt>
    <dd>application</dd>
    <dt>Subtype name:</dt>
@@ -511,15 +505,17 @@
    <dd>Same as for <code>application/xml</code> <a href="references.html#refsRFC3023">[RFC3023]</a></dd>
    <dt>Encoding considerations:</dt>
    <dd>Same as for <code>application/xml</code> <a href="references.html#refsRFC3023">[RFC3023]</a></dd>
+
    <dt>Security considerations:</dt>
    <dd>Same as for <code>application/xml</code> <a href="references.html#refsRFC3023">[RFC3023]</a></dd>
+
    <dt>Interoperability considerations:</dt>
    <dd>Same as for <code>application/xml</code> <a href="references.html#refsRFC3023">[RFC3023]</a></dd>
    <dt id="authors-using-xhtml">Published specification:</dt>
    <dd>
     Labeling a resource with the <code><a href="#application-xhtml-xml">application/xhtml+xml</a></code>
     type asserts that the resource is an XML document that likely has
-    a root element from the <a href="namespaces.html#html-namespace-0">HTML namespace</a>. As such, the
+    a root element from the <a href="namespaces.html#html-namespace-0">HTML namespace</a>. Thus, the
     relevant specifications are the XML specification, the Namespaces
     in XML specification, and this specification. <a href="references.html#refsXML">[XML]</a> <a href="references.html#refsXMLNS">[XMLNS]</a>
    </dd>
@@ -548,7 +544,66 @@
    <dd>W3C</dd>
   </dl><p>Fragment identifiers used with <code><a href="#application-xhtml-xml">application/xhtml+xml</a></code>
   resources have the same semantics as with any <a href="infrastructure.html#xml-mime-type">XML MIME
-  type</a>. <a href="references.html#refsRFC3023">[RFC3023]</a></p><h3 id="text-cache-manifest"><span class="secno">12.4 </span><dfn><code>text/cache-manifest</code></dfn></h3><p>This registration is for community review and will be submitted
+  type</a>. <a href="references.html#refsRFC3023">[RFC3023]</a></p><h3 id="application-x-www-form-urlencoded"><span class="secno">12.4 </span><dfn><code>application/x-www-form-urlencoded</code></dfn></h3><p>This registration is for community review and will be submitted
+  to the IESG for review, approval, and registration with IANA.</p><dl><dt>Type name:</dt>
+   <dd>application</dd>
+   <dt>Subtype name:</dt>
+   <dd>x-www-form-urlencoded</dd>
+   <dt>Required parameters:</dt>
+   <dd>No parameters</dd>
+   <dt>Optional parameters:</dt>
+   <dd>No parameters</dd>
+   <dt>Encoding considerations:</dt>
+   <dd>7bit (US-ASCII encoding of octets that themselves can be encoding text using any <a href="infrastructure.html#ascii-compatible-character-encoding">ASCII-compatible character encoding</a>)</dd>
+
+   <dt>Security considerations:</dt>
+   <dd>
+    <p>In isolation, an <code><a href="#application-x-www-form-urlencoded">application/x-www-form-urlencoded</a></code>
+    payload poses no security risks. However, as this type is usually
+    used as part of a form submission, all the risks that apply to
+    HTML forms need to be considered in the context of this type.</p>
+   </dd>
+
+   <dt>Interoperability considerations:</dt>
+   <dd>
+    Rules for generating and processing
+    <code><a href="#application-x-www-form-urlencoded">application/x-www-form-urlencoded</a></code> payloads are
+    defined in this specification.
+   </dd>
+   <dt>Published specification:</dt>
+   <dd>
+    This document is the relevant specification.
+    Algorithms for <a href="form-submission.html#application-x-www-form-urlencoded-encoding-algorithm" title="application/x-www-form-urlencoded encoding algorithm">encoding</a>
+    and <a href="form-submission.html#application-x-www-form-urlencoded-decoding-algorithm" title="application/x-www-form-urlencoded decoding algorithm">decoding</a> are defined.
+   </dd>
+   <dt>Applications that use this media type:</dt>
+   <dd>
+    Web browsers and servers.
+   </dd>
+   <dt>Additional information:</dt>
+   <dd>
+    <dl><dt>Magic number(s):</dt>
+     <dd>There is no reliable mechanism for recognising <code><a href="#application-x-www-form-urlencoded">application/x-www-form-urlencoded</a></code> payloads.</dd>
+     <dt>File extension(s):</dt>
+     <dd>Not applicable.</dd>
+     <dt>Macintosh file type code(s):</dt>
+     <dd>Not applicable.</dd>
+    </dl></dd>
+   <dt>Person &amp; email address to contact for further information:</dt>
+   <dd>Ian Hickson &lt;ian@hixie.ch&gt;</dd>
+   <dt>Intended usage:</dt>
+   <dd>Common</dd>
+   <dt>Restrictions on usage:</dt>
+   <dd>This type is only intended to be used to describe HTML form
+   submission payloads.</dd>
+   <dt>Author:</dt>
+   <dd>Ian Hickson &lt;ian@hixie.ch&gt;</dd>
+   <dt>Change controller:</dt>
+   <dd>W3C</dd>
+  </dl><p>Fragment identifiers have no meaning with the
+  <code><a href="#application-x-www-form-urlencoded">application/x-www-form-urlencoded</a></code> type as this type is
+  only used for uploaded payloads that do not have <a href="urls.html#url">URL</a>
+  identifiers.</p><h3 id="text-cache-manifest"><span class="secno">12.5 </span><dfn><code>text/cache-manifest</code></dfn></h3><p>This registration is for community review and will be submitted
   to the IESG for review, approval, and registration with IANA.</p><dl><dt>Type name:</dt>
    <dd>text</dd>
    <dt>Subtype name:</dt>
@@ -558,7 +613,8 @@
    <dt>Optional parameters:</dt>
    <dd>No parameters</dd>
    <dt>Encoding considerations:</dt>
-   <dd>Always UTF-8.</dd>
+   <dd>8bit (always UTF-8)</dd>
+
    <dt>Security considerations:</dt>
    <dd>
     <p>Cache manifests themselves pose no immediate risk unless
@@ -570,6 +626,7 @@
     information leakage, cross-site scripting attacks, and the
     like.</p>
    </dd>
+
    <dt>Interoperability considerations:</dt>
    <dd>
     Rules for processing both conforming and non-conforming content
@@ -606,4 +663,42 @@
    <dt>Change controller:</dt>
    <dd>W3C</dd>
   </dl><p>Fragment identifiers have no meaning with
-  <code><a href="#text-cache-manifest">text/cache-manifest</a></code> resources.</p></body></html>
+  <code><a href="#text-cache-manifest">text/cache-manifest</a></code> resources.</p><h3 id="web-scheme-prefix"><span class="secno">12.6 </span><dfn title="scheme-web"><code>web+</code> scheme prefix</dfn></h3><p>This section describes a convention for use with the IANA URI
+  scheme registry. It does not itself register a specific scheme. <a href="references.html#refsRFC4395">[RFC4395]</a></p><dl><dt>URI scheme name:</dt>
+   <dd>
+    Schemes starting with the four characters "<code title="">web+</code>" followed by one or more letters in the range
+    <code title="">a</code>-<code title="">z</code>.
+   </dd>
+   <dt>Status:</dt>
+   <dd>permanent</dd>
+   <dt>URI scheme syntax:</dt>
+   <dd>Scheme-specific.</dd>
+   <dt>URI scheme semantics:</dt>
+   <dd>Scheme-specific.</dd>
+   <dt>Encoding considerations:</dt>
+   <dd>All "<code title="">web+</code>" schemes should use UTF-8 encodings were relevant.</dd>
+   <dt>Applications/protocols that use this URI scheme name:</dt>
+   <dd>Scheme-specific.</dd>
+   <dt>Interoperability considerations:</dt>
+   <dd>The scheme is expected to be used in the context of Web applications.</dd>
+
+   <dt>Security considerations:</dt>
+   <dd>
+    Any Web page is able to register a handler for all "<code title="">web+</code>" schemes. As such, these schemes must not be
+    used for features intended to be core platform features (e.g.
+    network transfer protocols like HTTP or FTP). Similarly, such
+    schemes must not store confidential information in their URLs,
+    such as usernames, passwords, personal information, or
+    confidential project names.
+   </dd>
+
+   <dt>Contact:</dt>
+   <dd>Ian Hickson &lt;ian@hixie.ch&gt;</dd>
+   <dt>Author/Change controller:</dt>
+   <dd>Ian Hickson &lt;ian@hixie.ch&gt;</dd>
+   <dt>References:</dt>
+   <dd>
+    <cite>Custom scheme and content handlers</cite>, HTML Living Standard:
+    <a href="system-state-and-capabilities.html#custom-handlers">http://www.whatwg.org/specs/web-apps/current-work/#custom-handlers</a>
+   </dd>
+  </dl></body></html>

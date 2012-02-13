@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>4.10.7 The input element &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<!DOCTYPE html>
+<html lang="en-US-x-Hixie"><head><title>4.10.7 The input element &#x2014; HTML5</title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -19,6 +19,7 @@
    dd table + p { margin-top: 1em; }
    p + * > li, dd li { margin: 1em 0; }
    dt, dfn { font-weight: bold; font-style: normal; }
+   i, em { font-style: italic; }
    dt dfn { font-style: italic; }
    pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
    pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
@@ -40,9 +41,10 @@
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
 
    .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   img.extra { float: right; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   img.extra, p.overview { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; position: relative; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl::before { content: "IDL"; font: bold small sans-serif; padding: 0.5em; background: white; position: absolute; top: 0; margin: -1px 0 0 -4em; width: 1.5em; border: thin solid; border-radius: 0 0 0 0.5em }
    pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
    pre.css:first-line { color: #AAAA50; }
    dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
@@ -50,6 +52,7 @@
    dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
    dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
    dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
    dl.switch { padding-left: 2em; }
    dl.switch > dt { text-indent: -1.5em; }
    dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
@@ -104,6 +107,7 @@
    .note { color: green; background: transparent; font-family: sans-serif; }
    .warning { color: red; background: transparent; }
    .note, .warning { font-weight: bolder; font-style: italic; }
+   .note em, .warning em, .note i, .warning i { font-style: normal; }
    p.note, div.note { padding: 0.5em 2em; }
    span.note { padding: 0 2em; }
    .note p:first-child, .warning p:first-child { margin-top: 0; }
@@ -295,8 +299,6 @@
      src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
    }
 
-  ]]></style><style type="text/css"><![CDATA[
-   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
   ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
    function getCookie(name) {
      var params = location.search.substr(1).split("&");
@@ -315,82 +317,85 @@
      }
      return null;
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="forms.html" title="4.10 Forms" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="states-of-the-type-attribute.html" title="4.10.7.1 States of the type attribute" rel="next"/></head><body><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="the-label-element.html" title="4.10.6 The label element" rel="prev"/><link href="index.html#contents" title="Table of contents" rel="contents"/><link href="states-of-the-type-attribute.html" title="4.10.7.1 States of the type attribute" rel="next"/></head><body onload="fixBrokenLink();" class="split chapter"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   </div><div>
-   <a href="forms.html" class="prev">4.10 Forms</a> &#x2013;
-   <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="states-of-the-type-attribute.html" class="next">4.10.7.1 States of the type attribute</a>
-  </div><h4 id="the-input-element"><span class="secno">4.10.7 </span>The <dfn><code>input</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
+
+   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   </div><nav class="prev_next"><a href="the-label-element.html">&#x2190; 4.10.6 The label element</a> &#x2013;
+   <a href="index.html#contents">Table of contents</a> &#x2013;
+   <a href="states-of-the-type-attribute.html">4.10.7.1 States of the type attribute &#x2192;</a>
+  </nav><h4 id="the-input-element"><span class="secno">4.10.7 </span>The <dfn><code>input</code></dfn> element</h4><dl class="element"><dt><a href="element-definitions.html#element-dfn-categories" title="element-dfn-categories">Categories</a>:</dt>
    <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
    <dd><a href="content-models.html#phrasing-content">Phrasing content</a>.</dd>
-   <dd>If the <code title="attr-input-type"><a href="#attr-input-type">type</a></code> attribute is <em>not</em> in the <a href="states-of-the-type-attribute.html#hidden-state" title="attr-input-type-hidden">Hidden</a> state: <a href="content-models.html#interactive-content">Interactive content</a>.</dd>
-   <dd>If the <code title="attr-input-type"><a href="#attr-input-type">type</a></code> attribute is <em>not</em> in the <a href="states-of-the-type-attribute.html#hidden-state" title="attr-input-type-hidden">Hidden</a> state: <a href="forms.html#category-listed" title="category-listed">Listed</a>, <a href="forms.html#category-label" title="category-label">labelable</a>, <a href="forms.html#category-submit" title="category-submit">submittable</a>, and <a href="forms.html#category-reset" title="category-reset">resettable</a> <a href="forms.html#form-associated-element">form-associated element</a>.</dd>
-   <dd>If the <code title="attr-input-type"><a href="#attr-input-type">type</a></code> attribute is in the <a href="states-of-the-type-attribute.html#hidden-state" title="attr-input-type-hidden">Hidden</a> state: <a href="forms.html#category-listed" title="category-listed">Listed</a>, <a href="forms.html#category-submit" title="category-submit">submittable</a>, and <a href="forms.html#category-reset" title="category-reset">resettable</a> <a href="forms.html#form-associated-element">form-associated element</a>.</dd>
-   <dt>Contexts in which this element can be used:</dt>
+   <dd>If the <code title="attr-input-type"><a href="#attr-input-type">type</a></code> attribute is <em>not</em> in the <a href="states-of-the-type-attribute.html#hidden-state-type-hidden" title="attr-input-type-hidden">Hidden</a> state: <a href="content-models.html#interactive-content">Interactive content</a>.</dd>
+   <dd>If the <code title="attr-input-type"><a href="#attr-input-type">type</a></code> attribute is <em>not</em> in the <a href="states-of-the-type-attribute.html#hidden-state-type-hidden" title="attr-input-type-hidden">Hidden</a> state: <a href="forms.html#category-listed" title="category-listed">Listed</a>, <a href="forms.html#category-label" title="category-label">labelable</a>, <a href="forms.html#category-submit" title="category-submit">submittable</a>, and <a href="forms.html#category-reset" title="category-reset">resettable</a> <a href="forms.html#form-associated-element">form-associated element</a>.</dd>
+   <dd>If the <code title="attr-input-type"><a href="#attr-input-type">type</a></code> attribute is in the <a href="states-of-the-type-attribute.html#hidden-state-type-hidden" title="attr-input-type-hidden">Hidden</a> state: <a href="forms.html#category-listed" title="category-listed">Listed</a>, <a href="forms.html#category-submit" title="category-submit">submittable</a>, and <a href="forms.html#category-reset" title="category-reset">resettable</a> <a href="forms.html#form-associated-element">form-associated element</a>.</dd>
+   <dd>If the <code title="attr-input-type"><a href="#attr-input-type">type</a></code> attribute is <em>not</em> in the <a href="states-of-the-type-attribute.html#hidden-state-type-hidden" title="attr-input-type-hidden">Hidden</a> state: <a href="content-models.html#palpable-content">Palpable content</a>.</dd>
+   <dt><a href="element-definitions.html#element-dfn-contexts" title="element-dfn-contexts">Contexts in which this element can be used</a>:</dt>
    <dd>Where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
-   <dt>Content model:</dt>
+   <dt><a href="element-definitions.html#element-dfn-content-model" title="element-dfn-content-model">Content model</a>:</dt>
    <dd>Empty.</dd>
-   <dt>Content attributes:</dt>
-   <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
-   <dd><code title="attr-input-accept"><a href="number-state.html#attr-input-accept">accept</a></code></dd>
-   <dd><code title="attr-input-alt"><a href="number-state.html#attr-input-alt">alt</a></code></dd>
+   <dt><a href="element-definitions.html#element-dfn-attributes" title="element-dfn-attributes">Content attributes</a>:</dt>
+   <dd><a href="global-attributes.html#global-attributes">Global attributes</a></dd>
+   <dd><code title="attr-input-accept"><a href="states-of-the-type-attribute.html#attr-input-accept">accept</a></code></dd>
+   <dd><code title="attr-input-alt"><a href="states-of-the-type-attribute.html#attr-input-alt">alt</a></code></dd>
    <dd><code title="attr-input-autocomplete"><a href="common-input-element-attributes.html#attr-input-autocomplete">autocomplete</a></code></dd>
-   <dd><code title="attr-fe-autofocus"><a href="association-of-controls-and-forms.html#attr-fe-autofocus">autofocus</a></code></dd>
+   <dd><code title="attr-fe-autofocus"><a href="attributes-common-to-form-controls.html#attr-fe-autofocus">autofocus</a></code></dd>
    <dd><code title="attr-input-checked"><a href="#attr-input-checked">checked</a></code></dd>
    <dd><code title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code></dd>
-   <dd><code title="attr-fe-disabled"><a href="association-of-controls-and-forms.html#attr-fe-disabled">disabled</a></code></dd>
+   <dd><code title="attr-fe-disabled"><a href="attributes-common-to-form-controls.html#attr-fe-disabled">disabled</a></code></dd>
    <dd><code title="attr-fae-form"><a href="association-of-controls-and-forms.html#attr-fae-form">form</a></code></dd>
-   <dd><code title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code></dd>
-   <dd><code title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code></dd>
-   <dd><code title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code></dd>
-   <dd><code title="attr-fs-formnovalidate"><a href="association-of-controls-and-forms.html#attr-fs-formnovalidate">formnovalidate</a></code></dd>
-   <dd><code title="attr-fs-formtarget"><a href="association-of-controls-and-forms.html#attr-fs-formtarget">formtarget</a></code></dd>
-   <dd><code title="attr-dim-height"><a href="the-map-element.html#attr-dim-height">height</a></code></dd>
+   <dd><code title="attr-fs-formaction"><a href="attributes-common-to-form-controls.html#attr-fs-formaction">formaction</a></code></dd>
+   <dd><code title="attr-fs-formenctype"><a href="attributes-common-to-form-controls.html#attr-fs-formenctype">formenctype</a></code></dd>
+   <dd><code title="attr-fs-formmethod"><a href="attributes-common-to-form-controls.html#attr-fs-formmethod">formmethod</a></code></dd>
+   <dd><code title="attr-fs-formnovalidate"><a href="attributes-common-to-form-controls.html#attr-fs-formnovalidate">formnovalidate</a></code></dd>
+   <dd><code title="attr-fs-formtarget"><a href="attributes-common-to-form-controls.html#attr-fs-formtarget">formtarget</a></code></dd>
+   <dd><code title="attr-dim-height"><a href="dimension-attributes.html#attr-dim-height">height</a></code></dd>
    <dd><code title="attr-input-list"><a href="common-input-element-attributes.html#attr-input-list">list</a></code></dd>
    <dd><code title="attr-input-max"><a href="common-input-element-attributes.html#attr-input-max">max</a></code></dd>
    <dd><code title="attr-input-maxlength"><a href="common-input-element-attributes.html#attr-input-maxlength">maxlength</a></code></dd>
    <dd><code title="attr-input-min"><a href="common-input-element-attributes.html#attr-input-min">min</a></code></dd>
    <dd><code title="attr-input-multiple"><a href="common-input-element-attributes.html#attr-input-multiple">multiple</a></code></dd>
-   <dd><code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code></dd>
+   <dd><code title="attr-fe-name"><a href="attributes-common-to-form-controls.html#attr-fe-name">name</a></code></dd>
    <dd><code title="attr-input-pattern"><a href="common-input-element-attributes.html#attr-input-pattern">pattern</a></code></dd>
    <dd><code title="attr-input-placeholder"><a href="common-input-element-attributes.html#attr-input-placeholder">placeholder</a></code></dd>
    <dd><code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code></dd>
    <dd><code title="attr-input-required"><a href="common-input-element-attributes.html#attr-input-required">required</a></code></dd>
    <dd><code title="attr-input-size"><a href="common-input-element-attributes.html#attr-input-size">size</a></code></dd>
-   <dd><code title="attr-input-src"><a href="number-state.html#attr-input-src">src</a></code></dd>
+   <dd><code title="attr-input-src"><a href="states-of-the-type-attribute.html#attr-input-src">src</a></code></dd>
    <dd><code title="attr-input-step"><a href="common-input-element-attributes.html#attr-input-step">step</a></code></dd>
    <dd><code title="attr-input-type"><a href="#attr-input-type">type</a></code></dd>
    <dd><code title="attr-input-value"><a href="#attr-input-value">value</a></code></dd>
-   <dd><code title="attr-dim-width"><a href="the-map-element.html#attr-dim-width">width</a></code></dd>
-   <dt>DOM interface:</dt>
+   <dd><code title="attr-dim-width"><a href="dimension-attributes.html#attr-dim-width">width</a></code></dd>
+   <dt><a href="element-definitions.html#element-dfn-dom" title="element-dfn-dom">DOM interface</a>:</dt>
    <dd>
 <pre class="idl">interface <dfn id="htmlinputelement">HTMLInputElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
            attribute DOMString <a href="#dom-input-accept" title="dom-input-accept">accept</a>;
            attribute DOMString <a href="#dom-input-alt" title="dom-input-alt">alt</a>;
            attribute DOMString <a href="#dom-input-autocomplete" title="dom-input-autocomplete">autocomplete</a>;
-           attribute boolean <a href="association-of-controls-and-forms.html#dom-fe-autofocus" title="dom-fe-autofocus">autofocus</a>;
+           attribute boolean <a href="attributes-common-to-form-controls.html#dom-fe-autofocus" title="dom-fe-autofocus">autofocus</a>;
            attribute boolean <a href="#dom-input-defaultchecked" title="dom-input-defaultChecked">defaultChecked</a>;
-           attribute boolean <a href="common-input-element-attributes.html#dom-input-checked" title="dom-input-checked">checked</a>;
+           attribute boolean <a href="common-input-element-apis.html#dom-input-checked" title="dom-input-checked">checked</a>;
            attribute DOMString <a href="#dom-input-dirname" title="dom-input-dirName">dirName</a>;
-           attribute boolean <a href="association-of-controls-and-forms.html#dom-fe-disabled" title="dom-fe-disabled">disabled</a>;
-  readonly attribute <a href="forms.html#htmlformelement">HTMLFormElement</a>? <a href="association-of-controls-and-forms.html#dom-fae-form" title="dom-fae-form">form</a>;
-  readonly attribute <a href="infrastructure.html#filelist">FileList</a>? <a href="common-input-element-attributes.html#dom-input-files" title="dom-input-files">files</a>;
-           attribute DOMString <a href="association-of-controls-and-forms.html#dom-fs-formaction" title="dom-fs-formAction">formAction</a>;
-           attribute DOMString <a href="association-of-controls-and-forms.html#dom-fs-formenctype" title="dom-fs-formEnctype">formEnctype</a>;
-           attribute DOMString <a href="association-of-controls-and-forms.html#dom-fs-formmethod" title="dom-fs-formMethod">formMethod</a>;
-           attribute boolean <a href="association-of-controls-and-forms.html#dom-fs-formnovalidate" title="dom-fs-formNoValidate">formNoValidate</a>;
-           attribute DOMString <a href="association-of-controls-and-forms.html#dom-fs-formtarget" title="dom-fs-formTarget">formTarget</a>;
-           attribute DOMString <a href="the-map-element.html#dom-dim-height" title="dom-dim-height">height</a>;
+           attribute boolean <a href="attributes-common-to-form-controls.html#dom-fe-disabled" title="dom-fe-disabled">disabled</a>;
+  readonly attribute <a href="the-form-element.html#htmlformelement">HTMLFormElement</a>? <a href="association-of-controls-and-forms.html#dom-fae-form" title="dom-fae-form">form</a>;
+  readonly attribute <a href="infrastructure.html#filelist">FileList</a>? <a href="common-input-element-apis.html#dom-input-files" title="dom-input-files">files</a>;
+           attribute DOMString <a href="attributes-common-to-form-controls.html#dom-fs-formaction" title="dom-fs-formAction">formAction</a>;
+           attribute DOMString <a href="attributes-common-to-form-controls.html#dom-fs-formenctype" title="dom-fs-formEnctype">formEnctype</a>;
+           attribute DOMString <a href="attributes-common-to-form-controls.html#dom-fs-formmethod" title="dom-fs-formMethod">formMethod</a>;
+           attribute boolean <a href="attributes-common-to-form-controls.html#dom-fs-formnovalidate" title="dom-fs-formNoValidate">formNoValidate</a>;
+           attribute DOMString <a href="attributes-common-to-form-controls.html#dom-fs-formtarget" title="dom-fs-formTarget">formTarget</a>;
+           attribute unsigned long <a href="#dom-input-height" title="dom-input-height">height</a>;
            attribute boolean <a href="#dom-input-indeterminate" title="dom-input-indeterminate">indeterminate</a>;
-  readonly attribute <a href="elements.html#htmlelement">HTMLElement</a>? <a href="common-input-element-attributes.html#dom-input-list" title="dom-input-list">list</a>;
+  readonly attribute <a href="elements.html#htmlelement">HTMLElement</a>? <a href="common-input-element-apis.html#dom-input-list" title="dom-input-list">list</a>;
            attribute DOMString <a href="#dom-input-max" title="dom-input-max">max</a>;
            attribute long <a href="#dom-input-maxlength" title="dom-input-maxLength">maxLength</a>;
            attribute DOMString <a href="#dom-input-min" title="dom-input-min">min</a>;
            attribute boolean <a href="#dom-input-multiple" title="dom-input-multiple">multiple</a>;
-           attribute DOMString <a href="association-of-controls-and-forms.html#dom-fe-name" title="dom-fe-name">name</a>;
+           attribute DOMString <a href="attributes-common-to-form-controls.html#dom-fe-name" title="dom-fe-name">name</a>;
            attribute DOMString <a href="#dom-input-pattern" title="dom-input-pattern">pattern</a>;
            attribute DOMString <a href="#dom-input-placeholder" title="dom-input-placeholder">placeholder</a>;
            attribute boolean <a href="#dom-input-readonly" title="dom-input-readOnly">readOnly</a>;
@@ -400,28 +405,27 @@
            attribute DOMString <a href="#dom-input-step" title="dom-input-step">step</a>;
            attribute DOMString <a href="#dom-input-type" title="dom-input-type">type</a>;
            attribute DOMString <a href="#dom-input-defaultvalue" title="dom-input-defaultValue">defaultValue</a>;
-           attribute DOMString <a href="common-input-element-attributes.html#dom-input-value" title="dom-input-value">value</a>;
-           attribute <span>Date</span> <a href="common-input-element-attributes.html#dom-input-valueasdate" title="dom-input-valueAsDate">valueAsDate</a>;
-           attribute double <a href="common-input-element-attributes.html#dom-input-valueasnumber" title="dom-input-valueAsNumber">valueAsNumber</a>;
-  readonly attribute <a href="the-button-element.html#htmloptionelement">HTMLOptionElement</a>? <a href="common-input-element-attributes.html#dom-input-selectedoption" title="dom-input-selectedOption">selectedOption</a>;
-           attribute DOMString <a href="the-map-element.html#dom-dim-width" title="dom-dim-width">width</a>;
+           attribute DOMString <a href="common-input-element-apis.html#dom-input-value" title="dom-input-value">value</a>;
+           attribute <span>Date</span>? <a href="common-input-element-apis.html#dom-input-valueasdate" title="dom-input-valueAsDate">valueAsDate</a>;
+           attribute double <a href="common-input-element-apis.html#dom-input-valueasnumber" title="dom-input-valueAsNumber">valueAsNumber</a>;
+           attribute unsigned long <a href="#dom-input-width" title="dom-input-width">width</a>;
 
-  void <a href="common-input-element-attributes.html#dom-input-stepup" title="dom-input-stepUp">stepUp</a>(in optional long n);
-  void <a href="common-input-element-attributes.html#dom-input-stepdown" title="dom-input-stepDown">stepDown</a>(in optional long n);
+  void <a href="common-input-element-apis.html#dom-input-stepup" title="dom-input-stepUp">stepUp</a>(optional long n);
+  void <a href="common-input-element-apis.html#dom-input-stepdown" title="dom-input-stepDown">stepDown</a>(optional long n);
 
-  readonly attribute boolean <a href="association-of-controls-and-forms.html#dom-cva-willvalidate" title="dom-cva-willValidate">willValidate</a>;
-  readonly attribute <a href="association-of-controls-and-forms.html#validitystate">ValidityState</a> <a href="association-of-controls-and-forms.html#dom-cva-validity" title="dom-cva-validity">validity</a>;
-  readonly attribute DOMString <a href="association-of-controls-and-forms.html#dom-cva-validationmessage" title="dom-cva-validationMessage">validationMessage</a>;
-  boolean <a href="association-of-controls-and-forms.html#dom-cva-checkvalidatity" title="dom-cva-checkValidatity">checkValidity</a>();
-  void <a href="association-of-controls-and-forms.html#dom-cva-setcustomvalidity" title="dom-cva-setCustomValidity">setCustomValidity</a>(in DOMString error);
+  readonly attribute boolean <a href="constraints.html#dom-cva-willvalidate" title="dom-cva-willValidate">willValidate</a>;
+  readonly attribute <a href="constraints.html#validitystate">ValidityState</a> <a href="constraints.html#dom-cva-validity" title="dom-cva-validity">validity</a>;
+  readonly attribute DOMString <a href="constraints.html#dom-cva-validationmessage" title="dom-cva-validationMessage">validationMessage</a>;
+  boolean <a href="constraints.html#dom-cva-checkvalidatity" title="dom-cva-checkValidatity">checkValidity</a>();
+  void <a href="constraints.html#dom-cva-setcustomvalidity" title="dom-cva-setCustomValidity">setCustomValidity</a>(DOMString error);
 
-  readonly attribute <a href="infrastructure.html#nodelist">NodeList</a> <a href="forms.html#dom-lfe-labels" title="dom-lfe-labels">labels</a>;
+  readonly attribute <a href="infrastructure.html#nodelist">NodeList</a> <a href="the-label-element.html#dom-lfe-labels" title="dom-lfe-labels">labels</a>;
 
-  void <a href="association-of-controls-and-forms.html#dom-textarea-input-select" title="dom-textarea/input-select">select</a>();
-           attribute unsigned long <a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart" title="dom-textarea/input-selectionStart">selectionStart</a>;
-           attribute unsigned long <a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend" title="dom-textarea/input-selectionEnd">selectionEnd</a>;
-           attribute DOMString <a href="association-of-controls-and-forms.html#dom-textarea-input-selectiondirection" title="dom-textarea/input-selectionDirection">selectionDirection</a>;
-  void <a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange" title="dom-textarea/input-setSelectionRange">setSelectionRange</a>(in unsigned long start, in unsigned long end, in optional DOMString direction);
+  void <a href="textFieldSelection.html#dom-textarea-input-select" title="dom-textarea/input-select">select</a>();
+           attribute unsigned long <a href="textFieldSelection.html#dom-textarea-input-selectionstart" title="dom-textarea/input-selectionStart">selectionStart</a>;
+           attribute unsigned long <a href="textFieldSelection.html#dom-textarea-input-selectionend" title="dom-textarea/input-selectionEnd">selectionEnd</a>;
+           attribute DOMString <a href="textFieldSelection.html#dom-textarea-input-selectiondirection" title="dom-textarea/input-selectionDirection">selectionDirection</a>;
+  void <a href="textFieldSelection.html#dom-textarea-input-setselectionrange" title="dom-textarea/input-setSelectionRange">setSelectionRange</a>(unsigned long start, unsigned long end, optional DOMString direction);
 };</pre>
    </dd>
   </dl><p>The <code><a href="#the-input-element">input</a></code> element <a href="rendering.html#represents">represents</a> a typed data field,
@@ -435,827 +439,1081 @@
      </th><th> Data type
      </th><th> Control type
    </th></tr></thead><tbody><tr><td> <dfn id="attr-input-type-hidden-keyword" title="attr-input-type-hidden-keyword"><code>hidden</code></dfn>
-     </td><td> <a href="states-of-the-type-attribute.html#hidden-state" title="attr-input-type-hidden">Hidden</a>
+     </td><td> <a href="states-of-the-type-attribute.html#hidden-state-type-hidden" title="attr-input-type-hidden">Hidden</a>
      </td><td> An arbitrary string
      </td><td> n/a
     </td></tr><tr><td> <dfn id="attr-input-type-text-keyword" title="attr-input-type-text-keyword"><code>text</code></dfn>
-     </td><td> <a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-text">Text</a>
+     </td><td> <a href="states-of-the-type-attribute.html#text-type-text-state-and-search-state-type-search" title="attr-input-type-text">Text</a>
      </td><td> Text with no line breaks
-     </td><td> Text field
+     </td><td> A text field
     </td></tr><tr><td> <dfn id="attr-input-type-search-keyword" title="attr-input-type-search-keyword"><code>search</code></dfn>
-     </td><td> <a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-search">Search</a>
+     </td><td> <a href="states-of-the-type-attribute.html#text-type-text-state-and-search-state-type-search" title="attr-input-type-search">Search</a>
      </td><td> Text with no line breaks
      </td><td> Search field
     </td></tr><tr><td> <dfn id="attr-input-type-tel-keyword" title="attr-input-type-tel-keyword"><code>tel</code></dfn>
-     </td><td> <a href="states-of-the-type-attribute.html#telephone-state" title="attr-input-type-tel">Telephone</a>
+     </td><td> <a href="states-of-the-type-attribute.html#telephone-state-type-tel" title="attr-input-type-tel">Telephone</a>
      </td><td> Text with no line breaks
      </td><td> A text field
     </td></tr><tr><td> <dfn id="attr-input-type-url-keyword" title="attr-input-type-url-keyword"><code>url</code></dfn>
-     </td><td> <a href="states-of-the-type-attribute.html#url-state" title="attr-input-type-url">URL</a>
-     </td><td> An absolute IRI
+     </td><td> <a href="states-of-the-type-attribute.html#url-state-type-url" title="attr-input-type-url">URL</a>
+     </td><td> An absolute URL
      </td><td> A text field
     </td></tr><tr><td> <dfn id="attr-input-type-email-keyword" title="attr-input-type-email-keyword"><code>email</code></dfn>
-     </td><td> <a href="states-of-the-type-attribute.html#e-mail-state" title="attr-input-type-email">E-mail</a>
+     </td><td> <a href="states-of-the-type-attribute.html#e-mail-state-type-email" title="attr-input-type-email">E-mail</a>
      </td><td> An e-mail address or list of e-mail addresses
      </td><td> A text field
     </td></tr><tr><td> <dfn id="attr-input-type-password-keyword" title="attr-input-type-password-keyword"><code>password</code></dfn>
-     </td><td> <a href="states-of-the-type-attribute.html#password-state" title="attr-input-type-password">Password</a>
+     </td><td> <a href="states-of-the-type-attribute.html#password-state-type-password" title="attr-input-type-password">Password</a>
      </td><td> Text with no line breaks (sensitive information)
-     </td><td> Text field that obscures data entry
+     </td><td> A text field that obscures data entry
     </td></tr><tr><td> <dfn id="attr-input-type-datetime-keyword" title="attr-input-type-datetime-keyword"><code>datetime</code></dfn>
-     </td><td> <a href="states-of-the-type-attribute.html#date-and-time-state" title="attr-input-type-datetime">Date and Time</a>
+     </td><td> <a href="states-of-the-type-attribute.html#date-and-time-state-type-datetime" title="attr-input-type-datetime">Date and Time</a>
      </td><td> A date and time (year, month, day, hour, minute, second, fraction of a second) with the time zone set to UTC
      </td><td> A date and time control
     </td></tr><tr><td> <dfn id="attr-input-type-date-keyword" title="attr-input-type-date-keyword"><code>date</code></dfn>
-     </td><td> <a href="states-of-the-type-attribute.html#date-state" title="attr-input-type-date">Date</a>
+     </td><td> <a href="states-of-the-type-attribute.html#date-state-type-date" title="attr-input-type-date">Date</a>
      </td><td> A date (year, month, day) with no time zone
      </td><td> A date control
     </td></tr><tr><td> <dfn id="attr-input-type-month-keyword" title="attr-input-type-month-keyword"><code>month</code></dfn>
-     </td><td> <a href="states-of-the-type-attribute.html#month-state" title="attr-input-type-month">Month</a>
+     </td><td> <a href="states-of-the-type-attribute.html#month-state-type-month" title="attr-input-type-month">Month</a>
      </td><td> A date consisting of a year and a month with no time zone
      </td><td> A month control
     </td></tr><tr><td> <dfn id="attr-input-type-week-keyword" title="attr-input-type-week-keyword"><code>week</code></dfn>
-     </td><td> <a href="states-of-the-type-attribute.html#week-state" title="attr-input-type-week">Week</a>
+     </td><td> <a href="states-of-the-type-attribute.html#week-state-type-week" title="attr-input-type-week">Week</a>
      </td><td> A date consisting of a week-year number and a week number with no time zone
      </td><td> A week control
     </td></tr><tr><td> <dfn id="attr-input-type-time-keyword" title="attr-input-type-time-keyword"><code>time</code></dfn>
-     </td><td> <a href="states-of-the-type-attribute.html#time-state" title="attr-input-type-time">Time</a>
+     </td><td> <a href="states-of-the-type-attribute.html#time-state-type-time" title="attr-input-type-time">Time</a>
      </td><td> A time (hour, minute, seconds, fractional seconds) with no time zone
      </td><td> A time control
     </td></tr><tr><td> <dfn id="attr-input-type-datetime-local-keyword" title="attr-input-type-datetime-local-keyword"><code>datetime-local</code></dfn>
-     </td><td> <a href="states-of-the-type-attribute.html#local-date-and-time-state" title="attr-input-type-datetime-local">Local Date and Time</a>
+     </td><td> <a href="states-of-the-type-attribute.html#local-date-and-time-state-type-datetime-local" title="attr-input-type-datetime-local">Local Date and Time</a>
      </td><td> A date and time (year, month, day, hour, minute, second, fraction of a second) with no time zone
      </td><td> A date and time control
     </td></tr><tr><td> <dfn id="attr-input-type-number-keyword" title="attr-input-type-number-keyword"><code>number</code></dfn>
-     </td><td> <a href="number-state.html#number-state" title="attr-input-type-number">Number</a>
+     </td><td> <a href="states-of-the-type-attribute.html#number-state-type-number" title="attr-input-type-number">Number</a>
      </td><td> A numerical value
      </td><td> A text field or spinner control
     </td></tr><tr><td> <dfn id="attr-input-type-range-keyword" title="attr-input-type-range-keyword"><code>range</code></dfn>
-     </td><td> <a href="number-state.html#range-state" title="attr-input-type-range">Range</a>
+     </td><td> <a href="states-of-the-type-attribute.html#range-state-type-range" title="attr-input-type-range">Range</a>
      </td><td> A numerical value, with the extra semantic that the exact value is not important
      </td><td> A slider control or similar
     </td></tr><tr><td> <dfn id="attr-input-type-color-keyword" title="attr-input-type-color-keyword"><code>color</code></dfn>
-     </td><td> <a href="number-state.html#color-state" title="attr-input-type-color">Color</a>
+     </td><td> <a href="states-of-the-type-attribute.html#color-state-type-color" title="attr-input-type-color">Color</a>
      </td><td> An sRGB color with 8-bit red, green, and blue components
      </td><td> A color well
     </td></tr><tr><td> <dfn id="attr-input-type-checkbox-keyword" title="attr-input-type-checkbox-keyword"><code>checkbox</code></dfn>
-     </td><td> <a href="number-state.html#checkbox-state" title="attr-input-type-checkbox">Checkbox</a>
+     </td><td> <a href="states-of-the-type-attribute.html#checkbox-state-type-checkbox" title="attr-input-type-checkbox">Checkbox</a>
      </td><td> A set of zero or more values from a predefined list
      </td><td> A checkbox
     </td></tr><tr><td> <dfn id="attr-input-type-radio-keyword" title="attr-input-type-radio-keyword"><code>radio</code></dfn>
-     </td><td> <a href="number-state.html#radio-button-state" title="attr-input-type-radio">Radio Button</a>
+     </td><td> <a href="states-of-the-type-attribute.html#radio-button-state-type-radio" title="attr-input-type-radio">Radio Button</a>
      </td><td> An enumerated value
      </td><td> A radio button
     </td></tr><tr><td> <dfn id="attr-input-type-file-keyword" title="attr-input-type-file-keyword"><code>file</code></dfn>
-     </td><td> <a href="number-state.html#file-upload-state" title="attr-input-type-file">File Upload</a>
+     </td><td> <a href="states-of-the-type-attribute.html#file-upload-state-type-file" title="attr-input-type-file">File Upload</a>
      </td><td> Zero or more files each with a <a href="infrastructure.html#mime-type">MIME type</a> and optionally a file name
      </td><td> A label and a button
     </td></tr><tr><td> <dfn id="attr-input-type-submit-keyword" title="attr-input-type-submit-keyword"><code>submit</code></dfn>
-     </td><td> <a href="number-state.html#submit-button-state" title="attr-input-type-submit">Submit Button</a>
+     </td><td> <a href="states-of-the-type-attribute.html#submit-button-state-type-submit" title="attr-input-type-submit">Submit Button</a>
      </td><td> An enumerated value, with the extra semantic that it must be the last value selected and initiates form submission
      </td><td> A button
     </td></tr><tr><td> <dfn id="attr-input-type-image-keyword" title="attr-input-type-image-keyword"><code>image</code></dfn>
-     </td><td> <a href="number-state.html#image-button-state" title="attr-input-type-image">Image Button</a>
+     </td><td> <a href="states-of-the-type-attribute.html#image-button-state-type-image" title="attr-input-type-image">Image Button</a>
      </td><td> A coordinate, relative to a particular image's size, with the extra semantic that it must be the last value selected and initiates form submission
      </td><td> Either a clickable image, or a button
     </td></tr><tr><td> <dfn id="attr-input-type-reset-keyword" title="attr-input-type-reset-keyword"><code>reset</code></dfn>
-     </td><td> <a href="number-state.html#reset-button-state" title="attr-input-type-reset">Reset Button</a>
+     </td><td> <a href="states-of-the-type-attribute.html#reset-button-state-type-reset" title="attr-input-type-reset">Reset Button</a>
      </td><td> n/a
      </td><td> A button
     </td></tr><tr><td> <dfn id="attr-input-type-button-keyword" title="attr-input-type-button-keyword"><code>button</code></dfn>
-     </td><td> <a href="number-state.html#button-state" title="attr-input-type-button">Button</a>
+     </td><td> <a href="states-of-the-type-attribute.html#button-state-type-button" title="attr-input-type-button">Button</a>
      </td><td> n/a
      </td><td> A button
-  </td></tr></tbody></table><p>The <i>missing value default</i> is the <a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-text">Text</a> state.</p><p>Which of the <code title="attr-input-accept"><a href="number-state.html#attr-input-accept">accept</a></code>, <code title="attr-input-alt"><a href="number-state.html#attr-input-alt">alt</a></code>, <code title="attr-input-autocomplete"><a href="common-input-element-attributes.html#attr-input-autocomplete">autocomplete</a></code>, <code title="attr-input-checked"><a href="#attr-input-checked">checked</a></code>, <code title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>, <code title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>, <code title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code>, <code title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code>, <code title="attr-fs-formnovalidate"><a href="association-of-controls-and-forms.html#attr-fs-formnovalidate">formnovalidate</a></code>, <code title="attr-fs-formtarget"><a href="association-of-controls-and-forms.html#attr-fs-formtarget">formtarget</a></code>, <code title="attr-dim-height"><a href="the-map-element.html#attr-dim-height">height</a></code>, <code title="attr-input-list"><a href="common-input-element-attributes.html#attr-input-list">list</a></code>, <code title="attr-input-max"><a href="common-input-element-attributes.html#attr-input-max">max</a></code>, <code title="attr-input-maxlength"><a href="common-input-element-attributes.html#attr-input-maxlength">maxlength</a></code>, <code title="attr-input-min"><a href="common-input-element-attributes.html#attr-input-min">min</a></code>, <code title="attr-input-multiple"><a href="common-input-element-attributes.html#attr-input-multiple">multiple</a></code>, <code title="attr-input-pattern"><a href="common-input-element-attributes.html#attr-input-pattern">pattern</a></code>, <code title="attr-input-placeholder"><a href="common-input-element-attributes.html#attr-input-placeholder">placeholder</a></code>, <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code>, <code title="attr-input-required"><a href="common-input-element-attributes.html#attr-input-required">required</a></code>, <code title="attr-input-size"><a href="common-input-element-attributes.html#attr-input-size">size</a></code>, <code title="attr-input-src"><a href="number-state.html#attr-input-src">src</a></code>, <code title="attr-input-step"><a href="common-input-element-attributes.html#attr-input-step">step</a></code>, and <code title="attr-dim-width"><a href="the-map-element.html#attr-dim-width">width</a></code> content attributes, the <code title="dom-input-checked"><a href="common-input-element-attributes.html#dom-input-checked">checked</a></code>, <code title="dom-input-files"><a href="common-input-element-attributes.html#dom-input-files">files</a></code>, <code title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code>, <code title="dom-input-valueAsNumber"><a href="common-input-element-attributes.html#dom-input-valueasnumber">valueAsNumber</a></code>, <code title="dom-input-list"><a href="common-input-element-attributes.html#dom-input-list">list</a></code>, and <code title="dom-input-selectedOption"><a href="common-input-element-attributes.html#dom-input-selectedoption">selectedOption</a></code> IDL
-  attributes, the <code title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code> method, the <code title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-  <code title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>, and
-  <code title="dom-textarea/input-selectionDirection"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>,
-  IDL attributes, the <code title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>
-  method, the <code title="dom-input-stepUp"><a href="common-input-element-attributes.html#dom-input-stepup">stepUp()</a></code> and
-  <code title="dom-input-stepDown"><a href="common-input-element-attributes.html#dom-input-stepdown">stepDown()</a></code> methods, and the
-  <code title="event-input-input"><a href="common-input-element-attributes.html#event-input-input">input</a></code> and <code title="event-input-change"><a href="common-input-element-attributes.html#event-input-change">change</a></code> events apply to an
+  </td></tr></tbody></table><p>The <i>missing value default</i> is the <a href="states-of-the-type-attribute.html#text-type-text-state-and-search-state-type-search" title="attr-input-type-text">Text</a> state.</p><p>Which of the <code title="attr-input-accept"><a href="states-of-the-type-attribute.html#attr-input-accept">accept</a></code>, <code title="attr-input-alt"><a href="states-of-the-type-attribute.html#attr-input-alt">alt</a></code>, <code title="attr-input-autocomplete"><a href="common-input-element-attributes.html#attr-input-autocomplete">autocomplete</a></code>, <code title="attr-input-checked"><a href="#attr-input-checked">checked</a></code>, <code title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>, <code title="attr-fs-formaction"><a href="attributes-common-to-form-controls.html#attr-fs-formaction">formaction</a></code>, <code title="attr-fs-formenctype"><a href="attributes-common-to-form-controls.html#attr-fs-formenctype">formenctype</a></code>, <code title="attr-fs-formmethod"><a href="attributes-common-to-form-controls.html#attr-fs-formmethod">formmethod</a></code>, <code title="attr-fs-formnovalidate"><a href="attributes-common-to-form-controls.html#attr-fs-formnovalidate">formnovalidate</a></code>, <code title="attr-fs-formtarget"><a href="attributes-common-to-form-controls.html#attr-fs-formtarget">formtarget</a></code>, <code title="attr-dim-height"><a href="dimension-attributes.html#attr-dim-height">height</a></code>, <code title="attr-input-list"><a href="common-input-element-attributes.html#attr-input-list">list</a></code>, <code title="attr-input-max"><a href="common-input-element-attributes.html#attr-input-max">max</a></code>, <code title="attr-input-maxlength"><a href="common-input-element-attributes.html#attr-input-maxlength">maxlength</a></code>, <code title="attr-input-min"><a href="common-input-element-attributes.html#attr-input-min">min</a></code>, <code title="attr-input-multiple"><a href="common-input-element-attributes.html#attr-input-multiple">multiple</a></code>, <code title="attr-input-pattern"><a href="common-input-element-attributes.html#attr-input-pattern">pattern</a></code>, <code title="attr-input-placeholder"><a href="common-input-element-attributes.html#attr-input-placeholder">placeholder</a></code>, <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code>, <code title="attr-input-required"><a href="common-input-element-attributes.html#attr-input-required">required</a></code>, <code title="attr-input-size"><a href="common-input-element-attributes.html#attr-input-size">size</a></code>, <code title="attr-input-src"><a href="states-of-the-type-attribute.html#attr-input-src">src</a></code>, <code title="attr-input-step"><a href="common-input-element-attributes.html#attr-input-step">step</a></code>, and <code title="attr-dim-width"><a href="dimension-attributes.html#attr-dim-width">width</a></code> content attributes, the <code title="dom-input-checked"><a href="common-input-element-apis.html#dom-input-checked">checked</a></code>, <code title="dom-input-files"><a href="common-input-element-apis.html#dom-input-files">files</a></code>, <code title="dom-input-valueAsDate"><a href="common-input-element-apis.html#dom-input-valueasdate">valueAsDate</a></code>, <code title="dom-input-valueAsNumber"><a href="common-input-element-apis.html#dom-input-valueasnumber">valueAsNumber</a></code>, and <code title="dom-input-list"><a href="common-input-element-apis.html#dom-input-list">list</a></code> IDL
+  attributes, the <code title="dom-textarea/input-select"><a href="textFieldSelection.html#dom-textarea-input-select">select()</a></code> method, the <code title="dom-textarea/input-selectionStart"><a href="textFieldSelection.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+  <code title="dom-textarea/input-selectionEnd"><a href="textFieldSelection.html#dom-textarea-input-selectionend">selectionEnd</a></code>, and
+  <code title="dom-textarea/input-selectionDirection"><a href="textFieldSelection.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>,
+  IDL attributes, the <code title="dom-textarea/input-setSelectionRange"><a href="textFieldSelection.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>
+  method, the <code title="dom-input-stepUp"><a href="common-input-element-apis.html#dom-input-stepup">stepUp()</a></code> and
+  <code title="dom-input-stepDown"><a href="common-input-element-apis.html#dom-input-stepdown">stepDown()</a></code> methods, and the
+  <code title="event-input-input"><a href="common-input-element-apis.html#event-input-input">input</a></code> and <code title="event-input-change"><a href="common-input-element-apis.html#event-input-change">change</a></code> events apply to an
   <code><a href="#the-input-element">input</a></code> element depends on the state of its <code title="attr-input-type"><a href="#attr-input-type">type</a></code> attribute.  The following table
   <span class="impl">is non-normative and</span> summarizes which of
   those content attributes, IDL attributes, methods, and events apply
   to each state:</p><table class="applies" id="input-type-attr-summary"><thead><tr><th>
-     </th><th> <span title=""><a href="states-of-the-type-attribute.html#hidden-state" title="attr-input-type-hidden">Hidden</a></span>
-     </th><th> <span title=""><a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-text">Text</a>,</span>
-          <span title=""><a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-search">Search</a></span>
-     </th><th> <span title=""><a href="states-of-the-type-attribute.html#url-state" title="attr-input-type-url">URL</a>,</span>
-          <span title=""><a href="states-of-the-type-attribute.html#telephone-state" title="attr-input-type-tel">Telephone</a></span>
-     </th><th> <span title=""><a href="states-of-the-type-attribute.html#e-mail-state" title="attr-input-type-email">E-mail</a></span>
-     </th><th> <span title=""><a href="states-of-the-type-attribute.html#password-state" title="attr-input-type-password">Password</a></span>
-     </th><th> <span title=""><a href="states-of-the-type-attribute.html#date-and-time-state" title="attr-input-type-datetime">Date and Time</a>,</span>
-          <span title=""><a href="states-of-the-type-attribute.html#date-state" title="attr-input-type-date">Date</a>,</span>
-          <span title=""><a href="states-of-the-type-attribute.html#month-state" title="attr-input-type-month">Month</a>,</span>
-          <span title=""><a href="states-of-the-type-attribute.html#week-state" title="attr-input-type-week">Week</a>,</span>
-          <span title=""><a href="states-of-the-type-attribute.html#time-state" title="attr-input-type-time">Time</a></span>
-     </th><th> <span title=""><a href="states-of-the-type-attribute.html#local-date-and-time-state" title="attr-input-type-datetime-local">Local Date and Time</a></span>
-     </th><th> <span title=""><a href="number-state.html#number-state" title="attr-input-type-number">Number</a></span>
-     </th><th> <span title=""><a href="number-state.html#range-state" title="attr-input-type-range">Range</a></span>
-     </th><th> <span title=""><a href="number-state.html#color-state" title="attr-input-type-color">Color</a></span>
-     </th><th> <span title=""><a href="number-state.html#checkbox-state" title="attr-input-type-checkbox">Checkbox</a>,</span>
-          <span title=""><a href="number-state.html#radio-button-state" title="attr-input-type-radio">Radio Button</a></span>
-     </th><th> <span title=""><a href="number-state.html#file-upload-state" title="attr-input-type-file">File Upload</a></span>
-     </th><th> <span title=""><a href="number-state.html#submit-button-state" title="attr-input-type-submit">Submit Button</a></span>
-     </th><th> <span title=""><a href="number-state.html#image-button-state" title="attr-input-type-image">Image Button</a></span>
-     </th><th> <span title=""><a href="number-state.html#reset-button-state" title="attr-input-type-reset">Reset Button</a>,</span>
-          <span title=""><a href="number-state.html#button-state" title="attr-input-type-button">Button</a></span>
+     </th><th> <span title=""><a href="states-of-the-type-attribute.html#hidden-state-type-hidden" title="attr-input-type-hidden">Hidden</a></span>
+     </th><th> <span title=""><a href="states-of-the-type-attribute.html#text-type-text-state-and-search-state-type-search" title="attr-input-type-text">Text</a>,</span>
+          <span title=""><a href="states-of-the-type-attribute.html#text-type-text-state-and-search-state-type-search" title="attr-input-type-search">Search</a></span>
+     </th><th> <span title=""><a href="states-of-the-type-attribute.html#url-state-type-url" title="attr-input-type-url">URL</a>,</span>
+          <span title=""><a href="states-of-the-type-attribute.html#telephone-state-type-tel" title="attr-input-type-tel">Telephone</a></span>
+     </th><th> <span title=""><a href="states-of-the-type-attribute.html#e-mail-state-type-email" title="attr-input-type-email">E-mail</a></span>
+     </th><th> <span title=""><a href="states-of-the-type-attribute.html#password-state-type-password" title="attr-input-type-password">Password</a></span>
+     </th><th> <span title=""><a href="states-of-the-type-attribute.html#date-and-time-state-type-datetime" title="attr-input-type-datetime">Date and Time</a>,</span>
+          <span title=""><a href="states-of-the-type-attribute.html#date-state-type-date" title="attr-input-type-date">Date</a>,</span>
+          <span title=""><a href="states-of-the-type-attribute.html#month-state-type-month" title="attr-input-type-month">Month</a>,</span>
+          <span title=""><a href="states-of-the-type-attribute.html#week-state-type-week" title="attr-input-type-week">Week</a>,</span>
+          <span title=""><a href="states-of-the-type-attribute.html#time-state-type-time" title="attr-input-type-time">Time</a></span>
+     </th><th> <span title=""><a href="states-of-the-type-attribute.html#local-date-and-time-state-type-datetime-local" title="attr-input-type-datetime-local">Local Date and Time</a></span>
+     </th><th> <span title=""><a href="states-of-the-type-attribute.html#number-state-type-number" title="attr-input-type-number">Number</a></span>
+     </th><th> <span title=""><a href="states-of-the-type-attribute.html#range-state-type-range" title="attr-input-type-range">Range</a></span>
+     </th><th> <span title=""><a href="states-of-the-type-attribute.html#color-state-type-color" title="attr-input-type-color">Color</a></span>
+     </th><th> <span title=""><a href="states-of-the-type-attribute.html#checkbox-state-type-checkbox" title="attr-input-type-checkbox">Checkbox</a>,</span>
+          <span title=""><a href="states-of-the-type-attribute.html#radio-button-state-type-radio" title="attr-input-type-radio">Radio Button</a></span>
+     </th><th> <span title=""><a href="states-of-the-type-attribute.html#file-upload-state-type-file" title="attr-input-type-file">File Upload</a></span>
+     </th><th> <span title=""><a href="states-of-the-type-attribute.html#submit-button-state-type-submit" title="attr-input-type-submit">Submit Button</a></span>
+     </th><th> <span title=""><a href="states-of-the-type-attribute.html#image-button-state-type-image" title="attr-input-type-image">Image Button</a></span>
+     </th><th> <span title=""><a href="states-of-the-type-attribute.html#reset-button-state-type-reset" title="attr-input-type-reset">Reset Button</a>,</span>
+          <span title=""><a href="states-of-the-type-attribute.html#button-state-type-button" title="attr-input-type-button">Button</a></span>
 
    </th></tr></thead><tbody><tr><th colspan="16" scope="rowgroup">Content attributes
 
-    </th></tr><tr><th> <code title="attr-input-accept"><a href="number-state.html#attr-input-accept">accept</a></code>
+    </th></tr><tr><th> <code title="attr-input-accept"><a href="states-of-the-type-attribute.html#attr-input-accept">accept</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
+
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
 
-    </td></tr><tr><th> <code title="attr-input-alt"><a href="number-state.html#attr-input-alt">alt</a></code>
+
+    </td></tr><tr><th> <code title="attr-input-alt"><a href="states-of-the-type-attribute.html#attr-input-alt">alt</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
+
 
     </td></tr><tr><th> <code title="attr-input-autocomplete"><a href="common-input-element-attributes.html#attr-input-autocomplete">autocomplete</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
+
+
+
+
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
 
     </td></tr><tr><th> <code title="attr-input-checked"><a href="#attr-input-checked">checked</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
 
     </td></tr><tr><th> <code title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
 
-    </td></tr><tr><th> <code title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+
+    </td></tr><tr><th> <code title="attr-fs-formaction"><a href="attributes-common-to-form-controls.html#attr-fs-formaction">formaction</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
 
-    </td></tr><tr><th> <code title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code>
+
+    </td></tr><tr><th> <code title="attr-fs-formenctype"><a href="attributes-common-to-form-controls.html#attr-fs-formenctype">formenctype</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
 
-    </td></tr><tr><th> <code title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code>
+
+    </td></tr><tr><th> <code title="attr-fs-formmethod"><a href="attributes-common-to-form-controls.html#attr-fs-formmethod">formmethod</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
 
-    </td></tr><tr><th> <code title="attr-fs-formnovalidate"><a href="association-of-controls-and-forms.html#attr-fs-formnovalidate">formnovalidate</a></code>
+
+    </td></tr><tr><th> <code title="attr-fs-formnovalidate"><a href="attributes-common-to-form-controls.html#attr-fs-formnovalidate">formnovalidate</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
 
-    </td></tr><tr><th> <code title="attr-fs-formtarget"><a href="association-of-controls-and-forms.html#attr-fs-formtarget">formtarget</a></code>
+
+    </td></tr><tr><th> <code title="attr-fs-formtarget"><a href="attributes-common-to-form-controls.html#attr-fs-formtarget">formtarget</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
 
-    </td></tr><tr><th> <code title="attr-dim-height"><a href="the-map-element.html#attr-dim-height">height</a></code>
+
+    </td></tr><tr><th> <code title="attr-dim-height"><a href="dimension-attributes.html#attr-dim-height">height</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
+
 
     </td></tr><tr><th> <code title="attr-input-list"><a href="common-input-element-attributes.html#attr-input-list">list</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
+
+
+
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
 
     </td></tr><tr><th> <code title="attr-input-max"><a href="common-input-element-attributes.html#attr-input-max">max</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
+
+
+
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
 
     </td></tr><tr><th> <code title="attr-input-maxlength"><a href="common-input-element-attributes.html#attr-input-maxlength">maxlength</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
 
     </td></tr><tr><th> <code title="attr-input-min"><a href="common-input-element-attributes.html#attr-input-min">min</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
+
+
+
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
 
     </td></tr><tr><th> <code title="attr-input-multiple"><a href="common-input-element-attributes.html#attr-input-multiple">multiple</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7;  
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
 
     </td></tr><tr><th> <code title="attr-input-pattern"><a href="common-input-element-attributes.html#attr-input-pattern">pattern</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
 
     </td></tr><tr><th> <code title="attr-input-placeholder"><a href="common-input-element-attributes.html#attr-input-placeholder">placeholder</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
 
     </td></tr><tr><th> <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
+
+
+
+
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
 
     </td></tr><tr><th> <code title="attr-input-required"><a href="common-input-element-attributes.html#attr-input-required">required</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
+
+
+
+
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
 
     </td></tr><tr><th> <code title="attr-input-size"><a href="common-input-element-attributes.html#attr-input-size">size</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
 
-    </td></tr><tr><th> <code title="attr-input-src"><a href="number-state.html#attr-input-src">src</a></code>
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+
+    </td></tr><tr><th> <code title="attr-input-src"><a href="states-of-the-type-attribute.html#attr-input-src">src</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
+
 
     </td></tr><tr><th> <code title="attr-input-step"><a href="common-input-element-attributes.html#attr-input-step">step</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
+
+
+
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+
+    </td></tr><tr><th> <code title="attr-dim-width"><a href="dimension-attributes.html#attr-dim-width">width</a></code>
+     </th><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
 
-    </td></tr><tr><th> <code title="attr-dim-width"><a href="the-map-element.html#attr-dim-width">width</a></code>
-     </th><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
+
 
    </td></tr></tbody><tbody><tr><th colspan="16" scope="rowgroup">IDL attributes and methods
 
-    </th></tr><tr><th> <code title="dom-input-checked"><a href="common-input-element-attributes.html#dom-input-checked">checked</a></code>
+    </th></tr><tr><th> <code title="dom-input-checked"><a href="common-input-element-apis.html#dom-input-checked">checked</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="yes"> Yes     
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
 
-    </td></tr><tr><th> <code title="dom-input-files"><a href="common-input-element-attributes.html#dom-input-files">files</a></code>
-     </th><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
+     </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
 
-    </td></tr><tr class="impl"><th> <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code>
-     </th><td class="yes"> <a href="common-input-element-attributes.html#dom-input-value-default" title="dom-input-value-default">default</a> 
-     </td><td class="yes"> <a href="common-input-element-attributes.html#dom-input-value-value" title="dom-input-value-value">value</a> 
-     </td><td class="yes"> <a href="common-input-element-attributes.html#dom-input-value-value" title="dom-input-value-value">value</a> 
-     </td><td class="yes"> <a href="common-input-element-attributes.html#dom-input-value-value" title="dom-input-value-value">value</a> 
-     </td><td class="yes"> <a href="common-input-element-attributes.html#dom-input-value-value" title="dom-input-value-value">value</a> 
-     </td><td class="yes"> <a href="common-input-element-attributes.html#dom-input-value-value" title="dom-input-value-value">value</a> 
-     </td><td class="yes"> <a href="common-input-element-attributes.html#dom-input-value-value" title="dom-input-value-value">value</a> 
-     </td><td class="yes"> <a href="common-input-element-attributes.html#dom-input-value-value" title="dom-input-value-value">value</a> 
-     </td><td class="yes"> <a href="common-input-element-attributes.html#dom-input-value-value" title="dom-input-value-value">value</a> 
-     </td><td class="yes"> <a href="common-input-element-attributes.html#dom-input-value-value" title="dom-input-value-value">value</a> 
-     </td><td class="yes"> <a href="common-input-element-attributes.html#dom-input-value-default-on" title="dom-input-value-default-on">default/on</a> 
-     </td><td class="yes"> <a href="common-input-element-attributes.html#dom-input-value-filename" title="dom-input-value-filename">filename</a> 
-     </td><td class="yes"> <a href="common-input-element-attributes.html#dom-input-value-default" title="dom-input-value-default">default</a> 
-     </td><td class="yes"> <a href="common-input-element-attributes.html#dom-input-value-default" title="dom-input-value-default">default</a> 
-     </td><td class="yes"> <a href="common-input-element-attributes.html#dom-input-value-default" title="dom-input-value-default">default</a> 
 
-    </td></tr><tr><th> <code title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code>
+    </td></tr><tr><th> <code title="dom-input-files"><a href="common-input-element-apis.html#dom-input-files">files</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="yes"> Yes     
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
 
-    </td></tr><tr><th> <code title="dom-input-valueAsNumber"><a href="common-input-element-attributes.html#dom-input-valueasnumber">valueAsNumber</a></code>
+     </td><td class="yes"> Yes     
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+
+    </td></tr><tr class="impl"><th> <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code>
+     </th><td class="yes"> <a href="common-input-element-apis.html#dom-input-value-default" title="dom-input-value-default">default</a> 
+     </td><td class="yes"> <a href="common-input-element-apis.html#dom-input-value-value" title="dom-input-value-value">value</a> 
+
+     </td><td class="yes"> <a href="common-input-element-apis.html#dom-input-value-value" title="dom-input-value-value">value</a> 
+     </td><td class="yes"> <a href="common-input-element-apis.html#dom-input-value-value" title="dom-input-value-value">value</a> 
+     </td><td class="yes"> <a href="common-input-element-apis.html#dom-input-value-value" title="dom-input-value-value">value</a> 
+     </td><td class="yes"> <a href="common-input-element-apis.html#dom-input-value-value" title="dom-input-value-value">value</a> 
+
+
+
+
+     </td><td class="yes"> <a href="common-input-element-apis.html#dom-input-value-value" title="dom-input-value-value">value</a> 
+     </td><td class="yes"> <a href="common-input-element-apis.html#dom-input-value-value" title="dom-input-value-value">value</a> 
+     </td><td class="yes"> <a href="common-input-element-apis.html#dom-input-value-value" title="dom-input-value-value">value</a> 
+     </td><td class="yes"> <a href="common-input-element-apis.html#dom-input-value-value" title="dom-input-value-value">value</a> 
+     </td><td class="yes"> <a href="common-input-element-apis.html#dom-input-value-default-on" title="dom-input-value-default-on">default/on</a> 
+
+     </td><td class="yes"> <a href="common-input-element-apis.html#dom-input-value-filename" title="dom-input-value-filename">filename</a> 
+     </td><td class="yes"> <a href="common-input-element-apis.html#dom-input-value-default" title="dom-input-value-default">default</a> 
+     </td><td class="yes"> <a href="common-input-element-apis.html#dom-input-value-default" title="dom-input-value-default">default</a> 
+     </td><td class="yes"> <a href="common-input-element-apis.html#dom-input-value-default" title="dom-input-value-default">default</a> 
+
+
+    </td></tr><tr><th> <code title="dom-input-valueAsDate"><a href="common-input-element-apis.html#dom-input-valueasdate">valueAsDate</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
-     </td><td class="yes"> Yes     
-     </td><td class="yes"> Yes     
-     </td><td class="yes"> Yes     
-     </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
 
-    </td></tr><tr><th> <code title="dom-input-list"><a href="common-input-element-attributes.html#dom-input-list">list</a></code>
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+
+    </td></tr><tr><th> <code title="dom-input-valueAsNumber"><a href="common-input-element-apis.html#dom-input-valueasnumber">valueAsNumber</a></code>
      </th><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="yes"> Yes     
+
+
+
+
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+
+    </td></tr><tr><th> <code title="dom-input-list"><a href="common-input-element-apis.html#dom-input-list">list</a></code>
+     </th><td class="no"> &#xB7; 
+     </td><td class="yes"> Yes     
+
+     </td><td class="yes"> Yes     
+     </td><td class="yes"> Yes     
+     </td><td class="no"> &#xB7; 
+     </td><td class="yes"> Yes     
+
+
+
+
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
+     </td><td class="no"> &#xB7; 
+
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+
+    </td></tr><tr><th> <code title="dom-textarea/input-select"><a href="textFieldSelection.html#dom-textarea-input-select">select()</a></code>
+     </th><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
+     </td><td class="yes"> Yes     
+     </td><td class="no"> &#xB7; 
+     </td><td class="yes"> Yes     
+     </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
 
-    </td></tr><tr><th> <code title="dom-input-selectedOption"><a href="common-input-element-attributes.html#dom-input-selectedoption">selectedOption</a></code>
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+
+    </td></tr><tr><th> <code title="dom-textarea/input-selectionStart"><a href="textFieldSelection.html#dom-textarea-input-selectionstart">selectionStart</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
      </td><td class="yes"> Yes     
-     </td><td class="yes"> Yes&#x2020; 
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
-     </td><td class="yes"> Yes     
-     </td><td class="yes"> Yes     
-     </td><td class="yes"> Yes     
-     </td><td class="yes"> Yes     
+     </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
 
-    </td></tr><tr><th> <code title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code>
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+
+    </td></tr><tr><th> <code title="dom-textarea/input-selectionEnd"><a href="textFieldSelection.html#dom-textarea-input-selectionend">selectionEnd</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
 
-    </td></tr><tr><th> <code title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+
+    </td></tr><tr><th> <code title="dom-textarea/input-selectionDirection"><a href="textFieldSelection.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
 
-    </td></tr><tr><th> <code title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+
+    </td></tr><tr><th> <code title="dom-textarea/input-setSelectionRange"><a href="textFieldSelection.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
+
+
+
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
 
-    </td></tr><tr><th> <code title="dom-textarea/input-selectionDirection"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>
-     </th><td class="no"> &#xB7; 
-     </td><td class="yes"> Yes     
-     </td><td class="yes"> Yes     
-     </td><td class="no"> &#xB7; 
-     </td><td class="yes"> Yes     
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
 
-    </td></tr><tr><th> <code title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>
+
+    </td></tr><tr><th> <code title="dom-input-stepDown"><a href="common-input-element-apis.html#dom-input-stepdown">stepDown()</a></code>
      </th><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="no"> &#xB7; 
+     </td><td class="yes"> Yes     
+
+
+
+
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
-     </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
 
-    </td></tr><tr><th> <code title="dom-input-stepDown"><a href="common-input-element-attributes.html#dom-input-stepdown">stepDown()</a></code>
+
+    </td></tr><tr><th> <code title="dom-input-stepUp"><a href="common-input-element-apis.html#dom-input-stepup">stepUp()</a></code>
      </th><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
+
+
+
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
 
-    </td></tr><tr><th> <code title="dom-input-stepUp"><a href="common-input-element-attributes.html#dom-input-stepup">stepUp()</a></code>
-     </th><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="yes"> Yes     
-     </td><td class="yes"> Yes     
-     </td><td class="yes"> Yes     
-     </td><td class="yes"> Yes     
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
-     </td><td class="no"> &#xB7; 
 
    </td></tr></tbody><tbody><tr><th colspan="16" scope="rowgroup">Events
 
-    </th></tr><tr><th> <span title=""><code title="event-input-input"><a href="common-input-element-attributes.html#event-input-input">input</a></code> event</span>
+    </th></tr><tr><th> <span title=""><code title="event-input-input"><a href="common-input-element-apis.html#event-input-input">input</a></code> event</span>
      </th><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
+
+
+
+
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
+
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
 
-    </td></tr><tr><th> <span title=""><code title="event-input-change"><a href="common-input-element-attributes.html#event-input-change">change</a></code> event</span>
+
+    </td></tr><tr><th> <span title=""><code title="event-input-change"><a href="common-input-element-apis.html#event-input-change">change</a></code> event</span>
      </th><td class="no"> &#xB7; 
      </td><td class="yes"> Yes     
+
+     </td><td class="yes"> Yes     
+     </td><td class="yes"> Yes     
+     </td><td class="yes"> Yes     
+     </td><td class="yes"> Yes     
+
+
+
+
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
      </td><td class="yes"> Yes     
-     </td><td class="yes"> Yes     
-     </td><td class="yes"> Yes     
-     </td><td class="yes"> Yes     
-     </td><td class="yes"> Yes     
+
      </td><td class="yes"> Yes     
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
      </td><td class="no"> &#xB7; 
 
-  </td></tr></tbody></table><p class="note">&#x2020; The dagger symbol (&#x2020;) indicates that
-  the feature only applies when the <code title="attr-input-multiple"><a href="common-input-element-attributes.html#attr-input-multiple">multiple</a></code> attribute is not
-  specified.</p><div class="impl">
+
+  </td></tr></tbody></table><div class="impl">
 
   <p>Some states of the <code title="attr-input-type"><a href="#attr-input-type">type</a></code>
   attribute define a <dfn id="value-sanitization-algorithm">value sanitization algorithm</dfn>.</p>
 
-  <p>Each <code><a href="#the-input-element">input</a></code> element has a <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>, which is exposed by the <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attribute. Some states
+  <p>Each <code><a href="#the-input-element">input</a></code> element has a <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a>, which is exposed by the <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attribute. Some states
   define an <dfn id="concept-input-value-string-number" title="concept-input-value-string-number">algorithm
   to convert a string to a number</dfn>, an <dfn id="concept-input-value-number-string" title="concept-input-value-number-string">algorithm to convert a
   number to a string</dfn>, an <dfn id="concept-input-value-string-date" title="concept-input-value-string-date">algorithm to convert a
@@ -1264,29 +1522,31 @@
   <code title="attr-input-max"><a href="common-input-element-attributes.html#attr-input-max">max</a></code>,
   <code title="attr-input-min"><a href="common-input-element-attributes.html#attr-input-min">min</a></code>,
   <code title="attr-input-step"><a href="common-input-element-attributes.html#attr-input-step">step</a></code>,
-  <code title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code>,
-  <code title="dom-input-valueAsNumber"><a href="common-input-element-attributes.html#dom-input-valueasnumber">valueAsNumber</a></code>,
-  <code title="dom-input-stepDown"><a href="common-input-element-attributes.html#dom-input-stepdown">stepDown()</a></code>, and
-  <code title="dom-input-stepUp"><a href="common-input-element-attributes.html#dom-input-stepup">stepUp()</a></code>.</p>
+  <code title="dom-input-valueAsDate"><a href="common-input-element-apis.html#dom-input-valueasdate">valueAsDate</a></code>,
+  <code title="dom-input-valueAsNumber"><a href="common-input-element-apis.html#dom-input-valueasnumber">valueAsNumber</a></code>,
+  <code title="dom-input-stepDown"><a href="common-input-element-apis.html#dom-input-stepdown">stepDown()</a></code>, and
+  <code title="dom-input-stepUp"><a href="common-input-element-apis.html#dom-input-stepup">stepUp()</a></code>.</p>
 
   <p>Each <code><a href="#the-input-element">input</a></code> element has a boolean <dfn id="concept-input-value-dirty-flag" title="concept-input-value-dirty-flag">dirty value flag</dfn>. The
   <a href="#concept-input-value-dirty-flag" title="concept-input-value-dirty-flag">dirty value flag</a>
   must be initially set to false when the element is created, and must
   be set to true whenever the user interacts with the control in a way
-  that changes the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>.</p>
+  that changes the <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a>. (It is
+  also set to true when the value is programmatically changed, as
+  described in the definition of the <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attribute.)</p>
 
   </div><p>The <dfn id="attr-input-value" title="attr-input-value"><code>value</code></dfn>
-  content attribute gives the default <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> of the <code><a href="#the-input-element">input</a></code>
+  content attribute gives the default <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> of the <code><a href="#the-input-element">input</a></code>
   element. <span class="impl">When the <code title="attr-input-value"><a href="#attr-input-value">value</a></code> content attribute is added,
   set, or removed, if the control's <a href="#concept-input-value-dirty-flag" title="concept-input-value-dirty-flag">dirty value flag</a> is
-  false, the user agent must set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> of the element to the value of
+  false, the user agent must set the <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> of the element to the value of
   the <code title="attr-input-value"><a href="#attr-input-value">value</a></code> content attribute,
   if there is one, or the empty string otherwise, and then run the
   current <a href="#value-sanitization-algorithm">value sanitization algorithm</a>, if one is
   defined.</span></p><div class="impl">
 
-  <p>Each <code><a href="#the-input-element">input</a></code> element has a <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a>, which is exposed by
-  the <code title="dom-input-checked"><a href="common-input-element-attributes.html#dom-input-checked">checked</a></code> IDL
+  <p>Each <code><a href="#the-input-element">input</a></code> element has a <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a>, which is exposed by
+  the <code title="dom-input-checked"><a href="common-input-element-apis.html#dom-input-checked">checked</a></code> IDL
   attribute.</p>
 
   <p>Each <code><a href="#the-input-element">input</a></code> element has a boolean <dfn id="concept-input-checked-dirty-flag" title="concept-input-checked-dirty-flag">dirty checkedness
@@ -1294,27 +1554,27 @@
   checkedness</i></dfn>. The <a href="#concept-input-checked-dirty-flag" title="concept-input-checked-dirty-flag">dirty checkedness
   flag</a> must be initially set to false when the element is
   created, and must be set to true whenever the user interacts with
-  the control in a way that changes the <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a>.</p>
+  the control in a way that changes the <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a>.</p>
 
   </div><p>The <dfn id="attr-input-checked" title="attr-input-checked"><code>checked</code></dfn>
   content attribute is a <a href="common-microsyntaxes.html#boolean-attribute">boolean attribute</a> that gives the
-  default <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> of the
+  default <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> of the
   <code><a href="#the-input-element">input</a></code> element. <span class="impl">When the <code title="attr-input-checked"><a href="#attr-input-checked">checked</a></code> content attribute is
   added, if the control does not have <i title="concept-input-checked-dirty"><a href="#concept-input-checked-dirty">dirty checkedness</a></i>, the user
-  agent must set the <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> of the element to
+  agent must set the <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> of the element to
   true; when the <code title="attr-input-checked"><a href="#attr-input-checked">checked</a></code>
   content attribute is removed, if the control does not have <i title="concept-input-checked-dirty"><a href="#concept-input-checked-dirty">dirty checkedness</a></i>, the user
-  agent must set the <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> of the element to
+  agent must set the <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> of the element to
   false.</span></p><div class="impl">
 
-  <p>The <a href="association-of-controls-and-forms.html#concept-form-reset-control" title="concept-form-reset-control">reset
+  <p>The <a href="form-submission.html#concept-form-reset-control" title="concept-form-reset-control">reset
   algorithm</a> for <code><a href="#the-input-element">input</a></code> elements is to set the <a href="#concept-input-value-dirty-flag" title="concept-input-value-dirty-flag">dirty value flag</a> and
   <a href="#concept-input-checked-dirty-flag" title="concept-input-checked-dirty-flag">dirty checkedness
-  flag</a> back to false, set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> of the element to the value of
+  flag</a> back to false, set the <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> of the element to the value of
   the <code title="attr-input-value"><a href="#attr-input-value">value</a></code> content attribute,
-  if there is one, or the empty string otherwise, set the <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> of the element to true
+  if there is one, or the empty string otherwise, set the <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> of the element to true
   if the element has a <code title="attr-input-checked"><a href="#attr-input-checked">checked</a></code>
-  content attribute and false if it does not, empty the list of <a href="number-state.html#concept-input-type-file-selected" title="concept-input-type-file-selected">selected files</a>, and
+  content attribute and false if it does not, empty the list of <a href="states-of-the-type-attribute.html#concept-input-type-file-selected" title="concept-input-type-file-selected">selected files</a>, and
   then invoke the <a href="#value-sanitization-algorithm">value sanitization algorithm</a>, if the
   <code title="attr-input-type"><a href="#attr-input-type">type</a></code> attribute's current state
   defines one.</p>
@@ -1322,21 +1582,23 @@
   <p>Each <code><a href="#the-input-element">input</a></code> element is either <dfn id="concept-input-mutable" title="concept-input-mutable"><i>mutable</i></dfn> or <dfn id="concept-input-immutable" title="concept-input-immutable"><i>immutable</i></dfn>. Except where
   otherwise specified, an <code><a href="#the-input-element">input</a></code> element is always <i title="concept-input-mutable"><a href="#concept-input-mutable">mutable</a></i>. Similarly, except where
   otherwise specified, the user agent should not allow the user to
-  modify the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> or
-  <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a>.</p>
+  modify the element's <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> or
+  <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a>.</p>
 
-  <p>When an <code><a href="#the-input-element">input</a></code> element is <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a>, it is <i title="concept-input-immutable"><a href="#concept-input-immutable">immutable</a></i>.</p>
+  <p>When an <code><a href="#the-input-element">input</a></code> element is <a href="attributes-common-to-form-controls.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a>, it is <i title="concept-input-immutable"><a href="#concept-input-immutable">immutable</a></i>.</p>
 
   <p>When an <code><a href="#the-input-element">input</a></code> element does not have a
-  <code><a href="infrastructure.html#document">Document</a></code> node as one of its ancestors (i.e. when it is
+  <code><a href="dom.html#document">Document</a></code> node as one of its ancestors (i.e. when it is
   not in the document), it is <i title="concept-input-immutable"><a href="#concept-input-immutable">immutable</a></i>.</p> 
+
   <p class="note">The <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code> attribute can also in
-  some cases (e.g. for the <a href="states-of-the-type-attribute.html#date-state" title="attr-input-type-date">Date</a> state, but not the <a href="number-state.html#checkbox-state" title="attr-input-type-checkbox">Checkbox</a> state) make an
+  some cases (e.g. for the <a href="states-of-the-type-attribute.html#date-state-type-date" title="attr-input-type-date">Date</a> state, but not the <a href="states-of-the-type-attribute.html#checkbox-state-type-checkbox" title="attr-input-type-checkbox">Checkbox</a> state) make an
   <code><a href="#the-input-element">input</a></code> element <i title="concept-input-immutable"><a href="#concept-input-immutable">immutable</a></i>.</p>
 
-  <p>When an <code><a href="#the-input-element">input</a></code> element is <a href="infrastructure.html#concept-clone" title="concept-clone">cloned</a>, the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>, <a href="#concept-input-value-dirty-flag" title="concept-input-value-dirty-flag">dirty value flag</a>,
-  <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a>, and <a href="#concept-input-checked-dirty-flag" title="concept-input-checked-dirty-flag">dirty checkedness
-  flag</a> must be propagated to the clone when it is created.</p>
+  <p>The <a href="infrastructure.html#concept-node-clone-ext" title="concept-node-clone-ext">cloning steps</a> for
+  <code><a href="#the-input-element">input</a></code> elements must propagate the <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a>, <a href="#concept-input-value-dirty-flag" title="concept-input-value-dirty-flag">dirty value flag</a>,
+  <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a>, and <a href="#concept-input-checked-dirty-flag" title="concept-input-checked-dirty-flag">dirty checkedness
+  flag</a> from the node being cloned to the copy.</p>
 
   <hr/><p>When an <code><a href="#the-input-element">input</a></code> element is first created, the
   element's rendering and behavior must be set to the rendering and
@@ -1350,15 +1612,15 @@
   <p>When an <code><a href="#the-input-element">input</a></code> element's <code title="attr-input-type"><a href="#attr-input-type">type</a></code> attribute changes state, the
   user agent must run the following steps:</p>
 
-  <ol><li><p>If the previous state of the element's <code title="attr-input-type"><a href="#attr-input-type">type</a></code> attribute put the <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attribute in the <i title="dom-input-value-value"><a href="common-input-element-attributes.html#dom-input-value-value">value</a></i> mode, and the element's
-   <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> is not the empty
-   string, and the new state of the element's <code title="attr-input-type"><a href="#attr-input-type">type</a></code> attribute puts the <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attribute in either the <i title="dom-input-value-default"><a href="common-input-element-attributes.html#dom-input-value-default">default</a></i> mode or the <i title="dom-input-value-default-on"><a href="common-input-element-attributes.html#dom-input-value-default-on">default/on</a></i> mode, then set
+  <ol><li><p>If the previous state of the element's <code title="attr-input-type"><a href="#attr-input-type">type</a></code> attribute put the <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attribute in the <i title="dom-input-value-value"><a href="common-input-element-apis.html#dom-input-value-value">value</a></i> mode, and the element's
+   <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> is not the empty
+   string, and the new state of the element's <code title="attr-input-type"><a href="#attr-input-type">type</a></code> attribute puts the <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attribute in either the <i title="dom-input-value-default"><a href="common-input-element-apis.html#dom-input-value-default">default</a></i> mode or the <i title="dom-input-value-default-on"><a href="common-input-element-apis.html#dom-input-value-default-on">default/on</a></i> mode, then set
    the element's <code title="attr-input-value"><a href="#attr-input-value">value</a></code> content
-   attribute to the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>.</p></li>
+   attribute to the element's <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a>.</p></li>
 
-   <li><p>Otherwise, if the previous state of the element's <code title="attr-input-type"><a href="#attr-input-type">type</a></code> attribute put the <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attribute in any mode
-   other than the <i title="dom-input-value-value"><a href="common-input-element-attributes.html#dom-input-value-value">value</a></i> mode, and
-   the new state of the element's <code title="attr-input-type"><a href="#attr-input-type">type</a></code> attribute puts the <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attribute in the <i title="dom-input-value-value"><a href="common-input-element-attributes.html#dom-input-value-value">value</a></i> mode, then set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> of the element to the value
+   <li><p>Otherwise, if the previous state of the element's <code title="attr-input-type"><a href="#attr-input-type">type</a></code> attribute put the <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attribute in any mode
+   other than the <i title="dom-input-value-value"><a href="common-input-element-apis.html#dom-input-value-value">value</a></i> mode, and
+   the new state of the element's <code title="attr-input-type"><a href="#attr-input-type">type</a></code> attribute puts the <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attribute in the <i title="dom-input-value-value"><a href="common-input-element-apis.html#dom-input-value-value">value</a></i> mode, then set the <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> of the element to the value
    of the <code title="attr-input-value"><a href="#attr-input-value">value</a></code> content
    attribute, if there is one, or the empty string otherwise, and
    then set the control's <a href="#concept-input-value-dirty-flag" title="concept-input-value-dirty-flag">dirty value flag</a> to
@@ -1373,16 +1635,16 @@
 
   </ol></div><hr/><p>The <code title="attr-fae-form"><a href="association-of-controls-and-forms.html#attr-fae-form">form</a></code> attribute is used to
   explicitly associate the <code><a href="#the-input-element">input</a></code> element with its
-  <a href="association-of-controls-and-forms.html#form-owner">form owner</a>. The <code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code>
-  attribute represents the element's name. The <code title="attr-fe-disabled"><a href="association-of-controls-and-forms.html#attr-fe-disabled">disabled</a></code> attribute is used to make
+  <a href="association-of-controls-and-forms.html#form-owner">form owner</a>. The <code title="attr-fe-name"><a href="attributes-common-to-form-controls.html#attr-fe-name">name</a></code>
+  attribute represents the element's name. The <code title="attr-fe-disabled"><a href="attributes-common-to-form-controls.html#attr-fe-disabled">disabled</a></code> attribute is used to make
   the control non-interactive and to prevent its value from being
-  submitted. The <code title="attr-fe-autofocus"><a href="association-of-controls-and-forms.html#attr-fe-autofocus">autofocus</a></code>
+  submitted. The <code title="attr-fe-autofocus"><a href="attributes-common-to-form-controls.html#attr-fe-autofocus">autofocus</a></code>
   attribute controls focus.</p><div class="impl">
 
   <p>The <dfn id="dom-input-indeterminate" title="dom-input-indeterminate"><code>indeterminate</code></dfn> IDL
   attribute must initially be set to false. On getting, it must return
   the last value it was set to. On setting, it must be set to the new
-  value. It has no effect except for changing the appearance of <a href="number-state.html#checkbox-state" title="attr-input-type-checkbox">checkbox</a> controls.</p>
+  value. It has no effect except for changing the appearance of <a href="states-of-the-type-attribute.html#checkbox-state-type-checkbox" title="attr-input-type-checkbox">checkbox</a> controls.</p>
 
   <p>The <dfn id="dom-input-accept" title="dom-input-accept"><code>accept</code></dfn>, <dfn id="dom-input-alt" title="dom-input-alt"><code>alt</code></dfn>, <dfn id="dom-input-max" title="dom-input-max"><code>max</code></dfn>, <dfn id="dom-input-min" title="dom-input-min"><code>min</code></dfn>, <dfn id="dom-input-multiple" title="dom-input-multiple"><code>multiple</code></dfn>, <dfn id="dom-input-pattern" title="dom-input-pattern"><code>pattern</code></dfn>, <dfn id="dom-input-placeholder" title="dom-input-placeholder"><code>placeholder</code></dfn>, <dfn id="dom-input-required" title="dom-input-required"><code>required</code></dfn>, <dfn id="dom-input-size" title="dom-input-size"><code>size</code></dfn>, <dfn id="dom-input-src" title="dom-input-src"><code>src</code></dfn>, and <dfn id="dom-input-step" title="dom-input-step"><code>step</code></dfn> IDL attributes must
   <a href="common-dom-interfaces.html#reflect">reflect</a> the respective content attributes of the same
@@ -1401,16 +1663,29 @@
   attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-input-maxlength"><a href="common-input-element-attributes.html#attr-input-maxlength">maxlength</a></code> content attribute,
   <a href="common-dom-interfaces.html#limited-to-only-non-negative-numbers">limited to only non-negative numbers</a>.</p>
 
-  <p>The <code title="dom-cva-willValidate"><a href="association-of-controls-and-forms.html#dom-cva-willvalidate">willValidate</a></code>, <code title="dom-cva-validity"><a href="association-of-controls-and-forms.html#dom-cva-validity">validity</a></code>, and <code title="dom-cva-validationMessage"><a href="association-of-controls-and-forms.html#dom-cva-validationmessage">validationMessage</a></code>
-  attributes, and the <code title="dom-cva-checkValidatity"><a href="association-of-controls-and-forms.html#dom-cva-checkvalidatity">checkValidity()</a></code> and <code title="dom-cva-setCustomValidity"><a href="association-of-controls-and-forms.html#dom-cva-setcustomvalidity">setCustomValidity()</a></code>
-  methods, are part of the <a href="association-of-controls-and-forms.html#the-constraint-validation-api">constraint validation API</a>. The
-  <code title="dom-lfe-labels"><a href="forms.html#dom-lfe-labels">labels</a></code> attribute provides a list
-  of the element's <code><a href="forms.html#the-label-element">label</a></code>s. The <code title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code>, <code title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-  <code title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
-  <code title="dom-textarea/input-selectionDirection"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>,
-  and <code title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>
+  <p>The IDL attributes <dfn id="dom-input-width" title="dom-input-width"><code>width</code></dfn> and <dfn id="dom-input-height" title="dom-input-height"><code>height</code></dfn> must return the
+  rendered width and height of the image, in CSS pixels, if an image
+  is <a href="rendering.html#being-rendered">being rendered</a>, and is being rendered to a visual
+  medium; or else the intrinsic width and height of the image, in CSS
+  pixels, if an image is <i title="input-img-available"><a href="states-of-the-type-attribute.html#input-img-available">available</a></i>
+  but not being rendered to a visual medium; or else 0, if no image is
+  <i title="input-img-available"><a href="states-of-the-type-attribute.html#input-img-available">available</a></i>. When the
+  <code><a href="#the-input-element">input</a></code> element's <code title="attr-input-type"><a href="#attr-input-type">type</a></code> attribute is not in the <a href="states-of-the-type-attribute.html#image-button-state-type-image" title="attr-input-type-image">Image Button</a> state, then no
+  image is <i title="input-img-available"><a href="states-of-the-type-attribute.html#input-img-available">available</a></i>. <a href="references.html#refsCSS">[CSS]</a></p>
+
+  <p>On setting, they must act as if they <a href="common-dom-interfaces.html#reflect" title="reflect">reflected</a> the respective content attributes
+  of the same name.</p>
+
+  <p>The <code title="dom-cva-willValidate"><a href="constraints.html#dom-cva-willvalidate">willValidate</a></code>, <code title="dom-cva-validity"><a href="constraints.html#dom-cva-validity">validity</a></code>, and <code title="dom-cva-validationMessage"><a href="constraints.html#dom-cva-validationmessage">validationMessage</a></code>
+  attributes, and the <code title="dom-cva-checkValidatity"><a href="constraints.html#dom-cva-checkvalidatity">checkValidity()</a></code> and <code title="dom-cva-setCustomValidity"><a href="constraints.html#dom-cva-setcustomvalidity">setCustomValidity()</a></code>
+  methods, are part of the <a href="constraints.html#the-constraint-validation-api">constraint validation API</a>. The
+  <code title="dom-lfe-labels"><a href="the-label-element.html#dom-lfe-labels">labels</a></code> attribute provides a list
+  of the element's <code><a href="the-label-element.html#the-label-element">label</a></code>s. The <code title="dom-textarea/input-select"><a href="textFieldSelection.html#dom-textarea-input-select">select()</a></code>, <code title="dom-textarea/input-selectionStart"><a href="textFieldSelection.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+  <code title="dom-textarea/input-selectionEnd"><a href="textFieldSelection.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
+  <code title="dom-textarea/input-selectionDirection"><a href="textFieldSelection.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>,
+  and <code title="dom-textarea/input-setSelectionRange"><a href="textFieldSelection.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>
   methods and attributes expose the element's text selection. The
-  <code title="dom-fe-autofocus"><a href="association-of-controls-and-forms.html#dom-fe-autofocus">autofocus</a></code>, <code title="dom-fe-disabled"><a href="association-of-controls-and-forms.html#dom-fe-disabled">disabled</a></code>, <code title="dom-fae-form"><a href="association-of-controls-and-forms.html#dom-fae-form">form</a></code>, and <code title="dom-fe-name"><a href="association-of-controls-and-forms.html#dom-fe-name">name</a></code> IDL attributes are part of the
+  <code title="dom-fe-autofocus"><a href="attributes-common-to-form-controls.html#dom-fe-autofocus">autofocus</a></code>, <code title="dom-fe-disabled"><a href="attributes-common-to-form-controls.html#dom-fe-disabled">disabled</a></code>, <code title="dom-fae-form"><a href="association-of-controls-and-forms.html#dom-fae-form">form</a></code>, and <code title="dom-fe-name"><a href="attributes-common-to-form-controls.html#dom-fe-name">name</a></code> IDL attributes are part of the
   element's forms API.</p>
 
   </div></body></html>

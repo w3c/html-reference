@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>5.3 Origin &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<!DOCTYPE html>
+<html lang="en-US-x-Hixie"><head><title>5.3 Origin &#x2014; HTML5</title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -19,6 +19,7 @@
    dd table + p { margin-top: 1em; }
    p + * > li, dd li { margin: 1em 0; }
    dt, dfn { font-weight: bold; font-style: normal; }
+   i, em { font-style: italic; }
    dt dfn { font-style: italic; }
    pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
    pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
@@ -40,9 +41,10 @@
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
 
    .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   img.extra { float: right; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   img.extra, p.overview { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; position: relative; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl::before { content: "IDL"; font: bold small sans-serif; padding: 0.5em; background: white; position: absolute; top: 0; margin: -1px 0 0 -4em; width: 1.5em; border: thin solid; border-radius: 0 0 0 0.5em }
    pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
    pre.css:first-line { color: #AAAA50; }
    dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
@@ -50,6 +52,7 @@
    dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
    dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
    dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
    dl.switch { padding-left: 2em; }
    dl.switch > dt { text-indent: -1.5em; }
    dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
@@ -104,6 +107,7 @@
    .note { color: green; background: transparent; font-family: sans-serif; }
    .warning { color: red; background: transparent; }
    .note, .warning { font-weight: bolder; font-style: italic; }
+   .note em, .warning em, .note i, .warning i { font-style: normal; }
    p.note, div.note { padding: 0.5em 2em; }
    span.note { padding: 0 2em; }
    .note p:first-child, .warning p:first-child { margin-top: 0; }
@@ -295,8 +299,6 @@
      src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
    }
 
-  ]]></style><style type="text/css"><![CDATA[
-   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
   ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
    function getCookie(name) {
      var params = location.search.substr(1).split("&");
@@ -315,16 +317,18 @@
      }
      return null;
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="browsers.html" title="5 Loading Web pages" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="history.html" title="5.4 Session history and navigation" rel="next"/></head><body><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="browsers.html" title="5 Loading Web pages" rel="prev"/><link href="index.html#contents" title="Table of contents" rel="contents"/><link href="history.html" title="5.4 Session history and navigation" rel="next"/></head><body onload="fixBrokenLink();" class="split chapter"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   </div><div>
-   <a href="browsers.html" class="prev">5 Loading Web pages</a> &#x2013;
-   <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="history.html" class="next">5.4 Session history and navigation</a>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
+
+   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   </div><nav class="prev_next"><a href="browsers.html">&#x2190; 5 Loading Web pages</a> &#x2013;
+   <a href="index.html#contents">Table of contents</a> &#x2013;
+   <a href="history.html">5.4 Session history and navigation &#x2192;</a>
   <ol class="toc"><li><ol><li><a href="origin-0.html#origin-0"><span class="secno">5.3 </span>Origin</a>
-    <ol><li><a href="origin-0.html#relaxing-the-same-origin-restriction"><span class="secno">5.3.1 </span>Relaxing the same-origin restriction</a></li></ol></li></ol></li></ol></div><h3 id="origin-0"><span class="secno">5.3 </span>Origin</h3><p>The <dfn id="origin">origin</dfn> of a resource and the <dfn id="effective-script-origin">effective script
+    <ol><li><a href="origin-0.html#relaxing-the-same-origin-restriction"><span class="secno">5.3.1 </span>Relaxing the same-origin restriction</a></li></ol></li></ol></li></ol></nav><h3 id="origin-0"><span class="secno">5.3 </span>Origin</h3><p>The <dfn id="origin">origin</dfn> of a resource and the <dfn id="effective-script-origin">effective script
   origin</dfn> of a resource are both either opaque identifiers or
   tuples consisting of a scheme component, a host component, a port
   component, and optionally extra data.</p><p class="note">The extra data could include the certificate of the
@@ -339,67 +343,8 @@
    <dd>
 
     <p>The <a href="#origin">origin</a> and <a href="#effective-script-origin">effective script
-    origin</a> of the <a href="urls.html#url">URL</a> is whatever is returned by
-    the following algorithm:</p>
-
-    <ol><li><p>Let <var title="">url</var> be the <a href="urls.html#url">URL</a> for
-     which the <a href="#origin">origin</a> is being determined.</p></li>
-
-     <li><p><a href="urls.html#parse-a-url" title="parse a url">Parse</a> <var title="">url</var>.</p></li>
-
-     <li><p>If <var title="">url</var> identifies a resource that is
-     its own trust domain (e.g. it identifies an e-mail on an IMAP
-     server or a post on an NNTP server) then return a globally unique
-     identifier specific to the resource identified by <var title="">url</var>, so that if this algorithm is invoked again
-     for <a href="urls.html#url" title="URL">URLs</a> that identify the same resource,
-     the same identifier will be returned.</p></li>
-
-     <li><p>If <var title="">url</var> does not use a server-based
-     naming authority, or if parsing <var title="">url</var> failed,
-     or if <var title="">url</var> is not an <a href="urls.html#absolute-url">absolute
-     URL</a>, then return a new globally unique
-     identifier.</p></li>
-
-     <li><p>Let <var title="">scheme</var> be the <a href="urls.html#url-scheme" title="url-scheme">&lt;scheme&gt;</a> component of <var title="">url</var>, <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a>.</p></li>
-
-     <li><p>If the UA doesn't support the protocol given by <var title="">scheme</var>, then return a new globally unique
-     identifier.</p></li>
-
-     <li><p>If <var title="">scheme</var> is "<code title="">file</code>", then the user agent may return a
-     UA-specific value.</p></li>
-
-     <li><p>Let <var title="">host</var> be the <a href="urls.html#url-host" title="url-host">&lt;host&gt;</a> component of <var title="">url</var>.</p></li>
-
-     <li>
-
-      <p>Apply the IDNA ToASCII algorithm to <var title="">host</var>,
-      with both the AllowUnassigned and UseSTD3ASCIIRules flags
-      set. Let <var title="">host</var> be the result of the ToASCII
-      algorithm.</p>
-
-      <p>If ToASCII fails to convert one of the components of the
-      string, e.g. because it is too long or because it contains
-      invalid characters, then return a new globally unique
-      identifier. <a href="references.html#refsRFC3490">[RFC3490]</a></p>
-
-     </li>
-
-     <li><p>Let <var title="">host</var> be the result of converting
-     <var title="">host</var> <a href="infrastructure.html#converted-to-ascii-lowercase" title="converted to ASCII lowercase">to
-     ASCII lowercase</a>.</p></li>
-
-     <li><p>If there is no <a href="urls.html#url-port" title="url-port">&lt;port&gt;</a>
-     component, then let <var title="">port</var> be the default port
-     for the protocol given by <var title="">scheme</var>. Otherwise,
-     let <var title="">port</var> be the <a href="urls.html#url-port" title="url-port">&lt;port&gt;</a> component of <var title="">url</var>.</p></li>
-
-     <li><p>Return the tuple (<var title="">scheme</var>, <var title="">host</var>, <var title="">port</var>).</p></li>
-
-    </ol><p>In addition, if the <a href="urls.html#url">URL</a> is in fact associated with
-    a <code><a href="infrastructure.html#document">Document</a></code> object that was created by parsing the
-    resource obtained from fetching <a href="urls.html#url">URL</a>, and this was
-    done over a secure connection, then the server's secure
-    certificate may be added to the origin as additional data.</p>
+    origin</a> of the <a href="urls.html#url">URL</a> are the origin defined in
+    <cite>The Web Origin Concept</cite>. <a href="references.html#refsORIGIN">[ORIGIN]</a></p>
 
    </dd>
 
@@ -412,15 +357,15 @@
     origin</a> of a script are determined from another resource,
     called the <i>owner</i>:</p>
 
-    <dl class="switch"><dt>If a script is in a <code><a href="scripting-1.html#the-script-element">script</a></code> element</dt>
+    <dl class="switch"><dt>If a script is in a <code><a href="the-script-element.html#the-script-element">script</a></code> element</dt>
 
-     <dd>The owner is the <code><a href="infrastructure.html#document">Document</a></code> to which the
-     <code><a href="scripting-1.html#the-script-element">script</a></code> element belongs.</dd>
+     <dd>The owner is the <code><a href="dom.html#document">Document</a></code> to which the
+     <code><a href="the-script-element.html#the-script-element">script</a></code> element belongs.</dd>
 
 
      <dt>If a script is in an <a href="webappapis.html#event-handler-content-attributes" title="event handler content&#10;     attributes">event handler content attribute</a></dt>
 
-     <dd>The owner is the <code><a href="infrastructure.html#document">Document</a></code> to which the
+     <dd>The owner is the <code><a href="dom.html#document">Document</a></code> to which the
      attribute node belongs.</dd>
 
 
@@ -431,7 +376,7 @@
 
 
      <dt>If a script is a <a href="webappapis.html#javascript-protocol" title="javascript protocol"><code title="">javascript:</code> URL</a> that was returned as the
-     location of an HTTP redirect (<a href="fetching-resources.html#concept-http-equivalent-codes" title="concept-http-equivalent-codes">or equivalent</a> in
+     location of an HTTP redirect (<a href="urls.html#concept-http-equivalent-codes" title="concept-http-equivalent-codes">or equivalent</a> in
      other protocols)</dt>
 
      <dd>The owner is the <a href="urls.html#url">URL</a> that redirected to the
@@ -440,7 +385,7 @@
 
      <dt>If a script is a <a href="webappapis.html#javascript-protocol" title="javascript protocol"><code title="">javascript:</code> URL</a> in an attribute</dt>
 
-     <dd>The owner is the <code><a href="infrastructure.html#document">Document</a></code> of the element on
+     <dd>The owner is the <code><a href="dom.html#document">Document</a></code> of the element on
      which the attribute is found.</dd>
 
 
@@ -454,7 +399,7 @@
      the URL having been provided by the user (e.g. by using a
      <i>bookmarklet</i>)</dt>
 
-     <dd>The owner is the <code><a href="infrastructure.html#document">Document</a></code> of the <a href="browsers.html#browsing-context">browsing
+     <dd>The owner is the <code><a href="dom.html#document">Document</a></code> of the <a href="browsers.html#browsing-context">browsing
      context</a>'s <a href="browsers.html#active-document">active document</a>.</dd>
 
 
@@ -462,8 +407,8 @@
      context</a> is being <a href="history.html#navigate" title="navigate">navigated</a>,
      the URL having been declared in markup</dt>
 
-     <dd>The owner is the <code><a href="infrastructure.html#document">Document</a></code> of the element
-     (e.g. an <code><a href="text-level-semantics.html#the-a-element">a</a></code> or <code><a href="the-map-element.html#the-area-element">area</a></code> element) that
+     <dd>The owner is the <code><a href="dom.html#document">Document</a></code> of the element
+     (e.g. an <code><a href="the-a-element.html#the-a-element">a</a></code> or <code><a href="the-area-element.html#the-area-element">area</a></code> element) that
      declared the URL.</dd>
 
 
@@ -481,30 +426,27 @@
    </dd>
 
 
-   <dt>For <code><a href="infrastructure.html#document">Document</a></code> objects</dt>
+   <dt>For <code><a href="dom.html#document">Document</a></code> objects</dt>
 
    <dd>
 
-    <dl class="switch"><dt id="sandboxOrigin">If a <code><a href="infrastructure.html#document">Document</a></code> is in a
+    <dl class="switch"><dt id="sandboxOrigin">If a <code><a href="dom.html#document">Document</a></code> is in a
      <a href="browsers.html#browsing-context">browsing context</a> whose <a href="the-iframe-element.html#sandboxed-origin-browsing-context-flag">sandboxed origin
      browsing context flag</a> was set when the
-     <code><a href="infrastructure.html#document">Document</a></code> was created</dt>
-
-     <dt>If a <code><a href="infrastructure.html#document">Document</a></code> was generated from a resource
-     labeled as <code><a href="iana.html#text-html-sandboxed">text/html-sandboxed</a></code></dt>
+     <code><a href="dom.html#document">Document</a></code> was created</dt>
 
      <dd>The <a href="#origin">origin</a> is a globally unique identifier
-     assigned when the <code><a href="infrastructure.html#document">Document</a></code> is created.</dd>
+     assigned when the <code><a href="dom.html#document">Document</a></code> is created.</dd>
 
 
-     <dt>If a <code><a href="infrastructure.html#document">Document</a></code> was generated from a <a href="webappapis.html#javascript-protocol" title="javascript protocol"><code>javascript:</code>
+     <dt>If a <code><a href="dom.html#document">Document</a></code> was generated from a <a href="webappapis.html#javascript-protocol" title="javascript protocol"><code>javascript:</code>
      URL</a></dt>
 
      <dd>The <a href="#origin">origin</a> is equal to the <a href="#origin">origin</a>
      of the script of that <a href="webappapis.html#javascript-protocol" title="javascript&#10;     protocol"><code>javascript:</code> URL</a>.</dd>
 
 
-     <dt>If a <code><a href="infrastructure.html#document">Document</a></code> was served over the network and
+     <dt>If a <code><a href="dom.html#document">Document</a></code> was served over the network and
      has an address that uses a URL scheme with a server-based naming
      authority</dt>
 
@@ -512,48 +454,48 @@
      <a href="dom.html#the-document-s-address">the <code>Document</code>'s address</a>.</dd>
 
 
-     <dt>If a <code><a href="infrastructure.html#document">Document</a></code> was generated from a <a href="infrastructure.html#data-protocol" title="data protocol"><code title="">data:</code> URL</a> that
-     was returned as the location of an HTTP redirect (<a href="fetching-resources.html#concept-http-equivalent-codes" title="concept-http-equivalent-codes">or equivalent</a> in
+     <dt>If a <code><a href="dom.html#document">Document</a></code> was generated from a <a href="infrastructure.html#data-protocol" title="data protocol"><code title="">data:</code> URL</a> that
+     was returned as the location of an HTTP redirect (<a href="urls.html#concept-http-equivalent-codes" title="concept-http-equivalent-codes">or equivalent</a> in
      other protocols)</dt>
 
      <dd>The <a href="#origin">origin</a> is the <a href="#origin">origin</a> of the
      <a href="urls.html#url">URL</a> that redirected to the <a href="infrastructure.html#data-protocol" title="data&#10;     protocol"><code title="">data:</code> URL</a>.</dd>
 
 
-     <dt>If a <code><a href="infrastructure.html#document">Document</a></code> was generated from a <a href="infrastructure.html#data-protocol" title="data protocol"><code title="">data:</code> URL</a>
-     found in another <code><a href="infrastructure.html#document">Document</a></code> or in a script</dt>
+     <dt>If a <code><a href="dom.html#document">Document</a></code> was generated from a <a href="infrastructure.html#data-protocol" title="data protocol"><code title="">data:</code> URL</a>
+     found in another <code><a href="dom.html#document">Document</a></code> or in a script</dt>
 
      <dd>The <a href="#origin">origin</a> is the <a href="#origin">origin</a> of the
-     <code><a href="infrastructure.html#document">Document</a></code> or script that initiated the <a href="history.html#navigate" title="navigate">navigation</a> to that <a href="urls.html#url">URL</a>.</dd>
+     <code><a href="dom.html#document">Document</a></code> or script that initiated the <a href="history.html#navigate" title="navigate">navigation</a> to that <a href="urls.html#url">URL</a>.</dd>
 
 
-     <dt>If a <code><a href="infrastructure.html#document">Document</a></code> has the <a href="dom.html#the-document-s-address" title="the&#10;     document's address">address</a>
-     "<code><a href="fetching-resources.html#about:blank">about:blank</a></code>"</dt>
+     <dt>If a <code><a href="dom.html#document">Document</a></code> has the <a href="dom.html#the-document-s-address" title="the&#10;     document's address">address</a>
+     "<code><a href="urls.html#about:blank">about:blank</a></code>"</dt>
 
-     <dd>The <a href="#origin">origin</a> of the <code><a href="infrastructure.html#document">Document</a></code> is <a href="browsers.html#about-blank-origin">the <span>origin</span> it was
+     <dd>The <a href="#origin">origin</a> of the <code><a href="dom.html#document">Document</a></code> is <a href="browsers.html#about-blank-origin">the <span>origin</span> it was
      assigned when its browsing context was created</a>.</dd>
 
 
-     <dt>If a <code><a href="infrastructure.html#document">Document</a></code> is <a href="the-iframe-element.html#an-iframe-srcdoc-document">an <code>iframe</code> <code title="attr-iframe-srcdoc">srcdoc</code> document</a></dt>
+     <dt>If a <code><a href="dom.html#document">Document</a></code> is <a href="the-iframe-element.html#an-iframe-srcdoc-document">an <code>iframe</code> <code title="attr-iframe-srcdoc">srcdoc</code> document</a></dt>
 
-     <dd>The <a href="#origin">origin</a> of the <code><a href="infrastructure.html#document">Document</a></code> is the
-     <a href="#origin">origin</a> of the <code><a href="infrastructure.html#document">Document</a></code>'s <a href="browsers.html#browsing-context">browsing
+     <dd>The <a href="#origin">origin</a> of the <code><a href="dom.html#document">Document</a></code> is the
+     <a href="#origin">origin</a> of the <code><a href="dom.html#document">Document</a></code>'s <a href="browsers.html#browsing-context">browsing
      context</a>'s <a href="browsers.html#browsing-context-container">browsing context container</a>'s
-     <code><a href="infrastructure.html#document">Document</a></code>.</dd>
+     <code><a href="dom.html#document">Document</a></code>.</dd>
 
 
-     <dt>If a <code><a href="infrastructure.html#document">Document</a></code> was obtained in some other manner
+     <dt>If a <code><a href="dom.html#document">Document</a></code> was obtained in some other manner
      (e.g. a <a href="infrastructure.html#data-protocol" title="data protocol"><code title="">data:</code>
-     URL</a> typed in by the user, a <code><a href="infrastructure.html#document">Document</a></code> created
+     URL</a> typed in by the user, a <code><a href="dom.html#document">Document</a></code> created
      using the <code title="dom-DOMImplementation-createDocument"><a href="infrastructure.html#dom-domimplementation-createdocument">createDocument()</a></code>
      API, etc)</dt>
 
      <dd>The <a href="#origin">origin</a> is a globally unique identifier
-     assigned when the <code><a href="infrastructure.html#document">Document</a></code> is created.</dd>
+     assigned when the <code><a href="dom.html#document">Document</a></code> is created.</dd>
 
-    </dl><p>When a <code><a href="infrastructure.html#document">Document</a></code> is created, its <a href="#effective-script-origin">effective
+    </dl><p>When a <code><a href="dom.html#document">Document</a></code> is created, its <a href="#effective-script-origin">effective
     script origin</a> is initialized to the <a href="#origin">origin</a> of
-    the <code><a href="infrastructure.html#document">Document</a></code>. However, the <code title="dom-document-domain"><a href="#dom-document-domain">document.domain</a></code> attribute can
+    the <code><a href="dom.html#document">Document</a></code>. However, the <code title="dom-document-domain"><a href="#dom-document-domain">document.domain</a></code> attribute can
     be used to change it.</p>
 
    </dd>
@@ -563,68 +505,40 @@
 
    <dd>
 
-    <dl class="switch"><dt>If an image is the image of an <code><a href="embedded-content-1.html#the-img-element">img</a></code> element and
-     its image data is <a href="fetching-resources.html#cors-cross-origin">CORS-cross-origin</a></dt>
+    <dl class="switch"><dt>If an image is the image of an <code><a href="the-img-element.html#the-img-element">img</a></code> element and
+     its image data is <a href="urls.html#cors-cross-origin">CORS-cross-origin</a></dt>
 
      <dd>The <a href="#origin">origin</a> is a globally unique identifier
      assigned when the image is created.</dd>
 
 
-     <dt>If an image is the image of an <code><a href="embedded-content-1.html#the-img-element">img</a></code> element and
-     its image data is <a href="fetching-resources.html#cors-same-origin">CORS-same-origin</a></dt>
+     <dt>If an image is the image of an <code><a href="the-img-element.html#the-img-element">img</a></code> element and
+     its image data is <a href="urls.html#cors-same-origin">CORS-same-origin</a></dt>
 
      <dd>The <a href="#origin">origin</a> is the <a href="#origin">origin</a> of the
-     <code><a href="embedded-content-1.html#the-img-element">img</a></code> element's <code><a href="infrastructure.html#document">Document</a></code>.</dd>
+     <code><a href="the-img-element.html#the-img-element">img</a></code> element's <code><a href="dom.html#document">Document</a></code>.</dd>
 
-
-
-     <dt>If an image was served over the network and has an address
-     that uses a URL scheme with a server-based naming authority</dt>
-
-     <dd>The <a href="#origin">origin</a> is the <a href="#origin">origin</a> of the
-     image's <a href="urls.html#url">URL</a>.</dd>
-
-
-     <dt>If an image was generated from a <a href="infrastructure.html#data-protocol" title="data&#10;     protocol"><code title="">data:</code> URL</a> that was
-     returned as the location of an HTTP redirect (<a href="fetching-resources.html#concept-http-equivalent-codes" title="concept-http-equivalent-codes">or equivalent</a> in
-     other protocols)</dt>
-
-     <dd>The <a href="#origin">origin</a> is the <a href="#origin">origin</a> of the
-     <a href="urls.html#url">URL</a> that redirected to the <a href="infrastructure.html#data-protocol" title="data&#10;     protocol"><code title="">data:</code> URL</a>.</dd>
-
-
-     <dt>If an image was generated from a <a href="infrastructure.html#data-protocol" title="data&#10;     protocol"><code title="">data:</code> URL</a> found in another
-     <code><a href="infrastructure.html#document">Document</a></code> or in a script</dt>
-
-     <dd>The <a href="#origin">origin</a> is the <a href="#origin">origin</a> of the
-     <code><a href="infrastructure.html#document">Document</a></code> or script that loaded that image.</dd>
-
-
-     <dt>If an image was obtained in some other manner (e.g. a <a href="infrastructure.html#data-protocol" title="data protocol"><code title="">data:</code> URL</a>
-     typed in by the user)</dt>
-
-     <dd>The <a href="#origin">origin</a> is a globally unique identifier
-     assigned when the image is created.</dd>
+     
 
     </dl></dd>
 
 
-   <dt>For <code><a href="the-iframe-element.html#the-audio-element">audio</a></code> and <code><a href="the-iframe-element.html#the-video-element">video</a></code> elements</dt>
+   <dt>For <code><a href="the-audio-element.html#the-audio-element">audio</a></code> and <code><a href="the-video-element.html#the-video-element">video</a></code> elements</dt>
 
    <dd>
 
-    <dl class="switch"><dt>If the <a href="the-iframe-element.html#media-data">media data</a> is
-     <a href="fetching-resources.html#cors-cross-origin">CORS-cross-origin</a></dt>
+    <dl class="switch"><dt>If the <a href="media-elements.html#media-data">media data</a> is
+     <a href="urls.html#cors-cross-origin">CORS-cross-origin</a></dt>
 
      <dd>The <a href="#origin">origin</a> is a globally unique identifier
      assigned when the image is created.</dd>
 
 
-     <dt>If the <a href="the-iframe-element.html#media-data">media data</a> is
-     <a href="fetching-resources.html#cors-same-origin">CORS-same-origin</a></dt>
+     <dt>If the <a href="media-elements.html#media-data">media data</a> is
+     <a href="urls.html#cors-same-origin">CORS-same-origin</a></dt>
 
      <dd>The <a href="#origin">origin</a> is the <a href="#origin">origin</a> of the
-     <a href="the-iframe-element.html#media-element">media element</a>'s <code><a href="infrastructure.html#document">Document</a></code>.</dd>
+     <a href="media-elements.html#media-element">media element</a>'s <code><a href="dom.html#document">Document</a></code>.</dd>
 
     </dl></dd>
 
@@ -636,17 +550,19 @@
     <p>The <a href="#origin">origin</a> of a downloadable Web font is equal to
     the <a href="#origin">origin</a> of the <a href="urls.html#absolute-url">absolute URL</a> used to
     obtain the font (after any redirects). <a href="references.html#refsCSSFONTS">[CSSFONTS]</a></p> 
+
     <p>The <a href="#origin">origin</a> of a locally installed system font is
-    equal to the <a href="#origin">origin</a> of the <code><a href="infrastructure.html#document">Document</a></code> in
+    equal to the <a href="#origin">origin</a> of the <code><a href="dom.html#document">Document</a></code> in
     which that font is being used.</p>
 
    </dd>
 
   </dl><p>Other specifications can override the above definitions by
   themselves specifying the origin of a particular URL, script,
-  <code><a href="infrastructure.html#document">Document</a></code>, or image.</p>
+  <code><a href="dom.html#document">Document</a></code>, or image.</p>
 
   
+
   <hr/><p>The <dfn id="unicode-serialization-of-an-origin">Unicode serialization of an origin</dfn> is the string
   obtained by applying the following algorithm to the given
   <a href="#origin">origin</a>:</p>
@@ -749,22 +665,22 @@
   </dl><div class="impl">
 
   <p>The <dfn id="dom-document-domain" title="dom-document-domain"><code>domain</code></dfn>
-  attribute on <code><a href="infrastructure.html#document">Document</a></code> objects must be initialized to
+  attribute on <code><a href="dom.html#document">Document</a></code> objects must be initialized to
   <a href="#the-document-s-domain">the document's domain</a>, if it has one, and the empty
   string otherwise. If the value is an IPv6 address, then the square
   brackets from the host portion of the <a href="urls.html#url-host" title="url-host">&lt;host&gt;</a> component must be omitted from
   the attribute's value.</p>
 
   <p>On getting, the attribute must return its current value, unless
-  the <code><a href="infrastructure.html#document">Document</a></code> has no <a href="browsers.html#browsing-context">browsing context</a>, in
+  the <code><a href="dom.html#document">Document</a></code> has no <a href="browsers.html#browsing-context">browsing context</a>, in
   which case it must return the empty string.</p>
 
   <p>On setting, the user agent must run the following algorithm:</p>
 
   <ol><li>
 
-    <p>If the <code><a href="infrastructure.html#document">Document</a></code> has no <a href="browsers.html#browsing-context">browsing
-    context</a>, throw a <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code> exception and
+    <p>If the <code><a href="dom.html#document">Document</a></code> has no <a href="browsers.html#browsing-context">browsing
+    context</a>, throw a <code><a href="infrastructure.html#securityerror">SecurityError</a></code> exception and
     abort these steps.</p>
 
    </li>
@@ -779,7 +695,7 @@
 
     <p>If ToASCII fails to convert one of the components of the
     string, e.g. because it is too long or because it contains invalid
-    characters, then throw a <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code> exception and abort
+    characters, then throw a <code><a href="infrastructure.html#securityerror">SecurityError</a></code> exception and abort
     these steps. <a href="references.html#refsRFC3490">[RFC3490]</a></p>
 
    </li>
@@ -793,7 +709,7 @@
     <ol><li>
 
       <p>If the current value is an IP address, throw a
-      <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code> exception and abort these steps.</p>
+      <code><a href="infrastructure.html#securityerror">SecurityError</a></code> exception and abort these steps.</p>
 
      </li>
 
@@ -801,7 +717,7 @@
 
       <p>If <var title="">new value</var>, prefixed by a U+002E FULL
       STOP (.), does not exactly match the end of the current value,
-      throw a <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code> exception and abort these
+      throw a <code><a href="infrastructure.html#securityerror">SecurityError</a></code> exception and abort these
       steps.</p>
 
      </li>
@@ -812,7 +728,7 @@
       Public Suffix List, or, if <var title="">new value</var>,
       prefixed by a U+002E FULL STOP (.), matches the end of a
       suffix in the Public Suffix List, then throw a
-      <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code> exception and abort these steps. <a href="references.html#refsPSL">[PSL]</a></p>
+      <code><a href="infrastructure.html#securityerror">SecurityError</a></code> exception and abort these steps. <a href="references.html#refsPSL">[PSL]</a></p>
 
       <p>Suffixes must be compared after applying the IDNA ToASCII
       algorithm to them, with both the AllowUnassigned and
@@ -834,7 +750,7 @@
    <li>
 
     <p>Set the host part of the <a href="#effective-script-origin">effective script origin</a>
-    tuple of the <code><a href="infrastructure.html#document">Document</a></code> to <var title="">new
+    tuple of the <code><a href="dom.html#document">Document</a></code> to <var title="">new
     value</var>.</p>
 
    </li>
@@ -842,7 +758,7 @@
    <li>
 
     <p>Set the port part of the <a href="#effective-script-origin">effective script origin</a>
-    tuple of the <code><a href="infrastructure.html#document">Document</a></code> to "manual override" (a value
+    tuple of the <code><a href="dom.html#document">Document</a></code> to "manual override" (a value
     that, for the purposes of <a href="#same-origin" title="same origin">comparing
     origins</a>, is identical to "manual override" but not
     identical to any other value).</p>
@@ -850,7 +766,7 @@
    </li>
 
   </ol><p>The <dfn id="the-document-s-domain" title="the document's domain">domain</dfn> of a
-  <code><a href="infrastructure.html#document">Document</a></code> is the host part of the document's
+  <code><a href="dom.html#document">Document</a></code> is the host part of the document's
   <a href="#origin">origin</a>, if that is a scheme/host/port tuple. If it
   isn't, then the document does not have a domain.</p>
 

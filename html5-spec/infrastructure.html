@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>2 Common infrastructure &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<!DOCTYPE html>
+<html lang="en-US-x-Hixie"><head><title>2 Common infrastructure &#x2014; HTML5</title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -19,6 +19,7 @@
    dd table + p { margin-top: 1em; }
    p + * > li, dd li { margin: 1em 0; }
    dt, dfn { font-weight: bold; font-style: normal; }
+   i, em { font-style: italic; }
    dt dfn { font-style: italic; }
    pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
    pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
@@ -40,9 +41,10 @@
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
 
    .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   img.extra { float: right; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   img.extra, p.overview { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; position: relative; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl::before { content: "IDL"; font: bold small sans-serif; padding: 0.5em; background: white; position: absolute; top: 0; margin: -1px 0 0 -4em; width: 1.5em; border: thin solid; border-radius: 0 0 0 0.5em }
    pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
    pre.css:first-line { color: #AAAA50; }
    dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
@@ -50,6 +52,7 @@
    dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
    dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
    dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
    dl.switch { padding-left: 2em; }
    dl.switch > dt { text-indent: -1.5em; }
    dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
@@ -104,6 +107,7 @@
    .note { color: green; background: transparent; font-family: sans-serif; }
    .warning { color: red; background: transparent; }
    .note, .warning { font-weight: bolder; font-style: italic; }
+   .note em, .warning em, .note i, .warning i { font-style: normal; }
    p.note, div.note { padding: 0.5em 2em; }
    span.note { padding: 0 2em; }
    .note p:first-child, .warning p:first-child { margin-top: 0; }
@@ -295,8 +299,6 @@
      src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
    }
 
-  ]]></style><style type="text/css"><![CDATA[
-   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
   ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
    function getCookie(name) {
      var params = location.search.substr(1).split("&");
@@ -315,18 +317,20 @@
      }
      return null;
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="introduction.html" title="1 Introduction" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="common-microsyntaxes.html" title="2.5 Common microsyntaxes" rel="next"/></head><body><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="introduction.html" title="1 Introduction" rel="prev"/><link href="index.html#contents" title="Table of contents" rel="contents"/><link href="common-microsyntaxes.html" title="2.5 Common microsyntaxes" rel="next"/></head><body onload="fixBrokenLink();" class="split chapter"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   </div><div>
-   <a href="introduction.html" class="prev">1 Introduction</a> &#x2013;
-   <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="common-microsyntaxes.html" class="next">2.5 Common microsyntaxes</a>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
+
+   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   </div><nav class="prev_next"><a href="introduction.html">&#x2190; 1 Introduction</a> &#x2013;
+   <a href="index.html#contents">Table of contents</a> &#x2013;
+   <a href="common-microsyntaxes.html">2.5 Common microsyntaxes &#x2192;</a>
   <ol class="toc"><li><a href="infrastructure.html#infrastructure"><span class="secno">2 </span>Common infrastructure</a>
   <ol><li><a href="infrastructure.html#terminology"><span class="secno">2.1 </span>Terminology</a>
     <ol><li><a href="infrastructure.html#resources"><span class="secno">2.1.1 </span>Resources</a></li><li><a href="infrastructure.html#xml"><span class="secno">2.1.2 </span>XML</a></li><li><a href="infrastructure.html#dom-trees"><span class="secno">2.1.3 </span>DOM trees</a></li><li><a href="infrastructure.html#scripting-0"><span class="secno">2.1.4 </span>Scripting</a></li><li><a href="infrastructure.html#plugins"><span class="secno">2.1.5 </span>Plugins</a></li><li><a href="infrastructure.html#character-encodings"><span class="secno">2.1.6 </span>Character encodings</a></li></ol></li><li><a href="infrastructure.html#conformance-requirements"><span class="secno">2.2 </span>Conformance requirements</a>
-    <ol><li><a href="infrastructure.html#conformance-classes"><span class="secno">2.2.1 </span>Conformance classes</a></li><li><a href="infrastructure.html#dependencies"><span class="secno">2.2.2 </span>Dependencies</a></li><li><a href="infrastructure.html#extensibility"><span class="secno">2.2.3 </span>Extensibility</a></li></ol></li><li><a href="infrastructure.html#case-sensitivity-and-string-comparison"><span class="secno">2.3 </span>Case-sensitivity and string comparison</a></li><li><a href="infrastructure.html#utf-8"><span class="secno">2.4 </span>UTF-8</a></li></ol></li></ol></div><h2 id="infrastructure"><span class="secno">2 </span>Common infrastructure</h2><h3 id="terminology"><span class="secno">2.1 </span>Terminology</h3><p>This specification refers to both HTML and XML attributes and IDL
+    <ol><li><a href="infrastructure.html#conformance-classes"><span class="secno">2.2.1 </span>Conformance classes</a></li><li><a href="infrastructure.html#dependencies"><span class="secno">2.2.2 </span>Dependencies</a></li><li><a href="infrastructure.html#extensibility"><span class="secno">2.2.3 </span>Extensibility</a></li></ol></li><li><a href="infrastructure.html#case-sensitivity-and-string-comparison"><span class="secno">2.3 </span>Case-sensitivity and string comparison</a></li><li><a href="infrastructure.html#utf-8"><span class="secno">2.4 </span>UTF-8</a></li></ol></li></ol></nav><h2 id="infrastructure"><span class="secno">2 </span>Common infrastructure</h2><h3 id="terminology"><span class="secno">2.1 </span>Terminology</h3><p>This specification refers to both HTML and XML attributes and IDL
   attributes, often in the same context. When it is not clear which is
   being referred to, they are referred to as <dfn title="">content
   attributes</dfn> for HTML and XML attributes, and <dfn title="">IDL
@@ -341,7 +345,21 @@
   ... (this does not apply to XHTML)".</p><p>This specification uses the term <dfn title="">document</dfn> to
   refer to any use of HTML, ranging from short static documents to
   long essays or reports with rich multimedia, as well as to
-  fully-fledged interactive applications.</p><p>For simplicity, terms such as <dfn title="">shown</dfn>, <dfn title="">displayed</dfn>, and <dfn title="">visible</dfn> might
+  fully-fledged interactive applications. The term is used to refer
+  both to <code><a href="dom.html#document">Document</a></code> objects and their descendant DOM
+  trees, and to serialized byte streams using the <a href="syntax.html#syntax" title="the&#10;  HTML syntax">HTML syntax</a> or <a href="the-xhtml-syntax.html#the-xhtml-syntax" title="the XHTML&#10;  syntax">XHTML syntax</a>, depending on context.</p><p>In the context of the DOM structures, the terms <a href="#html-documents" title="HTML&#10;  documents">HTML document</a> and <a href="#xml-documents" title="XML documents">XML
+  document</a> are used as defined in the DOM Core specification,
+  and refer specifically to two different modes that
+  <code><a href="dom.html#document">Document</a></code> objects can find themselves in. <a href="references.html#refsDOMCORE">[DOMCORE]</a> (Such uses are always hyperlinked
+  to their definition.)</p><p>In the context of byte streams, the term HTML document refers to
+  resources labeled as <code><a href="iana.html#text-html">text/html</a></code>, and the term XML
+  document refers to resources labeled with an <a href="#xml-mime-type">XML MIME
+  type</a>.</p><p>The term <dfn id="xhtml-document">XHTML document</dfn> is used to refer to both
+  <code><a href="dom.html#document">Document</a></code>s in the <a href="#xml-documents" title="XML documents">XML
+  document</a> mode that contains element nodes in the <a href="namespaces.html#html-namespace-0">HTML
+  namespace</a>, and byte streams labeled with an <a href="#xml-mime-type">XML MIME
+  type</a> that contain elements from the <a href="namespaces.html#html-namespace-0">HTML
+  namespace</a>, depending on context.</p><hr/><p>For simplicity, terms such as <dfn title="">shown</dfn>, <dfn title="">displayed</dfn>, and <dfn title="">visible</dfn> might
   sometimes be used when referring to the way a document is rendered
   to the user. These terms are not meant to imply a visual medium;
   they must be considered to apply to other media in equivalent
@@ -377,8 +395,8 @@
   matches the <code title="">media-type</code> rule defined in section
   3.7 "Media Types" of RFC 2616, but does not contain any U+003B
   SEMICOLON characters (;). In other words, if it consists only of a
-  type and subtype, with no MIME Type parameters. <a href="references.html#refsHTTP">[HTTP]</a></p><p>The term <dfn id="html-mime-type">HTML MIME type</dfn> is used to refer to the <a href="#mime-type" title="MIME type">MIME types</a> <code><a href="iana.html#text-html">text/html</a></code> and
-  <code><a href="iana.html#text-html-sandboxed">text/html-sandboxed</a></code>.</p><p>A resource's <dfn id="critical-subresources">critical subresources</dfn> are those that the
+  type and subtype, with no MIME Type parameters. <a href="references.html#refsHTTP">[HTTP]</a></p><p>The term <dfn id="html-mime-type">HTML MIME type</dfn> is used to refer to the
+  <a href="#mime-type">MIME type</a> <code><a href="iana.html#text-html">text/html</a></code>.</p><p>A resource's <dfn id="critical-subresources">critical subresources</dfn> are those that the
   resource needs to have available to be correctly processed. Which
   resources are considered critical or not is defined by the
   specification that defines the resource's format. For CSS resources,
@@ -392,19 +410,22 @@
   elements</dfn>", when used in this specification, refers to any
   element in that namespace, and thus refers to both HTML and XHTML
   elements.</p><p>Except where otherwise stated, all elements defined or mentioned
-  in this specification are in the
-  <code>http://www.w3.org/1999/xhtml</code> namespace, and all
-  attributes defined or mentioned in this specification have no
-  namespace.</p><p>Attribute names are said to be <dfn id="xml-compatible">XML-compatible</dfn> if they
+  in this specification are in the <a href="namespaces.html#html-namespace-0">HTML namespace</a>
+  ("<code>http://www.w3.org/1999/xhtml</code>"), and all attributes
+  defined or mentioned in this specification have no namespace.</p><p>The term <dfn id="element-type">element type</dfn> is used to refer to the class of
+  elements have a given local name and namespace. For example,
+  <code><a href="the-button-element.html#the-button-element">button</a></code> elements are elements with the element type
+  <code><a href="the-button-element.html#the-button-element">button</a></code>, meaning they have the local name "<code title="">button</code>" and (implicitly as defined above) the
+  <a href="namespaces.html#html-namespace-0">HTML namespace</a>.</p><p>Attribute names are said to be <dfn id="xml-compatible">XML-compatible</dfn> if they
   match the <a href="http://www.w3.org/TR/REC-xml/#NT-Name"><code title="">Name</code></a> production defined in XML, they contain no
   U+003A COLON characters (:), and their first three characters are
   not an <a href="#ascii-case-insensitive">ASCII case-insensitive</a> match for the string
   "<code title="">xml</code>". <a href="references.html#refsXML">[XML]</a></p><p>The term <dfn id="xml-mime-type">XML MIME type</dfn> is used to refer to the <a href="#mime-type" title="MIME type">MIME types</a> <code title="">text/xml</code>,
   <code title="">application/xml</code>, and any <a href="#mime-type">MIME
   type</a> whose subtype ends with the four characters "<code title="">+xml</code>". <a href="references.html#refsRFC3023">[RFC3023]</a></p><h4 id="dom-trees"><span class="secno">2.1.3 </span>DOM trees</h4><p>The <dfn id="root-element-of-a-document-object">root element of a <code>Document</code> object</dfn> is
-  that <code><a href="#document">Document</a></code>'s first element child, if any. If it does
-  not have one then the <code><a href="#document">Document</a></code> has no root element.</p><p>The term <dfn id="root-element">root element</dfn>, when not referring to a
-  <code><a href="#document">Document</a></code> object's root element, means the furthest
+  that <code><a href="dom.html#document">Document</a></code>'s first element child, if any. If it does
+  not have one then the <code><a href="dom.html#document">Document</a></code> has no root element.</p><p>The term <dfn id="root-element">root element</dfn>, when not referring to a
+  <code><a href="dom.html#document">Document</a></code> object's root element, means the furthest
   ancestor element node of whatever node is being discussed, or the
   node itself if it has no ancestors. When the node is a part of the
   document, then the node's <a href="#root-element">root element</a> is indeed the
@@ -420,30 +441,24 @@
   element</a> to being another element.</p><p>A node's <dfn id="home-subtree">home subtree</dfn> is the subtree rooted at that
   node's <a href="#root-element">root element</a>. When a node is <a href="#in-a-document">in a
   <code>Document</code></a>, its <a href="#home-subtree">home subtree</a> is that
-  <code><a href="#document">Document</a></code>'s tree.</p><p>The <code><a href="#document">Document</a></code> of a <code><a href="#node">Node</a></code> (such as an
-  element) is the <code><a href="#document">Document</a></code> that the <code><a href="#node">Node</a></code>'s
+  <code><a href="dom.html#document">Document</a></code>'s tree.</p><p>The <code><a href="dom.html#document">Document</a></code> of a <code><a href="#node">Node</a></code> (such as an
+  element) is the <code><a href="dom.html#document">Document</a></code> that the <code><a href="#node">Node</a></code>'s
   <code title="dom-Node-ownerDocument"><a href="#dom-node-ownerdocument">ownerDocument</a></code> IDL
   attribute returns. When a <code><a href="#node">Node</a></code> is <a href="#in-a-document">in a
-  <code>Document</code></a> then that <code><a href="#document">Document</a></code> is
-  always the <code><a href="#node">Node</a></code>'s <code><a href="#document">Document</a></code>, and the
+  <code>Document</code></a> then that <code><a href="dom.html#document">Document</a></code> is
+  always the <code><a href="#node">Node</a></code>'s <code><a href="dom.html#document">Document</a></code>, and the
   <code><a href="#node">Node</a></code>'s <code title="dom-Node-ownerDocument"><a href="#dom-node-ownerdocument">ownerDocument</a></code> IDL attribute
-  thus always returns that <code><a href="#document">Document</a></code>.</p><p>The term <dfn id="tree-order">tree order</dfn> means a pre-order, depth-first
+  thus always returns that <code><a href="dom.html#document">Document</a></code>.</p><p>The <code><a href="dom.html#document">Document</a></code> of a content attribute is the
+  <code><a href="dom.html#document">Document</a></code> of the attribute's element.</p><p>The term <dfn id="tree-order">tree order</dfn> means a pre-order, depth-first
   traversal of DOM nodes involved (through the <code title="dom-Node-parentNode"><a href="#dom-node-parentnode">parentNode</a></code>/<code title="dom-Node-childNodes"><a href="#dom-node-childnodes">childNodes</a></code> relationship).</p><p>When it is stated that some element or attribute is <dfn id="ignore" title="ignore">ignored</dfn>, or treated as some other value, or
   handled as if it was something else, this refers only to the
   processing of the node after it is in the DOM. <span class="impl">A
-  user agent must not mutate the DOM in such situations.</span></p><p>The term <dfn id="text-node">text node</dfn> refers to any <code><a href="#text">Text</a></code>
-  node, including <code><a href="#cdatasection">CDATASection</a></code> nodes; specifically, any
-  <code><a href="#node">Node</a></code> with node type <code title="">TEXT_NODE</code> (3)
-  or <code title="">CDATA_SECTION_NODE</code> (4). <a href="references.html#refsDOMCORE">[DOMCORE]</a></p><p>A content attribute is said to <dfn title="">change</dfn> value
+  user agent must not mutate the DOM in such situations.</span></p><p>A content attribute is said to <dfn title="">change</dfn> value
   only if its new value is different than its previous value; setting
   an attribute to a value it already has does not change it.</p><p>The term <dfn title="">empty</dfn>, when used of an attribute
-  value, text node, or string, means that the length of the text is
-  zero (i.e. not even containing spaces or control characters).</p><p>Nodes can be <dfn id="concept-clone" title="concept-clone">cloned</dfn>, as
-  described in the DOM Core specification. For example, the <code title="dom-cloneNode">cloneNode()</code> and <code title="dom-importNode">importNode()</code> methods of the
-  <code><a href="#node">Node</a></code> interface both clone nodes, as do a number of
-  algorithms in this specification. Certain <a href="#html-elements">HTML elements</a>
-  (in particular, <code><a href="the-input-element.html#the-input-element">input</a></code> and <code><a href="scripting-1.html#the-script-element">script</a></code>) apply
-  additional requirements on how they are cloned. <a href="references.html#refsDOMCORE">[DOMCORE]</a></p><h4 id="scripting-0"><span class="secno">2.1.4 </span>Scripting</h4><p>The construction "a <code>Foo</code> object", where
+  value, <code><a href="#text">Text</a></code> node, or string, means that the length of
+  the text is zero (i.e. not even containing spaces or control
+  characters).</p><h4 id="scripting-0"><span class="secno">2.1.4 </span>Scripting</h4><p>The construction "a <code>Foo</code> object", where
   <code>Foo</code> is actually an interface, is sometimes used instead
   of the more accurate "an object implementing the interface
   <code>Foo</code>".</p><p>An IDL attribute is said to be <dfn title="">getting</dfn> when
@@ -453,22 +468,24 @@
   attributes and methods on that object <span class="impl">must</span>
   operate on the actual underlying data, not a snapshot of the
   data.</p><p>In the contexts of events, the terms <dfn title="">fire</dfn> and
-  <dfn title="">dispatch</dfn> are used as defined in the DOM Core
-  specification: firing an event means to create and dispatch it, and
-  dispatching an event means to follow the steps that propagate the
-  event through the tree. The term <dfn id="concept-events-trusted" title="concept-events-trusted">trusted event</dfn> is used to refer
-  to events that have the <span>trusted flag</span> set. <a href="references.html#refsDOMCORE">[DOMCORE]</a></p><h4 id="plugins"><span class="secno">2.1.5 </span>Plugins</h4><p>The term <dfn id="plugin">plugin</dfn> refers to a user-agent defined set of
+  <dfn id="concept-event-dispatch" title="concept-event-dispatch">dispatch</dfn> are used as
+  defined in the DOM Core specification: firing an event means to
+  create and dispatch it, and dispatching an event means to follow the
+  steps that propagate the event through the tree. The term <dfn id="concept-events-trusted" title="concept-events-trusted">trusted event</dfn> is used to refer
+  to events whose <code title="dom-event-isTrusted"><a href="#dom-event-istrusted">isTrusted</a></code>
+  attribute is initialized to true. <a href="references.html#refsDOMCORE">[DOMCORE]</a></p><h4 id="plugins"><span class="secno">2.1.5 </span>Plugins</h4><p>The term <dfn id="plugin">plugin</dfn> refers to a user-agent defined set of
   content handlers used by the user agent that can take part in the
-  user agent's rendering of a <code><a href="#document">Document</a></code> object, but that
+  user agent's rendering of a <code><a href="dom.html#document">Document</a></code> object, but that
   neither act as <a href="browsers.html#child-browsing-context" title="child browsing context">child browsing
-  contexts</a> of the <code><a href="#document">Document</a></code> nor introduce any
-  <code><a href="#node">Node</a></code> objects to the <code><a href="#document">Document</a></code>'s DOM.</p><p>Typically such content handlers are provided by third parties,
+  contexts</a> of the <code><a href="dom.html#document">Document</a></code> nor introduce any
+  <code><a href="#node">Node</a></code> objects to the <code><a href="dom.html#document">Document</a></code>'s DOM.</p><p>Typically such content handlers are provided by third parties,
   though a user agent can also designate built-in content handlers as
   plugins.</p><div class="impl">
 
   <p>A user agent must not consider the types <code>text/plain</code>
   and <code>application/octet-stream</code> as having a registered
   <a href="#plugin">plugin</a>.</p> 
+
   </div><p class="example">One example of a plugin would be a PDF viewer
   that is instantiated in a <a href="browsers.html#browsing-context">browsing context</a> when the
   user navigates to a PDF file. This would count as a plugin
@@ -482,7 +499,10 @@
   such as the Netscape Plugin API; others might use remote content
   converters or have built-in support for certain types. Indeed, this
   specification doesn't require user agents to support plugins at all.
-  <a href="references.html#refsNPAPI">[NPAPI]</a></p><div class="impl">
+  <a href="references.html#refsNPAPI">[NPAPI]</a></p><p>A plugin can be <dfn id="concept-plugin-secure" title="concept-plugin-secure">secured</dfn>
+  if it honors the semantics of the <code title="attr-iframe-sandbox"><a href="the-iframe-element.html#attr-iframe-sandbox">sandbox</a></code> attribute.</p><p class="example">For example, a secured plugin would prevent its
+  contents from creating pop-up windows when the plugin is
+  instantiated inside a sandboxed <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>.</p><div class="impl">
 
   <p class="warning">Browsers should take extreme care when
   interacting with external content intended for <a href="#plugin" title="plugin">plugins</a>. When third-party software is run with
@@ -503,19 +523,59 @@
   HZ-GB-2312, and variants of ISO-2022, even though it is possible in
   these encodings for bytes like 0x70 to be part of longer sequences
   that are unrelated to their interpretation as ASCII. It excludes
-  such encodings as UTF-7, UTF-16, GSM03.38, and EBCDIC variants.</p><p>The term <dfn id="unicode-character">Unicode character</dfn> is used to mean a <i title="">Unicode scalar value</i> (i.e. any Unicode code point that
-  is not a surrogate code point). <a href="references.html#refsUNICODE">[UNICODE]</a></p><h3 id="conformance-requirements"><span class="secno">2.2 </span>Conformance requirements</h3><p>All diagrams, examples, and notes in this specification are
+  such encodings as UTF-7, UTF-16, GSM03.38, and EBCDIC variants.</p><p>The term <dfn id="a-utf-16-encoding">a UTF-16 encoding</dfn> refers to any variant of
+  UTF-16: self-describing UTF-16 with a BOM, ambiguous UTF-16 without
+  a BOM, raw UTF-16LE, and raw UTF-16BE. <a href="references.html#refsRFC2781">[RFC2781]</a></p><p>The term <dfn id="code-unit">code unit</dfn> is used as defined in the Web IDL
+  specification: a 16 bit unsigned integer, the smallest atomic
+  component of a <code>DOMString</code>. (This is a narrower
+  definition than the one used in Unicode.) <a href="references.html#refsWEBIDL">[WEBIDL]</a></p><p>The term <dfn id="unicode-code-point">Unicode code point</dfn> means a <i title="">Unicode scalar value</i> where possible, and an isolated
+  surrogate code point when not. When a conformance requirement is
+  defined in terms of characters or Unicode code points, a pair of
+  <a href="#code-unit" title="code unit">code units</a> consisting of a high
+  surrogate followed by a low surrogate must be treated as the single
+  code point represented by the surrogate pair, but isolated
+  surrogates must each be treated as the single code point with the
+  value of the surrogate. <a href="references.html#refsUNICODE">[UNICODE]</a></p><p>In this specification, the term <dfn id="character">character</dfn>, when not
+  qualified as <em>Unicode</em> character, is synonymous with the term
+  <a href="#unicode-code-point">Unicode code point</a>.</p><p>The term <dfn id="unicode-character">Unicode character</dfn> is used to mean a <i title="">Unicode scalar value</i> (i.e. any Unicode code point that
+  is not a surrogate code point). <a href="references.html#refsUNICODE">[UNICODE]</a></p><p>The <dfn id="code-point-length">code-point length</dfn> of a string is the number of
+  <a href="#code-unit" title="code unit">code units</a> in that string.</p><p class="note">This complexity results from the historical decision
+  to define the DOM API in terms of 16 bit (UTF-16) <a href="#code-unit" title="code&#10;  unit">code units</a>, rather than in terms of <a href="#unicode-character" title="Unicode character">Unicode characters</a>.</p><h3 id="conformance-requirements"><span class="secno">2.2 </span>Conformance requirements</h3><p>All diagrams, examples, and notes in this specification are
   non-normative, as are all sections explicitly marked non-normative.
   Everything else in this specification is normative.</p><p>The key words "MUST", "MUST NOT", "REQUIRED",  "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
   "OPTIONAL" in the normative parts of this document are to be
-  interpreted as described in RFC2119. For readability, these words do
-  not appear in all uppercase letters in this specification. <a href="references.html#refsRFC2119">[RFC2119]</a></p><div class="impl">
+  interpreted as described in RFC2119. The key word "OPTIONALLY" in
+  the normative parts of this document is to be interpreted with the
+  same normative meaning as "MAY" and "OPTIONAL". For readability,
+  these words do not appear in all uppercase letters in this
+  specification. <a href="references.html#refsRFC2119">[RFC2119]</a></p><div class="impl">
 
   <p>Requirements phrased in the imperative as part of algorithms
   (such as "strip any leading space characters" or "return false and
   abort these steps") are to be interpreted with the meaning of the
   key word ("must", "should", "may", etc) used in introducing the
   algorithm.</p>
+
+  <div class="example">
+
+   <p>For example, were the spec to say:</p>
+
+   <pre>To eat a kiwi, the user must:
+1. Peel the kiwi.
+2. Eat the kiwi flesh.</pre>
+
+   <p>...it would be equivalent to the following:</p>
+
+   <pre>To eat a kiwi:
+1. The user must peel the kiwi.
+2. The user must eat the kiwi flesh.</pre>
+
+   <p>Here the key word is "must".</p>
+
+   <p>The former (imperative) style is generally preferred in this
+   specification for stylistic reasons.</p>
+
+  </div>
 
   <p>Conformance requirements phrased as algorithms or specific steps
   may be implemented in any manner, so long as the end result is
@@ -532,7 +592,9 @@
   implementors)</span>.</p>
 
   <p><dfn id="conforming-html5-documents">Conforming
+
   HTML5
+
   documents</dfn> are those that comply with all
   the conformance criteria for documents. For readability, some of
   these conformance requirements are phrased as conformance
@@ -546,12 +608,6 @@
   "authors must not use the <code title="">foobar</code> element", it
   would imply that documents are not allowed to contain elements named
   <code title="">foobar</code>.</p>
-
-  <p class="note">the conformance requirements for documents include
-  syntax (the &lt;table&gt; element is conforming as a child of
-  &lt;body&gt;, but not as a child ot &lt;title&gt;), and semantics (the
-  &lt;table&gt; elements denotes a multi-dimensional data table, not a
-  piece of furniture).</p>
 
   <p class="note impl">There is no implied relationship between
   document conformance requirements and implementation conformance
@@ -575,11 +631,11 @@
     specifications.</p>
 
     <p class="example">A conforming XHTML processor would, upon
-    finding an XHTML <code><a href="scripting-1.html#the-script-element">script</a></code> element in an XML document,
+    finding an XHTML <code><a href="the-script-element.html#the-script-element">script</a></code> element in an XML document,
     execute the script contained in that element. However, if the
     element is found within a transformation expressed in XSLT
     (assuming the user agent also supports XSLT), then the processor
-    would instead treat the <code><a href="scripting-1.html#the-script-element">script</a></code> element as an opaque
+    would instead treat the <code><a href="the-script-element.html#the-script-element">script</a></code> element as an opaque
     element that forms part of the transform.</p>
 
     <p>Web browsers that support <a href="syntax.html#syntax">the HTML syntax</a> must
@@ -594,8 +650,8 @@
     <p class="note">Unless explicitly stated, specifications that
     override the semantics of HTML elements do not override the
     requirements on DOM objects representing those elements. For
-    example, the <code><a href="scripting-1.html#the-script-element">script</a></code> element in the example above
-    would still implement the <code><a href="scripting-1.html#htmlscriptelement">HTMLScriptElement</a></code>
+    example, the <code><a href="the-script-element.html#the-script-element">script</a></code> element in the example above
+    would still implement the <code><a href="the-script-element.html#htmlscriptelement">HTMLScriptElement</a></code>
     interface.</p>
 
    </dd>
@@ -630,10 +686,18 @@
     (possibly as a user option) as supporting the suggested default
     rendering defined by this specification.</p>
 
+    <p>This is not required. In particular, even user agents that do
+    implement the suggested default rendering are encouraged to offer
+    settings that override this default to improve the experience for
+    the user, e.g. changing the color contrast, using different focus
+    styles, or otherwise making the experience more accessible and
+    usable to the user.</p>
+
     <p>User agents that are designated as supporting the suggested
-    default rendering must implement the rules in <a href="rendering.html#rendering">the rendering section</a> that that section
-    defines as the behavior that user agents are <em>expected</em> to
-    implement.</p>
+    default rendering must, while so designated, implement the rules
+    in <a href="rendering.html#rendering">the rendering section</a> that that
+    section defines as the behavior that user agents are
+    <em>expected</em> to implement.</p>
 
    </dd>
 
@@ -666,9 +730,9 @@
     specification. Automated conformance checkers are exempt from
     detecting errors that require interpretation of the author's
     intent (for example, while a document is non-conforming if the
-    content of a <code><a href="grouping-content.html#the-blockquote-element">blockquote</a></code> element is not a quote,
+    content of a <code><a href="the-blockquote-element.html#the-blockquote-element">blockquote</a></code> element is not a quote,
     conformance checkers running without the input of human judgement
-    do not have to check that <code><a href="grouping-content.html#the-blockquote-element">blockquote</a></code> elements only
+    do not have to check that <code><a href="the-blockquote-element.html#the-blockquote-element">blockquote</a></code> elements only
     contain quoted material).</p>
 
     <p>Conformance checkers must check that the input document
@@ -723,7 +787,7 @@
     them for conformance should act in accordance with the semantics
     of the documents that they process.</p>
 
-    <p class="example">A tool that generates <a href="sections.html#outline" title="outline">document outlines</a> but increases the nesting
+    <p class="example">A tool that generates <a href="headings-and-sections.html#outline" title="outline">document outlines</a> but increases the nesting
     level for each paragraph and does not increase the nesting level
     for each section would not be conforming.</p>
 
@@ -736,7 +800,9 @@
 
     <p>Authoring tools and markup generators must generate
     <a href="#conforming-html5-documents">conforming
+
     HTML5
+
     documents</a>. Conformance criteria that apply to authors also
     apply to authoring tools, where appropriate.</p>
 
@@ -747,12 +813,12 @@
     elements or encourage their users to do so.</p>
 
     <p class="example">For example, it is not conforming to use an
-    <code><a href="sections.html#the-address-element">address</a></code> element for arbitrary contact information;
+    <code><a href="the-address-element.html#the-address-element">address</a></code> element for arbitrary contact information;
     that element can only be used for marking up contact information
     for the author of the document or section. However, since an
     authoring tool is likely unable to determine the difference, an
     authoring tool is exempt from that requirement. This does not
-    mean, though, that authoring tools can use <code><a href="sections.html#the-address-element">address</a></code>
+    mean, though, that authoring tools can use <code><a href="the-address-element.html#the-address-element">address</a></code>
     elements for any block of italics text (for instance); it just
     means that the authoring tool doesn't have to verify that when the
     user uses a tool for inserting contact information for a section,
@@ -784,8 +850,8 @@
     elements they know are appropriate, and should not use elements
     that they do not know to be appropriate. This might in certain
     extreme cases mean limiting the use of flow elements to just a few
-    elements, like <code><a href="grouping-content.html#the-div-element">div</a></code>, <code><a href="text-level-semantics.html#the-b-element">b</a></code>, <code><a href="text-level-semantics.html#the-i-element">i</a></code>,
-    and <code><a href="text-level-semantics.html#the-span-element">span</a></code> and making liberal use of the <code title="attr-style"><a href="elements.html#the-style-attribute">style</a></code> attribute.</p>
+    elements, like <code><a href="the-div-element.html#the-div-element">div</a></code>, <code><a href="the-b-element.html#the-b-element">b</a></code>, <code><a href="the-i-element.html#the-i-element">i</a></code>,
+    and <code><a href="the-span-element.html#the-span-element">span</a></code> and making liberal use of the <code title="attr-style"><a href="global-attributes.html#the-style-attribute">style</a></code> attribute.</p>
 
     <p>All authoring tools, whether WYSIWYG or not, should make a best
     effort attempt at enabling users to create well-structured,
@@ -804,18 +870,6 @@
   <a href="syntax.html#syntax">the HTML syntax</a>). Implementations must support at least
   one of these two formats, although supporting both is
   encouraged.</p>
-
-  <p id="entity-references">The language in this specification assumes
-  that the user agent expands all entity references, and therefore
-  does not include entity reference nodes in the DOM. If user agents
-  do include entity reference nodes in the DOM, then user agents must
-  handle them as if they were fully expanded when implementing this
-  specification. For example, if a requirement talks about an
-  element's child text nodes, then any text nodes that are children of
-  an entity reference that is a child of that element would be used as
-  well. Entity references to unknown entities must be treated as if
-  they contained just an empty text node for the purposes of the
-  algorithms defined in this specification.</p>
 
   <p>Some conformance requirements are phrased as requirements on
   elements, attributes, methods or objects. Such requirements fall
@@ -847,6 +901,7 @@
 
    </dd>
 
+
    <dt>DOM</dt>
 
    <dd>
@@ -857,19 +912,18 @@
     defined, in this specification, in terms of operations on the DOM.
     <a href="references.html#refsDOMCORE">[DOMCORE]</a></p>
 
-    <p>Implementations must support some version of DOM Core and DOM
-    Events, because this specification is defined in terms of the DOM,
-    and some of the features are defined as extensions to the DOM Core
-    interfaces. <a href="references.html#refsDOMCORE">[DOMCORE]</a> <a href="references.html#refsDOMEVENTS">[DOMEVENTS]</a></p>
+    <p>Implementations must support DOM Core and the events defined in
+    DOM Events, because this specification is defined in terms of the
+    DOM, and some of the features are defined as extensions to the DOM
+    Core interfaces. <a href="references.html#refsDOMCORE">[DOMCORE]</a> <a href="references.html#refsDOMEVENTS">[DOMEVENTS]</a></p>
 
     <p>In particular, the following features are defined in the DOM
     Core specification: <a href="references.html#refsDOMCORE">[DOMCORE]</a></p>
 
     <ul class="brief"><li><dfn id="attr"><code>Attr</code></dfn> interface</li>
-     <li><dfn id="cdatasection"><code>CDATASection</code></dfn> interface</li>
      <li><dfn id="comment-0"><code>Comment</code></dfn> interface</li>
      <li><dfn id="domimplementation"><code>DOMImplementation</code></dfn> interface</li>
-     <li><dfn id="document"><code>Document</code></dfn> interface</li>
+     <li><dfn id="dom-document" title="DOM Document"><code>Document</code></dfn> interface</li>
      <li><dfn id="documentfragment"><code>DocumentFragment</code></dfn> interface</li>
      <li><dfn id="documenttype"><code>DocumentType</code></dfn> interface</li>
      <li><dfn id="domexception"><code>DOMException</code></dfn> interface</li>
@@ -879,7 +933,14 @@
      <li><dfn id="processinginstruction"><code>ProcessingInstruction</code></dfn> interface</li>
      <li><dfn id="text"><code>Text</code></dfn> interface</li>
 
+     <li><dfn id="htmlcollection"><code>HTMLCollection</code></dfn> interface, and the terms <dfn id="collections">collections</dfn> and <dfn id="represented-by-the-collection">represented by the collection</dfn></li>
+
+     <li><dfn id="domstringlist"><code>DOMStringList</code></dfn> interface</li>
+     <li><dfn id="domtokenlist"><code>DOMTokenList</code></dfn> interface</li>
+     <li><dfn id="domsettabletokenlist"><code>DOMSettableTokenList</code></dfn> interface</li>
+
      <li><dfn id="dom-domimplementation-createdocument" title="dom-DOMImplementation-createDocument"><code>createDocument()</code></dfn> method</li>
+     <li><dfn id="dom-domimplementation-createhtmldocument" title="dom-DOMImplementation-createHTMLDocument"><code>createHTMLDocument()</code></dfn> method</li>
      <li><dfn id="dom-document-createelement" title="dom-Document-createElement"><code>createElement()</code></dfn> method</li>
      <li><dfn id="dom-document-createelementns" title="dom-Document-createElementNS"><code>createElementNS()</code></dfn> method</li>
      <li><dfn id="dom-document-getelementbyid" title="dom-Document-getElementById"><code>getElementById()</code></dfn> method</li>
@@ -891,20 +952,83 @@
      <li><dfn id="dom-node-parentnode" title="dom-Node-parentNode"><code>parentNode</code></dfn> attribute</li>
      <li><dfn id="dom-node-namespaceuri" title="dom-Node-namespaceURI"><code>namespaceURI</code></dfn> attribute</li>
      <li><dfn id="dom-element-tagname" title="dom-Element-tagName"><code>tagName</code></dfn> attribute</li>
+     <li><dfn id="dom-element-id" title="dom-Element-id"><code>id</code></dfn> attribute</li>
      <li><dfn id="textcontent"><code>textContent</code></dfn> attribute</li>
 
-    </ul><p>The following features are defined in the DOM Events
+     <li><dfn id="event"><code>Event</code></dfn> interface</li>
+     <li><dfn id="eventtarget"><code>EventTarget</code></dfn> interface</li>
+     <li><dfn id="eventinit"><code>EventInit</code></dfn> dictionary type</li>
+     <li><dfn id="dom-event-target" title="dom-Event-target"><code>target</code></dfn> attribute</li>
+     <li><dfn id="dom-event-istrusted" title="dom-Event-isTrusted"><code>isTrusted</code></dfn> attribute</li>
+     <li>The <dfn id="concept-event-type" title="concept-event-type">type</dfn> of an event</li>
+     <li>The concept of an <dfn id="concept-event-listener" title="concept-event-listener">event listener</dfn> and the <a href="#concept-event-listener" title="concept-event-listener">event listeners</a> associated with an <code><a href="#eventtarget">EventTarget</a></code></li>
+
+     <li>The <dfn id="document-s-character-encoding" title="document's character encoding">encoding</dfn> (herein the <i>character encoding</i>) and <dfn id="concept-document-content-type" title="concept-document-content-type">content type</dfn> of a <code><a href="dom.html#document">Document</a></code></li>
+     <li>The distinction between <dfn id="xml-documents">XML documents</dfn> and <dfn id="html-documents">HTML documents</dfn></li>
+     <li>The terms <dfn id="quirks-mode">quirks mode</dfn>, <dfn id="limited-quirks-mode">limited-quirks mode</dfn>, and <dfn id="no-quirks-mode">no-quirks mode</dfn></li>
+     <li>The algorithm to <dfn id="concept-node-clone" title="concept-node-clone">clone</dfn> a <code><a href="#node">Node</a></code>, and the concept of <dfn id="concept-node-clone-ext" title="concept-node-clone-ext">cloning steps</dfn> used by that algorithm</li>
+     <li>The concept of <dfn id="base-url-change-steps">base URL change steps</dfn> and the definition of what happens when an element is <dfn id="affected-by-a-base-url-change">affected by a base URL change</dfn>.</li>
+     <li>The concept of an element's <dfn id="concept-id" title="concept-id">unique identifier (ID)</dfn>.</li>
+
+     <li>The concept of a DOM <dfn id="concept-range" title="concept-range">range</dfn>.</li>
+
+    </ul><p>The term <dfn id="throw">throw</dfn> in this specification is used as
+    defined in the DOM Core specification. The following
+    <code><a href="#domexception">DOMException</a></code> types are defined in the DOM Core
+    specification: <a href="references.html#refsDOMCORE">[DOMCORE]</a></p>
+
+    <ol class="brief"><li value="1"><dfn id="indexsizeerror"><code>IndexSizeError</code></dfn></li>
+     <li value="3"><dfn id="hierarchyrequesterror"><code>HierarchyRequestError</code></dfn></li>
+     <li value="4"><dfn id="wrongdocumenterror"><code>WrongDocumentError</code></dfn></li>
+     <li value="5"><dfn id="invalidcharactererror"><code>InvalidCharacterError</code></dfn></li>
+     <li value="7"><dfn id="nomodificationallowederror"><code>NoModificationAllowedError</code></dfn></li>
+     <li value="8"><dfn id="notfounderror"><code>NotFoundError</code></dfn></li>
+     <li value="9"><dfn id="notsupportederror"><code>NotSupportedError</code></dfn></li>
+     <li value="11"><dfn id="invalidstateerror"><code>InvalidStateError</code></dfn></li>
+     <li value="12"><dfn id="syntaxerror"><code>SyntaxError</code></dfn></li>
+     <li value="13"><dfn id="invalidmodificationerror"><code>InvalidModificationError</code></dfn></li>
+     <li value="14"><dfn id="namespaceerror"><code>NamespaceError</code></dfn></li>
+     <li value="15"><dfn id="invalidaccesserror"><code>InvalidAccessError</code></dfn></li>
+     <li value="17"><dfn id="typemismatcherror"><code>TypeMismatchError</code></dfn></li>
+     <li value="18"><dfn id="securityerror"><code>SecurityError</code></dfn></li>
+     <li value="19"><dfn id="networkerror"><code>NetworkError</code></dfn></li>
+     <li value="20"><dfn id="aborterror"><code>AbortError</code></dfn></li>
+     <li value="21"><dfn id="urlmismatcherror"><code>URLMismatchError</code></dfn></li>
+     <li value="22"><dfn id="quotaexceedederror"><code>QuotaExceededError</code></dfn></li>
+     <li value="23"><dfn id="timeouterror"><code>TimeoutError</code></dfn></li>
+     <li value="24"><dfn id="invalidnodetypeerror"><code>InvalidNodeTypeError</code></dfn></li>
+     <li value="25"><dfn id="datacloneerror"><code>DataCloneError</code></dfn></li>
+    </ol><p class="example">For example, to <i>throw a
+    <code><a href="#timeouterror">TimeoutError</a></code> exception</i>, a user agent would
+    construct a <code><a href="#domexception">DOMException</a></code> object whose type was the
+    string "<code title="">TimeoutError</code>" (and whose code was
+    the number 23, for legacy reasons) and actually throw that object
+    as an exception.</p>
+
+    <p>The following features are defined in the DOM Events
     specification: <a href="references.html#refsDOMEVENTS">[DOMEVENTS]</a></p>
 
-    <ul class="brief"><li><dfn id="event"><code>Event</code></dfn> interface</li>
-     <li><dfn id="eventtarget"><code>EventTarget</code></dfn> interface</li>
-     <li><dfn id="uievent"><code>UIEvent</code></dfn> interface</li>
-     <li><dfn id="mouseevent"><code>MouseEvent</code></dfn> interface</li>
+    <ul class="brief"><li><dfn id="mouseevent"><code>MouseEvent</code></dfn> interface</li>
+     <li><dfn id="mouseeventinit"><code>MouseEventInit</code></dfn> dictionary type</li>
+
+     <li>The <dfn id="uievent"><code>UIEvent</code></dfn> interface's <dfn id="dom-uievent-detail" title="dom-UIEvent-detail"><code>detail</code></dfn> attribute</li>
 
      <li><dfn id="event-click" title="event-click"><code>click</code></dfn> event</li>
 
-     <li><dfn id="dom-event-target" title="dom-Event-target"><code>target</code></dfn> attribute</li>
+    </ul><p>In addition, user agents must implement the features defined in
+    the DOM Parsing and Serialization specification, HTML
+    Editing APIs, and UndoManager and DOM Transaction specifications
+    that apply to their conformance class.
+    <a href="references.html#refsDOMPARSING">[DOMPARSING]</a>
+    <a href="references.html#refsEDITING">[EDITING]</a>
+    <a href="references.html#refsUNDO">[UNDO]</a>
+    </p>
 
+    <p>The following features are defined in the DOM Parsing and
+    Serialization specification: <a href="references.html#refsDOMPARSING">[DOMPARSING]</a></p>
+
+    <ul class="brief"><li><dfn id="dom-innerhtml" title="dom-innerHTML">innerHTML</dfn></li>
+     <li><dfn id="dom-outerhtml" title="dom-outerHTML">outerHTML</dfn></li>
     </ul></dd>
 
    <dt>File API</dt>
@@ -914,9 +1038,14 @@
     <p>This specification uses the following interfaces defined in the
     File API specification: <a href="references.html#refsFILEAPI">[FILEAPI]</a></p>
 
-    <ul class="brief"><li><dfn id="blob">Blob</dfn></li>
-     <li><dfn id="file">File</dfn></li>
-     <li><dfn id="filelist">FileList</dfn></li>
+    <ul class="brief"><li><dfn id="blob"><code>Blob</code></dfn></li>
+     <li><dfn id="file"><code>File</code></dfn></li>
+     <li><dfn id="filelist"><code>FileList</code></dfn></li>
+
+    </ul><p>It also uses the following interface defined in the File System
+    API specification: <a href="references.html#refsFILESYSTEMAPI">[FILESYSTEMAPI]</a></p>
+
+    <ul class="brief"><li><dfn id="filecallback"><code>FileCallback</code></dfn></li>
 
     </ul></dd>
 
@@ -928,20 +1057,48 @@
     required for conforming IDL fragments, as described in the Web IDL
     specification. <a href="references.html#refsWEBIDL">[WEBIDL]</a></p>
 
-    <p>The terms <dfn id="supported-property-indices">supported property indices</dfn>, <dfn id="supported-property-names">supported
-    property names</dfn>, and <dfn id="dfn-read-only-array" title="dfn-read-only-array">read
-    only</dfn> (when applied to arrays) are used as defined in the
-    WebIDL specification.</p>
+    <p>The terms <dfn id="relevant-namespace-object">relevant namespace object</dfn>, <dfn id="supported-property-indices">supported
+    property indices</dfn>, <dfn id="determine-the-value-of-an-indexed-property">determine the value of an indexed
+    property</dfn>, <dfn id="support-named-properties">support named properties</dfn>,
+    <dfn id="supported-property-names">supported property names</dfn>, <dfn id="determine-the-value-of-a-named-property">determine the value of a
+    named property</dfn>, <dfn id="platform-array-objects">platform array objects</dfn>, and <dfn id="dfn-read-only-array" title="dfn-read-only-array">read only</dfn> (when applied to
+    arrays) are used as defined in the Web IDL specification.</p>
 
     <p id="float-nan">Except where otherwise specified, if an IDL
     attribute that is a floating point number type (<code title="">double</code>) is assigned an Infinity or Not-a-Number
-    (NaN) value, a <code><a href="common-dom-interfaces.html#not_supported_err">NOT_SUPPORTED_ERR</a></code> exception must be
-    raised.</p>
+    (NaN) value, a <code><a href="#notsupportederror">NotSupportedError</a></code> exception must be
+    thrown.</p>
 
     <p>Except where otherwise specified, if a method with an argument
     that is a floating point number type (<code title="">double</code>)
     is passed an Infinity or Not-a-Number (NaN) value, a
-    <code><a href="common-dom-interfaces.html#not_supported_err">NOT_SUPPORTED_ERR</a></code> exception must be raised.</p>
+    <code><a href="#notsupportederror">NotSupportedError</a></code> exception must be thrown.</p>
+
+    <p>When this specification requires a user agent to <dfn id="create-a-date-object">create a
+    <code>Date</code> object</dfn> representing a particular time, the
+    milliseconds component of that time, if any, must be truncated to
+    an integer and the time value of the newly created
+    <code>Date</code> object must represent the time after that
+    truncation.</p>
+
+    <p class="example">For instance, given the time 23045 millionths
+    of a second after 01:00 UTC on January 1st 2000, i.e. the time
+    2000-01-01T00:00:00.023045Z, then the <code>Date</code> object
+    created representing that time would represent the same time as
+    that created representing the time 2000-01-01T00:00:00.023Z, 45
+    millionths earlier.</p>
+
+   </dd>
+
+   <dt>Typed Arrays</dt>
+
+   <dd>
+
+    <p>The <dfn id="arraybuffer">ArrayBuffer</dfn> interface and underlying concepts
+    from the Typed Array Specification are used for several features
+    in this specification. The <dfn id="uint8clampedarray">Uint8ClampedArray</dfn> interface
+    type is specifically used in the definition of the
+    <code><a href="the-canvas-element.html#the-canvas-element">canvas</a></code> element's 2D API. <a href="references.html#refsTYPEDARRAY">[TYPEDARRAY]</a></p>
 
    </dd>
 
@@ -963,14 +1120,42 @@
 
    </dd>
 
+
+
    <dt>Media Queries</dt>
 
    <dd>
 
-    <p>Implementations must support some version of the Media Queries
-    language. <a href="references.html#refsMQ">[MQ]</a></p>
+    <p>Implementations must support the Media Queries language. <a href="references.html#refsMQ">[MQ]</a></p>
 
    </dd>
+
+
+
+   <dt>WebVTT</dt>
+
+   <dd>
+
+    <p>Implementations may support <dfn id="webvtt">WebVTT</dfn> as a text track
+    format for subtitles, captions, chapter titles, metadata, etc, for
+    media resources. <a href="references.html#refsWEBVTT">[WEBVTT]</a></p>
+
+    <p>The following terms, used in this specification, are defined in
+    the WebVTT specification:</p>
+
+    <ul class="brief"><li><dfn id="webvtt-file">WebVTT file</dfn>
+     </li><li><dfn id="webvtt-file-using-cue-text">WebVTT file using cue text</dfn>
+     </li><li><dfn id="webvtt-file-using-chapter-title-text">WebVTT file using chapter title text</dfn>
+     </li><li><dfn id="webvtt-file-using-only-nested-cues">WebVTT file using only nested cues</dfn>
+     </li><li><dfn id="webvtt-parser">WebVTT parser</dfn>
+     </li><li><dfn id="webvtt-cue-settings">WebVTT cue settings</dfn> and how to <dfn id="parse-the-webvtt-settings">parse the WebVTT settings</dfn>
+     </li><li>The <dfn id="rules-for-updating-the-display-of-webvtt-text-tracks">rules for updating the display of WebVTT text tracks</dfn>
+     </li><li>The <dfn id="webvtt-cue-text-dom-construction-rules">WebVTT cue text DOM construction rules</dfn>
+     </li><li>The <dfn id="webvtt-cue-text-rendering-rules">WebVTT cue text rendering rules</dfn>
+     </li><li>The <dfn id="webvtt-cue-text-parsing-rules">WebVTT cue text parsing rules</dfn>
+    </li></ul></dd>
+
+
 
    <dt>URIs, IRIs, IDNA</dt>
 
@@ -988,7 +1173,7 @@
 
    <dd>
 
-    <p>The following term is defined in the Cookie specification: <a href="references.html#refsCOOKIES">[COOKIES]</a></p>
+    <p>The following terms are defined in the Cookie specification: <a href="references.html#refsCOOKIES">[COOKIES]</a></p>
 
     <ul class="brief"><li><dfn id="cookie-string">cookie-string</dfn>
      </li><li><dfn id="receives-a-set-cookie-string">receives a set-cookie-string</dfn>
@@ -1002,6 +1187,8 @@
 
     <ul class="brief"><li><dfn id="cross-origin-request">cross-origin request</dfn>
      </li><li><dfn id="cross-origin-request-status">cross-origin request status</dfn>
+     </li><li><dfn id="custom-request-headers">custom request headers</dfn>
+     </li><li><dfn id="simple-cross-origin-request">simple cross-origin request</dfn>
      </li><li><dfn id="redirect-steps">redirect steps</dfn>
      </li><li><dfn id="credential-flag">credential flag</dfn>
      </li><li><dfn id="resource-sharing-check">resource sharing check</dfn>
@@ -1032,7 +1219,29 @@
     cannot be parsed, as closing the open construct does not result
     in a viable value.</p>
 
-   </dd>
+    <p>The term <dfn id="css-element-reference-identifier">CSS element reference identifier</dfn> is used as
+    defined in the <cite>CSS Image Values and Replaced Content</cite>
+    specification to define the API that declares identifiers for use
+    with the CSS 'element()' function. <a href="references.html#refsCSSIMAGES">[CSSIMAGES]</a></p>
+
+    <p>Similarly, the term <dfn id="provides-a-paint-source">provides a paint source</dfn> is used
+    as defined in the <cite>CSS Image Values and Replaced
+    Content</cite> specification to define the interaction of certain
+    HTML elements with the CSS 'element()' function. <a href="references.html#refsCSSIMAGES">[CSSIMAGES]</a></p>
+
+    <p>Support for the CSS Object Model is required for
+    implementations that support scripting. The following features and
+    terms are defined in the CSSOM specifications: <a href="references.html#refsCSSOM">[CSSOM]</a> <a href="references.html#refsCSSOMVIEW">[CSSOMVIEW]</a>
+
+    </p><ul class="brief"><li><dfn id="linkstyle"><code>LinkStyle</code></dfn></li>
+     <li><dfn id="cssstyledeclaration"><code>CSSStyleDeclaration</code></dfn></li>
+     <li><dfn id="stylesheet"><code>StyleSheet</code></dfn></li>
+     <li><dfn id="dom-linkstyle-sheet" title="dom-linkstyle-sheet"><code>sheet</code></dfn></li>
+     <li><dfn id="dom-stylesheet-disabled" title="dom-stylesheet-disabled"><code>disabled</code></dfn></li>
+     <li><dfn id="alternative-style-sheet-sets">Alternative style sheet sets</dfn> and the <dfn id="preferred-style-sheet-set">preferred style sheet set</dfn></li>
+     <li><dfn id="serializing-a-css-value">Serializing a CSS value</dfn></li>
+     <li><dfn id="scroll-an-element-into-view">Scroll an element into view</dfn></li>
+    </ul></dd>
 
 
   </dl><p>This specification does not <em>require</em> support of any
@@ -1048,33 +1257,33 @@
   and video formats in the respective sections.</p>
 
   </div><h4 id="extensibility"><span class="secno">2.2.3 </span>Extensibility</h4><p>HTML has a wide number of extensibility mechanisms that can be
-  used for adding semantics in a safe manner:</p><ul><li>Authors can use the <code title="attr-class"><a href="elements.html#classes">class</a></code>
+  used for adding semantics in a safe manner:</p><ul><li>Authors can use the <code title="attr-class"><a href="global-attributes.html#classes">class</a></code>
    attribute to extend elements, effectively creating their own
    elements, while using the most applicable existing "real" HTML
    element, so that browsers and other tools that don't know of the
    extension can still support it somewhat well. This is the tack used
-   by Microformats, for example.</li>
+   by microformats, for example.</li>
 
    <li>Authors can include data for inline client-side scripts or
-   server-side site-wide scripts to process using the <code title="attr-data-*"><a href="elements.html#attr-data">data-*=""</a></code> attributes. These are
+   server-side site-wide scripts to process using the <code title="attr-data-*"><a href="global-attributes.html#attr-data">data-*=""</a></code> attributes. These are
    guaranteed to never be touched by browsers, and allow scripts to
    include data on HTML elements that scripts can then look for and
    process.</li>
 
-   <li>Authors can use the <code title="meta"><a href="semantics.html#the-meta-element">&lt;meta name=""
+   <li>Authors can use the <code title="meta"><a href="the-meta-element.html#the-meta-element">&lt;meta name=""
    content=""&gt;</a></code> mechanism to include page-wide metadata by
-   registering <a href="semantics.html#concept-meta-extensions" title="concept-meta-extensions">extensions to the
+   registering <a href="the-meta-element.html#concept-meta-extensions" title="concept-meta-extensions">extensions to the
    predefined set of metadata names</a>.</li>
 
    <li>Authors can use the <code title="attr-hyperlink-rel"><a href="links.html#attr-hyperlink-rel">rel=""</a></code> mechanism to annotate
    links with specific meanings by registering <a href="links.html#concept-rel-extensions" title="concept-rel-extensions">extensions to the predefined set of
-   link types</a>. This is also used by Microformats.</li>
+   link types</a>. This is also used by microformats.</li>
 
-   <li>Authors can embed raw data using the <code title="script"><a href="scripting-1.html#the-script-element">&lt;script type=""&gt;</a></code> mechanism with a custom
+   <li>Authors can embed raw data using the <code title="script"><a href="the-script-element.html#the-script-element">&lt;script type=""&gt;</a></code> mechanism with a custom
    type, for further handling by inline or server-side scripts.</li>
 
    <li>Authors can create <a href="#plugin" title="plugin">plugins</a> and
-   invoke them using the <code><a href="the-iframe-element.html#the-embed-element">embed</a></code> element. This is how Flash
+   invoke them using the <code><a href="the-embed-element.html#the-embed-element">embed</a></code> element. This is how Flash
    works.</li>
 
    <li>Authors can extend APIs using the JavaScript prototyping
@@ -1162,9 +1371,9 @@
    implementation "Foo Browser" could add a new IDL attribute "<code title="">fooTypeTime</code>" to a control's DOM interface that
    returned the time it took the user to select the current value of a
    control (say). On the other hand, defining a new control that
-   appears in a form's <code title="dom-form-elements"><a href="forms.html#dom-form-elements">elements</a></code>
+   appears in a form's <code title="dom-form-elements"><a href="the-form-element.html#dom-form-elements">elements</a></code>
    array would be in violation of the above requirement, as it would
-   violate the definition of <code title="dom-form-elements"><a href="forms.html#dom-form-elements">elements</a></code> given in this
+   violate the definition of <code title="dom-form-elements"><a href="the-form-element.html#dom-form-elements">elements</a></code> given in this
    specification.</p>
 
   </div>
@@ -1216,10 +1425,12 @@
   document</a>, even if the element happens to be syntactically
   correct HTML5.)</p>
 
+
   <hr/><p>User agents must treat elements and attributes that they do not
   understand as semantically neutral; leaving them in the DOM (for DOM
   processors), and styling them according to CSS (for CSS processors),
   but not inferring any meaning from them.</p>
+
 
   <p>When support for a feature is disabled (e.g. as an emergency
   measure to mitigate a security problem, or to aid in development, or
@@ -1230,6 +1441,7 @@
   attribute itself would be omitted from the objects that implement
   that interface &#x2014; leaving the attribute on the object but
   making it return null or throw an exception is insufficient.</p>
+
 
   </div><h3 id="case-sensitivity-and-string-comparison"><span class="secno">2.3 </span>Case-sensitivity and string comparison</h3><p>Comparing two strings in a <dfn id="case-sensitive">case-sensitive</dfn> manner means
   comparing them exactly, code point for code point.</p><p>Comparing two strings in an <dfn id="ascii-case-insensitive">ASCII case-insensitive</dfn>

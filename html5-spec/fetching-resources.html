@@ -19,6 +19,7 @@
    dd table + p { margin-top: 1em; }
    p + * > li, dd li { margin: 1em 0; }
    dt, dfn { font-weight: bold; font-style: normal; }
+   i, em { font-style: italic; }
    dt dfn { font-style: italic; }
    pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
    pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
@@ -40,9 +41,10 @@
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
 
    .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   img.extra { float: right; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   img.extra, p.overview { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; position: relative; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl::before { content: "IDL"; font: bold small sans-serif; padding: 0.5em; background: white; position: absolute; top: 0; margin: -1px 0 0 -4em; width: 1.5em; border: thin solid; border-radius: 0 0 0 0.5em }
    pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
    pre.css:first-line { color: #AAAA50; }
    dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
@@ -50,6 +52,7 @@
    dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
    dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
    dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
    dl.switch { padding-left: 2em; }
    dl.switch > dt { text-indent: -1.5em; }
    dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
@@ -104,6 +107,7 @@
    .note { color: green; background: transparent; font-family: sans-serif; }
    .warning { color: red; background: transparent; }
    .note, .warning { font-weight: bolder; font-style: italic; }
+   .note em, .warning em, .note i, .warning i { font-style: normal; }
    p.note, div.note { padding: 0.5em 2em; }
    span.note { padding: 0 2em; }
    .note p:first-child, .warning p:first-child { margin-top: 0; }
@@ -295,8 +299,6 @@
      src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
    }
 
-  ]]></style><style type="text/css"><![CDATA[
-   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
   ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
    function getCookie(name) {
      var params = location.search.substr(1).split("&");
@@ -343,7 +345,7 @@
   <ol><li>
 
     <p>Let <var title="">document</var> be the appropriate
-    <code><a href="infrastructure.html#document">Document</a></code> as given by the following list:</p>
+    <code><a href="dom.html#document">Document</a></code> as given by the following list:</p>
 
     <dl class="switch"><dt>When <a href="history.html#navigate" title="navigate">navigating</a></dt>
 
@@ -352,7 +354,7 @@
 
      <dt>When fetching resources for an element</dt>
 
-     <dd>The element's <code><a href="infrastructure.html#document">Document</a></code>.</dd>
+     <dd>The element's <code><a href="dom.html#document">Document</a></code>.</dd>
 
      <dt>When fetching resources in response to a call to an API</dt>
 
@@ -365,7 +367,7 @@
     <p>While <var title="">document</var> is <a href="the-iframe-element.html#an-iframe-srcdoc-document">an
     <code>iframe</code> <code title="attr-iframe-srcdoc">srcdoc</code>
     document</a>, let <var title="">document</var> be <var title="">document</var>'s <a href="browsers.html#browsing-context">browsing context</a>'s
-    <a href="browsers.html#browsing-context-container">browsing context container</a>'s <code><a href="infrastructure.html#document">Document</a></code>
+    <a href="browsers.html#browsing-context-container">browsing context container</a>'s <code><a href="dom.html#document">Document</a></code>
     instead.</p>
 
    </li>
@@ -381,7 +383,7 @@
     component from the generated <i>address of the resource from which
     Request-URIs are obtained</i>.</p> 
     <p>If the <a href="origin-0.html#origin">origin</a> of the appropriate
-    <code><a href="infrastructure.html#document">Document</a></code> is not a scheme/host/port tuple, then the
+    <code><a href="dom.html#document">Document</a></code> is not a scheme/host/port tuple, then the
     <code title="http-referer">Referer</code> (sic) header must be
     omitted, regardless of its value.</p>
 
@@ -658,7 +660,7 @@
    <li><p>Skip any U+0009, U+000A, U+000C, U+000D, or U+0020
    characters that immediately follow the word "<code title="">charset</code>" (there might not be any).</p></li>
 
-   <li><p>If the next character is not a U+003D EQUALS SIGN ('='),
+   <li><p>If the next character is not a U+003D EQUALS SIGN (=),
    then move <var title="">position</var> to point just before that
    next character, and jump back to the step labeled
    <i>loop</i>.</p></li>
@@ -671,12 +673,12 @@
 
     <p>Process the next character as follows:</p>
 
-    <dl class="switch"><dt>If it is a U+0022 QUOTATION MARK ('"') and there is a later U+0022 QUOTATION MARK ('"') in <var title="">s</var></dt>
-     <dt>If it is a U+0027 APOSTROPHE ("'") and there is a later U+0027 APOSTROPHE ("'") in <var title="">s</var></dt>
+    <dl class="switch"><dt>If it is a U+0022 QUOTATION MARK (") and there is a later U+0022 QUOTATION MARK (") in <var title="">s</var></dt>
+     <dt>If it is a U+0027 APOSTROPHE (') and there is a later U+0027 APOSTROPHE (') in <var title="">s</var></dt>
      <dd>Return the encoding corresponding to the string between this character and the next earliest occurrence of this character.</dd>
 
-     <dt>If it is an unmatched U+0022 QUOTATION MARK ('"')</dt>
-     <dt>If it is an unmatched U+0027 APOSTROPHE ("'")</dt>
+     <dt>If it is an unmatched U+0022 QUOTATION MARK (")</dt>
+     <dt>If it is an unmatched U+0027 APOSTROPHE (')</dt>
      <dt>If there is no next character</dt>
      <dd>Return nothing.</dd>
 
@@ -711,7 +713,10 @@
   </td></tr></tbody></table><p>The empty string is also a valid keyword, and maps to the <a href="#attr-crossorigin-anonymous" title="attr-crossorigin-anonymous">Anonymous</a> state. The
   attribute's <i>invalid value default</i> is the <a href="#attr-crossorigin-anonymous" title="attr-crossorigin-anonymous">Anonymous</a> state. The
   <i>missing value default</i>, used when the attribute is omitted, is
-  the <dfn id="attr-crossorigin-none" title="attr-crossorigin-none">No CORS</dfn> state.</p><h4 id="cors-enabled-fetch"><span class="secno">2.7.6 </span>CORS-enabled fetch</h4><p>When the user agent is required to perform a <dfn id="potentially-cors-enabled-fetch">potentially
+  the <dfn id="attr-crossorigin-none" title="attr-crossorigin-none">No CORS</dfn> state.</p><div class="impl">
+  <h4 id="cors-enabled-fetch"><span class="secno">2.7.6 </span>CORS-enabled fetch</h4>
+
+  <p>When the user agent is required to perform a <dfn id="potentially-cors-enabled-fetch">potentially
   CORS-enabled fetch</dfn> of an <a href="urls.html#absolute-url">absolute URL</a> <var title="">URL</var>, with a mode <var title="">mode</var> that is
   either "<a href="#attr-crossorigin-none" title="attr-crossorigin-none">No CORS</a>", "<a href="#attr-crossorigin-anonymous" title="attr-crossorigin-anonymous">Anonymous</a>", or "<a href="#attr-crossorigin-use-credentials" title="attr-crossorigin-use-credentials">Use Credentials</a>",
   an <a href="origin-0.html#origin">origin</a> <var title="">origin</var>, and a default
@@ -721,7 +726,9 @@
   is only used if <var title="">mode</var> is "<a href="#attr-crossorigin-none" title="attr-crossorigin-none">No CORS</a>". This algorithm wraps
   the <a href="#fetch">fetch</a> algorithm above, and labels the obtained
   resource as either <dfn id="cors-same-origin">CORS-same-origin</dfn> or
-  <dfn id="cors-cross-origin">CORS-cross-origin</dfn>, or blocks the resource entirely.</p><dl class="switch"><dt>If <var title="">mode</var> is "<a href="#attr-crossorigin-none" title="attr-crossorigin-none">No CORS</a>"</dt>
+  <dfn id="cors-cross-origin">CORS-cross-origin</dfn>, or blocks the resource entirely.</p>
+
+  <dl class="switch"><dt>If <var title="">mode</var> is "<a href="#attr-crossorigin-none" title="attr-crossorigin-none">No CORS</a>"</dt>
 
    <dd>
 
@@ -785,7 +792,7 @@
 
        <dd>
 
-        <p>Tbe <a href="webappapis.html#concept-task" title="concept-task">tasks</a> from the
+        <p>The <a href="webappapis.html#concept-task" title="concept-task">tasks</a> from the
         <a href="#fetch">fetch</a> algorithm are <a href="webappapis.html#queue-a-task" title="queue a&#10;        task">queued</a> normally, but for the purposes of the
         calling algorithm, the obtained resource is
         <a href="#cors-cross-origin">CORS-cross-origin</a>. The user agent may report a
@@ -798,7 +805,7 @@
 
        <dd>
 
-        <p>Tbe <a href="webappapis.html#concept-task" title="concept-task">tasks</a> from the
+        <p>The <a href="webappapis.html#concept-task" title="concept-task">tasks</a> from the
         <a href="#fetch">fetch</a> algorithm are <a href="webappapis.html#queue-a-task" title="queue a&#10;        task">queued</a> normally, and for the purposes of the
         calling algorithm, the obtained resource is
         <a href="#cors-same-origin">CORS-same-origin</a>.</p>
@@ -849,7 +856,7 @@
 
        <dd>
 
-        <p>Tbe <a href="webappapis.html#concept-task" title="concept-task">tasks</a> from the
+        <p>The <a href="webappapis.html#concept-task" title="concept-task">tasks</a> from the
         <a href="#fetch">fetch</a> algorithm are <a href="webappapis.html#queue-a-task" title="queue a&#10;        task">queued</a> normally, and for the purposes of the
         calling algorithm, the obtained resource is
         <a href="#cors-same-origin">CORS-same-origin</a>.</p>
@@ -860,4 +867,4 @@
 
     </ol></dd>
 
-  </dl></body></html>
+  </dl></div></body></html>

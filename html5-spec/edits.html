@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>4.7 Edits &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<!DOCTYPE html>
+<html lang="en-US-x-Hixie"><head><title>4.7 Edits &#x2014; HTML5</title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -19,6 +19,7 @@
    dd table + p { margin-top: 1em; }
    p + * > li, dd li { margin: 1em 0; }
    dt, dfn { font-weight: bold; font-style: normal; }
+   i, em { font-style: italic; }
    dt dfn { font-style: italic; }
    pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
    pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
@@ -40,9 +41,10 @@
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
 
    .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   img.extra { float: right; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   img.extra, p.overview { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; position: relative; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl::before { content: "IDL"; font: bold small sans-serif; padding: 0.5em; background: white; position: absolute; top: 0; margin: -1px 0 0 -4em; width: 1.5em; border: thin solid; border-radius: 0 0 0 0.5em }
    pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
    pre.css:first-line { color: #AAAA50; }
    dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
@@ -50,6 +52,7 @@
    dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
    dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
    dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
    dl.switch { padding-left: 2em; }
    dl.switch > dt { text-indent: -1.5em; }
    dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
@@ -104,6 +107,7 @@
    .note { color: green; background: transparent; font-family: sans-serif; }
    .warning { color: red; background: transparent; }
    .note, .warning { font-weight: bolder; font-style: italic; }
+   .note em, .warning em, .note i, .warning i { font-style: normal; }
    p.note, div.note { padding: 0.5em 2em; }
    span.note { padding: 0 2em; }
    .note p:first-child, .warning p:first-child { margin-top: 0; }
@@ -295,8 +299,6 @@
      src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
    }
 
-  ]]></style><style type="text/css"><![CDATA[
-   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
   ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
    function getCookie(name) {
      var params = location.search.substr(1).split("&");
@@ -315,238 +317,15 @@
      }
      return null;
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="text-level-semantics.html" title="4.6 Text-level semantics" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="embedded-content-1.html" title="4.8 Embedded content" rel="next"/></head><body><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="usage-summary.html" title="4.6.28 Usage summary" rel="prev"/><link href="index.html#contents" title="Table of contents" rel="contents"/><link href="the-ins-element.html" title="4.7.1 The ins element" rel="next"/></head><body onload="fixBrokenLink();" class="split chapter"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   </div><div>
-   <a href="text-level-semantics.html" class="prev">4.6 Text-level semantics</a> &#x2013;
-   <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="embedded-content-1.html" class="next">4.8 Embedded content</a>
-  <ol class="toc"><li><ol><li><a href="edits.html#edits"><span class="secno">4.7 </span>Edits</a>
-    <ol><li><a href="edits.html#the-ins-element"><span class="secno">4.7.1 </span>The <code>ins</code> element</a></li><li><a href="edits.html#the-del-element"><span class="secno">4.7.2 </span>The <code>del</code> element</a></li><li><a href="edits.html#attributes-common-to-ins-and-del-elements"><span class="secno">4.7.3 </span>Attributes common to <code>ins</code> and <code>del</code> elements</a></li><li><a href="edits.html#edits-and-paragraphs"><span class="secno">4.7.4 </span>Edits and paragraphs</a></li><li><a href="edits.html#edits-and-lists"><span class="secno">4.7.5 </span>Edits and lists</a></li></ol></li></ol></li></ol></div><h3 id="edits"><span class="secno">4.7 </span>Edits</h3><p>The <code><a href="#the-ins-element">ins</a></code> and <code><a href="#the-del-element">del</a></code> elements represent
-  edits to the document.</p><h4 id="the-ins-element"><span class="secno">4.7.1 </span>The <dfn><code>ins</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
-   <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
-   <dd>When the element only contains <a href="content-models.html#phrasing-content">phrasing content</a>: <a href="content-models.html#phrasing-content">phrasing content</a>.</dd>
-   <dt>Contexts in which this element can be used:</dt>
-   <dd>When the element only contains <a href="content-models.html#phrasing-content">phrasing content</a>: where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
-   <dd>Otherwise: where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
-   <dt>Content model:</dt>
-   <dd><a href="content-models.html#transparent">Transparent</a>.</dd>
-   <dt>Content attributes:</dt>
-   <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
-   <dd><code title="attr-mod-cite"><a href="#attr-mod-cite">cite</a></code></dd>
-   <dd><code title="attr-mod-datetime"><a href="#attr-mod-datetime">datetime</a></code></dd>
-   <dt>DOM interface:</dt>
-   <dd>Uses the <code><a href="#htmlmodelement">HTMLModElement</a></code> interface.</dd>
-  </dl><p>The <code><a href="#the-ins-element">ins</a></code> element <a href="rendering.html#represents">represents</a> an addition
-  to the document.</p><div class="example">
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
 
-   <p>The following represents the addition of a single paragraph:</p>
-
-   <pre>&lt;aside&gt;
- &lt;ins&gt;
-  &lt;p&gt; I like fruit. &lt;/p&gt;
- &lt;/ins&gt;
-&lt;/aside&gt;</pre>
-
-   <p>As does this, because everything in the <code><a href="sections.html#the-aside-element">aside</a></code>
-   element here counts as <a href="content-models.html#phrasing-content">phrasing content</a> and therefore
-   there is just one <a href="content-models.html#paragraph">paragraph</a>:</p>
-
-   <pre>&lt;aside&gt;
- &lt;ins&gt;
-  Apples are &lt;em&gt;tasty&lt;/em&gt;.
- &lt;/ins&gt;
- &lt;ins&gt;
-  So are pears.
- &lt;/ins&gt;
-&lt;/aside&gt;</pre>
-
-  </div><p><code><a href="#the-ins-element">ins</a></code> elements should not cross <a href="content-models.html#paragraph" title="paragraph">implied paragraph</a> boundaries.</p><div class="example">
-
-   <p>The following example represents the addition of two paragraphs,
-   the second of which was inserted in two parts. The first
-   <code><a href="#the-ins-element">ins</a></code> element in this example thus crosses a paragraph
-   boundary, which is considered poor form.</p>
-
-   <pre class="bad">&lt;aside&gt;
- &lt;!-- don't do this --&gt;
- &lt;ins datetime="2005-03-16T00:00Z"&gt;
-  &lt;p&gt; I like fruit. &lt;/p&gt;
-  Apples are &lt;em&gt;tasty&lt;/em&gt;.
- &lt;/ins&gt;
- &lt;ins datetime="2007-12-19T00:00Z"&gt;
-  So are pears.
- &lt;/ins&gt;
-&lt;/aside&gt;</pre>
-
-   <p>Here is a better way of marking this up. It uses more elements,
-   but none of the elements cross implied paragraph boundaries.</p>
-
-   <pre>&lt;aside&gt;
- &lt;ins datetime="2005-03-16T00:00Z"&gt;
-  &lt;p&gt; I like fruit. &lt;/p&gt;
- &lt;/ins&gt;
- &lt;ins datetime="2005-03-16T00:00Z"&gt;
-  Apples are &lt;em&gt;tasty&lt;/em&gt;.
- &lt;/ins&gt;
- &lt;ins datetime="2007-12-19T00:00Z"&gt;
-  So are pears.
- &lt;/ins&gt;
-&lt;/aside&gt;</pre>
-
-   
-  </div><h4 id="the-del-element"><span class="secno">4.7.2 </span>The <dfn><code>del</code></dfn> element</h4><dl class="element"><dt>Categories</dt>
-   <dd><a href="content-models.html#flow-content">Flow content</a>.</dd>
-   <dd>When the element only contains <a href="content-models.html#phrasing-content">phrasing content</a>: <a href="content-models.html#phrasing-content">phrasing content</a>.</dd>
-   <dt>Contexts in which this element can be used:</dt>
-   <dd>When the element only contains <a href="content-models.html#phrasing-content">phrasing content</a>: where <a href="content-models.html#phrasing-content">phrasing content</a> is expected.</dd>
-   <dd>Otherwise: where <a href="content-models.html#flow-content">flow content</a> is expected.</dd>
-   <dt>Content model:</dt>
-   <dd><a href="content-models.html#transparent">Transparent</a>.</dd>
-   <dt>Content attributes:</dt>
-   <dd><a href="elements.html#global-attributes">Global attributes</a></dd>
-   <dd><code title="attr-mod-cite"><a href="#attr-mod-cite">cite</a></code></dd>
-   <dd><code title="attr-mod-datetime"><a href="#attr-mod-datetime">datetime</a></code></dd>
-   <dt>DOM interface:</dt>
-   <dd>Uses the <code><a href="#htmlmodelement">HTMLModElement</a></code> interface.</dd>
-  </dl><p>The <code><a href="#the-del-element">del</a></code> element <a href="rendering.html#represents">represents</a> a removal
-  from the document.</p><p><code><a href="#the-del-element">del</a></code> elements should not cross <a href="content-models.html#paragraph" title="paragraph">implied paragraph</a> boundaries.</p><div class="example">
-
-   <p>The following shows a "to do" list where items that have been
-   done are crossed-off with the date and time of their
-   completion.</p>
-
-   <pre>&lt;h1&gt;To Do&lt;/h1&gt;
-&lt;ul&gt;
- &lt;li&gt;Empty the dishwasher&lt;/li&gt;
- &lt;li&gt;&lt;del datetime="2009-10-11T01:25-07:00"&gt;Watch Walter Lewin's lectures&lt;/del&gt;&lt;/li&gt;
- &lt;li&gt;&lt;del datetime="2009-10-10T23:38-07:00"&gt;Download more tracks&lt;/del&gt;&lt;/li&gt;
- &lt;li&gt;Buy a printer&lt;/li&gt;
-&lt;/ul&gt;</pre>
-
-  </div><h4 id="attributes-common-to-ins-and-del-elements"><span class="secno">4.7.3 </span>Attributes common to <code><a href="#the-ins-element">ins</a></code> and <code><a href="#the-del-element">del</a></code> elements</h4><p>The <dfn id="attr-mod-cite" title="attr-mod-cite"><code>cite</code></dfn> attribute
-  may be used to specify the address of a document that explains the
-  change. When that document is long, for instance the minutes of a
-  meeting, authors are encouraged to include a fragment identifier
-  pointing to the specific part of that document that discusses the
-  change.</p><p>If the <code title="attr-mod-cite"><a href="#attr-mod-cite">cite</a></code> attribute is
-  present, it must be a <a href="urls.html#valid-url-potentially-surrounded-by-spaces">valid URL potentially surrounded by
-  spaces</a> that explains the change. <span class="impl">To obtain
-  the corresponding citation link, the value of the attribute must be
-  <a href="urls.html#resolve-a-url" title="resolve a url">resolved</a> relative to the
-  element. User agents should allow users to follow such citation
-  links.</span></p><p>The <dfn id="attr-mod-datetime" title="attr-mod-datetime"><code>datetime</code></dfn>
-  attribute may be used to specify the time and date of the change.</p><p>If present, the <code title="attr-mod-datetime"><a href="#attr-mod-datetime">datetime</a></code>
-  attribute's value must be a <a href="common-microsyntaxes.html#valid-date-string-with-optional-time">valid date string with optional
-  time</a>.</p><div class="impl">
-
-  <p>User agents must parse the <code title="attr-mod-datetime"><a href="#attr-mod-datetime">datetime</a></code> attribute according to the
-  <a href="common-microsyntaxes.html#parse-a-date-or-time-string">parse a date or time string</a> algorithm. If that doesn't
-  return a <a href="common-microsyntaxes.html#concept-date" title="concept-date">date</a> or a <a href="common-microsyntaxes.html#concept-datetime" title="concept-datetime">global date and time</a>, then the
-  modification has no associated timestamp (the value is
-  non-conforming; it is not a <a href="common-microsyntaxes.html#valid-date-string-with-optional-time">valid date string with optional
-  time</a>). Otherwise, the modification is marked as having been
-  made at the given <a href="common-microsyntaxes.html#concept-date" title="concept-date">date</a> or <a href="common-microsyntaxes.html#concept-datetime" title="concept-datetime">global date and time</a>. If the given
-  value is a <a href="common-microsyntaxes.html#concept-datetime" title="concept-datetime">global date and
-  time</a> then user agents should use the associated time-zone
-  offset information to determine which time zone to present the given
-  datetime in.</p>
-
-  </div><p>The <code><a href="#the-ins-element">ins</a></code> and <code><a href="#the-del-element">del</a></code> elements <span class="impl">must</span> implement the <code><a href="#htmlmodelement">HTMLModElement</a></code>
-  interface:</p><pre class="idl">interface <dfn id="htmlmodelement">HTMLModElement</dfn> : <a href="elements.html#htmlelement">HTMLElement</a> {
-           attribute DOMString <a href="#dom-mod-cite" title="dom-mod-cite">cite</a>;
-           attribute DOMString <a href="#dom-mod-datetime" title="dom-mod-datetime">dateTime</a>;
-};</pre><div class="impl">
-
-  <p>The <dfn id="dom-mod-cite" title="dom-mod-cite"><code>cite</code></dfn> IDL
-  attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the element's <code title="attr-mod-cite"><a href="#attr-mod-cite">cite</a></code> content attribute. The <dfn id="dom-mod-datetime" title="dom-mod-datetime"><code>dateTime</code></dfn> IDL attribute
-  must <a href="common-dom-interfaces.html#reflect">reflect</a> the element's <code title="attr-mod-datetime"><a href="#attr-mod-datetime">datetime</a></code> content attribute.</p>
-
-  </div><h4 id="edits-and-paragraphs"><span class="secno">4.7.4 </span>Edits and paragraphs</h4><p><i>This section is non-normative.</i></p><p>Since the <code><a href="#the-ins-element">ins</a></code> and <code><a href="#the-del-element">del</a></code> elements do not
-  affect <a href="content-models.html#paragraph" title="paragraph">paragraphing</a>, it is possible,
-  in some cases where paragraphs are <a href="content-models.html#paragraph" title="paragraph">implied</a> (without explicit <code><a href="grouping-content.html#the-p-element">p</a></code>
-  elements), for an <code><a href="#the-ins-element">ins</a></code> or <code><a href="#the-del-element">del</a></code> element to
-  span both an entire paragraph or other non-<a href="content-models.html#phrasing-content">phrasing
-  content</a> elements and part of another paragraph. For
-  example:</p><pre>&lt;section&gt;
- &lt;ins&gt;
-  &lt;p&gt;
-   This is a paragraph that was inserted.
-  &lt;/p&gt;
-  This is another paragraph whose first sentence was inserted
-  at the same time as the paragraph above.
- &lt;/ins&gt;
- This is a second sentence, which was there all along.
-&lt;/section&gt;</pre><p>By only wrapping some paragraphs in <code><a href="grouping-content.html#the-p-element">p</a></code> elements, one
-  can even get the end of one paragraph, a whole second paragraph,
-  and the start of a third paragraph to be covered by the same
-  <code><a href="#the-ins-element">ins</a></code> or <code><a href="#the-del-element">del</a></code> element (though this is very
-  confusing, and not considered good practice):</p><pre class="bad">&lt;section&gt;
- This is the first paragraph. &lt;ins&gt;This sentence was
- inserted.
- &lt;p&gt;This second paragraph was inserted.&lt;/p&gt;
- This sentence was inserted too.&lt;/ins&gt; This is the
- third paragraph in this example.
- &lt;!-- (don't do this) --&gt;
-&lt;/section&gt;</pre><p>However, due to the way <a href="content-models.html#paragraph" title="paragraph">implied
-  paragraphs</a> are defined, it is not possible to mark up the
-  end of one paragraph and the start of the very next one using the
-  same <code><a href="#the-ins-element">ins</a></code> or <code><a href="#the-del-element">del</a></code> element. You instead have
-  to use one (or two) <code><a href="grouping-content.html#the-p-element">p</a></code> element(s) and two
-  <code><a href="#the-ins-element">ins</a></code> or <code><a href="#the-del-element">del</a></code> elements, as for example:</p><pre>&lt;section&gt;
- &lt;p&gt;This is the first paragraph. &lt;del&gt;This sentence was
- deleted.&lt;/del&gt;&lt;/p&gt;
- &lt;p&gt;&lt;del&gt;This sentence was deleted too.&lt;/del&gt; That
- sentence needed a separate &amp;lt;del&amp;gt; element.&lt;/p&gt;
-&lt;/section&gt;</pre><p>Partly because of the confusion described above, authors are
-  strongly encouraged to always mark up all paragraphs with the
-  <code><a href="grouping-content.html#the-p-element">p</a></code> element, instead of having <code><a href="#the-ins-element">ins</a></code> or
-  <code><a href="#the-del-element">del</a></code> elements that cross <a href="content-models.html#paragraph" title="paragraph">implied
-  paragraphs</a> boundaries.</p><h4 id="edits-and-lists"><span class="secno">4.7.5 </span>Edits and lists</h4><p><i>This section is non-normative.</i></p><p>The content models of the <code><a href="grouping-content.html#the-ol-element">ol</a></code> and <code><a href="grouping-content.html#the-ul-element">ul</a></code>
-  elements do not allow <code><a href="#the-ins-element">ins</a></code> and <code><a href="#the-del-element">del</a></code> elements
-  as children. Lists always represent all their items, including items
-  that would otherwise have been marked as deleted.</p><p>To indicate that an item is inserted or deleted, an
-  <code><a href="#the-ins-element">ins</a></code> or <code><a href="#the-del-element">del</a></code> element can be wrapped around
-  the contents of the <code><a href="grouping-content.html#the-li-element">li</a></code> element. To indicate that an
-  item has been replaced by another, a single <code><a href="grouping-content.html#the-li-element">li</a></code> element
-  can have one or more <code><a href="#the-del-element">del</a></code> elements followed by one or
-  more <code><a href="#the-ins-element">ins</a></code> elements.</p><div class="example">
-
-   <p>In the following example, a list that started empty had items
-   added and removed from it over time. The bits in the example that
-   have been emphasized show the parts that are the "current" state of
-   the list. The list item numbers don't take into account the edits,
-   though.</p>
-
-   <pre>&lt;h1&gt;Stop-ship bugs&lt;/h1&gt;
-&lt;ol&gt;
- &lt;li&gt;&lt;ins datetime="2008-02-12T15:20Z"&gt;<em>Bug 225:
- Rain detector doesn't work in snow</em>&lt;/ins&gt;&lt;/li&gt;
- &lt;li&gt;&lt;del datetime="2008-03-01T20:22Z"&gt;&lt;ins datetime="2008-02-14T12:02Z"&gt;Bug 228:
- Water buffer overflows in April&lt;/ins&gt;&lt;/del&gt;&lt;/li&gt;
- &lt;li&gt;&lt;ins datetime="2008-02-16T13:50Z"&gt;<em>Bug 230:
- Water heater doesn't use renewable fuels</em>&lt;/ins&gt;&lt;/li&gt;
- &lt;li&gt;&lt;del datetime="2008-02-20T21:15Z"&gt;&lt;ins datetime="2008-02-16T14:25Z"&gt;Bug 232:
- Carbon dioxide emissions detected after startup&lt;/ins&gt;&lt;/del&gt;&lt;/li&gt;
-&lt;/ol&gt;</pre>
-
-  </div><div class="example">
-
-   <p>In the following example, a list that started with just fruit
-   was replaced by a list with just colors.</p>
-
-   <pre>&lt;h1&gt;List of &lt;del&gt;fruits&lt;/del&gt;&lt;ins&gt;colors&lt;/ins&gt;&lt;/h1&gt;
-&lt;ul&gt;
- &lt;li&gt;&lt;del&gt;Lime&lt;/del&gt;&lt;ins&gt;Green&lt;/ins&gt;&lt;/li&gt;
- &lt;li&gt;&lt;del&gt;Apple&lt;/del&gt;&lt;/li&gt;
- &lt;li&gt;Orange&lt;/li&gt;
- &lt;li&gt;&lt;del&gt;Pear&lt;/del&gt;&lt;/li&gt;
- &lt;li&gt;&lt;ins&gt;Teal&lt;/ins&gt;&lt;/li&gt;
- &lt;li&gt;&lt;del&gt;Lemon&lt;/del&gt;&lt;ins&gt;Yellow&lt;/ins&gt;&lt;/li&gt;
- &lt;li&gt;Olive&lt;/li&gt;
- &lt;li&gt;&lt;ins&gt;Purple&lt;/ins&gt;&lt;/li&gt;
-&lt;/ul&gt;</pre>
-
-  </div></body></html>
+   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   </div><nav class="prev_next"><a href="usage-summary.html">&#x2190; 4.6.28 Usage summary</a> &#x2013;
+   <a href="index.html#contents">Table of contents</a> &#x2013;
+   <a href="the-ins-element.html">4.7.1 The ins element &#x2192;</a>
+  </nav><h3 id="edits"><span class="secno">4.7 </span>Edits</h3><p>The <code><a href="the-ins-element.html#the-ins-element">ins</a></code> and <code><a href="the-del-element.html#the-del-element">del</a></code> elements represent
+  edits to the document.</p></body></html>

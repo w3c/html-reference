@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>7.7 Drag and drop &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<!DOCTYPE html>
+<html lang="en-US-x-Hixie"><head><title>7.6 Drag and drop &#x2014; HTML5</title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -19,6 +19,7 @@
    dd table + p { margin-top: 1em; }
    p + * > li, dd li { margin: 1em 0; }
    dt, dfn { font-weight: bold; font-style: normal; }
+   i, em { font-style: italic; }
    dt dfn { font-style: italic; }
    pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
    pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
@@ -40,9 +41,10 @@
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
 
    .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   img.extra { float: right; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   img.extra, p.overview { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; position: relative; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl::before { content: "IDL"; font: bold small sans-serif; padding: 0.5em; background: white; position: absolute; top: 0; margin: -1px 0 0 -4em; width: 1.5em; border: thin solid; border-radius: 0 0 0 0.5em }
    pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
    pre.css:first-line { color: #AAAA50; }
    dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
@@ -50,6 +52,7 @@
    dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
    dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
    dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
    dl.switch { padding-left: 2em; }
    dl.switch > dt { text-indent: -1.5em; }
    dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
@@ -104,6 +107,7 @@
    .note { color: green; background: transparent; font-family: sans-serif; }
    .warning { color: red; background: transparent; }
    .note, .warning { font-weight: bolder; font-style: italic; }
+   .note em, .warning em, .note i, .warning i { font-style: normal; }
    p.note, div.note { padding: 0.5em 2em; }
    span.note { padding: 0 2em; }
    .note p:first-child, .warning p:first-child { margin-top: 0; }
@@ -295,8 +299,6 @@
      src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
    }
 
-  ]]></style><style type="text/css"><![CDATA[
-   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
   ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
    function getCookie(name) {
      var params = location.search.substr(1).split("&");
@@ -315,24 +317,26 @@
      }
      return null;
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="editing.html" title="7 User interaction" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="syntax.html" title="8 The HTML syntax" rel="next"/></head><body><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="editing-apis.html" title="7.5.4 Editing APIs" rel="prev"/><link href="index.html#contents" title="Table of contents" rel="contents"/><link href="syntax.html" title="8 The HTML syntax" rel="next"/></head><body onload="fixBrokenLink();" class="split chapter"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   </div><div>
-   <a href="editing.html" class="prev">7 User interaction</a> &#x2013;
-   <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="syntax.html" class="next">8 The HTML syntax</a>
-  <ol class="toc"><li><ol><li><a href="dnd.html#dnd"><span class="secno">7.7 </span>Drag and drop</a>
-    <ol><li><a href="dnd.html#introduction-7"><span class="secno">7.7.1 </span>Introduction</a></li><li><a href="dnd.html#the-drag-data-store"><span class="secno">7.7.2 </span>The drag data store</a></li><li><a href="dnd.html#the-datatransfer-interface"><span class="secno">7.7.3 </span>The <code>DataTransfer</code> interface</a>
-      <ol><li><a href="dnd.html#the-datatransferitemlist-interface"><span class="secno">7.7.3.1 </span>The <code>DataTransferItemList</code> interface</a></li><li><a href="dnd.html#the-datatransferitem-interface"><span class="secno">7.7.3.2 </span>The <code>DataTransferItem</code> interface</a></li></ol></li><li><a href="dnd.html#the-dragevent-interface"><span class="secno">7.7.4 </span>The <code>DragEvent</code> interface</a></li><li><a href="dnd.html#drag-and-drop-processing-model"><span class="secno">7.7.5 </span>Drag-and-drop processing model</a></li><li><a href="dnd.html#dndevents"><span class="secno">7.7.6 </span>Events summary</a></li><li><a href="dnd.html#the-draggable-attribute"><span class="secno">7.7.7 </span>The <code>draggable</code> attribute</a></li><li><a href="dnd.html#the-dropzone-attribute"><span class="secno">7.7.8 </span>The <code>dropzone</code> attribute</a></li><li><a href="dnd.html#security-risks-in-the-drag-and-drop-model"><span class="secno">7.7.9 </span>Security risks in the drag-and-drop model</a></li></ol></li><li><a href="dnd.html#editing-apis"><span class="secno">7.8 </span>Editing APIs</a></li></ol></li></ol></div><h3 id="dnd"><span class="secno">7.7 </span><dfn>Drag and drop</dfn></h3><p>This section defines an event-based drag-and-drop mechanism.</p><p>This specification does not define exactly what a
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
+
+   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   </div><nav class="prev_next"><a href="editing-apis.html">&#x2190; 7.5.4 Editing APIs</a> &#x2013;
+   <a href="index.html#contents">Table of contents</a> &#x2013;
+   <a href="syntax.html">8 The HTML syntax &#x2192;</a>
+  <ol class="toc"><li><ol><li><a href="dnd.html#dnd"><span class="secno">7.6 </span>Drag and drop</a>
+    <ol><li><a href="dnd.html#introduction-7"><span class="secno">7.6.1 </span>Introduction</a></li><li><a href="dnd.html#the-drag-data-store"><span class="secno">7.6.2 </span>The drag data store</a></li><li><a href="dnd.html#the-datatransfer-interface"><span class="secno">7.6.3 </span>The <code>DataTransfer</code> interface</a>
+      <ol><li><a href="dnd.html#the-datatransferitemlist-interface"><span class="secno">7.6.3.1 </span>The <code>DataTransferItemList</code> interface</a></li><li><a href="dnd.html#the-datatransferitem-interface"><span class="secno">7.6.3.2 </span>The <code>DataTransferItem</code> interface</a></li></ol></li><li><a href="dnd.html#the-dragevent-interface"><span class="secno">7.6.4 </span>The <code>DragEvent</code> interface</a></li><li><a href="dnd.html#drag-and-drop-processing-model"><span class="secno">7.6.5 </span>Drag-and-drop processing model</a></li><li><a href="dnd.html#dndevents"><span class="secno">7.6.6 </span>Events summary</a></li><li><a href="dnd.html#the-draggable-attribute"><span class="secno">7.6.7 </span>The <code>draggable</code> attribute</a></li><li><a href="dnd.html#the-dropzone-attribute"><span class="secno">7.6.8 </span>The <code>dropzone</code> attribute</a></li><li><a href="dnd.html#security-risks-in-the-drag-and-drop-model"><span class="secno">7.6.9 </span>Security risks in the drag-and-drop model</a></li></ol></li></ol></li></ol></nav><h3 id="dnd"><span class="secno">7.6 </span><dfn>Drag and drop</dfn></h3><p>This section defines an event-based drag-and-drop mechanism.</p><p>This specification does not define exactly what a
   <em>drag-and-drop operation</em> actually is.</p><p>On a visual medium with a pointing device, a drag operation could
   be the default action of a <code title="event-mousedown">mousedown</code> event that is followed by a
   series of <code title="event-mousemove">mousemove</code> events, and
-  the drop could be triggered by the mouse being released.</p><p>On media without a pointing device, the user would probably have
-  to explicitly indicate his intention to perform a drag-and-drop
-  operation, stating what he wishes to drag and where he wishes to
-  drop it, respectively.</p><div class="impl">
+  the drop could be triggered by the mouse being released.</p><p>When using an input modality other than a pointing device, users
+  would probably have to explicitly indicate their intention to
+  perform a drag-and-drop operation, stating what they wish to drag
+  and where they wish to drop it, respectively.</p><div class="impl">
 
   <p>However it is implemented, drag-and-drop operations must have a
   starting point (e.g. where the mouse was clicked, or the start of
@@ -346,7 +350,7 @@
   before the drop occurs (so if the operation is not canceled, there
   must be at least one element in the middle step).</p>
 
-  </div><h4 id="introduction-7"><span class="secno">7.7.1 </span>Introduction</h4><p><i>This section is non-normative.</i></p><p>To make an element draggable is simple: give the element a <code title="attr-draggable"><a href="#the-draggable-attribute">draggable</a></code> attribute, and set an event
+  </div><h4 id="introduction-7"><span class="secno">7.6.1 </span>Introduction</h4><p><i>This section is non-normative.</i></p><p>To make an element draggable is simple: give the element a <code title="attr-draggable"><a href="#the-draggable-attribute">draggable</a></code> attribute, and set an event
   listener for <code title="event-dragstart"><a href="#event-dragstart">dragstart</a></code> that
   stores the data being dragged.</p><p>The event handler typically needs to check that it's not a text
   selection that is being dragged, and then needs to store data into
@@ -370,10 +374,10 @@
   }
 &lt;/script&gt;</pre><hr/><p>To accept a drop, the drop target has to have a <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code> attribute and listen to the
   <code title="drop-event">drop</code> event.</p><p>The value of the <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code>
-  attribute specifies what kind of data to accept (e.g. "<code title="">s:text/plain</code>" to accept any text strings, or
-  "<code>f:image/png</code>" to accept a PNG image file) and what kind
-  of feedback to give (e.g. "<code>move</code>" to indicate that the
-  data will be moved).</p><p class="note">Instead of using the <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code> attribute, a drop target can
+  attribute specifies what kind of data to accept (e.g. "<code title="">string:text/plain</code>" to accept any text strings, or
+  "<code>file:image/png</code>" to accept a PNG image file) and what
+  kind of feedback to give (e.g. "<code>move</code>" to indicate that
+  the data will be moved).</p><p class="note">Instead of using the <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code> attribute, a drop target can
   handle the <code title="event-dragenter"><a href="#event-dragenter">dragenter</a></code> event (to
   report whether or not the drop target is to accept the drop) and the
   <code title="event-dragover"><a href="#event-dragover">dragover</a></code> event (to specify what
@@ -382,7 +386,7 @@
   <code title="dom-DataTransfer-DropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code>
   attribute's value can be used by the source (otherwise it's
   reset).</p><p>For example:</p><pre>&lt;p&gt;Drop your favorite fruits below:&lt;/p&gt;
-&lt;ol dropzone="move s:text/x-example" ondrop="dropHandler(event)"&gt;
+&lt;ol dropzone="move string:text/x-example" ondrop="dropHandler(event)"&gt;
  &lt;-- don't forget to change the "text/x-example" type to something
  specific to your site --&gt;
 &lt;/ol&gt;
@@ -417,7 +421,7 @@
     // remove the dragged element
     event.target.parentNode.removeChild(event.target);
   }
-&lt;/script&gt;</pre><h4 id="the-drag-data-store"><span class="secno">7.7.2 </span>The drag data store</h4><p>The data that underlies a drag-and-drop operation, known as the
+&lt;/script&gt;</pre><h4 id="the-drag-data-store"><span class="secno">7.6.2 </span>The drag data store</h4><p>The data that underlies a drag-and-drop operation, known as the
   <dfn id="drag-data-store">drag data store</dfn>, consists of the following information:</p><ul><li><p>A <dfn id="drag-data-store-item-list">drag data store item list</dfn>, which is a list of
    items representing the dragged data, each consisting of the
    following information:</p>
@@ -434,10 +438,12 @@
        </dd>
 
 
-       <dt><i><a href="infrastructure.html#file">File</a></i></dt>
+
+       <dt><i title="">File</i></dt>
        <dd>
         <p>Binary data with a file name.</p>
        </dd>
+
 
 
       </dl></dd>
@@ -461,6 +467,7 @@
       <p>There is a limit of one <i>Plain Unicode string</i> item per
       <a href="#the-drag-data-item-type-string" title="The drag data item type string">item type
       string</a>.</p> 
+
      </dd>
 
      <dt>The actual data</dt>
@@ -539,7 +546,7 @@
   store elements list</a> is empty, it has no <a href="#drag-data-store-bitmap">drag data store
   bitmap</a> / <a href="#drag-data-store-hot-spot-coordinate">drag data store hot spot coordinate</a>,
   its <a href="#drag-data-store-mode">drag data store mode</a> is <a href="#concept-dnd-p" title="concept-dnd-p">protected mode</a>, and its <a href="#drag-data-store-allowed-effects-state">drag data
-  store allowed effects state</a> is the string "<code title="">uninitialized</code>".</p><h4 id="the-datatransfer-interface"><span class="secno">7.7.3 </span>The <code><a href="#datatransfer">DataTransfer</a></code> interface</h4><p><code><a href="#datatransfer">DataTransfer</a></code> objects are used to expose the
+  store allowed effects state</a> is the string "<code title="">uninitialized</code>".</p><h4 id="the-datatransfer-interface"><span class="secno">7.6.3 </span>The <code><a href="#datatransfer">DataTransfer</a></code> interface</h4><p><code><a href="#datatransfer">DataTransfer</a></code> objects are used to expose the
   <a href="#drag-data-store">drag data store</a> that underlies a drag-and-drop
   operation.</p><pre class="idl">interface <dfn id="datatransfer">DataTransfer</dfn> {
            attribute DOMString <a href="#dom-datatransfer-dropeffect" title="dom-DataTransfer-dropEffect">dropEffect</a>;
@@ -547,14 +554,14 @@
 
   readonly attribute <a href="#datatransferitemlist">DataTransferItemList</a> <a href="#dom-datatransfer-items" title="dom-DataTransfer-items">items</a>;
 
-  void <a href="#dom-datatransfer-setdragimage" title="dom-DataTransfer-setDragImage">setDragImage</a>(in Element image, in long x, in long y);
-  void <a href="#dom-datatransfer-addelement" title="dom-DataTransfer-addElement">addElement</a>(in Element element);
+  void <a href="#dom-datatransfer-setdragimage" title="dom-DataTransfer-setDragImage">setDragImage</a>(Element image, long x, long y);
+  void <a href="#dom-datatransfer-addelement" title="dom-DataTransfer-addElement">addElement</a>(Element element);
 
   /* old interface */
-  readonly attribute DOMStringList <a href="#dom-datatransfer-types" title="dom-DataTransfer-types">types</a>;
-  DOMString <a href="#dom-datatransfer-getdata" title="dom-DataTransfer-getData">getData</a>(in DOMString format);
-  void <a href="#dom-datatransfer-setdata" title="dom-DataTransfer-setData">setData</a>(in DOMString format, in DOMString data);
-  void <a href="#dom-datatransfer-cleardata" title="dom-DataTransfer-clearData">clearData</a>(in optional DOMString format);
+  readonly attribute <a href="infrastructure.html#domstringlist">DOMStringList</a> <a href="#dom-datatransfer-types" title="dom-DataTransfer-types">types</a>;
+  DOMString <a href="#dom-datatransfer-getdata" title="dom-DataTransfer-getData">getData</a>(DOMString format);
+  void <a href="#dom-datatransfer-setdata" title="dom-DataTransfer-setData">setData</a>(DOMString format, DOMString data);
+  void <a href="#dom-datatransfer-cleardata" title="dom-DataTransfer-clearData">clearData</a>(optional DOMString format);
   readonly attribute <a href="infrastructure.html#filelist">FileList</a> <a href="#dom-datatransfer-files" title="dom-DataTransfer-files">files</a>;
 };</pre><dl class="domintro"><dt><var title="">dataTransfer</var> . <code title="dom-DataTransfer-dropEffect"><a href="#dom-datatransfer-dropeffect">dropEffect</a></code> [ = <var title="">value</var> ]</dt>
 
@@ -616,7 +623,7 @@
 
    <dd>
 
-    <p>Returns a <code>DOMStringList</code> listing the formats that
+    <p>Returns a <code><a href="infrastructure.html#domstringlist">DOMStringList</a></code> listing the formats that
     were set in the <code title="event-dragstart"><a href="#event-dragstart">dragstart</a></code>
     event. In addition, if any files are being dragged, then one of
     the types will be the string "<code title="">Files</code>".</p>
@@ -701,7 +708,7 @@
    Nothing happens.</p></li>
 
    <li><p>If the <var title="">element</var> argument is an
-   <code><a href="embedded-content-1.html#the-img-element">img</a></code> element, then set the <a href="#drag-data-store-bitmap">drag data store
+   <code><a href="the-img-element.html#the-img-element">img</a></code> element, then set the <a href="#drag-data-store-bitmap">drag data store
    bitmap</a> to the element's image (at its intrinsic size);
    otherwise, set the <a href="#drag-data-store-bitmap">drag data store bitmap</a> to an image
    generated from the given element (the exact mechanism for doing so
@@ -734,7 +741,7 @@
   image at the time the method is invoked.</p>
 
   <p>The <dfn id="dom-datatransfer-types" title="dom-DataTransfer-types"><code>types</code></dfn>
-  attribute must return a <a href="infrastructure.html#live">live</a> <code>DOMStringList</code>
+  attribute must return a <a href="infrastructure.html#live">live</a> <code><a href="infrastructure.html#domstringlist">DOMStringList</a></code>
   giving the strings that the following steps would produce. The same
   object must be returned each time.</p>
 
@@ -742,7 +749,7 @@
 
    <li><p>If the <code><a href="#datatransfer">DataTransfer</a></code> object is no longer
    associated with a <a href="#drag-data-store">drag data store</a>, the
-   <code>DOMStringList</code> is empty. Abort these steps; return the
+   <code><a href="infrastructure.html#domstringlist">DOMStringList</a></code> is empty. Abort these steps; return the
    empty list <var title="">L</var>.</p></li>
 
    <li><p>For each item in the <a href="#drag-data-store-item-list">drag data store item list</a>
@@ -891,14 +898,16 @@
   </ol><p class="note">This version of the API does not expose the types of
   the files during the drag.</p>
 
-  </div><h5 id="the-datatransferitemlist-interface"><span class="secno">7.7.3.1 </span>The <code><a href="#datatransferitemlist">DataTransferItemList</a></code> interface</h5><p>Each <code><a href="#datatransfer">DataTransfer</a></code> object is associated with a
+  </div><h5 id="the-datatransferitemlist-interface"><span class="secno">7.6.3.1 </span>The <code><a href="#datatransferitemlist">DataTransferItemList</a></code> interface</h5><p>Each <code><a href="#datatransfer">DataTransfer</a></code> object is associated with a
   <code><a href="#datatransferitemlist">DataTransferItemList</a></code> object.</p><pre class="idl">interface <dfn id="datatransferitemlist">DataTransferItemList</dfn> {
   readonly attribute unsigned long <a href="#dom-datatransferitemlist-length" title="dom-DataTransferItemList-length">length</a>;
-  <a href="#dom-datatransferitemlist-item" title="dom-DataTransferItemList-item">getter</a> <a href="#datatransferitem">DataTransferItem</a> (in unsigned long index);
-  <a href="#dom-datatransferitemlist-removeitem" title="dom-DataTransferItemList-removeItem">deleter</a> void (in unsigned long index);
+  <a href="#dom-datatransferitemlist-item" title="dom-DataTransferItemList-item">getter</a> <a href="#datatransferitem">DataTransferItem</a> (unsigned long index);
+  <a href="#dom-datatransferitemlist-removeitem" title="dom-DataTransferItemList-removeItem">deleter</a> void (unsigned long index);
   void <a href="#dom-datatransferitemlist-clear" title="dom-DataTransferItemList-clear">clear</a>();
 
-  <a href="#datatransferitem">DataTransferItem</a>? <a href="#dom-datatransferitemlist-add" title="dom-DataTransferItemList-add">add</a>(in DOMString data, in DOMString type);  <a href="#datatransferitem">DataTransferItem</a>? <a href="#dom-datatransferitemlist-add" title="dom-DataTransferItemList-add">add</a>(in <a href="infrastructure.html#file">File</a> data);};</pre><dl class="domintro"><dt><var title="">items</var> . <code title="dom-DataTransferItemList-length"><a href="#dom-datatransferitemlist-length">length</a></code></dt>
+  <a href="#datatransferitem">DataTransferItem</a>? <a href="#dom-datatransferitemlist-add" title="dom-DataTransferItemList-add">add</a>(DOMString data, DOMString type);
+  <a href="#datatransferitem">DataTransferItem</a>? <a href="#dom-datatransferitemlist-add" title="dom-DataTransferItemList-add">add</a>(<a href="infrastructure.html#file">File</a> data);
+};</pre><dl class="domintro"><dt><var title="">items</var> . <code title="dom-DataTransferItemList-length"><a href="#dom-datatransferitemlist-length">length</a></code></dt>
 
    <dd><p>Returns the number of items in the <a href="#drag-data-store">drag data store</a>.</p></dd>
 
@@ -989,7 +998,7 @@
 
   <ol><li><p>If the <code><a href="#datatransferitemlist">DataTransferItemList</a></code> object is not in the
    <i title="concept-dnd-rw"><a href="#concept-dnd-rw">read/write mode</a></i>, throw an
-   <code><a href="common-dom-interfaces.html#invalid_state_err">INVALID_STATE_ERR</a></code> exception and abort these
+   <code><a href="infrastructure.html#invalidstateerror">InvalidStateError</a></code> exception and abort these
    steps.</p></li>
 
    <li><p>Remove the <var title="">i</var>th item from the <a href="#drag-data-store">drag
@@ -1019,7 +1028,7 @@
       list</a> whose <a href="#the-drag-data-item-kind" title="the drag data item&#10;      kind">kind</a> is <i>Plain Unicode string</i> and whose <a href="#the-drag-data-item-type-string" title="the drag data item type string">type string</a> is
       equal to the value of the method's second argument,
       <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a>, then throw a
-      <code><a href="common-dom-interfaces.html#not_supported_err">NOT_SUPPORTED_ERR</a></code> exception and abort these
+      <code><a href="infrastructure.html#notsupportederror">NotSupportedError</a></code> exception and abort these
       steps.</p>
 
       <p>Otherwise, add an item to the <a href="#drag-data-store-item-list">drag data store item
@@ -1029,6 +1038,7 @@
       string given by the method's first argument.</p>
 
      </dd>
+
 
 
      <dt>If the first argument to the method is a <code><a href="infrastructure.html#file">File</a></code></dt>
@@ -1044,6 +1054,7 @@
      </dd>
 
 
+
     </dl></li>
 
    <li><p><a href="#dom-datatransferitemlist-item" title="dom-DataTransferItemList-item">Determine the value
@@ -1051,15 +1062,17 @@
    item, and return that value (a newly created
    <code><a href="#datatransferitem">DataTransferItem</a></code> object).</p></li>
 
-  </ol></div><h5 id="the-datatransferitem-interface"><span class="secno">7.7.3.2 </span>The <code><a href="#datatransferitem">DataTransferItem</a></code> interface</h5><p>Each <code><a href="#datatransferitem">DataTransferItem</a></code> object is associated with a
+  </ol></div><h5 id="the-datatransferitem-interface"><span class="secno">7.6.3.2 </span>The <code><a href="#datatransferitem">DataTransferItem</a></code> interface</h5><p>Each <code><a href="#datatransferitem">DataTransferItem</a></code> object is associated with a
   <code><a href="#datatransfer">DataTransfer</a></code> object.</p><pre class="idl">interface <dfn id="datatransferitem">DataTransferItem</dfn> {
-    readonly attribute DOMString <a href="#dom-datatransferitem-kind" title="dom-DataTransferItem-kind">kind</a>;
-    readonly attribute DOMString <a href="#dom-datatransferitem-type" title="dom-DataTransferItem-type">type</a>;
-    void <a href="#dom-datatransferitem-getasstring" title="dom-DataTransferItem-getAsString">getAsString</a>(in <a href="#functionstringcallback">FunctionStringCallback</a>? callback);    <a href="infrastructure.html#file">File</a>? <a href="#dom-datatransferitem-getasfile" title="dom-DataTransferItem-getAsFile">getAsFile</a>();};
+  readonly attribute DOMString <a href="#dom-datatransferitem-kind" title="dom-DataTransferItem-kind">kind</a>;
+  readonly attribute DOMString <a href="#dom-datatransferitem-type" title="dom-DataTransferItem-type">type</a>;
+  void <a href="#dom-datatransferitem-getasstring" title="dom-DataTransferItem-getAsString">getAsString</a>(<a href="#functionstringcallback">FunctionStringCallback</a>? callback);
+  <a href="infrastructure.html#file">File</a>? <a href="#dom-datatransferitem-getasfile" title="dom-DataTransferItem-getAsFile">getAsFile</a>();
+};
 
-[Callback=FunctionOnly, NoInterfaceObject]
+[Callback, NoInterfaceObject]
 interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
-  void <span title="dom-FunctionStringCallback-handleEvent">handleEvent</span>(in DOMString data);
+  void <span title="dom-FunctionStringCallback-handleEvent">handleEvent</span>(DOMString data);
 };</pre><dl class="domintro"><dt><var title="">item</var> . <code title="dom-DataTransferItem-kind"><a href="#dom-datatransferitem-kind">kind</a></code></dt>
    <dd>
 
@@ -1083,12 +1096,14 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
    </dd>
 
 
+
    <dt><var title="">file</var> = <var title="">item</var> . <code title="dom-DataTransferItem-getAsFile"><a href="#dom-datatransferitem-getasfile">getAsFile</a></code>()</dt>
    <dd>
 
     <p>Returns a <code><a href="infrastructure.html#file">File</a></code> object, if <a href="#the-drag-data-item-kind">the drag data item kind</a> is <i><a href="infrastructure.html#file">File</a></i>.</p>
 
    </dd>
+
 
 
   </dl><div class="impl">
@@ -1122,7 +1137,9 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
 
   <table><thead><tr><th> Kind </th><th> String
    </th></tr></thead><tbody><tr><td> <i>Plain Unicode string</i> </td><td> "<code title="">string</code>"
+
     </td></tr><tr><td> <i><a href="infrastructure.html#file">File</a></i> </td><td> "<code title="">file</code>"
+
   </td></tr></tbody></table><p>The <dfn id="dom-datatransferitem-type" title="dom-DataTransferItem-type"><code>type</code></dfn> attribute
   must return the empty string if the <code><a href="#datatransferitem">DataTransferItem</a></code>
   object is in the <i>disabled mode</i>; otherwise it must return
@@ -1159,11 +1176,14 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
    actual data of the item represented by the
    <code><a href="#datatransferitem">DataTransferItem</a></code> object.</p>
 
-  </li></ol></div><h4 id="the-dragevent-interface"><span class="secno">7.7.4 </span>The <code><a href="#dragevent">DragEvent</a></code> interface</h4><p>The drag-and-drop processing model involves several events. They
-  all use the <code><a href="#dragevent">DragEvent</a></code> interface.</p><pre class="idl">interface <dfn id="dragevent">DragEvent</dfn> : <a href="infrastructure.html#mouseevent">MouseEvent</a> {
+  </li></ol></div><h4 id="the-dragevent-interface"><span class="secno">7.6.4 </span>The <code><a href="#dragevent">DragEvent</a></code> interface</h4><p>The drag-and-drop processing model involves several events. They
+  all use the <code><a href="#dragevent">DragEvent</a></code> interface.</p><pre class="idl">[Constructor(DOMString type, optional <a href="#drageventinit">DragEventInit</a> eventInitDict)]
+interface <dfn id="dragevent">DragEvent</dfn> : <a href="infrastructure.html#mouseevent">MouseEvent</a> {
   readonly attribute <a href="#datatransfer">DataTransfer</a>? <a href="#dom-dragevent-datatransfer" title="dom-DragEvent-dataTransfer">dataTransfer</a>;
+};
 
-  void <a href="#dom-dragevent-initdragevent" title="dom-DragEvent-initDragEvent">initDragEvent</a>(in DOMString typeArg, in boolean canBubbleArg, in boolean cancelableArg, in any dummyArg, in long detailArg, in long screenXArg, in long screenYArg, in long clientXArg, in long clientYArg, in boolean ctrlKeyArg, in boolean altKeyArg, in boolean shiftKeyArg, in boolean metaKeyArg, in unsigned short buttonArg, in EventTarget relatedTargetArg, in <a href="#datatransfer">DataTransfer</a>? dataTransferArg);
+dictionary <dfn id="drageventinit">DragEventInit</dfn> : <a href="infrastructure.html#mouseeventinit">MouseEventInit</a> {
+  <a href="#datatransfer">DataTransfer</a>? dataTransfer;
 };</pre><dl class="domintro"><dt><var title="">event</var> . <code title="dom-DragEvent-dataTransfer"><a href="#dom-dragevent-datatransfer">dataTransfer</a></code></dt>
 
    <dd>
@@ -1174,14 +1194,11 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
 
   </dl><div class="impl">
 
-  <p>The <dfn id="dom-dragevent-initdragevent" title="dom-DragEvent-initDragEvent"><code>initDragEvent()</code></dfn>
-  method must initialize the event in a manner analogous to the
-  similarly-named method in the DOM Events interfaces, except that the
-  <var title="">dummyArg</var> argument must be ignored. <a href="references.html#refsDOMEVENTS">[DOMEVENTS]</a></p>
-
   <p>The <dfn id="dom-dragevent-datatransfer" title="dom-DragEvent-dataTransfer"><code>dataTransfer</code></dfn>
-  attribute of the <code><a href="#dragevent">DragEvent</a></code> interface represents the
-  context information for the event.</p>
+  attribute of the <code><a href="#dragevent">DragEvent</a></code> interface must return the
+  value it was initialized to. When the object is created, this
+  attribute must be initialized to null. It represents the context
+  information for the event.</p>
 
   </div><div class="impl">
 
@@ -1233,7 +1250,7 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
       <td>"<code title="">move</code>"</td>
      </tr><tr><td>"<code title="">uninitialized</code>" when what is being dragged is a selection</td>
       <td>"<code title="">copy</code>"</td>
-     </tr><tr><td>"<code title="">uninitialized</code>" when what is being dragged is an <code><a href="text-level-semantics.html#the-a-element">a</a></code> element with an <code>href</code> attribute</td>
+     </tr><tr><td>"<code title="">uninitialized</code>" when what is being dragged is an <code><a href="the-a-element.html#the-a-element">a</a></code> element with an <code>href</code> attribute</td>
       <td>"<code title="">link</code>"</td>
      </tr><tr><td>Any other case</td>
       <td>"<code title="">copy</code>"</td>
@@ -1243,12 +1260,12 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
 
     <p>Create a <code><a href="#dragevent">DragEvent</a></code> object and initialize it to
     have the given name <var title="">e</var>, to bubble, to be
-    cancelable unless <var title="">e</var> is <code title="event-dragleave"><a href="#event-dragleave">dragleave</a></code> or <code title="event-dragend"><a href="#event-dragend">dragend</a></code>, and to have the <code title="dom-UIEvent-detail">detail</code> attribute set to zero,
-    the mouse and key attributes set according to the state of the
-    input devices as they would be for user interaction events, the
-    <code title="">relatedTarget</code> attribute set to null, and the
-    <code title="dom-DragEvent-dataTransfer"><a href="#dom-dragevent-datatransfer">dataTransfer</a></code>
-    attribute set to <var title="">dataTransfer</var>, the
+    cancelable unless <var title="">e</var> is <code title="event-dragleave"><a href="#event-dragleave">dragleave</a></code> or <code title="event-dragend"><a href="#event-dragend">dragend</a></code>, and to have the <code title="dom-UIEvent-detail"><a href="infrastructure.html#dom-uievent-detail">detail</a></code> attribute initialized to
+    zero, the mouse and key attributes initialized according to the
+    state of the input devices as they would be for user interaction
+    events, the <code title="">relatedTarget</code> attribute
+    initialized to null, and the <code title="dom-DragEvent-dataTransfer"><a href="#dom-dragevent-datatransfer">dataTransfer</a></code> attribute
+    initialized to <var title="">dataTransfer</var>, the
     <code><a href="#datatransfer">DataTransfer</a></code> object created above.</p>
 
     
@@ -1275,7 +1292,7 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
 
   </ol></div><div class="impl">
 
-  <h4 id="drag-and-drop-processing-model"><span class="secno">7.7.5 </span>Drag-and-drop processing model</h4>
+  <h4 id="drag-and-drop-processing-model"><span class="secno">7.6.5 </span>Drag-and-drop processing model</h4>
 
   <p>When the user attempts to begin a drag operation, the user agent
   must run the following steps. User agents must act as if these steps
@@ -1292,7 +1309,7 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
     the selection that is being dragged.</p>
 
     <p>Otherwise, if the drag operation was invoked on a
-    <code><a href="infrastructure.html#document">Document</a></code>, it is the first element, going up the
+    <code><a href="dom.html#document">Document</a></code>, it is the first element, going up the
     ancestor chain, starting at the node that the user tried to drag,
     that has the IDL attribute <code title="dom-draggable"><a href="#dom-draggable">draggable</a></code> set to true. If there is no
     such element, then nothing is being dragged; abort these steps,
@@ -1302,7 +1319,7 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
     agent's purview. What is being dragged is defined by the document
     or application where the drag was started.</p>
 
-    <p class="note"><code><a href="embedded-content-1.html#the-img-element">img</a></code> elements and <code><a href="text-level-semantics.html#the-a-element">a</a></code>
+    <p class="note"><code><a href="the-img-element.html#the-img-element">img</a></code> elements and <code><a href="the-a-element.html#the-a-element">a</a></code>
     elements with an <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code>
     attribute have their <code title="dom-draggable"><a href="#dom-draggable">draggable</a></code>
     attribute set to true by default.</p>
@@ -1319,12 +1336,13 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
     follows:</p>
 
     <p>If it is a selection that is being dragged, then the
-    <a href="#source-node">source node</a> is the text node that the user started
-    the drag on (typically the text node that the user originally
-    clicked). If the user did not specify a particular node, for
-    example if the user just told the user agent to begin a drag of
-    "the selection", then the <a href="#source-node">source node</a> is the first
-    text node containing a part of the selection.</p>
+    <a href="#source-node">source node</a> is the <code><a href="infrastructure.html#text">Text</a></code> node that the
+    user started the drag on (typically the <code><a href="infrastructure.html#text">Text</a></code> node
+    that the user originally clicked). If the user did not specify a
+    particular node, for example if the user just told the user agent
+    to begin a drag of "the selection", then the <a href="#source-node">source
+    node</a> is the first <code><a href="infrastructure.html#text">Text</a></code> node containing a part
+    of the selection.</p>
 
     <p>Otherwise, if it is an element that is being dragged, then the
     <a href="#source-node">source node</a> is the element that is being dragged.</p>
@@ -1406,6 +1424,7 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
    in any <a href="infrastructure.html#other-applicable-specifications">other applicable specifications</a>.</li>
 
 
+
    <li>
 
     <p>Run the following substeps:</p>
@@ -1417,14 +1436,14 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
       <p>For each <var title="">node</var> in the <a href="#list-of-dragged-nodes">list of
       dragged nodes</a>:</p>
 
-      <dl><dt>If the node is an <code><a href="text-level-semantics.html#the-a-element">a</a></code> element with an <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code> attribute</dt>
+      <dl><dt>If the node is an <code><a href="the-a-element.html#the-a-element">a</a></code> element with an <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code> attribute</dt>
 
        <dd>Add to <var title="">urls</var> the result of <a href="urls.html#resolve-a-url" title="resolve a url">resolving</a> the element's <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code> content attribute
        relative to the element.</dd>
 
-       <dt>If the node is an <code><a href="embedded-content-1.html#the-img-element">img</a></code> element with an <code title="attr-img-src"><a href="embedded-content-1.html#attr-img-src">src</a></code> attribute</dt>
+       <dt>If the node is an <code><a href="the-img-element.html#the-img-element">img</a></code> element with an <code title="attr-img-src"><a href="the-img-element.html#attr-img-src">src</a></code> attribute</dt>
 
-       <dd>Add to <var title="">urls</var> the result of <a href="urls.html#resolve-a-url" title="resolve a url">resolving</a> the element's <code title="attr-img-src"><a href="embedded-content-1.html#attr-img-src">src</a></code> content attribute relative to
+       <dd>Add to <var title="">urls</var> the result of <a href="urls.html#resolve-a-url" title="resolve a url">resolving</a> the element's <code title="attr-img-src"><a href="the-img-element.html#attr-img-src">src</a></code> content attribute relative to
        the element.</dd>
 
        
@@ -1481,6 +1500,7 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
 
     <p>If the event is canceled, then the drag-and-drop operation
     should not occur; abort these steps.</p> 
+
     <p class="note">Since events with no event listeners registered
     are, almost by definition, never canceled, drag-and-drop is always
     available to the user if the author does not specifically prevent
@@ -1514,10 +1534,7 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
   </ol><p>From the moment that the user agent is to <dfn id="initiate-the-drag-and-drop-operation">initiate the
   drag-and-drop operation</dfn>, until the end of the drag-and-drop
   operation, device input events (e.g. mouse and keyboard events) must
-  be suppressed. In addition, the user agent must track all DOM
-  changes made during the drag-and-drop operation, and add them to its
-  <span>undo transaction history</span> as one atomic operation once
-  the drag-and-drop operation has ended.</p>
+  be suppressed.</p>
 
   <p>During the drag operation, the element directly indicated by the
   user as the drop target is called the <dfn id="immediate-user-selection">immediate user
@@ -1608,13 +1625,14 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
         list:</p>
 
         <dl class="switch"><dt>If the <a href="#current-target-element">current target element</a> is a text
-         field (e.g. <code><a href="the-button-element.html#the-textarea-element">textarea</a></code>, or an <code><a href="the-input-element.html#the-input-element">input</a></code>
+         field (e.g. <code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code>, or an <code><a href="the-input-element.html#the-input-element">input</a></code>
          element whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code>
-         attribute is in the <a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-text">Text</a> state) or an
-         <a href="editing.html#editable">editable</a> element, and the <a href="#drag-data-store-item-list">drag data store
-         item list</a> has an item with <a href="#the-drag-data-item-type-string">the drag data item
-         type string</a> "<code>text/plain</code>" and <a href="#the-drag-data-item-kind">the
-         drag data item kind</a> <i>Plain Unicode string</i></dt>
+         attribute is in the <a href="states-of-the-type-attribute.html#text-type-text-state-and-search-state-type-search" title="attr-input-type-text">Text</a> state) or an
+         <a href="editing-apis.html#editing-host">editing host</a> or <a href="editing-apis.html#editable">editable</a> element,
+         and the <a href="#drag-data-store-item-list">drag data store item list</a> has an item
+         with <a href="#the-drag-data-item-type-string">the drag data item type string</a>
+         "<code>text/plain</code>" and <a href="#the-drag-data-item-kind">the drag data item
+         kind</a> <i>Plain Unicode string</i></dt>
 
          <dd><p>Set the <a href="#current-target-element">current target element</a> to the
          <a href="#immediate-user-selection">immediate user selection</a> anyway.</p></dd>
@@ -1641,18 +1659,13 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
          <dd>
 
           <p><a href="#fire-a-dnd-event">Fire a DND event</a> named <code title="event-dragenter"><a href="#event-dragenter">dragenter</a></code> at <a href="dom.html#the-body-element-0">the body
-          element</a>, and set the <a href="#current-target-element">current target
-          element</a> to <a href="dom.html#the-body-element-0">the body element</a>, regardless
-          of whether that event was canceled or not.</p>
+          element</a>, if there is one, or at the
+          <code><a href="dom.html#document">Document</a></code> object, if not. Then, and set the
+          <a href="#current-target-element">current target element</a> to <a href="dom.html#the-body-element-0">the body
+          element</a>, regardless of whether that event was
+          canceled or not.</p>
 
-          <p class="note">If <a href="dom.html#the-body-element-0">the body element</a> is null,
-          then the event will be fired at the <code><a href="infrastructure.html#document">Document</a></code>
-          object (as required by the definition of <a href="dom.html#the-body-element-0">the body
-          element</a>), but the <a href="#current-target-element">current target element</a>
-          would be set to null, not the <code><a href="infrastructure.html#document">Document</a></code>
-          object.</p></dd>
-
-        </dl></dd>
+        </dd></dl></dd>
 
       </dl></li>
 
@@ -1677,13 +1690,14 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
       list:</p>
 
       <dl class="switch"><dt>If the <a href="#current-target-element">current target element</a> is a text field
-       (e.g. <code><a href="the-button-element.html#the-textarea-element">textarea</a></code>, or an <code><a href="the-input-element.html#the-input-element">input</a></code> element
+       (e.g. <code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code>, or an <code><a href="the-input-element.html#the-input-element">input</a></code> element
        whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in
-       the <a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-text">Text</a> state) or an
-       <a href="editing.html#editable">editable</a> element, and the <a href="#drag-data-store-item-list">drag data store
-       item list</a> has an item with <a href="#the-drag-data-item-type-string">the drag data item type
-       string</a> "<code>text/plain</code>" and <a href="#the-drag-data-item-kind">the drag data
-       item kind</a> <i>Plain Unicode string</i></dt>
+       the <a href="states-of-the-type-attribute.html#text-type-text-state-and-search-state-type-search" title="attr-input-type-text">Text</a> state) or an
+       <a href="editing-apis.html#editing-host">editing host</a> or <a href="editing-apis.html#editable">editable</a> element, and
+       the <a href="#drag-data-store-item-list">drag data store item list</a> has an item with
+       <a href="#the-drag-data-item-type-string">the drag data item type string</a>
+       "<code>text/plain</code>" and <a href="#the-drag-data-item-kind">the drag data item
+       kind</a> <i>Plain Unicode string</i></dt>
 
        <dd><p>Set the <a href="#current-drag-operation">current drag operation</a> to either
        "<code title="">copy</code>" or "<code title="">move</code>",
@@ -1791,7 +1805,8 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
        it is not null, use platform-specific conventions for drag
        cancellation.</p>
 
-      </li></ol><p>Otherwise, the drag operation was as success; run these substeps:</p>
+      </li></ol><p>Otherwise, the drag operation might be a success; run these
+      substeps:</p>
 
       <ol><li><p>Let <var title="">dropped</var> be true.</p></li>
 
@@ -1811,22 +1826,23 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
         follows:</p>
 
         <dl class="switch"><dt>If the <a href="#current-target-element">current target element</a> is a text
-         field (e.g. <code><a href="the-button-element.html#the-textarea-element">textarea</a></code>, or an <code><a href="the-input-element.html#the-input-element">input</a></code>
+         field (e.g. <code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code>, or an <code><a href="the-input-element.html#the-input-element">input</a></code>
          element whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code>
-         attribute is in the <a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-text">Text</a> state) or an
-         <a href="editing.html#editable">editable</a> element, and the <a href="#drag-data-store-item-list">drag data store
-         item list</a> has an item with <a href="#the-drag-data-item-type-string">the drag data item
-         type string</a> "<code>text/plain</code>" and <a href="#the-drag-data-item-kind">the
-         drag data item kind</a> <i>Plain Unicode string</i></dt>
+         attribute is in the <a href="states-of-the-type-attribute.html#text-type-text-state-and-search-state-type-search" title="attr-input-type-text">Text</a> state) or an
+         <a href="editing-apis.html#editing-host">editing host</a> or <a href="editing-apis.html#editable">editable</a> element,
+         and the <a href="#drag-data-store-item-list">drag data store item list</a> has an item
+         with <a href="#the-drag-data-item-type-string">the drag data item type string</a>
+         "<code>text/plain</code>" and <a href="#the-drag-data-item-kind">the drag data item
+         kind</a> <i>Plain Unicode string</i></dt>
 
          <dd><p>Insert the actual data of the first item in the
          <a href="#drag-data-store-item-list">drag data store item list</a> to have <a href="#the-drag-data-item-type-string" title="the drag data item type string">a drag data item type
          string</a> of "<code>text/plain</code>" and <a href="#the-drag-data-item-kind" title="the drag data item kind">a drag data item kind</a>
          that is <i>Plain Unicode string</i> into the text field or
-         <a href="editing.html#editable">editable</a> element in a manner consistent with
-         platform-specific conventions (e.g. inserting it at the
-         current mouse cursor position, or inserting it at the end of
-         the field).</p></dd>
+         <a href="editing-apis.html#editing-host">editing host</a> or <a href="editing-apis.html#editable">editable</a> element in
+         a manner consistent with platform-specific conventions (e.g.
+         inserting it at the current mouse cursor position, or
+         inserting it at the end of the field).</p></dd>
 
          <dt>Otherwise</dt>
 
@@ -1850,33 +1866,39 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
       default action of the <code title="event-dragend"><a href="#event-dragend">dragend</a></code>
       event:</p>
 
-      <dl class="switch"><dt>If the <a href="#current-target-element">current target element</a> is a text field
-       (e.g. <code><a href="the-button-element.html#the-textarea-element">textarea</a></code>, or an <code><a href="the-input-element.html#the-input-element">input</a></code> element
-       whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in
-       the <a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-text">Text</a> state), and
-       <var title="">dropped</var> is true, and the <a href="#current-drag-operation">current drag
-       operation</a> is "<code title="">move</code>", and the
-       source of the drag-and-drop operation is a selection in the
-       DOM</dt>
+      <dl class="switch"><dt>If <var title="">dropped</var> is true, and the
+       <a href="#current-target-element">current target element</a> is a text field (e.g.
+       <code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code>, or an <code><a href="the-input-element.html#the-input-element">input</a></code> element whose
+       <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the
+       <a href="states-of-the-type-attribute.html#text-type-text-state-and-search-state-type-search" title="attr-input-type-text">Text</a> state), and the
+       <a href="#current-drag-operation">current drag operation</a> is "<code title="">move</code>", and the source of the drag-and-drop
+       operation is a selection in the DOM</dt>
 
-       <dd>The user agent should delete the range representing the
-       dragged selection from the DOM.</dd>
+       <dd><p>The user agent should delete the range representing the
+       dragged selection from the DOM.</p></dd>
 
-       <dt>If the <a href="#current-target-element">current target element</a> is a text field
-       (e.g. <code><a href="the-button-element.html#the-textarea-element">textarea</a></code>, or an <code><a href="the-input-element.html#the-input-element">input</a></code> element
-       whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in
-       the <a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-text">Text</a> state), and
-       <var title="">dropped</var> is true, and the <a href="#current-drag-operation">current drag
-       operation</a> is "<code title="">move</code>", and the
-       source of the drag-and-drop operation is a selection in a text
-       field</dt>
+       <dt>If <var title="">dropped</var> is true, and the
+       <a href="#current-target-element">current target element</a> is a text field (e.g.
+       <code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code>, or an <code><a href="the-input-element.html#the-input-element">input</a></code> element whose
+       <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the
+       <a href="states-of-the-type-attribute.html#text-type-text-state-and-search-state-type-search" title="attr-input-type-text">Text</a> state), and the
+       <a href="#current-drag-operation">current drag operation</a> is "<code title="">move</code>", and the source of the drag-and-drop
+       operation is a selection in a text field</dt>
 
-       <dd>The user agent should delete the dragged selection from the
-       relevant text field.</dd>
+       <dd><p>The user agent should delete the dragged selection from
+       the relevant text field.</p></dd>
+
+       <dt>If <var title="">dropped</var> is false or if the
+       <a href="#current-drag-operation">current drag operation</a> is "<code title="">none</code>"</dt>
+
+       <dd><p>The drag was canceled. If the platform conventions
+       dictate that this be represented to the user (e.g. by animating
+       the dragged selection going back to the source of the
+       drag-and-drop operation), then do so.</p></dd>
 
        <dt>Otherwise</dt>
 
-       <dd>The event has no default action.</dd>
+       <dd><p>The event has no default action.</p></dd>
 
       </dl></li>
 
@@ -1889,12 +1911,12 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
   lower on the page.</p>
 
   <p class="note">This model is independent of which
-  <code><a href="infrastructure.html#document">Document</a></code> object the nodes involved are from; the events
+  <code><a href="dom.html#document">Document</a></code> object the nodes involved are from; the events
   are fired as described above and the rest of the processing model
   runs as described above, irrespective of how many documents are
   involved in the operation.</p>
 
-  </div><h4 id="dndevents"><span class="secno">7.7.6 </span>Events summary</h4><p><i>This section is non-normative.</i></p><p>The following events are involved in the drag-and-drop
+  </div><h4 id="dndevents"><span class="secno">7.6.6 </span>Events summary</h4><p><i>This section is non-normative.</i></p><p>The following events are involved in the drag-and-drop
   model.</p><table><thead><tr><th> Event Name </th>
      <th> Target </th>
      
@@ -1963,7 +1985,7 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
   <code title="dom-DataTransfer-effectAllowed"><a href="#dom-datatransfer-effectallowed">effectAllowed</a></code>
   attribute always has the value it had after the previous event was
   fired, defaulting to "<code title="">uninitialized</code>" in the
-  <code title="event-dragstart"><a href="#event-dragstart">dragstart</a></code> event.</p><h4 id="the-draggable-attribute"><span class="secno">7.7.7 </span>The <dfn title="attr-draggable"><code>draggable</code></dfn> attribute</h4><p>All <a href="infrastructure.html#html-elements">HTML elements</a> may have the <code title="attr-draggable"><a href="#the-draggable-attribute">draggable</a></code> content attribute set. The
+  <code title="event-dragstart"><a href="#event-dragstart">dragstart</a></code> event.</p><h4 id="the-draggable-attribute"><span class="secno">7.6.7 </span>The <dfn title="attr-draggable"><code>draggable</code></dfn> attribute</h4><p>All <a href="infrastructure.html#html-elements">HTML elements</a> may have the <code title="attr-draggable"><a href="#the-draggable-attribute">draggable</a></code> content attribute set. The
   <code title="attr-draggable"><a href="#the-draggable-attribute">draggable</a></code> attribute is an
   <a href="common-microsyntaxes.html#enumerated-attribute">enumerated attribute</a>. It has three states. The first
   state is <i>true</i> and it has the keyword <code title="">true</code>. The second state is <i>false</i> and it has
@@ -2000,8 +2022,8 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
   false.</p>
 
   <p>Otherwise, the element's <code title="attr-draggable"><a href="#the-draggable-attribute">draggable</a></code> content attribute has the
-  state <i>auto</i>. If the element is an <code><a href="embedded-content-1.html#the-img-element">img</a></code> element,
-  or, if the element is an <code><a href="text-level-semantics.html#the-a-element">a</a></code> element with an <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code> content attribute, the <code title="dom-draggable"><a href="#dom-draggable">draggable</a></code> IDL attribute must return
+  state <i>auto</i>. If the element is an <code><a href="the-img-element.html#the-img-element">img</a></code> element,
+  or, if the element is an <code><a href="the-a-element.html#the-a-element">a</a></code> element with an <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code> content attribute, the <code title="dom-draggable"><a href="#dom-draggable">draggable</a></code> IDL attribute must return
   true.</p>
 
   <p>Otherwise, the <code title="dom-draggable"><a href="#dom-draggable">draggable</a></code> DOM
@@ -2013,7 +2035,7 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
   value true, the <code title="attr-draggable"><a href="#the-draggable-attribute">draggable</a></code>
   content attribute must be set to the literal value <code title="">true</code>.</p>
 
-  </div><h4 id="the-dropzone-attribute"><span class="secno">7.7.8 </span>The <dfn title="attr-dropzone"><code>dropzone</code></dfn> attribute</h4><p>All <a href="infrastructure.html#html-elements">HTML elements</a> may have the <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code> content attribute set. When
+  </div><h4 id="the-dropzone-attribute"><span class="secno">7.6.8 </span>The <dfn title="attr-dropzone"><code>dropzone</code></dfn> attribute</h4><p>All <a href="infrastructure.html#html-elements">HTML elements</a> may have the <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code> content attribute set. When
   specified, its value must be an <a href="common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens">unordered set of unique
   space-separated tokens</a> that are <a href="infrastructure.html#ascii-case-insensitive">ASCII
   case-insensitive</a>. The allowed values are the following:</p><dl><dt><dfn id="attr-dropzone-copy" title="attr-dropzone-copy"><code>copy</code></dfn></dt>
@@ -2034,10 +2056,8 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
    result in a link to the original data.</p>
 
 
-   </dd><dt>Any keyword with three characters or more, beginning with the
-   two characters U+0073 LATIN SMALL LETTER S and U+003A COLON or
-   U+0053 LATIN CAPITAL LETTER S and U+003A COLON (i.e. an <a href="infrastructure.html#ascii-case-insensitive">ASCII
-   case-insensitive</a> match for the string "<code title="">s:</code>")<dt>
+   </dd><dt>Any keyword with eight characters or more, beginning with the
+   an <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for the string "<code title="">string:</code>"<dt>
 
    </dt></dt><dd><p>Indicates that items with <a href="#the-drag-data-item-kind">the drag data item
    kind</a> <i>Plain Unicode string</i> and <a href="#the-drag-data-item-type-string">the drag data
@@ -2045,15 +2065,15 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
    of the keyword are accepted.</p></dd>
 
 
-   <dt>Any keyword with three characters or more, beginning with the
-   two characters U+0066 LATIN SMALL LETTER F and U+003A COLON or
-   U+0046 LATIN CAPITAL LETTER F and U+003A COLON (i.e. an <a href="infrastructure.html#ascii-case-insensitive">ASCII
-   case-insensitive</a> match for the string "<code title="">f:</code>")<dt>
+
+   <dt>Any keyword with six characters or more, beginning with an
+   <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for the string "<code title="">file:</code>"<dt>
 
    </dt></dt><dd><p>Indicates that items with <a href="#the-drag-data-item-kind">the drag data item
    kind</a> <i><a href="infrastructure.html#file">File</a></i> and <a href="#the-drag-data-item-type-string">the drag data item type
    string</a> set to a value that matches the remainder of the
    keyword are accepted.</p></dd>
+
 
 
   </dl><p>The <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code> content
@@ -2106,24 +2126,23 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
 
       </ol></li>
 
-     <li><p>If <var title="">keyword</var> is shorter than three
-     characters in length, then skip to the step labeled <i>end of
+     <li><p>If <var title="">keyword</var> does not contain a U+003A
+     COLON character (:), or if the first such character in <var title="">keyword</var> is either the first character or the last
+     character in the string, then skip to the step labeled <i>end of
      keyword</i> below.</p></li>
 
-     <li><p>If the second character in <var title="">keyword</var> is
-     not a U+003A COLON character (:), then skip to the step labeled
-     <i>end of keyword</i> below.</p></li>
+     <li><p>Let <var title="">kind code</var> be the substring
+     of <var title="">keyword</var> from the first character in the
+     string to the last character in the string that is before the
+     first U+003A COLON character (:) in the string, <a href="infrastructure.html#converted-to-ascii-lowercase">converted
+     to ASCII lowercase</a>.</p>
 
-     <li><p>Let <var title="">kind code</var> be the first character
-     in <var title="">keyword</var>, <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII
-     lowercase</a>.</p></li>
-
-     <li>
+     </li><li>
 
       <p>Jump to the appropriate step from the list below, based on
       the value of <var title="">kind code</var>:</p>
 
-      <dl class="switch"><dt>If <var title="">kind code</var> is a U+0073 LATIN SMALL LETTER S character</dt>
+      <dl class="switch"><dt>If <var title="">kind code</var> is the string "<code title="">string</code>"</dt>
        <dd>
 
         <p>Let <var title="">kind</var> be
@@ -2132,13 +2151,15 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
        </dd>
 
 
-       <dt>If <var title="">kind code</var> is a U+0066 LATIN SMALL LETTER F character</dt>
+
+       <dt>If <var title="">kind code</var> is the string "<code title="">file</code>"</dt>
        <dd>
 
         <p>Let <var title="">kind</var> be
         <i><a href="infrastructure.html#file">File</a></i>.</p>
 
        </dd>
+
 
 
        <dt>Otherwise</dt>
@@ -2150,9 +2171,10 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
 
       </dl></li>
 
-     <li><p>Let <var title="">type</var> be the string consisting of
-     all but the first two characters of <var title="">keyword</var>,
-     <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a>.</p></li>
+     <li><p>Let <var title="">type</var> be the substring of <var title="">keyword</var> from the first character after the first
+     U+003A COLON character (:) in the string, to the last character
+     in the string, <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII
+     lowercase</a>.</p></li>
 
      <li><p>If there exist any items in the <a href="#drag-data-store-item-list">drag data store item
      list</a> whose <a href="#the-drag-data-item-kind" title="the drag data item kind">drag data
@@ -2183,11 +2205,11 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
 
   </div><div class="example">
 
-   <p>In this example, a <code><a href="grouping-content.html#the-div-element">div</a></code> element is made into a drop
+   <p>In this example, a <code><a href="the-div-element.html#the-div-element">div</a></code> element is made into a drop
    target for image files using the <code title="attr-dropzone"><a href="#the-dropzone-attribute">dropzone</a></code> attribute. Images dropped
    into the target are then displayed.</p>
 
-   <pre>&lt;div dropzone="copy f:image/png f:image/gif f:image/jpeg" ondrop="receive(event, this)"&gt;
+   <pre>&lt;div dropzone="copy file:image/png file:image/gif file:image/jpeg" ondrop="receive(event, this)"&gt;
  &lt;p&gt;Drop an image here to have it displayed.&lt;/p&gt;
 &lt;/div&gt;
 &lt;script&gt;
@@ -2205,7 +2227,7 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
 
   </div><div class="impl">
 
-  <h4 id="security-risks-in-the-drag-and-drop-model"><span class="secno">7.7.9 </span>Security risks in the drag-and-drop model</h4>
+  <h4 id="security-risks-in-the-drag-and-drop-model"><span class="secno">7.6.9 </span>Security risks in the drag-and-drop model</h4>
 
   <p>User agents must not make the data added to the
   <code><a href="#datatransfer">DataTransfer</a></code> object during the <code title="event-dragstart"><a href="#event-dragstart">dragstart</a></code> event available to scripts
@@ -2228,443 +2250,22 @@ interface <dfn id="functionstringcallback">FunctionStringCallback</dfn> {
   data to be dragged from sensitive sources and dropped into hostile
   documents without the user's consent.</p>
 
-  </div><h3 id="editing-apis"><span class="secno">7.8 </span>Editing APIs</h3><dl class="domintro"><dt><var title="">document</var> . <code title="dom-document-execCommand"><a href="#execCommand">execCommand</a></code>(<var title="">commandId</var> [, <var title="">showUI</var> [, <var title="">value</var> ] ] )</dt>
+  <p>User agents should filter potentially active (scripted) content
+  (e.g. HTML) when it is dragged and when it is dropped, using a
+  whitelist of known-safe features. This specification does not
+  specify how this is performed.</p>
 
-   <dd>
+  <div class="example">
 
-    <p>Runs the action specified by the first argument, as described
-    in the list below. The second and third arguments sometimes affect
-    the action. (If they don't they are ignored.)</p>
+   <p>Consider a hostile page providing some content and gettuing the
+   user to select and drag and drop (or indeed, copy and paste) that
+   content to a victim page's <code title="attr-contenteditable"><a href="editing.html#attr-contenteditable">contenteditable</a></code> region. If the
+   browser does not ensure that only safe content is dragged,
+   potentially unsafe content such as scripts and event handlers in
+   the selection, once dropped (or pasted) into the victim site, get
+   the privileges of the victim site. This would thus enable a
+   cross-site scripting attack.</p>
 
-   </dd>
+  </div>
 
-   <dt><var title="">document</var> . <code title="dom-document-queryCommandEnabled"><a href="#dom-document-querycommandenabled">queryCommandEnabled</a></code>(<var title="">commandId</var>)</dt>
-
-   <dd>
-
-    <p>Returns whether the given command is enabled, as described in the list below.</p>
-
-   </dd>
-
-   <dt><var title="">document</var> . <code title="dom-document-queryCommandIndeterm"><a href="#dom-document-querycommandindeterm">queryCommandIndeterm</a></code>(<var title="">commandId</var>)</dt>
-
-   <dd>
-
-    <p>Returns whether the given command is indeterminate, as described in the list below.</p>
-
-   </dd>
-
-   <dt><var title="">document</var> . <code title="dom-document-queryCommandState"><a href="#dom-document-querycommandstate">queryCommandState</a></code>(<var title="">commandId</var>)</dt>
-
-   <dd>
-
-    <p>Returns the state of the command, as described in the list below.</p>
-
-   </dd>
-
-   <dt><var title="">document</var> . <code title="dom-document-queryCommandSupported"><a href="#dom-document-querycommandsupported">queryCommandSupported</a></code>(<var title="">commandId</var>)</dt>
-
-   <dd>
-
-    <p>Returns true if the command is supported; otherwise, returns false.</p>
-
-   </dd>
-
-   <dt><var title="">document</var> . <code title="dom-document-queryCommandValue"><a href="#dom-document-querycommandvalue">queryCommandValue</a></code>(<var title="">commandId</var>)</dt>
-
-   <dd>
-
-    <p>Returns the value of the command, as described in the list below.</p>
-
-   </dd>
-
-  </dl><div class="impl">
-
-  <p>The <dfn id="execCommand" title="dom-document-execCommand"><code>execCommand(<var title="">commandId</var>, <var title="">showUI</var>, <var title="">value</var>)</code></dfn> method on the
-  <code><a href="dom.html#htmldocument">HTMLDocument</a></code> interface allows scripts to perform
-  actions on the current selection or at the current caret position.
-  Generally, these commands would be used to implement editor UI, for
-  example having a "delete" button on a toolbar.</p>
-
-  <p>There are three variants to this method, with one, two, and three
-  arguments respectively. The <var title="">showUI</var> and <var title="">value</var> parameters, even if specified, are ignored
-  except where otherwise stated.</p>
-
-  <p>When <code title="dom-document-execCommand"><a href="#execCommand">execCommand()</a></code>
-  is invoked, the user agent must run the following steps:</p>
-
-  <ol><li>If the given <var title="">commandId</var> maps to an entry in
-   the list below whose "Enabled When" entry has a condition that is
-   currently false, do nothing; abort these steps.</li>
-
-   <li>Otherwise, execute the "Action" listed below for the given <var title="">commandId</var>.</li>
-
-  </ol></div><p>A document is <dfn id="ready-for-editing-host-commands">ready for editing host commands</dfn> if it
-  has a selection that is entirely within an <a href="editing.html#editing-host">editing
-  host</a>, or if it has no selection but its caret is inside an
-  <a href="editing.html#editing-host">editing host</a>.</p><div class="impl">
-
-  <p>The <dfn id="dom-document-querycommandenabled" title="dom-document-queryCommandEnabled"><code>queryCommandEnabled(<var title="">commandId</var>)</code></dfn> method, when invoked, must
-  return true if the condition listed below under "Enabled When" for
-  the given <var title="">commandId</var> is true, and false
-  otherwise.</p>
-
-  <p>The <dfn id="dom-document-querycommandindeterm" title="dom-document-queryCommandIndeterm"><code>queryCommandIndeterm(<var title="">commandId</var>)</code></dfn> method, when invoked, must
-  return true if the condition listed below under "Indeterminate When"
-  for the given <var title="">commandId</var> is true, and false
-  otherwise.</p>
-
-  <p>The <dfn id="dom-document-querycommandstate" title="dom-document-queryCommandState"><code>queryCommandState(<var title="">commandId</var>)</code></dfn> method, when invoked, must
-  return the value expressed below under "State" for the given <var title="">commandId</var>.</p>
-
-  <p>The <dfn id="dom-document-querycommandsupported" title="dom-document-queryCommandSupported"><code>queryCommandSupported(<var title="">commandId</var>)</code></dfn> method, when invoked, must
-  return true if the given <var title="">commandId</var> is in the
-  list below, and false otherwise.</p>
-
-  <p>The <dfn id="dom-document-querycommandvalue" title="dom-document-queryCommandValue"><code>queryCommandValue(<var title="">commandId</var>)</code></dfn> method, when invoked, must
-  return the value expressed below under "Value" for the given <var title="">commandId</var>.</p>
-
-  </div><p>The possible values for <var title="">commandId</var>, and their
-  corresponding meanings, are as follows. <span class="impl">These
-  values must be compared to the argument in an <a href="infrastructure.html#ascii-case-insensitive">ASCII
-  case-insensitive</a> manner.</span></p><dl><dt><dfn id="command-bold" title="command-bold"><code>bold</code></dfn></dt>
-   <dd><strong>Summary</strong>: Toggles whether the selection is bold.</dd>
-   <dd class="impl"><strong>Action</strong>: The user agent must act as if the user
-   had requested that the selection <a href="editing.html#contenteditable-wrapSemantic">be wrapped in the
-   semantics</a> of the <em><code><a href="text-level-semantics.html#the-b-element">b</a></code></em> element (or, again,
-   unwrapped, or have that semantic inserted or removed, as defined by
-   the UA).</dd>
-   <dd><strong>Enabled When</strong>: The document is <a href="#ready-for-editing-host-commands">ready for
-   editing host commands</a>.</dd>
-   <dd><strong>Indeterminate When</strong>: Never.</dd>
-   <dd><strong>State</strong>: True if the selection, or the caret, if
-   there is no selection, is, or is contained within, a
-   <code><a href="text-level-semantics.html#the-b-element">b</a></code> element. False otherwise.</dd>
-   <dd><strong>Value</strong>: The string "<code title="">true</code>"
-   if the expression given for the "State" above is true, the string
-   "<code title="">false</code>" otherwise.</dd>
-
-   <dt><dfn id="command-createlink" title="command-createLink"><code>createLink</code></dfn></dt>
-   <dd><strong>Summary</strong>: Toggles whether the selection is a
-   link or not. If the second argument is true, and a link is to be
-   added, the user agent will ask the user for the address. Otherwise,
-   the third argument will be used as the address.</dd>
-   <dd class="impl"><strong>Action</strong>: The user agent must act as if the user
-   had requested that the selection <a href="editing.html#contenteditable-wrapSemantic">be wrapped in the
-   semantics</a> of the <em><code><a href="text-level-semantics.html#the-a-element">a</a></code></em> element (or, again,
-   unwrapped, or have that semantic inserted or removed, as defined by
-   the UA). If the user agent creates an <code><a href="text-level-semantics.html#the-a-element">a</a></code> element or
-   modifies an existing <code><a href="text-level-semantics.html#the-a-element">a</a></code> element, then if the <var title="">showUI</var> argument is present and has the value false,
-   then the value of the <var title="">value</var> argument must be
-   used as the <a href="urls.html#url">URL</a> of the link. Otherwise, the user agent
-   should prompt the user for the URL of the link.</dd>
-   <dd><strong>Enabled When</strong>: The document is <a href="#ready-for-editing-host-commands">ready for
-   editing host commands</a>.</dd>
-   <dd><strong>Indeterminate When</strong>: Never.</dd>
-   <dd><strong>State</strong>: Always false.</dd>
-   <dd><strong>Value</strong>: Always the string "<code title="">false</code>".</dd>
-
-   <dt><dfn id="command-delete" title="command-delete"><code>delete</code></dfn></dt>
-   <dd><strong>Summary</strong>: Deletes the selection or the
-   character before the cursor.</dd>
-   <dd class="impl"><strong>Action</strong>: The user agent must act as if the user
-   had performed <a href="editing.html#contenteditable-delete">a backspace
-   operation</a>.</dd>
-   <dd><strong>Enabled When</strong>: The document is <a href="#ready-for-editing-host-commands">ready for
-   editing host commands</a>.</dd>
-   <dd><strong>Indeterminate When</strong>: Never.</dd>
-   <dd><strong>State</strong>: Always false.</dd>
-   <dd><strong>Value</strong>: Always the string "<code title="">false</code>".</dd>
-
-   <dt><dfn id="command-formatblock" title="command-formatBlock"><code>formatBlock</code></dfn></dt>
-   <dd><strong>Summary</strong>: Wraps the selection in the element
-   given by the third argument. If the third argument doesn't
-   specify an element that is a <dfn id="formatblock-candidate"><code title="">formatBlock</code>
-   candidate</dfn>, does nothing.</dd>
-   <dd class="impl">
-    <p><strong>Action</strong>: The user agent must run the following
-    steps:</p>
-    <ol><li><p>If the <var title="">value</var> argument wasn't
-     specified, abort these steps without doing anything.</p></li>
-     <li><p>If the <var title="">value</var> argument has a leading
-     U+003C LESS-THAN SIGN character (&lt;) and a trailing U+003E
-     GREATER-THAN SIGN character (&gt;), then remove the first and last
-     characters from <var title="">value</var>.</p></li>
-     <li>
-      <p>If <var title="">value</var> is (now) an <a href="infrastructure.html#ascii-case-insensitive">ASCII
-      case-insensitive</a> match for the tag name of an element
-      defined by this specification that is defined to be a
-      <a href="#formatblock-candidate"><code title="">formatBlock</code> candidate</a>, then,
-      for every position in the selection, take the nearest
-      <a href="#formatblock-candidate"><code title="">formatBlock</code> candidate</a>
-      ancestor element of that position that contains only
-      <a href="content-models.html#phrasing-content">phrasing content</a>, and, if that element is
-      <a href="editing.html#editable">editable</a>, is not an <a href="editing.html#editing-host">editing host</a>, and
-      has a parent element whose content model allows that parent to
-      contain any <a href="content-models.html#flow-content">flow content</a>, replace it with an
-      element in the HTML namespace whose name is <var title="">value</var>, and move all the children that were in it
-      to the new element, and copy all the attributes that were on it
-      to the new element.</p>
-      <p>If there is no selection, then, where in the description
-      above refers to the selection, the user agent must act as if the
-      selection was an empty range (with just one position) at the
-      caret position.</p>
-     </li>
-    </ol></dd>
-   <dd><strong>Enabled When</strong>: The document is <a href="#ready-for-editing-host-commands">ready for
-   editing host commands</a>.</dd>
-   <dd><strong>Indeterminate When</strong>: Never.</dd>
-   <dd><strong>State</strong>: Always false.</dd>
-   <dd><strong>Value</strong>: Always the string "<code title="">false</code>".</dd>
-
-   <dt><dfn id="command-forwarddelete" title="command-forwardDelete"><code>forwardDelete</code></dfn></dt>
-   <dd><strong>Summary</strong>: Deletes the selection or the
-   character after the cursor.</dd>
-   <dd class="impl"><strong>Action</strong>: The user agent must act as if the user
-   had performed <a href="editing.html#contenteditable-delete">a forward delete
-   operation</a>.</dd>
-   <dd><strong>Enabled When</strong>: The document is <a href="#ready-for-editing-host-commands">ready for
-   editing host commands</a>.</dd>
-   <dd><strong>Indeterminate When</strong>: Never.</dd>
-   <dd><strong>State</strong>: Always false.</dd>
-   <dd><strong>Value</strong>: Always the string "<code title="">false</code>".</dd>
-
-   <dt><dfn id="command-insertimage" title="command-insertImage"><code>insertImage</code></dfn></dt>
-   <dd><strong>Summary</strong>: Toggles whether the selection is an
-   image or not. If the second argument is true, and an image is to be
-   added, the user agent will ask the user for the address. Otherwise,
-   the third argument will be used as the address.</dd>
-   <dd class="impl"><strong>Action</strong>: The user agent must act
-   as if the user had requested that the selection <a href="editing.html#contenteditable-wrapSemantic">be wrapped in the
-   semantics</a> of the <em><code><a href="embedded-content-1.html#the-img-element">img</a></code></em> element (or, again,
-   unwrapped, or have that semantic inserted or removed, as defined by
-   the UA). If the user agent creates an <code><a href="embedded-content-1.html#the-img-element">img</a></code> element or
-   modifies an existing <code><a href="embedded-content-1.html#the-img-element">img</a></code> element, then if the <var title="">showUI</var> argument is present and has the value false,
-   then the value of the <var title="">value</var> argument must be
-   used as the <a href="urls.html#url">URL</a> of the image. Otherwise, the user
-   agent should prompt the user for the URL of the image.</dd>
-   <dd><strong>Enabled When</strong>: The document is <a href="#ready-for-editing-host-commands">ready for
-   editing host commands</a>.</dd>
-   <dd><strong>Indeterminate When</strong>: Never.</dd>
-   <dd><strong>State</strong>: Always false.</dd>
-   <dd><strong>Value</strong>: Always the string "<code title="">false</code>".</dd>
-
-   <dt><dfn id="command-inserthtml" title="command-insertHTML"><code>insertHTML</code></dfn></dt>
-   <dd><strong>Summary</strong>: Replaces the selection with the value
-   of the third argument parsed as HTML.</dd>
-   <dd class="impl">
-    <p><strong>Action</strong>: The user agent must run the following
-    steps:</p>
-    <ol><li><p>If the document is an <a href="dom.html#xml-documents" title="XML documents">XML
-     document</a>, then throw an <code><a href="common-dom-interfaces.html#invalid_access_err">INVALID_ACCESS_ERR</a></code>
-     exception and abort these steps.</p></li>
-     <li><p>If the <var title="">value</var> argument wasn't
-     specified, abort these steps without doing anything.</p></li>
-     <li><p>If there is a selection, act as if the user had requested
-     that <a href="editing.html#contenteditable-delete">the selection be
-     deleted</a>.</p></li>
-     <li><p>Invoke the <a href="the-end.html#html-fragment-parsing-algorithm">HTML fragment parsing algorithm</a>
-     with an arbitrary orphan <code><a href="sections.html#the-body-element">body</a></code> element owned by the
-     same <code><a href="infrastructure.html#document">Document</a></code> as the <i title="">context</i> element
-     and with the <var title="">value</var> argument as <i title="">input</i>.</p></li>
-     <li><p>Insert the nodes returned by the previous step into the
-     document at the location of the caret, firing any mutation events
-     as appropriate.</p></li>
-    </ol></dd>
-   <dd><strong>Enabled When</strong>: The document is <a href="#ready-for-editing-host-commands">ready for
-   editing host commands</a>.</dd>
-   <dd><strong>Indeterminate When</strong>: Never.</dd>
-   <dd><strong>State</strong>: Always false.</dd>
-   <dd><strong>Value</strong>: Always the string "<code title="">false</code>".</dd>
-
-   <dt><dfn id="command-insertlinebreak" title="command-insertLineBreak"><code>insertLineBreak</code></dfn></dt>
-   <dd><strong>Summary</strong>: Inserts a line break.</dd>
-   <dd class="impl"><strong>Action</strong>: The user agent must act as if the user
-   had <a href="editing.html#contenteditable-br">requested a line
-   separator</a>.</dd>
-   <dd><strong>Enabled When</strong>: The document is <a href="#ready-for-editing-host-commands">ready for
-   editing host commands</a>.</dd>
-   <dd><strong>Indeterminate When</strong>: Never.</dd>
-   <dd><strong>State</strong>: Always false.</dd>
-   <dd><strong>Value</strong>: Always the string "<code title="">false</code>".</dd>
-
-   <dt><dfn id="command-insertorderedlist" title="command-insertOrderedList"><code>insertOrderedList</code></dfn></dt>
-   <dd><strong>Summary</strong>: Toggles whether the selection is an ordered list.</dd>
-   <dd class="impl"><strong>Action</strong>: The user agent must act as if the user
-   had requested that the selection <a href="editing.html#contenteditable-wrapSemantic">be wrapped in the
-   semantics</a> of the <code><a href="grouping-content.html#the-ol-element">ol</a></code> element (or unwrapped, or, if
-   there is no selection, have that semantic inserted or removed
-   &#x2014; the exact behavior is UA-defined).</dd>
-   <dd><strong>Enabled When</strong>: The document is <a href="#ready-for-editing-host-commands">ready for
-   editing host commands</a>.</dd>
-   <dd><strong>Indeterminate When</strong>: Never.</dd>
-   <dd><strong>State</strong>: Always false.</dd>
-   <dd><strong>Value</strong>: Always the string "<code title="">false</code>".</dd>
-
-   <dt><dfn id="command-insertunorderedlist" title="command-insertUnorderedList"><code>insertUnorderedList</code></dfn></dt>
-   <dd><strong>Summary</strong>: Toggles whether the selection is an unordered list.</dd>
-   <dd class="impl"><strong>Action</strong>: The user agent must act as if the user
-   had requested that the selection <a href="editing.html#contenteditable-wrapSemantic">be wrapped in the
-   semantics</a> of the <code><a href="grouping-content.html#the-ul-element">ul</a></code> element (or unwrapped, or, if
-   there is no selection, have that semantic inserted or removed
-   &#x2014; the exact behavior is UA-defined).</dd>
-   <dd><strong>Enabled When</strong>: The document is <a href="#ready-for-editing-host-commands">ready for
-   editing host commands</a>.</dd>
-   <dd><strong>Indeterminate When</strong>: Never.</dd>
-   <dd><strong>State</strong>: Always false.</dd>
-   <dd><strong>Value</strong>: Always the string "<code title="">false</code>".</dd>
-
-   <dt><dfn id="command-insertparagraph" title="command-insertParagraph"><code>insertParagraph</code></dfn></dt>
-   <dd><strong>Summary</strong>: Inserts a paragraph break.</dd>
-   <dd class="impl"><strong>Action</strong>: The user agent must act as if the user
-   had performed a <a href="editing.html#contenteditable-breakBlock">break
-   block</a> editing action.</dd>
-   <dd><strong>Enabled When</strong>: The document is <a href="#ready-for-editing-host-commands">ready for
-   editing host commands</a>.</dd>
-   <dd><strong>Indeterminate When</strong>: Never.</dd>
-   <dd><strong>State</strong>: Always false.</dd>
-   <dd><strong>Value</strong>: Always the string "<code title="">false</code>".</dd>
-
-   <dt><dfn id="command-inserttext" title="command-insertText"><code>insertText</code></dfn></dt>
-   <dd><strong>Summary</strong>: Inserts the text given in the third parameter.</dd>
-   <dd class="impl"><strong>Action</strong>: The user agent must act as if the user
-   had <a href="editing.html#contenteditable-insertText">inserted text</a>
-   corresponding to the <var title="">value</var> parameter.</dd>
-   <dd><strong>Enabled When</strong>: The document is <a href="#ready-for-editing-host-commands">ready for
-   editing host commands</a>.</dd>
-   <dd><strong>Indeterminate When</strong>: Never.</dd>
-   <dd><strong>State</strong>: Always false.</dd>
-   <dd><strong>Value</strong>: Always the string "<code title="">false</code>".</dd>
-
-   <dt><dfn id="command-italic" title="command-italic"><code>italic</code></dfn></dt>
-   <dd><strong>Summary</strong>: Toggles whether the selection is italic.</dd>
-   <dd class="impl"><strong>Action</strong>: The user agent must act as if the user
-   had requested that the selection <a href="editing.html#contenteditable-wrapSemantic">be wrapped in the
-   semantics</a> of the <em><code><a href="text-level-semantics.html#the-i-element">i</a></code></em> element (or, again,
-   unwrapped, or have that semantic inserted or removed, as defined by
-   the UA).</dd>
-   <dd><strong>Enabled When</strong>: The document is <a href="#ready-for-editing-host-commands">ready for
-   editing host commands</a>.</dd>
-   <dd><strong>Indeterminate When</strong>: Never.</dd>
-   <dd><strong>State</strong>: True if the selection, or the caret, if
-   there is no selection, is, or is contained within, a
-   <code><a href="text-level-semantics.html#the-i-element">i</a></code> element. False otherwise.</dd>
-   <dd><strong>Value</strong>: The string "<code title="">true</code>"
-   if the expression given for the "State" above is true, the string
-   "<code title="">false</code>" otherwise.</dd>
-
-   <dt><dfn id="command-redo" title="command-redo"><code>redo</code></dfn></dt>
-   <dd><strong>Summary</strong>: Acts as if the user had requested a redo.</dd>
-   <dd class="impl"><strong>Action</strong>: The user agent must <span title="do-redo">move forward one step</span> in its <span>undo
-   transaction history</span>, restoring the associated state. If the
-   <span>undo position</span> is at the end of the <span>undo
-   transaction history</span>, the user agent must do nothing.
-   </dd>
-   <dd><strong>Enabled When</strong>: The <span>undo position</span>
-   is not at the end of the <span>undo transaction
-   history</span>.</dd>
-   <dd><strong>Indeterminate When</strong>: Never.</dd>
-   <dd><strong>State</strong>: Always false.</dd>
-   <dd><strong>Value</strong>: Always the string "<code title="">false</code>".</dd>
-
-   <dt><dfn id="command-selectall" title="command-selectAll"><code>selectAll</code></dfn></dt>
-   <dd><strong>Summary</strong>: Selects all the editable content.</dd>
-   <dd class="impl"><strong>Action</strong>: The user agent must change the
-   selection so that all the content in the currently focused
-   <a href="editing.html#editing-host">editing host</a> is selected. If no <a href="editing.html#editing-host">editing
-   host</a> is focused, then the content of the entire document
-   must be selected.</dd>
-   <dd><strong>Enabled When</strong>: Always.</dd>
-   <dd><strong>Indeterminate When</strong>: Never.</dd>
-   <dd><strong>State</strong>: Always false.</dd>
-   <dd><strong>Value</strong>: Always the string "<code title="">false</code>".</dd>
-
-   <dt><dfn id="command-subscript" title="command-subscript"><code>subscript</code></dfn></dt>
-   <dd><strong>Summary</strong>: Toggles whether the selection is subscripted.</dd>
-   <dd class="impl"><strong>Action</strong>: The user agent must act as if the user
-   had requested that the selection <a href="editing.html#contenteditable-wrapSemantic">be wrapped in the
-   semantics</a> of the <em><code><a href="text-level-semantics.html#the-sub-and-sup-elements">sub</a></code></em> element (or, again,
-   unwrapped, or have that semantic inserted or removed, as defined by
-   the UA).</dd>
-   <dd><strong>Enabled When</strong>: The document is <a href="#ready-for-editing-host-commands">ready for
-   editing host commands</a>.</dd>
-   <dd><strong>Indeterminate When</strong>: Never.</dd>
-   <dd><strong>State</strong>: True if the selection, or the caret, if
-   there is no selection, is, or is contained within, a
-   <code><a href="text-level-semantics.html#the-sub-and-sup-elements">sub</a></code> element. False otherwise.</dd>
-   <dd><strong>Value</strong>: The string "<code title="">true</code>"
-   if the expression given for the "State" above is true, the string
-   "<code title="">false</code>" otherwise.</dd>
-
-   <dt><dfn id="command-superscript" title="command-superscript"><code>superscript</code></dfn></dt>
-   <dd><strong>Summary</strong>: Toggles whether the selection is superscripted.</dd>
-   <dd class="impl"><strong>Action</strong>: The user agent must act as if the user
-   had requested that the selection <a href="editing.html#contenteditable-wrapSemantic">be wrapped in the
-   semantics</a> of the <code><a href="text-level-semantics.html#the-sub-and-sup-elements">sup</a></code> element (or unwrapped, or, if
-   there is no selection, have that semantic inserted or removed
-   &#x2014; the exact behavior is UA-defined).</dd>
-   <dd><strong>Enabled When</strong>: The document is <a href="#ready-for-editing-host-commands">ready for
-   editing host commands</a>.</dd>
-   <dd><strong>Indeterminate When</strong>: Never.</dd>
-   <dd><strong>State</strong>: True if the selection, or the caret, if
-   there is no selection, is, or is contained within, a
-   <code><a href="text-level-semantics.html#the-sub-and-sup-elements">sup</a></code> element. False otherwise.</dd>
-   <dd><strong>Value</strong>: The string "<code title="">true</code>"
-   if the expression given for the "State" above is true, the string
-   "<code title="">false</code>" otherwise.</dd>
-
-   <dt><dfn id="command-undo" title="command-undo"><code>undo</code></dfn></dt>
-   <dd><strong>Summary</strong>: Acts as if the user had requested an undo.</dd>
-   <dd class="impl"><strong>Action</strong>: The user agent must <span title="do-undo">move back one step</span> in its <span>undo
-   transaction history</span>, restoring the associated state. If the
-   <span>undo position</span> is at the start of the <span>undo
-   transaction history</span>, the user agent must do nothing.
-   </dd>
-   <dd><strong>Enabled When</strong>: The <span>undo position</span>
-   is not at the start of the <span>undo transaction
-   history</span>.</dd>
-   <dd><strong>Indeterminate When</strong>: Never.</dd>
-   <dd><strong>State</strong>: Always false.</dd>
-   <dd><strong>Value</strong>: Always the string "<code title="">false</code>".</dd>
-
-   <dt><dfn id="command-unlink" title="command-unlink"><code>unlink</code></dfn></dt>
-   <dd><strong>Summary</strong>: Removes all links from the selection.</dd>
-   <dd class="impl"><strong>Action</strong>: The user agent must remove all
-   <code><a href="text-level-semantics.html#the-a-element">a</a></code> elements that have <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code> attributes and that are partially
-   or completely included in the current selection.</dd>
-   <dd><strong>Enabled When</strong>: The document has a selection
-   that is entirely within an <a href="editing.html#editing-host">editing host</a> and that
-   contains (either partially or completely) at least one
-   <code><a href="text-level-semantics.html#the-a-element">a</a></code> element that has an <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code> attribute.</dd>
-   <dd><strong>Indeterminate When</strong>: Never.</dd>
-   <dd><strong>State</strong>: Always false.</dd>
-   <dd><strong>Value</strong>: Always the string "<code title="">false</code>".</dd>
-
-   <dt><dfn id="command-unselect" title="command-unselect"><code>unselect</code></dfn></dt>
-   <dd><strong>Summary</strong>: Unselects everything.</dd>
-   <dd class="impl"><strong>Action</strong>: The user agent must change the
-   selection so that nothing is selected.</dd>
-   <dd><strong>Enabled When</strong>: Always.</dd>
-   <dd><strong>Indeterminate When</strong>: Never.</dd>
-   <dd><strong>State</strong>: Always false.</dd>
-   <dd><strong>Value</strong>: Always the string "<code title="">false</code>".</dd>
-
-   <dt class="impl"><code><var title="">vendorID</var>-<var title="">customCommandID</var></code></dt>
-   <dd class="impl"><strong>Action</strong>: User agents may implement
-   vendor-specific extensions to this API. Vendor-specific extensions
-   to the list of commands should use the syntax <code><var title="">vendorID</var>-<var title="">customCommandID</var></code>
-   so as to prevent clashes between extensions from different vendors
-   and future additions to this specification.</dd>
-   <dd class="impl"><strong>Enabled When</strong>: UA-defined.</dd>
-   <dd class="impl"><strong>Indeterminate When</strong>: UA-defined.</dd>
-   <dd class="impl"><strong>State</strong>: UA-defined.</dd>
-   <dd class="impl"><strong>Value</strong>: UA-defined.</dd>
-
-   <dt class="impl">Anything else</dt>
-   <dd class="impl"><strong>Action</strong>: User agents must do nothing.</dd>
-   <dd class="impl"><strong>Enabled When</strong>: Never.</dd>
-   <dd class="impl"><strong>Indeterminate When</strong>: Never.</dd>
-   <dd class="impl"><strong>State</strong>: Always false.</dd>
-   <dd class="impl"><strong>Value</strong>: Always the string "<code title="">false</code>".</dd>
-
-  </dl></body></html>
+  </div></body></html>

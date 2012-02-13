@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>5.4 Session history and navigation &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<!DOCTYPE html>
+<html lang="en-US-x-Hixie"><head><title>5.4 Session history and navigation &#x2014; HTML5</title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -19,6 +19,7 @@
    dd table + p { margin-top: 1em; }
    p + * > li, dd li { margin: 1em 0; }
    dt, dfn { font-weight: bold; font-style: normal; }
+   i, em { font-style: italic; }
    dt dfn { font-style: italic; }
    pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
    pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
@@ -40,9 +41,10 @@
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
 
    .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   img.extra { float: right; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   img.extra, p.overview { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; position: relative; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl::before { content: "IDL"; font: bold small sans-serif; padding: 0.5em; background: white; position: absolute; top: 0; margin: -1px 0 0 -4em; width: 1.5em; border: thin solid; border-radius: 0 0 0 0.5em }
    pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
    pre.css:first-line { color: #AAAA50; }
    dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
@@ -50,6 +52,7 @@
    dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
    dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
    dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
    dl.switch { padding-left: 2em; }
    dl.switch > dt { text-indent: -1.5em; }
    dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
@@ -104,6 +107,7 @@
    .note { color: green; background: transparent; font-family: sans-serif; }
    .warning { color: red; background: transparent; }
    .note, .warning { font-weight: bolder; font-style: italic; }
+   .note em, .warning em, .note i, .warning i { font-style: normal; }
    p.note, div.note { padding: 0.5em 2em; }
    span.note { padding: 0 2em; }
    .note p:first-child, .warning p:first-child { margin-top: 0; }
@@ -295,8 +299,6 @@
      src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
    }
 
-  ]]></style><style type="text/css"><![CDATA[
-   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
   ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
    function getCookie(name) {
      var params = location.search.substr(1).split("&");
@@ -315,24 +317,26 @@
      }
      return null;
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="origin-0.html" title="5.3 Origin" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="offline.html" title="5.6 Offline Web applications" rel="next"/></head><body><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="origin-0.html" title="5.3 Origin" rel="prev"/><link href="index.html#contents" title="Table of contents" rel="contents"/><link href="offline.html" title="5.6 Offline Web applications" rel="next"/></head><body onload="fixBrokenLink();" class="split chapter"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   </div><div>
-   <a href="origin-0.html" class="prev">5.3 Origin</a> &#x2013;
-   <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="offline.html" class="next">5.6 Offline Web applications</a>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
+
+   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   </div><nav class="prev_next"><a href="origin-0.html">&#x2190; 5.3 Origin</a> &#x2013;
+   <a href="index.html#contents">Table of contents</a> &#x2013;
+   <a href="offline.html">5.6 Offline Web applications &#x2192;</a>
   <ol class="toc"><li><ol><li><a href="history.html#history"><span class="secno">5.4 </span>Session history and navigation</a>
     <ol><li><a href="history.html#the-session-history-of-browsing-contexts"><span class="secno">5.4.1 </span>The session history of browsing contexts</a></li><li><a href="history.html#the-history-interface"><span class="secno">5.4.2 </span>The <code>History</code> interface</a></li><li><a href="history.html#the-location-interface"><span class="secno">5.4.3 </span>The <code>Location</code> interface</a>
       <ol><li><a href="history.html#security-location"><span class="secno">5.4.3.1 </span>Security</a></li></ol></li><li><a href="history.html#history-notes"><span class="secno">5.4.4 </span>Implementation notes for session history</a></li></ol></li><li><a href="history.html#browsing-the-web"><span class="secno">5.5 </span>Browsing the Web</a>
-    <ol><li><a href="history.html#navigating-across-documents"><span class="secno">5.5.1 </span>Navigating across documents</a></li><li><a href="history.html#read-html"><span class="secno">5.5.2 </span>Page load processing model for HTML files</a></li><li><a href="history.html#read-xml"><span class="secno">5.5.3 </span>Page load processing model for XML files</a></li><li><a href="history.html#read-text"><span class="secno">5.5.4 </span>Page load processing model for text files</a></li><li><a href="history.html#read-image"><span class="secno">5.5.5 </span>Page load processing model for images</a></li><li><a href="history.html#read-plugin"><span class="secno">5.5.6 </span>Page load processing model for content that uses plugins</a></li><li><a href="history.html#read-ua-inline"><span class="secno">5.5.7 </span>Page load processing model for inline content that doesn't have a DOM</a></li><li><a href="history.html#scroll-to-fragid"><span class="secno">5.5.8 </span>Navigating to a fragment identifier</a></li><li><a href="history.html#history-traversal"><span class="secno">5.5.9 </span>History traversal</a>
-      <ol><li><a href="history.html#event-definitions"><span class="secno">5.5.9.1 </span>Event definitions</a></li></ol></li><li><a href="history.html#unloading-documents"><span class="secno">5.5.10 </span>Unloading documents</a>
-      <ol><li><a href="history.html#event-definition"><span class="secno">5.5.10.1 </span>Event definition</a></li></ol></li><li><a href="history.html#aborting-a-document-load"><span class="secno">5.5.11 </span>Aborting a document load</a></li></ol></li></ol></li></ol></div><h3 id="history"><span class="secno">5.4 </span>Session history and navigation</h3><h4 id="the-session-history-of-browsing-contexts"><span class="secno">5.4.1 </span>The session history of browsing contexts</h4><p>The sequence of <code><a href="infrastructure.html#document">Document</a></code>s in a <a href="browsers.html#browsing-context">browsing
+    <ol><li><a href="history.html#navigating-across-documents"><span class="secno">5.5.1 </span>Navigating across documents</a></li><li><a href="history.html#read-html"><span class="secno">5.5.2 </span>Page load processing model for HTML files</a></li><li><a href="history.html#read-xml"><span class="secno">5.5.3 </span>Page load processing model for XML files</a></li><li><a href="history.html#read-text"><span class="secno">5.5.4 </span>Page load processing model for text files</a></li><li><a href="history.html#read-multipart-x-mixed-replace"><span class="secno">5.5.5 </span>Page load processing model for <code>multipart/x-mixed-replace</code> resources</a></li><li><a href="history.html#read-media"><span class="secno">5.5.6 </span>Page load processing model for media</a></li><li><a href="history.html#read-plugin"><span class="secno">5.5.7 </span>Page load processing model for content that uses plugins</a></li><li><a href="history.html#read-ua-inline"><span class="secno">5.5.8 </span>Page load processing model for inline content that doesn't have a DOM</a></li><li><a href="history.html#scroll-to-fragid"><span class="secno">5.5.9 </span>Navigating to a fragment identifier</a></li><li><a href="history.html#history-traversal"><span class="secno">5.5.10 </span>History traversal</a>
+      <ol><li><a href="history.html#event-definitions-0"><span class="secno">5.5.10.1 </span>Event definitions</a></li></ol></li><li><a href="history.html#unloading-documents"><span class="secno">5.5.11 </span>Unloading documents</a>
+      <ol><li><a href="history.html#event-definition"><span class="secno">5.5.11.1 </span>Event definition</a></li></ol></li><li><a href="history.html#aborting-a-document-load"><span class="secno">5.5.12 </span>Aborting a document load</a></li></ol></li></ol></li></ol></nav><h3 id="history"><span class="secno">5.4 </span>Session history and navigation</h3><h4 id="the-session-history-of-browsing-contexts"><span class="secno">5.4.1 </span>The session history of browsing contexts</h4><p>The sequence of <code><a href="dom.html#document">Document</a></code>s in a <a href="browsers.html#browsing-context">browsing
   context</a> is its <dfn id="session-history">session history</dfn>.</p><p><code><a href="#history-0">History</a></code> objects provide a representation of the
   pages in the session history of <a href="browsers.html#browsing-context" title="browsing&#10;  context">browsing contexts</a>. Each <a href="browsers.html#browsing-context">browsing
   context</a>, including <a href="browsers.html#nested-browsing-context" title="nested browsing&#10;  context">nested browsing contexts</a>, has a distinct session
-  history.</p><p>Each <code><a href="infrastructure.html#document">Document</a></code> object in a <a href="browsers.html#browsing-context">browsing
+  history.</p><p>Each <code><a href="dom.html#document">Document</a></code> object in a <a href="browsers.html#browsing-context">browsing
   context</a>'s <a href="#session-history">session history</a> is associated with a
   unique instance of the <code><a href="#history-0">History</a></code> object, although they
   all must model the same underlying <a href="#session-history">session history</a>.</p><div class="impl">
@@ -340,21 +344,21 @@
   <p>The <dfn id="dom-history" title="dom-history"><code>history</code></dfn> attribute
   of the <code><a href="browsers.html#window">Window</a></code> interface must return the object
   implementing the <code><a href="#history-0">History</a></code> interface for that
-  <code><a href="browsers.html#window">Window</a></code> object's <code><a href="infrastructure.html#document">Document</a></code>.</p>
+  <code><a href="browsers.html#window">Window</a></code> object's <code><a href="dom.html#document">Document</a></code>.</p>
 
   </div><p><code><a href="#history-0">History</a></code> objects represent their <a href="browsers.html#browsing-context">browsing
   context</a>'s session history as a flat list of <a href="#session-history-entry" title="session history entry">session history entries</a>. Each
   <dfn id="session-history-entry">session history entry</dfn> consists of either a
   <a href="urls.html#url">URL</a> or a <a href="#state-object">state object</a>, or both<span class="impl">, and may in addition have a title, a
-  <code><a href="infrastructure.html#document">Document</a></code> object, form data, a scroll position, and
+  <code><a href="dom.html#document">Document</a></code> object, form data, a scroll position, and
   other information associated with it</span>.</p><div class="impl">
 
   <p class="note">This does not imply that the user interface need be
   linear. See the <a href="#history-notes">notes below</a>.</p>
 
   </div><p class="note">Titles associated with <a href="#session-history-entry" title="session history&#10;  entry">session history entries</a> need not have any relation
-  with the current <code><a href="semantics.html#the-title-element">title</a></code> of the
-  <code><a href="infrastructure.html#document">Document</a></code>. The title of a <a href="#session-history-entry">session history
+  with the current <code><a href="the-title-element.html#the-title-element">title</a></code> of the
+  <code><a href="dom.html#document">Document</a></code>. The title of a <a href="#session-history-entry">session history
   entry</a> is intended to explain the state of the document at
   that point, so that the user can navigate the document's
   history.</p><p>URLs without associated <a href="#state-object" title="state object">state
@@ -372,11 +376,11 @@
    would still need the parsing for handling <a href="urls.html#url" title="URL">URLs</a> passed around by users, so it's only a minor
    optimization), and second, so that the author can store state that
    one wouldn't store in the URL because it only applies to the current
-   <code><a href="infrastructure.html#document">Document</a></code> instance and it would have to be reconstructed
-   if a new <code><a href="infrastructure.html#document">Document</a></code> were opened.</p>
+   <code><a href="dom.html#document">Document</a></code> instance and it would have to be reconstructed
+   if a new <code><a href="dom.html#document">Document</a></code> were opened.</p>
 
    <p>An example of the latter would be something like keeping track of
-   the precise coordinate from which a popup <code><a href="grouping-content.html#the-div-element">div</a></code> was made
+   the precise coordinate from which a popup <code><a href="the-div-element.html#the-div-element">div</a></code> was made
    to animate, so that if the user goes back, it can be made to animate
    to the same location. Or alternatively, it could be used to keep a
    pointer into a cache of data that would be fetched from the server
@@ -389,41 +393,50 @@
   <a href="browsers.html#active-document">active document</a> of the <a href="browsers.html#browsing-context">browsing
   context</a>. The <a href="#current-entry">current entry</a> is usually an entry
   for the <a href="#dom-location-href" title="dom-location-href">location</a> of the
-  <code><a href="infrastructure.html#document">Document</a></code>. However, it can also be one of the entries
+  <code><a href="dom.html#document">Document</a></code>. However, it can also be one of the entries
   for <a href="#state-object" title="state object">state objects</a> added to the
   history by that document.</p><p><dfn id="an-entry-with-persisted-user-state">An entry with persisted user state</dfn> is one that also
   has user-agent defined state. This specification does not specify
   what kind of state can be stored.</p><p class="example">For example, some user agents might want to
-  persist the scroll position, or the values of form controls.</p><p>Entries that consist of <a href="#state-object" title="state object">state
-  objects</a> share the same <code><a href="infrastructure.html#document">Document</a></code> as the entry for
+  persist the scroll position, or the values of form controls.</p><p class="note">User agents that persist the value of form controls
+  are encouraged to also persist their directionality (the value of
+  the element's <code title="attr-dir"><a href="global-attributes.html#the-dir-attribute">dir</a></code> attribute). This
+  prevents values from being displayed incorrectly after a history
+  traversal when the user had originally entered the values with an
+  explicit, non-default directionality.</p><p>Entries that consist of <a href="#state-object" title="state object">state
+  objects</a> share the same <code><a href="dom.html#document">Document</a></code> as the entry for
   the page that was active when they were added.</p><p>Contiguous entries that differ just by fragment identifier also
-  share the same <code><a href="infrastructure.html#document">Document</a></code>.</p><p class="note">All entries that share the same
-  <code><a href="infrastructure.html#document">Document</a></code> (and that are therefore merely different
-  states of one particular document) are contiguous by definition.</p><div class="impl">
+  share the same <code><a href="dom.html#document">Document</a></code>.</p><p class="note">All entries that share the same
+  <code><a href="dom.html#document">Document</a></code> (and that are therefore merely different
+  states of one particular document) are contiguous by definition.</p><p>Each <code><a href="dom.html#document">Document</a></code> in a <a href="browsers.html#browsing-context">browsing context</a>
+  also has a <dfn id="latest-entry">latest entry</dfn>. This is the entry or that
+  <code><a href="dom.html#document">Document</a></code> that was most the recently traversed to. When
+  a <code><a href="dom.html#document">Document</a></code> is created, it initially has no <a href="#latest-entry">latest
+  entry</a>.</p><div class="impl">
 
   <p>User agents may <a href="browsers.html#discard-a-document" title="discard a Document">discard</a>
-  the <code><a href="infrastructure.html#document">Document</a></code> objects of entries other than the
+  the <code><a href="dom.html#document">Document</a></code> objects of entries other than the
   <a href="#current-entry">current entry</a> that are not referenced from any script,
   reloading the pages afresh when the user or script navigates back to
   such pages. This specification does not specify when user agents
-  should discard <code><a href="infrastructure.html#document">Document</a></code> objects and when they should
+  should discard <code><a href="dom.html#document">Document</a></code> objects and when they should
   cache them.</p>
 
-  <p>Entries that have had their <code><a href="infrastructure.html#document">Document</a></code> objects
+  <p>Entries that have had their <code><a href="dom.html#document">Document</a></code> objects
   discarded must, for the purposes of the algorithms given below, act
   as if they had not. When the user or script navigates back or
   forwards to a page which has no in-memory DOM objects, any other
-  entries that shared the same <code><a href="infrastructure.html#document">Document</a></code> object with it
+  entries that shared the same <code><a href="dom.html#document">Document</a></code> object with it
   must share the new object as well.</p>
 
   </div><h4 id="the-history-interface"><span class="secno">5.4.2 </span>The <code><a href="#history-0">History</a></code> interface</h4><pre class="idl">interface <dfn id="history-0">History</dfn> {
   readonly attribute long <a href="#dom-history-length" title="dom-history-length">length</a>;
   readonly attribute any <a href="#dom-history-state" title="dom-history-state">state</a>;
-  void <a href="#dom-history-go" title="dom-history-go">go</a>(in optional long delta);
+  void <a href="#dom-history-go" title="dom-history-go">go</a>(optional long delta);
   void <a href="#dom-history-back" title="dom-history-back">back</a>();
   void <a href="#dom-history-forward" title="dom-history-forward">forward</a>();
-  void <a href="#dom-history-pushstate" title="dom-history-pushState">pushState</a>(in any data, in DOMString title, in optional DOMString url);
-  void <a href="#dom-history-replacestate" title="dom-history-replaceState">replaceState</a>(in any data, in DOMString title, in optional DOMString url);
+  void <a href="#dom-history-pushstate" title="dom-history-pushState">pushState</a>(any data, DOMString title, optional DOMString url);
+  void <a href="#dom-history-replacestate" title="dom-history-replaceState">replaceState</a>(any data, DOMString title, optional DOMString url);
 };</pre><dl class="domintro"><dt><var title="">window</var> . <code title="dom-history"><a href="#dom-history">history</a></code> . <code title="dom-history-length"><a href="#dom-history-length">length</a></code></dt>
 
    <dd>
@@ -492,7 +505,7 @@
   object is the union of all the <a href="#session-history" title="session history">session
   histories</a> of all <a href="browsers.html#browsing-context" title="browsing context">browsing
   contexts</a> of all the <a href="browsers.html#fully-active">fully active</a>
-  <code><a href="infrastructure.html#document">Document</a></code> objects that share the <code><a href="#history-0">History</a></code>
+  <code><a href="dom.html#document">Document</a></code> objects that share the <code><a href="#history-0">History</a></code>
   object's <a href="browsers.html#top-level-browsing-context">top-level browsing context</a>, with all the
   entries that are <a href="#current-entry" title="current entry">current entries</a>
   in their respective <a href="#session-history" title="session history">session
@@ -535,6 +548,7 @@
   invoked, the user agent must <a href="#traverse-the-history-by-a-delta">traverse the history by a
   delta</a> +1.</p>
 
+
   <p>To <dfn id="traverse-the-history-by-a-delta">traverse the history by a delta</dfn> <var title="">delta</var>, the user agent must <a href="webappapis.html#queue-a-task">queue a task</a>
   to run the following steps. The <a href="webappapis.html#task-source">task source</a> for the
   queued task is the <a href="webappapis.html#history-traversal-task-source">history traversal task source</a>.</p>
@@ -558,8 +572,8 @@
    <li>
 
     <p>If the <var title="">specified browsing context</var>'s
-    <a href="browsers.html#active-document">active document</a> is not the same <code><a href="infrastructure.html#document">Document</a></code>
-    as the <code><a href="infrastructure.html#document">Document</a></code> of the <var title="">specified
+    <a href="browsers.html#active-document">active document</a> is not the same <code><a href="dom.html#document">Document</a></code>
+    as the <code><a href="dom.html#document">Document</a></code> of the <var title="">specified
     entry</var>, then run these substeps:</p>
 
     <ol><li><p><a href="#prompt-to-unload-a-document" title="prompt to unload a document">Prompt to
@@ -603,19 +617,19 @@
     <ol><li><a href="urls.html#resolve-a-url" title="resolve a url">Resolve</a> the value of the
      third argument, relative to the <a href="browsers.html#entry-script">entry script</a>'s <a href="webappapis.html#script-s-base-url" title="script's base URL">base URL</a>.</li>
 
-     <li>If that fails, raise a <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code> exception
+     <li>If that fails, throw a <code><a href="infrastructure.html#securityerror">SecurityError</a></code> exception
      and abort these steps.</li>
 
      <li>Compare the resulting <a href="urls.html#absolute-url">absolute URL</a> to <a href="dom.html#the-document-s-address">the
      document's address</a>. If any part of these two <a href="urls.html#url" title="URL">URLs</a> differ other than the <a href="urls.html#url-path" title="url-path">&lt;path&gt;</a>, <a href="urls.html#url-query" title="url-query">&lt;query&gt;</a>, and <a href="urls.html#url-fragment" title="url-fragment">&lt;fragment&gt;</a> components, then
-     raise a <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code> exception and abort these
+     throw a <code><a href="infrastructure.html#securityerror">SecurityError</a></code> exception and abort these
      steps.</li>
 
      <li>If the <a href="origin-0.html#origin">origin</a> of the resulting <a href="urls.html#absolute-url">absolute
      URL</a> is not the same as the <a href="origin-0.html#origin">origin</a> of the
      <a href="browsers.html#entry-script">entry script</a>'s <a href="webappapis.html#script-s-document" title="script's&#10;     document">document</a>, and either the <a href="urls.html#url-path" title="url-path">&lt;path&gt;</a> or <a href="urls.html#url-query" title="url-query">&lt;query&gt;</a> components of the two
      <a href="urls.html#url" title="URL">URLs</a> compared in the previous step
-     differ, raise a <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code> exception and abort
+     differ, throw a <code><a href="infrastructure.html#securityerror">SecurityError</a></code> exception and abort
      these steps. (This prevents sandboxed content from spoofing other
      pages on the same origin.)</li>
 
@@ -651,12 +665,12 @@
      entry is then said to be <a href="#an-entry-with-persisted-user-state">an entry with persisted user
      state</a>.</p></li>
 
-     <li><p>Add a state object entry to the session history, after the
-     <a href="#current-entry">current entry</a>, with <var title="">cloned data</var> as
-     the state object, the given <var title="">title</var> as the title,
-     and, if the third argument is present, the <a href="urls.html#absolute-url">absolute
-     URL</a> that was found earlier in this algorithm as the
-     <a href="urls.html#url">URL</a> of the entry.</p></li>
+     <li><p>Add a <a href="#state-object">state object</a> entry to the session
+     history, after the <a href="#current-entry">current entry</a>, with <var title="">cloned data</var> as the <a href="#state-object">state object</a>, the
+     given <var title="">title</var> as the title, and, if the third
+     argument is present, the <a href="urls.html#absolute-url">absolute URL</a> that was found
+     earlier in this algorithm as the <a href="urls.html#url">URL</a> of the
+     entry.</p></li>
 
      <li><p>Update the <a href="#current-entry">current entry</a> to be this newly
      added entry.</p></li>
@@ -672,6 +686,12 @@
 
     </ol></li>
 
+   <li><p>If the <a href="#current-entry">current entry</a> in the session history
+   represents a non-GET request (e.g. it was the result of a POST
+   submission) then update it to instead represent a GET request
+   (<a href="urls.html#concept-http-equivalent-get" title="concept-http-equivalent-get">or
+   equivalent</a>).</p></li>
+
    <li>
 
     <p>If the third argument is present, set <a href="dom.html#the-document-s-current-address">the document's
@@ -686,9 +706,18 @@
 
    <li>
 
-     <p>Set <code title="dom-history-state"><a href="#dom-history-state">history.state</a></code> to a
-     <a href="common-dom-interfaces.html#structured-clone">structured clone</a> of <var title="">cloned
-     data</var>.</p> 
+    <p>Set <code title="dom-history-state"><a href="#dom-history-state">history.state</a></code> to a
+    <a href="common-dom-interfaces.html#structured-clone">structured clone</a> of <var title="">cloned
+    data</var>.</p> 
+
+   </li>
+
+   <li>
+
+    <p>Let the <a href="#latest-entry">latest entry</a> of the
+    <code><a href="dom.html#document">Document</a></code> of the <a href="#current-entry">current entry</a> be the
+    <a href="#current-entry">current entry</a>.</p>
+
    </li>
 
   </ol><p class="note">The <var title="">title</var> is purely
@@ -697,9 +726,10 @@
   <p>User agents may limit the number of state objects added to the
   session history per page. If a page hits the UA-defined limit, user
   agents must remove the entry immediately after the first entry for
-  that <code><a href="infrastructure.html#document">Document</a></code> object in the session history after
+  that <code><a href="dom.html#document">Document</a></code> object in the session history after
   having added the new entry. (Thus the state history acts as a FIFO
   buffer for eviction, but as a LIFO buffer for navigation.)</p>
+
 
   </div><div class="example">
 
@@ -769,8 +799,8 @@
 
    <p>Applications might not use the same title for a <a href="#session-history-entry">session
    history entry</a> as the value of the document's
-   <code><a href="semantics.html#the-title-element">title</a></code> element at that time. For example, here is a
-   simple page that shows a block in the <code><a href="semantics.html#the-title-element">title</a></code> element.
+   <code><a href="the-title-element.html#the-title-element">title</a></code> element at that time. For example, here is a
+   simple page that shows a block in the <code><a href="the-title-element.html#the-title-element">title</a></code> element.
    Clearly, when navigating backwards to a previous state the user
    does not go back in time, and therefore it would be inappropriate
    to put the time in the session history title.</p>
@@ -794,7 +824,7 @@
 State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BUTTON ONCLICK="inc()"&gt;
 &lt;/FORM&gt;</pre>
 
-  </div><h4 id="the-location-interface"><span class="secno">5.4.3 </span>The <code><a href="#location">Location</a></code> interface</h4><p>Each <code><a href="infrastructure.html#document">Document</a></code> object in a <a href="browsers.html#browsing-context">browsing
+  </div><h4 id="the-location-interface"><span class="secno">5.4.3 </span>The <code><a href="#location">Location</a></code> interface</h4><p>Each <code><a href="dom.html#document">Document</a></code> object in a <a href="browsers.html#browsing-context">browsing
   context</a>'s session history is associated with a unique
   instance of a <code><a href="#location">Location</a></code> object.</p><dl class="domintro"><dt><var title="">document</var> . <code title="dom-document-location"><a href="#dom-document-location">location</a></code> [ = <var title="">value</var> ]</dt>
    <dt><var title="">window</var> . <code title="dom-location"><a href="#dom-location">location</a></code> [ = <var title="">value</var> ]</dt>
@@ -810,22 +840,22 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   </dl><div class="impl">
 
   <p>The <dfn id="dom-document-location" title="dom-document-location"><code>location</code></dfn> attribute
-  of the <code><a href="dom.html#htmldocument">HTMLDocument</a></code> interface must return the
-  <code><a href="#location">Location</a></code> object for that <code><a href="infrastructure.html#document">Document</a></code> object,
+  of the <code><a href="dom.html#document">Document</a></code> interface must return the
+  <code><a href="#location">Location</a></code> object for that <code><a href="dom.html#document">Document</a></code> object,
   if it is in a <a href="browsers.html#browsing-context">browsing context</a>, and null otherwise.</p>
 
   <p>The <dfn id="dom-location" title="dom-location"><code>location</code></dfn>
   attribute of the <code><a href="browsers.html#window">Window</a></code> interface must return the
   <code><a href="#location">Location</a></code> object for that <code><a href="browsers.html#window">Window</a></code> object's
-  <code><a href="infrastructure.html#document">Document</a></code>.</p>
+  <code><a href="dom.html#document">Document</a></code>.</p>
 
   </div><p><code><a href="#location">Location</a></code> objects provide a representation of <a href="dom.html#the-document-s-current-address" title="the document's current address">their document's current
   address</a>, and allow the <a href="#current-entry">current entry</a> of the
   <a href="browsers.html#browsing-context">browsing context</a>'s session history to be changed, by
   adding or replacing entries in the <code title="dom-history"><a href="#dom-history">history</a></code> object.</p><pre class="idl">interface <dfn id="location">Location</dfn> {
   stringifier attribute DOMString <a href="#dom-location-href" title="dom-location-href">href</a>;
-  void <a href="#dom-location-assign" title="dom-location-assign">assign</a>(in DOMString url);
-  void <a href="#dom-location-replace" title="dom-location-replace">replace</a>(in DOMString url);
+  void <a href="#dom-location-assign" title="dom-location-assign">assign</a>(DOMString url);
+  void <a href="#dom-location-replace" title="dom-location-replace">replace</a>(DOMString url);
   void <a href="#dom-location-reload" title="dom-location-reload">reload</a>();
 
   // <a href="urls.html#url-decomposition-idl-attributes">URL decomposition IDL attributes</a> 
@@ -836,9 +866,6 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
            attribute DOMString <a href="#dom-location-pathname" title="dom-location-pathname">pathname</a>;
            attribute DOMString <a href="#dom-location-search" title="dom-location-search">search</a>;
            attribute DOMString <a href="#dom-location-hash" title="dom-location-hash">hash</a>;
-
-  // resolving relative URLs
-  DOMString <a href="#dom-location-resolveurl" title="dom-location-resolveURL">resolveURL</a>(in DOMString url);
 };</pre><dl class="domintro"><dt><var title="">location</var> . <code title="dom-location-href"><a href="#dom-location-href">href</a></code> [ = <var title="">value</var> ]</dt>
 
    <dd>
@@ -873,22 +900,14 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
    </dd>
 
-   <dt><var title="">url</var> = <var title="">location</var> . <code title="dom-location-resolveURL"><a href="#dom-location-resolveurl">resolveURL</a></code>(<var title="">url</var>)</dt>
-
-   <dd>
-
-    <p>Resolves the given relative URL to an absolute URL.</p>
-
-   </dd>
-
   </dl><div class="impl">
 
   <p>The <dfn id="dom-location-href" title="dom-location-href"><code>href</code></dfn>
   attribute must return <a href="dom.html#the-document-s-current-address" title="the document's current&#10;  address">the current address</a> of the associated
-  <code><a href="infrastructure.html#document">Document</a></code> object, as an <a href="urls.html#absolute-url">absolute URL</a>.</p>
+  <code><a href="dom.html#document">Document</a></code> object, as an <a href="urls.html#absolute-url">absolute URL</a>.</p>
 
   <p>On setting, if the <code><a href="#location">Location</a></code> object's associated
-  <code><a href="infrastructure.html#document">Document</a></code> object has <a href="the-end.html#completely-loaded">completely loaded</a>,
+  <code><a href="dom.html#document">Document</a></code> object has <a href="the-end.html#completely-loaded">completely loaded</a>,
   then the user agent must act as if the <code title="dom-location-assign"><a href="#dom-location-assign">assign()</a></code> method had been called
   with the new value as its argument. Otherwise, the user agent must
   act as if the <code title="dom-location-replace"><a href="#dom-location-replace">replace()</a></code>
@@ -902,10 +921,11 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   <a href="#navigate">navigate</a> the
   <a href="browsers.html#browsing-context">browsing context</a> to the specified <var title="">url</var>. If the <a href="browsers.html#browsing-context">browsing context</a>'s
   <a href="#session-history">session history</a> contains only one
-  <code><a href="infrastructure.html#document">Document</a></code>, and that was the <code><a href="fetching-resources.html#about:blank">about:blank</a></code>
-  <code><a href="infrastructure.html#document">Document</a></code> created when the <a href="browsers.html#browsing-context">browsing context</a>
+  <code><a href="dom.html#document">Document</a></code>, and that was the <code><a href="urls.html#about:blank">about:blank</a></code>
+  <code><a href="dom.html#document">Document</a></code> created when the <a href="browsers.html#browsing-context">browsing context</a>
   was created, then the navigation must be done with <a href="#replacement-enabled">replacement
   enabled</a>.</p> 
+
   <p>When the <dfn id="dom-location-replace" title="dom-location-replace"><code>replace(<var title="">url</var>)</code></dfn> method is invoked, the UA must
   <a href="urls.html#resolve-a-url" title="resolve a url">resolve</a> the argument, relative to
   the <a href="browsers.html#entry-script">entry script</a>'s <a href="webappapis.html#script-s-base-url" title="script's base URL">base
@@ -921,7 +941,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   <p>If the <a href="urls.html#resolve-a-url" title="resolve a url">resolving</a> step of the
   <code title="dom-location-assign"><a href="#dom-location-assign">assign()</a></code> and <code title="dom-location-replace"><a href="#dom-location-replace">replace()</a></code> methods is not
   successful, then the user agent must instead throw a
-  <code><a href="common-dom-interfaces.html#syntax_err">SYNTAX_ERR</a></code> exception.</p>
+  <code><a href="infrastructure.html#syntaxerror">SyntaxError</a></code> exception.</p>
 
   <p>When the <dfn id="dom-location-reload" title="dom-location-reload"><code>reload()</code></dfn> method is
   invoked, the user agent must run the appropriate steps from the
@@ -932,6 +952,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
    <dd><p>Repaint the <a href="browsers.html#browsing-context">browsing context</a> and abort these
    steps.</p></dd> 
+
    <dt>If the <a href="browsers.html#browsing-context">browsing context</a>'s <a href="browsers.html#active-document">active
    document</a> is <a href="the-iframe-element.html#an-iframe-srcdoc-document">an <code>iframe</code> <code title="attr-iframe-srcdoc">srcdoc</code> document</a></dt>
 
@@ -952,13 +973,14 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
    address</a> with <a href="#replacement-enabled">replacement enabled</a>. The
    <a href="#source-browsing-context">source browsing context</a> must be the <a href="browsers.html#browsing-context">browsing
    context</a> being navigated.</p></dd> 
+
    
 
   </dl><p>When a user requests that the current page of a <a href="browsers.html#browsing-context">browsing
   context</a> be reloaded through a user interface element, the
   user agent should <a href="#navigate">navigate</a> the
   <a href="browsers.html#browsing-context">browsing context</a> to the same resource as
-  <code><a href="infrastructure.html#document">Document</a></code>, with <a href="#replacement-enabled">replacement enabled</a>. In the
+  <code><a href="dom.html#document">Document</a></code>, with <a href="#replacement-enabled">replacement enabled</a>. In the
   case of non-idempotent methods (e.g. HTTP POST), the user agent
   should prompt the user to confirm the operation first, since
   otherwise transactions (e.g. purchases or database modifications)
@@ -972,26 +994,19 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   </div><p>The <code><a href="#location">Location</a></code> interface also has the complement of
   <a href="urls.html#url-decomposition-idl-attributes">URL decomposition IDL attributes</a>, <dfn id="dom-location-protocol" title="dom-location-protocol"><code>protocol</code></dfn>, <dfn id="dom-location-host" title="dom-location-host"><code>host</code></dfn>, <dfn id="dom-location-port" title="dom-location-port"><code>port</code></dfn>, <dfn id="dom-location-hostname" title="dom-location-hostname"><code>hostname</code></dfn>, <dfn id="dom-location-pathname" title="dom-location-pathname"><code>pathname</code></dfn>, <dfn id="dom-location-search" title="dom-location-search"><code>search</code></dfn>, and <dfn id="dom-location-hash" title="dom-location-hash"><code>hash</code></dfn>. <span class="impl">These must follow the rules given for <a href="urls.html#url-decomposition-idl-attributes">URL
   decomposition IDL attributes</a>, with the <a href="urls.html#concept-uda-input" title="concept-uda-input">input</a> being <a href="dom.html#the-document-s-current-address" title="the&#10;  document's current address">the current address</a> of the
-  associated <code><a href="infrastructure.html#document">Document</a></code> object, as an <a href="urls.html#absolute-url">absolute
+  associated <code><a href="dom.html#document">Document</a></code> object, as an <a href="urls.html#absolute-url">absolute
   URL</a> (same as the <code title="dom-location-href"><a href="#dom-location-href">href</a></code>
   attribute), and the <a href="urls.html#concept-uda-setter" title="concept-uda-setter">common setter
   action</a> being the same as setting the <code title="dom-location-href"><a href="#dom-location-href">href</a></code> attribute to the new output
   value.</span></p><div class="impl">
 
-  <hr/><p>The <dfn id="dom-location-resolveurl" title="dom-location-resolveURL"><code>resolveURL(<var title="">url</var>)</code></dfn> method must <a href="urls.html#resolve-a-url" title="resolve a&#10;  url">resolve</a> its <var title="">url</var> argument, relative
-  to the <a href="browsers.html#entry-script">entry script</a>'s <a href="webappapis.html#script-s-base-url" title="script's base&#10;  URL">base URL</a>, and if that succeeds, return the resulting
-  <a href="urls.html#absolute-url">absolute URL</a>. If it fails, it must throw a
-  <code><a href="common-dom-interfaces.html#syntax_err">SYNTAX_ERR</a></code> exception instead.</p>
-
-  </div><div class="impl">
-
   <h5 id="security-location"><span class="secno">5.4.3.1 </span>Security</h5>
 
-  <p id="security-3">User agents must raise a
-  <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code> exception whenever any of the members of a
+  <p id="security-3">User agents must throw a
+  <code><a href="infrastructure.html#securityerror">SecurityError</a></code> exception whenever any of the members of a
   <code><a href="#location">Location</a></code> object are accessed by scripts whose
   <a href="origin-0.html#effective-script-origin">effective script origin</a> is not the <a href="origin-0.html#same-origin" title="same&#10;  origin">same</a> as the <code><a href="#location">Location</a></code> object's associated
-  <code><a href="infrastructure.html#document">Document</a></code>'s <a href="origin-0.html#effective-script-origin">effective script origin</a>, with
+  <code><a href="dom.html#document">Document</a></code>'s <a href="origin-0.html#effective-script-origin">effective script origin</a>, with
   the following exceptions:</p>
 
   <ul><li>The <code title="dom-location-href"><a href="#dom-location-href">href</a></code> setter, if the
@@ -1027,6 +1042,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   with just one "Back" button, with a session history that interleaves
   the navigation of the two inner frames and the outer page.</p>
 
+
   <p><strong>Security</strong>: It is suggested that to avoid letting
   a page "hijack" the history navigation facilities of a UA by abusing
   <code title="dom-history-pushState"><a href="#dom-history-pushstate">pushState()</a></code>, the UA
@@ -1042,6 +1058,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   a timer, or from event listeners that are not triggered in response
   to a clear user action, or that are invoked in rapid succession.</p>
 
+
   </div><h3 id="browsing-the-web"><span class="secno">5.5 </span>Browsing the Web</h3><div class="impl">
 
   <h4 id="navigating-across-documents"><span class="secno">5.5.1 </span>Navigating across documents</h4>
@@ -1051,7 +1068,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   <dfn id="source-browsing-context">source browsing context</dfn>, which is the browsing context
   which was responsible for starting the navigation.</p>
 
-  <p class="example">For example, <a href="links.html#following-hyperlinks" title="following&#10;  hyperlinks">following a hyperlink</a>, <a href="association-of-controls-and-forms.html#concept-form-submit" title="concept-form-submit">form submission</a>, and the <code title="dom-open"><a href="browsers.html#dom-open">window.open()</a></code> and <code title="dom-location-assign"><a href="#dom-location-assign">location.assign()</a></code> methods can all
+  <p class="example">For example, <a href="links.html#following-hyperlinks" title="following&#10;  hyperlinks">following a hyperlink</a>, <a href="form-submission.html#concept-form-submit" title="concept-form-submit">form submission</a>, and the <code title="dom-open"><a href="browsers.html#dom-open">window.open()</a></code> and <code title="dom-location-assign"><a href="#dom-location-assign">location.assign()</a></code> methods can all
   cause a browsing context to navigate.</p>
 
   <p>A user agent may provide various ways for the user to explicitly
@@ -1059,7 +1076,8 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   in this specification.</p>
 
   
-    <p>When a browsing context is <dfn id="navigate" title="navigate">navigated</dfn>
+  
+  <p>When a browsing context is <dfn id="navigate" title="navigate">navigated</dfn>
   to a new resource, the user agent must run the following steps:</p>
 
   <ol><li><p>Release the <a href="webappapis.html#storage-mutex">storage mutex</a>.</p></li>
@@ -1128,12 +1146,13 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
    navigated, then abort these steps without affecting the
    <a href="#unload-a-document">unload a document</a> algorithm or the aforementioned
    history traversal task.</p></li> 
+
    <li><p>If there is a preexisting attempt to navigate the
    <a href="browsers.html#browsing-context">browsing context</a>, and either that attempt has not yet
    <a href="#concept-navigate-mature" title="concept-navigate-mature">matured</a> (i.e. it has
-   not passed the point of making its <code><a href="infrastructure.html#document">Document</a></code> the
+   not passed the point of making its <code><a href="dom.html#document">Document</a></code> the
    <a href="browsers.html#active-document">active document</a>), or that navigation's resource is not
-   to be fetched using HTTP GET <a href="fetching-resources.html#concept-http-equivalent-get" title="concept-http-equivalent-get">or equivalent</a>, or its
+   to be fetched using HTTP GET <a href="urls.html#concept-http-equivalent-get" title="concept-http-equivalent-get">or equivalent</a>, or its
    resource's <a href="urls.html#absolute-url">absolute URL</a> differs from this attempt's by
    more than the presence, absence, or value of the <a href="urls.html#url-fragment" title="url-fragment">&lt;fragment&gt;</a> component, then cancel
    that preexisting attempt to navigate the <a href="browsers.html#browsing-context">browsing
@@ -1145,14 +1164,18 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
    <a href="browsers.html#active-document">active document</a> of the <a href="browsers.html#browsing-context">browsing context</a>
    being navigated, ignoring any <a href="urls.html#url-fragment" title="url-fragment">&lt;fragment&gt;</a> components of those
    <a href="urls.html#url" title="URL">URLs</a>, and the new resource is to be
-   fetched using HTTP GET <a href="fetching-resources.html#concept-http-equivalent-get" title="concept-http-equivalent-get">or
+   fetched using HTTP GET <a href="urls.html#concept-http-equivalent-get" title="concept-http-equivalent-get">or
    equivalent</a>, and the <a href="urls.html#absolute-url">absolute URL</a> of the new
    resource has a <a href="urls.html#url-fragment" title="url-fragment">&lt;fragment&gt;</a>
    component (even if it is empty), then <a href="#scroll-to-fragid" title="navigate-fragid">navigate to that fragment identifier</a>
    and abort these steps.</p></li>
 
    <li><p>Cancel <em>any</em> preexisting attempt to navigate the
-   <a href="browsers.html#browsing-context">browsing context</a>.</p></li>
+   <a href="browsers.html#browsing-context">browsing context</a>, including canceling any instances of
+   the <a href="urls.html#fetch">fetch</a> algorithm started by those attempts. If one
+   of those attempts has already <a href="#create-a-document-object" title="create a document&#10;   object">created a new <code>Document</code> object</a>, <a href="#abort-a-document" title="abort a document">abort</a> that <code><a href="dom.html#document">Document</a></code>
+   also. (Previous navigation attempts whose <a href="urls.html#fetch">fetch</a>
+   requests have <em>finished</em> are unaffected, however.)</p></li>
 
    <li><p>If the new resource is to be handled using a mechanism that
    does not affect the browsing context, e.g. ignoring the navigation
@@ -1161,7 +1184,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
    mechanism instead.</p></li>
 
    <li><p><a href="#prompt-to-unload-a-document" title="prompt to unload a document">Prompt to
-   unload</a> the <code><a href="infrastructure.html#document">Document</a></code> object. If the user
+   unload</a> the <code><a href="dom.html#document">Document</a></code> object. If the user
    <a href="#refused-to-allow-the-document-to-be-unloaded">refused to allow the document to be unloaded</a>, then
    these steps must be aborted.</p></li>
 
@@ -1174,7 +1197,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
     <p>If the new resource is to be handled by displaying some sort of
     inline content, e.g. an error message because the specified scheme
     is not one of the supported protocols, or an inline prompt to
-    allow the user to select <a href="timers.html#dom-navigator-registerprotocolhandler" title="dom-navigator-registerProtocolHandler">a registered
+    allow the user to select <a href="system-state-and-capabilities.html#dom-navigator-registerprotocolhandler" title="dom-navigator-registerProtocolHandler">a registered
     handler</a> for the given scheme, then <a href="#read-ua-inline" title="navigate-ua-inline">display the inline content</a> and
     abort these steps.</p>
 
@@ -1187,12 +1210,12 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
    <li>
 
     <p>If the resource has already been obtained (e.g. because it is
-    being used to populate an <code><a href="the-iframe-element.html#the-object-element">object</a></code> element's new
+    being used to populate an <code><a href="the-object-element.html#the-object-element">object</a></code> element's new
     <a href="browsers.html#child-browsing-context">child browsing context</a>), then skip this step.</p>
 
     <p>Otherwise:</p>
 
-    <p>If the new resource is to be fetched using HTTP GET <a href="fetching-resources.html#concept-http-equivalent-get" title="concept-http-equivalent-get">or equivalent</a>, and
+    <p>If the new resource is to be fetched using HTTP GET <a href="urls.html#concept-http-equivalent-get" title="concept-http-equivalent-get">or equivalent</a>, and
     there are <a href="offline.html#relevant-application-cache" title="relevant application cache">relevant
     application caches</a> that are identified by a URL with the
     <a href="origin-0.html#same-origin">same origin</a> as the URL in question, and that have
@@ -1213,26 +1236,29 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
     application cache at all; the submission will be made to the
     network.</p>
 
-    <p>Otherwise, <a href="fetching-resources.html#fetch">fetch</a> the new resource, with the
+    <p>Otherwise, <a href="urls.html#fetch">fetch</a> the new resource, with the
     <i>manual redirect flag</i> set.</p>
 
     <p>If the resource is being fetched using a method other than one
-    <a href="fetching-resources.html#concept-http-equivalent-get" title="concept-http-equivalent-get">equivalent to</a>
+    <a href="urls.html#concept-http-equivalent-get" title="concept-http-equivalent-get">equivalent to</a>
     HTTP's GET, or, if the
     <a href="#navigate" title="navigate">navigation algorithm</a> was invoked as
-    a result of the <a href="association-of-controls-and-forms.html#concept-form-submit" title="concept-form-submit">form submission
-    algorithm</a>, then the <a href="fetching-resources.html#fetch" title="fetch">fetching
+    a result of the <a href="form-submission.html#concept-form-submit" title="concept-form-submit">form submission
+    algorithm</a>, then the <a href="urls.html#fetch" title="fetch">fetching
     algorithm</a> must be invoked from the <a href="origin-0.html#origin">origin</a> of
     the <a href="browsers.html#active-document">active document</a> of the <a href="#source-browsing-context">source browsing
     context</a>, if any.</p> 
+
     <p>If the <a href="browsers.html#browsing-context">browsing context</a> being navigated is a
     <a href="browsers.html#child-browsing-context">child browsing context</a> for an <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> or
-    <code><a href="the-iframe-element.html#the-object-element">object</a></code> element, then the <a href="fetching-resources.html#fetch" title="fetch">fetching
+    <code><a href="the-object-element.html#the-object-element">object</a></code> element, then the <a href="urls.html#fetch" title="fetch">fetching
     algorithm</a> must be invoked from the <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> or
-    <code><a href="the-iframe-element.html#the-object-element">object</a></code> element's <a href="browsers.html#browsing-context-scope-origin">browsing context scope
+    <code><a href="the-object-element.html#the-object-element">object</a></code> element's <a href="browsers.html#browsing-context-scope-origin">browsing context scope
     origin</a>, if it has one.</p> 
-    <p>The <a href="fetching-resources.html#fetch">fetch</a> algorithm must <a href="the-end.html#delay-the-load-event">delay the load
+
+    <p>The <a href="urls.html#fetch">fetch</a> algorithm must <a href="the-end.html#delay-the-load-event">delay the load
     event</a> of the <a href="browsers.html#browsing-context">browsing context</a>.</p> 
+
    </li>
 
    <li>
@@ -1251,7 +1277,16 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
     origin</a> as the original resource, or the resource is being
     obtained using the POST method or a safe method (in HTTP terms),
     return to <a href="#navigate-fragid-step">the step labeled
-    "fragment identifiers"</a> with the new resource.</p>
+    "fragment identifiers"</a> with the new resource, except that if
+    the <a href="urls.html#url">URL</a> of the target of the redirect does not have a
+    fragment identifier and the <a href="urls.html#url">URL</a> of the resource that
+    led to the redirect does, then the fragment identifier of the
+    resource that led to the redirect must be propagated to the
+    <a href="urls.html#url">URL</a> of the target of the redirect.</p>
+
+    <p class="example">So for instance, if the original URL was "<code title="">http://example.com/#!sample</code>" and "<code title="">http://example.com/</code>" is found to redirect to
+    "<code title="">https://example.com/</code>", the URL of the new
+    resource will be "<code title="">https://example.com/#!sample</code>".</p>
 
     <p>Otherwise, if fetching the resource results in a redirect but
     the <a href="urls.html#url">URL</a> of the target of the redirect does not have
@@ -1271,7 +1306,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
    <li>
 
     <p>If the resource was not fetched from an <a href="offline.html#application-cache">application
-    cache</a>, and was to be fetched using HTTP GET <a href="fetching-resources.html#concept-http-equivalent-get" title="concept-http-equivalent-get">or equivalent</a>, and its
+    cache</a>, and was to be fetched using HTTP GET <a href="urls.html#concept-http-equivalent-get" title="concept-http-equivalent-get">or equivalent</a>, and its
     URL <a href="offline.html#concept-appcache-matches-fallback" title="concept-appcache-matches-fallback">matches the
     fallback namespace</a> of one or more <a href="offline.html#relevant-application-cache" title="relevant&#10;    application cache">relevant application caches</a>, and the
     <a href="offline.html#concept-appcache-selection" title="concept-appcache-selection">most appropriate
@@ -1281,8 +1316,9 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
     resource's URL and that is a <a href="infrastructure.html#prefix-match">prefix match</a> for the
     resource's URL, and the user didn't cancel the navigation attempt
     during the previous step, and the navigation attempt failed (e.g.
-    the server returned a 4xx or 5xx status code <a href="fetching-resources.html#concept-http-equivalent-codes" title="concept-http-equivalent-codes">or equivalent</a>, or
+    the server returned a 4xx or 5xx status code <a href="urls.html#concept-http-equivalent-codes" title="concept-http-equivalent-codes">or equivalent</a>, or
     there was a DNS error), then:</p> 
+
     <p>Let <var title="">candidate</var> be the <a href="offline.html#concept-appcache-fallback" title="concept-appcache-fallback">fallback resource</a>
     specified for the <a href="offline.html#concept-appcache-fallback-ns" title="concept-appcache-fallback-ns">fallback namespace</a> in
     question. If multiple application caches match, the user agent
@@ -1300,28 +1336,36 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
    </li>
 
-   <li><p>If the document's out-of-band metadata (e.g. HTTP headers),
-   not counting any <a href="fetching-resources.html#content-type" title="Content-Type">type information</a>
-   (such as the Content-Type HTTP header), requires some sort of
-   processing that will not affect the browsing context, then perform
-   that processing and abort these steps.</p>
+   <li>
 
-   <div class="note">
-    <p>Such processing might be triggered by, amongst other things, the
-    following:</p>
-    <ul class="brief"><li>HTTP status codes (e.g. 204 No Content or 205 Reset Content)</li>
-     <li>HTTP Content-Disposition headers</li>
-     <li>Network errors</li>
-    </ul></div>
+    <p><i>Resource handling</i>: If the resource's out-of-band
+    metadata (e.g. HTTP headers), not counting any <a href="urls.html#content-type" title="Content-Type">type information</a> (such as the
+    Content-Type HTTP header), requires some sort of processing that
+    will not affect the browsing context, then perform that processing
+    and abort these steps.</p>
+
+    <div class="note">
+     <p>Such processing might be triggered by, amongst other things, the
+     following:</p>
+     <ul class="brief"><li>HTTP status codes (e.g. 204 No Content or 205 Reset Content)</li>
+      <li>Network errors (e.g. the network interface being unavailable)</li>
+      <li>Cryptographic protocol failures (e.g. an incorrect TLS certificate)</li>
+      
+      
+      
+      
+     </ul></div>
+
 
     
+
     <p>HTTP 401 responses that do not include a challenge recognized
     by the user agent must be processed as if they had no challenge,
     e.g. rendering the entity body as if the response had been 200
     OK.</p>
 
     <p>User agents may show the entity body of an HTTP 401 response
-    even when the response do include a recognized challenge, with the
+    even when the response does include a recognized challenge, with the
     option to login being included in a non-modal fashion, to enable
     the information provided by the server to be used by the user
     before authenticating. Similarly, user agents should allow the
@@ -1332,7 +1376,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
    </li>
 
-   <li><p>Let <var title="">type</var> be <a href="fetching-resources.html#content-type-sniffing-0" title="Content-Type&#10;   sniffing">the sniffed type of the resource</a>.</p></li>
+   <li><p>Let <var title="">type</var> be <a href="urls.html#content-type-sniffing-0" title="Content-Type&#10;   sniffing">the sniffed type of the resource</a>.</p></li>
 
    <li><p>If the user agent has been configured to process resources
    of the given <var title="">type</var> using some mechanism other
@@ -1342,14 +1386,15 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
    following list, and process the resource as described there:</p>
 
     <dl class="switch"><dt>"<code><a href="iana.html#text-html">text/html</a></code>"</dt>
-     <dt>"<code><a href="iana.html#text-html-sandboxed">text/html-sandboxed</a></code>"</dt>
      <dd>Follow the steps given in the <a href="#read-html" title="navigate-html">HTML document</a> section, and abort
      these steps.</dd>
 
      
-     <dt>Any type ending in "<code title="">+xml</code>"</dt> 
      <dt>"<code>application/xml</code>"</dt>
      <dt>"<code>text/xml</code>"</dt>
+     <dt>"<code>image/svg+xml</code>"</dt>
+     <dt>"<code><a href="iana.html#application-xhtml-xml">application/xhtml+xml</a></code>"</dt>
+     <dt>Any other type ending in "<code title="">+xml</code>" that is not an <a href="#explicitly-supported-xml-type">explicitly supported XML type</a></dt> 
      <dd>Follow the steps given in the <a href="#read-xml" title="navigate-xml">XML
      document</a> section. If that section determines that the
      content is <em>not</em> to be displayed as a generic XML
@@ -1360,8 +1405,12 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
      <dd>Follow the steps given in the <a href="#read-text" title="navigate-text">plain text file</a> section, and abort
      these steps.</dd>
 
-     <dt>A supported image type</dt>
-     <dd>Follow the steps given in the <a href="#read-image" title="navigate-image">image</a> section, and abort these
+     <dt>"<code><a href="iana.html#multipart-x-mixed-replace">multipart/x-mixed-replace</a></code>"</dt>
+     <dd>Follow the steps given in the <a href="#read-multipart-x-mixed-replace" title="navigate-multipart-x-mixed-replace">multipart/x-mixed-replace</a>
+     section, and abort these steps.</dd>
+
+     <dt>A supported image, video, or audio type</dt>
+     <dd>Follow the steps given in the <a href="#read-media" title="navigate-media">media</a> section, and abort these
      steps.</dd>
 
      <dt>A type that will use an external application to render the
@@ -1369,17 +1418,28 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
      <dd>Follow the steps given in the <a href="#read-plugin" title="navigate-plugin">plugin</a> section, and abort these
      steps.</dd>
 
-    </dl><p><dfn id="set-the-document-s-address" title="set the document's address">Setting the document's
+    </dl><p>An <dfn id="explicitly-supported-xml-type">explicitly supported XML type</dfn> is one for which
+    the user agent is configured to use an external application to
+    render the content (either a <a href="infrastructure.html#plugin">plugin</a> rendering
+    directly in the <a href="browsers.html#browsing-context">browsing context</a>, or a separate
+    application), or one for which the user agent has dedicated
+    processing rules (e.g. a Web browser with a built-in Atom feed
+    viewer would be said to explicitly support the
+    <code>application/atom+xml</code> MIME type), or one for which the
+    user agent has a dedicated handler (e.g. one registered using
+    <code title="dom-navigator-registerContentHandler"><a href="system-state-and-capabilities.html#dom-navigator-registercontenthandler">registerContentHandler()</a></code>).</p>
+
+    <p><dfn id="set-the-document-s-address" title="set the document's address">Setting the document's
     address</dfn>: If there is no <dfn id="override-url">override URL</dfn>, then any
-    <code><a href="infrastructure.html#document">Document</a></code> created by these steps must have its <a href="dom.html#the-document-s-address" title="the document's address">address</a> set to the
-    <a href="urls.html#url">URL</a> that was originally to be <a href="fetching-resources.html#fetch" title="fetch">fetched</a>, ignoring any other data that was
+    <code><a href="dom.html#document">Document</a></code> created by these steps must have its <a href="dom.html#the-document-s-address" title="the document's address">address</a> set to the
+    <a href="urls.html#url">URL</a> that was originally to be <a href="urls.html#fetch" title="fetch">fetched</a>, ignoring any other data that was
     used to obtain the resource (e.g. the entity body in the case of a
     POST submission is not part of <a href="dom.html#the-document-s-address">the document's
     address</a>, nor is the URL of the fallback resource in the
     case of the original load having failed and that URL having been
     found to match a <a href="offline.html#concept-appcache-fallback-ns" title="concept-appcache-fallback-ns">fallback
     namespace</a>). However, if there <em>is</em> an <a href="#override-url">override
-    URL</a>, then any <code><a href="infrastructure.html#document">Document</a></code> created by these steps
+    URL</a>, then any <code><a href="dom.html#document">Document</a></code> created by these steps
     must have its <a href="dom.html#the-document-s-address" title="the document's address">address</a>
     set to that <a href="urls.html#url">URL</a> instead.</p>
 
@@ -1388,19 +1448,19 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
     <code>javascript:</code> URL</a>.</p>
 
     <p><dfn id="create-a-document-object" title="create a Document object">Creating a new
-    <code>Document</code> object</dfn>: When a <code><a href="infrastructure.html#document">Document</a></code>
+    <code>Document</code> object</dfn>: When a <code><a href="dom.html#document">Document</a></code>
     is created as part of the above steps, a new <code><a href="browsers.html#window">Window</a></code>
     object must be created and associated with the
-    <code><a href="infrastructure.html#document">Document</a></code>, with one exception: if the <a href="browsers.html#browsing-context">browsing
+    <code><a href="dom.html#document">Document</a></code>, with one exception: if the <a href="browsers.html#browsing-context">browsing
     context</a>'s only entry in its <a href="#session-history">session history</a> is
-    the <code><a href="fetching-resources.html#about:blank">about:blank</a></code> <code><a href="infrastructure.html#document">Document</a></code> that was added
+    the <code><a href="urls.html#about:blank">about:blank</a></code> <code><a href="dom.html#document">Document</a></code> that was added
     when the <a href="browsers.html#browsing-context">browsing context</a> was created, and navigation
     is occurring with <a href="#replacement-enabled">replacement enabled</a>, and that
-    <code><a href="infrastructure.html#document">Document</a></code> has the <a href="origin-0.html#same-origin">same origin</a> as the new
-    <code><a href="infrastructure.html#document">Document</a></code>, then the <code><a href="browsers.html#window">Window</a></code> object of that
-    <code><a href="infrastructure.html#document">Document</a></code> must be used instead, and the <code title="dom-document"><a href="browsers.html#dom-document">document</a></code> attribute of the
+    <code><a href="dom.html#document">Document</a></code> has the <a href="origin-0.html#same-origin">same origin</a> as the new
+    <code><a href="dom.html#document">Document</a></code>, then the <code><a href="browsers.html#window">Window</a></code> object of that
+    <code><a href="dom.html#document">Document</a></code> must be used instead, and the <code title="dom-document"><a href="browsers.html#dom-document-0">document</a></code> attribute of the
     <code><a href="browsers.html#window">Window</a></code> object must be changed to point to the new
-    <code><a href="infrastructure.html#document">Document</a></code> instead.</p>
+    <code><a href="dom.html#document">Document</a></code> instead.</p>
 
    </li>
 
@@ -1409,7 +1469,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
     <p><i>Non-document content</i>: If, given <var title="">type</var>, the new resource is to be handled by
     displaying some sort of inline content, e.g. a native rendering of
     the content, an error message because the specified type is not
-    supported, or an inline prompt to allow the user to select <a href="timers.html#dom-navigator-registercontenthandler" title="dom-navigator-registerContentHandler">a registered
+    supported, or an inline prompt to allow the user to select <a href="system-state-and-capabilities.html#dom-navigator-registercontenthandler" title="dom-navigator-registerContentHandler">a registered
     handler</a> for the given type, then <a href="#read-ua-inline" title="navigate-ua-inline">display the inline content</a> and
     abort these steps.</p>
 
@@ -1420,19 +1480,20 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
    </li>
 
    <li><p>Otherwise, the document's <var title="">type</var> is such
-   that the resource will not affect the browsing context,
-   e.g. because the resource is to be handed to an external
-   application. Process the resource appropriately.</p>
+   that the resource will not affect the browsing context, e.g.
+   because the resource is to be handed to an external application or
+   because it is an unknown type that will be processed <span>as a
+   download</span>. Process the resource appropriately.</p>
 
   </li></ol><hr/><p>Some of the sections below, to which the above algorithm defers
   in certain cases, require the user agent to <dfn id="update-the-session-history-with-the-new-page">update the session
   history with the new page</dfn>. When a user agent is required to do
   this, it must <a href="webappapis.html#queue-a-task">queue a task</a> (associated with the
-  <code><a href="infrastructure.html#document">Document</a></code> object of the <a href="#current-entry">current entry</a>, not
+  <code><a href="dom.html#document">Document</a></code> object of the <a href="#current-entry">current entry</a>, not
   the new one) to run the following steps:</p>
 
   <ol><li><p><a href="#unload-a-document" title="unload a document">Unload</a> the
-   <code><a href="infrastructure.html#document">Document</a></code> object of the <a href="#current-entry">current entry</a>,
+   <code><a href="dom.html#document">Document</a></code> object of the <a href="#current-entry">current entry</a>,
    with the <var title="">recycle</var> parameter set to
    false.</p></li>
 
@@ -1443,10 +1504,10 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
      <dd>
 
-      <ol><li><p>Replace the <code><a href="infrastructure.html#document">Document</a></code> of the entry being
+      <ol><li><p>Replace the <code><a href="dom.html#document">Document</a></code> of the entry being
        updated, and any other entries that referenced the same
        document as that entry, with the new
-       <code><a href="infrastructure.html#document">Document</a></code>.</p></li>
+       <code><a href="dom.html#document">Document</a></code>.</p></li>
 
        <li><p><a href="#traverse-the-history">Traverse the history</a> to the new
        entry.</p></li>
@@ -1455,7 +1516,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
       is no the <a href="#current-entry">current entry</a>, and can never happen with
       <a href="#replacement-enabled">replacement enabled</a>. (It happens when the user
       tried to traverse to a session history entry that no longer had
-      a <code><a href="infrastructure.html#document">Document</a></code> object.)</p>
+      a <code><a href="dom.html#document">Document</a></code> object.)</p>
 
      </dd>
 
@@ -1481,9 +1542,10 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
        <li><p>Remove any <a href="webappapis.html#concept-task" title="concept-task">tasks</a>
        queued by the <a href="webappapis.html#history-traversal-task-source">history traversal task
        source</a>.</p></li> 
+
        <li><p>Append a new entry at the end of the <code><a href="#history-0">History</a></code>
        object representing the new resource and its
-       <code><a href="infrastructure.html#document">Document</a></code> object and related state.</p></li>
+       <code><a href="dom.html#document">Document</a></code> object and related state.</p></li>
 
        <li><p><a href="#traverse-the-history">Traverse the history</a> to the new entry. If
        the navigation was initiated with <a href="#replacement-enabled">replacement
@@ -1505,7 +1567,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
    agent to optimize the user experience in the face of performance
    concerns.)</p></li>
 
-   <li><p>If the <code><a href="infrastructure.html#document">Document</a></code> object has no parser, or its
+   <li><p>If the <code><a href="dom.html#document">Document</a></code> object has no parser, or its
    parser has <a href="the-end.html#stop-parsing" title="stop parsing">stopped parsing</a>, or
    the user agent has reason to believe the user is no longer
    interested in scrolling to the fragment identifier, then abort
@@ -1526,27 +1588,26 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   <p>When an HTML document is to be loaded in a <a href="browsers.html#browsing-context">browsing
   context</a>, the user agent must <a href="webappapis.html#queue-a-task">queue a task</a> to
   <a href="#create-a-document-object">create a <code>Document</code> object</a>, mark it as being
-  an <a href="dom.html#html-documents" title="HTML documents">HTML document</a>, create an
-  <a href="parsing.html#html-parser">HTML parser</a>, and associate it with the document. Each
-  <a href="webappapis.html#concept-task" title="concept-task">task</a> that the <a href="webappapis.html#networking-task-source">networking
-  task source</a> places on the <a href="webappapis.html#task-queue">task queue</a> while the
-  <a href="fetching-resources.html#fetch" title="fetch">fetching algorithm</a> runs must then fill
-  the parser's <a href="parsing.html#the-input-stream">input stream</a> with the fetched bytes and
-  cause the <a href="parsing.html#html-parser">HTML parser</a> to perform the appropriate
-  processing of the input stream.</p>
+  an <a href="infrastructure.html#html-documents" title="HTML documents">HTML document</a>, set its <a href="infrastructure.html#concept-document-content-type" title="concept-document-content-type">content type</a> to "<code title="">text/html</code>", create an <a href="parsing.html#html-parser">HTML parser</a>, and
+  associate it with the document. Each <a href="webappapis.html#concept-task" title="concept-task">task</a> that the <a href="webappapis.html#networking-task-source">networking task
+  source</a> places on the <a href="webappapis.html#task-queue">task queue</a> while the <a href="urls.html#fetch" title="fetch">fetching algorithm</a> runs must then fill the
+  parser's <a href="parsing.html#the-input-stream">input stream</a> with the fetched bytes and cause
+  the <a href="parsing.html#html-parser">HTML parser</a> to perform the appropriate processing
+  of the input stream.</p>
 
   <p class="note">The <a href="parsing.html#the-input-stream">input stream</a> converts bytes into
   characters for use in the <a href="tokenization.html#tokenization" title="tokenization">tokenizer</a>. This process relies, in part,
-  on character encoding information found in the real <a href="fetching-resources.html#content-type" title="Content-Type">Content-Type metadata</a> of the resource;
+  on character encoding information found in the real <a href="urls.html#content-type" title="Content-Type">Content-Type metadata</a> of the resource;
   the "sniffed type" is not used for this purpose.</p>
 
   
+
   <p>When no more bytes are available, the user agent must <a href="webappapis.html#queue-a-task">queue
   a task</a> for the parser to process the implied EOF character,
   which eventually causes a <code title="event-load">load</code> event
   to be fired.</p>
 
-  <p>After creating the <code><a href="infrastructure.html#document">Document</a></code> object, but before any
+  <p>After creating the <code><a href="dom.html#document">Document</a></code> object, but before any
   script execution, certainly before the parser <a href="the-end.html#stop-parsing" title="stop&#10;  parsing">stops</a>, the user agent must <a href="#update-the-session-history-with-the-new-page">update the session
   history with the new page</a>.</p>
 
@@ -1564,19 +1625,19 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   <p>When faced with displaying an XML file inline, user agents must
   first <a href="#create-a-document-object">create a <code>Document</code> object</a>, following
   the requirements of the XML and Namespaces in XML recommendations,
-  RFC 3023, DOM3 Core, and other relevant specifications. <a href="references.html#refsXML">[XML]</a> <a href="references.html#refsXMLNS">[XMLNS]</a> <a href="references.html#refsRFC3023">[RFC3023]</a> <a href="references.html#refsDOMCORE">[DOMCORE]</a></p>
+  RFC 3023, DOM Core, and other relevant specifications. <a href="references.html#refsXML">[XML]</a> <a href="references.html#refsXMLNS">[XMLNS]</a> <a href="references.html#refsRFC3023">[RFC3023]</a> <a href="references.html#refsDOMCORE">[DOMCORE]</a></p>
 
   <p>The actual HTTP headers and other metadata, not the headers as
   mutated or implied by the algorithms given in this specification,
   are the ones that must be used when determining the character
   encoding according to the rules given in the above
   specifications. Once the character encoding is established, the
-  <a href="dom.html#document-s-character-encoding">document's character encoding</a> must be set to that
+  <a href="infrastructure.html#document-s-character-encoding">document's character encoding</a> must be set to that
   character encoding.</p>
 
   <p>If the root element, as parsed according to the XML
-  specifications cited above, is found to be an <code><a href="semantics.html#the-html-element">html</a></code>
-  element with an attribute <code title="attr-html-manifest"><a href="semantics.html#attr-html-manifest">manifest</a></code> whose value is not the
+  specifications cited above, is found to be an <code><a href="the-html-element.html#the-html-element">html</a></code>
+  element with an attribute <code title="attr-html-manifest"><a href="the-html-element.html#attr-html-manifest">manifest</a></code> whose value is not the
   empty string, then, as soon as the element is <a href="infrastructure.html#insert-an-element-into-a-document" title="insert an&#10;  element into a document">inserted into the document</a>, the user
   agent must <a href="urls.html#resolve-a-url" title="resolve a url">resolve</a> the value of
   that attribute relative to that element, and if that is successful,
@@ -1584,20 +1645,20 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   selection algorithm</a> with the resulting <a href="urls.html#absolute-url">absolute
   URL</a> with any <a href="urls.html#url-fragment" title="url-fragment">&lt;fragment&gt;</a> component removed as
   the manifest URL, and passing in the newly-created
-  <code><a href="infrastructure.html#document">Document</a></code>. Otherwise, if the attribute is absent, its
+  <code><a href="dom.html#document">Document</a></code>. Otherwise, if the attribute is absent, its
   value is the empty string, or resolving its value fails, then as
   soon as the root element is <a href="infrastructure.html#insert-an-element-into-a-document" title="insert an element into a&#10;  document">inserted into the document</a>, the user agent must run
   the <a href="offline.html#concept-appcache-init" title="concept-appcache-init">application cache selection
   algorithm</a> with no manifest, and passing in the
-  <code><a href="infrastructure.html#document">Document</a></code>.</p>
+  <code><a href="dom.html#document">Document</a></code>.</p>
 
-  <p class="note">Because the processing of the <code title="attr-html-manifest"><a href="semantics.html#attr-html-manifest">manifest</a></code> attribute happens
+  <p class="note">Because the processing of the <code title="attr-html-manifest"><a href="the-html-element.html#attr-html-manifest">manifest</a></code> attribute happens
   only once the root element is parsed, any URLs referenced by
   processing instructions before the root element (such as <code title="">&lt;?xml-stylesheet?&gt;</code> and <code title="">&lt;?xbl?&gt;</code> PIs) will be fetched from the network and
   cannot be cached.</p>
 
   <p>User agents may examine the namespace of the root
-  <code><a href="infrastructure.html#element">Element</a></code> node of this <code><a href="infrastructure.html#document">Document</a></code> object to
+  <code><a href="infrastructure.html#element">Element</a></code> node of this <code><a href="dom.html#document">Document</a></code> object to
   perform namespace-based dispatch to alternative processing tools,
   e.g. determining that the content is actually a syndication feed and
   passing it to a feed handler. If such processing is to take place,
@@ -1605,7 +1666,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   "non-document content") in the <a href="#navigate">navigate</a> steps
   above.</p>
 
-  <p>Otherwise, then, with the newly created <code><a href="infrastructure.html#document">Document</a></code>,
+  <p>Otherwise, then, with the newly created <code><a href="dom.html#document">Document</a></code>,
   the user agents must <a href="#update-the-session-history-with-the-new-page">update the session history with the new
   page</a>. User agents may do this before the complete document
   has been parsed (thus achieving <i>incremental rendering</i>), and
@@ -1613,50 +1674,53 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
   <p>Error messages from the parse process (e.g. XML namespace
   well-formedness errors) may be reported inline by mutating the
-  <code><a href="infrastructure.html#document">Document</a></code>.</p>
+  <code><a href="dom.html#document">Document</a></code>.</p>
 
 
   <h4 id="read-text"><span class="secno">5.5.4 </span><dfn title="navigate-text">Page load processing model for text files</dfn></h4>
 
   <p>When a plain text document is to be loaded in a <a href="browsers.html#browsing-context">browsing
-  context</a>, the user agent should <a href="webappapis.html#queue-a-task">queue a task</a> to
+  context</a>, the user agent must <a href="webappapis.html#queue-a-task">queue a task</a> to
   <a href="#create-a-document-object">create a <code>Document</code> object</a>, mark it as being
-  an <a href="dom.html#html-documents" title="HTML documents">HTML document</a>, create an
-  <a href="parsing.html#html-parser">HTML parser</a>, associate it with the document, act as if
-  the tokenizer had emitted a start tag token with the tag name "pre"
-  followed by a single U+000A LINE FEED (LF) character, and switch the <a href="parsing.html#html-parser">HTML parser</a>'s tokenizer
-  to the <a href="tokenization.html#plaintext-state">PLAINTEXT state</a>.  Each <a href="webappapis.html#concept-task" title="concept-task">task</a> that the <a href="webappapis.html#networking-task-source">networking task
-  source</a> places on the <a href="webappapis.html#task-queue">task queue</a> while the <a href="fetching-resources.html#fetch" title="fetch">fetching algorithm</a> runs must then fill the
-  parser's <a href="parsing.html#the-input-stream">input stream</a> with the fetched bytes and cause
-  the <a href="parsing.html#html-parser">HTML parser</a> to perform the appropriate processing
-  of the input stream.</p>
+  an <a href="infrastructure.html#html-documents" title="HTML documents">HTML document</a>, set its <a href="infrastructure.html#concept-document-content-type" title="concept-document-content-type">content type</a> to "<code title="">text/plain</code>", create an <a href="parsing.html#html-parser">HTML parser</a>,
+  associate it with the document, act as if the tokenizer had emitted
+  a start tag token with the tag name "pre" followed by a single
+  U+000A LINE FEED (LF) character, and switch
+  the <a href="parsing.html#html-parser">HTML parser</a>'s tokenizer to the <a href="tokenization.html#plaintext-state">PLAINTEXT
+  state</a>. Each <a href="webappapis.html#concept-task" title="concept-task">task</a> that the
+  <a href="webappapis.html#networking-task-source">networking task source</a> places on the <a href="webappapis.html#task-queue">task
+  queue</a> while the <a href="urls.html#fetch" title="fetch">fetching algorithm</a>
+  runs must then fill the parser's <a href="parsing.html#the-input-stream">input stream</a> with the
+  fetched bytes and cause the <a href="parsing.html#html-parser">HTML parser</a> to perform the
+  appropriate processing of the input stream.</p>
 
   <p>The rules for how to convert the bytes of the plain text document
   into actual characters, and the rules for actually rendering the
   text to the user, are defined in RFC 2046, RFC 3676, and subsequent
   versions thereof. <a href="references.html#refsRFC2046">[RFC2046]</a> <a href="references.html#refsRFC3676">[RFC3676]</a></p>
 
-  <p>The <a href="dom.html#document-s-character-encoding">document's character encoding</a> must be set to the
+  <p>The <a href="infrastructure.html#document-s-character-encoding">document's character encoding</a> must be set to the
   character encoding used to decode the document.</p>
 
-  <p>Upon creation of the <code><a href="infrastructure.html#document">Document</a></code> object, the user agent
+  <p>Upon creation of the <code><a href="dom.html#document">Document</a></code> object, the user agent
   must run the <a href="offline.html#concept-appcache-init" title="concept-appcache-init">application cache
   selection algorithm</a> with no manifest, and passing in the
-  newly-created <code><a href="infrastructure.html#document">Document</a></code>.</p>
+  newly-created <code><a href="dom.html#document">Document</a></code>.</p>
 
   
+
   <p>When no more bytes are available, the user agent must <a href="webappapis.html#queue-a-task">queue
   a task</a> for the parser to process the implied EOF character,
   which eventually causes a <code title="event-load">load</code> event
   to be fired.</p>
 
-  <p>After creating the <code><a href="infrastructure.html#document">Document</a></code> object, but potentially
+  <p>After creating the <code><a href="dom.html#document">Document</a></code> object, but potentially
   before the page has finished parsing, the user agent must
   <a href="#update-the-session-history-with-the-new-page">update the session history with the new page</a>.</p>
 
-  <p>User agents may add content to the <code><a href="semantics.html#the-head-element">head</a></code> element of
-  the <code><a href="infrastructure.html#document">Document</a></code>, e.g. linking to a style sheet or an XBL
-  binding, providing script, giving the document a <code><a href="semantics.html#the-title-element">title</a></code>,
+  <p>User agents may add content to the <code><a href="the-head-element.html#the-head-element">head</a></code> element of
+  the <code><a href="dom.html#document">Document</a></code>, e.g. linking to a style sheet or an XBL
+  binding, providing script, giving the document a <code><a href="the-title-element.html#the-title-element">title</a></code>,
   etc.</p>
 
   <p class="note">In particular, if the user agent supports the <code title="">Format=Flowed</code> feature of RFC 3676 then the user
@@ -1668,96 +1732,150 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   section must be the <a href="webappapis.html#networking-task-source">networking task source</a>.</p>
 
 
-  <h4 id="read-image"><span class="secno">5.5.5 </span><dfn title="navigate-image">Page load processing model for images</dfn></h4>
+  <h4 id="read-multipart-x-mixed-replace"><span class="secno">5.5.5 </span><dfn title="navigate-multipart-x-mixed-replace">Page load processing model for <code>multipart/x-mixed-replace</code> resources</dfn></h4>
 
-  <p>When an image resource is to be loaded in a <a href="browsers.html#browsing-context">browsing
-  context</a>, the user agent should <a href="#create-a-document-object">create a
-  <code>Document</code> object</a>, mark it as being an <a href="dom.html#html-documents" title="HTML documents">HTML document</a>, append an
-  <code><a href="semantics.html#the-html-element">html</a></code> element to the <code><a href="infrastructure.html#document">Document</a></code>, append a
-  <code><a href="semantics.html#the-head-element">head</a></code> element and a <code><a href="sections.html#the-body-element">body</a></code> element to the
-  <code><a href="semantics.html#the-html-element">html</a></code> element, append an <code><a href="embedded-content-1.html#the-img-element">img</a></code> to the
-  <code><a href="sections.html#the-body-element">body</a></code> element, and set the <code title="attr-img-src"><a href="embedded-content-1.html#attr-img-src">src</a></code> attribute of the <code><a href="embedded-content-1.html#the-img-element">img</a></code>
-  element to the address of the image.</p>
+  <p>When a resource with the type
+  <code><a href="iana.html#multipart-x-mixed-replace">multipart/x-mixed-replace</a></code> is to be loaded in a
+  <a href="browsers.html#browsing-context">browsing context</a>, the user agent must parse the
+  resource using the rules for multipart types. <a href="references.html#refsRFC2046">[RFC2046]</a></p>
 
-  
-  <p>Then, the user agent must act as if it had <a href="the-end.html#stop-parsing" title="stop&#10;  parsing">stopped parsing</a>.</p>
+  <p>For each body part obtained from the resource, the user agent
+  must run a new instance of the <a href="#navigate">navigate</a> algorithm,
+  starting from the <i>resource handling</i> step, using the new body
+  part as the resource being navigated, with <a href="#replacement-enabled">replacement
+  enabled</a> if a previous body part from the same resource
+  resulted in a <code><a href="dom.html#document">Document</a></code> object being <a href="#create-a-document-object" title="create&#10;  a document object">created</a>, and otherwise using the same
+  setup as the <a href="#navigate">navigate</a> attempt that caused this section
+  to be invoked in the first place.</p>
 
-  <p>Upon creation of the <code><a href="infrastructure.html#document">Document</a></code> object, the user agent
+  <p>For the purposes of algorithms processing these body parts as if
+  they were complete stand-alone resources, the user agent must act as
+  if there were no more bytes for those resources whenever the
+  boundary following the body part is reached.</p>
+
+  <p class="note">Thus, <code title="event-load">load</code> events
+  (and for that matter <code title="event-unload">unload</code>
+  events) do fire for each body part loaded.</p>
+
+
+  <h4 id="read-media"><span class="secno">5.5.6 </span><dfn title="navigate-media">Page load processing model for media</dfn></h4>
+
+  <p>When an image, video, or audio resource is to be loaded in a
+  <a href="browsers.html#browsing-context">browsing context</a>, the user agent should <a href="#create-a-document-object">create a
+  <code>Document</code> object</a>, mark it as being an <a href="infrastructure.html#html-documents" title="HTML documents">HTML document</a>, set its <a href="infrastructure.html#concept-document-content-type" title="concept-document-content-type">content type</a> to the sniffed
+  MIME type of the resource (<var title="">type</var> in the
+  <a href="#navigate">navigate</a> algorithm), append an <code><a href="the-html-element.html#the-html-element">html</a></code>
+  element to the <code><a href="dom.html#document">Document</a></code>, append a <code><a href="the-head-element.html#the-head-element">head</a></code>
+  element and a <code><a href="the-body-element.html#the-body-element">body</a></code> element to the <code><a href="the-html-element.html#the-html-element">html</a></code>
+  element, append an element <var title="">host element</var> for the
+  media, as described below, to the <code><a href="the-body-element.html#the-body-element">body</a></code> element, and set
+  the appropriate attribute of the element <var title="">host
+  element</var>, as described below, to the address of the image,
+  video, or audio resource.</p>
+
+  <p>The element <var title="">host element</var> to create for the
+  media is the element given in the table below in the second cell of
+  the row whose first cell describes the media. The appropriate
+  attribute to set is the one given by the third cell in that same
+  row.</p>
+
+  <table><thead><tr><th> Type of media
+         </th><th> Element for the media
+         </th><th> Appropriate attribute
+    </th></tr><tr><td> Image
+         </td><td> <code><a href="the-img-element.html#the-img-element">img</a></code>
+         </td><td> <code title="attr-img-src"><a href="the-img-element.html#attr-img-src">src</a></code>
+    </td></tr><tr><td> Video
+         </td><td> <code><a href="the-video-element.html#the-video-element">video</a></code>
+         </td><td> <code title="attr-media-src"><a href="media-elements.html#attr-media-src">src</a></code>
+    </td></tr><tr><td> Audio
+         </td><td> <code><a href="the-audio-element.html#the-audio-element">audio</a></code>
+         </td><td> <code title="attr-media-src"><a href="media-elements.html#attr-media-src">src</a></code>
+  </td></tr></thead></table><p>Then, the user agent must act as if it had <a href="the-end.html#stop-parsing" title="stop&#10;  parsing">stopped parsing</a>.</p>
+
+  <p>Upon creation of the <code><a href="dom.html#document">Document</a></code> object, the user agent
   must run the <a href="offline.html#concept-appcache-init" title="concept-appcache-init">application cache
   selection algorithm</a> with no manifest, and passing in the
-  newly-created <code><a href="infrastructure.html#document">Document</a></code>.</p>
+  newly-created <code><a href="dom.html#document">Document</a></code>.</p>
 
-  <p>After creating the <code><a href="infrastructure.html#document">Document</a></code> object, but potentially
+  <p>After creating the <code><a href="dom.html#document">Document</a></code> object, but potentially
   before the page has finished fully loading, the user agent must
   <a href="#update-the-session-history-with-the-new-page">update the session history with the new page</a>.</p>
 
-  <p>User agents may add content to the <code><a href="semantics.html#the-head-element">head</a></code> element of
-  the <code><a href="infrastructure.html#document">Document</a></code>, or attributes to the <code><a href="embedded-content-1.html#the-img-element">img</a></code>
-  element, e.g. to link to a style sheet or an XBL binding, to provide
-  a script, to give the document a <code><a href="semantics.html#the-title-element">title</a></code>, etc.</p>
+  <p>User agents may add content to the <code><a href="the-head-element.html#the-head-element">head</a></code> element of
+  the <code><a href="dom.html#document">Document</a></code>, or attributes to the element <var title="">host element</var>, e.g. to link to a style sheet or an XBL
+  binding, to provide a script, to give the document a
+  <code><a href="the-title-element.html#the-title-element">title</a></code>, to make the media <a href="media-elements.html#attr-media-autoplay" title="attr-media-autoplay">autoplay</a>, etc.</p>
 
 
-  <h4 id="read-plugin"><span class="secno">5.5.6 </span><dfn title="navigate-plugin">Page load processing model for content that uses plugins</dfn></h4>
+  <h4 id="read-plugin"><span class="secno">5.5.7 </span><dfn title="navigate-plugin">Page load processing model for content that uses plugins</dfn></h4>
 
   <p>When a resource that requires an external resource to be rendered
   is to be loaded in a <a href="browsers.html#browsing-context">browsing context</a>, the user agent
   should <a href="#create-a-document-object">create a <code>Document</code> object</a>, mark it
-  as being an <a href="dom.html#html-documents" title="HTML documents">HTML document</a>,
-  append an <code><a href="semantics.html#the-html-element">html</a></code> element to the <code><a href="infrastructure.html#document">Document</a></code>,
-  append a <code><a href="semantics.html#the-head-element">head</a></code> element and a <code><a href="sections.html#the-body-element">body</a></code> element
-  to the <code><a href="semantics.html#the-html-element">html</a></code> element, append an <code><a href="the-iframe-element.html#the-embed-element">embed</a></code> to
-  the <code><a href="sections.html#the-body-element">body</a></code> element, and set the <code title="attr-embed-src"><a href="the-iframe-element.html#attr-embed-src">src</a></code> attribute of the
-  <code><a href="the-iframe-element.html#the-embed-element">embed</a></code> element to the address of the resource.</p>
+  as being an <a href="infrastructure.html#html-documents" title="HTML documents">HTML document</a>, set
+  its <a href="infrastructure.html#concept-document-content-type" title="concept-document-content-type">content type</a> to
+  the sniffed MIME type of the resource (<var title="">type</var> in
+  the <a href="#navigate">navigate</a> algorithm), append an <code><a href="the-html-element.html#the-html-element">html</a></code>
+  element to the <code><a href="dom.html#document">Document</a></code>, append a <code><a href="the-head-element.html#the-head-element">head</a></code>
+  element and a <code><a href="the-body-element.html#the-body-element">body</a></code> element to the <code><a href="the-html-element.html#the-html-element">html</a></code>
+  element, append an <code><a href="the-embed-element.html#the-embed-element">embed</a></code> to the <code><a href="the-body-element.html#the-body-element">body</a></code>
+  element, and set the <code title="attr-embed-src"><a href="the-embed-element.html#attr-embed-src">src</a></code>
+  attribute of the <code><a href="the-embed-element.html#the-embed-element">embed</a></code> element to the address of the
+  resource.</p>
 
   
+
   <p>Then, the user agent must act as if it had <a href="the-end.html#stop-parsing" title="stop&#10;  parsing">stopped parsing</a>.</p>
 
-  <p>Upon creation of the <code><a href="infrastructure.html#document">Document</a></code> object, the user agent
+  <p>Upon creation of the <code><a href="dom.html#document">Document</a></code> object, the user agent
   must run the <a href="offline.html#concept-appcache-init" title="concept-appcache-init">application cache
   selection algorithm</a> with no manifest, and passing in the
-  newly-created <code><a href="infrastructure.html#document">Document</a></code>.</p>
+  newly-created <code><a href="dom.html#document">Document</a></code>.</p>
 
-  <p>After creating the <code><a href="infrastructure.html#document">Document</a></code> object, but potentially
+  <p>After creating the <code><a href="dom.html#document">Document</a></code> object, but potentially
   before the page has finished fully loading, the user agent must
   <a href="#update-the-session-history-with-the-new-page">update the session history with the new page</a>.</p>
 
-  <p>User agents may add content to the <code><a href="semantics.html#the-head-element">head</a></code> element of
-  the <code><a href="infrastructure.html#document">Document</a></code>, or attributes to the <code><a href="the-iframe-element.html#the-embed-element">embed</a></code>
+  <p>User agents may add content to the <code><a href="the-head-element.html#the-head-element">head</a></code> element of
+  the <code><a href="dom.html#document">Document</a></code>, or attributes to the <code><a href="the-embed-element.html#the-embed-element">embed</a></code>
   element, e.g. to link to a style sheet or an XBL binding, or to give
-  the document a <code><a href="semantics.html#the-title-element">title</a></code>.</p>
+  the document a <code><a href="the-title-element.html#the-title-element">title</a></code>.</p>
 
   <p class="note" id="sandboxPluginNavigate">If the <a href="the-iframe-element.html#sandboxed-plugins-browsing-context-flag">sandboxed
   plugins browsing context flag</a> was set on the <a href="browsers.html#browsing-context">browsing
-  context</a> when the <code><a href="infrastructure.html#document">Document</a></code> was created, the
-  synthesized <code><a href="the-iframe-element.html#the-embed-element">embed</a></code> element will <a href="the-iframe-element.html#sandboxPluginEmbed">fail to render the content</a>.</p>
+  context</a> when the <code><a href="dom.html#document">Document</a></code> was created, the
+  synthesized <code><a href="the-embed-element.html#the-embed-element">embed</a></code> element will <a href="the-embed-element.html#sandboxPluginEmbed">fail to render the content</a> if the
+  relevant <a href="infrastructure.html#plugin">plugin</a> cannot be <a href="infrastructure.html#concept-plugin-secure" title="concept-plugin-secure">secured</a>.</p>
 
 
-  <h4 id="read-ua-inline"><span class="secno">5.5.7 </span><dfn title="navigate-ua-inline">Page load processing model for inline content that doesn't have a DOM</dfn></h4>
+  <h4 id="read-ua-inline"><span class="secno">5.5.8 </span><dfn title="navigate-ua-inline">Page load processing model for inline content that doesn't have a DOM</dfn></h4>
 
   <p>When the user agent is to display a user agent page inline in a
   <a href="browsers.html#browsing-context">browsing context</a>, the user agent should <a href="#create-a-document-object">create a
-  <code>Document</code> object</a>, mark it as being an <a href="dom.html#html-documents" title="HTML documents">HTML document</a>, and then either
-  associate that <code><a href="infrastructure.html#document">Document</a></code> with a custom rendering that is
-  not rendered using the normal <code><a href="infrastructure.html#document">Document</a></code> rendering rules,
-  or mutate that <code><a href="infrastructure.html#document">Document</a></code> until it represents the content
-  the user agent wants to render.</p>
+  <code>Document</code> object</a>, mark it as being an <a href="infrastructure.html#html-documents" title="HTML documents">HTML document</a>, set its <a href="infrastructure.html#concept-document-content-type" title="concept-document-content-type">content type</a> to "<code title="">text/html</code>", and then either associate that
+  <code><a href="dom.html#document">Document</a></code> with a custom rendering that is not rendered
+  using the normal <code><a href="dom.html#document">Document</a></code> rendering rules, or mutate
+  that <code><a href="dom.html#document">Document</a></code> until it represents the content the user
+  agent wants to render.</p>
 
   
+
   <p>Once the page has been set up, the user agent must act as if it
   had <a href="the-end.html#stop-parsing" title="stop parsing">stopped parsing</a>.</p>
 
-  <p>Upon creation of the <code><a href="infrastructure.html#document">Document</a></code> object, the user agent
+  <p>Upon creation of the <code><a href="dom.html#document">Document</a></code> object, the user agent
   must run the <a href="offline.html#concept-appcache-init" title="concept-appcache-init">application cache
   selection algorithm</a> with no manifest, passing in the
-  newly-created <code><a href="infrastructure.html#document">Document</a></code>.</p>
+  newly-created <code><a href="dom.html#document">Document</a></code>.</p>
 
-  <p>After creating the <code><a href="infrastructure.html#document">Document</a></code> object, but potentially
+  <p>After creating the <code><a href="dom.html#document">Document</a></code> object, but potentially
   before the page has been completely set up, the user agent must
   <a href="#update-the-session-history-with-the-new-page">update the session history with the new page</a>.</p>
 
 
 
-  <h4 id="scroll-to-fragid"><span class="secno">5.5.8 </span><dfn title="navigate-fragid">Navigating to a fragment identifier</dfn></h4>
+  <h4 id="scroll-to-fragid"><span class="secno">5.5.9 </span><dfn title="navigate-fragid">Navigating to a fragment identifier</dfn></h4>
 
   <p>When a user agent is supposed to navigate to a fragment
   identifier, then the user agent must <a href="webappapis.html#queue-a-task">queue a task</a> to
@@ -1779,7 +1897,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
    the <a href="webappapis.html#history-traversal-task-source">history traversal task source</a>.</p></li>
 
    <li><p>Append a new entry at the end of the <code><a href="#history-0">History</a></code>
-   object representing the new resource and its <code><a href="infrastructure.html#document">Document</a></code>
+   object representing the new resource and its <code><a href="dom.html#document">Document</a></code>
    object and related state. Its <a href="urls.html#url">URL</a> must be set to the
    address to which the user agent was <a href="#navigate" title="navigate">navigating</a>. The title must be left
    unset.</p></li>
@@ -1788,24 +1906,25 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
    will <a href="#scroll-to-the-fragment-identifier">scroll to the fragment identifier</a> given in what
    is now <a href="dom.html#the-document-s-current-address">the document's current address</a>.</p></li>
 
-  </ol><p class="note">If the scrolling fails because the relevant <a href="elements.html#concept-id" title="concept-id">ID</a> has
+  </ol><p class="note">If the scrolling fails because the relevant <a href="infrastructure.html#concept-id" title="concept-id">ID</a> has
   not yet been parsed, then the original <a href="#navigate" title="navigate">navigation</a> algorithm will take care of the
   scrolling instead, as the last few steps of its <a href="#update-the-session-history-with-the-new-page">update the
   session history with the new page</a> algorithm.</p>
 
   <hr/><p>When the user agent is required to <dfn id="scroll-to-the-fragment-identifier">scroll to the fragment
-  identifier</dfn>, it must change the scrolling position of the
-  document using the <span>scroll an element into view</span>
-  algorithm defined in the CSSOM View specification, or perform some
-  other action, such that <a href="#the-indicated-part-of-the-document">the indicated part of the
-  document</a> is brought to the user's attention. If there is no
-  indicated part, then the user agent must not scroll anywhere. <a href="references.html#refsCSSOMVIEW">[CSSOMVIEW]</a></p>
+  identifier</dfn>, it must either change the scrolling position of
+  the document using the <a href="infrastructure.html#scroll-an-element-into-view">scroll an element into view</a>
+  algorithm defined in the CSSOM View specification, with the <var title="">align to top flag</var> set, or perform some other action,
+  such that <a href="#the-indicated-part-of-the-document">the indicated part of the document</a> is brought
+  to the user's attention. If there is no indicated part, or if the
+  indicated part is not <a href="rendering.html#being-rendered">being rendered</a>, then the user
+  agent must not scroll anywhere. <a href="references.html#refsCSSOMVIEW">[CSSOMVIEW]</a></p>
 
   <p><dfn id="the-indicated-part-of-the-document">The indicated part of the document</dfn> is the one that the
   fragment identifier, if any, identifies. The semantics of the
   fragment identifier in terms of mapping it to a specific DOM Node is
   defined by the specification that defines the <a href="infrastructure.html#mime-type">MIME type</a>
-  used by the <code><a href="infrastructure.html#document">Document</a></code> (for example, the processing of
+  used by the <code><a href="dom.html#document">Document</a></code> (for example, the processing of
   fragment identifiers for <a href="infrastructure.html#xml-mime-type" title="XML MIME type">XML MIME
   types</a> is the responsibility of RFC3023). <a href="references.html#refsRFC3023">[RFC3023]</a></p>
 
@@ -1817,6 +1936,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   <ol><li><p><a href="urls.html#parse-a-url" title="parse a url">Parse</a> the <a href="urls.html#url">URL</a>,
    and let <var title="">fragid</var> be the <a href="urls.html#url-fragment" title="url-fragment">&lt;fragment&gt;</a> component of the
    URL.</p></li>
+
    <li><p>If <var title="">fragid</var> is the empty string, then
    <a href="#the-indicated-part-of-the-document">the indicated part of the document</a> is the top of the
    document; stop the algorithm here.</p></li>
@@ -1828,12 +1948,12 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
    surrogate code points), then skip this step and the next one.</p>
 
    </li><li><p>If this step was not skipped and there is an element in the
-   DOM that has an <a href="elements.html#concept-id" title="concept-id">ID</a> exactly equal to
+   DOM that has an <a href="infrastructure.html#concept-id" title="concept-id">ID</a> exactly equal to
    <var title="">decoded fragid</var>, then the first such element in
    tree order is <a href="#the-indicated-part-of-the-document">the indicated part of the document</a>; stop
    the algorithm here.</p></li>
 
-   <li><p>If there is an <code><a href="text-level-semantics.html#the-a-element">a</a></code> element in the DOM that has a
+   <li><p>If there is an <code><a href="the-a-element.html#the-a-element">a</a></code> element in the DOM that has a
    <code title="attr-a-name"><a href="obsolete.html#attr-a-name">name</a></code> attribute whose value is
    exactly equal to <var title="">fragid</var> (<em>not</em> <var title="">decoded fragid</var>), then the first such element in tree
    order is <a href="#the-indicated-part-of-the-document">the indicated part of the document</a>; stop the
@@ -1851,26 +1971,27 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   document</a>, if that is an element; otherwise there is no
   <i><a href="#target-element">target element</a></i>. <a href="references.html#refsSELECTORS">[SELECTORS]</a></p>
 
-  </div><h4 id="history-traversal"><span class="secno">5.5.9 </span>History traversal</h4><div class="impl">
+  </div><h4 id="history-traversal"><span class="secno">5.5.10 </span>History traversal</h4><div class="impl">
 
   <p>When a user agent is required to <dfn id="traverse-the-history">traverse the history</dfn>
-  to a <i>specified entry</i>, optionally with <a href="#replacement-enabled">replacement
-  enabled</a>, the user agent must act as follows.</p>
+  to a <var title="">specified entry</var>, optionally with
+  <a href="#replacement-enabled">replacement enabled</a>, the user agent must act as
+  follows.</p>
 
   <p class="note">This algorithm is not just invoked when <a href="#traverse-the-history-by-a-delta" title="traverse the history by a delta">explicitly going back or
   forwards in the session history</a> &#x2014; it is also invoked in
   other situations, for example when <a href="#navigate" title="navigate">navigating
-  a browsing context</a>, as part of <a href="#update-the-session-history-with-the-new-page" title="update the session&#10;  history with the new page">updating the session history with the new
-  page</a>.</p>
+  a browsing context</a>, as part of <a href="#update-the-session-history-with-the-new-page" title="update the&#10;  session history with the new page">updating the session history with
+  the new page</a>.</p>
 
-  <ol><li><p>If there is no longer a <code><a href="infrastructure.html#document">Document</a></code> object for the
+  <ol><li><p>If there is no longer a <code><a href="dom.html#document">Document</a></code> object for the
    entry in question, the user agent must
    <a href="#navigate">navigate</a>
    the browsing context to the location for that entry to perform an
    <a href="#entry-update">entry update</a> of that entry, and abort these steps. The
    "<a href="#navigate">navigate</a>" algorithm reinvokes this "traverse"
    algorithm to complete the traversal, at which point there
-   <em>is</em> a <code><a href="infrastructure.html#document">Document</a></code> object and so this step gets
+   <em>is</em> a <code><a href="dom.html#document">Document</a></code> object and so this step gets
    skipped. The navigation must be done using the same <a href="#source-browsing-context">source
    browsing context</a> as was used the first time this entry was
    created. (This can never happen with <a href="#replacement-enabled">replacement
@@ -1882,26 +2003,27 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
    attribute.</p></li>
 
    <li><p>If appropriate, update the <a href="#current-entry">current entry</a> in the
-   <a href="browsers.html#browsing-context">browsing context</a>'s <code><a href="infrastructure.html#document">Document</a></code> object's
+   <a href="browsers.html#browsing-context">browsing context</a>'s <code><a href="dom.html#document">Document</a></code> object's
    <code><a href="#history-0">History</a></code> object to reflect any state that the user
    agent wishes to persist. The entry is then said to be <a href="#an-entry-with-persisted-user-state">an
    entry with persisted user state</a>.</p></li>
 
-   <li><p>If the <i>specified entry</i> has a different
-   <code><a href="infrastructure.html#document">Document</a></code> object than the <a href="#current-entry">current entry</a>
+   <li><p>If the <var title="">specified entry</var> has a different
+   <code><a href="dom.html#document">Document</a></code> object than the <a href="#current-entry">current entry</a>
    then the user agent must run the following substeps:</p>
 
     <ol><li>If the browsing context is a <a href="browsers.html#top-level-browsing-context">top-level browsing
      context</a>, but not an <a href="browsers.html#auxiliary-browsing-context">auxiliary browsing
      context</a>, and the <a href="origin-0.html#origin">origin</a> of the
-     <code><a href="infrastructure.html#document">Document</a></code> of the <i>specified entry</i> is not the
-     <a href="origin-0.html#same-origin" title="same origin">same</a> as the <a href="origin-0.html#origin">origin</a>
-     of the <code><a href="infrastructure.html#document">Document</a></code> of the <a href="#current-entry">current entry</a>,
-     then the following sub-sub-steps must be run:
+     <code><a href="dom.html#document">Document</a></code> of the <var title="">specified entry</var>
+     is not the <a href="origin-0.html#same-origin" title="same origin">same</a> as the
+     <a href="origin-0.html#origin">origin</a> of the <code><a href="dom.html#document">Document</a></code> of the
+     <a href="#current-entry">current entry</a>, then the following sub-sub-steps must
+     be run:
 
       <ol><li>The current <a href="browsers.html#browsing-context-name">browsing context name</a> must be
        stored with all the entries in the history that are associated
-       with <code><a href="infrastructure.html#document">Document</a></code> objects with the <a href="origin-0.html#same-origin">same
+       with <code><a href="dom.html#document">Document</a></code> objects with the <a href="origin-0.html#same-origin">same
        origin</a> as the <a href="browsers.html#active-document">active document</a> <em>and</em>
        that are contiguous with the <a href="#current-entry">current entry</a>.</li>
 
@@ -1910,12 +2032,11 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
       </ol></li>
 
-     <li id="appcache-history-2">The user agent must make the
-     <i>specified entry</i>'s <code><a href="infrastructure.html#document">Document</a></code> object the
+     <li id="appcache-history-2">The user agent must make the <var title="">specified entry</var>'s <code><a href="dom.html#document">Document</a></code> object the
      <a href="browsers.html#active-document">active document</a> of the <a href="browsers.html#browsing-context">browsing
      context</a>.</li>
 
-     <li>If the <i>specified entry</i> has a <a href="browsers.html#browsing-context-name">browsing
+     <li>If the <var title="">specified entry</var> has a <a href="browsers.html#browsing-context-name">browsing
      context name</a> stored with it, then the following
      sub-sub-steps must be run:
 
@@ -1924,48 +2045,50 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
        <li>Any <a href="browsers.html#browsing-context-name">browsing context name</a> stored with the
        entries in the history that are associated with
-       <code><a href="infrastructure.html#document">Document</a></code> objects with the <a href="origin-0.html#same-origin">same origin</a>
+       <code><a href="dom.html#document">Document</a></code> objects with the <a href="origin-0.html#same-origin">same origin</a>
        as the new <a href="browsers.html#active-document">active document</a>, and that are
        contiguous with the specified entry, must be cleared.</li>
 
       </ol></li>
 
-     <li id="history-autocomplete"><p>If the <i>specified entry</i>'s
-     <code><a href="infrastructure.html#document">Document</a></code> has any <code><a href="the-input-element.html#the-input-element">input</a></code> elements whose
-     <a href="common-input-element-attributes.html#resulting-autocompletion-state">resulting autocompletion state</a> is <i title="">off</i>, invoke the <a href="association-of-controls-and-forms.html#concept-form-reset-control" title="concept-form-reset-control">reset algorithm</a> of each
+     <li id="history-autocomplete"><p>If the <var title="">specified
+     entry</var>'s <code><a href="dom.html#document">Document</a></code> has any <code><a href="the-input-element.html#the-input-element">input</a></code>
+     elements whose <a href="common-input-element-attributes.html#resulting-autocompletion-state">resulting autocompletion state</a> is <i title="">off</i>, invoke the <a href="form-submission.html#concept-form-reset-control" title="concept-form-reset-control">reset algorithm</a> of each
      of those elements.</p></li>
 
-     <li><p>If the <a href="dom.html#current-document-readiness">current document readiness</a> of the
-     <i>specified entry</i>'s <code><a href="infrastructure.html#document">Document</a></code> is "complete",
-     <a href="webappapis.html#queue-a-task">queue a task</a> to fire a <code title="event-pageshow"><a href="#event-pageshow">pageshow</a></code> event at the
-     <code><a href="browsers.html#window">Window</a></code> object of that <code><a href="infrastructure.html#document">Document</a></code>, but
+     <li><p>If the <a href="dom.html#current-document-readiness">current document readiness</a> of the <var title="">specified entry</var>'s <code><a href="dom.html#document">Document</a></code> is
+     "<code title="">complete</code>", <a href="webappapis.html#queue-a-task">queue a task</a> to fire a <code title="event-pageshow"><a href="#event-pageshow">pageshow</a></code> event at the
+     <code><a href="browsers.html#window">Window</a></code> object of that <code><a href="dom.html#document">Document</a></code>, but
      with its <code title="dom-event-target"><a href="infrastructure.html#dom-event-target">target</a></code> set to the
-     <code><a href="infrastructure.html#document">Document</a></code> object (and the <code title="dom-event-currentTarget">currentTarget</code> set to the
+     <code><a href="dom.html#document">Document</a></code> object (and the <code title="dom-event-currentTarget">currentTarget</code> set to the
      <code><a href="browsers.html#window">Window</a></code> object), using the
      <code><a href="#pagetransitionevent">PageTransitionEvent</a></code> interface, with the <code title="dom-PageTransitionEvent-persisted"><a href="#dom-pagetransitionevent-persisted">persisted</a></code>
-     attribute set to true. This event must not bubble, must not be
-     cancelable, and has no default action.</p></li>
+     attribute initialized to true. This event must not bubble, must
+     not be cancelable, and has no default action.</p></li>
 
      
+
     </ol></li>
 
    <li><p>Set <a href="dom.html#the-document-s-current-address">the document's current address</a> to the URL
-   of the <i>specified entry</i>.</p></li>
+   of the <var title="">specified entry</var>.</p></li>
 
-   <li><p>If the <i>specified entry</i> has a URL whose fragment
-   identifier differs from that of the <a href="#current-entry">current entry</a>'s
-   when compared in a <a href="infrastructure.html#case-sensitive">case-sensitive</a> manner, and the two
-   share the same <code><a href="infrastructure.html#document">Document</a></code> object, then let <var title="">hash changed</var> be true, and let <var title="">old
-   URL</var> be the URL of the <a href="#current-entry">current entry</a> and <var title="">new URL</var> be the URL of the <i>specified entry</i>.
-   Otherwise, let <var title="">hash changed</var> be false.</p></li>
+   <li><p>If the <var title="">specified entry</var> has a URL whose
+   fragment identifier differs from that of the <a href="#current-entry">current
+   entry</a>'s when compared in a <a href="infrastructure.html#case-sensitive">case-sensitive</a>
+   manner, and the two share the same <code><a href="dom.html#document">Document</a></code> object,
+   then let <var title="">hash changed</var> be true, and let <var title="">old URL</var> be the URL of the <a href="#current-entry">current entry</a>
+   and <var title="">new URL</var> be the URL of the <var title="">specified entry</var>. Otherwise, let <var title="">hash
+   changed</var> be false.</p></li>
 
    <li><p>If the traversal was initiated with <dfn id="replacement-enabled">replacement
    enabled</dfn>, remove the entry immediately before the
    <var title="">specified entry</var> in the session history.</p>
 
-   </li><li><p>If the <i>specified entry</i> is not <a href="#an-entry-with-persisted-user-state">an entry with
-   persisted user state</a>, but its URL has a fragment identifier,
-   <a href="#scroll-to-the-fragment-identifier">scroll to the fragment identifier</a>.</p></li>
+   </li><li><p>If the <var title="">specified entry</var> is not <a href="#an-entry-with-persisted-user-state">an
+   entry with persisted user state</a>, but its URL has a fragment
+   identifier, <a href="#scroll-to-the-fragment-identifier">scroll to the fragment
+   identifier</a>.</p></li>
 
    <li>
 
@@ -1975,9 +2098,9 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
     form fields, that it had previously recorded.</p>
 
     
-    <p class="note">This can even include updating the <code title="attr-dir"><a href="elements.html#the-dir-attribute">dir</a></code> attribute of <code><a href="the-button-element.html#the-textarea-element">textarea</a></code>
+    <p class="note">This can even include updating the <code title="attr-dir"><a href="global-attributes.html#the-dir-attribute">dir</a></code> attribute of <code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code>
     elements or <code><a href="the-input-element.html#the-input-element">input</a></code> elements whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in either the
-    <a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-text">Text</a> state or the <a href="states-of-the-type-attribute.html#text-state-and-search-state" title="attr-input-type-search">Search</a> state, if the
+    <a href="states-of-the-type-attribute.html#text-type-text-state-and-search-state-type-search" title="attr-input-type-text">Text</a> state or the <a href="states-of-the-type-attribute.html#text-type-text-state-and-search-state-type-search" title="attr-input-type-search">Search</a> state, if the
     persisted state includes the directionality of user input in such
     controls.</p>
 
@@ -1987,36 +2110,51 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
    state object. Otherwise, let <var title="">state</var> be
    null.</p></li>
 
-   <li><p>Set <code title="dom-history-state"><a href="#dom-history-state">history.state</a></code> to <var title="">state</var>.</p></li>
+   <li><p>Set <code title="dom-history-state"><a href="#dom-history-state">history.state</a></code> to
+   <var title="">state</var>.</p></li>
 
-   <li><p>Fire a <code title="event-popstate"><a href="#event-popstate">popstate</a></code> event at
-   the <code><a href="browsers.html#window">Window</a></code> object of the <code><a href="infrastructure.html#document">Document</a></code>, using
-   the <code><a href="#popstateevent">PopStateEvent</a></code> interface, with the <code title="dom-PopStateEvent-state"><a href="#dom-popstateevent-state">state</a></code> attribute set to the
-   value of <var title="">state</var>. This event must bubble but not
-   be cancelable and has no default action.</p></li>
+   <li><p>Let <var title="">state changed</var> be true if the
+   <a href="#latest-entry">latest entry</a> of the <code><a href="dom.html#document">Document</a></code> of the <var title="">specified entry</var> is not the <var title="">specified
+   entry</var>; otherwise let it be false. (If the
+   <code><a href="dom.html#document">Document</a></code> has no <a href="#latest-entry">latest entry</a> then by
+   definition its <a href="#latest-entry">latest entry</a> is not the <var title="">specified entry</var>.)</p>
+
+   </li><li><p>Let the <a href="#latest-entry">latest entry</a> of the
+   <code><a href="dom.html#document">Document</a></code> of the <var title="">specified entry</var> be
+   the <var title="">specified entry</var>.</p></li>
+
+   <li><p>If <var title="">state changed</var> is true, fire a <code title="event-popstate"><a href="#event-popstate">popstate</a></code> event at the
+   <code><a href="browsers.html#window">Window</a></code> object of the <code><a href="dom.html#document">Document</a></code>, using the
+   <code><a href="#popstateevent">PopStateEvent</a></code> interface, with the <code title="dom-PopStateEvent-state"><a href="#dom-popstateevent-state">state</a></code> attribute initialized
+   to the value of <var title="">state</var>. This event must bubble
+   but not be cancelable and has no default action.</p></li>
 
    <li><p>If <var title="">hash changed</var> is true, then fire a
    <code title="event-hashchange"><a href="#event-hashchange">hashchange</a></code> event at the
    <a href="browsers.html#browsing-context">browsing context</a>'s <code><a href="browsers.html#window">Window</a></code> object, using
-   the <code><a href="#hashchangeevent">HashChangeEvent</a></code> interface, with the <code title="dom-HashChangeEvent-oldURL"><a href="#dom-hashchangeevent-oldurl">oldURL</a></code> attribute set to
-   <var title="">old URL</var> and the <code title="dom-HashChangeEvent-newURL"><a href="#dom-hashchangeevent-newurl">newURL</a></code> attribute set to
-   <var title="">new URL</var>. This event must bubble but not be
-   cancelable and has no default action.</p></li>
+   the <code><a href="#hashchangeevent">HashChangeEvent</a></code> interface, with the <code title="dom-HashChangeEvent-oldURL"><a href="#dom-hashchangeevent-oldurl">oldURL</a></code> attribute
+   initialized to <var title="">old URL</var> and the <code title="dom-HashChangeEvent-newURL"><a href="#dom-hashchangeevent-newurl">newURL</a></code> attribute
+   initialized to <var title="">new URL</var>. This event must bubble
+   but not be cancelable and has no default action.</p></li>
 
-   <li><p>The <a href="#current-entry">current entry</a> is now the <i>specified
-   entry</i>.</p></li>
+   <li><p>The <a href="#current-entry">current entry</a> is now the <var title="">specified
+   entry</var>.</p></li>
 
   </ol><p>The <a href="webappapis.html#task-source">task source</a> for the tasks mentioned above is the
   <a href="webappapis.html#dom-manipulation-task-source">DOM manipulation task source</a>.</p>
 
 
-  <h5 id="event-definitions"><span class="secno">5.5.9.1 </span>Event definitions</h5>
+  <h5 id="event-definitions-0"><span class="secno">5.5.10.1 </span>Event definitions</h5>
 
   </div><p>The <dfn id="event-popstate" title="event-popstate"><code>popstate</code></dfn> event
   is fired in certain cases when navigating to a <a href="#session-history-entry">session history
-  entry</a>.</p><pre class="idl">interface <dfn id="popstateevent">PopStateEvent</dfn> : <a href="infrastructure.html#event">Event</a> {
+  entry</a>.</p><pre class="idl">[Constructor(DOMString type, optional <a href="#popstateeventinit">PopStateEventInit</a> eventInitDict)]
+interface <dfn id="popstateevent">PopStateEvent</dfn> : <a href="infrastructure.html#event">Event</a> {
   readonly attribute any <a href="#dom-popstateevent-state" title="dom-PopStateEvent-state">state</a>;
-  void <a href="#dom-popstateevent-initpopstateevent" title="dom-PopStateEvent-initPopStateEvent">initPopStateEvent</a>(in DOMString typeArg, in boolean canBubbleArg, in boolean cancelableArg, in any stateArg);
+};
+
+dictionary <dfn id="popstateeventinit">PopStateEventInit</dfn> : <a href="infrastructure.html#eventinit">EventInit</a> {
+  any state;
 };</pre><dl class="domintro"><dt><var title="">event</var> . <code title="dom-PopStateEvent-state"><a href="#dom-popstateevent-state">state</a></code></dt>
 
    <dd>
@@ -2027,22 +2165,25 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
   </dl><div class="impl">
 
-  <p>The <dfn id="dom-popstateevent-initpopstateevent" title="dom-PopStateEvent-initPopStateEvent"><code>initPopStateEvent()</code></dfn>
-  method must initialize the event in a manner analogous to the
-  similarly-named method in the DOM Events interfaces. <a href="references.html#refsDOMEVENTS">[DOMEVENTS]</a></p>
-
   <p>The <dfn id="dom-popstateevent-state" title="dom-PopStateEvent-state"><code>state</code></dfn>
-  attribute represents the context information for the event, or null,
-  if the state represented is the initial state of the
-  <code><a href="infrastructure.html#document">Document</a></code>.</p>
+  attribute must return the value it was initialized to. When the
+  object is created, this attribute must be initialized to null. It
+  represents the context information for the event, or null, if the
+  state represented is the initial state of the
+  <code><a href="dom.html#document">Document</a></code>.</p>
 
   </div><hr/><p>The <dfn id="event-hashchange" title="event-hashchange"><code>hashchange</code></dfn>
   event is fired when navigating to a <a href="#session-history-entry">session history
   entry</a> whose <a href="urls.html#url">URL</a> differs from that of the
-  previous one only in the fragment identifier.</p><pre class="idl">interface <dfn id="hashchangeevent">HashChangeEvent</dfn> : <a href="infrastructure.html#event">Event</a> {
+  previous one only in the fragment identifier.</p><pre class="idl">[Constructor(DOMString type, optional <a href="#hashchangeeventinit">HashChangeEventInit</a> eventInitDict)]
+interface <dfn id="hashchangeevent">HashChangeEvent</dfn> : <a href="infrastructure.html#event">Event</a> {
   readonly attribute DOMString <a href="#dom-hashchangeevent-oldurl" title="dom-HashChangeEvent-oldURL">oldURL</a>;
   readonly attribute DOMString <a href="#dom-hashchangeevent-newurl" title="dom-HashChangeEvent-newURL">newURL</a>;
-  void <a href="#dom-hashchangeevent-inithashchangeevent" title="dom-HashChangeEvent-initHashChangeEvent">initHashChangeEvent</a>(in DOMString typeArg, in boolean canBubbleArg, in boolean cancelableArg, in DOMString oldURLArg, in DOMString newURLArg);
+};
+
+dictionary <dfn id="hashchangeeventinit">HashChangeEventInit</dfn> : <a href="infrastructure.html#eventinit">EventInit</a> {
+  DOMString oldURL;
+  DOMString newURL;
 };</pre><dl class="domintro"><dt><var title="">event</var> . <code title="dom-HashChangeEvent-oldURL"><a href="#dom-hashchangeevent-oldurl">oldURL</a></code></dt>
 
    <dd>
@@ -2064,27 +2205,30 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
   </dl><div class="impl">
 
-  <p>The <dfn id="dom-hashchangeevent-inithashchangeevent" title="dom-HashChangeEvent-initHashChangeEvent"><code>initHashChangeEvent()</code></dfn>
-  method must initialize the event in a manner analogous to the
-  similarly-named method in the DOM Events interfaces. <a href="references.html#refsDOMEVENTS">[DOMEVENTS]</a></p>
-
   <p>The <dfn id="dom-hashchangeevent-oldurl" title="dom-HashChangeEvent-oldURL"><code>oldURL</code></dfn>
-  attribute represents context information for the event, specifically
-  the URL of the <a href="#session-history-entry">session history entry</a> that was traversed
+  attribute must return the value it was initialized to. When the
+  object is created, this attribute must be initialized to null. It
+  represents context information for the event, specifically the URL
+  of the <a href="#session-history-entry">session history entry</a> that was traversed
   from.</p>
 
   <p>The <dfn id="dom-hashchangeevent-newurl" title="dom-HashChangeEvent-newURL"><code>newURL</code></dfn>
-  attribute represents context information for the event, specifically
-  the URL of the <a href="#session-history-entry">session history entry</a> that was traversed
-  to.</p>
+  attribute must return the value it was initialized to. When the
+  object is created, this attribute must be initialized to null. It
+  represents context information for the event, specifically the URL
+  of the <a href="#session-history-entry">session history entry</a> that was traversed to.</p>
 
   </div><hr/><p>The <dfn id="event-pageshow" title="event-pageshow"><code>pageshow</code></dfn> event
   is fired when traversing <em>to</em> a <a href="#session-history-entry">session history
   entry</a>.</p><p>The <dfn id="event-pagehide" title="event-pagehide"><code>pagehide</code></dfn>
   event is fired when traversing <em>from</em> a <a href="#session-history-entry">session history
-  entry</a>.</p><pre class="idl">interface <dfn id="pagetransitionevent">PageTransitionEvent</dfn> : <a href="infrastructure.html#event">Event</a> {
+  entry</a>.</p><pre class="idl">[Constructor(DOMString type, optional <a href="#pagetransitioneventinit">PageTransitionEventInit</a> eventInitDict)]
+interface <dfn id="pagetransitionevent">PageTransitionEvent</dfn> : <a href="infrastructure.html#event">Event</a> {
   readonly attribute boolean <a href="#dom-pagetransitionevent-persisted" title="dom-PageTransitionEvent-persisted">persisted</a>;
-  void <a href="#dom-pagetransitionevent-initpagetransitionevent" title="dom-PageTransitionEvent-initPageTransitionEvent">initPageTransitionEvent</a>(in DOMString typeArg, in boolean canBubbleArg, in boolean cancelableArg, in boolean persistedArg);
+};
+
+dictionary <dfn id="pagetransitioneventinit">PageTransitionEventInit</dfn> : <a href="infrastructure.html#eventinit">EventInit</a> {
+  boolean persisted;
 };</pre><dl class="domintro"><dt><var title="">event</var> . <code title="dom-PageTransitionEvent-persisted"><a href="#dom-pagetransitionevent-persisted">persisted</a></code></dt>
 
    <dd>
@@ -2095,32 +2239,40 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
   </dl><div class="impl">
 
-  <p>The <dfn id="dom-pagetransitionevent-initpagetransitionevent" title="dom-PageTransitionEvent-initPageTransitionEvent"><code>initPageTransitionEvent()</code></dfn>
-  method must initialize the event in a manner analogous to the
-  similarly-named method in the DOM Events interfaces. <a href="references.html#refsDOMEVENTS">[DOMEVENTS]</a></p>
-
   <p>The <dfn id="dom-pagetransitionevent-persisted" title="dom-PageTransitionEvent-persisted"><code>persisted</code></dfn>
-  attribute represents the context information for the event.</p>
+  attribute must return the value it was initialized to. When the
+  object is created, this attribute must be initialized to false. It
+  represents the context information for the event.</p>
 
-  </div><h4 id="unloading-documents"><span class="secno">5.5.10 </span>Unloading documents</h4><div class="impl">
+  </div><h4 id="unloading-documents"><span class="secno">5.5.11 </span>Unloading documents</h4><div class="impl">
 
-  <p>A <code><a href="infrastructure.html#document">Document</a></code> has a <var title="concept-document-salvageable">salvageable</var> state, which
-  is initially true.</p>
+  <p>A <code><a href="dom.html#document">Document</a></code> has a <dfn id="concept-document-salvageable" title="concept-document-salvageable"><var>salvageable</var></dfn>
+  state, which must initially be true.</p>
+
+  <p><a href="webappapis.html#event-loop" title="event loop">Event loops</a> have a
+  <dfn id="termination-nesting-level">termination nesting level</dfn> counter, which must initially
+  be zero.</p>
 
   <p>When a user agent is to <dfn id="prompt-to-unload-a-document">prompt to unload a document</dfn>,
   it must run the following steps.</p>
 
-  <ol><li><p>Let <var title="">event</var> be a new
+  <ol><li><p>Increase the <a href="webappapis.html#event-loop">event loop</a>'s <a href="#termination-nesting-level">termination
+   nesting level</a> by one.</p></li>
+
+   <li><p>Let <var title="">event</var> be a new
    <code><a href="#beforeunloadevent">BeforeUnloadEvent</a></code> event object with the name <code title="event-beforeunload">beforeunload</code>, which does not
    bubble but is cancelable.</p></li>
 
    <li><p><i>Dispatch</i>: Dispatch <var title="">event</var> at the
-   <code><a href="infrastructure.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code> object.</p></li>
+   <code><a href="dom.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code> object.</p></li>
+
+   <li><p>Decrease the <a href="webappapis.html#event-loop">event loop</a>'s <a href="#termination-nesting-level">termination
+   nesting level</a> by one.</p></li>
 
    <li><p>Release the <a href="webappapis.html#storage-mutex">storage mutex</a>.</p></li>
 
    <li><p>If any event listeners were triggered by the earlier
-   <i>dispatch</i> step, then set the <code><a href="infrastructure.html#document">Document</a></code>'s <var title="concept-document-salvageable">salvageable</var> state to
+   <i>dispatch</i> step, then set the <code><a href="dom.html#document">Document</a></code>'s <var title="concept-document-salvageable"><a href="#concept-document-salvageable">salvageable</a></var> state to
    false.</p></li>
 
    <li>
@@ -2151,7 +2303,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
    <li><p>Let <var title="">descendants</var> be the <a href="browsers.html#list-of-the-descendant-browsing-contexts">list of the
    descendant browsing contexts</a> of the
-   <code><a href="infrastructure.html#document">Document</a></code>.</p></li>
+   <code><a href="dom.html#document">Document</a></code>.</p></li>
 
    <li>
 
@@ -2166,40 +2318,46 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
      the user implicitly also <a href="#refused-to-allow-the-document-to-be-unloaded" title="refused to allow the&#10;     document to be unloaded">refused to allow <em>this</em> document
      to be unloaded</a>; abort these steps.</p>
 
-     </li><li><p>If <var title="concept-document-salvageable">salvageable</var> state of
+     </li><li><p>If <var title="concept-document-salvageable"><a href="#concept-document-salvageable">salvageable</a></var> state of
      the <a href="browsers.html#active-document">active document</a> of the <a href="browsers.html#browsing-context">browsing
-     context</a> <var title="">b</var> is false, then set the <var title="concept-document-salvageable">salvageable</var> state of
+     context</a> <var title="">b</var> is false, then set the <var title="concept-document-salvageable"><a href="#concept-document-salvageable">salvageable</a></var> state of
      <em>this</em> document to false also.</p></li>
 
     </ol></li>
 
   </ol><p>When a user agent is to <dfn id="unload-a-document">unload a document</dfn>, it must run
   the following steps. These steps are passed an argument, <var title="">recycle</var>, which is either true or false, indicating
-  whether the <code><a href="infrastructure.html#document">Document</a></code> object is going to be
-  re-used. (This is set by the <code title="dom-document-open"><a href="apis-in-html-documents.html#dom-document-open">document.open()</a></code> method.)</p>
+  whether the <code><a href="dom.html#document">Document</a></code> object is going to be
+  re-used. (This is set by the <code title="dom-document-open"><a href="dynamic-markup-insertion.html#dom-document-open">document.open()</a></code> method.)</p>
 
-  <ol><li><p>Fire a <code title="event-pagehide"><a href="#event-pagehide">pagehide</a></code> event at
-   the <code><a href="browsers.html#window">Window</a></code> object of the <code><a href="infrastructure.html#document">Document</a></code>, but
+  <ol><li><p>Increase the <a href="webappapis.html#event-loop">event loop</a>'s <a href="#termination-nesting-level">termination
+   nesting level</a> by one.</p></li>
+
+   <li><p>Fire a <code title="event-pagehide"><a href="#event-pagehide">pagehide</a></code> event at
+   the <code><a href="browsers.html#window">Window</a></code> object of the <code><a href="dom.html#document">Document</a></code>, but
    with its <code title="dom-event-target"><a href="infrastructure.html#dom-event-target">target</a></code> set to the
-   <code><a href="infrastructure.html#document">Document</a></code> object (and the <code title="dom-event-currentTarget">currentTarget</code> set to the
+   <code><a href="dom.html#document">Document</a></code> object (and the <code title="dom-event-currentTarget">currentTarget</code> set to the
    <code><a href="browsers.html#window">Window</a></code> object), using the
    <code><a href="#pagetransitionevent">PageTransitionEvent</a></code> interface, with the <code title="dom-PageTransitionEvent-persisted"><a href="#dom-pagetransitionevent-persisted">persisted</a></code>
-   attribute set to true. This event must not bubble, must not be
-   cancelable, and has no default action.</p></li>
+   attribute initialized to true. This event must not bubble, must not
+   be cancelable, and has no default action.</p></li>
 
    <li><p><i>Unload event</i>: <a href="webappapis.html#fire-a-simple-event">Fire a simple event</a> named
    <code title="event-unload">unload</code> at the
-   <code><a href="infrastructure.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code> object.</p></li>
+   <code><a href="dom.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code> object.</p></li>
+
+   <li><p>Decrease the <a href="webappapis.html#event-loop">event loop</a>'s <a href="#termination-nesting-level">termination
+   nesting level</a> by one.</p></li>
 
    <li><p>Release the <a href="webappapis.html#storage-mutex">storage mutex</a>.</p></li>
 
    <li><p>If any event listeners were triggered by the earlier
-   <i>unload event</i> step, then set the <code><a href="infrastructure.html#document">Document</a></code>
-   object's <var title="concept-document-salvageable">salvageable</var> state to
+   <i>unload event</i> step, then set the <code><a href="dom.html#document">Document</a></code>
+   object's <var title="concept-document-salvageable"><a href="#concept-document-salvageable">salvageable</a></var> state to
    false.</p></li>
 
    <li><p>Run any <a href="#unloading-document-cleanup-steps">unloading document cleanup steps</a> for
-   <code><a href="infrastructure.html#document">Document</a></code> that are defined by this specification and
+   <code><a href="dom.html#document">Document</a></code> that are defined by this specification and
    <a href="infrastructure.html#other-applicable-specifications">other applicable specifications</a>.</p></li>
 
    <li><p>If this algorithm was invoked by another instance of the
@@ -2209,7 +2367,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
    <li><p>Let <var title="">descendants</var> be the <a href="browsers.html#list-of-the-descendant-browsing-contexts">list of the
    descendant browsing contexts</a> of the
-   <code><a href="infrastructure.html#document">Document</a></code>.</p></li>
+   <code><a href="dom.html#document">Document</a></code>.</p></li>
 
    <li>
 
@@ -2222,15 +2380,15 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
      <var title="">b</var> with the <var title="">recycle</var>
      parameter set to false.</p></li>
 
-     <li><p>If <var title="concept-document-salvageable">salvageable</var> state of
+     <li><p>If <var title="concept-document-salvageable"><a href="#concept-document-salvageable">salvageable</a></var> state of
      the <a href="browsers.html#active-document">active document</a> of the <a href="browsers.html#browsing-context">browsing
-     context</a> <var title="">b</var> is false, then set the <var title="concept-document-salvageable">salvageable</var> state of
+     context</a> <var title="">b</var> is false, then set the <var title="concept-document-salvageable"><a href="#concept-document-salvageable">salvageable</a></var> state of
      <em>this</em> document to false also.</p></li>
 
     </ol></li>
 
-   <li><p>If <var title="concept-document-salvageable">salvageable</var> and <var title="">recycle</var> are both false, then the
-   <code><a href="infrastructure.html#document">Document</a></code>'s <a href="browsers.html#browsing-context">browsing context</a> must <a href="browsers.html#discard-a-document" title="discard a document">discard the
+   <li><p>If <var title="concept-document-salvageable"><a href="#concept-document-salvageable">salvageable</a></var> and <var title="">recycle</var> are both false, then the
+   <code><a href="dom.html#document">Document</a></code>'s <a href="browsers.html#browsing-context">browsing context</a> must <a href="browsers.html#discard-a-document" title="discard a document">discard the
    <code>Document</code></a>.</p></li>
 
   </ol><p>This specification defines the following <dfn id="unloading-document-cleanup-steps">unloading document
@@ -2240,7 +2398,7 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
     <p><span>Make disappear</span> any <code>WebSocket</code> objects
     that were created by the <code title="dom-WebSocket">WebSocket()</code> constructor whose global
-    object is the <code><a href="infrastructure.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code> object.
+    object is the <code><a href="dom.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code> object.
 
 
     <a href="references.html#refsWEBSOCKET">[WEBSOCKET]</a>
@@ -2249,28 +2407,22 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
     </p>
 
     <p>If this affected any <code>WebSocket</code> objects, the set
-    <code><a href="infrastructure.html#document">Document</a></code>'s <var title="concept-document-salvageable">salvageable</var> state to
+    <code><a href="dom.html#document">Document</a></code>'s <var title="concept-document-salvageable"><a href="#concept-document-salvageable">salvageable</a></var> state to
     false.</p>
 
    </li>
 
-   <li>
+   <li><p>If the <code><a href="dom.html#document">Document</a></code>'s <var title="concept-document-salvageable"><a href="#concept-document-salvageable">salvageable</a></var> state is
+   false, <span title="concept-EventSource-forcibly-close">forcibly
+   close</span> any <code>EventSource</code> objects that whose
+   constructor was invoked from the <code><a href="dom.html#document">Document</a></code>'s
+   <code><a href="browsers.html#window">Window</a></code> object.</p></li>
 
-    <p>If the <code><a href="infrastructure.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code> object <span title="concept-PeerConnection-owner">owns</span> any
-    <code>PeerConnection</code> objects whose
-    <span><code>PeerConnection</code> readiness state</span> is not
-    <code title="dom-PeerConnection-CLOSED">CLOSED</code>, then set
-    <code><a href="infrastructure.html#document">Document</a></code>'s <var title="concept-document-salvageable">salvageable</var> state to
-    false.</p>
+   <li><p>If the <code><a href="dom.html#document">Document</a></code>'s <var title="concept-document-salvageable"><a href="#concept-document-salvageable">salvageable</a></var> state is
+   false, empty the <code><a href="dom.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code>'s
+   <a href="timers.html#list-of-active-timers">list of active timers</a>.</p></li>
 
-   </li>
-
-   <li><p>If the <code><a href="infrastructure.html#document">Document</a></code>'s <var title="concept-document-salvageable">salvageable</var> state is
-   false, empty the <code><a href="infrastructure.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code>'s
-   <a href="timers.html#list-of-active-timeouts">list of active timeouts</a> and its <a href="timers.html#list-of-active-intervals">list of active
-   intervals</a>.</p></li>
-
-  </ol><h5 id="event-definition"><span class="secno">5.5.10.1 </span>Event definition</h5>
+  </ol><h5 id="event-definition"><span class="secno">5.5.11.1 </span>Event definition</h5>
 
   </div><pre class="idl">interface <dfn id="beforeunloadevent">BeforeUnloadEvent</dfn> : <a href="infrastructure.html#event">Event</a> {
            attribute DOMString <a href="#dom-beforeunloadevent-returnvalue" title="dom-BeforeUnloadEvent-returnValue">returnValue</a>;
@@ -2295,32 +2447,36 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
 
   </div><div class="impl">
 
-  <h4 id="aborting-a-document-load"><span class="secno">5.5.11 </span>Aborting a document load</h4>
+  <h4 id="aborting-a-document-load"><span class="secno">5.5.12 </span>Aborting a document load</h4>
 
-  <p>If a <code><a href="infrastructure.html#document">Document</a></code> is <dfn id="abort-a-document" title="abort a&#10;  document">aborted</dfn>, the user agent must run the following
+  <p>If a <code><a href="dom.html#document">Document</a></code> is <dfn id="abort-a-document" title="abort a&#10;  document">aborted</dfn>, the user agent must run the following
   steps:</p>
 
   <ol><li><p><a href="#abort-a-document" title="abort a document">Abort</a> the <a href="browsers.html#active-document" title="active document">active documents</a> of every
    <a href="browsers.html#child-browsing-context">child browsing context</a>.</p></li>
 
-   <li><p>Cancel any instances of the <a href="fetching-resources.html#fetch" title="fetch">fetch</a>
-   algorithm in the context of this <code><a href="infrastructure.html#document">Document</a></code>, discarding
+   <li><p>Cancel any instances of the <a href="urls.html#fetch" title="fetch">fetch</a>
+   algorithm in the context of this <code><a href="dom.html#document">Document</a></code>, discarding
    any <a href="webappapis.html#concept-task" title="concept-task">tasks</a> <a href="webappapis.html#queue-a-task" title="queue a&#10;   task">queued</a> for them, and discarding any further data
    received from the network for them.</p></li>
 
-   <li><p>If the <code><a href="infrastructure.html#document">Document</a></code> has an <a href="dom.html#active-parser">active
+   <li><p>If the <code><a href="dom.html#document">Document</a></code> has an <a href="dom.html#active-parser">active
    parser</a>, then <a href="the-end.html#abort-a-parser" title="abort a parser">abort that
    parser</a>.</p></li>
+
+   <li><p>Set the <code><a href="dom.html#document">Document</a></code>'s <var title="concept-document-salvageable"><a href="#concept-document-salvageable">salvageable</a></var> state to
+   false.</p></li>
 
    
 
   </ol><p>User agents may allow users to explicitly invoke the <a href="#abort-a-document" title="abort a document">abort a document</a> algorithm for a
-  <code><a href="infrastructure.html#document">Document</a></code>. If the user does so, then, if that
-  <code><a href="infrastructure.html#document">Document</a></code> is an <a href="browsers.html#active-document">active document</a>, the user
+  <code><a href="dom.html#document">Document</a></code>. If the user does so, then, if that
+  <code><a href="dom.html#document">Document</a></code> is an <a href="browsers.html#active-document">active document</a>, the user
   agent should <a href="webappapis.html#queue-a-task">queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple
   event</a> named <code title="event-abort">abort</code> at that
-  <code><a href="infrastructure.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code> object before invoking
+  <code><a href="dom.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code> object before invoking
   the <a href="#abort-a-document" title="abort a document">abort</a> algorithm.</p>
 
   
+
   </div></body></html>

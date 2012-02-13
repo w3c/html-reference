@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>3.2 Elements &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<!DOCTYPE html>
+<html lang="en-US-x-Hixie"><head><title>3.2 Elements &#x2014; HTML5</title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -19,6 +19,7 @@
    dd table + p { margin-top: 1em; }
    p + * > li, dd li { margin: 1em 0; }
    dt, dfn { font-weight: bold; font-style: normal; }
+   i, em { font-style: italic; }
    dt dfn { font-style: italic; }
    pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
    pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
@@ -40,9 +41,10 @@
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
 
    .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   img.extra { float: right; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   img.extra, p.overview { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; position: relative; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl::before { content: "IDL"; font: bold small sans-serif; padding: 0.5em; background: white; position: absolute; top: 0; margin: -1px 0 0 -4em; width: 1.5em; border: thin solid; border-radius: 0 0 0 0.5em }
    pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
    pre.css:first-line { color: #AAAA50; }
    dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
@@ -50,6 +52,7 @@
    dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
    dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
    dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
    dl.switch { padding-left: 2em; }
    dl.switch > dt { text-indent: -1.5em; }
    dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
@@ -104,6 +107,7 @@
    .note { color: green; background: transparent; font-family: sans-serif; }
    .warning { color: red; background: transparent; }
    .note, .warning { font-weight: bolder; font-style: italic; }
+   .note em, .warning em, .note i, .warning i { font-style: normal; }
    p.note, div.note { padding: 0.5em 2em; }
    span.note { padding: 0 2em; }
    .note p:first-child, .warning p:first-child { margin-top: 0; }
@@ -295,8 +299,6 @@
      src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
    }
 
-  ]]></style><style type="text/css"><![CDATA[
-   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
   ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
    function getCookie(name) {
      var params = location.search.substr(1).split("&");
@@ -315,27 +317,64 @@
      }
      return null;
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="dom.html" title="3 Semantics, structure, and APIs of HTML documents" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="content-models.html" title="3.2.5 Content models" rel="next"/></head><body><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="dom.html" title="3 Semantics, structure, and APIs of HTML documents" rel="prev"/><link href="index.html#contents" title="Table of contents" rel="contents"/><link href="global-attributes.html" title="3.2.3 Global attributes" rel="next"/></head><body onload="fixBrokenLink();" class="split chapter"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   </div><div>
-   <a href="dom.html" class="prev">3 Semantics, structure, and APIs of HTML documents</a> &#x2013;
-   <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="content-models.html" class="next">3.2.5 Content models</a>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
+
+   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   </div><nav class="prev_next"><a href="dom.html">&#x2190; 3 Semantics, structure, and APIs of HTML documents</a> &#x2013;
+   <a href="index.html#contents">Table of contents</a> &#x2013;
+   <a href="global-attributes.html">3.2.3 Global attributes &#x2192;</a>
   <ol class="toc"><li><ol><li><a href="elements.html#elements"><span class="secno">3.2 </span>Elements</a>
-    <ol><li><a href="elements.html#semantics-0"><span class="secno">3.2.1 </span>Semantics</a></li><li><a href="elements.html#elements-in-the-dom"><span class="secno">3.2.2 </span>Elements in the DOM</a></li><li><a href="elements.html#global-attributes"><span class="secno">3.2.3 </span>Global attributes</a>
-      <ol><li><a href="elements.html#the-id-attribute"><span class="secno">3.2.3.1 </span>The <code>id</code> attribute</a></li><li><a href="elements.html#the-title-attribute"><span class="secno">3.2.3.2 </span>The <code>title</code> attribute</a></li><li><a href="elements.html#the-lang-and-xml:lang-attributes"><span class="secno">3.2.3.3 </span>The <code title="attr-lang">lang</code> and <code title="attr-xml-lang">xml:lang</code> attributes</a></li><li><a href="elements.html#the-xml:base-attribute-xml-only"><span class="secno">3.2.3.4 </span>The <code>xml:base</code>
-  attribute (XML only)</a></li><li><a href="elements.html#the-dir-attribute"><span class="secno">3.2.3.5 </span>The <code>dir</code> attribute</a></li><li><a href="elements.html#classes"><span class="secno">3.2.3.6 </span>The <code>class</code> attribute</a></li><li><a href="elements.html#the-style-attribute"><span class="secno">3.2.3.7 </span>The <code>style</code> attribute</a></li><li><a href="elements.html#embedding-custom-non-visible-data-with-the-data-attributes"><span class="secno">3.2.3.8 </span>Embedding custom non-visible data with the <code title="attr-data-*">data-*</code> attributes</a></li></ol></li><li><a href="elements.html#element-definitions"><span class="secno">3.2.4 </span>Element definitions</a>
-      <ol><li><a href="elements.html#attributes"><span class="secno">3.2.4.1 </span>Attributes</a></li></ol></li></ol></li></ol></li></ol></div><h3 id="elements"><span class="secno">3.2 </span>Elements</h3><h4 id="semantics-0"><span class="secno">3.2.1 </span>Semantics</h4><p>Elements, attributes, and attribute values in HTML are defined
+    <ol><li><a href="elements.html#semantics-0"><span class="secno">3.2.1 </span>Semantics</a></li><li><a href="elements.html#elements-in-the-dom"><span class="secno">3.2.2 </span>Elements in the DOM</a></li></ol></li></ol></li></ol></nav><h3 id="elements"><span class="secno">3.2 </span>Elements</h3><h4 id="semantics-0"><span class="secno">3.2.1 </span>Semantics</h4><p>Elements, attributes, and attribute values in HTML are defined
   (by this specification) to have certain meanings (semantics). For
-  example, the <code><a href="grouping-content.html#the-ol-element">ol</a></code> element represents an ordered list, and
-  the <code title="attr-lang"><a href="#attr-lang">lang</a></code> attribute represents the
-  language of the content.</p><p>Authors must not use elements, attributes, or attribute values
-  for purposes other than their appropriate intended semantic
-  purpose. Authors must not use elements, attributes, or attribute
-  values that are not permitted by this specification or <a href="infrastructure.html#other-applicable-specifications">other
-  applicable specifications</a>.</p><div class="example">
+  example, the <code><a href="the-ol-element.html#the-ol-element">ol</a></code> element represents an ordered list, and
+  the <code title="attr-lang"><a href="global-attributes.html#attr-lang">lang</a></code> attribute represents the
+  language of the content.</p><p>These definitions allow HTML processors, such as Web browsers or
+  search engines, to present and use documents and applications in a
+  wide variety of contexts that the author might not have
+  considered.</p><div class="example">
+
+   <p>As a simple example, consider a Web page written by an author
+   who only considered desktop computer Web browsers. Because HTML
+   conveys <em>meaning</em>, rather than presentation, the same page
+   can also be used by a small browser on a mobile phone, without any
+   change to the page. Instead of headings being in large letters as
+   on the desktop, for example, the browser on the mobile phone might
+   use the same size text for the whole the page, but with the
+   headings in bold.</p>
+
+   <p>But it goes further than just differences in screen size: the
+   same page could equally be used by a blind user using a browser
+   based around speech synthesis, which instead of displaying the page
+   on a screen, reads the page to the user, e.g. using headphones.
+   Instead of large text for the headings, the speech browser might
+   use a different volume or a slower voice.</p>
+
+   <p>That's not all, either. Since the browsers know which parts of
+   the page are the headings, they can create a document outline that
+   the user can use to quickly navigate around the document, using
+   keys for "jump to next heading" or "jump to previous heading". Such
+   features are especially common with speech browsers, where users
+   would otherwise find quickly navigating a page quite difficult.</p>
+
+   <p>Even beyond browsers, software can make use of this information.
+   Search engines can use the headings to more effectively index a
+   page, or to provide quick links to subsections of the page from
+   their results. Tools can use the headings to create a table of
+   contents (that is in fact how this very specification's table of
+   contents is generated).</p>
+
+   <p>This example has focused on headings, but the same principle
+   applies to all of the semantics in HTML.</p>
+
+  </div><p>Authors must not use elements, attributes, or attribute values
+  for purposes other than their appropriate intended semantic purpose,
+  as doing so prevents software from correctly processing the
+  page.</p><div class="example">
+
    <p>For example, the following document is non-conforming, despite
    being syntactically correct:</p>
 
@@ -356,8 +395,15 @@
 &lt;/html&gt;</pre>
 
    <p>...because the data placed in the cells is clearly not tabular
-   data (and the <code><a href="text-level-semantics.html#the-cite-element">cite</a></code> element mis-used). A corrected
-   version of this document might be:</p>
+   data (and the <code><a href="the-cite-element.html#the-cite-element">cite</a></code> element mis-used). This would make
+   software that relies on these semantics fail: for example, a speech
+   browser that allowed a blind user to navigate tables in the
+   document would report the quote above as a table, confusing the
+   user; similarly, a tool that extracted titles of works from pages
+   would extract "Ernest" as the title of a work, even though it's
+   actually a person's name, not a title.</p>
+
+   <p>A corrected version of this document might be:</p>
 
    <pre>&lt;!DOCTYPE HTML&gt;
 &lt;html lang="en-GB"&gt;
@@ -373,6 +419,8 @@
  &lt;/body&gt;
 &lt;/html&gt;</pre>
 
+  </div><div class="example">
+
    <p>This next document fragment, intended to represent the heading
    of a corporate site, is similarly non-conforming because the second
    line is not intended to be a heading of a subsection, but merely a
@@ -384,7 +432,7 @@
  &lt;h2&gt;Leading the way in widget design since 1432&lt;/h2&gt;
  ...</pre>
 
-   <p>The <code><a href="sections.html#the-hgroup-element">hgroup</a></code> element is intended for these kinds of
+   <p>The <code><a href="the-hgroup-element.html#the-hgroup-element">hgroup</a></code> element is intended for these kinds of
    situations:</p>
 
    <pre>&lt;body&gt;
@@ -393,6 +441,11 @@
   &lt;h2&gt;Leading the way in widget design since 1432&lt;/h2&gt;
  &lt;/hgroup&gt;
  ...</pre>
+
+  </div><p>Authors must not use elements, attributes, or attribute values
+  that are not permitted by this specification or <a href="infrastructure.html#other-applicable-specifications">other
+  applicable specifications</a>, as doing so makes it significantly
+  harder for the language to be extended in the future.</p><div class="example">
 
    <p>In the next example, there is a non-conforming attribute value
    ("carpet") and a non-conforming attribute ("texture"), which
@@ -411,37 +464,29 @@
   by the state of the document at that instant in time, and the
   semantics of a document can therefore change over time. User agents
   <span class="impl">must</span> update their presentation of the
-  document as this occurs.</p><p class="example">HTML has a <code><a href="the-button-element.html#the-progress-element">progress</a></code> element that
+  document as this occurs.</p><p class="example">HTML has a <code><a href="the-progress-element.html#the-progress-element">progress</a></code> element that
   describes a progress bar. If its "value" attribute is dynamically
   updated by a script, the UA would update the rendering to show the
   progress changing.</p><h4 id="elements-in-the-dom"><span class="secno">3.2.2 </span>Elements in the DOM</h4><p>The nodes representing <a href="infrastructure.html#html-elements">HTML elements</a> in the DOM
   <span class="impl">must</span> implement, and expose to scripts, the
   interfaces listed for them in the relevant sections of this
-  specification. This includes <a href="infrastructure.html#html-elements">HTML elements</a> in <a href="dom.html#xml-documents">XML
+  specification. This includes <a href="infrastructure.html#html-elements">HTML elements</a> in <a href="infrastructure.html#xml-documents">XML
   documents</a>, even when those documents are in another context
   (e.g. inside an XSLT transform).</p><p>Elements in the DOM <a href="rendering.html#represents" title="represents">represent</a>
   things; that is, they have intrinsic <em>meaning</em>, also known as
-  semantics.</p><p class="example">For example, an <code><a href="grouping-content.html#the-ol-element">ol</a></code> element
+  semantics.</p><p class="example">For example, an <code><a href="the-ol-element.html#the-ol-element">ol</a></code> element
   represents an ordered list.</p><p>The basic interface, from which all the <a href="infrastructure.html#html-elements">HTML
   elements</a>' interfaces inherit, <span class="impl">and which
   must be used by elements that have no additional
   requirements,</span> is the <code><a href="#htmlelement">HTMLElement</a></code> interface.</p><pre class="idl">interface <dfn id="htmlelement">HTMLElement</dfn> : <a href="infrastructure.html#element">Element</a> {
-  // <a href="dom.html#dom-tree-accessors">DOM tree accessors</a>
-  NodeList <a href="dom.html#dom-getelementsbyclassname" title="dom-getElementsByClassName">getElementsByClassName</a>(in DOMString classNames);
-
-  // <a href="apis-in-html-documents.html#dynamic-markup-insertion">dynamic markup insertion</a>
-           attribute DOMString <a href="apis-in-html-documents.html#dom-innerhtml" title="dom-innerHTML">innerHTML</a>;
-           attribute DOMString <a href="apis-in-html-documents.html#dom-outerhtml" title="dom-outerHTML">outerHTML</a>;
-  void <a href="apis-in-html-documents.html#dom-insertadjacenthtml" title="dom-insertAdjacentHTML">insertAdjacentHTML</a>(in DOMString position, in DOMString text);
-
   // <span>metadata attributes</span>
-           attribute DOMString <a href="#dom-id" title="dom-id">id</a>;
-           attribute DOMString <a href="#dom-title" title="dom-title">title</a>;
-           attribute DOMString <a href="#dom-lang" title="dom-lang">lang</a>;
-           attribute DOMString <a href="#dom-dir" title="dom-dir">dir</a>;
-           attribute <span>DOMString</span> <a href="#dom-classname" title="dom-className">className</a>;
-  readonly attribute <a href="common-dom-interfaces.html#domtokenlist">DOMTokenList</a> <a href="#dom-classlist" title="dom-classList">classList</a>;
-  readonly attribute <a href="common-dom-interfaces.html#domstringmap">DOMStringMap</a> <a href="#dom-dataset" title="dom-dataset">dataset</a>;
+           attribute DOMString <a href="global-attributes.html#dom-title" title="dom-title">title</a>;
+           attribute DOMString <a href="global-attributes.html#dom-lang" title="dom-lang">lang</a>;
+           attribute boolean <a href="global-attributes.html#dom-translate" title="dom-translate">translate</a>;
+           attribute DOMString <a href="global-attributes.html#dom-dir" title="dom-dir">dir</a>;
+           attribute <span>DOMString</span> <a href="global-attributes.html#dom-classname" title="dom-className">className</a>;
+  readonly attribute <a href="infrastructure.html#domtokenlist">DOMTokenList</a> <a href="global-attributes.html#dom-classlist" title="dom-classList">classList</a>;
+  readonly attribute <a href="common-dom-interfaces.html#domstringmap">DOMStringMap</a> <a href="global-attributes.html#dom-dataset" title="dom-dataset">dataset</a>;
 
   // <a href="editing.html#editing">user interaction</a>
            attribute boolean <a href="editing.html#dom-hidden" title="dom-hidden">hidden</a>;
@@ -452,76 +497,77 @@
            attribute DOMString <a href="editing.html#dom-accesskey" title="dom-accessKey">accessKey</a>;
   readonly attribute DOMString <a href="editing.html#dom-accesskeylabel" title="dom-accessKeyLabel">accessKeyLabel</a>;
            attribute boolean <a href="dnd.html#dom-draggable" title="dom-draggable">draggable</a>;
-  [PutForwards=<a href="common-dom-interfaces.html#dom-domsettabletokenlist-value" title="dom-DOMSettableTokenList-value">value</a>] readonly attribute <a href="common-dom-interfaces.html#domsettabletokenlist">DOMSettableTokenList</a> <a href="dnd.html#dom-dropzone" title="dom-dropzone">dropzone</a>;
+  [PutForwards=<span title="dom-DOMSettableTokenList-value">value</span>] readonly attribute <a href="infrastructure.html#domsettabletokenlist">DOMSettableTokenList</a> <a href="dnd.html#dom-dropzone" title="dom-dropzone">dropzone</a>;
            attribute DOMString <a href="editing.html#dom-contenteditable" title="dom-contentEditable">contentEditable</a>;
   readonly attribute boolean <a href="editing.html#dom-iscontenteditable" title="dom-isContentEditable">isContentEditable</a>;
-           attribute <a href="interactive-elements.html#htmlmenuelement">HTMLMenuElement</a>? <a href="interactive-elements.html#dom-contextmenu" title="dom-contextMenu">contextMenu</a>;
-           attribute boolean <a href="editing.html#dom-spellcheck" title="dom-spellcheck">spellcheck</a>;
+           attribute <a href="the-menu-element.html#htmlmenuelement">HTMLMenuElement</a>? <a href="the-menu-element.html#dom-contextmenu" title="dom-contextMenu">contextMenu</a>;
+           attribute boolean <a href="editing-apis.html#dom-spellcheck" title="dom-spellcheck">spellcheck</a>;
 
   // <a href="commands.html#command-api">command API</a>
   readonly attribute DOMString? <a href="commands.html#dom-command-ro-commandtype" title="dom-command-ro-commandType">commandType</a>;
-  readonly attribute DOMString? <a href="commands.html#dom-command-ro-label" title="dom-command-ro-label">label</a>;
-  readonly attribute DOMString? <a href="commands.html#dom-command-ro-icon" title="dom-command-ro-icon">icon</a>;
-  readonly attribute boolean <a href="commands.html#dom-command-ro-disabled" title="dom-command-ro-disabled">disabled</a>;
-  readonly attribute boolean <a href="commands.html#dom-command-ro-checked" title="dom-command-ro-checked">checked</a>;
+  readonly attribute DOMString? <a href="commands.html#dom-command-ro-commandlabel" title="dom-command-ro-commandLabel">commandLabel</a>;
+  readonly attribute DOMString? <a href="commands.html#dom-command-ro-commandicon" title="dom-command-ro-commandIcon">commandIcon</a>;
+  readonly attribute boolean? <a href="commands.html#dom-command-ro-commandhidden" title="dom-command-ro-commandHidden">commandHidden</a>;
+  readonly attribute boolean? <a href="commands.html#dom-command-ro-commanddisabled" title="dom-command-ro-commandDisabled">commandDisabled</a>;
+  readonly attribute boolean? <a href="commands.html#dom-command-ro-commandchecked" title="dom-command-ro-commandChecked">commandChecked</a>;
+
   // <span>styling</span>
-  readonly attribute <span>CSSStyleDeclaration</span> <a href="#dom-style" title="dom-style">style</a>;
+  readonly attribute <a href="infrastructure.html#cssstyledeclaration">CSSStyleDeclaration</a> <a href="global-attributes.html#dom-style" title="dom-style">style</a>;
 
   // <a href="webappapis.html#event-handler-idl-attributes">event handler IDL attributes</a>
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onabort" title="handler-onabort">onabort</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onblur" title="handler-onblur">onblur</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncanplay" title="handler-oncanplay">oncanplay</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncanplaythrough" title="handler-oncanplaythrough">oncanplaythrough</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onchange" title="handler-onchange">onchange</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onclick" title="handler-onclick">onclick</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncontextmenu" title="handler-oncontextmenu">oncontextmenu</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncuechange" title="handler-oncuechange">oncuechange</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondblclick" title="handler-ondblclick">ondblclick</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondrag" title="handler-ondrag">ondrag</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragend" title="handler-ondragend">ondragend</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragenter" title="handler-ondragenter">ondragenter</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragleave" title="handler-ondragleave">ondragleave</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragover" title="handler-ondragover">ondragover</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragstart" title="handler-ondragstart">ondragstart</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondrop" title="handler-ondrop">ondrop</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondurationchange" title="handler-ondurationchange">ondurationchange</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onemptied" title="handler-onemptied">onemptied</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onended" title="handler-onended">onended</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onerror" title="handler-onerror">onerror</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onfocus" title="handler-onfocus">onfocus</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oninput" title="handler-oninput">oninput</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oninvalid" title="handler-oninvalid">oninvalid</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onkeydown" title="handler-onkeydown">onkeydown</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onkeypress" title="handler-onkeypress">onkeypress</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onkeyup" title="handler-onkeyup">onkeyup</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onload" title="handler-onload">onload</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onloadeddata" title="handler-onloadeddata">onloadeddata</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onloadedmetadata" title="handler-onloadedmetadata">onloadedmetadata</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onloadstart" title="handler-onloadstart">onloadstart</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmousedown" title="handler-onmousedown">onmousedown</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmousemove" title="handler-onmousemove">onmousemove</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmouseout" title="handler-onmouseout">onmouseout</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmouseover" title="handler-onmouseover">onmouseover</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmouseup" title="handler-onmouseup">onmouseup</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmousewheel" title="handler-onmousewheel">onmousewheel</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onpause" title="handler-onpause">onpause</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onplay" title="handler-onplay">onplay</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onplaying" title="handler-onplaying">onplaying</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onprogress" title="handler-onprogress">onprogress</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onratechange" title="handler-onratechange">onratechange</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onreadystatechange" title="handler-onreadystatechange">onreadystatechange</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onreset" title="handler-onreset">onreset</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onscroll" title="handler-onscroll">onscroll</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onseeked" title="handler-onseeked">onseeked</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onseeking" title="handler-onseeking">onseeking</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onselect" title="handler-onselect">onselect</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onshow" title="handler-onshow">onshow</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onstalled" title="handler-onstalled">onstalled</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onsubmit" title="handler-onsubmit">onsubmit</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onsuspend" title="handler-onsuspend">onsuspend</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ontimeupdate" title="handler-ontimeupdate">ontimeupdate</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onvolumechange" title="handler-onvolumechange">onvolumechange</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onwaiting" title="handler-onwaiting">onwaiting</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onabort" title="handler-onabort">onabort</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onblur" title="handler-onblur">onblur</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncanplay" title="handler-oncanplay">oncanplay</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncanplaythrough" title="handler-oncanplaythrough">oncanplaythrough</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onchange" title="handler-onchange">onchange</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onclick" title="handler-onclick">onclick</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncontextmenu" title="handler-oncontextmenu">oncontextmenu</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncuechange" title="handler-oncuechange">oncuechange</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondblclick" title="handler-ondblclick">ondblclick</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondrag" title="handler-ondrag">ondrag</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragend" title="handler-ondragend">ondragend</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragenter" title="handler-ondragenter">ondragenter</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragleave" title="handler-ondragleave">ondragleave</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragover" title="handler-ondragover">ondragover</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragstart" title="handler-ondragstart">ondragstart</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondrop" title="handler-ondrop">ondrop</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondurationchange" title="handler-ondurationchange">ondurationchange</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onemptied" title="handler-onemptied">onemptied</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onended" title="handler-onended">onended</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onerror" title="handler-onerror">onerror</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onfocus" title="handler-onfocus">onfocus</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oninput" title="handler-oninput">oninput</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oninvalid" title="handler-oninvalid">oninvalid</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onkeydown" title="handler-onkeydown">onkeydown</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onkeypress" title="handler-onkeypress">onkeypress</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onkeyup" title="handler-onkeyup">onkeyup</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onload" title="handler-onload">onload</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onloadeddata" title="handler-onloadeddata">onloadeddata</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onloadedmetadata" title="handler-onloadedmetadata">onloadedmetadata</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onloadstart" title="handler-onloadstart">onloadstart</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmousedown" title="handler-onmousedown">onmousedown</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmousemove" title="handler-onmousemove">onmousemove</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmouseout" title="handler-onmouseout">onmouseout</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmouseover" title="handler-onmouseover">onmouseover</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmouseup" title="handler-onmouseup">onmouseup</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmousewheel" title="handler-onmousewheel">onmousewheel</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onpause" title="handler-onpause">onpause</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onplay" title="handler-onplay">onplay</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onplaying" title="handler-onplaying">onplaying</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onprogress" title="handler-onprogress">onprogress</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onratechange" title="handler-onratechange">onratechange</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onreset" title="handler-onreset">onreset</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onscroll" title="handler-onscroll">onscroll</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onseeked" title="handler-onseeked">onseeked</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onseeking" title="handler-onseeking">onseeking</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onselect" title="handler-onselect">onselect</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onshow" title="handler-onshow">onshow</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onstalled" title="handler-onstalled">onstalled</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onsubmit" title="handler-onsubmit">onsubmit</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onsuspend" title="handler-onsuspend">onsuspend</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ontimeupdate" title="handler-ontimeupdate">ontimeupdate</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onvolumechange" title="handler-onvolumechange">onvolumechange</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onwaiting" title="handler-onwaiting">onwaiting</a>;
 };
 
 interface <dfn id="htmlunknownelement">HTMLUnknownElement</dfn> : <a href="#htmlelement">HTMLElement</a> { };</pre><p>The <code><a href="#htmlelement">HTMLElement</a></code> interface holds methods and
@@ -533,705 +579,4 @@ interface <dfn id="htmlunknownelement">HTMLUnknownElement</dfn> : <a href="#html
   <a href="infrastructure.html#html-elements">HTML elements</a> that are not defined by this
   specification (or <a href="infrastructure.html#other-applicable-specifications">other applicable specifications</a>).</p>
 
-  </div><h4 id="global-attributes"><span class="secno">3.2.3 </span><dfn>Global attributes</dfn></h4><p>The following attributes are common to and may be specified on
-  all <a href="infrastructure.html#html-elements">HTML elements</a><span class="impl"> (even those not
-  defined in this specification)</span>:</p><ul class="brief"><li><code title="attr-accesskey"><a href="editing.html#the-accesskey-attribute">accesskey</a></code></li>
-   <li><code title="attr-class"><a href="#classes">class</a></code></li>
-   <li><code title="attr-contenteditable"><a href="editing.html#attr-contenteditable">contenteditable</a></code></li>
-   <li><code title="attr-contextmenu"><a href="interactive-elements.html#attr-contextmenu">contextmenu</a></code></li>
-   <li><code title="attr-dir"><a href="#the-dir-attribute">dir</a></code></li>
-   <li><code title="attr-draggable"><a href="dnd.html#the-draggable-attribute">draggable</a></code></li>
-   <li><code title="attr-dropzone"><a href="dnd.html#the-dropzone-attribute">dropzone</a></code></li>
-   <li><code title="attr-hidden"><a href="editing.html#the-hidden-attribute">hidden</a></code></li>
-   <li><code title="attr-id"><a href="#the-id-attribute">id</a></code></li>
-   <li><code title="attr-lang"><a href="#attr-lang">lang</a></code></li>
-   <li><code title="attr-spellcheck"><a href="editing.html#attr-spellcheck">spellcheck</a></code></li>
-   <li><code title="attr-style"><a href="#the-style-attribute">style</a></code></li>
-   <li><code title="attr-tabindex"><a href="editing.html#attr-tabindex">tabindex</a></code></li>
-   <li><code title="attr-title"><a href="#the-title-attribute">title</a></code></li>
-  </ul><hr/><p>The following <a href="webappapis.html#event-handler-content-attributes">event handler content attributes</a> may
-  be specified on any <a href="infrastructure.html#html-elements" title="HTML elements">HTML
-  element</a>:</p><ul class="brief"><li><code title="handler-onabort"><a href="webappapis.html#handler-onabort">onabort</a></code></li>
-   <li><code title="handler-onblur"><a href="webappapis.html#handler-onblur">onblur</a></code>*</li>
-   <li><code title="handler-oncanplay"><a href="webappapis.html#handler-oncanplay">oncanplay</a></code></li>
-   <li><code title="handler-oncanplaythrough"><a href="webappapis.html#handler-oncanplaythrough">oncanplaythrough</a></code></li>
-   <li><code title="handler-onchange"><a href="webappapis.html#handler-onchange">onchange</a></code></li>
-   <li><code title="handler-onclick"><a href="webappapis.html#handler-onclick">onclick</a></code></li>
-   <li><code title="handler-oncontextmenu"><a href="webappapis.html#handler-oncontextmenu">oncontextmenu</a></code></li>
-   <li><code title="handler-oncuechange"><a href="webappapis.html#handler-oncuechange">oncuechange</a></code></li>
-   <li><code title="handler-ondblclick"><a href="webappapis.html#handler-ondblclick">ondblclick</a></code></li>
-   <li><code title="handler-ondrag"><a href="webappapis.html#handler-ondrag">ondrag</a></code></li>
-   <li><code title="handler-ondragend"><a href="webappapis.html#handler-ondragend">ondragend</a></code></li>
-   <li><code title="handler-ondragenter"><a href="webappapis.html#handler-ondragenter">ondragenter</a></code></li>
-   <li><code title="handler-ondragleave"><a href="webappapis.html#handler-ondragleave">ondragleave</a></code></li>
-   <li><code title="handler-ondragover"><a href="webappapis.html#handler-ondragover">ondragover</a></code></li>
-   <li><code title="handler-ondragstart"><a href="webappapis.html#handler-ondragstart">ondragstart</a></code></li>
-   <li><code title="handler-ondrop"><a href="webappapis.html#handler-ondrop">ondrop</a></code></li>
-   <li><code title="handler-ondurationchange"><a href="webappapis.html#handler-ondurationchange">ondurationchange</a></code></li>
-   <li><code title="handler-onemptied"><a href="webappapis.html#handler-onemptied">onemptied</a></code></li>
-   <li><code title="handler-onended"><a href="webappapis.html#handler-onended">onended</a></code></li>
-   <li><code title="handler-onerror"><a href="webappapis.html#handler-onerror">onerror</a></code>*</li>
-   <li><code title="handler-onfocus"><a href="webappapis.html#handler-onfocus">onfocus</a></code>*</li>
-   <li><code title="handler-oninput"><a href="webappapis.html#handler-oninput">oninput</a></code></li>
-   <li><code title="handler-oninvalid"><a href="webappapis.html#handler-oninvalid">oninvalid</a></code></li>
-   <li><code title="handler-onkeydown"><a href="webappapis.html#handler-onkeydown">onkeydown</a></code></li>
-   <li><code title="handler-onkeypress"><a href="webappapis.html#handler-onkeypress">onkeypress</a></code></li>
-   <li><code title="handler-onkeyup"><a href="webappapis.html#handler-onkeyup">onkeyup</a></code></li>
-   <li><code title="handler-onload"><a href="webappapis.html#handler-onload">onload</a></code>*</li>
-   <li><code title="handler-onloadeddata"><a href="webappapis.html#handler-onloadeddata">onloadeddata</a></code></li>
-   <li><code title="handler-onloadedmetadata"><a href="webappapis.html#handler-onloadedmetadata">onloadedmetadata</a></code></li>
-   <li><code title="handler-onloadstart"><a href="webappapis.html#handler-onloadstart">onloadstart</a></code></li>
-   <li><code title="handler-onmousedown"><a href="webappapis.html#handler-onmousedown">onmousedown</a></code></li>
-   <li><code title="handler-onmousemove"><a href="webappapis.html#handler-onmousemove">onmousemove</a></code></li>
-   <li><code title="handler-onmouseout"><a href="webappapis.html#handler-onmouseout">onmouseout</a></code></li>
-   <li><code title="handler-onmouseover"><a href="webappapis.html#handler-onmouseover">onmouseover</a></code></li>
-   <li><code title="handler-onmouseup"><a href="webappapis.html#handler-onmouseup">onmouseup</a></code></li>
-   <li><code title="handler-onmousewheel"><a href="webappapis.html#handler-onmousewheel">onmousewheel</a></code></li>
-   <li><code title="handler-onpause"><a href="webappapis.html#handler-onpause">onpause</a></code></li>
-   <li><code title="handler-onplay"><a href="webappapis.html#handler-onplay">onplay</a></code></li>
-   <li><code title="handler-onplaying"><a href="webappapis.html#handler-onplaying">onplaying</a></code></li>
-   <li><code title="handler-onprogress"><a href="webappapis.html#handler-onprogress">onprogress</a></code></li>
-   <li><code title="handler-onratechange"><a href="webappapis.html#handler-onratechange">onratechange</a></code></li>
-   <li><code title="handler-onreadystatechange"><a href="webappapis.html#handler-onreadystatechange">onreadystatechange</a></code></li>
-   <li><code title="handler-onreset"><a href="webappapis.html#handler-onreset">onreset</a></code></li>
-   <li><code title="handler-onscroll"><a href="webappapis.html#handler-onscroll">onscroll</a></code>*</li>
-   <li><code title="handler-onseeked"><a href="webappapis.html#handler-onseeked">onseeked</a></code></li>
-   <li><code title="handler-onseeking"><a href="webappapis.html#handler-onseeking">onseeking</a></code></li>
-   <li><code title="handler-onselect"><a href="webappapis.html#handler-onselect">onselect</a></code></li>
-   <li><code title="handler-onshow"><a href="webappapis.html#handler-onshow">onshow</a></code></li>
-   <li><code title="handler-onstalled"><a href="webappapis.html#handler-onstalled">onstalled</a></code></li>
-   <li><code title="handler-onsubmit"><a href="webappapis.html#handler-onsubmit">onsubmit</a></code></li>
-   <li><code title="handler-onsuspend"><a href="webappapis.html#handler-onsuspend">onsuspend</a></code></li>
-   <li><code title="handler-ontimeupdate"><a href="webappapis.html#handler-ontimeupdate">ontimeupdate</a></code></li>
-   <li><code title="handler-onvolumechange"><a href="webappapis.html#handler-onvolumechange">onvolumechange</a></code></li>
-   <li><code title="handler-onwaiting"><a href="webappapis.html#handler-onwaiting">onwaiting</a></code></li>
-  </ul><p class="note">The attributes marked with an asterisk have a
-  different meaning when specified on <code><a href="sections.html#the-body-element">body</a></code> elements as
-  those elements expose <a href="webappapis.html#event-handlers">event handlers</a> of the
-  <code><a href="browsers.html#window">Window</a></code> object with the same names.</p><p class="note">While these attributes apply to all elements, they
-  are not useful on all elements. For example, only <a href="the-iframe-element.html#media-element" title="media&#10;  element">media elements</a> will ever receive a <code title="event-media-volumechange"><a href="the-iframe-element.html#event-media-volumechange">volumechange</a></code> event fired by
-  the user agent.</p><hr/><p><a href="#custom-data-attribute" title="custom data attribute">Custom data attributes</a>
-  (e.g. <code title="">data-foldername</code> or <code title="">data-msgid</code>) can be specified on any <a href="infrastructure.html#html-elements" title="HTML elements">HTML element</a>, to store custom data
-  specific to the page.</p><hr/><p>In <a href="dom.html#html-documents">HTML documents</a>, elements in the <a href="namespaces.html#html-namespace-0">HTML
-  namespace</a> may have an <code title="">xmlns</code> attribute
-  specified, if, and only if, it has the exact value
-  "<code>http://www.w3.org/1999/xhtml</code>". This does not apply to
-  <a href="dom.html#xml-documents">XML documents</a>.</p><p class="note">In HTML, the <code title="">xmlns</code> attribute
-  has absolutely no effect. It is basically a talisman. It is allowed
-  merely to make migration to and from XHTML mildly easier. When
-  parsed by an <a href="parsing.html#html-parser">HTML parser</a>, the attribute ends up in no
-  namespace, not the "<code>http://www.w3.org/2000/xmlns/</code>"
-  namespace like namespace declaration attributes in XML do.</p><p class="note">In XML, an <code title="">xmlns</code> attribute is
-  part of the namespace declaration mechanism, and an element cannot
-  actually have an <code title="">xmlns</code> attribute in no
-  namespace specified.</p><hr/><p>The XML specification also allows the use of the <code title="attr-xml-space">xml:space</code> attribute in the <a href="namespaces.html#xml-namespace">XML
-  namespace</a> on any element in an <a href="dom.html#xml-documents" title="XML&#10;  documents">XML document</a>. This attribute has no effect on
-  <a href="infrastructure.html#html-elements">HTML elements</a>, as the default behavior in HTML is to
-  preserve whitespace. <a href="references.html#refsXML">[XML]</a></p><p class="note">There is no way to serialize the <code title="attr-xml-space">xml:space</code> attribute on <a href="infrastructure.html#html-elements">HTML
-  elements</a> in the <code><a href="iana.html#text-html">text/html</a></code> syntax.</p><hr/><p>To enable assistive technology products to expose a more
-  fine-grained interface than is otherwise possible with HTML elements
-  and attributes, a set of <a href="content-models.html#wai-aria" title="WAI-ARIA">annotations for
-  assistive technology products</a> can be specified (the ARIA
-  <code title="attr-aria-role">role</code> and <code title="attr-aria-*">aria-*</code> attributes).</p><h5 id="the-id-attribute"><span class="secno">3.2.3.1 </span>The <dfn title="attr-id"><code>id</code></dfn> attribute</h5><p>The <code title="attr-id"><a href="#the-id-attribute">id</a></code> attribute specifies its
-  element's <dfn id="concept-id" title="concept-id">unique identifier (ID)</dfn>. The
-  value must be unique amongst all the IDs in the element's <a href="infrastructure.html#home-subtree">home
-  subtree</a> and must contain at least one character. The value
-  must not contain any <a href="common-microsyntaxes.html#space-character" title="space character">space
-  characters</a>.</p><p class="note">An element's <a href="#concept-id" title="concept-id">unique
-  identifier</a> can be used for a variety of purposes, most
-  notably as a way to link to specific parts of a document using
-  fragment identifiers, as a way to target an element when scripting,
-  and as a way to style a specific element from CSS.</p><div class="impl">
-
-  <p>If the value is not the empty string, user agents must associate
-  the element with the given value (exactly, including any space
-  characters) for the purposes of <a href="#concept-id" title="concept-id">ID</a> matching within the element's
-  <a href="infrastructure.html#home-subtree">home subtree</a> (e.g. for selectors in CSS or for the
-  <code title="dom-Document-getElementById"><a href="infrastructure.html#dom-document-getelementbyid">getElementById()</a></code>
-  method in the DOM).</p>
-
-  <p>Identifiers are opaque strings. Particular meanings should not be
-  derived from the value of the <code title="attr-id"><a href="#the-id-attribute">id</a></code>
-  attribute.</p>
-
-  <p>This specification doesn't preclude an element having multiple
-  IDs, if other mechanisms (e.g. DOM Core methods) can set an
-  element's <a href="#concept-id" title="concept-id">ID</a> in a way that doesn't conflict with the <code title="attr-id"><a href="#the-id-attribute">id</a></code> attribute.</p>
-
-  <p>The <dfn id="dom-id" title="dom-id"><code>id</code></dfn> IDL attribute must
-  <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-id"><a href="#the-id-attribute">id</a></code> content
-  attribute.</p>
-
-  </div><h5 id="the-title-attribute"><span class="secno">3.2.3.2 </span>The <dfn title="attr-title"><code>title</code></dfn> attribute</h5><p>The <code title="attr-title"><a href="#the-title-attribute">title</a></code> attribute
-  <a href="rendering.html#represents">represents</a> advisory information for the element, such
-  as would be appropriate for a tooltip. On a link, this could be the
-  title or a description of the target resource; on an image, it could
-  be the image credit or a description of the image; on a paragraph,
-  it could be a footnote or commentary on the text; on a citation, it
-  could be further information about the source; and so forth. The
-  value is text.</p><p>If this attribute is omitted from an element, then it implies
-  that the <code title="attr-title"><a href="#the-title-attribute">title</a></code> attribute of the
-  nearest ancestor <a href="infrastructure.html#html-elements" title="HTML elements">HTML element</a>
-  with a <code title="attr-title"><a href="#the-title-attribute">title</a></code> attribute set is also
-  relevant to this element. Setting the attribute overrides this,
-  explicitly stating that the advisory information of any ancestors is
-  not relevant to this element. Setting the attribute to the empty
-  string indicates that the element has no advisory information.</p><p>If the <code title="attr-title"><a href="#the-title-attribute">title</a></code> attribute's value
-  contains U+000A LINE FEED (LF) characters, the content is split into
-  multiple lines. Each U+000A LINE FEED (LF) character represents a
-  line break.</p><div class="example">
-
-   <p>Caution is advised with respect to the use of newlines in <code title="attr-title"><a href="#the-title-attribute">title</a></code> attributes.</p>
-
-   <p>For instance, the following snippet actually defines an
-   abbreviation's expansion <em>with a line break in it</em>:</p>
-
-   <pre class="bad">&lt;p&gt;My logs show that there was some interest in &lt;abbr title="Hypertext
-Transport Protocol"&gt;HTTP&lt;/abbr&gt; today.&lt;/p&gt;</pre>
-
-  </div><p>Some elements, such as <code><a href="semantics.html#the-link-element">link</a></code>, <code><a href="text-level-semantics.html#the-abbr-element">abbr</a></code>, and
-  <code><a href="the-input-element.html#the-input-element">input</a></code>, define additional semantics for the <code title="attr-title"><a href="#the-title-attribute">title</a></code> attribute beyond the semantics
-  described above.</p><div class="impl">
-
-  <hr/><p>The <dfn id="dom-title" title="dom-title"><code>title</code></dfn> IDL attribute
-  must <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-title"><a href="#the-title-attribute">title</a></code>
-  content attribute.</p>
-
-  </div><h5 id="the-lang-and-xml:lang-attributes"><span class="secno">3.2.3.3 </span>The <code title="attr-lang"><a href="#attr-lang">lang</a></code> and <code title="attr-xml-lang"><a href="#attr-xml-lang">xml:lang</a></code> attributes</h5><p>The <dfn id="attr-lang" title="attr-lang"><code>lang</code></dfn> attribute (in
-  no namespace) specifies the primary language for the element's
-  contents and for any of the element's attributes that contain
-  text. Its value must be a valid BCP 47 language tag, or the empty
-  string. Setting the attribute to the empty string indicates that the
-  primary language is unknown. <a href="references.html#refsBCP47">[BCP47]</a></p><p>The <dfn id="attr-xml-lang" title="attr-xml-lang"><code title="">lang</code></dfn>
-  attribute in the <a href="namespaces.html#xml-namespace">XML namespace</a> is defined in XML. <a href="references.html#refsXML">[XML]</a></p><p>If these attributes are omitted from an element, then the
-  language of this element is the same as the language of its parent
-  element, if any.</p><p>The <code title="attr-lang"><a href="#attr-lang">lang</a></code> attribute in no namespace
-  may be used on any <a href="infrastructure.html#html-elements" title="HTML elements">HTML
-  element</a>.</p><p>The <a href="#attr-xml-lang" title="attr-xml-lang"><code title="">lang</code>
-  attribute in the <span>XML namespace</span></a> may be used on
-  <a href="infrastructure.html#html-elements">HTML elements</a> in <a href="dom.html#xml-documents">XML documents</a>, as well as
-  elements in other namespaces if the relevant specifications allow it
-  (in particular, MathML and SVG allow <a href="#attr-xml-lang" title="attr-xml-lang"><code title="">lang</code> attributes in the
-  <span>XML namespace</span></a> to be specified on their
-  elements). If both the <code title="attr-lang"><a href="#attr-lang">lang</a></code> attribute
-  in no namespace and the <a href="#attr-xml-lang" title="attr-xml-lang"><code title="">lang</code> attribute in the <span>XML
-  namespace</span></a> are specified on the same element, they must
-  have exactly the same value when compared in an <a href="infrastructure.html#ascii-case-insensitive">ASCII
-  case-insensitive</a> manner.</p><p>Authors must not use the <a href="#attr-xml-lang" title="attr-xml-lang"><code title="">lang</code> attribute in the <span>XML
-  namespace</span></a> on <a href="infrastructure.html#html-elements">HTML elements</a> in <a href="dom.html#html-documents">HTML
-  documents</a>. To ease migration to and from XHTML, authors may
-  specify an attribute in no namespace with no prefix and with the
-  literal localname "<code title="">xml:lang</code>" on <a href="infrastructure.html#html-elements">HTML
-  elements</a> in <a href="dom.html#html-documents">HTML documents</a>, but such attributes
-  must only be specified if a <code title="attr-lang"><a href="#attr-lang">lang</a></code>
-  attribute in no namespace is also specified, and both attributes
-  must have the same value when compared in an <a href="infrastructure.html#ascii-case-insensitive">ASCII
-  case-insensitive</a> manner.</p><p class="note">The attribute in no namespace with no prefix and
-  with the literal localname "<code title="">xml:lang</code>" has no
-  effect on language processing.</p><div class="impl">
-
-  <hr/><p>To determine the <dfn id="language">language</dfn> of a node, user agents must
-  look at the nearest ancestor element (including the element itself
-  if the node is an element) that has a <a href="#attr-xml-lang" title="attr-xml-lang"><code title="">lang</code> attribute in the
-  <span>XML namespace</span></a> set or is an <a href="infrastructure.html#html-elements" title="HTML&#10;  elements">HTML element</a> and has a <code title="attr-lang"><a href="#attr-lang">lang</a></code> in no namespace attribute set. That
-  attribute specifies the language of the node (regardless of its
-  value).</p>
-
-  <p>If both the <code title="attr-lang"><a href="#attr-lang">lang</a></code> attribute in no
-  namespace and the <a href="#attr-xml-lang" title="attr-xml-lang"><code title="">lang</code> attribute in the <span>XML
-  namespace</span></a> are set on an element, user agents must use
-  the <a href="#attr-xml-lang" title="attr-xml-lang"><code title="">lang</code> attribute
-  in the <span>XML namespace</span></a>, and the <code title="attr-lang"><a href="#attr-lang">lang</a></code> attribute in no namespace must be
-  <a href="infrastructure.html#ignore" title="ignore">ignored</a> for the purposes of determining
-  the element's language.</p>
-
-  <p>If none of the node's ancestors, including the <a href="infrastructure.html#root-element">root
-  element</a>, have either attribute set, but there is a
-  <a href="semantics.html#pragma-set-default-language">pragma-set default language</a> set, then that is the
-  language of the node. If there is no <a href="semantics.html#pragma-set-default-language">pragma-set default
-  language</a> set, then language information from a higher-level
-  protocol (such as HTTP), if any, must be used as the final fallback
-  language instead. In the absence of any such language information,
-  and in cases where the higher-level protocol reports multiple
-  languages, the language of the node is unknown, and the
-  corresponding language tag is the empty string.</p>
-
-  <p>If the resulting value is not a recognized language tag, then it
-  must be treated as an unknown language having the given language
-  tag, distinct from all other languages. For the purposes of
-  round-tripping or communicating with other services that expect
-  language tags, user agents should pass unknown language tags
-  through unmodified.</p>
-
-  <p class="example">Thus, for instance, an element with <code title="">lang="xyzzy"</code> would be matched by the selector <code title="">:lang(xyzzy)</code> (e.g. in CSS), but it would not be
-  matched by <code title="">:lang(abcde)</code>, even though both are
-  equally invalid. Similarly, if a Web browser and screen reader
-  working in unison communicated about the language of the element,
-  the browser would tell the screen reader that the language was
-  "xyzzy", even if it knew it was invalid, just in case the screen
-  reader actually supported a language with that tag after all.</p>
-
-  <p>If the resulting value is the empty string, then it must be
-  interpreted as meaning that the language of the node is explicitly
-  unknown.</p>
-
-  <hr/><p>User agents may use the element's language to determine proper
-  processing or rendering (e.g. in the selection of appropriate
-  fonts or pronunciations, or for dictionary selection). </p>
-
-  <hr/><p>The <dfn id="dom-lang" title="dom-lang"><code>lang</code></dfn> IDL attribute
-  must <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-lang"><a href="#attr-lang">lang</a></code>
-  content attribute in no namespace.</p>
-
-  </div><h5 id="the-xml:base-attribute-xml-only"><span class="secno">3.2.3.4 </span>The <dfn title="attr-xml-base"><code>xml:base</code></dfn>
-  attribute (XML only)</h5><p>The <code title="attr-xml-base"><a href="#the-xml:base-attribute-xml-only">xml:base</a></code> attribute is
-  defined in XML Base. <a href="references.html#refsXMLBASE">[XMLBASE]</a></p><p>The <code title="attr-xml-base"><a href="#the-xml:base-attribute-xml-only">xml:base</a></code> attribute may be
-  used on elements of <a href="dom.html#xml-documents">XML documents</a>. Authors must not
-  use the <code title="attr-xml-base"><a href="#the-xml:base-attribute-xml-only">xml:base</a></code> attribute in
-  <a href="dom.html#html-documents">HTML documents</a>.</p><h5 id="the-dir-attribute"><span class="secno">3.2.3.5 </span>The <dfn title="attr-dir"><code>dir</code></dfn> attribute</h5><p>The <code title="attr-dir"><a href="#the-dir-attribute">dir</a></code> attribute specifies the
-  element's text directionality. The attribute is an <a href="common-microsyntaxes.html#enumerated-attribute">enumerated
-  attribute</a> with the following keywords and states:</p><dl><dt>The <dfn id="attr-dir-ltr" title="attr-dir-ltr"><code>ltr</code></dfn> keyword, which maps to the <dfn id="attr-dir-ltr-state" title="attr-dir-ltr-state">ltr</dfn> state</dt>
-
-   <dd>
-
-    <p>Indicates that the contents of the element are explicitly
-    directionally embedded left-to-right text.</p>
-
-   </dd>
-
-   <dt>The <dfn id="attr-dir-rtl" title="attr-dir-rtl"><code>rtl</code></dfn> keyword, which maps to the <dfn id="attr-dir-rtl-state" title="attr-dir-rtl-state">rtl</dfn> state</dt>
-
-   <dd>
-
-    <p>Indicates that the contents of the element are explicitly
-    directionally embedded right-to-left text.</p>
-
-   </dd>
-
-   <dt>The <dfn id="attr-dir-auto" title="attr-dir-auto"><code>auto</code></dfn> keyword, which maps to the <dfn id="attr-dir-auto-state" title="attr-dir-auto-state">auto</dfn> state</dt>
-
-   <dd>
-
-    <p>Indicates that the contents of the element are explicitly
-    embedded text, but that the direction is to be determined
-    programmatically using the contents of the element (as described
-    below).</p>
-
-    <p class="note">The heuristic used by this state is very crude (it
-    just looks at the first character with a strong directionality, in
-    a manner analogous to the Paragraph Level determination in the
-    bidirectional algorithm). Authors are urged to only use this value
-    as a last resort when the direction of the text is truly unknown
-    and no better server-side heuristic can be applied.</p>
-
-    <p class="note">For <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> and <code><a href="grouping-content.html#the-pre-element">pre</a></code>
-    elements, the heuristic is applied on a per-paragraph level.</p>
-
-   </dd>
-
-  </dl><p>The attribute has no <i>invalid value default</i> and no
-  <i>missing value default</i>.</p><p><dfn id="the-directionality">The directionality</dfn> of an element is either '<dfn id="concept-ltr" title="concept-ltr">ltr</dfn>' or '<dfn id="concept-rtl" title="concept-rtl">rtl</dfn>', and is determined as per the first
-  appropriate set of steps from the following list:</p><dl class="switch"><dt>If the element's <code title="attr-dir"><a href="#the-dir-attribute">dir</a></code> attribute is
-   in the <a href="#attr-dir-ltr-state" title="attr-dir-ltr-state">ltr</a> state</dt>
-
-   <dd><p><a href="#the-directionality">The directionality</a> of the element is '<a href="#concept-ltr" title="concept-ltr">ltr</a>'.</p></dd>
-
-
-   <dt>If the element's <code title="attr-dir"><a href="#the-dir-attribute">dir</a></code> attribute is
-   in the <a href="#attr-dir-rtl-state" title="attr-dir-rtl-state">rtl</a> state</dt>
-
-   <dd><p><a href="#the-directionality">The directionality</a> of the element is '<a href="#concept-rtl" title="concept-rtl">rtl</a>'.</p></dd>
-
-
-   <dt>If the element's <code title="attr-dir"><a href="#the-dir-attribute">dir</a></code> attribute is
-   in the <a href="#attr-dir-auto-state" title="attr-dir-auto-state">auto</a> state</dt>
-
-   <dt>If the element is a <code><a href="text-level-semantics.html#the-bdi-element">bdi</a></code> element and the <code title="attr-dir"><a href="#the-dir-attribute">dir</a></code> attribute is not in a defined state
-   (i.e. it is not present or has an invalid value)</dt>
-
-   <dd>
-
-    <p>Find the first character in <a href="infrastructure.html#tree-order">tree order</a> that
-    matches the following criteria:</p>
-
-    <ul><li><p>The character is from a <a href="infrastructure.html#text-node">text node</a> that is a
-     descendant of the element whose <a href="#the-directionality" title="the&#10;     directionality">directionality</a> is being
-     determined.</p></li>
-
-     <li><p>The character is of bidirectional character type L, AL,
-     or R. <a href="references.html#refsBIDI">[BIDI]</a></p></li>
-
-     <li>
-
-      <p>The character is not in a text node that has an ancestor
-      element that is a descendant of the element whose <a href="#the-directionality" title="the directionality">directionality</a> is being
-      determined and that is either:</p>
-
-      <ul class="brief"><li>A <code><a href="text-level-semantics.html#the-bdi-element">bdi</a></code> element.
-       </li><li>A <code><a href="scripting-1.html#the-script-element">script</a></code> element.
-       </li><li>A <code><a href="semantics.html#the-style-element">style</a></code> element.
-       </li><li>An element with a <code title="attr-dir"><a href="#the-dir-attribute">dir</a></code> attribute in a defined state.
-      </li></ul></li>
-
-    </ul><p>If such a character is found and it is of bidirectional
-    character type AL or R, <a href="#the-directionality">the directionality</a> of the
-    element is '<a href="#concept-rtl" title="concept-rtl">rtl</a>'.</p>
-
-    <p>Otherwise, <a href="#the-directionality">the directionality</a> of the element is
-    '<a href="#concept-ltr" title="concept-ltr">ltr</a>'.</p>
-
-   </dd>
-
-
-   <dt>If the element is a <a href="infrastructure.html#root-element">root element</a> and the <code title="attr-dir"><a href="#the-dir-attribute">dir</a></code> attribute is not in a defined state
-   (i.e. it is not present or has an invalid value)</dt>
-
-   <dd><p><a href="#the-directionality">The directionality</a> of the element is '<a href="#concept-ltr" title="concept-ltr">ltr</a>'.</p></dd>
-
-
-   <dt>If the element has a parent element and the <code title="attr-dir"><a href="#the-dir-attribute">dir</a></code> attribute is not in a defined state
-   (i.e. it is not present or has an invalid value)</dt>
-
-   <dd><p><a href="#the-directionality">The directionality</a> of the element is the same
-   as the element's parent element's <a href="#the-directionality" title="the&#10;   directionality">directionality</a>.</p></dd>
-
-
-  </dl><p>The effect of this attribute is primarily on the presentation
-  layer. For example, the rendering section in this specification
-  defines a mapping from this attribute to the CSS 'direction' and
-  'unicode-bidi' properties, and CSS defines rendering in terms of
-  those properties.</p><hr/><dl class="domintro"><dt><var title="">document</var> . <code title="dom-dir"><a href="#dom-dir">dir</a></code> [ = <var title="">value</var> ]</dt>
-   <dd>
-    <p>Returns <a href="dom.html#the-html-element-0">the <code>html</code> element</a>'s <code title="attr-dir"><a href="#the-dir-attribute">dir</a></code> attribute's value, if any.</p>
-    <p>Can be set, to either "<code title="">ltr</code>", "<code title="">rtl</code>", or "<code title="">auto</code>" to replace <a href="dom.html#the-html-element-0">the <code>html</code> element</a>'s <code title="attr-dir"><a href="#the-dir-attribute">dir</a></code> attribute's value.</p>
-    <p>If there is no <a href="dom.html#the-html-element-0" title="the html element"><code>html</code> element</a>, returns the empty string and ignores new values.</p>
-   </dd>
-
-  </dl><div class="impl">
-
-  <p>The <dfn id="dom-dir" title="dom-dir"><code>dir</code></dfn> IDL attribute on
-  an element must <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-dir"><a href="#the-dir-attribute">dir</a></code> content attribute of that element,
-  <a href="common-dom-interfaces.html#limited-to-only-known-values">limited to only known values</a>.</p>
-
-  <p>The <dfn id="dom-document-dir" title="dom-document-dir"><code>dir</code></dfn> IDL
-  attribute on <code><a href="dom.html#htmldocument">HTMLDocument</a></code> objects must
-  <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-dir"><a href="#the-dir-attribute">dir</a></code> content
-  attribute of <a href="dom.html#the-html-element-0">the <code>html</code> element</a>, if any,
-  <a href="common-dom-interfaces.html#limited-to-only-known-values">limited to only known values</a>. If there is no such
-  element, then the attribute must return the empty string and do
-  nothing on setting.</p>
-
-  </div><p class="note">Authors are strongly encouraged to use the <code title="attr-dir"><a href="#the-dir-attribute">dir</a></code> attribute to indicate text direction
-  rather than using CSS, since that way their documents will continue
-  to render correctly even in the absence of CSS (e.g. as interpreted
-  by search engines).</p><div class="example">
-
-   <p>This markup fragment is of an IM conversation.</p>
-
-   <pre>&lt;p dir=auto class="u1"&gt;&lt;b&gt;&lt;bdi&gt;Student&lt;/bdi&gt;:&lt;/b&gt; How do you write "What's your name?" in Arabic?&lt;/p&gt;
-&lt;p dir=auto class="u2"&gt;&lt;b&gt;&lt;bdi&gt;Teacher&lt;/bdi&gt;:&lt;/b&gt; &#x645;&#x627; &#x627;&#x633;&#x645;&#x643;&#x61F;&lt;/p&gt;
-&lt;p dir=auto class="u1"&gt;&lt;b&gt;&lt;bdi&gt;Student&lt;/bdi&gt;:&lt;/b&gt; Thanks.&lt;/p&gt;
-&lt;p dir=auto class="u2"&gt;&lt;b&gt;&lt;bdi&gt;Teacher&lt;/bdi&gt;:&lt;/b&gt; That's written "&#x634;&#x643;&#x631;&#x64B;&#x627;".&lt;/p&gt;
-&lt;p dir=auto class="u2"&gt;&lt;b&gt;&lt;bdi&gt;Teacher&lt;/bdi&gt;:&lt;/b&gt; Do you know how to write "Please"?&lt;/p&gt;
-&lt;p dir=auto class="u1"&gt;&lt;b&gt;&lt;bdi&gt;Student&lt;/bdi&gt;:&lt;/b&gt; "&#x645;&#x646; &#x641;&#x636;&#x644;&#x643;", right?&lt;/p&gt;</pre>
-
-
-   <p>Given a suitable style sheet and the default alignment styles
-   for the <code><a href="grouping-content.html#the-p-element">p</a></code> element, namely to align the text to the
-   <i>start edge</i> of the paragraph, the resulting rendering could
-   be as follows:</p>
-
-   <p><img alt="Each paragraph rendered as a separate block, with the paragraphs left-aligned except the second paragraph and the last one, which would  be right aligned, with the usernames ('Student' and 'Teacher' in this example) flush right, with a colon to their left, and the text first to the left of that." src="http://dev.w3.org/html5/spec/images/im.png"/></p>
-
-   <p>As noted earlier, the <code title="attr-dir-auto"><a href="#attr-dir-auto">auto</a></code>
-   value is not a panacea. The final paragraph in this example is
-   misinterpreted as being right-to-left text, since it begins with an
-   Arabic character, which causes the "right?" to be to the left of
-   the Arabic text.</p>
-
-  </div><h5 id="classes"><span class="secno">3.2.3.6 </span>The <dfn title="attr-class"><code>class</code></dfn> attribute</h5><p>Every <a href="infrastructure.html#html-elements" title="HTML elements">HTML element</a> may have a
-  <code title="attr-class"><a href="#classes">class</a></code> attribute specified.</p><p>The attribute, if specified, must have a value that is a
-  <a href="common-microsyntaxes.html#set-of-space-separated-tokens">set of space-separated tokens</a> representing the various
-  classes that the element belongs to.</p><div class="impl">
-
-  <p>The classes that an <a href="infrastructure.html#html-elements" title="HTML elements">HTML
-  element</a> has assigned to it consists of all the classes
-  returned when the value of the <code title="attr-class"><a href="#classes">class</a></code>
-  attribute is <a href="common-microsyntaxes.html#split-a-string-on-spaces" title="split a string on spaces">split on
-  spaces</a>. (Duplicates are ignored.)</p>
-
-  </div><p class="note">Assigning classes to an element affects class
-  matching in selectors in CSS, the <code title="dom-document-getElementsByClassName"><a href="dom.html#dom-document-getelementsbyclassname">getElementsByClassName()</a></code>
-  method in the DOM, and other such features.</p><p>There are no additional restrictions on the tokens authors can
-  use in the <code title="attr-class"><a href="#classes">class</a></code> attribute, but
-  authors are encouraged to use values that describe the nature of the
-  content, rather than values that describe the desired presentation
-  of the content.</p><div class="impl">
-
-  <hr/><p>The <dfn id="dom-classname" title="dom-className"><code>className</code></dfn> and
-  <dfn id="dom-classlist" title="dom-classList"><code>classList</code></dfn> IDL
-  attributes must both <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-class"><a href="#classes">class</a></code> content attribute.</p>
-
-  </div><h5 id="the-style-attribute"><span class="secno">3.2.3.7 </span>The <dfn title="attr-style"><code>style</code></dfn> attribute</h5><p>All <a href="infrastructure.html#html-elements">HTML elements</a> may have the <code title="attr-style"><a href="#the-style-attribute">style</a></code> content attribute set. This is a
-  <span>CSS styling attribute</span> as defined by the CSS Styling
-  Attribute Syntax specification. <a href="references.html#refsCSSATTR">[CSSATTR]</a></p><div class="impl">
-
-  <p>In user agents that support CSS, the attribute's value must be
-  parsed when the attribute is added or has its value changed, according
-  to the rules given for <span>CSS styling attributes</span>. <a href="references.html#refsCSSATTR">[CSSATTR]</a></p>
-
-  </div><p>Documents that use <code title="attr-style"><a href="#the-style-attribute">style</a></code>
-  attributes on any of their elements must still be comprehensible and
-  usable if those attributes were removed.</p><p class="note">In particular, using the <code title="attr-style"><a href="#the-style-attribute">style</a></code> attribute to hide and show content,
-  or to convey meaning that is otherwise not included in the document,
-  is non-conforming. (To hide and show content, use the <code title="attr-hidden"><a href="editing.html#the-hidden-attribute">hidden</a></code> attribute.)</p><hr/><dl class="domintro"><dt><var title="">element</var> . <code title="dom-style"><a href="#dom-style">style</a></code></dt>
-   <dd>
-    <p>Returns a <code>CSSStyleDeclaration</code> object for the element's <code title="attr-style"><a href="#the-style-attribute">style</a></code> attribute.</p>
-   </dd>
-
-  </dl><div class="impl">
-
-  <p>The <dfn id="dom-style" title="dom-style"><code>style</code></dfn> IDL attribute
-  must return a <code>CSSStyleDeclaration</code> whose value
-  represents the declarations specified in the attribute, if
-  present. Mutating the <code>CSSStyleDeclaration</code> object must
-  create a <code title="attr-style"><a href="#the-style-attribute">style</a></code> attribute on the
-  element (if there isn't one already) and then change its value to be
-  a value representing the serialized form of the
-  <code>CSSStyleDeclaration</code> object. The same object must be
-  returned each time. <a href="references.html#refsCSSOM">[CSSOM]</a></p>
-
-  </div><div class="example">
-
-   <p>In the following example, the words that refer to colors are
-   marked up using the <code><a href="text-level-semantics.html#the-span-element">span</a></code> element and the <code title="attr-style"><a href="#the-style-attribute">style</a></code> attribute to make those words show
-   up in the relevant colors in visual media.</p>
-
-   <pre>&lt;p&gt;My sweat suit is &lt;span style="color: green; background:
-transparent"&gt;green&lt;/span&gt; and my eyes are &lt;span style="color: blue;
-background: transparent"&gt;blue&lt;/span&gt;.&lt;/p&gt;</pre>
-
-  </div><h5 id="embedding-custom-non-visible-data-with-the-data-attributes"><span class="secno">3.2.3.8 </span><dfn>Embedding custom non-visible data</dfn> with the <code title="attr-data-*"><a href="#attr-data">data-*</a></code> attributes</h5><p>A <dfn id="custom-data-attribute">custom data attribute</dfn> is an attribute in no
-  namespace whose name starts with the string "<dfn id="attr-data" title="attr-data-*"><code>data-</code></dfn>", has at least one
-  character after the hyphen, is <a href="infrastructure.html#xml-compatible">XML-compatible</a>, and
-  contains no characters in the range U+0041 to U+005A (LATIN CAPITAL
-  LETTER A to LATIN CAPITAL LETTER Z).</p><p class="note">All attributes on <a href="infrastructure.html#html-elements">HTML elements</a> in
-  <a href="dom.html#html-documents">HTML documents</a> get ASCII-lowercased automatically, so
-  the restriction on ASCII uppercase letters doesn't affect such
-  documents.</p><p><a href="#custom-data-attribute" title="custom data attribute">Custom data attributes</a>
-  are intended to store custom data private to the page or
-  application, for which there are no more appropriate attributes or
-  elements.</p><p>These attributes are not intended for use by software that is
-  independent of the site that uses the attributes.</p><div class="example">
-
-   <p>For instance, a site about music could annotate list items
-   representing tracks in an album with custom data attributes
-   containing the length of each track. This information could then be
-   used by the site itself to allow the user to sort the list by track
-   length, or to filter the list for tracks of certain lengths.</p>
-
-   <pre>&lt;ol&gt;
- &lt;li data-length="2m11s"&gt;Beyond The Sea&lt;/li&gt;
- ...
-&lt;/ol&gt;</pre>
-
-   <p>It would be inappropriate, however, for the user to use generic
-   software not associated with that music site to search for tracks
-   of a certain length by looking at this data.</p>
-
-   <p>This is because these attributes are intended for use by the
-   site's own scripts, and are not a generic extension mechanism for
-   publicly-usable metadata.</p>
-
-  </div><p>Every <a href="infrastructure.html#html-elements" title="HTML elements">HTML element</a> may have
-  any number of <a href="#custom-data-attribute" title="custom data attribute">custom data
-  attributes</a> specified, with any value.</p><hr/><dl class="domintro"><dt><var title="">element</var> . <code title="dom-dataset"><a href="#dom-dataset">dataset</a></code></dt>
-   <dd>
-
-    <p>Returns a <code><a href="common-dom-interfaces.html#domstringmap">DOMStringMap</a></code> object for the element's <code title="attr-data-*"><a href="#attr-data">data-*</a></code> attributes.</p>
-
-    <p>Hyphenated names become camel-cased. For example, <code title="">data-foo-bar=""</code> becomes <code title="">element.dataset.fooBar</code>.</p>
-
-   </dd>
-
-  </dl><div class="impl">
-
-  <p>The <dfn id="dom-dataset" title="dom-dataset"><code>dataset</code></dfn> IDL
-  attribute provides convenient accessors for all the <code title="attr-data-*"><a href="#attr-data">data-*</a></code> attributes on an element. On
-  getting, the <code title="dom-dataset"><a href="#dom-dataset">dataset</a></code> IDL attribute
-  must return a <code><a href="common-dom-interfaces.html#domstringmap">DOMStringMap</a></code> object, associated with the
-  following algorithms, which expose these attributes on their
-  element:</p>
-
-  <dl><dt>The algorithm for getting the list of name-value pairs</dt>
-
-   <dd>
-    <ol><li>Let <var title="">list</var> be an empty list of name-value
-     pairs.</li>
-
-     <li>For each content attribute on the element whose first five
-     characters are the string "<code title="">data-</code>" and whose
-     remaining characters (if any) do not include any characters in
-     the range U+0041 to U+005A (LATIN CAPITAL LETTER A to LATIN
-     CAPITAL LETTER Z), add a name-value pair to <var title="">list</var> whose name is the attribute's name with the
-     first five characters removed and whose value is the attribute's
-     value.</li>
-
-     <li>For each name on the list, for each U+002D HYPHEN-MINUS
-     character (-) in the name that is followed by a character in the
-     range U+0061 to U+007A (U+0061 LATIN SMALL LETTER A to U+007A
-     LATIN SMALL LETTER Z), remove the U+002D HYPHEN-MINUS character
-     (-) and replace the character that followed it by the same
-     character <a href="infrastructure.html#converted-to-ascii-uppercase">converted to ASCII uppercase</a>.</li>
-
-     <li>Return <var title="">list</var>.</li>
-
-    </ol></dd>
-
-   <dt>The algorithm for setting names to certain values</dt>
-
-   <dd>
-    <ol><li>Let <var title="">name</var> be the name passed to the
-     algorithm.</li>
-
-     <li>Let <var title="">value</var> be the value passed to the
-     algorithm.</li>
-
-     <li>If <var title="">name</var> contains a U+002D HYPHEN-MINUS
-     character (-) followed by a character in the range U+0061 to
-     U+007A (U+0061 LATIN SMALL LETTER A to U+007A LATIN SMALL LETTER
-     Z), throw a <code><a href="common-dom-interfaces.html#syntax_err">SYNTAX_ERR</a></code> exception and abort these
-     steps.</li>
-
-     <li>For each character in the range U+0041 to U+005A (U+0041
-     LATIN CAPITAL LETTER A to U+005A LATIN CAPITAL LETTER Z) in <var title="">name</var>, insert a U+002D HYPHEN-MINUS character (-)
-     before the character and replace the character with the same
-     character <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a>.</li>
-
-     <li>Insert the string <code title="">data-</code> at the front of
-     <var title="">name</var>.</li>
-
-     <li>Set the value of the attribute with the name <var title="">name</var>, to the value <var title="">value</var>,
-     replacing any previous value if the attribute already existed. If
-     <code title="">setAttribute()</code> would have raised an
-     exception when setting an attribute with the name <var title="">name</var>, then this must raise the same
-     exception.</li>
-
-    </ol></dd>
-
-   <dt>The algorithm for deleting names</dt>
-
-   <dd>
-    <ol><li>Let <var title="">name</var> be the name passed to the
-     algorithm.</li>
-     <li>For each character in the range U+0041 to U+005A (U+0041
-     LATIN CAPITAL LETTER A to U+005A LATIN CAPITAL LETTER Z) in <var title="">name</var>, insert a U+002D HYPHEN-MINUS character (-)
-     before the character and replace the character with the same
-     character <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a>.</li>
-
-     <li>Insert the string <code title="">data-</code> at the front of
-     <var title="">name</var>.</li>
-
-     <li>Remove the attribute with the name <var title="">name</var>,
-     if such an attribute exists. Do nothing otherwise.</li>
-
-    </ol></dd>
-
-  </dl><p>The same object must be returned each time.</p>
-
-  </div><div class="example">
-
-   <p>If a Web page wanted an element to represent a space ship,
-   e.g. as part of a game, it would have to use the <code title="attr-class"><a href="#classes">class</a></code> attribute along with <code title="attr-data-*"><a href="#attr-data">data-*</a></code> attributes:</p>
-
-   <pre>&lt;div class="spaceship" data-ship-id="92432"
-     data-weapons="laser 2" data-shields="50%"
-     data-x="30" data-y="10" data-z="90"&gt;
- &lt;button class="fire"
-         onclick="spaceships[this.parentNode.dataset.shipId].fire()"&gt;
-  Fire
- &lt;/button&gt;
-&lt;/div&gt;</pre>
-
-   <p>Notice how the hyphenated attribute name becomes camel-cased in
-   the API.</p>
-
-  </div><p>Authors should carefully design such extensions so that when the
-  attributes are ignored and any associated CSS dropped, the page is
-  still usable.</p><div class="impl">
-
-  <p>User agents must not derive any implementation behavior from
-  these attributes or values. Specifications intended for user agents
-  must not define these attributes to have any meaningful values.</p>
-
-  </div><p>JavaScript libraries may use the <a href="#custom-data-attribute" title="custom data&#10;  attribute">custom data attributes</a>, as they are considered to
-  be part of the page on which they are used. Authors of libraries
-  that are reused by many authors are encouraged to include their name
-  in the attribute names, to reduce the risk of clashes. Where it
-  makes sense, library authors are also encouraged to make the exact
-  name used in the attribute names customizable, so that libraries
-  whose authors unknowingly picked the same name can be used on the
-  same page, and so that multiple versions of a particular library can
-  be used on the same page even when those versions are not mutually
-  compatible.</p><div class="example">
-
-   <p>For example, a library called "DoQuery" could use attribute
-   names like <code title="">data-doquery-range</code>, and a library
-   called "jJo" could use attributes names like <code title="">data-jjo-range</code>. The jJo library could also provide
-   an API to set which prefix to use (e.g. <code title="">J.setDataPrefix('j2')</code>, making the attributes have
-   names like <code title="">data-j2-range</code>).</p>
-
-  </div><h4 id="element-definitions"><span class="secno">3.2.4 </span>Element definitions</h4><p>Each element in this specification has a definition that includes
-  the following information:</p><dl><dt>Categories</dt>
-
-   <dd><p>A list of <a href="content-models.html#content-categories" title="content categories">categories</a>
-   to which the element belongs. These are used when defining the
-   <a href="content-models.html#content-models">content models</a> for each element.</p></dd>
-
-
-   <dt>Contexts in which this element can be used</dt>
-
-   <dd>
-
-    <p>A <em>non-normative</em> description of where the element can
-    be used. This information is redundant with the content models of
-    elements that allow this one as a child, and is provided only as a
-    convenience.</p>
-
-    <p class="note">For simplicity, only the most specific
-    expectations are listed. For example, an element that is both
-    <a href="content-models.html#flow-content">flow content</a> and <a href="content-models.html#phrasing-content">phrasing content</a> can be
-    used anywhere that either <a href="content-models.html#flow-content">flow content</a> or
-    <a href="content-models.html#phrasing-content">phrasing content</a> is expected, but since anywhere that
-    <a href="content-models.html#flow-content">flow content</a> is expected, <a href="content-models.html#phrasing-content">phrasing
-    content</a> is also expected (since all <a href="content-models.html#phrasing-content">phrasing
-    content</a> is <a href="content-models.html#flow-content">flow content</a>), only "where
-    <a href="content-models.html#phrasing-content">phrasing content</a> is expected" will be listed.</p>
-
-   </dd>
-
-
-   <dt>Content model</dt>
-
-   <dd><p>A normative description of what content must be included as
-   children and descendants of the element.</p></dd>
-
-
-   <dt>Content attributes</dt>
-
-   <dd><p>A normative list of attributes that may be specified on the
-   element (except where otherwise disallowed).</p></dd>
-
-
-   <dt>DOM interface</dt>
-
-   <dd><p>A normative definition of a DOM interface that such elements
-   must implement.</p></dd>
-
-  </dl><p>This is then followed by a description of what the element
-  <a href="rendering.html#represents">represents</a>, along with any additional normative
-  conformance criteria that may apply to authors<span class="impl" title=""> and implementations</span>. Examples are sometimes
-  also included.</p><h5 id="attributes"><span class="secno">3.2.4.1 </span>Attributes</h5><p id="attribute-text">Except where otherwise specified, attributes
-  on <a href="infrastructure.html#html-elements">HTML elements</a> may have any string value, including
-  the empty string. Except where explicitly stated, there is no
-  restriction on what text can be specified in such attributes.</p></body></html>
+  </div></body></html>

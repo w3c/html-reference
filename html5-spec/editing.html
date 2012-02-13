@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>7 User interaction &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<!DOCTYPE html>
+<html lang="en-US-x-Hixie"><head><title>7 User interaction &#x2014; HTML5</title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -19,6 +19,7 @@
    dd table + p { margin-top: 1em; }
    p + * > li, dd li { margin: 1em 0; }
    dt, dfn { font-weight: bold; font-style: normal; }
+   i, em { font-style: italic; }
    dt dfn { font-style: italic; }
    pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
    pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
@@ -40,9 +41,10 @@
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
 
    .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   img.extra { float: right; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   img.extra, p.overview { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; position: relative; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl::before { content: "IDL"; font: bold small sans-serif; padding: 0.5em; background: white; position: absolute; top: 0; margin: -1px 0 0 -4em; width: 1.5em; border: thin solid; border-radius: 0 0 0 0.5em }
    pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
    pre.css:first-line { color: #AAAA50; }
    dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
@@ -50,6 +52,7 @@
    dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
    dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
    dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
    dl.switch { padding-left: 2em; }
    dl.switch > dt { text-indent: -1.5em; }
    dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
@@ -104,6 +107,7 @@
    .note { color: green; background: transparent; font-family: sans-serif; }
    .warning { color: red; background: transparent; }
    .note, .warning { font-weight: bolder; font-style: italic; }
+   .note em, .warning em, .note i, .warning i { font-style: normal; }
    p.note, div.note { padding: 0.5em 2em; }
    span.note { padding: 0 2em; }
    .note p:first-child, .warning p:first-child { margin-top: 0; }
@@ -295,8 +299,6 @@
      src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
    }
 
-  ]]></style><style type="text/css"><![CDATA[
-   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
   ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
    function getCookie(name) {
      var params = location.search.substr(1).split("&");
@@ -315,22 +317,32 @@
      }
      return null;
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="timers.html" title="6.3 Timers" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="dnd.html" title="7.7 Drag and drop" rel="next"/></head><body><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="system-state-and-capabilities.html" title="6.5 System state and capabilities" rel="prev"/><link href="index.html#contents" title="Table of contents" rel="contents"/><link href="editing-apis.html" title="7.5.4 Editing APIs" rel="next"/></head><body onload="fixBrokenLink();" class="split chapter"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   </div><div>
-   <a href="timers.html" class="prev">6.3 Timers</a> &#x2013;
-   <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="dnd.html" class="next">7.7 Drag and drop</a>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
+
+   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   </div><nav class="prev_next"><a href="system-state-and-capabilities.html">&#x2190; 6.5 System state and capabilities</a> &#x2013;
+   <a href="index.html#contents">Table of contents</a> &#x2013;
+   <a href="editing-apis.html">7.5.4 Editing APIs &#x2192;</a>
   <ol class="toc"><li><a href="editing.html#editing"><span class="secno">7 </span>User interaction</a>
   <ol><li><a href="editing.html#the-hidden-attribute"><span class="secno">7.1 </span>The <code>hidden</code> attribute</a></li><li><a href="editing.html#activation"><span class="secno">7.2 </span>Activation</a></li><li><a href="editing.html#focus"><span class="secno">7.3 </span>Focus</a>
     <ol><li><a href="editing.html#sequential-focus-navigation-and-the-tabindex-attribute"><span class="secno">7.3.1 </span>Sequential focus navigation and the <code title="attr-tabindex">tabindex</code> attribute</a></li><li><a href="editing.html#focus-management"><span class="secno">7.3.2 </span>Focus management</a></li><li><a href="editing.html#document-level-focus-apis"><span class="secno">7.3.3 </span>Document-level focus APIs</a></li><li><a href="editing.html#element-level-focus-apis"><span class="secno">7.3.4 </span>Element-level focus APIs</a></li></ol></li><li><a href="editing.html#assigning-keyboard-shortcuts"><span class="secno">7.4 </span>Assigning keyboard shortcuts</a>
-    <ol><li><a href="editing.html#introduction-6"><span class="secno">7.4.1 </span>Introduction</a></li><li><a href="editing.html#the-accesskey-attribute"><span class="secno">7.4.2 </span>The <code>accesskey</code> attribute</a></li><li><a href="editing.html#processing-model-3"><span class="secno">7.4.3 </span>Processing model</a></li></ol></li><li><a href="editing.html#contenteditable"><span class="secno">7.5 </span>The <code title="attr-contenteditable">contenteditable</code> attribute</a>
-    <ol><li><a href="editing.html#user-editing-actions"><span class="secno">7.5.1 </span>User editing actions</a></li><li><a href="editing.html#making-entire-documents-editable"><span class="secno">7.5.2 </span>Making entire documents editable</a></li></ol></li><li><a href="editing.html#spelling-and-grammar-checking"><span class="secno">7.6 </span>Spelling and grammar checking</a></li></ol></li></ol></div><h2 id="editing"><span class="secno">7 </span><dfn>User interaction</dfn></h2><h3 id="the-hidden-attribute"><span class="secno">7.1 </span>The <dfn title="attr-hidden"><code>hidden</code></dfn> attribute</h3><p>All <a href="infrastructure.html#html-elements">HTML elements</a> may have the <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> content attribute set. The <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> attribute is a <a href="common-microsyntaxes.html#boolean-attribute">boolean
-  attribute</a>. When specified on an element, it indicates that
-  the element is not yet, or is no longer, relevant. <span class="impl">User agents should not render elements that have the
-  <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> attribute
+    <ol><li><a href="editing.html#introduction-6"><span class="secno">7.4.1 </span>Introduction</a></li><li><a href="editing.html#the-accesskey-attribute"><span class="secno">7.4.2 </span>The <code>accesskey</code> attribute</a></li><li><a href="editing.html#processing-model-3"><span class="secno">7.4.3 </span>Processing model</a></li></ol></li><li><a href="editing.html#editing-0"><span class="secno">7.5 </span>Editing</a>
+    <ol><li><a href="editing.html#contenteditable"><span class="secno">7.5.1 </span>Making document regions editable: The <code title="attr-contenteditable">contenteditable</code> content
+  attribute</a></li><li><a href="editing.html#making-entire-documents-editable:-the-designmode-idl-attribute"><span class="secno">7.5.2 </span>Making entire documents editable: The <code title="dom-document-designMode">designMode</code> IDL attribute</a></li><li><a href="editing.html#best-practices-for-in-page-editors"><span class="secno">7.5.3 </span>Best practices for in-page editors</a></li></ol></li></ol></li></ol></nav><h2 id="editing"><span class="secno">7 </span><dfn>User interaction</dfn></h2><h3 id="the-hidden-attribute"><span class="secno">7.1 </span>The <dfn title="attr-hidden"><code>hidden</code></dfn> attribute</h3><p>All <a href="infrastructure.html#html-elements">HTML elements</a> may have the <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> content attribute set. The <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> attribute is a <a href="common-microsyntaxes.html#boolean-attribute">boolean
+  attribute</a>.
+
+
+  When specified on an element, it indicates that the element is not
+  yet, or is no longer, relevant.
+
+
+
+  <span class="impl">User agents should not render elements that have
+  the <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> attribute
   specified.</span></p><div class="example">
 
    <p>In the following skeletal example, the attribute is used to hide
@@ -371,11 +383,14 @@
    attribute. If the content is not applicable or relevant, then there
    is no reason to link to it.</p>
 
+
    <p>It would similarly be incorrect to use the ARIA <code title="attr-aria-describedby">aria-describedby</code> attribute to
    refer to descriptions that are themselves <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code>. Hiding a section means that it
    is not applicable or relevant to anyone at the current time, so
    clearly it cannot be a valid description of content the user can
    interact with.</p>
+
+
 
   </div><p>Elements in a section hidden by the <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> attribute are still active,
   e.g. scripts and form controls in such sections still execute
@@ -396,35 +411,22 @@
 
   </dl><div class="impl">
 
-  <p>Each element has a <var title="">click in progress</var> flag,
-  initially set to false.</p>
-
   <p>The <dfn id="dom-click" title="dom-click"><code>click()</code></dfn> method must
-  run these steps:</p>
+  <a href="content-models.html#run-synthetic-click-activation-steps">run synthetic click activation steps</a> on the
+  element.</p>
 
-  <ol><li><p>If the element's <var title="">click in progress</var> flag
-   is set to true, then abort these steps.</p></li>
-
-   <li><p>Set the <var title="">click in progress</var> flag on the
-   element to true.</p></li>
-
-   <li><p>If the element has a defined <a href="content-models.html#activation-behavior">activation behavior</a>,
-   <a href="content-models.html#run-synthetic-click-activation-steps">run synthetic click activation steps</a> on the
-   element. Otherwise, <a href="webappapis.html#fire-a-click-event">fire a <code>click</code> event</a> at
-   the element.</p></li>
-
-   <li><p>Set the <var title="">click in progress</var> flag on the
-   element to false.</p></li>
-
-  </ol></div><h3 id="focus"><span class="secno">7.3 </span>Focus</h3><div class="impl">
+  </div><h3 id="focus"><span class="secno">7.3 </span>Focus</h3><div class="impl">
 
   <p>When an element is <i>focused</i>, key events received by the
   document must be targeted at that element. There may be no element
   focused; when no element is focused, key events received by the
-  document must be targeted at <a href="dom.html#the-body-element-0">the body element</a>.</p>
+  document must be targeted at <a href="dom.html#the-body-element-0">the body element</a>, if there
+  is one, or else at the <code><a href="dom.html#document">Document</a></code>'s root element, if
+  there is one. If there is no root element, key events must not be
+  fired.</p>
 
   <p>User agents may track focus for each <a href="browsers.html#browsing-context">browsing
-  context</a> or <code><a href="infrastructure.html#document">Document</a></code> individually, or may support
+  context</a> or <code><a href="dom.html#document">Document</a></code> individually, or may support
   only one focused element per <a href="browsers.html#top-level-browsing-context">top-level browsing context</a>
   &#x2014; user agents should follow platform conventions in this
   regard.</p>
@@ -433,6 +435,10 @@
   currently have focus must be independent of whether or not the
   <a href="browsers.html#top-level-browsing-context">top-level browsing context</a> itself has the <i>system
   focus</i>.</p>
+
+  <p id="bc-focus-ergo-bcc-focus">When a <a href="browsers.html#child-browsing-context">child browsing
+  context</a> is focused, its <a href="browsers.html#browsing-context-container">browsing context
+  container</a> must also have focus.</p>
 
   <p class="note">When an element is focused, the element matches the
   CSS <code>:focus</code> pseudo-class.</p>
@@ -553,47 +559,50 @@
   <a href="#focusable">focusable</a>, unless platform conventions dictate
   otherwise:</p>
 
-  <ul><li><code><a href="text-level-semantics.html#the-a-element">a</a></code> elements that have an <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code> attribute</li>
+  <ul><li><code><a href="the-a-element.html#the-a-element">a</a></code> elements that have an <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code> attribute</li>
 
-   <li><code><a href="semantics.html#the-link-element">link</a></code> elements that have an <code title="attr-link-href"><a href="semantics.html#attr-link-href">href</a></code> attribute</li>
+   <li><code><a href="the-link-element.html#the-link-element">link</a></code> elements that have an <code title="attr-link-href"><a href="the-link-element.html#attr-link-href">href</a></code> attribute</li>
 
-   <li><code><a href="the-button-element.html#the-button-element">button</a></code> elements that are not <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
+   <li><code><a href="the-button-element.html#the-button-element">button</a></code> elements that are not <a href="attributes-common-to-form-controls.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
 
    <li><code><a href="the-input-element.html#the-input-element">input</a></code> elements whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute are not in the
-   <a href="states-of-the-type-attribute.html#hidden-state" title="attr-input-type-hidden">Hidden</a> state and that
-   are not <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
+   <a href="states-of-the-type-attribute.html#hidden-state-type-hidden" title="attr-input-type-hidden">Hidden</a> state and that
+   are not <a href="attributes-common-to-form-controls.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
 
-   <li><code><a href="the-button-element.html#the-select-element">select</a></code> elements that are not <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
+   <li><code><a href="the-select-element.html#the-select-element">select</a></code> elements that are not <a href="attributes-common-to-form-controls.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
 
-   <li><code><a href="the-button-element.html#the-textarea-element">textarea</a></code> elements that are not <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
+   <li><code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code> elements that are not <a href="attributes-common-to-form-controls.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
 
-   <li><code><a href="interactive-elements.html#the-command-element">command</a></code> elements that do not have a <code title="attr-command-disabled"><a href="interactive-elements.html#attr-command-disabled">disabled</a></code> attribute</li>
+   <li><code><a href="the-command-element.html#the-command-element">command</a></code> elements that do not have a <code title="attr-command-disabled"><a href="the-command-element.html#attr-command-disabled">disabled</a></code> attribute</li>
 
    <li>Elements with a <code title="attr-draggable"><a href="dnd.html#the-draggable-attribute">draggable</a></code>
    attribute set, if that would enable the user agent to allow the
    user to begin a drag operations for those elements without the use
    of a pointing device</li>
 
-   <li><a href="#editing-host" title="editing host">Editing hosts</a></li>
+   <li><a href="editing-apis.html#editing-host" title="editing host">Editing hosts</a></li>
+
+   <li><a href="browsers.html#browsing-context-container" title="browsing context container">Browsing context
+   containers</a></li> 
 
   </ul><p>In addition, each shape that is generated for an
-  <code><a href="the-map-element.html#the-area-element">area</a></code> element should be <a href="#focusable">focusable</a>, unless
-  platform conventions dictate otherwise. (A single <code><a href="the-map-element.html#the-area-element">area</a></code>
+  <code><a href="the-area-element.html#the-area-element">area</a></code> element should be <a href="#focusable">focusable</a>, unless
+  platform conventions dictate otherwise. (A single <code><a href="the-area-element.html#the-area-element">area</a></code>
   element can correspond to multiple shapes, since image maps can be
   reused with multiple images on a page.)</p>
 
-  <p>The user agent may also make part of a <code><a href="interactive-elements.html#the-details-element">details</a></code>
+  <p>The user agent may also make part of a <code><a href="the-details-element.html#the-details-element">details</a></code>
   element's rendering focusable, to enable the element to be opened or
   closed using keyboard input. However, this is distinct from the
-  <code><a href="interactive-elements.html#the-details-element">details</a></code> or <code><a href="interactive-elements.html#the-summary-element">summary</a></code> element being
+  <code><a href="the-details-element.html#the-details-element">details</a></code> or <code><a href="the-summary-element.html#the-summary-element">summary</a></code> element being
   focusable.</p>
 
   <hr/><p>The <dfn id="focusing-steps">focusing steps</dfn> are as follows:</p>
 
   <ol><li><p>If the element is not <a href="infrastructure.html#in-a-document" title="in a Document">in a
    <code>Document</code></a>, or if the element's
-   <code><a href="infrastructure.html#document">Document</a></code> has no <a href="browsers.html#browsing-context">browsing context</a>, or if
-   the element's <code><a href="infrastructure.html#document">Document</a></code>'s <a href="browsers.html#browsing-context">browsing context</a>
+   <code><a href="dom.html#document">Document</a></code> has no <a href="browsers.html#browsing-context">browsing context</a>, or if
+   the element's <code><a href="dom.html#document">Document</a></code>'s <a href="browsers.html#browsing-context">browsing context</a>
    has no <a href="browsers.html#top-level-browsing-context">top-level browsing context</a>, then abort these
    steps.</p>
 
@@ -606,7 +615,7 @@
     <p>Make the element the currently focused element in its
     <a href="browsers.html#top-level-browsing-context">top-level browsing context</a>.</p>
 
-    <p>Some elements, most notably <code><a href="the-map-element.html#the-area-element">area</a></code>, can correspond
+    <p>Some elements, most notably <code><a href="the-area-element.html#the-area-element">area</a></code>, can correspond
     to more than one distinct focusable area. If a particular area was
     indicated when the element was focused, then that is the area that
     must get focus; otherwise, e.g. when using the <code title="dom-focus"><a href="#dom-focus">focus()</a></code> method, the first such region in
@@ -634,9 +643,9 @@
   <p>The <dfn id="unfocusing-steps">unfocusing steps</dfn> are as follows:</p>
 
   <ol><li><p>If the element is an <code><a href="the-input-element.html#the-input-element">input</a></code> element, and the
-   <code title="event-input-change"><a href="common-input-element-attributes.html#event-input-change">change</a></code> event applies to the
+   <code title="event-input-change"><a href="common-input-element-apis.html#event-input-change">change</a></code> event applies to the
    element, and the element does not have a defined <a href="content-models.html#activation-behavior">activation
-   behavior</a>, and the user has changed the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> or its list of <a href="number-state.html#concept-input-type-file-selected" title="concept-input-type-file-selected">selected files</a>
+   behavior</a>, and the user has changed the element's <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> or its list of <a href="states-of-the-type-attribute.html#concept-input-type-file-selected" title="concept-input-type-file-selected">selected files</a>
    while the control was focused without committing that change, then
    <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> that bubbles named <code title="event-change">change</code> at the element.</p>
 
@@ -654,8 +663,8 @@
   steps</a> for the affected element only.</p>
 
   <p class="example">For example, this might happen because the
-  element is removed from its <code><a href="infrastructure.html#document">Document</a></code>, or has a <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> attribute added. It would also
-  happen to an <code><a href="the-input-element.html#the-input-element">input</a></code> element when the element gets <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a>.</p>
+  element is removed from its <code><a href="dom.html#document">Document</a></code>, or has a <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> attribute added. It would also
+  happen to an <code><a href="the-input-element.html#the-input-element">input</a></code> element when the element gets <a href="attributes-common-to-form-controls.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a>.</p>
 
   </div><h4 id="document-level-focus-apis"><span class="secno">7.3.3 </span>Document-level focus APIs</h4><dl class="domintro"><dt><var title="">document</var> . <code title="dom-document-activeElement"><a href="#dom-document-activeelement">activeElement</a></code></dt>
 
@@ -692,18 +701,25 @@
   </dl><div class="impl">
 
   <p>The <dfn id="dom-document-activeelement" title="dom-document-activeElement"><code>activeElement</code></dfn>
-  attribute on <code><a href="dom.html#htmldocument">HTMLDocument</a></code> objects must return the
+  attribute on <code><a href="dom.html#document">Document</a></code> objects must return the
   element in the document that is focused. If no element in the
-  <code><a href="infrastructure.html#document">Document</a></code> is focused, this must return <a href="dom.html#the-body-element-0">the body
+  <code><a href="dom.html#document">Document</a></code> is focused, this must return <a href="dom.html#the-body-element-0">the body
   element</a>.</p>
 
+  <p class="note">When a <a href="browsers.html#child-browsing-context">child browsing context</a> is
+  focused, its <a href="browsers.html#browsing-context-container">browsing context container</a> is also
+  focused, <a href="#bc-focus-ergo-bcc-focus">by definition</a>. For
+  example, if the user moves the focus to a text field in an
+  <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, the <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> is the element with
+  focus in the <a href="browsers.html#parent-browsing-context">parent browsing context</a>.</p>
+
   <p>The <dfn id="dom-document-hasfocus" title="dom-document-hasFocus"><code>hasFocus()</code></dfn> method
-  on <code><a href="dom.html#htmldocument">HTMLDocument</a></code> objects must return true if the
-  <code><a href="infrastructure.html#document">Document</a></code>'s <a href="browsers.html#browsing-context">browsing context</a> is focused,
+  on <code><a href="dom.html#document">Document</a></code> objects must return true if the
+  <code><a href="dom.html#document">Document</a></code>'s <a href="browsers.html#browsing-context">browsing context</a> is focused,
   and all its <a href="browsers.html#ancestor-browsing-context" title="ancestor browsing context">ancestor
   browsing contexts</a> are also focused, and the <a href="browsers.html#top-level-browsing-context">top-level
   browsing context</a> has the <i>system focus</i>. If the
-  <code><a href="infrastructure.html#document">Document</a></code> has no <a href="browsers.html#browsing-context">browsing context</a> or if its
+  <code><a href="dom.html#document">Document</a></code> has no <a href="browsers.html#browsing-context">browsing context</a> or if its
   <a href="browsers.html#browsing-context">browsing context</a> has no <a href="browsers.html#top-level-browsing-context">top-level browsing
   context</a>, then the method will always return false.</p>
 
@@ -747,7 +763,10 @@
 
     <p>Do not use this method to hide the focus ring if you find the
     focus ring unsightly. Instead, use a CSS rule to override the
-    'outline' property.</p>
+    'outline' property. (Be aware, however, that this makes the page
+    significantly less usable for some people, especially those with
+    reduced vision who use focus outlines to help them navigate the
+    page.)</p>
 
     <div class="example">
 
@@ -800,7 +819,45 @@
   or digit.</p><p>User agents can provide users with a list of the keyboard
   shortcuts, but authors are encouraged to do so also. The <code title="dom-accessKeyLabel"><a href="#dom-accesskeylabel">accessKeyLabel</a></code> IDL attribute
   returns a string representing the actual key combination assigned by
-  the user agent.</p><h4 id="the-accesskey-attribute"><span class="secno">7.4.2 </span>The <dfn title="attr-accesskey"><code>accesskey</code></dfn> attribute</h4><p>All <a href="infrastructure.html#html-elements">HTML elements</a> may have the <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> content attribute set. The
+  the user agent.</p><div class="example">
+
+   <p>In this example, an author has provided a button that can be
+   invoked using a shortcut key. To support full keyboards, the author
+   has provided "C" as a possible key. To support devices equipped
+   only with numeric keypads, the author has provided "1" as another
+   possibly key.</p>
+
+   <pre>&lt;input type=button value=Collect onclick="collect()"
+       <strong>accesskey="C 1"</strong> id=c&gt;</pre>
+
+  </div><div class="example">
+
+   <p>To tell the user what the shortcut key is, the author has 
+   this script here opted to explicitly add the key combination to the
+   button's label:</p>
+
+   <pre>function addShortcutKeyLabel(button) {
+<strong>  if (button.accessKeyLabel != '')
+    button.value += ' (' + button.accessKeyLabel + ')';</strong>
+}
+addShortcutKeyLabel(document.getElementById('c'));</pre>
+
+   <p>Browsers on different platforms will show different labels, even
+   for the same key combination, based on the convention prevalent on
+   that platform. For example, if the key combination is the Control
+   key, the Shift key, and the letter C, a Windows browser might
+   display "<samp>Ctrl+Shift+C</samp>", whereas a Mac browser might
+   display "<samp>^&#x21E7;C</samp>", while an Emacs browser might
+   just display "<samp>C-C</samp>". Similarly, if the key combination
+   is the Alt key and the Escape key, Windows might use
+   "<samp>Alt+Esc</samp>", Mac might use
+   "<samp>&#x2325;&#x238B;</samp>", and an Emacs browser might use
+   "<samp>M-ESC</samp>" or "<samp>ESC ESC</samp>".</p>
+
+   <p>In general, therefore, it is unwise to attempt to parse the
+   value returned from the <code title="dom-accessKeyLabel"><a href="#dom-accesskeylabel">accessKeyLabel</a></code> IDL attribute.</p>
+
+  </div><h4 id="the-accesskey-attribute"><span class="secno">7.4.2 </span>The <dfn title="attr-accesskey"><code>accesskey</code></dfn> attribute</h4><p>All <a href="infrastructure.html#html-elements">HTML elements</a> may have the <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> content attribute set. The
   <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> attribute's value is
   used by the user agent as a guide for creating a keyboard shortcut
   that activates or focuses the element.</p><p>If specified, the value must be an <a href="common-microsyntaxes.html#ordered-set-of-unique-space-separated-tokens">ordered set of unique
@@ -896,11 +953,11 @@
      keyboard, then skip the remainder of these steps for this
      value.</p></li>
 
-     <li><p>If the user agent can find a combination of modifier keys
-     that, with the key that corresponds to the value given in the
-     attribute, can be used as a shortcut key, then the user agent may
-     assign that combination of keys as the element's <a href="#assigned-access-key">assigned
-     access key</a> and abort these steps.</p></li>
+     <li><p>If the user agent can find a mix of zero or more modifier
+     keys that, combined with the key that corresponds to the value
+     given in the attribute, can be used as the access key, then the
+     user agent may assign that combination of keys as the element's
+     <a href="#assigned-access-key">assigned access key</a> and abort these steps.</p></li>
 
     </ol></li>
 
@@ -914,20 +971,22 @@
   </ol><p>Once a user agent has selected and assigned an access key for an
   element, the user agent should not change the element's
   <a href="#assigned-access-key">assigned access key</a> unless the <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> content attribute is changed
-  or the element is moved to another <code><a href="infrastructure.html#document">Document</a></code>.</p>
+  or the element is moved to another <code><a href="dom.html#document">Document</a></code>.</p>
 
   <p>When the user presses the key combination corresponding to the
   <a href="#assigned-access-key">assigned access key</a> for an element, if the element
-  <a href="commands.html#concept-command" title="concept-command">defines a command</a>, and the
+  <a href="commands.html#concept-command" title="concept-command">defines a command</a>, the
   command's <a href="commands.html#command-facet-hiddenstate" title="command-facet-HiddenState">Hidden
-  State</a> facet is false (visible), and the command's <a href="commands.html#command-facet-disabledstate" title="command-facet-DisabledState">Disabled State</a> facet is
-  also false (enabled), then the user agent must trigger the <a href="commands.html#command-facet-action" title="command-facet-Action">Action</a> of the command.</p>
+  State</a> facet is false (visible), the command's <a href="commands.html#command-facet-disabledstate" title="command-facet-DisabledState">Disabled State</a> facet is
+  also false (enabled), and the element is <a href="infrastructure.html#in-a-document">in a
+  <code>Document</code></a>, then the user agent must trigger the
+  <a href="commands.html#command-facet-action" title="command-facet-Action">Action</a> of the command.</p>
 
-  <p>User agents may expose elements that have an <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> attribute in other ways as
+  <p class="note">User agents might expose elements that have an <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> attribute in other ways as
   well, e.g. in a menu displayed in response to a specific key
-  combination.</p>
+  combination.</p> 
 
-  <p>The <dfn id="dom-accesskey" title="dom-accessKey"><code>accessKey</code></dfn> IDL
+  <hr/><p>The <dfn id="dom-accesskey" title="dom-accessKey"><code>accessKey</code></dfn> IDL
   attribute must <a href="common-dom-interfaces.html#reflect">reflect</a> the <code title="attr-accesskey"><a href="#the-accesskey-attribute">accesskey</a></code> content attribute.</p>
 
   <p>The <dfn id="dom-accesskeylabel" title="dom-accessKeyLabel"><code>accessKeyLabel</code></dfn> IDL
@@ -935,7 +994,8 @@
   <a href="#assigned-access-key">assigned access key</a>, if any. If the element does not
   have one, then the IDL attribute must return the empty string.</p>
 
-  </div><h3 id="contenteditable"><span class="secno">7.5 </span>The <code title="attr-contenteditable"><a href="#attr-contenteditable">contenteditable</a></code> attribute</h3><p>The <dfn id="attr-contenteditable" title="attr-contenteditable"><code>contenteditable</code></dfn>
+  </div><h3 id="editing-0"><span class="secno">7.5 </span>Editing</h3><h4 id="contenteditable"><span class="secno">7.5.1 </span>Making document regions editable: The <code title="attr-contenteditable"><a href="#attr-contenteditable">contenteditable</a></code> content
+  attribute</h4><p>The <dfn id="attr-contenteditable" title="attr-contenteditable"><code>contenteditable</code></dfn>
   attribute is an <a href="common-microsyntaxes.html#enumerated-attribute">enumerated attribute</a> whose keywords are
   the empty string, <code title="">true</code>, and <code title="">false</code>. The empty string and the <code title="">true</code> keyword map to the <i>true</i> state. The <code title="">false</code> keyword maps to the <i>false</i> state. In
   addition, there is a third state, the <i>inherit</i> state, which is
@@ -943,28 +1003,7 @@
   default</i>).</p><p>The <i>true</i> state indicates that the element is editable. The
   <i>inherit</i> state indicates that the element is editable if its
   parent is. The <i>false</i> state indicates that the element is not
-  editable.</p><div class="impl">
-
-  <p>Specifically, if an <a href="infrastructure.html#html-elements" title="HTML elements">HTML
-  element</a> has a <code title="attr-contenteditable"><a href="#attr-contenteditable">contenteditable</a></code> attribute set to
-  the true state, or it has its <code title="attr-contenteditable"><a href="#attr-contenteditable">contenteditable</a></code> attribute set to
-  the inherit state and if its nearest ancestor <a href="infrastructure.html#html-elements" title="HTML&#10;  elements">HTML element</a> with the <code title="attr-contenteditable"><a href="#attr-contenteditable">contenteditable</a></code> attribute set to
-  a state other than the inherit state has its attribute set to the
-  true state, or if it and its ancestors all have their <code title="attr-contenteditable"><a href="#attr-contenteditable">contenteditable</a></code> attribute set to
-  the inherit state but the <code><a href="infrastructure.html#document">Document</a></code> has <code title="dom-document-designMode"><a href="#designMode">designMode</a></code> enabled, then the
-  UA must treat the element as <dfn id="editable">editable</dfn> (as described
-  below).</p>
-
-  <p>Otherwise, either the <a href="infrastructure.html#html-elements" title="HTML elements">HTML
-  element</a> has a <code title="attr-contenteditable"><a href="#attr-contenteditable">contenteditable</a></code> attribute set to
-  the false state, or its <code title="attr-contenteditable"><a href="#attr-contenteditable">contenteditable</a></code> attribute is set
-  to the inherit state and its nearest ancestor <a href="infrastructure.html#html-elements" title="HTML&#10;  elements">HTML element</a> with the <code title="attr-contenteditable"><a href="#attr-contenteditable">contenteditable</a></code> attribute set to
-  a state other than the inherit state has its attribute set to the
-  false state, or all its ancestors have their <code title="attr-contenteditable"><a href="#attr-contenteditable">contenteditable</a></code> attribute set to
-  the inherit state and the <code><a href="infrastructure.html#document">Document</a></code> itself has <code title="dom-document-designMode"><a href="#designMode">designMode</a></code> disabled; either
-  way, the element is not editable.</p>
-
-  </div><dl class="domintro"><dt><var title="">element</var> . <code title="dom-contentEditable"><a href="#dom-contenteditable">contentEditable</a></code> [ = <var title="">value</var> ]</dt>
+  editable.</p><dl class="domintro"><dt><var title="">element</var> . <code title="dom-contentEditable"><a href="#dom-contenteditable">contentEditable</a></code> [ = <var title="">value</var> ]</dt>
 
    <dd>
 
@@ -973,7 +1012,7 @@
 
     <p>Can be set, to change that state.</p>
 
-    <p>Throws a <code><a href="common-dom-interfaces.html#syntax_err">SYNTAX_ERR</a></code> exception if the new value
+    <p>Throws a <code><a href="infrastructure.html#syntaxerror">SyntaxError</a></code> exception if the new value
     isn't one of those strings.</p>
 
    </dd>
@@ -1000,217 +1039,14 @@
   value is an <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for the string
   "<code title="">false</code>" then the content attribute must be set
   to the string "<code title="">false</code>", and otherwise the
-  attribute setter must raise a <code><a href="common-dom-interfaces.html#syntax_err">SYNTAX_ERR</a></code> exception.</p>
+  attribute setter must throw a <code><a href="infrastructure.html#syntaxerror">SyntaxError</a></code> exception.</p>
 
   <p>The <dfn id="dom-iscontenteditable" title="dom-isContentEditable"><code>isContentEditable</code></dfn>
-  IDL attribute, on getting, must return true if the element is
-  <a href="#editable">editable</a>, and false otherwise.</p>
+  IDL attribute, on getting, must return true if the element is either
+  an <a href="editing-apis.html#editing-host">editing host</a> or <a href="editing-apis.html#editable">editable</a>, and false
+  otherwise.</p>
 
-  <p>If an element is <a href="#editable">editable</a> and its parent element is
-  not, or if an element is <a href="#editable">editable</a> and it has no parent
-  element, then the element is an <dfn id="editing-host">editing host</dfn>. Editable
-  elements can be nested. Editing hosts are typically focusable and
-  typically form part of the <a href="#attr-tabindex" title="attr-tabindex">tab
-  order</a>. An editing host can contain non-editable sections,
-  these are handled as described below. An editing host can contain
-  non-editable sections that contain further editing hosts.</p>
-
-  <p>When an editing host has focus, it must have a <dfn id="caret-position">caret
-  position</dfn> that specifies where the current editing position is.
-  It may also have a selection.</p>
-
-  <p class="note">How the caret and selection are represented depends
-  entirely on the UA.</p>
-
-  
-  </div><div class="impl">
-
-  <h4 id="user-editing-actions"><span class="secno">7.5.1 </span>User editing actions</h4>
-
-  <p>There are several actions that the user agent should allow the
-  user to perform while the user is interacting with an editing
-  host. How exactly each action is triggered is not defined for every
-  action, but when it is not defined, suggested key bindings are
-  provided to guide implementors.</p>
-
-  <dl><dt>Move the caret</dt>
-
-   <dd><p>User agents must allow users to move the caret to any
-   position within an editing host, even into nested editable
-   elements. This could be triggered as the default action of <code title="event-keydown">keydown</code> events with various key
-   identifiers and as the default action of <code title="event-mousedown">mousedown</code> events.</p></dd>
-
-
-   <dt>Change the selection</dt>
-
-   <dd><p>User agents must allow users to change the selection within
-   an editing host, even into nested editable elements. User agents
-   may prevent selections from being made in ways that cross from
-   editable elements into non-editable elements (e.g. by making each
-   non-editable descendant atomically selectable, but not allowing
-   text selection within them). This could be triggered as the default
-   action of <code title="event-keydown">keydown</code> events with
-   various key identifiers and as the default action of <code title="event-mousedown">mousedown</code> events.</p></dd>
-
-
-   <dt id="contenteditable-insertText">Insert text</dt>
-
-   <dd><p>This action must be triggered as the default action of a
-   <code title="event-textInput">textInput</code> event, and may be
-   triggered by other commands as well. It must cause the user agent
-   to insert the specified text (given by the event object's <code title="">data</code> attribute in the case of the <code title="event-textInput">textInput</code> event) at the caret.</p>
-
-   <p>If the caret is positioned somewhere where <a href="content-models.html#phrasing-content">phrasing
-   content</a> is not allowed (e.g. inside an empty <code><a href="grouping-content.html#the-ol-element">ol</a></code>
-   element), then the user agent must not insert the text directly at
-   the caret position. In such cases the behavior is UA-dependent,
-   but user agents must not, in response to a request to insert text,
-   generate a DOM that is less conformant than the DOM prior to the
-   request.</p>
-
-   <p>User agents should allow users to insert new paragraphs into
-   elements that contains only content other than paragraphs.</p>
-
-   <div class="example">
-    <p>For example, given the markup:</p>
-    <pre>&lt;section&gt;
- &lt;dl&gt;
-  &lt;dt&gt; Ben &lt;/dt&gt;
-  &lt;dd&gt; Goat &lt;/dd&gt;
- &lt;/dl&gt;
-&lt;/section&gt;</pre>
-    <p>...the user agent should allow the user to insert
-    <code><a href="grouping-content.html#the-p-element">p</a></code> elements before and after the <code><a href="grouping-content.html#the-dl-element">dl</a></code>
-    element, as children of the <code><a href="sections.html#the-section-element">section</a></code> element.</p>
-   </div>
-
-   </dd>
-
-
-   <dt id="contenteditable-breakBlock">Break block</dt>
-
-   <dd><p>UAs should offer a way for the user to request that the
-   current paragraph be broken at the caret, e.g. as the default
-   action of a <code title="event-keydown">keydown</code> event whose
-   identifier is the "Enter" key and that has no modifiers set.</p>
-
-   <p>The exact behavior is UA-dependent, but user agents must not,
-   in response to a request to break a paragraph, generate a DOM that
-   is less conformant than the DOM prior to the request.</p></dd>
-
-
-   <dt id="contenteditable-br">Insert a line separator</dt>
-
-   <dd><p>UAs should offer a way for the user to request an explicit
-   line break at the caret position without breaking the paragraph,
-   e.g. as the default action of a <code title="event-keydown">keydown</code> event whose identifier is the
-   "Enter" key and that has a shift modifier set. Line separators are
-   typically found within a poem verse or an address. To insert a line
-   break, the user agent must insert a <code><a href="text-level-semantics.html#the-br-element">br</a></code> element.</p>
-
-   <p>If the caret is positioned somewhere where <a href="content-models.html#phrasing-content">phrasing
-   content</a> is not allowed (e.g. in an empty <code><a href="grouping-content.html#the-ol-element">ol</a></code>
-   element), then the user agent must not insert the <code><a href="text-level-semantics.html#the-br-element">br</a></code>
-   element directly at the caret position. In such cases the behavior
-   is UA-dependent, but user agents must not, in response to a request
-   to insert a line separator, generate a DOM that is less conformant
-   than the DOM prior to the request.</p></dd>
-
-
-   <dt id="contenteditable-delete">Delete</dt>
-
-   <dd><p>UAs should offer a way for the user to delete text and
-   elements, including non-editable descendants, e.g. as the default
-   action of <code title="event-keydown">keydown</code> events whose
-   identifiers are "U+0008" or "U+007F".</p>
-
-   <p>Five edge cases in particular need to be considered carefully
-   when implementing this feature: backspacing at the start of an
-   element, backspacing when the caret is immediately after an
-   element, forward-deleting at the end of an element,
-   forward-deleting when the caret is immediately before an element,
-   and deleting a selection whose start and end points do not share a
-   common parent node.</p>
-
-   <p>In any case, the exact behavior is UA-dependent, but user
-   agents must not, in response to a request to delete text or an
-   element, generate a DOM that is less conformant than the DOM prior
-   to the request.</p></dd>
-
-
-   <dt id="contenteditable-wrapSemantic">Insert, and wrap text in,
-   semantic elements</dt>
-
-   <dd><p>UAs should offer the user the ability to mark text and
-   paragraphs with semantics that HTML can express.</p>
-
-   <p>UAs should similarly offer a way for the user to insert empty
-   semantic elements to subsequently fill by entering text
-   manually.</p>
-
-   <p>UAs should also offer a way to remove those semantics from
-   marked up text, and to remove empty semantic element that have been
-   inserted.</p>
-
-   <p>In response to a request from a user to mark text up in italics,
-   user agents should use the <code><a href="text-level-semantics.html#the-i-element">i</a></code> element to represent the
-   semantic. The <code><a href="text-level-semantics.html#the-em-element">em</a></code> element should be used only if the
-   user agent is sure that the user means to indicate stress
-   emphasis.</p>
-
-   <p>In response to a request from a user to mark text up in bold,
-   user agents should use the <code><a href="text-level-semantics.html#the-b-element">b</a></code> element to represent the
-   semantic. The <code><a href="text-level-semantics.html#the-strong-element">strong</a></code> element should be used only if
-   the user agent is sure that the user means to indicate
-   importance.</p>
-
-   <p>The exact behavior is UA-dependent, but user agents must not,
-   in response to a request to wrap semantics around some text or to
-   insert or remove a semantic element, generate a DOM that is less
-   conformant than the DOM prior to the request.</p></dd>
-
-
-   <dt>Select and move non-editable elements nested inside editing hosts</dt>
-
-   <dd><p>UAs should offer a way for the user to move images and other
-   non-editable parts around the content within an editing host. This
-   may be done using the <a href="dnd.html#dnd">drag and drop</a> mechanism. User
-   agents must not, in response to a request to move non-editable
-   elements nested inside editing hosts, generate a DOM that is less
-   conformant than the DOM prior to the request.</p></dd>
-
-
-   <dt>Edit form controls nested inside editing hosts</dt>
-
-   <dd><p>When an <a href="#editable">editable</a> form control is edited, the
-   changes must be reflected in both its current value <em>and</em>
-   its default value. For <code><a href="the-input-element.html#the-input-element">input</a></code> elements this means
-   updating the <code title="dom-input-defaultValue"><a href="the-input-element.html#dom-input-defaultvalue">defaultValue</a></code> IDL attribute as
-   well as the <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL
-   attribute; for <code><a href="the-button-element.html#the-select-element">select</a></code> elements it means updating the
-   <code><a href="the-button-element.html#the-option-element">option</a></code> elements' <code title="dom-option-defaultSelected"><a href="the-button-element.html#dom-option-defaultselected">defaultSelected</a></code> IDL
-   attribute as well as the <code title="dom-option-selected"><a href="the-button-element.html#dom-option-selected">selected</a></code> IDL attribute; for
-   <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> elements this means updating the <code title="dom-textarea-defaultValue"><a href="the-button-element.html#dom-textarea-defaultvalue">defaultValue</a></code> IDL attribute
-   as well as the <code title="dom-textarea-value"><a href="the-button-element.html#dom-textarea-value">value</a></code> IDL
-   attribute. (Updating the <code title="">default*</code> IDL
-   attributes causes content attributes to be updated as well.)</p></dd>
-
-  </dl><p>User agents may perform several commands per user request; for
-  example if the user selects a block of text and hits
-  <kbd><kbd>Enter</kbd></kbd>, the UA might interpret that as a
-  request to delete the content of the selection followed by a request
-  to break the paragraph at that position.</p>
-
-  <p>User agents may add <span>DOM changes</span> entries to the
-  <span>undo transaction history</span> of the <a href="#editing-host">editing
-  host</a>'s <code><a href="infrastructure.html#document">Document</a></code> object each time an action is
-  triggered.</p>
-
-  <p>All of the actions defined above, whether triggered by the user
-  or programmatically (e.g. by <code title="dom-document-execCommand"><a href="dnd.html#execCommand">execCommand()</a></code> commands),
-  must fire mutation events as appropriate.</p>
-
-  </div><h4 id="making-entire-documents-editable"><span class="secno">7.5.2 </span>Making entire documents editable</h4><div class="impl">
+  </div><h4 id="making-entire-documents-editable:-the-designmode-idl-attribute"><span class="secno">7.5.2 </span>Making entire documents editable: The <code title="dom-document-designMode"><a href="#designMode">designMode</a></code> IDL attribute</h4><div class="impl">
 
   <p>Documents have a <dfn id="designMode" title="dom-document-designMode"><code>designMode</code></dfn>, which
   can be either enabled or disabled.</p>
@@ -1229,7 +1065,7 @@
   </dl><div class="impl">
 
   <p>The <code title="dom-document-designMode"><a href="#designMode">designMode</a></code> IDL
-  attribute on the <code><a href="infrastructure.html#document">Document</a></code> object takes two values,
+  attribute on the <code><a href="dom.html#document">Document</a></code> object takes two values,
   "<code title="">on</code>" and "<code title="">off</code>". When it
   is set, the new value must be compared in an <a href="infrastructure.html#ascii-case-insensitive">ASCII
   case-insensitive</a> manner to these two values. If it matches
@@ -1244,181 +1080,35 @@
   <p>The last state set must persist until the document is destroyed
   or the state is changed. Initially, documents must have their <code title="dom-document-designMode"><a href="#designMode">designMode</a></code> disabled.</p>
 
-  </div><h3 id="spelling-and-grammar-checking"><span class="secno">7.6 </span>Spelling and grammar checking</h3><div class="impl">
+  </div><h4 id="best-practices-for-in-page-editors"><span class="secno">7.5.3 </span>Best practices for in-page editors</h4><p>Authors are encouraged to set the 'white-space' property on <a href="editing-apis.html#editing-host" title="editing host">editing hosts</a> and on markup that was
+  originally created through these editing mechanisms to the value
+  'pre-wrap'. Default HTML whitespace handling is not well suited to
+  WYSIWYG editing, and line wrapping will not work correctly in some
+  corner cases if 'white-space' is left at its default value.</p><div class="example">
 
-  <p>User agents can support the checking of spelling and grammar of
-  editable text, either in form controls (such as the value of
-  <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> elements), or in elements in an <a href="#editing-host">editing
-  host</a> (using <code title="attr-contenteditable"><a href="#attr-contenteditable">contenteditable</a></code>).</p>
+   <p>As an example of problems that occur if the default 'normal'
+   value is used instead, consider the case of the user typing
+   "<kbd>yellow&#x2423;&#x2423;ball</kbd>", with two spaces (here
+   represented by "&#x2423;") between the words. With the editing
+   rules in place for the default value of 'white-space' ('normal'),
+   the resulting markup will either consist of
+   "<samp>yellow&amp;nbsp;&#xA0;ball</samp>" or
+   "<samp>yellow&#xA0;&amp;nbsp;ball</samp>"; i.e., there will be a
+   non-breaking space between the two words in addition to the regular
+   space. This is necessary because the 'normal' value for
+   'white-space' requires adjacent regular spaces to be collapsed
+   together.</p>
 
-  <p>For each element, user agents must establish a <dfn id="concept-spellcheck-default" title="concept-spellcheck-default">default behavior</dfn>, either
-  through defaults or through preferences expressed by the user. There
-  are three possible default behaviors for each element:</p>
+   <p>In the former case, "<samp>yellow&#x237D;</samp>" might wrap to
+   the next line ("&#x237D;" being used here to represent a
+   non-breaking space) even though "<samp>yellow</samp>" alone might
+   fit at the end of the line; in the latter case,
+   "<samp>&#x237D;ball</samp>", if wrapped to the start of the line,
+   would have visible indentation from the non-breaking space.</p>
 
-  <dl><dt><dfn id="concept-spellcheck-default-true" title="concept-spellcheck-default-true">true-by-default</dfn>
+   <p>When 'white-space' is set to 'pre-wrap', however, the editing
+   rules will instead simply put two regular spaces between the words,
+   and should the two words be split at the end of a line, the spaces
+   would be neatly removed from the rendering.</p>
 
-   </dt><dd>The element will be checked for spelling and grammar if its
-   contents are editable.
-
-   </dd><dt><dfn id="concept-spellcheck-default-false" title="concept-spellcheck-default-false">false-by-default</dfn>
-
-   </dt><dd>The element will never be checked for spelling and grammar.
-
-   </dd><dt><dfn id="concept-spellcheck-default-inherit" title="concept-spellcheck-default-inherit">inherit-by-default</dfn>
-
-   </dt><dd>The element's default behavior is the same as its parent
-   element's. Elements that have no parent element cannot have this as
-   their default behavior.
-
-  </dd></dl><hr/></div><p>The <dfn id="attr-spellcheck" title="attr-spellcheck"><code>spellcheck</code></dfn>
-  attribute is an <a href="common-microsyntaxes.html#enumerated-attribute">enumerated attribute</a> whose keywords are
-  the empty string, <code title="">true</code> and <code title="">false</code>. The empty string and the <code title="">true</code> keyword map to the <i>true</i> state. The <code title="">false</code> keyword maps to the <i>false</i> state. In
-  addition, there is a third state, the <i>default</i> state, which is
-  the <i>missing value default</i> (and the <i>invalid value
-  default</i>).</p><p>The <i>true</i> state indicates that the element is to have its
-  spelling and grammar checked. The <i>default</i> state indicates
-  that the element is to act according to a default behavior, possibly
-  based on the parent element's own <code title="attr-spellcheck"><a href="#attr-spellcheck">spellcheck</a></code> state. The <i>false</i>
-  state indicates that the element is not to be checked.</p><div class="impl">
-
-  <hr/></div><dl class="domintro"><dt><var title="">element</var> . <code title="dom-spellcheck"><a href="#dom-spellcheck">spellcheck</a></code> [ = <var title="">value</var> ]</dt>
-
-   <dd>
-
-    <p>Returns true if the element is to have its spelling and grammar
-    checked; otherwise, returns false.</p>
-
-    <p>Can be set, to override the default and set the <code title="attr-spellcheck"><a href="#attr-spellcheck">spellcheck</a></code> content attribute.</p>
-
-   </dd>
-
-  </dl><div class="impl">
-
-  <p>The <dfn id="dom-spellcheck" title="dom-spellcheck"><code>spellcheck</code></dfn> IDL
-  attribute, on getting, must return true if the element's <code title="attr-spellcheck"><a href="#attr-spellcheck">spellcheck</a></code> content attribute is in
-  the <i>true</i> state, or if the element's <code title="attr-spellcheck"><a href="#attr-spellcheck">spellcheck</a></code> content attribute is in
-  the <i>default</i> state and the element's <a href="#concept-spellcheck-default" title="concept-spellcheck-default">default behavior</a> is <a href="#concept-spellcheck-default-true" title="concept-spellcheck-default-true">true-by-default</a>, or
-  if the element's <code title="attr-spellcheck"><a href="#attr-spellcheck">spellcheck</a></code>
-  content attribute is in the <i>default</i> state and the element's
-  <a href="#concept-spellcheck-default" title="concept-spellcheck-default">default behavior</a> is
-  <a href="#concept-spellcheck-default-inherit" title="concept-spellcheck-default-inherit">inherit-by-default</a>
-  and the element's parent element's <code title="dom-spellcheck"><a href="#dom-spellcheck">spellcheck</a></code> IDL attribute would return
-  true; otherwise, if none of those conditions applies, then the
-  attribute must instead return false.</p>
-
-  <p class="note">The <code title="dom-spellcheck"><a href="#dom-spellcheck">spellcheck</a></code>
-  IDL attribute is not affected by user preferences that override the
-  <code title="attr-spellcheck"><a href="#attr-spellcheck">spellcheck</a></code> content attribute,
-  and therefore might not reflect the actual spellchecking state.</p>
-
-  <p>On setting, if the new value is true, then the element's <code title="attr-spellcheck"><a href="#attr-spellcheck">spellcheck</a></code> content attribute must be
-  set to the literal string "<code title="">true</code>", otherwise it
-  must be set to the literal string "<code title="">false</code>".
-
-  </p><hr/><p>User agents must only consider the following pieces of text as
-  checkable for the purposes of this feature:</p>
-
-  <ul><li>The value of <code><a href="the-input-element.html#the-input-element">input</a></code> elements to which the <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code> attribute applies,
-   whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attributes are not
-   in the <a href="states-of-the-type-attribute.html#password-state" title="attr-input-type-password">Password</a>
-   state, and that are not <i title="concept-input-immutable"><a href="the-input-element.html#concept-input-immutable">immutable</a></i> (i.e. that do not
-   have the <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code>
-   attribute specified and that are not <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a>).</li>
-
-   <li>The value of <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> elements that do not have a
-   <code title="attr-textarea-readonly"><a href="the-button-element.html#attr-textarea-readonly">readonly</a></code> attribute and
-   that are not <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a>.</li>
-
-   <li>Text in <a href="infrastructure.html#text-node" title="text node">text nodes</a> that are
-   children of <a href="#editable">editable</a> elements.</li>
-
-   <li>Text in attributes of <a href="#editable">editable</a> elements.</li>
-
-  </ul><p>For text that is part of a <a href="infrastructure.html#text-node">text node</a>, the element
-  with which the text is associated is the element that is the
-  immediate parent of the first character of the word, sentence, or
-  other piece of text. For text in attributes, it is the attribute's
-  element. For the values of <code><a href="the-input-element.html#the-input-element">input</a></code> and
-  <code><a href="the-button-element.html#the-textarea-element">textarea</a></code> elements, it is the element itself.</p>
-
-  <p>To determine if a word, sentence, or other piece of text in an
-  applicable element (as defined above) is to have spelling- and/or
-  grammar-checking enabled, the UA must use the following
-  algorithm:</p>
-
-  <ol><li>If the user has disabled the checking for this text, then the
-   checking is disabled.</li>
-
-   <li>Otherwise, if the user has forced the checking for this text to
-   always be enabled, then the checking is enabled.</li>
-
-   
-
-   <li>Otherwise, if the element with which the text is associated has
-   a <code title="attr-spellcheck"><a href="#attr-spellcheck">spellcheck</a></code> content
-   attribute, then: if that attribute is in the <i>true</i> state,
-   then checking is enabled; otherwise, if that attribute is in the
-   <i>false</i> state, then checking is disabled.</li>
-
-   
-
-   <li>Otherwise, if there is an ancestor element with a <code title="attr-spellcheck"><a href="#attr-spellcheck">spellcheck</a></code> content attribute that is
-   not in the <i>default</i> state, then: if the nearest such
-   ancestor's <code title="attr-spellcheck"><a href="#attr-spellcheck">spellcheck</a></code> content
-   attribute is in the <i>true</i> state, then checking is enabled;
-   otherwise, checking is disabled.</li>
-
-   
-
-   <li>Otherwise, if the element's <a href="#concept-spellcheck-default" title="concept-spellcheck-default">default behavior</a> is <a href="#concept-spellcheck-default-true" title="concept-spellcheck-default-true">true-by-default</a>,
-   then checking is enabled.</li>
-
-   <li>Otherwise, if the element's <a href="#concept-spellcheck-default" title="concept-spellcheck-default">default behavior</a> is <a href="#concept-spellcheck-default-false" title="concept-spellcheck-default-false">false-by-default</a>,
-   then checking is disabled.</li>
-
-   
-
-   <li>Otherwise, if the element's parent element has <em>its</em>
-   checking enabled, then checking is enabled.</li>
-
-   <li>Otherwise, checking is disabled.</li>
-
-  </ol><p>If the checking is enabled for a word/sentence/text, the user
-  agent should indicate spelling and/or grammar errors in that
-  text. User agents should take into account the other semantics given
-  in the document when suggesting spelling and grammar
-  corrections. User agents may use the language of the element to
-  determine what spelling and grammar rules to use, or may use the
-  user's preferred language settings. UAs should use
-  <code><a href="the-input-element.html#the-input-element">input</a></code> element attributes such as <code title="attr-input-pattern"><a href="common-input-element-attributes.html#attr-input-pattern">pattern</a></code> to ensure that the
-  resulting value is valid, where possible.</p>
-
-  <p>If checking is disabled, the user agent should not indicate
-  spelling or grammar errors for that text.</p>
-
-  <div class="example">
-
-   <p>The element with ID "a" in the following example would be the
-   one used to determine if the word "Hello" is checked for spelling
-   errors. In this example, it would not be.</p>
-
-   <pre>&lt;div contenteditable="true"&gt;
- &lt;span spellcheck="false" id="a"&gt;Hell&lt;/span&gt;&lt;em&gt;o!&lt;/em&gt;
-&lt;/div&gt;</pre>
-
-   <p>The element with ID "b" in the following example would have
-   checking enabled (the leading space character in the attribute's
-   value on the <code><a href="the-input-element.html#the-input-element">input</a></code> element causes the attribute to be
-   ignored, so the ancestor's value is used instead, regardless of the
-   default).</p>
-
-   <pre>&lt;p spellcheck="true"&gt;
- &lt;label&gt;Name: &lt;input spellcheck=" false" id="b"&gt;&lt;/label&gt;
-&lt;/p&gt;</pre>
-
-  </div>
-
-  </div><p class="note">This specification does not define the user
-  interface for spelling and grammar checkers. A user agent could
-  offer on-demand checking, could perform continuous checking while
-  the checking is enabled, or could use other interfaces.</p></body></html>
+  </div></body></html>

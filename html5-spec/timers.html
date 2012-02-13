@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>6.3 Timers &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<!DOCTYPE html>
+<html lang="en-US-x-Hixie"><head><title>6.3 Timers &#x2014; HTML5</title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -19,6 +19,7 @@
    dd table + p { margin-top: 1em; }
    p + * > li, dd li { margin: 1em 0; }
    dt, dfn { font-weight: bold; font-style: normal; }
+   i, em { font-style: italic; }
    dt dfn { font-style: italic; }
    pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
    pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
@@ -40,9 +41,10 @@
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
 
    .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   img.extra { float: right; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   img.extra, p.overview { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; position: relative; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl::before { content: "IDL"; font: bold small sans-serif; padding: 0.5em; background: white; position: absolute; top: 0; margin: -1px 0 0 -4em; width: 1.5em; border: thin solid; border-radius: 0 0 0 0.5em }
    pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
    pre.css:first-line { color: #AAAA50; }
    dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
@@ -50,6 +52,7 @@
    dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
    dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
    dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
    dl.switch { padding-left: 2em; }
    dl.switch > dt { text-indent: -1.5em; }
    dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
@@ -104,6 +107,7 @@
    .note { color: green; background: transparent; font-family: sans-serif; }
    .warning { color: red; background: transparent; }
    .note, .warning { font-weight: bolder; font-style: italic; }
+   .note em, .warning em, .note i, .warning i { font-style: normal; }
    p.note, div.note { padding: 0.5em 2em; }
    span.note { padding: 0 2em; }
    .note p:first-child, .warning p:first-child { margin-top: 0; }
@@ -295,8 +299,6 @@
      src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
    }
 
-  ]]></style><style type="text/css"><![CDATA[
-   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
   ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
    function getCookie(name) {
      var params = location.search.substr(1).split("&");
@@ -315,25 +317,26 @@
      }
      return null;
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="webappapis.html" title="6 Web application APIs" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="editing.html" title="7 User interaction" rel="next"/></head><body><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="webappapis.html" title="6 Web application APIs" rel="prev"/><link href="index.html#contents" title="Table of contents" rel="contents"/><link href="user-prompts.html" title="6.4 User prompts" rel="next"/></head><body onload="fixBrokenLink();" class="split chapter"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   </div><div>
-   <a href="webappapis.html" class="prev">6 Web application APIs</a> &#x2013;
-   <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="editing.html" class="next">7 User interaction</a>
-  <ol class="toc"><li><ol><li><a href="timers.html#timers"><span class="secno">6.3 </span>Timers</a></li><li><a href="timers.html#user-prompts"><span class="secno">6.4 </span>User prompts</a>
-    <ol><li><a href="timers.html#simple-dialogs"><span class="secno">6.4.1 </span>Simple dialogs</a></li><li><a href="timers.html#printing"><span class="secno">6.4.2 </span>Printing</a></li><li><a href="timers.html#dialogs-implemented-using-separate-documents"><span class="secno">6.4.3 </span>Dialogs implemented using separate documents</a></li></ol></li><li><a href="timers.html#system-state-and-capabilities"><span class="secno">6.5 </span>System state and capabilities</a>
-    <ol><li><a href="timers.html#the-navigator-object"><span class="secno">6.5.1 </span>The <code>Navigator</code> object</a>
-      <ol><li><a href="timers.html#client-identification"><span class="secno">6.5.1.1 </span>Client identification</a></li><li><a href="timers.html#custom-handlers"><span class="secno">6.5.1.2 </span>Custom scheme and content handlers</a></li><li><a href="timers.html#security-and-privacy"><span class="secno">6.5.1.3 </span>Security and privacy</a></li><li><a href="timers.html#sample-handler-impl"><span class="secno">6.5.1.4 </span>Sample user interface</a></li><li><a href="timers.html#manually-releasing-the-storage-mutex"><span class="secno">6.5.1.5 </span>Manually releasing the storage mutex</a></li></ol></li><li><a href="timers.html#the-external-interface"><span class="secno">6.5.2 </span>The <code>External</code> interface</a></li></ol></li></ol></li></ol></div><h3 id="timers"><span class="secno">6.3 </span>Timers</h3><p>The <code title="dom-windowtimers-setTimeout"><a href="#dom-windowtimers-settimeout">setTimeout()</a></code>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
+
+   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   </div><nav class="prev_next"><a href="webappapis.html">&#x2190; 6 Web application APIs</a> &#x2013;
+   <a href="index.html#contents">Table of contents</a> &#x2013;
+   <a href="user-prompts.html">6.4 User prompts &#x2192;</a>
+  </nav><h3 id="timers"><span class="secno">6.3 </span>Timers</h3><p>The <code title="dom-windowtimers-setTimeout"><a href="#dom-windowtimers-settimeout">setTimeout()</a></code>
   and <code title="dom-windowtimers-setInterval"><a href="#dom-windowtimers-setinterval">setInterval()</a></code>
-  methods allow authors to schedule timer-based callbacks.</p><pre class="idl">[Supplemental, NoInterfaceObject]
+  methods allow authors to schedule timer-based callbacks.</p><pre class="idl">[NoInterfaceObject]
 interface <dfn id="windowtimers">WindowTimers</dfn> {
-  long <a href="#dom-windowtimers-settimeout" title="dom-windowtimers-setTimeout">setTimeout</a>(in any handler, in optional any timeout, in any... args);
-  void <a href="#dom-windowtimers-cleartimeout" title="dom-windowtimers-clearTimeout">clearTimeout</a>(in long handle);
-  long <a href="#dom-windowtimers-setinterval" title="dom-windowtimers-setInterval">setInterval</a>(in any handler, in optional any timeout, in any... args);
-  void <a href="#dom-windowtimers-clearinterval" title="dom-windowtimers-clearInterval">clearInterval</a>(in long handle);
+  long <a href="#dom-windowtimers-settimeout" title="dom-windowtimers-setTimeout">setTimeout</a>(Function handler, optional long timeout, any... args);
+  long <a href="#dom-windowtimers-settimeout" title="dom-windowtimers-setTimeout">setTimeout</a>([AllowAny] DOMString handler, optional long timeout, any... args);
+  void <a href="#dom-windowtimers-cleartimeout" title="dom-windowtimers-clearTimeout">clearTimeout</a>(long handle);
+  long <a href="#dom-windowtimers-setinterval" title="dom-windowtimers-setInterval">setInterval</a>(Function handler, optional long timeout, any... args);
+  long <a href="#dom-windowtimers-setinterval" title="dom-windowtimers-setInterval">setInterval</a>([AllowAny] DOMString handler, optional long timeout, any... args);
+  void <a href="#dom-windowtimers-clearinterval" title="dom-windowtimers-clearInterval">clearInterval</a>(long handle);
 };
 <a href="browsers.html#window">Window</a> implements <a href="#windowtimers">WindowTimers</a>;</pre><dl class="domintro"><dt><var title="">handle</var> = <var title="">window</var> . <code title="dom-windowtimers-setTimeout"><a href="#dom-windowtimers-settimeout">setTimeout</a></code>( <var title="">handler</var> [, <var title="">timeout</var> [, <var title="">arguments</var>... ] ] )</dt>
 
@@ -393,29 +396,34 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
 
   <p class="note">The <code><a href="#windowtimers">WindowTimers</a></code> interface adds to the
   <code><a href="browsers.html#window">Window</a></code> interface and the <code>WorkerUtils</code>
-  interface (part of Web Workers).</p>
+  interface (part of Web Workers).
+  
+  <a href="references.html#refsWEBWORKERS">[WEBWORKERS]</a>
+  
+  </p>
 
   <p>Each object that implements the <code><a href="#windowtimers">WindowTimers</a></code>
-  interface has a <dfn id="list-of-active-timeouts">list of active timeouts</dfn> and a <dfn id="list-of-active-intervals">list
-  of active intervals</dfn>. Each entry in these lists is identified
-  by a number, which must be unique within its list for the lifetime
-  of the object that implements the <code><a href="#windowtimers">WindowTimers</a></code>
-  interface.</p>
+  interface has a <dfn id="list-of-active-timers">list of active timers</dfn>. Each entry in this
+  lists is identified by a number, which must be unique within the
+  list for the lifetime of the object that implements the
+  <code><a href="#windowtimers">WindowTimers</a></code> interface.</p>
 
   <hr/><p>The <dfn id="dom-windowtimers-settimeout" title="dom-windowtimers-setTimeout"><code>setTimeout()</code></dfn>
   method must run the following steps:
 
-  </p><ol><li><p>Let <var title="">handle</var> be a user-agent-defined integer
-   that is greater than zero that will identify the timeout to be set
-   by this call.</p></li>
+  </p><ol><li><p>Let <var title="">handle</var> be a user-agent-defined
+   integer that is greater than zero that will identify the timeout to
+   be set by this call in the <a href="#list-of-active-timers">list of active
+   timers</a>.</p></li>
 
-   <li><p>Add an entry to the <a href="#list-of-active-timeouts">list of active timeouts</a> for
+   <li><p>Add an entry to the <a href="#list-of-active-timers">list of active timers</a> for
    <var title="">handle</var>.</p></li>
 
-   <li><p><a href="#get-the-timed-task">Get the timed task</a> <var title="">handle</var> in
-   the <a href="#list-of-active-timeouts">list of active timeouts</a>, and let <var title="">task</var> be the result.</p></li>
+   <li><p><a href="#get-the-timed-task">Get the timed task</a> <var title="">handle</var>
+   in the <a href="#list-of-active-timers">list of active timers</a>, and let <var title="">task</var> be the result.</p></li>
 
-   <li><p><a href="#get-the-timeout">Get the timeout</a>, and let <var title="">timeout</var> be the result.</p></li>
+   <li><p>Let <var title="">timeout</var> be the second argument to
+   the method, or zero if the argument was omitted.</p></li>
 
    <li><p>If the currently running <a href="webappapis.html#concept-task" title="concept-task">task</a> is a task that was created by the
    <code title="dom-windowtimers-setTimeout"><a href="#dom-windowtimers-settimeout">setTimeout()</a></code>
@@ -428,7 +436,7 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
    <li>
 
     <p>If the <a href="#method-context">method context</a> is a <code><a href="browsers.html#window">Window</a></code>
-    object, wait until the <code><a href="infrastructure.html#document">Document</a></code> associated with the
+    object, wait until the <code><a href="dom.html#document">Document</a></code> associated with the
     <a href="#method-context">method context</a> has been <a href="browsers.html#fully-active">fully active</a> for
     a further <var title="">timeout</var> milliseconds (not
     necessarily consecutively).</p>
@@ -443,9 +451,34 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
 
    </li>
 
-   <li><p>Wait until any invocations of this algorithm started before
-   this one whose <var title="">timeout</var> is equal to or less than
-   this one's have completed.</p></li>
+   <li>
+
+    <p>Wait until any invocations of this algorithm that had the same
+    <a href="#method-context">method context</a>, that started before this one, and
+    whose <var title="">timeout</var> is equal to or less than this
+    one's, have completed.</p>
+
+    <p class="note">Argument conversion as defined by Web IDL (for
+    example, invoking <code title="">toString()</code> methods on
+    objects passed as the first argument) happens in the algorithms
+    defined in Web IDL, before this algorithm is invoked.</p>
+
+    <div class="example">
+
+     <p>So for example, the following rather silly code will result in
+     the log containing "<code title="">ONE&#xA0;TWO&#xA0;</code>":</p>
+
+     <pre>var log = '';
+function logger(s) { log += s + ' '; }
+
+setTimeout({ toString: function () {
+  setTimeout("logger('ONE')", 100);
+  return "logger('TWO')";
+} }, 100);</pre>
+
+    </div>
+
+   </li>
 
    <li>
 
@@ -462,43 +495,47 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
 
    </li>
 
-   <li><p><a href="webappapis.html#queue-a-task" title="queue a task">Queue</a> the <var title="">task</var> <a href="webappapis.html#concept-task" title="concept-task">task</a>.</p></li>
+   <li>
 
-  </ol><p>The <dfn id="dom-windowtimers-cleartimeout" title="dom-windowtimers-clearTimeout"><code>clearTimeout()</code></dfn>
-  method must clear the entry identified as <var title="">handle</var>
-  from the <a href="#list-of-active-timeouts">list of active timeouts</a> of the
-  <code><a href="#windowtimers">WindowTimers</a></code> object on which the method was invoked,
-  where <var title="">handle</var> is the argument passed to the
-  method, if any. (If <var title="">handle</var> does not identify an
-  entry in the <a href="#list-of-active-timeouts">list of active timeouts</a> of the
-  <code><a href="#windowtimers">WindowTimers</a></code> object on which the method was invoked,
-  the method does nothing.)</p>
+    <p><a href="webappapis.html#queue-a-task" title="queue a task">Queue</a> the <var title="">task</var> <a href="webappapis.html#concept-task" title="concept-task">task</a>.</p>
 
-  <hr/><p>The <dfn id="dom-windowtimers-setinterval" title="dom-windowtimers-setInterval"><code>setInterval()</code></dfn>
+    <p class="note">Once the task has been processed, it is safe to
+    remove the entry for <var title="">handle</var> from the
+    <a href="#list-of-active-timers">list of active timers</a> (there is no way for the
+    entry's existence to be detected past this point, so it does not
+    techncially matter one way or the other).</p>
+
+   </li>
+
+  </ol><hr/><p>The <dfn id="dom-windowtimers-setinterval" title="dom-windowtimers-setInterval"><code>setInterval()</code></dfn>
   method must run the following steps:
 
-  </p><ol><li><p>Let <var title="">handle</var> be a user-agent-defined integer
-   that is greater than zero that will identify the interval to be set
-   by this call.</p></li>
+  </p><ol><li><p>Let <var title="">handle</var> be a user-agent-defined
+   integer that is greater than zero that will identify the timeout to
+   be set by this call in the <a href="#list-of-active-timers">list of active
+   timers</a>.</p></li>
 
-   <li><p>Add an entry to the <a href="#list-of-active-intervals">list of active intervals</a> for
+   <li><p>Add an entry to the <a href="#list-of-active-timers">list of active timers</a> for
    <var title="">handle</var>.</p></li>
 
-   <li><p><a href="#get-the-timed-task">Get the timed task</a> <var title="">handle</var> in
-   the <a href="#list-of-active-intervals">list of active intervals</a>, and let <var title="">task</var> be the result.</p></li>
+   <li><p><a href="#get-the-timed-task">Get the timed task</a> <var title="">handle</var>
+   in the <a href="#list-of-active-timers">list of active timers</a>, and let <var title="">task</var> be the result.</p></li>
 
-   <li><p><a href="#get-the-timeout">Get the timeout</a>, and let <var title="">timeout</var> be the result.</p></li>
+   <li><p>Let <var title="">timeout</var> be the second argument to
+   the method, or zero if the argument was omitted.</p></li>
 
-   <li><p>If <var title="">timeout</var> is less than 10, then
-   increase <var title="">timeout</var> to 10.</p></li> 
+   <li><p>If <var title="">timeout</var> is less than 4, then
+   increase <var title="">timeout</var> to 4.</p></li> 
+
    <li><p>Return <var title="">handle</var>, and then continue running
    this algorithm asynchronously.</p></li>
 
    
+
    <li>
 
     <p><i title="">Wait</i>: If the <a href="#method-context">method context</a> is a
-    <code><a href="browsers.html#window">Window</a></code> object, wait until the <code><a href="infrastructure.html#document">Document</a></code>
+    <code><a href="browsers.html#window">Window</a></code> object, wait until the <code><a href="dom.html#document">Document</a></code>
     associated with the <a href="#method-context">method context</a> has been <a href="browsers.html#fully-active">fully
     active</a> for a further <var title="">interval</var>
     milliseconds (not necessarily consecutively).</p>
@@ -532,13 +569,13 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
 
    <li><p>Return to the step labeled <i>wait</i>.</p></li>
 
-  </ol><p>The <dfn id="dom-windowtimers-clearinterval" title="dom-windowtimers-clearInterval"><code>clearInterval()</code></dfn>
-  method must clear the entry identified as <var title="">handle</var>
-  from the <a href="#list-of-active-intervals">list of active intervals</a> of the
-  <code><a href="#windowtimers">WindowTimers</a></code> object on which the method was invoked,
-  where <var title="">handle</var> is the argument passed to the
-  method, if any. (If <var title="">handle</var> does not identify an
-  entry in the <a href="#list-of-active-intervals">list of active intervals</a> of the
+  </ol><hr/><p>The <dfn id="dom-windowtimers-cleartimeout" title="dom-windowtimers-clearTimeout"><code>clearTimeout()</code></dfn>
+  and <dfn id="dom-windowtimers-clearinterval" title="dom-windowtimers-clearInterval"><code>clearInterval()</code></dfn>
+  methods must clear the entry identified as <var title="">handle</var> from the <a href="#list-of-active-timers">list of active timers</a> of
+  the <code><a href="#windowtimers">WindowTimers</a></code> object on which the method was
+  invoked, where <var title="">handle</var> is the argument passed to
+  the method, if any. (If <var title="">handle</var> does not identify
+  an entry in the <a href="#list-of-active-timers">list of active timers</a> of the
   <code><a href="#windowtimers">WindowTimers</a></code> object on which the method was invoked,
   the method does nothing.)</p>
 
@@ -553,11 +590,12 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
 
   <ol><li>
 
-    <p>If the first argument to the invoked method is an object that
-    has an internal [[Call]] method, then return a <a href="webappapis.html#concept-task" title="concept-task">task</a> that checks if the entry for <var title="">handle</var> in <var title="">list</var> has been
-    cleared, and if it has not, calls the aforementioned [[Call]]
-    method with as its arguments the third and subsequent arguments to
-    the invoked method (if any), and with an undefined <var title="">thisArg</var>, and abort these steps. <a href="references.html#refsECMA262">[ECMA262]</a></p>
+    <p>If the first argument to the invoked method is a
+    <code><a href="webappapis.html#function">Function</a></code>, then return a <a href="webappapis.html#concept-task" title="concept-task">task</a> that checks if the entry for <var title="">handle</var> in <var title="">list</var> has been
+    cleared, and if it has not, calls the <code><a href="webappapis.html#function">Function</a></code> with
+    as its arguments the third and subsequent arguments to the invoked
+    method (if any) and with an undefined <var title="">thisArg</var>,
+    and abort these steps. <a href="references.html#refsECMA262">[ECMA262]</a></p>
 
     <p class="note">Setting <var title="">thisArg</var> to undefined
     means that the function code will be executed with the <code title="">this</code> keyword bound to the <code><a href="browsers.html#windowproxy">WindowProxy</a></code>
@@ -568,9 +606,8 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
 
    </li>
 
-   <li><p>Apply the ToString() abstract operation to the first
-   argument to the method, and let <var title="">script source</var>
-   be the result. <a href="references.html#refsECMA262">[ECMA262]</a></p></li>
+   <li><p>Let <var title="">script source</var> be the first argument
+   to the method.</p></li>
 
    <li><p>Let <var title="">script language</var> be
    JavaScript.</p></li>
@@ -582,9 +619,9 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
     context</a>, let <var title="">browsing context</var> be the
     <a href="browsers.html#browsing-context">browsing context</a> with which <var title="">global
     object</var> is associated, let <var title="">character
-    encoding</var> be the <a href="dom.html#document-s-character-encoding" title="document's character&#10;    encoding">character encoding</a> of the <code><a href="infrastructure.html#document">Document</a></code>
+    encoding</var> be the <a href="infrastructure.html#document-s-character-encoding" title="document's character&#10;    encoding">character encoding</a> of the <code><a href="dom.html#document">Document</a></code>
     associated with <var title="">global object</var> (<a href="webappapis.html#sce-not-copy">this is a reference, not a copy</a>), and let
-    <var title="">base URL</var> be the <a href="urls.html#document-base-url" title="document base&#10;    URL">base URL</a> of the <code><a href="infrastructure.html#document">Document</a></code> associated with
+    <var title="">base URL</var> be the <a href="urls.html#document-base-url" title="document base&#10;    URL">base URL</a> of the <code><a href="dom.html#document">Document</a></code> associated with
     <var title="">global object</var> (<a href="webappapis.html#sbu-not-copy">this is
     a reference, not a copy</a>).</p>
 
@@ -606,958 +643,14 @@ interface <dfn id="windowtimers">WindowTimers</dfn> {
    </li>
 
    <li><p>Return a <a href="webappapis.html#concept-task" title="concept-task">task</a> that checks
-   if the entry for <var title="">handle</var> in <var title="">list</var> has been cleared, and if it has not, <a href="webappapis.html#create-a-script" title="create a script">creates a script</a> using <var title="">script source</var> as the script source, <var title="">scripting language</var> as the scripting language, <var title="">global object</var> as the global object, <var title="">browsing context</var> as the browsing context, <var title="">document</var> as the document, <var title="">character
+   if the entry for <var title="">handle</var> in <var title="">list</var> has been cleared, and if it has not, <a href="webappapis.html#create-a-script" title="create a script">creates a script</a> using <var title="">script source</var> as the script source, the
+   <a href="urls.html#url">URL</a> where <var title="">script source</var> can be
+   found, <var title="">scripting language</var> as the scripting
+   language, <var title="">global object</var> as the global object,
+   <var title="">browsing context</var> as the browsing context, <var title="">document</var> as the document, <var title="">character
    encoding</var> as the URL character encoding, and <var title="">base URL</var> as the base URL.</p></li>
-
-  </ol><p>When the above methods are to <dfn id="get-the-timeout">get the timeout</dfn>, they
-  must run the following steps:</p>
-
-  <ol><li><p>Let <var title="">timeout</var> be the second argument to
-   the method, or zero if the argument was omitted.</p></li>
-
-   <li><p>Apply the ToString() abstract operation to <var title="">timeout</var>, and let <var title="">timeout</var>
-   be the result. <a href="references.html#refsECMA262">[ECMA262]</a></p></li>
-
-   <li><p>Apply the ToNumber() abstract operation to <var title="">timeout</var>, and let <var title="">timeout</var> be the
-   result. <a href="references.html#refsECMA262">[ECMA262]</a></p></li>
-
-   <li><p>If <var title="">timeout</var> is an Infinity value, a
-   Not-a-Number (NaN) value, or negative, let <var title="">timeout</var> be zero.</p></li>
-
-   <li><p>Round <var title="">timeout</var> down to the nearest
-   integer, and let <var title="">timeout</var> be the
-   result.</p></li>
-
-   <li><p>Return <var title="">timeout</var>.</p></li>
 
   </ol><hr/><p>The <a href="webappapis.html#task-source">task source</a> for these <a href="webappapis.html#concept-task" title="concept-task">tasks</a> is the <dfn id="timer-task-source">timer task
   source</dfn>.</p>
 
-  </div><h3 id="user-prompts"><span class="secno">6.4 </span>User prompts</h3><h4 id="simple-dialogs"><span class="secno">6.4.1 </span>Simple dialogs</h4><dl class="domintro"><dt><var title="">window</var> . <code title="dom-alert"><a href="#dom-alert">alert</a></code>(<var title="">message</var>)</dt>
-   <dd>
-
-    <p>Displays a modal alert with the given message, and waits for the user to dismiss it.</p>
-
-    <p>A call to the <code title="dom-navigator-yieldForStorageUpdates"><a href="#dom-navigator-yieldforstorageupdates">navigator.yieldForStorageUpdates()</a></code>
-    method is implied when this method is invoked.</p>
-
-   </dd>
-
-   <dt><var title="">result</var> = <var title="">window</var> . <code title="dom-confirm"><a href="#dom-confirm">confirm</a></code>(<var title="">message</var>)</dt>
-   <dd>
-
-    <p>Displays a modal OK/Cancel prompt with the given message, waits
-    for the user to dismiss it, and returns true if the user clicks OK
-    and false if the user clicks Cancel.</p>
-
-    <p>A call to the <code title="dom-navigator-yieldForStorageUpdates"><a href="#dom-navigator-yieldforstorageupdates">navigator.yieldForStorageUpdates()</a></code>
-    method is implied when this method is invoked.</p>
-
-   </dd>
-
-   <dt><var title="">result</var> = <var title="">window</var> . <code title="dom-prompt"><a href="#dom-prompt">prompt</a></code>(<var title="">message</var> [, <var title="">default</var>] )</dt>
-   <dd>
-
-    <p>Displays a modal text field prompt with the given message,
-    waits for the user to dismiss it, and returns the value that the
-    user entered. If the user cancels the prompt, then returns null
-    instead. If the second argument is present, then the given value
-    is used as a default.</p>
-
-    <p>A call to the <code title="dom-navigator-yieldForStorageUpdates"><a href="#dom-navigator-yieldforstorageupdates">navigator.yieldForStorageUpdates()</a></code>
-    method is implied when this method is invoked.</p>
-
-   </dd>
-
-  </dl><div class="impl">
-
-  <p>The <dfn id="dom-alert" title="dom-alert"><code>alert(<var title="">message</var>)</code></dfn> method, when invoked, must
-  release the <a href="webappapis.html#storage-mutex">storage mutex</a> and show the given <var title="">message</var> to the user. The user agent may make the
-  method wait for the user to acknowledge the message before
-  returning; if so, the user agent must <a href="webappapis.html#pause">pause</a> while the
-  method is waiting.</p>
-
-  <p>The <dfn id="dom-confirm" title="dom-confirm"><code>confirm(<var title="">message</var>)</code></dfn> method, when invoked, must
-  release the <a href="webappapis.html#storage-mutex">storage mutex</a> and show the given <var title="">message</var> to the user, and ask the user to respond with
-  a positive or negative response. The user agent must then
-  <a href="webappapis.html#pause">pause</a> as the method waits for the user's response. If
-  the user responds positively, the method must return true, and if
-  the user responds negatively, the method must return false.</p>
-
-  <p>The <dfn id="dom-prompt" title="dom-prompt"><code>prompt(<var title="">message</var>, <var title="">default</var>)</code></dfn>
-  method, when invoked, must release the <a href="webappapis.html#storage-mutex">storage mutex</a>,
-  show the given <var title="">message</var> to the user, and ask the
-  user to either respond with a string value or abort. The user agent
-  must then <a href="webappapis.html#pause">pause</a> as the method waits for the user's
-  response. The second argument is optional. If the second argument
-  (<var title="">default</var>) is present, then the response must be
-  defaulted to the value given by <var title="">default</var>. If the
-  user aborts, then the method must return null; otherwise, the method
-  must return the string that the user responded with.</p>
-
-  </div><h4 id="printing"><span class="secno">6.4.2 </span>Printing</h4><dl class="domintro"><dt><var title="">window</var> . <code title="dom-print"><a href="#dom-print">print</a></code>()</dt>
-
-   <dd>
-
-    <p>Prompts the user to print the page.</p>
-
-    <p>A call to the <code title="dom-navigator-yieldForStorageUpdates"><a href="#dom-navigator-yieldforstorageupdates">navigator.yieldForStorageUpdates()</a></code>
-    method is implied when this method is invoked.</p>
-
-   </dd>
-
-  </dl><div class="impl">
-
-  <p>The <dfn id="dom-print" title="dom-print"><code>print()</code></dfn> method,
-  when invoked, must run the <a href="#printing-steps">printing steps</a>.</p>
-
-  <p>User agents should also run the <a href="#printing-steps">printing steps</a>
-  whenever the user asks for the opportunity to <a href="rendering.html#obtain-a-physical-form">obtain a
-  physical form</a> (e.g. printed copy), or the representation of a
-  physical form (e.g. PDF copy), of a document.</p>
-
-  <p>The <dfn id="printing-steps">printing steps</dfn> are as follows:</p>
-
-  <ol><li>
-
-    <p>The user agent may display a message to the user and/or may
-    abort these steps.</p>
-
-    <p class="example">For instance, a kiosk browser could silently
-    ignore any invocations of the <code title="dom-print"><a href="#dom-print">print()</a></code> method.</p>
-
-    <p class="example">For instance, a browser on a mobile device
-    could detect that there are no printers in the vicinity and
-    display a message saying so before continuing to offer a "save to
-    PDF" option.</p>
-
-   </li>
-
-   <li>
-
-    <p>The user agent must <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named
-    <code title="event-beforeprint">beforeprint</code> at the
-    <code><a href="browsers.html#window">Window</a></code> object of the <code><a href="infrastructure.html#document">Document</a></code> that is
-    being printed, as well as any <a href="browsers.html#nested-browsing-context" title="nested browsing&#10;    context">nested browsing contexts</a> in it.</p>
-
-    <p class="example">The <code title="event-beforeprint">beforeprint</code> event can be used
-    to annotate the printed copy, for instance adding the time at
-    which the document was printed.</p>
-
-   </li>
-
-   <li>
-
-    <p>The user agent must release the <a href="webappapis.html#storage-mutex">storage mutex</a>.</p>
-
-   </li>
-
-   <li>
-
-    <p>The user agent should offer the user the opportunity to
-    <a href="rendering.html#obtain-a-physical-form">obtain a physical form</a> (or the representation of a
-    physical form) of the document. The user agent may wait for the
-    user to either accept or decline before returning; if so, the user
-    agent must <a href="webappapis.html#pause">pause</a> while the method is waiting. Even if
-    the user agent doesn't wait at this point, the user agent must use
-    the state of the relevant documents as they are at this point in
-    the algorithm if and when it eventually creates the alternate
-    form.</p>
-
-   </li>
-
-   <li>
-
-    <p>The user agent must <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named
-    <code title="event-afterprint">afterprint</code> at the
-    <code><a href="browsers.html#window">Window</a></code> object of the <code><a href="infrastructure.html#document">Document</a></code> that is
-    being printed, as well as any <a href="browsers.html#nested-browsing-context" title="nested browsing&#10;    context">nested browsing contexts</a> in it.</p>
-
-    <p class="example">The <code title="event-afterprint">afterprint</code> event can be used
-    to revert annotations added in the earlier event, as well as
-    showing post-printing UI. For instance, if a page is walking the
-    user through the steps of applying for a home loan, the script
-    could automatically advance to the next step after having printed
-    a form or other.</p>
-
-   </li>
-
-  </ol></div><h4 id="dialogs-implemented-using-separate-documents"><span class="secno">6.4.3 </span>Dialogs implemented using separate documents</h4><dl class="domintro"><dt><var title="">result</var> = <var title="">window</var> . <code title="dom-showModalDialog"><a href="#dom-showmodaldialog">showModalDialog</a></code>(<var title="">url</var> [, <var title="">argument</var>] )</dt>
-
-   <dd>
-
-    <p>Prompts the user with the given page, waits for that page to
-    close, and returns the return value.</p>
-
-    <p>A call to the <code title="dom-navigator-yieldForStorageUpdates"><a href="#dom-navigator-yieldforstorageupdates">navigator.yieldForStorageUpdates()</a></code>
-    method is implied when this method is invoked.</p>
-
-   </dd>
-
-  </dl><div class="impl">
-
-  <p>The <dfn id="dom-showmodaldialog" title="dom-showModalDialog"><code>showModalDialog(<var title="">url</var>, <var title="">argument</var>)</code></dfn> method, when invoked, must
-  cause the user agent to run the following steps:</p>
-
-  <ol><li>
-
-    <p><a href="urls.html#resolve-a-url" title="resolve a url">Resolve</a> <var title="">url</var> relative to the <a href="browsers.html#entry-script">entry script</a>'s
-    <a href="webappapis.html#script-s-base-url" title="script's base URL">base URL</a>.</p>
-
-    <p>If this fails, then throw a <code><a href="common-dom-interfaces.html#syntax_err">SYNTAX_ERR</a></code> exception
-    and abort these steps.</p>
-
-   </li>
-
-   <li>
-
-    <p>Release the <a href="webappapis.html#storage-mutex">storage mutex</a>.</p>
-
-   </li>
-
-   <li>
-
-    <p>If the user agent is configured such that this invocation of
-    <code title="dom-showModalDialog"><a href="#dom-showmodaldialog">showModalDialog()</a></code> is
-    somehow disabled, then return the empty string and abort these
-    steps.</p>
-
-    <p class="note">User agents are expected to disable this method in
-    certain cases to avoid user annoyance (e.g. as part of their popup
-    blocker feature). For instance, a user agent could require that a
-    site be white-listed before enabling this method, or the user
-    agent could be configured to only allow one modal dialog at a
-    time.</p>
-
-   </li>
-
-   <li>
-
-    <p>If the current browsing context had the <a href="the-iframe-element.html#sandboxed-navigation-browsing-context-flag">sandboxed
-    navigation browsing context flag</a> set when its <a href="browsers.html#active-document">active
-    document</a> was created, then return the empty string and
-    abort these steps.</p>
-
-   </li>
-
-   <li>
-
-    <p>Let <var title="">the list of background browsing
-    contexts</var> be a list of all the browsing contexts that:</p>
-
-    <ul><li>are part of the same <a href="browsers.html#unit-of-related-browsing-contexts">unit of related browsing
-     contexts</a> as the browsing context of the
-     <code><a href="browsers.html#window">Window</a></code> object on which the <code title="dom-showModalDialog"><a href="#dom-showmodaldialog">showModalDialog()</a></code> method was
-     called, and that</li>
-
-     <li>have an <a href="browsers.html#active-document">active document</a> whose
-     <a href="origin-0.html#origin">origin</a> is the <a href="origin-0.html#same-origin" title="same origin">same</a>
-     as the <a href="origin-0.html#origin">origin</a> of the <a href="webappapis.html#concept-script" title="concept-script">script</a> that called the <code title="dom-showModalDialog"><a href="#dom-showmodaldialog">showModalDialog()</a></code> method at
-     the time the method was called,</li> 
-    </ul><p>...as well as any browsing contexts that are nested inside any
-    of the browsing contexts matching those conditions.</p>
-
-   </li>
-
-   <li>
-
-    <p>Disable the user interface for all the browsing contexts in
-    <var title="">the list of background browsing contexts</var>. This
-    should prevent the user from navigating those browsing contexts,
-    causing events to be sent to those browsing context, or editing
-    any content in those browsing contexts. However, it does not
-    prevent those browsing contexts from receiving events from sources
-    other than the user, from running scripts, from running
-    animations, and so forth.</p>
-
-   </li>
-
-   <li>
-
-    <p>Create a new <a href="browsers.html#auxiliary-browsing-context">auxiliary browsing context</a>, with the
-    <a href="browsers.html#opener-browsing-context">opener browsing context</a> being the browsing context of
-    the <code><a href="browsers.html#window">Window</a></code> object on which the <code title="dom-showModalDialog"><a href="#dom-showmodaldialog">showModalDialog()</a></code> method was
-    called. The new auxiliary browsing context has no name.</p>
-
-    <p class="note">This <a href="browsers.html#browsing-context">browsing context</a>'s
-    <code><a href="infrastructure.html#document">Document</a></code>s' <code><a href="browsers.html#window">Window</a></code> objects all implement
-    the <code><a href="#windowmodal">WindowModal</a></code> interface.</p>
-
-   </li>
-
-   <li>
-
-    <p>Let the <a href="#dialog-arguments">dialog arguments</a> of the new browsing
-    context be set to the value of <var title="">argument</var>, or
-    the 'undefined' value if the argument was omitted.</p>
-
-   </li>
-
-   <li>
-
-    <p>Let the <a href="#dialog-arguments-origin">dialog arguments' origin</a> be the
-    <a href="origin-0.html#origin">origin</a> of the <a href="webappapis.html#concept-script" title="concept-script">script</a> that called the <code title="dom-showModalDialog"><a href="#dom-showmodaldialog">showModalDialog()</a></code> method.</p>
-
-   </li>
-
-   <li>
-
-    <p><a href="history.html#navigate">Navigate</a> the new
-    <a href="browsers.html#browsing-context">browsing context</a> to the <a href="urls.html#absolute-url">absolute URL</a>
-    that resulted from <a href="urls.html#resolve-a-url" title="resolve a url">resolving</a>
-    <var title="">url</var> earlier, with <a href="history.html#replacement-enabled">replacement
-    enabled</a>, and with the <a href="webappapis.html#script-s-browsing-context" title="script's browsing&#10;    context">browsing context</a> of the <a href="webappapis.html#concept-script" title="concept-script">script</a> that invoked the method as
-    the <a href="history.html#source-browsing-context">source browsing context</a>.</p>
-
-   </li>
-
-   <li>
-
-    <p><a href="webappapis.html#spin-the-event-loop">Spin the event loop</a> until the new <a href="browsers.html#browsing-context">browsing
-    context</a> is closed. (The user agent must allow the user to
-    indicate that the <a href="browsers.html#browsing-context">browsing context</a> is to be
-    closed.)</p>
-
-   </li>
-
-   <li>
-
-    <p>Reenable the user interface for all the browsing contexts in
-    <var title="">the list of background browsing contexts</var>.</p>
-
-   </li>
-
-   <li>
-
-    <p>Return the <a href="browsers.html#auxiliary-browsing-context">auxiliary browsing context</a>'s
-    <a href="#return-value">return value</a>.</p>
-
-   </li>
-
-  </ol><p>The <code><a href="browsers.html#window">Window</a></code> objects of <code><a href="infrastructure.html#document">Document</a></code>s hosted
-  by <a href="browsers.html#browsing-context" title="browsing context">browsing contexts</a> created
-  by the above algorithm must also implement the
-  <code><a href="#windowmodal">WindowModal</a></code> interface.</p>
-
-  <p class="note">When this happens, the members of the
-  <code><a href="#windowmodal">WindowModal</a></code> interface, in JavaScript environments,
-  appear to actually be part of the <code><a href="browsers.html#window">Window</a></code> interface
-  (e.g. they are on the same prototype chain as the <code title="dom-alert"><a href="#dom-alert">window.alert()</a></code> method).</p>
-
-  </div><pre class="idl">[NoInterfaceObject] interface <dfn id="windowmodal">WindowModal</dfn> {
-  readonly attribute any <a href="#dom-windowmodal-dialogarguments" title="dom-WindowModal-dialogArguments">dialogArguments</a>;
-           attribute DOMString <a href="#dom-windowmodal-returnvalue" title="dom-WindowModal-returnValue">returnValue</a>;
-};</pre><dl class="domintro"><dt><var title="">window</var> . <code title="dom-WindowModal-dialogArguments"><a href="#dom-windowmodal-dialogarguments">dialogArguments</a></code></dt>
-
-   <dd>
-
-    <p>Returns the <var title="">argument</var> argument that was
-    passed to the <code title="dom-showModalDialog"><a href="#dom-showmodaldialog">showModalDialog()</a></code> method.</p>
-
-   </dd>
-
-   <dt><var title="">window</var> . <code title="dom-WindowModal-returnValue"><a href="#dom-windowmodal-returnvalue">returnValue</a></code> [ = <var title="">value</var> ]</dt>
-
-   <dd>
-
-    <p>Returns the current return value for the window.</p>
-
-    <p>Can be set, to change the value that will be returned by the
-    <code title="dom-showModalDialog"><a href="#dom-showmodaldialog">showModalDialog()</a></code>
-    method.</p>
-
-   </dd>
-
-  </dl><div class="impl">
-
-  <p>Such browsing contexts have associated <dfn id="dialog-arguments">dialog
-  arguments</dfn>, which are stored along with the <dfn id="dialog-arguments-origin">dialog
-  arguments' origin</dfn>. These values are set by the <code title="dom-showModalDialog"><a href="#dom-showmodaldialog">showModalDialog()</a></code> method in the
-  algorithm above, when the browsing context is created, based on the
-  arguments provided to the method.</p>
-
-  <p>The <dfn id="dom-windowmodal-dialogarguments" title="dom-WindowModal-dialogArguments"><code>dialogArguments</code></dfn>
-  IDL attribute, on getting, must check whether its browsing context's
-  <a href="browsers.html#active-document">active document</a>'s <a href="origin-0.html#origin">origin</a> is the <a href="origin-0.html#same-origin" title="same origin">same</a> as the <a href="#dialog-arguments-origin">dialog arguments'
-  origin</a>. If it is, then the browsing context's <a href="#dialog-arguments">dialog
-  arguments</a> must be returned unchanged. Otherwise, if the
-  <a href="#dialog-arguments">dialog arguments</a> are an object, then the empty string
-  must be returned, and if the <a href="#dialog-arguments">dialog arguments</a> are not
-  an object, then the stringification of the <a href="#dialog-arguments">dialog
-  arguments</a> must be returned.
-
-  </p><p>These browsing contexts also have an associated <dfn id="return-value">return
-  value</dfn>. The <a href="#return-value">return value</a> of a browsing context
-  must be initialized to the empty string when the browsing context is
-  created.</p>
-
-  <p>The <dfn id="dom-windowmodal-returnvalue" title="dom-WindowModal-returnValue"><code>returnValue</code></dfn>
-  IDL attribute, on getting, must return the <a href="#return-value">return value</a>
-  of its browsing context, and on setting, must set the <a href="#return-value">return
-  value</a> to the given new value.</p>
-
-  </div><p class="note">The <code title="dom-window-close"><a href="browsers.html#dom-window-close">window.close()</a></code> method can be used to
-  close the browsing context.</p><h3 id="system-state-and-capabilities"><span class="secno">6.5 </span>System state and capabilities</h3><h4 id="the-navigator-object"><span class="secno">6.5.1 </span>The <code><a href="#navigator">Navigator</a></code> object</h4><div class="impl">
-
-  <p>The <dfn id="dom-navigator" title="dom-navigator"><code>navigator</code></dfn>
-  attribute of the <code><a href="browsers.html#window">Window</a></code> interface must return an
-  instance of the <code><a href="#navigator">Navigator</a></code> interface, which represents
-  the identity and state of the user agent (the client), and allows
-  Web pages to register themselves as potential protocol and content
-  handlers:</p>
-
-  </div><pre class="idl">interface <dfn id="navigator">Navigator</dfn> {
-  // objects implementing this interface also implement the interfaces given below
-};
-<a href="#navigator">Navigator</a> implements <a href="#navigatorid">NavigatorID</a>;
-<a href="#navigator">Navigator</a> implements <a href="offline.html#navigatoronline">NavigatorOnLine</a>;
-<a href="#navigator">Navigator</a> implements <a href="#navigatorcontentutils">NavigatorContentUtils</a>;
-<a href="#navigator">Navigator</a> implements <a href="#navigatorstorageutils">NavigatorStorageUtils</a>;</pre><div class="impl">
-
-  <p>These interfaces are defined separately so that other
-  specifications can re-use parts of the <code><a href="#navigator">Navigator</a></code>
-  interface.</p>
-
-   
-  </div><h5 id="client-identification"><span class="secno">6.5.1.1 </span>Client identification</h5><pre class="idl">[Supplemental, NoInterfaceObject]
-interface <dfn id="navigatorid">NavigatorID</dfn> {  readonly attribute DOMString <a href="#dom-navigator-appname" title="dom-navigator-appName">appName</a>;
-  readonly attribute DOMString <a href="#dom-navigator-appversion" title="dom-navigator-appVersion">appVersion</a>;
-  readonly attribute DOMString <a href="#dom-navigator-platform" title="dom-navigator-platform">platform</a>;
-  readonly attribute DOMString <a href="#dom-navigator-useragent" title="dom-navigator-userAgent">userAgent</a>;
-};</pre><p>In certain cases, despite the best efforts of the entire
-  industry, Web browsers have bugs and limitations that Web authors
-  are forced to work around.</p><p>This section defines a collection of attributes that can be used
-  to determine, from script, the kind of user agent in use, in order
-  to work around these issues.</p><p>Client detection should always be limited to detecting known
-  current versions; future versions and unknown versions should always
-  be assumed to be fully compliant.</p><dl class="domintro"><dt><var title="">window</var> . <code title="dom-navigator"><a href="#dom-navigator">navigator</a></code> . <code title="dom-navigator-appName"><a href="#dom-navigator-appname">appName</a></code></dt>
-   <dd>
-    <p>Returns the name of the browser.</p>
-   </dd>
-
-   <dt><var title="">window</var> . <code title="dom-navigator"><a href="#dom-navigator">navigator</a></code> . <code title="dom-navigator-appVersion"><a href="#dom-navigator-appversion">appVersion</a></code></dt>
-   <dd>
-    <p>Returns the version of the browser.</p>
-   </dd>
-
-   <dt><var title="">window</var> . <code title="dom-navigator"><a href="#dom-navigator">navigator</a></code> . <code title="dom-navigator-platform"><a href="#dom-navigator-platform">platform</a></code></dt>
-   <dd>
-    <p>Returns the name of the platform.</p>
-   </dd>
-
-   <dt><var title="">window</var> . <code title="dom-navigator"><a href="#dom-navigator">navigator</a></code> . <code title="dom-navigator-userAgent"><a href="#dom-navigator-useragent">userAgent</a></code></dt>
-   <dd>
-    <p>Returns the complete User-Agent header.</p>
-   </dd>
-
-  </dl><div class="impl">
-
-  <dl><dt><dfn id="dom-navigator-appname" title="dom-navigator-appName"><code>appName</code></dfn></dt>
-   <dd><p>Must return either the string "<code title="">Netscape</code>" or the full name of the browser, e.g. "<code title="">Mellblom Browsernator</code>".</p></dd>
-
-   <dt><dfn id="dom-navigator-appversion" title="dom-navigator-appVersion"><code>appVersion</code></dfn></dt>
-   <dd><p>Must return either the string "<code title="">4.0</code>" or a string representing the version of the browser in detail, e.g. "<code title="">1.0 (VMS; en-US) Mellblomenator/9000</code>".</p></dd>
-
-   
-
-   
-
-   <dt><dfn id="dom-navigator-platform" title="dom-navigator-platform"><code>platform</code></dfn></dt>
-   <dd><p>Must return either the empty string or a string representing the platform on which the browser is executing, e.g. "<code title="">MacIntel</code>", "<code title="">Win32</code>", "<code title="">FreeBSD i386</code>", "<code title="">WebTV OS</code>".</p></dd>
-
-   
-
-   
-
-   
-
-   
-
-   <dt><dfn id="dom-navigator-useragent" title="dom-navigator-userAgent"><code>userAgent</code></dfn></dt>
-   <dd><p>Must return the string used for the value of the "<code title="">User-Agent</code>" header in HTTP requests, or the empty string if no such header is ever sent.</p></dd>
-
-   
-
-   
-
-  </dl><p class="warning">Any information in this API that varies from user
-  to user can be used to profile the user. In fact, if enough such
-  information is available, a user can actually be uniquely
-  identified. For this reason, user agent implementors are strongly
-  urged to include as little information in this API as possible.</p>
-
-  </div><h5 id="custom-handlers"><span class="secno">6.5.1.2 </span>Custom scheme and content handlers</h5><pre class="idl">[Supplemental, NoInterfaceObject]
-interface <dfn id="navigatorcontentutils">NavigatorContentUtils</dfn> {
-  // content handler registration
-  void <a href="#dom-navigator-registerprotocolhandler" title="dom-navigator-registerProtocolHandler">registerProtocolHandler</a>(in DOMString scheme, in DOMString url, in DOMString title);
-  void <a href="#dom-navigator-registercontenthandler" title="dom-navigator-registerContentHandler">registerContentHandler</a>(in DOMString mimeType, in DOMString url, in DOMString title);
-};</pre><p>The <dfn id="dom-navigator-registerprotocolhandler" title="dom-navigator-registerProtocolHandler"><code>registerProtocolHandler()</code></dfn>
-  method allows Web sites to register themselves as possible handlers
-  for particular schemes. For example, an online telephone messaging
-  service could register itself as a handler of the <code>sms:</code>
-  scheme (<a href="references.html#refsRFC5724">[RFC5724]</a>), so that if the user
-  clicks on such a link, he is given the opportunity to use that Web
-  site. Analogously, the <dfn id="dom-navigator-registercontenthandler" title="dom-navigator-registerContentHandler"><code>registerContentHandler()</code></dfn>
-  method allows Web sites to register themselves as possible handlers
-  for content in a particular <a href="infrastructure.html#mime-type">MIME type</a>. For example, the
-  same online telephone messaging service could register itself as a
-  handler for <code>text/directory</code> files (<a href="references.html#refsRFC2425">[RFC2425]</a>), so that if the user has no
-  native application capable of handling vCards (<a href="references.html#refsRFC2426">[RFC2426]</a>), his Web browser can instead
-  suggest he use that site to view contact information stored on
-  vCards that he opens.</p><dl class="domintro"><dt><var title="">window</var> . <code title="dom-navigator"><a href="#dom-navigator">navigator</a></code> . <code title="dom-navigator-registerProtocolHandler"><a href="#dom-navigator-registerprotocolhandler">registerProtocolHandler</a></code>(<var title="">scheme</var>, <var title="">url</var>, <var title="">title</var>)</dt>
-   <dt><var title="">window</var> . <code title="dom-navigator"><a href="#dom-navigator">navigator</a></code> . <code title="dom-navigator-registerContentHandler"><a href="#dom-navigator-registercontenthandler">registerContentHandler</a></code>(<var title="">mimeType</var>, <var title="">url</var>, <var title="">title</var>)</dt>
-
-   <dd>
-
-    <p>Registers a handler for the given scheme or content type, at
-    the given URL, with the given title.</p>
-
-    <p>The string "<code title="">%s</code>" in the URL is used as a
-    placeholder for where to put the URL of the content to be
-    handled.</p>
-
-    <p>Throws a <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code> exception if the user agent
-    blocks the registration (this might happen if trying to register
-    as a handler for "http", for instance).</p>
-
-    <p>Throws a <code><a href="common-dom-interfaces.html#syntax_err">SYNTAX_ERR</a></code> if the "<code title="">%s</code>" string is missing in the URL.</p>
-
-   </dd>
-
-  </dl><div class="impl">
-
-  <p>User agents may, within the constraints described in this
-  section, do whatever they like when the methods are called. A UA
-  could, for instance, prompt the user and offer the user the
-  opportunity to add the site to a shortlist of handlers, or make the
-  handlers his default, or cancel the request. UAs could provide such
-  a UI through modal UI or through a non-modal transient notification
-  interface. UAs could also simply silently collect the information,
-  providing it only when relevant to the user.</p>
-
-  <p>User agents should keep track of which sites have registered
-  handlers (even if the user has declined such registrations) so that
-  the user is not repeatedly prompted with the same request.</p>
-
-  <p>The arguments to the methods have the following meanings and
-  corresponding implementation requirements:</p>
-
-  <dl><dt><var title="">scheme</var> (<code title="dom-navigator-registerProtocolHandler"><a href="#dom-navigator-registerprotocolhandler">registerProtocolHandler()</a></code> only)</dt>
-
-   <dd>
-
-    <p>A scheme, such as <code>ftp</code> or <code>sms</code>. The
-    scheme must be compared in an <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a>
-    manner by user agents for the purposes of comparing with the
-    scheme part of URLs that they consider against the list of
-    registered handlers.</p>
-
-    <p>The <var title="">scheme</var> value, if it contains a colon
-    (as in "<code>ftp:</code>"), will never match anything, since
-    schemes don't contain colons.</p>
-
-    <p class="note">This feature is not intended to be used with
-    non-standard protocols.</p>
-
-   </dd>
-
-   <dt><var title="">mimeType</var> (<code title="dom-navigator-registerContentHandler"><a href="#dom-navigator-registercontenthandler">registerContentHandler()</a></code> only)</dt>
-
-   <dd>
-
-    <p>A <a href="infrastructure.html#mime-type">MIME type</a>, such as
-    <code>model/vnd.flatland.3dml</code> or
-    <code>application/vnd.google-earth.kml+xml</code>. The <a href="infrastructure.html#mime-type">MIME
-    type</a> must be compared in an <a href="infrastructure.html#ascii-case-insensitive">ASCII
-    case-insensitive</a> manner by user agents for the purposes of
-    comparing with MIME types of documents that they consider against
-    the list of registered handlers.</p>
-
-    <p>User agents must compare the given values only to the MIME
-    type/subtype parts of content types, not to the complete type
-    including parameters. Thus, if <var title="">mimeType</var> values
-    passed to this method include characters such as commas or
-    whitespace, or include MIME parameters, then the handler being
-    registered will never be used.</p>
-
-    <p class="note">The type is compared to the <a href="infrastructure.html#mime-type">MIME type</a>
-    used by the user agent <em>after</em> the sniffing algorithms have
-    been applied.</p>
-
-   </dd>
-
-
-   <dt><var title="">url</var></dt>
-
-   <dd>
-
-    <p>A string used to build the <a href="urls.html#url">URL</a> of the page that
-    will handle the requests.</p>
-
-    <p>When the user agent uses this URL, it must replace the first
-    occurrence of the exact literal string "<code title="">%s</code>"
-    with an escaped version of the <a href="urls.html#absolute-url">absolute URL</a> of the
-    content in question (as defined below), then <a href="urls.html#resolve-a-url" title="resolve&#10;    a url">resolve</a> the resulting URL, relative to the <a href="webappapis.html#script-s-base-url" title="script's base URL">base URL</a> of the <a href="browsers.html#entry-script">entry
-    script</a> at the time the <code title="dom-navigator-registerContentHandler"><a href="#dom-navigator-registercontenthandler">registerContentHandler()</a></code>
-    or <code title="dom-navigator-registerProtocolHandler"><a href="#dom-navigator-registerprotocolhandler">registerProtocolHandler()</a></code>
-    methods were invoked, and then <a href="history.html#navigate">navigate</a> an appropriate <a href="browsers.html#browsing-context">browsing context</a> to the
-    resulting URL using the GET method (<a href="fetching-resources.html#concept-http-equivalent-get" title="concept-http-equivalent-get">or equivalent</a> for
-    non-HTTP URLs).</p>
-
-    <p>To get the escaped version of the <a href="urls.html#absolute-url">absolute URL</a> of
-    the content in question, the user agent must replace every
-    character in that <a href="urls.html#absolute-url">absolute URL</a> that doesn't match the
-    &lt;query&gt; production defined in RFC 3986 by the
-    percent-encoded form of that character. <a href="references.html#refsRFC3986">[RFC3986]</a></p>
-
-    <div class="example">
-
-     <p>If the user had visited a site at <code title="">http://example.com/</code> that made the following
-     call:</p>
-
-     <pre>navigator.registerContentHandler('application/x-soup', 'soup?url=%s', 'SoupWeb&#x2122;')</pre>
-
-     <p>...and then, much later, while visiting <code title="">http://www.example.net/</code>, clicked on a link such
-     as:</p>
-
-     <pre>&lt;a href="chickenk&#xEF;wi.soup"&gt;Download our Chicken K&#xEF;wi soup!&lt;/a&gt;</pre>
-
-     <p>...then, assuming this <code>chickenk&#xEF;wi.soup</code> file
-     was served with the <a href="infrastructure.html#mime-type">MIME type</a>
-     <code>application/x-soup</code>, the UA might navigate to the
-     following URL:</p>
-
-     <pre>http://example.com/soup?url=http://www.example.net/chickenk%C3%AFwi.soup</pre>
-
-     <p>This site could then fetch the <code>chickenk&#xEF;wi.soup</code>
-     file and do whatever it is that it does with soup (synthesize it
-     and ship it to the user, or whatever).</p>
-
-    </div>
-
-   </dd>
-
-   <dt><var title="">title</var></dt>
-
-   <dd>
-
-    <p>A descriptive title of the handler, which the UA might use to
-    remind the user what the site in question is.</p>
-
-   </dd>
-
-  </dl><p>User agents should raise <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code> exceptions if
-  the methods are called with <var title="">scheme</var> or <var title="">mimeType</var> values that the UA deems to be
-  "privileged". For example, a site attempting to register a handler
-  for <code>http</code> URLs or <code><a href="iana.html#text-html">text/html</a></code> content in a
-  Web browser would likely cause an exception to be raised.</p>
-
-  <p>User agents must raise a <code><a href="common-dom-interfaces.html#syntax_err">SYNTAX_ERR</a></code> exception if the
-  <var title="">url</var> argument passed to one of these methods does
-  not contain the exact literal string "<code>%s</code>", or if <a href="urls.html#resolve-a-url" title="resolve a url">resolving</a> the <var title="">url</var>
-  argument with the first occurrence of the string "<code title="">%s</code>" removed, relative to the <a href="browsers.html#entry-script">entry
-  script</a>'s <a href="webappapis.html#script-s-base-url" title="script's base URL">base URL</a>, is
-  not successful.</p>
-
-  <p>User agents must not raise any other exceptions (other than
-  binding-specific exceptions, such as for an incorrect number of
-  arguments in an JavaScript implementation).</p>
-
-  <p>This section does not define how the pages registered by these
-  methods are used, beyond the requirements on how to process the <var title="">url</var> value (see above). To some extent, the <a href="history.html#navigate" title="navigate">processing model for navigating across
-  documents</a> defines some cases where these methods are
-  relevant, but in general UAs may use this information wherever they
-  would otherwise consider handing content to native plugins or helper
-  applications.</p>
-
-  <p>UAs must not use registered content handlers to handle content
-  that was returned as part of a non-GET transaction (or rather, as
-  part of any non-idempotent transaction), as the remote site would
-  not be able to fetch the same data.</p>
-
-  </div><div class="impl">
-
-  <h5 id="security-and-privacy"><span class="secno">6.5.1.3 </span>Security and privacy</h5>
-
-  <p>These mechanisms can introduce a number of concerns, in
-  particular privacy concerns.</p>
-
-  <p><strong>Hijacking all Web usage.</strong> User agents should not
-  allow schemes that are key to its normal operation, such as
-  <code>http</code> or <code>https</code>, to be rerouted through
-  third-party sites. This would allow a user's activities to be
-  trivially tracked, and would allow user information, even in secure
-  connections, to be collected.</p>
-
-  <p><strong>Hijacking defaults.</strong> It is strongly recommended
-  that user agents do not automatically change any defaults, as this
-  could lead the user to send data to remote hosts that the user is
-  not expecting. New handlers registering themselves should never
-  automatically cause those sites to be used.</p>
-
-  <p><strong>Registration spamming.</strong> User agents should
-  consider the possibility that a site will attempt to register a
-  large number of handlers, possibly from multiple domains (e.g. by
-  redirecting through a series of pages each on a different domain,
-  and each registering a handler for <code>video/mpeg</code> &#x2014;
-  analogous practices abusing other Web browser features have been
-  used by pornography Web sites for many years). User agents should
-  gracefully handle such hostile attempts, protecting the user.</p>
-
-  <p><strong>Misleading titles.</strong> User agents should not rely
-  wholly on the <var title="">title</var> argument to the methods when
-  presenting the registered handlers to the user, since sites could
-  easily lie. For example, a site <code>hostile.example.net</code>
-  could claim that it was registering the "Cuddly Bear Happy Content
-  Handler". User agents should therefore use the handler's domain in
-  any UI along with any title.</p>
-
-  <p><strong>Hostile handler metadata.</strong> User agents should
-  protect against typical attacks against strings embedded in their
-  interface, for example ensuring that markup or escape characters in
-  such strings are not executed, that null bytes are properly handled,
-  that over-long strings do not cause crashes or buffer overruns, and
-  so forth.</p>
-
-  <p><strong>Leaking Intranet URLs.</strong> The mechanism described
-  in this section can result in secret Intranet URLs being leaked, in
-  the following manner:</p>
-
-  <ol><li>The user registers a third-party content handler as the default
-   handler for a content type.</li>
-
-   <li>The user then browses his corporate Intranet site and accesses
-   a document that uses that content type.</li>
-
-   <li>The user agent contacts the third party and hands the third
-   party the URL to the Intranet content.</li>
-
-  </ol><p>No actual confidential file data is leaked in this manner, but
-  the URLs themselves could contain confidential information. For
-  example, the URL could be
-  <code>http://www.corp.example.com/upcoming-aquisitions/the-sample-company.egf</code>,
-  which might tell the third party that Example Corporation is
-  intending to merge with The Sample Company. Implementors might wish
-  to consider allowing administrators to disable this feature for
-  certain subdomains, content types, or schemes.</p>
-
-  <p><strong>Leaking secure URLs.</strong> User agents should not send
-  HTTPS URLs to third-party sites registered as content handlers, in
-  the same way that user agents do not send <code title="http-referer">Referer</code> (sic) HTTP headers from secure
-  sites to third-party sites.</p>
-
-  <p><strong>Leaking credentials.</strong> User agents must never send
-  username or password information in the URLs that are escaped and
-  included sent to the handler sites. User agents may even avoid
-  attempting to pass to Web-based handlers the URLs of resources
-  that are known to require authentication to access, as such sites
-  would be unable to access the resources in question without
-  prompting the user for credentials themselves (a practice that would
-  require the user to know whether to trust the third-party handler, a
-  decision many users are unable to make or even understand).</p>
-
-  </div><div class="impl">
-
-  <h5 id="sample-handler-impl"><span class="secno">6.5.1.4 </span>Sample user interface</h5>
-
-  <p><i>This section is non-normative.</i></p>
-
-  <p>A simple implementation of this feature for a desktop Web browser
-  might work as follows.</p>
-
-  <p>The <code title="dom-navigator-registerContentHandler"><a href="#dom-navigator-registercontenthandler">registerContentHandler()</a></code>
-  method could display a modal dialog box:</p>
-
-  <p><img alt="The modal dialog box could have the title 'Content Handler Registration', and could say 'This Web page: Kittens at work http://kittens.example.org/ ...would like permission to handle files of type: application/x-meowmeow using the following Web-based application: Kittens-at-work displayer http://kittens.example.org/?show=%s Do you trust the administrators of the &quot;kittens.example.org&quot; domain?' with two buttons, 'Trust kittens.example.org' and 'Cancel'." height="374" src="http://dev.w3.org/html5/spec/images/sample-content-handler-registration.png" width="534"/></p>
-
-  <p>In this dialog box, "Kittens at work" is the title of the page
-  that invoked the method, "http://kittens.example.org/" is the URL of
-  that page, "application/x-meowmeow" is the string that was passed to
-  the <code title="dom-navigator-registerContentHandler"><a href="#dom-navigator-registercontenthandler">registerContentHandler()</a></code>
-  method as its first argument (<var title="">mimeType</var>),
-  "http://kittens.example.org/?show=%s" was the second argument (<var title="">url</var>), and "Kittens-at-work displayer" was the third
-  argument (<var title="">title</var>).</p>
-
-  <p>If the user clicks the Cancel button, then nothing further
-  happens. If the user clicks the "Trust" button, then the handler is
-  remembered.</p>
-
-  <p>When the user then attempts to fetch a URL that uses the
-  "application/x-meowmeow" <a href="infrastructure.html#mime-type">MIME type</a>, then it might
-  display a dialog as follows:</p>
-
-  <p><img alt="The dialog box could have the title 'Unknown File Type' and could say 'You have attempted to access:' followed by a URL, followed by a prompt such as 'How would you like FerretBrowser to handle this resource?' with three radio buttons, one saying 'Contact the FerretBrowser plugin registry to see if there is an official way to handle this resource.', one saying 'Pass this URL to a local application' with an application selector, and one saying 'Pass this URL to the &quot;Kittens-at-work displayer&quot; application at &quot;kittens.example.org&quot;', with a checkbox labeled 'Always do this for resources using the &quot;application/x-meowmeow&quot; type in future.', and with two buttons, 'Ok' and 'Cancel'." height="428" src="http://dev.w3.org/html5/spec/images/sample-content-handler.png" width="577"/></p>
-
-  <p>In this dialog, the third option is the one that was primed by
-  the site registering itself earlier.</p>
-
-  <p>If the user does select that option, then the browser, in
-  accordance with the requirements described in the previous two
-  sections, will redirect the user to
-  "http://kittens.example.org/?show=data%3Aapplication/x-meowmeow;base64,S2l0dGVucyBhcmUgdGhlIGN1dGVzdCE%253D".</p>
-
-  <p>The <code title="dom-navigator-registerProtocolHandler"><a href="#dom-navigator-registerprotocolhandler">registerProtocolHandler()</a></code>
-  method would work equivalently, but for schemes instead of unknown
-  content types.</p>
-
-  </div><h5 id="manually-releasing-the-storage-mutex"><span class="secno">6.5.1.5 </span>Manually releasing the storage mutex</h5><pre class="idl">[Supplemental, NoInterfaceObject]
-interface <dfn id="navigatorstorageutils">NavigatorStorageUtils</dfn> {
-  void <a href="#dom-navigator-yieldforstorageupdates" title="dom-navigator-yieldForStorageUpdates">yieldForStorageUpdates</a>();
-};</pre><dl class="domintro"><dt><var title="">window</var> . <code title="dom-navigator"><a href="#dom-navigator">navigator</a></code> . <code title="dom-navigator-yieldForStorageUpdates"><a href="#dom-navigator-yieldforstorageupdates">yieldForStorageUpdates</a></code>()</dt>
-
-   <dd>
-
-    <p>If a script uses the <code title="dom-document-cookie"><a href="dom.html#dom-document-cookie">document.cookie</a></code> API, or the
-    <code title="dom-localStorage">localStorage</code> API, the
-    browser will block other scripts from accessing cookies or storage
-    until the first script finishes.
-    
-    <a href="references.html#refsWEBSTORAGE">[WEBSTORAGE]</a>
-    
-    </p>
-
-    <p>Calling the <code title="dom-navigator-yieldForStorageUpdates"><a href="#dom-navigator-yieldforstorageupdates">navigator.yieldForStorageUpdates()</a></code>
-    method tells the user agent to unblock any other scripts that may
-    be blocked, even though the script hasn't returned.</p>
-
-    <p>Values of cookies and items in the <code>Storage</code> objects
-    of <code title="dom-localStorage">localStorage</code> attributes
-    can change after calling this method, whence its name.
-    
-    <a href="references.html#refsWEBSTORAGE">[WEBSTORAGE]</a>
-    
-    </p>
-
-   </dd>
-
-  </dl><div class="impl">
-
-   <p>The <dfn id="dom-navigator-yieldforstorageupdates" title="dom-navigator-yieldForStorageUpdates"><code>yieldForStorageUpdates()</code></dfn>
-   method, when invoked, must, if the <a href="webappapis.html#storage-mutex">storage mutex</a> is
-   owned by the <a href="webappapis.html#event-loop">event loop</a> of the <a href="webappapis.html#concept-task" title="concept-task">task</a> that resulted in the method being
-   called, release the <a href="webappapis.html#storage-mutex">storage mutex</a> so that it is once
-   again free. Otherwise, it must do nothing.</p>
-
-  </div><h4 id="the-external-interface"><span class="secno">6.5.2 </span>The <code><a href="#external">External</a></code> interface</h4><div class="impl">
-
-  <p>The <dfn id="dom-external" title="dom-external"><code>external</code></dfn>
-  attribute of the <code><a href="browsers.html#window">Window</a></code> interface must return an
-  instance of the <code><a href="#external">External</a></code> interface. The same object
-  must be returned each time.</p>
-
-  </div><pre class="idl">interface <dfn id="external">External</dfn> {
-  void <a href="#dom-external-addsearchprovider" title="dom-external-AddSearchProvider">AddSearchProvider</a>(in DOMString engineURL);
-  unsigned long <a href="#dom-external-issearchproviderinstalled" title="dom-external-IsSearchProviderInstalled">IsSearchProviderInstalled</a>(in DOMString engineURL);
-};</pre><dl class="domintro"><dt><var title="">window</var> . <code title="dom-external"><a href="#dom-external">external</a></code> . <code title="dom-external-AddSearchProvider"><a href="#dom-external-addsearchprovider">AddSearchProvider</a></code>( <var title="">url</var> )</dt>
-   <dd>
-
-    <p>Adds the search engine described by the OpenSearch description
-    document at <var title="">url</var>. <a href="references.html#refsOPENSEARCH">[OPENSEARCH]</a></p>
-
-    <p>The OpenSearch description document has to be on the same
-    server as the script that calls this method.</p>
-
-   </dd>
-
-   <dt><var title="">installed</var> = <var title="">window</var> . <code title="dom-external"><a href="#dom-external">external</a></code> . <code title="dom-external-IsSearchProviderInstalled"><a href="#dom-external-issearchproviderinstalled">IsSearchProviderInstalled</a></code>( <var title="">url</var> )</dt>
-   <dd>
-
-    <p>Returns a value based on comparing <var title="">url</var> to
-    the URLs of the results pages of the installed search engines.</p>
-
-    <dl><dt>0 </dt><dd>None of the installed search engines match <var title="">url</var>.
-     </dd><dt>1 </dt><dd>One or more installed search engines match <var title="">url</var>, but none are the user's default search engine.
-     </dd><dt>2 </dt><dd>The user's default search engine matches <var title="">url</var>.
-    </dd></dl><p>The <var title="">url</var> is compared to the URLs of the
-    results pages of the installed search engines using a prefix
-    match. Only results pages on the same domain as the script that
-    calls this method are checked.</p>
-
-   </dd>
-
-  </dl><p class="note">Another way of exposing search engines using
-  OpenSearch description documents is using a <code><a href="semantics.html#the-link-element">link</a></code>
-  element with the <code title="rel-search"><a href="links.html#link-type-search">search</a></code> link
-  type.</p><div class="impl">
-
-   <p>The <dfn id="dom-external-addsearchprovider" title="dom-external-AddSearchProvider"><code>AddSearchProvider()</code></dfn>
-   method, when invoked, must run the following steps:</p>
-
-   <ol><li><p>Optionally, abort these steps. User agents may implement
-    the method as a stub method that never does anything, or may
-    arbitrarily ignore invocations with particular arguments for
-    security, privacy, or usability reasons.</p></li>
-
-    <li><p><a href="urls.html#resolve-a-url" title="resolve a url">Resolve</a> the value of the
-    method's first argument relative to the <a href="browsers.html#entry-script">entry
-    script</a>'s <a href="webappapis.html#script-s-base-url" title="script's base URL">base
-    URL</a>.</p></li>
-
-    <li><p>If this fails, abort these steps.</p></li>
-
-    <li><p>Process the resulting <a href="urls.html#absolute-url">absolute URL</a> as the
-    <a href="urls.html#url">URL</a> to an OpenSearch description document. <a href="references.html#refsOPENSEARCH">[OPENSEARCH]</a></p></li>
-
-   </ol><p>The <dfn id="dom-external-issearchproviderinstalled" title="dom-external-IsSearchProviderInstalled"><code>IsSearchProviderInstalled()</code></dfn>
-   method, when invoked, must run the following steps:</p>
-
-   <ol><li><p>Optionally, return 0 and abort these steps. User agents may
-    implement the method as a stub method that never returns a
-    non-zero value, or may arbitrarily ignore invocations with
-    particular arguments for security, privacy, or usability
-    reasons.</p></li>
-
-    <li><p>If the <a href="origin-0.html#origin">origin</a> of the <a href="browsers.html#entry-script">entry script</a>
-    is an opaque identifier (i.e. it has no host component), then
-    return 0 and abort these steps.</p></li>
-
-    <li><p>Let <var title="">host1</var> be the host component of the
-    <a href="origin-0.html#origin">origin</a> of the <a href="browsers.html#entry-script">entry script</a>.</p></li>
-
-    <li><p><a href="urls.html#resolve-a-url" title="resolve a url">Resolve</a> the <var title="">scriptURL</var> argument relative to the <a href="browsers.html#entry-script">entry
-    script</a>'s <a href="webappapis.html#script-s-base-url" title="script's base URL">base
-    URL</a>.</p></li>
-
-    <li><p>If this fails, return 0 and abort these steps.</p></li>
-
-    <li><p>Let <var title="">host2</var> be be the <a href="urls.html#url-host" title="url-host">&lt;host&gt;</a> component of the resulting
-    <a href="urls.html#absolute-url">absolute URL</a>.</p></li>
-
-    <li>
-
-     <p>If the longest suffix in the Public Suffix List that matches
-     the end of <var title="">host1</var> is different than the
-     longest suffix in the Public Suffix List that matches the end of
-     <var title="">host2</var>, then return 0 and abort these steps.
-     <a href="references.html#refsPSL">[PSL]</a></p>
-
-     <p>If the next domain component of <var title="">host1</var> and
-     <var title="">host2</var> after their common suffix are not the
-     same, then return 0 and abort these steps.</p>
-
-     <p>Domain labels must be compared after applying the IDNA ToASCII
-     algorithm to them, with both the AllowUnassigned and
-     UseSTD3ASCIIRules flags set, in an <a href="infrastructure.html#ascii-case-insensitive">ASCII
-     case-insensitive</a> manner. <a href="references.html#refsRFC3490">[RFC3490]</a></p>
-
-    </li>
-
-    <li><p>Let <var title="">search engines</var> be the list of
-    search engines known by the user agent and made available to the
-    user by the user agent for which the resulting <a href="urls.html#absolute-url">absolute
-    URL</a> is a <a href="infrastructure.html#prefix-match">prefix match</a> of the search engine's
-    <a href="urls.html#url">URL</a>, if any. For search engines registered using
-    OpenSearch description documents, the <a href="urls.html#url">URL</a> of the
-    search engine corresponds to the URL given in a <code title="">Url</code> element whose <code title="">rel</code>
-    attribute is "<code title="">results</code>" (the default). <a href="references.html#refsOPENSEARCH">[OPENSEARCH]</a></p></li>
-
-    <li><p>If <var title="">search engines</var> is empty, return 0
-    and abort these steps.</p></li>
-
-    <li><p>If the user's default search engine (as determined by the
-    user agent) is one of the search engines in <var title="">search
-    engines</var>, then return 2 and abort these steps.</p></li>
-
-    <li><p>Return 1.</p></li>
-
-   </ol></div></body></html>
+  </div></body></html>

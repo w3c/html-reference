@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>4.12 Links &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<!DOCTYPE html>
+<html lang="en-US-x-Hixie"><head><title>4.12 Links &#x2014; HTML5</title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -19,6 +19,7 @@
    dd table + p { margin-top: 1em; }
    p + * > li, dd li { margin: 1em 0; }
    dt, dfn { font-weight: bold; font-style: normal; }
+   i, em { font-style: italic; }
    dt dfn { font-style: italic; }
    pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
    pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
@@ -40,9 +41,10 @@
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
 
    .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   img.extra { float: right; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   img.extra, p.overview { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; position: relative; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl::before { content: "IDL"; font: bold small sans-serif; padding: 0.5em; background: white; position: absolute; top: 0; margin: -1px 0 0 -4em; width: 1.5em; border: thin solid; border-radius: 0 0 0 0.5em }
    pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
    pre.css:first-line { color: #AAAA50; }
    dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
@@ -50,6 +52,7 @@
    dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
    dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
    dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
    dl.switch { padding-left: 2em; }
    dl.switch > dt { text-indent: -1.5em; }
    dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
@@ -104,6 +107,7 @@
    .note { color: green; background: transparent; font-family: sans-serif; }
    .warning { color: red; background: transparent; }
    .note, .warning { font-weight: bolder; font-style: italic; }
+   .note em, .warning em, .note i, .warning i { font-style: normal; }
    p.note, div.note { padding: 0.5em 2em; }
    span.note { padding: 0 2em; }
    .note p:first-child, .warning p:first-child { margin-top: 0; }
@@ -295,8 +299,6 @@
      src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
    }
 
-  ]]></style><style type="text/css"><![CDATA[
-   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
   ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
    function getCookie(name) {
      var params = location.search.substr(1).split("&");
@@ -315,22 +317,24 @@
      }
      return null;
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="commands.html" title="4.11.5 Commands" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="browsers.html" title="5 Loading Web pages" rel="next"/></head><body><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="commands.html" title="4.11.5 Commands" rel="prev"/><link href="index.html#contents" title="Table of contents" rel="contents"/><link href="browsers.html" title="5 Loading Web pages" rel="next"/></head><body onload="fixBrokenLink();" class="split chapter"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   </div><div>
-   <a href="commands.html" class="prev">4.11.5 Commands</a> &#x2013;
-   <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="browsers.html" class="next">5 Loading Web pages</a>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
+
+   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   </div><nav class="prev_next"><a href="commands.html">&#x2190; 4.11.5 Commands</a> &#x2013;
+   <a href="index.html#contents">Table of contents</a> &#x2013;
+   <a href="browsers.html">5 Loading Web pages &#x2192;</a>
   <ol class="toc"><li><ol><li><a href="links.html#links"><span class="secno">4.12 </span>Links</a>
-    <ol><li><a href="links.html#introduction-3"><span class="secno">4.12.1 </span>Introduction</a></li><li><a href="links.html#links-created-by-a-and-area-elements"><span class="secno">4.12.2 </span>Links created by <code>a</code> and <code>area</code> elements</a></li><li><a href="links.html#following-hyperlinks"><span class="secno">4.12.3 </span>Following hyperlinks</a></li><li><a href="links.html#linkTypes"><span class="secno">4.12.4 </span>Link types</a>
-      <ol><li><a href="links.html#rel-alternate"><span class="secno">4.12.4.1 </span>Link type "<code>alternate</code>"</a></li><li><a href="links.html#link-type-author"><span class="secno">4.12.4.2 </span>Link type "<code>author</code>"</a></li><li><a href="links.html#link-type-bookmark"><span class="secno">4.12.4.3 </span>Link type "<code>bookmark</code>"</a></li><li><a href="links.html#link-type-external"><span class="secno">4.12.4.4 </span>Link type "<code>external</code>"</a></li><li><a href="links.html#link-type-help"><span class="secno">4.12.4.5 </span>Link type "<code>help</code>"</a></li><li><a href="links.html#rel-icon"><span class="secno">4.12.4.6 </span>Link type "<code>icon</code>"</a></li><li><a href="links.html#link-type-license"><span class="secno">4.12.4.7 </span>Link type "<code>license</code>"</a></li><li><a href="links.html#link-type-nofollow"><span class="secno">4.12.4.8 </span>Link type "<code>nofollow</code>"</a></li><li><a href="links.html#link-type-noreferrer"><span class="secno">4.12.4.9 </span>Link type "<code>noreferrer</code>"</a></li><li><a href="links.html#link-type-pingback"><span class="secno">4.12.4.10 </span>Link type "<code>pingback</code>"</a></li><li><a href="links.html#link-type-prefetch"><span class="secno">4.12.4.11 </span>Link type "<code>prefetch</code>"</a></li><li><a href="links.html#link-type-search"><span class="secno">4.12.4.12 </span>Link type "<code>search</code>"</a></li><li><a href="links.html#link-type-sidebar"><span class="secno">4.12.4.13 </span>Link type "<code>sidebar</code>"</a></li><li><a href="links.html#link-type-stylesheet"><span class="secno">4.12.4.14 </span>Link type "<code>stylesheet</code>"</a></li><li><a href="links.html#link-type-tag"><span class="secno">4.12.4.15 </span>Link type "<code>tag</code>"</a></li><li><a href="links.html#sequential-link-types"><span class="secno">4.12.4.16 </span>Sequential link types</a>
-        <ol><li><a href="links.html#link-type-next"><span class="secno">4.12.4.16.1 </span>Link type "<code>next</code>"</a></li><li><a href="links.html#link-type-prev"><span class="secno">4.12.4.16.2 </span>Link type "<code>prev</code>"</a></li></ol></li><li><a href="links.html#other-link-types"><span class="secno">4.12.4.17 </span>Other link types</a></li></ol></li></ol></li><li><a href="links.html#common-idioms-without-dedicated-elements"><span class="secno">4.13 </span>Common idioms without dedicated elements</a>
-    <ol><li><a href="links.html#the-main-part-of-the-content"><span class="secno">4.13.1 </span>The main part of the content</a></li><li><a href="links.html#rel-up"><span class="secno">4.13.2 </span>Bread crumb navigation</a></li><li><a href="links.html#tag-clouds"><span class="secno">4.13.3 </span>Tag clouds</a></li><li><a href="links.html#conversations"><span class="secno">4.13.4 </span>Conversations</a></li><li><a href="links.html#footnotes"><span class="secno">4.13.5 </span>Footnotes</a></li></ol></li><li><a href="links.html#matching-html-elements-using-selectors"><span class="secno">4.14 </span>Matching HTML elements using selectors</a>
-    <ol><li><a href="links.html#selectors"><span class="secno">4.14.1 </span>Case-sensitivity</a></li><li><a href="links.html#pseudo-classes"><span class="secno">4.14.2 </span>Pseudo-classes</a></li></ol></li></ol></li></ol></div><h3 id="links"><span class="secno">4.12 </span>Links</h3><h4 id="introduction-3"><span class="secno">4.12.1 </span>Introduction</h4><p>Links are a conceptual construct, created by <code><a href="text-level-semantics.html#the-a-element">a</a></code>,
-  <code><a href="the-map-element.html#the-area-element">area</a></code>, and <code><a href="semantics.html#the-link-element">link</a></code> elements, that <a href="rendering.html#represents" title="represents">represent</a> a connection between two
-  resources, one of which is the current <code><a href="infrastructure.html#document">Document</a></code>. There
+    <ol><li><a href="links.html#introduction-3"><span class="secno">4.12.1 </span>Introduction</a></li><li><a href="links.html#links-created-by-a-and-area-elements"><span class="secno">4.12.2 </span>Links created by <code>a</code> and <code>area</code> elements</a></li><li><a href="links.html#following-hyperlinks-0"><span class="secno">4.12.3 </span>Following hyperlinks</a></li><li><a href="links.html#linkTypes"><span class="secno">4.12.4 </span>Link types</a>
+      <ol><li><a href="links.html#rel-alternate"><span class="secno">4.12.4.1 </span>Link type "<code>alternate</code>"</a></li><li><a href="links.html#link-type-author"><span class="secno">4.12.4.2 </span>Link type "<code>author</code>"</a></li><li><a href="links.html#link-type-bookmark"><span class="secno">4.12.4.3 </span>Link type "<code>bookmark</code>"</a></li><li><a href="links.html#link-type-help"><span class="secno">4.12.4.4 </span>Link type "<code>help</code>"</a></li><li><a href="links.html#rel-icon"><span class="secno">4.12.4.5 </span>Link type "<code>icon</code>"</a></li><li><a href="links.html#link-type-license"><span class="secno">4.12.4.6 </span>Link type "<code>license</code>"</a></li><li><a href="links.html#link-type-nofollow"><span class="secno">4.12.4.7 </span>Link type "<code>nofollow</code>"</a></li><li><a href="links.html#link-type-noreferrer"><span class="secno">4.12.4.8 </span>Link type "<code>noreferrer</code>"</a></li><li><a href="links.html#link-type-prefetch"><span class="secno">4.12.4.9 </span>Link type "<code>prefetch</code>"</a></li><li><a href="links.html#link-type-search"><span class="secno">4.12.4.10 </span>Link type "<code>search</code>"</a></li><li><a href="links.html#link-type-stylesheet"><span class="secno">4.12.4.11 </span>Link type "<code>stylesheet</code>"</a></li><li><a href="links.html#link-type-tag"><span class="secno">4.12.4.12 </span>Link type "<code>tag</code>"</a></li><li><a href="links.html#sequential-link-types"><span class="secno">4.12.4.13 </span>Sequential link types</a>
+        <ol><li><a href="links.html#link-type-next"><span class="secno">4.12.4.13.1 </span>Link type "<code>next</code>"</a></li><li><a href="links.html#link-type-prev"><span class="secno">4.12.4.13.2 </span>Link type "<code>prev</code>"</a></li></ol></li><li><a href="links.html#other-link-types"><span class="secno">4.12.4.14 </span>Other link types</a></li></ol></li></ol></li><li><a href="links.html#common-idioms"><span class="secno">4.13 </span>Common idioms without dedicated elements</a>
+    <ol><li><a href="links.html#the-main-part-of-the-content"><span class="secno">4.13.1 </span>The main part of the content</a></li><li><a href="links.html#rel-up"><span class="secno">4.13.2 </span>Bread crumb navigation</a></li><li><a href="links.html#tag-clouds"><span class="secno">4.13.3 </span>Tag clouds</a></li><li><a href="links.html#conversations"><span class="secno">4.13.4 </span>Conversations</a></li><li><a href="links.html#footnotes"><span class="secno">4.13.5 </span>Footnotes</a></li></ol></li><li><a href="links.html#selectors"><span class="secno">4.14 </span>Matching HTML elements using selectors</a>
+    <ol><li><a href="links.html#case-sensitivity"><span class="secno">4.14.1 </span>Case-sensitivity</a></li><li><a href="links.html#pseudo-classes"><span class="secno">4.14.2 </span>Pseudo-classes</a></li></ol></li></ol></li></ol></nav><h3 id="links"><span class="secno">4.12 </span>Links</h3><h4 id="introduction-3"><span class="secno">4.12.1 </span>Introduction</h4><p>Links are a conceptual construct, created by <code><a href="the-a-element.html#the-a-element">a</a></code>,
+  <code><a href="the-area-element.html#the-area-element">area</a></code>, and <code><a href="the-link-element.html#the-link-element">link</a></code> elements, that <a href="rendering.html#represents" title="represents">represent</a> a connection between two
+  resources, one of which is the current <code><a href="dom.html#document">Document</a></code>. There
   are two kinds of links in HTML:</p><dl><dt><dfn id="external-resource-link" title="external resource link">Links to external
    resources</dfn></dt>
 
@@ -345,15 +349,15 @@
    the user agent to <a href="history.html#navigate">navigate</a> to those resources, e.g. to
    visit them in a browser or download them.</p></dd>
 
-  </dl><p>For <code><a href="semantics.html#the-link-element">link</a></code> elements with an <code title="attr-link-href"><a href="semantics.html#attr-link-href">href</a></code> attribute and a <code title="attr-link-rel"><a href="semantics.html#attr-link-rel">rel</a></code> attribute, links must be created
-  for the keywords of the <code title="attr-link-rel"><a href="semantics.html#attr-link-rel">rel</a></code>
-  attribute, as defined for those keywords in the <a href="#linkTypes">link types</a> section.</p><p>Similarly, for <code><a href="text-level-semantics.html#the-a-element">a</a></code> and <code><a href="the-map-element.html#the-area-element">area</a></code> elements with
+  </dl><p>For <code><a href="the-link-element.html#the-link-element">link</a></code> elements with an <code title="attr-link-href"><a href="the-link-element.html#attr-link-href">href</a></code> attribute and a <code title="attr-link-rel"><a href="the-link-element.html#attr-link-rel">rel</a></code> attribute, links must be created
+  for the keywords of the <code title="attr-link-rel"><a href="the-link-element.html#attr-link-rel">rel</a></code>
+  attribute, as defined for those keywords in the <a href="#linkTypes">link types</a> section.</p><p>Similarly, for <code><a href="the-a-element.html#the-a-element">a</a></code> and <code><a href="the-area-element.html#the-area-element">area</a></code> elements with
   an <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code> attribute and a
   <code title="attr-hyperlink-rel"><a href="#attr-hyperlink-rel">rel</a></code> attribute, links must be
   created for the keywords of the <code title="attr-hyperlink-rel"><a href="#attr-hyperlink-rel">rel</a></code> attribute as defined for those
   keywords in the <a href="#linkTypes">link types</a> section. Unlike
-  <code><a href="semantics.html#the-link-element">link</a></code> elements, however, <code><a href="text-level-semantics.html#the-a-element">a</a></code> and
-  <code><a href="the-map-element.html#the-area-element">area</a></code> element with an <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code> attribute that either do not
+  <code><a href="the-link-element.html#the-link-element">link</a></code> elements, however, <code><a href="the-a-element.html#the-a-element">a</a></code> and
+  <code><a href="the-area-element.html#the-area-element">area</a></code> element with an <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code> attribute that either do not
   have a <code title="attr-hyperlink-rel"><a href="#attr-hyperlink-rel">rel</a></code> attribute, or
   whose <code title="attr-hyperlink-rel"><a href="#attr-hyperlink-rel">rel</a></code> attribute has no
   keywords that are defined as specifying <a href="#hyperlink" title="hyperlink">hyperlinks</a>, must also create a
@@ -362,18 +366,18 @@
   linking the element's document to the resource given by the
   element's <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code>
   attribute.</p><p>A <a href="#hyperlink">hyperlink</a> can have one or more <dfn id="hyperlink-annotation" title="hyperlink annotation">hyperlink annotations</dfn> that modify
-  the processing semantics of that hyperlink.</p><h4 id="links-created-by-a-and-area-elements"><span class="secno">4.12.2 </span>Links created by <code><a href="text-level-semantics.html#the-a-element">a</a></code> and <code><a href="the-map-element.html#the-area-element">area</a></code> elements</h4><p>The <dfn id="attr-hyperlink-href" title="attr-hyperlink-href"><code>href</code></dfn>
-  attribute on <code><a href="text-level-semantics.html#the-a-element">a</a></code> and <code><a href="the-map-element.html#the-area-element">area</a></code> elements must have
+  the processing semantics of that hyperlink.</p><h4 id="links-created-by-a-and-area-elements"><span class="secno">4.12.2 </span>Links created by <code><a href="the-a-element.html#the-a-element">a</a></code> and <code><a href="the-area-element.html#the-area-element">area</a></code> elements</h4><p>The <dfn id="attr-hyperlink-href" title="attr-hyperlink-href"><code>href</code></dfn>
+  attribute on <code><a href="the-a-element.html#the-a-element">a</a></code> and <code><a href="the-area-element.html#the-area-element">area</a></code> elements must have
   a value that is a <a href="urls.html#valid-url-potentially-surrounded-by-spaces">valid URL potentially surrounded by
   spaces</a>.</p><p class="note">The <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code>
-  attribute on <code><a href="text-level-semantics.html#the-a-element">a</a></code> and <code><a href="the-map-element.html#the-area-element">area</a></code> elements is not
+  attribute on <code><a href="the-a-element.html#the-a-element">a</a></code> and <code><a href="the-area-element.html#the-area-element">area</a></code> elements is not
   required; when those elements do not have <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code> attributes they do not
   create hyperlinks.</p><p>The <dfn id="attr-hyperlink-target" title="attr-hyperlink-target"><code>target</code></dfn>
   attribute, if present, must be a <a href="browsers.html#valid-browsing-context-name-or-keyword">valid browsing context name
   or keyword</a>. It gives the name of the <a href="browsers.html#browsing-context">browsing
   context</a> that will be used. <span class="impl">User agents use
   this name when <a href="#following-hyperlinks">following hyperlinks</a>.</span></p><p>The <dfn id="attr-hyperlink-rel" title="attr-hyperlink-rel"><code>rel</code></dfn>
-  attribute on <code><a href="text-level-semantics.html#the-a-element">a</a></code> and <code><a href="the-map-element.html#the-area-element">area</a></code> elements controls
+  attribute on <code><a href="the-a-element.html#the-a-element">a</a></code> and <code><a href="the-area-element.html#the-area-element">area</a></code> elements controls
   what kinds of links the elements create. The attribue's value must
   be a <a href="common-microsyntaxes.html#set-of-space-separated-tokens">set of space-separated tokens</a>. The <a href="#linkTypes">allowed keywords and their meanings</a> are
   defined below.</p><p>The <code title="attr-hyperlink-rel"><a href="#attr-hyperlink-rel">rel</a></code> attribute has
@@ -385,7 +389,7 @@
   designed. It is purely advisory. The value must be a <a href="common-microsyntaxes.html#valid-media-query">valid
   media query</a>. The default, if the <code title="attr-hyperlink-media"><a href="#attr-hyperlink-media">media</a></code> attribute is omitted, is
   "<code title="">all</code>".</p><p>The <dfn id="attr-hyperlink-hreflang" title="attr-hyperlink-hreflang"><code>hreflang</code></dfn>
-  attribute on <code><a href="text-level-semantics.html#the-a-element">a</a></code> and <code><a href="the-map-element.html#the-area-element">area</a></code> elements that
+  attribute on <code><a href="the-a-element.html#the-a-element">a</a></code> and <code><a href="the-area-element.html#the-area-element">area</a></code> elements that
   create <a href="#hyperlink" title="hyperlink">hyperlinks</a>, if present, gives
   the language of the linked resource. It is purely advisory. The
   value must be a valid BCP 47 language tag. <a href="references.html#refsBCP47">[BCP47]</a> <span class="impl">User agents must
@@ -401,16 +405,18 @@
   agents must not use metadata included in the link to the resource to
   determine its type.</span></p><div class="impl">
 
-  <h4 id="following-hyperlinks"><span class="secno">4.12.3 </span><dfn>Following hyperlinks</dfn></h4>
+  <h4 id="following-hyperlinks-0"><span class="secno">4.12.3 </span>Following hyperlinks</h4>
 
-  <p>When a user <em>follows a hyperlink</em> created by an element,
-  the user agent must <a href="urls.html#resolve-a-url" title="resolve a url">resolve</a> the
-  <a href="urls.html#url">URL</a> given by the <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code> attribute of that element,
-  relative to that element, and if that is successful, must
+  
+
+  <p>When a user <dfn id="following-hyperlinks" title="following hyperlinks">follows a
+  hyperlink</dfn> created by an element, the user agent must <a href="urls.html#resolve-a-url" title="resolve a url">resolve</a> the <a href="urls.html#url">URL</a> given by
+  the <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code> attribute of that
+  element, relative to that element, and if that is successful, must
   <a href="history.html#navigate">navigate</a> a <a href="browsers.html#browsing-context">browsing
   context</a> to the resulting <a href="urls.html#absolute-url">absolute URL</a>. In the
   case of server-side image maps, that <a href="urls.html#absolute-url">absolute URL</a> must
-  have its <var><a href="text-level-semantics.html#hyperlink-suffix">hyperlink suffix</a></var> appended to it before the
+  have its <var><a href="the-a-element.html#hyperlink-suffix">hyperlink suffix</a></var> appended to it before the
   navigation is started.</p>
 
   <p>If <a href="urls.html#resolve-a-url" title="resolve a url">resolving</a> the
@@ -425,8 +431,8 @@
   that must be the <a href="browsers.html#browsing-context">browsing context</a> that is
   navigated.</p>
 
-  <p>Otherwise, if the element is an <code><a href="text-level-semantics.html#the-a-element">a</a></code> or
-  <code><a href="the-map-element.html#the-area-element">area</a></code> element that has a <code title="attr-hyperlink-target"><a href="#attr-hyperlink-target">target</a></code> attribute, then the
+  <p>Otherwise, if the element is an <code><a href="the-a-element.html#the-a-element">a</a></code> or
+  <code><a href="the-area-element.html#the-area-element">area</a></code> element that has a <code title="attr-hyperlink-target"><a href="#attr-hyperlink-target">target</a></code> attribute, then the
   <a href="browsers.html#browsing-context">browsing context</a> that is navigated must be chosen by
   applying <a href="browsers.html#the-rules-for-choosing-a-browsing-context-given-a-browsing-context-name">the rules for choosing a browsing context given a
   browsing context name</a>, using the value of the <code title="attr-hyperlink-target"><a href="#attr-hyperlink-target">target</a></code> attribute as the
@@ -434,19 +440,22 @@
   new <a href="browsers.html#browsing-context">browsing context</a>, it must be navigated with
   <a href="history.html#replacement-enabled">replacement enabled</a>.</p>
 
-  <p>Otherwise, if the hyperlink is a <a href="#rel-sidebar-hyperlink" title="rel-sidebar-hyperlink">sidebar hyperlink</a> and the user
-  agent implements a feature that can be considered a secondary
-  browsing context, such a secondary browsing context may be selected
-  as the browsing context to be navigated.</p>
 
-  <p>Otherwise, if the element is an <code><a href="text-level-semantics.html#the-a-element">a</a></code> or
-  <code><a href="the-map-element.html#the-area-element">area</a></code> element with no <code title="attr-hyperlink-target"><a href="#attr-hyperlink-target">target</a></code> attribute, but the
-  <code><a href="infrastructure.html#document">Document</a></code> contains a <code><a href="semantics.html#the-base-element">base</a></code> element with a
-  <code title="attr-base-target"><a href="semantics.html#attr-base-target">target</a></code> attribute, then the
+ 
+  <p>Otherwise, if the hyperlink is a <dfn id="rel-sidebar-hyperlink" title="rel-sidebar-hyperlink">sidebar hyperlink</dfn> and the user
+  agent implements a feature that can be considered a <a href="browsers.html#secondary-browsing-context">secondary
+  browsing context</a>, such a <a href="browsers.html#secondary-browsing-context">secondary browsing
+  context</a> may be selected as the browsing context to be
+  navigated.</p>
+
+  <p>Otherwise, if the element is an <code><a href="the-a-element.html#the-a-element">a</a></code> or
+  <code><a href="the-area-element.html#the-area-element">area</a></code> element with no <code title="attr-hyperlink-target"><a href="#attr-hyperlink-target">target</a></code> attribute, but the
+  <code><a href="dom.html#document">Document</a></code> contains a <code><a href="the-base-element.html#the-base-element">base</a></code> element with a
+  <code title="attr-base-target"><a href="the-base-element.html#attr-base-target">target</a></code> attribute, then the
   browsing context that is navigated must be chosen by applying
   <a href="browsers.html#the-rules-for-choosing-a-browsing-context-given-a-browsing-context-name">the rules for choosing a browsing context given a browsing
-  context name</a>, using the value of the <code title="attr-base-target"><a href="semantics.html#attr-base-target">target</a></code> attribute of the first such
-  <code><a href="semantics.html#the-base-element">base</a></code> element as the browsing context name. If these
+  context name</a>, using the value of the <code title="attr-base-target"><a href="the-base-element.html#attr-base-target">target</a></code> attribute of the first such
+  <code><a href="the-base-element.html#the-base-element">base</a></code> element as the browsing context name. If these
   rules result in the creation of a new <a href="browsers.html#browsing-context">browsing context</a>,
   it must be navigated with <a href="history.html#replacement-enabled">replacement enabled</a>.</p>
   
@@ -455,7 +464,7 @@
   same browsing context as the one which the element itself is in.</p>
 
   <p>The navigation must be done with the <a href="browsers.html#browsing-context">browsing
-  context</a> that contains the <code><a href="infrastructure.html#document">Document</a></code> object with
+  context</a> that contains the <code><a href="dom.html#document">Document</a></code> object with
   which the element in question is associated as the <a href="history.html#source-browsing-context">source
   browsing context</a>.</p>
 
@@ -467,21 +476,18 @@
   the term <i>current document</i> refers to the resource within
   which the element representing the link finds itself.</p><div class="impl">
 
-  <p>To determine which link types apply to a <code><a href="semantics.html#the-link-element">link</a></code>,
-  <code><a href="text-level-semantics.html#the-a-element">a</a></code>, or <code><a href="the-map-element.html#the-area-element">area</a></code> element, the element's <code title="">rel</code> attribute must be <a href="common-microsyntaxes.html#split-a-string-on-spaces" title="split a string on&#10;  spaces">split on spaces</a>. The resulting tokens are the link
+  <p>To determine which link types apply to a <code><a href="the-link-element.html#the-link-element">link</a></code>,
+  <code><a href="the-a-element.html#the-a-element">a</a></code>, or <code><a href="the-area-element.html#the-area-element">area</a></code> element, the element's <code title="">rel</code> attribute must be <a href="common-microsyntaxes.html#split-a-string-on-spaces" title="split a string on&#10;  spaces">split on spaces</a>. The resulting tokens are the link
   types that apply to that element.</p>
 
   </div><p>Except where otherwise specified, a keyword must not be specified
   more than once per <code title="attr-hyperlink-rel"><a href="#attr-hyperlink-rel">rel</a></code>
-  attribute.</p><p>The link types that contain no U+003A COLON characters (:),
-  including all those defined in this specification, are <a href="infrastructure.html#ascii-case-insensitive">ASCII
-  case-insensitive</a> values<span class="impl">, and must be
-  compared as such</span>.</p><p class="example">Thus, <code title="">rel="next"</code> is the
+  attribute.</p><p>Link types are always <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a><span class="impl">, and must be compared as such</span>.</p><p class="example">Thus, <code title="">rel="next"</code> is the
   same as <code title="">rel="NEXT"</code>.</p><table><thead><tr><th rowspan="2">Link type</th>
      <th colspan="2">Effect on...</th>
      <th rowspan="2">Brief description</th>
-    </tr><tr><th><code><a href="semantics.html#the-link-element">link</a></code></th>
-     <th><code><a href="text-level-semantics.html#the-a-element">a</a></code> and <code><a href="the-map-element.html#the-area-element">area</a></code></th>
+    </tr><tr><th><code><a href="the-link-element.html#the-link-element">link</a></code></th>
+     <th><code><a href="the-a-element.html#the-a-element">a</a></code> and <code><a href="the-area-element.html#the-area-element">area</a></code></th>
     </tr></thead><tbody><tr><td><code title="rel-alternate"><a href="#rel-alternate">alternate</a></code></td> 
      <td><a href="#hyperlink">Hyperlink</a></td>
      <td><a href="#hyperlink">Hyperlink</a></td>
@@ -494,10 +500,6 @@
      <td><em>not allowed</em></td>
      <td><a href="#hyperlink">Hyperlink</a></td>
      <td>Gives the permalink for the nearest ancestor section.</td>
-    </tr><tr><td><code title="rel-external"><a href="#link-type-external">external</a></code></td> 
-     <td><em>not allowed</em></td>
-     <td><a href="#hyperlink">Hyperlink</a></td>
-     <td>Indicates that the referenced document is not part of the same site as the current document.</td>
     </tr><tr><td><code title="rel-help"><a href="#link-type-help">help</a></code></td>
      <td><a href="#hyperlink">Hyperlink</a></td>
      <td><a href="#hyperlink">Hyperlink</a></td>
@@ -522,10 +524,6 @@
      <td><em>not allowed</em></td>
      <td><a href="#hyperlink-annotation" title="hyperlink annotation">Annotation</a></td>
      <td>Requires that the user agent not send an HTTP <code title="http-referer">Referer</code> (sic) header if the user follows the hyperlink.</td>
-    </tr><tr><td><code title="rel-pingback"><a href="#link-type-pingback">pingback</a></code></td>
-     <td><a href="#external-resource-link" title="external resource link">External Resource</a></td>
-     <td><em>not allowed</em></td>
-     <td>Gives the address of the pingback server that handles pingbacks to the current document.</td>
     </tr><tr><td><code title="rel-prefetch"><a href="#link-type-prefetch">prefetch</a></code></td>
      <td><a href="#external-resource-link" title="external resource link">External Resource</a></td>
      <td><a href="#external-resource-link" title="external resource link">External Resource</a></td>
@@ -538,16 +536,12 @@
      <td><a href="#hyperlink">Hyperlink</a></td>
      <td><a href="#hyperlink">Hyperlink</a></td>
      <td>Gives a link to a resource that can be used to search through the current document and its related pages.</td>
-    </tr><tr><td><code title="rel-sidebar"><a href="#link-type-sidebar">sidebar</a></code></td> 
-     <td><a href="#hyperlink">Hyperlink</a></td>
-     <td><a href="#hyperlink">Hyperlink</a></td>
-     <td>Specifies that the referenced document, if retrieved, is intended to be shown in the browser's sidebar (if it has one).</td>
     </tr><tr><td><code title="rel-stylesheet"><a href="#link-type-stylesheet">stylesheet</a></code></td> 
      <td><a href="#external-resource-link" title="external resource link">External Resource</a></td>
      <td><em>not allowed</em></td>
      <td>Imports a stylesheet.</td>
     </tr><tr><td><code title="rel-tag"><a href="#link-type-tag">tag</a></code></td> 
-     <td><a href="#hyperlink">Hyperlink</a></td>
+     <td><em>not allowed</em></td>
      <td><a href="#hyperlink">Hyperlink</a></td>
      <td>Gives a tag (identified by the given address) that applies to the current document.</td>
     </tr></tbody></table><div class="impl">
@@ -558,9 +552,9 @@
   documents.</p>
 
   </div><h5 id="rel-alternate"><span class="secno">4.12.4.1 </span>Link type "<dfn title="rel-alternate"><code>alternate</code></dfn>"</h5><p>The <code title="rel-alternate"><a href="#rel-alternate">alternate</a></code> keyword may be
-  used with <code><a href="semantics.html#the-link-element">link</a></code>, <code><a href="text-level-semantics.html#the-a-element">a</a></code>, and <code><a href="the-map-element.html#the-area-element">area</a></code>
+  used with <code><a href="the-link-element.html#the-link-element">link</a></code>, <code><a href="the-a-element.html#the-a-element">a</a></code>, and <code><a href="the-area-element.html#the-area-element">area</a></code>
   elements.</p><p>The meaning of this keyword depends on the values of the other
-  attributes.</p><dl class="switch"><dt>If the element is a <code><a href="semantics.html#the-link-element">link</a></code> element and the <code title="attr-link-rel"><a href="semantics.html#attr-link-rel">rel</a></code> attribute also contains the
+  attributes.</p><dl class="switch"><dt>If the element is a <code><a href="the-link-element.html#the-link-element">link</a></code> element and the <code title="attr-link-rel"><a href="the-link-element.html#attr-link-rel">rel</a></code> attribute also contains the
    keyword <code title="rel-stylesheet"><a href="#link-type-stylesheet">stylesheet</a></code></dt>
 
    <dd>
@@ -585,13 +579,13 @@
 
     <div class="impl">
 
-    <p>The first <code><a href="semantics.html#the-link-element">link</a></code>, <code><a href="text-level-semantics.html#the-a-element">a</a></code>, or <code><a href="the-map-element.html#the-area-element">area</a></code>
+    <p>The first <code><a href="the-link-element.html#the-link-element">link</a></code>, <code><a href="the-a-element.html#the-a-element">a</a></code>, or <code><a href="the-area-element.html#the-area-element">area</a></code>
     element in the document (in tree order) with the <code title="rel-alternate"><a href="#rel-alternate">alternate</a></code> keyword used with the <code title="attr-hyperlink-type"><a href="#attr-hyperlink-type">type</a></code> attribute set to the value
     <code title="">application/rss+xml</code> or the value <code title="">application/atom+xml</code> must be treated as the default
     syndication feed for the purposes of feed autodiscovery.</p>
 
     <div class="example">
-     <p>The following <code><a href="semantics.html#the-link-element">link</a></code> element gives the syndication
+     <p>The following <code><a href="the-link-element.html#the-link-element">link</a></code> element gives the syndication
      feed for the current page:</p>
      <pre>&lt;link rel="alternate" type="application/atom+xml" href="data.xml"&gt;</pre>
      <p>The following extract offers various different syndication
@@ -626,7 +620,7 @@
     <p>If the <code title="rel-alternate"><a href="#rel-alternate">alternate</a></code> keyword is
     used with the <code title="attr-hyperlink-hreflang"><a href="#attr-hyperlink-hreflang">hreflang</a></code>
     attribute, and that attribute's value differs from the <a href="infrastructure.html#root-element">root
-    element</a>'s <a href="elements.html#language">language</a>, it indicates that the
+    element</a>'s <a href="global-attributes.html#language">language</a>, it indicates that the
     referenced document is a translation.</p>
 
     <p>If the <code title="rel-alternate"><a href="#rel-alternate">alternate</a></code> keyword is
@@ -656,30 +650,30 @@
    </dd>
 
   </dl><h5 id="link-type-author"><span class="secno">4.12.4.2 </span>Link type "<dfn title="rel-author"><code>author</code></dfn>"</h5><p>The <code title="rel-author"><a href="#link-type-author">author</a></code> keyword may be
-  used with <code><a href="semantics.html#the-link-element">link</a></code>, <code><a href="text-level-semantics.html#the-a-element">a</a></code>, and <code><a href="the-map-element.html#the-area-element">area</a></code>
-  elements. This keyword creates a <a href="#hyperlink">hyperlink</a>.</p><p>For <code><a href="text-level-semantics.html#the-a-element">a</a></code> and <code><a href="the-map-element.html#the-area-element">area</a></code> elements, the <code title="rel-author"><a href="#link-type-author">author</a></code> keyword indicates that the
+  used with <code><a href="the-link-element.html#the-link-element">link</a></code>, <code><a href="the-a-element.html#the-a-element">a</a></code>, and <code><a href="the-area-element.html#the-area-element">area</a></code>
+  elements. This keyword creates a <a href="#hyperlink">hyperlink</a>.</p><p>For <code><a href="the-a-element.html#the-a-element">a</a></code> and <code><a href="the-area-element.html#the-area-element">area</a></code> elements, the <code title="rel-author"><a href="#link-type-author">author</a></code> keyword indicates that the
   referenced document provides further information about the author of
-  the nearest <code><a href="sections.html#the-article-element">article</a></code> element ancestor of the element
+  the nearest <code><a href="the-article-element.html#the-article-element">article</a></code> element ancestor of the element
   defining the hyperlink, if there is one, or of the page as a whole,
-  otherwise.</p><p>For <code><a href="semantics.html#the-link-element">link</a></code> elements, the <code title="rel-author"><a href="#link-type-author">author</a></code> keyword indicates that the
+  otherwise.</p><p>For <code><a href="the-link-element.html#the-link-element">link</a></code> elements, the <code title="rel-author"><a href="#link-type-author">author</a></code> keyword indicates that the
   referenced document provides further information about the author
   for the page as a whole.</p><p class="note">The "referenced document" can be, and often is, a
   <code title="">mailto:</code> URL giving the e-mail address of the
   author. <a href="references.html#refsMAILTO">[MAILTO]</a></p><div class="impl">
 
   <p><strong>Synonyms</strong>: For historical reasons, user agents
-  must also treat <code><a href="semantics.html#the-link-element">link</a></code>, <code><a href="text-level-semantics.html#the-a-element">a</a></code>, and
-  <code><a href="the-map-element.html#the-area-element">area</a></code> elements that have a <code title="">rev</code>
+  must also treat <code><a href="the-link-element.html#the-link-element">link</a></code>, <code><a href="the-a-element.html#the-a-element">a</a></code>, and
+  <code><a href="the-area-element.html#the-area-element">area</a></code> elements that have a <code title="">rev</code>
   attribute with the value "<code>made</code>" as having the <code title="rel-author"><a href="#link-type-author">author</a></code> keyword specified as a link
   relationship.</p>
 
   </div><h5 id="link-type-bookmark"><span class="secno">4.12.4.3 </span>Link type "<dfn title="rel-bookmark"><code>bookmark</code></dfn>"</h5><p>The <code title="rel-bookmark"><a href="#link-type-bookmark">bookmark</a></code> keyword may be
-  used with <code><a href="text-level-semantics.html#the-a-element">a</a></code> and <code><a href="the-map-element.html#the-area-element">area</a></code> elements. This
+  used with <code><a href="the-a-element.html#the-a-element">a</a></code> and <code><a href="the-area-element.html#the-area-element">area</a></code> elements. This
   keyword creates a <a href="#hyperlink">hyperlink</a>.</p><p>The <code title="rel-bookmark"><a href="#link-type-bookmark">bookmark</a></code> keyword gives a
-  permalink for the nearest ancestor <code><a href="sections.html#the-article-element">article</a></code> element of
-  the linking element in question, or of <a href="sections.html#associatedSection">the section the linking element is most
+  permalink for the nearest ancestor <code><a href="the-article-element.html#the-article-element">article</a></code> element of
+  the linking element in question, or of <a href="headings-and-sections.html#associatedSection">the section the linking element is most
   closely associated with</a>, if there are no ancestor
-  <code><a href="sections.html#the-article-element">article</a></code> elements.</p><div class="example">
+  <code><a href="the-article-element.html#the-article-element">article</a></code> elements.</p><div class="example">
    <p>The following snippet has three permalinks. A user agent could
    determine which permalink applies to which part of the spec by
    looking at where the permalinks are given.</p>
@@ -703,13 +697,9 @@
   &lt;/article&gt;
  &lt;/body&gt;
  ...</pre>
-  </div><h5 id="link-type-external"><span class="secno">4.12.4.4 </span>Link type "<dfn title="rel-external"><code>external</code></dfn>"</h5><p>The <code title="rel-external"><a href="#link-type-external">external</a></code> keyword may be
-  used with <code><a href="text-level-semantics.html#the-a-element">a</a></code> and <code><a href="the-map-element.html#the-area-element">area</a></code> elements. This
-  keyword creates a <a href="#hyperlink">hyperlink</a>.</p><p>The <code title="rel-external"><a href="#link-type-external">external</a></code> keyword indicates
-  that the link is leading to a document that is not part of the site
-  that the current document forms a part of.</p><h5 id="link-type-help"><span class="secno">4.12.4.5 </span>Link type "<dfn title="rel-help"><code>help</code></dfn>"</h5><p>The <code title="rel-help"><a href="#link-type-help">help</a></code> keyword may be used with
-  <code><a href="semantics.html#the-link-element">link</a></code>, <code><a href="text-level-semantics.html#the-a-element">a</a></code>, and <code><a href="the-map-element.html#the-area-element">area</a></code>
-  elements. This keyword creates a <a href="#hyperlink">hyperlink</a>.</p><p>For <code><a href="text-level-semantics.html#the-a-element">a</a></code> and <code><a href="the-map-element.html#the-area-element">area</a></code> elements, the <code title="rel-help"><a href="#link-type-help">help</a></code> keyword indicates that the referenced
+  </div><h5 id="link-type-help"><span class="secno">4.12.4.4 </span>Link type "<dfn title="rel-help"><code>help</code></dfn>"</h5><p>The <code title="rel-help"><a href="#link-type-help">help</a></code> keyword may be used with
+  <code><a href="the-link-element.html#the-link-element">link</a></code>, <code><a href="the-a-element.html#the-a-element">a</a></code>, and <code><a href="the-area-element.html#the-area-element">area</a></code>
+  elements. This keyword creates a <a href="#hyperlink">hyperlink</a>.</p><p>For <code><a href="the-a-element.html#the-a-element">a</a></code> and <code><a href="the-area-element.html#the-area-element">area</a></code> elements, the <code title="rel-help"><a href="#link-type-help">help</a></code> keyword indicates that the referenced
   document provides further help information for the parent of the
   element defining the hyperlink, and its children.</p><div class="example">
 
@@ -720,9 +710,11 @@
 
    <pre> &lt;p&gt;&lt;label&gt; Topic: &lt;input name=topic&gt; &lt;a href="help/topic.html" rel="help"&gt;(Help)&lt;/a&gt;&lt;/label&gt;&lt;/p&gt;</pre>
 
-  </div><p>For <code><a href="semantics.html#the-link-element">link</a></code> elements, the <code title="rel-help"><a href="#link-type-help">help</a></code> keyword indicates that the referenced
-  document provides help for the page as a whole.</p><h5 id="rel-icon"><span class="secno">4.12.4.6 </span>Link type "<dfn title="rel-icon"><code>icon</code></dfn>"</h5><p>The <code title="rel-icon"><a href="#rel-icon">icon</a></code> keyword may be used with
-  <code><a href="semantics.html#the-link-element">link</a></code> elements. This keyword creates an <a href="#external-resource-link" title="external resource link">external resource link</a>.</p><div class="impl">
+  </div><p>For <code><a href="the-link-element.html#the-link-element">link</a></code> elements, the <code title="rel-help"><a href="#link-type-help">help</a></code> keyword indicates that the referenced
+  document provides help for the page as a whole.</p><p>For <code><a href="the-a-element.html#the-a-element">a</a></code> and <code><a href="the-area-element.html#the-area-element">area</a></code> elements, on some
+  browsers, the <code title="rel-help"><a href="#link-type-help">help</a></code> keyword causes the
+  link to use a different cursor.</p><h5 id="rel-icon"><span class="secno">4.12.4.5 </span>Link type "<dfn title="rel-icon"><code>icon</code></dfn>"</h5><p>The <code title="rel-icon"><a href="#rel-icon">icon</a></code> keyword may be used with
+  <code><a href="the-link-element.html#the-link-element">link</a></code> elements. This keyword creates an <a href="#external-resource-link" title="external resource link">external resource link</a>.</p><div class="impl">
 
   <p>The specified resource is an icon representing the page or site,
   and should be used by the user agent when representing the page in
@@ -730,28 +722,33 @@
 
   </div><p>Icons could be auditory icons, visual icons, or other kinds of
   icons. <span class="impl">If multiple icons are provided, the user
-  agent must select the most appropriate icon according to the <code title="attr-link-type"><a href="semantics.html#attr-link-type">type</a></code>, <code title="attr-link-media"><a href="semantics.html#attr-link-media">media</a></code>, and <code title="attr-link-sizes"><a href="#attr-link-sizes">sizes</a></code> attributes. If there are
+  agent must select the most appropriate icon according to the <code title="attr-link-type"><a href="the-link-element.html#attr-link-type">type</a></code>, <code title="attr-link-media"><a href="the-link-element.html#attr-link-media">media</a></code>, and <code title="attr-link-sizes"><a href="#attr-link-sizes">sizes</a></code> attributes. If there are
   multiple equally appropriate icons, user agents must use the last
-  one declared in <a href="infrastructure.html#tree-order">tree order</a>. If the user agent tries to
-  use an icon but that icon is determined, upon closer examination, to
-  in fact be inappropriate (e.g. because it uses an unsupported
-  format), then the user agent must try the next-most-appropriate icon
-  as determined by the attributes.</span></p><div class="impl">
+  one declared in <a href="infrastructure.html#tree-order">tree order</a> at the time that the user
+  agent collected the list of icons. If the user agent tries to use an
+  icon but that icon is determined, upon closer examination, to in
+  fact be inappropriate (e.g. because it uses an unsupported format),
+  then the user agent must try the next-most-appropriate icon as
+  determined by the attributes.</span></p><div class="impl">
+
+  <p class="note">User agents are not required to update icons when
+  the list of icons changes, but are encouraged to do so.</p>
 
   <p>There is no default type for resources given by the <code title="rel-icon"><a href="#rel-icon">icon</a></code> keyword. However, for the purposes of
-  <a href="semantics.html#concept-link-type-sniffing">determining the type of the
+  <a href="the-link-element.html#concept-link-type-sniffing">determining the type of the
   resource</a>, user agents must expect the resource to be an image.</p>
 
   </div><p>The <dfn id="attr-link-sizes" title="attr-link-sizes"><code>sizes</code></dfn>
-  attribute gives the sizes of icons for visual media.</p><p>If specified, the attribute must have a value that is an
-  <a href="common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens">unordered set of unique space-separated tokens</a>, which
-  are <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a>. The values must all be
-  either an <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for the string
-  "<code title="attr-link-sizes-any"><a href="#attr-link-sizes-any">any</a></code>", or a value that
-  consists of two <a href="common-microsyntaxes.html#valid-non-negative-integer" title="valid non-negative integer">valid
-  non-negative integers</a> that do not have a leading U+0030 DIGIT
-  ZERO (0) character and that are separated by a single U+0078 LATIN
-  SMALL LETTER X or U+0058 LATIN CAPITAL LETTER X character.</p><p>The keywords represent icon sizes.</p><div class="impl">
+  attribute gives the sizes of icons for visual media. Its value, if
+  present, is merely advisory. User agents may use the value to decide
+  which icon(s) to use if multiple icons are available.</p><p>If specified, the attribute must have a value that is an
+  <a href="common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens">unordered set of unique space-separated tokens</a> which
+  are <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a>. Each value must be either
+  an <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> match for the string "<code title="attr-link-sizes-any"><a href="#attr-link-sizes-any">any</a></code>", or a value that consists of
+  two <a href="common-microsyntaxes.html#valid-non-negative-integer" title="valid non-negative integer">valid non-negative
+  integers</a> that do not have a leading U+0030 DIGIT ZERO (0)
+  character and that are separated by a single U+0078 LATIN SMALL
+  LETTER X or U+0058 LATIN CAPITAL LETTER X character.</p><p>The keywords represent icon sizes.</p><div class="impl">
 
   <p>To parse and process the attribute's value, the user agent must
   first <a href="common-microsyntaxes.html#split-a-string-on-spaces" title="split a string on spaces">split the attribute's
@@ -796,13 +793,9 @@
   icon sizes that are not actually available in the linked
   resource.</p><div class="impl">
 
-  <p>If the attribute is not specified, then the user agent must
-  assume that the given icon is appropriate, but less appropriate than
-  an icon of a known and appropriate size.</p>
-
-  <p>In the absence of a <code><a href="semantics.html#the-link-element">link</a></code> with the <code title="rel-icon"><a href="#rel-icon">icon</a></code> keyword, for <code><a href="infrastructure.html#document">Document</a></code>s
+  <p>In the absence of a <code><a href="the-link-element.html#the-link-element">link</a></code> with the <code title="rel-icon"><a href="#rel-icon">icon</a></code> keyword, for <code><a href="dom.html#document">Document</a></code>s
   obtained over HTTP or HTTPS, user agents may instead attempt to
-  <a href="fetching-resources.html#fetch">fetch</a> and use an icon with the <a href="urls.html#absolute-url">absolute
+  <a href="urls.html#fetch">fetch</a> and use an icon with the <a href="urls.html#absolute-url">absolute
   URL</a> obtained by resolving the <a href="urls.html#url">URL</a> "<code title="">/favicon.ico</code>" against <a href="dom.html#the-document-s-address">the document's
   address</a>, as if the page had declared that icon using the
   <code title="rel-icon"><a href="#rel-icon">icon</a></code> keyword.</p>
@@ -828,8 +821,11 @@
  &lt;body&gt;
   ...</pre>
 
-  </div><h5 id="link-type-license"><span class="secno">4.12.4.7 </span>Link type "<dfn title="rel-license"><code>license</code></dfn>"</h5><p>The <code title="rel-license"><a href="#link-type-license">license</a></code> keyword may be used
-  with <code><a href="semantics.html#the-link-element">link</a></code>, <code><a href="text-level-semantics.html#the-a-element">a</a></code>, and <code><a href="the-map-element.html#the-area-element">area</a></code>
+  </div><p>For historical reasons, the <code title="rel-icon"><a href="#rel-icon">icon</a></code>
+  keyword may be preceded by the keyword "<code title="">shortcut</code>". If the "<code title="">shortcut</code>"
+  keyword is present, it must be come immediately before the <code title="rel-icon"><a href="#rel-icon">icon</a></code> keyword and the two keywords must be
+  separated by only a single U+0020 SPACE character.</p><h5 id="link-type-license"><span class="secno">4.12.4.6 </span>Link type "<dfn title="rel-license"><code>license</code></dfn>"</h5><p>The <code title="rel-license"><a href="#link-type-license">license</a></code> keyword may be used
+  with <code><a href="the-link-element.html#the-link-element">link</a></code>, <code><a href="the-a-element.html#the-a-element">a</a></code>, and <code><a href="the-area-element.html#the-area-element">area</a></code>
   elements. This keyword creates a <a href="#hyperlink">hyperlink</a>.</p><p>The <code title="rel-license"><a href="#link-type-license">license</a></code> keyword indicates
   that the referenced document provides the copyright license terms
   under which the main content of the current document is
@@ -881,86 +877,80 @@
   must also treat the keyword "<code title="">copyright</code>" like
   the <code title="rel-license"><a href="#link-type-license">license</a></code> keyword.</p>
 
-  </div><h5 id="link-type-nofollow"><span class="secno">4.12.4.8 </span>Link type "<dfn title="rel-nofollow"><code>nofollow</code></dfn>"</h5><p>The <code title="rel-nofollow"><a href="#link-type-nofollow">nofollow</a></code> keyword may be
-  used with <code><a href="text-level-semantics.html#the-a-element">a</a></code> and <code><a href="the-map-element.html#the-area-element">area</a></code> elements. This
+  </div><h5 id="link-type-nofollow"><span class="secno">4.12.4.7 </span>Link type "<dfn title="rel-nofollow"><code>nofollow</code></dfn>"</h5><p>The <code title="rel-nofollow"><a href="#link-type-nofollow">nofollow</a></code> keyword may be
+  used with <code><a href="the-a-element.html#the-a-element">a</a></code> and <code><a href="the-area-element.html#the-area-element">area</a></code> elements. This
   keyword does not create a <a href="#hyperlink">hyperlink</a>, but <a href="#hyperlink-annotation" title="hyperlink annotation">annotates</a> any other hyperlinks
   created by the element (the implied hyperlink, if no other keywords
   create one).</p><p>The <code title="rel-nofollow"><a href="#link-type-nofollow">nofollow</a></code> keyword indicates
   that the link is not endorsed by the original author or publisher of
   the page, or that the link to the referenced document was included
   primarily because of a commercial relationship between people
-  affiliated with the two pages.</p><h5 id="link-type-noreferrer"><span class="secno">4.12.4.9 </span>Link type "<dfn title="rel-noreferrer"><code>noreferrer</code></dfn>"</h5><p>The <code title="rel-noreferrer"><a href="#link-type-noreferrer">noreferrer</a></code> keyword may be
-  used with <code><a href="text-level-semantics.html#the-a-element">a</a></code> and <code><a href="the-map-element.html#the-area-element">area</a></code> elements. This
+  affiliated with the two pages.</p><h5 id="link-type-noreferrer"><span class="secno">4.12.4.8 </span>Link type "<dfn title="rel-noreferrer"><code>noreferrer</code></dfn>"</h5><p>The <code title="rel-noreferrer"><a href="#link-type-noreferrer">noreferrer</a></code> keyword may be
+  used with <code><a href="the-a-element.html#the-a-element">a</a></code> and <code><a href="the-area-element.html#the-area-element">area</a></code> elements. This
   keyword does not create a <a href="#hyperlink">hyperlink</a>, but <a href="#hyperlink-annotation" title="hyperlink annotation">annotates</a> any other hyperlinks
   created by the element (the implied hyperlink, if no other keywords
   create one).</p><p>It indicates that no referrer information is to be leaked when
   following the link.</p><div class="impl">
 
-  <p>If a user agent follows a link defined by an <code><a href="text-level-semantics.html#the-a-element">a</a></code> or
-  <code><a href="the-map-element.html#the-area-element">area</a></code> element that has the <code title="rel-noreferrer"><a href="#link-type-noreferrer">noreferrer</a></code> keyword, the user agent
+  <p>If a user agent follows a link defined by an <code><a href="the-a-element.html#the-a-element">a</a></code> or
+  <code><a href="the-area-element.html#the-area-element">area</a></code> element that has the <code title="rel-noreferrer"><a href="#link-type-noreferrer">noreferrer</a></code> keyword, the user agent
   must not include a <code title="http-referer">Referer</code> (sic)
-  HTTP header (<a href="fetching-resources.html#concept-http-equivalent-headers" title="concept-http-equivalent-headers">or
+  HTTP header (<a href="urls.html#concept-http-equivalent-headers" title="concept-http-equivalent-headers">or
   equivalent</a> for other protocols) in the request.</p>
 
   <p>This keyword also <a href="browsers.html#noopener">causes the <code title="dom-opener">opener</code> attribute to remain null</a> if the
   hyperlink creates a new <a href="browsers.html#browsing-context">browsing context</a>.</p>
 
-  </div><h5 id="link-type-pingback"><span class="secno">4.12.4.10 </span>Link type "<dfn title="rel-pingback"><code>pingback</code></dfn>"</h5><p>The <code title="rel-pingback"><a href="#link-type-pingback">pingback</a></code> keyword may be
-  used with <code><a href="semantics.html#the-link-element">link</a></code> elements. This keyword creates an <a href="#external-resource-link" title="external resource link">external resource link</a>.</p><p>For the semantics of the <code title="rel-pingback"><a href="#link-type-pingback">pingback</a></code> keyword, see the Pingback 1.0
-  specification. <a href="references.html#refsPINGBACK">[PINGBACK]</a></p><h5 id="link-type-prefetch"><span class="secno">4.12.4.11 </span>Link type "<dfn title="rel-prefetch"><code>prefetch</code></dfn>"</h5><p>The <code title="rel-prefetch"><a href="#link-type-prefetch">prefetch</a></code> keyword may be
-  used with <code><a href="semantics.html#the-link-element">link</a></code>, <code><a href="text-level-semantics.html#the-a-element">a</a></code>, and <code><a href="the-map-element.html#the-area-element">area</a></code>
+  </div><h5 id="link-type-prefetch"><span class="secno">4.12.4.9 </span>Link type "<dfn title="rel-prefetch"><code>prefetch</code></dfn>"</h5><p>The <code title="rel-prefetch"><a href="#link-type-prefetch">prefetch</a></code> keyword may be
+  used with <code><a href="the-link-element.html#the-link-element">link</a></code>, <code><a href="the-a-element.html#the-a-element">a</a></code>, and <code><a href="the-area-element.html#the-area-element">area</a></code>
   elements. This keyword creates an <a href="#external-resource-link" title="external resource&#10;  link">external resource link</a>.</p><p>The <code title="rel-prefetch"><a href="#link-type-prefetch">prefetch</a></code> keyword indicates
   that preemptively fetching and caching the specified resource is
   likely to be beneficial, as it is highly likely that the user will
-  require this resource.</p><p>There is no default type for resources given by the <code title="rel-prefetch"><a href="#link-type-prefetch">prefetch</a></code> keyword.</p><h5 id="link-type-search"><span class="secno">4.12.4.12 </span>Link type "<dfn title="rel-search"><code>search</code></dfn>"</h5><p>The <code title="rel-search"><a href="#link-type-search">search</a></code> keyword may be used
-  with <code><a href="semantics.html#the-link-element">link</a></code>, <code><a href="text-level-semantics.html#the-a-element">a</a></code>, and <code><a href="the-map-element.html#the-area-element">area</a></code>
+  require this resource.</p><p>There is no default type for resources given by the <code title="rel-prefetch"><a href="#link-type-prefetch">prefetch</a></code> keyword.</p><h5 id="link-type-search"><span class="secno">4.12.4.10 </span>Link type "<dfn title="rel-search"><code>search</code></dfn>"</h5><p>The <code title="rel-search"><a href="#link-type-search">search</a></code> keyword may be used
+  with <code><a href="the-link-element.html#the-link-element">link</a></code>, <code><a href="the-a-element.html#the-a-element">a</a></code>, and <code><a href="the-area-element.html#the-area-element">area</a></code>
   elements. This keyword creates a <a href="#hyperlink">hyperlink</a>.</p><p>The <code title="rel-search"><a href="#link-type-search">search</a></code> keyword indicates that
   the referenced document provides an interface specifically for
   searching the document and its related resources.</p><p class="note">OpenSearch description documents can be used with
-  <code><a href="semantics.html#the-link-element">link</a></code> elements and the <code title="rel-search"><a href="#link-type-search">search</a></code> link type to enable user agents to
-  autodiscover search interfaces. <a href="references.html#refsOPENSEARCH">[OPENSEARCH]</a></p><h5 id="link-type-sidebar"><span class="secno">4.12.4.13 </span>Link type "<dfn title="rel-sidebar"><code>sidebar</code></dfn>"</h5><p>The <code title="rel-sidebar"><a href="#link-type-sidebar">sidebar</a></code> keyword may be used
-  with <code><a href="semantics.html#the-link-element">link</a></code>, <code><a href="text-level-semantics.html#the-a-element">a</a></code>, and <code><a href="the-map-element.html#the-area-element">area</a></code>
-  elements. This keyword creates a <a href="#hyperlink">hyperlink</a>.</p><p>The <code title="rel-sidebar"><a href="#link-type-sidebar">sidebar</a></code> keyword indicates
-  that the referenced document, if retrieved, is intended to be shown
-  in a <a href="browsers.html#secondary-browsing-context">secondary browsing context</a> (if possible), instead
-  of in the current <a href="browsers.html#browsing-context">browsing context</a>.</p><p>A <a href="#hyperlink">hyperlink</a> with the <code title="rel-sidebar"><a href="#link-type-sidebar">sidebar</a></code> keyword specified is a <dfn id="rel-sidebar-hyperlink" title="rel-sidebar-hyperlink">sidebar hyperlink</dfn>.</p><h5 id="link-type-stylesheet"><span class="secno">4.12.4.14 </span>Link type "<dfn title="rel-stylesheet"><code>stylesheet</code></dfn>"</h5><p>The <code title="rel-stylesheet"><a href="#link-type-stylesheet">stylesheet</a></code> keyword may be
-  used with <code><a href="semantics.html#the-link-element">link</a></code> elements. This keyword creates an <a href="#external-resource-link" title="external resource link">external resource link</a> that
-  contributes to the <a href="semantics.html#styling">styling processing model</a>.</p><p>The specified resource is a resource that describes how to
+  <code><a href="the-link-element.html#the-link-element">link</a></code> elements and the <code title="rel-search"><a href="#link-type-search">search</a></code> link type to enable user agents to
+  autodiscover search interfaces. <a href="references.html#refsOPENSEARCH">[OPENSEARCH]</a></p><h5 id="link-type-stylesheet"><span class="secno">4.12.4.11 </span>Link type "<dfn title="rel-stylesheet"><code>stylesheet</code></dfn>"</h5><p>The <code title="rel-stylesheet"><a href="#link-type-stylesheet">stylesheet</a></code> keyword may be
+  used with <code><a href="the-link-element.html#the-link-element">link</a></code> elements. This keyword creates an <a href="#external-resource-link" title="external resource link">external resource link</a> that
+  contributes to the <a href="styling.html#styling">styling processing model</a>.</p><p>The specified resource is a resource that describes how to
   present the document. Exactly how the resource is to be processed
   depends on the actual type of the resource.</p><p>If the <code title="rel-alternate"><a href="#rel-alternate">alternate</a></code> keyword is
-  also specified on the <code><a href="semantics.html#the-link-element">link</a></code> element, then <dfn id="the-link-is-an-alternative-stylesheet">the link
-  is an alternative stylesheet</dfn>; in this case, the <code title="attr-title"><a href="elements.html#the-title-attribute">title</a></code> attribute must be specified on the
-  <code><a href="semantics.html#the-link-element">link</a></code> element, with a non-empty value.</p><p>The default type for resources given by the <code title="rel-stylesheet"><a href="#link-type-stylesheet">stylesheet</a></code> keyword is <code title="">text/css</code>.</p><div class="impl">
+  also specified on the <code><a href="the-link-element.html#the-link-element">link</a></code> element, then <dfn id="the-link-is-an-alternative-stylesheet">the link
+  is an alternative stylesheet</dfn>; in this case, the <code title="attr-title"><a href="global-attributes.html#the-title-attribute">title</a></code> attribute must be specified on the
+  <code><a href="the-link-element.html#the-link-element">link</a></code> element, with a non-empty value.</p><p>The default type for resources given by the <code title="rel-stylesheet"><a href="#link-type-stylesheet">stylesheet</a></code> keyword is <code title="">text/css</code>.</p><div class="impl">
 
-  <p>The appropriate time to <a href="semantics.html#concept-link-obtain" title="concept-link-obtain">obtain</a> the resource is when the
+  <p>The appropriate time to <a href="the-link-element.html#concept-link-obtain" title="concept-link-obtain">obtain</a> the resource is when the
   <a href="#external-resource-link" title="external resource link">external resource link</a>
   is created or when its element is <a href="infrastructure.html#insert-an-element-into-a-document" title="insert an element&#10;  into a document">inserted into a document</a>, whichever happens
   last. If the resource is <a href="#the-link-is-an-alternative-stylesheet" title="the link is an alternative&#10;  stylesheet">an alternative stylesheet</a> then the user agent may
-  defer obtaining the resource until it is part of the <span>preferred
-  style sheet set</span>. <a href="references.html#refsCSSOM">[CSSOM]</a></p> 
+  defer obtaining the resource until it is part of the <a href="infrastructure.html#preferred-style-sheet-set">preferred
+  style sheet set</a>. <a href="references.html#refsCSSOM">[CSSOM]</a></p> 
+
   <p><strong>Quirk</strong>: If the document has been set to
-  <a href="dom.html#quirks-mode">quirks mode</a>, has the <a href="origin-0.html#same-origin">same origin</a> as the
+  <a href="infrastructure.html#quirks-mode">quirks mode</a>, has the <a href="origin-0.html#same-origin">same origin</a> as the
   <a href="urls.html#url">URL</a> of the external resource<!-- CVE-2010-0654 -->, and
-  the <a href="fetching-resources.html#content-type" title="Content-Type">Content-Type metadata</a> of the
+  the <a href="urls.html#content-type" title="Content-Type">Content-Type metadata</a> of the
   external resource is not a supported style sheet type, the user
   agent must instead assume it to be <code title="">text/css</code>.</p>
 
-  </div><h5 id="link-type-tag"><span class="secno">4.12.4.15 </span>Link type "<dfn title="rel-tag"><code>tag</code></dfn>"</h5><p>The <code title="rel-tag"><a href="#link-type-tag">tag</a></code> keyword may be used
-  with <code><a href="semantics.html#the-link-element">link</a></code>, <code><a href="text-level-semantics.html#the-a-element">a</a></code>, and <code><a href="the-map-element.html#the-area-element">area</a></code>
-  elements. This keyword creates a <a href="#hyperlink">hyperlink</a>.</p><p>The <code title="rel-tag"><a href="#link-type-tag">tag</a></code> keyword indicates that the
+  </div><h5 id="link-type-tag"><span class="secno">4.12.4.12 </span>Link type "<dfn title="rel-tag"><code>tag</code></dfn>"</h5><p>The <code title="rel-tag"><a href="#link-type-tag">tag</a></code> keyword may be used with
+  <code><a href="the-a-element.html#the-a-element">a</a></code> and <code><a href="the-area-element.html#the-area-element">area</a></code> elements. This keyword creates
+  a <a href="#hyperlink">hyperlink</a>.</p><p>The <code title="rel-tag"><a href="#link-type-tag">tag</a></code> keyword indicates that the
   <em>tag</em> that the referenced document represents applies to the
   current document.</p><p class="note">Since it indicates that the tag <em>applies to the
   current document</em>, it would be inappropriate to use this keyword
   in the markup of a <a href="#tag-cloud">tag cloud</a>, which lists
-  the popular tag across a set of pages.</p><h5 id="sequential-link-types"><span class="secno">4.12.4.16 </span>Sequential link types</h5><p>Some documents form part of a sequence of documents.</p><p>A sequence of documents is one where each document can have a
+  the popular tags across a set of pages.</p><h5 id="sequential-link-types"><span class="secno">4.12.4.13 </span>Sequential link types</h5><p>Some documents form part of a sequence of documents.</p><p>A sequence of documents is one where each document can have a
   <em>previous sibling</em> and a <em>next sibling</em>. A document
   with no previous sibling is the start of its sequence, a document
-  with no next sibling is the end of its sequence.</p><p>A document may be part of multiple sequences.</p><h6 id="link-type-next"><span class="secno">4.12.4.16.1 </span>Link type "<dfn title="rel-next"><code>next</code></dfn>"</h6><p>The <code title="rel-next"><a href="#link-type-next">next</a></code> keyword may be used with
-  <code><a href="semantics.html#the-link-element">link</a></code>, <code><a href="text-level-semantics.html#the-a-element">a</a></code>, and <code><a href="the-map-element.html#the-area-element">area</a></code>
+  with no next sibling is the end of its sequence.</p><p>A document may be part of multiple sequences.</p><h6 id="link-type-next"><span class="secno">4.12.4.13.1 </span>Link type "<dfn title="rel-next"><code>next</code></dfn>"</h6><p>The <code title="rel-next"><a href="#link-type-next">next</a></code> keyword may be used with
+  <code><a href="the-link-element.html#the-link-element">link</a></code>, <code><a href="the-a-element.html#the-a-element">a</a></code>, and <code><a href="the-area-element.html#the-area-element">area</a></code>
   elements. This keyword creates a <a href="#hyperlink">hyperlink</a>.</p><p>The <code title="rel-next"><a href="#link-type-next">next</a></code> keyword indicates that the
   document is part of a sequence, and that the link is leading to the
-  document that is the next logical document in the sequence.</p><h6 id="link-type-prev"><span class="secno">4.12.4.16.2 </span>Link type "<dfn title="rel-prev"><code>prev</code></dfn>"</h6><p>The <code title="rel-prev"><a href="#link-type-prev">prev</a></code> keyword may be used with
-  <code><a href="semantics.html#the-link-element">link</a></code>, <code><a href="text-level-semantics.html#the-a-element">a</a></code>, and <code><a href="the-map-element.html#the-area-element">area</a></code>
+  document that is the next logical document in the sequence.</p><h6 id="link-type-prev"><span class="secno">4.12.4.13.2 </span>Link type "<dfn title="rel-prev"><code>prev</code></dfn>"</h6><p>The <code title="rel-prev"><a href="#link-type-prev">prev</a></code> keyword may be used with
+  <code><a href="the-link-element.html#the-link-element">link</a></code>, <code><a href="the-a-element.html#the-a-element">a</a></code>, and <code><a href="the-area-element.html#the-area-element">area</a></code>
   elements. This keyword creates a <a href="#hyperlink">hyperlink</a>.</p><p>The <code title="rel-prev"><a href="#link-type-prev">prev</a></code> keyword indicates that the
   document is part of a sequence, and that the link is leading to the
   document that is the previous logical document in the sequence.</p><div class="impl">
@@ -969,8 +959,8 @@
   must also treat the keyword "<code title="">previous</code>" like
   the <code title="rel-prev"><a href="#link-type-prev">prev</a></code> keyword.</p>
 
-  </div><h5 id="other-link-types"><span class="secno">4.12.4.17 </span>Other link types</h5><p><dfn id="concept-rel-extensions" title="concept-rel-extensions">Extensions to the predefined
-  set of link types</dfn> may be registered in the <a href="http://microformats.org/wiki/existing-rel-values">Microformats wiki existing-rel-values page</a>. <a href="references.html#refsMFREL">[MFREL]</a></p><p>Anyone is free to edit the <span title="">Microformats wiki
+  </div><h5 id="other-link-types"><span class="secno">4.12.4.14 </span>Other link types</h5><p><dfn id="concept-rel-extensions" title="concept-rel-extensions">Extensions to the predefined
+  set of link types</dfn> may be registered in the <a href="http://microformats.org/wiki/existing-rel-values#HTML5_link_type_extensions">microformats wiki existing-rel-values page</a>. <a href="references.html#refsMFREL">[MFREL]</a></p><p>Anyone is free to edit the <span title="">microformats wiki
   existing-rel-values page</span> at any time to add a type. Extension
   types must be specified with the following information:</p><dl><dt>Keyword</dt>
 
@@ -986,7 +976,7 @@
    </dd>
 
 
-   <dt>Effect on... <code><a href="semantics.html#the-link-element">link</a></code></dt>
+   <dt>Effect on... <code><a href="the-link-element.html#the-link-element">link</a></code></dt>
 
    <dd>
 
@@ -994,23 +984,23 @@
 
     <dl><dt>Not allowed</dt>
 
-     <dd>The keyword must not be specified on <code><a href="semantics.html#the-link-element">link</a></code>
+     <dd>The keyword must not be specified on <code><a href="the-link-element.html#the-link-element">link</a></code>
      elements.</dd>
 
      <dt>Hyperlink</dt>
 
-     <dd>The keyword may be specified on a <code><a href="semantics.html#the-link-element">link</a></code> element;
+     <dd>The keyword may be specified on a <code><a href="the-link-element.html#the-link-element">link</a></code> element;
      it creates a <a href="#hyperlink">hyperlink</a>.</dd>
 
      <dt>External Resource</dt>
 
-     <dd>The keyword may be specified on a <code><a href="semantics.html#the-link-element">link</a></code> element;
+     <dd>The keyword may be specified on a <code><a href="the-link-element.html#the-link-element">link</a></code> element;
      it creates an <a href="#external-resource-link">external resource link</a>.</dd>
 
     </dl></dd>
 
 
-   <dt>Effect on... <code><a href="text-level-semantics.html#the-a-element">a</a></code> and <code><a href="the-map-element.html#the-area-element">area</a></code></dt>
+   <dt>Effect on... <code><a href="the-a-element.html#the-a-element">a</a></code> and <code><a href="the-area-element.html#the-area-element">area</a></code></dt>
 
    <dd>
 
@@ -1018,25 +1008,25 @@
 
     <dl><dt>Not allowed</dt>
 
-     <dd>The keyword must not be specified on <code><a href="text-level-semantics.html#the-a-element">a</a></code> and
-     <code><a href="the-map-element.html#the-area-element">area</a></code> elements.</dd>
+     <dd>The keyword must not be specified on <code><a href="the-a-element.html#the-a-element">a</a></code> and
+     <code><a href="the-area-element.html#the-area-element">area</a></code> elements.</dd>
 
      <dt>Hyperlink</dt>
 
-     <dd>The keyword may be specified on <code><a href="text-level-semantics.html#the-a-element">a</a></code> and
-     <code><a href="the-map-element.html#the-area-element">area</a></code> elements; it creates a
+     <dd>The keyword may be specified on <code><a href="the-a-element.html#the-a-element">a</a></code> and
+     <code><a href="the-area-element.html#the-area-element">area</a></code> elements; it creates a
      <a href="#hyperlink">hyperlink</a>.</dd>
 
      <dt>External Resource</dt>
 
-     <dd>The keyword may be specified on a <code><a href="text-level-semantics.html#the-a-element">a</a></code> and
-     <code><a href="the-map-element.html#the-area-element">area</a></code> elements; it creates an <a href="#external-resource-link">external resource
+     <dd>The keyword may be specified on <code><a href="the-a-element.html#the-a-element">a</a></code> and
+     <code><a href="the-area-element.html#the-area-element">area</a></code> elements; it creates an <a href="#external-resource-link">external resource
      link</a>.</dd>
 
      <dt>Hyperlink Annotation</dt>
 
-     <dd>The keyword may be specified on a <code><a href="text-level-semantics.html#the-a-element">a</a></code> and
-     <code><a href="the-map-element.html#the-area-element">area</a></code> elements; it <a href="#hyperlink-annotation" title="hyperlink&#10;     annotation">annotates</a> other <a href="#hyperlink" title="hyperlink">hyperlinks</a> created by the element.</dd>
+     <dd>The keyword may be specified on <code><a href="the-a-element.html#the-a-element">a</a></code> and
+     <code><a href="the-area-element.html#the-area-element">area</a></code> elements; it <a href="#hyperlink-annotation" title="hyperlink&#10;     annotation">annotates</a> other <a href="#hyperlink" title="hyperlink">hyperlinks</a> created by the element.</dd>
 
     </dl></dd>
 
@@ -1113,7 +1103,7 @@
 
   </dl><div class="impl">
 
-  <p>Conformance checkers must use the information given on the <span title="">Microformats wiki existing-rel-values page</span> to
+  <p>Conformance checkers must use the information given on the <span title="">microformats wiki existing-rel-values page</span> to
   establish if a value is allowed or not: values defined in this
   specification or marked as "proposed" or "ratified" must be accepted
   when used on the elements for which they apply as described in the
@@ -1128,26 +1118,26 @@
   add the value to the Wiki, with the details described above, with
   the "proposed" status.</p>
 
-  </div><p>Types defined as extensions in the <a href="http://microformats.org/wiki/existing-rel-values">Microformats
+  </div><p>Types defined as extensions in the <a href="http://microformats.org/wiki/existing-rel-values#HTML5_link_type_extensions">microformats
   wiki existing-rel-values page</a> with the status "proposed" or
   "ratified" may be used with the <code title="">rel</code> attribute
-  on <code><a href="semantics.html#the-link-element">link</a></code>, <code><a href="text-level-semantics.html#the-a-element">a</a></code>, and <code><a href="the-map-element.html#the-area-element">area</a></code> elements
-  in accordance to the "Effect on..." field. <a href="references.html#refsMFREL">[MFREL]</a></p><h3 id="common-idioms-without-dedicated-elements"><span class="secno">4.13 </span>Common idioms without dedicated elements</h3><h4 id="the-main-part-of-the-content"><span class="secno">4.13.1 </span>The main part of the content</h4><p>The main content of a page &#x2014; not including headers and
+  on <code><a href="the-link-element.html#the-link-element">link</a></code>, <code><a href="the-a-element.html#the-a-element">a</a></code>, and <code><a href="the-area-element.html#the-area-element">area</a></code> elements
+  in accordance to the "Effect on..." field. <a href="references.html#refsMFREL">[MFREL]</a></p><h3 id="common-idioms"><span class="secno">4.13 </span>Common idioms without dedicated elements</h3><h4 id="the-main-part-of-the-content"><span class="secno">4.13.1 </span>The main part of the content</h4><p>The main content of a page &#x2014; not including headers and
   footers, navigation links, sidebars, advertisements, and so forth
   &#x2014; can be marked up in a variety of ways, depending on the
   needs of the author.</p><p>The simplest solution is to not mark up the main content at all,
   and just leave it as implicit. Another way to think of this is that
-  the <code><a href="sections.html#the-body-element">body</a></code> elements marks up the main content of the
+  the <code><a href="the-body-element.html#the-body-element">body</a></code> elements marks up the main content of the
   page, and the bits that aren't main content are excluded through the
-  use of more appropriate elements like <code><a href="sections.html#the-aside-element">aside</a></code> and
-  <code><a href="sections.html#the-nav-element">nav</a></code>.</p><div class="example">
+  use of more appropriate elements like <code><a href="the-aside-element.html#the-aside-element">aside</a></code> and
+  <code><a href="the-nav-element.html#the-nav-element">nav</a></code>.</p><div class="example">
 
    <p>Here is a short Web page marked up along this minimalistic
    school of thought. The main content is highlighted. Notice how all
-   the <em>other</em> content in the <code><a href="sections.html#the-body-element">body</a></code> is marked up
+   the <em>other</em> content in the <code><a href="the-body-element.html#the-body-element">body</a></code> is marked up
    with elements to indicate that it's not part of the main content,
-   in this case <code><a href="sections.html#the-header-element">header</a></code>, <code><a href="sections.html#the-nav-element">nav</a></code>, and
-   <code><a href="sections.html#the-footer-element">footer</a></code>.</p>
+   in this case <code><a href="the-header-element.html#the-header-element">header</a></code>, <code><a href="the-nav-element.html#the-nav-element">nav</a></code>, and
+   <code><a href="the-footer-element.html#the-footer-element">footer</a></code>.</p>
 
    <pre>&lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
@@ -1173,7 +1163,7 @@
 
   </div><p>If the main content is an independent unit of content that one
   could imagine syndicating independently, then the
-  <code><a href="sections.html#the-article-element">article</a></code> element would be appropriate to mark up the
+  <code><a href="the-article-element.html#the-article-element">article</a></code> element would be appropriate to mark up the
   main content of the document.</p><div class="example">
 
    <p>The document in the previous example is here recast as a blog
@@ -1195,7 +1185,7 @@
 <strong>  &lt;article&gt;
    &lt;header&gt;
     &lt;h1&gt;My toys&lt;/h1&gt;
-    &lt;p&gt;Published &lt;time pubdate datetime="2010-08-04"&gt;August 4th&lt;/time&gt;&lt;/p&gt;
+    &lt;p&gt;Published August 4th&lt;/p&gt;
    &lt;/header&gt;
    &lt;p&gt;I really like my chained book and my telephone. I'm not such a
    fan of my big ball.&lt;/p&gt;
@@ -1209,7 +1199,7 @@
 
   </div><p>If the main content is not an independent unit of content so much
   as a section of a larger work, for instance a chapter, then the
-  <code><a href="sections.html#the-section-element">section</a></code> element would be appropriate to mark up the
+  <code><a href="the-section-element.html#the-section-element">section</a></code> element would be appropriate to mark up the
   main content of the document.</p><div class="example">
 
    <p>Here is the same document, case as a chapter in an online
@@ -1240,13 +1230,13 @@
  &lt;/body&gt;
 &lt;/html&gt;</pre>
 
-  </div><p>If neither <code><a href="sections.html#the-article-element">article</a></code> nor <code><a href="sections.html#the-section-element">section</a></code> would be
+  </div><p>If neither <code><a href="the-article-element.html#the-article-element">article</a></code> nor <code><a href="the-section-element.html#the-section-element">section</a></code> would be
   appropriate, but the main content still needs an explicit element,
-  for example for styling purposes, then the <code><a href="grouping-content.html#the-div-element">div</a></code> element
+  for example for styling purposes, then the <code><a href="the-div-element.html#the-div-element">div</a></code> element
   can be used.</p><div class="example">
 
    <p>This is the same as the original example, but using
-   <code><a href="grouping-content.html#the-div-element">div</a></code> for the main content instead of leaving it
+   <code><a href="the-div-element.html#the-div-element">div</a></code> for the main content instead of leaving it
    implied:</p>
 
    <pre>&lt;!DOCTYPE HTML&gt;
@@ -1278,7 +1268,7 @@
 
   </div><h4 id="rel-up"><span class="secno">4.13.2 </span>Bread crumb navigation</h4><p>This specification does not provide a machine-readable way of
   describing bread-crumb navigation menus. Authors are encouraged to
-  just use a series of links in a paragraph. The <code><a href="sections.html#the-nav-element">nav</a></code>
+  just use a series of links in a paragraph. The <code><a href="the-nav-element.html#the-nav-element">nav</a></code>
   element can be used to mark the section containing these
   paragraphs as being navigation blocks.</p><div class="example">
 
@@ -1302,7 +1292,7 @@
   </div><h4 id="tag-clouds"><span class="secno">4.13.3 </span>Tag clouds</h4><p id="tag-cloud">This specification does not define any markup
   specifically for marking up lists of keywords that apply to a group
   of pages (also known as <i>tag clouds</i>). In general, authors are
-  encouraged to either mark up such lists using <code><a href="grouping-content.html#the-ul-element">ul</a></code>
+  encouraged to either mark up such lists using <code><a href="the-ul-element.html#the-ul-element">ul</a></code>
   elements with explicit inline counts that are then hidden and turned
   into a presentational effect using a style sheet, or to use SVG.</p><div class="example">
 
@@ -1327,20 +1317,20 @@
  &lt;li class="tag-cloud-5"&gt;&lt;a title="41 instances" href="/t/pear"&gt;pear&lt;/a&gt; &lt;span&gt;(very popular)&lt;/span&gt;
 &lt;/ul&gt;</pre>
 
-   <p>The actual frequency of each tag is given using the <code title="attr-title"><a href="elements.html#the-title-attribute">title</a></code> attribute. A CSS style sheet is
+   <p>The actual frequency of each tag is given using the <code title="attr-title"><a href="global-attributes.html#the-title-attribute">title</a></code> attribute. A CSS style sheet is
    provided to convert the markup into a cloud of differently-sized
    words, but for user agents that do not support CSS or are not
    visual, the markup contains annotations like "(popular)" or
    "(rare)" to categorize the various tags by frequency, thus enabling
    all users to benefit from the information.</p>
 
-   <p>The <code><a href="grouping-content.html#the-ul-element">ul</a></code> element is used (rather than
-   <code><a href="grouping-content.html#the-ol-element">ol</a></code>) because the order is not particularly important:
+   <p>The <code><a href="the-ul-element.html#the-ul-element">ul</a></code> element is used (rather than
+   <code><a href="the-ol-element.html#the-ol-element">ol</a></code>) because the order is not particularly important:
    while the list is in fact ordered alphabetically, it would convey
    the same information if ordered by, say, the length of the tag.</p>
 
    <p>The <code title="rel-tag"><a href="#link-type-tag">tag</a></code> <code title="attr-hyperlink-rel"><a href="#attr-hyperlink-rel">rel</a></code>-keyword is <em>not</em> used
-   on these <code><a href="text-level-semantics.html#the-a-element">a</a></code> elements because they do not represent tags
+   on these <code><a href="the-a-element.html#the-a-element">a</a></code> elements because they do not represent tags
    that apply to the page itself; they are just part of an index
    listing the tags themselves.</p>
 
@@ -1348,10 +1338,10 @@
   up conversations, meeting minutes, chat transcripts, dialogues in
   screenplays, instant message logs, and other situations where
   different players take turns in discourse.</p><p>Instead, authors are encouraged to mark up conversations using
-  <code><a href="grouping-content.html#the-p-element">p</a></code> elements and punctuation. Authors who need to mark
+  <code><a href="the-p-element.html#the-p-element">p</a></code> elements and punctuation. Authors who need to mark
   the speaker for styling purposes are encouraged to use
-  <code><a href="text-level-semantics.html#the-span-element">span</a></code> or <code><a href="text-level-semantics.html#the-b-element">b</a></code>. Paragraphs with their text
-  wrapped in the <code><a href="text-level-semantics.html#the-i-element">i</a></code> element can be used for marking up
+  <code><a href="the-span-element.html#the-span-element">span</a></code> or <code><a href="the-b-element.html#the-b-element">b</a></code>. Paragraphs with their text
+  wrapped in the <code><a href="the-i-element.html#the-i-element">i</a></code> element can be used for marking up
   stage directions.</p><div class="example">
 
    <p>This example demonstrates this using an extract from Abbot and
@@ -1367,21 +1357,63 @@
 
   </div><div class="example">
 
-   <p>The following extract shows how an IM conversation log could be
-   marked up.</p>
+   <p>HTML does not have a good way to mark up graphs, so descriptions
+   of interactive conversations from games are more difficult to mark
+   up. This example shows one possible convention using
+   <code><a href="the-dl-element.html#the-dl-element">dl</a></code> elements to list the possible responses at each
+   point in the conversation. Another option to consider is describing
+   the conversation in the form of a DOT file, and outputting the
+   result as an SVG image to place in the document. <a href="references.html#refsDOT">[DOT]</a></p>
 
-   <pre>&lt;p&gt; &lt;time&gt;14:22&lt;/time&gt; &lt;b&gt;egof&lt;/b&gt; I'm not that nerdy, I've only seen 30% of the star trek episodes
-&lt;p&gt; &lt;time&gt;14:23&lt;/time&gt; &lt;b&gt;kaj&lt;/b&gt; if you know what percentage of the star trek episodes you have seen, you are inarguably nerdy
-&lt;p&gt; &lt;time&gt;14:23&lt;/time&gt; &lt;b&gt;egof&lt;/b&gt; it's unarguably
-&lt;p&gt; &lt;time&gt;14:23&lt;/time&gt; &lt;i&gt;* kaj blinks&lt;/i&gt;
-&lt;p&gt; &lt;time&gt;14:24&lt;/time&gt; &lt;b&gt;kaj&lt;/b&gt; you are not helping your case</pre>
-   
+   <pre>&lt;p&gt; Next, you meet a fisherman. You can say one of several greetings:
+&lt;dl&gt;
+ &lt;dt&gt; "Hello there!"
+ &lt;dd&gt;
+  &lt;p&gt; He responds with "Hello, how may I help you?"; you can respond with:
+  &lt;dl&gt;
+   &lt;dt&gt; "I would like to buy a fish."
+   &lt;dd&gt; &lt;p&gt; He sells you a fish and the conversation finishes.
+   &lt;dt&gt; "Can I borrow your boat?"
+   &lt;dd&gt;
+    &lt;p&gt; He is surprised and asks "What are you offering in return?".
+    &lt;dl&gt;
+     &lt;dt&gt; "Five gold." (if you have enough)
+     &lt;dt&gt; "Ten gold." (if you have enough)
+     &lt;dt&gt; "Fifteen gold." (if you have enough)
+     &lt;dd&gt; &lt;p&gt; He lends you his boat. The conversation ends.
+     &lt;dt&gt; "A fish." (if you have one)
+     &lt;dt&gt; "A newspaper." (if you have one)
+     &lt;dt&gt; "A pebble." (if you have one)
+     &lt;dd&gt; &lt;p&gt; "No thanks", he replies. Your conversation options        
+     at this point are the same as they were after asking to borrow
+     his boat, minus any options you've suggested before.
+    &lt;/dl&gt;
+   &lt;/dd&gt;
+  &lt;/dl&gt;
+ &lt;/dd&gt;
+ &lt;dt&gt; "Vote for me in the next election!"
+ &lt;dd&gt; &lt;p&gt; He turns away. The conversation finishes.
+ &lt;dt&gt; "Sir, are you aware that your fish are running away?"
+ &lt;dd&gt;
+  &lt;p&gt; He looks at you skeptically and says "Fish cannot run, sir".
+  &lt;dl&gt;
+   &lt;dt&gt; "You got me!"
+   &lt;dd&gt; &lt;p&gt; The fisherman sighs and the conversation ends.
+   &lt;dt&gt; "Only kidding."
+   &lt;dd&gt; &lt;p&gt; "Good one!" he retorts. Your conversation options at this
+   point are the same as those following "Hello there!" above.
+   &lt;dt&gt; "Oh, then what are they doing?"
+   &lt;dd&gt; &lt;p&gt; He looks at his fish, giving you an opportunity to steal
+   his boat, which you do. The conversation ends.
+  &lt;/dl&gt;
+ &lt;/dd&gt;
+&lt;/ul&gt;</pre>
 
   </div><h4 id="footnotes"><span class="secno">4.13.5 </span>Footnotes</h4><p>HTML does not have a dedicated mechanism for marking up
-  footnotes. Here are the recommended alternatives.</p><hr/><p>For short inline annotations, the <code title="attr-title"><a href="elements.html#the-title-attribute">title</a></code> attribute should be used.</p><div class="example">
+  footnotes. Here are the recommended alternatives.</p><hr/><p>For short inline annotations, the <code title="attr-title"><a href="global-attributes.html#the-title-attribute">title</a></code> attribute should be used.</p><div class="example">
 
    <p>In this example, two parts of a dialogue are annotated with
-   footnote-like content using the <code title="attr-title"><a href="elements.html#the-title-attribute">title</a></code> attribute.</p>
+   footnote-like content using the <code title="attr-title"><a href="global-attributes.html#the-title-attribute">title</a></code> attribute.</p>
 
    <pre>&lt;p&gt; &lt;b&gt;Customer&lt;/b&gt;: Hello! I wish to register a complaint. Hello. Miss?
 &lt;p&gt; &lt;b&gt;Shopkeeper&lt;/b&gt;: <strong>&lt;span title="Colloquial pronunciation of 'What do you'"</strong>
@@ -1390,7 +1422,7 @@
 &lt;p&gt; &lt;b&gt;Shopkeeper&lt;/b&gt;: Sorry, &lt;span <strong>title="This is, of course, a lie."</strong>&gt;we're
 closing for lunch&lt;/span&gt;.</pre>
 
-  </div><hr/><p>For longer annotations, the <code><a href="text-level-semantics.html#the-a-element">a</a></code> element should be
+  </div><hr/><p>For longer annotations, the <code><a href="the-a-element.html#the-a-element">a</a></code> element should be
   used, pointing to an element later in the document. The convention
   is that the contents of the link be a number in square brackets.</p><div class="example">
 
@@ -1415,7 +1447,7 @@ contradict people?
 
   </div><hr/><p>For side notes, longer annotations that apply to entire sections
   of the text rather than just specific words or sentences, the
-  <code><a href="sections.html#the-aside-element">aside</a></code> element should be used.</p><div class="example">
+  <code><a href="the-aside-element.html#the-aside-element">aside</a></code> element should be used.</p><div class="example">
 
    <p>In this example, a sidebar is given after a dialogue, giving it
    some context.</p>
@@ -1432,11 +1464,11 @@ contradict people?
 &lt;/aside&gt;</pre>
 
   </div><hr/><p>For figures or tables, footnotes can be included in the relevant
-  <code><a href="grouping-content.html#the-figcaption-element">figcaption</a></code> or <code><a href="tabular-data.html#the-caption-element">caption</a></code> element, or in
+  <code><a href="the-figcaption-element.html#the-figcaption-element">figcaption</a></code> or <code><a href="the-caption-element.html#the-caption-element">caption</a></code> element, or in
   surrounding prose.</p><div class="example">
 
    <p>In this example, a  table has cells with footnotes
-   that are given in prose. A <code><a href="grouping-content.html#the-figure-element">figure</a></code> element is used to
+   that are given in prose. A <code><a href="the-figure-element.html#the-figure-element">figure</a></code> element is used to
    give a single legend to the combination of the table and its
    footnotes.</p>
 
@@ -1468,94 +1500,51 @@ contradict people?
 
   </div><div class="impl">
 
-  <h3 id="matching-html-elements-using-selectors"><span class="secno">4.14 </span>Matching HTML elements using selectors</h3>
+  <h3 id="selectors"><span class="secno">4.14 </span>Matching HTML elements using selectors</h3>
 
-  <h4 id="selectors"><span class="secno">4.14.1 </span>Case-sensitivity</h4>
+  <h4 id="case-sensitivity"><span class="secno">4.14.1 </span>Case-sensitivity</h4>
+
+  <p>The Selectors specification leaves the case-sensitivity of IDs,
+  classes, element names, attribute names, and attribute values to be
+  defined by the host language. <a href="references.html#refsSELECTORS">[SELECTORS]</a></p>
+
+  <p>The <a href="infrastructure.html#concept-id" title="concept-id">unique identifier</a> of
+  <a href="infrastructure.html#html-elements">HTML elements</a> in documents that are in <a href="infrastructure.html#quirks-mode">quirks
+  mode</a> must be treated as <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a>
+  for the purposes of selector matching.</p>
+
+  <p>Classes from the <code title="attr-class"><a href="global-attributes.html#classes">class</a></code> attribute
+  of <a href="infrastructure.html#html-elements">HTML elements</a> in documents that are in <a href="infrastructure.html#quirks-mode">quirks
+  mode</a> must be treated as <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a>
+  for the purposes of selector matching.</p>
 
   <p>Attribute and element <em>names</em> of <a href="infrastructure.html#html-elements">HTML
-  elements</a> in <a href="dom.html#html-documents">HTML documents</a> must be treated as
-  <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a>.</p>
+  elements</a> in <a href="infrastructure.html#html-documents">HTML documents</a> must be treated as
+  <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a> for the purposes of selector
+  matching.</p>
 
-  <p>Classes from the <code title="attr-class"><a href="elements.html#classes">class</a></code> attribute
-  of <a href="infrastructure.html#html-elements">HTML elements</a> in documents that are in <a href="dom.html#quirks-mode">quirks
-  mode</a> must be treated as <a href="infrastructure.html#ascii-case-insensitive">ASCII
-  case-insensitive</a>.</p>
-
-  <p>Attribute selectors on an <a href="infrastructure.html#html-elements" title="HTML elements">HTML
-  element</a> in an <a href="dom.html#html-documents" title="HTML documents">HTML
-  document</a> must treat the <em>values</em> of attributes with
-  the following names as <a href="infrastructure.html#ascii-case-insensitive">ASCII case-insensitive</a>, with one
-  exception as noted below:</p>
-
-  
-  
-  <ul class="brief"><li><code title="">accept</code>
-   </li><li><code title="">accept-charset</code>
-   </li><li><code title="">align</code>
-   </li><li><code title="">alink</code>
-   </li><li><code title="">axis</code>
-   </li><li><code title="">bgcolor</code>
-   </li><li><code title="">charset</code>
-   </li><li><code title="">checked</code>
-   </li><li><code title="">clear</code>
-   </li><li><code title="">codetype</code>
-   </li><li><code title="">color</code>
-   </li><li><code title="">compact</code>
-   </li><li><code title="">declare</code>
-   </li><li><code title="">defer</code>
-   </li><li><code title="">dir</code>
-   </li><li><code title="">direction</code> 
-   </li><li><code title="">disabled</code>
-   </li><li><code title="">enctype</code>
-   </li><li><code title="">face</code>
-   </li><li><code title="">frame</code>
-   </li><li><code title="">hreflang</code>
-   </li><li><code title="">http-equiv</code>
-   </li><li><code title="">lang</code>
-   </li><li><code title="">language</code>
-   </li><li><code title="">link</code>
-   </li><li><code title="">media</code>
-   </li><li><code title="">method</code>
-   </li><li><code title="">multiple</code>
-   </li><li><code title="">nohref</code>
-   </li><li><code title="">noresize</code>
-   </li><li><code title="">noshade</code>
-   </li><li><code title="">nowrap</code>
-   </li><li><code title="">readonly</code>
-   </li><li><code title="">rel</code>
-   </li><li><code title="">rev</code>
-   </li><li><code title="">rules</code>
-   </li><li><code title="">scope</code>
-   </li><li><code title="">scrolling</code>
-   </li><li><code title="">selected</code>
-   </li><li><code title="">shape</code>
-   </li><li><code title="">target</code>
-   </li><li><code title="">text</code>
-   </li><li><code title="">type</code> (except as specified below)
-   </li><li><code title="">valign</code>
-   </li><li><code title="">valuetype</code>
-   </li><li><code title="">vlink</code>
-  </li></ul><p>All other attribute values on <a href="infrastructure.html#html-elements">HTML elements</a> must be
-  treated as <a href="infrastructure.html#case-sensitive">case-sensitive</a>.</p>
-
-  <p>The exception to the list above is the <code title="attr-ol-type"><a href="grouping-content.html#attr-ol-type">type</a></code> attribute on <code><a href="grouping-content.html#the-ol-element">ol</a></code>
-  elements, which must be treated as <a href="infrastructure.html#case-sensitive">case-sensitive</a>.</p>
+  <p>Everything else (attribute values on <a href="infrastructure.html#html-elements">HTML elements</a>,
+  IDs and classes in <a href="infrastructure.html#no-quirks-mode">no-quirks mode</a> and
+  <a href="infrastructure.html#limited-quirks-mode">limited-quirks mode</a>, and element names, attribute
+  names, and attribute values in <a href="infrastructure.html#xml-documents">XML documents</a>) must be
+  treated as <a href="infrastructure.html#case-sensitive">case-sensitive</a> for the purposes of selector
+  matching.</p>
 
 
   <h4 id="pseudo-classes"><span class="secno">4.14.2 </span>Pseudo-classes</h4>
 
   <p>There are a number of dynamic selectors that can be used with
-  HTML. This section defines when these selectors match HTML
-  elements.</p>
+  HTML. This section defines when these selectors match HTML elements.
+  <a href="references.html#refsSELECTORS">[SELECTORS]</a> <a href="references.html#refsCSSUI">[CSSUI]</a></p>
 
   <dl><dt><dfn id="selector-link" title="selector-link"><code>:link</code></dfn></dt>
    <dt><dfn id="selector-visited" title="selector-visited"><code>:visited</code></dfn></dt>
 
    <dd>
 
-    <p>All <code><a href="text-level-semantics.html#the-a-element">a</a></code> elements that have an <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code> attribute, all
-    <code><a href="the-map-element.html#the-area-element">area</a></code> elements that have an <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code> attribute, and all
-    <code><a href="semantics.html#the-link-element">link</a></code> elements that have an <code title="attr-link-href"><a href="semantics.html#attr-link-href">href</a></code> attribute, must match one of
+    <p>All <code><a href="the-a-element.html#the-a-element">a</a></code> elements that have an <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code> attribute, all
+    <code><a href="the-area-element.html#the-area-element">area</a></code> elements that have an <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code> attribute, and all
+    <code><a href="the-link-element.html#the-link-element">link</a></code> elements that have an <code title="attr-link-href"><a href="the-link-element.html#attr-link-href">href</a></code> attribute, must match one of
     <code title="selector-link"><a href="#selector-link">:link</a></code> and <code title="selector-visited"><a href="#selector-visited">:visited</a></code>.</p>
 
     <p>Other specifications might apply more specific rules regarding
@@ -1587,17 +1576,17 @@ contradict people?
       element's <a href="content-models.html#activation-behavior">activation behavior</a> has finished running,
       which ever comes first:</p>
 
-      <ul><li><code><a href="text-level-semantics.html#the-a-element">a</a></code> elements that have an <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code> attribute</li>
+      <ul><li><code><a href="the-a-element.html#the-a-element">a</a></code> elements that have an <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code> attribute</li>
 
-       <li><code><a href="the-map-element.html#the-area-element">area</a></code> elements that have an <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code> attribute</li>
+       <li><code><a href="the-area-element.html#the-area-element">area</a></code> elements that have an <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code> attribute</li>
 
-       <li><code><a href="semantics.html#the-link-element">link</a></code> elements that have an <code title="attr-link-href"><a href="semantics.html#attr-link-href">href</a></code> attribute</li>
+       <li><code><a href="the-link-element.html#the-link-element">link</a></code> elements that have an <code title="attr-link-href"><a href="the-link-element.html#attr-link-href">href</a></code> attribute</li>
 
-       <li><code><a href="the-button-element.html#the-button-element">button</a></code> elements that are not <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
+       <li><code><a href="the-button-element.html#the-button-element">button</a></code> elements that are not <a href="attributes-common-to-form-controls.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
 
-       <li><code><a href="the-input-element.html#the-input-element">input</a></code> elements whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="number-state.html#submit-button-state" title="attr-input-type-submit">Submit Button</a>, <a href="number-state.html#image-button-state" title="attr-input-type-image">Image Button</a>, <a href="number-state.html#reset-button-state" title="attr-input-type-reset">Reset Button</a>, or <a href="number-state.html#button-state" title="attr-input-type-button">Button</a> state</li>
+       <li><code><a href="the-input-element.html#the-input-element">input</a></code> elements whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="states-of-the-type-attribute.html#submit-button-state-type-submit" title="attr-input-type-submit">Submit Button</a>, <a href="states-of-the-type-attribute.html#image-button-state-type-image" title="attr-input-type-image">Image Button</a>, <a href="states-of-the-type-attribute.html#reset-button-state-type-reset" title="attr-input-type-reset">Reset Button</a>, or <a href="states-of-the-type-attribute.html#button-state-type-button" title="attr-input-type-button">Button</a> state</li>
 
-       <li><code><a href="interactive-elements.html#the-command-element">command</a></code> elements that do not have a <code title="attr-command-disabled"><a href="interactive-elements.html#attr-command-disabled">disabled</a></code> attribute</li>
+       <li><code><a href="the-command-element.html#the-command-element">command</a></code> elements that do not have a <code title="attr-command-disabled"><a href="the-command-element.html#attr-command-disabled">disabled</a></code> attribute</li>
 
        <li>elements that are <a href="editing.html#specially-focusable">specially focusable</a></li>
 
@@ -1638,35 +1627,35 @@ contradict people?
     must match any element falling into one of the following
     categories:</p>
 
-    <ul><li><code><a href="text-level-semantics.html#the-a-element">a</a></code> elements that have an <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code> attribute</li>
+    <ul><li><code><a href="the-a-element.html#the-a-element">a</a></code> elements that have an <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code> attribute</li>
 
-     <li><code><a href="the-map-element.html#the-area-element">area</a></code> elements that have an <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code> attribute</li>
+     <li><code><a href="the-area-element.html#the-area-element">area</a></code> elements that have an <code title="attr-hyperlink-href"><a href="#attr-hyperlink-href">href</a></code> attribute</li>
 
-     <li><code><a href="semantics.html#the-link-element">link</a></code> elements that have an <code title="attr-link-href"><a href="semantics.html#attr-link-href">href</a></code> attribute</li>
+     <li><code><a href="the-link-element.html#the-link-element">link</a></code> elements that have an <code title="attr-link-href"><a href="the-link-element.html#attr-link-href">href</a></code> attribute</li>
 
-     <li><code><a href="the-button-element.html#the-button-element">button</a></code> elements that are not <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
+     <li><code><a href="the-button-element.html#the-button-element">button</a></code> elements that are not <a href="attributes-common-to-form-controls.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
 
      <li><code><a href="the-input-element.html#the-input-element">input</a></code> elements whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute are not in the
-     <a href="states-of-the-type-attribute.html#hidden-state" title="attr-input-type-hidden">Hidden</a> state and that
-     are not <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
+     <a href="states-of-the-type-attribute.html#hidden-state-type-hidden" title="attr-input-type-hidden">Hidden</a> state and that
+     are not <a href="attributes-common-to-form-controls.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
 
-     <li><code><a href="the-button-element.html#the-select-element">select</a></code> elements that are not <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
+     <li><code><a href="the-select-element.html#the-select-element">select</a></code> elements that are not <a href="attributes-common-to-form-controls.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
 
-     <li><code><a href="the-button-element.html#the-textarea-element">textarea</a></code> elements that are not <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
+     <li><code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code> elements that are not <a href="attributes-common-to-form-controls.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
 
-     <li><code><a href="the-button-element.html#the-optgroup-element">optgroup</a></code> elements that are not <span title="concept-optgroup-disabled">disabled</span></li>
+     <li><code><a href="the-optgroup-element.html#the-optgroup-element">optgroup</a></code> elements that do not have a <code title="attr-optgroup-disabled"><a href="the-optgroup-element.html#attr-optgroup-disabled">disabled</a></code> attribute</li>
 
-     <li><code><a href="the-button-element.html#the-option-element">option</a></code> elements that are not <a href="the-button-element.html#concept-option-disabled" title="concept-option-disabled">disabled</a></li>
+     <li><code><a href="the-option-element.html#the-option-element">option</a></code> elements that are not <a href="the-option-element.html#concept-option-disabled" title="concept-option-disabled">disabled</a></li>
 
-     <li><code><a href="interactive-elements.html#the-command-element">command</a></code> elements that do not have a <code title="attr-command-disabled"><a href="interactive-elements.html#attr-command-disabled">disabled</a></code> attribute</li>
+     <li><code><a href="the-command-element.html#the-command-element">command</a></code> elements that do not have a <code title="attr-command-disabled"><a href="the-command-element.html#attr-command-disabled">disabled</a></code> attribute</li>
 
-     <li><code><a href="grouping-content.html#the-li-element">li</a></code> elements that are children of
-     <code><a href="interactive-elements.html#the-menu-element">menu</a></code> elements, and that have a child element that
+     <li><code><a href="the-li-element.html#the-li-element">li</a></code> elements that are children of
+     <code><a href="the-menu-element.html#the-menu-element">menu</a></code> elements, and that have a child element that
      defines a <a href="commands.html#concept-command" title="concept-command">command</a>, if the
      first such element's <a href="commands.html#command-facet-disabledstate" title="command-facet-disabledstate">Disabled State</a> facet
      is false (not disabled)</li>
 
-     <li><code><a href="forms.html#the-fieldset-element">fieldset</a></code> elements that do not have a <code title="attr-fieldset-disabled"><a href="forms.html#attr-fieldset-disabled">disabled</a></code> attribute</li>
+     <li><code><a href="the-fieldset-element.html#the-fieldset-element">fieldset</a></code> elements that do not have a <code title="attr-fieldset-disabled"><a href="the-fieldset-element.html#attr-fieldset-disabled">disabled</a></code> attribute</li>
 
     </ul></dd>
 
@@ -1679,29 +1668,29 @@ contradict people?
     pseudo-class must match any element falling into one of the
     following categories:</p>
 
-    <ul><li><code><a href="the-button-element.html#the-button-element">button</a></code> elements that are <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
+    <ul><li><code><a href="the-button-element.html#the-button-element">button</a></code> elements that are <a href="attributes-common-to-form-controls.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
 
      <li><code><a href="the-input-element.html#the-input-element">input</a></code> elements whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute are not in the
-     <a href="states-of-the-type-attribute.html#hidden-state" title="attr-input-type-hidden">Hidden</a> state and that
-     are <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
+     <a href="states-of-the-type-attribute.html#hidden-state-type-hidden" title="attr-input-type-hidden">Hidden</a> state and that
+     are <a href="attributes-common-to-form-controls.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
 
-     <li><code><a href="the-button-element.html#the-select-element">select</a></code> elements that are <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
+     <li><code><a href="the-select-element.html#the-select-element">select</a></code> elements that are <a href="attributes-common-to-form-controls.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
 
-     <li><code><a href="the-button-element.html#the-textarea-element">textarea</a></code> elements that are <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
+     <li><code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code> elements that are <a href="attributes-common-to-form-controls.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
 
-     <li><code><a href="the-button-element.html#the-optgroup-element">optgroup</a></code> elements that are <span title="concept-optgroup-disabled">disabled</span></li>
+     <li><code><a href="the-optgroup-element.html#the-optgroup-element">optgroup</a></code> elements that have a <code title="attr-optgroup-disabled"><a href="the-optgroup-element.html#attr-optgroup-disabled">disabled</a></code> attribute</li>
 
-     <li><code><a href="the-button-element.html#the-option-element">option</a></code> elements that are <a href="the-button-element.html#concept-option-disabled" title="concept-option-disabled">disabled</a></li>
+     <li><code><a href="the-option-element.html#the-option-element">option</a></code> elements that are <a href="the-option-element.html#concept-option-disabled" title="concept-option-disabled">disabled</a></li>
 
-     <li><code><a href="interactive-elements.html#the-command-element">command</a></code> elements that have a <code title="attr-command-disabled"><a href="interactive-elements.html#attr-command-disabled">disabled</a></code> attribute</li>
+     <li><code><a href="the-command-element.html#the-command-element">command</a></code> elements that have a <code title="attr-command-disabled"><a href="the-command-element.html#attr-command-disabled">disabled</a></code> attribute</li>
 
-     <li><code><a href="grouping-content.html#the-li-element">li</a></code> elements that are children of
-     <code><a href="interactive-elements.html#the-menu-element">menu</a></code> elements, and that have a child element that
+     <li><code><a href="the-li-element.html#the-li-element">li</a></code> elements that are children of
+     <code><a href="the-menu-element.html#the-menu-element">menu</a></code> elements, and that have a child element that
      defines a <a href="commands.html#concept-command" title="concept-command">command</a>, if the
      first such element's <a href="commands.html#command-facet-disabledstate" title="command-facet-disabledstate">Disabled State</a> facet
      is true (disabled)</li>
 
-     <li><code><a href="forms.html#the-fieldset-element">fieldset</a></code> elements that have a <code title="attr-fieldset-disabled"><a href="forms.html#attr-fieldset-disabled">disabled</a></code> attribute</li>
+     <li><code><a href="the-fieldset-element.html#the-fieldset-element">fieldset</a></code> elements that have a <code title="attr-fieldset-disabled"><a href="the-fieldset-element.html#attr-fieldset-disabled">disabled</a></code> attribute</li>
 
     </ul></dd>
 
@@ -1714,23 +1703,23 @@ contradict people?
     must match any element falling into one of the following
     categories:</p>
 
-    <ul><li><code><a href="the-input-element.html#the-input-element">input</a></code> elements whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="number-state.html#checkbox-state" title="attr-input-type-checkbox">Checkbox</a> state and whose
-     <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> state is
+    <ul><li><code><a href="the-input-element.html#the-input-element">input</a></code> elements whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="states-of-the-type-attribute.html#checkbox-state-type-checkbox" title="attr-input-type-checkbox">Checkbox</a> state and whose
+     <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> state is
      true</li>
 
-     <li><code><a href="the-input-element.html#the-input-element">input</a></code> elements whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="number-state.html#radio-button-state" title="attr-input-type-radio">Radio Button</a> state and whose
-     <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> state is
+     <li><code><a href="the-input-element.html#the-input-element">input</a></code> elements whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="states-of-the-type-attribute.html#radio-button-state-type-radio" title="attr-input-type-radio">Radio Button</a> state and whose
+     <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> state is
      true</li>
 
-     <li><code><a href="the-button-element.html#the-option-element">option</a></code> elements whose <a href="the-button-element.html#concept-option-selectedness" title="concept-option-selectedness">selectedness</a> is
+     <li><code><a href="the-option-element.html#the-option-element">option</a></code> elements whose <a href="the-option-element.html#concept-option-selectedness" title="concept-option-selectedness">selectedness</a> is
      true</li>
 
-     <li><code><a href="interactive-elements.html#the-command-element">command</a></code> elements whose <code title="attr-command-type"><a href="interactive-elements.html#attr-command-type">type</a></code> attribute is in the <a href="interactive-elements.html#attr-command-type-state-checkbox" title="attr-command-type-state-checkbox">Checkbox</a> state
-     and that have a <code title="attr-command-checked"><a href="interactive-elements.html#attr-command-checked">checked</a></code>
+     <li><code><a href="the-command-element.html#the-command-element">command</a></code> elements whose <code title="attr-command-type"><a href="the-command-element.html#attr-command-type">type</a></code> attribute is in the <a href="the-command-element.html#attr-command-type-state-checkbox" title="attr-command-type-state-checkbox">Checkbox</a> state
+     and that have a <code title="attr-command-checked"><a href="the-command-element.html#attr-command-checked">checked</a></code>
      attribute</li>
 
-     <li><code><a href="interactive-elements.html#the-command-element">command</a></code> elements whose <code title="attr-command-type"><a href="interactive-elements.html#attr-command-type">type</a></code> attribute is in the <a href="interactive-elements.html#attr-command-type-state-radio" title="attr-command-type-state-radio">Radio</a> state and that
-     have a <code title="attr-command-checked"><a href="interactive-elements.html#attr-command-checked">checked</a></code>
+     <li><code><a href="the-command-element.html#the-command-element">command</a></code> elements whose <code title="attr-command-type"><a href="the-command-element.html#attr-command-type">type</a></code> attribute is in the <a href="the-command-element.html#attr-command-type-state-radio" title="attr-command-type-state-radio">Radio</a> state and that
+     have a <code title="attr-command-checked"><a href="the-command-element.html#attr-command-checked">checked</a></code>
      attribute</li>
 
     </ul></dd>
@@ -1746,11 +1735,11 @@ contradict people?
     pseudo-class must match any element falling into one of the
     following categories:</p>
 
-    <ul><li><code><a href="the-input-element.html#the-input-element">input</a></code> elements whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="number-state.html#checkbox-state" title="attr-input-type-checkbox">Checkbox</a> state and whose
+    <ul><li><code><a href="the-input-element.html#the-input-element">input</a></code> elements whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="states-of-the-type-attribute.html#checkbox-state-type-checkbox" title="attr-input-type-checkbox">Checkbox</a> state and whose
      <code title="dom-input-indeterminate"><a href="the-input-element.html#dom-input-indeterminate">indeterminate</a></code> IDL
      attribute is set to true</li>
 
-     <li><code><a href="the-button-element.html#the-progress-element">progress</a></code> elements with no <code title="attr-progress-value"><a href="the-button-element.html#attr-progress-value">value</a></code> content attribute</li>
+     <li><code><a href="the-progress-element.html#the-progress-element">progress</a></code> elements with no <code title="attr-progress-value"><a href="the-progress-element.html#attr-progress-value">value</a></code> content attribute</li>
 
     </ul></dd>
 
@@ -1764,16 +1753,17 @@ contradict people?
     categories:</p>
 
     <ul><li><code><a href="the-button-element.html#the-button-element">button</a></code> elements that are their form's
-     <a href="association-of-controls-and-forms.html#default-button">default button</a></li>
+     <a href="form-submission.html#default-button">default button</a></li>
 
-     <li><code><a href="the-input-element.html#the-input-element">input</a></code> elements whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="number-state.html#submit-button-state" title="attr-input-type-submit">Submit Button</a> or <a href="number-state.html#image-button-state" title="attr-input-type-image">Image Button</a> state, and that
-     are their form's <a href="association-of-controls-and-forms.html#default-button">default button</a></li>
+     <li><code><a href="the-input-element.html#the-input-element">input</a></code> elements whose <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="states-of-the-type-attribute.html#submit-button-state-type-submit" title="attr-input-type-submit">Submit Button</a> or <a href="states-of-the-type-attribute.html#image-button-state-type-image" title="attr-input-type-image">Image Button</a> state, and that
+     are their form's <a href="form-submission.html#default-button">default button</a></li>
 
      <li><code><a href="the-input-element.html#the-input-element">input</a></code> elements to which the <code title="attr-input-checked"><a href="the-input-element.html#attr-input-checked">checked</a></code> attribute applies and
      that have a <code title="attr-input-checked"><a href="the-input-element.html#attr-input-checked">checked</a></code>
      attribute</li>
 
-     <li><code><a href="the-button-element.html#the-option-element">option</a></code> elements that have a <code title="attr-option-selected"><a href="the-button-element.html#attr-option-selected">selected</a></code> attribute</li>
+     <li><code><a href="the-option-element.html#the-option-element">option</a></code> elements that have a <code title="attr-option-selected"><a href="the-option-element.html#attr-option-selected">selected</a></code> attribute</li>
+
     </ul></dd>
 
 
@@ -1782,11 +1772,18 @@ contradict people?
    <dd>
 
     <p>The <code title="selector-valid"><a href="#selector-valid">:valid</a></code> pseudo-class
-    must match all elements that are <a href="association-of-controls-and-forms.html#candidate-for-constraint-validation" title="candidate for&#10;    constraint validation">candidates for constraint validation</a>
-    and that <a href="association-of-controls-and-forms.html#concept-fv-valid" title="concept-fv-valid">satisfy their
-    constraints</a>.</p>
+    must match any element falling into one of the following
+    categories:</p>
 
-   </dd>
+    <ul><li>elements that are <a href="constraints.html#candidate-for-constraint-validation" title="candidate for constraint&#10;     validation">candidates for constraint validation</a> and that
+     <a href="constraints.html#concept-fv-valid" title="concept-fv-valid">satisfy their
+     constraints</a></li>
+
+     <li><code><a href="the-form-element.html#the-form-element">form</a></code> elements that are not the <a href="association-of-controls-and-forms.html#form-owner">form
+     owner</a> of any elements that themselves are <a href="constraints.html#candidate-for-constraint-validation" title="candidate for constraint validation">candidates for
+     constraint validation</a> but do not <a href="constraints.html#concept-fv-valid" title="concept-fv-valid">satisfy their constraints</a></li>
+
+    </ul></dd>
 
 
    <dt><dfn id="selector-invalid" title="selector-invalid"><code>:invalid</code></dfn></dt>
@@ -1794,11 +1791,18 @@ contradict people?
    <dd>
 
     <p>The <code title="selector-invalid"><a href="#selector-invalid">:invalid</a></code> pseudo-class
-    must match all elements that are <a href="association-of-controls-and-forms.html#candidate-for-constraint-validation" title="candidate for&#10;    constraint validation">candidates for constraint validation</a>
-    but that do not <a href="association-of-controls-and-forms.html#concept-fv-valid" title="concept-fv-valid">satisfy their
-    constraints</a>.</p>
+    must match any element falling into one of the following
+    categories:</p>
 
-   </dd>
+    <ul><li>elements that are <a href="constraints.html#candidate-for-constraint-validation" title="candidate for constraint&#10;     validation">candidates for constraint validation</a> but that
+     do not <a href="constraints.html#concept-fv-valid" title="concept-fv-valid">satisfy their
+     constraints</a></li>
+
+     <li><code><a href="the-form-element.html#the-form-element">form</a></code> elements that are the <a href="association-of-controls-and-forms.html#form-owner">form
+     owner</a> of one or more elements that themselves are <a href="constraints.html#candidate-for-constraint-validation" title="candidate for constraint validation">candidates for
+     constraint validation</a> but do not <a href="constraints.html#concept-fv-valid" title="concept-fv-valid">satisfy their constraints</a></li>
+
+    </ul></dd>
 
 
    <dt><dfn id="selector-in-range" title="selector-in-range"><code>:in-range</code></dfn></dt>
@@ -1806,10 +1810,10 @@ contradict people?
    <dd>
 
     <p>The <code title="selector-in-range"><a href="#selector-in-range">:in-range</a></code>
-    pseudo-class must match all elements that are <a href="association-of-controls-and-forms.html#candidate-for-constraint-validation" title="candidate for constraint validation">candidates for
+    pseudo-class must match all elements that are <a href="constraints.html#candidate-for-constraint-validation" title="candidate for constraint validation">candidates for
     constraint validation</a>, <a href="common-input-element-attributes.html#have-range-limitations">have range limitations</a>,
-    and that are neither <a href="association-of-controls-and-forms.html#suffering-from-an-underflow">suffering from an underflow</a> nor
-    <a href="association-of-controls-and-forms.html#suffering-from-an-overflow">suffering from an overflow</a>.</p>
+    and that are neither <a href="constraints.html#suffering-from-an-underflow">suffering from an underflow</a> nor
+    <a href="constraints.html#suffering-from-an-overflow">suffering from an overflow</a>.</p>
 
    </dd>
 
@@ -1819,10 +1823,10 @@ contradict people?
    <dd>
 
     <p>The <code title="selector-out-of-range"><a href="#selector-out-of-range">:out-of-range</a></code>
-    pseudo-class must match all elements that are <a href="association-of-controls-and-forms.html#candidate-for-constraint-validation" title="candidate for constraint validation">candidates for
+    pseudo-class must match all elements that are <a href="constraints.html#candidate-for-constraint-validation" title="candidate for constraint validation">candidates for
     constraint validation</a>, <a href="common-input-element-attributes.html#have-range-limitations">have range limitations</a>,
-    and that are either <a href="association-of-controls-and-forms.html#suffering-from-an-underflow">suffering from an underflow</a> or
-    <a href="association-of-controls-and-forms.html#suffering-from-an-overflow">suffering from an overflow</a>.</p>
+    and that are either <a href="constraints.html#suffering-from-an-underflow">suffering from an underflow</a> or
+    <a href="constraints.html#suffering-from-an-overflow">suffering from an overflow</a>.</p>
 
    </dd>
 
@@ -1837,10 +1841,10 @@ contradict people?
 
     <ul><li><code><a href="the-input-element.html#the-input-element">input</a></code> elements that are <i title="concept-input-required"><a href="common-input-element-attributes.html#concept-input-required">required</a></i></li>
 
-     <li><code><a href="the-button-element.html#the-select-element">select</a></code> elements that have a <code title="attr-select-required"><a href="the-button-element.html#attr-select-required">required</a></code>
+     <li><code><a href="the-select-element.html#the-select-element">select</a></code> elements that have a <code title="attr-select-required"><a href="the-select-element.html#attr-select-required">required</a></code>
      attribute</li>
 
-     <li><code><a href="the-button-element.html#the-textarea-element">textarea</a></code> elements that have a <code title="attr-textarea-required"><a href="the-button-element.html#attr-textarea-required">required</a></code>
+     <li><code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code> elements that have a <code title="attr-textarea-required"><a href="the-textarea-element.html#attr-textarea-required">required</a></code>
      attribute</li>
 
     </ul></dd>
@@ -1857,9 +1861,9 @@ contradict people?
     <ul><li><code><a href="the-input-element.html#the-input-element">input</a></code> elements to which the <code title="attr-input-required"><a href="common-input-element-attributes.html#attr-input-required">required</a></code> attribute applies
      that are not <i title="concept-input-required"><a href="common-input-element-attributes.html#concept-input-required">required</a></i></li>
 
-     <li><code><a href="the-button-element.html#the-select-element">select</a></code> elements that do not have a <code title="attr-select-required"><a href="the-button-element.html#attr-select-required">required</a></code> attribute</li>
+     <li><code><a href="the-select-element.html#the-select-element">select</a></code> elements that do not have a <code title="attr-select-required"><a href="the-select-element.html#attr-select-required">required</a></code> attribute</li>
 
-     <li><code><a href="the-button-element.html#the-textarea-element">textarea</a></code> elements that do not have a <code title="attr-textarea-required"><a href="the-button-element.html#attr-textarea-required">required</a></code>
+     <li><code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code> elements that do not have a <code title="attr-textarea-required"><a href="the-textarea-element.html#attr-textarea-required">required</a></code>
      attribute</li>
 
     </ul></dd>
@@ -1877,13 +1881,14 @@ contradict people?
     <ul><li><code><a href="the-input-element.html#the-input-element">input</a></code> elements to which the <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code> attribute applies,
      but that are not <i title="concept-input-immutable"><a href="the-input-element.html#concept-input-immutable">immutable</a></i>
      (i.e. that do not have the <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code> attribute specified
-     and that are not <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a>)</li>
+     and that are not <a href="attributes-common-to-form-controls.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a>)</li>
 
-     <li><code><a href="the-button-element.html#the-textarea-element">textarea</a></code> elements that do not have a <code title="attr-textarea-readonly"><a href="the-button-element.html#attr-textarea-readonly">readonly</a></code> attribute, and
-     that are not <a href="association-of-controls-and-forms.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
+     <li><code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code> elements that do not have a <code title="attr-textarea-readonly"><a href="the-textarea-element.html#attr-textarea-readonly">readonly</a></code> attribute, and
+     that are not <a href="attributes-common-to-form-controls.html#concept-fe-disabled" title="concept-fe-disabled">disabled</a></li>
 
-     <li>elements that are <a href="editing.html#editable">editable</a> and are neither
-     <code><a href="the-input-element.html#the-input-element">input</a></code> elemenst nor <code><a href="the-button-element.html#the-textarea-element">textarea</a></code>
+     <li>elements that are <a href="editing-apis.html#editing-host" title="editing host">editing
+     hosts</a> or <a href="editing-apis.html#editable">editable</a> and are neither
+     <code><a href="the-input-element.html#the-input-element">input</a></code> elements nor <code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code>
      elements</li>
 
     </ul><p>The <code title="selector-read-only"><a href="#selector-read-only">:read-only</a></code>
@@ -1892,21 +1897,21 @@ contradict people?
    </dd>
 
 
-   <dt><dfn id="selector-ltr" title="selector-ltr"><code>:ltr</code></dfn></dt>
+   <dt><dfn id="selector-ltr" title="selector-ltr"><code>:dir(ltr)</code></dfn></dt>
 
    <dd>
 
-    <p>The <code title="selector-ltr"><a href="#selector-ltr">:ltr</a></code> pseudo-class must
-    match all elements whose <a href="elements.html#the-directionality" title="the&#10;    directionality">directionality</a> is '<a href="elements.html#concept-ltr" title="concept-ltr">ltr</a>'.</p>
+    <p>The <code title="selector-ltr"><a href="#selector-ltr">:dir(ltr)</a></code> pseudo-class must
+    match all elements whose <a href="global-attributes.html#the-directionality" title="the&#10;    directionality">directionality</a> is '<a href="global-attributes.html#concept-ltr" title="concept-ltr">ltr</a>'.</p>
 
    </dd>
 
-   <dt><dfn id="selector-rtl" title="selector-rtl"><code>:rtl</code></dfn></dt>
+   <dt><dfn id="selector-rtl" title="selector-rtl"><code>:dir(rtl)</code></dfn></dt>
 
    <dd>
 
-    <p>The <code title="selector-rtl"><a href="#selector-rtl">:rtl</a></code> pseudo-class must
-    match all elements whose <a href="elements.html#the-directionality" title="the&#10;    directionality">directionality</a> is '<a href="elements.html#concept-rtl" title="concept-rtl">rtl</a>'.</p>
+    <p>The <code title="selector-rtl"><a href="#selector-rtl">:dir(rtl)</a></code> pseudo-class must
+    match all elements whose <a href="global-attributes.html#the-directionality" title="the&#10;    directionality">directionality</a> is '<a href="global-attributes.html#concept-rtl" title="concept-rtl">rtl</a>'.</p>
 
    </dd>
 

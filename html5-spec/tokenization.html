@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>8.2.4 Tokenization &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<!DOCTYPE html>
+<html lang="en-US-x-Hixie"><head><title>8.2.4 Tokenization &#x2014; HTML5</title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -19,6 +19,7 @@
    dd table + p { margin-top: 1em; }
    p + * > li, dd li { margin: 1em 0; }
    dt, dfn { font-weight: bold; font-style: normal; }
+   i, em { font-style: italic; }
    dt dfn { font-style: italic; }
    pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
    pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
@@ -40,9 +41,10 @@
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
 
    .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   img.extra { float: right; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   img.extra, p.overview { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; position: relative; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl::before { content: "IDL"; font: bold small sans-serif; padding: 0.5em; background: white; position: absolute; top: 0; margin: -1px 0 0 -4em; width: 1.5em; border: thin solid; border-radius: 0 0 0 0.5em }
    pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
    pre.css:first-line { color: #AAAA50; }
    dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
@@ -50,6 +52,7 @@
    dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
    dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
    dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
    dl.switch { padding-left: 2em; }
    dl.switch > dt { text-indent: -1.5em; }
    dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
@@ -104,6 +107,7 @@
    .note { color: green; background: transparent; font-family: sans-serif; }
    .warning { color: red; background: transparent; }
    .note, .warning { font-weight: bolder; font-style: italic; }
+   .note em, .warning em, .note i, .warning i { font-style: normal; }
    p.note, div.note { padding: 0.5em 2em; }
    span.note { padding: 0 2em; }
    .note p:first-child, .warning p:first-child { margin-top: 0; }
@@ -295,8 +299,6 @@
      src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
    }
 
-  ]]></style><style type="text/css"><![CDATA[
-   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
   ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
    function getCookie(name) {
      var params = location.search.substr(1).split("&");
@@ -315,16 +317,17 @@
      }
      return null;
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="parsing.html" title="8.2 Parsing HTML documents" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="tree-construction.html" title="8.2.5 Tree construction" rel="next"/></head><body><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="parsing.html" title="8.2 Parsing HTML documents" rel="prev"/><link href="index.html#contents" title="Table of contents" rel="contents"/><link href="tree-construction.html" title="8.2.5 Tree construction" rel="next"/></head><body onload="fixBrokenLink();" class="split chapter"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   </div><div>
-   <a href="parsing.html" class="prev">8.2 Parsing HTML documents</a> &#x2013;
-   <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="tree-construction.html" class="next">8.2.5 Tree construction</a>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   </div><nav class="prev_next"><a href="parsing.html">&#x2190; 8.2 Parsing HTML documents</a> &#x2013;
+   <a href="index.html#contents">Table of contents</a> &#x2013;
+   <a href="tree-construction.html">8.2.5 Tree construction &#x2192;</a>
   <ol class="toc"><li><ol><li><ol><li><a href="tokenization.html#tokenization"><span class="secno">8.2.4 </span>Tokenization</a>
-      <ol><li><a href="tokenization.html#data-state"><span class="secno">8.2.4.1 </span>Data state</a></li><li><a href="tokenization.html#character-reference-in-data-state"><span class="secno">8.2.4.2 </span>Character reference in data state</a></li><li><a href="tokenization.html#rcdata-state"><span class="secno">8.2.4.3 </span>RCDATA state</a></li><li><a href="tokenization.html#character-reference-in-rcdata-state"><span class="secno">8.2.4.4 </span>Character reference in RCDATA state</a></li><li><a href="tokenization.html#rawtext-state"><span class="secno">8.2.4.5 </span>RAWTEXT state</a></li><li><a href="tokenization.html#script-data-state"><span class="secno">8.2.4.6 </span>Script data state</a></li><li><a href="tokenization.html#plaintext-state"><span class="secno">8.2.4.7 </span>PLAINTEXT state</a></li><li><a href="tokenization.html#tag-open-state"><span class="secno">8.2.4.8 </span>Tag open state</a></li><li><a href="tokenization.html#end-tag-open-state"><span class="secno">8.2.4.9 </span>End tag open state</a></li><li><a href="tokenization.html#tag-name-state"><span class="secno">8.2.4.10 </span>Tag name state</a></li><li><a href="tokenization.html#rcdata-less-than-sign-state"><span class="secno">8.2.4.11 </span>RCDATA less-than sign state</a></li><li><a href="tokenization.html#rcdata-end-tag-open-state"><span class="secno">8.2.4.12 </span>RCDATA end tag open state</a></li><li><a href="tokenization.html#rcdata-end-tag-name-state"><span class="secno">8.2.4.13 </span>RCDATA end tag name state</a></li><li><a href="tokenization.html#rawtext-less-than-sign-state"><span class="secno">8.2.4.14 </span>RAWTEXT less-than sign state</a></li><li><a href="tokenization.html#rawtext-end-tag-open-state"><span class="secno">8.2.4.15 </span>RAWTEXT end tag open state</a></li><li><a href="tokenization.html#rawtext-end-tag-name-state"><span class="secno">8.2.4.16 </span>RAWTEXT end tag name state</a></li><li><a href="tokenization.html#script-data-less-than-sign-state"><span class="secno">8.2.4.17 </span>Script data less-than sign state</a></li><li><a href="tokenization.html#script-data-end-tag-open-state"><span class="secno">8.2.4.18 </span>Script data end tag open state</a></li><li><a href="tokenization.html#script-data-end-tag-name-state"><span class="secno">8.2.4.19 </span>Script data end tag name state</a></li><li><a href="tokenization.html#script-data-escape-start-state"><span class="secno">8.2.4.20 </span>Script data escape start state</a></li><li><a href="tokenization.html#script-data-escape-start-dash-state"><span class="secno">8.2.4.21 </span>Script data escape start dash state</a></li><li><a href="tokenization.html#script-data-escaped-state"><span class="secno">8.2.4.22 </span>Script data escaped state</a></li><li><a href="tokenization.html#script-data-escaped-dash-state"><span class="secno">8.2.4.23 </span>Script data escaped dash state</a></li><li><a href="tokenization.html#script-data-escaped-dash-dash-state"><span class="secno">8.2.4.24 </span>Script data escaped dash dash state</a></li><li><a href="tokenization.html#script-data-escaped-less-than-sign-state"><span class="secno">8.2.4.25 </span>Script data escaped less-than sign state</a></li><li><a href="tokenization.html#script-data-escaped-end-tag-open-state"><span class="secno">8.2.4.26 </span>Script data escaped end tag open state</a></li><li><a href="tokenization.html#script-data-escaped-end-tag-name-state"><span class="secno">8.2.4.27 </span>Script data escaped end tag name state</a></li><li><a href="tokenization.html#script-data-double-escape-start-state"><span class="secno">8.2.4.28 </span>Script data double escape start state</a></li><li><a href="tokenization.html#script-data-double-escaped-state"><span class="secno">8.2.4.29 </span>Script data double escaped state</a></li><li><a href="tokenization.html#script-data-double-escaped-dash-state"><span class="secno">8.2.4.30 </span>Script data double escaped dash state</a></li><li><a href="tokenization.html#script-data-double-escaped-dash-dash-state"><span class="secno">8.2.4.31 </span>Script data double escaped dash dash state</a></li><li><a href="tokenization.html#script-data-double-escaped-less-than-sign-state"><span class="secno">8.2.4.32 </span>Script data double escaped less-than sign state</a></li><li><a href="tokenization.html#script-data-double-escape-end-state"><span class="secno">8.2.4.33 </span>Script data double escape end state</a></li><li><a href="tokenization.html#before-attribute-name-state"><span class="secno">8.2.4.34 </span>Before attribute name state</a></li><li><a href="tokenization.html#attribute-name-state"><span class="secno">8.2.4.35 </span>Attribute name state</a></li><li><a href="tokenization.html#after-attribute-name-state"><span class="secno">8.2.4.36 </span>After attribute name state</a></li><li><a href="tokenization.html#before-attribute-value-state"><span class="secno">8.2.4.37 </span>Before attribute value state</a></li><li><a href="tokenization.html#attribute-value-double-quoted-state"><span class="secno">8.2.4.38 </span>Attribute value (double-quoted) state</a></li><li><a href="tokenization.html#attribute-value-single-quoted-state"><span class="secno">8.2.4.39 </span>Attribute value (single-quoted) state</a></li><li><a href="tokenization.html#attribute-value-unquoted-state"><span class="secno">8.2.4.40 </span>Attribute value (unquoted) state</a></li><li><a href="tokenization.html#character-reference-in-attribute-value-state"><span class="secno">8.2.4.41 </span>Character reference in attribute value state</a></li><li><a href="tokenization.html#after-attribute-value-quoted-state"><span class="secno">8.2.4.42 </span>After attribute value (quoted) state</a></li><li><a href="tokenization.html#self-closing-start-tag-state"><span class="secno">8.2.4.43 </span>Self-closing start tag state</a></li><li><a href="tokenization.html#bogus-comment-state"><span class="secno">8.2.4.44 </span>Bogus comment state</a></li><li><a href="tokenization.html#markup-declaration-open-state"><span class="secno">8.2.4.45 </span>Markup declaration open state</a></li><li><a href="tokenization.html#comment-start-state"><span class="secno">8.2.4.46 </span>Comment start state</a></li><li><a href="tokenization.html#comment-start-dash-state"><span class="secno">8.2.4.47 </span>Comment start dash state</a></li><li><a href="tokenization.html#comment-state"><span class="secno">8.2.4.48 </span>Comment state</a></li><li><a href="tokenization.html#comment-end-dash-state"><span class="secno">8.2.4.49 </span>Comment end dash state</a></li><li><a href="tokenization.html#comment-end-state"><span class="secno">8.2.4.50 </span>Comment end state</a></li><li><a href="tokenization.html#comment-end-bang-state"><span class="secno">8.2.4.51 </span>Comment end bang state</a></li><li><a href="tokenization.html#doctype-state"><span class="secno">8.2.4.52 </span>DOCTYPE state</a></li><li><a href="tokenization.html#before-doctype-name-state"><span class="secno">8.2.4.53 </span>Before DOCTYPE name state</a></li><li><a href="tokenization.html#doctype-name-state"><span class="secno">8.2.4.54 </span>DOCTYPE name state</a></li><li><a href="tokenization.html#after-doctype-name-state"><span class="secno">8.2.4.55 </span>After DOCTYPE name state</a></li><li><a href="tokenization.html#after-doctype-public-keyword-state"><span class="secno">8.2.4.56 </span>After DOCTYPE public keyword state</a></li><li><a href="tokenization.html#before-doctype-public-identifier-state"><span class="secno">8.2.4.57 </span>Before DOCTYPE public identifier state</a></li><li><a href="tokenization.html#doctype-public-identifier-double-quoted-state"><span class="secno">8.2.4.58 </span>DOCTYPE public identifier (double-quoted) state</a></li><li><a href="tokenization.html#doctype-public-identifier-single-quoted-state"><span class="secno">8.2.4.59 </span>DOCTYPE public identifier (single-quoted) state</a></li><li><a href="tokenization.html#after-doctype-public-identifier-state"><span class="secno">8.2.4.60 </span>After DOCTYPE public identifier state</a></li><li><a href="tokenization.html#between-doctype-public-and-system-identifiers-state"><span class="secno">8.2.4.61 </span>Between DOCTYPE public and system identifiers state</a></li><li><a href="tokenization.html#after-doctype-system-keyword-state"><span class="secno">8.2.4.62 </span>After DOCTYPE system keyword state</a></li><li><a href="tokenization.html#before-doctype-system-identifier-state"><span class="secno">8.2.4.63 </span>Before DOCTYPE system identifier state</a></li><li><a href="tokenization.html#doctype-system-identifier-double-quoted-state"><span class="secno">8.2.4.64 </span>DOCTYPE system identifier (double-quoted) state</a></li><li><a href="tokenization.html#doctype-system-identifier-single-quoted-state"><span class="secno">8.2.4.65 </span>DOCTYPE system identifier (single-quoted) state</a></li><li><a href="tokenization.html#after-doctype-system-identifier-state"><span class="secno">8.2.4.66 </span>After DOCTYPE system identifier state</a></li><li><a href="tokenization.html#bogus-doctype-state"><span class="secno">8.2.4.67 </span>Bogus DOCTYPE state</a></li><li><a href="tokenization.html#cdata-section-state"><span class="secno">8.2.4.68 </span>CDATA section state</a></li><li><a href="tokenization.html#tokenizing-character-references"><span class="secno">8.2.4.69 </span>Tokenizing character references</a></li></ol></li></ol></li></ol></li></ol></div><div class="impl">
+      <ol><li><a href="tokenization.html#data-state"><span class="secno">8.2.4.1 </span>Data state</a></li><li><a href="tokenization.html#character-reference-in-data-state"><span class="secno">8.2.4.2 </span>Character reference in data state</a></li><li><a href="tokenization.html#rcdata-state"><span class="secno">8.2.4.3 </span>RCDATA state</a></li><li><a href="tokenization.html#character-reference-in-rcdata-state"><span class="secno">8.2.4.4 </span>Character reference in RCDATA state</a></li><li><a href="tokenization.html#rawtext-state"><span class="secno">8.2.4.5 </span>RAWTEXT state</a></li><li><a href="tokenization.html#script-data-state"><span class="secno">8.2.4.6 </span>Script data state</a></li><li><a href="tokenization.html#plaintext-state"><span class="secno">8.2.4.7 </span>PLAINTEXT state</a></li><li><a href="tokenization.html#tag-open-state"><span class="secno">8.2.4.8 </span>Tag open state</a></li><li><a href="tokenization.html#end-tag-open-state"><span class="secno">8.2.4.9 </span>End tag open state</a></li><li><a href="tokenization.html#tag-name-state"><span class="secno">8.2.4.10 </span>Tag name state</a></li><li><a href="tokenization.html#rcdata-less-than-sign-state"><span class="secno">8.2.4.11 </span>RCDATA less-than sign state</a></li><li><a href="tokenization.html#rcdata-end-tag-open-state"><span class="secno">8.2.4.12 </span>RCDATA end tag open state</a></li><li><a href="tokenization.html#rcdata-end-tag-name-state"><span class="secno">8.2.4.13 </span>RCDATA end tag name state</a></li><li><a href="tokenization.html#rawtext-less-than-sign-state"><span class="secno">8.2.4.14 </span>RAWTEXT less-than sign state</a></li><li><a href="tokenization.html#rawtext-end-tag-open-state"><span class="secno">8.2.4.15 </span>RAWTEXT end tag open state</a></li><li><a href="tokenization.html#rawtext-end-tag-name-state"><span class="secno">8.2.4.16 </span>RAWTEXT end tag name state</a></li><li><a href="tokenization.html#script-data-less-than-sign-state"><span class="secno">8.2.4.17 </span>Script data less-than sign state</a></li><li><a href="tokenization.html#script-data-end-tag-open-state"><span class="secno">8.2.4.18 </span>Script data end tag open state</a></li><li><a href="tokenization.html#script-data-end-tag-name-state"><span class="secno">8.2.4.19 </span>Script data end tag name state</a></li><li><a href="tokenization.html#script-data-escape-start-state"><span class="secno">8.2.4.20 </span>Script data escape start state</a></li><li><a href="tokenization.html#script-data-escape-start-dash-state"><span class="secno">8.2.4.21 </span>Script data escape start dash state</a></li><li><a href="tokenization.html#script-data-escaped-state"><span class="secno">8.2.4.22 </span>Script data escaped state</a></li><li><a href="tokenization.html#script-data-escaped-dash-state"><span class="secno">8.2.4.23 </span>Script data escaped dash state</a></li><li><a href="tokenization.html#script-data-escaped-dash-dash-state"><span class="secno">8.2.4.24 </span>Script data escaped dash dash state</a></li><li><a href="tokenization.html#script-data-escaped-less-than-sign-state"><span class="secno">8.2.4.25 </span>Script data escaped less-than sign state</a></li><li><a href="tokenization.html#script-data-escaped-end-tag-open-state"><span class="secno">8.2.4.26 </span>Script data escaped end tag open state</a></li><li><a href="tokenization.html#script-data-escaped-end-tag-name-state"><span class="secno">8.2.4.27 </span>Script data escaped end tag name state</a></li><li><a href="tokenization.html#script-data-double-escape-start-state"><span class="secno">8.2.4.28 </span>Script data double escape start state</a></li><li><a href="tokenization.html#script-data-double-escaped-state"><span class="secno">8.2.4.29 </span>Script data double escaped state</a></li><li><a href="tokenization.html#script-data-double-escaped-dash-state"><span class="secno">8.2.4.30 </span>Script data double escaped dash state</a></li><li><a href="tokenization.html#script-data-double-escaped-dash-dash-state"><span class="secno">8.2.4.31 </span>Script data double escaped dash dash state</a></li><li><a href="tokenization.html#script-data-double-escaped-less-than-sign-state"><span class="secno">8.2.4.32 </span>Script data double escaped less-than sign state</a></li><li><a href="tokenization.html#script-data-double-escape-end-state"><span class="secno">8.2.4.33 </span>Script data double escape end state</a></li><li><a href="tokenization.html#before-attribute-name-state"><span class="secno">8.2.4.34 </span>Before attribute name state</a></li><li><a href="tokenization.html#attribute-name-state"><span class="secno">8.2.4.35 </span>Attribute name state</a></li><li><a href="tokenization.html#after-attribute-name-state"><span class="secno">8.2.4.36 </span>After attribute name state</a></li><li><a href="tokenization.html#before-attribute-value-state"><span class="secno">8.2.4.37 </span>Before attribute value state</a></li><li><a href="tokenization.html#attribute-value-double-quoted-state"><span class="secno">8.2.4.38 </span>Attribute value (double-quoted) state</a></li><li><a href="tokenization.html#attribute-value-single-quoted-state"><span class="secno">8.2.4.39 </span>Attribute value (single-quoted) state</a></li><li><a href="tokenization.html#attribute-value-unquoted-state"><span class="secno">8.2.4.40 </span>Attribute value (unquoted) state</a></li><li><a href="tokenization.html#character-reference-in-attribute-value-state"><span class="secno">8.2.4.41 </span>Character reference in attribute value state</a></li><li><a href="tokenization.html#after-attribute-value-quoted-state"><span class="secno">8.2.4.42 </span>After attribute value (quoted) state</a></li><li><a href="tokenization.html#self-closing-start-tag-state"><span class="secno">8.2.4.43 </span>Self-closing start tag state</a></li><li><a href="tokenization.html#bogus-comment-state"><span class="secno">8.2.4.44 </span>Bogus comment state</a></li><li><a href="tokenization.html#markup-declaration-open-state"><span class="secno">8.2.4.45 </span>Markup declaration open state</a></li><li><a href="tokenization.html#comment-start-state"><span class="secno">8.2.4.46 </span>Comment start state</a></li><li><a href="tokenization.html#comment-start-dash-state"><span class="secno">8.2.4.47 </span>Comment start dash state</a></li><li><a href="tokenization.html#comment-state"><span class="secno">8.2.4.48 </span>Comment state</a></li><li><a href="tokenization.html#comment-end-dash-state"><span class="secno">8.2.4.49 </span>Comment end dash state</a></li><li><a href="tokenization.html#comment-end-state"><span class="secno">8.2.4.50 </span>Comment end state</a></li><li><a href="tokenization.html#comment-end-bang-state"><span class="secno">8.2.4.51 </span>Comment end bang state</a></li><li><a href="tokenization.html#doctype-state"><span class="secno">8.2.4.52 </span>DOCTYPE state</a></li><li><a href="tokenization.html#before-doctype-name-state"><span class="secno">8.2.4.53 </span>Before DOCTYPE name state</a></li><li><a href="tokenization.html#doctype-name-state"><span class="secno">8.2.4.54 </span>DOCTYPE name state</a></li><li><a href="tokenization.html#after-doctype-name-state"><span class="secno">8.2.4.55 </span>After DOCTYPE name state</a></li><li><a href="tokenization.html#after-doctype-public-keyword-state"><span class="secno">8.2.4.56 </span>After DOCTYPE public keyword state</a></li><li><a href="tokenization.html#before-doctype-public-identifier-state"><span class="secno">8.2.4.57 </span>Before DOCTYPE public identifier state</a></li><li><a href="tokenization.html#doctype-public-identifier-double-quoted-state"><span class="secno">8.2.4.58 </span>DOCTYPE public identifier (double-quoted) state</a></li><li><a href="tokenization.html#doctype-public-identifier-single-quoted-state"><span class="secno">8.2.4.59 </span>DOCTYPE public identifier (single-quoted) state</a></li><li><a href="tokenization.html#after-doctype-public-identifier-state"><span class="secno">8.2.4.60 </span>After DOCTYPE public identifier state</a></li><li><a href="tokenization.html#between-doctype-public-and-system-identifiers-state"><span class="secno">8.2.4.61 </span>Between DOCTYPE public and system identifiers state</a></li><li><a href="tokenization.html#after-doctype-system-keyword-state"><span class="secno">8.2.4.62 </span>After DOCTYPE system keyword state</a></li><li><a href="tokenization.html#before-doctype-system-identifier-state"><span class="secno">8.2.4.63 </span>Before DOCTYPE system identifier state</a></li><li><a href="tokenization.html#doctype-system-identifier-double-quoted-state"><span class="secno">8.2.4.64 </span>DOCTYPE system identifier (double-quoted) state</a></li><li><a href="tokenization.html#doctype-system-identifier-single-quoted-state"><span class="secno">8.2.4.65 </span>DOCTYPE system identifier (single-quoted) state</a></li><li><a href="tokenization.html#after-doctype-system-identifier-state"><span class="secno">8.2.4.66 </span>After DOCTYPE system identifier state</a></li><li><a href="tokenization.html#bogus-doctype-state"><span class="secno">8.2.4.67 </span>Bogus DOCTYPE state</a></li><li><a href="tokenization.html#cdata-section-state"><span class="secno">8.2.4.68 </span>CDATA section state</a></li><li><a href="tokenization.html#tokenizing-character-references"><span class="secno">8.2.4.69 </span>Tokenizing character references</a></li></ol></li></ol></li></ol></li></ol></nav><div class="impl">
 
   <h4 id="tokenization"><span class="secno">8.2.4 </span><dfn>Tokenization</dfn></h4>
 
@@ -332,12 +335,12 @@
   machine to tokenize HTML. The state machine must start in the
   <a href="#data-state">data state</a>. Most states consume a single character,
   which may have various side-effects, and either switches the state
-  machine to a new state to <em>reconsume</em> the same character, or
-  switches it to a new state (to consume the next character), or
-  repeats the same state (to consume the next character). Some states
-  have more complicated behavior and can consume several characters
-  before switching to another state. In some cases, the tokenizer
-  state is also changed by the tree construction stage.</p>
+  machine to a new state to <i>reconsume</i> the same character, or
+  switches it to a new state to consume the next character, or stays
+  in the same state to consume the next character. Some states have
+  more complicated behavior and can consume several characters before
+  switching to another state. In some cases, the tokenizer state is
+  also changed by the tree construction stage.</p>
 
   <p>The exact behavior of certain states depends on the
   <a href="parsing.html#insertion-mode">insertion mode</a> and the <a href="parsing.html#stack-of-open-elements">stack of open
@@ -363,8 +366,8 @@
   <a href="tree-construction.html#tree-construction">tree construction</a> stage. The tree construction stage
   can affect the state of the tokenization stage, and can insert
   additional characters into the stream. (For example, the
-  <code><a href="scripting-1.html#the-script-element">script</a></code> element can result in scripts executing and
-  using the <a href="apis-in-html-documents.html#dynamic-markup-insertion">dynamic markup insertion</a> APIs to insert
+  <code><a href="the-script-element.html#the-script-element">script</a></code> element can result in scripts executing and
+  using the <a href="dynamic-markup-insertion.html#dynamic-markup-insertion">dynamic markup insertion</a> APIs to insert
   characters into the stream being tokenized.)</p>
 
   <p>When a start tag token is emitted with its <i>self-closing
@@ -394,6 +397,7 @@
 
   
 
+
   <h5 id="data-state"><span class="secno">8.2.4.1 </span><dfn>Data state</dfn></h5>
 
   <p>Consume the <a href="parsing.html#next-input-character">next input character</a>:</p>
@@ -418,15 +422,15 @@
 
   </dl><h5 id="character-reference-in-data-state"><span class="secno">8.2.4.2 </span><dfn>Character reference in data state</dfn></h5>
 
+  <p>Switch to the <a href="#data-state">data state</a>.</p>
+
   <p>Attempt to <a href="#consume-a-character-reference">consume a character reference</a>, with no
   <a href="#additional-allowed-character">additional allowed character</a>.</p>
 
   <p>If nothing is returned, emit a U+0026 AMPERSAND character (&amp;)
   token.</p>
 
-  <p>Otherwise, emit the character token that was returned.</p>
-
-  <p>Finally, switch to the <a href="#data-state">data state</a>.</p>
+  <p>Otherwise, emit the character tokens that were returned.</p>
 
 
   <h5 id="rcdata-state"><span class="secno">8.2.4.3 </span><dfn>RCDATA state</dfn></h5>
@@ -453,15 +457,15 @@
 
   </dl><h5 id="character-reference-in-rcdata-state"><span class="secno">8.2.4.4 </span><dfn>Character reference in RCDATA state</dfn></h5>
 
+  <p>Switch to the <a href="#rcdata-state">RCDATA state</a>.</p>
+
   <p>Attempt to <a href="#consume-a-character-reference">consume a character reference</a>, with no
   <a href="#additional-allowed-character">additional allowed character</a>.</p>
 
   <p>If nothing is returned, emit a U+0026 AMPERSAND character (&amp;)
   token.</p>
 
-  <p>Otherwise, emit the character token that was returned.</p>
-
-  <p>Finally, switch to the <a href="#rcdata-state">RCDATA state</a>.</p>
+  <p>Otherwise, emit the character tokens that were returned.</p>
 
 
   <h5 id="rawtext-state"><span class="secno">8.2.4.5 </span><dfn>RAWTEXT state</dfn></h5>
@@ -543,9 +547,9 @@
    comment state</a>.</dd>
 
    <dt>Anything else</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Emit a U+003C LESS-THAN SIGN
-   character token and reconsume the <a href="parsing.html#current-input-character">current input
-   character</a> in the <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Emit a U+003C LESS-THAN SIGN character token.
+   Reconsume the <a href="parsing.html#current-input-character">current input character</a>.</dd>
 
   </dl><h5 id="end-tag-open-state"><span class="secno">8.2.4.9 </span><dfn>End tag open state</dfn></h5>
 
@@ -569,9 +573,9 @@
    state</a>.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Emit a U+003C LESS-THAN SIGN
-   character token and a U+002F SOLIDUS character token. Reconsume
-   the EOF character in the <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Emit a U+003C LESS-THAN SIGN character token and a
+   U+002F SOLIDUS character token. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#bogus-comment-state">bogus
@@ -605,8 +609,8 @@
    character to the current tag token's tag name.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
-   <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the current
@@ -622,9 +626,9 @@
    to the <a href="#rcdata-end-tag-open-state">RCDATA end tag open state</a>.</dd>
 
    <dt>Anything else</dt>
-   <dd>Emit a U+003C LESS-THAN SIGN character token and reconsume the
-   <a href="parsing.html#current-input-character">current input character</a> in the <a href="#rcdata-state">RCDATA
-   state</a>.</dd>
+   <dd>Switch to the <a href="#rcdata-state">RCDATA state</a>. Emit a U+003C
+   LESS-THAN SIGN character token. Reconsume the <a href="parsing.html#current-input-character">current
+   input character</a>.</dd>
 
   </dl><h5 id="rcdata-end-tag-open-state"><span class="secno">8.2.4.12 </span><dfn>RCDATA end tag open state</dfn></h5>
   
@@ -649,9 +653,9 @@
    emitted.)</dd>
 
    <dt>Anything else</dt>
-   <dd>Emit a U+003C LESS-THAN SIGN character token, a U+002F SOLIDUS
-   character token, and reconsume the <a href="parsing.html#current-input-character">current input
-   character</a> in the <a href="#rcdata-state">RCDATA state</a>.</dd>
+   <dd>Switch to the <a href="#rcdata-state">RCDATA state</a>. Emit a U+003C
+   LESS-THAN SIGN character token and a U+002F SOLIDUS character token.
+   Reconsume the <a href="parsing.html#current-input-character">current input character</a>.</dd>
 
   </dl><h5 id="rcdata-end-tag-name-state"><span class="secno">8.2.4.13 </span><dfn>RCDATA end tag name state</dfn></h5>
   
@@ -676,8 +680,8 @@
 
    <dt>U+003E GREATER-THAN SIGN (&gt;)</dt>
    <dd>If the current end tag token is an <a href="#appropriate-end-tag-token">appropriate end tag
-   token</a>, then emit the current tag token and switch to the
-   <a href="#data-state">data state</a>. Otherwise, treat it as per the "anything
+   token</a>, then switch to the <a href="#data-state">data state</a> and emit
+   the current tag token. Otherwise, treat it as per the "anything
    else" entry below.</dd>
 
    <dt>U+0041 LATIN CAPITAL LETTER A through to U+005A LATIN CAPITAL LETTER Z</dt>
@@ -692,11 +696,11 @@
    character</a> to the <var><a href="#temporary-buffer">temporary buffer</a></var>.</dd>
 
    <dt>Anything else</dt>
-   <dd>Emit a U+003C LESS-THAN SIGN character token, a U+002F SOLIDUS
-   character token, a character token for each of the characters in
-   the <var><a href="#temporary-buffer">temporary buffer</a></var> (in the order they were added to
-   the buffer), and reconsume the <a href="parsing.html#current-input-character">current input character</a>
-   in the <a href="#rcdata-state">RCDATA state</a>.</dd>
+   <dd>Switch to the <a href="#rcdata-state">RCDATA state</a>. Emit a U+003C
+   LESS-THAN SIGN character token, a U+002F SOLIDUS character token,
+   and a character token for each of the characters in the
+   <var><a href="#temporary-buffer">temporary buffer</a></var> (in the order they were added to the
+   buffer). Reconsume the <a href="parsing.html#current-input-character">current input character</a>.</dd>
 
   </dl><h5 id="rawtext-less-than-sign-state"><span class="secno">8.2.4.14 </span><dfn>RAWTEXT less-than sign state</dfn></h5>
   
@@ -708,9 +712,9 @@
    to the <a href="#rawtext-end-tag-open-state">RAWTEXT end tag open state</a>.</dd>
 
    <dt>Anything else</dt>
-   <dd>Emit a U+003C LESS-THAN SIGN character token and reconsume the
-   <a href="parsing.html#current-input-character">current input character</a> in the <a href="#rawtext-state">RAWTEXT
-   state</a>.</dd>
+   <dd>Switch to the <a href="#rawtext-state">RAWTEXT state</a>. Emit a U+003C
+   LESS-THAN SIGN character token. Reconsume the <a href="parsing.html#current-input-character">current
+   input character</a>.</dd>
 
   </dl><h5 id="rawtext-end-tag-open-state"><span class="secno">8.2.4.15 </span><dfn>RAWTEXT end tag open state</dfn></h5>
   
@@ -735,9 +739,9 @@
    emitted.)</dd>
 
    <dt>Anything else</dt>
-   <dd>Emit a U+003C LESS-THAN SIGN character token, a U+002F SOLIDUS
-   character token, and reconsume the <a href="parsing.html#current-input-character">current input
-   character</a> in the <a href="#rawtext-state">RAWTEXT state</a>.</dd>
+   <dd>Switch to the <a href="#rawtext-state">RAWTEXT state</a>. Emit a U+003C
+   LESS-THAN SIGN character token and a U+002F SOLIDUS character
+   token. Reconsume the <a href="parsing.html#current-input-character">current input character</a>.</dd>
 
   </dl><h5 id="rawtext-end-tag-name-state"><span class="secno">8.2.4.16 </span><dfn>RAWTEXT end tag name state</dfn></h5>
   
@@ -762,8 +766,8 @@
 
    <dt>U+003E GREATER-THAN SIGN (&gt;)</dt>
    <dd>If the current end tag token is an <a href="#appropriate-end-tag-token">appropriate end tag
-   token</a>, then emit the current tag token and switch to the
-   <a href="#data-state">data state</a>. Otherwise, treat it as per the "anything
+   token</a>, then switch to the <a href="#data-state">data state</a> and emit
+   the current tag token. Otherwise, treat it as per the "anything
    else" entry below.</dd>
 
    <dt>U+0041 LATIN CAPITAL LETTER A through to U+005A LATIN CAPITAL LETTER Z</dt>
@@ -778,11 +782,11 @@
    character</a> to the <var><a href="#temporary-buffer">temporary buffer</a></var>.</dd>
 
    <dt>Anything else</dt>
-   <dd>Emit a U+003C LESS-THAN SIGN character token, a U+002F SOLIDUS
-   character token, a character token for each of the characters in
-   the <var><a href="#temporary-buffer">temporary buffer</a></var> (in the order they were added to
-   the buffer), and reconsume the <a href="parsing.html#current-input-character">current input character</a>
-   in the <a href="#rawtext-state">RAWTEXT state</a>.</dd>
+   <dd>Switch to the <a href="#rawtext-state">RAWTEXT state</a>. Emit a U+003C
+   LESS-THAN SIGN character token, a U+002F SOLIDUS character token,
+   and a character token for each of the characters in the
+   <var><a href="#temporary-buffer">temporary buffer</a></var> (in the order they were added to the
+   buffer). Reconsume the <a href="parsing.html#current-input-character">current input character</a>.</dd>
 
   </dl><h5 id="script-data-less-than-sign-state"><span class="secno">8.2.4.17 </span><dfn>Script data less-than sign state</dfn></h5>
 
@@ -798,9 +802,9 @@
    MARK character token.</dd>
 
    <dt>Anything else</dt>
-   <dd>Emit a U+003C LESS-THAN SIGN character token and reconsume the
-   <a href="parsing.html#current-input-character">current input character</a> in the <a href="#script-data-state">script data
-   state</a>.</dd>
+   <dd>Switch to the <a href="#script-data-state">script data state</a>. Emit a U+003C
+   LESS-THAN SIGN character token. Reconsume the <a href="parsing.html#current-input-character">current
+   input character</a>.</dd>
 
   </dl><h5 id="script-data-end-tag-open-state"><span class="secno">8.2.4.18 </span><dfn>Script data end tag open state</dfn></h5>
   
@@ -825,9 +829,9 @@
    emitted.)</dd>
 
    <dt>Anything else</dt>
-   <dd>Emit a U+003C LESS-THAN SIGN character token, a U+002F SOLIDUS
-   character token, and reconsume the <a href="parsing.html#current-input-character">current input
-   character</a> in the <a href="#script-data-state">script data state</a>.</dd>
+   <dd>Switch to the <a href="#script-data-state">script data state</a>. Emit a U+003C
+   LESS-THAN SIGN character token and a U+002F SOLIDUS character token.
+   Reconsume the <a href="parsing.html#current-input-character">current input character</a>.</dd>
 
   </dl><h5 id="script-data-end-tag-name-state"><span class="secno">8.2.4.19 </span><dfn>Script data end tag name state</dfn></h5>
   
@@ -852,8 +856,8 @@
 
    <dt>U+003E GREATER-THAN SIGN (&gt;)</dt>
    <dd>If the current end tag token is an <a href="#appropriate-end-tag-token">appropriate end tag
-   token</a>, then emit the current tag token and switch to the
-   <a href="#data-state">data state</a>. Otherwise, treat it as per the "anything
+   token</a>, then switch to the <a href="#data-state">data state</a> and emit
+   the current tag token. Otherwise, treat it as per the "anything
    else" entry below.</dd>
 
    <dt>U+0041 LATIN CAPITAL LETTER A through to U+005A LATIN CAPITAL LETTER Z</dt>
@@ -868,11 +872,11 @@
    character</a> to the <var><a href="#temporary-buffer">temporary buffer</a></var>.</dd>
 
    <dt>Anything else</dt>
-   <dd>Emit a U+003C LESS-THAN SIGN character token, a U+002F SOLIDUS
-   character token, a character token for each of the characters in
-   the <var><a href="#temporary-buffer">temporary buffer</a></var> (in the order they were added to
-   the buffer), and reconsume the <a href="parsing.html#current-input-character">current input character</a>
-   in the <a href="#script-data-state">script data state</a>.</dd>
+   <dd>Switch to the <a href="#script-data-state">script data state</a>. Emit a U+003C
+   LESS-THAN SIGN character token, a U+002F SOLIDUS character token,
+   and a character token for each of the characters in the
+   <var><a href="#temporary-buffer">temporary buffer</a></var> (in the order they were added to the
+   buffer). Reconsume the <a href="parsing.html#current-input-character">current input character</a>.</dd>
 
   </dl><h5 id="script-data-escape-start-state"><span class="secno">8.2.4.20 </span><dfn>Script data escape start state</dfn></h5>
 
@@ -883,8 +887,8 @@
    state</a>. Emit a U+002D HYPHEN-MINUS character token.</dd>
 
    <dt>Anything else</dt>
-   <dd>Reconsume the <a href="parsing.html#current-input-character">current input character</a> in the
-   <a href="#script-data-state">script data state</a>.</dd>
+   <dd>Switch to the <a href="#script-data-state">script data state</a>. Reconsume the
+   <a href="parsing.html#current-input-character">current input character</a>.</dd>
 
   </dl><h5 id="script-data-escape-start-dash-state"><span class="secno">8.2.4.21 </span><dfn>Script data escape start dash state</dfn></h5>
 
@@ -895,8 +899,8 @@
    state</a>. Emit a U+002D HYPHEN-MINUS character token.</dd>
 
    <dt>Anything else</dt>
-   <dd>Reconsume the <a href="parsing.html#current-input-character">current input character</a> in the
-   <a href="#script-data-state">script data state</a>.</dd>
+   <dd>Switch to the <a href="#script-data-state">script data state</a>. Reconsume the
+   <a href="parsing.html#current-input-character">current input character</a>.</dd>
 
   </dl><h5 id="script-data-escaped-state"><span class="secno">8.2.4.22 </span><dfn>Script data escaped state</dfn></h5>
 
@@ -915,8 +919,8 @@
    character token.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
-   <a href="#data-state">data state</a>.</dd>
+   <dd>Switch to the <a href="#data-state">data state</a>. <a href="parsing.html#parse-error">Parse
+   error</a>. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd>Emit the <a href="parsing.html#current-input-character">current input character</a> as a character
@@ -940,8 +944,8 @@
    token.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
-   <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd>Switch to the <a href="#script-data-escaped-state">script data escaped state</a>. Emit the
@@ -968,8 +972,8 @@
    token.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
-   <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd>Switch to the <a href="#script-data-escaped-state">script data escaped state</a>. Emit the
@@ -999,9 +1003,9 @@
    <a href="parsing.html#current-input-character">current input character</a> as a character token.</dd>
 
    <dt>Anything else</dt>
-   <dd>Emit a U+003C LESS-THAN SIGN character token and reconsume the
-   <a href="parsing.html#current-input-character">current input character</a> in the <a href="#script-data-escaped-state">script data
-   escaped state</a>.</dd>
+   <dd>Switch to the <a href="#script-data-state">script data state</a>. Emit a U+003C
+   LESS-THAN SIGN character token. Reconsume the <a href="parsing.html#current-input-character">current
+   input character</a>.</dd>
 
   </dl><h5 id="script-data-escaped-end-tag-open-state"><span class="secno">8.2.4.26 </span><dfn>Script data escaped end tag open state</dfn></h5>
 
@@ -1025,9 +1029,10 @@
    filled in before it is emitted.)</dd>
 
    <dt>Anything else</dt>
-   <dd>Emit a U+003C LESS-THAN SIGN character token, a U+002F SOLIDUS
-   character token, and reconsume the <a href="parsing.html#current-input-character">current input
-   character</a> in the <a href="#script-data-escaped-state">script data escaped state</a>.</dd>
+   <dd>Switch to the <a href="#script-data-escaped-state">script data escaped state</a>. Emit a
+   U+003C LESS-THAN SIGN character token and a U+002F SOLIDUS
+   character token. Reconsume the <a href="parsing.html#current-input-character">current input
+   character</a>.</dd>
 
   </dl><h5 id="script-data-escaped-end-tag-name-state"><span class="secno">8.2.4.27 </span><dfn>Script data escaped end tag name state</dfn></h5>
 
@@ -1051,8 +1056,8 @@
 
    <dt>U+003E GREATER-THAN SIGN (&gt;)</dt>
    <dd>If the current end tag token is an <a href="#appropriate-end-tag-token">appropriate end tag
-   token</a>, then emit the current tag token and switch to the
-   <a href="#data-state">data state</a>. Otherwise, treat it as per the "anything
+   token</a>, then switch to the <a href="#data-state">data state</a> and emit
+   the current tag token. Otherwise, treat it as per the "anything
    else" entry below.</dd>
 
    <dt>U+0041 LATIN CAPITAL LETTER A through to U+005A LATIN CAPITAL LETTER Z</dt>
@@ -1067,11 +1072,11 @@
    character</a> to the <var><a href="#temporary-buffer">temporary buffer</a></var>.</dd>
 
    <dt>Anything else</dt>
-   <dd>Emit a U+003C LESS-THAN SIGN character token, a U+002F SOLIDUS
-   character token, a character token for each of the characters in
-   the <var><a href="#temporary-buffer">temporary buffer</a></var> (in the order they were added to
-   the buffer), and reconsume the <a href="parsing.html#current-input-character">current input character</a>
-   in the <a href="#script-data-escaped-state">script data escaped state</a>.</dd>
+   <dd>Switch to the <a href="#script-data-escaped-state">script data escaped state</a>. Emit a
+   U+003C LESS-THAN SIGN character token, a U+002F SOLIDUS character
+   token, and a character token for each of the characters in the
+   <var><a href="#temporary-buffer">temporary buffer</a></var> (in the order they were added to the
+   buffer). Reconsume the <a href="parsing.html#current-input-character">current input character</a>.</dd>
 
   </dl><h5 id="script-data-double-escape-start-state"><span class="secno">8.2.4.28 </span><dfn>Script data double escape start state</dfn></h5>
 
@@ -1101,8 +1106,8 @@
    character</a> as a character token.</dd>
 
    <dt>Anything else</dt>
-   <dd>Reconsume the <a href="parsing.html#current-input-character">current input character</a> in the
-   <a href="#script-data-escaped-state">script data escaped state</a>.</dd>
+   <dd>Switch to the <a href="#script-data-escaped-state">script data escaped state</a>. Reconsume
+   the <a href="parsing.html#current-input-character">current input character</a>.</dd>
 
   </dl><h5 id="script-data-double-escaped-state"><span class="secno">8.2.4.29 </span><dfn>Script data double escaped state</dfn></h5>
 
@@ -1122,8 +1127,8 @@
    character token.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
-   <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd>Emit the <a href="parsing.html#current-input-character">current input character</a> as a character
@@ -1148,8 +1153,8 @@
    character token.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
-   <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd>Switch to the <a href="#script-data-double-escaped-state">script data double escaped
@@ -1178,8 +1183,8 @@
    character token.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
-   <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd>Switch to the <a href="#script-data-double-escaped-state">script data double escaped
@@ -1196,8 +1201,8 @@
    U+002F SOLIDUS character token.</dd>
 
    <dt>Anything else</dt>
-   <dd>Reconsume the <a href="parsing.html#current-input-character">current input character</a> in the
-   <a href="#script-data-double-escaped-state">script data double escaped state</a>.</dd>
+   <dd>Switch to the <a href="#script-data-double-escaped-state">script data double escaped state</a>.
+   Reconsume the <a href="parsing.html#current-input-character">current input character</a>.</dd>
 
   </dl><h5 id="script-data-double-escape-end-state"><span class="secno">8.2.4.33 </span><dfn>Script data double escape end state</dfn></h5>
 
@@ -1227,8 +1232,8 @@
    character</a> as a character token.</dd>
 
    <dt>Anything else</dt>
-   <dd>Reconsume the <a href="parsing.html#current-input-character">current input character</a> in the
-   <a href="#script-data-double-escaped-state">script data double escaped state</a>.</dd>
+   <dd>Switch to the <a href="#script-data-double-escaped-state">script data double escaped state</a>.
+   Reconsume the <a href="parsing.html#current-input-character">current input character</a>.</dd>
 
   </dl><h5 id="before-attribute-name-state"><span class="secno">8.2.4.34 </span><dfn>Before attribute name state</dfn></h5>
 
@@ -1269,8 +1274,8 @@
    entry below.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
-   <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd>Start a new attribute in the current tag token. Set that
@@ -1315,8 +1320,8 @@
    entry below.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
-   <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the current
@@ -1372,8 +1377,8 @@
    entry below.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
-   <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd>Start a new attribute in the current tag token. Set that
@@ -1396,8 +1401,8 @@
    <dd>Switch to the <a href="#attribute-value-double-quoted-state">attribute value (double-quoted) state</a>.</dd>
 
    <dt>U+0026 AMPERSAND (&amp;)</dt>
-   <dd>Switch to the <a href="#attribute-value-unquoted-state">attribute value (unquoted) state</a>
-   and reconsume this <a href="parsing.html#current-input-character">current input character</a>.</dd>
+   <dd>Switch to the <a href="#attribute-value-unquoted-state">attribute value (unquoted) state</a>.
+   Reconsume the <a href="parsing.html#current-input-character">current input character</a>.</dd>
 
    <dt>U+0027 APOSTROPHE (')</dt>
    <dd>Switch to the <a href="#attribute-value-single-quoted-state">attribute value (single-quoted) state</a>.</dd>
@@ -1418,8 +1423,8 @@
    entry below.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
-   <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the current
@@ -1444,8 +1449,8 @@
    character to the current attribute's value.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
-   <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the current
@@ -1469,8 +1474,8 @@
    character to the current attribute's value.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
-   <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the current
@@ -1509,8 +1514,8 @@
    entry below.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
-   <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the current
@@ -1523,7 +1528,7 @@
   <p>If nothing is returned, append a U+0026 AMPERSAND character
   (&amp;) to the current attribute's value.</p>
 
-  <p>Otherwise, append the returned character token to the current
+  <p>Otherwise, append the returned character tokens to the current
   attribute's value.</p>
 
   <p>Finally, switch back to the attribute value state that switched
@@ -1549,12 +1554,12 @@
    token.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
-   <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the character in
-   the <a href="#before-attribute-name-state">before attribute name state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#before-attribute-name-state">before attribute
+   name state</a>. Reconsume the character.</dd>
 
   </dl><h5 id="self-closing-start-tag-state"><span class="secno">8.2.4.43 </span><dfn>Self-closing start tag state</dfn></h5>
 
@@ -1566,12 +1571,12 @@
    token.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the EOF character in the
-   <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the character in
-   the <a href="#before-attribute-name-state">before attribute name state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#before-attribute-name-state">before attribute
+   name state</a>. Reconsume the character.</dd>
 
   </dl><h5 id="bogus-comment-state"><span class="secno">8.2.4.44 </span><dfn>Bogus comment state</dfn></h5>
 
@@ -1603,12 +1608,12 @@
   case-insensitive</a> match for the word "DOCTYPE", then consume
   those characters and switch to the <a href="#doctype-state">DOCTYPE state</a>.</p>
 
-  <p>Otherwise, if the <a href="parsing.html#current-node">current node</a> is not an element in
-  the <a href="namespaces.html#html-namespace-0">HTML namespace</a> and the next seven characters are an
-  <a href="infrastructure.html#case-sensitive">case-sensitive</a> match for the string "[CDATA[" (the five
-  uppercase letters "CDATA" with a U+005B LEFT SQUARE BRACKET
-  character before and after), then consume those characters and
-  switch to the <a href="#cdata-section-state">CDATA section state</a>.</p>
+  <p>Otherwise, if there is a <a href="parsing.html#current-node">current node</a> and it is not
+  an element in the <a href="namespaces.html#html-namespace-0">HTML namespace</a> and the next seven
+  characters are a <a href="infrastructure.html#case-sensitive">case-sensitive</a> match for the string
+  "[CDATA[" (the five uppercase letters "CDATA" with a U+005B LEFT
+  SQUARE BRACKET character before and after), then consume those
+  characters and switch to the <a href="#cdata-section-state">CDATA section state</a>.</p>
 
   <p>Otherwise, this is a <a href="parsing.html#parse-error">parse error</a>. Switch to the
   <a href="#bogus-comment-state">bogus comment state</a>. The next character that is
@@ -1631,9 +1636,10 @@
    <dt>U+003E GREATER-THAN SIGN (&gt;)</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
    state</a>. Emit the comment token.</dd> 
+
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Emit the comment token. Reconsume
-   the EOF character in the <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Emit the comment token. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the comment
@@ -1657,8 +1663,10 @@
    state</a>. Emit the comment token.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Emit the comment token. Reconsume the
-   EOF character in the <a href="#data-state">data state</a>.</dd> 
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Emit the comment token. Reconsume the EOF
+   character.</dd> 
+
    <dt>Anything else</dt>
    <dd>Append a U+002D HYPHEN-MINUS character (-) and the
    <a href="parsing.html#current-input-character">current input character</a> to the comment token's
@@ -1676,8 +1684,10 @@
    character to the comment token's data.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Emit the comment token. Reconsume the
-   EOF character in the <a href="#data-state">data state</a>.</dd> 
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Emit the comment token. Reconsume the EOF
+   character.</dd> 
+
    <dt>Anything else</dt>
    <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the comment
    token's data.</dd>
@@ -1696,8 +1706,10 @@
    state</a>.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Emit the comment token. Reconsume the
-   EOF character in the <a href="#data-state">data state</a>.</dd> 
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Emit the comment token. Reconsume the EOF
+   character.</dd> 
+
    <dt>Anything else</dt>
    <dd>Append a U+002D HYPHEN-MINUS character (-) and the
    <a href="parsing.html#current-input-character">current input character</a> to the comment token's
@@ -1726,8 +1738,10 @@
    character (-) to the comment token's data.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Emit the comment token. Reconsume
-   the EOF character in the <a href="#data-state">data state</a>.</dd> 
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Emit the comment token. Reconsume the EOF
+   character.</dd> 
+
    <dt>Anything else</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Append two U+002D HYPHEN-MINUS
    characters (-) and the <a href="parsing.html#current-input-character">current input character</a> to the
@@ -1754,8 +1768,10 @@
    Switch to the <a href="#comment-state">comment state</a>.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Emit the comment token. Reconsume
-   the EOF character in the <a href="#data-state">data state</a>.</dd> 
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Emit the comment token. Reconsume the EOF
+   character.</dd> 
+
    <dt>Anything else</dt>
    <dd>Append two U+002D HYPHEN-MINUS characters (-), a U+0021
    EXCLAMATION MARK character (!), and the <a href="parsing.html#current-input-character">current input
@@ -1774,13 +1790,14 @@
    <dd>Switch to the <a href="#before-doctype-name-state">before DOCTYPE name state</a>.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Create a new DOCTYPE token. Set its
-   <i>force-quirks flag</i> to <i>on</i>. Emit the token. Reconsume
-   the EOF character in the <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Create a new DOCTYPE token. Set its <i>force-quirks
+   flag</i> to <i>on</i>. Emit the token. Reconsume the EOF
+   character.</dd>
 
    <dt>Anything else</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Reconsume the character in the
-   <a href="#before-doctype-name-state">before DOCTYPE name state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#before-doctype-name-state">before DOCTYPE
+   name state</a>. Reconsume the character.</dd>
 
   </dl><h5 id="before-doctype-name-state"><span class="secno">8.2.4.53 </span><dfn>Before DOCTYPE name state</dfn></h5>
 
@@ -1810,9 +1827,10 @@
    state</a>. Emit the token.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Create a new DOCTYPE token. Set its
-   <i>force-quirks flag</i> to <i>on</i>. Emit the token. Reconsume
-   the EOF character in the <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Create a new DOCTYPE token. Set its <i>force-quirks
+   flag</i> to <i>on</i>. Emit the token. Reconsume the EOF
+   character.</dd>
 
    <dt>Anything else</dt>
    <dd>Create a new DOCTYPE token. Set the token's name to the
@@ -1844,9 +1862,9 @@
    character to the current DOCTYPE token's name.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
-   <i>force-quirks flag</i> to <i>on</i>. Emit that DOCTYPE token.
-   Reconsume the EOF character in the <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Set the DOCTYPE token's <i>force-quirks flag</i> to
+   <i>on</i>. Emit that DOCTYPE token. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the current
@@ -1868,9 +1886,9 @@
    token.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
-   <i>force-quirks flag</i> to <i>on</i>. Emit that DOCTYPE token.
-   Reconsume the EOF character in the <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Set the DOCTYPE token's <i>force-quirks flag</i> to
+   <i>on</i>. Emit that DOCTYPE token. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd>
@@ -1920,9 +1938,9 @@
    state</a>. Emit that DOCTYPE token.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
-   <i>force-quirks flag</i> to <i>on</i>. Emit that DOCTYPE token.
-   Reconsume the EOF character in the <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Set the DOCTYPE token's <i>force-quirks flag</i> to
+   <i>on</i>. Emit that DOCTYPE token. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
@@ -1956,9 +1974,9 @@
    state</a>. Emit that DOCTYPE token.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
-   <i>force-quirks flag</i> to <i>on</i>. Emit that DOCTYPE token.
-   Reconsume the EOF character in the <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Set the DOCTYPE token's <i>force-quirks flag</i> to
+   <i>on</i>. Emit that DOCTYPE token. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
@@ -1982,9 +2000,9 @@
    state</a>. Emit that DOCTYPE token.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
-   <i>force-quirks flag</i> to <i>on</i>. Emit that DOCTYPE token.
-   Reconsume the EOF character in the <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Set the DOCTYPE token's <i>force-quirks flag</i> to
+   <i>on</i>. Emit that DOCTYPE token. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the current
@@ -2007,9 +2025,9 @@
    state</a>. Emit that DOCTYPE token.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
-   <i>force-quirks flag</i> to <i>on</i>. Emit that DOCTYPE token.
-   Reconsume the EOF character in the <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Set the DOCTYPE token's <i>force-quirks flag</i> to
+   <i>on</i>. Emit that DOCTYPE token. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the current
@@ -2042,9 +2060,9 @@
    <a href="#doctype-system-identifier-single-quoted-state">DOCTYPE system identifier (single-quoted) state</a>.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
-   <i>force-quirks flag</i> to <i>on</i>. Emit that DOCTYPE token.
-   Reconsume the EOF character in the <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Set the DOCTYPE token's <i>force-quirks flag</i> to
+   <i>on</i>. Emit that DOCTYPE token. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
@@ -2077,9 +2095,9 @@
    (single-quoted) state</a>.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
-   <i>force-quirks flag</i> to <i>on</i>. Emit that DOCTYPE token.
-   Reconsume the EOF character in the <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Set the DOCTYPE token's <i>force-quirks flag</i> to
+   <i>on</i>. Emit that DOCTYPE token. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
@@ -2114,9 +2132,9 @@
    state</a>. Emit that DOCTYPE token.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
-   <i>force-quirks flag</i> to <i>on</i>. Emit that DOCTYPE token.
-   Reconsume the EOF character in the <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Set the DOCTYPE token's <i>force-quirks flag</i> to
+   <i>on</i>. Emit that DOCTYPE token. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
@@ -2150,9 +2168,9 @@
    state</a>. Emit that DOCTYPE token.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
-   <i>force-quirks flag</i> to <i>on</i>. Emit that DOCTYPE token.
-   Reconsume the EOF character in the <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Set the DOCTYPE token's <i>force-quirks flag</i> to
+   <i>on</i>. Emit that DOCTYPE token. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
@@ -2177,9 +2195,9 @@
    state</a>. Emit that DOCTYPE token.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
-   <i>force-quirks flag</i> to <i>on</i>. Emit that DOCTYPE token.
-   Reconsume the EOF character in the <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Set the DOCTYPE token's <i>force-quirks flag</i> to
+   <i>on</i>. Emit that DOCTYPE token. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the current
@@ -2203,9 +2221,9 @@
    state</a>. Emit that DOCTYPE token.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
-   <i>force-quirks flag</i> to <i>on</i>. Emit that DOCTYPE token.
-   Reconsume the EOF character in the <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Set the DOCTYPE token's <i>force-quirks flag</i> to
+   <i>on</i>. Emit that DOCTYPE token. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd>Append the <a href="parsing.html#current-input-character">current input character</a> to the current
@@ -2227,9 +2245,9 @@
    token.</dd>
 
    <dt>EOF</dt>
-   <dd><a href="parsing.html#parse-error">Parse error</a>. Set the DOCTYPE token's
-   <i>force-quirks flag</i> to <i>on</i>. Emit that DOCTYPE token.
-   Reconsume the EOF character in the <a href="#data-state">data state</a>.</dd>
+   <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#data-state">data
+   state</a>. Set the DOCTYPE token's <i>force-quirks flag</i> to
+   <i>on</i>. Emit that DOCTYPE token. Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd><a href="parsing.html#parse-error">Parse error</a>. Switch to the <a href="#bogus-doctype-state">bogus DOCTYPE
@@ -2245,13 +2263,15 @@
    token.</dd>
 
    <dt>EOF</dt>
-   <dd>Emit the DOCTYPE token. Reconsume the EOF character in the
-   <a href="#data-state">data state</a>.</dd>
+   <dd>Switch to the <a href="#data-state">data state</a>. Emit the DOCTYPE token.
+   Reconsume the EOF character.</dd>
 
    <dt>Anything else</dt>
    <dd>Ignore the character.</dd>
 
   </dl><h5 id="cdata-section-state"><span class="secno">8.2.4.68 </span><dfn>CDATA section state</dfn></h5>
+
+  <p>Switch to the <a href="#data-state">data state</a>.</p>
 
   <p>Consume every character up to the next occurrence of the three
   character sequence U+005D RIGHT SQUARE BRACKET U+005D RIGHT SQUARE
@@ -2260,8 +2280,6 @@
   character tokens consisting of all the characters consumed except
   the matching three character sequence at the end (if one was found
   before the end of the file).</p>
-
-  <p>Switch to the <a href="#data-state">data state</a>.</p>
 
   <p>If the end of the file was reached, reconsume the EOF
   character.</p>
@@ -2396,7 +2414,8 @@
     <p>Otherwise, return a character token for the Unicode character
     whose code point is that number.
 
-        If the number is in the range 0x0001 to 0x0008,    0x000E to 0x001F,  0x007F  to 0x009F, 0xFDD0 to
+    
+    If the number is in the range 0x0001 to 0x0008,    0x000E to 0x001F,  0x007F  to 0x009F, 0xFDD0 to
     0xFDEF, or is one of 0x000B, 0xFFFE, 0xFFFF, 0x1FFFE, 0x1FFFF,
     0x2FFFE, 0x2FFFF, 0x3FFFE, 0x3FFFF, 0x4FFFE, 0x4FFFF, 0x5FFFE,
     0x5FFFF, 0x6FFFE, 0x6FFFF, 0x7FFFE, 0x7FFFF, 0x8FFFE, 0x8FFFF,

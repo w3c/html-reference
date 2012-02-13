@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>4.10.7.1.13 Number state &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<!DOCTYPE html>
+<html lang="en-US-x-Hixie"><head><title>4.10.7.1.13 Number state &#x2014; HTML5</title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -19,6 +19,7 @@
    dd table + p { margin-top: 1em; }
    p + * > li, dd li { margin: 1em 0; }
    dt, dfn { font-weight: bold; font-style: normal; }
+   i, em { font-style: italic; }
    dt dfn { font-style: italic; }
    pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
    pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
@@ -40,9 +41,10 @@
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
 
    .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   img.extra { float: right; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   img.extra, p.overview { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; position: relative; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl::before { content: "IDL"; font: bold small sans-serif; padding: 0.5em; background: white; position: absolute; top: 0; margin: -1px 0 0 -4em; width: 1.5em; border: thin solid; border-radius: 0 0 0 0.5em }
    pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
    pre.css:first-line { color: #AAAA50; }
    dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
@@ -50,6 +52,7 @@
    dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
    dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
    dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
    dl.switch { padding-left: 2em; }
    dl.switch > dt { text-indent: -1.5em; }
    dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
@@ -104,6 +107,7 @@
    .note { color: green; background: transparent; font-family: sans-serif; }
    .warning { color: red; background: transparent; }
    .note, .warning { font-weight: bolder; font-style: italic; }
+   .note em, .warning em, .note i, .warning i { font-style: normal; }
    p.note, div.note { padding: 0.5em 2em; }
    span.note { padding: 0 2em; }
    .note p:first-child, .warning p:first-child { margin-top: 0; }
@@ -295,8 +299,6 @@
      src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
    }
 
-  ]]></style><style type="text/css"><![CDATA[
-   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
   ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
    function getCookie(name) {
      var params = location.search.substr(1).split("&");
@@ -315,42 +317,49 @@
      }
      return null;
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="states-of-the-type-attribute.html" title="4.10.7.1 States of the type attribute" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="common-input-element-attributes.html" title="4.10.7.2 Common input element attributes" rel="next"/></head><body><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="states-of-the-type-attribute.html" title="4.10.7.1 States of the type attribute" rel="prev"/><link href="index.html#contents" title="Table of contents" rel="contents"/><link href="common-input-element-attributes.html" title="4.10.7.2 Common input element attributes" rel="next"/></head><body class="split chapter"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   </div><div>
-   <a href="states-of-the-type-attribute.html" class="prev">4.10.7.1 States of the type attribute</a> &#x2013;
-   <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="common-input-element-attributes.html" class="next">4.10.7.2 Common input element attributes</a>
-  <ol class="toc"><li><ol><li><ol><li><ol><li><ol><li><a href="number-state.html#number-state"><span class="secno">4.10.7.1.13 </span>Number state</a></li><li><a href="number-state.html#range-state"><span class="secno">4.10.7.1.14 </span>Range state</a></li><li><a href="number-state.html#color-state"><span class="secno">4.10.7.1.15 </span>Color state</a></li><li><a href="number-state.html#checkbox-state"><span class="secno">4.10.7.1.16 </span>Checkbox state</a></li><li><a href="number-state.html#radio-button-state"><span class="secno">4.10.7.1.17 </span>Radio Button state</a></li><li><a href="number-state.html#file-upload-state"><span class="secno">4.10.7.1.18 </span>File Upload state</a></li><li><a href="number-state.html#submit-button-state"><span class="secno">4.10.7.1.19 </span>Submit Button state</a></li><li><a href="number-state.html#image-button-state"><span class="secno">4.10.7.1.20 </span>Image Button state</a></li><li><a href="number-state.html#reset-button-state"><span class="secno">4.10.7.1.21 </span>Reset Button state</a></li><li><a href="number-state.html#button-state"><span class="secno">4.10.7.1.22 </span>Button state</a></li></ol></li></ol></li></ol></li></ol></li></ol></div><h6 id="number-state"><span class="secno">4.10.7.1.13 </span><dfn title="attr-input-type-number">Number</dfn> state</h6><div class="impl">
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5477.</p>
+
+   <h2 class="no-num no-toc" id="editor-s-draft-16-december-2011">Editor's Draft 16 December 2011</h2>
+   </div><nav class="prev_next"><a href="states-of-the-type-attribute.html">&#x2190; 4.10.7.1 States of the type attribute</a> &#x2013;
+   <a href="index.html#contents">Table of contents</a> &#x2013;
+   <a href="common-input-element-attributes.html">4.10.7.2 Common input element attributes &#x2192;</a>
+  <ol class="toc"><li><ol><li><ol><li><ol><li><ol><li><a href="number-state.html#number-state"><span class="secno">4.10.7.1.13 </span>Number state</a></li><li><a href="number-state.html#range-state"><span class="secno">4.10.7.1.14 </span>Range state</a></li><li><a href="number-state.html#color-state"><span class="secno">4.10.7.1.15 </span>Color state</a></li><li><a href="number-state.html#checkbox-state"><span class="secno">4.10.7.1.16 </span>Checkbox state</a></li><li><a href="number-state.html#radio-button-state"><span class="secno">4.10.7.1.17 </span>Radio Button state</a></li><li><a href="number-state.html#file-upload-state"><span class="secno">4.10.7.1.18 </span>File Upload state</a></li><li><a href="number-state.html#submit-button-state"><span class="secno">4.10.7.1.19 </span>Submit Button state</a></li><li><a href="number-state.html#image-button-state"><span class="secno">4.10.7.1.20 </span>Image Button state</a></li><li><a href="number-state.html#reset-button-state"><span class="secno">4.10.7.1.21 </span>Reset Button state</a></li><li><a href="number-state.html#button-state"><span class="secno">4.10.7.1.22 </span>Button state</a></li></ol></li></ol></li></ol></li></ol></li></ol></nav><h6 id="number-state"><span class="secno">4.10.7.1.13 </span><dfn title="attr-input-type-number">Number</dfn> state</h6><div class="impl">
 
   <p>When an <code><a href="the-input-element.html#the-input-element">input</a></code> element's <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="#number-state" title="attr-input-type-number">Number</a> state, the rules in
   this section apply.</p>
 
   </div><p>The <code><a href="the-input-element.html#the-input-element">input</a></code> element <a href="rendering.html#represents">represents</a> a control
-  for setting the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to a string representing a
+  for setting the element's <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> to a string representing a
   number.</p><div class="impl">
 
   <p>If the element is <i title="concept-input-mutable"><a href="the-input-element.html#concept-input-mutable">mutable</a></i>,
   the user agent should allow the user to change the number
-  represented by its <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>, as
+  represented by its <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a>, as
   obtained from applying the <a href="common-microsyntaxes.html#rules-for-parsing-floating-point-number-values">rules for parsing floating point
   number values</a> to it. User agents must not allow the user to
-  set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to a non-empty
+  set the <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> to a non-empty
   string that is not a <a href="common-microsyntaxes.html#valid-floating-point-number">valid floating point number</a>. If
   the user agent provides a user interface for selecting a number,
-  then the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> must be set to
+  then the <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> must be set to
   the <a href="common-microsyntaxes.html#best-representation-of-the-number-as-a-floating-point-number" title="best representation of the number as a floating&#10;  point number">best representation of the number representing the
   user's selection as a floating point number</a>. User agents
-  should allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
+  should allow the user to set the <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
 
-  </div><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
+  </div><p class="note">This specification does not define what user
+  interface user agents are to use; user agent vendors are encouraged
+  to consider what would best serve their users' needs. For example, a
+  user agent in Persian or Arabic markets might support Persian and
+  Arabic numeric input (converting it to the format required for
+  submission as described above). </p><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
   specified and not empty, must have a value that is a <a href="common-microsyntaxes.html#valid-floating-point-number">valid
   floating point number</a>.</p><div class="impl">
 
   <p><strong>The <a href="the-input-element.html#value-sanitization-algorithm">value sanitization algorithm</a> is as
-  follows</strong>: If the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>
+  follows</strong>: If the <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a>
   of the element is not a <a href="common-microsyntaxes.html#valid-floating-point-number">valid floating point number</a>,
   then set it to the empty string instead.</p>
 
@@ -363,9 +372,9 @@
   step</a> is 1 (allowing only integers, unless the <code title="attr-input-min"><a href="common-input-element-attributes.html#attr-input-min">min</a></code> attribute has a non-integer
   value).</p><div class="impl">
 
-  <p>When the element is <a href="association-of-controls-and-forms.html#suffering-from-a-step-mismatch">suffering from a step mismatch</a>,
-  the user agent may round the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the nearest number for
-  which the element would not <a href="association-of-controls-and-forms.html#suffering-from-a-step-mismatch" title="suffering from a step&#10;  mismatch">suffer from a step mismatch</a>. If there are two such
+  <p>When the element is <a href="constraints.html#suffering-from-a-step-mismatch">suffering from a step mismatch</a>,
+  the user agent may round the element's <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> to the nearest number for
+  which the element would not <a href="constraints.html#suffering-from-a-step-mismatch" title="suffering from a step&#10;  mismatch">suffer from a step mismatch</a>. If there are two such
   numbers, user agents are encouraged to pick the one nearest positive
   infinity.</p>
 
@@ -393,17 +402,16 @@
    <code title="attr-input-readonly"><a href="common-input-element-attributes.html#attr-input-readonly">readonly</a></code>,
    <code title="attr-input-required"><a href="common-input-element-attributes.html#attr-input-required">required</a></code>, and
    <code title="attr-input-step"><a href="common-input-element-attributes.html#attr-input-step">step</a></code> content attributes;
-   <code title="dom-input-list"><a href="common-input-element-attributes.html#dom-input-list">list</a></code>,
-   <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code>,
-   <code title="dom-input-valueAsNumber"><a href="common-input-element-attributes.html#dom-input-valueasnumber">valueAsNumber</a></code>, and
-   <code title="dom-input-selectedOption"><a href="common-input-element-attributes.html#dom-input-selectedoption">selectedOption</a></code> IDL attributes;
-   <code title="dom-input-stepDown"><a href="common-input-element-attributes.html#dom-input-stepdown">stepDown()</a></code> and
-   <code title="dom-input-stepUp"><a href="common-input-element-attributes.html#dom-input-stepup">stepUp()</a></code> methods.</p>
+   <code title="dom-input-list"><a href="common-input-element-apis.html#dom-input-list">list</a></code>,
+   <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code>, and
+   <code title="dom-input-valueAsNumber"><a href="common-input-element-apis.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
+   <code title="dom-input-stepDown"><a href="common-input-element-apis.html#dom-input-stepdown">stepDown()</a></code> and
+   <code title="dom-input-stepUp"><a href="common-input-element-apis.html#dom-input-stepup">stepUp()</a></code> methods.</p>
 
-   <p>The <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attribute is
-   in mode <a href="common-input-element-attributes.html#dom-input-value-value" title="dom-input-value-value">value</a>.</p>
+   <p>The <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attribute is
+   in mode <a href="common-input-element-apis.html#dom-input-value-value" title="dom-input-value-value">value</a>.</p>
 
-   <p>The <code title="event-input-input"><a href="common-input-element-attributes.html#event-input-input">input</a></code> and <code title="event-input-change"><a href="common-input-element-attributes.html#event-input-change">change</a></code> events apply.</p>
+   <p>The <code title="event-input-input"><a href="common-input-element-apis.html#event-input-input">input</a></code> and <code title="event-input-change"><a href="common-input-element-apis.html#event-input-change">change</a></code> events apply.</p>
 
    <p>The following content attributes must not be specified and do not
    apply to the element:
@@ -411,29 +419,29 @@
    <code class="no-backref" title="attr-input-alt"><a href="#attr-input-alt">alt</a></code>,
    <code class="no-backref" title="attr-input-checked"><a href="the-input-element.html#attr-input-checked">checked</a></code>,
    <code class="no-backref" title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>,
-   <code class="no-backref" title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>,
-   <code class="no-backref" title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code>,
-   <code class="no-backref" title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code>,
-   <code class="no-backref" title="attr-fs-formnovalidate"><a href="association-of-controls-and-forms.html#attr-fs-formnovalidate">formnovalidate</a></code>,
-   <code class="no-backref" title="attr-fs-formtarget"><a href="association-of-controls-and-forms.html#attr-fs-formtarget">formtarget</a></code>,
-   <code class="no-backref" title="attr-dim-height"><a href="the-map-element.html#attr-dim-height">height</a></code>,
+   <code class="no-backref" title="attr-fs-formaction"><a href="attributes-common-to-form-controls.html#attr-fs-formaction">formaction</a></code>,
+   <code class="no-backref" title="attr-fs-formenctype"><a href="attributes-common-to-form-controls.html#attr-fs-formenctype">formenctype</a></code>,
+   <code class="no-backref" title="attr-fs-formmethod"><a href="attributes-common-to-form-controls.html#attr-fs-formmethod">formmethod</a></code>,
+   <code class="no-backref" title="attr-fs-formnovalidate"><a href="attributes-common-to-form-controls.html#attr-fs-formnovalidate">formnovalidate</a></code>,
+   <code class="no-backref" title="attr-fs-formtarget"><a href="attributes-common-to-form-controls.html#attr-fs-formtarget">formtarget</a></code>,
+   <code class="no-backref" title="attr-dim-height"><a href="dimension-attributes.html#attr-dim-height">height</a></code>,
    <code class="no-backref" title="attr-input-maxlength"><a href="common-input-element-attributes.html#attr-input-maxlength">maxlength</a></code>,
    <code class="no-backref" title="attr-input-multiple"><a href="common-input-element-attributes.html#attr-input-multiple">multiple</a></code>,
    <code class="no-backref" title="attr-input-pattern"><a href="common-input-element-attributes.html#attr-input-pattern">pattern</a></code>,
    <code class="no-backref" title="attr-input-size"><a href="common-input-element-attributes.html#attr-input-size">size</a></code>,
    <code class="no-backref" title="attr-input-src"><a href="#attr-input-src">src</a></code>, and
-   <code class="no-backref" title="attr-dim-width"><a href="the-map-element.html#attr-dim-width">width</a></code>.</p>
+   <code class="no-backref" title="attr-dim-width"><a href="dimension-attributes.html#attr-dim-width">width</a></code>.</p>
 
    <p>The following IDL attributes and methods do not apply to the
    element:
-   <code class="no-backref" title="dom-input-checked"><a href="common-input-element-attributes.html#dom-input-checked">checked</a></code>,
-   <code class="no-backref" title="dom-input-files"><a href="common-input-element-attributes.html#dom-input-files">files</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionDirection"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>, and
-   <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code> IDL attributes;
-   <code class="no-backref" title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code> and
-   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code> methods.</p>
+   <code class="no-backref" title="dom-input-checked"><a href="common-input-element-apis.html#dom-input-checked">checked</a></code>,
+   <code class="no-backref" title="dom-input-files"><a href="common-input-element-apis.html#dom-input-files">files</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="textFieldSelection.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="textFieldSelection.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionDirection"><a href="textFieldSelection.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>, and
+   <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-apis.html#dom-input-valueasdate">valueAsDate</a></code> IDL attributes;
+   <code class="no-backref" title="dom-textarea/input-select"><a href="textFieldSelection.html#dom-textarea-input-select">select()</a></code> and
+   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="textFieldSelection.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code> methods.</p>
 
   </div><h6 id="range-state"><span class="secno">4.10.7.1.14 </span><dfn title="attr-input-type-range">Range</dfn> state</h6><div class="impl">
 
@@ -441,7 +449,7 @@
   section apply.</p>
 
   </div><p>The <code><a href="the-input-element.html#the-input-element">input</a></code> element <a href="rendering.html#represents">represents</a> a control
-  for setting the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to a string representing a
+  for setting the element's <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> to a string representing a
   number, but with the caveat that the exact value is not important,
   letting UAs provide a simpler interface than they do for the <a href="#number-state" title="attr-input-type-number">Number</a> state.</p><div class="impl">
 
@@ -451,21 +459,21 @@
 
   <p>If the element is <i title="concept-input-mutable"><a href="the-input-element.html#concept-input-mutable">mutable</a></i>,
   the user agent should allow the user to change the number
-  represented by its <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>, as
+  represented by its <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a>, as
   obtained from applying the <a href="common-microsyntaxes.html#rules-for-parsing-floating-point-number-values">rules for parsing floating point
   number values</a> to it. User agents must not allow the user to
-  set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to a string that
+  set the <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> to a string that
   is not a <a href="common-microsyntaxes.html#valid-floating-point-number">valid floating point number</a>. If the user agent
-  provides a user interface for selecting a number, then the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> must be set to a <a href="common-microsyntaxes.html#best-representation-of-the-number-as-a-floating-point-number" title="best representation of the number as a floating point&#10;  number">best representation of the number representing the user's
+  provides a user interface for selecting a number, then the <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> must be set to a <a href="common-microsyntaxes.html#best-representation-of-the-number-as-a-floating-point-number" title="best representation of the number as a floating point&#10;  number">best representation of the number representing the user's
   selection as a floating point number</a>. User agents must not
-  allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
+  allow the user to set the <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
 
   </div><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
   specified, must have a value that is a <a href="common-microsyntaxes.html#valid-floating-point-number">valid floating point
   number</a>.</p><div class="impl">
 
   <p><strong>The <a href="the-input-element.html#value-sanitization-algorithm">value sanitization algorithm</a> is as
-  follows</strong>: If the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>
+  follows</strong>: If the <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a>
   of the element is not a <a href="common-microsyntaxes.html#valid-floating-point-number">valid floating point number</a>,
   then set it to a <a href="common-microsyntaxes.html#valid-floating-point-number">valid floating point number</a> that
   represents the <a href="#concept-input-value-default-range" title="concept-input-value-default-range">default value</a>.</p>
@@ -480,14 +488,14 @@
   plus half the difference between the <a href="common-input-element-attributes.html#concept-input-min" title="concept-input-min">minimum</a> and the <a href="common-input-element-attributes.html#concept-input-max" title="concept-input-max">maximum</a>, unless the <a href="common-input-element-attributes.html#concept-input-max" title="concept-input-max">maximum</a> is less than the <a href="common-input-element-attributes.html#concept-input-min" title="concept-input-min">minimum</a>, in which case the <a href="#concept-input-value-default-range" title="concept-input-value-default-range">default value</a> is
   the <a href="common-input-element-attributes.html#concept-input-min" title="concept-input-min">minimum</a>.</p><div class="impl">
 
-  <p>When the element is <a href="association-of-controls-and-forms.html#suffering-from-an-underflow">suffering from an
-  underflow</a>, the user agent must set the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to a <a href="common-microsyntaxes.html#valid-floating-point-number">valid floating point
+  <p>When the element is <a href="constraints.html#suffering-from-an-underflow">suffering from an
+  underflow</a>, the user agent must set the element's <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> to a <a href="common-microsyntaxes.html#valid-floating-point-number">valid floating point
   number</a> that represents the <a href="common-input-element-attributes.html#concept-input-min" title="concept-input-min">minimum</a>.</p>
 
-  <p>When the element is <a href="association-of-controls-and-forms.html#suffering-from-an-overflow">suffering from an overflow</a>,
+  <p>When the element is <a href="constraints.html#suffering-from-an-overflow">suffering from an overflow</a>,
   if the <a href="common-input-element-attributes.html#concept-input-max" title="concept-input-max">maximum</a> is not less
   than the <a href="common-input-element-attributes.html#concept-input-min" title="concept-input-min">minimum</a>, the user
-  agent must set the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to a <a href="common-microsyntaxes.html#valid-floating-point-number">valid floating point
+  agent must set the element's <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> to a <a href="common-microsyntaxes.html#valid-floating-point-number">valid floating point
   number</a> that represents the <a href="common-input-element-attributes.html#concept-input-max" title="concept-input-max">maximum</a>.</p>
 
   </div><p><span class="impl">The <a href="common-input-element-attributes.html#concept-input-step-scale" title="concept-input-step-scale">step scale factor</a> is
@@ -495,9 +503,9 @@
   step</a> is 1 (allowing only integers, unless the <code title="attr-input-min"><a href="common-input-element-attributes.html#attr-input-min">min</a></code> attribute has a non-integer
   value).</p><div class="impl">
 
-  <p>When the element is <a href="association-of-controls-and-forms.html#suffering-from-a-step-mismatch">suffering from a step mismatch</a>,
-  the user agent must round the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the nearest number for
-  which the element would not <a href="association-of-controls-and-forms.html#suffering-from-a-step-mismatch" title="suffering from a step&#10;  mismatch">suffer from a step mismatch</a>, and which is greater
+  <p>When the element is <a href="constraints.html#suffering-from-a-step-mismatch">suffering from a step mismatch</a>,
+  the user agent must round the element's <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> to the nearest number for
+  which the element would not <a href="constraints.html#suffering-from-a-step-mismatch" title="suffering from a step&#10;  mismatch">suffer from a step mismatch</a>, and which is greater
   than or equal to the <a href="common-input-element-attributes.html#concept-input-min" title="concept-input-min">minimum</a>,
   and, if the <a href="common-input-element-attributes.html#concept-input-max" title="concept-input-max">maximum</a> is not
   less than the <a href="common-input-element-attributes.html#concept-input-min" title="concept-input-min">minimum</a>, which
@@ -530,17 +538,16 @@
    <code title="attr-input-max"><a href="common-input-element-attributes.html#attr-input-max">max</a></code>,
    <code title="attr-input-min"><a href="common-input-element-attributes.html#attr-input-min">min</a></code>, and
    <code title="attr-input-step"><a href="common-input-element-attributes.html#attr-input-step">step</a></code> content attributes;
-   <code title="dom-input-list"><a href="common-input-element-attributes.html#dom-input-list">list</a></code>,
-   <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code>,
-   <code title="dom-input-valueAsNumber"><a href="common-input-element-attributes.html#dom-input-valueasnumber">valueAsNumber</a></code>, and
-   <code title="dom-input-selectedOption"><a href="common-input-element-attributes.html#dom-input-selectedoption">selectedOption</a></code> IDL attributes;
-   <code title="dom-input-stepDown"><a href="common-input-element-attributes.html#dom-input-stepdown">stepDown()</a></code> and
-   <code title="dom-input-stepUp"><a href="common-input-element-attributes.html#dom-input-stepup">stepUp()</a></code> methods.</p>
+   <code title="dom-input-list"><a href="common-input-element-apis.html#dom-input-list">list</a></code>,
+   <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code>, and
+   <code title="dom-input-valueAsNumber"><a href="common-input-element-apis.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
+   <code title="dom-input-stepDown"><a href="common-input-element-apis.html#dom-input-stepdown">stepDown()</a></code> and
+   <code title="dom-input-stepUp"><a href="common-input-element-apis.html#dom-input-stepup">stepUp()</a></code> methods.</p>
 
-   <p>The <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attribute is
-   in mode <a href="common-input-element-attributes.html#dom-input-value-value" title="dom-input-value-value">value</a>.</p>
+   <p>The <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attribute is
+   in mode <a href="common-input-element-apis.html#dom-input-value-value" title="dom-input-value-value">value</a>.</p>
 
-   <p>The <code title="event-input-input"><a href="common-input-element-attributes.html#event-input-input">input</a></code> and <code title="event-input-change"><a href="common-input-element-attributes.html#event-input-change">change</a></code> events apply.</p>
+   <p>The <code title="event-input-input"><a href="common-input-element-apis.html#event-input-input">input</a></code> and <code title="event-input-change"><a href="common-input-element-apis.html#event-input-change">change</a></code> events apply.</p>
 
    <p>The following content attributes must not be specified and do not
    apply to the element:
@@ -548,12 +555,12 @@
    <code class="no-backref" title="attr-input-alt"><a href="#attr-input-alt">alt</a></code>,
    <code class="no-backref" title="attr-input-checked"><a href="the-input-element.html#attr-input-checked">checked</a></code>,
    <code class="no-backref" title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>,
-   <code class="no-backref" title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>,
-   <code class="no-backref" title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code>,
-   <code class="no-backref" title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code>,
-   <code class="no-backref" title="attr-fs-formnovalidate"><a href="association-of-controls-and-forms.html#attr-fs-formnovalidate">formnovalidate</a></code>,
-   <code class="no-backref" title="attr-fs-formtarget"><a href="association-of-controls-and-forms.html#attr-fs-formtarget">formtarget</a></code>,
-   <code class="no-backref" title="attr-dim-height"><a href="the-map-element.html#attr-dim-height">height</a></code>,
+   <code class="no-backref" title="attr-fs-formaction"><a href="attributes-common-to-form-controls.html#attr-fs-formaction">formaction</a></code>,
+   <code class="no-backref" title="attr-fs-formenctype"><a href="attributes-common-to-form-controls.html#attr-fs-formenctype">formenctype</a></code>,
+   <code class="no-backref" title="attr-fs-formmethod"><a href="attributes-common-to-form-controls.html#attr-fs-formmethod">formmethod</a></code>,
+   <code class="no-backref" title="attr-fs-formnovalidate"><a href="attributes-common-to-form-controls.html#attr-fs-formnovalidate">formnovalidate</a></code>,
+   <code class="no-backref" title="attr-fs-formtarget"><a href="attributes-common-to-form-controls.html#attr-fs-formtarget">formtarget</a></code>,
+   <code class="no-backref" title="attr-dim-height"><a href="dimension-attributes.html#attr-dim-height">height</a></code>,
    <code class="no-backref" title="attr-input-maxlength"><a href="common-input-element-attributes.html#attr-input-maxlength">maxlength</a></code>,
    <code class="no-backref" title="attr-input-multiple"><a href="common-input-element-attributes.html#attr-input-multiple">multiple</a></code>,
    <code class="no-backref" title="attr-input-pattern"><a href="common-input-element-attributes.html#attr-input-pattern">pattern</a></code>,
@@ -562,18 +569,18 @@
    <code class="no-backref" title="attr-input-required"><a href="common-input-element-attributes.html#attr-input-required">required</a></code>,
    <code class="no-backref" title="attr-input-size"><a href="common-input-element-attributes.html#attr-input-size">size</a></code>,
    <code class="no-backref" title="attr-input-src"><a href="#attr-input-src">src</a></code>, and
-   <code class="no-backref" title="attr-dim-width"><a href="the-map-element.html#attr-dim-width">width</a></code>.</p>
+   <code class="no-backref" title="attr-dim-width"><a href="dimension-attributes.html#attr-dim-width">width</a></code>.</p>
 
    <p>The following IDL attributes and methods do not apply to the
    element:
-   <code class="no-backref" title="dom-input-checked"><a href="common-input-element-attributes.html#dom-input-checked">checked</a></code>,
-   <code class="no-backref" title="dom-input-files"><a href="common-input-element-attributes.html#dom-input-files">files</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionDirection"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>, and
-   <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code> IDL attributes;
-   <code class="no-backref" title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code> and
-   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code> methods.</p>
+   <code class="no-backref" title="dom-input-checked"><a href="common-input-element-apis.html#dom-input-checked">checked</a></code>,
+   <code class="no-backref" title="dom-input-files"><a href="common-input-element-apis.html#dom-input-files">files</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="textFieldSelection.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="textFieldSelection.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionDirection"><a href="textFieldSelection.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>, and
+   <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-apis.html#dom-input-valueasdate">valueAsDate</a></code> IDL attributes;
+   <code class="no-backref" title="dom-textarea/input-select"><a href="textFieldSelection.html#dom-textarea-input-select">select()</a></code> and
+   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="textFieldSelection.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code> methods.</p>
 
   </div><div class="example">
 
@@ -636,7 +643,7 @@
   section apply.</p>
 
   </div><p>The <code><a href="the-input-element.html#the-input-element">input</a></code> element <a href="rendering.html#represents">represents</a> a color
-  well control, for setting the element's <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to a string representing a
+  well control, for setting the element's <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> to a string representing a
   <a href="common-microsyntaxes.html#simple-color">simple color</a>.</p><div class="impl">
 
   <p class="note">In this state, there is always a color picked, and
@@ -644,23 +651,23 @@
 
   <p>If the element is <i title="concept-input-mutable"><a href="the-input-element.html#concept-input-mutable">mutable</a></i>,
   the user agent should allow the user to change the color represented
-  by its <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>, as obtained from
+  by its <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a>, as obtained from
   applying the <a href="common-microsyntaxes.html#rules-for-parsing-simple-color-values">rules for parsing simple color values</a> to
-  it. User agents must not allow the user to set the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to a string that is not a
+  it. User agents must not allow the user to set the <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> to a string that is not a
   <a href="common-microsyntaxes.html#valid-lowercase-simple-color">valid lowercase simple color</a>. If the user agent
-  provides a user interface for selecting a color, then the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> must be set to the result of
+  provides a user interface for selecting a color, then the <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> must be set to the result of
   using the <a href="common-microsyntaxes.html#rules-for-serializing-simple-color-values">rules for serializing simple color values</a> to
   the user's selection. User agents must not allow the user to set the
-  <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
+  <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> to the empty string.</p>
 
   </div><p>The <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code> attribute, if
   specified and not empty, must have a value that is a <a href="common-microsyntaxes.html#valid-simple-color">valid
   simple color</a>.</p><div class="impl">
 
   <p><strong>The <a href="the-input-element.html#value-sanitization-algorithm">value sanitization algorithm</a> is as
-  follows</strong>: If the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a>
+  follows</strong>: If the <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a>
   of the element is a <a href="common-microsyntaxes.html#valid-simple-color">valid simple color</a>, then set it to
-  the <a href="association-of-controls-and-forms.html#concept-fe-value" title="concept-fe-value">value</a> of the element
+  the <a href="attributes-common-to-form-controls.html#concept-fe-value" title="concept-fe-value">value</a> of the element
   <a href="infrastructure.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a>; otherwise, set it to the string
   "<code title="">#000000</code>".</p>
 
@@ -670,14 +677,13 @@
    attributes, IDL attributes, and methods apply to the element:
    <code title="attr-input-autocomplete"><a href="common-input-element-attributes.html#attr-input-autocomplete">autocomplete</a></code> and
    <code title="attr-input-list"><a href="common-input-element-attributes.html#attr-input-list">list</a></code> content attributes;
-   <code title="dom-input-list"><a href="common-input-element-attributes.html#dom-input-list">list</a></code>,
-   <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code>, and
-   <code title="dom-input-selectedOption"><a href="common-input-element-attributes.html#dom-input-selectedoption">selectedOption</a></code> IDL attributes.</p>
+   <code title="dom-input-list"><a href="common-input-element-apis.html#dom-input-list">list</a></code> and
+   <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attributes.</p>
 
-   <p>The <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attribute is
-   in mode <a href="common-input-element-attributes.html#dom-input-value-value" title="dom-input-value-value">value</a>.</p>
+   <p>The <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attribute is
+   in mode <a href="common-input-element-apis.html#dom-input-value-value" title="dom-input-value-value">value</a>.</p>
 
-   <p>The <code title="event-input-input"><a href="common-input-element-attributes.html#event-input-input">input</a></code> and <code title="event-input-change"><a href="common-input-element-attributes.html#event-input-change">change</a></code> events apply.</p>
+   <p>The <code title="event-input-input"><a href="common-input-element-apis.html#event-input-input">input</a></code> and <code title="event-input-change"><a href="common-input-element-apis.html#event-input-change">change</a></code> events apply.</p>
 
    <p>The following content attributes must not be specified and do not
    apply to the element:
@@ -685,14 +691,14 @@
    <code class="no-backref" title="attr-input-alt"><a href="#attr-input-alt">alt</a></code>,
    <code class="no-backref" title="attr-input-checked"><a href="the-input-element.html#attr-input-checked">checked</a></code>,
    <code class="no-backref" title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>,
-   <code class="no-backref" title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>,
-   <code class="no-backref" title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code>,
-   <code class="no-backref" title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code>,
-   <code class="no-backref" title="attr-fs-formnovalidate"><a href="association-of-controls-and-forms.html#attr-fs-formnovalidate">formnovalidate</a></code>,
-   <code class="no-backref" title="attr-fs-formtarget"><a href="association-of-controls-and-forms.html#attr-fs-formtarget">formtarget</a></code>,
-   <code class="no-backref" title="attr-dim-height"><a href="the-map-element.html#attr-dim-height">height</a></code>,
-   <code class="no-backref" title="attr-input-maxlength"><a href="common-input-element-attributes.html#attr-input-maxlength">maxlength</a></code>,
+   <code class="no-backref" title="attr-fs-formaction"><a href="attributes-common-to-form-controls.html#attr-fs-formaction">formaction</a></code>,
+   <code class="no-backref" title="attr-fs-formenctype"><a href="attributes-common-to-form-controls.html#attr-fs-formenctype">formenctype</a></code>,
+   <code class="no-backref" title="attr-fs-formmethod"><a href="attributes-common-to-form-controls.html#attr-fs-formmethod">formmethod</a></code>,
+   <code class="no-backref" title="attr-fs-formnovalidate"><a href="attributes-common-to-form-controls.html#attr-fs-formnovalidate">formnovalidate</a></code>,
+   <code class="no-backref" title="attr-fs-formtarget"><a href="attributes-common-to-form-controls.html#attr-fs-formtarget">formtarget</a></code>,
+   <code class="no-backref" title="attr-dim-height"><a href="dimension-attributes.html#attr-dim-height">height</a></code>,
    <code class="no-backref" title="attr-input-max"><a href="common-input-element-attributes.html#attr-input-max">max</a></code>,
+   <code class="no-backref" title="attr-input-maxlength"><a href="common-input-element-attributes.html#attr-input-maxlength">maxlength</a></code>,
    <code class="no-backref" title="attr-input-min"><a href="common-input-element-attributes.html#attr-input-min">min</a></code>,
    <code class="no-backref" title="attr-input-multiple"><a href="common-input-element-attributes.html#attr-input-multiple">multiple</a></code>,
    <code class="no-backref" title="attr-input-pattern"><a href="common-input-element-attributes.html#attr-input-pattern">pattern</a></code>,
@@ -702,21 +708,21 @@
    <code class="no-backref" title="attr-input-size"><a href="common-input-element-attributes.html#attr-input-size">size</a></code>,
    <code class="no-backref" title="attr-input-src"><a href="#attr-input-src">src</a></code>,
    <code class="no-backref" title="attr-input-step"><a href="common-input-element-attributes.html#attr-input-step">step</a></code>, and
-   <code class="no-backref" title="attr-dim-width"><a href="the-map-element.html#attr-dim-width">width</a></code>.</p>
+   <code class="no-backref" title="attr-dim-width"><a href="dimension-attributes.html#attr-dim-width">width</a></code>.</p>
 
    <p>The following IDL attributes and methods do not apply to the
    element:
-   <code class="no-backref" title="dom-input-checked"><a href="common-input-element-attributes.html#dom-input-checked">checked</a></code>,
-   <code class="no-backref" title="dom-input-files"><a href="common-input-element-attributes.html#dom-input-files">files</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionDirection"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>,
-   <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code>, and
-   <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-attributes.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
-   <code class="no-backref" title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code>,
-   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
-   <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-attributes.html#dom-input-stepdown">stepDown()</a></code>, and
-   <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-attributes.html#dom-input-stepup">stepUp()</a></code> methods.</p>
+   <code class="no-backref" title="dom-input-checked"><a href="common-input-element-apis.html#dom-input-checked">checked</a></code>,
+   <code class="no-backref" title="dom-input-files"><a href="common-input-element-apis.html#dom-input-files">files</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="textFieldSelection.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="textFieldSelection.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionDirection"><a href="textFieldSelection.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>,
+   <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-apis.html#dom-input-valueasdate">valueAsDate</a></code>, and
+   <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-apis.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
+   <code class="no-backref" title="dom-textarea/input-select"><a href="textFieldSelection.html#dom-textarea-input-select">select()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="textFieldSelection.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
+   <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-apis.html#dom-input-stepdown">stepDown()</a></code>, and
+   <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-apis.html#dom-input-stepup">stepUp()</a></code> methods.</p>
 
   </div><h6 id="checkbox-state"><span class="secno">4.10.7.1.16 </span><dfn title="attr-input-type-checkbox">Checkbox</dfn> state</h6><div class="impl">
 
@@ -724,8 +730,8 @@
   this section apply.</p>
 
   </div><p>The <code><a href="the-input-element.html#the-input-element">input</a></code> element <a href="rendering.html#represents">represents</a> a
-  two-state control that represents the element's <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> state. If the
-  element's <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> state
+  two-state control that represents the element's <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> state. If the
+  element's <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> state
   is true, the control represents a positive selection, and if it is
   false, a negative selection. If the element's <code title="dom-input-indeterminate"><a href="the-input-element.html#dom-input-indeterminate">indeterminate</a></code> IDL attribute
   is set to true, then the control's selection should be obscured as
@@ -736,18 +742,18 @@
 
   <p>If the element is <i title="concept-input-mutable"><a href="the-input-element.html#concept-input-mutable">mutable</a></i>,
   then: The <a href="content-models.html#pre-click-activation-steps">pre-click activation steps</a> consist of setting
-  the element's <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> to
+  the element's <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> to
   its opposite value (i.e. true if it is false, false if it is true),
   and of setting the element's <code title="dom-input-indeterminate"><a href="the-input-element.html#dom-input-indeterminate">indeterminate</a></code> IDL attribute
   to false. The <a href="content-models.html#canceled-activation-steps">canceled activation steps</a> consist of
-  setting the <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> and
+  setting the <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> and
   the element's <code title="dom-input-indeterminate"><a href="the-input-element.html#dom-input-indeterminate">indeterminate</a></code> IDL attribute
   back to the values they had before the <a href="content-models.html#pre-click-activation-steps">pre-click activation
   steps</a> were run. The <a href="content-models.html#activation-behavior">activation behavior</a> is to
   <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> that bubbles named <code title="event-change">change</code> at the element. </p>
 
-  <p><strong>Constraint validation</strong>: If the element is <i title="concept-input-required"><a href="common-input-element-attributes.html#concept-input-required">required</a></i> and its <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> is false, then the
-  element is <a href="association-of-controls-and-forms.html#suffering-from-being-missing">suffering from being missing</a>.</p>
+  <p><strong>Constraint validation</strong>: If the element is <i title="concept-input-required"><a href="common-input-element-attributes.html#concept-input-required">required</a></i> and its <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> is false, then the
+  element is <a href="constraints.html#suffering-from-being-missing">suffering from being missing</a>.</p>
 
   </div><dl class="domintro"><dt><var title="">input</var> . <code title="dom-input-indeterminate"><a href="the-input-element.html#dom-input-indeterminate">indeterminate</a></code> [ = <var title="">value</var> ]</dt>
 
@@ -764,13 +770,13 @@
    attributes and IDL attributes apply to the element:
    <code title="attr-input-checked"><a href="the-input-element.html#attr-input-checked">checked</a></code>, and
    <code title="attr-input-required"><a href="common-input-element-attributes.html#attr-input-required">required</a></code> content attributes;
-   <code title="dom-input-checked"><a href="common-input-element-attributes.html#dom-input-checked">checked</a></code> and
-   <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attributes.</p>
+   <code title="dom-input-checked"><a href="common-input-element-apis.html#dom-input-checked">checked</a></code> and
+   <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attributes.</p>
 
-   <p>The <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attribute is
-   in mode <a href="common-input-element-attributes.html#dom-input-value-default-on" title="dom-input-value-default-on">default/on</a>.</p>
+   <p>The <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attribute is
+   in mode <a href="common-input-element-apis.html#dom-input-value-default-on" title="dom-input-value-default-on">default/on</a>.</p>
 
-   <p>The <code title="event-input-change"><a href="common-input-element-attributes.html#event-input-change">change</a></code> event applies.</p>
+   <p>The <code title="event-input-change"><a href="common-input-element-apis.html#event-input-change">change</a></code> event applies.</p>
 
    <p>The following content attributes must not be specified and do not
    apply to the element:
@@ -778,12 +784,12 @@
    <code class="no-backref" title="attr-input-alt"><a href="#attr-input-alt">alt</a></code>,
    <code class="no-backref" title="attr-input-autocomplete"><a href="common-input-element-attributes.html#attr-input-autocomplete">autocomplete</a></code>,
    <code class="no-backref" title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>,
-   <code class="no-backref" title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>,
-   <code class="no-backref" title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code>,
-   <code class="no-backref" title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code>,
-   <code class="no-backref" title="attr-fs-formnovalidate"><a href="association-of-controls-and-forms.html#attr-fs-formnovalidate">formnovalidate</a></code>,
-   <code class="no-backref" title="attr-fs-formtarget"><a href="association-of-controls-and-forms.html#attr-fs-formtarget">formtarget</a></code>,
-   <code class="no-backref" title="attr-dim-height"><a href="the-map-element.html#attr-dim-height">height</a></code>,
+   <code class="no-backref" title="attr-fs-formaction"><a href="attributes-common-to-form-controls.html#attr-fs-formaction">formaction</a></code>,
+   <code class="no-backref" title="attr-fs-formenctype"><a href="attributes-common-to-form-controls.html#attr-fs-formenctype">formenctype</a></code>,
+   <code class="no-backref" title="attr-fs-formmethod"><a href="attributes-common-to-form-controls.html#attr-fs-formmethod">formmethod</a></code>,
+   <code class="no-backref" title="attr-fs-formnovalidate"><a href="attributes-common-to-form-controls.html#attr-fs-formnovalidate">formnovalidate</a></code>,
+   <code class="no-backref" title="attr-fs-formtarget"><a href="attributes-common-to-form-controls.html#attr-fs-formtarget">formtarget</a></code>,
+   <code class="no-backref" title="attr-dim-height"><a href="dimension-attributes.html#attr-dim-height">height</a></code>,
    <code class="no-backref" title="attr-input-list"><a href="common-input-element-attributes.html#attr-input-list">list</a></code>,
    <code class="no-backref" title="attr-input-max"><a href="common-input-element-attributes.html#attr-input-max">max</a></code>,
    <code class="no-backref" title="attr-input-maxlength"><a href="common-input-element-attributes.html#attr-input-maxlength">maxlength</a></code>,
@@ -795,24 +801,23 @@
    <code class="no-backref" title="attr-input-size"><a href="common-input-element-attributes.html#attr-input-size">size</a></code>,
    <code class="no-backref" title="attr-input-src"><a href="#attr-input-src">src</a></code>,
    <code class="no-backref" title="attr-input-step"><a href="common-input-element-attributes.html#attr-input-step">step</a></code>, and
-   <code class="no-backref" title="attr-dim-width"><a href="the-map-element.html#attr-dim-width">width</a></code>.</p>
+   <code class="no-backref" title="attr-dim-width"><a href="dimension-attributes.html#attr-dim-width">width</a></code>.</p>
 
    <p>The following IDL attributes and methods do not apply to the
    element:
-   <code class="no-backref" title="dom-input-files"><a href="common-input-element-attributes.html#dom-input-files">files</a></code>,
-   <code class="no-backref" title="dom-input-list"><a href="common-input-element-attributes.html#dom-input-list">list</a></code>,
-   <code class="no-backref" title="dom-input-selectedOption"><a href="common-input-element-attributes.html#dom-input-selectedoption">selectedOption</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionDirection"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>,
-   <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code>, and
-   <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-attributes.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
-   <code class="no-backref" title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code>,
-   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
-   <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-attributes.html#dom-input-stepdown">stepDown()</a></code>, and
-   <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-attributes.html#dom-input-stepup">stepUp()</a></code> methods.</p>
+   <code class="no-backref" title="dom-input-files"><a href="common-input-element-apis.html#dom-input-files">files</a></code>,
+   <code class="no-backref" title="dom-input-list"><a href="common-input-element-apis.html#dom-input-list">list</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="textFieldSelection.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="textFieldSelection.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionDirection"><a href="textFieldSelection.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>,
+   <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-apis.html#dom-input-valueasdate">valueAsDate</a></code>, and
+   <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-apis.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
+   <code class="no-backref" title="dom-textarea/input-select"><a href="textFieldSelection.html#dom-textarea-input-select">select()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="textFieldSelection.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
+   <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-apis.html#dom-input-stepdown">stepDown()</a></code>, and
+   <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-apis.html#dom-input-stepup">stepUp()</a></code> methods.</p>
 
-   <p>The <code class="no-backref" title="event-input-input"><a href="common-input-element-attributes.html#event-input-input">input</a></code> event does not apply.</p>
+   <p>The <code class="no-backref" title="event-input-input"><a href="common-input-element-apis.html#event-input-input">input</a></code> event does not apply.</p>
 
   </div><h6 id="radio-button-state"><span class="secno">4.10.7.1.17 </span><dfn title="attr-input-type-radio">Radio Button</dfn> state</h6><div class="impl">
 
@@ -822,8 +827,8 @@
   </div><p>The <code><a href="the-input-element.html#the-input-element">input</a></code> element <a href="rendering.html#represents">represents</a> a control
   that, when used in conjunction with other <code><a href="the-input-element.html#the-input-element">input</a></code>
   elements, forms a <i><a href="#radio-button-group">radio button group</a></i> in which only one
-  control can have its <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> state set to true. If
-  the element's <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a>
+  control can have its <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> state set to true. If
+  the element's <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a>
   state is true, the control represents the selected control in the
   group, and if it is false, it indicates a control in the group that
   is not selected.</p><p>The <dfn id="radio-button-group"><i>radio button group</i></dfn> that contains an
@@ -835,41 +840,41 @@
    same <a href="association-of-controls-and-forms.html#form-owner">form owner</a>, or they both have no <a href="association-of-controls-and-forms.html#form-owner">form
    owner</a>.</li>
 
-   <li>They both have a <code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code>
-   attribute, their <code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code> attributes
-   are not empty, and the value of <var title="">a</var>'s <code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code> attribute is a <a href="infrastructure.html#compatibility-caseless">compatibility
+   <li>They both have a <code title="attr-fe-name"><a href="attributes-common-to-form-controls.html#attr-fe-name">name</a></code>
+   attribute, their <code title="attr-fe-name"><a href="attributes-common-to-form-controls.html#attr-fe-name">name</a></code> attributes
+   are not empty, and the value of <var title="">a</var>'s <code title="attr-fe-name"><a href="attributes-common-to-form-controls.html#attr-fe-name">name</a></code> attribute is a <a href="infrastructure.html#compatibility-caseless">compatibility
    caseless</a> match for the value of <var title="">b</var>'s
-   <code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code> attribute.</li>
+   <code title="attr-fe-name"><a href="attributes-common-to-form-controls.html#attr-fe-name">name</a></code> attribute.</li>
 
   </ul><p>A document must not contain an <code><a href="the-input-element.html#the-input-element">input</a></code> element whose
   <i><a href="#radio-button-group">radio button group</a></i> contains only that element.</p><div class="impl">
 
-  <p>When any of the following phenomena occur, if the element's <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> state is true after
-  the occurrence, the <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> state of all the other
+  <p>When any of the following phenomena occur, if the element's <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> state is true after
+  the occurrence, the <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> state of all the other
   elements in the same <i><a href="#radio-button-group">radio button group</a></i> must be set to
   false:</p>
 
-  <ul><li>The element's <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> state is set to
+  <ul><li>The element's <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> state is set to
    true (for whatever reason).</li>
 
-   <li>The element's <code title="attr-fe-name"><a href="association-of-controls-and-forms.html#attr-fe-name">name</a></code> attribute
+   <li>The element's <code title="attr-fe-name"><a href="attributes-common-to-form-controls.html#attr-fe-name">name</a></code> attribute
    is set, changed, or removed.</li>
 
    <li>The element's <a href="association-of-controls-and-forms.html#form-owner">form owner</a> changes.</li>
 
   </ul><p>If the element is <i title="concept-input-mutable"><a href="the-input-element.html#concept-input-mutable">mutable</a></i>,
   then: The <a href="content-models.html#pre-click-activation-steps">pre-click activation steps</a> consist of setting
-  the element's <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> to
+  the element's <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> to
   true. The <a href="content-models.html#canceled-activation-steps">canceled activation steps</a> consist of setting
-  the element's <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> to
+  the element's <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> to
   false. The <a href="content-models.html#activation-behavior">activation behavior</a> is to <a href="webappapis.html#fire-a-simple-event">fire a
   simple event</a> that bubbles named <code title="event-change">change</code> at the element. .</p>
 
   <p><strong>Constraint validation</strong>: If an element in the
   <i><a href="#radio-button-group">radio button group</a></i> is <i title="concept-input-required"><a href="common-input-element-attributes.html#concept-input-required">required</a></i>, and all of the
   <code><a href="the-input-element.html#the-input-element">input</a></code> elements in the <i><a href="#radio-button-group">radio button group</a></i> have a
-  <a href="association-of-controls-and-forms.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> that is false,
-  then the element is <a href="association-of-controls-and-forms.html#suffering-from-being-missing">suffering from being missing</a>.</p>
+  <a href="attributes-common-to-form-controls.html#concept-fe-checked" title="concept-fe-checked">checkedness</a> that is false,
+  then the element is <a href="constraints.html#suffering-from-being-missing">suffering from being missing</a>.</p>
 
   </div><p class="note">If none of the radio buttons in a <a href="#radio-button-group">radio button
   group</a> are checked when they are inserted into the document,
@@ -881,13 +886,13 @@
    attributes and IDL attributes apply to the element:
    <code title="attr-input-checked"><a href="the-input-element.html#attr-input-checked">checked</a></code> and
    <code title="attr-input-required"><a href="common-input-element-attributes.html#attr-input-required">required</a></code> content attributes;
-   <code title="dom-input-checked"><a href="common-input-element-attributes.html#dom-input-checked">checked</a></code> and
-   <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attributes.</p>
+   <code title="dom-input-checked"><a href="common-input-element-apis.html#dom-input-checked">checked</a></code> and
+   <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attributes.</p>
 
-   <p>The <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attribute is
-   in mode <a href="common-input-element-attributes.html#dom-input-value-default-on" title="dom-input-value-default-on">default/on</a>.</p>
+   <p>The <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attribute is
+   in mode <a href="common-input-element-apis.html#dom-input-value-default-on" title="dom-input-value-default-on">default/on</a>.</p>
 
-   <p>The <code title="event-input-change"><a href="common-input-element-attributes.html#event-input-change">change</a></code> event applies.</p>
+   <p>The <code title="event-input-change"><a href="common-input-element-apis.html#event-input-change">change</a></code> event applies.</p>
 
    <p>The following content attributes must not be specified and do not
    apply to the element:
@@ -895,12 +900,12 @@
    <code class="no-backref" title="attr-input-alt"><a href="#attr-input-alt">alt</a></code>,
    <code class="no-backref" title="attr-input-autocomplete"><a href="common-input-element-attributes.html#attr-input-autocomplete">autocomplete</a></code>,
    <code class="no-backref" title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>,
-   <code class="no-backref" title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>,
-   <code class="no-backref" title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code>,
-   <code class="no-backref" title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code>,
-   <code class="no-backref" title="attr-fs-formnovalidate"><a href="association-of-controls-and-forms.html#attr-fs-formnovalidate">formnovalidate</a></code>,
-   <code class="no-backref" title="attr-fs-formtarget"><a href="association-of-controls-and-forms.html#attr-fs-formtarget">formtarget</a></code>,
-   <code class="no-backref" title="attr-dim-height"><a href="the-map-element.html#attr-dim-height">height</a></code>,
+   <code class="no-backref" title="attr-fs-formaction"><a href="attributes-common-to-form-controls.html#attr-fs-formaction">formaction</a></code>,
+   <code class="no-backref" title="attr-fs-formenctype"><a href="attributes-common-to-form-controls.html#attr-fs-formenctype">formenctype</a></code>,
+   <code class="no-backref" title="attr-fs-formmethod"><a href="attributes-common-to-form-controls.html#attr-fs-formmethod">formmethod</a></code>,
+   <code class="no-backref" title="attr-fs-formnovalidate"><a href="attributes-common-to-form-controls.html#attr-fs-formnovalidate">formnovalidate</a></code>,
+   <code class="no-backref" title="attr-fs-formtarget"><a href="attributes-common-to-form-controls.html#attr-fs-formtarget">formtarget</a></code>,
+   <code class="no-backref" title="attr-dim-height"><a href="dimension-attributes.html#attr-dim-height">height</a></code>,
    <code class="no-backref" title="attr-input-list"><a href="common-input-element-attributes.html#attr-input-list">list</a></code>,
    <code class="no-backref" title="attr-input-max"><a href="common-input-element-attributes.html#attr-input-max">max</a></code>,
    <code class="no-backref" title="attr-input-maxlength"><a href="common-input-element-attributes.html#attr-input-maxlength">maxlength</a></code>,
@@ -912,24 +917,23 @@
    <code class="no-backref" title="attr-input-size"><a href="common-input-element-attributes.html#attr-input-size">size</a></code>,
    <code class="no-backref" title="attr-input-src"><a href="#attr-input-src">src</a></code>,
    <code class="no-backref" title="attr-input-step"><a href="common-input-element-attributes.html#attr-input-step">step</a></code>, and
-   <code class="no-backref" title="attr-dim-width"><a href="the-map-element.html#attr-dim-width">width</a></code>.</p>
+   <code class="no-backref" title="attr-dim-width"><a href="dimension-attributes.html#attr-dim-width">width</a></code>.</p>
 
    <p>The following IDL attributes and methods do not apply to the
    element:
-   <code class="no-backref" title="dom-input-files"><a href="common-input-element-attributes.html#dom-input-files">files</a></code>,
-   <code class="no-backref" title="dom-input-list"><a href="common-input-element-attributes.html#dom-input-list">list</a></code>,
-   <code class="no-backref" title="dom-input-selectedOption"><a href="common-input-element-attributes.html#dom-input-selectedoption">selectedOption</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionDirection"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>,
-   <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code>, and
-   <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-attributes.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
-   <code class="no-backref" title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code>,
-   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
-   <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-attributes.html#dom-input-stepdown">stepDown()</a></code>, and
-   <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-attributes.html#dom-input-stepup">stepUp()</a></code> methods.</p>
+   <code class="no-backref" title="dom-input-files"><a href="common-input-element-apis.html#dom-input-files">files</a></code>,
+   <code class="no-backref" title="dom-input-list"><a href="common-input-element-apis.html#dom-input-list">list</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="textFieldSelection.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="textFieldSelection.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionDirection"><a href="textFieldSelection.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>,
+   <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-apis.html#dom-input-valueasdate">valueAsDate</a></code>, and
+   <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-apis.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
+   <code class="no-backref" title="dom-textarea/input-select"><a href="textFieldSelection.html#dom-textarea-input-select">select()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="textFieldSelection.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
+   <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-apis.html#dom-input-stepdown">stepDown()</a></code>, and
+   <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-apis.html#dom-input-stepup">stepUp()</a></code> methods.</p>
 
-   <p>The <code class="no-backref" title="event-input-input"><a href="common-input-element-attributes.html#event-input-input">input</a></code> event does not apply.</p>
+   <p>The <code class="no-backref" title="event-input-input"><a href="common-input-element-apis.html#event-input-input">input</a></code> event does not apply.</p>
 
   </div><h6 id="file-upload-state"><span class="secno">4.10.7.1.18 </span><dfn title="attr-input-type-file">File Upload</dfn> state</h6><div class="impl">
 
@@ -952,8 +956,13 @@
   filesystem or created on the fly, e.g. a picture taken from a camera
   connected to the user's device.</p>
 
+  <p>File names must be exposed in Unicode normalization Form C (NFC),
+  whether in the DOM (e.g. in <code><a href="infrastructure.html#file">File</a></code> objects) or in form
+  submission, regardless of the conventions of the user agent's
+  platform's file system.</p>
+
   <p><strong>Constraint validation</strong>: If the element is <i title="concept-input-required"><a href="common-input-element-attributes.html#concept-input-required">required</a></i> and the list of <a href="#concept-input-type-file-selected" title="concept-input-type-file-selected">selected files</a> is
-  empty, then the element is <a href="association-of-controls-and-forms.html#suffering-from-being-missing">suffering from being
+  empty, then the element is <a href="constraints.html#suffering-from-being-missing">suffering from being
   missing</a>.</p>
 
   <p>Unless the <code title="attr-input-multiple"><a href="common-input-element-attributes.html#attr-input-multiple">multiple</a></code>
@@ -996,11 +1005,11 @@
 
   </div><div class="example" id="fakepath-srsly">
 
-   <p>For historical reasons, the <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attribute prefixes the
+   <p>For historical reasons, the <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attribute prefixes the
    filename with the string "<code title="">C:\fakepath\</code>". Some
    legacy user agents actually included the full path (which was a
    security vulnerability). As a result of this, obtaining the
-   filename from the <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL
+   filename from the <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL
    attribute in a backwards-compatible way is non-trivial. The
    following function extracts the filename in a suitably compatible
    manner:</p>
@@ -1041,13 +1050,13 @@
    <code title="attr-input-accept"><a href="#attr-input-accept">accept</a></code>,
    <code title="attr-input-multiple"><a href="common-input-element-attributes.html#attr-input-multiple">multiple</a></code>, and
    <code title="attr-input-required"><a href="common-input-element-attributes.html#attr-input-required">required</a></code>;
-   <code title="dom-input-files"><a href="common-input-element-attributes.html#dom-input-files">files</a></code> and
-   <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attributes.</p>
+   <code title="dom-input-files"><a href="common-input-element-apis.html#dom-input-files">files</a></code> and
+   <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attributes.</p>
 
-   <p>The <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attribute is
-   in mode <a href="common-input-element-attributes.html#dom-input-value-filename" title="dom-input-value-filename">filename</a>.</p>
+   <p>The <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attribute is
+   in mode <a href="common-input-element-apis.html#dom-input-value-filename" title="dom-input-value-filename">filename</a>.</p>
 
-   <p>The <code title="event-input-change"><a href="common-input-element-attributes.html#event-input-change">change</a></code> event applies.</p>
+   <p>The <code title="event-input-change"><a href="common-input-element-apis.html#event-input-change">change</a></code> event applies.</p>
 
    <p>The following content attributes must not be specified and do not
    apply to the element:
@@ -1055,12 +1064,12 @@
    <code class="no-backref" title="attr-input-autocomplete"><a href="common-input-element-attributes.html#attr-input-autocomplete">autocomplete</a></code>,
    <code class="no-backref" title="attr-input-checked"><a href="the-input-element.html#attr-input-checked">checked</a></code>,
    <code class="no-backref" title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>,
-   <code class="no-backref" title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>,
-   <code class="no-backref" title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code>,
-   <code class="no-backref" title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code>,
-   <code class="no-backref" title="attr-fs-formnovalidate"><a href="association-of-controls-and-forms.html#attr-fs-formnovalidate">formnovalidate</a></code>,
-   <code class="no-backref" title="attr-fs-formtarget"><a href="association-of-controls-and-forms.html#attr-fs-formtarget">formtarget</a></code>,
-   <code class="no-backref" title="attr-dim-height"><a href="the-map-element.html#attr-dim-height">height</a></code>,
+   <code class="no-backref" title="attr-fs-formaction"><a href="attributes-common-to-form-controls.html#attr-fs-formaction">formaction</a></code>,
+   <code class="no-backref" title="attr-fs-formenctype"><a href="attributes-common-to-form-controls.html#attr-fs-formenctype">formenctype</a></code>,
+   <code class="no-backref" title="attr-fs-formmethod"><a href="attributes-common-to-form-controls.html#attr-fs-formmethod">formmethod</a></code>,
+   <code class="no-backref" title="attr-fs-formnovalidate"><a href="attributes-common-to-form-controls.html#attr-fs-formnovalidate">formnovalidate</a></code>,
+   <code class="no-backref" title="attr-fs-formtarget"><a href="attributes-common-to-form-controls.html#attr-fs-formtarget">formtarget</a></code>,
+   <code class="no-backref" title="attr-dim-height"><a href="dimension-attributes.html#attr-dim-height">height</a></code>,
    <code class="no-backref" title="attr-input-list"><a href="common-input-element-attributes.html#attr-input-list">list</a></code>,
    <code class="no-backref" title="attr-input-max"><a href="common-input-element-attributes.html#attr-input-max">max</a></code>,
    <code class="no-backref" title="attr-input-maxlength"><a href="common-input-element-attributes.html#attr-input-maxlength">maxlength</a></code>,
@@ -1071,27 +1080,26 @@
    <code class="no-backref" title="attr-input-size"><a href="common-input-element-attributes.html#attr-input-size">size</a></code>,
    <code class="no-backref" title="attr-input-src"><a href="#attr-input-src">src</a></code>,
    <code class="no-backref" title="attr-input-step"><a href="common-input-element-attributes.html#attr-input-step">step</a></code>, and
-   <code class="no-backref" title="attr-dim-width"><a href="the-map-element.html#attr-dim-width">width</a></code>.</p>
+   <code class="no-backref" title="attr-dim-width"><a href="dimension-attributes.html#attr-dim-width">width</a></code>.</p>
 
    <p>The element's <code title="attr-input-value"><a href="the-input-element.html#attr-input-value">value</a></code>
    attribute must be omitted.</p>
 
    <p>The following IDL attributes and methods do not apply to the
    element:
-   <code class="no-backref" title="dom-input-checked"><a href="common-input-element-attributes.html#dom-input-checked">checked</a></code>,
-   <code class="no-backref" title="dom-input-list"><a href="common-input-element-attributes.html#dom-input-list">list</a></code>,
-   <code class="no-backref" title="dom-input-selectedOption"><a href="common-input-element-attributes.html#dom-input-selectedoption">selectedOption</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionDirection"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>,
-   <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code>, and
-   <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-attributes.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
-   <code class="no-backref" title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code>,
-   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
-   <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-attributes.html#dom-input-stepdown">stepDown()</a></code>, and
-   <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-attributes.html#dom-input-stepup">stepUp()</a></code> methods.</p>
+   <code class="no-backref" title="dom-input-checked"><a href="common-input-element-apis.html#dom-input-checked">checked</a></code>,
+   <code class="no-backref" title="dom-input-list"><a href="common-input-element-apis.html#dom-input-list">list</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="textFieldSelection.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="textFieldSelection.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionDirection"><a href="textFieldSelection.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>,
+   <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-apis.html#dom-input-valueasdate">valueAsDate</a></code>, and
+   <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-apis.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
+   <code class="no-backref" title="dom-textarea/input-select"><a href="textFieldSelection.html#dom-textarea-input-select">select()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="textFieldSelection.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
+   <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-apis.html#dom-input-stepdown">stepDown()</a></code>, and
+   <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-apis.html#dom-input-stepup">stepUp()</a></code> methods.</p>
 
-   <p>The <code class="no-backref" title="event-input-input"><a href="common-input-element-attributes.html#event-input-input">input</a></code> event does not apply.</p>
+   <p>The <code class="no-backref" title="event-input-input"><a href="common-input-element-apis.html#event-input-input">input</a></code> event does not apply.</p>
 
   </div><h6 id="submit-button-state"><span class="secno">4.10.7.1.19 </span><dfn title="attr-input-type-submit">Submit Button</dfn> state</h6><div class="impl">
 
@@ -1109,26 +1117,26 @@
   the user agent should allow the user to activate the element.</p>
 
   <p>The element's <a href="content-models.html#activation-behavior">activation behavior</a>, if the element
-  has a <a href="association-of-controls-and-forms.html#form-owner">form owner</a>, is to <a href="association-of-controls-and-forms.html#concept-form-submit" title="concept-form-submit">submit</a> the <a href="association-of-controls-and-forms.html#form-owner">form
+  has a <a href="association-of-controls-and-forms.html#form-owner">form owner</a>, is to <a href="form-submission.html#concept-form-submit" title="concept-form-submit">submit</a> the <a href="association-of-controls-and-forms.html#form-owner">form
   owner</a> from the <code><a href="the-input-element.html#the-input-element">input</a></code> element; otherwise, it is
   to do nothing.</p>
 
-  </div><p>The <code title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>, <code title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code>, <code title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code>, <code title="attr-fs-formnovalidate"><a href="association-of-controls-and-forms.html#attr-fs-formnovalidate">formnovalidate</a></code>, and <code title="attr-fs-formtarget"><a href="association-of-controls-and-forms.html#attr-fs-formtarget">formtarget</a></code> attributes are <a href="association-of-controls-and-forms.html#attributes-for-form-submission">attributes
-  for form submission</a>.</p><p class="note">The <code title="attr-fs-formnovalidate"><a href="association-of-controls-and-forms.html#attr-fs-formnovalidate">formnovalidate</a></code> attribute can
+  </div><p>The <code title="attr-fs-formaction"><a href="attributes-common-to-form-controls.html#attr-fs-formaction">formaction</a></code>, <code title="attr-fs-formenctype"><a href="attributes-common-to-form-controls.html#attr-fs-formenctype">formenctype</a></code>, <code title="attr-fs-formmethod"><a href="attributes-common-to-form-controls.html#attr-fs-formmethod">formmethod</a></code>, <code title="attr-fs-formnovalidate"><a href="attributes-common-to-form-controls.html#attr-fs-formnovalidate">formnovalidate</a></code>, and <code title="attr-fs-formtarget"><a href="attributes-common-to-form-controls.html#attr-fs-formtarget">formtarget</a></code> attributes are <a href="attributes-common-to-form-controls.html#attributes-for-form-submission">attributes
+  for form submission</a>.</p><p class="note">The <code title="attr-fs-formnovalidate"><a href="attributes-common-to-form-controls.html#attr-fs-formnovalidate">formnovalidate</a></code> attribute can
   be used to make submit buttons that do not trigger the constraint
   validation.</p><div class="bookkeeping">
 
    <p>The following common <code><a href="the-input-element.html#the-input-element">input</a></code> element content
    attributes and IDL attributes apply to the element:
-   <code title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>,
-   <code title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code>,
-   <code title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code>,
-   <code title="attr-fs-formnovalidate"><a href="association-of-controls-and-forms.html#attr-fs-formnovalidate">formnovalidate</a></code>, and
-   <code title="attr-fs-formtarget"><a href="association-of-controls-and-forms.html#attr-fs-formtarget">formtarget</a></code> content attributes;
-   <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attribute.</p>
+   <code title="attr-fs-formaction"><a href="attributes-common-to-form-controls.html#attr-fs-formaction">formaction</a></code>,
+   <code title="attr-fs-formenctype"><a href="attributes-common-to-form-controls.html#attr-fs-formenctype">formenctype</a></code>,
+   <code title="attr-fs-formmethod"><a href="attributes-common-to-form-controls.html#attr-fs-formmethod">formmethod</a></code>,
+   <code title="attr-fs-formnovalidate"><a href="attributes-common-to-form-controls.html#attr-fs-formnovalidate">formnovalidate</a></code>, and
+   <code title="attr-fs-formtarget"><a href="attributes-common-to-form-controls.html#attr-fs-formtarget">formtarget</a></code> content attributes;
+   <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attribute.</p>
 
-   <p>The <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attribute is
-   in mode <a href="common-input-element-attributes.html#dom-input-value-default" title="dom-input-value-default">default</a>.</p>
+   <p>The <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attribute is
+   in mode <a href="common-input-element-apis.html#dom-input-value-default" title="dom-input-value-default">default</a>.</p>
 
    <p>The following content attributes must not be specified and do not
    apply to the element:
@@ -1137,7 +1145,7 @@
    <code class="no-backref" title="attr-input-autocomplete"><a href="common-input-element-attributes.html#attr-input-autocomplete">autocomplete</a></code>,
    <code class="no-backref" title="attr-input-checked"><a href="the-input-element.html#attr-input-checked">checked</a></code>,
    <code class="no-backref" title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>,
-   <code class="no-backref" title="attr-dim-height"><a href="the-map-element.html#attr-dim-height">height</a></code>,
+   <code class="no-backref" title="attr-dim-height"><a href="dimension-attributes.html#attr-dim-height">height</a></code>,
    <code class="no-backref" title="attr-input-list"><a href="common-input-element-attributes.html#attr-input-list">list</a></code>,
    <code class="no-backref" title="attr-input-max"><a href="common-input-element-attributes.html#attr-input-max">max</a></code>,
    <code class="no-backref" title="attr-input-maxlength"><a href="common-input-element-attributes.html#attr-input-maxlength">maxlength</a></code>,
@@ -1150,25 +1158,24 @@
    <code class="no-backref" title="attr-input-size"><a href="common-input-element-attributes.html#attr-input-size">size</a></code>,
    <code class="no-backref" title="attr-input-src"><a href="#attr-input-src">src</a></code>,
    <code class="no-backref" title="attr-input-step"><a href="common-input-element-attributes.html#attr-input-step">step</a></code>, and
-   <code class="no-backref" title="attr-dim-width"><a href="the-map-element.html#attr-dim-width">width</a></code>.</p>
+   <code class="no-backref" title="attr-dim-width"><a href="dimension-attributes.html#attr-dim-width">width</a></code>.</p>
 
    <p>The following IDL attributes and methods do not apply to the
    element:
-   <code class="no-backref" title="dom-input-checked"><a href="common-input-element-attributes.html#dom-input-checked">checked</a></code>,
-   <code class="no-backref" title="dom-input-files"><a href="common-input-element-attributes.html#dom-input-files">files</a></code>,
-   <code class="no-backref" title="dom-input-list"><a href="common-input-element-attributes.html#dom-input-list">list</a></code>,
-   <code class="no-backref" title="dom-input-selectedOption"><a href="common-input-element-attributes.html#dom-input-selectedoption">selectedOption</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionDirection"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>,
-   <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code>, and
-   <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-attributes.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
-   <code class="no-backref" title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code>,
-   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
-   <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-attributes.html#dom-input-stepdown">stepDown()</a></code>, and
-   <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-attributes.html#dom-input-stepup">stepUp()</a></code> methods.</p>
+   <code class="no-backref" title="dom-input-checked"><a href="common-input-element-apis.html#dom-input-checked">checked</a></code>,
+   <code class="no-backref" title="dom-input-files"><a href="common-input-element-apis.html#dom-input-files">files</a></code>,
+   <code class="no-backref" title="dom-input-list"><a href="common-input-element-apis.html#dom-input-list">list</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="textFieldSelection.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="textFieldSelection.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionDirection"><a href="textFieldSelection.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>,
+   <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-apis.html#dom-input-valueasdate">valueAsDate</a></code>, and
+   <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-apis.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
+   <code class="no-backref" title="dom-textarea/input-select"><a href="textFieldSelection.html#dom-textarea-input-select">select()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="textFieldSelection.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
+   <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-apis.html#dom-input-stepdown">stepDown()</a></code>, and
+   <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-apis.html#dom-input-stepup">stepUp()</a></code> methods.</p>
 
-   <p>The <code class="no-backref" title="event-input-input"><a href="common-input-element-attributes.html#event-input-input">input</a></code> and <code class="no-backref" title="event-input-change"><a href="common-input-element-attributes.html#event-input-change">change</a></code> events do not apply.</p>
+   <p>The <code class="no-backref" title="event-input-input"><a href="common-input-element-apis.html#event-input-input">input</a></code> and <code class="no-backref" title="event-input-change"><a href="common-input-element-apis.html#event-input-change">change</a></code> events do not apply.</p>
 
   </div><h6 id="image-button-state"><span class="secno">4.10.7.1.20 </span><dfn title="attr-input-type-image">Image Button</dfn> state</h6><div class="impl">
 
@@ -1180,7 +1187,10 @@
   or alternatively a button from which the user can submit the
   form. The element is a <a href="forms.html#concept-button" title="concept-button">button</a>,
   specifically a <a href="forms.html#concept-submit-button" title="concept-submit-button">submit
-  button</a>.</p><hr/><p>The image is given by the <dfn id="attr-input-src" title="attr-input-src"><code>src</code></dfn> attribute. The <code title="attr-input-src"><a href="#attr-input-src">src</a></code> attribute must be present, and
+  button</a>.</p><p class="note">The coordinate is sent to the server <a href="form-submission.html#constructing-the-form-data-set" title="constructing the form data set">during form submission</a>
+  by sending two entries for the element, derived from the name of the
+  control but with "<code title="">.x</code>" and "<code title="">.y</code>" appended to the name with the <var title="">x</var> and <var title="">y</var> components of the
+  coordinate respectively.</p><hr/><p>The image is given by the <dfn id="attr-input-src" title="attr-input-src"><code>src</code></dfn> attribute. The <code title="attr-input-src"><a href="#attr-input-src">src</a></code> attribute must be present, and
   must contain a <a href="urls.html#valid-non-empty-url-potentially-surrounded-by-spaces">valid non-empty URL potentially surrounded by
   spaces</a> referencing a non-interactive, optionally animated,
   image resource that is neither paged nor scripted.</p><div class="impl">
@@ -1189,8 +1199,9 @@
   cannot support images, or its support for images has been disabled,
   or the user agent only fetches elements on demand, or the <code title="attr-input-src"><a href="#attr-input-src">src</a></code> attribute's value is the empty
   string, the user agent must <a href="urls.html#resolve-a-url" title="resolve a&#10;  url">resolve</a> the value of the <code title="attr-input-src"><a href="#attr-input-src">src</a></code> attribute, relative to the
-  element, and if that is successful, must <a href="fetching-resources.html#fetch">fetch</a> the
+  element, and if that is successful, must <a href="urls.html#fetch">fetch</a> the
   resulting <a href="urls.html#absolute-url">absolute URL</a>:</p>  
+
   <ul><li>The <code><a href="the-input-element.html#the-input-element">input</a></code> element's <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is first set to the
    <a href="#image-button-state" title="attr-input-type-image">Image Button</a> state
    (possibly when the element is first created), and the <code title="attr-input-src"><a href="#attr-input-src">src</a></code> attribute is present.</li>
@@ -1207,20 +1218,20 @@
   </ul><p>Fetching the image must <a href="the-end.html#delay-the-load-event">delay the load event</a> of the
   element's document until the <a href="webappapis.html#concept-task" title="concept-task">task</a>
   that is <a href="webappapis.html#queue-a-task" title="queue a task">queued</a> by the
-  <a href="webappapis.html#networking-task-source">networking task source</a> once the resource has been <a href="fetching-resources.html#fetch" title="fetch">fetched</a> (defined below) has been run.</p>
+  <a href="webappapis.html#networking-task-source">networking task source</a> once the resource has been <a href="urls.html#fetch" title="fetch">fetched</a> (defined below) has been run.</p>
 
   <p>If the image was successfully obtained, with no network errors,
   and the image's type is a supported image type, and the image is a
   valid image of that type, then the image is said to be <dfn id="input-img-available" title="input-img-available"><i>available</i></dfn>. If this is true
   before the image is completely downloaded, each <a href="webappapis.html#concept-task" title="concept-task">task</a> that is <a href="webappapis.html#queue-a-task" title="queue a&#10;  task">queued</a> by the <a href="webappapis.html#networking-task-source">networking task source</a> while
-  the image is being <a href="fetching-resources.html#fetch" title="fetch">fetched</a> must update
+  the image is being <a href="urls.html#fetch" title="fetch">fetched</a> must update
   the presentation of the image appropriately.</p>
 
-  <p>The user agents should apply the <a href="fetching-resources.html#content-type-sniffing:-image" title="Content-Type&#10;  sniffing: image">image sniffing rules</a> to determine the type
-  of the image, with the image's <a href="fetching-resources.html#content-type" title="Content-Type">associated
+  <p>The user agents should apply the <a href="urls.html#content-type-sniffing:-image" title="Content-Type&#10;  sniffing: image">image sniffing rules</a> to determine the type
+  of the image, with the image's <a href="urls.html#content-type" title="Content-Type">associated
   Content-Type headers</a> giving the <var title="">official
   type</var>. If these rules are not applied, then the type of the
-  image must be the type given by the image's <a href="fetching-resources.html#content-type" title="Content-Type">associated Content-Type headers</a>.</p>
+  image must be the type given by the image's <a href="urls.html#content-type" title="Content-Type">associated Content-Type headers</a>.</p>
 
   <p>User agents must not support non-image resources with the
   <code><a href="the-input-element.html#the-input-element">input</a></code> element. User agents must not run executable code
@@ -1230,7 +1241,7 @@
   animation in the resource.</p>
 
   <p>The <a href="webappapis.html#concept-task" title="concept-task">task</a> that is <a href="webappapis.html#queue-a-task" title="queue a task">queued</a> by the <a href="webappapis.html#networking-task-source">networking task
-  source</a> once the resource has been <a href="fetching-resources.html#fetch" title="fetch">fetched</a>, must, if the download was successful
+  source</a> once the resource has been <a href="urls.html#fetch" title="fetch">fetched</a>, must, if the download was successful
   and the image is <i title="input-img-available"><a href="#input-img-available">available</a></i>,
   <a href="webappapis.html#queue-a-task">queue a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named
   <code title="event-load">load</code> at the <code><a href="the-input-element.html#the-input-element">input</a></code>
@@ -1243,7 +1254,7 @@
   <hr/></div><p>The <dfn id="attr-input-alt" title="attr-input-alt"><code>alt</code></dfn> attribute
   provides the textual label for the alternative button for users and
   user agents who cannot use the image. The <code title="attr-input-alt"><a href="#attr-input-alt">alt</a></code> attribute must also be present,
-  and must contain a non-empty string.</p><p>The <code><a href="the-input-element.html#the-input-element">input</a></code> element supports <a href="the-map-element.html#dimension-attributes">dimension
+  and must contain a non-empty string.</p><p>The <code><a href="the-input-element.html#the-input-element">input</a></code> element supports <a href="dimension-attributes.html#dimension-attributes">dimension
   attributes</a>.</p><div class="impl">
 
   <hr/><p>If the <code title="attr-input-src"><a href="#attr-input-src">src</a></code> attribute is set,
@@ -1255,7 +1266,7 @@
   allow the user to select this <a href="#concept-input-type-image-coordinate" title="concept-input-type-image-coordinate">coordinate</a>. The
   <a href="content-models.html#activation-behavior">activation behavior</a> in this case consists of taking the
   user's selected <a href="#concept-input-type-image-coordinate" title="concept-input-type-image-coordinate">coordinate</a>, and
-  then, if the element has a <a href="association-of-controls-and-forms.html#form-owner">form owner</a>, <a href="association-of-controls-and-forms.html#concept-form-submit" title="concept-form-submit">submitting</a> the <code><a href="the-input-element.html#the-input-element">input</a></code>
+  then, if the element has a <a href="association-of-controls-and-forms.html#form-owner">form owner</a>, <a href="form-submission.html#concept-form-submit" title="concept-form-submit">submitting</a> the <code><a href="the-input-element.html#the-input-element">input</a></code>
   element's <a href="association-of-controls-and-forms.html#form-owner">form owner</a> from the <code><a href="the-input-element.html#the-input-element">input</a></code>
   element. If the user activates the control without explicitly
   selecting a coordinate, then the coordinate (0,0) must be
@@ -1266,7 +1277,7 @@
   allow the user to activate the button. The <a href="content-models.html#activation-behavior">activation
   behavior</a> in this case consists of setting the <a href="#concept-input-type-image-coordinate" title="concept-input-type-image-coordinate">selected
   coordinate</a> to (0,0), and then, if the element has a
-  <a href="association-of-controls-and-forms.html#form-owner">form owner</a>, <a href="association-of-controls-and-forms.html#concept-form-submit" title="concept-form-submit">submitting</a> the <code><a href="the-input-element.html#the-input-element">input</a></code>
+  <a href="association-of-controls-and-forms.html#form-owner">form owner</a>, <a href="form-submission.html#concept-form-submit" title="concept-form-submit">submitting</a> the <code><a href="the-input-element.html#the-input-element">input</a></code>
   element's <a href="association-of-controls-and-forms.html#form-owner">form owner</a> from the <code><a href="the-input-element.html#the-input-element">input</a></code>
   element.</p>
 
@@ -1300,24 +1311,37 @@
   <p>Where a border or padding is missing, its width is zero CSS
   pixels.</p>
 
-  <hr/></div><p>The <code title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>, <code title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code>, <code title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code>, <code title="attr-fs-formnovalidate"><a href="association-of-controls-and-forms.html#attr-fs-formnovalidate">formnovalidate</a></code>, and <code title="attr-fs-formtarget"><a href="association-of-controls-and-forms.html#attr-fs-formtarget">formtarget</a></code> attributes are <a href="association-of-controls-and-forms.html#attributes-for-form-submission">attributes
-  for form submission</a>.</p><div class="bookkeeping">
+  <hr/></div><p>The <code title="attr-fs-formaction"><a href="attributes-common-to-form-controls.html#attr-fs-formaction">formaction</a></code>, <code title="attr-fs-formenctype"><a href="attributes-common-to-form-controls.html#attr-fs-formenctype">formenctype</a></code>, <code title="attr-fs-formmethod"><a href="attributes-common-to-form-controls.html#attr-fs-formmethod">formmethod</a></code>, <code title="attr-fs-formnovalidate"><a href="attributes-common-to-form-controls.html#attr-fs-formnovalidate">formnovalidate</a></code>, and <code title="attr-fs-formtarget"><a href="attributes-common-to-form-controls.html#attr-fs-formtarget">formtarget</a></code> attributes are <a href="attributes-common-to-form-controls.html#attributes-for-form-submission">attributes
+  for form submission</a>.</p><dl class="domintro"><dt><var title="">image</var> . <code title="dom-input-width"><a href="the-input-element.html#dom-input-width">width</a></code> [ = <var title="">value</var> ]</dt>
+   <dt><var title="">image</var> . <code title="dom-input-height"><a href="the-input-element.html#dom-input-height">height</a></code> [ = <var title="">value</var> ]</dt>
+
+   <dd>
+
+    <p>These attributes return the actual rendered dimensions of the
+    image, or zero if the dimensions are not known.</p>
+
+    <p>They can be set, to change the corresponding content
+    attributes.</p>
+
+   </dd>
+
+  </dl><div class="bookkeeping">
 
    <p>The following common <code><a href="the-input-element.html#the-input-element">input</a></code> element content
    attributes and IDL attributes apply to the element:
    <code title="attr-input-alt"><a href="#attr-input-alt">alt</a></code>,
-   <code title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>,
-   <code title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code>,
-   <code title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code>,
-   <code title="attr-fs-formnovalidate"><a href="association-of-controls-and-forms.html#attr-fs-formnovalidate">formnovalidate</a></code>,
-   <code title="attr-fs-formtarget"><a href="association-of-controls-and-forms.html#attr-fs-formtarget">formtarget</a></code>,
-   <code title="attr-dim-height"><a href="the-map-element.html#attr-dim-height">height</a></code>,
+   <code title="attr-fs-formaction"><a href="attributes-common-to-form-controls.html#attr-fs-formaction">formaction</a></code>,
+   <code title="attr-fs-formenctype"><a href="attributes-common-to-form-controls.html#attr-fs-formenctype">formenctype</a></code>,
+   <code title="attr-fs-formmethod"><a href="attributes-common-to-form-controls.html#attr-fs-formmethod">formmethod</a></code>,
+   <code title="attr-fs-formnovalidate"><a href="attributes-common-to-form-controls.html#attr-fs-formnovalidate">formnovalidate</a></code>,
+   <code title="attr-fs-formtarget"><a href="attributes-common-to-form-controls.html#attr-fs-formtarget">formtarget</a></code>,
+   <code title="attr-dim-height"><a href="dimension-attributes.html#attr-dim-height">height</a></code>,
    <code title="attr-input-src"><a href="#attr-input-src">src</a></code>, and
-   <code title="attr-dim-width"><a href="the-map-element.html#attr-dim-width">width</a></code> content attributes;
-   <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attribute.</p>
+   <code title="attr-dim-width"><a href="dimension-attributes.html#attr-dim-width">width</a></code> content attributes;
+   <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attribute.</p>
 
-   <p>The <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attribute is
-   in mode <a href="common-input-element-attributes.html#dom-input-value-default" title="dom-input-value-default">default</a>.</p>
+   <p>The <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attribute is
+   in mode <a href="common-input-element-apis.html#dom-input-value-default" title="dom-input-value-default">default</a>.</p>
 
    <p>The following content attributes must not be specified and do not
    apply to the element:
@@ -1342,26 +1366,36 @@
 
    <p>The following IDL attributes and methods do not apply to the
    element:
-   <code class="no-backref" title="dom-input-checked"><a href="common-input-element-attributes.html#dom-input-checked">checked</a></code>,
-   <code class="no-backref" title="dom-input-files"><a href="common-input-element-attributes.html#dom-input-files">files</a></code>,
-   <code class="no-backref" title="dom-input-list"><a href="common-input-element-attributes.html#dom-input-list">list</a></code>,
-   <code class="no-backref" title="dom-input-selectedOption"><a href="common-input-element-attributes.html#dom-input-selectedoption">selectedOption</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionDirection"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>,
-   <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code>, and
-   <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-attributes.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
-   <code class="no-backref" title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code>,
-   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
-   <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-attributes.html#dom-input-stepdown">stepDown()</a></code>, and
-   <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-attributes.html#dom-input-stepup">stepUp()</a></code> methods.</p>
+   <code class="no-backref" title="dom-input-checked"><a href="common-input-element-apis.html#dom-input-checked">checked</a></code>,
+   <code class="no-backref" title="dom-input-files"><a href="common-input-element-apis.html#dom-input-files">files</a></code>,
+   <code class="no-backref" title="dom-input-list"><a href="common-input-element-apis.html#dom-input-list">list</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="textFieldSelection.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="textFieldSelection.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionDirection"><a href="textFieldSelection.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>,
+   <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-apis.html#dom-input-valueasdate">valueAsDate</a></code>, and
+   <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-apis.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
+   <code class="no-backref" title="dom-textarea/input-select"><a href="textFieldSelection.html#dom-textarea-input-select">select()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="textFieldSelection.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
+   <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-apis.html#dom-input-stepdown">stepDown()</a></code>, and
+   <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-apis.html#dom-input-stepup">stepUp()</a></code> methods.</p>
 
-   <p>The <code class="no-backref" title="event-input-input"><a href="common-input-element-attributes.html#event-input-input">input</a></code> and <code class="no-backref" title="event-input-change"><a href="common-input-element-attributes.html#event-input-change">change</a></code> events do not apply.</p>
+   <p>The <code class="no-backref" title="event-input-input"><a href="common-input-element-apis.html#event-input-input">input</a></code> and <code class="no-backref" title="event-input-change"><a href="common-input-element-apis.html#event-input-change">change</a></code> events do not apply.</p>
 
   </div><p class="note">Many aspects of this state's behavior are similar to
-  the behavior of the <code><a href="embedded-content-1.html#the-img-element">img</a></code> element. Readers are encouraged
+  the behavior of the <code><a href="the-img-element.html#the-img-element">img</a></code> element. Readers are encouraged
   to read that section, where many of the same requirements are
-  described in more detail.</p><h6 id="reset-button-state"><span class="secno">4.10.7.1.21 </span><dfn title="attr-input-type-reset">Reset Button</dfn> state</h6><div class="impl">
+  described in more detail.</p><div class="example">
+
+   <p>Take the following form:</p>
+
+   <pre>&lt;form action="process.cgi"&gt;
+ &lt;input type=image src=map.png name=where&gt;
+&lt;/form&gt;</pre>
+
+   <p>If the user clicked on the image at coordinate (127,40) then the
+   URL used to submit the form would be "<code title="">process.cgi?where.x=127&amp;where.y=40</code>".</p>
+
+  </div><h6 id="reset-button-state"><span class="secno">4.10.7.1.21 </span><dfn title="attr-input-type-reset">Reset Button</dfn> state</h6><div class="impl">
 
   <p>When an <code><a href="the-input-element.html#the-input-element">input</a></code> element's <code title="attr-input-type"><a href="the-input-element.html#attr-input-type">type</a></code> attribute is in the <a href="#reset-button-state" title="attr-input-type-reset">Reset Button</a> state, the rules
   in this section apply.</p>
@@ -1377,16 +1411,16 @@
   the user agent should allow the user to activate the element.</p>
 
   <p>The element's <a href="content-models.html#activation-behavior">activation behavior</a>, if the element
-  has a <a href="association-of-controls-and-forms.html#form-owner">form owner</a>, is to <a href="association-of-controls-and-forms.html#concept-form-reset" title="concept-form-reset">reset</a> the <a href="association-of-controls-and-forms.html#form-owner">form owner</a>;
+  has a <a href="association-of-controls-and-forms.html#form-owner">form owner</a>, is to <a href="form-submission.html#concept-form-reset" title="concept-form-reset">reset</a> the <a href="association-of-controls-and-forms.html#form-owner">form owner</a>;
   otherwise, it is to do nothing.</p>
 
   <p><strong>Constraint validation</strong>: The element is
-  <a href="association-of-controls-and-forms.html#barred-from-constraint-validation">barred from constraint validation</a>.</p>
+  <a href="constraints.html#barred-from-constraint-validation">barred from constraint validation</a>.</p>
 
   </div><div class="bookkeeping">
 
-   <p>The <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attribute
-   applies to this element and is in mode <a href="common-input-element-attributes.html#dom-input-value-default" title="dom-input-value-default">default</a>.</p>
+   <p>The <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attribute
+   applies to this element and is in mode <a href="common-input-element-apis.html#dom-input-value-default" title="dom-input-value-default">default</a>.</p>
 
    <p>The following content attributes must not be specified and do not
    apply to the element:
@@ -1395,12 +1429,12 @@
    <code class="no-backref" title="attr-input-autocomplete"><a href="common-input-element-attributes.html#attr-input-autocomplete">autocomplete</a></code>,
    <code class="no-backref" title="attr-input-checked"><a href="the-input-element.html#attr-input-checked">checked</a></code>,
    <code class="no-backref" title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>,
-   <code class="no-backref" title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>,
-   <code class="no-backref" title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code>,
-   <code class="no-backref" title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code>,
-   <code class="no-backref" title="attr-fs-formnovalidate"><a href="association-of-controls-and-forms.html#attr-fs-formnovalidate">formnovalidate</a></code>,
-   <code class="no-backref" title="attr-fs-formtarget"><a href="association-of-controls-and-forms.html#attr-fs-formtarget">formtarget</a></code>,
-   <code class="no-backref" title="attr-dim-height"><a href="the-map-element.html#attr-dim-height">height</a></code>,
+   <code class="no-backref" title="attr-fs-formaction"><a href="attributes-common-to-form-controls.html#attr-fs-formaction">formaction</a></code>,
+   <code class="no-backref" title="attr-fs-formenctype"><a href="attributes-common-to-form-controls.html#attr-fs-formenctype">formenctype</a></code>,
+   <code class="no-backref" title="attr-fs-formmethod"><a href="attributes-common-to-form-controls.html#attr-fs-formmethod">formmethod</a></code>,
+   <code class="no-backref" title="attr-fs-formnovalidate"><a href="attributes-common-to-form-controls.html#attr-fs-formnovalidate">formnovalidate</a></code>,
+   <code class="no-backref" title="attr-fs-formtarget"><a href="attributes-common-to-form-controls.html#attr-fs-formtarget">formtarget</a></code>,
+   <code class="no-backref" title="attr-dim-height"><a href="dimension-attributes.html#attr-dim-height">height</a></code>,
    <code class="no-backref" title="attr-input-list"><a href="common-input-element-attributes.html#attr-input-list">list</a></code>,
    <code class="no-backref" title="attr-input-max"><a href="common-input-element-attributes.html#attr-input-max">max</a></code>,
    <code class="no-backref" title="attr-input-maxlength"><a href="common-input-element-attributes.html#attr-input-maxlength">maxlength</a></code>,
@@ -1413,25 +1447,24 @@
    <code class="no-backref" title="attr-input-size"><a href="common-input-element-attributes.html#attr-input-size">size</a></code>,
    <code class="no-backref" title="attr-input-src"><a href="#attr-input-src">src</a></code>,
    <code class="no-backref" title="attr-input-step"><a href="common-input-element-attributes.html#attr-input-step">step</a></code>, and
-   <code class="no-backref" title="attr-dim-width"><a href="the-map-element.html#attr-dim-width">width</a></code>.</p>
+   <code class="no-backref" title="attr-dim-width"><a href="dimension-attributes.html#attr-dim-width">width</a></code>.</p>
 
    <p>The following IDL attributes and methods do not apply to the
    element:
-   <code class="no-backref" title="dom-input-checked"><a href="common-input-element-attributes.html#dom-input-checked">checked</a></code>,
-   <code class="no-backref" title="dom-input-files"><a href="common-input-element-attributes.html#dom-input-files">files</a></code>,
-   <code class="no-backref" title="dom-input-list"><a href="common-input-element-attributes.html#dom-input-list">list</a></code>,
-   <code class="no-backref" title="dom-input-selectedOption"><a href="common-input-element-attributes.html#dom-input-selectedoption">selectedOption</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionDirection"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>,
-   <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code>, and
-   <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-attributes.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
-   <code class="no-backref" title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code>,
-   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
-   <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-attributes.html#dom-input-stepdown">stepDown()</a></code>, and
-   <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-attributes.html#dom-input-stepup">stepUp()</a></code> methods.</p>
+   <code class="no-backref" title="dom-input-checked"><a href="common-input-element-apis.html#dom-input-checked">checked</a></code>,
+   <code class="no-backref" title="dom-input-files"><a href="common-input-element-apis.html#dom-input-files">files</a></code>,
+   <code class="no-backref" title="dom-input-list"><a href="common-input-element-apis.html#dom-input-list">list</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="textFieldSelection.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="textFieldSelection.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionDirection"><a href="textFieldSelection.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>,
+   <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-apis.html#dom-input-valueasdate">valueAsDate</a></code>, and
+   <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-apis.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
+   <code class="no-backref" title="dom-textarea/input-select"><a href="textFieldSelection.html#dom-textarea-input-select">select()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="textFieldSelection.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
+   <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-apis.html#dom-input-stepdown">stepDown()</a></code>, and
+   <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-apis.html#dom-input-stepup">stepUp()</a></code> methods.</p>
 
-   <p>The <code class="no-backref" title="event-input-input"><a href="common-input-element-attributes.html#event-input-input">input</a></code> and <code class="no-backref" title="event-input-change"><a href="common-input-element-attributes.html#event-input-change">change</a></code> events do not apply.</p>
+   <p>The <code class="no-backref" title="event-input-input"><a href="common-input-element-apis.html#event-input-input">input</a></code> and <code class="no-backref" title="event-input-change"><a href="common-input-element-apis.html#event-input-change">change</a></code> events do not apply.</p>
 
   </div><h6 id="button-state"><span class="secno">4.10.7.1.22 </span><dfn title="attr-input-type-button">Button</dfn> state</h6><div class="impl">
 
@@ -1451,12 +1484,12 @@
   element's <a href="content-models.html#activation-behavior">activation behavior</a> is to do nothing.</p>
 
   <p><strong>Constraint validation</strong>: The element is
-  <a href="association-of-controls-and-forms.html#barred-from-constraint-validation">barred from constraint validation</a>.</p>
+  <a href="constraints.html#barred-from-constraint-validation">barred from constraint validation</a>.</p>
 
   </div><div class="bookkeeping">
 
-   <p>The <code title="dom-input-value"><a href="common-input-element-attributes.html#dom-input-value">value</a></code> IDL attribute
-   applies to this element and is in mode <a href="common-input-element-attributes.html#dom-input-value-default" title="dom-input-value-default">default</a>.</p>
+   <p>The <code title="dom-input-value"><a href="common-input-element-apis.html#dom-input-value">value</a></code> IDL attribute
+   applies to this element and is in mode <a href="common-input-element-apis.html#dom-input-value-default" title="dom-input-value-default">default</a>.</p>
 
    <p>The following content attributes must not be specified and do not
    apply to the element:
@@ -1465,12 +1498,12 @@
    <code class="no-backref" title="attr-input-autocomplete"><a href="common-input-element-attributes.html#attr-input-autocomplete">autocomplete</a></code>,
    <code class="no-backref" title="attr-input-checked"><a href="the-input-element.html#attr-input-checked">checked</a></code>,
    <code class="no-backref" title="attr-input-dirname"><a href="common-input-element-attributes.html#attr-input-dirname">dirname</a></code>,
-   <code class="no-backref" title="attr-fs-formaction"><a href="association-of-controls-and-forms.html#attr-fs-formaction">formaction</a></code>,
-   <code class="no-backref" title="attr-fs-formenctype"><a href="association-of-controls-and-forms.html#attr-fs-formenctype">formenctype</a></code>,
-   <code class="no-backref" title="attr-fs-formmethod"><a href="association-of-controls-and-forms.html#attr-fs-formmethod">formmethod</a></code>,
-   <code class="no-backref" title="attr-fs-formnovalidate"><a href="association-of-controls-and-forms.html#attr-fs-formnovalidate">formnovalidate</a></code>,
-   <code class="no-backref" title="attr-fs-formtarget"><a href="association-of-controls-and-forms.html#attr-fs-formtarget">formtarget</a></code>,
-   <code class="no-backref" title="attr-dim-height"><a href="the-map-element.html#attr-dim-height">height</a></code>,
+   <code class="no-backref" title="attr-fs-formaction"><a href="attributes-common-to-form-controls.html#attr-fs-formaction">formaction</a></code>,
+   <code class="no-backref" title="attr-fs-formenctype"><a href="attributes-common-to-form-controls.html#attr-fs-formenctype">formenctype</a></code>,
+   <code class="no-backref" title="attr-fs-formmethod"><a href="attributes-common-to-form-controls.html#attr-fs-formmethod">formmethod</a></code>,
+   <code class="no-backref" title="attr-fs-formnovalidate"><a href="attributes-common-to-form-controls.html#attr-fs-formnovalidate">formnovalidate</a></code>,
+   <code class="no-backref" title="attr-fs-formtarget"><a href="attributes-common-to-form-controls.html#attr-fs-formtarget">formtarget</a></code>,
+   <code class="no-backref" title="attr-dim-height"><a href="dimension-attributes.html#attr-dim-height">height</a></code>,
    <code class="no-backref" title="attr-input-list"><a href="common-input-element-attributes.html#attr-input-list">list</a></code>,
    <code class="no-backref" title="attr-input-max"><a href="common-input-element-attributes.html#attr-input-max">max</a></code>,
    <code class="no-backref" title="attr-input-maxlength"><a href="common-input-element-attributes.html#attr-input-maxlength">maxlength</a></code>,
@@ -1483,24 +1516,23 @@
    <code class="no-backref" title="attr-input-size"><a href="common-input-element-attributes.html#attr-input-size">size</a></code>,
    <code class="no-backref" title="attr-input-src"><a href="#attr-input-src">src</a></code>,
    <code class="no-backref" title="attr-input-step"><a href="common-input-element-attributes.html#attr-input-step">step</a></code>, and
-   <code class="no-backref" title="attr-dim-width"><a href="the-map-element.html#attr-dim-width">width</a></code>.</p>
+   <code class="no-backref" title="attr-dim-width"><a href="dimension-attributes.html#attr-dim-width">width</a></code>.</p>
 
    <p>The following IDL attributes and methods do not apply to the
    element:
-   <code class="no-backref" title="dom-input-checked"><a href="common-input-element-attributes.html#dom-input-checked">checked</a></code>,
-   <code class="no-backref" title="dom-input-files"><a href="common-input-element-attributes.html#dom-input-files">files</a></code>,
-   <code class="no-backref" title="dom-input-list"><a href="common-input-element-attributes.html#dom-input-list">list</a></code>,
-   <code class="no-backref" title="dom-input-selectedOption"><a href="common-input-element-attributes.html#dom-input-selectedoption">selectedOption</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
-   <code class="no-backref" title="dom-textarea/input-selectionDirection"><a href="association-of-controls-and-forms.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>,
-   <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-attributes.html#dom-input-valueasdate">valueAsDate</a></code>, and
-   <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-attributes.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
-   <code class="no-backref" title="dom-textarea/input-select"><a href="association-of-controls-and-forms.html#dom-textarea-input-select">select()</a></code>,
-   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="association-of-controls-and-forms.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
-   <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-attributes.html#dom-input-stepdown">stepDown()</a></code>, and
-   <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-attributes.html#dom-input-stepup">stepUp()</a></code> methods.</p>
+   <code class="no-backref" title="dom-input-checked"><a href="common-input-element-apis.html#dom-input-checked">checked</a></code>,
+   <code class="no-backref" title="dom-input-files"><a href="common-input-element-apis.html#dom-input-files">files</a></code>,
+   <code class="no-backref" title="dom-input-list"><a href="common-input-element-apis.html#dom-input-list">list</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionStart"><a href="textFieldSelection.html#dom-textarea-input-selectionstart">selectionStart</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionEnd"><a href="textFieldSelection.html#dom-textarea-input-selectionend">selectionEnd</a></code>,
+   <code class="no-backref" title="dom-textarea/input-selectionDirection"><a href="textFieldSelection.html#dom-textarea-input-selectiondirection">selectionDirection</a></code>,
+   <code class="no-backref" title="dom-input-valueAsDate"><a href="common-input-element-apis.html#dom-input-valueasdate">valueAsDate</a></code>, and
+   <code class="no-backref" title="dom-input-valueAsNumber"><a href="common-input-element-apis.html#dom-input-valueasnumber">valueAsNumber</a></code> IDL attributes;
+   <code class="no-backref" title="dom-textarea/input-select"><a href="textFieldSelection.html#dom-textarea-input-select">select()</a></code>,
+   <code class="no-backref" title="dom-textarea/input-setSelectionRange"><a href="textFieldSelection.html#dom-textarea-input-setselectionrange">setSelectionRange()</a></code>,
+   <code class="no-backref" title="dom-input-stepDown"><a href="common-input-element-apis.html#dom-input-stepdown">stepDown()</a></code>, and
+   <code class="no-backref" title="dom-input-stepUp"><a href="common-input-element-apis.html#dom-input-stepup">stepUp()</a></code> methods.</p>
 
-   <p>The <code class="no-backref" title="event-input-input"><a href="common-input-element-attributes.html#event-input-input">input</a></code> and <code class="no-backref" title="event-input-change"><a href="common-input-element-attributes.html#event-input-change">change</a></code> events do not apply.</p>
+   <p>The <code class="no-backref" title="event-input-input"><a href="common-input-element-apis.html#event-input-input">input</a></code> and <code class="no-backref" title="event-input-change"><a href="common-input-element-apis.html#event-input-change">change</a></code> events do not apply.</p>
 
   </div></body></html>

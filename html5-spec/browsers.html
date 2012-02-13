@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "">
-<html lang="en-US-x-Hixie" class="split chapter"><head><title>5 Loading Web pages &#x2014; HTML5 </title><style type="text/css"><![CDATA[
+<!DOCTYPE html>
+<html lang="en-US-x-Hixie"><head><title>5 Loading Web pages &#x2014; HTML5</title><style type="text/css"><![CDATA[
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -19,6 +19,7 @@
    dd table + p { margin-top: 1em; }
    p + * > li, dd li { margin: 1em 0; }
    dt, dfn { font-weight: bold; font-style: normal; }
+   i, em { font-style: italic; }
    dt dfn { font-style: italic; }
    pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
    pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
@@ -40,9 +41,10 @@
    .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
 
    .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   img.extra { float: right; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
+   img.extra, p.overview { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; position: relative; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl::before { content: "IDL"; font: bold small sans-serif; padding: 0.5em; background: white; position: absolute; top: 0; margin: -1px 0 0 -4em; width: 1.5em; border: thin solid; border-radius: 0 0 0 0.5em }
    pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
    pre.css:first-line { color: #AAAA50; }
    dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #DDFFDD; }
@@ -50,6 +52,7 @@
    dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
    dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
    dl.domintro dd p { margin: 0.5em 0; }
+   dl.domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
    dl.switch { padding-left: 2em; }
    dl.switch > dt { text-indent: -1.5em; }
    dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
@@ -104,6 +107,7 @@
    .note { color: green; background: transparent; font-family: sans-serif; }
    .warning { color: red; background: transparent; }
    .note, .warning { font-weight: bolder; font-style: italic; }
+   .note em, .warning em, .note i, .warning i { font-style: normal; }
    p.note, div.note { padding: 0.5em 2em; }
    span.note { padding: 0 2em; }
    .note p:first-child, .warning p:first-child { margin-top: 0; }
@@ -295,8 +299,6 @@
      src: url('http://www.whatwg.org/specs/web-apps/current-work/fonts/Essays1743-BoldItalic.ttf');
    }
 
-  ]]></style><style type="text/css"><![CDATA[
-   .domintro:before { display: table; margin: -1em -0.5em -0.5em auto; width: auto; content: 'This box is non-normative. Implementation requirements are given below this box.'; color: black; font-style: italic; border: solid 2px; background: white; padding: 0 0.25em; }
   ]]></style><link href="data:text/css," id="complete" rel="stylesheet" title="Complete specification"/><link href="data:text/css,.impl%20%7B%20display:%20none;%20%7D%0Ahtml%20%7B%20border:%20solid%20yellow;%20%7D%20.domintro:before%20%7B%20display:%20none;%20%7D" id="author" rel="alternate stylesheet" title="Author documentation only"/><link href="data:text/css,.impl%20%7B%20background:%20%23FFEEEE;%20%7D%20.domintro:before%20%7B%20background:%20%23FFEEEE;%20%7D" id="highlight" rel="alternate stylesheet" title="Highlight implementation requirements"/><script type="text/javascript"><![CDATA[
    function getCookie(name) {
      var params = location.search.substr(1).split("&");
@@ -315,20 +317,22 @@
      }
      return null;
    }
-  ]]></script><script src="link-fixup.js"/><link href="style.css" rel="stylesheet"/><link href="links.html" title="4.12 Links" rel="prev"/><link href="spec.html#contents" title="Table of contents" rel="index"/><link href="origin-0.html" title="5.3 Origin" rel="next"/></head><body><div class="head" id="head">
+  ]]></script><script src="link-fixup.js"/><link href="links.html" title="4.12 Links" rel="prev"/><link href="index.html#contents" title="Table of contents" rel="contents"/><link href="origin-0.html" title="5.3 Origin" rel="next"/></head><body onload="fixBrokenLink();" class="split chapter"><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   </div><div>
-   <a href="links.html" class="prev">4.12 Links</a> &#x2013;
-   <a href="spec.html#contents">Table of contents</a> &#x2013;
-   <a href="origin-0.html" class="next">5.3 Origin</a>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
+
+   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   </div><nav class="prev_next"><a href="links.html">&#x2190; 4.12 Links</a> &#x2013;
+   <a href="index.html#contents">Table of contents</a> &#x2013;
+   <a href="origin-0.html">5.3 Origin &#x2192;</a>
   <ol class="toc"><li><a href="browsers.html#browsers"><span class="secno">5 </span>Loading Web pages</a>
   <ol><li><a href="browsers.html#windows"><span class="secno">5.1 </span>Browsing contexts</a>
     <ol><li><a href="browsers.html#nested-browsing-contexts"><span class="secno">5.1.1 </span>Nested browsing contexts</a>
       <ol><li><a href="browsers.html#navigating-nested-browsing-contexts-in-the-dom"><span class="secno">5.1.1.1 </span>Navigating nested browsing contexts in the DOM</a></li></ol></li><li><a href="browsers.html#auxiliary-browsing-contexts"><span class="secno">5.1.2 </span>Auxiliary browsing contexts</a>
       <ol><li><a href="browsers.html#navigating-auxiliary-browsing-contexts-in-the-dom"><span class="secno">5.1.2.1 </span>Navigating auxiliary browsing contexts in the DOM</a></li></ol></li><li><a href="browsers.html#secondary-browsing-contexts"><span class="secno">5.1.3 </span>Secondary browsing contexts</a></li><li><a href="browsers.html#security-nav"><span class="secno">5.1.4 </span>Security</a></li><li><a href="browsers.html#groupings-of-browsing-contexts"><span class="secno">5.1.5 </span>Groupings of browsing contexts</a></li><li><a href="browsers.html#browsing-context-names"><span class="secno">5.1.6 </span>Browsing context names</a></li></ol></li><li><a href="browsers.html#the-window-object"><span class="secno">5.2 </span>The <code>Window</code> object</a>
-    <ol><li><a href="browsers.html#security-window"><span class="secno">5.2.1 </span>Security</a></li><li><a href="browsers.html#apis-for-creating-and-navigating-browsing-contexts-by-name"><span class="secno">5.2.2 </span>APIs for creating and navigating browsing contexts by name</a></li><li><a href="browsers.html#accessing-other-browsing-contexts"><span class="secno">5.2.3 </span>Accessing other browsing contexts</a></li><li><a href="browsers.html#named-access-on-the-window-object"><span class="secno">5.2.4 </span>Named access on the <code>Window</code> object</a></li><li><a href="browsers.html#garbage-collection-and-browsing-contexts"><span class="secno">5.2.5 </span>Garbage collection and browsing contexts</a></li><li><a href="browsers.html#browser-interface-elements"><span class="secno">5.2.6 </span>Browser interface elements</a></li><li><a href="browsers.html#the-windowproxy-object"><span class="secno">5.2.7 </span>The <code>WindowProxy</code> object</a></li></ol></li></ol></li></ol></div><h2 id="browsers"><span class="secno">5 </span>Loading Web pages</h2><div class="impl">
+    <ol><li><a href="browsers.html#security-window"><span class="secno">5.2.1 </span>Security</a></li><li><a href="browsers.html#apis-for-creating-and-navigating-browsing-contexts-by-name"><span class="secno">5.2.2 </span>APIs for creating and navigating browsing contexts by name</a></li><li><a href="browsers.html#accessing-other-browsing-contexts"><span class="secno">5.2.3 </span>Accessing other browsing contexts</a></li><li><a href="browsers.html#named-access-on-the-window-object"><span class="secno">5.2.4 </span>Named access on the <code>Window</code> object</a></li><li><a href="browsers.html#garbage-collection-and-browsing-contexts"><span class="secno">5.2.5 </span>Garbage collection and browsing contexts</a></li><li><a href="browsers.html#browser-interface-elements"><span class="secno">5.2.6 </span>Browser interface elements</a></li><li><a href="browsers.html#the-windowproxy-object"><span class="secno">5.2.7 </span>The <code>WindowProxy</code> object</a></li></ol></li></ol></li></ol></nav><h2 id="browsers"><span class="secno">5 </span>Loading Web pages</h2><div class="impl">
 
   <p>This section describes features that apply most directly to Web
   browsers. Having said that, except where specified otherwise, the
@@ -336,29 +340,33 @@
   agents, whether they are Web browsers or not.</p>
 
   </div><h3 id="windows"><span class="secno">5.1 </span>Browsing contexts</h3><p>A <dfn id="browsing-context">browsing context</dfn> is an environment in which
-  <code><a href="infrastructure.html#document">Document</a></code> objects are presented to the user.</p><p class="note">A tab or window in a Web browser typically contains
+  <code><a href="dom.html#document">Document</a></code> objects are presented to the user.</p><p class="note">A tab or window in a Web browser typically contains
   a <a href="#browsing-context">browsing context</a>, as does an <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code><span class="impl"> or <code><a href="obsolete.html#frame">frame</a></code>s in a
   <code><a href="obsolete.html#frameset">frameset</a></code></span>.</p><p>Each <a href="#browsing-context">browsing context</a> has a corresponding
   <code><a href="#windowproxy">WindowProxy</a></code> object.</p><p>A <a href="#browsing-context">browsing context</a> has a <a href="history.html#session-history">session
-  history</a>, which lists the <code><a href="infrastructure.html#document">Document</a></code> objects that
+  history</a>, which lists the <code><a href="dom.html#document">Document</a></code> objects that
   that <a href="#browsing-context">browsing context</a> has presented, is presenting, or
-  will present. At any time, one <code><a href="infrastructure.html#document">Document</a></code> in each
+  will present. At any time, one <code><a href="dom.html#document">Document</a></code> in each
   <a href="#browsing-context">browsing context</a> is designated the <dfn id="active-document">active
-  document</dfn>.</p><p>Each <code><a href="infrastructure.html#document">Document</a></code> is associated with a
+  document</dfn>. A <code><a href="dom.html#document">Document</a></code>'s <a href="#browsing-context">browsing
+  context</a> is that <a href="#browsing-context">browsing context</a> whose
+  <a href="history.html#session-history">session history</a> contains the <code><a href="dom.html#document">Document</a></code>, if
+  any. (A <code><a href="dom.html#document">Document</a></code> created using an API such as <code title="dom-DOMImplementation-createDocument"><a href="infrastructure.html#dom-domimplementation-createdocument">createDocument()</a></code>
+  has no <a href="#browsing-context">browsing context</a>.)</p><p>Each <code><a href="dom.html#document">Document</a></code> is associated with a
   <code><a href="#window">Window</a></code> object. A <a href="#browsing-context">browsing context</a>'s
   <code><a href="#windowproxy">WindowProxy</a></code> object forwards everything to the
   <a href="#browsing-context">browsing context</a>'s <a href="#active-document">active document</a>'s
   <code><a href="#window">Window</a></code> object.</p><p class="note">In general, there is a 1-to-1 mapping from the
-  <code><a href="#window">Window</a></code> object to the <code><a href="infrastructure.html#document">Document</a></code> object.
+  <code><a href="#window">Window</a></code> object to the <code><a href="dom.html#document">Document</a></code> object.
   There are two exceptions. First, a <code><a href="#window">Window</a></code> can be reused
-  for the presentation of a second <code><a href="infrastructure.html#document">Document</a></code> in the same
+  for the presentation of a second <code><a href="dom.html#document">Document</a></code> in the same
   <a href="#browsing-context">browsing context</a>, such that the mapping is then 2-to-1.
   This occurs when a <a href="#browsing-context">browsing context</a> is <a href="history.html#navigate" title="navigate">navigated</a> from the initial
-  <code><a href="fetching-resources.html#about:blank">about:blank</a></code> <code><a href="infrastructure.html#document">Document</a></code> to another, with
-  <a href="history.html#replacement-enabled">replacement enabled</a>. Second, a <code><a href="infrastructure.html#document">Document</a></code>
+  <code><a href="urls.html#about:blank">about:blank</a></code> <code><a href="dom.html#document">Document</a></code> to another, with
+  <a href="history.html#replacement-enabled">replacement enabled</a>. Second, a <code><a href="dom.html#document">Document</a></code>
   can end up being reused for several <code><a href="#window">Window</a></code> objects when
-  the <code title="dom-document-open"><a href="apis-in-html-documents.html#dom-document-open">document.open()</a></code> method is
-  used, such that the mapping is then 1-to-many.</p><p class="note">A <code><a href="infrastructure.html#document">Document</a></code> does not necessarily have a
+  the <code title="dom-document-open"><a href="dynamic-markup-insertion.html#dom-document-open">document.open()</a></code> method is
+  used, such that the mapping is then 1-to-many.</p><p class="note">A <code><a href="dom.html#document">Document</a></code> does not necessarily have a
   <a href="#browsing-context">browsing context</a> associated with it. In particular,
   data mining tools are likely to never instantiate browsing
   contexts.</p><hr/><p>A <a href="#browsing-context">browsing context</a> can have a <dfn id="creator-browsing-context">creator browsing
@@ -371,42 +379,42 @@
   context</a>. Otherwise, the <a href="#browsing-context">browsing context</a> has no
   <a href="#creator-browsing-context">creator browsing context</a>.</p><p>If a <a href="#browsing-context">browsing context</a> <var title="">A</var> has a
   <a href="#creator-browsing-context">creator browsing context</a>, then the
-  <code><a href="infrastructure.html#document">Document</a></code> that was the <a href="#active-document">active document</a> of
+  <code><a href="dom.html#document">Document</a></code> that was the <a href="#active-document">active document</a> of
   that <a href="#creator-browsing-context">creator browsing context</a> at the time <var title="">A</var> was created is the <dfn id="creator-document">creator
   <code>Document</code></dfn>.</p><div class="impl">
 
   <p>When a <a href="#browsing-context">browsing context</a> is first created, it must be
-  created with a single <code><a href="infrastructure.html#document">Document</a></code> in its session history,
+  created with a single <code><a href="dom.html#document">Document</a></code> in its session history,
   whose <a href="dom.html#the-document-s-address" title="the document's address">address</a> is
-  <code><a href="fetching-resources.html#about:blank">about:blank</a></code>, which is marked as being an <a href="dom.html#html-documents" title="HTML documents">HTML document</a>, and whose <a href="dom.html#document-s-character-encoding" title="document's character encoding">character encoding</a> is
-  UTF-8. The <code><a href="infrastructure.html#document">Document</a></code> must have a single child
-  <code><a href="semantics.html#the-html-element">html</a></code> node, which itself has a single child
-  <code><a href="sections.html#the-body-element">body</a></code> node.</p>
+  <code><a href="urls.html#about:blank">about:blank</a></code>, which is marked as being an <a href="infrastructure.html#html-documents" title="HTML documents">HTML document</a>, and whose <a href="infrastructure.html#document-s-character-encoding" title="document's character encoding">character encoding</a> is
+  UTF-8. The <code><a href="dom.html#document">Document</a></code> must have a single child
+  <code><a href="the-html-element.html#the-html-element">html</a></code> node, which itself has a single child
+  <code><a href="the-body-element.html#the-body-element">body</a></code> node.</p>
 
   <p class="note">If the <a href="#browsing-context">browsing context</a> is created
   specifically to be immediately navigated, then that initial
   navigation will have <a href="history.html#replacement-enabled">replacement enabled</a>.</p>
 
   <p id="about-blank-origin">The <a href="origin-0.html#origin">origin</a> of the
-  <code><a href="fetching-resources.html#about:blank">about:blank</a></code> <code><a href="infrastructure.html#document">Document</a></code> is set when the
-  <code><a href="infrastructure.html#document">Document</a></code> is created. If the new <a href="#browsing-context">browsing
+  <code><a href="urls.html#about:blank">about:blank</a></code> <code><a href="dom.html#document">Document</a></code> is set when the
+  <code><a href="dom.html#document">Document</a></code> is created. If the new <a href="#browsing-context">browsing
   context</a> has a <a href="#creator-browsing-context">creator browsing context</a>, then the
-  <a href="origin-0.html#origin">origin</a> of the <code><a href="fetching-resources.html#about:blank">about:blank</a></code>
-  <code><a href="infrastructure.html#document">Document</a></code> is the <a href="origin-0.html#origin">origin</a> of the
+  <a href="origin-0.html#origin">origin</a> of the <code><a href="urls.html#about:blank">about:blank</a></code>
+  <code><a href="dom.html#document">Document</a></code> is the <a href="origin-0.html#origin">origin</a> of the
   <a href="#creator-document">creator <code>Document</code></a>. Otherwise, the
-  <a href="origin-0.html#origin">origin</a> of the <code><a href="fetching-resources.html#about:blank">about:blank</a></code>
-  <code><a href="infrastructure.html#document">Document</a></code> is a globally unique identifier assigned when
+  <a href="origin-0.html#origin">origin</a> of the <code><a href="urls.html#about:blank">about:blank</a></code>
+  <code><a href="dom.html#document">Document</a></code> is a globally unique identifier assigned when
   the new <a href="#browsing-context">browsing context</a> is created.</p>
 
   </div><h4 id="nested-browsing-contexts"><span class="secno">5.1.1 </span>Nested browsing contexts</h4><p>Certain elements (for example, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> elements) can
   instantiate further <a href="#browsing-context" title="browsing context">browsing
-  contexts</a>. These are called <dfn id="nested-browsing-context" title="nested browsing&#10;  context">nested browsing contexts</dfn>. If a browsing context <var title="">P</var> has a <code><a href="infrastructure.html#document">Document</a></code>s <var title="">D</var>
+  contexts</a>. These are called <dfn id="nested-browsing-context" title="nested browsing&#10;  context">nested browsing contexts</dfn>. If a browsing context <var title="">P</var> has a <code><a href="dom.html#document">Document</a></code> <var title="">D</var>
   with an element <var title="">E</var> that nests another browsing
   context <var title="">C</var> inside it, then <var title="">C</var>
   is said to be <dfn id="browsing-context-nested-through" title="browsing context nested through">nested
   through</dfn> <var title="">D</var>, and <var title="">E</var> is
   said to be the <dfn id="browsing-context-container">browsing context container</dfn> of <var title="">C</var>. If the <a href="#browsing-context-container">browsing context container</a>
-  element <var title="">E</var> is <a href="infrastructure.html#in-a-document" title="in a&#10;  Document">in</a> the <code><a href="infrastructure.html#document">Document</a></code> <var title="">D</var>,
+  element <var title="">E</var> is <a href="infrastructure.html#in-a-document" title="in a&#10;  Document">in</a> the <code><a href="dom.html#document">Document</a></code> <var title="">D</var>,
   then <var title="">P</var> is said to be the <dfn id="parent-browsing-context">parent browsing
   context</dfn> of <var title="">C</var> and <var title="">C</var> is
   said to be a <dfn id="child-browsing-context">child browsing context</dfn> of <var title="">P</var>. Otherwise, the <a href="#nested-browsing-context">nested browsing
@@ -423,7 +431,7 @@
   contexts for which it is an <a href="#ancestor-browsing-context">ancestor browsing
   context</a>.</p><p>The transitive closure of <a href="#parent-browsing-context" title="parent browsing&#10;  context">parent browsing contexts</a> for a <a href="#nested-browsing-context">nested browsing
   context</a> gives the list of <a href="#ancestor-browsing-context" title="ancestor browsing&#10;  context">ancestor browsing contexts</a>.</p><p>The <dfn id="list-of-the-descendant-browsing-contexts">list of the descendant browsing contexts</dfn> of a
-  <code><a href="infrastructure.html#document">Document</a></code> <var title="">d</var> is the (ordered) list
+  <code><a href="dom.html#document">Document</a></code> <var title="">d</var> is the (ordered) list
   returned by the following algorithm:</p><ol><li><p>Let <var title="">list</var> be an empty list.</p></li>
 
    <li>
@@ -443,31 +451,31 @@
 
    <li><p>Return the constructed <var title="">list</var>.</p></li>
 
-  </ol><p>A <code><a href="infrastructure.html#document">Document</a></code> is said to be <dfn id="fully-active">fully active</dfn>
+  </ol><p>A <code><a href="dom.html#document">Document</a></code> is said to be <dfn id="fully-active">fully active</dfn>
   when it is the <a href="#active-document">active document</a> of its <a href="#browsing-context">browsing
   context</a>, and either its browsing context is a <a href="#top-level-browsing-context">top-level
   browsing context</a>, or it has a <a href="#parent-browsing-context">parent browsing
-  context</a> and the <code><a href="infrastructure.html#document">Document</a></code> <a href="#browsing-context-nested-through" title="browsing&#10;  context nested through">through which</a> it is <a href="#nested-browsing-context" title="nested browsing context">nested</a> is itself <a href="#fully-active">fully
+  context</a> and the <code><a href="dom.html#document">Document</a></code> <a href="#browsing-context-nested-through" title="browsing&#10;  context nested through">through which</a> it is <a href="#nested-browsing-context" title="nested browsing context">nested</a> is itself <a href="#fully-active">fully
   active</a>.</p><p>Because they are nested through an element, <a href="#child-browsing-context" title="child&#10;  browsing context">child browsing contexts</a> are always tied to
-  a specific <code><a href="infrastructure.html#document">Document</a></code> in their <a href="#parent-browsing-context">parent browsing
+  a specific <code><a href="dom.html#document">Document</a></code> in their <a href="#parent-browsing-context">parent browsing
   context</a>. User agents must not allow the user to interact with
   <a href="#child-browsing-context" title="child browsing context">child browsing contexts</a>
-  of elements that are in <code><a href="infrastructure.html#document">Document</a></code>s that are not
+  of elements that are in <code><a href="dom.html#document">Document</a></code>s that are not
   themselves <a href="#fully-active">fully active</a>.</p><p>A <a href="#nested-browsing-context">nested browsing context</a> can have a <a href="the-iframe-element.html#seamless-browsing-context-flag">seamless
   browsing context flag</a> set, if it is embedded through an
   <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> element with a <code title="attr-iframe-seamless"><a href="the-iframe-element.html#attr-iframe-seamless">seamless</a></code> attribute.</p><p class="note">A <a href="#nested-browsing-context">nested browsing context</a> can in some
   cases be taken out of its <a href="#parent-browsing-context">parent browsing context</a> (e.g.
   if an <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> element is removed from its
-  <code><a href="infrastructure.html#document">Document</a></code>). In such a situation, the <a href="#nested-browsing-context">nested
+  <code><a href="dom.html#document">Document</a></code>). In such a situation, the <a href="#nested-browsing-context">nested
   browsing context</a> has no <a href="#parent-browsing-context">parent browsing context</a>,
   but it still has the same <a href="#browsing-context-container">browsing context container</a>
   and is still <a href="#browsing-context-nested-through" title="browsing context nested through">nested
-  through</a> that element's <code><a href="infrastructure.html#document">Document</a></code>. Such a
+  through</a> that element's <code><a href="dom.html#document">Document</a></code>. Such a
   <a href="#nested-browsing-context">nested browsing context</a> is <em>not</em> a
   <a href="#top-level-browsing-context">top-level browsing context</a>, and cannot contain
-  <code><a href="infrastructure.html#document">Document</a></code>s that are <a href="#fully-active">fully active</a>.
+  <code><a href="dom.html#document">Document</a></code>s that are <a href="#fully-active">fully active</a>.
   Furthermore, if a <a href="#browsing-context-container">browsing context container</a> (such as
-  an <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>) is moved to another <code><a href="infrastructure.html#document">Document</a></code>,
+  an <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>) is moved to another <code><a href="dom.html#document">Document</a></code>,
   then the <a href="#parent-browsing-context">parent browsing context</a> of its <a href="#nested-browsing-context">nested
   browsing context</a> will change.</p><h5 id="navigating-nested-browsing-contexts-in-the-dom"><span class="secno">5.1.1.1 </span>Navigating nested browsing contexts in the DOM</h5><dl class="domintro"><dt><var title="">window</var> . <code title="dom-top"><a href="#dom-top">top</a></code></dt>
 
@@ -493,14 +501,14 @@
 
     <p>Returns null if there isn't one.</p>
 
-    <p>Throws a <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code> exception in cross-origin situations.</p>
+    <p>Throws a <code><a href="infrastructure.html#securityerror">SecurityError</a></code> exception in cross-origin situations.</p>
 
    </dd>
 
   </dl><div class="impl">
 
   <p>The <dfn id="dom-top" title="dom-top"><code>top</code></dfn> IDL attribute on
-  the <code><a href="#window">Window</a></code> object of a <code><a href="infrastructure.html#document">Document</a></code> in a
+  the <code><a href="#window">Window</a></code> object of a <code><a href="dom.html#document">Document</a></code> in a
   <a href="#browsing-context">browsing context</a> <var title="">b</var> must return the
   <code><a href="#windowproxy">WindowProxy</a></code> object of its <a href="#top-level-browsing-context">top-level browsing
   context</a> (which would be its own <code><a href="#windowproxy">WindowProxy</a></code>
@@ -511,7 +519,7 @@
 
   <p>The <dfn id="dom-parent" title="dom-parent"><code>parent</code></dfn> IDL
   attribute on the <code><a href="#window">Window</a></code> object of a
-  <code><a href="infrastructure.html#document">Document</a></code> in a <a href="#browsing-context">browsing context</a> <var title="">b</var> must return the <code><a href="#windowproxy">WindowProxy</a></code> object of
+  <code><a href="dom.html#document">Document</a></code> in a <a href="#browsing-context">browsing context</a> <var title="">b</var> must return the <code><a href="#windowproxy">WindowProxy</a></code> object of
   the <a href="#parent-browsing-context">parent browsing context</a>, if there is one (i.e. if
   <var title="">b</var> is a <a href="#child-browsing-context">child browsing context</a>), or
   the <code><a href="#windowproxy">WindowProxy</a></code> object of the <a href="#browsing-context">browsing
@@ -521,16 +529,16 @@
 
   <p>The <dfn id="dom-frameelement" title="dom-frameElement"><code>frameElement</code></dfn>
   IDL attribute on the <code><a href="#window">Window</a></code> object of a
-  <code><a href="infrastructure.html#document">Document</a></code> <var title="">d</var>, on getting, must run
+  <code><a href="dom.html#document">Document</a></code> <var title="">d</var>, on getting, must run
   the following algorithm:</p>
 
-  <ol><li><p>If <var title="">d</var> is not a <code><a href="infrastructure.html#document">Document</a></code> in a
+  <ol><li><p>If <var title="">d</var> is not a <code><a href="dom.html#document">Document</a></code> in a
    <a href="#nested-browsing-context">nested browsing context</a>, return null and abort these
    steps.</p></li>
 
    <li><p>If the <a href="#browsing-context-container">browsing context container</a>'s
-   <code><a href="infrastructure.html#document">Document</a></code> does not have the <a href="origin-0.html#same-origin" title="same&#10;   origin">same</a> <a href="origin-0.html#effective-script-origin">effective script origin</a> as the
-   <a href="#entry-script">entry script</a>, then throw a <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code>
+   <code><a href="dom.html#document">Document</a></code> does not have the <a href="origin-0.html#same-origin" title="same&#10;   origin">same</a> <a href="origin-0.html#effective-script-origin">effective script origin</a> as the
+   <a href="#entry-script">entry script</a>, then throw a <code><a href="infrastructure.html#securityerror">SecurityError</a></code>
    exception.</p></li>
 
    <li><p>Otherwise, return the <a href="#browsing-context-container">browsing context
@@ -549,11 +557,10 @@
   context</a> from which the current <a href="#browsing-context">browsing context</a>
   was created (its <a href="#opener-browsing-context">opener browsing context</a>), if there is
   one, if it is still available, and if the current <a href="#browsing-context">browsing
-  context</a> has not <i><a href="#disowned-its-opener">disowned its opener</a></i>. On setting, if
-  the new value is null then the current <a href="#browsing-context">browsing context</a>
-  must <dfn id="disowned-its-opener" title="disowned its opener">disown its opener</dfn>; if
-  the new value is anything else then the user agent must ignore the
-  new value.</p><h4 id="secondary-browsing-contexts"><span class="secno">5.1.3 </span>Secondary browsing contexts</h4><p>User agents may support <dfn id="secondary-browsing-context" title="secondary browsing&#10;  context">secondary browsing contexts</dfn>, which are <a href="#browsing-context" title="browsing context">browsing contexts</a> that form part of
+  context</a> has not <i><a href="#disowned-its-opener">disowned its opener</a></i>; otherwise, it
+  must return null. On setting, if the new value is null then the
+  current <a href="#browsing-context">browsing context</a> must <dfn id="disowned-its-opener" title="disowned its&#10;  opener">disown its opener</dfn>; if the new value is anything else
+  then the user agent must ignore the new value.</p><h4 id="secondary-browsing-contexts"><span class="secno">5.1.3 </span>Secondary browsing contexts</h4><p>User agents may support <dfn id="secondary-browsing-context" title="secondary browsing&#10;  context">secondary browsing contexts</dfn>, which are <a href="#browsing-context" title="browsing context">browsing contexts</a> that form part of
   the user agent's interface, apart from the main content area.</p><div class="impl">
 
   <h4 id="security-nav"><span class="secno">5.1.4 </span>Security</h4>
@@ -584,13 +591,13 @@
    <var title="">A</var> itself).</li>
 
   </ul><hr/><p>An element has a <dfn id="browsing-context-scope-origin">browsing context scope origin</dfn> if its
-  <code><a href="infrastructure.html#document">Document</a></code>'s <a href="#browsing-context">browsing context</a> is a
+  <code><a href="dom.html#document">Document</a></code>'s <a href="#browsing-context">browsing context</a> is a
   <a href="#top-level-browsing-context">top-level browsing context</a> or if all of its
-  <code><a href="infrastructure.html#document">Document</a></code>'s <a href="#ancestor-browsing-context" title="ancestor browsing&#10;  context">ancestor browsing contexts</a> all have <a href="#active-document" title="active document">active documents</a> whose
+  <code><a href="dom.html#document">Document</a></code>'s <a href="#ancestor-browsing-context" title="ancestor browsing&#10;  context">ancestor browsing contexts</a> all have <a href="#active-document" title="active document">active documents</a> whose
   <a href="origin-0.html#origin">origin</a> are the <a href="origin-0.html#same-origin">same origin</a> as the
-  element's <code><a href="infrastructure.html#document">Document</a></code>'s <a href="origin-0.html#origin">origin</a>. If an element
+  element's <code><a href="dom.html#document">Document</a></code>'s <a href="origin-0.html#origin">origin</a>. If an element
   has a <a href="#browsing-context-scope-origin">browsing context scope origin</a>, then its value is
-  the <a href="origin-0.html#origin">origin</a> of the element's <code><a href="infrastructure.html#document">Document</a></code>.</p>
+  the <a href="origin-0.html#origin">origin</a> of the element's <code><a href="dom.html#document">Document</a></code>.</p>
 
   </div><div class="impl">
 
@@ -628,7 +635,7 @@
   <dfn id="unit-of-related-similar-origin-browsing-contexts">unit of related similar-origin browsing contexts</dfn>.</p>
 
   <p>Each <a href="#unit-of-related-similar-origin-browsing-contexts">unit of related similar-origin browsing
-  contexts</a> can have a <dfn id="entry-script">entry script</dfn> which is used to
+  contexts</a> can have an <dfn id="entry-script">entry script</dfn> which is used to
   obtain, amongst other things, the <a href="webappapis.html#script-s-base-url">script's base URL</a> to
   <a href="urls.html#resolve-a-url" title="resolve a url">resolve</a> relative <a href="urls.html#url" title="URL">URLs</a> used in scripts running in that <a href="#unit-of-related-similar-origin-browsing-contexts">unit
   of related similar-origin browsing contexts</a>. Initially, there
@@ -772,7 +779,7 @@
      </td><td>current
      </td><td>current
 
-    </td></tr><tr><td>name that exists and is a ancestor that is top
+    </td></tr><tr><td>name that exists and is an ancestor that is top
      </td><td>specified ancestor
      </td><td>specified ancestor
      </td><td>none
@@ -780,7 +787,7 @@
      </td><td>specified ancestor/top
      </td><td>specified ancestor/top
 
-    </td></tr><tr><td>name that exists and is a ancestor that is not top
+    </td></tr><tr><td>name that exists and is an ancestor that is not top
      </td><td>specified ancestor
      </td><td>specified ancestor
      </td><td>none
@@ -791,7 +798,17 @@
   </td></tr></tbody></table><p><small>&#x2020; This case is only possible if the <code title="attr-iframe-sandbox"><a href="the-iframe-element.html#attr-iframe-sandbox">sandbox</a></code> attribute also allows
   scripts.</small></p><div class="impl">
 
-  <p><dfn id="the-rules-for-choosing-a-browsing-context-given-a-browsing-context-name">The rules for choosing a browsing context given a browsing
+  <hr/><p>An algorithm is <dfn id="allowed-to-show-a-pop-up">allowed to show a pop-up</dfn> if, in the
+  <a href="webappapis.html#concept-task" title="concept-task">task</a> in which the algorithm is
+  running, either:</p>
+
+  <ul class="brief"><li>an <a href="content-models.html#activation-behavior">activation behavior</a> is currently being
+   processed whose <code title="event-click"><a href="infrastructure.html#event-click">click</a></code> event was
+   <a href="infrastructure.html#concept-events-trusted" title="concept-events-trusted">trusted</a>, or</li>
+
+   <li>the event listener for a <a href="infrastructure.html#concept-events-trusted" title="concept-events-trusted">trusted</a> <code title="event-click"><a href="infrastructure.html#event-click">click</a></code> event is being handled.</li>
+
+  </ul><hr/><p><dfn id="the-rules-for-choosing-a-browsing-context-given-a-browsing-context-name">The rules for choosing a browsing context given a browsing
   context name</dfn> are as follows. The rules assume that they are
   being applied in the context of a <a href="#browsing-context">browsing context</a>.</p>
 
@@ -905,21 +922,22 @@
 
    </li>
 
-  </ol></div><h3 id="the-window-object"><span class="secno">5.2 </span>The <code><a href="#window">Window</a></code> object</h3><pre class="idl">[ReplaceableNamedProperties] 
-interface <dfn id="window">Window</dfn> {
+  </ol></div><h3 id="the-window-object"><span class="secno">5.2 </span>The <code><a href="#window">Window</a></code> object</h3><pre class="idl">[ReplaceableNamedProperties]
+interface <dfn id="window">Window</dfn> : <a href="infrastructure.html#eventtarget">EventTarget</a> {
   // the current browsing context
-  readonly attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-window" title="dom-window">window</a>;
-  readonly attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-self" title="dom-self">self</a>;
-  readonly attribute <a href="infrastructure.html#document">Document</a> <a href="#dom-document" title="dom-document">document</a>;
+  [Unforgeable] readonly attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-window" title="dom-window">window</a>;
+  [Replaceable] readonly attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-self" title="dom-self">self</a>;
+  [Unforgeable] readonly attribute <a href="dom.html#document">Document</a> <a href="#dom-document-0" title="dom-document">document</a>;
            attribute DOMString <a href="#dom-name" title="dom-name">name</a>; 
-  [PutForwards=<a href="history.html#dom-location-href" title="dom-location-href">href</a>] readonly attribute <a href="history.html#location">Location</a> <a href="history.html#dom-location" title="dom-location">location</a>;
+  [PutForwards=<a href="history.html#dom-location-href" title="dom-location-href">href</a>, Unforgeable] readonly attribute <a href="history.html#location">Location</a> <a href="history.html#dom-location" title="dom-location">location</a>;
   readonly attribute <a href="history.html#history-0">History</a> <a href="history.html#dom-history" title="dom-history">history</a>;
   [Replaceable] readonly attribute <a href="#barprop">BarProp</a> <a href="#dom-window-locationbar" title="dom-window-locationbar">locationbar</a>;
   [Replaceable] readonly attribute <a href="#barprop">BarProp</a> <a href="#dom-window-menubar" title="dom-window-menubar">menubar</a>;
   [Replaceable] readonly attribute <a href="#barprop">BarProp</a> <a href="#dom-window-personalbar" title="dom-window-personalbar">personalbar</a>;
   [Replaceable] readonly attribute <a href="#barprop">BarProp</a> <a href="#dom-window-scrollbars" title="dom-window-scrollbars">scrollbars</a>;
   [Replaceable] readonly attribute <a href="#barprop">BarProp</a> <a href="#dom-window-statusbar" title="dom-window-statusbar">statusbar</a>;
-  [Replaceable] readonly attribute <a href="#barprop">BarProp</a> <a href="#dom-window-toolbar" title="dom-window-toolbar">toolbar</a>;           attribute DOMString <a href="#dom-window-status" title="dom-window-status">status</a>;
+  [Replaceable] readonly attribute <a href="#barprop">BarProp</a> <a href="#dom-window-toolbar" title="dom-window-toolbar">toolbar</a>;
+           attribute DOMString <a href="#dom-window-status" title="dom-window-status">status</a>;
   void <a href="#dom-window-close" title="dom-window-close">close</a>();
   void <a href="#dom-window-stop" title="dom-window-stop">stop</a>();
   void <a href="editing.html#dom-window-focus" title="dom-window-focus">focus</a>();
@@ -928,98 +946,94 @@ interface <dfn id="window">Window</dfn> {
   // other browsing contexts
   [Replaceable] readonly attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-frames" title="dom-frames">frames</a>;
   [Replaceable] readonly attribute unsigned long <a href="#dom-length" title="dom-length">length</a>;
-  readonly attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-top" title="dom-top">top</a>;
-           attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-opener" title="dom-opener">opener</a>;
+  [Unforgeable] readonly attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-top" title="dom-top">top</a>;
+           attribute <a href="#windowproxy">WindowProxy</a>? <a href="#dom-opener" title="dom-opener">opener</a>;
   readonly attribute <a href="#windowproxy">WindowProxy</a> <a href="#dom-parent" title="dom-parent">parent</a>;
   readonly attribute <a href="infrastructure.html#element">Element</a>? <a href="#dom-frameelement" title="dom-frameElement">frameElement</a>;
-  <a href="#windowproxy">WindowProxy</a> <a href="#dom-open" title="dom-open">open</a>(in optional DOMString url, in optional DOMString target, in optional DOMString features, in optional DOMString replace);
-  <a href="#dom-window-item" title="dom-window-item">getter</a> <a href="#windowproxy">WindowProxy</a> (in unsigned long index);
-  <a href="#dom-window-nameditem" title="dom-window-namedItem">getter</a> any (in DOMString name);
+  <a href="#windowproxy">WindowProxy</a> <a href="#dom-open" title="dom-open">open</a>(optional DOMString url, optional DOMString target, optional DOMString features, optional boolean replace);
+  <a href="#dom-window-item" title="dom-window-item">getter</a> <a href="#windowproxy">WindowProxy</a> (unsigned long index);
+  <a href="#dom-window-nameditem" title="dom-window-namedItem">getter</a> object (DOMString name);
 
   // the user agent
-  readonly attribute <a href="timers.html#navigator">Navigator</a> <a href="timers.html#dom-navigator" title="dom-navigator">navigator</a>; 
-  readonly attribute <a href="timers.html#external">External</a> <a href="timers.html#dom-external" title="dom-external">external</a>;
+  readonly attribute <a href="system-state-and-capabilities.html#navigator">Navigator</a> <a href="system-state-and-capabilities.html#dom-navigator" title="dom-navigator">navigator</a>; 
+  readonly attribute <a href="system-state-and-capabilities.html#external">External</a> <a href="system-state-and-capabilities.html#dom-external" title="dom-external">external</a>;
   readonly attribute <a href="offline.html#applicationcache">ApplicationCache</a> <a href="offline.html#dom-applicationcache" title="dom-applicationCache">applicationCache</a>;
 
   // user prompts
-  void <a href="timers.html#dom-alert" title="dom-alert">alert</a>(in DOMString message);
-  boolean <a href="timers.html#dom-confirm" title="dom-confirm">confirm</a>(in DOMString message);
-  DOMString? <a href="timers.html#dom-prompt" title="dom-prompt">prompt</a>(in DOMString message, in optional DOMString default);
-  void <a href="timers.html#dom-print" title="dom-print">print</a>();
-  any <a href="timers.html#dom-showmodaldialog" title="dom-showModalDialog">showModalDialog</a>(in DOMString url, in optional any argument);
+  void <a href="user-prompts.html#dom-alert" title="dom-alert">alert</a>(DOMString message);
+  boolean <a href="user-prompts.html#dom-confirm" title="dom-confirm">confirm</a>(DOMString message);
+  DOMString? <a href="user-prompts.html#dom-prompt" title="dom-prompt">prompt</a>(DOMString message, optional DOMString default);
+  void <a href="user-prompts.html#dom-print" title="dom-print">print</a>();
+  any <a href="user-prompts.html#dom-showmodaldialog" title="dom-showModalDialog">showModalDialog</a>(DOMString url, optional any argument);
 
   // <a href="webappapis.html#event-handler-idl-attributes">event handler IDL attributes</a>
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onabort" title="handler-onabort">onabort</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onafterprint" title="handler-window-onafterprint">onafterprint</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onbeforeprint" title="handler-window-onbeforeprint">onbeforeprint</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onbeforeunload" title="handler-window-onbeforeunload">onbeforeunload</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onblur" title="handler-window-onblur">onblur</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncanplay" title="handler-oncanplay">oncanplay</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncanplaythrough" title="handler-oncanplaythrough">oncanplaythrough</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onchange" title="handler-onchange">onchange</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onclick" title="handler-onclick">onclick</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncontextmenu" title="handler-oncontextmenu">oncontextmenu</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncuechange" title="handler-oncuechange">oncuechange</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondblclick" title="handler-ondblclick">ondblclick</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondrag" title="handler-ondrag">ondrag</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragend" title="handler-ondragend">ondragend</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragenter" title="handler-ondragenter">ondragenter</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragleave" title="handler-ondragleave">ondragleave</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragover" title="handler-ondragover">ondragover</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragstart" title="handler-ondragstart">ondragstart</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondrop" title="handler-ondrop">ondrop</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondurationchange" title="handler-ondurationchange">ondurationchange</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onemptied" title="handler-onemptied">onemptied</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onended" title="handler-onended">onended</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onerror" title="handler-window-onerror">onerror</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onfocus" title="handler-window-onfocus">onfocus</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onhashchange" title="handler-window-onhashchange">onhashchange</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oninput" title="handler-oninput">oninput</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oninvalid" title="handler-oninvalid">oninvalid</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onkeydown" title="handler-onkeydown">onkeydown</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onkeypress" title="handler-onkeypress">onkeypress</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onkeyup" title="handler-onkeyup">onkeyup</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onload" title="handler-window-onload">onload</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onloadeddata" title="handler-onloadeddata">onloadeddata</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onloadedmetadata" title="handler-onloadedmetadata">onloadedmetadata</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onloadstart" title="handler-onloadstart">onloadstart</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onmessage" title="handler-window-onmessage">onmessage</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmousedown" title="handler-onmousedown">onmousedown</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmousemove" title="handler-onmousemove">onmousemove</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmouseout" title="handler-onmouseout">onmouseout</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmouseover" title="handler-onmouseover">onmouseover</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmouseup" title="handler-onmouseup">onmouseup</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmousewheel" title="handler-onmousewheel">onmousewheel</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onoffline" title="handler-window-onoffline">onoffline</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-ononline" title="handler-window-ononline">ononline</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onpause" title="handler-onpause">onpause</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onplay" title="handler-onplay">onplay</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onplaying" title="handler-onplaying">onplaying</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onpagehide" title="handler-window-onpagehide">onpagehide</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onpageshow" title="handler-window-onpageshow">onpageshow</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onpopstate" title="handler-window-onpopstate">onpopstate</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onprogress" title="handler-onprogress">onprogress</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onratechange" title="handler-onratechange">onratechange</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onreadystatechange" title="handler-onreadystatechange">onreadystatechange</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onredo" title="handler-window-onredo">onredo</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onreset" title="handler-onreset">onreset</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onresize" title="handler-window-onresize">onresize</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onscroll" title="handler-onscroll">onscroll</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onseeked" title="handler-onseeked">onseeked</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onseeking" title="handler-onseeking">onseeking</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onselect" title="handler-onselect">onselect</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onshow" title="handler-onshow">onshow</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onstalled" title="handler-onstalled">onstalled</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onstorage" title="handler-window-onstorage">onstorage</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onsubmit" title="handler-onsubmit">onsubmit</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onsuspend" title="handler-onsuspend">onsuspend</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ontimeupdate" title="handler-ontimeupdate">ontimeupdate</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onundo" title="handler-window-onundo">onundo</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onunload" title="handler-window-onunload">onunload</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onvolumechange" title="handler-onvolumechange">onvolumechange</a>;
-           attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onwaiting" title="handler-onwaiting">onwaiting</a>;
-};
-<a href="#window">Window</a> implements <a href="infrastructure.html#eventtarget">EventTarget</a>;</pre><dl class="domintro"><dt><var title="">window</var> . <code title="dom-window"><a href="#dom-window">window</a></code></dt>
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onabort" title="handler-onabort">onabort</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onafterprint" title="handler-window-onafterprint">onafterprint</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onbeforeprint" title="handler-window-onbeforeprint">onbeforeprint</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onbeforeunload" title="handler-window-onbeforeunload">onbeforeunload</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onblur" title="handler-window-onblur">onblur</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncanplay" title="handler-oncanplay">oncanplay</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncanplaythrough" title="handler-oncanplaythrough">oncanplaythrough</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onchange" title="handler-onchange">onchange</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onclick" title="handler-onclick">onclick</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncontextmenu" title="handler-oncontextmenu">oncontextmenu</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oncuechange" title="handler-oncuechange">oncuechange</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondblclick" title="handler-ondblclick">ondblclick</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondrag" title="handler-ondrag">ondrag</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragend" title="handler-ondragend">ondragend</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragenter" title="handler-ondragenter">ondragenter</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragleave" title="handler-ondragleave">ondragleave</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragover" title="handler-ondragover">ondragover</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondragstart" title="handler-ondragstart">ondragstart</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondrop" title="handler-ondrop">ondrop</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ondurationchange" title="handler-ondurationchange">ondurationchange</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onemptied" title="handler-onemptied">onemptied</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onended" title="handler-onended">onended</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onerror" title="handler-window-onerror">onerror</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onfocus" title="handler-window-onfocus">onfocus</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onhashchange" title="handler-window-onhashchange">onhashchange</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oninput" title="handler-oninput">oninput</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-oninvalid" title="handler-oninvalid">oninvalid</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onkeydown" title="handler-onkeydown">onkeydown</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onkeypress" title="handler-onkeypress">onkeypress</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onkeyup" title="handler-onkeyup">onkeyup</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onload" title="handler-window-onload">onload</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onloadeddata" title="handler-onloadeddata">onloadeddata</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onloadedmetadata" title="handler-onloadedmetadata">onloadedmetadata</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onloadstart" title="handler-onloadstart">onloadstart</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onmessage" title="handler-window-onmessage">onmessage</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmousedown" title="handler-onmousedown">onmousedown</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmousemove" title="handler-onmousemove">onmousemove</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmouseout" title="handler-onmouseout">onmouseout</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmouseover" title="handler-onmouseover">onmouseover</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmouseup" title="handler-onmouseup">onmouseup</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onmousewheel" title="handler-onmousewheel">onmousewheel</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onoffline" title="handler-window-onoffline">onoffline</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-ononline" title="handler-window-ononline">ononline</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onpause" title="handler-onpause">onpause</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onplay" title="handler-onplay">onplay</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onplaying" title="handler-onplaying">onplaying</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onpagehide" title="handler-window-onpagehide">onpagehide</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onpageshow" title="handler-window-onpageshow">onpageshow</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onpopstate" title="handler-window-onpopstate">onpopstate</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onprogress" title="handler-onprogress">onprogress</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onratechange" title="handler-onratechange">onratechange</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onreset" title="handler-onreset">onreset</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onresize" title="handler-window-onresize">onresize</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onscroll" title="handler-onscroll">onscroll</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onseeked" title="handler-onseeked">onseeked</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onseeking" title="handler-onseeking">onseeking</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onselect" title="handler-onselect">onselect</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onshow" title="handler-onshow">onshow</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onstalled" title="handler-onstalled">onstalled</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onstorage" title="handler-window-onstorage">onstorage</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onsubmit" title="handler-onsubmit">onsubmit</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onsuspend" title="handler-onsuspend">onsuspend</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-ontimeupdate" title="handler-ontimeupdate">ontimeupdate</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-window-onunload" title="handler-window-onunload">onunload</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onvolumechange" title="handler-onvolumechange">onvolumechange</a>;
+  [TreatNonCallableAsNull] attribute <a href="webappapis.html#function">Function</a>? <a href="webappapis.html#handler-onwaiting" title="handler-onwaiting">onwaiting</a>;
+};</pre><dl class="domintro"><dt><var title="">window</var> . <code title="dom-window"><a href="#dom-window">window</a></code></dt>
    <dt><var title="">window</var> . <code title="dom-frames"><a href="#dom-frames">frames</a></code></dt>
    <dt><var title="">window</var> . <code title="dom-self"><a href="#dom-self">self</a></code></dt>
 
@@ -1030,7 +1044,7 @@ interface <dfn id="window">Window</dfn> {
    </dd>
 
 
-   <dt><var title="">window</var> . <code title="dom-document"><a href="#dom-document">document</a></code></dt>
+   <dt><var title="">window</var> . <code title="dom-document"><a href="#dom-document-0">document</a></code></dt>
 
    <dd>
 
@@ -1049,33 +1063,42 @@ interface <dfn id="window">Window</dfn> {
 
   </dl><div class="impl">
 
+  <p>The <code><a href="#window">Window</a></code> interface must not exist if the
+  interface's <a href="infrastructure.html#relevant-namespace-object">relevant namespace object</a> is not a
+  <code><a href="#window">Window</a></code> object. <a href="references.html#refsWEBIDL">[WEBIDL]</a></p>
+
   <p>The <dfn id="dom-window" title="dom-window"><code>window</code></dfn>, <dfn id="dom-frames" title="dom-frames"><code>frames</code></dfn>, and <dfn id="dom-self" title="dom-self"><code>self</code></dfn> IDL attributes must all
   return the <code><a href="#window">Window</a></code> object's <a href="#browsing-context">browsing
   context</a>'s <code><a href="#windowproxy">WindowProxy</a></code> object.</p>
 
-  <p>The <dfn id="dom-document" title="dom-document"><code>document</code></dfn> IDL
-  attribute must return the <code><a href="infrastructure.html#document">Document</a></code> object of the
-  <code><a href="#window">Window</a></code> object's <code><a href="infrastructure.html#document">Document</a></code>'s <a href="#browsing-context">browsing
+  <p>The <dfn id="dom-document-0" title="dom-document"><code>document</code></dfn> IDL
+  attribute must return the <code><a href="dom.html#document">Document</a></code> object of the
+  <code><a href="#window">Window</a></code> object's <code><a href="dom.html#document">Document</a></code>'s <a href="#browsing-context">browsing
   context</a>'s <a href="#active-document">active document</a>.</p>
 
   <p>The <dfn id="dom-document-defaultview" title="dom-document-defaultView"><code>defaultView</code></dfn> IDL
-  attribute of the <code><a href="dom.html#htmldocument">HTMLDocument</a></code> interface must return the
-  <code><a href="infrastructure.html#document">Document</a></code>'s <a href="#browsing-context">browsing context</a>'s
+  attribute of the <code><a href="dom.html#document">Document</a></code> interface must return the
+  <code><a href="dom.html#document">Document</a></code>'s <a href="#browsing-context">browsing context</a>'s
   <code><a href="#windowproxy">WindowProxy</a></code> object, if there is one, or null
   otherwise.</p>
+
+  <hr/><p>For historical reasons, <code><a href="#window">Window</a></code> objects must also
+  have a writable, configurable, non-enumerable property named
+  <dfn id="htmldocument"><code>HTMLDocument</code></dfn> whose value is the
+  <code><a href="dom.html#document">Document</a></code> interface object.</p>
 
   </div><div class="impl">
 
   <h4 id="security-window"><span class="secno">5.2.1 </span>Security</h4>
 
-  <p id="security-2">User agents must raise a
-  <code><a href="common-dom-interfaces.html#security_err">SECURITY_ERR</a></code> exception whenever any of the members of a
+  <p id="security-2">User agents must throw a
+  <code><a href="infrastructure.html#securityerror">SecurityError</a></code> exception whenever any properties of a
   <code><a href="#window">Window</a></code> object are accessed by scripts whose
   <a href="origin-0.html#effective-script-origin">effective script origin</a> is not the same as the
-  <code><a href="#window">Window</a></code> object's <code><a href="infrastructure.html#document">Document</a></code>'s <a href="origin-0.html#effective-script-origin">effective
+  <code><a href="#window">Window</a></code> object's <code><a href="dom.html#document">Document</a></code>'s <a href="origin-0.html#effective-script-origin">effective
   script origin</a>, with the following exceptions:</p>
 
-  <ul><li>The <code title="dom-location"><a href="history.html#dom-location">location</a></code> object
+  <ul><li>The <code title="dom-location"><a href="history.html#dom-location">location</a></code> attribute
 
    </li><li>The <code title="dom-window-postMessage">postMessage()</code> method
 
@@ -1084,7 +1107,7 @@ interface <dfn id="window">Window</dfn> {
    </li><li>The <a href="#dynamic-nested-browsing-context-properties">dynamic nested browsing context properties</a>
 
   </li></ul><p>When a script whose <a href="origin-0.html#effective-script-origin">effective script origin</a> is not
-  the same as the <code><a href="#window">Window</a></code> object's <code><a href="infrastructure.html#document">Document</a></code>'s
+  the same as the <code><a href="#window">Window</a></code> object's <code><a href="dom.html#document">Document</a></code>'s
   <a href="origin-0.html#effective-script-origin">effective script origin</a> attempts to access that
   <code><a href="#window">Window</a></code> object's methods or attributes, the user agent
   must act as if any changes to the <code><a href="#window">Window</a></code> object's
@@ -1092,7 +1115,7 @@ interface <dfn id="window">Window</dfn> {
 
   <p>For members that return objects (including function objects),
   each distinct <a href="origin-0.html#effective-script-origin">effective script origin</a> that is not the
-  same as the <code><a href="#window">Window</a></code> object's <code><a href="infrastructure.html#document">Document</a></code>'s
+  same as the <code><a href="#window">Window</a></code> object's <code><a href="dom.html#document">Document</a></code>'s
   <a href="origin-0.html#effective-script-origin">effective script origin</a> must be provided with a
   separate set of objects. These objects must have the prototype chain
   appropriate for the script for which the objects are created (not
@@ -1102,7 +1125,7 @@ interface <dfn id="window">Window</dfn> {
 
   <div class="example">
 
-   <p>For instance, if two frames containing <code><a href="infrastructure.html#document">Document</a></code>s
+   <p>For instance, if two frames containing <code><a href="dom.html#document">Document</a></code>s
    from different <a href="origin-0.html#origin" title="origin">origins</a> access the same
    <code><a href="#window">Window</a></code> object's <code title="dom-window-postMessage">postMessage()</code> method, they
    will get distinct objects that are not equal.</p>
@@ -1114,7 +1137,7 @@ interface <dfn id="window">Window</dfn> {
    <dd>
 
     <p>Opens a window to show <var title="">url</var> (defaults to
-    <code><a href="fetching-resources.html#about:blank">about:blank</a></code>), and returns it. The <var title="">target</var> argument gives the name of the new
+    <code><a href="urls.html#about:blank">about:blank</a></code>), and returns it. The <var title="">target</var> argument gives the name of the new
     window. If a window exists with that name already, it is
     reused. The <var title="">replace</var> attribute, if true, means
     that whatever page is currently open in that window will be
@@ -1150,6 +1173,8 @@ interface <dfn id="window">Window</dfn> {
 
   </dl><div class="impl">
 
+  
+
   <p>The <dfn id="dom-open" title="dom-open"><code>open()</code></dfn> method on
   <code><a href="#window">Window</a></code> objects provides a mechanism for <a href="history.html#navigate" title="navigate">navigating</a> an existing <a href="#browsing-context">browsing
   context</a> or opening and navigating an <a href="#auxiliary-browsing-context">auxiliary browsing
@@ -1161,7 +1186,7 @@ interface <dfn id="window">Window</dfn> {
   <a href="urls.html#valid-non-empty-url">valid non-empty URL</a> for a page to load in the browsing
   context. If no arguments are provided, or if the first argument is
   the empty string, then the <var title="">url</var> argument defaults
-  to "<code><a href="fetching-resources.html#about:blank">about:blank</a></code>". The argument must be <a href="urls.html#resolve-a-url" title="resolve a url">resolved</a> to an <a href="urls.html#absolute-url">absolute
+  to "<code><a href="urls.html#about:blank">about:blank</a></code>". The argument must be <a href="urls.html#resolve-a-url" title="resolve a url">resolved</a> to an <a href="urls.html#absolute-url">absolute
   URL</a> (or an error), relative to the <a href="#entry-script">entry
   script</a>'s <a href="webappapis.html#script-s-base-url" title="script's base URL">base URL</a>,
   when the method is invoked.</p>
@@ -1203,8 +1228,15 @@ interface <dfn id="window">Window</dfn> {
   agent could override the selection of the target browsing context to
   instead target a new tab.</p>
 
-  <p>Then, if <var title="">url</var> is not
-  "<code><a href="fetching-resources.html#about:blank">about:blank</a></code>", the user agent must
+  <p>If the method is not <a href="#allowed-to-show-a-pop-up">allowed to show a pop-up</a> and
+  applying <a href="#the-rules-for-choosing-a-browsing-context-given-a-browsing-context-name">the rules for choosing a browsing context given a
+  browsing context name</a> using the <var title="">target</var>
+  argument, would result in there not being a chosen browsing context,
+  then throw an <code><a href="infrastructure.html#invalidaccesserror">InvalidAccessError</a></code> exception and abort
+  these steps.</p>
+
+  <p>Otherwise, if <var title="">url</var> is not
+  "<code><a href="urls.html#about:blank">about:blank</a></code>", the user agent must
   <a href="history.html#navigate">navigate</a> the selected
   <a href="#browsing-context">browsing context</a> to the <a href="urls.html#absolute-url">absolute URL</a> (or
   error) obtained from <a href="urls.html#resolve-a-url" title="resolve a url">resolving</a>
@@ -1217,11 +1249,11 @@ interface <dfn id="window">Window</dfn> {
   browsing context</a>.</p>
 
   <p>If <var title="">url</var> <em>is</em>
-  "<code><a href="fetching-resources.html#about:blank">about:blank</a></code>", the user agent must instead <a href="webappapis.html#queue-a-task">queue
-  a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named <code title="event-load">load</code> at the the selected <a href="#browsing-context">browsing
-  context</a>'s <code><a href="#window">Window</a></code> object, but with its <code title="dom-event-target"><a href="infrastructure.html#dom-event-target">target</a></code> set to the the selected
+  "<code><a href="urls.html#about:blank">about:blank</a></code>", the user agent must instead <a href="webappapis.html#queue-a-task">queue
+  a task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> named <code title="event-load">load</code> at the selected <a href="#browsing-context">browsing
+  context</a>'s <code><a href="#window">Window</a></code> object, but with its <code title="dom-event-target"><a href="infrastructure.html#dom-event-target">target</a></code> set to the selected
   <a href="#browsing-context">browsing context</a>'s <code><a href="#window">Window</a></code> object's
-  <code><a href="infrastructure.html#document">Document</a></code> object (and the <code title="dom-event-currentTarget">currentTarget</code> set to the
+  <code><a href="dom.html#document">Document</a></code> object (and the <code title="dom-event-currentTarget">currentTarget</code> set to the
   <code><a href="#window">Window</a></code> object).</p>
 
   <p>The method must return the <code><a href="#windowproxy">WindowProxy</a></code> object of the
@@ -1251,7 +1283,7 @@ interface <dfn id="window">Window</dfn> {
   attempt to <a href="history.html#navigate">navigate</a> the <a href="#browsing-context">browsing context</a>
   and that attempt is not currently running the <a href="history.html#unload-a-document">unload a
   document</a> algorithm, cancel that <a href="history.html#navigate" title="navigate">navigation</a> and any associated instances of
-  the <a href="fetching-resources.html#fetch" title="fetch">fetch algorithm</a>. Otherwise, it must
+  the <a href="urls.html#fetch" title="fetch">fetch algorithm</a>. Otherwise, it must
   do nothing.</p>
 
   </div><h4 id="accessing-other-browsing-contexts"><span class="secno">5.2.3 </span>Accessing other browsing contexts</h4><dl class="domintro"><dt><var title="">window</var> . <code title="dom-length"><a href="#dom-length">length</a></code></dt>
@@ -1293,7 +1325,7 @@ interface <dfn id="window">Window</dfn> {
   property</dfn> <var title="">index</var> of a <code><a href="#window">Window</a></code>
   object, the user agent must return the <code><a href="#windowproxy">WindowProxy</a></code>
   object of the <var title="">index</var>th <a href="#child-browsing-context">child browsing
-  context</a> of the <code><a href="infrastructure.html#document">Document</a></code> that is nested through
+  context</a> of the <code><a href="dom.html#document">Document</a></code> that is nested through
   an element that is <a href="infrastructure.html#in-a-document" title="in a document">in the
   <code>Document</code></a>, sorted in the <a href="infrastructure.html#tree-order">tree order</a>
   of the elements nesting those <a href="#browsing-context" title="browsing&#10;  context">browsing contexts</a>.</p>
@@ -1311,28 +1343,29 @@ interface <dfn id="window">Window</dfn> {
 
   </dl><div class="impl">
 
-  <p>The <code><a href="#window">Window</a></code> interface <span title="support named&#10;  properties">supports named properties</span>. The <a href="infrastructure.html#supported-property-names">supported
+  <p>The <code><a href="#window">Window</a></code> interface <a href="infrastructure.html#support-named-properties" title="support named&#10;  properties">supports named properties</a>. The <a href="infrastructure.html#supported-property-names">supported
   property names</a> at any moment consist of:</p>
 
   <ul><li>the value of the <code title="">name</code> content attribute
-   for all <code><a href="text-level-semantics.html#the-a-element">a</a></code>, <code><a href="obsolete.html#the-applet-element">applet</a></code>, <code><a href="the-map-element.html#the-area-element">area</a></code>,
-   <code><a href="the-iframe-element.html#the-embed-element">embed</a></code>, <code><a href="forms.html#the-form-element">form</a></code>, <code><a href="obsolete.html#frame">frame</a></code>,
-   <code><a href="obsolete.html#frameset">frameset</a></code>, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <code><a href="embedded-content-1.html#the-img-element">img</a></code>, and
-   <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements in the <a href="#active-document">active document</a>
+   for all <code><a href="the-a-element.html#the-a-element">a</a></code>, <code><a href="obsolete.html#the-applet-element">applet</a></code>, <code><a href="the-area-element.html#the-area-element">area</a></code>,
+   <code><a href="the-embed-element.html#the-embed-element">embed</a></code>, <code><a href="the-form-element.html#the-form-element">form</a></code>, <code><a href="obsolete.html#frame">frame</a></code>,
+   <code><a href="obsolete.html#frameset">frameset</a></code>, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <code><a href="the-img-element.html#the-img-element">img</a></code>, and
+   <code><a href="the-object-element.html#the-object-element">object</a></code> elements in the <a href="#active-document">active document</a>
    that have a <code title="">name</code> content attribute, and</li>
 
-   <li>the value of the <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content
+   <li>the value of the <code title="attr-id"><a href="global-attributes.html#the-id-attribute">id</a></code> content
    attribute of any <a href="infrastructure.html#html-elements" title="HTML elements">HTML element</a> in
-   the <a href="#active-document">active document</a> with an <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content attribute.</li>
+   the <a href="#active-document">active document</a> with an <code title="attr-id"><a href="global-attributes.html#the-id-attribute">id</a></code> content attribute.</li>
 
   </ul><p class="critical">It is possible that this will change. Browser
-  vendors are considering limiting this behaviour to <a href="dom.html#quirks-mode">quirks
+  vendors are considering limiting this behaviour to <a href="infrastructure.html#quirks-mode">quirks
   mode</a>. <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=11960">Read
   more...</a></p>
 
-  <p>When <dfn id="dom-window-nameditem" title="dom-window-namedItem">the <code>Window</code>
-  object is indexed for property retrieval</dfn> using a name <var title="">name</var>, then the user agent must return the value
-  obtained using the following steps:</p>
+  <p>To <a href="infrastructure.html#determine-the-value-of-a-named-property">determine the value of a named property</a> <var title="">name</var> when <dfn id="dom-window-nameditem" title="dom-window-namedItem">the
+  <code>Window</code> object is indexed for property retrieval</dfn>,
+  the user agent must return the value obtained using the following
+  steps:</p>
 
   <ol><li>
 
@@ -1363,38 +1396,39 @@ interface <dfn id="window">Window</dfn> {
 
    <li>
 
-    <p>Otherwise return an <code><a href="common-dom-interfaces.html#htmlcollection">HTMLCollection</a></code> rooted at the
-    <code><a href="infrastructure.html#document">Document</a></code> node, whose filter matches only <a href="#dom-window-nameditem-filter" title="dom-window-namedItem-filter">named elements</a> with
+    <p>Otherwise return an <code><a href="infrastructure.html#htmlcollection">HTMLCollection</a></code> rooted at the
+    <code><a href="dom.html#document">Document</a></code> node, whose filter matches only <a href="#dom-window-nameditem-filter" title="dom-window-namedItem-filter">named elements</a> with
     the name <var title="">name</var>.</p> 
+
    </li>
 
   </ol><p><dfn id="dom-window-nameditem-filter" title="dom-window-nameditem-filter">Named elements</dfn>
   with the name <var title="">name</var>, for the purposes of the
   above algorithm, are those that are either:</p>
 
-  <ul><li><code><a href="text-level-semantics.html#the-a-element">a</a></code>, <code><a href="obsolete.html#the-applet-element">applet</a></code>, <code><a href="the-map-element.html#the-area-element">area</a></code>,
-   <code><a href="the-iframe-element.html#the-embed-element">embed</a></code>, <code><a href="forms.html#the-form-element">form</a></code>, <code><a href="obsolete.html#frame">frame</a></code>,
-   <code><a href="obsolete.html#frameset">frameset</a></code>, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <code><a href="embedded-content-1.html#the-img-element">img</a></code>, or
-   <code><a href="the-iframe-element.html#the-object-element">object</a></code> elements that have a <code title="attr-name">name</code> content attribute whose value is <var title="">name</var>, or</li>
+  <ul><li><code><a href="the-a-element.html#the-a-element">a</a></code>, <code><a href="obsolete.html#the-applet-element">applet</a></code>, <code><a href="the-area-element.html#the-area-element">area</a></code>,
+   <code><a href="the-embed-element.html#the-embed-element">embed</a></code>, <code><a href="the-form-element.html#the-form-element">form</a></code>, <code><a href="obsolete.html#frame">frame</a></code>,
+   <code><a href="obsolete.html#frameset">frameset</a></code>, <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code>, <code><a href="the-img-element.html#the-img-element">img</a></code>, or
+   <code><a href="the-object-element.html#the-object-element">object</a></code> elements that have a <code title="attr-name">name</code> content attribute whose value is <var title="">name</var>, or</li>
 
-   <li><a href="infrastructure.html#html-elements">HTML elements</a> that have an <code title="attr-id"><a href="elements.html#the-id-attribute">id</a></code> content attribute whose value is <var title="">name</var>.</li>
+   <li><a href="infrastructure.html#html-elements">HTML elements</a> that have an <code title="attr-id"><a href="global-attributes.html#the-id-attribute">id</a></code> content attribute whose value is <var title="">name</var>.</li>
 
   </ul></div><div class="impl">
 
   <h4 id="garbage-collection-and-browsing-contexts"><span class="secno">5.2.5 </span>Garbage collection and browsing contexts</h4>
 
   <p>A <a href="#browsing-context">browsing context</a> has a strong reference to each of
-  its <code><a href="infrastructure.html#document">Document</a></code>s and its <code><a href="#windowproxy">WindowProxy</a></code> object,
+  its <code><a href="dom.html#document">Document</a></code>s and its <code><a href="#windowproxy">WindowProxy</a></code> object,
   and the user agent itself has a strong reference to its <a href="#top-level-browsing-context" title="top-level browsing context">top-level browsing
   contexts</a>.</p>
 
-  <p>A <code><a href="infrastructure.html#document">Document</a></code> has a strong reference to its
+  <p>A <code><a href="dom.html#document">Document</a></code> has a strong reference to its
   <code><a href="#window">Window</a></code> object.</p>
 
   <p class="note">A <code><a href="#window">Window</a></code> object <a href="common-dom-interfaces.html#implied-strong-reference" title="implied&#10;  strong reference">has a strong reference</a> to its
-  <code><a href="infrastructure.html#document">Document</a></code> object through its <code title="dom-document"><a href="#dom-document">document</a></code> attribute.  Thus, references
+  <code><a href="dom.html#document">Document</a></code> object through its <code title="dom-document"><a href="#dom-document-0">document</a></code> attribute.  Thus, references
   from other scripts to either of those objects will keep both
-  alive. Similarly, both <code><a href="infrastructure.html#document">Document</a></code> and <code><a href="#window">Window</a></code>
+  alive. Similarly, both <code><a href="dom.html#document">Document</a></code> and <code><a href="#window">Window</a></code>
   objects have <a href="common-dom-interfaces.html#implied-strong-reference" title="implied strong reference">implied strong
   references</a> to the <code><a href="#windowproxy">WindowProxy</a></code> object.</p>
 
@@ -1402,37 +1436,41 @@ interface <dfn id="window">Window</dfn> {
   reference to its <a href="webappapis.html#script-s-browsing-context" title="script's browsing context">browsing
   context</a> and its <a href="webappapis.html#script-s-document" title="script's&#10;  document">document</a>.</p>
 
+  
   <p>When a <a href="#browsing-context">browsing context</a> is to <dfn id="discard-a-document">discard a
   <code>Document</code></dfn>, the user agent must run the following
   steps:</p>
 
-  <ol><li><p>Set the <code><a href="infrastructure.html#document">Document</a></code>'s <var title="concept-document-salvageable">salvageable</var> state to
+  <ol><li><p>Set the <code><a href="dom.html#document">Document</a></code>'s <var title="concept-document-salvageable"><a href="history.html#concept-document-salvageable">salvageable</a></var> state to
    false.</p></li>
 
    <li><p>Run any <a href="history.html#unloading-document-cleanup-steps">unloading document cleanup steps</a> for
-   the <code><a href="infrastructure.html#document">Document</a></code> that are defined by this specification
+   the <code><a href="dom.html#document">Document</a></code> that are defined by this specification
    and <a href="infrastructure.html#other-applicable-specifications">other applicable specifications</a>.</p></li>
 
+   <li><p><a href="history.html#abort-a-document" title="abort a document">Abort the
+   <code>Document</code></a>.</p></li>
+
    <li><p>Remove any <a href="webappapis.html#concept-task" title="concept-task">tasks</a>
-   associated with the <code><a href="infrastructure.html#document">Document</a></code> in any <a href="webappapis.html#task-source">task
+   associated with the <code><a href="dom.html#document">Document</a></code> in any <a href="webappapis.html#task-source">task
    source</a>, without running those tasks.</p></li>
 
    <li><p><a href="#a-browsing-context-is-discarded" title="a browsing context is discarded">Discard</a>
    all the <a href="#child-browsing-context" title="child browsing context">child browsing
-   contexts</a> of the <code><a href="infrastructure.html#document">Document</a></code>.</p></li>
+   contexts</a> of the <code><a href="dom.html#document">Document</a></code>.</p></li>
 
-   <li><p>Lose the strong reference from the <code><a href="infrastructure.html#document">Document</a></code>'s
+   <li><p>Lose the strong reference from the <code><a href="dom.html#document">Document</a></code>'s
    <a href="#browsing-context">browsing context</a> to the
-   <code><a href="infrastructure.html#document">Document</a></code>.</p></li>
+   <code><a href="dom.html#document">Document</a></code>.</p></li>
 
-  </ol><p class="note">Whenever a <code><a href="infrastructure.html#document">Document</a></code> object is <a href="#discard-a-document" title="discard a Document">discarded</a>, it is also removed from
-  the list of <span>the worker's <code><a href="infrastructure.html#document">Document</a></code>s</span> of each
-  worker whose list contains that <code><a href="infrastructure.html#document">Document</a></code>.</p>
+  </ol><p class="note">Whenever a <code><a href="dom.html#document">Document</a></code> object is <a href="#discard-a-document" title="discard a Document">discarded</a>, it is also removed from
+  the list of <span>the worker's <code><a href="dom.html#document">Document</a></code>s</span> of each
+  worker whose list contains that <code><a href="dom.html#document">Document</a></code>.</p>
 
   <p>When <dfn id="a-browsing-context-is-discarded">a <em><span>browsing context</span></em> is
   discarded</dfn>, the strong reference from the user agent itself to
   the <a href="#browsing-context">browsing context</a> must be severed, and all the
-  <code><a href="infrastructure.html#document">Document</a></code> objects for all the entries in the
+  <code><a href="dom.html#document">Document</a></code> objects for all the entries in the
   <a href="#browsing-context">browsing context</a>'s session history must be <a href="#discard-a-document" title="discard a document">discarded</a> as well.</p>
 
   <p>User agents may <a href="#a-browsing-context-is-discarded" title="a browsing context is&#10;  discarded">discard</a> <a href="#top-level-browsing-context" title="top-level browsing&#10;  context">top-level browsing contexts</a> at any time (typically,
@@ -1486,7 +1524,7 @@ interface <dfn id="window">Window</dfn> {
   setting, the new value must be discarded.</p>
 
   <p>The following <code><a href="#barprop">BarProp</a></code> objects exist for each
-  <code><a href="infrastructure.html#document">Document</a></code> object in a <a href="#browsing-context">browsing
+  <code><a href="dom.html#document">Document</a></code> object in a <a href="#browsing-context">browsing
   context</a>. Some of the user interface elements represented by
   these objects might have no equivalent in some user agents; for
   those user agents, except when otherwise specified, the object must
@@ -1557,6 +1595,7 @@ interface <dfn id="window">Window</dfn> {
   object</a>.</p>
 
 
+
   <hr/><p>For historical reasons, the <dfn id="dom-window-status" title="dom-window-status"><code>status</code></dfn> attribute on the
   <code><a href="#window">Window</a></code> object must return an empty string on getting,
   and do nothing on setting.</p>
@@ -1579,7 +1618,7 @@ interface <dfn id="window">Window</dfn> {
   <p class="note">The <code><a href="#windowproxy">WindowProxy</a></code> object allows scripts
   to act as if each <a href="#browsing-context">browsing context</a> had a single
   <code><a href="#window">Window</a></code> object, while still keeping separate
-  <code><a href="#window">Window</a></code> objects for each <code><a href="infrastructure.html#document">Document</a></code>.</p>
+  <code><a href="#window">Window</a></code> objects for each <code><a href="dom.html#document">Document</a></code>.</p>
 
   <div class="example">
 
