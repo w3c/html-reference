@@ -321,9 +321,9 @@
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5496.</p>
 
-   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-13-january-2012">Editor's Draft 13 January 2012</h2>
    </div><nav class="prev_next"><a href="system-state-and-capabilities.html">&#x2190; 6.5 System state and capabilities</a> &#x2013;
    <a href="index.html#contents">Table of contents</a> &#x2013;
    <a href="editing-apis.html">7.5.4 Editing APIs &#x2192;</a>
@@ -333,17 +333,12 @@
     <ol><li><a href="editing.html#introduction-6"><span class="secno">7.4.1 </span>Introduction</a></li><li><a href="editing.html#the-accesskey-attribute"><span class="secno">7.4.2 </span>The <code>accesskey</code> attribute</a></li><li><a href="editing.html#processing-model-3"><span class="secno">7.4.3 </span>Processing model</a></li></ol></li><li><a href="editing.html#editing-0"><span class="secno">7.5 </span>Editing</a>
     <ol><li><a href="editing.html#contenteditable"><span class="secno">7.5.1 </span>Making document regions editable: The <code title="attr-contenteditable">contenteditable</code> content
   attribute</a></li><li><a href="editing.html#making-entire-documents-editable:-the-designmode-idl-attribute"><span class="secno">7.5.2 </span>Making entire documents editable: The <code title="dom-document-designMode">designMode</code> IDL attribute</a></li><li><a href="editing.html#best-practices-for-in-page-editors"><span class="secno">7.5.3 </span>Best practices for in-page editors</a></li></ol></li></ol></li></ol></nav><h2 id="editing"><span class="secno">7 </span><dfn>User interaction</dfn></h2><h3 id="the-hidden-attribute"><span class="secno">7.1 </span>The <dfn title="attr-hidden"><code>hidden</code></dfn> attribute</h3><p>All <a href="infrastructure.html#html-elements">HTML elements</a> may have the <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> content attribute set. The <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> attribute is a <a href="common-microsyntaxes.html#boolean-attribute">boolean
-  attribute</a>.
-
-
-  When specified on an element, it indicates that the element is not
-  yet, or is no longer, relevant.
-
-
-
-  <span class="impl">User agents should not render elements that have
-  the <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> attribute
-  specified.</span></p><div class="example">
+  attribute</a>. When specified on an element, it indicates that
+  the element is not yet, or is no longer, directly relevant to the
+  page's current state, or that it is being used to declare content to
+  be reused by other parts of the page as opposed to being directly
+  accessed by the user. <span class="impl">User agents should not
+  render elements that have the <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> attribute specified.</span></p><div class="example">
 
    <p>In the following skeletal example, the attribute is used to hide
    the Web game's main screen until the user logs in:</p>
@@ -375,22 +370,28 @@
   controls in one big page with a scrollbar. It is similarly incorrect
   to use this attribute to hide content just from one presentation
   &#x2014; if something is marked <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code>, it is hidden from all
-  presentations, including, for instance, screen readers.</p><p>Elements that are not <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code>
-  should not link to or refer to elements that are <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code>.</p><div class="example">
+  presentations, including, for instance, screen readers.</p><p>Elements that are not themselves <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> must not <a href="links.html#hyperlink">hyperlink</a> to
+  elements that are <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code>. The <code title="">for</code> attributes of <code><a href="the-label-element.html#the-label-element">label</a></code> and
+  <code><a href="the-output-element.html#the-output-element">output</a></code> elements that are not themselves <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> must similarly not refer to
+  elements that are <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code>. In both
+  cases, such references would cause user confusion.</p><p>Elements and scripts may, however, refer to elements that are
+  <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> in other contexts.</p><div class="example">
 
    <p>For example, it would be incorrect to use the <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code> attribute to link to a
    section marked with the <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code>
    attribute. If the content is not applicable or relevant, then there
    is no reason to link to it.</p>
 
+   <p>It would be fine, however, to use the ARIA <code title="attr-aria-describedby">aria-describedby</code> attribute to
+   refer to descriptions that are themselves <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code>. While hiding the descriptions
+   implies that they are not useful alone, they could be written in
+   such a way that they are useful in the specific context of being
+   referenced from the images that they describe.</p>
 
-   <p>It would similarly be incorrect to use the ARIA <code title="attr-aria-describedby">aria-describedby</code> attribute to
-   refer to descriptions that are themselves <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code>. Hiding a section means that it
-   is not applicable or relevant to anyone at the current time, so
-   clearly it cannot be a valid description of content the user can
-   interact with.</p>
-
-
+   <p>Similarly, a <code><a href="the-canvas-element.html#the-canvas-element">canvas</a></code> element with the <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> attribute could be used by a
+   scripted graphics engine as an off-screen buffer, and a form
+   control could refer to a hidden <code><a href="the-form-element.html#the-form-element">form</a></code> element using its
+   <code title="attr-fae-form"><a href="association-of-controls-and-forms.html#attr-fae-form">form</a></code> attribute.</p>
 
   </div><p>Elements in a section hidden by the <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> attribute are still active,
   e.g. scripts and form controls in such sections still execute

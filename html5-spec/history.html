@@ -321,9 +321,9 @@
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5496.</p>
 
-   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-13-january-2012">Editor's Draft 13 January 2012</h2>
    </div><nav class="prev_next"><a href="origin-0.html">&#x2190; 5.3 Origin</a> &#x2013;
    <a href="index.html#contents">Table of contents</a> &#x2013;
    <a href="offline.html">5.6 Offline Web applications &#x2192;</a>
@@ -1912,13 +1912,12 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   session history with the new page</a> algorithm.</p>
 
   <hr/><p>When the user agent is required to <dfn id="scroll-to-the-fragment-identifier">scroll to the fragment
-  identifier</dfn>, it must either change the scrolling position of
-  the document using the <a href="infrastructure.html#scroll-an-element-into-view">scroll an element into view</a>
-  algorithm defined in the CSSOM View specification, with the <var title="">align to top flag</var> set, or perform some other action,
-  such that <a href="#the-indicated-part-of-the-document">the indicated part of the document</a> is brought
-  to the user's attention. If there is no indicated part, or if the
-  indicated part is not <a href="rendering.html#being-rendered">being rendered</a>, then the user
-  agent must not scroll anywhere. <a href="references.html#refsCSSOMVIEW">[CSSOMVIEW]</a></p>
+  identifier</dfn>, it must change the scrolling position of the
+  document using the <a href="infrastructure.html#scroll-an-element-into-view">scroll an element into view</a>
+  algorithm defined in the CSSOM View specification, or perform some
+  other action, such that <a href="#the-indicated-part-of-the-document">the indicated part of the
+  document</a> is brought to the user's attention. If there is no
+  indicated part, then the user agent must not scroll anywhere. <a href="references.html#refsCSSOMVIEW">[CSSOMVIEW]</a></p>
 
   <p><dfn id="the-indicated-part-of-the-document">The indicated part of the document</dfn> is the one that the
   fragment identifier, if any, identifies. The semantics of the
@@ -2247,27 +2246,17 @@ dictionary <dfn id="pagetransitioneventinit">PageTransitionEventInit</dfn> : <a 
   </div><h4 id="unloading-documents"><span class="secno">5.5.11 </span>Unloading documents</h4><div class="impl">
 
   <p>A <code><a href="dom.html#document">Document</a></code> has a <dfn id="concept-document-salvageable" title="concept-document-salvageable"><var>salvageable</var></dfn>
-  state, which must initially be true.</p>
-
-  <p><a href="webappapis.html#event-loop" title="event loop">Event loops</a> have a
-  <dfn id="termination-nesting-level">termination nesting level</dfn> counter, which must initially
-  be zero.</p>
+  state, which is initially true.</p>
 
   <p>When a user agent is to <dfn id="prompt-to-unload-a-document">prompt to unload a document</dfn>,
   it must run the following steps.</p>
 
-  <ol><li><p>Increase the <a href="webappapis.html#event-loop">event loop</a>'s <a href="#termination-nesting-level">termination
-   nesting level</a> by one.</p></li>
-
-   <li><p>Let <var title="">event</var> be a new
+  <ol><li><p>Let <var title="">event</var> be a new
    <code><a href="#beforeunloadevent">BeforeUnloadEvent</a></code> event object with the name <code title="event-beforeunload">beforeunload</code>, which does not
    bubble but is cancelable.</p></li>
 
    <li><p><i>Dispatch</i>: Dispatch <var title="">event</var> at the
    <code><a href="dom.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code> object.</p></li>
-
-   <li><p>Decrease the <a href="webappapis.html#event-loop">event loop</a>'s <a href="#termination-nesting-level">termination
-   nesting level</a> by one.</p></li>
 
    <li><p>Release the <a href="webappapis.html#storage-mutex">storage mutex</a>.</p></li>
 
@@ -2330,10 +2319,7 @@ dictionary <dfn id="pagetransitioneventinit">PageTransitionEventInit</dfn> : <a 
   whether the <code><a href="dom.html#document">Document</a></code> object is going to be
   re-used. (This is set by the <code title="dom-document-open"><a href="dynamic-markup-insertion.html#dom-document-open">document.open()</a></code> method.)</p>
 
-  <ol><li><p>Increase the <a href="webappapis.html#event-loop">event loop</a>'s <a href="#termination-nesting-level">termination
-   nesting level</a> by one.</p></li>
-
-   <li><p>Fire a <code title="event-pagehide"><a href="#event-pagehide">pagehide</a></code> event at
+  <ol><li><p>Fire a <code title="event-pagehide"><a href="#event-pagehide">pagehide</a></code> event at
    the <code><a href="browsers.html#window">Window</a></code> object of the <code><a href="dom.html#document">Document</a></code>, but
    with its <code title="dom-event-target"><a href="infrastructure.html#dom-event-target">target</a></code> set to the
    <code><a href="dom.html#document">Document</a></code> object (and the <code title="dom-event-currentTarget">currentTarget</code> set to the
@@ -2345,9 +2331,6 @@ dictionary <dfn id="pagetransitioneventinit">PageTransitionEventInit</dfn> : <a 
    <li><p><i>Unload event</i>: <a href="webappapis.html#fire-a-simple-event">Fire a simple event</a> named
    <code title="event-unload">unload</code> at the
    <code><a href="dom.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code> object.</p></li>
-
-   <li><p>Decrease the <a href="webappapis.html#event-loop">event loop</a>'s <a href="#termination-nesting-level">termination
-   nesting level</a> by one.</p></li>
 
    <li><p>Release the <a href="webappapis.html#storage-mutex">storage mutex</a>.</p></li>
 
@@ -2420,7 +2403,8 @@ dictionary <dfn id="pagetransitioneventinit">PageTransitionEventInit</dfn> : <a 
 
    <li><p>If the <code><a href="dom.html#document">Document</a></code>'s <var title="concept-document-salvageable"><a href="#concept-document-salvageable">salvageable</a></var> state is
    false, empty the <code><a href="dom.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code>'s
-   <a href="timers.html#list-of-active-timers">list of active timers</a>.</p></li>
+   <a href="timers.html#list-of-active-timeouts">list of active timeouts</a> and its <a href="timers.html#list-of-active-intervals">list of active
+   intervals</a>.</p></li>
 
   </ol><h5 id="event-definition"><span class="secno">5.5.11.1 </span>Event definition</h5>
 

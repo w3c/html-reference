@@ -321,9 +321,9 @@
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5496.</p>
 
-   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-13-january-2012">Editor's Draft 13 January 2012</h2>
    </div><nav class="prev_next"><a href="history.html">&#x2190; 5.4 Session history and navigation</a> &#x2013;
    <a href="index.html#contents">Table of contents</a> &#x2013;
    <a href="webappapis.html">6 Web application APIs &#x2192;</a>
@@ -504,9 +504,8 @@ clock.js</pre><p>With a small change to the HTML file, the manifest (served as
     namespaces</dfn>.</p>
 
     <p class="note">These are used as prefix match patterns, and
-    declare URLs for which the user agent will ignore the application
-    cache, instead fetching them normally (i.e. from the network or
-    locale HTTP cache as appropriate).</p>
+    declare URLs that the user agent will never load from the cache
+    but will instead always attempt to obtain from the network.</p>
 
    </li>
 
@@ -1289,13 +1288,13 @@ NETWORK:
      entries</a>, create a <a href="webappapis.html#concept-task" title="concept-task">task</a>
      to <a href="webappapis.html#fire-a-simple-event">fire a simple event</a> that is cancelable named
      <code title="event-appcache-error"><a href="#event-appcache-error">error</a></code> (not <code title="event-appcache-obsolete"><a href="#event-appcache-obsolete">obsolete</a></code>!) at the
-     <code><a href="#applicationcache">ApplicationCache</a></code> singleton of the
-     <code><a href="dom.html#document">Document</a></code> for this entry, if there still is one, and
-     append it to <var title="">task list</var>. The default action of
-     this event must be, if the user agent <a href="#shows-caching-progress">shows caching
-     progress</a>, the display of some sort of user interface
-     indicating to the user that the user agent failed to save the
-     application for offline use.</p></li>
+     <code><a href="#applicationcache">ApplicationCache</a></code> singleton of the <a href="#cache-host">cache
+     host</a> the <code><a href="dom.html#document">Document</a></code> for this entry, if there
+     still is one, and append it to <var title="">task list</var>. The
+     default action of this event must be, if the user agent
+     <a href="#shows-caching-progress">shows caching progress</a>, the display of some sort of
+     user interface indicating to the user that the user agent failed
+     to save the application for offline use.</p></li>
 
      <li><p>If <var title="">cache group</var> has an
      <a href="#application-cache">application cache</a> whose <a href="#concept-appcache-completeness" title="concept-appcache-completeness">completeness flag</a> is
@@ -1321,7 +1320,10 @@ NETWORK:
     there is a DNS error, or the connection times out, or the user
     cancels the download, or the parser for manifests fails when
     checking the magic signature), or if the server returned a
-    redirect, then run the <a href="#cache-failure-steps">cache failure steps</a>. <a href="references.html#refsHTTP">[HTTP]</a></p>
+    redirect, or if the resource is labeled with a <a href="infrastructure.html#mime-type">MIME
+    type</a> other than <code><a href="iana.html#text-cache-manifest">text/cache-manifest</a></code> or has
+    parameters that do not match the conditions listed earlier, then
+    run the <a href="#cache-failure-steps">cache failure steps</a>. <a href="references.html#refsHTTP">[HTTP]</a></p>
 
    </li>
 
@@ -1352,13 +1354,13 @@ NETWORK:
       out, or the user cancels the download), or if the resource is
       labeled with the "no-store" cache directive, then create a <a href="webappapis.html#concept-task" title="concept-task">task</a> to <a href="webappapis.html#fire-a-simple-event">fire a simple
       event</a> that is cancelable named <code title="event-appcache-error"><a href="#event-appcache-error">error</a></code> at the
-      <code><a href="#applicationcache">ApplicationCache</a></code> singleton of the
-      <code><a href="dom.html#document">Document</a></code> for this entry, if there still is one, and
-      append it to <var title="">task list</var>. The default action
-      of this event must be, if the user agent <a href="#shows-caching-progress">shows caching
-      progress</a>, the display of some sort of user interface
-      indicating to the user that the user agent failed to save the
-      application for offline use.</p>
+      <code><a href="#applicationcache">ApplicationCache</a></code> singleton of the <a href="#cache-host">cache
+      host</a> the <code><a href="dom.html#document">Document</a></code> for this entry, if there
+      still is one, and append it to <var title="">task list</var>.
+      The default action of this event must be, if the user agent
+      <a href="#shows-caching-progress">shows caching progress</a>, the display of some sort of
+      user interface indicating to the user that the user agent failed
+      to save the application for offline use.</p>
 
       <p>Otherwise, associate the <code><a href="dom.html#document">Document</a></code> for this entry
       with <var title="">cache</var>; store the resource for this
@@ -2252,7 +2254,7 @@ NETWORK:
   <a href="#application-cache">application cache</a> with which the
   <code><a href="#applicationcache">ApplicationCache</a></code> object's <a href="#cache-host">cache host</a> is
   associated, if any. If there is no such <a href="#application-cache">application
-  cache</a>, or it does not have a current <a href="#application-cache-download-process">application cache
+  cache</a>, or if does not have a current <a href="#application-cache-download-process">application cache
   download process</a>, then do nothing.</p>
 
   <p>If the <dfn id="dom-appcache-swapcache" title="dom-appcache-swapCache"><code>swapCache()</code></dfn> method

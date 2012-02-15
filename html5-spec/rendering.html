@@ -322,7 +322,7 @@
 
    <h1>HTML5</h1>
    <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2>
-   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-13-january-2012">Editor's Draft 13 January 2012</h2>
    </div><nav class="prev_next"><a href="the-xhtml-syntax.html">&#x2190; 9 The XHTML syntax</a> &#x2013;
    <a href="index.html#contents">Table of contents</a> &#x2013;
    <a href="obsolete.html">11 Obsolete features &#x2192;</a>
@@ -592,7 +592,7 @@ html, body { display: block; }</pre>
 
 address, blockquote, center, div, figure, figcaption, footer, form,
 header, hr, legend, listing, p, plaintext, pre, summary, xmp {
-  display: block;
+  display: block; unicode-bidi: isolate;
 }
 
 blockquote, figure, listing, p, plaintext, pre, xmp {
@@ -651,11 +651,6 @@ form { margin-bottom: 1em; }</pre>
 
   <h4 id="phrasing-content-1"><span class="secno">10.3.4 </span>Phrasing content</h4>
 
-  <p class="critical">The rule for <code><a href="the-b-element.html#the-b-element">b</a></code> and
-  <code><a href="the-strong-element.html#the-strong-element">strong</a></code> elements below might change (to 'bolder' instead
-  of 'bold'). See <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=12154">W3C bug
-  12154</a>. Implementation feedback is desired.</p>
-
   <pre class="css">@namespace url(http://www.w3.org/1999/xhtml);
 
 cite, dfn, em, i, var { font-style: italic; }
@@ -711,6 +706,10 @@ br[clear=all i], br[clear=both i] { clear: both; }</pre>
   <p>User agents that do not support correct ruby rendering are
   expected to render parentheses around the text of <code><a href="the-rt-element.html#the-rt-element">rt</a></code>
   elements in the absence of <code><a href="the-rp-element.html#the-rp-element">rp</a></code> elements.</p>
+
+  <p class="critical">It is highly likely that the style rules above
+  will be dramatically expanded in the near future to include
+  suggested quote style rules for a variety of languages.</p>
 
   <hr/><p>User agents are expected to
   support the 'clear' property on inline elements (in order to render
@@ -826,26 +825,7 @@ br[clear=all i], br[clear=both i] { clear: both; }</pre>
 
 :dir(ltr) { direction: ltr; }
 :dir(rtl) { direction: rtl; }
-
-address, blockquote, center, div, figure, figcaption, footer, form,
-header, hr, legend, listing, p, plaintext, pre, summary, xmp, article,
-aside, h1, h2, h3, h4, h5, h6, hgroup, nav, section, table, caption,
-colgroup, col, thead, tbody, tfoot, tr, td, th, dir, dd, dl, dt, menu,
-ol, ul, li {
-  unicode-bidi: isolate;
-}
-
-[dir]:not(address):not(blockquote):not(center):not(div):not(figure
-):not(figcaption):not(footer):not(form):not(header):not(hr):not(legend
-):not(listing):not(p):not(plaintext):not(pre):not(summary):not(xmp
-):not(article):not(aside):not(h1):not(h2):not(h3):not(h4):not(h5
-):not(h6):not(hgroup):not(nav):not(section):not(table):not(caption
-):not(colgroup):not(col):not(thead):not(tbody):not(tfoot):not(tr
-):not(td):not(th):not(dir):not(dd):not(dl):not(dt):not(menu):not(ol
-):not(ul):not(li) {
-  unicode-bidi: embed;
-}
-
+[dir] { unicode-bidi: embed; }
 bdi, bdi[dir], output, output[dir], [dir=auto i] { unicode-bidi: isolate; }
 bdo, bdo[dir] { unicode-bidi: bidi-override; }
 bdo[dir=auto i] { unicode-bidi: bidi-override isolate; }
@@ -866,147 +846,176 @@ textarea[dir=auto i], pre[dir=auto i] { unicode-bidi: plaintext; }</pre>
 
   <pre class="css">@namespace url(http://www.w3.org/1999/xhtml);
 
-:root                                                         { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(af),       :not(:lang(af)) &gt; :lang(af)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(agq),      :not(:lang(agq)) &gt; :lang(agq)           { quotes: '\201e' '\201d' '\201a' '\2019' } /* &#x201E; &#x201D; &#x201A; &#x2019; */
-:root:lang(ak),       :not(:lang(ak)) &gt; :lang(ak)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(am),       :not(:lang(am)) &gt; :lang(am)             { quotes: '\00ab' '\00bb' '\2039' '\203a' } /* &#xAB; &#xBB; &#x2039; &#x203A; */
-:root:lang(ar),       :not(:lang(ar)) &gt; :lang(ar)             { quotes: '\201d' '\201c' '\2019' '\2018' } /* &#x201D; &#x201C; &#x2019; &#x2018; */
-:root:lang(asa),      :not(:lang(asa)) &gt; :lang(asa)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(az-Cyrl),  :not(:lang(az-Cyrl)) &gt; :lang(az-Cyrl)   { quotes: '\00ab' '\00bb' '\2039' '\203a' } /* &#xAB; &#xBB; &#x2039; &#x203A; */
-:root:lang(bas),      :not(:lang(bas)) &gt; :lang(bas)           { quotes: '\00ab' '\00bb' '\201e' '\201c' } /* &#xAB; &#xBB; &#x201E; &#x201C; */
-:root:lang(bem),      :not(:lang(bem)) &gt; :lang(bem)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(bez),      :not(:lang(bez)) &gt; :lang(bez)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(bg),       :not(:lang(bg)) &gt; :lang(bg)             { quotes: '\201e' '\201c' '\201a' '\2018' } /* &#x201E; &#x201C; &#x201A; &#x2018; */
-:root:lang(bm),       :not(:lang(bm)) &gt; :lang(bm)             { quotes: '\00ab' '\00bb' '\201c' '\201d' } /* &#xAB; &#xBB; &#x201C; &#x201D; */
-:root:lang(bn),       :not(:lang(bn)) &gt; :lang(bn)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(br),       :not(:lang(br)) &gt; :lang(br)             { quotes: '\00ab' '\00bb' '\2039' '\203a' } /* &#xAB; &#xBB; &#x2039; &#x203A; */
-:root:lang(brx),      :not(:lang(brx)) &gt; :lang(brx)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(ca),       :not(:lang(ca)) &gt; :lang(ca)             { quotes: '\201c' '\201d' '\00ab' '\00bb' } /* &#x201C; &#x201D; &#xAB; &#xBB; */
-:root:lang(cgg),      :not(:lang(cgg)) &gt; :lang(cgg)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(chr),      :not(:lang(chr)) &gt; :lang(chr)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(cs),       :not(:lang(cs)) &gt; :lang(cs)             { quotes: '\201e' '\201c' '\201a' '\2018' } /* &#x201E; &#x201C; &#x201A; &#x2018; */
-:root:lang(da),       :not(:lang(da)) &gt; :lang(da)             { quotes: '\00bb' '\00ab' '\203a' '\2039' } /* &#xBB; &#xAB; &#x203A; &#x2039; */
-:root:lang(dav),      :not(:lang(dav)) &gt; :lang(dav)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(de),       :not(:lang(de)) &gt; :lang(de)             { quotes: '\201e' '\201c' '\201a' '\2018' } /* &#x201E; &#x201C; &#x201A; &#x2018; */
-:root:lang(de-CH),    :not(:lang(de-CH)) &gt; :lang(de-CH)       { quotes: '\00ab' '\00bb' '\2039' '\203a' } /* &#xAB; &#xBB; &#x2039; &#x203A; */
-:root:lang(dje),      :not(:lang(dje)) &gt; :lang(dje)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(dua),      :not(:lang(dua)) &gt; :lang(dua)           { quotes: '\00ab' '\00bb' '\2018' '\2019' } /* &#xAB; &#xBB; &#x2018; &#x2019; */
-:root:lang(dyo),      :not(:lang(dyo)) &gt; :lang(dyo)           { quotes: '\00ab' '\00bb' '\201c' '\201d' } /* &#xAB; &#xBB; &#x201C; &#x201D; */
-:root:lang(ebu),      :not(:lang(ebu)) &gt; :lang(ebu)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(ee),       :not(:lang(ee)) &gt; :lang(ee)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(el),       :not(:lang(el)) &gt; :lang(el)             { quotes: '\00ab' '\00bb' '\201c' '\201d' } /* &#xAB; &#xBB; &#x201C; &#x201D; */
-:root:lang(el-POLYTON), :not(:lang(el-POLYTON)) &gt; :lang(el-POLYTON) { quotes: '\00ab' '\00bb' '\201b' '\201d' } /* &#xAB; &#xBB; &#x201B; &#x201D; */
-:root:lang(en),       :not(:lang(en)) &gt; :lang(en)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(en-GB),    :not(:lang(en-GB)) &gt; :lang(en-GB)       { quotes: '\2018' '\2019' '\201c' '\201d' } /* &#x2018; &#x2019; &#x201C; &#x201D; */
-:root:lang(es),       :not(:lang(es)) &gt; :lang(es)             { quotes: '\201c' '\201d' '\00ab' '\00bb' } /* &#x201C; &#x201D; &#xAB; &#xBB; */
-:root:lang(et),       :not(:lang(et)) &gt; :lang(et)             { quotes: '\201e' '\201c' '\201a' '\2018' } /* &#x201E; &#x201C; &#x201A; &#x2018; */
-:root:lang(eu),       :not(:lang(eu)) &gt; :lang(eu)             { quotes: '\201c' '\201d' '\00ab' '\00bb' } /* &#x201C; &#x201D; &#xAB; &#xBB; */
-:root:lang(ewo),      :not(:lang(ewo)) &gt; :lang(ewo)           { quotes: '\00ab' '\00bb' '\201c' '\201d' } /* &#xAB; &#xBB; &#x201C; &#x201D; */
-:root:lang(fa),       :not(:lang(fa)) &gt; :lang(fa)             { quotes: '\00ab' '\00bb' '\2039' '\203a' } /* &#xAB; &#xBB; &#x2039; &#x203A; */
-:root:lang(ff),       :not(:lang(ff)) &gt; :lang(ff)             { quotes: '\201e' '\201d' '\201a' '\2019' } /* &#x201E; &#x201D; &#x201A; &#x2019; */
-:root:lang(fi),       :not(:lang(fi)) &gt; :lang(fi)             { quotes: '\201d' '\201d' '\2019' '\2019' } /* &#x201D; &#x201D; &#x2019; &#x2019; */
-:root:lang(fr),       :not(:lang(fr)) &gt; :lang(fr)             { quotes: '\201c' '\201d' '\00ab' '\00bb' } /* &#x201C; &#x201D; &#xAB; &#xBB; */
-:root:lang(fr-CA),    :not(:lang(fr-CA)) &gt; :lang(fr-CA)       { quotes: '\00ab' '\00bb' '\2039' '\203a' } /* &#xAB; &#xBB; &#x2039; &#x203A; */
-:root:lang(fr-CH),    :not(:lang(fr-CH)) &gt; :lang(fr-CH)       { quotes: '\00ab' '\00bb' '\2039' '\203a' } /* &#xAB; &#xBB; &#x2039; &#x203A; */
-:root:lang(gsw),      :not(:lang(gsw)) &gt; :lang(gsw)           { quotes: '\00ab' '\00bb' '\2039' '\203a' } /* &#xAB; &#xBB; &#x2039; &#x203A; */
-:root:lang(gu),       :not(:lang(gu)) &gt; :lang(gu)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(guz),      :not(:lang(guz)) &gt; :lang(guz)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(ha),       :not(:lang(ha)) &gt; :lang(ha)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(he),       :not(:lang(he)) &gt; :lang(he)             { quotes: '\201c' '\201d' '\0027' '\0027' } /* &#x201C; &#x201D; ' ' */
-:root:lang(hi),       :not(:lang(hi)) &gt; :lang(hi)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(hr),       :not(:lang(hr)) &gt; :lang(hr)             { quotes: '\201e' '\201c' '\201a' '\2018' } /* &#x201E; &#x201C; &#x201A; &#x2018; */
-:root:lang(hu),       :not(:lang(hu)) &gt; :lang(hu)             { quotes: '\201e' '\201d' '\00bb' '\00ab' } /* &#x201E; &#x201D; &#xBB; &#xAB; */
-:root:lang(id),       :not(:lang(id)) &gt; :lang(id)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(ig),       :not(:lang(ig)) &gt; :lang(ig)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(it),       :not(:lang(it)) &gt; :lang(it)             { quotes: '\00ab' '\00bb' '\201c' '\201d' } /* &#xAB; &#xBB; &#x201C; &#x201D; */
-:root:lang(ja),       :not(:lang(ja)) &gt; :lang(ja)             { quotes: '\300c' '\300d' '\300e' '\300f' } /* &#x300C; &#x300D; &#x300E; &#x300F; */
-:root:lang(jmc),      :not(:lang(jmc)) &gt; :lang(jmc)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(kab),      :not(:lang(kab)) &gt; :lang(kab)           { quotes: '\00ab' '\00bb' '\201c' '\201d' } /* &#xAB; &#xBB; &#x201C; &#x201D; */
-:root:lang(kam),      :not(:lang(kam)) &gt; :lang(kam)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(kde),      :not(:lang(kde)) &gt; :lang(kde)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(kea),      :not(:lang(kea)) &gt; :lang(kea)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(khq),      :not(:lang(khq)) &gt; :lang(khq)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(ki),       :not(:lang(ki)) &gt; :lang(ki)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(kln),      :not(:lang(kln)) &gt; :lang(kln)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(kn),       :not(:lang(kn)) &gt; :lang(kn)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(ko),       :not(:lang(ko)) &gt; :lang(ko)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(ksb),      :not(:lang(ksb)) &gt; :lang(ksb)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(ksf),      :not(:lang(ksf)) &gt; :lang(ksf)           { quotes: '\00ab' '\00bb' '\2018' '\2019' } /* &#xAB; &#xBB; &#x2018; &#x2019; */
-:root:lang(lag),      :not(:lang(lag)) &gt; :lang(lag)           { quotes: '\201d' '\201d' '\2019' '\2019' } /* &#x201D; &#x201D; &#x2019; &#x2019; */
-:root:lang(lg),       :not(:lang(lg)) &gt; :lang(lg)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(ln),       :not(:lang(ln)) &gt; :lang(ln)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(lt),       :not(:lang(lt)) &gt; :lang(lt)             { quotes: '\201e' '\201c' '\201a' '\2018' } /* &#x201E; &#x201C; &#x201A; &#x2018; */
-:root:lang(lu),       :not(:lang(lu)) &gt; :lang(lu)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(luo),      :not(:lang(luo)) &gt; :lang(luo)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(luy),      :not(:lang(luy)) &gt; :lang(luy)           { quotes: '\201e' '\201c' '\201a' '\2018' } /* &#x201E; &#x201C; &#x201A; &#x2018; */
-:root:lang(lv),       :not(:lang(lv)) &gt; :lang(lv)             { quotes: '\00ab' '\00bb' '\201e' '\201c' } /* &#xAB; &#xBB; &#x201E; &#x201C; */
-:root:lang(mas),      :not(:lang(mas)) &gt; :lang(mas)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(mer),      :not(:lang(mer)) &gt; :lang(mer)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(mfe),      :not(:lang(mfe)) &gt; :lang(mfe)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(mg),       :not(:lang(mg)) &gt; :lang(mg)             { quotes: '\00ab' '\00bb' '\201c' '\201d' } /* &#xAB; &#xBB; &#x201C; &#x201D; */
-:root:lang(mk),       :not(:lang(mk)) &gt; :lang(mk)             { quotes: '\201e' '\201c' '\201a' '\2018' } /* &#x201E; &#x201C; &#x201A; &#x2018; */
-:root:lang(ml),       :not(:lang(ml)) &gt; :lang(ml)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(mr),       :not(:lang(mr)) &gt; :lang(mr)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(ms),       :not(:lang(ms)) &gt; :lang(ms)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(mua),      :not(:lang(mua)) &gt; :lang(mua)           { quotes: '\00ab' '\00bb' '\201c' '\201d' } /* &#xAB; &#xBB; &#x201C; &#x201D; */
-:root:lang(my),       :not(:lang(my)) &gt; :lang(my)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(naq),      :not(:lang(naq)) &gt; :lang(naq)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(nb),       :not(:lang(nb)) &gt; :lang(nb)             { quotes: '\00ab' '\00bb' '\2018' '\2019' } /* &#xAB; &#xBB; &#x2018; &#x2019; */
-:root:lang(nd),       :not(:lang(nd)) &gt; :lang(nd)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(nl),       :not(:lang(nl)) &gt; :lang(nl)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(nmg),      :not(:lang(nmg)) &gt; :lang(nmg)           { quotes: '\201e' '\201d' '\00ab' '\00bb' } /* &#x201E; &#x201D; &#xAB; &#xBB; */
-:root:lang(nn),       :not(:lang(nn)) &gt; :lang(nn)             { quotes: '\00ab' '\00bb' '\2018' '\2019' } /* &#xAB; &#xBB; &#x2018; &#x2019; */
-:root:lang(nus),      :not(:lang(nus)) &gt; :lang(nus)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(nyn),      :not(:lang(nyn)) &gt; :lang(nyn)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(pl),       :not(:lang(pl)) &gt; :lang(pl)             { quotes: '\201e' '\201d' '\00ab' '\00bb' } /* &#x201E; &#x201D; &#xAB; &#xBB; */
-:root:lang(pt),       :not(:lang(pt)) &gt; :lang(pt)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(pt-PT),    :not(:lang(pt-PT)) &gt; :lang(pt-PT)       { quotes: '\00ab' '\00bb' '\201c' '\201d' } /* &#xAB; &#xBB; &#x201C; &#x201D; */
-:root:lang(rn),       :not(:lang(rn)) &gt; :lang(rn)             { quotes: '\201d' '\201d' '\2019' '\2019' } /* &#x201D; &#x201D; &#x2019; &#x2019; */
-:root:lang(ro),       :not(:lang(ro)) &gt; :lang(ro)             { quotes: '\201e' '\201d' '\00ab' '\00bb' } /* &#x201E; &#x201D; &#xAB; &#xBB; */
-:root:lang(rof),      :not(:lang(rof)) &gt; :lang(rof)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(ru),       :not(:lang(ru)) &gt; :lang(ru)             { quotes: '\00ab' '\00bb' '\201e' '\201c' } /* &#xAB; &#xBB; &#x201E; &#x201C; */
-:root:lang(rw),       :not(:lang(rw)) &gt; :lang(rw)             { quotes: '\00ab' '\00bb' '\2018' '\2019' } /* &#xAB; &#xBB; &#x2018; &#x2019; */
-:root:lang(rwk),      :not(:lang(rwk)) &gt; :lang(rwk)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(saq),      :not(:lang(saq)) &gt; :lang(saq)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(sbp),      :not(:lang(sbp)) &gt; :lang(sbp)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(seh),      :not(:lang(seh)) &gt; :lang(seh)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(ses),      :not(:lang(ses)) &gt; :lang(ses)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(sg),       :not(:lang(sg)) &gt; :lang(sg)             { quotes: '\00ab' '\00bb' '\201c' '\201d' } /* &#xAB; &#xBB; &#x201C; &#x201D; */
-:root:lang(shi),      :not(:lang(shi)) &gt; :lang(shi)           { quotes: '\00ab' '\00bb' '\201e' '\201d' } /* &#xAB; &#xBB; &#x201E; &#x201D; */
-:root:lang(shi-Tfng), :not(:lang(shi-Tfng)) &gt; :lang(shi-Tfng) { quotes: '\00ab' '\00bb' '\201e' '\201d' } /* &#xAB; &#xBB; &#x201E; &#x201D; */
-:root:lang(sk),       :not(:lang(sk)) &gt; :lang(sk)             { quotes: '\201e' '\201c' '\201a' '\2018' } /* &#x201E; &#x201C; &#x201A; &#x2018; */
-:root:lang(sl),       :not(:lang(sl)) &gt; :lang(sl)             { quotes: '\201e' '\201c' '\201a' '\2018' } /* &#x201E; &#x201C; &#x201A; &#x2018; */
-:root:lang(sn),       :not(:lang(sn)) &gt; :lang(sn)             { quotes: '\201d' '\201d' '\2019' '\2019' } /* &#x201D; &#x201D; &#x2019; &#x2019; */
-:root:lang(so),       :not(:lang(so)) &gt; :lang(so)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(sq),       :not(:lang(sq)) &gt; :lang(sq)             { quotes: '\201e' '\201c' '\201a' '\2018' } /* &#x201E; &#x201C; &#x201A; &#x2018; */
-:root:lang(sr),       :not(:lang(sr)) &gt; :lang(sr)             { quotes: '\201e' '\201c' '\201a' '\2018' } /* &#x201E; &#x201C; &#x201A; &#x2018; */
-:root:lang(sr-Latn),  :not(:lang(sr-Latn)) &gt; :lang(sr-Latn)   { quotes: '\201e' '\201c' '\201a' '\2018' } /* &#x201E; &#x201C; &#x201A; &#x2018; */
-:root:lang(sv),       :not(:lang(sv)) &gt; :lang(sv)             { quotes: '\201d' '\201d' '\2019' '\2019' } /* &#x201D; &#x201D; &#x2019; &#x2019; */
-:root:lang(sw),       :not(:lang(sw)) &gt; :lang(sw)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(swc),      :not(:lang(swc)) &gt; :lang(swc)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(ta),       :not(:lang(ta)) &gt; :lang(ta)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(te),       :not(:lang(te)) &gt; :lang(te)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(teo),      :not(:lang(teo)) &gt; :lang(teo)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(th),       :not(:lang(th)) &gt; :lang(th)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(ti-ER),    :not(:lang(ti-ER)) &gt; :lang(ti-ER)       { quotes: '\2018' '\2019' '\201c' '\201d' } /* &#x2018; &#x2019; &#x201C; &#x201D; */
-:root:lang(to),       :not(:lang(to)) &gt; :lang(to)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(tr),       :not(:lang(tr)) &gt; :lang(tr)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(twq),      :not(:lang(twq)) &gt; :lang(twq)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(tzm),      :not(:lang(tzm)) &gt; :lang(tzm)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(uk),       :not(:lang(uk)) &gt; :lang(uk)             { quotes: '\00ab' '\00bb' '\201e' '\201c' } /* &#xAB; &#xBB; &#x201E; &#x201C; */
-:root:lang(ur),       :not(:lang(ur)) &gt; :lang(ur)             { quotes: '\201d' '\201c' '\2019' '\2018' } /* &#x201D; &#x201C; &#x2019; &#x2018; */
-:root:lang(vai),      :not(:lang(vai)) &gt; :lang(vai)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(vai-Latn), :not(:lang(vai-Latn)) &gt; :lang(vai-Latn) { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(vi),       :not(:lang(vi)) &gt; :lang(vi)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(vun),      :not(:lang(vun)) &gt; :lang(vun)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(xh),       :not(:lang(xh)) &gt; :lang(xh)             { quotes: '\2018' '\2019' '\201c' '\201d' } /* &#x2018; &#x2019; &#x201C; &#x201D; */
-:root:lang(xog),      :not(:lang(xog)) &gt; :lang(xog)           { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(yav),      :not(:lang(yav)) &gt; :lang(yav)           { quotes: '\00ab' '\00bb' '\00ab' '\00bb' } /* &#xAB; &#xBB; &#xAB; &#xBB; */
-:root:lang(yo),       :not(:lang(yo)) &gt; :lang(yo)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(zh),       :not(:lang(zh)) &gt; :lang(zh)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
-:root:lang(zh-Hant),  :not(:lang(zh-Hant)) &gt; :lang(zh-Hant)   { quotes: '\300c' '\300d' '\300e' '\300f' } /* &#x300C; &#x300D; &#x300E; &#x300F; */
-:root:lang(zu),       :not(:lang(zu)) &gt; :lang(zu)             { quotes: '\201c' '\201d' '\2018' '\2019' } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:root                { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(af)            { quotes: '\201c' '\201d' '\2018' '\201d'; } /* &#x201C; &#x201D; &#x2018; &#x201D; */
+:lang(agq)           { quotes: '\0027' '\0027' '\201e' '\201d'; } /* ' ' &#x201E; &#x201D; */
+:lang(ak)            { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(am)            { quotes: '\00ab' '\00bb' '\2039' '\203a'; } /* &#xAB; &#xBB; &#x2039; &#x203A; */
+:lang(ar)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(asa)           { quotes: '\0027' '\0027' '\201c' '\201d'; } /* ' ' &#x201C; &#x201D; */
+:lang(az)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(bas)           { quotes: '\00ab' '\00bb' '\201c' '\201e'; } /* &#xAB; &#xBB; &#x201C; &#x201E; */
+:lang(be)            { quotes: '\201e' '\201d' '\00ab' '\00bb'; } /* &#x201E; &#x201D; &#xAB; &#xBB; */
+:lang(bem)           { quotes: '\0027' '\0027' '\201c' '\201c'; } /* ' ' &#x201C; &#x201C; */
+:lang(bez)           { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(bg)            { quotes: '\201e' '\201c' '\2018' '\2019'; } /* &#x201E; &#x201C; &#x2018; &#x2019; */
+:lang(bm)            { quotes: '\00ab' '\00bb' '\201c' '\201d'; } /* &#xAB; &#xBB; &#x201C; &#x201D; */
+:lang(bn)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(brx)           { quotes: '\0027' '\0027' '\0022' '\0022'; } /* ' ' " " */
+:lang(bs)            { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(ca)            { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(cgg)           { quotes: '\0027' '\0027' '\201c' '\201e'; } /* ' ' &#x201C; &#x201E; */
+:lang(chr)           { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(cs)            { quotes: '\201e' '\201c' '\201a' '\2018'; } /* &#x201E; &#x201C; &#x201A; &#x2018; */
+:lang(cy)            { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(da)            { quotes: '\201d' '\201d' '\201d' '\201d'; } /* &#x201D; &#x201D; &#x201D; &#x201D; */
+:lang(dav)           { quotes: '\0027' '\0027' '\201c' '\201d'; } /* ' ' &#x201C; &#x201D; */
+:lang(de)            { quotes: '\201e' '\201c' '\201a' '\2018'; } /* &#x201E; &#x201C; &#x201A; &#x2018; */
+:lang(de-CH)         { quotes: '\00ab' '\00bb' '\2039' '\203a'; } /* &#xAB; &#xBB; &#x2039; &#x203A; */
+:lang(dje)           { quotes: '\201c' '\201d' '\00ab' '\00bb'; } /* &#x201C; &#x201D; &#xAB; &#xBB; */
+:lang(dua)           { quotes: '\00ab' '\00bb' '\0027' '\0027'; } /* &#xAB; &#xBB; ' ' */
+:lang(dyo)           { quotes: '\00ab' '\00bb' '\201c' '\201d'; } /* &#xAB; &#xBB; &#x201C; &#x201D; */
+:lang(dz)            { quotes: '\0022' '\0022' '\0027' '\0027'; } /* " " ' ' */
+:lang(ebu)           { quotes: '\0027' '\0027' '\201c' '\201d'; } /* ' ' &#x201C; &#x201D; */
+:lang(ee)            { quotes: '\0027' '\0027' '\201c' '\201c'; } /* ' ' &#x201C; &#x201C; */
+:lang(el)            { quotes: '\00ab' '\00bb' '\2018' '\2019'; } /* &#xAB; &#xBB; &#x2018; &#x2019; */
+:lang(el-POLYTON)    { quotes: '\00ab' '\00bb' '\201b' '\2019'; } /* &#xAB; &#xBB; &#x201B; &#x2019; */
+:lang(en)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(en-GB)         { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(es)            { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(et)            { quotes: '\201e' '\201c' '\201e' '\201c'; } /* &#x201E; &#x201C; &#x201E; &#x201C; */
+:lang(eu)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(ewo)           { quotes: '\00ab' '\00bb' '\201c' '\201d'; } /* &#xAB; &#xBB; &#x201C; &#x201D; */
+:lang(fa)            { quotes: '\00ab' '\00bb' '\2039' '\203a'; } /* &#xAB; &#xBB; &#x2039; &#x203A; */
+:lang(ff)            { quotes: '\201e' '\201d' '\0027' '\0027'; } /* &#x201E; &#x201D; ' ' */
+:lang(fi)            { quotes: '\201d' '\201d' '\2019' '\2019'; } /* &#x201D; &#x201D; &#x2019; &#x2019; */
+:lang(fil)           { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(fo)            { quotes: '\201d' '\201d' '\2019' '\2019'; } /* &#x201D; &#x201D; &#x2019; &#x2019; */
+:lang(fr)            { quotes: '\00ab' '\00bb' '\201c' '\201d'; } /* &#xAB; &#xBB; &#x201C; &#x201D; */
+:lang(fr-CH)         { quotes: '\00ab' '\00bb' '\2039' '\203a'; } /* &#xAB; &#xBB; &#x2039; &#x203A; */
+:lang(fur)           { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(gaa)           { quotes: '\0027' '\0027' '\0022' '\0022'; } /* ' ' " " */
+:lang(gd)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(gl)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(gsw)           { quotes: '\00ab' '\00bb' '\2039' '\203a'; } /* &#xAB; &#xBB; &#x2039; &#x203A; */
+:lang(gu)            { quotes: '\0027' '\0027' '\0022' '\0022'; } /* ' ' " " */
+:lang(guz)           { quotes: '\0027' '\2018' '\201c' '\201c'; } /* ' &#x2018; &#x201C; &#x201C; */
+:lang(ha)            { quotes: '\0027' '\0027' '\201c' '\201c'; } /* ' ' &#x201C; &#x201C; */
+:lang(he)            { quotes: '\201c' '\201d' '\0022' '\0022'; } /* &#x201C; &#x201D; " " */
+:lang(hi)            { quotes: '\0027' '\0027' '\0022' '\0022'; } /* ' ' " " */
+:lang(hr)            { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(hu)            { quotes: '\201e' '\201d' '\201e' '\201d'; } /* &#x201E; &#x201D; &#x201E; &#x201D; */
+:lang(ia)            { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(id)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(ig)            { quotes: '\0027' '\0027' '\201c' '\201d'; } /* ' ' &#x201C; &#x201D; */
+:lang(is)            { quotes: '\201e' '\201c' '\201a' '\2018'; } /* &#x201E; &#x201C; &#x201A; &#x2018; */
+:lang(it)            { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(it-CH)         { quotes: '\00ab' '\00bb' '\2039' '\203a'; } /* &#xAB; &#xBB; &#x2039; &#x203A; */
+:lang(ja)            { quotes: '\300c' '\300d' '\300e' '\300f'; } /* &#x300C; &#x300D; &#x300E; &#x300F; */
+:lang(jmc)           { quotes: '\0027' '\0027' '\201c' '\201c'; } /* ' ' &#x201C; &#x201C; */
+:lang(ka)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(kab)           { quotes: '\00ab' '\00bb' '\201c' '\201d'; } /* &#xAB; &#xBB; &#x201C; &#x201D; */
+:lang(kam)           { quotes: '\0027' '\0027' '\201c' '\201d'; } /* ' ' &#x201C; &#x201D; */
+:lang(kde)           { quotes: '\0027' '\0027' '\201c' '\201d'; } /* ' ' &#x201C; &#x201D; */
+:lang(kea)           { quotes: '\201c' '\201d' '\00ab' '\00bb'; } /* &#x201C; &#x201D; &#xAB; &#xBB; */
+:lang(khq)           { quotes: '\201c' '\201d' '\00ab' '\00bb'; } /* &#x201C; &#x201D; &#xAB; &#xBB; */
+:lang(ki)            { quotes: '\0027' '\0027' '\201c' '\201d'; } /* ' ' &#x201C; &#x201D; */
+:lang(kl)            { quotes: '\00bb' '\00ab' '\203a' '\2039'; } /* &#xBB; &#xAB; &#x203A; &#x2039; */
+:lang(kln)           { quotes: '\0027' '\0027' '\201c' '\201d'; } /* ' ' &#x201C; &#x201D; */
+:lang(km)            { quotes: '\0027' '\0027' '\0022' '\0022'; } /* ' ' " " */
+:lang(kn)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(ko)            { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(ksb)           { quotes: '\0027' '\0027' '\201c' '\201d'; } /* ' ' &#x201C; &#x201D; */
+:lang(ksf)           { quotes: '\0027' '\0027' '\00ab' '\00bb'; } /* ' ' &#xAB; &#xBB; */
+:lang(ksh)           { quotes: '\201e' '\201c' '\201a' '\2018'; } /* &#x201E; &#x201C; &#x201A; &#x2018; */
+:lang(lag)           { quotes: '\201d' '\201d' '\0027' '\0027'; } /* &#x201D; &#x201D; ' ' */
+:lang(lg)            { quotes: '\0027' '\0027' '\201c' '\201d'; } /* ' ' &#x201C; &#x201D; */
+:lang(ln)            { quotes: '\0027' '\0027' '\201c' '\201d'; } /* ' ' &#x201C; &#x201D; */
+:lang(lo)            { quotes: '\0027' '\0027' '\0022' '\0022'; } /* ' ' " " */
+:lang(lt)            { quotes: '\201e' '\201c' '\201e' '\201c'; } /* &#x201E; &#x201C; &#x201E; &#x201C; */
+:lang(lu)            { quotes: '\2018' '\2018' '\201c' '\201c'; } /* &#x2018; &#x2018; &#x201C; &#x201C; */
+:lang(luo)           { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(luy)           { quotes: '\0027' '\0027' '\201e' '\201c'; } /* ' ' &#x201E; &#x201C; */
+:lang(lv)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(mas)           { quotes: '\0027' '\0027' '\201d' '\201c'; } /* ' ' &#x201D; &#x201C; */
+:lang(mer)           { quotes: '\0027' '\0027' '\201c' '\201d'; } /* ' ' &#x201C; &#x201D; */
+:lang(mfe)           { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(mg)            { quotes: '\00ab' '\00bb' '\201c' '\201d'; } /* &#xAB; &#xBB; &#x201C; &#x201D; */
+:lang(ml)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(mn)            { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(mr)            { quotes: '\0027' '\0027' '\0022' '\0022'; } /* ' ' " " */
+:lang(ms)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(mt)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(mua)           { quotes: '\00ab' '\00bb' '\201c' '\201d'; } /* &#xAB; &#xBB; &#x201C; &#x201D; */
+:lang(my)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(naq)           { quotes: '\0027' '\0027' '\201c' '\201d'; } /* ' ' &#x201C; &#x201D; */
+:lang(nb)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(nd)            { quotes: '\0027' '\0027' '\201c' '\201d'; } /* ' ' &#x201C; &#x201D; */
+:lang(nds)           { quotes: '\201e' '\201c' '\201a' '\2018'; } /* &#x201E; &#x201C; &#x201A; &#x2018; */
+:lang(ne)            { quotes: '\0027' '\0027' '\0022' '\0022'; } /* ' ' " " */
+:lang(nl)            { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(nmg)           { quotes: '\201c' '\201e' '\00ab' '\00bb'; } /* &#x201C; &#x201E; &#xAB; &#xBB; */
+:lang(nn)            { quotes: '\00ab' '\00bb' '\201c' '\201d'; } /* &#xAB; &#xBB; &#x201C; &#x201D; */
+:lang(nr)            { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(nso)           { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(nus)           { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(nyn)           { quotes: '\0027' '\0027' '\201c' '\201e'; } /* ' ' &#x201C; &#x201E; */
+:lang(pa)            { quotes: '\0027' '\0027' '\0022' '\0022'; } /* ' ' " " */
+:lang(pl)            { quotes: '\2018' '\2019' '\201e' '\201d'; } /* &#x2018; &#x2019; &#x201E; &#x201D; */
+:lang(pt)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(rm)            { quotes: '\00ab' '\00bb' '\2039' '\203a'; } /* &#xAB; &#xBB; &#x2039; &#x203A; */
+:lang(rn)            { quotes: '\0027' '\0027' '\201d' '\201d'; } /* ' ' &#x201D; &#x201D; */
+:lang(ro)            { quotes: '\201e' '\201d' '\00ab' '\00bb'; } /* &#x201E; &#x201D; &#xAB; &#xBB; */
+:lang(rof)           { quotes: '\0027' '\0027' '\201c' '\201c'; } /* ' ' &#x201C; &#x201C; */
+:lang(ru)            { quotes: '\00ab' '\00bb' '\201e' '\201c'; } /* &#xAB; &#xBB; &#x201E; &#x201C; */
+:lang(rw)            { quotes: '\2018' '\2019' '\00ab' '\00bb'; } /* &#x2018; &#x2019; &#xAB; &#xBB; */
+:lang(rwk)           { quotes: '\0027' '\0027' '\201c' '\201c'; } /* ' ' &#x201C; &#x201C; */
+:lang(saq)           { quotes: '\0027' '\0027' '\201c' '\201d'; } /* ' ' &#x201C; &#x201D; */
+:lang(sbp)           { quotes: '\0027' '\0027' '\201c' '\201d'; } /* ' ' &#x201C; &#x201D; */
+:lang(se)            { quotes: '\201d' '\201d' '\2019' '\2019'; } /* &#x201D; &#x201D; &#x2019; &#x2019; */
+:lang(seh)           { quotes: '\0027' '\0027' '\0027' '\0027'; } /* ' ' ' ' */
+:lang(ses)           { quotes: '\201c' '\201d' '\00ab' '\00bb'; } /* &#x201C; &#x201D; &#xAB; &#xBB; */
+:lang(sg)            { quotes: '\00ab' '\00bb' '\201c' '\2019'; } /* &#xAB; &#xBB; &#x201C; &#x2019; */
+:lang(shi)           { quotes: '\00ab' '\00bb' '\201e' '\201d'; } /* &#xAB; &#xBB; &#x201E; &#x201D; */
+:lang(shi-Tfng)      { quotes: '\00ab' '\00bb' '\201e' '\201d'; } /* &#xAB; &#xBB; &#x201E; &#x201D; */
+:lang(sk)            { quotes: '\201a' '\2018' '\201e' '\201c'; } /* &#x201A; &#x2018; &#x201E; &#x201C; */
+:lang(sl)            { quotes: '\00bb' '\00ab' '\201e' '\201c'; } /* &#xBB; &#xAB; &#x201E; &#x201C; */
+:lang(sn)            { quotes: '\0027' '\0027' '\201d' '\201d'; } /* ' ' &#x201D; &#x201D; */
+:lang(so)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(sr)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(ss)            { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(st)            { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(sv)            { quotes: '\201d' '\201d' '\2019' '\2019'; } /* &#x201D; &#x201D; &#x2019; &#x2019; */
+:lang(sw)            { quotes: '\0027' '\0027' '\0027' '\0027'; } /* ' ' ' ' */
+:lang(swc)           { quotes: '\0027' '\0027' '\201d' '\201c'; } /* ' ' &#x201D; &#x201C; */
+:lang(ta)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(te)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(teo)           { quotes: '\0027' '\2019' '\201c' '\201d'; } /* ' &#x2019; &#x201C; &#x201D; */
+:lang(tg)            { quotes: '\00ab' '\00bb' '\00ab' '\201e'; } /* &#xAB; &#xBB; &#xAB; &#x201E; */
+:lang(th)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(ti-ER)         { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(tn)            { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(to)            { quotes: '\201c' '\201d' '\00ab' '\00bb'; } /* &#x201C; &#x201D; &#xAB; &#xBB; */
+:lang(tr)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(trv)           { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(ts)            { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(twq)           { quotes: '\201c' '\201d' '\00ab' '\00bb'; } /* &#x201C; &#x201D; &#xAB; &#xBB; */
+:lang(tzm)           { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(uk)            { quotes: '\00ab' '\00bb' '\201e' '\201c'; } /* &#xAB; &#xBB; &#x201E; &#x201C; */
+:lang(ur)            { quotes: '\0022' '\0022' '\0027' '\0027'; } /* " " ' ' */
+:lang(vai)           { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(vai-Latn)      { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(ve)            { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(vi)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(vun)           { quotes: '\0027' '\0027' '\201c' '\201c'; } /* ' ' &#x201C; &#x201C; */
+:lang(wae)           { quotes: '\00ab' '\00bb' '\2039' '\203a'; } /* &#xAB; &#xBB; &#x2039; &#x203A; */
+:lang(xh)            { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
+:lang(xog)           { quotes: '\0027' '\0027' '\201c' '\201e'; } /* ' ' &#x201C; &#x201E; */
+:lang(yav)           { quotes: '\00ab' '\00bb' '\00ab' '\00bb'; } /* &#xAB; &#xBB; &#xAB; &#xBB; */
+:lang(yo)            { quotes: '\0027' '\0027' '\0027' '\0027'; } /* ' ' ' ' */
+:lang(zh)            { quotes: '\201c' '\201d' '\2018' '\2019'; } /* &#x201C; &#x201D; &#x2018; &#x2019; */
+:lang(zh-Hant)       { quotes: '\300c' '\300d' '\300e' '\300f'; } /* &#x300C; &#x300D; &#x300E; &#x300F; */
+:lang(zu)            { quotes: '\2018' '\2019' '\201c' '\201d'; } /* &#x2018; &#x2019; &#x201C; &#x201D; */
 </pre>  
 
 
@@ -1015,7 +1024,7 @@ textarea[dir=auto i], pre[dir=auto i] { unicode-bidi: plaintext; }</pre>
   <pre class="css">@namespace url(http://www.w3.org/1999/xhtml);
 
 article, aside, h1, h2, h3, h4, h5, h6, hgroup, nav, section {
-  display: block;
+  display: block; unicode-bidi: isolate;
 }
 
 h1 { margin-top: 0.67em; margin-bottom: 0.67em; font-size: 2.00em; font-weight: bold; }
@@ -1047,8 +1056,8 @@ h6 { margin-top: 2.33em; margin-bottom: 2.33em; font-size: 0.67em; font-weight: 
 
   <pre class="css">@namespace url(http://www.w3.org/1999/xhtml);
 
-dir, dd, dl, dt, menu, ol, ul { display: block; }
-li { display: list-item; }
+dir, dd, dl, dt, menu, ol, ul { display: block; unicode-bidi: isolate; }
+li { display: list-item; unicode-bidi: isolate; }
 
 dir, dl, menu, ol, ul { margin-top: 1em; margin-bottom: 1em; }
 
@@ -1116,15 +1125,15 @@ ul[type=square i], li[type=square i] { list-style-type: square; }</pre>
 
   <pre class="css">@namespace url(http://www.w3.org/1999/xhtml);
 
-table { display: table; }
-caption { display: table-caption; }
-colgroup, colgroup[hidden] { display: table-column-group; }
-col, col[hidden] { display: table-column; }
-thead, thead[hidden] { display: table-header-group; }
-tbody, tbody[hidden] { display: table-row-group; }
-tfoot, tfoot[hidden] { display: table-footer-group; }
-tr, tr[hidden] { display: table-row; }
-td, th, td[hidden], th[hidden] { display: table-cell; }
+table { display: table; unicode-bidi: isolate; }
+caption { display: table-caption; unicode-bidi: isolate; }
+colgroup, colgroup[hidden] { display: table-column-group; unicode-bidi: isolate; }
+col, col[hidden] { display: table-column; unicode-bidi: isolate; }
+thead, thead[hidden] { display: table-header-group; unicode-bidi: isolate; }
+tbody, tbody[hidden] { display: table-row-group; unicode-bidi: isolate; }
+tfoot, tfoot[hidden] { display: table-footer-group; unicode-bidi: isolate; }
+tr, tr[hidden] { display: table-row; unicode-bidi: isolate; }
+td, th, td[hidden], th[hidden] { display: table-cell; unicode-bidi: isolate; }
 
 colgroup[hidden], col[hidden], thead[hidden], tbody[hidden],
 tfoot[hidden], tr[hidden], td[hidden], th[hidden] {
@@ -1179,7 +1188,10 @@ table[rules=all i] &gt; tfoot &gt; tr &gt; td, table[rules=all i] &gt; tfoot &gt
 
 table[align=left i] { float: left; }
 table[align=right i] { float: right; }
-table[align=center i] { margin-left: auto; margin-right: auto; }
+table[align=center i], table[align=abscenter i],
+table[align=absmiddle i], table[align=middle i] {
+  margin-left: auto; margin-right: auto;
+}
 thead[align=absmiddle i], tbody[align=absmiddle i], tfoot[align=absmiddle i],
 tr[align=absmiddle i], td[align=absmiddle i], th[align=absmiddle i] {
   text-align: center;

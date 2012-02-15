@@ -321,9 +321,9 @@
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5582.</p>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5496.</p>
 
-   <h2 class="no-num no-toc" id="editor-s-draft-11-february-2012">Editor's Draft 11 February 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-13-january-2012">Editor's Draft 13 January 2012</h2>
    </div><nav class="prev_next"><a href="introduction.html">&#x2190; 1 Introduction</a> &#x2013;
    <a href="index.html#contents">Table of contents</a> &#x2013;
    <a href="common-microsyntaxes.html">2.5 Common microsyntaxes &#x2192;</a>
@@ -453,12 +453,14 @@
   traversal of DOM nodes involved (through the <code title="dom-Node-parentNode"><a href="#dom-node-parentnode">parentNode</a></code>/<code title="dom-Node-childNodes"><a href="#dom-node-childnodes">childNodes</a></code> relationship).</p><p>When it is stated that some element or attribute is <dfn id="ignore" title="ignore">ignored</dfn>, or treated as some other value, or
   handled as if it was something else, this refers only to the
   processing of the node after it is in the DOM. <span class="impl">A
-  user agent must not mutate the DOM in such situations.</span></p><p>A content attribute is said to <dfn title="">change</dfn> value
+  user agent must not mutate the DOM in such situations.</span></p><p>The term <dfn id="text-node">text node</dfn> refers to any <code><a href="#text">Text</a></code>
+  node, including <code><a href="#cdatasection">CDATASection</a></code> nodes; specifically, any
+  <code><a href="#node">Node</a></code> with node type <code title="">TEXT_NODE</code> (3)
+  or <code title="">CDATA_SECTION_NODE</code> (4). <a href="references.html#refsDOMCORE">[DOMCORE]</a></p><p>A content attribute is said to <dfn title="">change</dfn> value
   only if its new value is different than its previous value; setting
   an attribute to a value it already has does not change it.</p><p>The term <dfn title="">empty</dfn>, when used of an attribute
-  value, <code><a href="#text">Text</a></code> node, or string, means that the length of
-  the text is zero (i.e. not even containing spaces or control
-  characters).</p><h4 id="scripting-0"><span class="secno">2.1.4 </span>Scripting</h4><p>The construction "a <code>Foo</code> object", where
+  value, text node, or string, means that the length of the text is
+  zero (i.e. not even containing spaces or control characters).</p><h4 id="scripting-0"><span class="secno">2.1.4 </span>Scripting</h4><p>The construction "a <code>Foo</code> object", where
   <code>Foo</code> is actually an interface, is sometimes used instead
   of the more accurate "an object implementing the interface
   <code>Foo</code>".</p><p>An IDL attribute is said to be <dfn title="">getting</dfn> when
@@ -544,11 +546,8 @@
   non-normative, as are all sections explicitly marked non-normative.
   Everything else in this specification is normative.</p><p>The key words "MUST", "MUST NOT", "REQUIRED",  "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
   "OPTIONAL" in the normative parts of this document are to be
-  interpreted as described in RFC2119. The key word "OPTIONALLY" in
-  the normative parts of this document is to be interpreted with the
-  same normative meaning as "MAY" and "OPTIONAL". For readability,
-  these words do not appear in all uppercase letters in this
-  specification. <a href="references.html#refsRFC2119">[RFC2119]</a></p><div class="impl">
+  interpreted as described in RFC2119. For readability, these words do
+  not appear in all uppercase letters in this specification. <a href="references.html#refsRFC2119">[RFC2119]</a></p><div class="impl">
 
   <p>Requirements phrased in the imperative as part of algorithms
   (such as "strip any leading space characters" or "return false and
@@ -871,6 +870,8 @@
   one of these two formats, although supporting both is
   encouraged.</p>
 
+
+
   <p>Some conformance requirements are phrased as requirements on
   elements, attributes, methods or objects. Such requirements fall
   into two categories: those describing content model restrictions,
@@ -921,6 +922,7 @@
     Core specification: <a href="references.html#refsDOMCORE">[DOMCORE]</a></p>
 
     <ul class="brief"><li><dfn id="attr"><code>Attr</code></dfn> interface</li>
+     <li><dfn id="cdatasection"><code>CDATASection</code></dfn> interface</li>
      <li><dfn id="comment-0"><code>Comment</code></dfn> interface</li>
      <li><dfn id="domimplementation"><code>DOMImplementation</code></dfn> interface</li>
      <li><dfn id="dom-document" title="DOM Document"><code>Document</code></dfn> interface</li>
@@ -966,7 +968,7 @@
      <li>The <dfn id="document-s-character-encoding" title="document's character encoding">encoding</dfn> (herein the <i>character encoding</i>) and <dfn id="concept-document-content-type" title="concept-document-content-type">content type</dfn> of a <code><a href="dom.html#document">Document</a></code></li>
      <li>The distinction between <dfn id="xml-documents">XML documents</dfn> and <dfn id="html-documents">HTML documents</dfn></li>
      <li>The terms <dfn id="quirks-mode">quirks mode</dfn>, <dfn id="limited-quirks-mode">limited-quirks mode</dfn>, and <dfn id="no-quirks-mode">no-quirks mode</dfn></li>
-     <li>The algorithm to <dfn id="concept-node-clone" title="concept-node-clone">clone</dfn> a <code><a href="#node">Node</a></code>, and the concept of <dfn id="concept-node-clone-ext" title="concept-node-clone-ext">cloning steps</dfn> used by that algorithm</li>
+     <li>The algorithm to <dfn id="concept-node-clone" title="concept-node-clone">clone</dfn> a <code><a href="#node">Node</a></code>, and the concept of <dfn id="concept-node-clone-ext" title="concept-node-clone-ext">cloning steps</dfn> used by tat algorithm</li>
      <li>The concept of <dfn id="base-url-change-steps">base URL change steps</dfn> and the definition of what happens when an element is <dfn id="affected-by-a-base-url-change">affected by a base URL change</dfn>.</li>
      <li>The concept of an element's <dfn id="concept-id" title="concept-id">unique identifier (ID)</dfn>.</li>
 
@@ -1008,10 +1010,9 @@
     <p>The following features are defined in the DOM Events
     specification: <a href="references.html#refsDOMEVENTS">[DOMEVENTS]</a></p>
 
-    <ul class="brief"><li><dfn id="mouseevent"><code>MouseEvent</code></dfn> interface</li>
+    <ul class="brief"><li><dfn id="uievent"><code>UIEvent</code></dfn> interface</li>
+     <li><dfn id="mouseevent"><code>MouseEvent</code></dfn> interface</li>
      <li><dfn id="mouseeventinit"><code>MouseEventInit</code></dfn> dictionary type</li>
-
-     <li>The <dfn id="uievent"><code>UIEvent</code></dfn> interface's <dfn id="dom-uievent-detail" title="dom-UIEvent-detail"><code>detail</code></dfn> attribute</li>
 
      <li><dfn id="event-click" title="event-click"><code>click</code></dfn> event</li>
 
@@ -1042,11 +1043,6 @@
      <li><dfn id="file"><code>File</code></dfn></li>
      <li><dfn id="filelist"><code>FileList</code></dfn></li>
 
-    </ul><p>It also uses the following interface defined in the File System
-    API specification: <a href="references.html#refsFILESYSTEMAPI">[FILESYSTEMAPI]</a></p>
-
-    <ul class="brief"><li><dfn id="filecallback"><code>FileCallback</code></dfn></li>
-
     </ul></dd>
 
    <dt>Web IDL</dt>
@@ -1058,21 +1054,22 @@
     specification. <a href="references.html#refsWEBIDL">[WEBIDL]</a></p>
 
     <p>The terms <dfn id="relevant-namespace-object">relevant namespace object</dfn>, <dfn id="supported-property-indices">supported
-    property indices</dfn>, <dfn id="determine-the-value-of-an-indexed-property">determine the value of an indexed
-    property</dfn>, <dfn id="support-named-properties">support named properties</dfn>,
-    <dfn id="supported-property-names">supported property names</dfn>, <dfn id="determine-the-value-of-a-named-property">determine the value of a
-    named property</dfn>, <dfn id="platform-array-objects">platform array objects</dfn>, and <dfn id="dfn-read-only-array" title="dfn-read-only-array">read only</dfn> (when applied to
-    arrays) are used as defined in the Web IDL specification.</p>
+    property indices</dfn>, <dfn id="supported-property-names">supported property names</dfn>,
+    <dfn id="determine-the-value-of-an-indexed-property">determine the value of an indexed property</dfn>,
+    <dfn id="determine-the-value-of-a-named-property">determine the value of a named property</dfn>, <dfn id="platform-array-objects">platform
+    array objects</dfn>, and <dfn id="dfn-read-only-array" title="dfn-read-only-array">read
+    only</dfn> (when applied to arrays) are used as defined in the
+    Web IDL specification.</p>
 
     <p id="float-nan">Except where otherwise specified, if an IDL
     attribute that is a floating point number type (<code title="">double</code>) is assigned an Infinity or Not-a-Number
     (NaN) value, a <code><a href="#notsupportederror">NotSupportedError</a></code> exception must be
-    thrown.</p>
+    raised.</p>
 
     <p>Except where otherwise specified, if a method with an argument
     that is a floating point number type (<code title="">double</code>)
     is passed an Infinity or Not-a-Number (NaN) value, a
-    <code><a href="#notsupportederror">NotSupportedError</a></code> exception must be thrown.</p>
+    <code><a href="#notsupportederror">NotSupportedError</a></code> exception must be raised.</p>
 
     <p>When this specification requires a user agent to <dfn id="create-a-date-object">create a
     <code>Date</code> object</dfn> representing a particular time, the
