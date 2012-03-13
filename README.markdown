@@ -8,7 +8,7 @@ front end to the [HTML5 spec][2].
 
    [2]: http://dev.w3.org/html5/spec-author-view/
 
-Michael(tm) Smith <[sideshowbarker@gmail.com][3]>
+Michael[tm] Smith <[sideshowbarker@gmail.com][3]>
 
    [3]: mailto:sideshowbarker@gmail.com
 
