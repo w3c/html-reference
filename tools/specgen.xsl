@@ -365,55 +365,45 @@ color: #3C790A;
       </h2>
 
         <xsl:if test="$site = 'W3C' and not($maturity = 'ED')">
+          <dl>
         <xsl:choose>
           <xsl:when test='$source and $maturity="ED"'>
-          <dl>
             <dt>Editor’s Draft is also available:</dt>
             <dd>
               <a id='latestED' href='{$source}'><xsl:value-of select='$source'/></a>
               <xsl:text> </xsl:text>
               <!-- * <xsl:value-of select='date:date-time()'/> -->
             </dd>
-          </dl>
             <xsl:if test='$latest and not($latest = "")'>
-            <dl>
               <dt>Latest Published Version:</dt>
               <dd><a href='{$latest}'><xsl:value-of select='$latest'/></a></dd>
-            </dl>
             </xsl:if>
           </xsl:when>
           <xsl:otherwise>
-            <dl>
               <dt>This Version:</dt>
               <dd>
                 <a href='{$this}'><xsl:value-of select='$this'/></a>
               </dd>
-            </dl>
             <xsl:if test='not($latest = "")'>
-            <dl>
               <dt>Latest Published Version:</dt>
               <dd><a href='{$latest}'><xsl:value-of select='$latest'/></a></dd>
-            </dl>
-            <dl class="ed-draft-link">
               <dt class="ed-draft-link">Editor’s Draft:</dt>
               <dd>
                 <a id='latestED' href='{$source}'><xsl:value-of select='$source'/></a>
                 <xsl:text> </xsl:text>
                 <!-- * <xsl:value-of select='date:date-time()'/> -->
               </dd>
-            </dl>
             </xsl:if>
           </xsl:otherwise>
         </xsl:choose>
         <xsl:if test='$previous-nodeset
           and not($previous-nodeset = "")'>
-          <dl>
           <dt>Previous Version<xsl:if test='count($previous-nodeset) > 1'>s</xsl:if>:</dt>
           <xsl:for-each select='$previous-nodeset'>
             <dd><a href='{.}'><xsl:value-of select='.'/></a></dd>
           </xsl:for-each>
-          </dl>
         </xsl:if>
+      </dl>
         </xsl:if>
 
         <xsl:if test="$person-nodeset">
