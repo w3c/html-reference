@@ -221,6 +221,7 @@ endif
 	  mv $$file.tmp $$file; \
 	done
 	@$(GREP) $(GREPFLAGS) -v "UNDEFINED" $< > $@
+	$(PERL) $(PERLFLAGS) -pi -e 's|<a href=".html#html-elements">|<a href="elements.html#html-elements">|' index-of-terms.html
 
 spec.html: html.spec.src.html src/status.html tools/specgen.xsl tools/toc.xsl
 	$(XSLTPROC) $(XSLTPROCFLAGS) \
