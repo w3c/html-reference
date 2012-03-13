@@ -50,7 +50,7 @@ ifeq ($(PUBSITE),)
 PUBSITE=W3C
 endif
 
-all: syntax Overview.html index.html MANIFEST spec.html README.md
+all: syntax Overview.html index.html MANIFEST spec.html README.markdown
 
 debug:
 	@echo $(MULTIPAGE_SPEC_FILES)
@@ -299,7 +299,7 @@ elements-generated.html: webapps.html tools/get-elements.xsl
 	  | $(PERL) $(PERLFLAGS) -pi -e 'undef $$/; s/ xmlns=""//g' \
 	  > $@
 
-README.md: README.html
+README.markdown: README.html
 	$(HTML2MARKDOWN) $(HTML2MARKDOWNFLAGS) $< > $@
 
 syntax:
