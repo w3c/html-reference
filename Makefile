@@ -176,7 +176,13 @@ html.spec.src.html: html-compiled.rng schema.html \
 	  > $@
 
 html5:
-	CVSROOT=:pserver:anonymous@dev.w3.org:/sources/public $(CVS) $(CVSFLAGS) co html5/spec
+	if [ -d /opt/workspace/html5/spec ]; then \
+	  mkdir html5 && cp -pR /opt/workspace/html5/spec html5/ ;
+	else \
+	  CVSROOT=:pserver:anonymous@dev.w3.org:/sources/public $(CVS) $(CVSFLAGS) co html5/spec \
+	  && rm -rf html5/CVS/ \
+	  && rm -rf html5/spec/CVS/ \
+	fi
 
 html5-spec: html5
 	for file in $(MULTIPAGE_SPEC_FILES); \
@@ -192,7 +198,8 @@ Overview.html: html.spec.src.html src/status.html tools/specgen.xsl tools/toc.xs
 	  tools/specgen.xsl html.spec.src.html 2>MANIFEST.tmp > $@.tmp
 	  $(TOHTML) $@.tmp 2>/dev/null \
 	  | $(PERL) $(PERLFLAGS) -pi -e 's| xmlns="http://www.w3.org/1999/xhtml"||' \
-	  | $(PERL) $(PERLFLAGS) -pi -e 's|<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">|<meta http-equiv="Content-Type" content="text/html; charset=utf-8">|' \
+	  | $(PERL) $(PERLFLAGS) -pi -e 's|<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">|<meta charset=utf-8>|' \
+	  | $(PERL) $(PERLFLAGS) -pi -e 's|<!DOCTYPE html PUBLIC "html" "about:legacy-compat">|<!doctype html>|' \
 	  > $@
 
 index.html: Overview.html
@@ -208,7 +215,8 @@ endif
 	for file in $(shell $(GREP) $(GREPFLAGS) -v "UNDEFINED" $< | $(GREP) $(GREPFLAGS) -v "\.xhtml"); \
 	  do $(TOHTML) - 2>/dev/null < $$file \
 	  | $(PERL) $(PERLFLAGS) -pi -e 's| xmlns="http://www.w3.org/1999/xhtml"||' \
-	  | $(PERL) $(PERLFLAGS) -pi -e 's|<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">|<meta http-equiv="Content-Type" content="text/html; charset=utf-8">|' \
+	  | $(PERL) $(PERLFLAGS) -pi -e 's|<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">|<meta charset=utf-8>|' \
+	  | $(PERL) $(PERLFLAGS) -pi -e 's|<!DOCTYPE html PUBLIC "html" "about:legacy-compat">|<!doctype html>|' \
 	  > $$file.tmp; \
 	  mv $$file.tmp $$file; \
 	done
@@ -221,7 +229,8 @@ spec.html: html.spec.src.html src/status.html tools/specgen.xsl tools/toc.xsl
 	  tools/specgen.xsl html.spec.src.html \
 	  | $(TOHTML) - 2>/dev/null \
 	  | $(PERL) $(PERLFLAGS) -pi -e 's| xmlns="http://www.w3.org/1999/xhtml"||' \
-	  | $(PERL) $(PERLFLAGS) -pi -e 's|<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">|<meta http-equiv="Content-Type" content="text/html; charset=utf-8">|' \
+	  | $(PERL) $(PERLFLAGS) -pi -e 's|<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">|<meta charset=utf-8>|' \
+	  | $(PERL) $(PERLFLAGS) -pi -e 's|<!DOCTYPE html PUBLIC "html" "about:legacy-compat">|<!doctype html>|' \
 	  > $@
 
 aria: aria/Overview.html aria/spec.html
@@ -326,7 +335,7 @@ endif
 	@echo
 
 schemaclean:
-	rm -rf syntax
+	$(RM) -r syntax
 
 distclean: clean schemaclean syntax
 	$(RM) webapps.html

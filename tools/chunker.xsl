@@ -18,8 +18,8 @@
     <xsl:param name="method">html</xsl:param>
     <xsl:param name="encoding">us-ascii</xsl:param>
     <xsl:param name="media-type">text/html; charset=us-ascii</xsl:param>
-    <xsl:param name="doctype-public">-//W3C//DTD HTML 4.01//EN</xsl:param>
-    <xsl:param name="doctype-system">http://www.w3.org/TR/html4/strict.dtd</xsl:param>
+    <xsl:param name="doctype-public">html</xsl:param>
+    <xsl:param name="doctype-system">about:legacy-compat</xsl:param>
     <xsl:param name="indent">yes</xsl:param>
     <xsl:param name="omit-xml-declaration">yes</xsl:param>
     <xsl:param name="cdata-section-elements"></xsl:param>

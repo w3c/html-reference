@@ -5,8 +5,8 @@
                 exclude-result-prefixes='h date'
                 version='1.0' id='xslt'>
   <xsl:output method='xml' encoding='us-ascii'
-    doctype-public='-//W3C//DTD HTML 4.01//EN'
-    doctype-system='http://www.w3.org/TR/html4/strict.dtd'
+    doctype-public='html'
+    doctype-system='about:legacy-compat'
     media-type='text/html; charset=us-ascii'
     indent="yes"/>
   <xsl:template match="/">
