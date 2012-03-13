@@ -48,28 +48,28 @@
       </s:rule>
     </xsl:for-each>
   </xsl:variable>
-  <xsl:variable name="warnings">
-    <xsl:for-each
-      select="document('../syntax/relaxng/warnings.sch')//*[@context]">
-      <s:rule>
-        <xsl:choose>
-          <xsl:when test="contains(@context,'|')">
-            <xsl:for-each select="str:tokenize(@context,'|')">
-              <xsl:call-template name="get-context"/>
-            </xsl:for-each>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:for-each select="@context">
-              <xsl:call-template name="get-context"/>
-            </xsl:for-each>
-          </xsl:otherwise>
-        </xsl:choose>
-        <xsl:for-each select="s:report|s:assert">
-          <xsl:copy-of select="."/>
-        </xsl:for-each>
-      </s:rule>
-    </xsl:for-each>
-  </xsl:variable>
+  <!-- * <xsl:variable name="warnings"> -->
+    <!-- * <xsl:for-each -->
+      <!-- * select="document('../syntax/relaxng/warnings.sch')//*[@context]"> -->
+      <!-- * <s:rule> -->
+        <!-- * <xsl:choose> -->
+          <!-- * <xsl:when test="contains(@context,'|')"> -->
+            <!-- * <xsl:for-each select="str:tokenize(@context,'|')"> -->
+              <!-- * <xsl:call-template name="get-context"/> -->
+            <!-- * </xsl:for-each> -->
+          <!-- * </xsl:when> -->
+          <!-- * <xsl:otherwise> -->
+            <!-- * <xsl:for-each select="@context"> -->
+              <!-- * <xsl:call-template name="get-context"/> -->
+            <!-- * </xsl:for-each> -->
+          <!-- * </xsl:otherwise> -->
+        <!-- * </xsl:choose> -->
+        <!-- * <xsl:for-each select="s:report|s:assert"> -->
+          <!-- * <xsl:copy-of select="."/> -->
+        <!-- * </xsl:for-each> -->
+      <!-- * </s:rule> -->
+    <!-- * </xsl:for-each> -->
+  <!-- * </xsl:variable> -->
   <xsl:template match="/">
     <html xml:lang="en">
       <xsl:text>&#10;  </xsl:text>
@@ -2704,18 +2704,18 @@
           </xsl:otherwise>
         </xsl:choose>
         <xsl:text>&#10;          </xsl:text>
-        <xsl:if
-          test="exsl:node-set($warnings)/s:rule[child::s:context = $name]
-          [child::s:report[@test[contains(.,concat('@',$attribute-name))]]]
-          and not($attribute-name='summary')
-          ">
-          <dd class="warning">
-            <xsl:value-of
-              select="exsl:node-set($warnings)/s:rule[child::s:context = $name]
-              /s:report[@test[contains(.,concat('@',$attribute-name))]]
-              "/>
-          </dd>
-        </xsl:if>
+        <!-- * <xsl:if -->
+          <!-- * test="exsl:node-set($warnings)/s:rule[child::s:context = $name] -->
+          <!-- * [child::s:report[@test[contains(.,concat('@',$attribute-name))]]] -->
+          <!-- * and not($attribute-name='summary') -->
+          <!-- * "> -->
+          <!-- * <dd class="warning"> -->
+            <!-- * <xsl:value-of -->
+              <!-- * select="exsl:node-set($warnings)/s:rule[child::s:context = $name] -->
+              <!-- * /s:report[@test[contains(.,concat('@',$attribute-name))]] -->
+              <!-- * "/> -->
+          <!-- * </dd> -->
+        <!-- * </xsl:if> -->
         <xsl:for-each select="exsl:node-set($definition)/*/*[@class='attr-values']/h:a">
           <xsl:if test="
             starts-with(@href,'#common.data.')

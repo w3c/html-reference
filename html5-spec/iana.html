@@ -321,14 +321,14 @@
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5496.</p>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5607.</p>
 
-   <h2 class="no-num no-toc" id="editor-s-draft-13-january-2012">Editor's Draft 13 January 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-7-march-2012">Editor's Draft 7 March 2012</h2>
    </div><nav class="prev_next"><a href="obsolete.html">&#x2190; 11 Obsolete features</a> &#x2013;
    <a href="index.html#contents">Table of contents</a> &#x2013;
    <a href="section-index.html">Index &#x2192;</a>
   <ol class="toc"><li><a href="iana.html#iana"><span class="secno">12 </span>IANA considerations</a>
-  <ol><li><a href="iana.html#text-html"><span class="secno">12.1 </span><code>text/html</code></a></li><li><a href="iana.html#multipart-x-mixed-replace"><span class="secno">12.2 </span><code>multipart/x-mixed-replace</code></a></li><li><a href="iana.html#application-xhtml-xml"><span class="secno">12.3 </span><code>application/xhtml+xml</code></a></li><li><a href="iana.html#application-x-www-form-urlencoded"><span class="secno">12.4 </span><code>application/x-www-form-urlencoded</code></a></li><li><a href="iana.html#text-cache-manifest"><span class="secno">12.5 </span><code>text/cache-manifest</code></a></li><li><a href="iana.html#web-scheme-prefix"><span class="secno">12.6 </span><code>web+</code> scheme prefix</a></li></ol></li></ol></nav><h2 id="iana"><span class="secno">12 </span>IANA considerations</h2><h3 id="text-html"><span class="secno">12.1 </span><dfn><code>text/html</code></dfn></h3><p>This registration is for community review and will be submitted
+  <ol><li><a href="iana.html#text-html"><span class="secno">12.1 </span><code>text/html</code></a></li><li><a href="iana.html#multipart-x-mixed-replace"><span class="secno">12.2 </span><code>multipart/x-mixed-replace</code></a></li><li><a href="iana.html#application-xhtml-xml"><span class="secno">12.3 </span><code>application/xhtml+xml</code></a></li><li><a href="iana.html#application-x-www-form-urlencoded"><span class="secno">12.4 </span><code>application/x-www-form-urlencoded</code></a></li><li><a href="iana.html#text-cache-manifest"><span class="secno">12.5 </span><code>text/cache-manifest</code></a></li><li><a href="iana.html#http-aes-scheme"><span class="secno">12.6 </span><code>http+aes</code> scheme</a></li><li><a href="iana.html#https-aes-scheme"><span class="secno">12.7 </span><code>https+aes</code> scheme</a></li><li><a href="iana.html#web-scheme-prefix"><span class="secno">12.8 </span><code>web+</code> scheme prefix</a></li></ol></li></ol></nav><h2 id="iana"><span class="secno">12 </span>IANA considerations</h2><h3 id="text-html"><span class="secno">12.1 </span><dfn><code>text/html</code></dfn></h3><p>This registration is for community review and will be submitted
   to the IESG for review, approval, and registration with IANA.</p><dl><dt>Type name:</dt>
    <dd>text</dd>
    <dt>Subtype name:</dt>
@@ -663,26 +663,152 @@
    <dt>Change controller:</dt>
    <dd>W3C</dd>
   </dl><p>Fragment identifiers have no meaning with
-  <code><a href="#text-cache-manifest">text/cache-manifest</a></code> resources.</p><h3 id="web-scheme-prefix"><span class="secno">12.6 </span><dfn title="scheme-web"><code>web+</code> scheme prefix</dfn></h3><p>This section describes a convention for use with the IANA URI
-  scheme registry. It does not itself register a specific scheme. <a href="references.html#refsRFC4395">[RFC4395]</a></p><dl><dt>URI scheme name</dt>
+  <code><a href="#text-cache-manifest">text/cache-manifest</a></code> resources.</p><h3 id="http-aes-scheme"><span class="secno">12.6 </span><dfn title="scheme-http+aes"><code>http+aes</code> scheme</dfn></h3><p>This section describes a URL scheme registration for the IANA URI
+  scheme registry. <a href="references.html#refsRFC4395">[RFC4395]</a></p><dl><dt>URI scheme name:</dt>
+   <dd><code title="">http+aes</code></dd>
+   <dt>Status:</dt>
+   <dd>permanent</dd>
+   <dt>URI scheme syntax:</dt>
+   <dd>Same as <code title="">http</code>, with the <code title="">userinfo</code> component instead used for specifying the
+   decryption key. (This key is provided in the form of 16, 24, or 32
+   bytes encoded as ASCII and escaped as necessary using the URL
+   escape mechanism; it is not in the "username:password" form, and
+   the ":" character is not special in this component when using this
+   scheme.)</dd>
+   <dt>URI scheme semantics:</dt>
+   <dd>Same as <code title="">http</code>, except that the message
+   body must be decrypted by applying the AES-CTR algorithm using the
+   key specified in the URL's <code title="">userinfo</code>
+   component, after unescaping it from the URL syntax to bytes, and
+   using a zero nonce. If there is no such component, or if that
+   component, when unescaped from the URL syntax to bytes, does not
+   consist of exactly 16, 24, or 32 bytes, then the user agent must
+   act as if the resource could not be obtained due to a network
+   error, and may report the problem to the user.</dd>
+   <dt>Encoding considerations:</dt>
+   <dd>Same as <code title="">http</code>, but the <code title="">userinfo</code> component represents bytes encoded using
+   ASCII and the URL escape mechanism.</dd>
+   <dt>Applications/protocols that use this URI scheme name:</dt>
+   <dd>Same as <code title="">http</code>.</dd>
+   <dt>Interoperability considerations:</dt>
+   <dd>Same as <code title="">http</code>, but specifically for
+   private resources that are hosted by untrusted intermediary servers
+   as in a content delivery network.</dd>
+
+   <dt>Security considerations:</dt>
+   <dd>
+    <p>URLs using this scheme contain sensitive information (the key
+    used to decrypt the referenced content) and as such should be
+    handled with care, e.g. only sent over TLS-encrypted connections,
+    and only sent to users who are authorized to access the encrypted
+    content.</p>
+    <p>User agents are encouraged to not show the key in user
+    interface elements where the URL is displayed: first, it's ugly
+    and not useful to the user; and second, it could be used to
+    obscure the domain name.</p>
+    <p>The <code title="">http+aes</code> URL scheme only enables the
+    <em>content</em> of a particular resource to be encrypted. Any
+    sensitive information held in HTTP headers is still transmitted in
+    the clear. The length of the resource is still visible. The rate
+    at which the data is transmitted is also unobscured. The name of
+    the resource is not hidden. If this scheme is used to obscure
+    private information, it is important to consider how these side
+    channels might leak information.</p>
+    <p class="example">For example, the length of a file containing
+    only the user's age in seconds encoded in ASCII would easily let
+    an attacker watching the network traffic or with access to the
+    system hosting the files determine if the user was less than 3
+    years old, less than 30 years old, or more than 30 years old, just
+    from the length of the file. Padding the file to ten digits
+    (either with trailing spaces or leading zeros) would make all ages
+    from zero to three hundred indistinguishable.</p>
+    <p class="example">Another example would be the file name.
+    Consider a bank where each user first downloads a "data.json"
+    file, which points to some other files for more data, such that
+    users in debt download a "debt.json" file while users in credit
+    download a "credit.json" file. In such a scenario, users can be
+    categorised by an attacker watching network traffic or with access
+    to the system hosting the files without the attacker ever having
+    to decrypt the "data.json" files.</p>
+    <p>Each resource encrypted in this fashion must use a fresh key.
+    Otherwise, an attacker can use commonalities in the resources'
+    plaintexts to determine the key and decrypt all the resources
+    sharing a key.</p>
+    <p>Authors should take care not to embed arbitrary content from
+    the same site using the same scheme, as all content using the
+    <code title="">http+aes</code> scheme on the same host (and same
+    port) shares the same <a href="origin-0.html#origin">origin</a> and can therefore leak
+    the keys of any other content also opened at that origin. This
+    problem can be mitigated using the <code><a href="the-iframe-element.html#the-iframe-element">iframe</a></code> element and
+    the <code title="attr-iframe-sandbox"><a href="the-iframe-element.html#attr-iframe-sandbox">sandbox</a></code>
+    attribute to embed such content.</p>
+    <p>The security considerations that apply to <code title="">http</code> apply as well.</p>
+   </dd>
+
+   <dt>Contact:</dt>
+   <dd>Ian Hickson &lt;ian@hixie.ch&gt;</dd>
+   <dt>Author/Change controller:</dt>
+   <dd>Ian Hickson &lt;ian@hixie.ch&gt;</dd>
+   <dt>References:</dt>
+   <dd>
+    The <code title="">http</code> URL scheme is defined in:
+    <a href="http://tools.ietf.org/html/draft-ietf-httpbis-p1-messaging">http://tools.ietf.org/html/draft-ietf-httpbis-p1-messaging</a>
+   </dd>
+  </dl><h3 id="https-aes-scheme"><span class="secno">12.7 </span><dfn title="scheme-https+aes"><code>https+aes</code> scheme</dfn></h3><p>This section describes a URL scheme registration for the IANA URI
+  scheme registry. <a href="references.html#refsRFC4395">[RFC4395]</a></p><dl><dt>URI scheme name:</dt>
+   <dd><code title="">https+aes</code></dd>
+   <dt>Status:</dt>
+   <dd>permanent</dd>
+   <dt>URI scheme syntax:</dt>
+   <dd>Same as <code title="">http+aes</code>.</dd>
+   <dt>URI scheme semantics:</dt>
+   <dd>Same as <code title="">http+aes</code>, but using HTTP over TLS
+   (as in, HTTPS) instead of HTTP, and defaulting to the HTTPS port
+   instead of HTTP's port.</dd>
+   <dt>Encoding considerations:</dt>
+   <dd>Same as <code title="">http+aes</code>.</dd>
+   <dt>Applications/protocols that use this URI scheme name:</dt>
+   <dd>Same as <code title="">https</code>.</dd>
+   <dt>Interoperability considerations:</dt>
+   <dd>Same as <code title="">https</code>, but specifically for
+   private resources that are hosted by untrusted intermediary servers
+   as in a content delivery network.</dd>
+
+   <dt>Security considerations:</dt>
+   <dd>
+    <p>The security considerations that apply to <code title="">http+aes</code> and <code title="">https</code> apply as
+    well.</p>
+   </dd>
+
+   <dt>Contact:</dt>
+   <dd>Ian Hickson &lt;ian@hixie.ch&gt;</dd>
+   <dt>Author/Change controller:</dt>
+   <dd>Ian Hickson &lt;ian@hixie.ch&gt;</dd>
+   <dt>References:</dt>
+   <dd>
+    The <code title="">https</code> URL scheme is defined in:
+    <a href="http://tools.ietf.org/html/draft-ietf-httpbis-p1-messaging">http://tools.ietf.org/html/draft-ietf-httpbis-p1-messaging</a>
+   </dd>
+  </dl><h3 id="web-scheme-prefix"><span class="secno">12.8 </span><dfn title="scheme-web"><code>web+</code> scheme prefix</dfn></h3><p>This section describes a convention for use with the IANA URI
+  scheme registry. It does not itself register a specific scheme. <a href="references.html#refsRFC4395">[RFC4395]</a></p><dl><dt>URI scheme name:</dt>
    <dd>
     Schemes starting with the four characters "<code title="">web+</code>" followed by one or more letters in the range
     <code title="">a</code>-<code title="">z</code>.
    </dd>
-   <dt>Status</dt>
+   <dt>Status:</dt>
    <dd>permanent</dd>
-   <dt>URI scheme syntax</dt>
+   <dt>URI scheme syntax:</dt>
    <dd>Scheme-specific.</dd>
-   <dt>URI scheme semantics</dt>
+   <dt>URI scheme semantics:</dt>
    <dd>Scheme-specific.</dd>
-   <dt>Encoding considerations</dt>
+   <dt>Encoding considerations:</dt>
    <dd>All "<code title="">web+</code>" schemes should use UTF-8 encodings were relevant.</dd>
-   <dt>Applications/protocols that use this URI scheme name</dt>
+   <dt>Applications/protocols that use this URI scheme name:</dt>
    <dd>Scheme-specific.</dd>
-   <dt>Interoperability considerations</dt>
+   <dt>Interoperability considerations:</dt>
    <dd>The scheme is expected to be used in the context of Web applications.</dd>
 
-   <dt>Security considerations</dt>
+   <dt>Security considerations:</dt>
    <dd>
     Any Web page is able to register a handler for all "<code title="">web+</code>" schemes. As such, these schemes must not be
     used for features intended to be core platform features (e.g.
@@ -692,10 +818,13 @@
     confidential project names.
    </dd>
 
-   <dt>Contact</dt>
+   <dt>Contact:</dt>
    <dd>Ian Hickson &lt;ian@hixie.ch&gt;</dd>
-   <dt>Author/Change controller</dt>
+   <dt>Author/Change controller:</dt>
    <dd>Ian Hickson &lt;ian@hixie.ch&gt;</dd>
-   <dt>References</dt>
-   <dd>W3C</dd>
+   <dt>References:</dt>
+   <dd>
+    <cite>Custom scheme and content handlers</cite>, HTML Living Standard:
+    <a href="system-state-and-capabilities.html#custom-handlers">http://www.whatwg.org/specs/web-apps/current-work/#custom-handlers</a>
+   </dd>
   </dl></body></html>

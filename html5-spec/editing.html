@@ -321,9 +321,9 @@
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5496.</p>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5607.</p>
 
-   <h2 class="no-num no-toc" id="editor-s-draft-13-january-2012">Editor's Draft 13 January 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-7-march-2012">Editor's Draft 7 March 2012</h2>
    </div><nav class="prev_next"><a href="system-state-and-capabilities.html">&#x2190; 6.5 System state and capabilities</a> &#x2013;
    <a href="index.html#contents">Table of contents</a> &#x2013;
    <a href="editing-apis.html">7.5.4 Editing APIs &#x2192;</a>
@@ -333,12 +333,17 @@
     <ol><li><a href="editing.html#introduction-6"><span class="secno">7.4.1 </span>Introduction</a></li><li><a href="editing.html#the-accesskey-attribute"><span class="secno">7.4.2 </span>The <code>accesskey</code> attribute</a></li><li><a href="editing.html#processing-model-3"><span class="secno">7.4.3 </span>Processing model</a></li></ol></li><li><a href="editing.html#editing-0"><span class="secno">7.5 </span>Editing</a>
     <ol><li><a href="editing.html#contenteditable"><span class="secno">7.5.1 </span>Making document regions editable: The <code title="attr-contenteditable">contenteditable</code> content
   attribute</a></li><li><a href="editing.html#making-entire-documents-editable:-the-designmode-idl-attribute"><span class="secno">7.5.2 </span>Making entire documents editable: The <code title="dom-document-designMode">designMode</code> IDL attribute</a></li><li><a href="editing.html#best-practices-for-in-page-editors"><span class="secno">7.5.3 </span>Best practices for in-page editors</a></li></ol></li></ol></li></ol></nav><h2 id="editing"><span class="secno">7 </span><dfn>User interaction</dfn></h2><h3 id="the-hidden-attribute"><span class="secno">7.1 </span>The <dfn title="attr-hidden"><code>hidden</code></dfn> attribute</h3><p>All <a href="infrastructure.html#html-elements">HTML elements</a> may have the <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> content attribute set. The <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> attribute is a <a href="common-microsyntaxes.html#boolean-attribute">boolean
-  attribute</a>. When specified on an element, it indicates that
-  the element is not yet, or is no longer, directly relevant to the
-  page's current state, or that it is being used to declare content to
-  be reused by other parts of the page as opposed to being directly
-  accessed by the user. <span class="impl">User agents should not
-  render elements that have the <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> attribute specified.</span></p><div class="example">
+  attribute</a>.
+
+
+  When specified on an element, it indicates that the element is not
+  yet, or is no longer, relevant.
+
+
+
+  <span class="impl">User agents should not render elements that have
+  the <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> attribute
+  specified.</span></p><div class="example">
 
    <p>In the following skeletal example, the attribute is used to hide
    the Web game's main screen until the user logs in:</p>
@@ -370,28 +375,22 @@
   controls in one big page with a scrollbar. It is similarly incorrect
   to use this attribute to hide content just from one presentation
   &#x2014; if something is marked <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code>, it is hidden from all
-  presentations, including, for instance, screen readers.</p><p>Elements that are not themselves <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> must not <a href="links.html#hyperlink">hyperlink</a> to
-  elements that are <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code>. The <code title="">for</code> attributes of <code><a href="the-label-element.html#the-label-element">label</a></code> and
-  <code><a href="the-output-element.html#the-output-element">output</a></code> elements that are not themselves <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> must similarly not refer to
-  elements that are <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code>. In both
-  cases, such references would cause user confusion.</p><p>Elements and scripts may, however, refer to elements that are
-  <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> in other contexts.</p><div class="example">
+  presentations, including, for instance, screen readers.</p><p>Elements that are not <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code>
+  should not link to or refer to elements that are <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code>.</p><div class="example">
 
    <p>For example, it would be incorrect to use the <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code> attribute to link to a
    section marked with the <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code>
    attribute. If the content is not applicable or relevant, then there
    is no reason to link to it.</p>
 
-   <p>It would be fine, however, to use the ARIA <code title="attr-aria-describedby">aria-describedby</code> attribute to
-   refer to descriptions that are themselves <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code>. While hiding the descriptions
-   implies that they are not useful alone, they could be written in
-   such a way that they are useful in the specific context of being
-   referenced from the images that they describe.</p>
 
-   <p>Similarly, a <code><a href="the-canvas-element.html#the-canvas-element">canvas</a></code> element with the <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> attribute could be used by a
-   scripted graphics engine as an off-screen buffer, and a form
-   control could refer to a hidden <code><a href="the-form-element.html#the-form-element">form</a></code> element using its
-   <code title="attr-fae-form"><a href="association-of-controls-and-forms.html#attr-fae-form">form</a></code> attribute.</p>
+   <p>It would similarly be incorrect to use the ARIA <code title="attr-aria-describedby">aria-describedby</code> attribute to
+   refer to descriptions that are themselves <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code>. Hiding a section means that it
+   is not applicable or relevant to anyone at the current time, so
+   clearly it cannot be a valid description of content the user can
+   interact with.</p>
+
+
 
   </div><p>Elements in a section hidden by the <code title="attr-hidden"><a href="#the-hidden-attribute">hidden</a></code> attribute are still active,
   e.g. scripts and form controls in such sections still execute
@@ -445,15 +444,21 @@
   CSS <code>:focus</code> pseudo-class.</p>
 
   </div><h4 id="sequential-focus-navigation-and-the-tabindex-attribute"><span class="secno">7.3.1 </span>Sequential focus navigation and the <code title="attr-tabindex"><a href="#attr-tabindex">tabindex</a></code> attribute</h4><p>The <dfn id="attr-tabindex" title="attr-tabindex"><code>tabindex</code></dfn>
-  content attribute specifies whether the element is focusable,
-  whether it can be reached using sequential focus navigation, and the
-  relative order of the element for the purposes of sequential focus
+  content attribute allows authors to control whether an element is
+  supposed to be focusable, whether it is supposed to be reachable
+  using sequential focus navigation, and what is to be the relative
+  order of the element for the purposes of sequential focus
   navigation. The name "tab index" comes from the common use of the
   "tab" key to navigate through the focusable elements. The term
   "tabbing" refers to moving forward through the focusable elements
   that can be reached using sequential focus navigation.</p><p>The <code title="attr-tabindex"><a href="#attr-tabindex">tabindex</a></code> attribute, if
   specified, must have a value that is a <a href="common-microsyntaxes.html#valid-integer">valid
   integer</a>.</p><div class="impl">
+
+  <p>Each element has a <dfn id="specially-focusable">tabindex focus
+  flag</dfn>. This flag is a factor that contributes towards
+  determining whether an element is <a href="#focusable">focusable</a>, as
+  described in the next section.</p>
 
   <p>If the attribute is specified, it must be parsed using the
   <a href="common-microsyntaxes.html#rules-for-parsing-integers">rules for parsing integers</a>. The attribute's values have
@@ -464,10 +469,16 @@
 
    <dd>
 
-    <p>The user agent should follow platform conventions to determine if
-    the element is to be focusable and, if so, whether the element can
-    be reached using sequential focus navigation, and if so, what its
-    relative order should be.</p>
+    <p>The user agent should follow platform conventions to determine
+    if the element's <a href="#specially-focusable">tabindex focus flag</a> is set and, if
+    so, whether the element can be reached using sequential focus
+    navigation, and if so, what its relative order should be.</p>
+
+    <p class="note">One valid reason to ignore the platform
+    conventions and always allow an element to be focused (by setting
+    its <a href="#specially-focusable">tabindex focus flag</a>) would be if the user's only
+    mechanism for activating an element is through a keyboard action
+    that triggers the focused element.</p>
 
    </dd>
 
@@ -475,9 +486,17 @@
 
    <dd>
 
-    <p>The user agent must allow the element to be focused, but should
-    not allow the element to be reached using sequential focus
-    navigation.</p>
+    <p>The user agent must set the element's <a href="#specially-focusable">tabindex focus
+    flag</a>, but should not allow the element to be reached using
+    sequential focus navigation.</p>
+
+    <p class="note">One valid reason to ignore the requirement that
+    sequential focus navigation not allow the author to lead to the
+    element would be if the user's only mechanism for moving the focus
+    is sequential focus navigation. For instance, a keyboard-only user
+    would be unable to click on a text field with a negative <code title="attr-tabindex"><a href="#attr-tabindex">tabindex</a></code>, so that user's user agent
+    would be well justified in allowing the user to tab to the control
+    regardless.</p>
 
    </dd>
 
@@ -485,10 +504,10 @@
 
    <dd>
 
-    <p>The user agent must allow the element to be focused, should
-    allow the element to be reached using sequential focus navigation,
-    and should follow platform conventions to determine the element's
-    relative order.</p>
+    <p>The user agent must set the element's <a href="#specially-focusable">tabindex focus
+    flag</a>, should allow the element to be reached using
+    sequential focus navigation, and should follow platform
+    conventions to determine the element's relative order.</p>
 
    </dd>
 
@@ -496,15 +515,15 @@
 
    <dd>
 
-    <p>The user agent must allow the element to be focused, should
-    allow the element to be reached using sequential focus navigation,
-    and should place the element in the sequential focus navigation
-    order so that it is:</p>
+    <p>The user agent must set the element's <a href="#specially-focusable">tabindex focus
+    flag</a>, should allow the element to be reached using
+    sequential focus navigation, and should place the element in the
+    sequential focus navigation order so that it is:</p>
 
-    <ul><li>before any focusable element whose <code title="attr-tabindex"><a href="#attr-tabindex">tabindex</a></code> attribute has been
-     omitted or whose value, when parsed, returns an error,</li>
+    <ul><li>before any <a href="#focusable">focusable</a> element whose <code title="attr-tabindex"><a href="#attr-tabindex">tabindex</a></code> attribute has been omitted
+     or whose value, when parsed, returns an error,</li>
 
-     <li>before any focusable element whose <code title="attr-tabindex"><a href="#attr-tabindex">tabindex</a></code> attribute has a value equal
+     <li>before any <a href="#focusable">focusable</a> element whose <code title="attr-tabindex"><a href="#attr-tabindex">tabindex</a></code> attribute has a value equal
      to or less than zero,</li>
 
      <li>after any element whose <code title="attr-tabindex"><a href="#attr-tabindex">tabindex</a></code> attribute has a value
@@ -527,12 +546,9 @@
 
     </ul></dd>
 
-  </dl><p>An element is <dfn id="specially-focusable">specially focusable</dfn> if the <code title="attr-tabindex"><a href="#attr-tabindex">tabindex</a></code> attribute's definition above
-  defines the element to be focusable.</p>
-
-  <p>An element that is <a href="#specially-focusable">specially focusable</a> but does not
-  otherwise have an <a href="content-models.html#activation-behavior">activation behavior</a> defined has an
-  <a href="content-models.html#activation-behavior">activation behavior</a> that does nothing.</p>
+  </dl><p>An element that has its <a href="#specially-focusable">tabindex focus flag</a> set but
+  does not otherwise have an <a href="content-models.html#activation-behavior">activation behavior</a> defined
+  has an <a href="content-models.html#activation-behavior">activation behavior</a> that does nothing.</p>
 
   <p class="note">This means that an element that is only focusable
   because of its <code title="attr-tabindex"><a href="#attr-tabindex">tabindex</a></code> attribute
@@ -550,15 +566,15 @@
   <h4 id="focus-management"><span class="secno">7.3.2 </span>Focus management</h4>
 
   <p>An element is <dfn id="focusable">focusable</dfn> if the user agent's default
-  behavior allows it to be focusable or if the element is
-  <a href="#specially-focusable">specially focusable</a>, but only if the element is either
-  <a href="rendering.html#being-rendered">being rendered</a> or <!-- CANVAS-FOCUS-FALLBACK --> is a
-  descendant of a <code><a href="the-canvas-element.html#the-canvas-element">canvas</a></code> element that
+  behavior allows it to be focusable or if the element has its
+  <a href="#specially-focusable">tabindex focus flag</a> set, but only if the element is
+  either <a href="rendering.html#being-rendered">being rendered</a> or <!-- CANVAS-FOCUS-FALLBACK -->
+  is a descendant of a <code><a href="the-canvas-element.html#the-canvas-element">canvas</a></code> element that
   <a href="rendering.html#represents">represents</a> <a href="content-models.html#embedded-content">embedded content</a>.</p>
 
   <p>User agents should make the following elements
-  <a href="#focusable">focusable</a>, unless platform conventions dictate
-  otherwise:</p>
+  <a href="#focusable">focusable</a> as part of their default behavior, unless
+  platform conventions dictate otherwise:</p>
 
   <ul><li><code><a href="the-a-element.html#the-a-element">a</a></code> elements that have an <code title="attr-hyperlink-href"><a href="links.html#attr-hyperlink-href">href</a></code> attribute</li>
 
@@ -593,9 +609,9 @@
   reused with multiple images on a page.)</p>
 
   <p>The user agent may also make part of a <code><a href="the-details-element.html#the-details-element">details</a></code>
-  element's rendering focusable, to enable the element to be opened or
-  closed using keyboard input. However, this is distinct from the
-  <code><a href="the-details-element.html#the-details-element">details</a></code> or <code><a href="the-summary-element.html#the-summary-element">summary</a></code> element being
+  element's rendering <a href="#focusable">focusable</a>, to enable the element to
+  be opened or closed using keyboard input. However, this is distinct
+  from the <code><a href="the-details-element.html#the-details-element">details</a></code> or <code><a href="the-summary-element.html#the-summary-element">summary</a></code> element being
   focusable.</p>
 
   <hr/><p>The <dfn id="focusing-steps">focusing steps</dfn> are as follows:</p>
@@ -604,8 +620,8 @@
    <code>Document</code></a>, or if the element's
    <code><a href="dom.html#document">Document</a></code> has no <a href="browsers.html#browsing-context">browsing context</a>, or if
    the element's <code><a href="dom.html#document">Document</a></code>'s <a href="browsers.html#browsing-context">browsing context</a>
-   has no <a href="browsers.html#top-level-browsing-context">top-level browsing context</a>, then abort these
-   steps.</p>
+   has no <a href="browsers.html#top-level-browsing-context">top-level browsing context</a>, or if the element
+   is not <a href="#focusable">focusable</a>, then abort these steps.</p>
 
    </li><li><p>If focusing the element will remove the focus from another
    element, then run the <a href="#unfocusing-steps">unfocusing steps</a> for that

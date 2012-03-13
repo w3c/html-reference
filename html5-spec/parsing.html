@@ -322,13 +322,13 @@
 
    <h1>HTML5</h1>
    <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2>
-   <h2 class="no-num no-toc" id="editor-s-draft-13-january-2012">Editor's Draft 13 January 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-7-march-2012">Editor's Draft 7 March 2012</h2>
    </div><nav class="prev_next"><a href="syntax.html">&#x2190; 8 The HTML syntax</a> &#x2013;
    <a href="index.html#contents">Table of contents</a> &#x2013;
    <a href="tokenization.html">8.2.4 Tokenization &#x2192;</a>
   <ol class="toc"><li><ol><li><a href="parsing.html#parsing"><span class="secno">8.2 </span>Parsing HTML documents</a>
-    <ol><li><a href="parsing.html#overview-of-the-parsing-model"><span class="secno">8.2.1 </span>Overview of the parsing model</a></li><li><a href="parsing.html#the-input-stream"><span class="secno">8.2.2 </span>The input stream</a>
-      <ol><li><a href="parsing.html#determining-the-character-encoding"><span class="secno">8.2.2.1 </span>Determining the character encoding</a></li><li><a href="parsing.html#character-encodings-0"><span class="secno">8.2.2.2 </span>Character encodings</a></li><li><a href="parsing.html#preprocessing-the-input-stream"><span class="secno">8.2.2.3 </span>Preprocessing the input stream</a></li><li><a href="parsing.html#changing-the-encoding-while-parsing"><span class="secno">8.2.2.4 </span>Changing the encoding while parsing</a></li></ol></li><li><a href="parsing.html#parse-state"><span class="secno">8.2.3 </span>Parse state</a>
+    <ol><li><a href="parsing.html#overview-of-the-parsing-model"><span class="secno">8.2.1 </span>Overview of the parsing model</a></li><li><a href="parsing.html#the-input-byte-stream"><span class="secno">8.2.2 </span>The input byte stream</a>
+      <ol><li><a href="parsing.html#determining-the-character-encoding"><span class="secno">8.2.2.1 </span>Determining the character encoding</a></li><li><a href="parsing.html#character-encodings-0"><span class="secno">8.2.2.2 </span>Character encodings</a></li><li><a href="parsing.html#changing-the-encoding-while-parsing"><span class="secno">8.2.2.3 </span>Changing the encoding while parsing</a></li><li><a href="parsing.html#preprocessing-the-input-stream"><span class="secno">8.2.2.4 </span>Preprocessing the input stream</a></li></ol></li><li><a href="parsing.html#parse-state"><span class="secno">8.2.3 </span>Parse state</a>
       <ol><li><a href="parsing.html#the-insertion-mode"><span class="secno">8.2.3.1 </span>The insertion mode</a></li><li><a href="parsing.html#the-stack-of-open-elements"><span class="secno">8.2.3.2 </span>The stack of open elements</a></li><li><a href="parsing.html#the-list-of-active-formatting-elements"><span class="secno">8.2.3.3 </span>The list of active formatting elements</a></li><li><a href="parsing.html#the-element-pointers"><span class="secno">8.2.3.4 </span>The element pointers</a></li><li><a href="parsing.html#other-parsing-state-flags"><span class="secno">8.2.3.5 </span>Other parsing state flags</a></li></ol></li></ol></li></ol></li></ol></nav><div class="impl">
 
   <h3 id="parsing"><span class="secno">8.2 </span>Parsing HTML documents</h3>
@@ -399,13 +399,13 @@
 
   <h4 id="overview-of-the-parsing-model"><span class="secno">8.2.1 </span>Overview of the parsing model</h4>
 
-  <p class="overview"><object data="images/parsing-model-overview.svg" height="450" width="345"><img alt="" height="450" src="http://dev.w3.org/html5/spec/images/parsing-model-overview.png" width="345"/></object></p>
+  <p class="overview"><object data="images/parsing-model-overview.svg" height="535" width="345"><img alt="" height="450" src="http://dev.w3.org/html5/spec/images/parsing-model-overview.png" width="345"/></object></p>
 
   <p>The input to the HTML parsing process consists of a stream of
-  Unicode code points, which is passed through a
-  <a href="tokenization.html#tokenization">tokenization</a> stage followed by a <a href="tree-construction.html#tree-construction">tree
-  construction</a> stage. The output is a <code><a href="dom.html#document">Document</a></code>
-  object.</p>
+  <a href="infrastructure.html#unicode-code-point" title="Unicode code point">Unicode code points</a>, which
+  is passed through a <a href="tokenization.html#tokenization">tokenization</a> stage followed by a
+  <a href="tree-construction.html#tree-construction">tree construction</a> stage. The output is a
+  <code><a href="dom.html#document">Document</a></code> object.</p>
 
   <p class="note">Implementations that <a href="infrastructure.html#non-scripted">do not
   support scripting</a> do not have to actually create a DOM
@@ -443,18 +443,43 @@
 
   </div><div class="impl">
 
-  <h4 id="the-input-stream"><span class="secno">8.2.2 </span>The <dfn>input stream</dfn></h4>
+  <h4 id="the-input-byte-stream"><span class="secno">8.2.2 </span>The <dfn>input byte stream</dfn></h4>
 
   <p>The stream of Unicode code points that comprises the input to the
   tokenization stage will be initially seen by the user agent as a
   stream of bytes (typically coming over the network or from the local
   file system). The bytes encode the actual characters according to a
-  particular <em>character encoding</em>, which the user agent must
-  use to decode the bytes into characters.</p>
+  particular <i>character encoding</i>, which the user agent must use
+  to decode the bytes into characters.</p>
 
   <p class="note">For XML documents, the algorithm user agents must
   use to determine the character encoding is given by the XML
   specification. This section does not apply to XML documents. <a href="references.html#refsXML">[XML]</a></p>
+
+  <p>The <a href="#encoding-sniffing-algorithm">encoding sniffing algorithm</a> defined below is
+  used to determine the character encoding.</p>
+
+  <p>Given an encoding, the bytes in the <a href="#the-input-byte-stream">input byte
+  stream</a> must be converted to Unicode code points for the
+  tokenizer's <a href="#input-stream">input stream</a>, as described by the rules for
+  that encoding, except that the leading U+FEFF BYTE ORDER MARK
+  character, if any, must not be stripped by the encoding layer (it is
+  stripped by the rule below).</p> 
+
+  <p>Bytes or sequences of bytes in the original byte stream that
+  could not be converted to Unicode code points must be converted to
+  U+FFFD REPLACEMENT CHARACTERs. Specifically, if the encoding is
+  UTF-8, the bytes must be <a href="infrastructure.html#decoded-as-utf-8-with-error-handling" title="decoded as UTF-8, with error&#10;  handling">decoded with the error handling</a> defined in this
+  specification.</p>
+
+  <p class="note">Bytes or sequences of bytes in the original byte
+  stream that did not conform to the encoding specification (e.g.
+  invalid UTF-8 byte sequences in a UTF-8 input byte stream) are
+  errors that conformance checkers are expected to report.</p>
+
+  <p>Any byte or sequence of bytes in the original byte stream that is
+  <a href="#misinterpreted-for-compatibility">misinterpreted for compatibility</a> is a <a href="#parse-error">parse
+  error</a>.</p>
 
 
   <h5 id="determining-the-character-encoding"><span class="secno">8.2.2.1 </span>Determining the character encoding</h5>
@@ -472,10 +497,10 @@
   parse of the document with the real encoding.</p>
 
   <p id="documentEncoding">User agents must use the following
-  algorithm (the <dfn id="encoding-sniffing-algorithm">encoding sniffing algorithm</dfn>) to determine
-  the character encoding to use when decoding a document in the first
-  pass. This algorithm takes as input any out-of-band metadata
-  available to the user agent (e.g. the <a href="urls.html#content-type" title="Content-Type">Content-Type metadata</a> of the document)
+  algorithm, called the <dfn id="encoding-sniffing-algorithm">encoding sniffing algorithm</dfn>, to
+  determine the character encoding to use when decoding a document in
+  the first pass. This algorithm takes as input any out-of-band
+  metadata available to the user agent (e.g. the <a href="urls.html#content-type" title="Content-Type">Content-Type metadata</a> of the document)
   and all the bytes available so far, and returns an encoding and a
   <dfn id="concept-encoding-confidence" title="concept-encoding-confidence">confidence</dfn>. The
   confidence is either <i>tentative</i>, <i>certain</i>, or
@@ -511,9 +536,9 @@
 
     <p class="note">The authoring conformance requirements for
     character encoding declarations limit them to only appearing <a href="the-meta-element.html#charset1024">in the first 1024 bytes</a>. User agents are
-    therefore encouraged to use the preparse algorithm below (part of
-    these steps) on the first 1024 bytes, but not to stall beyond
-    that.</p>
+    therefore encouraged to use the prescan algorithm below (as
+    invoked by these steps) on the first 1024 bytes, but not to stall
+    beyond that.</p>
 
    </li>
 
@@ -538,315 +563,27 @@
     </td></tr></tbody></table><p class="note">This step looks for Unicode Byte Order Marks
    (BOMs).</p></li>
 
-   <li><p>Otherwise, the user agent will have to search for explicit
-   character encoding information in the file itself. This should
-   proceed as follows:
-
-    </p><p>Let <var title="">position</var> be a pointer to a byte in the
-    input stream, initially pointing at the first byte. If at any
-    point during these substeps the user agent either runs out of
-    bytes or decides that scanning further bytes would not be
-    efficient, then skip to the next step of the overall character
-    encoding detection algorithm. User agents may decide that scanning
-    <em>any</em> bytes is not efficient, in which case these substeps
-    are entirely skipped.</p>
-
-    <p>Now, repeat the following "two" steps until the algorithm
-    aborts (either because user agent aborts, as described above, or
-    because a character encoding is found):</p>
-
-    <ol><li><p>If <var title="">position</var> points to:</p>
-
-      <dl class="switch"><dt>A sequence of bytes starting with: 0x3C 0x21 0x2D 0x2D (ASCII '&lt;!--')</dt>
-       <dd>
-
-        <p>Advance the <var title="">position</var> pointer so that it
-        points at the first 0x3E byte which is preceded by two 0x2D
-        bytes (i.e. at the end of an ASCII '--&gt;' sequence) and comes
-        after the 0x3C byte that was found. (The two 0x2D bytes can be
-        the same as the those in the '&lt;!--' sequence.)</p>
-
-       </dd>
-
-       <dt>A sequence of bytes starting with: 0x3C, 0x4D or 0x6D, 0x45 or 0x65, 0x54 or 0x74, 0x41 or 0x61, and one of 0x09, 0x0A, 0x0C, 0x0D, 0x20, 0x2F (case-insensitive ASCII '&lt;meta' followed by a space or slash)</dt>
-       <dd>
-
-        <ol><li><p>Advance the <var title="">position</var> pointer so
-         that it points at the next 0x09, 0x0A, 0x0C, 0x0D, 0x20, or
-         0x2F byte (the one in sequence of characters matched
-         above).</p></li>
-
-         <li><p>Let <var title="">attribute list</var> be an empty
-         list of strings.</p></li> 
-
-         <li><p>Let <var title="">got pragma</var> be false.</p></li>
-
-         <li><p>Let <var title="">need pragma</var> be null.</p></li>
-
-         <li><p>Let <var title="">charset</var> be the null value
-         (which, for the purposes of this algorithm, is distinct from
-         an unrecognised encoding or the empty string).</p></li>
-
-         <li><p><i>Attributes</i>: <a href="#concept-get-attributes-when-sniffing" title="concept-get-attributes-when-sniffing">Get an
-         attribute</a> and its value. If no attribute was sniffed,
-         then jump to the <i>processing</i> step below.</p></li>
-
-         <li><p>If the attribute's name is already in <var title="">attribute list</var>, then return to the step
-         labeled <i>attributes</i>.</p>
-
-         </li><li><p>Add the attribute's name to <var title="">attribute
-         list</var>.</p>
-
-         </li><li>
-
-          <p>Run the appropriate step from the following list, if one
-          applies:</p>
-
-          <dl class="switch"><dt>If the attribute's name is "<code title="">http-equiv</code>"</dt>
-
-           <dd><p>If the attribute's value is "<code title="">content-type</code>", then set <var title="">got
-           pragma</var> to true.</p></dd>
-
-           <dt>If the attribute's name is "<code title="">content</code>"</dt>
-
-           <dd><p>Apply the <a href="urls.html#algorithm-for-extracting-an-encoding-from-a-meta-element">algorithm for extracting an encoding
-           from a <code>meta</code> element</a>, giving the
-           attribute's value as the string to parse. If an encoding is
-           returned, and if <var title="">charset</var> is still set
-           to null, let <var title="">charset</var> be the encoding
-           returned, and set <var title="">need pragma</var> to
-           true.</p></dd>
-
-           <dt>If the attribute's name is "<code title="">charset</code>"</dt>
-
-           <dd><p>Let <var title="">charset</var> be the encoding
-           corresponding to the attribute's value, and set <var title="">need pragma</var> to false.</p></dd>
-
-          </dl></li>
-
-         <li><p>Return to the step labeled <i>attributes</i>.</p></li>
-
-         <li><p><i>Processing</i>: If <var title="">need pragma</var>
-         is null, then jump to the second step of the overall "two
-         step" algorithm.</p></li>
-
-         <li><p>If <var title="">need pragma</var> is true but <var title="">got pragma</var> is false, then jump to the second
-         step of the overall "two step" algorithm.</p></li>
-
-         <li><p>If <var title="">charset</var> is <a href="infrastructure.html#a-utf-16-encoding">a UTF-16
-         encoding</a>, change the value of <var title="">charset</var> to UTF-8.</p></li>
-
-         <li><p>If <var title="">charset</var> is not a supported
-         character encoding, then jump to the second step of the
-         overall "two step" algorithm.</p></li>
-
-         <li><p>Return the encoding given by <var title="">charset</var>, with <a href="#concept-encoding-confidence" title="concept-encoding-confidence">confidence</a>
-         <i>tentative</i>, and abort all these steps.</p></li>
-
-        </ol></dd>
-
-       <dt>A sequence of bytes starting with a 0x3C byte (ASCII &lt;), optionally a 0x2F byte (ASCII /), and finally a byte in the range 0x41-0x5A or 0x61-0x7A (an ASCII letter)</dt>
-       <dd>
-
-        <ol><li><p>Advance the <var title="">position</var> pointer so
-         that it points at the next 0x09 (ASCII TAB), 0x0A (ASCII LF),
-         0x0C (ASCII FF), 0x0D (ASCII CR), 0x20 (ASCII space), or 0x3E
-         (ASCII &gt;) byte.</p></li>
-
-         <li><p>Repeatedly <a href="#concept-get-attributes-when-sniffing" title="concept-get-attributes-when-sniffing">get an
-         attribute</a> until no further attributes can be found,
-         then jump to the second step in the overall "two step"
-         algorithm.</p></li>
-
-        </ol></dd>
-
-       <dt>A sequence of bytes starting with: 0x3C 0x21 (ASCII '&lt;!')</dt>
-       <dt>A sequence of bytes starting with: 0x3C 0x2F (ASCII '&lt;/')</dt>
-       <dt>A sequence of bytes starting with: 0x3C 0x3F (ASCII '&lt;?')</dt>
-       <dd>
-
-        <p>Advance the <var title="">position</var> pointer so that it
-        points at the first 0x3E byte (ASCII &gt;) that comes after the
-        0x3C byte that was found.</p>
-
-       </dd>
-
-       <dt>Any other byte</dt>
-       <dd>
-
-        <p>Do nothing with that byte.</p>
-
-       </dd>
-
-      </dl></li>
-
-     <li>Move <var title="">position</var> so it points at the next
-     byte in the input stream, and return to the first step of this
-     "two step" algorithm.</li>
-
-    </ol><p>When the above "two step" algorithm says to <dfn id="concept-get-attributes-when-sniffing" title="concept-get-attributes-when-sniffing">get an
-    attribute</dfn>, it means doing this:</p>
-
-    <ol><li><p>If the byte at <var title="">position</var> is one of 0x09
-     (ASCII TAB), 0x0A (ASCII LF), 0x0C (ASCII FF), 0x0D (ASCII CR),
-     0x20 (ASCII space), or 0x2F (ASCII /) then advance <var title="">position</var> to the next byte and redo this
-     substep.</p></li>
-
-     <li><p>If the byte at <var title="">position</var> is 0x3E (ASCII
-     &gt;), then abort the "get an attribute" algorithm. There isn't
-     one.</p></li>
-
-     <li><p>Otherwise, the byte at <var title="">position</var> is the
-     start of the attribute name. Let <var title="">attribute
-     name</var> and <var title="">attribute value</var> be the empty
-     string.</p></li>
-
-     <li><p><i>Attribute name</i>: Process the byte at <var title="">position</var> as follows:</p>
-
-      <dl class="switch"><dt>If it is 0x3D (ASCII =), and the <var title="">attribute
-       name</var> is longer than the empty string</dt>
-
-       <dd>Advance <var title="">position</var> to the next byte and
-       jump to the step below labeled <i>value</i>.</dd>
-
-       <dt>If it is 0x09 (ASCII TAB), 0x0A (ASCII LF), 0x0C (ASCII
-       FF), 0x0D (ASCII CR), or 0x20 (ASCII space)</dt>
-
-       <dd>Jump to the step below labeled <i>spaces</i>.</dd>
-
-       <dt>If it is 0x2F (ASCII /) or 0x3E (ASCII &gt;)</dt>
-
-       <dd>Abort the "get an attribute" algorithm. The attribute's
-       name is the value of <var title="">attribute name</var>, its
-       value is the empty string.</dd>
-
-       <dt>If it is in the range 0x41 (ASCII A) to 0x5A (ASCII
-       Z)</dt>
-
-       <dd>Append the Unicode character with code point <span title=""><var title="">b</var>+0x20</span> to <var title="">attribute name</var> (where <var title="">b</var> is
-       the value of the byte at <var title="">position</var>). (This
-       converts the input to lowercase.)</dd>
-
-       <dt>Anything else</dt>
-
-       <dd>Append the Unicode character with the same code point as the
-       value of the byte at <var title="">position</var>) to <var title="">attribute name</var>. (It doesn't actually matter how
-       bytes outside the ASCII range are handled here, since only
-       ASCII characters can contribute to the detection of a character
-       encoding.)</dd>
-
-      </dl></li>
-
-     <li><p>Advance <var title="">position</var> to the next byte and
-     return to the previous step.</p></li>
-
-     <li><p><i>Spaces</i>: If the byte at <var title="">position</var> is one of 0x09 (ASCII TAB), 0x0A (ASCII
-     LF), 0x0C (ASCII FF), 0x0D (ASCII CR), or 0x20 (ASCII space) then
-     advance <var title="">position</var> to the next byte, then,
-     repeat this step.</p></li>
-
-     <li><p>If the byte at <var title="">position</var> is
-     <em>not</em> 0x3D (ASCII =), abort the "get an attribute"
-     algorithm. The attribute's name is the value of <var title="">attribute name</var>, its value is the empty
-     string.</p></li>
-
-     <li><p>Advance <var title="">position</var> past the 0x3D (ASCII
-     =) byte.</p></li>
-
-     <li><p><i>Value</i>: If the byte at <var title="">position</var> is one of 0x09 (ASCII TAB), 0x0A (ASCII
-     LF), 0x0C (ASCII FF), 0x0D (ASCII CR), or 0x20 (ASCII space) then
-     advance <var title="">position</var> to the next byte, then,
-     repeat this step.</p></li>
-
-     <li><p>Process the byte at <var title="">position</var> as
-     follows:</p>
-
-      <dl class="switch"><dt>If it is 0x22 (ASCII ") or 0x27 (ASCII ')</dt>
-
-       <dd>
-
-        <ol><li>Let <var title="">b</var> be the value of the byte at
-         <var title="">position</var>.</li>
-
-         <li>Advance <var title="">position</var> to the next
-         byte.</li>
-
-         <li>If the value of the byte at <var title="">position</var>
-         is the value of <var title="">b</var>, then advance <var title="">position</var> to the next byte and abort the "get
-         an attribute" algorithm. The attribute's name is the value of
-         <var title="">attribute name</var>, and its value is the
-         value of <var title="">attribute value</var>.</li>
-
-         <li>Otherwise, if the value of the byte at <var title="">position</var> is in the range 0x41 (ASCII A) to
-         0x5A (ASCII Z), then append a Unicode character to <var title="">attribute value</var> whose code point is 0x20 more
-         than the value of the byte at <var title="">position</var>.</li>
-
-         <li>Otherwise, append a Unicode character to <var title="">attribute value</var> whose code point is the same as
-         the value of the byte at <var title="">position</var>.</li>
-
-         <li>Return to the second step in these substeps.</li>
-
-        </ol></dd>
-
-       <dt>If it is 0x3E (ASCII &gt;)</dt>
-
-       <dd>Abort the "get an attribute" algorithm. The attribute's
-       name is the value of <var title="">attribute name</var>, its
-       value is the empty string.</dd>
-
-
-       <dt>If it is in the range 0x41 (ASCII A) to 0x5A (ASCII
-       Z)</dt>
-
-       <dd>Append the Unicode character with code point <span title=""><var title="">b</var>+0x20</span> to <var title="">attribute
-       value</var> (where <var title="">b</var> is the value of the
-       byte at <var title="">position</var>). Advance <var title="">position</var> to the next byte.</dd>
-
-       <dt>Anything else</dt>
-
-       <dd>Append the Unicode character with the same code point as the
-       value of the byte at <var title="">position</var>) to <var title="">attribute value</var>. Advance <var title="">position</var> to the next byte.</dd>
-
-      </dl></li>
-
-     <li><p>Process the byte at <var title="">position</var> as
-     follows:</p>
-
-      <dl class="switch"><dt>If it is 0x09 (ASCII TAB), 0x0A (ASCII LF), 0x0C (ASCII
-       FF), 0x0D (ASCII CR), 0x20 (ASCII space), or 0x3E (ASCII
-       &gt;)</dt>
-
-       <dd>Abort the "get an attribute" algorithm. The attribute's
-       name is the value of <var title="">attribute name</var> and its
-       value is the value of <var title="">attribute value</var>.</dd>
-
-       <dt>If it is in the range 0x41 (ASCII A) to 0x5A (ASCII
-       Z)</dt>
-
-       <dd>Append the Unicode character with code point <span title=""><var title="">b</var>+0x20</span> to <var title="">attribute
-       value</var> (where <var title="">b</var> is the value of the
-       byte at <var title="">position</var>).</dd>
-
-       <dt>Anything else</dt>
-
-       <dd>Append the Unicode character with the same code point as the
-       value of the byte at <var title="">position</var>) to <var title="">attribute value</var>.</dd>
-
-      </dl></li>
-
-     <li><p>Advance <var title="">position</var> to the next byte and
-     return to the previous step.</p></li>
-
-    </ol><p>For the sake of interoperability, user agents should not use a
-    pre-scan algorithm that returns different results than the one
-    described above. (But, if you do, please at least let us know, so
-    that we can improve this algorithm and benefit everyone...)</p>
+   <li>
+
+    <p>Otherwise, optionally <a href="#prescan-a-byte-stream-to-determine-its-encoding" title="prescan a byte stream to&#10;    determine its encoding">prescan the byte stream to determine its
+    encoding</a>. The <var title="">end condition</var> is that the
+    user agent decides that scanning further bytes would not be
+    efficient. User agents are encouraged to only prescan the first
+    1024 bytes. User agents may decide that scanning <em>any</em>
+    bytes is not efficient, in which case these substeps are entirely
+    skipped.</p>
+
+    <p>The aforementioned algorithm either aborts unsuccessfully or
+    returns a character encoding. If it returns a character encoding,
+    then this algorithm must be aborted, returning the same encoding,
+    with <a href="#concept-encoding-confidence" title="concept-encoding-confidence">confidence</a>
+    <i>tentative</i>.</p>
 
    </li>
 
-   <li><p>If the user agent has information on the likely encoding for
-   this page, e.g. based on the encoding of the page when it was last
-   visited, then return that encoding, with the <a href="#concept-encoding-confidence" title="concept-encoding-confidence">confidence</a>
+   <li><p>Otherwise, if the user agent has information on the likely
+   encoding for this page, e.g. based on the encoding of the page when
+   it was last visited, then return that encoding, with the <a href="#concept-encoding-confidence" title="concept-encoding-confidence">confidence</a>
    <i>tentative</i>, and abort these steps.</p></li>
 
    <li>
@@ -987,7 +724,315 @@
   </ol><p>The <a href="infrastructure.html#document-s-character-encoding">document's character encoding</a> must immediately
   be set to the value returned from this algorithm, at the same time
   as the user agent uses the returned value to select the decoder to
-  use for the input stream.</p>
+  use for the input byte stream.</p>
+
+  <hr/><p>When an algorithm requires a user agent to <dfn id="prescan-a-byte-stream-to-determine-its-encoding">prescan a byte
+  stream to determine its encoding</dfn>, given some defined <var title="">end condition</var>, then it must run the following steps.
+  These steps either abort unsuccessfully or return a character
+  encoding.</p>
+
+  <ol><li>
+
+    <p>Let <var title="">position</var> be a pointer to a byte in the
+    input byte stream, initially pointing at the first byte. If at any
+    point during these steps the user agent either runs out of bytes
+    or reaches its <var title="">end condition</var>, then abort the
+    <a href="#prescan-a-byte-stream-to-determine-its-encoding">prescan a byte stream to determine its encoding</a>
+    algorithm unsuccessfully.</p>
+
+   </li>
+
+   <li>
+
+    <p><i>Loop</i>: If <var title="">position</var> points to:</p>
+
+    <dl class="switch"><dt>A sequence of bytes starting with: 0x3C 0x21 0x2D 0x2D (ASCII '&lt;!--')</dt>
+     <dd>
+
+      <p>Advance the <var title="">position</var> pointer so that it
+      points at the first 0x3E byte which is preceded by two 0x2D
+      bytes (i.e. at the end of an ASCII '--&gt;' sequence) and comes
+      after the 0x3C byte that was found. (The two 0x2D bytes can be
+      the same as the those in the '&lt;!--' sequence.)</p>
+
+     </dd>
+
+     <dt>A sequence of bytes starting with: 0x3C, 0x4D or 0x6D, 0x45 or 0x65, 0x54 or 0x74, 0x41 or 0x61, and one of 0x09, 0x0A, 0x0C, 0x0D, 0x20, 0x2F (case-insensitive ASCII '&lt;meta' followed by a space or slash)</dt>
+     <dd>
+
+      <ol><li><p>Advance the <var title="">position</var> pointer so
+       that it points at the next 0x09, 0x0A, 0x0C, 0x0D, 0x20, or
+       0x2F byte (the one in sequence of characters matched
+       above).</p></li>
+
+       <li><p>Let <var title="">attribute list</var> be an empty
+       list of strings.</p></li> 
+
+       <li><p>Let <var title="">got pragma</var> be false.</p></li>
+
+       <li><p>Let <var title="">need pragma</var> be null.</p></li>
+
+       <li><p>Let <var title="">charset</var> be the null value
+       (which, for the purposes of this algorithm, is distinct from
+       an unrecognised encoding or the empty string).</p></li>
+
+       <li><p><i>Attributes</i>: <a href="#concept-get-attributes-when-sniffing" title="concept-get-attributes-when-sniffing">Get an
+       attribute</a> and its value. If no attribute was sniffed,
+       then jump to the <i>processing</i> step below.</p></li>
+
+       <li><p>If the attribute's name is already in <var title="">attribute list</var>, then return to the step
+       labeled <i>attributes</i>.</p>
+
+       </li><li><p>Add the attribute's name to <var title="">attribute
+       list</var>.</p>
+
+       </li><li>
+
+        <p>Run the appropriate step from the following list, if one
+        applies:</p>
+
+        <dl class="switch"><dt>If the attribute's name is "<code title="">http-equiv</code>"</dt>
+
+         <dd><p>If the attribute's value is "<code title="">content-type</code>", then set <var title="">got
+         pragma</var> to true.</p></dd>
+
+         <dt>If the attribute's name is "<code title="">content</code>"</dt>
+
+         <dd><p>Apply the <a href="urls.html#algorithm-for-extracting-an-encoding-from-a-meta-element">algorithm for extracting an encoding
+         from a <code>meta</code> element</a>, giving the
+         attribute's value as the string to parse. If an encoding is
+         returned, and if <var title="">charset</var> is still set
+         to null, let <var title="">charset</var> be the encoding
+         returned, and set <var title="">need pragma</var> to
+         true.</p></dd>
+
+         <dt>If the attribute's name is "<code title="">charset</code>"</dt>
+
+         <dd><p>Let <var title="">charset</var> be the encoding
+         corresponding to the attribute's value, and set <var title="">need pragma</var> to false.</p></dd>
+
+        </dl></li>
+
+       <li><p>Return to the step labeled <i>attributes</i>.</p></li>
+
+       <li><p><i>Processing</i>: If <var title="">need pragma</var> is
+       null, then jump to the step below labeled <i>next
+       byte</i>.</p></li>
+
+       <li><p>If <var title="">need pragma</var> is true but <var title="">got pragma</var> is false, then jump to the step below
+       labeled <i>next byte</i>.</p></li>
+
+       <li><p>If <var title="">charset</var> is <a href="infrastructure.html#a-utf-16-encoding">a UTF-16
+       encoding</a>, change the value of <var title="">charset</var> to UTF-8.</p></li>
+
+       <li><p>If <var title="">charset</var> is not a supported
+       character encoding, then jump to the step below labeled <i>next
+       byte</i>.</p></li>
+
+       <li><p>Abort the <a href="#prescan-a-byte-stream-to-determine-its-encoding">prescan a byte stream to determine its
+       encoding</a> algorithm, returning the encoding given by <var title="">charset</var>.</p></li>
+
+      </ol></dd>
+
+     <dt>A sequence of bytes starting with a 0x3C byte (ASCII &lt;), optionally a 0x2F byte (ASCII /), and finally a byte in the range 0x41-0x5A or 0x61-0x7A (an ASCII letter)</dt>
+     <dd>
+
+      <ol><li><p>Advance the <var title="">position</var> pointer so
+       that it points at the next 0x09 (ASCII TAB), 0x0A (ASCII LF),
+       0x0C (ASCII FF), 0x0D (ASCII CR), 0x20 (ASCII space), or 0x3E
+       (ASCII &gt;) byte.</p></li>
+
+       <li><p>Repeatedly <a href="#concept-get-attributes-when-sniffing" title="concept-get-attributes-when-sniffing">get an
+       attribute</a> until no further attributes can be found, then
+       jump to the step below labeled <i>next byte</i>.</p></li>
+
+      </ol></dd>
+
+     <dt>A sequence of bytes starting with: 0x3C 0x21 (ASCII '&lt;!')</dt>
+     <dt>A sequence of bytes starting with: 0x3C 0x2F (ASCII '&lt;/')</dt>
+     <dt>A sequence of bytes starting with: 0x3C 0x3F (ASCII '&lt;?')</dt>
+     <dd>
+
+      <p>Advance the <var title="">position</var> pointer so that it
+      points at the first 0x3E byte (ASCII &gt;) that comes after the
+      0x3C byte that was found.</p>
+
+     </dd>
+
+     <dt>Any other byte</dt>
+     <dd>
+
+      <p>Do nothing with that byte.</p>
+
+     </dd>
+
+    </dl></li>
+
+   <li><i>Next byte</i>: Move <var title="">position</var> so it
+   points at the next byte in the input byte stream, and return to the
+   step above labeld <i>loop</i>.</li>
+
+  </ol><p>When the <a href="#prescan-a-byte-stream-to-determine-its-encoding">prescan a byte stream to determine its
+  encoding</a> algorithm says to <dfn id="concept-get-attributes-when-sniffing" title="concept-get-attributes-when-sniffing">get an attribute</dfn>,
+  it means doing this:</p>
+
+  <ol><li><p>If the byte at <var title="">position</var> is one of 0x09
+   (ASCII TAB), 0x0A (ASCII LF), 0x0C (ASCII FF), 0x0D (ASCII CR),
+   0x20 (ASCII space), or 0x2F (ASCII /) then advance <var title="">position</var> to the next byte and redo this
+   step.</p></li>
+
+   <li><p>If the byte at <var title="">position</var> is 0x3E (ASCII
+   &gt;), then abort the <a href="#concept-get-attributes-when-sniffing" title="concept-get-attributes-when-sniffing">get an
+   attribute</a> algorithm. There isn't one.</p></li>
+
+   <li><p>Otherwise, the byte at <var title="">position</var> is the
+   start of the attribute name. Let <var title="">attribute name</var>
+   and <var title="">attribute value</var> be the empty
+   string.</p></li>
+
+   <li><p><i>Attribute name</i>: Process the byte at <var title="">position</var> as follows:</p>
+
+    <dl class="switch"><dt>If it is 0x3D (ASCII =), and the <var title="">attribute
+     name</var> is longer than the empty string</dt>
+
+     <dd>Advance <var title="">position</var> to the next byte and
+     jump to the step below labeled <i>value</i>.</dd>
+
+     <dt>If it is 0x09 (ASCII TAB), 0x0A (ASCII LF), 0x0C (ASCII
+     FF), 0x0D (ASCII CR), or 0x20 (ASCII space)</dt>
+
+     <dd>Jump to the step below labeled <i>spaces</i>.</dd>
+
+     <dt>If it is 0x2F (ASCII /) or 0x3E (ASCII &gt;)</dt>
+
+     <dd>Abort the <a href="#concept-get-attributes-when-sniffing" title="concept-get-attributes-when-sniffing">get an
+     attribute</a> algorithm. The attribute's name is the value of
+     <var title="">attribute name</var>, its value is the empty
+     string.</dd>
+
+     <dt>If it is in the range 0x41 (ASCII A) to 0x5A (ASCII
+     Z)</dt>
+
+     <dd>Append the Unicode character with code point <span title=""><var title="">b</var>+0x20</span> to <var title="">attribute name</var> (where <var title="">b</var> is
+     the value of the byte at <var title="">position</var>). (This
+     converts the input to lowercase.)</dd>
+
+     <dt>Anything else</dt>
+
+     <dd>Append the Unicode character with the same code point as the
+     value of the byte at <var title="">position</var>) to <var title="">attribute name</var>. (It doesn't actually matter how
+     bytes outside the ASCII range are handled here, since only
+     ASCII characters can contribute to the detection of a character
+     encoding.)</dd>
+
+    </dl></li>
+
+   <li><p>Advance <var title="">position</var> to the next byte and
+   return to the previous step.</p></li>
+
+   <li><p><i>Spaces</i>: If the byte at <var title="">position</var> is one of 0x09 (ASCII TAB), 0x0A (ASCII
+   LF), 0x0C (ASCII FF), 0x0D (ASCII CR), or 0x20 (ASCII space) then
+   advance <var title="">position</var> to the next byte, then,
+   repeat this step.</p></li>
+
+   <li><p>If the byte at <var title="">position</var> is <em>not</em>
+   0x3D (ASCII =), abort the <a href="#concept-get-attributes-when-sniffing" title="concept-get-attributes-when-sniffing">get an
+   attribute</a> algorithm. The attribute's name is the value of
+   <var title="">attribute name</var>, its value is the empty
+   string.</p></li>
+
+   <li><p>Advance <var title="">position</var> past the 0x3D (ASCII
+   =) byte.</p></li>
+
+   <li><p><i>Value</i>: If the byte at <var title="">position</var> is one of 0x09 (ASCII TAB), 0x0A (ASCII
+   LF), 0x0C (ASCII FF), 0x0D (ASCII CR), or 0x20 (ASCII space) then
+   advance <var title="">position</var> to the next byte, then,
+   repeat this step.</p></li>
+
+   <li><p>Process the byte at <var title="">position</var> as
+   follows:</p>
+
+    <dl class="switch"><dt>If it is 0x22 (ASCII ") or 0x27 (ASCII ')</dt>
+
+     <dd>
+
+      <ol><li>Let <var title="">b</var> be the value of the byte at
+       <var title="">position</var>.</li>
+
+       <li><i>Quote loop</i>: Advance <var title="">position</var> to
+       the next byte.</li>
+
+       <li>If the value of the byte at <var title="">position</var> is
+       the value of <var title="">b</var>, then advance <var title="">position</var> to the next byte and abort the "get an
+       attribute" algorithm. The attribute's name is the value of <var title="">attribute name</var>, and its value is the value of
+       <var title="">attribute value</var>.</li>
+
+       <li>Otherwise, if the value of the byte at <var title="">position</var> is in the range 0x41 (ASCII A) to 0x5A
+       (ASCII Z), then append a Unicode character to <var title="">attribute value</var> whose code point is 0x20 more
+       than the value of the byte at <var title="">position</var>.</li>
+
+       <li>Otherwise, append a Unicode character to <var title="">attribute value</var> whose code point is the same as
+       the value of the byte at <var title="">position</var>.</li>
+
+       <li>Return to the step above labeled <i>quote loop</i>.</li>
+
+      </ol></dd>
+
+     <dt>If it is 0x3E (ASCII &gt;)</dt>
+
+     <dd>Abort the <a href="#concept-get-attributes-when-sniffing" title="concept-get-attributes-when-sniffing">get an
+     attribute</a> algorithm. The attribute's name is the value of
+     <var title="">attribute name</var>, its value is the empty
+     string.</dd>
+
+
+     <dt>If it is in the range 0x41 (ASCII A) to 0x5A (ASCII
+     Z)</dt>
+
+     <dd>Append the Unicode character with code point <span title=""><var title="">b</var>+0x20</span> to <var title="">attribute value</var> (where <var title="">b</var> is
+     the value of the byte at <var title="">position</var>). Advance
+     <var title="">position</var> to the next byte.</dd>
+
+     <dt>Anything else</dt>
+
+     <dd>Append the Unicode character with the same code point as the
+     value of the byte at <var title="">position</var>) to <var title="">attribute value</var>. Advance <var title="">position</var> to the next byte.</dd>
+
+    </dl></li>
+
+   <li><p>Process the byte at <var title="">position</var> as
+   follows:</p>
+
+    <dl class="switch"><dt>If it is 0x09 (ASCII TAB), 0x0A (ASCII LF), 0x0C (ASCII
+     FF), 0x0D (ASCII CR), 0x20 (ASCII space), or 0x3E (ASCII
+     &gt;)</dt>
+
+     <dd>Abort the <a href="#concept-get-attributes-when-sniffing" title="concept-get-attributes-when-sniffing">get an
+     attribute</a> algorithm. The attribute's name is the value of
+     <var title="">attribute name</var> and its value is the value of
+     <var title="">attribute value</var>.</dd>
+
+     <dt>If it is in the range 0x41 (ASCII A) to 0x5A (ASCII Z)</dt>
+
+     <dd>Append the Unicode character with code point <span title=""><var title="">b</var>+0x20</span> to <var title="">attribute value</var> (where <var title="">b</var> is
+     the value of the byte at <var title="">position</var>).</dd>
+
+     <dt>Anything else</dt>
+
+     <dd>Append the Unicode character with the same code point as the
+     value of the byte at <var title="">position</var>) to <var title="">attribute value</var>.</dd>
+
+    </dl></li>
+
+   <li><p>Advance <var title="">position</var> to the next byte and
+   return to the previous step.</p></li>
+
+  </ol><p>For the sake of interoperability, user agents should not use a
+  pre-scan algorithm that returns different results than the one
+  described above. (But, if you do, please at least let us know, so
+  that we can improve this algorithm and benefit everyone...)</p>
+
+
 
 
 
@@ -1088,82 +1133,7 @@
 
 
 
-  <h5 id="preprocessing-the-input-stream"><span class="secno">8.2.2.3 </span>Preprocessing the input stream</h5>
-
-  <p>Given an encoding, the bytes in the input stream must be
-  converted to Unicode code points for the tokenizer, as described by
-  the rules for that encoding, except that the leading U+FEFF BYTE
-  ORDER MARK character, if any, must not be stripped by the encoding
-  layer (it is stripped by the rule below).</p> 
-
-  <p>Bytes or sequences of bytes in the original byte stream that
-  could not be converted to Unicode code points must be converted to
-  U+FFFD REPLACEMENT CHARACTERs. Specifically, if the encoding is
-  UTF-8, the bytes must be <a href="infrastructure.html#decoded-as-utf-8-with-error-handling" title="decoded as UTF-8, with error&#10;  handling">decoded with the error handling</a> defined in this
-  specification.</p>
-
-  <p class="note">Bytes or sequences of bytes in the original byte
-  stream that did not conform to the encoding specification
-  (e.g. invalid UTF-8 byte sequences in a UTF-8 input stream) are
-  errors that conformance checkers are expected to report.</p>
-
-  <p>Any byte or sequence of bytes in the original byte stream that is
-  <a href="#misinterpreted-for-compatibility">misinterpreted for compatibility</a> is a <a href="#parse-error">parse
-  error</a>.</p>
-
-  <p>One leading U+FEFF BYTE ORDER MARK character must be ignored if
-  any are present.</p>
-
-  <p class="note">The requirement to strip a U+FEFF BYTE ORDER MARK
-  character regardless of whether that character was used to determine
-  the byte order is a <a href="introduction.html#willful-violation">willful violation</a> of Unicode,
-  motivated by a desire to increase the resilience of user agents in
-  the face of na&#xEF;ve transcoders.</p>
-
-  <p>Any occurrences of any characters in the ranges U+0001 to U+0008,
-     U+000E to U+001F,  U+007F
-   to U+009F, U+FDD0
-  to U+FDEF, and characters U+000B, U+FFFE, U+FFFF, U+1FFFE, U+1FFFF,
-  U+2FFFE, U+2FFFF, U+3FFFE, U+3FFFF, U+4FFFE, U+4FFFF, U+5FFFE,
-  U+5FFFF, U+6FFFE, U+6FFFF, U+7FFFE, U+7FFFF, U+8FFFE, U+8FFFF,
-  U+9FFFE, U+9FFFF, U+AFFFE, U+AFFFF, U+BFFFE, U+BFFFF, U+CFFFE,
-  U+CFFFF, U+DFFFE, U+DFFFF, U+EFFFE, U+EFFFF, U+FFFFE, U+FFFFF,
-  U+10FFFE, and U+10FFFF are <a href="#parse-error" title="parse error">parse
-  errors</a>. These are all control characters or permanently
-  undefined Unicode characters (noncharacters).</p>
-
-  <p>U+000D CARRIAGE RETURN (CR) characters and U+000A LINE FEED (LF)
-  characters are treated specially. Any CR characters that are
-  followed by LF characters must be removed, and any CR characters not
-  followed by LF characters must be converted to LF characters. Thus,
-  newlines in HTML DOMs are represented by LF characters, and there
-  are never any CR characters in the input to the
-  <a href="tokenization.html#tokenization">tokenization</a> stage.</p>
-
-  <p>The <dfn id="next-input-character">next input character</dfn> is the first character in the
-  input stream that has not yet been <dfn id="consumed">consumed</dfn>. Initially,
-  the <i><a href="#next-input-character">next input character</a></i> is the first character in the
-  input. The <dfn id="current-input-character">current input character</dfn> is the last character
-  to have been <i><a href="#consumed">consumed</a></i>.</p>
-
-  <p>The <dfn id="insertion-point">insertion point</dfn> is the position (just before a
-  character or just before the end of the input stream) where content
-  inserted using <code title="dom-document-write"><a href="dynamic-markup-insertion.html#dom-document-write">document.write()</a></code> is actually
-  inserted. The insertion point is relative to the position of the
-  character immediately after it, it is not an absolute offset into
-  the input stream. Initially, the insertion point is
-  undefined.</p>
-
-  <p>The "EOF" character in the tables below is a conceptual character
-  representing the end of the <a href="#the-input-stream">input stream</a>. If the parser
-  is a <a href="dynamic-markup-insertion.html#script-created-parser">script-created parser</a>, then the end of the
-  <a href="#the-input-stream">input stream</a> is reached when an <dfn id="explicit-eof-character">explicit "EOF"
-  character</dfn> (inserted by the <code title="dom-document-close"><a href="dynamic-markup-insertion.html#dom-document-close">document.close()</a></code> method) is
-  consumed. Otherwise, the "EOF" character is not a real character in
-  the stream, but rather the lack of any further characters.</p>
-
-
-  <h5 id="changing-the-encoding-while-parsing"><span class="secno">8.2.2.4 </span>Changing the encoding while parsing</h5>
+  <h5 id="changing-the-encoding-while-parsing"><span class="secno">8.2.2.3 </span>Changing the encoding while parsing</h5>
 
   <p>When the parser requires the user agent to <dfn id="change-the-encoding">change the
   encoding</dfn>, it must run the following steps. This might happen
@@ -1215,7 +1185,64 @@
    misinterpreted. User agents may notify the user of the situation,
    to aid in application development.</li>
 
-  </ol></div><div class="impl">
+  </ol><h5 id="preprocessing-the-input-stream"><span class="secno">8.2.2.4 </span>Preprocessing the input stream</h5>
+
+  <p>The <dfn id="input-stream">input stream</dfn> consists of the characters pushed
+  into it as the <a href="#the-input-byte-stream">input byte stream</a> is decoded or from the
+  various APIs that directly manipulate the input stream.</p>
+
+  <p>One leading U+FEFF BYTE ORDER MARK character must be ignored if
+  any are present in the <a href="#input-stream">input stream</a>.</p>
+
+  <p class="note">The requirement to strip a U+FEFF BYTE ORDER MARK
+  character regardless of whether that character was used to determine
+  the byte order is a <a href="introduction.html#willful-violation">willful violation</a> of Unicode,
+  motivated by a desire to increase the resilience of user agents in
+  the face of na&#xEF;ve transcoders.</p>
+
+  <p>Any occurrences of any characters in the ranges U+0001 to U+0008,
+     U+000E to U+001F,  U+007F
+   to U+009F, U+FDD0
+  to U+FDEF, and characters U+000B, U+FFFE, U+FFFF, U+1FFFE, U+1FFFF,
+  U+2FFFE, U+2FFFF, U+3FFFE, U+3FFFF, U+4FFFE, U+4FFFF, U+5FFFE,
+  U+5FFFF, U+6FFFE, U+6FFFF, U+7FFFE, U+7FFFF, U+8FFFE, U+8FFFF,
+  U+9FFFE, U+9FFFF, U+AFFFE, U+AFFFF, U+BFFFE, U+BFFFF, U+CFFFE,
+  U+CFFFF, U+DFFFE, U+DFFFF, U+EFFFE, U+EFFFF, U+FFFFE, U+FFFFF,
+  U+10FFFE, and U+10FFFF are <a href="#parse-error" title="parse error">parse
+  errors</a>. These are all control characters or permanently
+  undefined Unicode characters (noncharacters).</p>
+
+  <p>U+000D CARRIAGE RETURN (CR) characters and U+000A LINE FEED (LF)
+  characters are treated specially. All CR characters must be
+  converted to LF characters, and any LF characters that immediately
+  follow a CR character must be ignored. Thus, newlines in HTML DOMs
+  are represented by LF characters, and there are never any CR
+  characters in the input to the <a href="tokenization.html#tokenization">tokenization</a> stage.</p>
+
+  <p>The <dfn id="next-input-character">next input character</dfn> is the first character in the
+  <a href="#input-stream">input stream</a> that has not yet been <dfn id="consumed">consumed</dfn>
+  or explicit ignored by the requirements in this section. Initially,
+  the <i><a href="#next-input-character">next input character</a></i> is the first character in the input.
+  The <dfn id="current-input-character">current input character</dfn> is the last character to have
+  been <i><a href="#consumed">consumed</a></i>.</p>
+
+  <p>The <dfn id="insertion-point">insertion point</dfn> is the position (just before a
+  character or just before the end of the input stream) where content
+  inserted using <code title="dom-document-write"><a href="dynamic-markup-insertion.html#dom-document-write">document.write()</a></code> is actually
+  inserted. The insertion point is relative to the position of the
+  character immediately after it, it is not an absolute offset into
+  the input stream. Initially, the insertion point is
+  undefined.</p>
+
+  <p>The "EOF" character in the tables below is a conceptual character
+  representing the end of the <a href="#input-stream">input stream</a>. If the parser
+  is a <a href="dynamic-markup-insertion.html#script-created-parser">script-created parser</a>, then the end of the
+  <a href="#input-stream">input stream</a> is reached when an <dfn id="explicit-eof-character">explicit "EOF"
+  character</dfn> (inserted by the <code title="dom-document-close"><a href="dynamic-markup-insertion.html#dom-document-close">document.close()</a></code> method) is
+  consumed. Otherwise, the "EOF" character is not a real character in
+  the stream, but rather the lack of any further characters.</p>
+
+  </div><div class="impl">
 
   <h4 id="parse-state"><span class="secno">8.2.3 </span>Parse state</h4>
 

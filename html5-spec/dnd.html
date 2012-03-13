@@ -321,9 +321,9 @@
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5496.</p>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5607.</p>
 
-   <h2 class="no-num no-toc" id="editor-s-draft-13-january-2012">Editor's Draft 13 January 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-7-march-2012">Editor's Draft 7 March 2012</h2>
    </div><nav class="prev_next"><a href="editing-apis.html">&#x2190; 7.5.4 Editing APIs</a> &#x2013;
    <a href="index.html#contents">Table of contents</a> &#x2013;
    <a href="syntax.html">8 The HTML syntax &#x2192;</a>
@@ -1066,7 +1066,7 @@
   <code><a href="#datatransfer">DataTransfer</a></code> object.</p><pre class="idl">interface <dfn id="datatransferitem">DataTransferItem</dfn> {
   readonly attribute DOMString <a href="#dom-datatransferitem-kind" title="dom-DataTransferItem-kind">kind</a>;
   readonly attribute DOMString <a href="#dom-datatransferitem-type" title="dom-DataTransferItem-type">type</a>;
-  void <a href="#dom-datatransferitem-getasstring" title="dom-DataTransferItem-getAsString">getAsString</a>(<a href="#functionstringcallback">FunctionStringCallback</a>? callback);
+  void <a href="#dom-datatransferitem-getasstring" title="dom-DataTransferItem-getAsString">getAsString</a>(<a href="#functionstringcallback">FunctionStringCallback</a>? _callback);
   <a href="infrastructure.html#file">File</a>? <a href="#dom-datatransferitem-getasfile" title="dom-DataTransferItem-getAsFile">getAsFile</a>();
 };
 
@@ -1260,7 +1260,7 @@ dictionary <dfn id="drageventinit">DragEventInit</dfn> : <a href="infrastructure
 
     <p>Create a <code><a href="#dragevent">DragEvent</a></code> object and initialize it to
     have the given name <var title="">e</var>, to bubble, to be
-    cancelable unless <var title="">e</var> is <code title="event-dragleave"><a href="#event-dragleave">dragleave</a></code> or <code title="event-dragend"><a href="#event-dragend">dragend</a></code>, and to have the <code title="dom-UIEvent-detail">detail</code> attribute initialized to
+    cancelable unless <var title="">e</var> is <code title="event-dragleave"><a href="#event-dragleave">dragleave</a></code> or <code title="event-dragend"><a href="#event-dragend">dragend</a></code>, and to have the <code title="dom-UIEvent-detail"><a href="infrastructure.html#dom-uievent-detail">detail</a></code> attribute initialized to
     zero, the mouse and key attributes initialized according to the
     state of the input devices as they would be for user interaction
     events, the <code title="">relatedTarget</code> attribute
@@ -1336,12 +1336,13 @@ dictionary <dfn id="drageventinit">DragEventInit</dfn> : <a href="infrastructure
     follows:</p>
 
     <p>If it is a selection that is being dragged, then the
-    <a href="#source-node">source node</a> is the text node that the user started
-    the drag on (typically the text node that the user originally
-    clicked). If the user did not specify a particular node, for
-    example if the user just told the user agent to begin a drag of
-    "the selection", then the <a href="#source-node">source node</a> is the first
-    text node containing a part of the selection.</p>
+    <a href="#source-node">source node</a> is the <code><a href="infrastructure.html#text">Text</a></code> node that the
+    user started the drag on (typically the <code><a href="infrastructure.html#text">Text</a></code> node
+    that the user originally clicked). If the user did not specify a
+    particular node, for example if the user just told the user agent
+    to begin a drag of "the selection", then the <a href="#source-node">source
+    node</a> is the first <code><a href="infrastructure.html#text">Text</a></code> node containing a part
+    of the selection.</p>
 
     <p>Otherwise, if it is an element that is being dragged, then the
     <a href="#source-node">source node</a> is the element that is being dragged.</p>
@@ -2248,5 +2249,23 @@ dictionary <dfn id="drageventinit">DragEventInit</dfn> : <a href="infrastructure
   to start a drag. This is important because otherwise UAs could cause
   data to be dragged from sensitive sources and dropped into hostile
   documents without the user's consent.</p>
+
+  <p>User agents should filter potentially active (scripted) content
+  (e.g. HTML) when it is dragged and when it is dropped, using a
+  whitelist of known-safe features. This specification does not
+  specify how this is performed.</p>
+
+  <div class="example">
+
+   <p>Consider a hostile page providing some content and gettuing the
+   user to select and drag and drop (or indeed, copy and paste) that
+   content to a victim page's <code title="attr-contenteditable"><a href="editing.html#attr-contenteditable">contenteditable</a></code> region. If the
+   browser does not ensure that only safe content is dragged,
+   potentially unsafe content such as scripts and event handlers in
+   the selection, once dropped (or pasted) into the victim site, get
+   the privileges of the victim site. This would thus enable a
+   cross-site scripting attack.</p>
+
+  </div>
 
   </div></body></html>

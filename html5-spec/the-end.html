@@ -322,7 +322,7 @@
 
    <h1>HTML5</h1>
    <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2>
-   <h2 class="no-num no-toc" id="editor-s-draft-13-january-2012">Editor's Draft 13 January 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-7-march-2012">Editor's Draft 7 March 2012</h2>
    </div><nav class="prev_next"><a href="tree-construction.html">&#x2190; 8.2.5 Tree construction</a> &#x2013;
    <a href="index.html#contents">Table of contents</a> &#x2013;
    <a href="named-character-references.html">8.5 Named character references &#x2192;</a>
@@ -419,7 +419,7 @@
   </ol><p>When the user agent is to <dfn id="abort-a-parser">abort a parser</dfn>, it must run
   the following steps:</p>
 
-  <ol><li><p>Throw away any pending content in the <a href="parsing.html#the-input-stream">input
+  <ol><li><p>Throw away any pending content in the <a href="parsing.html#input-stream">input
    stream</a>, and discard any future content that would have been
    added to it.</p></li>
 
@@ -558,9 +558,9 @@
   <p>The next token is a character ("4"), triggers the <a href="parsing.html#reconstruct-the-active-formatting-elements" title="reconstruct the active formatting elements">reconstruction of
   the active formatting elements</a>, in this case just the
   <code><a href="the-i-element.html#the-i-element">i</a></code> element. A new <code><a href="the-i-element.html#the-i-element">i</a></code> element is thus created
-  for the "4" text node. After the end tag token for the "i" is also
-  received, and the "5" text node is inserted, the DOM looks as
-  follows:</p>
+  for the "4" <code><a href="infrastructure.html#text">Text</a></code> node. After the end tag token for the
+  "i" is also received, and the "5" <code><a href="infrastructure.html#text">Text</a></code> node is
+  inserted, the DOM looks as follows:</p>
 
   <ul class="domTree"><li class="t1"><code><a href="the-html-element.html#the-html-element">html</a></code><ul><li class="t1"><code><a href="the-head-element.html#the-head-element">head</a></code></li><li class="t1"><code><a href="the-body-element.html#the-body-element">body</a></code><ul><li class="t1"><code><a href="the-p-element.html#the-p-element">p</a></code><ul><li class="t3"><code>#text</code>: <span title="">1</span></li><li class="t1"><code><a href="the-b-element.html#the-b-element">b</a></code><ul><li class="t3"><code>#text</code>: <span title="">2</span></li><li class="t1"><code><a href="the-i-element.html#the-i-element">i</a></code><ul><li class="t3"><code>#text</code>: <span title="">3</span></li></ul></li></ul></li><li class="t1"><code><a href="the-i-element.html#the-i-element">i</a></code><ul><li class="t3"><code>#text</code>: <span title="">4</span></li></ul></li><li class="t3"><code>#text</code>: <span title="">5</span></li></ul></li></ul></li></ul></li></ul><h5 id="misnested-tags:-b-p-b-p"><span class="secno">8.2.8.2 </span>Misnested tags: &lt;b&gt;&lt;p&gt;&lt;/b&gt;&lt;/p&gt;</h5>
 
@@ -657,8 +657,7 @@
   mode</a>).</p>
 
   <ul class="domTree"><li class="t1"><code><a href="the-html-element.html#the-html-element">html</a></code><ul><li class="t1"><code><a href="the-head-element.html#the-head-element">head</a></code></li><li class="t1"><code><a href="the-body-element.html#the-body-element">body</a></code><ul><li class="t1"><code><a href="the-b-element.html#the-b-element">b</a></code></li><li class="t1"><code><a href="the-table-element.html#the-table-element">table</a></code><ul><li class="t1"><code><a href="the-tbody-element.html#the-tbody-element">tbody</a></code><ul><li class="t1"><code><a href="the-tr-element.html#the-tr-element">tr</a></code><ul><li class="t1"><code><a href="the-td-element.html#the-td-element">td</a></code></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul><p>The marker means that when the "aaa" character tokens are seen,
-  no <code><a href="the-b-element.html#the-b-element">b</a></code> element is created to hold the resulting text
-  node:</p>
+  no <code><a href="the-b-element.html#the-b-element">b</a></code> element is created to hold the resulting <code><a href="infrastructure.html#text">Text</a></code> node:</p>
 
   <ul class="domTree"><li class="t1"><code><a href="the-html-element.html#the-html-element">html</a></code><ul><li class="t1"><code><a href="the-head-element.html#the-head-element">head</a></code></li><li class="t1"><code><a href="the-body-element.html#the-body-element">body</a></code><ul><li class="t1"><code><a href="the-b-element.html#the-b-element">b</a></code></li><li class="t1"><code><a href="the-table-element.html#the-table-element">table</a></code><ul><li class="t1"><code><a href="the-tbody-element.html#the-tbody-element">tbody</a></code><ul><li class="t1"><code><a href="the-tr-element.html#the-tr-element">tr</a></code><ul><li class="t1"><code><a href="the-td-element.html#the-td-element">td</a></code><ul><li class="t3"><code>#text</code>: <span title="">aaa</span></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul><p>The end tags are handled in a straight-forward manner; after
   handling them, the <a href="parsing.html#stack-of-open-elements">stack of open elements</a> has on it the
@@ -680,8 +679,8 @@
 
   <p>When <a href="parsing.html#reconstruct-the-active-formatting-elements" title="reconstruct the active formatting elements">the
   active formatting elements are reconstructed</a>, a
-  <code><a href="the-b-element.html#the-b-element">b</a></code> element is created and <a href="tree-construction.html#foster-parent" title="foster&#10;  parent">foster parented</a>, and then the "bbb" text node is
-  appended to it:</p>
+  <code><a href="the-b-element.html#the-b-element">b</a></code> element is created and <a href="tree-construction.html#foster-parent" title="foster&#10;  parent">foster parented</a>, and then the "bbb" <code><a href="infrastructure.html#text">Text</a></code>
+  node is appended to it:</p>
 
   <ul class="domTree"><li class="t1"><code><a href="the-html-element.html#the-html-element">html</a></code><ul><li class="t1"><code><a href="the-head-element.html#the-head-element">head</a></code></li><li class="t1"><code><a href="the-body-element.html#the-body-element">body</a></code><ul><li class="t1"><code><a href="the-b-element.html#the-b-element">b</a></code></li><li class="t1"><code><a href="the-b-element.html#the-b-element">b</a></code><ul><li class="t3"><code>#text</code>: <span title="">bbb</span></li></ul></li><li class="t1"><code><a href="the-table-element.html#the-table-element">table</a></code><ul><li class="t1"><code><a href="the-tbody-element.html#the-tbody-element">tbody</a></code><ul><li class="t1"><code><a href="the-tr-element.html#the-tr-element">tr</a></code><ul><li class="t1"><code><a href="the-td-element.html#the-td-element">td</a></code><ul><li class="t3"><code>#text</code>: <span title="">aaa</span></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul><p>The <a href="parsing.html#stack-of-open-elements">stack of open elements</a> has on it the elements
   <code><a href="the-html-element.html#the-html-element">html</a></code>, <code><a href="the-body-element.html#the-body-element">body</a></code>, <code><a href="the-table-element.html#the-table-element">table</a></code>,
@@ -920,8 +919,11 @@
         
 
         <p>If <var title="">current node</var> is a <code><a href="the-pre-element.html#the-pre-element">pre</a></code>,
-        <code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code>, or <code><a href="obsolete.html#listing">listing</a></code> element, append
-        a U+000A LINE FEED (LF) character.</p>
+        <code><a href="the-textarea-element.html#the-textarea-element">textarea</a></code>, or <code><a href="obsolete.html#listing">listing</a></code> element, and
+        the first child node of the element, if any, is a
+        <code><a href="infrastructure.html#text">Text</a></code> node whose character data has as its first
+        character a U+000A LINE FEED (LF) character, then append a
+        U+000A LINE FEED (LF) character.</p>
 
         <p>Append the value of running the <a href="#html-fragment-serialization-algorithm">HTML fragment
         serialization algorithm</a> on the <var title="">current
@@ -933,8 +935,7 @@
        </dd>
 
 
-       <dt>If <var title="">current node</var> is a <code title="">Text</code> or <code title="">CDATASection</code>
-       node</dt>
+       <dt>If <var title="">current node</var> is a <code title="">Text</code> node</dt>
 
        <dd>
 
@@ -1025,7 +1026,7 @@
    of serializing the element is parsed, the comment will be truncated
    at that point and the rest of the comment will be interpreted as
    markup. More examples would be making a <code><a href="the-script-element.html#the-script-element">script</a></code> element
-   contain a text node with the text string
+   contain a <code><a href="infrastructure.html#text">Text</a></code> node with the text string
    "<code>&lt;/script&gt;</code>", or having a <code><a href="the-p-element.html#the-p-element">p</a></code> element
    that contains a <code><a href="the-ul-element.html#the-ul-element">ul</a></code> element (as the <code><a href="the-ul-element.html#the-ul-element">ul</a></code>
    element's <a href="syntax.html#syntax-start-tag" title="syntax-start-tag">start tag</a> would
@@ -1210,7 +1211,7 @@
 
    <li>
 
-    <p>Place into the <a href="parsing.html#the-input-stream">input stream</a> for the <a href="parsing.html#html-parser">HTML
+    <p>Place into the <a href="parsing.html#input-stream">input stream</a> for the <a href="parsing.html#html-parser">HTML
     parser</a> just created the <var title="">input</var>. The
     encoding <a href="parsing.html#concept-encoding-confidence" title="concept-encoding-confidence">confidence</a> is
     <i>irrelevant</i>.</p>

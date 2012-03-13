@@ -321,9 +321,9 @@
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"/></a></p>
 
    <h1>HTML5</h1>
-   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5496.</p>
+   <h2 class="no-num no-toc" id="a-vocabulary-and-associated-apis-for-html-and-xhtml">A vocabulary and associated APIs for HTML and XHTML</h2><p>This is revision 1.5607.</p>
 
-   <h2 class="no-num no-toc" id="editor-s-draft-13-january-2012">Editor's Draft 13 January 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-7-march-2012">Editor's Draft 7 March 2012</h2>
    </div><nav class="prev_next"><a href="origin-0.html">&#x2190; 5.3 Origin</a> &#x2013;
    <a href="index.html#contents">Table of contents</a> &#x2013;
    <a href="offline.html">5.6 Offline Web applications &#x2192;</a>
@@ -348,10 +348,11 @@
 
   </div><p><code><a href="#history-0">History</a></code> objects represent their <a href="browsers.html#browsing-context">browsing
   context</a>'s session history as a flat list of <a href="#session-history-entry" title="session history entry">session history entries</a>. Each
-  <dfn id="session-history-entry">session history entry</dfn> consists of either a
-  <a href="urls.html#url">URL</a> or a <a href="#state-object">state object</a>, or both<span class="impl">, and may in addition have a title, a
-  <code><a href="dom.html#document">Document</a></code> object, form data, a scroll position, and
-  other information associated with it</span>.</p><div class="impl">
+  <dfn id="session-history-entry">session history entry</dfn> consists of a <a href="urls.html#url">URL</a> and
+  optionally a <a href="#state-object">state object</a><span class="impl">, and may
+  in addition have a title, a <code><a href="dom.html#document">Document</a></code> object, form data,
+  a scroll position, and other information associated with
+  it</span>.</p><div class="impl">
 
   <p class="note">This does not imply that the user interface need be
   linear. See the <a href="#history-notes">notes below</a>.</p>
@@ -390,8 +391,9 @@
 
   </div><hr/><p>At any point, one of the entries in the session history is the
   <dfn id="current-entry">current entry</dfn>. This is the entry representing the
-  <a href="browsers.html#active-document">active document</a> of the <a href="browsers.html#browsing-context">browsing
-  context</a>. The <a href="#current-entry">current entry</a> is usually an entry
+  <a href="browsers.html#active-document">active document</a> of the <a href="browsers.html#browsing-context">browsing context</a>.
+  Which entry is the <a href="#current-entry">current entry</a> is changed by the
+  algorithms defined in this specification, e.g. during <a href="#traverse-the-history" title="traverse the history">session history traversal</a>.</p><p class="note">The <a href="#current-entry">current entry</a> is usually an entry
   for the <a href="#dom-location-href" title="dom-location-href">location</a> of the
   <code><a href="dom.html#document">Document</a></code>. However, it can also be one of the entries
   for <a href="#state-object" title="state object">state objects</a> added to the
@@ -633,6 +635,9 @@
      these steps. (This prevents sandboxed content from spoofing other
      pages on the same origin.)</li>
 
+     <li><p>Let <var title="">new URL</var> be the resulting
+     <a href="urls.html#absolute-url">absolute URL</a>.</p></li>
+
     </ol><p>For the purposes of the comparisons in the above substeps, the
     <a href="urls.html#url-path" title="url-path">&lt;path&gt;</a> and <a href="urls.html#url-query" title="url-query">&lt;query&gt;</a> components can only be the
     same if the URLs are both <a href="urls.html#hierarchical-url" title="hierarchical&#10;    URL">hierarchical URLs</a>.</p>
@@ -640,6 +645,11 @@
    </li>
 
    <li>
+
+    <p>If a third argument is <em>not</em> specified, then let <var title="">new URL</var> be the <a href="urls.html#url">URL</a> of the
+    <a href="#current-entry">current entry</a>.</p>
+
+   </li><li>
 
     <p>If the method invoked was the <code title="dom-history-pushState"><a href="#dom-history-pushstate">pushState()</a></code> method:</p>
 
@@ -667,9 +677,7 @@
 
      <li><p>Add a <a href="#state-object">state object</a> entry to the session
      history, after the <a href="#current-entry">current entry</a>, with <var title="">cloned data</var> as the <a href="#state-object">state object</a>, the
-     given <var title="">title</var> as the title, and, if the third
-     argument is present, the <a href="urls.html#absolute-url">absolute URL</a> that was found
-     earlier in this algorithm as the <a href="urls.html#url">URL</a> of the
+     given <var title="">title</var> as the title, and <var title="">new URL</var> as the <a href="urls.html#url">URL</a> of the
      entry.</p></li>
 
      <li><p>Update the <a href="#current-entry">current entry</a> to be this newly
@@ -680,9 +688,8 @@
     <ol><li><p>Update the <a href="#current-entry">current entry</a> in the session
      history so that <var title="">cloned data</var> is the entry's
      new state object, the given <var title="">title</var> is the new
-     title, and, if the third argument is present, the <a href="urls.html#absolute-url">absolute
-     URL</a> that was found earlier in this algorithm is the
-     entry's new <a href="urls.html#url">URL</a>.</p></li>
+     title, and <var title="">new URL</var> is the entry's new
+     <a href="urls.html#url">URL</a>.</p></li>
 
     </ol></li>
 
@@ -694,9 +701,7 @@
 
    <li>
 
-    <p>If the third argument is present, set <a href="dom.html#the-document-s-current-address">the document's
-    current address</a> to the <a href="urls.html#absolute-url">absolute URL</a> that was
-    found earlier in this algorithm.</p>
+    <p>Set <a href="dom.html#the-document-s-current-address">the document's current address</a> to <var title="">new URL</var>.</p>
 
     <p class="note">Since this is neither a <a href="#navigate" title="navigate">navigation</a> of the <a href="browsers.html#browsing-context">browsing
     context</a> nor a <a href="#traverse-the-history" title="traverse the history">history
@@ -729,7 +734,6 @@
   that <code><a href="dom.html#document">Document</a></code> object in the session history after
   having added the new entry. (Thus the state history acts as a FIFO
   buffer for eviction, but as a LIFO buffer for navigation.)</p>
-
 
   </div><div class="example">
 
@@ -1591,12 +1595,12 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   an <a href="infrastructure.html#html-documents" title="HTML documents">HTML document</a>, set its <a href="infrastructure.html#concept-document-content-type" title="concept-document-content-type">content type</a> to "<code title="">text/html</code>", create an <a href="parsing.html#html-parser">HTML parser</a>, and
   associate it with the document. Each <a href="webappapis.html#concept-task" title="concept-task">task</a> that the <a href="webappapis.html#networking-task-source">networking task
   source</a> places on the <a href="webappapis.html#task-queue">task queue</a> while the <a href="urls.html#fetch" title="fetch">fetching algorithm</a> runs must then fill the
-  parser's <a href="parsing.html#the-input-stream">input stream</a> with the fetched bytes and cause
-  the <a href="parsing.html#html-parser">HTML parser</a> to perform the appropriate processing
-  of the input stream.</p>
+  parser's <a href="parsing.html#the-input-byte-stream">input byte stream</a> with the fetched bytes and
+  cause the <a href="parsing.html#html-parser">HTML parser</a> to perform the appropriate
+  processing of the input stream.</p>
 
-  <p class="note">The <a href="parsing.html#the-input-stream">input stream</a> converts bytes into
-  characters for use in the <a href="tokenization.html#tokenization" title="tokenization">tokenizer</a>. This process relies, in part,
+  <p class="note">The <a href="parsing.html#the-input-byte-stream">input byte stream</a> converts bytes
+  into characters for use in the <a href="tokenization.html#tokenization" title="tokenization">tokenizer</a>. This process relies, in part,
   on character encoding information found in the real <a href="urls.html#content-type" title="Content-Type">Content-Type metadata</a> of the resource;
   the "sniffed type" is not used for this purpose.</p>
 
@@ -1690,9 +1694,9 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   state</a>. Each <a href="webappapis.html#concept-task" title="concept-task">task</a> that the
   <a href="webappapis.html#networking-task-source">networking task source</a> places on the <a href="webappapis.html#task-queue">task
   queue</a> while the <a href="urls.html#fetch" title="fetch">fetching algorithm</a>
-  runs must then fill the parser's <a href="parsing.html#the-input-stream">input stream</a> with the
-  fetched bytes and cause the <a href="parsing.html#html-parser">HTML parser</a> to perform the
-  appropriate processing of the input stream.</p>
+  runs must then fill the parser's <a href="parsing.html#the-input-byte-stream">input byte stream</a> with
+  the fetched bytes and cause the <a href="parsing.html#html-parser">HTML parser</a> to perform
+  the appropriate processing of the input stream.</p>
 
   <p>The rules for how to convert the bytes of the plain text document
   into actual characters, and the rules for actually rendering the
@@ -1912,12 +1916,13 @@ State: &lt;OUTPUT NAME=I&gt;1&lt;/OUTPUT&gt; &lt;INPUT VALUE="Increment" TYPE=BU
   session history with the new page</a> algorithm.</p>
 
   <hr/><p>When the user agent is required to <dfn id="scroll-to-the-fragment-identifier">scroll to the fragment
-  identifier</dfn>, it must change the scrolling position of the
-  document using the <a href="infrastructure.html#scroll-an-element-into-view">scroll an element into view</a>
-  algorithm defined in the CSSOM View specification, or perform some
-  other action, such that <a href="#the-indicated-part-of-the-document">the indicated part of the
-  document</a> is brought to the user's attention. If there is no
-  indicated part, then the user agent must not scroll anywhere. <a href="references.html#refsCSSOMVIEW">[CSSOMVIEW]</a></p>
+  identifier</dfn>, it must either change the scrolling position of
+  the document using the <a href="infrastructure.html#scroll-an-element-into-view">scroll an element into view</a>
+  algorithm defined in the CSSOM View specification, with the <var title="">align to top flag</var> set, or perform some other action,
+  such that <a href="#the-indicated-part-of-the-document">the indicated part of the document</a> is brought
+  to the user's attention. If there is no indicated part, or if the
+  indicated part is not <a href="rendering.html#being-rendered">being rendered</a>, then the user
+  agent must not scroll anywhere. <a href="references.html#refsCSSOMVIEW">[CSSOMVIEW]</a></p>
 
   <p><dfn id="the-indicated-part-of-the-document">The indicated part of the document</dfn> is the one that the
   fragment identifier, if any, identifies. The semantics of the
@@ -2246,17 +2251,27 @@ dictionary <dfn id="pagetransitioneventinit">PageTransitionEventInit</dfn> : <a 
   </div><h4 id="unloading-documents"><span class="secno">5.5.11 </span>Unloading documents</h4><div class="impl">
 
   <p>A <code><a href="dom.html#document">Document</a></code> has a <dfn id="concept-document-salvageable" title="concept-document-salvageable"><var>salvageable</var></dfn>
-  state, which is initially true.</p>
+  state, which must initially be true.</p>
+
+  <p><a href="webappapis.html#event-loop" title="event loop">Event loops</a> have a
+  <dfn id="termination-nesting-level">termination nesting level</dfn> counter, which must initially
+  be zero.</p>
 
   <p>When a user agent is to <dfn id="prompt-to-unload-a-document">prompt to unload a document</dfn>,
   it must run the following steps.</p>
 
-  <ol><li><p>Let <var title="">event</var> be a new
+  <ol><li><p>Increase the <a href="webappapis.html#event-loop">event loop</a>'s <a href="#termination-nesting-level">termination
+   nesting level</a> by one.</p></li>
+
+   <li><p>Let <var title="">event</var> be a new
    <code><a href="#beforeunloadevent">BeforeUnloadEvent</a></code> event object with the name <code title="event-beforeunload">beforeunload</code>, which does not
    bubble but is cancelable.</p></li>
 
    <li><p><i>Dispatch</i>: Dispatch <var title="">event</var> at the
    <code><a href="dom.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code> object.</p></li>
+
+   <li><p>Decrease the <a href="webappapis.html#event-loop">event loop</a>'s <a href="#termination-nesting-level">termination
+   nesting level</a> by one.</p></li>
 
    <li><p>Release the <a href="webappapis.html#storage-mutex">storage mutex</a>.</p></li>
 
@@ -2319,7 +2334,10 @@ dictionary <dfn id="pagetransitioneventinit">PageTransitionEventInit</dfn> : <a 
   whether the <code><a href="dom.html#document">Document</a></code> object is going to be
   re-used. (This is set by the <code title="dom-document-open"><a href="dynamic-markup-insertion.html#dom-document-open">document.open()</a></code> method.)</p>
 
-  <ol><li><p>Fire a <code title="event-pagehide"><a href="#event-pagehide">pagehide</a></code> event at
+  <ol><li><p>Increase the <a href="webappapis.html#event-loop">event loop</a>'s <a href="#termination-nesting-level">termination
+   nesting level</a> by one.</p></li>
+
+   <li><p>Fire a <code title="event-pagehide"><a href="#event-pagehide">pagehide</a></code> event at
    the <code><a href="browsers.html#window">Window</a></code> object of the <code><a href="dom.html#document">Document</a></code>, but
    with its <code title="dom-event-target"><a href="infrastructure.html#dom-event-target">target</a></code> set to the
    <code><a href="dom.html#document">Document</a></code> object (and the <code title="dom-event-currentTarget">currentTarget</code> set to the
@@ -2328,9 +2346,23 @@ dictionary <dfn id="pagetransitioneventinit">PageTransitionEventInit</dfn> : <a 
    attribute initialized to true. This event must not bubble, must not
    be cancelable, and has no default action.</p></li>
 
+   <li>
+
+    <p>Run any <dfn id="unloading-document-visibility-change-steps">unloading document visibility change steps</dfn>
+    for <code><a href="dom.html#document">Document</a></code> that are defined by <a href="infrastructure.html#other-applicable-specifications">other
+    applicable specifications</a>.</p>
+
+    <p class="note">This is specifically intended for use by the Page
+    Visibility specification. <a href="references.html#refsPAGEVIS">[PAGEVIS]</a></p>
+
+   </li>
+
    <li><p><i>Unload event</i>: <a href="webappapis.html#fire-a-simple-event">Fire a simple event</a> named
    <code title="event-unload">unload</code> at the
    <code><a href="dom.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code> object.</p></li>
+
+   <li><p>Decrease the <a href="webappapis.html#event-loop">event loop</a>'s <a href="#termination-nesting-level">termination
+   nesting level</a> by one.</p></li>
 
    <li><p>Release the <a href="webappapis.html#storage-mutex">storage mutex</a>.</p></li>
 
@@ -2403,8 +2435,7 @@ dictionary <dfn id="pagetransitioneventinit">PageTransitionEventInit</dfn> : <a 
 
    <li><p>If the <code><a href="dom.html#document">Document</a></code>'s <var title="concept-document-salvageable"><a href="#concept-document-salvageable">salvageable</a></var> state is
    false, empty the <code><a href="dom.html#document">Document</a></code>'s <code><a href="browsers.html#window">Window</a></code>'s
-   <a href="timers.html#list-of-active-timeouts">list of active timeouts</a> and its <a href="timers.html#list-of-active-intervals">list of active
-   intervals</a>.</p></li>
+   <a href="timers.html#list-of-active-timers">list of active timers</a>.</p></li>
 
   </ol><h5 id="event-definition"><span class="secno">5.5.11.1 </span>Event definition</h5>
 
