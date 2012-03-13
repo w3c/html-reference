@@ -177,11 +177,11 @@ html.spec.src.html: html-compiled.rng schema.html \
 
 html5:
 	if [ -d /opt/workspace/html5/spec ]; then \
-	  mkdir html5 && cp -pR /opt/workspace/html5/spec html5/ ;
+	  mkdir html5 && cp -pR /opt/workspace/html5/spec html5/; \
 	else \
 	  CVSROOT=:pserver:anonymous@dev.w3.org:/sources/public $(CVS) $(CVSFLAGS) co html5/spec \
 	  && rm -rf html5/CVS/ \
-	  && rm -rf html5/spec/CVS/ \
+	  && rm -rf html5/spec/CVS/; \
 	fi
 
 html5-spec: html5

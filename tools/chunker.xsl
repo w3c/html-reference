@@ -276,7 +276,7 @@ color: #3C790A;
       <xsl:text>&#10;</xsl:text>
     </xsl:if>
     <xsl:if test="$up">
-      <link rel="up" href="{$up}"/>
+      <link rel="section" href="{$up}"/>
       <xsl:text>&#10;</xsl:text>
     </xsl:if>
     <xsl:if test="$toc-link">
