@@ -8,18 +8,19 @@ while (<FILE>) {
   if (/\@namespace/) {
     next;
   }
-  if (/\*\//) {
+  if (/^#/) {
+    next;
+  }
+  if (/^.*\*\//) {
     $incomment = 0;
-    if (/^\s*\*\/\s*$/ || /^\s*\/\*/) {
-      next;
-    }
+    next;
   }
   if (/^\s*\/\*/) {
     $incomment = 1;
     next;
   }
   if (! $incomment eq 1) {
-  $lines .= $_;
+    $lines .= $_;
   }
 }
 my $css = CSS->new;
@@ -29,6 +30,7 @@ for my $style (@{$css->{styles}}) {
   print "  <rule>";
   for my $selector (@{$style->{selectors}}) {
     $selector_name = $selector->{name};
+    next if ($selector_name =~ /-webkit-inner-spin-button/);
     next if ($selector_name =~ /::/);
     next if ($selector_name =~ /-webkit-autofill/);
     next if ($selector_name =~ /audio|video/);
@@ -45,6 +47,10 @@ for my $style (@{$css->{styles}}) {
       if ($selector_name =~ /-webkit-any-link/) {
         print "    <selector>a<span class='pseudo'>:link</span></selector>\n";
         print "    <selector>a<span class='pseudo'>:visited</span></selector>\n";
+        last SWITCH;
+      }
+      if ($selector_name =~ /#if defined\(ENABLE_DATALIST\) && ENABLE_DATALIST datalist/) {
+        print "    <selector>datalist</selector>\n";
         last SWITCH;
       }
       print "    <selector>" . $selector_name . "</selector>\n";

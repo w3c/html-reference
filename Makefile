@@ -185,6 +185,7 @@ html5:
 	fi
 
 html5-spec: html5
+	mkdir $@
 	for file in $(MULTIPAGE_SPEC_FILES); \
 	  do $(PARSE) $(PARSEFLAGS) $</spec/$$file > $@/$(notdir $$file) 2>/dev/null; \
 	done
@@ -236,7 +237,7 @@ spec.html: html.spec.src.html src/status.html tools/specgen.xsl tools/toc.xsl
 
 aria: aria/Overview.html aria/spec.html
 
-aria/html.rng: schema
+aria/html.rng: syntax
 	$(TRANG) $(TRANGFLAGS) aria/html.rnc $@
 
 aria/html-compiled.rng: aria/html.rng
@@ -258,9 +259,9 @@ aria/html.spec.src.html: aria/html-compiled.rng aria/schema.html \
   LICENSE.xml html.css.xml html.css.LICENSE.xml
 	$(XSLTPROC) $(XSLTPROCFLAGS) \
 	  --param aria 1 \
-	  --stringparam rnc-html "../aria/schema.html" \
-	  --stringparam head "../aria/head.src.html" \
-	  --stringparam header "../aria/header.src.html" \
+	  --param rnc-html "document('../aria/schema.html')" \
+	  --param head "document('../aria/head.src.html')" \
+	  --param header "document('../aria/header.src.html')" \
 	  tools/generate-spec-source.xsl $< > $@
 
 aria/Overview.html: aria/html.spec.src.html src/status.html tools/specgen.xsl tools/toc.xsl tools/chunker.xsl
@@ -319,6 +320,7 @@ clean:
 	$(RM) MANIFEST.tmp
 	$(RM) MANIFEST
 	$(RM) -r html5
+	$(RM) -r html5-spec
 ifneq ($(OTHER_RNG),)
 	$(RM) $(OTHER_RNG)
 endif
