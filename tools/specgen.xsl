@@ -321,7 +321,7 @@ color: #3C790A;
         or $id-of-target = 'phrasing-content_xref28'
         or $id-of-target = 'phrasing-content_xref32'
         or $id-of-target = 'phrasing-content_xref35'
-        or $id-of-target = 'toc-toc'"/>
+        "/>
       <xsl:when test="not($chunk = 0)">
         <a href="{$page/@id}.html#{$id-of-target}"><xsl:copy-of select="$link-text"/></a>
       </xsl:when>
@@ -808,6 +808,7 @@ color: #3C790A;
         and not(parent::h:*[contains(@class,"no-toc")])'>
         <xsl:text> </xsl:text>
         <xsl:choose>
+          <xsl:when test="$myid = 'toc'"/>
           <xsl:when test="not($chunk=0)">
             <a class="toc-bak" href="{$TOC-file}#{$myid}-toc">T</a>
           </xsl:when>
