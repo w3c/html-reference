@@ -38,7 +38,7 @@ WHATTF_BASE_URL=http://svn.versiondude.net/whattf/syntax/trunk/relaxng/
 OTHER_RNG=$(foreach rnc,$(wildcard syntax/relaxng/*.rnc),$(basename $(notdir $(rnc))).rng)
 ARIA_OTHER_RNG=$(foreach rnc,$(wildcard syntax/relaxng/*.rnc),aria/$(basename $(notdir $(rnc))).rng)
 SCHEMA_FILES=$(wildcard syntax/relaxng/*.rnc) syntax/relaxng/assertions.sch syntax/relaxng/LICENSE
-MULTIPAGE_SPEC_FILES=$(foreach file,$(wildcard html5/spec/*.html),$(notdir $(file)))
+MULTIPAGE_SPEC_FILES=$(foreach file,$(wildcard html5/*.html),$(notdir $(file)))
 
 ELEMENTS=$(wildcard elements/*.html)
 
@@ -91,7 +91,8 @@ html.css.xml: html.css tools/css2xml
 	./tools/css2xml $< > $@
 
 fragment-links.js:
-	$(CURL) $(CURLFLAGS) -o $@ http://dev.w3.org/html5/spec-author-view/fragment-links.js
+	wget http://dev.w3.org/html5/spec-author-view/fragment-links.js
+	#$(CURL) $(CURLFLAGS) -o $@ http://dev.w3.org/html5/spec-author-view/fragment-links.js
 #	$(CURL) $(CURLFLAGS) -o $@ http://developers.whatwg.org/fragment-links.js
 
 fragment-links.html: fragment-links.js
@@ -102,8 +103,9 @@ fragment-links.html: fragment-links.js
 	  | perl -pe "s|' };|</li>\n</ul>\n</div>|g" \
 	  > $@
 
-fragment-links-full.js:
-	$(CURL) $(CURLFLAGS) -o $@ http://dev.w3.org/html5/spec/fragment-links.js
+fragment-links-full.js: /opt/workspace/github-html/heartbeat/fragment-links.js
+	cp $< $@
+	#$(CURL) $(CURLFLAGS) -o $@ http://dev.w3.org/html5/spec/fragment-links.js
 
 fragment-links-full.html: fragment-links-full.js
 	$(GREP) $(GREPFLAGS) "var fragment_links" $< \
@@ -176,8 +178,8 @@ html.spec.src.html: html-compiled.rng schema.html \
 	  > $@
 
 html5:
-	if [ -d /opt/workspace/html5/spec ]; then \
-	  mkdir html5 && cp -pR /opt/workspace/html5/spec html5/; \
+	if [ -d /opt/workspace/github-html/heartbeat ]; then \
+	  mkdir html5 && cp -pR /opt/workspace/github-html/heartbeat/ html5; \
 	else \
 	  CVSROOT=:pserver:anonymous@dev.w3.org:/sources/public $(CVS) $(CVSFLAGS) co html5/spec \
 	  && rm -rf html5/CVS/ \
@@ -187,7 +189,7 @@ html5:
 html5-spec: html5
 	mkdir $@
 	for file in $(MULTIPAGE_SPEC_FILES); \
-	  do $(PARSE) $(PARSEFLAGS) $</spec/$$file > $@/$(notdir $$file) 2>/dev/null; \
+	  do $(PARSE) $(PARSEFLAGS) $</$$file > $@/$(notdir $$file); \
 	done
 
 Overview.html: html.spec.src.html src/status.html tools/specgen.xsl tools/toc.xsl tools/chunker.xsl

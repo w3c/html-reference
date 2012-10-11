@@ -102,6 +102,11 @@
                 title="html-elements">HTML elements</dfn>
               is the set of elements described in the following
               sections.</p>
+            <p>In addition to the HTML elements listed below, the
+              <code class="element">math</code> element from the MathML namespace and the
+              <code class="element">svg</code> element from the SVG namespace are allowed in
+              documents wherever 
+              <a href="#phrasing-content">phrasing content</a> is allowed.</p>
             <div class="toc"/>
             <xsl:apply-templates select="descendant::*[local-name() = 'element'][@name]">
               <xsl:sort select="@name"/>
@@ -2471,13 +2476,24 @@
               </xsl:call-template>
             </xsl:if>
           </xsl:variable>
-          <xsl:if test="not($filename='')">
-            <a
-              class="spec-link"
-              title="Read about this attribute in the HTML5 spec"
-              href="{$filename}{$spec-target}">&#9432;</a>
-            <xsl:text>&#10;</xsl:text>
-          </xsl:if>
+          <xsl:choose>
+            <xsl:when test="starts-with($spec-target,'#ix-')">
+              <a
+                class="spec-link"
+                title="Read about this attribute in the HTML5 spec"
+                href="http://dev.w3.org/html5/spec/section-index.html{$spec-target}">&#9432;</a>
+              <xsl:text>&#10;</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:if test="not($filename='')">
+                <a
+                  class="spec-link"
+                  title="Read about this attribute in the HTML5 spec"
+                  href="{$filename}{$spec-target}">&#9432;</a>
+                <xsl:text>&#10;</xsl:text>
+              </xsl:if>
+            </xsl:otherwise>
+          </xsl:choose>
           <xsl:choose>
             <xsl:when test="$ref = 'common.attrs'
               or @href = '#global-attributes'">

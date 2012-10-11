@@ -308,6 +308,20 @@ color: #3C790A;
       </xsl:choose>
     </xsl:variable>
     <xsl:choose>
+      <xsl:when test="
+            $id-of-target = 'flow-content_xref2'
+        or $id-of-target = 'flow-content_xref11'
+        or $id-of-target = 'flow-content_xref14'
+        or $id-of-target = 'flow-content_xref30'
+        or $id-of-target = 'flow-content_xref25'
+        or $id-of-target = 'flow-content_xref27'
+        or $id-of-target = 'phrasing-content_xref4'
+        or $id-of-target = 'phrasing-content_xref14'
+        or $id-of-target = 'phrasing-content_xref18'
+        or $id-of-target = 'phrasing-content_xref28'
+        or $id-of-target = 'phrasing-content_xref32'
+        or $id-of-target = 'phrasing-content_xref35'
+        or $id-of-target = 'toc-toc'"/>
       <xsl:when test="not($chunk = 0)">
         <a href="{$page/@id}.html#{$id-of-target}"><xsl:copy-of select="$link-text"/></a>
       </xsl:when>
@@ -577,7 +591,7 @@ color: #3C790A;
     <xsl:variable name="activity">
       <a href="{$groupinfo-nodeset/*[@id = 'activity']}">
         <xsl:choose>
-          <xsl:when test="$groupinfo-nodeset/*[@id = 'activity'] = 'http://www.w3.org/MarkUp/Activity.html'"
+          <xsl:when test="$groupinfo-nodeset/*[@id = 'activity'] = 'http://www.w3.org/html/Activity.html'"
             >HTML Activity</xsl:when>
           <xsl:otherwise>[undefined activity]</xsl:otherwise>
         </xsl:choose>
@@ -616,7 +630,7 @@ color: #3C790A;
       </xsl:if>
       If you’d like to comment on this document, the preferred
       means for commenting is to submit your comments through the
-      <a href="http://www.w3.org/Bugs/Public/enter_bug.cgi?product=HTML%20WG&amp;component=HTML5%3A%20The%20Markup%20Language%20%28editor%3A%20Michael%28tm%29%20Smith%29"
+      <a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=HTML%20WG&amp;component=HTML5%3A%20The%20Markup%20Language%20%28editor%3A%20Michael%28tm%29%20Smith%29"
         >HTML Working Group bugzilla database, with the <b>Component</b> field set to <code>HTML5: The Markup Language</code></a>.
       Alternatively, you can send comments by e-mail to
       <a href='mailto:{$comments-address}'><xsl:value-of select='$comments-address'/></a>
@@ -1349,11 +1363,11 @@ color: #3C790A;
       <xsl:text> (</xsl:text>
       <span class="postfix or">either</span>
       <xsl:text> </xsl:text>
-      <a href="{$terminology.html}#phrasing-content">phrasing content</a>
+      phrasing content
       <xsl:text> </xsl:text>
       <span class="postfix or">or</span>
       <xsl:text> </xsl:text>
-      <a href="{$terminology.html}#flow-content">flow content</a>
+      flow content
       <xsl:text>)</xsl:text>
     </span>
     </p>

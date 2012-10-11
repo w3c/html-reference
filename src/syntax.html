@@ -209,11 +209,17 @@
       <a href="#must-requirement">must</a>
       be a valid character encoding name, and
       <a href="#must-requirement">must</a>
-      be the preferred name for that encoding,
-      as specified in
-      the IANA
+      be a
+      <a href="#case-insensitive">case-insensitive match</a>
+      for a
+      <var class="defined-elsewhere">character set name</var>
+      for which the IANA
       <a href="#refsCharacterSets">[Character Sets]</a>
-      registry.</li>
+      registry has a <code>Name</code> or <code>Alias</code> field
+      labeled as “preferred MIME name”;
+      or, if none of the <code>Alias</code> fields are so labeled, a
+      <a href="#case-insensitive">case-insensitive match</a>
+      for a <code>Name</code> field in the registry.</li>
       <li>The character encoding declaration
       <a href="#must-requirement">must</a>
       be serialized
@@ -933,7 +939,7 @@
           <li>An
           "<code title="U+0026 AMPERSAND">&amp;</code>"
           character.</li>
-          <li>One of the entity names listed in
+          <li>One of the names listed in
           the “Named character references” section of the HTML5
           specification
           <a href="#refsHTML5">[HTML5]</a>,
@@ -1034,15 +1040,24 @@
     <dfn id="syntax-ambiguous-ampersand">ambiguous ampersand</dfn>
     is an
     "<code title="U+0026 AMPERSAND">&amp;</code>"
-    character that is followed by some
-    <a href="#syntax-text" title="syntax-text">text</a>
-    other than a
-    <a href="#space">space character</a>,
-    a
-    "<code title="U+003C LESS-THAN SIGN">&lt;</code>",
-    character, or another
-    "<code title="U+0026 AMPERSAND">&amp;</code>"
-    character.</p>
+    character followed by one or more characters in the range
+    "<code title="U+0030 ZERO">0</code>"
+    to
+    "<code title="U+0039 ZERO">9</code>",
+    the range
+    "<code title="U+0061 LATIN SMALL LETTER A">a</code>"
+    to
+    "<code title="U+007A LATIN SMALL LETTER Z">z</code>",
+    or the range
+    "<code title="U+0041 LATIN CAPITAL LETTER A">A</code>"
+    to 
+    "<code title="U+005A LATIN CAPITAL LETTER Z">Z</code>",
+    followed by a
+    "<code title="U+003B SEMICOLON">;</code>"
+    (semicolon)
+    character, where these characters do not match any of the names given
+    in the “Named character references” section of the HTML5 specification
+    <a href="#refsHTML5">[HTML5]</a>.</p>
   </section>
   <section id="comments">
     <h2>Comments</h2>
@@ -1105,7 +1120,16 @@
      id="svg-mathml-elements"
      title="svg-mathml-elements"
      >SVG and MathML elements</dfn>
-   are elements from the SVG and MathML namespaces.
+   are elements from the SVG and MathML namespaces.</p>
+
+   <p>The
+     <code class="element">math</code> element from the MathML namespace
+     and the
+     <code class="element">svg</code> element from the SVG namespace
+    are allowed in documents wherever 
+    <a href="#phrasing-content">phrasing content</a> is allowed.</p>
+
+   <p>
    SVG and MathML elements can be used both in
    <a href="#syntax-document-html">documents in the HTML syntax</a>
    and in 

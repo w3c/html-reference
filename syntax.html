@@ -13,7 +13,7 @@
 </head>
 <body class="chunk" onload="initDfn()">
 <div id="jump-indexes" class="no-number no-toc"><div id="jumpIndexA-button" role="button" aria-haspopup="true" tabindex="0">jump</div></div>
-<h2 class="chunkpagetitle"><a href="Overview.html#toc">HTML: The Markup Language</a></h2>
+<h2 class="chunkpagetitle"><a href="Overview.html#toc">HTML: The Markup Language (an&#160;HTML&#160;language&#160;reference)</a></h2>
 <div class="nav">
 <span class="nav-prev"><a href="documents.html">&#171; documents</a></span>
 <span class="nav-next"><a href="elements-by-function.html">elements by function &#187;</a></span>
@@ -250,11 +250,17 @@
       <a href="terminology.html#must-requirement" id="must-requirement_xref14">must</a>
       be a valid character encoding name, and
       <a href="terminology.html#must-requirement" id="must-requirement_xref15">must</a>
-      be the preferred name for that encoding,
-      as specified in
-      the IANA
+      be a
+      <a href="terminology.html#case-insensitive" id="case-insensitive_xref11">case-insensitive match</a>
+      for a
+      <var class="defined-elsewhere">character set name</var>
+      for which the IANA
       <a href="references.html#refsCharacterSets" id="refsCharacterSets_xref1">[Character Sets]</a>
-      registry.</li>
+      registry has a <code>Name</code> or <code>Alias</code> field
+      labeled as &#8220;preferred MIME name&#8221;;
+      or, if none of the <code>Alias</code> fields are so labeled, a
+      <a href="terminology.html#case-insensitive" id="case-insensitive_xref12">case-insensitive match</a>
+      for a <code>Name</code> field in the registry.</li>
       <li>The character encoding declaration
       <a href="terminology.html#must-requirement" id="must-requirement_xref16">must</a>
       be serialized
@@ -541,7 +547,7 @@
       <a href="terminology.html#must-requirement" id="must-requirement_xref28">must</a>
       never be two or more attributes on the same
       start tag whose names are a
-      <a href="terminology.html#case-insensitive" id="case-insensitive_xref11">case-insensitive match</a>
+      <a href="terminology.html#case-insensitive" id="case-insensitive_xref13">case-insensitive match</a>
       for each other.</p>
       <p id="attributes-basic-syntax">The following list describes syntax
         rules for attributes in 
@@ -573,7 +579,7 @@
       and that contain no
       "<code title="U+003A COLON">:</code>"
       characters, and whose first three characters are not a
-      <a href="terminology.html#case-insensitive" id="case-insensitive_xref12">case-insensitive match</a>
+      <a href="terminology.html#case-insensitive" id="case-insensitive_xref14">case-insensitive match</a>
       for the string "<code>xml</code>".</li>
       <li>
       <dfn id="syntax-attribute-value" role="button" tabindex="0" aria-haspopup="true">attribute values</dfn>
@@ -870,7 +876,7 @@
           not contain any occurrences of the string
           "<code title="U+003C LESS-THAN SIGN, U+002F SOLIDUS">&lt;/</code>"
           followed by characters that are a
-          <a href="terminology.html#case-insensitive" id="case-insensitive_xref13">case-insensitive match</a>
+          <a href="terminology.html#case-insensitive" id="case-insensitive_xref15">case-insensitive match</a>
           for the tag name of the element containing the
           replaceable character data (for example,
           "<code>&lt;/title</code>" or
@@ -928,7 +934,7 @@
           not contain any occurrences of the string
           "<code title="U+003C LESS-THAN SIGN, U+002F SOLIDUS">&lt;/</code>",
           followed by characters that are a
-          <a href="terminology.html#case-insensitive" id="case-insensitive_xref14">case-insensitive match</a>
+          <a href="terminology.html#case-insensitive" id="case-insensitive_xref16">case-insensitive match</a>
           for the tag name of the element containing the
           replaceable character data (for example,
           "<code>&lt;/script</code>"
@@ -976,7 +982,7 @@
 <li>An
           "<code title="U+0026 AMPERSAND">&amp;</code>"
           character.</li>
-          <li>One of the entity names listed in
+          <li>One of the names listed in
           the &#8220;Named character references&#8221; section of the HTML5
           specification
           <a href="references.html#refsHTML5" id="refsHTML5_xref5">[HTML5]</a>,
@@ -1079,15 +1085,24 @@
     <dfn id="syntax-ambiguous-ampersand" role="button" tabindex="0" aria-haspopup="true">ambiguous ampersand</dfn>
     is an
     "<code title="U+0026 AMPERSAND">&amp;</code>"
-    character that is followed by some
-    <a href="syntax.html#syntax-text" title="syntax-text" id="syntax-text_xref8">text</a>
-    other than a
-    <a href="terminology.html#space" id="space_xref30">space character</a>,
-    a
-    "<code title="U+003C LESS-THAN SIGN">&lt;</code>",
-    character, or another
-    "<code title="U+0026 AMPERSAND">&amp;</code>"
-    character.</p>
+    character followed by one or more characters in the range
+    "<code title="U+0030 ZERO">0</code>"
+    to
+    "<code title="U+0039 ZERO">9</code>",
+    the range
+    "<code title="U+0061 LATIN SMALL LETTER A">a</code>"
+    to
+    "<code title="U+007A LATIN SMALL LETTER Z">z</code>",
+    or the range
+    "<code title="U+0041 LATIN CAPITAL LETTER A">A</code>"
+    to 
+    "<code title="U+005A LATIN CAPITAL LETTER Z">Z</code>",
+    followed by a
+    "<code title="U+003B SEMICOLON">;</code>"
+    (semicolon)
+    character, where these characters do not match any of the names given
+    in the &#8220;Named character references&#8221; section of the HTML5 specification
+    <a href="references.html#refsHTML5" id="refsHTML5_xref6">[HTML5]</a>.</p>
   </div>
   <div id="comments" class="section">
     <h2>4.7. Comments <a class="hash" href="#comments">#</a> <a class="toc-bak" href="Overview.html#comments-toc">T</a>
@@ -1101,13 +1116,13 @@
       <dfn id="comment-start-delimiter" title="comment-start-delimiter" role="button" tabindex="0" aria-haspopup="true">comment start delimiter</dfn>
       "<code title="U+003C LESS-THAN SIGN, U+0021 EXCLAMATION MARK, U+002D HYPHEN-MINUS, U+002D HYPHEN-MINUS">&lt;!--</code>"
       </li>
-      <li><a href="syntax.html#syntax-text" id="syntax-text_xref9">text</a></li>
+      <li><a href="syntax.html#syntax-text" id="syntax-text_xref8">text</a></li>
       <li>the
       <dfn id="comment-end-delimiter" title="comment-end-delimiter" role="button" tabindex="0" aria-haspopup="true">comment end delimiter</dfn>
       "<code title="U+002D HYPHEN-MINUS, U+002D HYPHEN-MINUS, U+003E GREATER-THAN SIGN">--&gt;</code>"
       </li>
     </ol>
-<p>The <a href="syntax.html#syntax-text" id="syntax-text_xref10">text</a>
+<p>The <a href="syntax.html#syntax-text" id="syntax-text_xref9">text</a>
     part of comments has the following restrictions:</p>
     <ul>
 <li>
@@ -1137,7 +1152,16 @@
 </h2>
    <p id="elements-svg-mathml">
    <dfn id="svg-mathml-elements" title="svg-mathml-elements" role="button" tabindex="0" aria-haspopup="true">SVG and MathML elements</dfn>
-   are elements from the SVG and MathML namespaces.
+   are elements from the SVG and MathML namespaces.</p>
+
+   <p>The
+     <code class="element">math</code> element from the MathML namespace
+     and the
+     <code class="element">svg</code> element from the SVG namespace
+    are allowed in documents wherever 
+    <a href="terminology.html#phrasing-content" id="phrasing-content_xref1">phrasing content</a> is allowed.</p>
+
+   <p>
    SVG and MathML elements can be used both in
    <a href="documents.html#syntax-document-html" id="syntax-document-html_xref11">documents in the HTML syntax</a>
    and in 
@@ -1203,7 +1227,7 @@
      <dfn id="cdata-start-delimiter" title="cdata-start-delimiter" role="button" tabindex="0" aria-haspopup="true">CDATA start delimiter</dfn>
      "<code title="U+003C LESS-THAN SIGN, U+0021 EXCLAMATION MARK, U+005B LEFT SQUARE BRACKET, U+0043 LATIN CAPITAL LETTER C, U+0044 LATIN CAPITAL LETTER D, U+0041 LATIN CAPITAL LETTER A, U+0054 LATIN CAPITAL LETTER T, U+0041 LATIN CAPITAL LETTER A, U+005B LEFT SQUARE BRACKET">&lt;![CDATA[</code>"</li>
      <li>
-<a href="syntax.html#syntax-text" title="syntax-text" id="syntax-text_xref11">text</a>, with the
+<a href="syntax.html#syntax-text" title="syntax-text" id="syntax-text_xref10">text</a>, with the
      additional restriction that the text
      <a href="terminology.html#must-requirement" id="must-requirement_xref57">must</a>
      not contain the
